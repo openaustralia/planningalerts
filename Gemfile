@@ -145,7 +145,8 @@ gem "skylight"
 # For making more reusable and testable components
 gem "view_component"
 
-# For generating sitemaps for search engines
+# For generating sitemaps for search engines and uploading them to S3
+gem "aws-sdk-s3", "~> 1"
 gem "sitemap_generator"
 
 group :test do
