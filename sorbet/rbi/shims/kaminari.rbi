@@ -2,6 +2,8 @@
 
 module ActiveRecord
   class Relation
+    include Kaminari::ActiveRecordRelationMethods
+
     sig { params(page: T.untyped).returns(ActiveRecord::Relation) }
     def page(page); end
 

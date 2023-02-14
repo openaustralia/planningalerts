@@ -84,7 +84,7 @@ class ApplicationsController < ApplicationController
         @applications = @applications
                         .reorder("date_scraped DESC")
       end
-      @applications = @applications.page(params[:page]).per(per_page)
+      @applications = @applications.page(params[:page]).per(per_page).without_count
     end
   end
 

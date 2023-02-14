@@ -31,6 +31,6 @@
 
   -# Only show the top pagination links beyond the first page
   - if @page.to_i > 1
-    = paginate @applications
+    = render "pagination", applications: @applications
   %ol.applications= render partial: "application", collection: @applications
-  = paginate @applications
+  = render "pagination", applications: @applications
