@@ -10,6 +10,7 @@ tmp/binlog
 tmp/rspec_guard_result
 tmp/capybara
 tmp/miniprofiler
+tmp/sitemaps
 coverage
 config/database.yml
 rerun.txt
