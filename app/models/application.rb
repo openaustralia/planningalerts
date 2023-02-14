@@ -100,12 +100,8 @@ class Application < ApplicationRecord
   sig { returns(T.untyped) }
   def find_all_nearest_or_recent
     if location
-      nearbys(
-        Application.nearby_and_recent_max_distance_km,
-        units: :km,
-        latitude: "application_versions.lat",
-        longitude: "application_versions.lng"
-      ).with_current_version.where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+      nearbys(Application.nearby_and_recent_max_distance_km, units: :km)
+        .where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     else
       Application.none
     end
