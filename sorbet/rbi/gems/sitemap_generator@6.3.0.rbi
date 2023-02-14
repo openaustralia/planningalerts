@@ -112,6 +112,50 @@ class SitemapGenerator::Application
   def rails_root; end
 end
 
+# Class for uploading sitemaps to an S3 bucket using the AWS SDK gem.
+#
+# source://sitemap_generator//lib/sitemap_generator/adapters/aws_sdk_adapter.rb#8
+class SitemapGenerator::AwsSdkAdapter
+  # Specify your AWS bucket name, credentials, and/or region.  By default
+  # the AWS SDK will auto-detect your credentials and region, but you can use
+  # the options to configure them manually.
+  #
+  # Requires Aws::S3::Resource and Aws::Credentials to be defined.
+  #
+  # Options:
+  #   **Deprecated, use :endpoint instead** :aws_endpoint [String] The object storage endpoint,
+  #                                                                if not AWS, e.g. 'https://sfo2.digitaloceanspaces.com'
+  #   **Deprecated, use :access_key_id instead** :aws_access_key_id [String] Your AWS access key id
+  #   **Deprecated, use :secret_access_key instead** :aws_secret_access_key [String] Your AWS secret access key
+  #   **Deprecated, use :region instead** :aws_region [String] Your AWS region
+  #   :acl [String] The ACL to apply to the uploaded files.  Defaults to 'public-read'.
+  #   :cache_control [String] The cache control headder to apply to the uploaded files.  Defaults to 'private, max-age=0, no-cache'.
+  #
+  #   All other options you provide are passed directly to the AWS client.
+  #   See https://docs.aws.amazon.com/sdk-for-ruby/v2/api/Aws/S3/Client.html#initialize-instance_method
+  #   for a full list of supported options.
+  #
+  # @param bucket [String] Name of the S3 bucket
+  # @param options [Hash] Options passed directly to AWS to control the Resource created.  See Options below.
+  # @return [AwsSdkAdapter] a new instance of AwsSdkAdapter
+  #
+  # source://sitemap_generator//lib/sitemap_generator/adapters/aws_sdk_adapter.rb#30
+  def initialize(bucket, aws_access_key_id: T.unsafe(nil), aws_secret_access_key: T.unsafe(nil), aws_region: T.unsafe(nil), aws_endpoint: T.unsafe(nil), acl: T.unsafe(nil), cache_control: T.unsafe(nil), **options); end
+
+  # Call with a SitemapLocation and string data
+  #
+  # source://sitemap_generator//lib/sitemap_generator/adapters/aws_sdk_adapter.rb#43
+  def write(location, raw_data); end
+
+  private
+
+  # source://sitemap_generator//lib/sitemap_generator/adapters/aws_sdk_adapter.rb#59
+  def s3_resource; end
+
+  # source://sitemap_generator//lib/sitemap_generator/adapters/aws_sdk_adapter.rb#55
+  def set_option_unless_set(key, value); end
+end
+
 # Define our own class rather than modify the global class
 #
 # source://sitemap_generator//lib/sitemap_generator/core_ext/big_decimal.rb#11
