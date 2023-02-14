@@ -145,6 +145,9 @@ gem "skylight"
 # For making more reusable and testable components
 gem "view_component"
 
+# For generating sitemaps for search engines
+gem "sitemap_generator"
+
 group :test do
   gem "capybara"
   gem "climate_control"

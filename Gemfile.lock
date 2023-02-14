@@ -602,6 +602,8 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
+    sitemap_generator (6.3.0)
+      builder (~> 3.0)
     skylight (5.3.4)
       activesupport (>= 5.2.0)
     slack-notifier (2.4.0)
@@ -793,6 +795,7 @@ DEPENDENCIES
   sidekiq (< 7)
   sidekiq-cron
   simplecov
+  sitemap_generator
   skylight
   slack-notifier
   sorbet
