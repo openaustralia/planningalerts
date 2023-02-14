@@ -28,20 +28,20 @@ class ApiController < ApplicationController
 
   sig { void }
   def suburb_postcode
-    apps = Application.with_current_version.order("application_versions.date_scraped DESC")
+    apps = Application.order("date_scraped DESC")
     descriptions = []
     if params[:suburb]
       descriptions << params[:suburb]
-      apps = apps.where(application_versions: { suburb: params[:suburb] })
+      apps = apps.where(suburb: params[:suburb])
     end
     if params[:state]
       descriptions << params[:state]
-      apps = apps.where(application_versions: { state: params[:state] })
+      apps = apps.where(state: params[:state])
     end
     # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
     if params[:postcode]
       descriptions << params[:postcode]
-      apps = apps.where(application_versions: { postcode: params[:postcode] })
+      apps = apps.where(postcode: params[:postcode])
     end
     api_render(apps, "Recent applications in #{descriptions.join(', ')}")
   end

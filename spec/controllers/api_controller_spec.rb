@@ -113,13 +113,11 @@ describe ApiController do
       scope2 = Application.none
       scope3 = Application.none
       scope4 = Application.none
-      scope5 = Application.none
-      allow(Application).to receive(:with_current_version).and_return(scope1)
-      allow(scope1).to receive(:order).and_return(scope2)
-      allow(scope2).to receive(:where).with(application_versions: { postcode: "2780" }).and_return(scope3)
-      allow(scope3).to receive(:includes).and_return(scope4)
-      allow(scope4).to receive(:page).with(nil).and_return(scope5)
-      allow(scope5).to receive(:per).with(100).and_return(result)
+      allow(Application).to receive(:order).and_return(scope1)
+      allow(scope1).to receive(:where).with(postcode: "2780").and_return(scope2)
+      allow(scope2).to receive(:includes).and_return(scope3)
+      allow(scope3).to receive(:page).with(nil).and_return(scope4)
+      allow(scope4).to receive(:per).with(100).and_return(result)
       get :suburb_postcode, params: { key: key.value, format: "rss", postcode: "2780" }
       expect(assigns[:applications]).to eq(result)
       expect(assigns[:description]).to eq("Recent applications in 2780")
@@ -133,14 +131,12 @@ describe ApiController do
       scope2 = Application.none
       scope3 = Application.none
       scope4 = Application.none
-      scope5 = Application.none
       allow(result).to receive(:total_pages).and_return(5)
-      allow(Application).to receive(:with_current_version).and_return(scope1)
-      allow(scope1).to receive(:order).and_return(scope2)
-      allow(scope2).to receive(:where).and_return(scope3)
-      allow(scope3).to receive(:includes).and_return(scope4)
-      allow(scope4).to receive(:page).and_return(scope5)
-      allow(scope5).to receive(:per).and_return(result)
+      allow(Application).to receive(:order).and_return(scope1)
+      allow(scope1).to receive(:where).and_return(scope2)
+      allow(scope2).to receive(:includes).and_return(scope3)
+      allow(scope3).to receive(:page).and_return(scope4)
+      allow(scope4).to receive(:per).and_return(result)
       get :suburb_postcode, params: { key: key.value, format: "js", postcode: "2780" }
       expect(JSON.parse(response.body)).to eq(
         [{
@@ -173,14 +169,12 @@ describe ApiController do
       scope2 = Application.none
       scope3 = Application.none
       scope4 = Application.none
-      scope5 = Application.none
       allow(result).to receive(:total_pages).and_return(5)
-      allow(Application).to receive(:with_current_version).and_return(scope1)
-      allow(scope1).to receive(:order).and_return(scope2)
-      allow(scope2).to receive(:where).and_return(scope3)
-      allow(scope3).to receive(:includes).and_return(scope4)
-      allow(scope4).to receive(:page).and_return(scope5)
-      allow(scope5).to receive(:per).and_return(result)
+      allow(Application).to receive(:order).and_return(scope1)
+      allow(scope1).to receive(:where).and_return(scope2)
+      allow(scope2).to receive(:includes).and_return(scope3)
+      allow(scope3).to receive(:page).and_return(scope4)
+      allow(scope4).to receive(:per).and_return(result)
       get :suburb_postcode, params: { key: key.value, format: "js", v: "2", postcode: "2780" }
       expect(JSON.parse(response.body)).to eq(
         "application_count" => 1,
@@ -215,14 +209,12 @@ describe ApiController do
       scope2 = Application.none
       scope3 = Application.none
       scope4 = Application.none
-      scope5 = Application.none
       allow(result).to receive(:total_pages).and_return(5)
-      allow(Application).to receive(:with_current_version).and_return(scope1)
-      allow(scope1).to receive(:order).and_return(scope2)
-      allow(scope2).to receive(:where).and_return(scope3)
-      allow(scope3).to receive(:includes).and_return(scope4)
-      allow(scope4).to receive(:page).and_return(scope5)
-      allow(scope5).to receive(:per).and_return(result)
+      allow(Application).to receive(:order).and_return(scope1)
+      allow(scope1).to receive(:where).and_return(scope2)
+      allow(scope2).to receive(:includes).and_return(scope3)
+      allow(scope3).to receive(:page).and_return(scope4)
+      allow(scope4).to receive(:per).and_return(result)
       get :suburb_postcode, params: { key: key.value, format: "geojson", postcode: "2780" }
       expect(JSON.parse(response.body)).to eq(
         "type" => "FeatureCollection",
@@ -256,13 +248,11 @@ describe ApiController do
       scope2 = Application.none
       scope3 = Application.none
       scope4 = Application.none
-      scope5 = Application.none
-      allow(Application).to receive(:with_current_version).and_return(scope1)
-      allow(scope1).to receive(:order).and_return(scope2)
-      allow(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)
-      allow(scope3).to receive(:includes).and_return(scope4)
-      allow(scope4).to receive(:page).with(nil).and_return(scope5)
-      allow(scope5).to receive(:per).with(100).and_return(result)
+      allow(Application).to receive(:order).and_return(scope1)
+      allow(scope1).to receive(:where).with(suburb: "Katoomba").and_return(scope2)
+      allow(scope2).to receive(:includes).and_return(scope3)
+      allow(scope3).to receive(:page).with(nil).and_return(scope4)
+      allow(scope4).to receive(:per).with(100).and_return(result)
       get :suburb_postcode, params: { key: key.value, format: "rss", suburb: "Katoomba" }
       expect(assigns[:applications]).to eq(result)
       expect(assigns[:description]).to eq("Recent applications in Katoomba")
@@ -276,14 +266,12 @@ describe ApiController do
         scope3 = Application.none
         scope4 = Application.none
         scope5 = Application.none
-        scope6 = Application.none
-        allow(Application).to receive(:with_current_version).and_return(scope1)
-        allow(scope1).to receive(:order).and_return(scope2)
-        allow(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)
-        allow(scope3).to receive(:where).with(application_versions: { state: "NSW" }).and_return(scope4)
-        allow(scope4).to receive(:includes).and_return(scope5)
-        allow(scope5).to receive(:page).with(nil).and_return(scope6)
-        allow(scope6).to receive(:per).with(100).and_return(result)
+        allow(Application).to receive(:order).and_return(scope1)
+        allow(scope1).to receive(:where).with(suburb: "Katoomba").and_return(scope2)
+        allow(scope2).to receive(:where).with(state: "NSW").and_return(scope3)
+        allow(scope3).to receive(:includes).and_return(scope4)
+        allow(scope4).to receive(:page).with(nil).and_return(scope5)
+        allow(scope5).to receive(:per).with(100).and_return(result)
         get :suburb_postcode, params: { key: key.value, format: "rss", suburb: "Katoomba", state: "NSW" }
         expect(assigns[:applications]).to eq(result)
         expect(assigns[:description]).to eq("Recent applications in Katoomba, NSW")
@@ -299,15 +287,13 @@ describe ApiController do
         scope4 = Application.none
         scope5 = Application.none
         scope6 = Application.none
-        scope7 = Application.none
-        allow(Application).to receive(:with_current_version).and_return(scope1)
-        allow(scope1).to receive(:order).and_return(scope2)
-        allow(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)
-        allow(scope3).to receive(:where).with(application_versions: { state: "NSW" }).and_return(scope4)
-        allow(scope4).to receive(:where).with(application_versions: { postcode: "2780" }).and_return(scope5)
-        allow(scope5).to receive(:includes).and_return(scope6)
-        allow(scope6).to receive(:page).with(nil).and_return(scope7)
-        allow(scope7).to receive(:per).with(100).and_return(result)
+        allow(Application).to receive(:order).and_return(scope1)
+        allow(scope1).to receive(:where).with(suburb: "Katoomba").and_return(scope2)
+        allow(scope2).to receive(:where).with(state: "NSW").and_return(scope3)
+        allow(scope3).to receive(:where).with(postcode: "2780").and_return(scope4)
+        allow(scope4).to receive(:includes).and_return(scope5)
+        allow(scope5).to receive(:page).with(nil).and_return(scope6)
+        allow(scope6).to receive(:per).with(100).and_return(result)
         get :suburb_postcode, params: { key: key.value, format: "rss", suburb: "Katoomba", state: "NSW", postcode: "2780" }
         expect(assigns[:applications]).to eq(result)
         expect(assigns[:description]).to eq("Recent applications in Katoomba, NSW, 2780")
