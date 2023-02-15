@@ -1,5 +1,5 @@
 # Depending on values in env variables for access to AWS
-SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new('planningalerts-sitemaps', region: 'ap-southeast-2')
+SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new('planningalerts-sitemaps-production', region: 'ap-southeast-2')
 
 # The directory to write sitemaps to locally
 SitemapGenerator::Sitemap.public_path = 'tmp/sitemaps/'
