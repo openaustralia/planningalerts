@@ -21,7 +21,7 @@ class Comment < ApplicationRecord
 
   scope(:confirmed, -> { where(confirmed: true) })
   scope(:visible, -> { where(confirmed: true, hidden: false) })
-  scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
+  scope(:in_past_week, -> { where("confirmed_at > ?", 7.days.ago) })
 
   delegate :email, to: :user
 
