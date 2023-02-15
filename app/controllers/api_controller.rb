@@ -22,7 +22,7 @@ class ApiController < ApplicationController
 
     # TODO: Handle the situation where the authority name isn't found
     authority = Authority.find_short_name_encoded!(params_authority_id)
-    apps = authority.applications.order("date_scraped DESC")
+    apps = authority.applications.order(first_date_scraped: :desc)
     api_render(apps, "Recent applications from #{authority.full_name_and_state}")
   end
 
