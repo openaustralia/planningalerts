@@ -79,11 +79,8 @@ class ApplicationsController < ApplicationController
       @alert = Alert.new(address: @q, user: User.new)
       @other_addresses = T.must(result.rest).map(&:full_address)
       @applications = Application.near([top.lat, top.lng], radius / 1000, units: :km)
-      @applications = @applications.where("date_scraped > ?", time.days.ago) if Flipper.enabled?(:extra_options_on_address_search, current_user)
-      if sort == "time"
-        @applications = @applications
-                        .reorder("date_scraped DESC")
-      end
+      @applications = @applications.where("first_date_scraped > ?", time.days.ago) if Flipper.enabled?(:extra_options_on_address_search, current_user)
+      @applications = @applications.reorder(first_date_scraped: :desc) if sort == "time"
       @applications = @applications.page(params[:page]).per(per_page).without_count
     end
   end

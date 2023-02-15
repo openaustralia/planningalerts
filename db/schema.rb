@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_14_044626) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_15_232451) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -121,7 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_044626) do
     t.index ["authority_id", "date_scraped"], name: "index_applications_on_authority_id_and_date_scraped"
     t.index ["authority_id", "first_date_scraped"], name: "index_applications_on_authority_id_and_first_date_scraped"
     t.index ["date_scraped", "lat", "lng"], name: "index_applications_on_date_scraped_and_lat_and_lng"
-    t.index ["first_date_scraped"], name: "index_applications_on_first_date_scraped"
+    t.index ["first_date_scraped", "lat", "lng"], name: "index_applications_on_first_date_scraped_and_lat_and_lng"
     t.index ["lat", "lng", "date_scraped"], name: "index_applications_on_lat_and_lng_and_date_scraped"
     t.index ["postcode"], name: "index_applications_on_postcode"
     t.index ["state"], name: "index_applications_on_state"
