@@ -43,16 +43,6 @@ class Application < ApplicationRecord
   # allowed returned applications in a single API request
   max_paginates_per 100
 
-  # TODO: Remove this as soon as we can
-  sig { returns(T.untyped) }
-  def self.applications_needing_updating_from_current
-    query = %w[address description info_url date_received on_notice_from on_notice_to date_scraped lat lng suburb state postcode comment_email comment_authority].map do |field|
-      "NOT(applications.#{field} <=> application_versions.#{field})"
-    end.join(" OR ")
-
-    Application.joins(:current_version).where(query)
-  end
-
   sig { returns(String) }
   def description
     Application.normalise_description(attributes["description"])
