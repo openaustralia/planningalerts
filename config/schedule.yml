@@ -11,8 +11,7 @@ queue_up_process_alerts:
   class: "QueueUpProcessAlertsJob"
   description: "Set up queue for all alerts to be processed over the next 24 hours"
 sitemap_refresh:
-  # TODO: Change this to the "normal" time of 3pm after we've finished testing
-  cron: "every day at 1 pm Australia/Sydney"
+  cron: "every day at 3 pm Australia/Sydney"
   class: InvokeRakeTaskJob
   args:
     # TODO: remove no_ping after we've confirmed that everything is working
