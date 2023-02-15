@@ -1,5 +1,7 @@
 # See http://www.robotstxt.org/wc/norobots.html for documentation on how to use the robots.txt file
 
+Sitemap: https://planningalerts-sitemaps-production.s3.amazonaws.com/sitemap.xml.gz
+
 # Generally we don't want search pages indexed
 
 User-agent: *
@@ -14,3 +16,5 @@ Disallow: /applications/*/nearby
 Disallow: /applications/search
 Disallow: /comments
 Disallow: /geocode_queries
+
+
