@@ -19,42 +19,11 @@ class LogApiCallService
     ).void
   end
   def self.call(key:, ip_address:, query:, params:, user_agent:, time:)
-    new(
-      key:,
-      ip_address:,
-      query:,
-      params:,
-      user_agent:,
-      time:
-    ).call
-  end
-
-  sig do
-    params(
-      key: ApiKey,
-      ip_address: String,
-      query: String,
-      params: T::Hash[String, T.nilable(T.any(Integer, String))],
-      user_agent: T.nilable(String),
-      time: Time
-    ).void
-  end
-  def initialize(key:, ip_address:, query:, params:, user_agent:, time:)
-    @key = key
-    @ip_address = ip_address
-    @query = query
-    @params = params
-    @user_agent = user_agent
-    @time = time
-  end
-
-  sig { void }
-  def call
     # Marking as T.unsafe to avoid complaining about unreachable code
     return unless T.unsafe(LOGGING_ENABLED)
 
     ElasticSearchClient&.index(
-      index: elasticsearch_index(time),
+      index: LogApiCallService.elasticsearch_index(time),
       body: {
         ip_address:,
         query:,
@@ -76,28 +45,8 @@ class LogApiCallService
     )
   end
 
-  private
-
-  sig { returns(ApiKey) }
-  attr_reader :key
-
-  sig { returns(String) }
-  attr_reader :ip_address
-
-  sig { returns(String) }
-  attr_reader :query
-
-  sig { returns(T::Hash[String, T.nilable(T.any(Integer, String))]) }
-  attr_reader :params
-
-  sig { returns(T.nilable(String)) }
-  attr_reader :user_agent
-
-  sig { returns(Time) }
-  attr_reader :time
-
   sig { params(time: Time).returns(String) }
-  def elasticsearch_index(time)
+  def self.elasticsearch_index(time)
     # Put all data for a particular month (in UTC) in its own index
     time_as_text = time.utc.strftime("%Y.%m")
     "pa-api-#{ENV.fetch('STAGE', nil)}-#{time_as_text}"
