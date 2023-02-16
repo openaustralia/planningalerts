@@ -66,9 +66,6 @@ module GeneratedPathHelpersModule
   def admin_root_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def admin_site_settings_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def admin_user_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
