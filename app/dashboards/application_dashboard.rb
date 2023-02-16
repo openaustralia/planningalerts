@@ -22,6 +22,7 @@ class ApplicationDashboard < Administrate::BaseDashboard
     council_reference: Field::String,
     current_version: Field::HasOne,
     date_received: Field::Date,
+    first_date_scraped: Field::DateTime,
     date_scraped: Field::DateTime,
     description: Field::Text,
     info_url: Field::String.with_options(searchable: false),
@@ -59,6 +60,7 @@ class ApplicationDashboard < Administrate::BaseDashboard
     comment_authority
     lat
     lng
+    first_date_scraped
     date_scraped
     date_received
     suburb
