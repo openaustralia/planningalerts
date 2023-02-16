@@ -4,10 +4,6 @@
 class LogApiCallService
   extend T::Sig
 
-  # If you're deploying big database changes you can flip this and commit
-  # so that API calls aren't blocked by your migration
-  LOGGING_ENABLED = true
-
   sig do
     params(
       key: ApiKey,
@@ -19,9 +15,6 @@ class LogApiCallService
     ).void
   end
   def self.call(key:, ip_address:, query:, params:, user_agent:, time:)
-    # Marking as T.unsafe to avoid complaining about unreachable code
-    return unless T.unsafe(LOGGING_ENABLED)
-
     ElasticSearchClient&.index(
       index: LogApiCallService.elasticsearch_index(time),
       body: {
