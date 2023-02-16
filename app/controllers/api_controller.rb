@@ -159,8 +159,10 @@ class ApiController < ApplicationController
 
   sig { void }
   def require_api_key
-    if params[:key]
-      @current_api_key = T.let(ApiKey.find_by(value: params[:key], disabled: false), T.nilable(ApiKey))
+    params_key = T.cast(params[:key], T.nilable(String))
+
+    if params_key
+      @current_api_key = T.let(ApiKey.find_valid(params_key), T.nilable(ApiKey))
       if @current_api_key
         # Everything is fine
         return

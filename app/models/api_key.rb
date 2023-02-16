@@ -9,6 +9,11 @@ class ApiKey < ApplicationRecord
 
   before_create :set_value
 
+  sig { params(value: String).returns(T.nilable(ApiKey)) }
+  def self.find_valid(value)
+    ApiKey.find_by(value:, disabled: false)
+  end
+
   private
 
   sig { void }
