@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_15_232451) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_16_024203) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -221,11 +221,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_232451) do
     t.datetime "updated_at", precision: nil
     t.integer "user_id"
     t.index ["comment_id"], name: "fk_rails_bc3addd41c"
-  end
-
-  create_table "site_settings", charset: "utf8mb4", force: :cascade do |t|
-    t.string "settings"
-    t.datetime "created_at", precision: nil
   end
 
   create_table "stats", id: :integer, charset: "utf8mb4", force: :cascade do |t|
