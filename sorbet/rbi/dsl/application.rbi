@@ -487,9 +487,6 @@ class Application
     def where(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def with_current_version(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def within_bounding_box(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -1779,9 +1776,6 @@ class Application
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelationWhereChain) }
     def where(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def with_current_version(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def within_bounding_box(*args, &blk); end

@@ -32,7 +32,6 @@ class Application < ApplicationRecord
   validates :info_url, url: true
   validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
 
-  scope(:with_current_version, -> { includes(:current_version).joins(:current_version) })
   scope(:in_past_week, -> { where("first_date_scraped > ?", 7.days.ago) })
   scope(:recent, -> { where("first_date_scraped >= ?", 14.days.ago) })
 
