@@ -63,7 +63,7 @@ class ApiController < ApplicationController
     location = Location.new(lat: params_lat.to_f, lng: params_lng.to_f)
     location_text = location.to_s
     api_render(
-      Application.order("date_scraped DESC")
+      Application.order(first_date_scraped: :desc)
                  .near([location.lat, location.lng], radius / 1000, units: :km),
       "Recent applications within #{help.meters_in_words(radius)} of #{location_text}"
     )
