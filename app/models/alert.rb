@@ -91,7 +91,7 @@ class Alert < ApplicationRecord
   # Applications in the area of interest which have new comments made since we were last alerted
   sig { returns(T.untyped) }
   def applications_with_new_comments
-    Application.order("date_scraped DESC")
+    Application.order(first_date_scraped: :desc)
                .near([lat, lng], radius_km, units: :km)
                .joins(:comments)
                .where("comments.confirmed_at > ?", cutoff_time)
