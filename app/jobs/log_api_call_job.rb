@@ -19,8 +19,11 @@ class LogApiCallJob
     ).void
   end
   def perform(api_key, ip_address, query, params, user_agent, time_as_float)
+    key = ApiKey.find_by(value: api_key) if api_key.present?
+    return if key.nil?
+
     LogApiCallService.call(
-      api_key:,
+      key:,
       ip_address:,
       query:,
       params:,

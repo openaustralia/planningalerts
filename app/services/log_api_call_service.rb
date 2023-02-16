@@ -10,7 +10,7 @@ class LogApiCallService
 
   sig do
     params(
-      api_key: String,
+      key: ApiKey,
       ip_address: String,
       query: String,
       params: T::Hash[String, T.nilable(T.any(Integer, String))],
@@ -18,9 +18,9 @@ class LogApiCallService
       time: Time
     ).void
   end
-  def self.call(api_key:, ip_address:, query:, params:, user_agent:, time:)
+  def self.call(key:, ip_address:, query:, params:, user_agent:, time:)
     new(
-      api_key:,
+      key:,
       ip_address:,
       query:,
       params:,
@@ -31,7 +31,7 @@ class LogApiCallService
 
   sig do
     params(
-      api_key: String,
+      key: ApiKey,
       ip_address: String,
       query: String,
       params: T::Hash[String, T.nilable(T.any(Integer, String))],
@@ -39,8 +39,8 @@ class LogApiCallService
       time: Time
     ).void
   end
-  def initialize(api_key:, ip_address:, query:, params:, user_agent:, time:)
-    @api_key = api_key
+  def initialize(key:, ip_address:, query:, params:, user_agent:, time:)
+    @key = key
     @ip_address = ip_address
     @query = query
     @params = params
@@ -53,33 +53,6 @@ class LogApiCallService
     # Marking as T.unsafe to avoid complaining about unreachable code
     return unless T.unsafe(LOGGING_ENABLED)
 
-    # Lookup the api key if there is one
-    key = ApiKey.find_by(value: api_key) if api_key.present?
-    log_to_elasticsearch(key) if key
-  end
-
-  private
-
-  sig { returns(String) }
-  attr_reader :api_key
-
-  sig { returns(String) }
-  attr_reader :ip_address
-
-  sig { returns(String) }
-  attr_reader :query
-
-  sig { returns(T::Hash[String, T.nilable(T.any(Integer, String))]) }
-  attr_reader :params
-
-  sig { returns(T.nilable(String)) }
-  attr_reader :user_agent
-
-  sig { returns(Time) }
-  attr_reader :time
-
-  sig { params(key: ApiKey).void }
-  def log_to_elasticsearch(key)
     ElasticSearchClient&.index(
       index: elasticsearch_index(time),
       body: {
@@ -102,6 +75,26 @@ class LogApiCallService
       }
     )
   end
+
+  private
+
+  sig { returns(ApiKey) }
+  attr_reader :key
+
+  sig { returns(String) }
+  attr_reader :ip_address
+
+  sig { returns(String) }
+  attr_reader :query
+
+  sig { returns(T::Hash[String, T.nilable(T.any(Integer, String))]) }
+  attr_reader :params
+
+  sig { returns(T.nilable(String)) }
+  attr_reader :user_agent
+
+  sig { returns(Time) }
+  attr_reader :time
 
   sig { params(time: Time).returns(String) }
   def elasticsearch_index(time)

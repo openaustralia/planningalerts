@@ -358,7 +358,7 @@ describe ApiController do
         end
         expect(LogApiCallService).to have_received(:call).with(
           time: expected_time,
-          api_key: key.value,
+          key:,
           ip_address: "0.0.0.0",
           query: "/applications.rss?key=#{CGI.escape(key.value)}&lat=1.0&lng=2.0&radius=4000",
           params: {
