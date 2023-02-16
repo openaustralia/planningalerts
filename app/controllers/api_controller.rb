@@ -28,7 +28,7 @@ class ApiController < ApplicationController
 
   sig { void }
   def suburb_postcode
-    apps = Application.order("date_scraped DESC")
+    apps = Application.order(first_date_scraped: :desc)
     descriptions = []
     if params[:suburb]
       descriptions << params[:suburb]
