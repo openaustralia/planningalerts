@@ -37,8 +37,9 @@ class Application < ApplicationRecord
 
   sig { returns(T::Hash[Symbol, T.untyped]) }
   def search_data
-    # Include version data in what's indexed by searchkick
-    attributes.symbolize_keys.merge(current_version&.search_data || {})
+    # lat and lon need to be symbols (rather than strings) in search_data
+    # to get valid data come through searchkick for some reason
+    attributes.symbolize_keys.merge(location: { lat:, lon: lng })
   end
 
   # For the benefit of kaminari. Also sets the maximum number of
