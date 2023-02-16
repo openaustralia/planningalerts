@@ -7,10 +7,6 @@ class ApplicationVersion < ApplicationRecord
   belongs_to :application
   belongs_to :previous_version, class_name: "ApplicationVersion", optional: true
 
-  validates :date_scraped, :address, :description, presence: true
-  validates :info_url, url: true
-  validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
-
   validates :current, uniqueness: { scope: :application_id }, if: :current
 
   delegate :authority, :council_reference, to: :application
@@ -62,25 +58,5 @@ class ApplicationVersion < ApplicationRecord
           "current" => true
         )
     )
-  end
-
-  private
-
-  sig { void }
-  def date_received_can_not_be_in_the_future
-    d = date_received
-    return unless d && d > Time.zone.today
-
-    errors.add(:date_received, "can not be in the future")
-  end
-
-  sig { void }
-  def validate_on_notice_period
-    from = on_notice_from
-    to = on_notice_to
-
-    return unless from && to && from > to
-
-    errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
   end
 end

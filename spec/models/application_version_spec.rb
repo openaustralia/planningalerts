@@ -4,45 +4,6 @@ require "spec_helper"
 
 describe ApplicationVersion do
   describe "validations" do
-    describe "date_scraped" do
-      it { expect(build(:application_version, date_scraped: nil)).not_to be_valid }
-    end
-
-    describe "address" do
-      it { expect(build(:application_version, address: "")).not_to be_valid }
-    end
-
-    describe "description" do
-      it { expect(build(:application_version, description: "")).not_to be_valid }
-    end
-
-    describe "info_url" do
-      it { expect(build(:application_version, info_url: "")).not_to be_valid }
-      it { expect(build(:application_version, info_url: "http://blah.com?p=1")).to be_valid }
-      it { expect(build(:application_version, info_url: "foo")).not_to be_valid }
-    end
-
-    describe "date_received" do
-      it { expect(build(:application_version, date_received: nil)).to be_valid }
-
-      context "when the date today is 1 january 2001" do
-        around do |test|
-          Timecop.freeze(Date.new(2001, 1, 1)) { test.run }
-        end
-
-        it { expect(build(:application_version, date_received: Date.new(2002, 1, 1))).not_to be_valid }
-        it { expect(build(:application_version, date_received: Date.new(2000, 1, 1))).to be_valid }
-      end
-    end
-
-    describe "on_notice" do
-      it { expect(build(:application_version, on_notice_from: nil, on_notice_to: nil)).to be_valid }
-      it { expect(build(:application_version, on_notice_from: Date.new(2001, 1, 1), on_notice_to: Date.new(2001, 2, 1))).to be_valid }
-      it { expect(build(:application_version, on_notice_from: nil, on_notice_to: Date.new(2001, 2, 1))).to be_valid }
-      it { expect(build(:application_version, on_notice_from: Date.new(2001, 1, 1), on_notice_to: nil)).to be_valid }
-      it { expect(build(:application_version, on_notice_from: Date.new(2001, 2, 1), on_notice_to: Date.new(2001, 1, 1))).not_to be_valid }
-    end
-
     describe "current" do
       # Creates a bare application with no application versions
       let(:application1) do

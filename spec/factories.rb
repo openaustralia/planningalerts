@@ -15,15 +15,15 @@ FactoryBot.define do
   factory :application_with_no_version, class: "Application" do
     association :authority
     council_reference { "001" }
+    date_scraped { 10.minutes.ago }
+    address { "A test address" }
+    description { "pretty" }
+    info_url { "http://foo.com" }
 
     factory :application do
-      address { "A test address" }
-      description { "pretty" }
-      info_url { "http://foo.com" }
       date_received { nil }
       on_notice_from { nil }
       on_notice_to { nil }
-      date_scraped { 10.minutes.ago }
 
       after(:create) do |application, evaluator|
         create(

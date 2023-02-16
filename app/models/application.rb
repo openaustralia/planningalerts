@@ -28,6 +28,9 @@ class Application < ApplicationRecord
 
   validates :council_reference, presence: true
   validates :council_reference, uniqueness: { scope: :authority_id, case_sensitive: false }
+  validates :date_scraped, :address, :description, presence: true
+  validates :info_url, url: true
+  validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
 
   scope(:with_current_version, -> { includes(:current_version).joins(:current_version) })
   scope(:in_past_week, -> { where("first_date_scraped > ?", 7.days.ago) })
@@ -146,5 +149,25 @@ class Application < ApplicationRecord
       logger.error "Couldn't geocode address: #{address} (#{r.error})"
       {}
     end
+  end
+
+  private
+
+  sig { void }
+  def date_received_can_not_be_in_the_future
+    d = date_received
+    return unless d && d > Time.zone.today
+
+    errors.add(:date_received, "can not be in the future")
+  end
+
+  sig { void }
+  def validate_on_notice_period
+    from = on_notice_from
+    to = on_notice_to
+
+    return unless from && to && from > to
+
+    errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
   end
 end
