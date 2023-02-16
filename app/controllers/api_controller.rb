@@ -163,10 +163,8 @@ class ApiController < ApplicationController
 
     if params_key
       @current_api_key = T.let(ApiKey.find_valid(params_key), T.nilable(ApiKey))
-      if @current_api_key
-        # Everything is fine
-        return
-      end
+      # return if everything is fine
+      return if @current_api_key
     end
 
     render_error("not authorised - use a valid api key", :unauthorized)
