@@ -90,9 +90,6 @@ gem "formtastic"
 # TODO: Double check where this is being used
 gem "oj"
 
-# Helps with defining attributes and type casting in form objects
-gem "virtus"
-
 # For theming (so we can run our proper theme at the same time as an
 # experimental tailwind based theme)
 # Using our fork to add Rails 6 & 7 support and fix a bad memory leak
