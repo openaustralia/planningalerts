@@ -26,35 +26,34 @@ Rails.application.routes.draw do
       mount Flipper::UI.app(Flipper) => "flipper", as: :flipper
     end
 
-    resources :applications, only: [:index, :show, :destroy]
-    resources :authorities, except: :destroy do
-      member do
-        post :import
-      end
-    end
     resources :users, except: [:new, :create] do
       collection do
         get :export_confirmed_emails
       end
     end
-    resources :reports, only: [:index, :show, :destroy]
+    resources :alerts, only: [:index, :show] do
+      member do
+        post :unsubscribe
+      end
+    end
     resources :comments, except: [:destroy, :new, :create] do
       member do
         post :resend
         post :confirm
       end
     end
-    resources :api_keys, except: [:destroy, :new, :create]
-    resources :alerts, only: [:index, :show] do
+    resources :reports, only: [:index, :show, :destroy]
+    resources :authorities, except: :destroy do
       member do
-        post :unsubscribe
+        post :import
       end
-
     end
-    resources :background_jobs, only: :index
+    resources :applications, only: [:index, :show, :destroy]
+    resources :api_keys, except: [:destroy, :new, :create]
     resources :api_usages, only: :index
+    resources :background_jobs, only: :index
 
-    root to: "applications#index"
+    root to: "users#index"
   end
 
   constraints subdomain: "api" do
