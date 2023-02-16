@@ -8,7 +8,7 @@
         = distance_and_heading_in_words(alert.location, application.location)
     - if application.location
       %tr
-        - if SiteSetting.get(:streetview_in_emails_enabled)
+        - if Flipper.enabled?(:streetview_in_emails, alert.user)
           %td.map
             = google_static_map(application, size: "150x150", key: "GOOGLE_MAPS_EMAIL_KEY")
           %td.streetview

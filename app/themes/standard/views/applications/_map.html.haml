@@ -1,9 +1,9 @@
 - if application.location
   -# If just showing the map make it twice as wide
-  .application#map_div{ data: { lat: application.lat, lng: application.lng, address: application.address, zoom: 16 }, class: ("double" unless SiteSetting.get(:streetview_in_app_enabled)) }
+  .application#map_div{ data: { lat: application.lat, lng: application.lng, address: application.address, zoom: 16 }, class: ("double" unless Flipper.enabled?(:streetview_in_app, current_user)) }
     %noscript= google_static_map(application, size: "350x330")
 
-  - if SiteSetting.get(:streetview_in_app_enabled)
+  - if Flipper.enabled?(:streetview_in_app, current_user)
     .details
       #pano{ data: { lat: application.lat, lng: application.lng, address: application.address } }
         %noscript= google_static_streetview(application, size: "350x330")

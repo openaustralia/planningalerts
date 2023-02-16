@@ -87,6 +87,7 @@ describe AlertMailer do
     end
 
     it "nicelies format (in HTML) a list of multiple planning applications" do
+      Flipper.enable(:streetview_in_emails)
       expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email2.html").read.gsub("\n", "\r\n"))
     end
   end
@@ -140,6 +141,7 @@ describe AlertMailer do
         end
 
         it "has a specific body" do
+          Flipper.enable(:streetview_in_emails)
           expect(html_body).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email1.html").read.gsub("\n", "\r\n"))
         end
       end
