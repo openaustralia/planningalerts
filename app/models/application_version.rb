@@ -9,8 +9,6 @@ class ApplicationVersion < ApplicationRecord
 
   validates :current, uniqueness: { scope: :application_id }, if: :current
 
-  delegate :authority, :council_reference, to: :application
-
   sig { returns(T::Hash[String, T.untyped]) }
   def data_attributes
     attributes.except(

@@ -53,9 +53,7 @@ describe CreateOrUpdateApplicationService do
     version = application.versions.first
     expect(version.application).to eq application
     expect(version.previous_version).to be_nil
-    expect(version.authority).to eq authority
     expect(version.date_scraped).to eq Date.new(2001, 1, 10)
-    expect(version.council_reference).to eq "123/45"
     expect(version.address).to eq "Some kind of address"
     expect(version.description).to eq "A really nice change"
     expect(version.info_url).to eq "http://foo.com"
