@@ -115,7 +115,7 @@ gem "sorbet-runtime"
 gem "octokit"
 
 # For rendering json output
-gem "jbuilder"
+gem "jb"
 
 # For sending notifications to Slack about bounced emails to authorities
 gem "slack-notifier"

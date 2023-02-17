@@ -1,0 +1,4 @@
+# typed: strict
+# frozen_string_literal: true
+
+render(partial: "application", formats: :json, collection: @applications)

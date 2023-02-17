@@ -1,0 +1,23 @@
+# typed: strict
+# frozen_string_literal: true
+
+{
+  application: {
+    id: application.id,
+    council_reference: application.council_reference,
+    date_scraped: application.first_date_scraped,
+    address: application.address,
+    description: application.description,
+    info_url: application.info_url,
+    # Provided for backwards compatibility
+    comment_url: nil,
+    date_received: application.date_received,
+    on_notice_from: application.on_notice_from,
+    on_notice_to: application.on_notice_to,
+    lat: application.lat,
+    lng: application.lng,
+    authority: {
+      full_name: application.authority.full_name
+    }
+  }
+}

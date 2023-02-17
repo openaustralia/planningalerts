@@ -1,0 +1,8 @@
+# typed: strict
+# frozen_string_literal: true
+
+{
+  application_count: @applications.count,
+  page_count: @applications.total_pages,
+  applications: render(partial: "application", formats: :json, collection: @applications)
+}

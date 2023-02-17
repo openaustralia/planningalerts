@@ -1,0 +1,8 @@
+# typed: strict
+# frozen_string_literal: true
+
+{
+  application_count: @applications.count,
+  max_id: @max_id,
+  applications: render(partial: "application", formats: :json, collection: @applications)
+}
