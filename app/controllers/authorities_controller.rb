@@ -11,6 +11,8 @@ class AuthoritiesController < ApplicationController
     @authorities = T.let(Authority.enabled, T.untyped)
     @authorities = @authorities.order(population_2017: :desc) if params[:order] == "population"
     @authorities = @authorities.order(:state, :full_name)
+    # This is faster than calling broken? on each authority in turn
+    @working_authority_ids = T.let(@authorities.joins(:applications).merge(Application.recent).group(:id).pluck(:id), T.nilable(T::Array[Integer]))
   end
 
   sig { void }
