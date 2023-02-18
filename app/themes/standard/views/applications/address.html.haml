@@ -29,8 +29,6 @@
     - if Flipper.enabled?(:extra_options_on_address_search, current_user)
       .filter-options= render "filter_options", sort: @sort, q: @q, radius: @radius, time: @time
 
-  -# Only show the top pagination links beyond the first page
-  - if @page.to_i > 1
-    = render "pagination", applications: @applications
+  = render "pagination", applications: @applications
   %ol.applications= render partial: "application", collection: @applications
   = render "pagination", applications: @applications
