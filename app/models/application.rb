@@ -16,7 +16,7 @@ class Application < ApplicationRecord
              locations: [:location],
              callbacks: :async
 
-  belongs_to :authority
+  belongs_to :authority, touch: true
   has_many :comments, dependent: :restrict_with_exception
   has_many :versions, -> { order(id: :desc) }, class_name: "ApplicationVersion", dependent: :destroy, inverse_of: :application
   has_one :current_version, -> { where(current: true) }, class_name: "ApplicationVersion", inverse_of: :application, dependent: :restrict_with_exception

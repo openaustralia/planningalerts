@@ -30,4 +30,4 @@
         = link_to "Population", order: "population"
         (2017 estimate)
   %tbody
-    = render @authorities
+    = render partial: "authority", collection: @authorities, cached: true
