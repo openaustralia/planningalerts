@@ -1,0 +1,9 @@
+%tr
+  %td= authority.state
+  %td
+    = link_to authority.full_name, authority_url(authority.short_name_encoded)
+    - if authority.broken?
+      %span.highlight possibly broken
+    - elsif !authority.covered?
+      &mdash; not covered
+  %td= authority.population_2017
