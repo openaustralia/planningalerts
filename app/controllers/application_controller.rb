@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  before_action :set_header_variable
   before_action :configure_permitted_parameters, if: :devise_controller?
   # This stores the location on every request so that we can always redirect back after logging in
   # See https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D
@@ -42,11 +41,6 @@ class ApplicationController < ActionController::Base
     else
       "standard"
     end
-  end
-
-  sig { void }
-  def set_header_variable
-    @alert_count = T.let(Stat.applications_sent, T.nilable(Integer))
   end
 
   sig { void }
