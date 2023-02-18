@@ -35,7 +35,7 @@
         %td= authority.state
         %td
           = link_to authority.full_name, authority_url(authority.short_name_encoded)
-          - if @working_authority_ids.exclude?(authority.id)
+          - if authority.broken?
             %span.highlight possibly broken
           - elsif !authority.covered?
             &mdash; not covered
