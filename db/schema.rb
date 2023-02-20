@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_16_024203) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_20_190615) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -140,6 +140,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_024203) do
     t.string "website_url"
     t.integer "population_2017"
     t.string "scraper_authority_label", comment: "For scrapers for multiple authorities filter by this label"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 
