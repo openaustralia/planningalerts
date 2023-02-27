@@ -26,7 +26,8 @@ class AuthorityDashboard < Administrate::BaseDashboard
     scraper_authority_label: Field::String,
     short_name: Field::String,
     state: Field::String,
-    website_url: Field::String
+    website_url: Field::String,
+    wikidata_id: Field::String
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
@@ -47,6 +48,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     short_name
     state
     email
+    wikidata_id
     website_url
     population_2017
     morph_name
@@ -63,6 +65,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     short_name
     state
     email
+    wikidata_id
     website_url
     population_2017
     morph_name
@@ -74,6 +77,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     full_name
     state
     email
+    wikidata_id
     website_url
     population_2017
     morph_name
@@ -93,7 +97,9 @@ class AuthorityDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = T.let({
     active: ->(resources) { resources.active },
-    disabled: ->(resources) { resources.where(disabled: true) }
+    disabled: ->(resources) { resources.where(disabled: true) },
+    # TODO: This is only needed temporarily while we're filling out the data. Get rid of it when we can.
+    empty_wikidata: ->(resources) { resources.active.where(wikidata_id: nil) }
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # Overwrite this method to customize how authorities are displayed
