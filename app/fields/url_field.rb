@@ -6,7 +6,7 @@ require "administrate/field/base"
 class UrlField < Administrate::Field::Base
   extend T::Sig
 
-  sig { returns(String) }
+  sig { returns(T.nilable(String)) }
   def to_s
     data
   end
