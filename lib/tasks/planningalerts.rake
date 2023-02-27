@@ -2,6 +2,10 @@
 
 # Given an official website for an LGA return the wikidata ID
 def wikidata_id_from_website(url)
+  # It looks like wikidata always put a "/" on the end of a URL irrespective
+  # of whether it was entered like that. So, to match we add a "/" if the url
+  # doesn't have one.
+  url += "/" if url.last != "/"
   sparql = SPARQL::Client.new("https://query.wikidata.org/sparql")
   query = sparql.select.where([:item, "wdt:P856", RDF::URI.new(url)])
   raise "More than one found!" if query.solutions.count > 1
