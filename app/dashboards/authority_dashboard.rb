@@ -27,7 +27,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     short_name: Field::String,
     state: Field::String,
     website_url: UrlField,
-    wikidata_id: Field::String
+    wikidata_id: WikidataField
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
