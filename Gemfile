@@ -146,6 +146,9 @@ gem "view_component"
 gem "aws-sdk-s3", "~> 1"
 gem "sitemap_generator"
 
+# For accessing wikidata
+gem "sparql-client"
+
 group :test do
   gem "capybara"
   gem "climate_control"

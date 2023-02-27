@@ -370,6 +370,7 @@ GEM
     launchy (2.5.2)
       addressable (~> 2.8)
     libv8-node (16.10.0.0-x86_64-linux)
+    link_header (0.0.8)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -398,6 +399,8 @@ GEM
     multipart-post (2.2.3)
     mysql2 (0.5.4)
     nenv (0.3.0)
+    net-http-persistent (4.0.1)
+      connection_pool (~> 2.2)
     net-imap (0.3.4)
       date
       net-protocol
@@ -490,6 +493,8 @@ GEM
       parser (>= 2.6.4.0)
       sorbet-runtime (>= 0.5.9204)
       unparser
+    rdf (3.2.9)
+      link_header (~> 0.0, >= 0.0.8)
     redcarpet (3.5.1)
     redis (4.8.0)
     regexp_parser (2.6.1)
@@ -611,6 +616,9 @@ GEM
     sorbet-static-and-runtime (0.5.10599)
       sorbet (= 0.5.10599)
       sorbet-runtime (= 0.5.10599)
+    sparql-client (3.2.1)
+      net-http-persistent (~> 4.0, >= 4.0.1)
+      rdf (~> 3.2, >= 3.2.6)
     spoom (1.1.15)
       sorbet (>= 0.5.10187)
       sorbet-runtime (>= 0.5.9204)
@@ -792,6 +800,7 @@ DEPENDENCIES
   slack-notifier
   sorbet
   sorbet-runtime
+  sparql-client
   spoom
   susy
   tailwindcss-rails (~> 2.0)
