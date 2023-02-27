@@ -8,7 +8,13 @@ def wikidata_id_from_website(url)
   # The query build for sparql-client doesn't seem to generate code that wikidata like when using union.
   # So instead create the query by hand
   query = sparql.query("SELECT * WHERE { { ?item wdt:P856 <http://#{domain}> . } UNION { ?item wdt:P856 <http://#{domain}/> . } UNION { ?item wdt:P856 <https://#{domain}> . } UNION { ?item wdt:P856 <https://#{domain}/> . } }")
-  return unless query.count == 1
+  if query.count.zero?
+    puts "WARNING: Couldn't find"
+    return
+  elsif query.count > 1
+    puts "WARNING: More than one found"
+    return
+  end
 
   entity_url = query.first[:item].to_s
   entity_url.split("/").last
@@ -23,8 +29,6 @@ namespace :planningalerts do
       if wikidata_id
         puts wikidata_id
         authority.update!(wikidata_id:)
-      else
-        puts "Couldn't find or more than one found"
       end
     end
   end
