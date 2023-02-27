@@ -26,7 +26,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     scraper_authority_label: Field::String,
     short_name: Field::String,
     state: Field::String,
-    website_url: Field::String,
+    website_url: UrlField,
     wikidata_id: Field::String
   }.freeze, T::Hash[Symbol, T.untyped])
 
