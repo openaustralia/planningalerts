@@ -26,8 +26,6 @@ namespace :planningalerts do
         next
       end
 
-      puts "Looking up #{authority.full_name} wikidata_id #{authority.wikidata_id}..."
-
       lga_id = WikidataService.lga(authority.wikidata_id)
       if lga_id.nil?
         puts "#{authority.full_name} wikidata_id #{authority.wikidata_id} couldn't find a related LGA"
