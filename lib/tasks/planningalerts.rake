@@ -8,14 +8,15 @@ def wikidata_id_from_website(url)
   # The query build for sparql-client doesn't seem to generate code that wikidata like when using union.
   # So instead create the query by hand
   query = sparql.query("SELECT * WHERE { ?item wdt:P31 ?parent { ?item wdt:P856 <http://#{domain}> . } UNION { ?item wdt:P856 <http://#{domain}/> . } UNION { ?item wdt:P856 <https://#{domain}> . } UNION { ?item wdt:P856 <https://#{domain}/> . } }")
-  # In the case where we get several results just restrict it to LGAs by removing actual councils
-  query.reject! { |q| q[:parent].to_s == "http://www.wikidata.org/entity/Q3308596" } if query.count > 1
+  # In the case where we get several results just restrict it to LGAs
+  query.select! { |q| %w[Q1426035 Q55557858 Q55558027 Q55558200 Q55593624 Q55671590 Q55687066].include?(q[:parent].to_s.split("/").last) } if query.count > 1
 
   if query.count.zero?
     puts "WARNING: Couldn't find"
     return
   elsif query.count > 1
     puts "WARNING: More than one found"
+    p query
     return
   end
 
