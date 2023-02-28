@@ -3,7 +3,9 @@
 namespace :planningalerts do
   desc "update wikidata ids"
   task update_wikidata_ids: :environment do
-    Authority.active.where(wikidata_id: nil).find_each do |authority|
+    Authority.active.find_each do |authority|
+      next if authority.wikidata_id.present?
+
       puts "Getting wikidata id for #{authority.full_name} (#{authority.website_url})..."
       wikidata_id = WikidataService.id_from_website(authority.website_url)
 
