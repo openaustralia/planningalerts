@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-module Wikidata
+module WikidataService
   extend T::Sig
 
   # Given an official website for an LGA return the wikidata ID
