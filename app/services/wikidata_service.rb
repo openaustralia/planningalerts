@@ -15,7 +15,16 @@ module WikidataService
     sparql = SPARQL::Client.new("https://query.wikidata.org/sparql")
     # The query build for sparql-client doesn't seem to generate code that wikidata like when using union.
     # So instead create the query by hand
-    query = sparql.query("SELECT * WHERE { ?item wdt:P31 ?parent { ?item wdt:P856 <http://#{domain}> . } UNION { ?item wdt:P856 <http://#{domain}/> . } UNION { ?item wdt:P856 <https://#{domain}> . } UNION { ?item wdt:P856 <https://#{domain}/> . } }")
+    query = sparql.query(
+      "SELECT * WHERE " \
+      "{ " \
+      "?item wdt:P31 ?parent " \
+      "{ ?item wdt:P856 <http://#{domain}> . } UNION " \
+      "{ ?item wdt:P856 <http://#{domain}/> . } UNION " \
+      "{ ?item wdt:P856 <https://#{domain}> . } UNION " \
+      "{ ?item wdt:P856 <https://#{domain}/> . } " \
+      "}"
+    )
     # In the case where we get several results just restrict it to LGAs
     query.select! { |q| LGA_STATES.include?(q[:parent].to_s.split("/").last) } if query.count > 1
 
