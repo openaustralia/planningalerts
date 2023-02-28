@@ -148,6 +148,7 @@ gem "sitemap_generator"
 
 # For accessing wikidata
 gem "sparql-client"
+gem "wikidata"
 
 group :test do
   gem "capybara"
