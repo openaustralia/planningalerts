@@ -5,7 +5,8 @@ module WikidataService
   extend T::Sig
 
   # ids for the classes of LGA areas for each state
-  LGA_STATES = T.let(%w[Q1426035 Q55557858 Q55558027 Q55558200 Q55593624 Q55671590 Q55687066].freeze, T::Array[String])
+  LGA_STATE_IDS = T.let(%w[Q1426035 Q55557858 Q55558027 Q55558200 Q55593624 Q55671590 Q55687066].freeze, T::Array[String])
+  LOCAL_GOVERNMENT_IDS = T.let(%w[Q3308596 Q6501447].freeze, T::Array[String])
 
   # Given an official website for an LGA return the wikidata ID
   sig { params(url: String).returns(T.nilable(String)) }
@@ -18,15 +19,14 @@ module WikidataService
     query = sparql.query(
       "SELECT * WHERE " \
       "{ " \
-      "?item wdt:P31 ?parent " \
-      "{ ?item wdt:P856 <http://#{domain}> . } UNION " \
-      "{ ?item wdt:P856 <http://#{domain}/> . } UNION " \
-      "{ ?item wdt:P856 <https://#{domain}> . } UNION " \
-      "{ ?item wdt:P856 <https://#{domain}/> . } " \
+      "VALUES ?url { <http://#{domain}> <http://#{domain}/> <https://#{domain}> <https://#{domain}/> }" \
+      "VALUES ?parent { #{(LGA_STATE_IDS + LOCAL_GOVERNMENT_IDS).map { |id| "wd:#{id}" }.join(' ')} } " \
+      "?item wdt:P856 ?url.  " \
+      "?item wdt:P31 ?parent. " \
       "}"
     )
     # In the case where we get several results just restrict it to LGAs
-    query.select! { |q| LGA_STATES.include?(q[:parent].to_s.split("/").last) } if query.count > 1
+    query.select! { |q| LGA_STATE_IDS.include?(q[:parent].to_s.split("/").last) } if query.count > 1
 
     if query.count.zero?
       return
@@ -48,7 +48,7 @@ module WikidataService
     # rubocop:enable Rails/DynamicFindBy
     # instance of
     ids = item.claims_for_property_id("P31").map { |claim| claim.mainsnak.value.entity.id }
-    if ids.any? { |i| LGA_STATES.include?(i) }
+    if ids.any? { |i| LGA_STATE_IDS.include?(i) }
       # We're already on an LGA so return the original id
       id
     else
