@@ -29,13 +29,27 @@ module WikidataService
     entity_url.split("/").last
   end
 
-  sig { params(id: String).returns(T::Boolean) }
-  def self.lga?(id)
+  # Given an id finds the id of the related LGA
+  # If the given id is an LGA it returns the same id
+  # If the LGA can't be found returns nil
+  sig { params(id: String).returns(T.nilable(String)) }
+  def self.lga(id)
     # rubocop:disable Rails/DynamicFindBy
     item = Wikidata::Item.find_by_id(id)
     # rubocop:enable Rails/DynamicFindBy
     # instance of
     ids = item.claims_for_property_id("P31").map { |claim| claim.mainsnak.value.entity.id }
-    ids.any? { |i| LGA_STATES.include?(i) }
+    if ids.any? { |i| LGA_STATES.include?(i) }
+      # We're already on an LGA so return the original id
+      id
+    else
+      # applies to jurisdiction
+      claims = item.claims_for_property_id("P1001")
+      raise "Don't expect more than one jurisdiction" if claims.count > 1
+
+      return if claims.empty?
+
+      claims.first.mainsnak.value.entity.id
+    end
   end
 end

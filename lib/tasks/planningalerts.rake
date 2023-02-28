@@ -19,13 +19,22 @@ namespace :planningalerts do
   desc "check wikidata ids point to the correct place"
   task check_wikidata_ids: :environment do
     Authority.active.find_each do |authority|
-      if authority.wikidata_id.nil?
+      if authority.wikidata_id.blank?
         puts "#{authority.full_name} does not have wikidata_id set"
         next
       end
 
-      unless WikidataService.lga?(authority.wikidata_id)
-        puts "#{authority.full_name} wikidata_id #{authority.wikidata_id} does not point to LGA"
+      puts "Looking up #{authority.full_name} wikidata_id #{authority.wikidata_id}..."
+
+      lga_id = WikidataService.lga(authority.wikidata_id)
+      if lga_id.nil?
+        puts "#{authority.full_name} wikidata_id #{authority.wikidata_id} couldn't find a related LGA"
+        next
+      end
+
+      if lga_id != authority.wikidata_id
+        puts "#{authority.full_name} wikidata_id #{authority.wikidata_id} => #{lga_id}"
+        authority.update!(wikidata_id: lga_id)
         next
       end
     end
