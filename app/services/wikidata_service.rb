@@ -8,6 +8,14 @@ module WikidataService
   LGA_STATE_IDS = T.let(%w[Q1426035 Q55557858 Q55558027 Q55558200 Q55593624 Q55671590 Q55687066].freeze, T::Array[String])
   LOCAL_GOVERNMENT_IDS = T.let(%w[Q3308596 Q6501447].freeze, T::Array[String])
 
+  sig { params(url: String).returns(T.nilable(String)) }
+  def self.lga_id_from_website(url)
+    id = id_from_website(url)
+    return if id.nil?
+
+    lga(id)
+  end
+
   # Given an official website for an LGA return the wikidata ID
   sig { params(url: String).returns(T.nilable(String)) }
   def self.id_from_website(url)
