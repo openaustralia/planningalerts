@@ -14,13 +14,15 @@ module WikidataService
     # Just doing the lookup by domain so that we can handle variants of the url (http/https and ending in "/")
     domain = URI.parse(url).host
     sparql = SPARQL::Client.new("https://query.wikidata.org/sparql")
-    # The query build for sparql-client doesn't seem to generate code that wikidata like when using union.
+    # The query build for sparql-client doesn't seem to generate code that wikidata likes when using multiple values.
     # So instead create the query by hand
+    url_values = ["http://#{domain}", "http://#{domain}/", "https://#{domain}", "https://#{domain}/"].map { |u| "<#{u}>" }
+    parent_values = (LGA_STATE_IDS + LOCAL_GOVERNMENT_IDS).map { |id| "wd:#{id}" }
     query = sparql.query(
       "SELECT * WHERE " \
       "{ " \
-      "VALUES ?url { <http://#{domain}> <http://#{domain}/> <https://#{domain}> <https://#{domain}/> }" \
-      "VALUES ?parent { #{(LGA_STATE_IDS + LOCAL_GOVERNMENT_IDS).map { |id| "wd:#{id}" }.join(' ')} } " \
+      "VALUES ?url { #{url_values.join(' ')} } " \
+      "VALUES ?parent { #{parent_values.join(' ')} } " \
       "?item wdt:P856 ?url.  " \
       "?item wdt:P31 ?parent. " \
       "}"
