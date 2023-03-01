@@ -85,12 +85,24 @@ module WikidataService
     # rubocop:disable Rails/DynamicFindBy
     item = Wikidata::Item.find_by_id(id)
     # rubocop:enable Rails/DynamicFindBy
+    {
+      state: state(item),
+      website_url: website_url(item),
+      population_2011: population_2011(item)
+    }
+  end
+
+  sig { params(item: T.untyped).returns(T.nilable(String)) }
+  def self.state(item)
     # located in the administrative territorial entity
     claims = item.claims_for_property_id("P131")
     raise "Not handling more than one" if claims.count > 1
 
-    state = STATE_MAPPING[claims.first.mainsnak.value.entity.id]
+    STATE_MAPPING[claims.first.mainsnak.value.entity.id]
+  end
 
+  sig { params(item: T.untyped).returns(T.nilable(String)) }
+  def self.website_url(item)
     # official website
     claims = item.claims_for_property_id("P856")
     raise "Not handling more than one" if claims.count > 1
@@ -107,7 +119,11 @@ module WikidataService
 
       website_url = claims.first.mainsnak.value.to_s if claims.first
     end
+    website_url
+  end
 
+  sig { params(item: T.untyped).returns(T.nilable(Integer)) }
+  def self.population_2011(item)
     # population
     claims = item.claims_for_property_id("P1082")
     # determination method
@@ -125,12 +141,6 @@ module WikidataService
 
     raise "Unexpected unit" unless claim_census_2011.mainsnak.value.value.unit == "1"
 
-    population_2011 = claim_census_2011.mainsnak.value.value.amount.to_i
-
-    {
-      state:,
-      website_url:,
-      population_2011:
-    }
+    claim_census_2011.mainsnak.value.value.amount.to_i
   end
 end
