@@ -124,23 +124,28 @@ module WikidataService
 
   sig { params(item: T.untyped).returns(T.nilable(Integer)) }
   def self.population_2011(item)
+    population(item, "Q91632502")
+  end
+
+  sig { params(item: T.untyped, determination_method: String).returns(T.nilable(Integer)) }
+  def self.population(item, determination_method)
     # population
     claims = item.claims_for_property_id("P1082")
     # determination method
     qualifiers = claims.first.qualifiers["P459"]
     raise "Don't expect more than one determination method" if qualifiers.count > 1
 
-    claim_census_2011 = claims.find do |claim|
+    claim_census = claims.find do |claim|
       qualifiers = claim.qualifiers["P459"]
       raise "Don't expect more than one determination method" if qualifiers.count > 1
 
-      qualifiers.first.datavalue.value.id == "Q91632502"
+      qualifiers.first.datavalue.value.id == determination_method
     end
 
-    raise "Unexpected type" unless claim_census_2011.mainsnak.value.type == "quantity"
+    raise "Unexpected type" unless claim_census.mainsnak.value.type == "quantity"
 
-    raise "Unexpected unit" unless claim_census_2011.mainsnak.value.value.unit == "1"
+    raise "Unexpected unit" unless claim_census.mainsnak.value.value.unit == "1"
 
-    claim_census_2011.mainsnak.value.value.amount.to_i
+    claim_census.mainsnak.value.value.amount.to_i
   end
 end
