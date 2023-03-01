@@ -108,9 +108,29 @@ module WikidataService
       website_url = claims.first.mainsnak.value.to_s if claims.first
     end
 
+    # population
+    claims = item.claims_for_property_id("P1082")
+    # determination method
+    qualifiers = claims.first.qualifiers["P459"]
+    raise "Don't expect more than one determination method" if qualifiers.count > 1
+
+    claim_census_2011 = claims.find do |claim|
+      qualifiers = claim.qualifiers["P459"]
+      raise "Don't expect more than one determination method" if qualifiers.count > 1
+
+      qualifiers.first.datavalue.value.id == "Q91632502"
+    end
+
+    raise "Unexpected type" unless claim_census_2011.mainsnak.value.type == "quantity"
+
+    raise "Unexpected unit" unless claim_census_2011.mainsnak.value.value.unit == "1"
+
+    population_2011 = claim_census_2011.mainsnak.value.value.amount.to_i
+
     {
       state:,
-      website_url:
+      website_url:,
+      population_2011:
     }
   end
 end
