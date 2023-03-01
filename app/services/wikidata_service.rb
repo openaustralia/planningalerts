@@ -87,10 +87,30 @@ module WikidataService
     # rubocop:enable Rails/DynamicFindBy
     # located in the administrative territorial entity
     claims = item.claims_for_property_id("P131")
-    raise "Not handling more than one on #{id}" if claims.count > 1
+    raise "Not handling more than one" if claims.count > 1
+
+    state = STATE_MAPPING[claims.first.mainsnak.value.entity.id]
+
+    # official website
+    claims = item.claims_for_property_id("P856")
+    raise "Not handling more than one" if claims.count > 1
+
+    website_url = claims.first.mainsnak.value.to_s if claims.first
+    if website_url.nil?
+      # See if the council has the website information
+      # legislative body
+      claims = item.claims_for_property_id("P194")
+      raise "Not handling more than one" if claims.count > 1
+
+      claims = claims.first.mainsnak.value.entity.claims_for_property_id("P856")
+      raise "Not handling more than one" if claims.count > 1
+
+      website_url = claims.first.mainsnak.value.to_s if claims.first
+    end
 
     {
-      state: STATE_MAPPING[claims.first.mainsnak.value.entity.id]
+      state:,
+      website_url:
     }
   end
 end

@@ -21,6 +21,7 @@ namespace :planningalerts do
   desc "get authority information from wikidata"
   task get_authority_wikidata_data: :environment do
     Authority.active.where.not(wikidata_id: nil).find_each do |authority|
+      puts "Looking up #{authority.wikidata_id}..."
       p WikidataService.get_data(authority.wikidata_id)
       exit
     end
