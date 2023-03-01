@@ -104,6 +104,14 @@ module WikidataService
     STATE_MAPPING[claims.first.mainsnak.value.entity.id]
   end
 
+  sig { params(item: T.untyped).returns(T.untyped) }
+  def self.item_for_council(item)
+    claims = item.claims_for_property_id("P194")
+    raise "Not handling more than one" if claims.count > 1
+
+    claims.first.mainsnak.value.entity
+  end
+
   sig { params(item: T.untyped).returns(T.nilable(String)) }
   def self.website_url(item)
     # official website
@@ -113,11 +121,7 @@ module WikidataService
     website_url = claims.first.mainsnak.value.to_s if claims.first
     if website_url.nil?
       # See if the council has the website information
-      # legislative body
-      claims = item.claims_for_property_id("P194")
-      raise "Not handling more than one" if claims.count > 1
-
-      claims = claims.first.mainsnak.value.entity.claims_for_property_id("P856")
+      claims = item_for_council(item).claims_for_property_id("P856")
       raise "Not handling more than one" if claims.count > 1
 
       website_url = claims.first.mainsnak.value.to_s if claims.first
