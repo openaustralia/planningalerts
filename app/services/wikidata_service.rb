@@ -35,19 +35,7 @@ module WikidataService
       "?item wdt:P31 ?parent. " \
       "}"
     )
-    # Limit to one result per item
-    items = {}
-    query.each { |q| items[q[:item].to_s] = q }
-    query = items.values
-
-    # In the case where we get several results just restrict it to LGAs
-    query.select! { |q| LGA_STATE_IDS.include?(q[:parent].to_s.split("/").last) } if query.count > 1
-
-    if query.count.zero?
-      return
-    elsif query.count > 1
-      raise "More than one found"
-    end
+    return if query.count.zero?
 
     entity_url = query.first[:item].to_s
     entity_url.split("/").last
