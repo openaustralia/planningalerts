@@ -100,9 +100,11 @@ module WikidataService
   def self.state(item)
     # located in the administrative territorial entity
     claims = item.claims_for_property_id("P131")
-    raise "Not handling more than one" if claims.count > 1
 
-    STATE_MAPPING[claims.first.mainsnak.value.entity.id]
+    claims.each do |claim|
+      state = STATE_MAPPING[claim.mainsnak.value.entity.id]
+      return state if state
+    end
   end
 
   sig { params(item: T.untyped).returns(T.untyped) }
@@ -110,13 +112,17 @@ module WikidataService
     claims = item.claims_for_property_id("P194")
     raise "Not handling more than one" if claims.count > 1
 
-    claims.first.mainsnak.value.entity
+    claims.first.mainsnak.value.entity unless claims.empty?
   end
 
   sig { params(item: T.untyped).returns(T.nilable(String)) }
   def self.website_url(item)
     # official website
     claims = item.claims_for_property_id("P856")
+    if claims.count > 1
+      # Find the one with "preferred" rank
+      claims = claims.select { |claim| claim.rank == "preferred" }
+    end
     raise "Not handling more than one" if claims.count > 1
 
     website_url = claims.first.mainsnak.value.to_s if claims.first
@@ -154,11 +160,11 @@ module WikidataService
     raise "Don't expect more than one determination method" if qualifiers.count > 1
 
     claim_census = claims.find do |claim|
-      qualifiers = claim.qualifiers["P459"]
-      raise "Don't expect more than one determination method" if qualifiers.count > 1
-
-      qualifiers.first.datavalue.value.id == determination_method
+      claim.qualifiers["P459"].any? do |qualifier|
+        qualifier.datavalue.value.id == determination_method
+      end
     end
+    return if claim_census.nil?
 
     raise "Unexpected type" unless claim_census.mainsnak.value.type == "quantity"
 
@@ -178,6 +184,6 @@ module WikidataService
 
   sig { params(item: T.untyped).returns(T.nilable(String)) }
   def self.full_name(item)
-    item_for_council(item).label
+    item_for_council(item)&.label
   end
 end
