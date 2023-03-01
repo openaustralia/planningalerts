@@ -105,6 +105,7 @@ module WikidataService
       state = STATE_MAPPING[claim.mainsnak.value.entity.id]
       return state if state
     end
+    nil
   end
 
   sig { params(item: T.untyped).returns(T.untyped) }
@@ -116,7 +117,7 @@ module WikidataService
   end
 
   sig { params(item: T.untyped).returns(T.nilable(String)) }
-  def self.website_url(item)
+  def self.website_url_single_item(item)
     # official website
     claims = item.claims_for_property_id("P856")
     if claims.count > 1
@@ -125,15 +126,12 @@ module WikidataService
     end
     raise "Not handling more than one" if claims.count > 1
 
-    website_url = claims.first.mainsnak.value.to_s if claims.first
-    if website_url.nil?
-      # See if the council has the website information
-      claims = item_for_council(item).claims_for_property_id("P856")
-      raise "Not handling more than one" if claims.count > 1
+    claims.first.mainsnak.value.to_s if claims.first
+  end
 
-      website_url = claims.first.mainsnak.value.to_s if claims.first
-    end
-    website_url
+  sig { params(item: T.untyped).returns(T.nilable(String)) }
+  def self.website_url(item)
+    website_url_single_item(item) || website_url_single_item(item_for_council(item))
   end
 
   sig { params(item: T.untyped).returns(T.nilable(Integer)) }
@@ -154,13 +152,12 @@ module WikidataService
   sig { params(item: T.untyped, determination_method: String).returns(T.nilable(Integer)) }
   def self.population(item, determination_method)
     # population
-    claims = item.claims_for_property_id("P1082")
-    # determination method
-    qualifiers = claims.first.qualifiers["P459"]
-    raise "Don't expect more than one determination method" if qualifiers.count > 1
+    claim_census = item.claims_for_property_id("P1082").find do |claim|
+      # determination method
+      qualifiers = claim.qualifiers["P459"]
+      next unless qualifiers
 
-    claim_census = claims.find do |claim|
-      claim.qualifiers["P459"].any? do |qualifier|
+      qualifiers.any? do |qualifier|
         qualifier.datavalue.value.id == determination_method
       end
     end
@@ -179,7 +176,7 @@ module WikidataService
     claims = item.claims_for_property_id("P10112")
     raise "Unexpected number of claims" if claims.count > 1
 
-    claims.first.mainsnak.value.to_s
+    claims.first.mainsnak.value.to_s if claims.first
   end
 
   sig { params(item: T.untyped).returns(T.nilable(String)) }
