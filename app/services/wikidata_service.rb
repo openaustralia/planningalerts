@@ -90,7 +90,8 @@ module WikidataService
       website_url: website_url(item),
       population_2011: population_2011(item),
       population_2016: population_2016(item),
-      population_2021: population_2021(item)
+      population_2021: population_2021(item),
+      asgs_2021: asgs_2021(item)
     }
   end
 
@@ -159,5 +160,14 @@ module WikidataService
     raise "Unexpected unit" unless claim_census.mainsnak.value.value.unit == "1"
 
     claim_census.mainsnak.value.value.amount.to_i
+  end
+
+  # Australian Statistical Geography 2021 ID
+  sig { params(item: T.untyped).returns(T.nilable(String)) }
+  def self.asgs_2021(item)
+    claims = item.claims_for_property_id("P10112")
+    raise "Unexpected number of claims" if claims.count > 1
+
+    claims.first.mainsnak.value.to_s
   end
 end
