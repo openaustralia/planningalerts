@@ -91,7 +91,8 @@ module WikidataService
       population_2011: population_2011(item),
       population_2016: population_2016(item),
       population_2021: population_2021(item),
-      asgs_2021: asgs_2021(item)
+      asgs_2021: asgs_2021(item),
+      full_name: full_name(item)
     }
   end
 
@@ -173,5 +174,10 @@ module WikidataService
     raise "Unexpected number of claims" if claims.count > 1
 
     claims.first.mainsnak.value.to_s
+  end
+
+  sig { params(item: T.untyped).returns(T.nilable(String)) }
+  def self.full_name(item)
+    item_for_council(item).label
   end
 end
