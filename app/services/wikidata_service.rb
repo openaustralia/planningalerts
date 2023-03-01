@@ -14,6 +14,14 @@ module WikidataService
   LGA_TAS = "Q55687066"
   LGA_STATE_IDS = T.let([LGA_VIC, LGA_WA, LGA_SA, LGA_NSW, LGA_QLD, LGA_NT, LGA_TAS].freeze, T::Array[String])
   LOCAL_GOVERNMENT_IDS = T.let(%w[Q3308596 Q6501447].freeze, T::Array[String])
+  STATE_MAPPING = T.let({ "Q3258" => "ACT",
+                          "Q3224" => "NSW",
+                          "Q3235" => "NT",
+                          "Q36074" => "QLD",
+                          "Q35715" => "SA",
+                          "Q34366" => "TAS",
+                          "Q36687" => "VIC",
+                          "Q3206" => "WA" }.freeze, T::Hash[String, String])
 
   sig { params(url: String).returns(T.nilable(String)) }
   def self.lga_id_from_website(url)
@@ -70,5 +78,19 @@ module WikidataService
 
       claims.first.mainsnak.value.entity.id
     end
+  end
+
+  sig { params(id: String).returns(T.untyped) }
+  def self.get_data(id)
+    # rubocop:disable Rails/DynamicFindBy
+    item = Wikidata::Item.find_by_id(id)
+    # rubocop:enable Rails/DynamicFindBy
+    # located in the administrative territorial entity
+    claims = item.claims_for_property_id("P131")
+    raise "Not handling more than one on #{id}" if claims.count > 1
+
+    {
+      state: STATE_MAPPING[claims.first.mainsnak.value.entity.id]
+    }
   end
 end
