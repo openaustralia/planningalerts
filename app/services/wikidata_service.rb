@@ -88,7 +88,9 @@ module WikidataService
     {
       state: state(item),
       website_url: website_url(item),
-      population_2011: population_2011(item)
+      population_2011: population_2011(item),
+      population_2016: population_2016(item),
+      population_2021: population_2021(item)
     }
   end
 
@@ -125,6 +127,16 @@ module WikidataService
   sig { params(item: T.untyped).returns(T.nilable(Integer)) }
   def self.population_2011(item)
     population(item, "Q91632502")
+  end
+
+  sig { params(item: T.untyped).returns(T.nilable(Integer)) }
+  def self.population_2016(item)
+    population(item, "Q33128519")
+  end
+
+  sig { params(item: T.untyped).returns(T.nilable(Integer)) }
+  def self.population_2021(item)
+    population(item, "Q60745365")
   end
 
   sig { params(item: T.untyped, determination_method: String).returns(T.nilable(Integer)) }
