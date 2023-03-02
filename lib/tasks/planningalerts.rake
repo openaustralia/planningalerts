@@ -20,12 +20,12 @@ namespace :planningalerts do
 
   desc "get authority information from wikidata"
   task get_authority_wikidata_data: :environment do
+    data = WikidataService.get_all_data
     CSV.open("wikidata.csv", "w") do |csv|
       Authority.active.where.not(wikidata_id: nil).order(:wikidata_id).each_with_index do |authority, index|
-        puts "Looking up #{index} #{authority.wikidata_id}..."
-        row = WikidataService.get_data(authority.wikidata_id)
-        csv << (row.keys + ["authority.state", "authority.website_url", "authority.population_2017", "authority.short_name", "authority.full_name"]) if index.zero?
-        csv << (row.values + [authority.state, authority.website_url, authority.population_2017, authority.short_name, authority.full_name])
+        row = data[authority.wikidata_id]
+        csv << (row.keys + ["wikidata_id", "authority.state", "authority.website_url", "authority.population_2017", "authority.short_name"]) if index.zero?
+        csv << (row.values + [authority.wikidata_id, authority.state, authority.website_url, authority.population_2017, authority.short_name])
       end
     end
   end
