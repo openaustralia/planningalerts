@@ -33,13 +33,6 @@ class Authority < ApplicationRecord
     morph_name.present?
   end
 
-  # Hardcoded total population of Australia (2017 estimate)
-  # From http://stat.data.abs.gov.au/Index.aspx?DataSetCode=ABS_ERP_LGA2017
-  sig { returns(Integer) }
-  def self.total_population_2017
-    24597528
-  end
-
   # Total population of Australia based on the 2021 Census
   # https://www.abs.gov.au/statistics/people/population/population-census/2021
   sig { returns(Integer) }
@@ -48,10 +41,10 @@ class Authority < ApplicationRecord
   end
 
   sig { returns(Integer) }
-  def self.total_population_2017_covered_by_all_active_authorities
+  def self.total_population_2021_covered_by_all_active_authorities
     sum = 0
     Authority.active.each do |a|
-      population = a.population_2017
+      population = a.population_2021
       sum += population if population
     end
     sum
@@ -59,7 +52,7 @@ class Authority < ApplicationRecord
 
   sig { returns(Float) }
   def self.percentage_population_covered_by_all_active_authorities
-    (total_population_2017_covered_by_all_active_authorities.to_f / total_population_2017) * 100
+    (total_population_2021_covered_by_all_active_authorities.to_f / total_population_2021) * 100
   end
 
   sig { returns(T.nilable(Integer)) }

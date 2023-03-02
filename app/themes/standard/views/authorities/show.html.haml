@@ -1,9 +1,9 @@
 - content_for :page_title, @authority.full_name
 %h3= yield :page_title
 
-- if @authority.population_2017
+- if @authority.population_2021
   %p
-    Population #{number_with_delimiter @authority.population_2017} (2017 estimate)
+    Population #{number_with_delimiter @authority.population_2021} (2021 census)
 
 - if @authority.covered?
   - if @authority.broken? && @authority.applications.count != 0

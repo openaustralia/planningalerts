@@ -39,7 +39,7 @@ Style/NumericLiterals:
 Style/Documentation:
   Enabled: false
 
-# We have a few places that we're using things population_2017 which quite
+# We have a few places that we're using things population_2021 which quite
 # a reasonable way to name things.
 Naming/VariableNumber:
   Enabled: false

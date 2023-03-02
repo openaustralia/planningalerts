@@ -9,7 +9,7 @@ class AuthoritiesController < ApplicationController
     @authority_count = T.let(Authority.active.count, T.nilable(Integer))
     @percentage_population_covered_by_all_active_authorities = T.let(Authority.percentage_population_covered_by_all_active_authorities.to_i, T.nilable(Integer))
     @authorities = T.let(Authority.enabled, T.untyped)
-    @authorities = @authorities.order(population_2017: :desc) if params[:order] == "population"
+    @authorities = @authorities.order(population_2021: :desc) if params[:order] == "population"
     @authorities = @authorities.order(:state, :full_name)
   end
 

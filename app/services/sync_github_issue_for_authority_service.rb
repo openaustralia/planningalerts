@@ -166,7 +166,7 @@ class SyncGithubIssueForAuthorityService
     update_date_field(project:, item:, field: project.latest_date_field, value: latest_date)
     update_text_field(project:, item:, field: project.scraper_field, value: morph_url(authority))
     update_text_field(project:, item:, field: project.state_field, value: authority.state)
-    update_number_field(project:, item:, field: project.population_field, value: authority.population_2017)
+    update_number_field(project:, item:, field: project.population_field, value: authority.population_2021)
     update_text_field(project:, item:, field: project.website_field, value: authority.website_url)
     update_text_field(project:, item:, field: project.authority_admin_field, value: admin_authority_url(authority, host: ENV.fetch("HOST", nil)))
   end
