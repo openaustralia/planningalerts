@@ -74,7 +74,7 @@ module WikidataService
 
   # Get the data for all authorities at once
   sig { returns(T::Hash[String, T::Hash[Symbol, T.untyped]]) }
-  def self.get_all_data
+  def self.all_data
     # This lists all the LGAs I hope. I think it returns roughly 10 less than the official numbers that
     # I can see from the ABS
     query = client.query(%(

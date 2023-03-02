@@ -20,7 +20,7 @@ namespace :planningalerts do
 
   desc "get authority information from wikidata"
   task get_authority_wikidata_data: :environment do
-    data = WikidataService.get_all_data
+    data = WikidataService.all_data
     CSV.open("wikidata.csv", "w") do |csv|
       Authority.active.where.not(wikidata_id: nil).order(:wikidata_id).each_with_index do |authority, index|
         row = data[authority.wikidata_id]
