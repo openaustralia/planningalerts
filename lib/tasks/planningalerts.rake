@@ -1,23 +1,6 @@
 # frozen_string_literal: true
 
 namespace :planningalerts do
-  desc "update wikidata ids"
-  task update_wikidata_ids: :environment do
-    Authority.active.find_each do |authority|
-      next if authority.wikidata_id.present?
-
-      puts "Getting wikidata id for #{authority.full_name} (#{authority.website_url})..."
-      wikidata_id = WikidataService.lga_id_from_website(authority.website_url)
-
-      if wikidata_id
-        puts wikidata_id
-        authority.update!(wikidata_id:)
-      else
-        puts "WARNING: Couldn't find"
-      end
-    end
-  end
-
   # Updates:
   # * state
   # * population
