@@ -28,5 +28,3 @@ planningalerts-app.sublime-project
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
-
-wikidata.csv
