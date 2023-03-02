@@ -24,8 +24,16 @@ namespace :planningalerts do
     CSV.open("wikidata.csv", "w") do |csv|
       Authority.active.where.not(wikidata_id: nil).order(:wikidata_id).each_with_index do |authority, index|
         row = data[authority.wikidata_id]
-        csv << (row.keys + ["wikidata_id", "authority.state", "authority.website_url", "authority.population_2017", "authority.short_name"]) if index.zero?
-        csv << (row.values + [authority.wikidata_id, authority.state, authority.website_url, authority.population_2017, authority.short_name])
+        # Merge in exisiting data
+        merged = row.merge(
+          wikidata_id: authority.wikidata_id,
+          authority_state: authority.state,
+          authority_website_url: authority.website_url,
+          authority_population_2017: authority.population_2017,
+          authority_short_name: authority.short_name
+        )
+        csv << merged.keys if index.zero?
+        csv << merged.values
       end
     end
   end
