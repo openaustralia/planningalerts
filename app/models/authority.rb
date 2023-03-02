@@ -40,6 +40,13 @@ class Authority < ApplicationRecord
     24597528
   end
 
+  # Total population of Australia based on the 2021 Census
+  # https://www.abs.gov.au/statistics/people/population/population-census/2021
+  sig { returns(Integer) }
+  def self.total_population_2021
+    25422788
+  end
+
   sig { returns(Integer) }
   def self.total_population_2017_covered_by_all_active_authorities
     sum = 0
