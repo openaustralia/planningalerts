@@ -46,15 +46,17 @@ module WikidataService
     # So instead create the query by hand
     url_values = ["http://#{domain}", "http://#{domain}/", "https://#{domain}", "https://#{domain}/"].map { |u| "<#{u}>" }
     parent_values = (LGA_STATE_IDS + LOCAL_GOVERNMENT_IDS).map { |id| "wd:#{id}" }
-    query = sparql.query(
-      "SELECT * WHERE " \
-      "{ " \
-      "VALUES ?url { #{url_values.join(' ')} } " \
-      "VALUES ?parent { #{parent_values.join(' ')} } " \
-      "?item wdt:P856 ?url.  " \
-      "?item wdt:P31 ?parent. " \
-      "}"
-    )
+    query = sparql.query(%(
+      SELECT * WHERE
+      {
+        VALUES ?url { #{url_values.join(' ')} }
+        VALUES ?parent { #{parent_values.join(' ')} }
+        ?item wdt:P856 ?url.
+        ?item wdt:P31 ?parent.
+        # Not a former local government area of Australia
+        MINUS { ?item wdt:P31 wd:Q30129411. }
+      }
+    ))
     return if query.count.zero?
 
     entity_url = query.first[:item].to_s
