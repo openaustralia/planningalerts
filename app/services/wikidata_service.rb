@@ -31,12 +31,17 @@ module WikidataService
     lga(id)
   end
 
+  sig { returns(SPARQL::Client) }
+  def self.client
+    SPARQL::Client.new("https://query.wikidata.org/sparql")
+  end
+
   # Given an official website for an LGA return the wikidata ID
   sig { params(url: String).returns(T.nilable(String)) }
   def self.id_from_website(url)
     # Just doing the lookup by domain so that we can handle variants of the url (http/https and ending in "/")
     domain = URI.parse(url).host
-    sparql = SPARQL::Client.new("https://query.wikidata.org/sparql")
+    sparql = client
     # The query build for sparql-client doesn't seem to generate code that wikidata likes when using multiple values.
     # So instead create the query by hand
     url_values = ["http://#{domain}", "http://#{domain}/", "https://#{domain}", "https://#{domain}/"].map { |u| "<#{u}>" }
