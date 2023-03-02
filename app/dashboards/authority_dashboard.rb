@@ -23,6 +23,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     last_scraper_run_log: Field::Text,
     morph_name: Field::String,
     population_2017: Field::Number,
+    population_2021: Field::Number,
     scraper_authority_label: Field::String,
     short_name: Field::String,
     state: Field::String,
@@ -51,6 +52,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     wikidata_id
     website_url
     population_2017
+    population_2021
     morph_name
     scraper_authority_label
     disabled
@@ -68,6 +70,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     wikidata_id
     website_url
     population_2017
+    population_2021
     morph_name
     scraper_authority_label
     disabled
@@ -80,6 +83,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     wikidata_id
     website_url
     population_2017
+    population_2021
     morph_name
     scraper_authority_label
     disabled
