@@ -18,6 +18,34 @@ namespace :planningalerts do
     end
   end
 
+  # Updates:
+  # * state
+  # * population
+  # * website_url
+  # TODO: Also update asgs_2021
+  desc "Update authorities from wikidata"
+  task update_authorities_from_wikidata: :environment do
+    data = WikidataService.all_data
+    Authority.active.find_each do |authority|
+      if authority.wikidata_id.blank?
+        puts "Skipping #{authority.full_name} because wikidata_id is blank"
+        next
+      end
+
+      row = data[authority.wikidata_id]
+      raise "wikidata_id for #{authority.full_name} does not point to an LGA" if row.nil?
+
+      puts "#{authority.full_name} - state: #{authority.state} => #{row[:state]}" if row[:state] != authority.state
+      puts "#{authority.full_name} - population_2021: #{authority.population_2021} => #{row[:population_2021]}" if row[:population_2021] != authority.population_2021
+      puts "#{authority.full_name} - website_url: #{authority.website_url} => #{row[:website_url]}" if row[:website_url] != authority.website_url
+      authority.update!(
+        state: row[:state],
+        population_2021: row[:population_2021],
+        website_url: row[:website_url]
+      )
+    end
+  end
+
   desc "get authority information from wikidata"
   task get_authority_wikidata_data: :environment do
     data = WikidataService.all_data
