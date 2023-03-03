@@ -3,9 +3,12 @@
 source "https://rubygems.org"
 
 gem "bootsnap", require: false
-gem "mysql2"
 gem "rails", "7.0.4.2"
 gem "rake"
+
+# Testing out migrating to postgres so we have two databases for the time being
+gem "mysql2"
+gem "pg"
 
 # API
 gem "dalli"
