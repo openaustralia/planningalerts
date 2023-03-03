@@ -29,6 +29,19 @@ namespace :planningalerts do
     end
   end
 
+  desc "Read shapefile"
+  task read_shapefile: :environment do
+    factory = RGeo::Geographic.spherical_factory(srid: 4283)
+    RGeo::Shapefile::Reader.open("LGA_2022_AUST_GDA94.shp", factory:) do |file|
+      puts "File contains #{file.num_records} records."
+      file.each do |record|
+        puts "Record number #{record.index}:"
+        # puts "  Geometry: #{record.geometry.as_text}"
+        puts "  Attributes: #{record.attributes.inspect}"
+      end
+    end
+  end
+
   namespace :emergency do
     desc "Regenerates all the counter caches in case they got out of synch"
     task fixup_counter_caches: :environment do
