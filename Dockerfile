@@ -14,6 +14,9 @@ RUN apt-get update \
 # Needed for sorbet extension for vscode
 RUN apt install watchman
 
+# Needed for rgeo geos support. See https://github.com/rgeo/rgeo/issues/227#issuecomment-1145169888
+RUN apt-get install -y libgeos++-dev libgeos-dev
+
 USER deploy
 
 COPY --chown=deploy:deploy Gemfile /app/Gemfile
