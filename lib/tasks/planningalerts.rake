@@ -5,7 +5,7 @@ namespace :planningalerts do
   # * state
   # * population
   # * website_url
-  # TODO: Also update asgs_2021
+  # * asgs (ABS code for LGA)
   desc "Update authorities from wikidata"
   task update_authorities_from_wikidata: :environment do
     data = WikidataService.all_data
@@ -21,10 +21,12 @@ namespace :planningalerts do
       puts "#{authority.full_name} - state: #{authority.state} => #{row[:state]}" if row[:state] != authority.state
       puts "#{authority.full_name} - population_2021: #{authority.population_2021} => #{row[:population_2021]}" if row[:population_2021] != authority.population_2021
       puts "#{authority.full_name} - website_url: #{authority.website_url} => #{row[:website_url]}" if row[:website_url] != authority.website_url
+      puts "#{authority.full_name} - asgs_2021: #{authority.asgs_2021} => #{row[:asgs_2021]}" if row[:asgs_2021] != authority.asgs_2021
       authority.update!(
         state: row[:state],
         population_2021: row[:population_2021],
-        website_url: row[:website_url]
+        website_url: row[:website_url],
+        asgs_2021: row[:asgs_2021]
       )
     end
   end
