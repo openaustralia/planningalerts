@@ -15,6 +15,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = T.let({
     id: Field::Number,
     applications: Field::HasMany,
+    asgs_2021: Field::String,
     comments: Field::HasMany,
     disabled: YesNoBooleanField,
     email: Field::String,
@@ -53,6 +54,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     website_url
     population_2017
     population_2021
+    asgs_2021
     morph_name
     scraper_authority_label
     disabled
