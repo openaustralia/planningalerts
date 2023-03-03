@@ -8,6 +8,7 @@ services:
       - "3000:3000"
     depends_on:
       - database
+      - postgres
       - redis
       - mailcatcher
       - elasticsearch
@@ -29,6 +30,21 @@ services:
     environment:
       # The values below need to be the same in config/database.yml
       MYSQL_ROOT_PASSWORD: password
+
+  postgres:
+    # Same version as used in production
+    image: postgres:15.2
+    ports:
+      # Give access to the database from your host machine. This is useful
+      # if you want to poke around.
+      # Note that we're forwarding this to port 15432 on the host machine so
+      # that it doesn't conflict with any postgres server you might have running there.
+      - 15432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      # The values below need to be the same in config/database.yml
+      POSTGRES_PASSWORD: password
 
   redis:
     # Using the latest but locking the version
@@ -61,5 +77,6 @@ services:
 volumes:
   gem_cache:
   database_data:
+  postgres_data:
   redis_data:
   elasticsearch_data:
