@@ -23,7 +23,6 @@ class AuthorityDashboard < Administrate::BaseDashboard
     github_issue: Field::HasOne,
     last_scraper_run_log: Field::Text,
     morph_name: Field::String,
-    population_2017: Field::Number,
     population_2021: Field::Number,
     scraper_authority_label: Field::String,
     short_name: Field::String,
@@ -52,7 +51,6 @@ class AuthorityDashboard < Administrate::BaseDashboard
     email
     wikidata_id
     website_url
-    population_2017
     population_2021
     asgs_2021
     morph_name
@@ -71,7 +69,6 @@ class AuthorityDashboard < Administrate::BaseDashboard
     email
     wikidata_id
     website_url
-    population_2017
     population_2021
     morph_name
     scraper_authority_label
@@ -84,7 +81,6 @@ class AuthorityDashboard < Administrate::BaseDashboard
     email
     wikidata_id
     website_url
-    population_2017
     population_2021
     morph_name
     scraper_authority_label
