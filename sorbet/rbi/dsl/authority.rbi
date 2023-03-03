@@ -822,51 +822,6 @@ class Authority
     def morph_name_will_change!; end
 
     sig { returns(T.nilable(::Integer)) }
-    def population_2017; end
-
-    sig { params(value: T.nilable(::Integer)).returns(T.nilable(::Integer)) }
-    def population_2017=(value); end
-
-    sig { returns(T::Boolean) }
-    def population_2017?; end
-
-    sig { returns(T.nilable(::Integer)) }
-    def population_2017_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def population_2017_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def population_2017_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
-    def population_2017_change; end
-
-    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
-    def population_2017_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def population_2017_changed?; end
-
-    sig { returns(T.nilable(::Integer)) }
-    def population_2017_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
-    def population_2017_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def population_2017_previously_changed?; end
-
-    sig { returns(T.nilable(::Integer)) }
-    def population_2017_previously_was; end
-
-    sig { returns(T.nilable(::Integer)) }
-    def population_2017_was; end
-
-    sig { void }
-    def population_2017_will_change!; end
-
-    sig { returns(T.nilable(::Integer)) }
     def population_2021; end
 
     sig { params(value: T.nilable(::Integer)).returns(T.nilable(::Integer)) }
@@ -936,9 +891,6 @@ class Authority
     def restore_morph_name!; end
 
     sig { void }
-    def restore_population_2017!; end
-
-    sig { void }
     def restore_population_2021!; end
 
     sig { void }
@@ -1006,12 +958,6 @@ class Authority
 
     sig { returns(T::Boolean) }
     def saved_change_to_morph_name?; end
-
-    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
-    def saved_change_to_population_2017; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_population_2017?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_population_2021; end
@@ -1348,9 +1294,6 @@ class Authority
 
     sig { returns(T::Boolean) }
     def will_save_change_to_morph_name?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_population_2017?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_population_2021?; end
