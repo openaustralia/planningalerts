@@ -802,6 +802,7 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-sorbet
   ruby-progressbar
+  rubyzip
   sanitize
   sass-rails
   searchkick

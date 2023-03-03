@@ -152,6 +152,7 @@ gem "wikidata"
 
 # For reading in authority boundary data
 gem "rgeo-shapefile"
+gem "rubyzip"
 
 group :test do
   gem "capybara"
