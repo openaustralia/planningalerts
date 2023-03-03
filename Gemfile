@@ -150,6 +150,9 @@ gem "sitemap_generator"
 gem "sparql-client"
 gem "wikidata"
 
+# For reading in authority boundary data
+gem "rgeo-shapefile"
+
 group :test do
   gem "capybara"
   gem "climate_control"
