@@ -1,0 +1,15 @@
+-- See https://github.com/dimitri/pgloader/blob/master/pgloader.1.md for 
+-- connection string options.
+
+LOAD DATABASE
+    FROM mysql://root:password@database/pa_development
+    INTO pgsql://postgres:password@postgres/pa_development
+
+ALTER SCHEMA 'pa_development' RENAME TO 'public'
+
+-- data-only: We don't need pgloader to touch the schema as Rails does a better
+--            job using rake db:schema:load.
+-- truncate:  Ensure all tables are empty first (especially schema_migrations).
+--            WARNING: THIS WILL SMOKE YOUR DATABASE!
+
+WITH data only, truncate;
