@@ -33,7 +33,7 @@ services:
 
   postgres:
     # Same version as used in production
-    image: postgres:15.2
+    image: postgis/postgis:15-3.3
     ports:
       # Give access to the database from your host machine. This is useful
       # if you want to poke around.
