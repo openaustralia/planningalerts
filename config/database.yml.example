@@ -15,36 +15,54 @@
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 
+# development:
+#   adapter: mysql2
+#   # To use utf8mb4 with mysql 5.6 we need to enable innodb_large_prefix. See
+#   # https://edgeguides.rubyonrails.org/configuring.html#configuring-a-mysql-or-mariadb-database
+#   encoding: utf8mb4
+#   # We're using an older collation because it's supported on mysql 5.6
+#   # which is what we're currently using in production.
+#   collation: utf8mb4_general_ci
+#   reconnect: false
+#   database: pa_development
+#   pool: 10
+#   host: database
+#   username: root
+#   password: password
+#   # This setting is only really necessary if using mysql 5.7.5 or later
+#   variables:
+#     sql_mode: TRADITIONAL
+
 development:
-  adapter: mysql2
-  # To use utf8mb4 with mysql 5.6 we need to enable innodb_large_prefix. See
-  # https://edgeguides.rubyonrails.org/configuring.html#configuring-a-mysql-or-mariadb-database
-  encoding: utf8mb4
-  # We're using an older collation because it's supported on mysql 5.6
-  # which is what we're currently using in production.
-  collation: utf8mb4_general_ci
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   database: pa_development
   pool: 10
-  host: database
-  username: root
+  host: postgres
+  username: postgres
   password: password
-  # This setting is only really necessary if using mysql 5.7.5 or later
-  variables:
-    sql_mode: TRADITIONAL
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
+# test: &TEST
+#   adapter: mysql2
+#   encoding: utf8mb4
+#   collation: utf8mb4_general_ci
+#   reconnect: false
+#   database: pa_test
+#   pool: 10
+#   host: database
+#   username: root
+#   password: password
+#   variables:
+#     sql_mode: TRADITIONAL
+
 test: &TEST
-  adapter: mysql2
-  encoding: utf8mb4
-  collation: utf8mb4_general_ci
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   database: pa_test
   pool: 10
-  host: database
-  username: root
+  host: postgres
+  username: postgres
   password: password
-  variables:
-    sql_mode: TRADITIONAL
