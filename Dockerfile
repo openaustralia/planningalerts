@@ -14,6 +14,9 @@ RUN apt-get update \
 # Needed for sorbet extension for vscode
 RUN apt install watchman
 
+# Needed for doing mysql -> postgres migration here
+RUN apt install -y pgloader
+
 USER deploy
 
 COPY --chown=deploy:deploy Gemfile /app/Gemfile
