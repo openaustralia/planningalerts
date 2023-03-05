@@ -12,8 +12,8 @@ class Authority < ApplicationRecord
 
   validates :state, inclusion: { in: %w[NSW VIC QLD SA WA TAS NT ACT] }
 
-  scope(:enabled, -> { where("disabled = 0 or disabled is null") })
-  scope(:active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') })
+  scope(:enabled, -> { where(disabled: false) })
+  scope(:active, -> { where(disabled: false).where("morph_name != '' AND morph_name IS NOT NULL") })
 
   sig { void }
   def short_name_encoded_is_unique
