@@ -3,4 +3,9 @@
 # The main idea is to use rails to generate the postgres schema and then use pgloader to migrate
 # the data. Otherwise we seem to run into problems where the primary key of tables isn't recognised
 # by rails for some reason.
+# So,
+# rails db:create
+# rails db:schema:load
+# Then,
+# sh database-migrate.sh
 pgloader --verbose database-migrate-commands
