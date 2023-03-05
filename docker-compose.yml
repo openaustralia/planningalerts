@@ -45,6 +45,9 @@ services:
     environment:
       # The values below need to be the same in config/database.yml
       POSTGRES_PASSWORD: password
+      # We're using the older (less secure) md5 so that pgloader works. Sigh.
+      POSTGRES_HOST_AUTH_METHOD: md5
+      POSTGRES_INITDB_ARGS: "--auth-host=md5"
 
   redis:
     # Using the latest but locking the version

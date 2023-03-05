@@ -14,7 +14,9 @@ RUN apt-get update \
 # Needed for sorbet extension for vscode
 RUN apt install watchman
 
-# Needed for doing mysql -> postgres migration here
+# Needed for doing mysql -> postgres migration here. There's an issue with support of scram-sha256 support
+# for authentication. Doesn't appear to be fixed even with the latest version (3.6.7~devel) from the postgresql apt repository.
+# Instead we need to force postgresql 15.x to use the old (less secure) md5 for authentication
 RUN apt install -y pgloader
 
 USER deploy
