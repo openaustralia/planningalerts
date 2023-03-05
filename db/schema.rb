@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_03_164924) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_05_235006) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "active_admin_comments", id: :serial, force: :cascade do |t|
     t.string "resource_id", default: "", null: false
