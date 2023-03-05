@@ -10,6 +10,9 @@ gem "rake"
 gem "mysql2"
 gem "pg"
 
+# Supports postgis so we can magically do spatial queries
+gem "activerecord-postgis-adapter"
+
 # API
 gem "dalli"
 

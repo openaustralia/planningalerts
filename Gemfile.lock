@@ -64,6 +64,9 @@ GEM
     activerecord (7.0.4.2)
       activemodel (= 7.0.4.2)
       activesupport (= 7.0.4.2)
+    activerecord-postgis-adapter (8.0.1)
+      activerecord (~> 7.0.0)
+      rgeo-activerecord (~> 7.0.0)
     activestorage (7.0.4.2)
       actionpack (= 7.0.4.2)
       activejob (= 7.0.4.2)
@@ -510,6 +513,9 @@ GEM
       netrc (~> 0.8)
     rexml (3.2.5)
     rgeo (2.4.0)
+    rgeo-activerecord (7.0.1)
+      activerecord (>= 5.0)
+      rgeo (>= 1.0.0)
     rgeo-geojson (2.1.1)
       rgeo (>= 1.0.0)
     rspec (3.12.0)
@@ -720,6 +726,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_record_doctor
+  activerecord-postgis-adapter
   administrate
   atdis
   autoprefixer-rails
