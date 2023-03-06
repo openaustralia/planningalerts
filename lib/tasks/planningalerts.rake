@@ -37,4 +37,19 @@ namespace :planningalerts do
       Comment.counter_culture_fix_counts
     end
   end
+
+  namespace :migrate do
+    desc "Update lonlat on applications"
+    task update_lonlat_on_applications: :environment do
+      # Do this initially in the slowest possible way
+      # TODO: Do this in SQL completely
+      Application.where(lonlat: nil).find_each do |application|
+        unless application.valid?
+          puts "Skipping application #{application.id} because it doesn't validate"
+          next
+        end
+        application.update!(lonlat: "POINT(#{application.lng} #{application.lat})")
+      end
+    end
+  end
 end
