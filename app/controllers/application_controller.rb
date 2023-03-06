@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   # This stores the location on every request so that we can always redirect back after logging in
   # See https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D
   before_action :store_user_location!, if: :storable_location?
+  before_action :authorize_rack_miniprofiler
 
   sig { void }
   def authenticate_active_admin_user!
@@ -32,6 +33,13 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  sig { void }
+  def authorize_rack_miniprofiler
+    return unless current_user&.admin?
+
+    Rack::MiniProfiler.authorize_request
+  end
 
   sig { returns(String) }
   def theme_resolver
