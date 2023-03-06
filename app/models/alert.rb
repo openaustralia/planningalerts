@@ -83,21 +83,31 @@ class Alert < ApplicationRecord
   # be included with the results.
   sig { returns(T.untyped) }
   def recent_new_applications
-    Application.order("first_date_scraped DESC")
-               .near([lat, lng], radius_km, units: :km)
-               .where("first_date_scraped > ?", cutoff_time)
+    result = if Flipper.enabled?(:use_postgis, user)
+               point = RGeo::Geographic.spherical_factory.point(lng, lat)
+               Application.where("ST_DWithin(lonlat, '#{point}', #{radius_meters})")
+             else
+               Application.near([lat, lng], radius_km, units: :km)
+             end
+    result.where("first_date_scraped > ?", cutoff_time)
+          .reorder("first_date_scraped DESC")
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted
   sig { returns(T.untyped) }
   def applications_with_new_comments
-    Application.order(first_date_scraped: :desc)
-               .near([lat, lng], radius_km, units: :km)
-               .joins(:comments)
-               .where("comments.confirmed_at > ?", cutoff_time)
-               .where("comments.confirmed" => true)
-               .where("comments.hidden" => false)
-               .distinct
+    result = if Flipper.enabled?(:use_postgis, user)
+               point = RGeo::Geographic.spherical_factory.point(lng, lat)
+               Application.where("ST_DWithin(lonlat, '#{point}', #{radius_meters})")
+             else
+               Application.near([lat, lng], radius_km, units: :km)
+             end
+    result.reorder(first_date_scraped: :desc)
+          .joins(:comments)
+          .where("comments.confirmed_at > ?", cutoff_time)
+          .where("comments.confirmed" => true)
+          .where("comments.hidden" => false)
+          .distinct
   end
 
   sig { returns(T::Array[Comment]) }
