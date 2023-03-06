@@ -34,7 +34,7 @@
 #     sql_mode: TRADITIONAL
 
 development:
-  adapter: postgresql
+  adapter: postgis
   encoding: unicode
   database: pa_development
   pool: 10
@@ -59,7 +59,7 @@ development:
 #     sql_mode: TRADITIONAL
 
 test: &TEST
-  adapter: postgresql
+  adapter: postgis
   encoding: unicode
   database: pa_test
   pool: 10
