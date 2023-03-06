@@ -79,8 +79,9 @@ class ApplicationsController < ApplicationController
       @alert = Alert.new(address: @q, user: User.new)
       @other_addresses = T.must(result.rest).map(&:full_address)
       @applications = if Flipper.enabled?(:use_postgis, current_user)
-                        Application.select("*", "ST_Distance(lonlat, 'POINT(#{top.lng} #{top.lat})'::geometry)/1000 AS distance")
-                                   .where("ST_DWithin(lonlat, 'POINT(#{top.lng} #{top.lat})'::geography, #{radius})")
+                        point = "POINT(#{top.lng} #{top.lat})"
+                        Application.select("*", "ST_Distance(lonlat, '#{point}')/1000 AS distance")
+                                   .where("ST_DWithin(lonlat, '#{point}', #{radius})")
                                    .order(:distance)
                       else
                         Application.near([top.lat, top.lng], radius / 1000, units: :km)
