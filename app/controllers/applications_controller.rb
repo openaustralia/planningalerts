@@ -79,7 +79,7 @@ class ApplicationsController < ApplicationController
       @alert = Alert.new(address: @q, user: User.new)
       @other_addresses = T.must(result.rest).map(&:full_address)
       @applications = if Flipper.enabled?(:use_postgis, current_user)
-                        point = "POINT(#{top.lng} #{top.lat})"
+                        point = RGeo::Geographic.spherical_factory.point(top.lng, top.lat)
                         Application.select("*", "ST_Distance(lonlat, '#{point}')/1000 AS distance")
                                    .where("ST_DWithin(lonlat, '#{point}', #{radius})")
                                    .order(:distance)
