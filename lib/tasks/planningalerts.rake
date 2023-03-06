@@ -41,15 +41,7 @@ namespace :planningalerts do
   namespace :migrate do
     desc "Update lonlat on applications"
     task update_lonlat_on_applications: :environment do
-      # Do this initially in the slowest possible way
-      # TODO: Do this in SQL completely
-      Application.where(lonlat: nil).find_each do |application|
-        unless application.valid?
-          puts "Skipping application #{application.id} because it doesn't validate"
-          next
-        end
-        application.update!(lonlat: "POINT(#{application.lng} #{application.lat})")
-      end
+      ActiveRecord::Base.connection.execute("UPDATE applications SET lonlat = ST_POINT(lng, lat) WHERE lonlat IS NULL")
     end
   end
 end
