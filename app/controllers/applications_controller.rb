@@ -78,7 +78,12 @@ class ApplicationsController < ApplicationController
       @full_address = T.let(top.full_address, T.nilable(String))
       @alert = Alert.new(address: @q, user: User.new)
       @other_addresses = T.must(result.rest).map(&:full_address)
-      @applications = Application.near([top.lat, top.lng], radius / 1000, units: :km)
+      @applications = if Flipper.enabled?(:use_postgis, current_user)
+                        Application.select("*", "ST_Distance(lonlat, ST_MakePoint(#{top.lng},#{top.lat})::geography)/1000 AS distance").where("ST_DWithin(lonlat, ST_MakePoint(#{top.lng},#{top.lat})::geography, #{radius})").order(:distance)
+                      else
+                        Application.near([top.lat, top.lng], radius / 1000, units: :km)
+                      end
+
       @applications = @applications.where("first_date_scraped > ?", time.days.ago) if Flipper.enabled?(:extra_options_on_address_search, current_user)
       @applications = @applications.reorder(first_date_scraped: :desc) if sort == "time"
       @applications = @applications.page(params[:page]).per(per_page).without_count

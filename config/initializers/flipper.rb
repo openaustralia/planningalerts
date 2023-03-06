@@ -7,7 +7,8 @@ Flipper::UI.configure do |config|
       "streetview_in_emails" => "Enable Google streetview in email. Disable it to save money",
       "streetview_in_app" => "Enable Google streetview in the main application. Disable it to save money",
       "switch_themes" => "Can switch to new in progress design for the site",
-      "extra_options_on_address_search" => "Add extra options to filter by time/space when searching address"
+      "extra_options_on_address_search" => "Add extra options to filter by time/space when searching address",
+      "use_postgis" => "Use PostGIS spatial queries to do thing"
     }
   end
 
