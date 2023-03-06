@@ -62,9 +62,15 @@ class ApiController < ApplicationController
              end
     location = Location.new(lat: params_lat.to_f, lng: params_lng.to_f)
     location_text = location.to_s
+    applications = if Flipper.enabled?(:use_postgis, T.must(@current_api_key).user)
+                     point = RGeo::Geographic.spherical_factory.point(location.lng, location.lat)
+                     Application.where("ST_DWithin(lonlat, '#{point}', #{radius})")
+                   else
+                     Application.near([location.lat, location.lng], radius / 1000, units: :km)
+                   end
+    applications = applications.reorder(first_date_scraped: :desc)
     api_render(
-      Application.order(first_date_scraped: :desc)
-                 .near([location.lat, location.lng], radius / 1000, units: :km),
+      applications,
       "Recent applications within #{help.meters_in_words(radius)} of #{location_text}"
     )
   end
