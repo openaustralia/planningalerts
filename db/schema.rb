@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_05_235006) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_06_000357) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -121,12 +121,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_235006) do
     t.string "postcode", limit: 4
     t.string "comment_email"
     t.string "comment_authority"
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.index ["authority_id", "council_reference"], name: "index_applications_on_authority_id_and_council_reference", unique: true
     t.index ["authority_id", "date_scraped"], name: "index_applications_on_authority_id_and_date_scraped"
     t.index ["authority_id", "first_date_scraped"], name: "index_applications_on_authority_id_and_first_date_scraped"
     t.index ["date_scraped", "lat", "lng"], name: "index_applications_on_date_scraped_and_lat_and_lng"
     t.index ["first_date_scraped", "lat", "lng"], name: "index_applications_on_first_date_scraped_and_lat_and_lng"
     t.index ["lat", "lng", "date_scraped"], name: "index_applications_on_lat_and_lng_and_date_scraped"
+    t.index ["lonlat"], name: "index_applications_on_lonlat", using: :gist
     t.index ["postcode"], name: "index_applications_on_postcode"
     t.index ["state"], name: "index_applications_on_state"
     t.index ["suburb"], name: "index_applications_on_suburb"
