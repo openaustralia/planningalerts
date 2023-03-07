@@ -11,6 +11,7 @@ tmp/rspec_guard_result
 tmp/capybara
 tmp/miniprofiler
 tmp/sitemaps
+tmp/boundaries
 coverage
 config/database.yml
 rerun.txt

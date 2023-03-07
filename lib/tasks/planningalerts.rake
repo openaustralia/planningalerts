@@ -31,6 +31,33 @@ namespace :planningalerts do
     end
   end
 
+  desc "Read shapefile"
+  task read_shapefile: :environment do
+    require "zip"
+
+    unless File.exist?("tmp/boundaries/LGA_2022_AUST_GDA94.shp")
+      puts "Downloading shapefile..."
+      FileUtils.mkdir_p("tmp/boundaries")
+      URI.open("https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files/LGA_2022_AUST_GDA94_SHP.zip") do |f|
+        zip_stream = Zip::InputStream.new(f)
+        while (entry = zip_stream.get_next_entry)
+          # Extract into tmp/boundaries directory
+          entry.extract("tmp/boundaries/#{entry.name}")
+        end
+      end
+    end
+
+    factory = RGeo::Geographic.spherical_factory(srid: 4283)
+    RGeo::Shapefile::Reader.open("tmp/boundaries/LGA_2022_AUST_GDA94.shp", factory:) do |file|
+      puts "File contains #{file.num_records} records."
+      file.each do |record|
+        puts "Record number #{record.index}:"
+        # puts "  Geometry: #{record.geometry.as_text}"
+        puts "  Attributes: #{record.attributes.inspect}"
+      end
+    end
+  end
+
   namespace :emergency do
     desc "Regenerates all the counter caches in case they got out of synch"
     task fixup_counter_caches: :environment do
