@@ -108,4 +108,13 @@ window.addEventListener("DOMContentLoaded", function() {
 
     drawCircleOnMap(map, lat, lng, radius_meters);
   });
+
+  this.document.querySelectorAll(".authority-map").forEach(function(e) {
+    var map = new google.maps.Map(e,  { zoom: 4, center: { lat: -28, lng: 137 },
+      backgroundColor: "#d1e6d9" });
+
+    var json = e.dataset.json;
+
+    map.data.loadGeoJson(json);
+  });
 });

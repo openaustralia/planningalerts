@@ -1,6 +1,8 @@
 - content_for :page_title, @authority.full_name
 %h3= yield :page_title
 
+.authority-map{ data: { json: boundary_authority_url(format: :json) } }
+
 - if @authority.population_2021
   %p
     Population #{number_with_delimiter @authority.population_2021} (2021 census)

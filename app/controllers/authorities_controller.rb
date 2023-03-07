@@ -36,7 +36,13 @@ class AuthoritiesController < ApplicationController
     authority = T.let(Authority.find_short_name_encoded!(params_id), Authority)
 
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(authority.boundary) }
+      format.json do
+        # Utterly ridiculous - Google maps api says it handles geojson though
+        # in fact it only can handle or "feature" or "featurecollection". So,
+        # we have to wrap perfectly valid geojson.
+        geometry = RGeo::GeoJSON.encode(authority.boundary)
+        render json: { type: "Feature", geometry: }
+      end
     end
   end
 end

@@ -47,7 +47,14 @@ namespace :planningalerts do
       end
     end
 
-    factory = RGeo::Geographic.spherical_factory(srid: 4283)
+    # See http://www.geoproject.com.au/gda.faq.html
+    # "What is the difference between GDA94 and WGS84?"
+    # Difference between GDA94 and WGS84 is going to be of the order of a metre
+    # or so so we can probably just ignore the difference for the time being
+    # TODO: Properly support the conversion
+
+    # We're just loading the GDA94 as if it's WGS84 (srid 4326)
+    factory = RGeo::Geographic.spherical_factory(srid: 4326)
     RGeo::Shapefile::Reader.open("tmp/boundaries/LGA_2022_AUST_GDA94.shp", factory:) do |file|
       file.each do |record|
         # First get the LGA code for the current record
