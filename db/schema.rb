@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_005221) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_191107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -150,7 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_005221) do
     t.string "wikidata_id"
     t.integer "population_2021"
     t.string "asgs_2021"
-    t.geography "boundary", limit: {:srid=>4283, :type=>"multi_polygon", :geographic=>true}
+    t.geography "boundary", limit: {:srid=>4326, :type=>"multi_polygon", :geographic=>true}
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 
