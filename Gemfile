@@ -154,6 +154,9 @@ gem "wikidata"
 gem "rgeo-shapefile"
 gem "rubyzip"
 
+# To profile code in development and production
+gem "rack-mini-profiler"
+
 group :test do
   gem "capybara"
   gem "climate_control"
@@ -196,9 +199,6 @@ group :development do
   # For a better error page in development
   gem "better_errors"
   gem "binding_of_caller"
-
-  # To profile code in development
-  gem "rack-mini-profiler"
 
   # For deployment
   gem "capistrano", require: false
