@@ -150,7 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_005221) do
     t.string "wikidata_id"
     t.integer "population_2021"
     t.string "asgs_2021"
-    t.geography "boundary", limit: {:srid=>4283, :type=>"st_polygon", :geographic=>true}
+    t.geography "boundary", limit: {:srid=>4283, :type=>"multi_polygon", :geographic=>true}
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 
