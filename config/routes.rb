@@ -144,6 +144,11 @@ Rails.application.routes.draw do
   end
 
   resources :authorities, only: %i[index show] do
+    get :under_the_hood
+    member do
+      get :boundary
+    end
+
     resources :applications, only: [:index] do
       collection do
         get :per_week
@@ -154,7 +159,6 @@ Rails.application.routes.draw do
         get :per_week
       end
     end
-    get :under_the_hood
   end
 
   resources :geocode_queries, only: [:index, :show]

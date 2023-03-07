@@ -27,4 +27,16 @@ class AuthoritiesController < ApplicationController
 
     @authority = Authority.find_short_name_encoded!(params_authority_id)
   end
+
+  sig { void }
+  def boundary
+    params_id = T.cast(params[:id], String)
+
+    # TODO: Use something like the friendly_id gem instead
+    authority = T.let(Authority.find_short_name_encoded!(params_id), Authority)
+
+    respond_to do |format|
+      format.json { render json: RGeo::GeoJSON.encode(authority.boundary) }
+    end
+  end
 end
