@@ -49,11 +49,18 @@ namespace :planningalerts do
 
     factory = RGeo::Geographic.spherical_factory(srid: 4283)
     RGeo::Shapefile::Reader.open("tmp/boundaries/LGA_2022_AUST_GDA94.shp", factory:) do |file|
-      puts "File contains #{file.num_records} records."
       file.each do |record|
-        puts "Record number #{record.index}:"
-        # puts "  Geometry: #{record.geometry.as_text}"
-        puts "  Attributes: #{record.attributes.inspect}"
+        # First get the LGA code for the current record
+        asgs_2021 = "LGA#{record.attributes['LGA_CODE22']}"
+        # Lookup the associated authority
+        authority = Authority.find_by(asgs_2021:)
+        # We expect there to be more authorities included in the shapefile
+        # then we have in PlanningAlerts currently. So, just silently ignore
+        # if we can't find it.
+        next if authority.nil?
+
+        puts "Loading boundary for #{authority.full_name}..."
+        authority.update!(boundary: record.geometry)
       end
     end
   end
