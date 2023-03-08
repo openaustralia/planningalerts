@@ -2,6 +2,7 @@
 //= require maps/alert_map
 //= require maps/geocoding_map
 //= require maps/basic_map_with_marker
+//= require maps/address_autocomplete.js
 
 window.addEventListener("DOMContentLoaded", function() {
   // Map on the application page
@@ -25,4 +26,9 @@ window.addEventListener("DOMContentLoaded", function() {
 
   var map_div = document.getElementById('geocoding-map');
   if (map_div) initialiseGeocodingMap(map_div);
+
+  if (document.querySelectorAll('.address-autocomplete-input').length) {
+    initAutoComplete();
+  }
 });
+

@@ -11,7 +11,3 @@ function initAutoComplete() {
     document.querySelector("form.one-field").submit();
   });
 }
-
-if (document.querySelectorAll('.address-autocomplete-input').length) {
-  initAutoComplete();
-}

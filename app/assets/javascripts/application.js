@@ -1,5 +1,4 @@
 //= require maps
-//= require maps/address_autocomplete.js
 //= require geolocation
 //= require event_tracking
 // Need ujs for confirmation on buttons
