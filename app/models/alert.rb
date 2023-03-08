@@ -51,6 +51,9 @@ class Alert < ApplicationRecord
 
     self.lat = loc.lat
     self.lng = loc.lng
+    # TODO: Can we get the factory from the database info instead?
+    factory = RGeo::Geographic.spherical_factory(srid: 4326)
+    self.lonlat = factory.point(loc.lng, loc.lat)
   end
 
   sig { returns(T::Boolean) }
