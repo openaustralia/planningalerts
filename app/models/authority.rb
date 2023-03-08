@@ -139,4 +139,9 @@ class Authority < ApplicationRecord
   def broken?
     applications.recent.empty?
   end
+
+  sig { returns(ActiveRecord::Relation) }
+  def alerts
+    Alert.active.where("ST_Covers('#{boundary}', lonlat)")
+  end
 end

@@ -9,6 +9,15 @@
   %p
     Population #{number_with_delimiter @authority.population_2021} (2021 census)
 
+- if Flipper.enabled?(:show_authority_map, current_user) && @authority.alerts
+  %p
+    - if @authority.alerts.count == 1
+      1 alert is
+    - else
+      = @authority.alerts.count
+      alerts are
+    set up inside the area covered by this authority
+
 - if @authority.covered?
   - if @authority.broken? && @authority.applications.count != 0
     %p
