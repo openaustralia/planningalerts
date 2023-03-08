@@ -1,4 +1,4 @@
-//= require maps/maps
+//= require maps
 //= require maps/address_autocomplete.js
 //= require geolocation
 //= require event_tracking
