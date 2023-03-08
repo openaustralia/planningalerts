@@ -11,29 +11,40 @@
   %dt Mappify address
   %dd= @geocode_query.result("mappify").full_address
 
-#geocoding-map
+-# rubocop:disable Layout/FirstHashElementIndentation
+#geocoding-map{
+  data: {
+    google: {
+      lat: @geocode_query.result("google").lat,
+      lng: @geocode_query.result("google").lng,
+      html: render("geocode_results/result", result: @geocode_query.result("google"))
+    },
+    mappify: {
+      lat: @geocode_query.result("mappify").lat,
+      lng: @geocode_query.result("mappify").lng,
+      html: render("geocode_results/result", result: @geocode_query.result("mappify"))
+    }
+  }
+}
+-# rubocop:enable Layout/FirstHashElementIndentation
 
 :javascript
   window.addEventListener("DOMContentLoaded", function() {
-    var googleLatLng = {lat: #{h @geocode_query.result("google").lat}, lng: #{h @geocode_query.result("google").lng}};
-    var mappifyLatLng = {lat: #{h @geocode_query.result("mappify").lat}, lng: #{h @geocode_query.result("mappify").lng}};
+    var map_div = document.getElementById('geocoding-map');
 
-    var map = new google.maps.Map(document.getElementById('geocoding-map'), {
-      zoom: 13,
-      center: googleLatLng
-    });
+    var googleLatLng = {lat: Number(map_div.dataset.googleLat), lng: Number(map_div.dataset.googleLng)};
+    var mappifyLatLng = {lat: Number(map_div.dataset.mappifyLat), lng: Number(map_div.dataset.mappifyLng)};
+
+    var map = new google.maps.Map(map_div, { zoom: 13, center: googleLatLng });
 
     // TODO: Generalise to any number of geocoder results
 
-    var googleContentString = '#{escape_javascript(render("geocode_results/result", result: @geocode_query.result("google")))}';
-    var mappifyContentString = '#{escape_javascript(render("geocode_results/result", result: @geocode_query.result("mappify")))}';
-
     var googleInfowindow = new google.maps.InfoWindow({
-      content: googleContentString
+      content: map_div.dataset.googleHtml
     });
 
     var mappifyInfowindow = new google.maps.InfoWindow({
-      content: mappifyContentString
+      content: map_div.dataset.mappifyHtml
     });
 
     var googleMarker = new google.maps.Marker({
