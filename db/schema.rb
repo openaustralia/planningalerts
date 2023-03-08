@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_025005) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_08_033322) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_025005) do
     t.datetime "updated_at", precision: nil, null: false
     t.string "comment_email"
     t.string "comment_authority"
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.index ["application_id"], name: "index_application_versions_on_application_id"
     t.index ["date_scraped"], name: "index_application_versions_on_date_scraped"
     t.index ["lat", "lng", "date_scraped"], name: "index_application_versions_on_lat_and_lng_and_date_scraped"
