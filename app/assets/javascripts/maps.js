@@ -9,20 +9,6 @@ function initialiseMap(elem, lat, lng, address, zoom) {
   return map;
 }
 
-function initialisePano(elem, latitude, longitude, address) {
-  // Can't yet figure out how to make the POV point at the marker
-  var pointToLookAt = new google.maps.LatLng(latitude, longitude);
-  var myPano = new  google.maps.StreetViewPanorama(elem,
-    {position: pointToLookAt, navigationControl: false, addressControl: false, zoom: 0});
-  google.maps.event.addListener(myPano, 'position_changed', function() {
-    // Orient the camera to face the position we're interested in
-    var angle = computeAngle(pointToLookAt, myPano.getPosition());
-    myPano.setPov({heading:angle, pitch:0, zoom:1});
-  });
-  var panoMarker = new google.maps.Marker({position: pointToLookAt, title: address});
-  panoMarker.setMap(myPano);
-}
-
 function computeAngle(endLatLng, startLatLng) {
   var DEGREE_PER_RADIAN = 57.2957795;
   var RADIAN_PER_DEGREE = 0.017453;
@@ -67,13 +53,22 @@ function initialiseMap2(map_div) {
   );
 }
 
-function initialisePano2(pano) {
-  initialisePano(
-    pano,
-    Number(pano.dataset.lat),
-    Number(pano.dataset.lng),
-    pano.dataset.address
-  );
+function initialisePano(elem) {
+  var lat = Number(elem.dataset.lat);
+  var lng = Number(elem.dataset.lng);
+  var address = elem.dataset.address;
+
+  // Can't yet figure out how to make the POV point at the marker
+  var pointToLookAt = new google.maps.LatLng(lat, lng);
+  var myPano = new  google.maps.StreetViewPanorama(elem,
+    {position: pointToLookAt, navigationControl: false, addressControl: false, zoom: 0});
+  google.maps.event.addListener(myPano, 'position_changed', function() {
+    // Orient the camera to face the position we're interested in
+    var angle = computeAngle(pointToLookAt, myPano.getPosition());
+    myPano.setPov({heading:angle, pitch:0, zoom:1});
+  });
+  var panoMarker = new google.maps.Marker({position: pointToLookAt, title: address});
+  panoMarker.setMap(myPano);
 }
 
 function initialiseEditAlertMap(map_alert_radius) {
@@ -148,7 +143,7 @@ window.addEventListener("DOMContentLoaded", function() {
 
   // Streetview on the application page
   var pano = document.querySelector("#pano");
-  if (pano) initialisePano2(pano);
+  if (pano) initialisePano(pano);
 
   // Alert radius map on the edit alert page
   var map_alert_radius = document.querySelector("#map_div.alert-radius");
