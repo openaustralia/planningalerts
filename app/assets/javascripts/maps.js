@@ -114,13 +114,13 @@ window.addEventListener("DOMContentLoaded", function() {
       fullscreenControl: false, streetViewControl: false, backgroundColor: "#d1e6d9" });
 
     var json = e.dataset.json;
-    var min_lng = Number(e.dataset.minLng);
-    var max_lng = Number(e.dataset.maxLng);
-    var min_lat = Number(e.dataset.minLat);
-    var max_lat = Number(e.dataset.maxLat);
+    var sw_lng = Number(e.dataset.swLng);
+    var sw_lat = Number(e.dataset.swLat);
+    var ne_lng = Number(e.dataset.neLng);
+    var ne_lat = Number(e.dataset.neLat);
 
-    var sw = new google.maps.LatLng(min_lat, min_lng);
-    var ne = new google.maps.LatLng(max_lat, max_lng);
+    var sw = new google.maps.LatLng(sw_lat, sw_lng);
+    var ne = new google.maps.LatLng(ne_lat, ne_lng);
     var bounds = new google.maps.LatLngBounds(sw, ne);
 
     map.fitBounds(bounds);
