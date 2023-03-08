@@ -4,31 +4,36 @@
 //= require maps/basic_map_with_marker
 //= require maps/address_autocomplete.js
 
-window.addEventListener("DOMContentLoaded", function() {
-  // Map on the application page
-  var map_div = document.querySelector("#map_div.application");
-  if (map_div) initialiseBasicMapWithMarker(map_div);
+// This function is called after the google maps api is fully loaded. So, we can safely set things
+// up to use it here
+function initialiseAllMaps() {
+  window.addEventListener("DOMContentLoaded", function() {
+    // Map on the application page
+    var map_div = document.querySelector("#map_div.application");
+    if (map_div) initialiseBasicMapWithMarker(map_div);
+  
+    // Streetview on the application page
+    var pano = document.querySelector("#pano");
+    if (pano) initialisePano(pano);
+  
+    // Alert radius map on the edit alert page
+    var map_div = document.querySelector("#map_div.alert-radius");
+    if (map_div) {
+      var circle = initialiseAlertMap(map_div);
+      document.querySelector(".sizes").addEventListener("change", function(e) {
+        circle.setRadius(parseInt(e.target.value));
+      });
+    }
+  
+    document.querySelectorAll(".map").forEach(initialiseAlertMap);
+  
+    var map_div = document.getElementById('geocoding-map');
+    if (map_div) initialiseGeocodingMap(map_div);
+  
+    if (document.querySelectorAll('.address-autocomplete-input').length) {
+      initAutoComplete();
+    }
+  });  
+}
 
-  // Streetview on the application page
-  var pano = document.querySelector("#pano");
-  if (pano) initialisePano(pano);
-
-  // Alert radius map on the edit alert page
-  var map_div = document.querySelector("#map_div.alert-radius");
-  if (map_div) {
-    var circle = initialiseAlertMap(map_div);
-    document.querySelector(".sizes").addEventListener("change", function(e) {
-      circle.setRadius(parseInt(e.target.value));
-    });
-  }
-
-  document.querySelectorAll(".map").forEach(initialiseAlertMap);
-
-  var map_div = document.getElementById('geocoding-map');
-  if (map_div) initialiseGeocodingMap(map_div);
-
-  if (document.querySelectorAll('.address-autocomplete-input').length) {
-    initAutoComplete();
-  }
-});
-
+window.initialiseAllMaps = initialiseAllMaps;
