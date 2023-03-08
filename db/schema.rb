@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_191107) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_08_025005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -46,6 +46,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_191107) do
     t.boolean "last_delivered_successfully"
     t.string "unsubscribed_by"
     t.integer "user_id", null: false
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.index ["lonlat"], name: "index_alerts_on_lonlat", using: :gist
     t.index ["user_id"], name: "fk_rails_d4053234e7"
   end
 
