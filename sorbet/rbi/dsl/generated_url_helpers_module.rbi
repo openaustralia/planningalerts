@@ -117,6 +117,9 @@ module GeneratedUrlHelpersModule
   def authority_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def boundary_authority_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def cancel_user_registration_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

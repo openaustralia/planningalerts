@@ -117,6 +117,9 @@ module GeneratedPathHelpersModule
   def authority_under_the_hood_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def boundary_authority_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def cancel_user_registration_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

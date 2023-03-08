@@ -889,6 +889,51 @@ class Alert
     sig { void }
     def lng_will_change!; end
 
+    sig { returns(T.untyped) }
+    def lonlat; end
+
+    sig { params(value: T.untyped).returns(T.untyped) }
+    def lonlat=(value); end
+
+    sig { returns(T::Boolean) }
+    def lonlat?; end
+
+    sig { returns(T.untyped) }
+    def lonlat_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def lonlat_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def lonlat_came_from_user?; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def lonlat_change; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def lonlat_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def lonlat_changed?; end
+
+    sig { returns(T.untyped) }
+    def lonlat_in_database; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def lonlat_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def lonlat_previously_changed?; end
+
+    sig { returns(T.untyped) }
+    def lonlat_previously_was; end
+
+    sig { returns(T.untyped) }
+    def lonlat_was; end
+
+    sig { void }
+    def lonlat_will_change!; end
+
     sig { returns(::Integer) }
     def radius_meters; end
 
@@ -966,6 +1011,9 @@ class Alert
 
     sig { void }
     def restore_lng!; end
+
+    sig { void }
+    def restore_lonlat!; end
 
     sig { void }
     def restore_radius_meters!; end
@@ -1050,6 +1098,12 @@ class Alert
 
     sig { returns(T::Boolean) }
     def saved_change_to_lng?; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def saved_change_to_lonlat; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_lonlat?; end
 
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def saved_change_to_radius_meters; end
@@ -1344,6 +1398,9 @@ class Alert
 
     sig { returns(T::Boolean) }
     def will_save_change_to_lng?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_lonlat?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_radius_meters?; end
