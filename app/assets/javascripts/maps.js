@@ -111,10 +111,19 @@ window.addEventListener("DOMContentLoaded", function() {
 
   this.document.querySelectorAll(".authority-map").forEach(function(e) {
     var map = new google.maps.Map(e,  { zoom: 4, center: { lat: -28, lng: 137 },
-      backgroundColor: "#d1e6d9" });
+      fullscreenControl: false, streetViewControl: false, backgroundColor: "#d1e6d9" });
 
     var json = e.dataset.json;
+    var min_lng = Number(e.dataset.minLng);
+    var max_lng = Number(e.dataset.maxLng);
+    var min_lat = Number(e.dataset.minLat);
+    var max_lat = Number(e.dataset.maxLat);
 
+    var sw = new google.maps.LatLng(min_lat, min_lng);
+    var ne = new google.maps.LatLng(max_lat, max_lng);
+    var bounds = new google.maps.LatLngBounds(sw, ne);
+
+    map.fitBounds(bounds);
     map.data.loadGeoJson(json);
   });
 });
