@@ -1,8 +1,9 @@
 - content_for :page_title, @authority.full_name
 %h3= yield :page_title
 
-- bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
-.authority-map{ data: { json: boundary_authority_url(format: :json),  min_lng: bb.min_x, max_lng: bb.max_x, min_lat: bb.min_y, max_lat: bb.max_y } }
+- if Flipper.enabled?(:show_authority_map, current_user)
+  - bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
+  .authority-map{ data: { json: boundary_authority_url(format: :json), min_lng: bb.min_x, max_lng: bb.max_x, min_lat: bb.min_y, max_lat: bb.max_y } }
 
 - if @authority.population_2021
   %p
