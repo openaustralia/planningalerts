@@ -64,26 +64,13 @@ function initialisePano(elem) {
   panoMarker.setMap(myPano);
 }
 
-function initialiseEditAlertMap(map_div) {
-  var lat = Number(map_div.dataset.lat);
-  var lng = Number(map_div.dataset.lng);
-  var radius_meters = Number(map_div.dataset.radiusMeters);
-
-  var map = initialiseBasicMapWithMarker(map_div);
-
-  var circle = drawCircleOnMap(map, lat, lng, radius_meters);
-  document.querySelector(".sizes").addEventListener("change", function(e) {
-    circle.setRadius(parseInt(e.target.value));
-  });
-}
-
 function initialiseAlertMap(map_div) {
   var lat = Number(map_div.dataset.lat);
   var lng = Number(map_div.dataset.lng);
   var radius_meters = Number(map_div.dataset.radiusMeters);
 
   var map = initialiseBasicMapWithMarker(map_div);
-  drawCircleOnMap(map, lat, lng, radius_meters);
+  return drawCircleOnMap(map, lat, lng, radius_meters);
 }
 
 function initialiseGeocodingMap(map_div) {
@@ -135,8 +122,13 @@ window.addEventListener("DOMContentLoaded", function() {
   if (pano) initialisePano(pano);
 
   // Alert radius map on the edit alert page
-  var map_alert_radius = document.querySelector("#map_div.alert-radius");
-  if (map_alert_radius) initialiseEditAlertMap(map_alert_radius);
+  var map_div = document.querySelector("#map_div.alert-radius");
+  if (map_div) {
+    var circle = initialiseAlertMap(map_div);
+    document.querySelector(".sizes").addEventListener("change", function(e) {
+      circle.setRadius(parseInt(e.target.value));
+    });
+  }
 
   document.querySelectorAll(".map").forEach(initialiseAlertMap);
 
