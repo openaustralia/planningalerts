@@ -1,7 +1,7 @@
 - content_for :page_title, @authority.full_name
 %h3= yield :page_title
 
-- if Flipper.enabled?(:show_authority_map, current_user)
+- if @authority.boundary && Flipper.enabled?(:show_authority_map, current_user)
   - bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
   .authority-map{ data: { json: boundary_authority_url(format: :json), sw: { lng: bb.min_x, lat: bb.min_y }, ne: { lng: bb.max_x, lat: bb.max_y } } }
 
