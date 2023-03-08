@@ -80,9 +80,10 @@ namespace :planningalerts do
   end
 
   namespace :migrate do
-    desc "Update lonlat on applications"
-    task update_lonlat_on_applications: :environment do
+    desc "Update lonlat on applications and alerts"
+    task update_lonlat: :environment do
       ActiveRecord::Base.connection.execute("UPDATE applications SET lonlat = ST_POINT(lng, lat) WHERE lonlat IS NULL")
+      ActiveRecord::Base.connection.execute("UPDATE alerts SET lonlat = ST_POINT(lng, lat) WHERE lonlat IS NULL")
     end
   end
 end
