@@ -136,9 +136,12 @@ class Application < ApplicationRecord
     r = GeocodeService.call(address)
     top = r.top
     if top
+      # TODO: Can we get the factory from the database info instead?
+      factory = RGeo::Geographic.spherical_factory(srid: 4326)
       {
         lat: top.lat,
         lng: top.lng,
+        lonlat: factory.point(top.lng, top.lat),
         suburb: top.suburb,
         # Hack - workaround for inconsistent returned state name (as of 21 Jan 2011)
         # from Google Geocoder
