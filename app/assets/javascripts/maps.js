@@ -1,14 +1,3 @@
-function initialiseMap(elem, lat, lng, address, zoom) {
-  var center = { lat: lat, lng: lng };
-  var map = new google.maps.Map(
-    elem,
-    { zoom: zoom, center: center, fullscreenControl: false, streetViewControl: false, draggable: false, backgroundColor: "#d1e6d9" }
-  );
-  new google.maps.Marker({ position: center, map: map, title: address });
-
-  return map;
-}
-
 function computeAngle(endLatLng, startLatLng) {
   var DEGREE_PER_RADIAN = 57.2957795;
   var RADIAN_PER_DEGREE = 0.017453;
@@ -43,14 +32,18 @@ function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
   });
 };
 
-function initialiseMap2(map_div) {
-  initialiseMap(
+function initialiseBasicMapWithMarker(map_div) {
+  var center = { lat: Number(map_div.dataset.lat), lng: Number(map_div.dataset.lng) };
+  var address = map_div.dataset.address;
+  var zoom = Number(map_div.dataset.zoom);
+
+  var map = new google.maps.Map(
     map_div,
-    Number(map_div.dataset.lat),
-    Number(map_div.dataset.lng),
-    map_div.dataset.address,
-    Number(map_div.dataset.zoom)
+    { zoom: zoom, center: center, fullscreenControl: false, streetViewControl: false, draggable: false, backgroundColor: "#d1e6d9" }
   );
+  new google.maps.Marker({ position: center, map: map, title: address });
+
+  return map;
 }
 
 function initialisePano(elem) {
@@ -71,14 +64,12 @@ function initialisePano(elem) {
   panoMarker.setMap(myPano);
 }
 
-function initialiseEditAlertMap(map_alert_radius) {
-  var lat = Number(map_alert_radius.dataset.lat);
-  var lng = Number(map_alert_radius.dataset.lng);
-  var address = map_alert_radius.dataset.address;
-  var zoom = Number(map_alert_radius.dataset.zoom);
-  var radius_meters = Number(map_alert_radius.dataset.radiusMeters);
+function initialiseEditAlertMap(map_div) {
+  var lat = Number(map_div.dataset.lat);
+  var lng = Number(map_div.dataset.lng);
+  var radius_meters = Number(map_div.dataset.radiusMeters);
 
-  var map = initialiseMap(map_alert_radius, lat, lng, address, zoom);
+  var map = initialiseBasicMapWithMarker(map_div);
 
   var circle = drawCircleOnMap(map, lat, lng, radius_meters);
   document.querySelector(".sizes").addEventListener("change", function(e) {
@@ -86,14 +77,12 @@ function initialiseEditAlertMap(map_alert_radius) {
   });
 }
 
-function initialiseAlertMap(e) {
-  var lat = Number(e.dataset.lat);
-  var lng = Number(e.dataset.lng);
-  var address = e.dataset.address;
-  var zoom = Number(e.dataset.zoom);
-  var radius_meters = Number(e.dataset.radiusMeters);
-  var map = initialiseMap(e, lat, lng, address, zoom);
+function initialiseAlertMap(map_div) {
+  var lat = Number(map_div.dataset.lat);
+  var lng = Number(map_div.dataset.lng);
+  var radius_meters = Number(map_div.dataset.radiusMeters);
 
+  var map = initialiseBasicMapWithMarker(map_div);
   drawCircleOnMap(map, lat, lng, radius_meters);
 }
 
@@ -139,7 +128,7 @@ function initialiseGeocodingMap(map_div) {
 window.addEventListener("DOMContentLoaded", function() {
   // Map on the application page
   var map_div = document.querySelector("#map_div.application");
-  if (map_div) initialiseMap2(map_div);
+  if (map_div) initialiseBasicMapWithMarker(map_div);
 
   // Streetview on the application page
   var pano = document.querySelector("#pano");
