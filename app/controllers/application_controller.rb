@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   # This stores the location on every request so that we can always redirect back after logging in
   # See https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D
   before_action :store_user_location!, if: :storable_location?
+  before_action :authorize_rack_miniprofiler
 
   sig { void }
   def authenticate_active_admin_user!
@@ -31,7 +32,30 @@ class ApplicationController < ActionController::Base
     render plain: "Not authorised", status: :forbidden unless T.must(current_user).admin?
   end
 
+  rescue_from ActiveRecord::StatementInvalid, with: :check_for_write_during_maintenance_mode
+
   private
+
+  sig { params(error: StandardError).void }
+  def check_for_write_during_maintenance_mode(error)
+    # Checking for mysql specific response that we don't have permission which means
+    # we're trying to do a write operation when we're only allowed to do read operations.
+    raise error unless Flipper.enabled?(:message_for_writes_during_maintenance_mode) && error.message.match?(/command denied to user/i)
+
+    Rails.logger.warn "Write attempted during maintenance mode: #{error}"
+
+    redirect_back(
+      fallback_location: root_path,
+      alert: t("activerecord.errors.write_during_maintenance_mode")
+    )
+  end
+
+  sig { void }
+  def authorize_rack_miniprofiler
+    return unless current_user&.admin?
+
+    Rack::MiniProfiler.authorize_request
+  end
 
   sig { returns(String) }
   def theme_resolver

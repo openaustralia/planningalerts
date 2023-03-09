@@ -11,50 +11,19 @@
   %dt Mappify address
   %dd= @geocode_query.result("mappify").full_address
 
-#geocoding-map
-
-:javascript
-  window.addEventListener("DOMContentLoaded", function() {
-    var googleLatLng = {lat: #{h @geocode_query.result("google").lat}, lng: #{h @geocode_query.result("google").lng}};
-    var mappifyLatLng = {lat: #{h @geocode_query.result("mappify").lat}, lng: #{h @geocode_query.result("mappify").lng}};
-
-    var map = new google.maps.Map(document.getElementById('geocoding-map'), {
-      zoom: 13,
-      center: googleLatLng
-    });
-
-    // TODO: Generalise to any number of geocoder results
-
-    var googleContentString = '#{escape_javascript(render("geocode_results/result", result: @geocode_query.result("google")))}';
-    var mappifyContentString = '#{escape_javascript(render("geocode_results/result", result: @geocode_query.result("mappify")))}';
-
-    var googleInfowindow = new google.maps.InfoWindow({
-      content: googleContentString
-    });
-
-    var mappifyInfowindow = new google.maps.InfoWindow({
-      content: mappifyContentString
-    });
-
-    var googleMarker = new google.maps.Marker({
-      position: googleLatLng,
-      map: map,
-      title: 'Google',
-      label: "G"
-    });
-
-    var mappifyMarker = new google.maps.Marker({
-      position: mappifyLatLng,
-      map: map,
-      title: 'Mappify',
-      label: "M"
-    });
-
-    googleMarker.addListener('click', function() {
-      googleInfowindow.open(map, googleMarker);
-    });
-
-    mappifyMarker.addListener('click', function() {
-      mappifyInfowindow.open(map, mappifyMarker);
-    });
-  });
+-# rubocop:disable Layout/FirstHashElementIndentation
+#geocoding-map{
+  data: {
+    google: {
+      lat: @geocode_query.result("google").lat,
+      lng: @geocode_query.result("google").lng,
+      html: render("geocode_results/result", result: @geocode_query.result("google"))
+    },
+    mappify: {
+      lat: @geocode_query.result("mappify").lat,
+      lng: @geocode_query.result("mappify").lng,
+      html: render("geocode_results/result", result: @geocode_query.result("mappify"))
+    }
+  }
+}
+-# rubocop:enable Layout/FirstHashElementIndentation

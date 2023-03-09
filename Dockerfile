@@ -19,6 +19,9 @@ RUN apt install watchman
 # Instead we need to force postgresql 15.x to use the old (less secure) md5 for authentication
 RUN apt install -y pgloader
 
+# Needed for rgeo geos support. See https://github.com/rgeo/rgeo/issues/227#issuecomment-1145169888
+RUN apt-get install -y libgeos++-dev libgeos-dev
+
 USER deploy
 
 COPY --chown=deploy:deploy Gemfile /app/Gemfile

@@ -198,6 +198,7 @@ GEM
     daemons (1.4.1)
     dalli (3.2.3)
     date (3.3.3)
+    dbf (4.2.2)
     debug_inspector (1.1.0)
     devise (4.8.1)
       bcrypt (~> 3.0)
@@ -509,9 +510,12 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
-    rgeo (2.4.0)
+    rgeo (3.0.0)
     rgeo-geojson (2.1.1)
       rgeo (>= 1.0.0)
+    rgeo-shapefile (3.0.0)
+      dbf (~> 4.0)
+      rgeo (>= 1.0)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -791,6 +795,7 @@ DEPENDENCIES
   redcarpet
   rest-client
   rexml
+  rgeo-shapefile
   rspec-activemodel-mocks
   rspec-rails
   rubocop
@@ -799,6 +804,7 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-sorbet
   ruby-progressbar
+  rubyzip
   sanitize
   sass-rails
   searchkick

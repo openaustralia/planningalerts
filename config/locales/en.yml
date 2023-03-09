@@ -32,6 +32,7 @@
 en:
   activerecord:
     errors:
+      write_during_maintenance_mode: "PlanningAlerts is currently in read-only maintenance mode. Please try again later."
       models:
         alert:
           attributes:

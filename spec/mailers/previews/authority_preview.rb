@@ -10,10 +10,8 @@ class AuthorityPreview < ActionMailer::Preview
       application: Application.new(
         id: 2,
         council_reference: "27-B/6",
-        current_version: ApplicationVersion.new(
-          description: "Erection of a bouncy castle",
-          address: "20 Illawarra Road Marrickville 2204"
-        ),
+        address: "20 Illawarra Road Marrickville 2204",
+        description: "Erection of a bouncy castle",
         authority: Authority.new(
           full_name: "Inner West Council",
           email: "hello@innerwest.nsw.gov.au"
