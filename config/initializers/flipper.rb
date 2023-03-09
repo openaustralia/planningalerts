@@ -8,9 +8,9 @@ Flipper::UI.configure do |config|
       "streetview_in_app" => "Enable Google streetview in the main application. Disable it to save money",
       "switch_themes" => "Can switch to new in progress design for the site",
       "extra_options_on_address_search" => "Add extra options to filter by time/space when searching address",
-      # Very important to note that switching on message_for_writes_during_maintenance_mode does not by itself
-      # enable maintenance mode. You must also disable writes to the database
-      "message_for_writes_during_maintenance_mode" => "If writes to the database are disabled during maintenance mode enable this to give users a helpful message"
+      # Very important to note that switching on maintance_mode ** is not enough **.
+      # You must also disable writes to the database by creating a database user with read-only privileges and using that
+      "maintenance_mode" => "Put a banner across the site and give helpful message to the user if trying to write to the database"
     }
   end
 
