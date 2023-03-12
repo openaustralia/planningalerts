@@ -1,7 +1,6 @@
-//= require address_autocomplete.js
+//= require maps
 //= require geolocation
 //= require event_tracking
-//= require maps
 // Need ujs for confirmation on buttons
 //= require rails-ujs
 

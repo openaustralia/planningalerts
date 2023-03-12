@@ -1,2 +1,1 @@
-= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV.fetch('GOOGLE_MAPS_API_KEY', nil)}&v=3&libraries=places&region=au"
-= javascript_include_tag "application"
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV.fetch('GOOGLE_MAPS_API_KEY', nil)}&v=3&libraries=places&region=au&callback=initialiseAllMaps", async: true

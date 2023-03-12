@@ -32,7 +32,24 @@ class ApplicationController < ActionController::Base
     render plain: "Not authorised", status: :forbidden unless T.must(current_user).admin?
   end
 
+  rescue_from ActiveRecord::StatementInvalid, with: :check_for_write_during_maintenance_mode
+
   private
+
+  sig { params(error: StandardError).void }
+  def check_for_write_during_maintenance_mode(error)
+    # Checking for mysql and postgres responses that we don't have permission which means
+    # we're trying to do a write operation when we're only allowed to do read operations.
+    raise error unless Flipper.enabled?(:maintance_mode) &&
+                       (error.message.match?(/command denied to user/i) || error.message.match?(/PG::InsufficientPrivilege/))
+
+    Rails.logger.warn "Write attempted during maintenance mode: #{error}"
+
+    redirect_back(
+      fallback_location: root_path,
+      alert: t("activerecord.errors.write_during_maintenance_mode")
+    )
+  end
 
   sig { void }
   def authorize_rack_miniprofiler
