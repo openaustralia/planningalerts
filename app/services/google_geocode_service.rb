@@ -18,13 +18,12 @@ class GoogleGeocodeService
   def call
     return error("Please enter a street address") if address == ""
 
-    parsed_response = call_google_api_no_caching(address)
+    parsed_response = call_google_api_check_status_no_caching(address)
 
-    status = parsed_response["status"]
     # TODO: Raise a proper error class here
-    raise "Google geocoding error #{status}" unless %w[OK ZERO_RESULTS].include?(status)
+    raise "Google geocoding error" if parsed_response.nil?
 
-    if status != "OK"
+    if parsed_response["status"] != "OK"
       return error(
         "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
       )
@@ -79,6 +78,13 @@ class GoogleGeocodeService
 
   sig { returns(String) }
   attr_reader :address
+
+  # Returns nil if status is not valid
+  sig { params(address: String).returns(T.nilable(T::Hash[String, T.untyped])) }
+  def call_google_api_check_status_no_caching(address)
+    parsed_response = call_google_api_no_caching(address)
+    parsed_response if %w[OK ZERO_RESULTS].include?(parsed_response["status"])
+  end
 
   sig { params(address: String).returns(T::Hash[String, T.untyped]) }
   def call_google_api_no_caching(address)
