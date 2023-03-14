@@ -18,14 +18,7 @@ class GoogleGeocodeService
   def call
     return error("Please enter a street address") if address == ""
 
-    params = {
-      address:,
-      key: ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil),
-      region: "au",
-      sensor: false
-    }
-    response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
-    parsed_response = response.parsed_response
+    parsed_response = call_google_api_no_caching(address)
 
     status = parsed_response["status"]
     # TODO: Raise a proper error class here
@@ -86,6 +79,18 @@ class GoogleGeocodeService
 
   sig { returns(String) }
   attr_reader :address
+
+  sig { params(address: String).returns(T::Hash[String, T.untyped]) }
+  def call_google_api_no_caching(address)
+    params = {
+      address:,
+      key: ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil),
+      region: "au",
+      sensor: false
+    }
+    response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
+    response.parsed_response
+  end
 
   sig { params(text: String).returns(GeocoderResults) }
   def error(text)
