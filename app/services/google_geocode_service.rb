@@ -25,8 +25,9 @@ class GoogleGeocodeService
       sensor: false
     }
     response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
+    parsed_response = response.parsed_response
 
-    status = response.parsed_response["status"]
+    status = parsed_response["status"]
     # TODO: Raise a proper error class here
     raise "Google geocoding error #{status}" unless %w[OK ZERO_RESULTS].include?(status)
 
@@ -36,7 +37,7 @@ class GoogleGeocodeService
       )
     end
 
-    results = response.parsed_response["results"]
+    results = parsed_response["results"]
     results = results.select do |result|
       country = component(result, "country")
       # Even though we've biased the results towards au by using region: "au",
