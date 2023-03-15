@@ -18,7 +18,7 @@ class GoogleGeocodeService
   def call
     return error("Please enter a street address") if address == ""
 
-    parsed_response = call_google_api_check_status_no_caching(address)
+    parsed_response = call_google_api_check_status(address)
 
     # TODO: Raise a proper error class here
     raise "Google geocoding error" if parsed_response.nil?
@@ -84,6 +84,15 @@ class GoogleGeocodeService
   def call_google_api_check_status_no_caching(address)
     parsed_response = call_google_api_no_caching(address)
     parsed_response if %w[OK ZERO_RESULTS].include?(parsed_response["status"])
+  end
+
+  # This caches the returned value for 24 hours but only if it's valid (non nil)
+  sig { params(address: String).returns(T.nilable(T::Hash[String, T.untyped])) }
+  def call_google_api_check_status(address)
+    # If we need to expire all the cached values for some reason then increment the version number below
+    Rails.cache.fetch("google_geocode_service/v1/#{address}", expires_in: 24.hours, skip_nil: true) do
+      call_google_api_check_status_no_caching(address)
+    end
   end
 
   sig { params(address: String).returns(T::Hash[String, T.untyped]) }
