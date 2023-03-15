@@ -82,8 +82,14 @@ class GoogleGeocodeService
   # Returns nil if status is not valid
   sig { params(address: String).returns(T.nilable(T::Hash[String, T.untyped])) }
   def call_google_api_check_status_no_caching(address)
-    parsed_response = call_google_api_no_caching(address)
-    parsed_response if %w[OK ZERO_RESULTS].include?(parsed_response["status"])
+    params = {
+      address:,
+      key: ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil),
+      region: "au",
+      sensor: false
+    }
+    response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
+    response.parsed_response if %w[OK ZERO_RESULTS].include?(response.parsed_response["status"])
   end
 
   # This caches the returned value for 24 hours but only if it's valid (non nil)
@@ -93,18 +99,6 @@ class GoogleGeocodeService
     Rails.cache.fetch("google_geocode_service/v1/#{address}", expires_in: 24.hours, skip_nil: true) do
       call_google_api_check_status_no_caching(address)
     end
-  end
-
-  sig { params(address: String).returns(T::Hash[String, T.untyped]) }
-  def call_google_api_no_caching(address)
-    params = {
-      address:,
-      key: ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil),
-      region: "au",
-      sensor: false
-    }
-    response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
-    response.parsed_response
   end
 
   sig { params(text: String).returns(GeocoderResults) }
