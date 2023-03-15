@@ -10,7 +10,8 @@ Flipper::UI.configure do |config|
       "extra_options_on_address_search" => "Add extra options to filter by time/space when searching address",
       # Very important to note that switching on maintance_mode ** is not enough **.
       # You must also disable writes to the database by creating a database user with read-only privileges and using that
-      "maintenance_mode" => "Put a banner across the site and give helpful message to the user if trying to write to the database"
+      "maintenance_mode" => "Put a banner across the site and give helpful message to the user if trying to write to the database",
+      "full_text_search" => "Allow searching for all applications containing the word 'tree', for example"
     }
   end
 

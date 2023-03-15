@@ -87,6 +87,11 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def search
+    unless Flipper.enabled?(:full_text_search, current_user)
+      render plain: t(".full_text_search_not_enabled")
+      return
+    end
+
     params_q = T.cast(params[:q], T.nilable(String))
 
     # TODO: Fix this hacky ugliness
