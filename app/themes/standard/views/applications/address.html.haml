@@ -1,7 +1,7 @@
 - content_for :meta_description, Rails.configuration.planningalerts_meta_description
 
 - if @q.nil?
-  %p This is where the search form is going to go
+  = render "address_search_form", q: @q, error: @error
 - else
   %h3
     Applications within
