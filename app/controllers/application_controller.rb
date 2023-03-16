@@ -59,8 +59,8 @@ class ApplicationController < ActionController::Base
 
   sig { returns(String) }
   def theme_resolver
-    # Only show a different theme if the user is an admin
-    if session[:theme] && current_user&.admin?
+    # Only show a different theme if the user is allowed
+    if session[:theme] && Flipper.enabled?(:switch_themes, current_user)
       session[:theme]
     else
       "standard"
