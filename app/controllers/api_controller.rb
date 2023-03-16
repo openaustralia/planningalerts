@@ -107,7 +107,7 @@ class ApiController < ApplicationController
     apps = apps.where("id > ?", params[:since_id]) if params[:since_id]
 
     # Max number of records that we'll show
-    limit = 10
+    limit = 1000
 
     applications = apps.limit(limit).to_a
     last = applications.last
