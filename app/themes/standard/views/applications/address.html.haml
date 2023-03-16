@@ -28,6 +28,8 @@
   - else
     .attention
       = render "alerts/signup_introduction"
+      = render "alerts/frequency"
+      = render "privacy_policy"
       = render "alerts/signup_form", alert: @alert, address_hidden: true
 
     .filter-and-sort-options

@@ -1,8 +1,9 @@
 - if current_user.nil?
-  = link_to "Create an account", new_user_registration_path
-  or
-  = link_to "sign in", new_user_session_path
-  to create an alert.
+  %p
+    = link_to "Create an account", new_user_registration_path
+    or
+    = link_to "sign in", new_user_session_path
+    to create an alert.
 - else
   = semantic_form_for alert do |f|
     = f.inputs do
