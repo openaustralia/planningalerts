@@ -17,9 +17,9 @@
       = image_tag "standard/menu.png", size: "50x50", class: "toggle hideable", alt: "Toggle menu", data: { target: "#menu ul" }
       %ul.hideable-target
         = menu_item(root_path) do
+          Home
+        = menu_item(address_applications_path) do
           Search
-        = menu_item(new_alert_path) do
-          Alert
         = menu_item(faq_path) do
           %abbr{ title: "Frequently asked questions" } FAQ
         = menu_item(authorities_path) do
