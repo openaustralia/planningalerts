@@ -7,7 +7,7 @@
     %ol
       %li.string#q_input{ class: ("error" if @error) }
         = label_tag(:q, "Enter a street address")
-        = render "home/address_field_with_geolocate", q: @q, error: @error
+        = render "applications/address_field_with_geolocate", q: @q, error: @error
 
   %fieldset.actions
     %ol
