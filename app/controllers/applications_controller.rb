@@ -66,7 +66,9 @@ class ApplicationsController < ApplicationController
     @sort = T.let(sort, T.nilable(String))
     per_page = 30
     @page = T.let(params_page, T.nilable(String))
-    result = GoogleGeocodeService.call(T.must(@q))
+    return unless @q
+
+    result = GoogleGeocodeService.call(@q)
     top = result.top
     if top.nil?
       @full_address = @q

@@ -1,34 +1,37 @@
 - content_for :meta_description, Rails.configuration.planningalerts_meta_description
 
-%h3
-  Applications within
-  - if Flipper.enabled?(:extra_options_on_address_search, current_user)
-    the last
-    = days_in_words(@time)
-    and
-  = meters_in_words(@radius)
-  of
-  = @full_address
-
-- unless @other_addresses.empty?
-  %h4 Or did you want?
-  %ul
-    - @other_addresses.each do |a|
-      %li= link_to a, q: a
-
--# TODO: Figure out how to handle no results when extra_options_on_address_search is enabled
-- if @applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user)
-  = render "no_applications", full_address: @full_address, q: @q
+- if @q.nil?
+  %p This is where the search form is going to go
 - else
-  .attention
-    = render "alerts/signup_introduction"
-    = render "alerts/signup_form", alert: @alert, address_hidden: true
-
-  .filter-and-sort-options
-    .sort-options= render "sort_options", sort: @sort, extra_params: { q: @q }
+  %h3
+    Applications within
     - if Flipper.enabled?(:extra_options_on_address_search, current_user)
-      .filter-options= render "filter_options", sort: @sort, q: @q, radius: @radius, time: @time
+      the last
+      = days_in_words(@time)
+      and
+    = meters_in_words(@radius)
+    of
+    = @full_address
 
-  = render "pagination", applications: @applications
-  %ol.applications= render partial: "application", collection: @applications
-  = render "pagination", applications: @applications
+  - unless @other_addresses.empty?
+    %h4 Or did you want?
+    %ul
+      - @other_addresses.each do |a|
+        %li= link_to a, q: a
+
+  -# TODO: Figure out how to handle no results when extra_options_on_address_search is enabled
+  - if @applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user)
+    = render "no_applications", full_address: @full_address, q: @q
+  - else
+    .attention
+      = render "alerts/signup_introduction"
+      = render "alerts/signup_form", alert: @alert, address_hidden: true
+
+    .filter-and-sort-options
+      .sort-options= render "sort_options", sort: @sort, extra_params: { q: @q }
+      - if Flipper.enabled?(:extra_options_on_address_search, current_user)
+        .filter-options= render "filter_options", sort: @sort, q: @q, radius: @radius, time: @time
+
+    = render "pagination", applications: @applications
+    %ol.applications= render partial: "application", collection: @applications
+    = render "pagination", applications: @applications
