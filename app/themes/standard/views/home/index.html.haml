@@ -2,15 +2,6 @@
 
 = render "home/address_search_preamble"
 
-%form.address-search.formtastic.one-field{ "accept-charset" => "UTF-8", "action" => address_applications_path, "method" => "get" }
-  %fieldset.inputs
-    %ol
-      %li.string#q_input{ class: ("error" if @error) }
-        = label_tag(:q, "Enter a street address")
-        = render "applications/address_field_with_geolocate", q: @q, error: @error
-
-  %fieldset.actions
-    %ol
-      %li.submit= submit_tag "Search", name: nil, class: "button button-rounded button-large button-action"
+= render "applications/address_search_form", q: @q, error: @error
 
 = render "home/trending", applications: @trending
