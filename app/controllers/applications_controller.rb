@@ -75,7 +75,7 @@ class ApplicationsController < ApplicationController
       @other_addresses = T.let([], T.nilable(T::Array[String]))
       @error = T.let(result.error, T.nilable(String))
       @trending = T.let(Application.trending.limit(4), T.untyped)
-      render "home/index"
+      render "address"
     else
       @full_address = T.let(top.full_address, T.nilable(String))
       @alert = Alert.new(address: @q, user: User.new)

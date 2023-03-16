@@ -1,6 +1,6 @@
 - content_for :meta_description, Rails.configuration.planningalerts_meta_description
 
-- if @q.nil?
+- if @q.nil? || @error
   = render "address_search_form", q: @q, error: @error
 - else
   %h3
