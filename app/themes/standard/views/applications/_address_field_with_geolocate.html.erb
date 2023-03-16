@@ -1,5 +1,5 @@
 <div x-data="{address: ''}">
-  <%= text_field_tag(:q, q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: "address-autocomplete-input", autofocus: true, "x-model": "address") %>
+  <%= text_field_tag(:q, q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: "address-autocomplete-input", autofocus: true, "x-model.fill": "address") %>
   <% if error %>
     <p class="inline-errors"><%= error %></p>
   <% else %>
