@@ -6,7 +6,8 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
     './app/views/**/*.{erb,haml,html,slim}',
-    './app/themes/tailwind/views/**/*.{erb,haml,html,slim}'
+    './app/themes/tailwind/views/**/*.{erb,haml,html,slim}',
+    './app/components/tailwind/*.{erb,haml,html,slim}',
   ],
   theme: {
     extend: {
