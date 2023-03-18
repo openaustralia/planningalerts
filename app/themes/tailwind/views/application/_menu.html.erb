@@ -1,25 +1,27 @@
-<button data-collapse-toggle="navbar-default" type="button" class="inline-flex py-2 pr-2 text-sm rounded-lg text-blue md:hidden focus:outline-none" aria-controls="navbar-default" aria-expanded="false">
-  <span class="sr-only">Open main menu</span>
-  <svg class="w-7 h-7" aria-hidden="true" fill="currentColor" viewBox="3 3 15 15" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-</button>
-<div class="hidden w-full md:block md:w-auto" id="navbar-default">
-  <ul class="flex items-start space-x-6 text-lg font-medium text-blue">
-    <li class="<%= class_names("border-b-4" => current_page?(root_path)) %>"><%= link_to "Home", root_path %></li>
-    <li>Applications</li>
-    <li class="<%= class_names("border-b-4" => current_page?(faq_path)) %>"><%= link_to_unless_current "FAQ", faq_path %></li>
-    <li class="<%= class_names("border-b-4" => current_page?(about_path)) %>"><%= link_to_unless_current "About", about_path %></li>
-    <% if current_user %>
-      <li class="<%= class_names("border-b-4" => current_page?(profile_path)) %>">
-        <%= link_to_unless_current profile_path do %>
-          <%= link_to profile_path do %>
-            <%= render "application/svg/user" %>
+<div class="flex flex-row-reverse">
+  <button data-collapse-toggle="navbar-default" type="button" class="inline-flex py-2 pr-2 text-sm rounded-lg text-blue md:hidden focus:outline-none" aria-controls="navbar-default" aria-expanded="false">
+    <span class="sr-only">Open main menu</span>
+    <svg class="w-7 h-7" aria-hidden="true" fill="currentColor" viewBox="3 3 15 15" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+  </button>
+  <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+    <ul class="flex items-start space-x-6 text-lg font-medium text-blue">
+      <li class="<%= class_names("border-b-4" => current_page?(root_path)) %>"><%= link_to "Home", root_path %></li>
+      <li>Applications</li>
+      <li class="<%= class_names("border-b-4" => current_page?(faq_path)) %>"><%= link_to_unless_current "FAQ", faq_path %></li>
+      <li class="<%= class_names("border-b-4" => current_page?(about_path)) %>"><%= link_to_unless_current "About", about_path %></li>
+      <% if current_user %>
+        <li class="<%= class_names("border-b-4" => current_page?(profile_path)) %>">
+          <%= link_to_unless_current profile_path do %>
+            <%= link_to profile_path do %>
+              <%= render "application/svg/user" %>
+            <% end %>
           <% end %>
-        <% end %>
-      </li>
-    <% else %>
-      <li class="<%= class_names("border-b-4" => current_page?(new_user_session_path)) %>">
-        <%= link_to_unless_current "Sign In", new_user_session_path %>
-      </li>
-    <% end %>
-  </ul>
+        </li>
+      <% else %>
+        <li class="<%= class_names("border-b-4" => current_page?(new_user_session_path)) %>">
+          <%= link_to_unless_current "Sign In", new_user_session_path %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
