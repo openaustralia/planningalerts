@@ -24,8 +24,7 @@ module.exports = {
       'lavender': '#9786AD',
       'yellow': '#F4BE53',
       'orange': '#E98E07',
-      // Calling this blue "Light Navy" in figma
-      'blue': '#414860',
+      'navy': '#414860',
       'green': '#038A81',
       'darker-orange': '#BA671D',
     }
