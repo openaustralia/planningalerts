@@ -16,15 +16,18 @@ module.exports = {
       },
     },
     colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      white: '#ffffff',
-      fuchsia: '#CD4A9A',
-      lavender: '#9786AD',
-      yellow: '#F4BE53',
-      orange: '#E98E07',
-      blue: '#414860',
-      green: '#038A81',
+      'transparent': 'transparent',
+      'current': 'currentColor',
+      'white': '#ffffff',
+      'off-white': "#eeeeee",
+      'fuchsia': '#CD4A9A',
+      'lavender': '#9786AD',
+      'yellow': '#F4BE53',
+      'orange': '#E98E07',
+      // Calling this blue "Light Navy" in figma
+      'blue': '#414860',
+      'green': '#038A81',
+      'darker-orange': '#BA671D',
     }
 },
   plugins: [
