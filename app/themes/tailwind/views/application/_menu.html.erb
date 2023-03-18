@@ -5,14 +5,14 @@
   </button>
   <div class="hidden w-full md:block md:w-auto" id="navbar-default">
     <ul class="flex items-start space-x-2 text-lg font-medium text-white">
-      <%= render NavItemComponent.new(text: "Home", url: root_path, selected: true) %>
-      <%= render NavItemComponent.new(text: "Applications", url: "#") %>
-      <%= render NavItemComponent.new(text: "FAQ", url: faq_path) %>
-      <%= render NavItemComponent.new(text: "About", url: about_path) %>
+      <%= render Tailwind::NavItemComponent.new(text: "Home", url: root_path, selected: true) %>
+      <%= render Tailwind::NavItemComponent.new(text: "Applications", url: "#") %>
+      <%= render Tailwind::NavItemComponent.new(text: "FAQ", url: faq_path) %>
+      <%= render Tailwind::NavItemComponent.new(text: "About", url: about_path) %>
       <% if current_user %>
-        <%= render NavItemComponent.new(text: current_user.name_with_fallback, url: profile_path) %>
+        <%= render Tailwind::NavItemComponent.new(text: current_user.name_with_fallback, url: profile_path) %>
       <% else %>
-        <%= render NavItemComponent.new(text: "Sign In", url: new_user_session_path) %>
+        <%= render Tailwind::NavItemComponent.new(text: "Sign In", url: new_user_session_path) %>
       <% end %>
     </ul>
   </div>

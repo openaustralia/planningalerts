@@ -1,5 +1,5 @@
 - if sort == "time"
-  = render(DropdownComponent.new) do |component|
+  = render(Standard::DropdownComponent.new) do |component|
     - component.with_button do
       within
       = meters_in_words(radius)
@@ -10,7 +10,7 @@
         end
       end
 - else
-  = render(DropdownComponent.new) do |component|
+  = render(Standard::DropdownComponent.new) do |component|
     - component.with_button do
       within the last
       = days_in_words(time)
