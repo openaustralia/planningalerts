@@ -10,7 +10,9 @@
   </head>
   <body class="mb-36">
     <%= render "header" %>
-    <%= yield %>
+    <%= render Tailwind::ContainerComponent.new do %>
+      <%= yield %>
+    <% end %>
     <%= render "footer" %>
   </body>
 </html>
