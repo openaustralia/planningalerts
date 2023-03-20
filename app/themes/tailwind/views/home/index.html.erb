@@ -6,7 +6,8 @@
 <div class="py-16 bg-navy px-28">
   <%= form_with url: address_applications_path, method: :get, class: "space-y-6 text-center" do |form| %>
     <%= form.label :q, "Enter a street address", class: "font-semibold text-4xl text-white" %>
-    <%= form.text_field :q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", class: "text-xl w-full p-4 placeholder-shown:truncate", required: "required", autofocus: true %>
+    <%# TODO: Re-enable autofocus:true below after finished testing with livereload %>
+    <%= form.text_field :q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", class: "text-xl w-full p-4 placeholder-shown:truncate", required: "required" %>
     <%= form.submit "Search", name: nil, class: "text-xl text-white bg-green px-16 py-4" %>
   <% end %>
 </div>
