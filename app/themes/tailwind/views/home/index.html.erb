@@ -5,12 +5,12 @@
   <%= image_tag "tailwind/illustration.svg" %>
 </div>
 
-<div class="py-16 bg-navy px-28">
+<div class="px-6 py-10 sm:py-16 bg-navy sm:px-28">
   <%= form_with url: address_applications_path, method: :get, class: "space-y-6 text-center" do |form| %>
-    <%= form.label :q, "Enter a street address", class: "font-semibold text-4xl text-white" %>
+    <%= form.label :q, "Enter a street address", class: "font-semibold text-3xl sm:text-4xl text-white" %>
     <%# TODO: Re-enable autofocus:true below after finished testing with livereload %>
-    <%= form.text_field :q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", class: "text-xl w-full p-4 placeholder-shown:truncate", required: "required" %>
-    <%= form.submit "Search", name: nil, class: "text-xl text-white bg-green px-16 py-4" %>
+    <%= form.text_field :q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", class: "text-xl w-full px-4 py-3 sm:py-4 placeholder-shown:truncate", required: "required" %>
+    <%= form.submit "Search", name: nil, class: "text-xl font-semibold text-white bg-green px-11 sm:px-16 py-3 sm:py-4" %>
   <% end %>
 </div>
 
