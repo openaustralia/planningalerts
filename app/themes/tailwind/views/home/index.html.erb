@@ -1,4 +1,4 @@
-<div class="max-w-6xl px-10 mx-auto">
+<%= render Tailwind::ContainerComponent.new do %>
   <div class="flex items-center justify-between my-7">
     <h2 class="max-w-xl text-4xl font-medium font-display text-navy">Find out for free what is being built and knocked down in your area.</h2>
     <%= image_tag "tailwind/illustration.svg" %>
@@ -13,4 +13,4 @@
   </div>
 
   <%= render "trending", applications: @trending %>
-</div>
+<% end %>
