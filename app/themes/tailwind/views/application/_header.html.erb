@@ -1,6 +1,12 @@
 <div class="pt-2 bg-orange">
   <%= render Tailwind::ContainerComponent.new do %>
-    <%= render "menu" %>
+    <div class="flex items-baseline">
+      <div class="text-[#EEEEEE] font-extrabold text-xl font-['Inter_var'] sm:hidden">
+          Planning Alerts
+      </div>
+
+      <%= render "menu" %>
+    </div>
   <% end %>
 </div>
 <div class="hidden pt-4 pb-5 sm:pb-6 sm:pt-8 bg-yellow sm:block">
