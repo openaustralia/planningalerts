@@ -12,8 +12,6 @@ class ApplicationController < ActionController::Base
 
   include Pundit::Authorization
 
-  theme :theme_resolver
-
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
@@ -57,15 +55,15 @@ class ApplicationController < ActionController::Base
     Rack::MiniProfiler.authorize_request
   end
 
-  sig { returns(String) }
-  def theme_resolver
-    # Only show a different theme if the user is allowed
-    if session[:theme] && Flipper.enabled?(:switch_themes, current_user)
-      session[:theme]
-    else
-      "standard"
-    end
-  end
+  # sig { returns(String) }
+  # def theme_resolver
+  #   # Only show a different theme if the user is allowed
+  #   if session[:theme] && Flipper.enabled?(:switch_themes, current_user)
+  #     session[:theme]
+  #   else
+  #     "standard"
+  #   end
+  # end
 
   sig { void }
   def configure_permitted_parameters
