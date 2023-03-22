@@ -1,16 +1,16 @@
 <nav class="ml-auto w-fit x-data">
   <div x-data="{ open: false }">
-    <button x-on:click="open = true" type="button" class="inline-flex py-2 text-sm text-white rounded-lg lg:hidden focus:outline-none">
+    <button x-on:click="open = true" type="button" class="inline-flex items-center py-2 text-sm text-white rounded-lg lg:hidden focus:outline-none">
       <span class="pr-2 text-base font-medium">Menu</span>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
     </button>
     <div x-show="open" x-cloak class="fixed top-0 left-0 w-full h-full overflow-y-scroll text-2xl text-right text-white bg-orange lg:hidden">
       <%= render Tailwind::ContainerComponent.new do %>
-        <button x-on:click="open = false" class="inline-flex py-2">
+        <button x-on:click="open = false" class="inline-flex items-center py-2">
           <span class="pr-2 text-base font-medium">Close</span>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
 
