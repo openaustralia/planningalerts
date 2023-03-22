@@ -4,7 +4,7 @@
       <span class="pr-2 text-base font-medium">Menu</span>
       <svg class="w-7 h-7" aria-hidden="true" fill="currentColor" viewBox="3 3 15 15" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
     </button>
-    <div x-show="open" class="fixed top-0 left-0 w-full h-full px-5 overflow-y-scroll text-2xl text-right text-white bg-orange">
+    <div x-show="open" x-cloak class="fixed top-0 left-0 w-full h-full px-5 overflow-y-scroll text-2xl text-right text-white bg-orange lg:hidden">
       <button x-on:click="open = false">
         <span>Close</span>
       </button>
