@@ -2,27 +2,35 @@
   <div x-data="{ open: false }">
     <button x-on:click="open = true" type="button" class="inline-flex py-2 text-sm text-white rounded-lg lg:hidden focus:outline-none">
       <span class="pr-2 text-base font-medium">Menu</span>
-      <svg class="w-7 h-7" aria-hidden="true" fill="currentColor" viewBox="3 3 15 15" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
     </button>
-    <div x-show="open" x-cloak class="fixed top-0 left-0 w-full h-full px-5 overflow-y-scroll text-2xl text-right text-white bg-orange lg:hidden">
-      <button x-on:click="open = false">
-        <span>Close</span>
-      </button>
-      <ul>
-        <li><%= link_to "Home", root_path, class: "underline" %></li>
-        <li><%= link_to "Search Applications", address_applications_path %></li>
-        <li><%= link_to "Coverage", authorities_path %></li>
-        <li><%= link_to "Help", faq_path %></li>
-        <li><%= link_to "Get the Data", api_howto_path %></li>
-        <li><%= link_to "About", about_path %></li>
-        <li>
-          <% if current_user %>
-            <%= link_to current_user.name_with_fallback, profile_path %>
-          <% else %>
-            <%= link_to "Sign In", new_user_session_path %>
-          <% end %>
-        </li>
-      </ul>
+    <div x-show="open" x-cloak class="fixed top-0 left-0 w-full h-full overflow-y-scroll text-2xl text-right text-white bg-orange lg:hidden">
+      <%= render Tailwind::ContainerComponent.new do %>
+        <button x-on:click="open = false" class="inline-flex py-2">
+          <span class="pr-2 text-base font-medium">Close</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+
+        </button>
+        <ul>
+          <li><%= link_to "Home", root_path, class: "underline" %></li>
+          <li><%= link_to "Search Applications", address_applications_path %></li>
+          <li><%= link_to "Coverage", authorities_path %></li>
+          <li><%= link_to "Help", faq_path %></li>
+          <li><%= link_to "Get the Data", api_howto_path %></li>
+          <li><%= link_to "About", about_path %></li>
+          <li>
+            <% if current_user %>
+              <%= link_to current_user.name_with_fallback, profile_path %>
+            <% else %>
+              <%= link_to "Sign In", new_user_session_path %>
+            <% end %>
+          </li>
+        </ul>
+      <% end %>
     </div>
   </div>
   <div class="hidden lg:block">
