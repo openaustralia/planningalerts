@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/openaustralia/themes_on_rails
-  revision: ee7f13f93379e69a8d638268236848ea1d1042e9
-  specs:
-    themes_on_rails (0.4.0)
-      concurrent-ruby
-      rails (>= 3.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -820,7 +812,6 @@ DEPENDENCIES
   susy
   tailwindcss-rails (~> 2.0)
   tapioca
-  themes_on_rails!
   thin
   timecop
   typhoeus

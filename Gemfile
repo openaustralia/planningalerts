@@ -90,11 +90,6 @@ gem "formtastic"
 # TODO: Double check where this is being used
 gem "oj"
 
-# For theming (so we can run our proper theme at the same time as an
-# experimental tailwind based theme)
-# Using our fork to add Rails 6 & 7 support and fix a bad memory leak
-gem "themes_on_rails", git: "https://github.com/openaustralia/themes_on_rails"
-
 # For logging API calls to elasticsearch
 # We can't upgrade elasticsearch gem until we've upgraded the server
 # TODO: Fix this
