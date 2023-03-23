@@ -41,9 +41,6 @@ class ApplicationVersionsController
     include ::DeviseHelper
     include ::Pundit::Helper
 
-    sig { returns(T.untyped) }
-    def current_theme; end
-
     sig { params(record: T.untyped).returns(T.untyped) }
     def policy(record); end
 
