@@ -12,7 +12,9 @@
   <body class="overflow-hidden mb-36" x-data="{ bodyScrolling: true }" x-bind:class="{ 'overflow-hidden': !bodyScrolling}">
     <%= render "header" %>
     <%= render Tailwind::ContainerComponent.new do %>
-      <%= yield %>
+      <div class="my-9 sm:my-7">
+        <%= yield %>
+      </div>
     <% end %>
     <%= render "footer" %>
   </body>
