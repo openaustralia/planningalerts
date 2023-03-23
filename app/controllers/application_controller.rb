@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
   def update_view_path_for_theme
     return unless Flipper.enabled?(:switch_themes, current_user) && session[:theme] == "tailwind"
 
-    prepend_view_path(Rails.root.join("app/themes/tailwind/views"))
+    prepend_view_path(Rails.root.join("app/views/_tailwind"))
   end
 
   sig { void }
