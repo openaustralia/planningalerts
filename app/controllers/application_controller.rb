@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-
+  before_action :update_view_path_for_theme
   before_action :configure_permitted_parameters, if: :devise_controller?
   # This stores the location on every request so that we can always redirect back after logging in
   # See https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D
@@ -55,15 +55,12 @@ class ApplicationController < ActionController::Base
     Rack::MiniProfiler.authorize_request
   end
 
-  # sig { returns(String) }
-  # def theme_resolver
-  #   # Only show a different theme if the user is allowed
-  #   if session[:theme] && Flipper.enabled?(:switch_themes, current_user)
-  #     session[:theme]
-  #   else
-  #     "standard"
-  #   end
-  # end
+  sig { void }
+  def update_view_path_for_theme
+    return unless Flipper.enabled?(:switch_themes, current_user) && session[:theme] == "tailwind"
+
+    prepend_view_path(Rails.root.join("app/themes/tailwind/views"))
+  end
 
   sig { void }
   def configure_permitted_parameters
