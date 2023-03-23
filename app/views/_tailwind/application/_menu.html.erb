@@ -1,5 +1,5 @@
 <nav class="ml-auto w-fit x-data">
-  <div x-data="{ open: false }">
+  <div x-data="{ open: true }">
     <button x-on:click="open = true; bodyScrolling = false" type="button" class="inline-flex items-center py-2 text-sm text-white rounded-lg lg:hidden focus:outline-none">
       <span class="pr-2 text-base font-medium">Menu</span>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
@@ -15,21 +15,29 @@
           </svg>
 
         </button>
-        <ul class="mt-12 mr-8">
-          <li><%= link_to "Home", root_path, class: "underline" %></li>
-          <li><%= link_to "Search Applications", address_applications_path %></li>
-          <li><%= link_to "Coverage", authorities_path %></li>
-          <li><%= link_to "Help", faq_path %></li>
-          <li><%= link_to "Get the Data", api_howto_path %></li>
-          <li><%= link_to "About", about_path %></li>
-          <li>
-            <% if current_user %>
-              <%= link_to current_user.name_with_fallback, profile_path %>
-            <% else %>
-              <%= link_to "Sign In", new_user_session_path %>
-            <% end %>
-          </li>
-        </ul>
+        <div class="my-12 mr-8">
+          <ul>
+            <li><%= link_to "Home", root_path, class: "underline" %></li>
+            <li><%= link_to "Search Applications", address_applications_path %></li>
+            <li><%= link_to "Coverage", authorities_path %></li>
+            <li><%= link_to "Help", faq_path %></li>
+            <li><%= link_to "Get the Data", api_howto_path %></li>
+            <li><%= link_to "About", about_path %></li>
+            <li>
+              <% if current_user %>
+                <%= link_to current_user.name_with_fallback, profile_path %>
+              <% else %>
+                <%= link_to "Sign In", new_user_session_path %>
+              <% end %>
+            </li>
+          </ul>
+          <ul class="mt-8 font-light">
+            <li><%= link_to "Contact", "#" %></li>
+            <li><%= link_to "Get Involved", "#" %></li>
+            <li><%= link_to "Source Code", "#" %></li>
+            <li><%= link_to "Blog", "#" %></li>
+          </ul>
+        </div>
       <% end %>
     </div>
   </div>
