@@ -60,7 +60,7 @@ module PlanningalertsApp
     # Precompile additional assets.
     # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
     # TODO: Use one JS/CSS asset to reduce HTTP requests
-    config.assets.precompile += %w[tailwind.css email.css standard/print.css standard/ie.css maps.js applications.js flatpickr.js bar_graph.js stacked_area_chart.js]
+    config.assets.precompile += %w[tailwind.css email.css standard/all.css standard/print.css standard/ie.css maps.js applications.js flatpickr.js bar_graph.js stacked_area_chart.js]
 
     config.assets.css_compressor = SkippingSassCompressor.new
 
