@@ -189,7 +189,7 @@ group :development do
   gem "rb-inotify", require: false
 
   # Using this webserver for development
-  gem "thin"
+  gem "puma"
 
   # For a better error page in development
   gem "better_errors"

@@ -187,7 +187,6 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    daemons (1.4.1)
     dalli (3.2.3)
     date (3.3.3)
     dbf (4.2.2)
@@ -426,6 +425,8 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (5.0.1)
+    puma (6.1.1)
+      nio4r (~> 2.0)
     pundit (2.3.0)
       activesupport (>= 3.0.0)
     raabro (1.4.0)
@@ -647,10 +648,6 @@ GEM
     temple (0.9.1)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
-    thin (1.8.1)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (>= 1, < 3)
     thor (1.2.1)
     tilt (2.0.11)
     timecop (0.9.6)
@@ -770,6 +767,7 @@ DEPENDENCIES
   nokogiri
   octokit
   oj
+  puma
   pundit (~> 2.2)
   rabl
   rack-attack
@@ -812,7 +810,6 @@ DEPENDENCIES
   susy
   tailwindcss-rails (~> 2.0)
   tapioca
-  thin
   timecop
   typhoeus
   uglifier

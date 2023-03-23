@@ -12,6 +12,7 @@ tmp/capybara
 tmp/miniprofiler
 tmp/sitemaps
 tmp/boundaries
+tmp/restart.txt
 coverage
 config/database.yml
 rerun.txt
