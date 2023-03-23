@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
     <%= javascript_include_tag "https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js", defer: true %>
   </head>
-  <body class="mb-36">
+  <body class="overflow-hidden mb-36" x-data="{ bodyScrolling: true }" x-bind:class="{ 'overflow-hidden': !bodyScrolling}">
     <%= render "header" %>
     <%= render Tailwind::ContainerComponent.new do %>
       <%= yield %>
