@@ -31,9 +31,9 @@ services:
       MYSQL_ROOT_PASSWORD: password
 
   redis:
-    # Using the latest but locking the version
     # TODO: Try switching to alpine variant for slimmer images
-    image: redis:7.0
+    # We're also using redis 6.2 in production
+    image: redis:6.2
     ports:
       - "6379"
     volumes:
