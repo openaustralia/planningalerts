@@ -1,2 +1,2 @@
-web: rvm . do bundle exec puma -C config/puma.rb
+web: rvm . do bundle exec puma -C config/puma.rb -e production
 worker: rvm . do bundle exec sidekiq -q default -q mailers -q searchkick -e production
