@@ -1,2 +1,2 @@
-web: rvm . do bin/rails -e production 
+web: rvm . do bin/rails server -e production 
 worker: rvm . do bundle exec sidekiq -q default -q mailers -q searchkick -e production
