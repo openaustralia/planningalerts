@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-  before_action :staging_authentication
+  before_action :basic_auth_authentication
   before_action :update_view_path_for_theme
   before_action :configure_permitted_parameters, if: :devise_controller?
   # This stores the location on every request so that we can always redirect back after logging in
@@ -36,17 +36,13 @@ class ApplicationController < ActionController::Base
   private
 
   sig { void }
-  def staging_authentication
-    # Only do this authentication for the staging environment
-    return unless ENV["STAGE"] == "staging"
-
-    unless ENV.key?("STAGING_USERNAME") && ENV.key?("STAGING_PASSWORD")
-      render plain: "environment variables STAGING_USERNAME and STAGING_PASSWORD need to both be set"
-      return
-    end
+  def basic_auth_authentication
+    # Only do this authentication when specific environment variables are set
+    # This is useful for staging where we want a simple (low security) password in front of every page
+    return unless ENV.key?("BASIC_AUTH_USERNAME") && ENV.key?("BASIC_AUTH_PASSWORD")
 
     authenticate_or_request_with_http_basic do |username, password|
-      username == ENV["STAGING_USERNAME"] && password == ENV["STAGING_PASSWORD"]
+      username == ENV["BASIC_AUTH_USERNAME"] && password == ENV["BASIC_AUTH_PASSWORD"]
     end
   end
 
