@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  before_action :staging_authentication
   before_action :update_view_path_for_theme
   before_action :configure_permitted_parameters, if: :devise_controller?
   # This stores the location on every request so that we can always redirect back after logging in
@@ -33,6 +34,21 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::StatementInvalid, with: :check_for_write_during_maintenance_mode
 
   private
+
+  sig { void }
+  def staging_authentication
+    # Only do this authentication for the staging environment
+    return unless ENV["STAGE"] == "staging"
+
+    unless ENV.key?("STAGING_USERNAME") && ENV.key?("STAGING_PASSWORD")
+      render plain: "environment variables STAGING_USERNAME and STAGING_PASSWORD need to both be set"
+      return
+    end
+
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV["STAGING_USERNAME"] && password == ENV["STAGING_PASSWORD"]
+    end
+  end
 
   sig { params(error: StandardError).void }
   def check_for_write_during_maintenance_mode(error)
