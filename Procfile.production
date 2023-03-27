@@ -1,2 +1,2 @@
-web: rvm . do bin/rails server -p 3000 -b 0.0.0.0
+web: rvm . do bundle exec rails server -p 3000 -b 0.0.0.0
 worker: rvm . do bundle exec sidekiq -q default -q mailers -q searchkick -e production
