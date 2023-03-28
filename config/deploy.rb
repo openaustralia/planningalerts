@@ -4,6 +4,8 @@ lock "~> 3.17.1"
 set :application, "planningalerts"
 set :repo_url, "https://github.com/openaustralia/planningalerts.git"
 
+set :branch, "puma-in-production"
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
