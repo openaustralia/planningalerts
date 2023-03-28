@@ -152,6 +152,9 @@ gem "rubyzip"
 # To profile code in development and production
 gem "rack-mini-profiler"
 
+# Using this webserver for development and production
+gem "puma"
+
 group :test do
   gem "capybara"
   gem "climate_control"
@@ -187,9 +190,6 @@ group :development do
   gem "rack-livereload"
   gem "rb-fsevent"
   gem "rb-inotify", require: false
-
-  # Using this webserver for development
-  gem "puma"
 
   # For a better error page in development
   gem "better_errors"
