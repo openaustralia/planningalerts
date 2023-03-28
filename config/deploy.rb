@@ -4,8 +4,6 @@ lock "~> 3.17.1"
 set :application, "planningalerts"
 set :repo_url, "https://github.com/openaustralia/planningalerts.git"
 
-set :branch, "puma-in-production"
-
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -54,11 +52,12 @@ set :aws_ec2_default_filters, (proc {
       name: "tag:#{fetch(:aws_ec2_application_tag)}",
       values: [fetch(:aws_ec2_application)]
     },
-    # We only want to deploy to blue for the moment
-    {
-      name: "tag:BlueGreen",
-      values: ["blue"]
-    },
+    # Uncomment the following lines (and set the value) if you want to only deploy to blue or green
+    # The default is to deploy to both blue AND green
+    # {
+    #   name: "tag:BlueGreen",
+    #   values: ["blue"]
+    # },
     {
       name: 'instance-state-name',
       values: ['running']
