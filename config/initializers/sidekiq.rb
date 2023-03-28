@@ -1,4 +1,4 @@
-# typed: strict
+# typed: false
 require 'sidekiq'
 
 Sidekiq.configure_server do |config|
@@ -11,4 +11,12 @@ end
 
 Sidekiq.configure_client do |config|
   config.redis = Rails.configuration.redis
+end
+
+# Hack to disable sidekiq-cron in development
+# See https://github.com/sidekiq-cron/sidekiq-cron/issues/258#issuecomment-1233153791
+if Rails.env.development?
+  Sidekiq::Cron::Job.class_eval do
+    def save; end
+  end
 end
