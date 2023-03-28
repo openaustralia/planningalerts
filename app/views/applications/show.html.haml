@@ -6,7 +6,6 @@
   %meta{ name: "twitter:title", content: @application.address }
   %meta{ name: "twitter:description", content: (@application.description[0..199] if @application.description) }
   %meta{ name: "twitter:image", content: google_static_map_url(lat: @application.lat, lng: @application.lng, size: "512x512") }
-  %meta{ property: "fb:app_id", content: ENV.fetch("FACEBOOK_APP_ID", nil) }
   %meta{ property: "og:url", content: application_url(@application) }
   %meta{ property: "og:type", content: "place" }
   %meta{ property: "og:title", content: @application.address }
