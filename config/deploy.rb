@@ -54,6 +54,11 @@ set :aws_ec2_default_filters, (proc {
       name: "tag:#{fetch(:aws_ec2_application_tag)}",
       values: [fetch(:aws_ec2_application)]
     },
+    # We only want to deploy to blue for the moment
+    {
+      name: "tag:BlueGreen",
+      values: ["blue"]
+    },
     {
       name: 'instance-state-name',
       values: ['running']
