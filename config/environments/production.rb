@@ -51,10 +51,7 @@ Rails.application.configure do
   # We're depending on the load balancer to do the redirection. Disabling the redirect
   # in rails itself makes it easier to test in development and when contacting the
   # server directly (not going through the load balancer)
-  # Also turn off HSTS includeSubDomains because we DON'T want HSTS on
-  # the email subdomain which points at Cuttlefish and depends on it
-  # working with http
-  config.ssl_options = { redirect: false, hsts: { subdomains: false, expires: 1.hour } }
+  config.ssl_options = { redirect: false, hsts: { expires: 1.hour } }
 
   # Set to :debug to see everything in the log.
   config.log_level = :warn
