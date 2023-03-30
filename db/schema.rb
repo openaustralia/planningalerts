@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_03_164924) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_30_035533) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -167,6 +167,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_164924) do
     t.index ["confirmed_at", "confirmed", "hidden"], name: "index_comments_on_confirmed_at_and_confirmed_and_hidden"
     t.index ["hidden"], name: "index_comments_on_hidden"
     t.index ["user_id"], name: "fk_rails_03de2dc08c"
+  end
+
+  create_table "contact_messages", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "email", null: false
+    t.string "reason", null: false
+    t.text "details", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "daily_api_usages", charset: "utf8mb4", force: :cascade do |t|
