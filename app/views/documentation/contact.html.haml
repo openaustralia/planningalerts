@@ -18,22 +18,13 @@
 %p
   We are a tiny team and a charity not the Government. We try to get back to everyone but sometimes things slip through the cracks. To help us better help you please describe your issue with as much detail as possible and add links!
 
-= form_with do |form|
-  %ol
-    %li
-      = form.label "Your name"
-      = form.text_field :name
-    %li
-      = form.label "Your email"
-      = form.text_field :email
-    %li
-      = form.label "I'm getting in touch because"
-      = form.collection_select :reason, @reasons.map { |r| [r] }, :first, :first
-    %li
-      = form.label "Please tell us briefly about your request"
-      %p
-        Some questions that might help you describe your request: What are you trying to do? What happens when you try to do that? What have you tried to fix it? How do you think we could help? Please include a link if relevant.
-      = form.text_area :content
-  -# TODO: Add recaptcha
-  = form.submit "Send message to Planning Alerts team"
-  %p We run this site, not the Government!
+= semantic_form_for @contact_message do |f|
+  = f.inputs do
+    = f.input :name, label: "Your name"
+    = f.input :email, label: "Your email"
+    = f.input :reason, label: "I'm getting in touch because", collection: @reasons, prompt: "-- Select closest relevant --"
+    = f.input :details, label: "Please tell us briefly about your request", hint: "Some questions that might help you describe your request: What are you trying to do? What happens when you try to do that? What have you tried to fix it? How do you think we could help? Please include a link if relevant."
+    -# TODO: Add recaptcha
+  = f.actions do
+    = f.action :submit, label: "Send message to Planning Alerts team"
+  %p "We run this site, not the Government!"

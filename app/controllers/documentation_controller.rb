@@ -29,7 +29,6 @@ class DocumentationController < ApplicationController
   def contact
     @reasons = T.let(
       [
-        "-- Select closest relevant --",
         "I'm having trouble signing up",
         "I can't find a development application",
         "I've stopped receiving alerts",
@@ -42,6 +41,7 @@ class DocumentationController < ApplicationController
       ],
       T.nilable(T::Array[String])
     )
+    @contact_message = T.let(ContactMessage.new, T.nilable(ContactMessage))
   end
 
   sig { void }
