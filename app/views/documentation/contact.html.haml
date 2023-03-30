@@ -1,0 +1,39 @@
+- content_for :page_title, "Contact us"
+
+%h3= yield :page_title
+
+%h4 Contact a planning authority
+
+%p
+  Are you trying to get in touch with your local council or state planning authority?
+
+%p
+  We have a list of links to the websites of all Planning Authorities whose information we share here.
+
+%p
+  Planning Alerts is a free service brought to you by the OpenAustralia Foundation. We are not affiliated with or a part of the Government. We are a charity run to help people find information which we all have a right to access
+
+%h4 Contact the Planning Alerts team
+
+%p
+  We are a tiny team and a charity not the Government. We try to get back to everyone but sometimes things slip through the cracks. To help us better help you please describe your issue with as much detail as possible and add links!
+
+= form_with do |form|
+  %ol
+    %li
+      = form.label "Your name"
+      = form.text_field :name
+    %li
+      = form.label "Your email"
+      = form.text_field :email
+    %li
+      = form.label "I'm getting in touch because"
+      = form.collection_select :reason, @reasons.map { |r| [r] }, :first, :first
+    %li
+      = form.label "Please tell us briefly about your request"
+      %p
+        Some questions that might help you describe your request: What are you trying to do? What happens when you try to do that? What have you tried to fix it? How do you think we could help? Please include a link if relevant.
+      = form.text_area :content
+  -# TODO: Add recaptcha
+  = form.submit "Send message to Planning Alerts team"
+  %p We run this site, not the Government!
