@@ -158,6 +158,8 @@ Rails.application.routes.draw do
     get :under_the_hood
   end
 
+  resources :contact_messages, only: :create
+
   resources :geocode_queries, only: [:index, :show]
 
   namespace :atdis do
