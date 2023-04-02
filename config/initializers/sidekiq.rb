@@ -13,10 +13,12 @@ Sidekiq.configure_client do |config|
   config.redis = Rails.configuration.redis
 end
 
-# Hack to disable sidekiq-cron in development
-# See https://github.com/sidekiq-cron/sidekiq-cron/issues/258#issuecomment-1233153791
-if Rails.env.development?
-  Sidekiq::Cron::Job.class_eval do
-    def save; end
+Sidekiq.configure_server do |config|
+  config.on(:startup) do
+    # We only want the cron jobs to be running in production - not even in staging.
+    # There's too much room for things to go badly wrong otherwise
+    if ENV["STAGE"] == "production"
+      Sidekiq::Cron::Job.load_from_hash YAML.load_file("config/cron.yml")
+    end
   end
 end
