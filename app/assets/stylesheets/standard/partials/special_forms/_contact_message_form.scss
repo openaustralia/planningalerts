@@ -35,4 +35,10 @@
   .g-recaptcha { 
     margin: 1.75em 0 .25em;
   }
+
+  .error {
+    textarea, input, .inline-errors {
+      background: #fdd;
+    }
+  }
 }
