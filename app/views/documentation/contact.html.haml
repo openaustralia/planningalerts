@@ -20,11 +20,12 @@
 
 = semantic_form_for @contact_message do |f|
   = f.inputs do
-    = f.input :name, label: "Your name"
-    = f.input :email, label: "Your email"
+    - if current_user.nil?
+      = f.input :name, label: "Your name"
+      = f.input :email, label: "Your email"
     = f.input :reason, label: "I'm getting in touch because", collection: @reasons, prompt: "-- Select closest relevant --"
     = f.input :details, label: "Please tell us briefly about your request", hint: "Some questions that might help you describe your request: What are you trying to do? What happens when you try to do that? What have you tried to fix it? How do you think we could help? Please include a link if relevant."
-    -# TODO: Add recaptcha
+    -# TODO: Add recaptcha if not logged in
   = f.actions do
     = f.action :submit, label: "Send message to the Planning Alerts team", button_html: { class: "button button-action" }
-  %p "We run this site, not the Government!"
+  %p We run this site, not the Government!
