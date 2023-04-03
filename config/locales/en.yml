@@ -70,6 +70,7 @@ en:
         email: "We never display your email address."
         address: "We never display your street address. <a href=\"%{link}\" data-target=\"%{target}\" class=\"%{class}\">Why do you need my address?</a>"
       contact_message:
+        name: "Or <a href=\"%{link}\">sign in</a>"
         details: "Some questions that might help you describe your request: What are you trying to do? What happens when you try to do that? What have you tried to fix it? How do you think we could help? Please include a link if relevant."
     placeholders:
       comment:

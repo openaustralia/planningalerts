@@ -24,7 +24,7 @@
 = semantic_form_for @contact_message do |f|
   = f.inputs do
     - if current_user.nil?
-      = f.input :name
+      = f.input :name, hint: t("formtastic.hints.contact_message.name", link: new_user_session_path)
       = f.input :email
     = f.input :reason, collection: @reasons, prompt: "-- Select closest relevant --"
     = f.input :details
