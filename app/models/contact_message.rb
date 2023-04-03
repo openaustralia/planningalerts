@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class ContactMessage < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   validates :email, :reason, :details, presence: true
 
   REASONS_LONG = T.let([
