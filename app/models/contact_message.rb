@@ -3,4 +3,5 @@
 
 class ContactMessage < ApplicationRecord
   belongs_to :user
+  validates :email, :reason, :details, presence: true
 end
