@@ -3,6 +3,7 @@
 
 class ContactMessagesController < ApplicationController
   extend T::Sig
+  include Recaptcha::Adapters::ControllerMethods
 
   sig { void }
   def create
@@ -15,7 +16,7 @@ class ContactMessagesController < ApplicationController
                                reason: params_contact_message[:reason],
                                details: params_contact_message[:details]
                              ), T.nilable(ContactMessage))
-    if T.must(@contact_message).save
+    if verify_recaptcha(model: @contact_message) && T.must(@contact_message).save
       # TODO: Redirect to a dedicated thank you page instead
       redirect_back(
         fallback_location: documentation_contact_path,

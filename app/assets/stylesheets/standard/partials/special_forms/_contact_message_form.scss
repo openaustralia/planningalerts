@@ -18,7 +18,7 @@
   }
 
   .inline-hints,
-  .inline-errors {
+  .inline-errors, .errors {
     margin: 0;
   }
 
@@ -36,9 +36,11 @@
     margin: 1.75em 0 .25em;
   }
 
-  .error {
-    textarea, input, .inline-errors {
-      background: #fdd;
-    }
+  .error textarea, .error input, .error .inline-errors, .errors {
+    background: #fdd;
   }
+
+  ul.errors {
+    list-style: none;
+  } 
 }
