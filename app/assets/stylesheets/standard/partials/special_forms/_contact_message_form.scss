@@ -8,11 +8,11 @@
     font-size: 1em;
   }
 
-  textarea {
+  textarea, select {
     padding: 0.5em;
   }
 
-  textarea, input {
+  textarea, input, select {
     font-family: $blueprint-font-family;
     font-size: 100%;
   }
