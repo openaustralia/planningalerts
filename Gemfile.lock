@@ -490,6 +490,8 @@ GEM
       unparser
     rdf (3.2.9)
       link_header (~> 0.0, >= 0.0.8)
+    recaptcha (5.12.3)
+      json
     redcarpet (3.5.1)
     redis (4.8.0)
     regexp_parser (2.6.1)
@@ -780,6 +782,7 @@ DEPENDENCIES
   rake
   rb-fsevent
   rb-inotify
+  recaptcha
   redcarpet
   rest-client
   rexml
