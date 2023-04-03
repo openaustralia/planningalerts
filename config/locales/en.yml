@@ -59,6 +59,7 @@ en:
         email: "Your email"
         address: "Your street address"
       contact_message:
+        # TODO: Using "I" and "your" in the same form. Fix this.
         name: "Your name"
         email: "Your email"
         reason: "I'm getting in touch because"
