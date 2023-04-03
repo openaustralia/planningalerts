@@ -26,7 +26,7 @@
     - if current_user.nil?
       = f.input :name, hint: t("formtastic.hints.contact_message.name", link: new_user_session_path)
       = f.input :email
-    = f.input :reason, collection: @reasons, prompt: "-- Select closest relevant --"
+    = f.input :reason, collection: ContactMessage::REASONS_LONG, prompt: "-- Select closest relevant --"
     = f.input :details
     - if current_user.nil?
       = recaptcha_tags
