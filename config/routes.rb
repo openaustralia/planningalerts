@@ -158,7 +158,11 @@ Rails.application.routes.draw do
     get :under_the_hood
   end
 
-  resources :contact_messages, only: :create
+  resources :contact_messages, only: :create do
+    collection do
+      get :thank_you    
+    end
+  end
 
   resources :geocode_queries, only: [:index, :show]
 

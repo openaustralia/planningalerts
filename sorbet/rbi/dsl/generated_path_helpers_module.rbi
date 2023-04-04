@@ -360,6 +360,9 @@ module GeneratedPathHelpersModule
   def thank_you_comment_reports_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def thank_you_contact_messages_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def toggle_theme_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

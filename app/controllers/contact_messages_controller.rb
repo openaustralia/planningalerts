@@ -17,13 +17,12 @@ class ContactMessagesController < ApplicationController
                                details: params_contact_message[:details]
                              ), T.nilable(ContactMessage))
     if (current_user || verify_recaptcha(model: @contact_message)) && T.must(@contact_message).save
-      # TODO: Redirect to a dedicated thank you page instead
-      redirect_back(
-        fallback_location: documentation_contact_path,
-        alert: "Thank you for getting in touch. We will get back to you as soon as we can."
-      )
+      redirect_to thank_you_contact_messages_url
     else
       render "documentation/contact"
     end
   end
+
+  sig { void }
+  def thank_you; end
 end
