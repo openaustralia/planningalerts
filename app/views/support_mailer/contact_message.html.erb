@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html charset=UTF-8">
+  </head>
+  <body>
+    <%= comment_as_html(@contact_message.details) %>
+    <% if @contact_message.user %>
+      <footer>
+        Sent by user <%= link_to @contact_message.user.name_with_fallback, admin_user_url(@contact_message.user) %>
+      </footer>
+    <% end %>
+  </body>
+</html>

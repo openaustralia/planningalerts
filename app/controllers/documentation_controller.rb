@@ -26,6 +26,11 @@ class DocumentationController < ApplicationController
   def how_to_lobby_your_local_council; end
 
   sig { void }
+  def contact
+    @contact_message = T.let(ContactMessage.new, T.nilable(ContactMessage))
+  end
+
+  sig { void }
   def error_404
     render status: :not_found, formats: [:html]
   end

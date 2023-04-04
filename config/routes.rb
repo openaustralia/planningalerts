@@ -158,6 +158,12 @@ Rails.application.routes.draw do
     get :under_the_hood
   end
 
+  resources :contact_messages, only: :create do
+    collection do
+      get :thank_you    
+    end
+  end
+
   resources :geocode_queries, only: [:index, :show]
 
   namespace :atdis do
@@ -174,6 +180,10 @@ Rails.application.routes.draw do
   get "get_involved" => "documentation#get_involved"
   get "how_to_write_a_scraper" => "documentation#how_to_write_a_scraper"
   get "how_to_lobby_your_local_council" => "documentation#how_to_lobby_your_local_council"
+  # TODO: I'm guessing we'll want to rename other help related urls above to something a bit more like this one?
+  namespace :documentation, path: "/help" do
+    get :contact
+  end
 
   get "/" => "home#index"
 
