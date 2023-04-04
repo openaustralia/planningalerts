@@ -12,7 +12,7 @@
 
     <p>
       The
-      <%= link_to "original comment", application_url(@report.comment.application, anchor: "comment#{@report.comment.id}") %>
+      <%= link_to "original comment", comment_url(@report.comment) %>
       was written by <%= link_to @report.comment.name, admin_user_url(@report.comment.user) %> who said:
     </p>
 

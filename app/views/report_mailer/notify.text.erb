@@ -5,7 +5,7 @@ The original comment was written by <%= @report.comment.name %> who said:
 <%= @report.comment.text %>
 
 The original comment can be found at:
-<%= application_url(@report.comment.application, anchor: "comment#{@report.comment.id}") %>
+<%= comment_url(@report.comment) %>
 
 To edit/hide/delete this comment:
 <%= edit_admin_comment_url(@report.comment) %>
