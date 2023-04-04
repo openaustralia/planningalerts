@@ -17,6 +17,10 @@
     font-size: 100%;
   }
 
+  textarea { 
+    resize: vertical;
+  }
+
   .inline-hints,
   .inline-errors, .errors {
     margin: 0;
