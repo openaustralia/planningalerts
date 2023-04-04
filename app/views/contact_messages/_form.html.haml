@@ -7,6 +7,10 @@
     = f.input :details
     - if current_user.nil?
       = recaptcha_tags
+      %p.inline-hints
+        Or
+        = link_to "sign in", new_user_session_path
+        to remove this annoying reCaptcha
     = f.semantic_errors :base
   = f.actions do
     = f.action :submit, button_html: { class: "button button-action" }
