@@ -30,6 +30,6 @@ class AuthorityPreview < ActionMailer::Preview
 
   def abuse_report
     report = FactoryBot.build_stubbed(:report)
-    ReportMailer.notify(report)
+    SupportMailer.report(report)
   end
 end

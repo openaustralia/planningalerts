@@ -102,8 +102,8 @@ en:
   comment_mailer:
     notify_authority:
       subject: "Comment on application %{council_reference}"
-  report_mailer:
-    notify:
+  support_mailer:
+    report:
       subject: "PlanningAlerts: Abuse report"
   users:
     activations:

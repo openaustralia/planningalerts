@@ -1,13 +1,13 @@
 # typed: strict
 # frozen_string_literal: true
 
-class ReportMailer < ApplicationMailer
+class SupportMailer < ApplicationMailer
   extend T::Sig
 
   helper :comments
 
   sig { params(report: Report).returns(T.any(Mail::Message, ActionMailer::MessageDelivery)) }
-  def notify(report)
+  def report(report)
     @report = T.let(report, T.nilable(Report))
     mail(
       to: ENV.fetch("EMAIL_MODERATOR", nil),

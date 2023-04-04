@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe ReportMailer do
+describe SupportMailer do
   let(:comment) do
     build(:comment,
           application: create(:geocoded_application, id: 2),
@@ -20,7 +20,7 @@ describe ReportMailer do
           details: "It's very rude!")
   end
 
-  let(:notifier) { described_class.notify(report) }
+  let(:notifier) { described_class.report(report) }
 
   it "comes from the moderator's email address" do
     expect(notifier.from).to eq(["moderator@planningalerts.org.au"])
