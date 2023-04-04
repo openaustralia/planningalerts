@@ -1,0 +1,13 @@
+= semantic_form_for contact_message do |f|
+  = f.inputs do
+    - if current_user.nil?
+      = f.input :name, hint: t("formtastic.hints.contact_message.name", link: new_user_session_path)
+      = f.input :email
+    = f.input :reason, collection: ContactMessage::REASONS_LONG, prompt: "-- Select closest relevant --"
+    = f.input :details
+    - if current_user.nil?
+      = recaptcha_tags
+    = f.semantic_errors :base
+  = f.actions do
+    = f.action :submit, button_html: { class: "button button-action" }
+  %p We run this site, not the Government!
