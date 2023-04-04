@@ -17,6 +17,7 @@ class ContactMessagesController < ApplicationController
                                details: params_contact_message[:details]
                              ), T.nilable(ContactMessage))
     if (current_user || verify_recaptcha(model: @contact_message)) && T.must(@contact_message).save
+      SupportMailer.contact_message(T.must(@contact_message)).deliver_later
       redirect_to thank_you_contact_messages_url
     else
       render "documentation/contact"

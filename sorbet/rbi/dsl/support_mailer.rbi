@@ -6,6 +6,9 @@
 
 class SupportMailer
   class << self
+    sig { params(contact_message: ::ContactMessage).returns(::ActionMailer::MessageDelivery) }
+    def contact_message(contact_message); end
+
     sig { params(report: ::Report).returns(::ActionMailer::MessageDelivery) }
     def report(report); end
   end
