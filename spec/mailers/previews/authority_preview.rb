@@ -27,9 +27,4 @@ class AuthorityPreview < ActionMailer::Preview
 
     CommentMailer.notify_authority(comment)
   end
-
-  def abuse_report
-    report = FactoryBot.build_stubbed(:report)
-    SupportMailer.report(report)
-  end
 end
