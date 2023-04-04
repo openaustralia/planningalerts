@@ -12,12 +12,12 @@
 
     <p>
       The
-      <%= link_to "original comment", application_url(@comment.application, anchor: "comment#{@comment.id}") %>
-      was written by <%= link_to @comment.name, admin_user_url(@comment.user) %> who said:
+      <%= link_to "original comment", application_url(@report.comment.application, anchor: "comment#{@report.comment.id}") %>
+      was written by <%= link_to @report.comment.name, admin_user_url(@report.comment.user) %> who said:
     </p>
 
-    <blockquote><%= @comment.text %></blockquote>
+    <blockquote><%= @report.comment.text %></blockquote>
 
-    <p><%= link_to "Edit/hide/delete this comment", edit_admin_comment_url(@comment) %></p>
+    <p><%= link_to "Edit/hide/delete this comment", edit_admin_comment_url(@report.comment) %></p>
   </body>
 </html>
