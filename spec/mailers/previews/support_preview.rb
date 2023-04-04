@@ -9,4 +9,9 @@ class SupportPreview < ActionMailer::Preview
     report = FactoryBot.build_stubbed(:report)
     SupportMailer.report(report)
   end
+
+  def contact_message
+    contact_message = FactoryBot.build_stubbed(:contact_message)
+    SupportMailer.contact_message(contact_message)
+  end
 end
