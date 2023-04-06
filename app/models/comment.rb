@@ -7,7 +7,9 @@ class Comment < ApplicationRecord
   extend T::Sig
 
   belongs_to :application
-  belongs_to :user
+  # The only situation in which a user is not attached to a comment is if the user has been deleted
+  # See app/models/user.rb:23
+  belongs_to :user, optional: true
   has_many :reports, dependent: :destroy
 
   # TODO: Remove accepts_nested_attributes_for after users purely sign up for alerts by being logged in
