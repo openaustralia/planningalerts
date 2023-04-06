@@ -87,12 +87,10 @@ namespace :foreman do
     end
   end
 
-  # We don't want to restart the puma server. We depend on the tmp/restart.txt
-  # file based restart for that.
-  desc "Restart the application worker service"
+  desc "Restart the application services"
   task :restart do
     on roles(:app) do
-      sudo "systemctl restart #{fetch(:application)}-#{fetch(:stage)}-worker.1.service"
+      sudo "systemctl restart #{fetch(:application)}-#{fetch(:stage)}.target"
     end
   end
 
