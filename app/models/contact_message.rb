@@ -14,6 +14,7 @@ class ContactMessage < ApplicationRecord
     "The address or map location is wrong",
     "I have a question about how Planning Alerts works",
     "I'm trying to reach council",
+    "I want API access or commercial use",
     "Other, please specify below"
   ].freeze, T::Array[String])
 end
