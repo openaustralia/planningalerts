@@ -95,7 +95,7 @@ en:
       already_have_key: "You already have an API key"
   applications:
     search:
-      full_text_search_not_enabled: "You do not have access to full text search. It is currently only available to some users. Email contact@planningalerts.org.au if you would like access"
+      full_text_search_not_enabled: "You do not have access to full text search. It is currently only available to some users. Contact us if you would like access"
   comments:
     create:
       not_filled_out: Some of the comment wasn't filled out completely. See below.

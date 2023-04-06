@@ -200,9 +200,8 @@
 
 %h4 Finishing up
 %p
-  Once you've finished your scraper and it's successfully downloading planning applications, simply
-  email
-  = mail_to "contact@planningalerts.org.au", "contact@planningalerts.org.au"
+  Once you've finished your scraper and it's successfully downloading planning applications,
+  = link_to "contact us", documentation_contact_path
   and we'll fork it into the
   = link_to "planningalerts-scrapers organization", "https://morph.io/planningalerts-scrapers"
   and import it into PlanningAlerts.
