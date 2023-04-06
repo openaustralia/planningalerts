@@ -53,8 +53,6 @@
     </div>
     <% if Flipper.enabled?(:switch_themes, current_user) %>
       <%= button_to "Toggle theme", toggle_theme_path, class: "btn btn-outline-primary" %>
-      <%# TODO: remove the line below %>
-      <p>Just some temporary extra words to check a deployment</p>
     <% end %>
   </div>
 </div>
