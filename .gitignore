@@ -13,6 +13,7 @@ tmp/miniprofiler
 tmp/sitemaps
 tmp/boundaries
 tmp/restart.txt
+tmp/storage
 coverage
 config/database.yml
 storage/*

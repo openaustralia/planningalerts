@@ -5,10 +5,18 @@
   </head>
   <body>
     <%= comment_as_html(@contact_message.details) %>
-    <% if @contact_message.user %>
       <footer>
-        Sent by user <%= link_to @contact_message.user.name_with_fallback, admin_user_url(@contact_message.user) %>
+        <% if @contact_message.attachments.attached? %>
+          <p>Attachments</p>
+          <ul>
+            <% @contact_message.attachments.attachments.each do |attachment| %>
+              <li><%= link_to attachment.filename, rails_blob_url(attachment, disposition: "attachment") %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        <% if @contact_message.user %>
+          <p>Sent by user <%= link_to @contact_message.user.name_with_fallback, admin_user_url(@contact_message.user) %></p>
+        <% end %>
       </footer>
-    <% end %>
   </body>
 </html>

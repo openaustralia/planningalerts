@@ -14,7 +14,8 @@ class ContactMessagesController < ApplicationController
                                name: current_user&.name || params_contact_message[:name],
                                email: current_user&.email || params_contact_message[:email],
                                reason: params_contact_message[:reason],
-                               details: params_contact_message[:details]
+                               details: params_contact_message[:details],
+                               attachments: params_contact_message[:attachments]
                              ), T.nilable(ContactMessage))
     if (current_user || verify_recaptcha(model: @contact_message)) && T.must(@contact_message).save
       SupportMailer.contact_message(T.must(@contact_message)).deliver_later
