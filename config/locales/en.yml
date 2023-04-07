@@ -64,6 +64,7 @@ en:
         email: "Your email"
         reason: "I'm getting in touch because"
         details: "Please tell us briefly about your request"
+        attachments: "Attach files or screenshots"
     hints:
       comment:
         text: "Have you made a donation or gift to a Councillor or Council employee? <a href=\"%{link}\" data-target=\"%{target}\" class=\"%{class}\">You may need to disclose this</a>"
