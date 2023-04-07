@@ -6,6 +6,7 @@
 
 class ActiveStorage::Blob
   include GeneratedAssociationMethods
+  include GeneratedAttributeMethods
   extend CommonRelationMethods
   extend GeneratedRelationMethods
 
@@ -256,46 +257,46 @@ class ActiveStorage::Blob
 
     # This method is created by ActiveRecord on the `ActiveStorage::Blob` class because it declared `has_many :attachments`.
     # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
-    sig { returns(ActiveRecord::Associations::CollectionProxy) }
+    sig { returns(::ActiveStorage::Attachment::PrivateCollectionProxy) }
     def attachments; end
 
-    sig { params(value: T::Enumerable[T.untyped]).void }
+    sig { params(value: T::Enumerable[::ActiveStorage::Attachment]).void }
     def attachments=(value); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Attachment) }
     def build_preview_image_attachment(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Blob) }
     def build_preview_image_blob(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Attachment) }
     def create_preview_image_attachment(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Attachment) }
     def create_preview_image_attachment!(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Blob) }
     def create_preview_image_blob(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Blob) }
     def create_preview_image_blob!(*args, &blk); end
 
-    sig { returns(T.untyped) }
+    sig { returns(T.nilable(::ActiveStorage::Attachment)) }
     def preview_image_attachment; end
 
-    sig { params(value: T.untyped).void }
+    sig { params(value: T.nilable(::ActiveStorage::Attachment)).void }
     def preview_image_attachment=(value); end
 
-    sig { returns(T.untyped) }
+    sig { returns(T.nilable(::ActiveStorage::Blob)) }
     def preview_image_blob; end
 
-    sig { params(value: T.untyped).void }
+    sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
     def preview_image_blob=(value); end
 
-    sig { returns(T.untyped) }
+    sig { returns(T.nilable(::ActiveStorage::Attachment)) }
     def reload_preview_image_attachment; end
 
-    sig { returns(T.untyped) }
+    sig { returns(T.nilable(::ActiveStorage::Blob)) }
     def reload_preview_image_blob; end
 
     sig { returns(T::Array[T.untyped]) }
@@ -306,10 +307,10 @@ class ActiveStorage::Blob
 
     # This method is created by ActiveRecord on the `ActiveStorage::Blob` class because it declared `has_many :variant_records`.
     # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
-    sig { returns(ActiveRecord::Associations::CollectionProxy) }
+    sig { returns(::ActiveStorage::VariantRecord::PrivateCollectionProxy) }
     def variant_records; end
 
-    sig { params(value: T::Enumerable[T.untyped]).void }
+    sig { params(value: T::Enumerable[::ActiveStorage::VariantRecord]).void }
     def variant_records=(value); end
   end
 
@@ -497,6 +498,521 @@ class ActiveStorage::Blob
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def without(*args, &blk); end
+  end
+
+  module GeneratedAttributeMethods
+    sig { returns(::Integer) }
+    def byte_size; end
+
+    sig { params(value: ::Integer).returns(::Integer) }
+    def byte_size=(value); end
+
+    sig { returns(T::Boolean) }
+    def byte_size?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def byte_size_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def byte_size_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def byte_size_came_from_user?; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def byte_size_change; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def byte_size_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def byte_size_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def byte_size_in_database; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def byte_size_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def byte_size_previously_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def byte_size_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def byte_size_was; end
+
+    sig { void }
+    def byte_size_will_change!; end
+
+    sig { returns(T.nilable(::String)) }
+    def checksum; end
+
+    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
+    def checksum=(value); end
+
+    sig { returns(T::Boolean) }
+    def checksum?; end
+
+    sig { returns(T.nilable(::String)) }
+    def checksum_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def checksum_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def checksum_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def checksum_change; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def checksum_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def checksum_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def checksum_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def checksum_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def checksum_previously_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def checksum_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def checksum_was; end
+
+    sig { void }
+    def checksum_will_change!; end
+
+    sig { returns(T.nilable(::String)) }
+    def content_type; end
+
+    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
+    def content_type=(value); end
+
+    sig { returns(T::Boolean) }
+    def content_type?; end
+
+    sig { returns(T.nilable(::String)) }
+    def content_type_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def content_type_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def content_type_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def content_type_change; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def content_type_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def content_type_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def content_type_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def content_type_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def content_type_previously_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def content_type_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def content_type_was; end
+
+    sig { void }
+    def content_type_will_change!; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def created_at; end
+
+    sig { params(value: ::ActiveSupport::TimeWithZone).returns(::ActiveSupport::TimeWithZone) }
+    def created_at=(value); end
+
+    sig { returns(T::Boolean) }
+    def created_at?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def created_at_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def created_at_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def created_at_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def created_at_change; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def created_at_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def created_at_changed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def created_at_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def created_at_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def created_at_previously_changed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def created_at_previously_was; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def created_at_was; end
+
+    sig { void }
+    def created_at_will_change!; end
+
+    sig { returns(::String) }
+    def filename; end
+
+    sig { params(value: ::String).returns(::String) }
+    def filename=(value); end
+
+    sig { returns(T::Boolean) }
+    def filename?; end
+
+    sig { returns(T.nilable(::String)) }
+    def filename_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def filename_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def filename_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def filename_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def filename_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def filename_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def filename_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def filename_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def filename_previously_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def filename_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def filename_was; end
+
+    sig { void }
+    def filename_will_change!; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id; end
+
+    sig { params(value: ::Integer).returns(::Integer) }
+    def id=(value); end
+
+    sig { returns(T::Boolean) }
+    def id?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def id_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def id_change; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def id_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def id_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def id_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def id_previously_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_was; end
+
+    sig { void }
+    def id_will_change!; end
+
+    sig { returns(::String) }
+    def key; end
+
+    sig { params(value: ::String).returns(::String) }
+    def key=(value); end
+
+    sig { returns(T::Boolean) }
+    def key?; end
+
+    sig { returns(T.nilable(::String)) }
+    def key_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def key_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def key_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def key_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def key_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def key_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def key_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def key_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def key_previously_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def key_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def key_was; end
+
+    sig { void }
+    def key_will_change!; end
+
+    sig { returns(T.untyped) }
+    def metadata; end
+
+    sig { params(value: T.untyped).returns(T.untyped) }
+    def metadata=(value); end
+
+    sig { returns(T::Boolean) }
+    def metadata?; end
+
+    sig { returns(T.untyped) }
+    def metadata_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def metadata_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def metadata_came_from_user?; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def metadata_change; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def metadata_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def metadata_changed?; end
+
+    sig { returns(T.untyped) }
+    def metadata_in_database; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def metadata_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def metadata_previously_changed?; end
+
+    sig { returns(T.untyped) }
+    def metadata_previously_was; end
+
+    sig { returns(T.untyped) }
+    def metadata_was; end
+
+    sig { void }
+    def metadata_will_change!; end
+
+    sig { void }
+    def restore_byte_size!; end
+
+    sig { void }
+    def restore_checksum!; end
+
+    sig { void }
+    def restore_content_type!; end
+
+    sig { void }
+    def restore_created_at!; end
+
+    sig { void }
+    def restore_filename!; end
+
+    sig { void }
+    def restore_id!; end
+
+    sig { void }
+    def restore_key!; end
+
+    sig { void }
+    def restore_metadata!; end
+
+    sig { void }
+    def restore_service_name!; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def saved_change_to_byte_size; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_byte_size?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def saved_change_to_checksum; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_checksum?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def saved_change_to_content_type; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_content_type?; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def saved_change_to_created_at; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_created_at?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_filename; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_filename?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def saved_change_to_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_id?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_key; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_key?; end
+
+    sig { returns(T.nilable([T.untyped, T.untyped])) }
+    def saved_change_to_metadata; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_metadata?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_service_name; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_service_name?; end
+
+    sig { returns(::String) }
+    def service_name; end
+
+    sig { params(value: ::String).returns(::String) }
+    def service_name=(value); end
+
+    sig { returns(T::Boolean) }
+    def service_name?; end
+
+    sig { returns(T.nilable(::String)) }
+    def service_name_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def service_name_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def service_name_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def service_name_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def service_name_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def service_name_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def service_name_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def service_name_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def service_name_previously_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def service_name_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def service_name_was; end
+
+    sig { void }
+    def service_name_will_change!; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_byte_size?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_checksum?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_content_type?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_created_at?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_filename?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_id?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_key?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_metadata?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_service_name?; end
   end
 
   module GeneratedRelationMethods
