@@ -2,7 +2,11 @@
 # frozen_string_literal: true
 
 class ContactMessage < ApplicationRecord
+  include ActiveStorage::Attached::Model
+
   belongs_to :user, optional: true
+  has_many_attached :attachments
+
   validates :email, :reason, :details, presence: true
 
   REASONS_LONG = T.let([

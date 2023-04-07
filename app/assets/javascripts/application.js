@@ -3,6 +3,7 @@
 //= require event_tracking
 // Need ujs for confirmation on buttons
 //= require rails-ujs
+//= require activestorage
 
 window.addEventListener("DOMContentLoaded", function() {
   document.querySelectorAll(".hideable").forEach(function(e) {

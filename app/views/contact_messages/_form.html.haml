@@ -5,6 +5,7 @@
       = f.input :email
     = f.input :reason, collection: ContactMessage::REASONS_LONG, prompt: "-- Select closest relevant --"
     = f.input :details, input_html: { rows: 8 }
+    = f.file_field :attachments, multiple: true, direct_upload: true
     - if current_user.nil?
       = recaptcha_tags
       %p.inline-hints
