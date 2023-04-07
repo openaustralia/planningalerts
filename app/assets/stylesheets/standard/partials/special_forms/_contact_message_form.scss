@@ -12,6 +12,10 @@
     padding: 0.5em;
   }
 
+  input[type="file"] {
+    border: 0;
+  }
+
   textarea, input, select {
     font-family: $blueprint-font-family;
     font-size: 100%;
