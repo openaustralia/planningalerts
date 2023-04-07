@@ -7,16 +7,13 @@ class ContactMessagesController < ApplicationController
 
   sig { void }
   def create
-    params_contact_message = T.cast(params[:contact_message], ActionController::Parameters)
-
-    @contact_message = T.let(ContactMessage.new(
-                               user: current_user,
-                               name: current_user&.name || params_contact_message[:name],
-                               email: current_user&.email || params_contact_message[:email],
-                               reason: params_contact_message[:reason],
-                               details: params_contact_message[:details],
-                               attachments: params_contact_message[:attachments]
-                             ), T.nilable(ContactMessage))
+    @contact_message = T.let(ContactMessage.new(contact_message_params), T.nilable(ContactMessage))
+    user = current_user
+    if user
+      T.must(@contact_message).user = user
+      T.must(@contact_message).name = user.name
+      T.must(@contact_message).email = user.email
+    end
     if (current_user || verify_recaptcha(model: @contact_message)) && T.must(@contact_message).save
       SupportMailer.contact_message(T.must(@contact_message)).deliver_later
       redirect_to thank_you_contact_messages_url
@@ -27,4 +24,11 @@ class ContactMessagesController < ApplicationController
 
   sig { void }
   def thank_you; end
+
+  private
+
+  sig { returns(ActionController::Parameters) }
+  def contact_message_params
+    T.cast(params.require(:contact_message), ActionController::Parameters).permit(:name, :email, :reason, :details, { attachments: [] })
+  end
 end
