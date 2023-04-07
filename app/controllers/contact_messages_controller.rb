@@ -7,17 +7,18 @@ class ContactMessagesController < ApplicationController
 
   sig { void }
   def create
-    @contact_message = T.let(ContactMessage.new(contact_message_params), T.nilable(ContactMessage))
+    contact_message = ContactMessage.new(contact_message_params)
     user = current_user
     if user
-      T.must(@contact_message).user = user
-      T.must(@contact_message).name = user.name
-      T.must(@contact_message).email = user.email
+      contact_message.user = user
+      contact_message.name = user.name
+      contact_message.email = user.email
     end
-    if (current_user || verify_recaptcha(model: @contact_message)) && T.must(@contact_message).save
-      SupportMailer.contact_message(T.must(@contact_message)).deliver_later
+    if (current_user || verify_recaptcha(model: contact_message)) && contact_message.save
+      SupportMailer.contact_message(contact_message).deliver_later
       redirect_to thank_you_contact_messages_url
     else
+      @contact_message = T.let(contact_message, T.nilable(ContactMessage))
       render "documentation/contact"
     end
   end
