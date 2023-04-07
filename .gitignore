@@ -15,6 +15,7 @@ tmp/boundaries
 tmp/restart.txt
 coverage
 config/database.yml
+storage/*
 rerun.txt
 webrat.log
 .DS_Store
