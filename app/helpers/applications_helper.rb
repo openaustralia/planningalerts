@@ -84,13 +84,13 @@ module ApplicationsHelper
 
   sig { params(application: Application, size: String, zoom: Integer, key: String).returns(String) }
   def google_static_map(application, size: "350x200", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
-    google_static_map_lat_lng(lat: T.must(application.lat), lng: T.must(application.lng), label: "Map of #{application.address}", size:, zoom:, key:)
+    google_static_map_lat_lng(lat: T.must(application.lat), lng: T.must(application.lng), label: "Map of #{application.address}", size:, zoom:, key: translate_key(key))
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
-  sig { params(lat: Float, lng: Float, size: String, label: String, zoom: Integer, key: String).returns(String) }
-  def google_static_map_lat_lng(lat:, lng:, size: "350x200", label: "Map", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
-    url = google_static_map_url(lat:, lng:, zoom:, size:, key: translate_key(key))
+  sig { params(lat: Float, lng: Float, size: String, label: String, zoom: Integer, key: Symbol).returns(String) }
+  def google_static_map_lat_lng(lat:, lng:, size: "350x200", label: "Map", zoom: 16, key: :api)
+    url = google_static_map_url(lat:, lng:, zoom:, size:, key:)
     image_tag(url, size:, alt: label)
   end
 
