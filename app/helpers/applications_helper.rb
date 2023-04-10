@@ -174,9 +174,9 @@ module ApplicationsHelper
     end
   end
 
-  sig { params(key: Symbol).returns(T.nilable(String)) }
-  def lookup_google_maps_key(key)
-    case key
+  sig { params(key_type: Symbol).returns(T.nilable(String)) }
+  def lookup_google_maps_key(key_type)
+    case key_type
     when :api
       ENV.fetch("GOOGLE_MAPS_API_KEY", nil)
     when :email
