@@ -82,9 +82,9 @@ module ApplicationsHelper
     "#{application.address} | #{application.first_date_scraped.to_date.to_fs(:rfc822)}"
   end
 
-  sig { params(application: Application, size: String, zoom: Integer, key: String).returns(String) }
-  def google_static_map(application, size: "350x200", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
-    google_static_map_lat_lng(lat: T.must(application.lat), lng: T.must(application.lng), label: "Map of #{application.address}", size:, zoom:, key: translate_key(key))
+  sig { params(application: Application, size: String, zoom: Integer, key: Symbol).returns(String) }
+  def google_static_map(application, size: "350x200", zoom: 16, key: :api)
+    google_static_map_lat_lng(lat: T.must(application.lat), lng: T.must(application.lng), label: "Map of #{application.address}", size:, zoom:, key:)
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
