@@ -12,7 +12,7 @@ class Application < ApplicationRecord
   extend Kaminari::ConfigurationMethods::ClassMethods
 
   searchkick highlight: [:description],
-             index_name: "pa_applications_#{ENV.fetch('STAGE', nil)}",
+             index_name: "pa_applications_#{Rails.env}",
              locations: [:location],
              callbacks: :async
 

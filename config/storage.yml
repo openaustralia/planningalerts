@@ -12,7 +12,7 @@ amazon:
   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
   region: ap-southeast-2
-  bucket: planningalerts-as-<%= ENV["STAGE"] %>
+  bucket: planningalerts-as-<%= Rails.env %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

@@ -22,8 +22,8 @@ class ElasticsearchSnapshotJob
     )
     ElasticSearchClient&.snapshot&.create(
       repository: "backups",
-      snapshot: "pa-api-#{ENV.fetch('STAGE', nil)}-#{Time.zone.now.utc.strftime('%Y.%m.%d')}",
-      body: { indices: "pa-api-#{ENV.fetch('STAGE', nil)}-*" }
+      snapshot: "pa-api-#{Rails.env}-#{Time.zone.now.utc.strftime('%Y.%m.%d')}",
+      body: { indices: "pa-api-#{Rails.env}-*" }
     )
   end
 end
