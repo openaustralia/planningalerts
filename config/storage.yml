@@ -6,21 +6,13 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-# TODO: Not ready for production yet!
+# Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 amazon:
   service: S3
   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
   region: ap-southeast-2
-  bucket: planningalerts-as-production
-
-# Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-# amazon:
-#   service: S3
-#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-#   region: us-east-1
-#   bucket: your_own_bucket
+  bucket: planningalerts-as-<%= ENV["STAGE"] %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
