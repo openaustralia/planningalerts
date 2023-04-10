@@ -107,7 +107,7 @@ module ApplicationsHelper
         size:,
         zoom:
       },
-      key:
+      key: translate_key(key)
     )
   end
 
@@ -121,7 +121,7 @@ module ApplicationsHelper
         location: "#{lat},#{lng}",
         size:
       },
-      key:
+      key: translate_key(key)
     )
   end
 
@@ -161,9 +161,32 @@ module ApplicationsHelper
 
   private
 
-  sig { params(domain: String, path: String, query: T::Hash[Symbol, T.any(String, Integer)], key: String).returns(String) }
-  def google_signed_url(domain:, path:, query:, key: "GOOGLE_MAPS_API_KEY")
-    google_maps_key = ENV.fetch(key, nil)
+  sig { params(key: String).returns(Symbol) }
+  def translate_key(key)
+    case key
+    when "GOOGLE_MAPS_API_KEY"
+      :api
+    when "GOOGLE_MAPS_EMAIL_KEY"
+      :email
+    when "GOOGLE_MAPS_SERVER_KEY"
+      :server
+    else
+      raise "Unexpected value"
+    end
+  end
+
+  sig { params(domain: String, path: String, query: T::Hash[Symbol, T.any(String, Integer)], key: Symbol).returns(String) }
+  def google_signed_url(domain:, path:, query:, key: :api)
+    google_maps_key = case key
+                      when :api
+                        ENV.fetch("GOOGLE_MAPS_API_KEY", nil)
+                      when :email
+                        ENV.fetch("GOOGLE_MAPS_EMAIL_KEY", nil)
+                      when :server
+                        ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil)
+                      else
+                        raise "Unexpected value"
+                      end
     cryptographic_key = ENV.fetch("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY", nil)
     if google_maps_key.present?
       signed = "#{path}?#{query.merge(key: google_maps_key).to_query}"
