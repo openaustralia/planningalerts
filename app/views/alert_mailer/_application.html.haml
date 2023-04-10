@@ -12,7 +12,7 @@
           %td.map
             = google_static_map(application, size: "150x150", key: :email)
           %td.streetview
-            = google_static_streetview(application, size: "150x150", key: "GOOGLE_MAPS_EMAIL_KEY")
+            = google_static_streetview(application, size: "150x150", key: :email)
         - else
           %td.map
             = google_static_map(application, size: "300x150", key: :email)

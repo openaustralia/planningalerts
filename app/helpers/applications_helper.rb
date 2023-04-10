@@ -125,9 +125,9 @@ module ApplicationsHelper
     )
   end
 
-  sig { params(application: Application, size: String, fov: Integer, key: String).returns(String) }
-  def google_static_streetview(application, size: "350x200", fov: 90, key: "GOOGLE_MAPS_API_KEY")
-    url = google_static_streetview_url(lat: T.must(application.lat), lng: T.must(application.lng), size:, fov:, key: translate_key(key))
+  sig { params(application: Application, size: String, fov: Integer, key: Symbol).returns(String) }
+  def google_static_streetview(application, size: "350x200", fov: 90, key: :api)
+    url = google_static_streetview_url(lat: T.must(application.lat), lng: T.must(application.lng), size:, fov:, key:)
     image_tag(url, size:, alt: "Streetview of #{application.address}")
   end
 
