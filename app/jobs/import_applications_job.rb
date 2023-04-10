@@ -10,6 +10,7 @@ class ImportApplicationsJob
   def perform(authority_id)
     authority = Authority.find(authority_id)
     info_logger = AuthorityLogger.new(authority_id, logger)
-    ImportApplicationsService.call(authority:, logger: info_logger)
+    scrape_delay = T.must(ENV.fetch("SCRAPE_DELAY", nil)).to_i
+    ImportApplicationsService.call(authority:, logger: info_logger, scrape_delay:)
   end
 end

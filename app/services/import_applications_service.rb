@@ -4,18 +4,20 @@
 class ImportApplicationsService
   extend T::Sig
 
-  sig { params(authority: Authority, logger: Logger).void }
-  def self.call(authority:, logger:)
+  sig { params(authority: Authority, logger: Logger, scrape_delay: Integer).void }
+  def self.call(authority:, logger:, scrape_delay:)
     new(
       authority:,
-      logger:
+      logger:,
+      scrape_delay:
     ).call
   end
 
-  sig { params(authority: Authority, logger: Logger).void }
-  def initialize(authority:, logger:)
+  sig { params(authority: Authority, logger: Logger, scrape_delay: Integer).void }
+  def initialize(authority:, logger:, scrape_delay:)
     @authority = authority
     @logger = logger
+    @scrape_delay = scrape_delay
   end
 
   sig { void }
@@ -45,11 +47,6 @@ class ImportApplicationsService
 
   private
 
-  sig { returns(Integer) }
-  def scrape_delay
-    T.must(ENV.fetch("SCRAPE_DELAY", nil)).to_i
-  end
-
   sig { returns(String) }
   def morph_api_key
     T.must(ENV.fetch("MORPH_API_KEY", nil))
@@ -65,6 +62,9 @@ class ImportApplicationsService
 
   sig { returns(Logger) }
   attr_reader :logger
+
+  sig { returns(Integer) }
+  attr_reader :scrape_delay
 
   # Import all the applications for this authority from morph.io
   sig { void }
