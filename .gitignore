@@ -32,3 +32,5 @@ planningalerts-app.sublime-project
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+/config/master.key
