@@ -140,8 +140,10 @@ gem "skylight"
 # For making more reusable and testable components
 gem "view_component"
 
-# For generating sitemaps for search engines and uploading them to S3
+# For uploading sitemaps to S3 and uploading attachments to S3 using active storage
 gem "aws-sdk-s3", "~> 1"
+
+# For generating sitemaps for search engines
 gem "sitemap_generator"
 
 # For accessing wikidata
