@@ -84,7 +84,7 @@ class GoogleGeocodeService
   def call_google_api_no_caching(address)
     params = {
       address:,
-      key: ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil),
+      key: Rails.application.credentials.dig(:google_maps, :server_key),
       region: "au",
       sensor: false
     }

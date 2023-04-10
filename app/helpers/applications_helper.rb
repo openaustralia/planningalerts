@@ -164,7 +164,7 @@ module ApplicationsHelper
   sig { params(domain: String, path: String, query: T::Hash[Symbol, T.any(String, Integer)], key: Symbol).returns(String) }
   def google_signed_url(domain:, path:, query:, key: :api)
     google_maps_key = lookup_google_maps_key(key)
-    cryptographic_key = ENV.fetch("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY", nil)
+    cryptographic_key = Rails.application.credentials.dig(:google_maps, :cryptographic_key)
     if google_maps_key.present?
       signed = "#{path}?#{query.merge(key: google_maps_key).to_query}"
       signature = sign_gmap_bus_api_url(signed, cryptographic_key)
@@ -178,11 +178,11 @@ module ApplicationsHelper
   def lookup_google_maps_key(key_type)
     case key_type
     when :api
-      ENV.fetch("GOOGLE_MAPS_API_KEY", nil)
+      Rails.application.credentials.dig(:google_maps, :api_key)
     when :email
-      ENV.fetch("GOOGLE_MAPS_EMAIL_KEY", nil)
+      Rails.application.credentials.dig(:google_maps, :email_key)
     when :server
-      ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil)
+      Rails.application.credentials.dig(:google_maps, :server_key)
     else
       raise "Unexpected value"
     end
