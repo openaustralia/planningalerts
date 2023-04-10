@@ -14,7 +14,7 @@ class ContactMessagesController < ApplicationController
       contact_message.name = user.name
       contact_message.email = user.email
     end
-    if (current_user || verify_recaptcha(model: contact_message)) && contact_message.save
+    if (current_user || ENV["RECAPTCHA_SITE_KEY"].nil? || verify_recaptcha(model: contact_message)) && contact_message.save
       SupportMailer.contact_message(contact_message).deliver_later
       redirect_to thank_you_contact_messages_url
     else
