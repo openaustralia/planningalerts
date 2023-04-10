@@ -161,20 +161,6 @@ module ApplicationsHelper
 
   private
 
-  sig { params(key: String).returns(Symbol) }
-  def translate_key(key)
-    case key
-    when "GOOGLE_MAPS_API_KEY"
-      :api
-    when "GOOGLE_MAPS_EMAIL_KEY"
-      :email
-    when "GOOGLE_MAPS_SERVER_KEY"
-      :server
-    else
-      raise "Unexpected value"
-    end
-  end
-
   sig { params(domain: String, path: String, query: T::Hash[Symbol, T.any(String, Integer)], key: Symbol).returns(String) }
   def google_signed_url(domain:, path:, query:, key: :api)
     google_maps_key = case key
