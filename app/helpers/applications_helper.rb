@@ -163,16 +163,7 @@ module ApplicationsHelper
 
   sig { params(domain: String, path: String, query: T::Hash[Symbol, T.any(String, Integer)], key: Symbol).returns(String) }
   def google_signed_url(domain:, path:, query:, key: :api)
-    google_maps_key = case key
-                      when :api
-                        ENV.fetch("GOOGLE_MAPS_API_KEY", nil)
-                      when :email
-                        ENV.fetch("GOOGLE_MAPS_EMAIL_KEY", nil)
-                      when :server
-                        ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil)
-                      else
-                        raise "Unexpected value"
-                      end
+    google_maps_key = lookup_google_maps_key(key)
     cryptographic_key = ENV.fetch("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY", nil)
     if google_maps_key.present?
       signed = "#{path}?#{query.merge(key: google_maps_key).to_query}"
@@ -180,6 +171,20 @@ module ApplicationsHelper
       domain + signed + "&signature=#{signature}"
     else
       "#{domain}#{path}?#{query.to_query}"
+    end
+  end
+
+  sig { params(key: Symbol).returns(T.nilable(String)) }
+  def lookup_google_maps_key(key)
+    case key
+    when :api
+      ENV.fetch("GOOGLE_MAPS_API_KEY", nil)
+    when :email
+      ENV.fetch("GOOGLE_MAPS_EMAIL_KEY", nil)
+    when :server
+      ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil)
+    else
+      raise "Unexpected value"
     end
   end
 
