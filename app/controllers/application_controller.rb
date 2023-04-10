@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-  before_action :basic_auth_authentication
   before_action :update_view_path_for_theme
   before_action :configure_permitted_parameters, if: :devise_controller?
   # This stores the location on every request so that we can always redirect back after logging in
@@ -34,17 +33,6 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::StatementInvalid, with: :check_for_write_during_maintenance_mode
 
   private
-
-  sig { void }
-  def basic_auth_authentication
-    # Only do this authentication when specific environment variables are set
-    # This is useful for staging where we want a simple (low security) password in front of every page
-    return unless ENV.key?("BASIC_AUTH_USERNAME") && ENV.key?("BASIC_AUTH_PASSWORD")
-
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV["BASIC_AUTH_USERNAME"] && password == ENV["BASIC_AUTH_PASSWORD"]
-    end
-  end
 
   sig { params(error: StandardError).void }
   def check_for_write_during_maintenance_mode(error)
