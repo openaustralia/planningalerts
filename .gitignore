@@ -34,3 +34,4 @@ planningalerts-app.sublime-project
 !/app/assets/builds/.keep
 
 /config/credentials/production.key
+/config/credentials/development.key
