@@ -23,7 +23,7 @@ describe SupportMailer do
   let(:notifier) { described_class.report(report) }
 
   it "comes from the moderator's email address" do
-    expect(notifier.from).to eq(["moderator@planningalerts.org.au"])
+    expect(notifier.from).to eq(["contact@planningalerts.org.au"])
   end
 
   it "has a replyto of the reporter's email address" do
@@ -31,7 +31,7 @@ describe SupportMailer do
   end
 
   it "goes to the moderator email address" do
-    expect(notifier.to).to eq(["moderator@planningalerts.org.au"])
+    expect(notifier.to).to eq(["contact@planningalerts.org.au"])
   end
 
   it "tells the moderator what the email is about" do

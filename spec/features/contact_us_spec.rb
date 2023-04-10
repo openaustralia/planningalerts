@@ -18,8 +18,8 @@ describe "Contact us" do
       click_button "Send message to the Planning Alerts team"
 
       expect(page).to have_content("Thank you for getting in touch")
-      expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq(1)
-      open_email("moderator@planningalerts.org.au")
+      expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
+      open_email("contact@planningalerts.org.au")
       expect(current_email).to have_subject("Contact form: The address or map location is wrong")
       expect(current_email.default_part_body.to_s).to include("Actually nothing is wrong here. Sorry")
       expect(current_email).to have_reply_to("matthew@oaf.org.au")
@@ -44,8 +44,8 @@ describe "Contact us" do
       click_button "Send message to the Planning Alerts team"
 
       expect(page).to have_content("Thank you for getting in touch")
-      expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq(1)
-      open_email("moderator@planningalerts.org.au")
+      expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
+      open_email("contact@planningalerts.org.au")
       expect(current_email).to have_subject("Contact form: The address or map location is wrong")
       expect(current_email.default_part_body.to_s).to include("Actually nothing is wrong here. Sorry")
       expect(current_email).to have_reply_to("matthew@oaf.org.au")
