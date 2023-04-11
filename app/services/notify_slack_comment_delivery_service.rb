@@ -62,7 +62,7 @@ class NotifySlackCommentDeliveryService
 
   sig { returns(String) }
   def comment_url
-    Rails.application.routes.url_helpers.admin_comment_url(comment, host: ENV.fetch("HOST", nil))
+    Rails.application.routes.url_helpers.admin_comment_url(comment, host: Rails.configuration.x.host)
   end
 
   private

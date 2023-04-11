@@ -6,7 +6,7 @@ SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/"
 # The directory to write sitemaps to locally
 SitemapGenerator::Sitemap.public_path = 'tmp/sitemaps/'
 
-SitemapGenerator::Sitemap.default_host = root_url(host: ENV.fetch("HOST", nil), protocol: "https")
+SitemapGenerator::Sitemap.default_host = root_url(host: Rails.configuration.x.host, protocol: "https")
 
 SitemapGenerator::Sitemap.create do
   add api_howto_path, changefreq: "monthly"

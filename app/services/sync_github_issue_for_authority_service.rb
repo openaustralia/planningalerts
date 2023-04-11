@@ -168,7 +168,7 @@ class SyncGithubIssueForAuthorityService
     update_text_field(project:, item:, field: project.state_field, value: authority.state)
     update_number_field(project:, item:, field: project.population_field, value: authority.population_2021)
     update_text_field(project:, item:, field: project.website_field, value: authority.website_url)
-    update_text_field(project:, item:, field: project.authority_admin_field, value: admin_authority_url(authority, host: ENV.fetch("HOST", nil)))
+    update_text_field(project:, item:, field: project.authority_admin_field, value: admin_authority_url(authority, host: Rails.configuration.x.host))
   end
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: T.nilable(String)).void }

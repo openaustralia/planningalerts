@@ -2,6 +2,13 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  ## User settings (START)
+
+  # Used to generate urls outside of the request cycle (in mailer, sidekiq, etc..)
+  config.x.host = "www.planningalerts.org.au"
+
+  ## User settings (END)
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -72,7 +79,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.default_url_options = {
-    host: ENV["HOST"], protocol: "https"
+    host: Rails.configuration.x.host, protocol: "https"
   }
 
   # Send mails to the locally running instance of Cuttlefish

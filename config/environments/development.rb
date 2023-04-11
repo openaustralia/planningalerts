@@ -2,6 +2,13 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  ## User settings (START)
+
+  # Used to generate urls outside of the request cycle (in mailer, sidekiq, etc..)
+  config.x.host = "localhost"
+
+  ## User settings (END)
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
