@@ -85,10 +85,10 @@ Rails.application.configure do
   # Send mails to the locally running instance of Cuttlefish
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: ENV["CUTTLEFISH_SERVER"],
+    address: Rails.application.credentials.dig(:cuttlefish, :server),
     port: 2525,
-    user_name: ENV["CUTTLEFISH_USER_NAME"],
-    password: ENV["CUTTLEFISH_PASSWORD"],
+    user_name: Rails.application.credentials.dig(:cuttlefish, :user_name),
+    password: Rails.application.credentials.dig(:cuttlefish, :password),
     authentication: :plain
   }
 
