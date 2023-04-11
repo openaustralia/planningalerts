@@ -10,8 +10,8 @@ class SupportMailer < ApplicationMailer
   def report(report)
     @report = T.let(report, T.nilable(Report))
     mail(
-      to: ENV.fetch("EMAIL_MODERATOR", nil),
-      from: "#{report.name} <#{ENV.fetch('EMAIL_MODERATOR', nil)}>",
+      to: "contact@planningalerts.org.au",
+      from: "#{report.name} <contact@planningalerts.org.au>",
       reply_to: "#{report.name} <#{report.email}>"
     )
   end
@@ -20,8 +20,8 @@ class SupportMailer < ApplicationMailer
   def contact_message(contact_message)
     @contact_message = T.let(contact_message, T.nilable(ContactMessage))
     mail(
-      to: ENV.fetch("EMAIL_MODERATOR", nil),
-      from: "#{contact_message.name} <#{ENV.fetch('EMAIL_MODERATOR', nil)}>",
+      to: "contact@planningalerts.org.au",
+      from: "#{contact_message.name} <contact@planningalerts.org.au>",
       reply_to: "#{contact_message.name} <#{contact_message.email}>",
       subject: "Contact form: #{contact_message.reason}"
     )

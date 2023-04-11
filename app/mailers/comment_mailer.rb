@@ -4,7 +4,6 @@
 class CommentMailer < ApplicationMailer
   extend T::Sig
 
-  include EmailFrom
   helper :comments
 
   sig { params(comment: Comment).returns(T.any(Mail::Message, ActionMailer::MessageDelivery)) }
@@ -24,7 +23,7 @@ class CommentMailer < ApplicationMailer
       # (see https://en.wikipedia.org/wiki/DMARC#Sender_field). We were using
       # the "sender" header before to signify who was sending the email before
       # but DMARC now effectively makes this way of doing things unworkable.
-      from: email_from,
+      from: "PlanningAlerts <contact@planningalerts.org.au>",
       reply_to: "#{comment.name} <#{comment.email}>",
       to: T.must(comment.application).comment_email_with_fallback,
       subject: default_i18n_subject(council_reference: T.must(comment.application).council_reference)
