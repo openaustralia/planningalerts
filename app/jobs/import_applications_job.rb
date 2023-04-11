@@ -15,6 +15,6 @@ class ImportApplicationsJob
   def perform(authority_id)
     authority = Authority.find(authority_id)
     info_logger = AuthorityLogger.new(authority_id, logger)
-    ImportApplicationsService.call(authority:, logger: info_logger, scrape_delay: SCRAPE_DELAY)
+    ImportApplicationsService.call(authority:, logger: info_logger, scrape_delay: SCRAPE_DELAY, morph_api_key: T.must(ENV.fetch("MORPH_API_KEY", nil)))
   end
 end
