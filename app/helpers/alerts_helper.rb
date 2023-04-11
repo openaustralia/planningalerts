@@ -9,11 +9,11 @@ module AlertsHelper
   sig { params(size: Integer).returns(T.nilable(String)) }
   def size_option_word(size)
     case size
-    when 200
+    when Rails.configuration.planningalerts_small_zone_size
       "street"
-    when 800
+    when Rails.configuration.planningalerts_medium_zone_size
       "neighbourhood"
-    when 2000
+    when Rails.configuration.planningalerts_large_zone_size
       "suburb"
     end
   end
