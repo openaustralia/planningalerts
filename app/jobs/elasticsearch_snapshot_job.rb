@@ -12,10 +12,10 @@ class ElasticsearchSnapshotJob
       body: {
         type: "s3",
         settings: {
-          bucket: ENV.fetch("ELASTICSEARCH_SNAPSHOT_S3_BUCKET", nil),
-          region: ENV.fetch("ELASTICSEARCH_SNAPSHOT_S3_REGION", nil),
-          access_key: ENV.fetch("ELASTICSEARCH_SNAPSHOT_ACCESS_KEY", nil),
-          secret_key: ENV.fetch("ELASTICSEARCH_SNAPSHOT_SECRET_KEY", nil),
+          bucket: Rails.application.credentials.dig(:elasticsearch, :snapshot, :s3_bucket),
+          region: Rails.application.credentials.dig(:elasticsearch, :snapshot, :s3_region),
+          access_key: Rails.application.credentials.dig(:elasticsearch, :snapshot, :access_key),
+          secret_key: Rails.application.credentials.dig(:elasticsearch, :snapshot, :secret_key),
           compress: true
         }
       }

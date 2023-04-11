@@ -6,6 +6,8 @@ Rails.application.configure do
 
   # Used to generate urls outside of the request cycle (in mailer, sidekiq, etc..)
   config.x.host = "www.planningalerts.org.au"
+  # For logging API calls and full text search (searchkick)
+  config.x.elasticsearch_url = Rails.application.credentials.dig(:elasticsearch, :url)
 
   ## User settings (END)
 

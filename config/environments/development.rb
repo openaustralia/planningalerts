@@ -6,6 +6,8 @@ Rails.application.configure do
 
   # Used to generate urls outside of the request cycle (in mailer, sidekiq, etc..)
   config.x.host = "localhost"
+  # For logging API calls and full text search (searchkick)
+  config.x.elasticsearch_url = "http://elasticsearch:9200"
 
   ## User settings (END)
 

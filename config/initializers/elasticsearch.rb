@@ -1,6 +1,6 @@
 # typed: true
 # TODO: Store this in a more sensibly named/namespaced variable
 
-ElasticSearchClient = if ENV["ELASTICSEARCH_URL"].present?
-                        Elasticsearch::Client.new url: ENV["ELASTICSEARCH_URL"]
+ElasticSearchClient = if Rails.configuration.x.elasticsearch_url.present?
+                        Elasticsearch::Client.new url: Rails.configuration.x.elasticsearch_url
                       end
