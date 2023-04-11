@@ -5,7 +5,7 @@
       = meters_in_words(radius)
     :ruby
       component.with_menu do |menu|
-        [Rails.configuration.planningalerts_small_zone_size, Rails.configuration.planningalerts_medium_zone_size, Rails.configuration.planningalerts_large_zone_size].each do |radius_option|
+        Alert::VALID_RADIUS_METERS_VALUES.each do |radius_option|
           menu.with_item(disabled: radius.to_i == radius_option) { link_to "within #{meters_in_words(radius_option)}", { q:, radius: (radius_option == 2000 ? nil : radius_option) } }
         end
       end
