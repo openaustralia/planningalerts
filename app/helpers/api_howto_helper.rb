@@ -35,8 +35,8 @@ module ApiHowtoHelper
     ).returns(String)
   end
   def api_example_latlong_url(
-    format, key, lat = Rails.configuration.planningalerts_api_example_lat, lng = Rails.configuration.planningalerts_api_example_lng,
-    radius = Rails.configuration.planningalerts_api_example_size
+    format:, key:, lat: Rails.configuration.planningalerts_api_example_lat, lng: Rails.configuration.planningalerts_api_example_lng,
+    radius: Rails.configuration.planningalerts_api_example_size
   )
     applications_url(host: api_host, format:, lat:, lng:, radius:, key:)
   end
@@ -52,10 +52,10 @@ module ApiHowtoHelper
     ).returns(String)
   end
   def api_example_area_url(
-    format, key, bottom_left_lat = Rails.configuration.planningalerts_api_example_bottom_left_lat,
-    bottom_left_lng = Rails.configuration.planningalerts_api_example_bottom_left_lng,
-    top_right_lat = Rails.configuration.planningalerts_api_example_top_right_lat,
-    top_right_lng = Rails.configuration.planningalerts_api_example_top_right_lng
+    format:, key:, bottom_left_lat: Rails.configuration.planningalerts_api_example_bottom_left_lat,
+    bottom_left_lng: Rails.configuration.planningalerts_api_example_bottom_left_lng,
+    top_right_lat: Rails.configuration.planningalerts_api_example_top_right_lat,
+    top_right_lng: Rails.configuration.planningalerts_api_example_top_right_lng
   )
     applications_url(
       host: api_host, format:,
@@ -66,7 +66,7 @@ module ApiHowtoHelper
   end
 
   sig { params(format: String, key: T.nilable(String), authority: String).returns(String) }
-  def api_example_authority_url(format, key, authority = Rails.configuration.planningalerts_api_example_authority)
+  def api_example_authority_url(format:, key:, authority: Rails.configuration.planningalerts_api_example_authority)
     authority_applications_url(
       host: api_host, format:, authority_id: authority,
       key:
@@ -81,7 +81,7 @@ module ApiHowtoHelper
       extra_params: T::Hash[Symbol, T.any(String, Integer)]
     ).returns(String)
   end
-  def api_example_postcode_url(format, key, postcode = Rails.configuration.planningalerts_api_example_postcode, extra_params = {})
+  def api_example_postcode_url(format:, key:, postcode: Rails.configuration.planningalerts_api_example_postcode, extra_params: {})
     T.unsafe(self).applications_url({ host: api_host, format:, postcode:, key: }.merge(extra_params))
   end
 
@@ -95,11 +95,11 @@ module ApiHowtoHelper
     ).returns(String)
   end
   def api_example_suburb_state_and_postcode_url(
-    format,
-    key,
-    suburb = Rails.configuration.planningalerts_api_example_suburb,
-    state = Rails.configuration.planningalerts_api_example_state,
-    postcode = Rails.configuration.planningalerts_api_example_postcode
+    format:,
+    key:,
+    suburb: Rails.configuration.planningalerts_api_example_suburb,
+    state: Rails.configuration.planningalerts_api_example_state,
+    postcode: Rails.configuration.planningalerts_api_example_postcode
   )
     applications_url(
       host: api_host, format:, suburb:, state:, postcode:,
@@ -108,8 +108,8 @@ module ApiHowtoHelper
   end
 
   sig { params(format: String, key: T.nilable(String)).returns(String) }
-  def api_example_latlong_url_html(format, key)
-    t = api_example_latlong_url(format, key || "44", "11", "22", "33")
+  def api_example_latlong_url_html(format:, key:)
+    t = api_example_latlong_url(format:, key: (key || "44"), lat: "11", lng: "22", radius: "33")
     t = t.sub("11", "[latitude]")
     t = t.sub("22", "[longitude]")
     t = t.sub("33", "[distance_in_metres]")
@@ -118,8 +118,8 @@ module ApiHowtoHelper
   end
 
   sig { params(format: String, key: T.nilable(String)).returns(String) }
-  def api_example_area_url_html(format, key)
-    t = api_example_area_url(format, key || "33", "11", "22", "11", "22")
+  def api_example_area_url_html(format:, key:)
+    t = api_example_area_url(format:, key: (key || "33"), bottom_left_lat: "11", bottom_left_lng: "22", top_right_lat: "11", top_right_lng: "22")
     t = t.gsub("11", "[latitude]")
     t = t.gsub("22", "[longitude]")
     t = t.sub("33", "[key]") if key.nil?
@@ -127,8 +127,8 @@ module ApiHowtoHelper
   end
 
   sig { params(format: String, key: T.nilable(String)).returns(String) }
-  def api_example_authority_url_html(format, key)
-    t = api_example_authority_url(format, key || "22", "11")
+  def api_example_authority_url_html(format:, key:)
+    t = api_example_authority_url(format:, key: (key || "22"), authority: "11")
     t = t.sub("11", "[name]")
     t = t.sub("22", "[key]") if key.nil?
     htmlify(t)
@@ -142,16 +142,16 @@ module ApiHowtoHelper
       extra_params: T::Hash[Symbol, T.any(String, Integer)]
     ).returns(String)
   end
-  def api_example_postcode_url_html(format, key, postcode = nil, extra_params = {})
-    t = api_example_postcode_url(format, key || "22", postcode || "11", extra_params)
+  def api_example_postcode_url_html(format:, key:, postcode: nil, extra_params: {})
+    t = api_example_postcode_url(format:, key: (key || "22"), postcode: (postcode || "11"), extra_params:)
     t = t.sub("11", "[postcode]")
     t = t.sub("22", "[key]") if key.nil?
     htmlify(t)
   end
 
   sig { params(format: String, key: T.nilable(String)).returns(String) }
-  def api_example_suburb_state_and_postcode_url_html(format, key)
-    t = api_example_suburb_state_and_postcode_url(format, key || "44", "11", "22", "33")
+  def api_example_suburb_state_and_postcode_url_html(format:, key:)
+    t = api_example_suburb_state_and_postcode_url(format:, key: (key || "44"), suburb: "11", state: "22", postcode: "33")
     t = t.sub("11", "[suburb]")
     t = t.sub("22", "[state]")
     t = t.sub("33", "[postcode]")

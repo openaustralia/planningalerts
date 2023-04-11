@@ -47,19 +47,19 @@
   %p.apidefinition
     Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
     with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
-  %code= api_example_latlong_url_html("json", api_key)
+  %code= api_example_latlong_url_html(format: "json", key: api_key)
   - if api_key
     .apiexamples
-      = link_to "Example", api_example_latlong_url("json", api_key), class: "button button-rounded"
+      = link_to "Example", api_example_latlong_url(format: "json", key: api_key), class: "button button-rounded"
 .apiitem
   %h5
     Area by longitude/latitude
   %p.apidefinition
     Return applications within a rectangle defined by longitude/latitude.
-  %code= api_example_area_url_html("json", api_key)
+  %code= api_example_area_url_html(format: "json", key: api_key)
   - if api_key
     .apiexamples
-      = link_to "Example", api_example_area_url("json", api_key), class: "button button-rounded"
+      = link_to "Example", api_example_area_url(format: "json", key: api_key), class: "button button-rounded"
 .apiitem
   %h5
     Planning authority
@@ -68,28 +68,28 @@
     to use here, find the planning authority on the
     = link_to "list of authorities", authorities_path
     and follow the link. The url has the authority short name in it.
-  %code= api_example_authority_url_html("json", api_key)
+  %code= api_example_authority_url_html(format: "json", key: api_key)
   - if api_key
     .apiexamples
-      = link_to "Example", api_example_authority_url("json", api_key), class: "button button-rounded"
+      = link_to "Example", api_example_authority_url(format: "json", key: api_key), class: "button button-rounded"
 .apiitem
   %h5
     Postcode
   %p.apidefinition
     Return applications for a specific postcode area
-  %code= api_example_postcode_url_html("json", api_key)
+  %code= api_example_postcode_url_html(format: "json", key: api_key)
   - if api_key
     .apiexamples
-      = link_to "Example", api_example_postcode_url("json", api_key), class: "button button-rounded"
+      = link_to "Example", api_example_postcode_url(format: "json", key: api_key), class: "button button-rounded"
 .apiitem
   %h5
     Suburb
   %p.apidefinition
     Return applications in a suburb. Including &ldquo;state&rdquo; and &ldquo;postcode&rdquo; in the search is optional.
-  %code= api_example_suburb_state_and_postcode_url_html("json", api_key)
+  %code= api_example_suburb_state_and_postcode_url_html(format: "json", key: api_key)
   - if api_key
     .apiexamples
-      = link_to "Example", api_example_suburb_state_and_postcode_url("json", api_key), class: "button button-rounded"
+      = link_to "Example", api_example_suburb_state_and_postcode_url(format: "json", key: api_key), class: "button button-rounded"
 
 %hr
 %h4 Extra query parameters
@@ -100,12 +100,12 @@
   %p.apidefinition
     API calls return a maximum of #{Application.max_per_page} results. To retrieve more results simply do another request with page
     set to 2, 3, etc&hellip; Not setting the page parameter is the same as requesting page 1.
-  %code= api_example_postcode_url_html("json", api_key, "2780", page: 2)
+  %code= api_example_postcode_url_html(format: "json", key: api_key, postcode: "2780", extra_params: { page: 2 })
 .apiitem
   %h5 count
   %p.apidefinition
     API calls by default return a maximum of #{Application.max_per_page} results. To return less than that per page simply set the count parameter to the maximum number you want to return.
-  %code= api_example_postcode_url_html("json", api_key, "2780", count: 10)
+  %code= api_example_postcode_url_html(format: "json", key: api_key, postcode: "2780", extra_params: { count: 10 })
 
 %hr
 %h4 Warning about client side API queries
