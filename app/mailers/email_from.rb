@@ -8,6 +8,6 @@ module EmailFrom
 
   sig { returns(String) }
   def email_from
-    "#{ENV.fetch('EMAIL_FROM_NAME', nil)} <#{ENV.fetch('EMAIL_FROM_ADDRESS', nil)}>"
+    "PlanningAlerts <#{ENV.fetch('EMAIL_FROM_ADDRESS', nil)}>"
   end
 end
