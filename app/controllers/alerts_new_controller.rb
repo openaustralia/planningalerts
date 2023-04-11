@@ -29,7 +29,7 @@ class AlertsNewController < ApplicationController
     alert = Alert.new(
       user: current_user,
       address:,
-      radius_meters: Rails.configuration.planningalerts_large_zone_size,
+      radius_meters: Alert::DEFAULT_RADIUS,
       # Because we're logged in we don't need to go through the whole email confirmation step
       confirmed: true
     )

@@ -8,11 +8,14 @@ class Alert < ApplicationRecord
   # TODO: Remove accepts_nested_attributes_for after users purely sign up for alerts by being logged in
   accepts_nested_attributes_for :user
 
-  RADIUS_DESCRIPTIONS = T.let({
-    Rails.configuration.planningalerts_small_zone_size => "street",
-    Rails.configuration.planningalerts_medium_zone_size => "neighbourhood",
-    Rails.configuration.planningalerts_large_zone_size => "suburb"
-  }.freeze, T::Hash[Integer, String])
+  DEFAULT_RADIUS = 2000
+
+  # This sets the allowable alert radii as well as human readable names for them
+  # The default alert radius is the largest size
+  RADIUS_DESCRIPTIONS = T.let(
+    { 200 => "street", 800 => "neighbourhood", DEFAULT_RADIUS => "suburb" }.freeze,
+    T::Hash[Integer, String]
+  )
 
   VALID_RADIUS_METERS_VALUES = T.let(RADIUS_DESCRIPTIONS.keys.freeze, T::Array[Integer])
 

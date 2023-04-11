@@ -72,10 +72,6 @@ module PlanningalertsApp
       "A free service which searches Australian planning authority websites " \
       "and emails you details of applications near you"
 
-    config.planningalerts_small_zone_size = 200
-    config.planningalerts_medium_zone_size = 800
-    config.planningalerts_large_zone_size = 2000
-
     # Values used in the API examples
     config.planningalerts_api_example_address = "24 Bruce Road Glenbrook, NSW 2773"
     config.planningalerts_api_example_size = 4000
