@@ -3,18 +3,22 @@
 require "spec_helper"
 
 describe "Searching for development application near an address" do
-  around do |scenario|
-    VCR.use_cassette("planningalerts") do
-      scenario.run
-    end
-  end
-
   before do
     create(:geocoded_application,
            address: "24 Bruce Road Glenbrook",
            description: "A lovely house",
            lat: -33.772609,
            lng: 150.624256)
+    # It's more elegant to mock out the geocoder rather than using VCR
+    g = GeocodedLocation.new(
+      lat: -33.772607,
+      lng: 150.624245,
+      suburb: "Glenbrook",
+      state: "NSW",
+      postcode: "2773",
+      full_address: "24 Bruce Rd, Glenbrook NSW 2773"
+    )
+    allow(GoogleGeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook").and_return(GeocoderResults.new([g], nil))
   end
 
   it "successfully" do
