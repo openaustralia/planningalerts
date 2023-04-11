@@ -10,10 +10,7 @@ module Users
       @user = T.let(user, T.nilable(User))
       @token = T.let(token, T.nilable(String))
 
-      mail(
-        from: "PlanningAlerts <contact@planningalerts.org.au>",
-        to: user.email
-      )
+      mail(to: user.email)
     end
   end
 end

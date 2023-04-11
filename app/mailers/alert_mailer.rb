@@ -29,7 +29,6 @@ class AlertMailer < ApplicationMailer
     )
 
     mail(
-      from: "PlanningAlerts <contact@planningalerts.org.au>",
       to: alert.email,
       subject: render_to_string(
         partial: "subject",
