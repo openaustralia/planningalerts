@@ -158,7 +158,6 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     chunky_png (1.4.0)
-    climate_control (1.2.0)
     coderay (1.1.3)
     colorize (0.8.1)
     compass (1.0.3)
@@ -730,7 +729,6 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capybara
-  climate_control
   compass-blueprint
   compass-rails (= 3.1.0)
   counter_culture

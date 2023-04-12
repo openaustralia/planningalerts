@@ -510,7 +510,7 @@ describe Alert do
         radius_meters: 2000
       )
       authority = create(:authority, disabled: false)
-      allow(GeocodeService).to receive(:call).with(", NSW").and_return(GeocoderResults.new([], "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"))
+      allow(GeocodeService).to receive(:call).with(address: ", NSW", mappify_key: nil).and_return(GeocoderResults.new([], "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"))
       CreateOrUpdateApplicationService.call(
         authority:,
         council_reference: "DA/2341/2021",
@@ -536,7 +536,7 @@ describe Alert do
           date_scraped: "2021-09-14 02:04:04"
         }
       )
-      expect(GeocodeService).to have_received(:call).with(", NSW")
+      expect(GeocodeService).to have_received(:call).with(address: ", NSW", mappify_key: nil)
       a = alert.recent_new_applications.first
       # This should pick up the location of the most recent version of the
       # application

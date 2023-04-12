@@ -162,7 +162,6 @@ gem "puma"
 
 group :test do
   gem "capybara"
-  gem "climate_control"
   # For some reason upgrading to email_spec 2.2.1 completely breaks things for us
   # TODO: Figure out what's going on fix this properly
   gem "email_spec", "2.2.0"

@@ -5,14 +5,15 @@
 class MappifyGeocodeService
   extend T::Sig
 
-  sig { params(address: String).returns(GeocoderResults) }
-  def self.call(address)
-    new(address).call
+  sig { params(address: String, key: T.nilable(String)).returns(GeocoderResults) }
+  def self.call(address:, key:)
+    new(address:, key:).call
   end
 
-  sig { params(address: String).void }
-  def initialize(address)
+  sig { params(address: String, key: T.nilable(String)).void }
+  def initialize(address:, key:)
     @address = address
+    @key = key
   end
 
   sig { returns(GeocoderResults) }
@@ -23,7 +24,7 @@ class MappifyGeocodeService
 
     # Not a REST api. Ugh.
     params = { streetAddress: address, formatCase: true, boostPrefix: false }
-    params["apiKey"] = ENV["MAPPIFY_API_KEY"] if ENV["MAPPIFY_API_KEY"].present?
+    params["apiKey"] = key if key.present?
     request = RestClient.post("https://mappify.io/api/rpc/address/autocomplete/",
                               params.to_json, content_type: :json, accept: :json)
     data = JSON.parse(request.body)
@@ -46,4 +47,7 @@ class MappifyGeocodeService
 
   sig { returns(String) }
   attr_reader :address
+
+  sig { returns(T.nilable(String)) }
+  attr_reader :key
 end

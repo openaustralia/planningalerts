@@ -5,21 +5,22 @@ class GeocodeService
   extend T::Sig
 
   # Default threshold of 100m
-  sig { params(address: String, threshold: Integer).returns(GeocoderResults) }
-  def self.call(address, threshold = 100)
-    new(address, threshold).call
+  sig { params(address: String, mappify_key: T.nilable(String), threshold: Integer).returns(GeocoderResults) }
+  def self.call(address:, mappify_key:, threshold: 100)
+    new(address:, mappify_key:, threshold:).call
   end
 
-  sig { params(address: String, threshold: Integer).void }
-  def initialize(address, threshold)
+  sig { params(address: String, mappify_key: T.nilable(String), threshold: Integer).void }
+  def initialize(address:, mappify_key:, threshold:)
     @address = address
     @threshold = threshold
+    @mappify_key = mappify_key
   end
 
   sig { returns(GeocoderResults) }
   def call
     google_result = GoogleGeocodeService.call(address)
-    mappify_result = MappifyGeocodeService.call(address)
+    mappify_result = MappifyGeocodeService.call(address:, key: mappify_key)
 
     record_in_database(google_result, mappify_result) if results_are_different(google_result, mappify_result)
     google_result
@@ -29,6 +30,9 @@ class GeocodeService
 
   sig { returns(String) }
   attr_reader :address
+
+  sig { returns(T.nilable(String)) }
+  attr_reader :mappify_key
 
   sig { returns(Integer) }
   attr_reader :threshold
