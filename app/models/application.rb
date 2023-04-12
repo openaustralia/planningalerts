@@ -136,7 +136,7 @@ class Application < ApplicationRecord
     r = GeocodeService.call(
       address:,
       google_key: Rails.application.credentials.dig(:google_maps, :server_key),
-      mappify_key: ENV.fetch("MAPPIFY_API_KEY", nil)
+      mappify_key: Rails.application.credentials[:mappify_api_key]
     )
     top = r.top
     if top
