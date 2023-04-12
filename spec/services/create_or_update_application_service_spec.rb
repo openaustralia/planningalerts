@@ -207,7 +207,7 @@ describe CreateOrUpdateApplicationService do
     end
 
     it "geocodes the address" do
-      allow(GeocodeService).to receive(:call).with(address: "24 Bruce Road, Glenbrook, NSW", mappify_key: nil).and_return(GeocoderResults.new([location], nil))
+      allow(GeocodeService).to receive(:call).with(address: "24 Bruce Road, Glenbrook, NSW", google_key: nil, mappify_key: nil).and_return(GeocoderResults.new([location], nil))
 
       expect(application.lat).to eq location.lat
       expect(application.lng).to eq location.lng
@@ -217,7 +217,7 @@ describe CreateOrUpdateApplicationService do
     end
 
     it "logs an error if the geocoder can't make sense of the address" do
-      allow(GeocodeService).to receive(:call).with(address: "24 Bruce Road, Glenbrook, NSW", mappify_key: nil).and_return(
+      allow(GeocodeService).to receive(:call).with(address: "24 Bruce Road, Glenbrook, NSW", google_key: nil, mappify_key: nil).and_return(
         GeocoderResults.new([], "something went wrong")
       )
       logger = instance_double(Logger, error: nil)

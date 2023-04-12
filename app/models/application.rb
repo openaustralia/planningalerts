@@ -133,7 +133,11 @@ class Application < ApplicationRecord
 
   sig { params(address: String).returns(T::Hash[Symbol, T.untyped]) }
   def self.geocode_attributes(address)
-    r = GeocodeService.call(address:, mappify_key: ENV.fetch("MAPPIFY_API_KEY", nil))
+    r = GeocodeService.call(
+      address:,
+      google_key: Rails.application.credentials.dig(:google_maps, :server_key),
+      mappify_key: ENV.fetch("MAPPIFY_API_KEY", nil)
+    )
     top = r.top
     if top
       {

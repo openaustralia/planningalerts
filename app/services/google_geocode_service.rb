@@ -4,14 +4,15 @@
 class GoogleGeocodeService
   extend T::Sig
 
-  sig { params(address: String).returns(GeocoderResults) }
-  def self.call(address)
-    new(address).call
+  sig { params(address: String, key: String).returns(GeocoderResults) }
+  def self.call(address:, key:)
+    new(address:, key:).call
   end
 
-  sig { params(address: String).void }
-  def initialize(address)
+  sig { params(address: String, key: String).void }
+  def initialize(address:, key:)
     @address = address
+    @key = key
   end
 
   sig { returns(GeocoderResults) }
@@ -79,15 +80,13 @@ class GoogleGeocodeService
   sig { returns(String) }
   attr_reader :address
 
+  sig { returns(String) }
+  attr_reader :key
+
   # Returns nil if status is not valid
   sig { params(address: String).returns(T.nilable(T::Hash[String, T.untyped])) }
   def call_google_api_no_caching(address)
-    params = {
-      address:,
-      key: Rails.application.credentials.dig(:google_maps, :server_key),
-      region: "au",
-      sensor: false
-    }
+    params = { address:, key:, region: "au", sensor: false }
     response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
     response.parsed_response if %w[OK ZERO_RESULTS].include?(response.parsed_response["status"])
   end

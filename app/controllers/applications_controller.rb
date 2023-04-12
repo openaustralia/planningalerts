@@ -68,7 +68,7 @@ class ApplicationsController < ApplicationController
     @page = T.let(params_page, T.nilable(String))
     return unless @q
 
-    result = GoogleGeocodeService.call(@q)
+    result = GoogleGeocodeService.call(address: @q, key: Rails.application.credentials.dig(:google_maps, :server_key))
     top = result.top
     if top.nil?
       @full_address = @q

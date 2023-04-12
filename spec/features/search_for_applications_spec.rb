@@ -18,7 +18,7 @@ describe "Searching for development application near an address" do
       postcode: "2773",
       full_address: "24 Bruce Rd, Glenbrook NSW 2773"
     )
-    allow(GoogleGeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook").and_return(GeocoderResults.new([g], nil))
+    allow(GoogleGeocodeService).to receive(:call).with(address: "24 Bruce Road, Glenbrook", key: nil).and_return(GeocoderResults.new([g], nil))
   end
 
   it "successfully" do
