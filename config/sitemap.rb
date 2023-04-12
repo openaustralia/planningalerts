@@ -1,5 +1,10 @@
 # Depending on values in env variables for access to AWS
-SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new('planningalerts-sitemaps-production', region: 'ap-southeast-2')
+SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
+  "planningalerts-sitemaps-production",
+  access_key_id: Rails.application.credentials.dig(:sitemaps, :aws, :access_key_id),
+  secret_access_key: Rails.application.credentials.dig(:sitemaps, :aws, :secret_access_key),
+  region: "ap-southeast-2"
+)
 
 SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/"
 
