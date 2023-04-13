@@ -19,7 +19,7 @@ class SyncGithubIssueForAuthorityService
     extend T::Sig
     sig { params(_context: T.untyped).returns(T::Hash[Symbol, String]) }
     def headers(_context)
-      { Authorization: "bearer #{ENV.fetch('GITHUB_PERSONAL_ACCESS_TOKEN', nil)}" }
+      { Authorization: "bearer #{Rails.application.credentials[:github_personal_access_token]}" }
     end
   end, GraphQL::Client::HTTP)
 
@@ -125,7 +125,7 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(logger: Logger, authority: Authority).void }
   def call(logger:, authority:)
-    client = Octokit::Client.new(access_token: ENV.fetch("GITHUB_PERSONAL_ACCESS_TOKEN", nil))
+    client = Octokit::Client.new(access_token: Rails.application.credentials[:github_personal_access_token])
 
     issue = authority.github_issue
     latest_date = authority.date_last_new_application_scraped
