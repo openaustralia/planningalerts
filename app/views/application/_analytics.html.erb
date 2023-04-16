@@ -5,5 +5,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', '<%= ENV.fetch("GOOGLE_ANALYTICS_MEASUREMENT_ID", nil) %>');
+  gtag('config', '<%= ENV.fetch("GOOGLE_ANALYTICS_MEASUREMENT_ID", nil) %>', {
+    cookie_flags: 'max-age=7200;secure;samesite=none'
+  });
 </script>
