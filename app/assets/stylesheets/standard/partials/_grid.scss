@@ -16,6 +16,10 @@
   @include span-columns(6, 12);
   height: 330px;
 }
+#pano {
+  display: none;
+}
+
 .map-settings {
   @include span-columns(6 omega, 12);
 }
@@ -357,6 +361,7 @@
 
   #pano {
     height: 330px;
+    display: block;
   }
 
   #map_div, .details {
