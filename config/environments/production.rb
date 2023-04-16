@@ -31,9 +31,8 @@ Rails.application.configure do
   config.require_master_key = true
 
   config.public_file_server.enabled = true
-  # TODO: Increase the max-age to at least one year when we're confident that this is working
   config.public_file_server.headers = {
-    "Cache-Control" => "public, max-age=#{2.days.to_i}"
+    "Cache-Control" => "public, max-age=#{1.year.to_i}"
   }
 
   # Compress JavaScripts and CSS.
