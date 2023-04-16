@@ -8,6 +8,7 @@ Rails.application.configure do
   config.x.host = "www.planningalerts.org.au"
   # For logging API calls and full text search (searchkick)
   config.x.elasticsearch_url = Rails.application.credentials.dig(:elasticsearch, :url)
+  config.x.rack_attack_redis_url = Rails.application.credentials[:rack_attack_redis_url]
 
   ## User settings (END)
 
