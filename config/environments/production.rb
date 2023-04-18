@@ -9,6 +9,7 @@ Rails.application.configure do
   # For logging API calls and full text search (searchkick)
   config.x.elasticsearch_url = Rails.application.credentials.dig(:elasticsearch, :url)
   config.x.rack_attack_redis_url = Rails.application.credentials[:rack_attack_redis_url]
+  config.x.flipper_redis_url = Rails.application.credentials[:flipper_redis_url]
 
   ## User settings (END)
 

@@ -9,7 +9,8 @@ Rails.application.configure do
   # For logging API calls and full text search (searchkick)
   config.x.elasticsearch_url = "http://elasticsearch:9200"
   config.x.rack_attack_redis_url = "redis://redis:6379/1"
-
+  config.x.flipper_redis_url = "redis://redis:6379/2"
+  
   ## User settings (END)
 
   # Settings specified here will take precedence over those in config/application.rb.

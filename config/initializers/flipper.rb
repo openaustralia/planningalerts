@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Flipper.configure do |config|
-  config.adapter { Flipper::Adapters::Redis.new(Redis.new(url: ENV["FLIPPER_REDIS_URL"])) }
+  config.adapter { Flipper::Adapters::Redis.new(Redis.new(url: Rails.configuration.x.flipper_redis_url)) }
 end
 
 Flipper::UI.configure do |config|
