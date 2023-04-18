@@ -8,6 +8,8 @@ Rails.application.configure do
   config.x.host = "localhost"
   # For logging API calls and full text search (searchkick)
   config.x.elasticsearch_url = "http://elasticsearch:9200"
+  # Services using redis
+  config.x.sidekiq_redis_url = "redis://redis:6379/0"
   config.x.rack_attack_redis_url = "redis://redis:6379/1"
   config.x.flipper_redis_url = "redis://redis:6379/2"
   

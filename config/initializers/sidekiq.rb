@@ -2,7 +2,7 @@
 require 'sidekiq'
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: ENV["REDIS_URL"] }
+  config.redis = { url: Rails.configuration.x.sidekiq_redis_url }
   # The default log level of INFO was too verbose in production and was causing
   # the syslog to get too big if we were running a job that updates the applications
   # and so reindexes and so causes sidekiq INFO messages to appear by their hundreds
@@ -10,7 +10,7 @@ Sidekiq.configure_server do |config|
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: ENV["REDIS_URL"] }
+  config.redis = { url: Rails.configuration.x.sidekiq_redis_url }
 end
 
 Sidekiq.configure_server do |config|

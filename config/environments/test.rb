@@ -11,6 +11,10 @@ Rails.application.configure do
 
   # Used to generate urls outside of the request cycle (in mailer, sidekiq, etc..)
   config.x.host = "localhost"
+  # Needs to be set in test for sidekiq initialiser to work
+  # The value is kind of irrelevant actually
+  # TODO: Fix this
+  config.x.sidekiq_redis_url = "redis://localhost:6379/0"
 
   ## User settings (END)
 
