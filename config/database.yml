@@ -48,3 +48,43 @@ test: &TEST
   password: password
   variables:
     sql_mode: TRADITIONAL
+
+production:
+  adapter: mysql2
+  # To use utf8mb4 with mysql 5.6 we need to enable innodb_large_prefix. See
+  # https://edgeguides.rubyonrails.org/configuring.html#configuring-a-mysql-or-mariadb-database
+  encoding: utf8mb4
+  # We're using an older collation because it's supported on mysql 5.6
+  # which is what we're currently using in production.
+  collation: utf8mb4_general_ci
+  host: <%= Rails.application.credentials.dig(:database, :mysql, :host) %>
+  database: pa-production
+  # For mysql read-only access (during maintenance switch out to the two lines below)
+  # username: pa-production-readonly
+  # password: "<%= Rails.application.credentials.dig(:database, :mysql, :password_readonly) %>"
+  username: pa-production
+  password: "<%= Rails.application.credentials.dig(:database, :mysql, :password) %>"
+  # Set pool to the same as the sidekiq concurrency
+  pool: 10
+
+# For postgres production uncomment the lines below
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: pa-production
+#   # Set pool to the same as the sidekiq concurrency
+#   pool: 10
+#   host: "<%= Rails.application.credentials.dig(:database, :postgres, :host) %>"
+#   username: pa-production
+#   password: "<%= Rails.application.credentials.dig(:database, :postgres, :password) %>"
+
+# For postgres production READ-ONLY uncomment the lines below
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: pa-production
+#   # Set pool to the same as the sidekiq concurrency
+#   pool: 10
+#   host: "<%= Rails.application.credentials.dig(:database, :postgres, :host) %>"
+#   username: pa-production-readonly
+#   password: "<%= Rails.application.credentials.dig(:database, :postgres, :password_readonly) %>"
