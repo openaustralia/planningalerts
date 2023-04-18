@@ -48,7 +48,7 @@ module PlanningalertsApp
 
     # This redis configuration is used by sidekiq
     config.redis = {
-      url: ENV["REDIS_URL"].present? ? ENV["REDIS_URL"] : "redis://localhost:6379/0"
+      url: ENV["REDIS_URL"]
     }
 
     config.middleware.use Rack::Attack
