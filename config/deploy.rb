@@ -65,6 +65,16 @@ set :aws_ec2_default_filters, (proc {
   ]
 })
 
+desc "upload memcache.yml configuration"
+task :upload_memcache_config do
+  # Each host is also running memcached. So...
+  servers = roles(:app).map(&:hostname)
+  memcache_config = { "servers" => servers }.to_yaml
+  on roles(:app) do
+    upload! StringIO.new(memcache_config), "#{shared_path}/config/memcache.yml"
+  end
+end
+
 namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
   task :export do
