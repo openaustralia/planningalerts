@@ -46,11 +46,6 @@ module PlanningalertsApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # This redis configuration is used by sidekiq
-    config.redis = {
-      url: ENV["REDIS_URL"]
-    }
-
     config.middleware.use Rack::Attack
 
     config.action_dispatch.tld_length = 2
