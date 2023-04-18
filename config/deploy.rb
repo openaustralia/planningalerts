@@ -65,6 +65,10 @@ set :aws_ec2_default_filters, (proc {
   ]
 })
 
+# Doing this so that when we get the host names in upload_memcache_config they can also
+# be used inside the network to contact the memcache servers
+set :aws_ec2_contact_point, :public_dns
+
 desc "upload memcache.yml configuration"
 task :upload_memcache_config do
   # Each host is also running memcached. So...
