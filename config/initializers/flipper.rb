@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+Flipper.configure do |config|
+  config.adapter { Flipper::Adapters::Redis.new(Redis.new(url: ENV["FLIPPER_REDIS_URL"])) }
+end
+
 Flipper::UI.configure do |config|
   config.descriptions_source = lambda do |_keys|
     # This should be a complete list of all features being currently used in the codebase
