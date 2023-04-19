@@ -46,11 +46,6 @@ module PlanningalertsApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # This redis configuration is used by sidekiq
-    config.redis = {
-      url: ENV["REDIS_URL"].present? ? ENV["REDIS_URL"] : "redis://localhost:6379/0"
-    }
-
     config.middleware.use Rack::Attack
 
     config.action_dispatch.tld_length = 2
@@ -60,7 +55,7 @@ module PlanningalertsApp
     # Precompile additional assets.
     # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
     # TODO: Use one JS/CSS asset to reduce HTTP requests
-    config.assets.precompile += %w[tailwind.css email.css standard/print.css standard/ie.css maps.js applications.js flatpickr.js bar_graph.js stacked_area_chart.js]
+    config.assets.precompile += %w[tailwind.css email.css standard/all.css standard/print.css standard/ie.css maps.js applications.js flatpickr.js bar_graph.js stacked_area_chart.js]
 
     config.assets.css_compressor = SkippingSassCompressor.new
 
@@ -71,10 +66,6 @@ module PlanningalertsApp
     config.planningalerts_meta_description =
       "A free service which searches Australian planning authority websites " \
       "and emails you details of applications near you"
-
-    config.planningalerts_small_zone_size = 200
-    config.planningalerts_medium_zone_size = 800
-    config.planningalerts_large_zone_size = 2000
 
     # Values used in the API examples
     config.planningalerts_api_example_address = "24 Bruce Road Glenbrook, NSW 2773"

@@ -82,20 +82,20 @@ module ApplicationsHelper
     "#{application.address} | #{application.first_date_scraped.to_date.to_fs(:rfc822)}"
   end
 
-  sig { params(application: Application, size: String, zoom: Integer, key: String).returns(String) }
-  def google_static_map(application, size: "350x200", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
+  sig { params(application: Application, size: String, zoom: Integer, key: Symbol).returns(String) }
+  def google_static_map(application, size: "350x200", zoom: 16, key: :api)
     google_static_map_lat_lng(lat: T.must(application.lat), lng: T.must(application.lng), label: "Map of #{application.address}", size:, zoom:, key:)
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
-  sig { params(lat: Float, lng: Float, size: String, label: String, zoom: Integer, key: String).returns(String) }
-  def google_static_map_lat_lng(lat:, lng:, size: "350x200", label: "Map", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
+  sig { params(lat: Float, lng: Float, size: String, label: String, zoom: Integer, key: Symbol).returns(String) }
+  def google_static_map_lat_lng(lat:, lng:, size: "350x200", label: "Map", zoom: 16, key: :api)
     url = google_static_map_url(lat:, lng:, zoom:, size:, key:)
     image_tag(url, size:, alt: label)
   end
 
-  sig { params(lat: T.nilable(Float), lng: T.nilable(Float), zoom: Integer, size: String, key: String).returns(T.nilable(String)) }
-  def google_static_map_url(lat:, lng:, zoom: 16, size: "350x200", key: "GOOGLE_MAPS_API_KEY")
+  sig { params(lat: T.nilable(Float), lng: T.nilable(Float), zoom: Integer, size: String, key: Symbol).returns(T.nilable(String)) }
+  def google_static_map_url(lat:, lng:, zoom: 16, size: "350x200", key: :api)
     return if lat.nil? || lng.nil?
 
     google_signed_url(
@@ -111,8 +111,8 @@ module ApplicationsHelper
     )
   end
 
-  sig { params(lat: Float, lng: Float, size: String, fov: Integer, key: String).returns(String) }
-  def google_static_streetview_url(lat:, lng:, size: "350x200", fov: 90, key: "GOOGLE_MAPS_API_KEY")
+  sig { params(lat: Float, lng: Float, size: String, fov: Integer, key: Symbol).returns(String) }
+  def google_static_streetview_url(lat:, lng:, size: "350x200", fov: 90, key: :api)
     google_signed_url(
       domain: "https://maps.googleapis.com",
       path: "/maps/api/streetview",
@@ -125,8 +125,8 @@ module ApplicationsHelper
     )
   end
 
-  sig { params(application: Application, size: String, fov: Integer, key: String).returns(String) }
-  def google_static_streetview(application, size: "350x200", fov: 90, key: "GOOGLE_MAPS_API_KEY")
+  sig { params(application: Application, size: String, fov: Integer, key: Symbol).returns(String) }
+  def google_static_streetview(application, size: "350x200", fov: 90, key: :api)
     url = google_static_streetview_url(lat: T.must(application.lat), lng: T.must(application.lng), size:, fov:, key:)
     image_tag(url, size:, alt: "Streetview of #{application.address}")
   end
@@ -161,16 +161,30 @@ module ApplicationsHelper
 
   private
 
-  sig { params(domain: String, path: String, query: T::Hash[Symbol, T.any(String, Integer)], key: String).returns(String) }
-  def google_signed_url(domain:, path:, query:, key: "GOOGLE_MAPS_API_KEY")
-    google_maps_key = ENV.fetch(key, nil)
-    cryptographic_key = ENV.fetch("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY", nil)
+  sig { params(domain: String, path: String, query: T::Hash[Symbol, T.any(String, Integer)], key: Symbol).returns(String) }
+  def google_signed_url(domain:, path:, query:, key: :api)
+    google_maps_key = lookup_google_maps_key(key)
+    cryptographic_key = Rails.application.credentials.dig(:google_maps, :cryptographic_key)
     if google_maps_key.present?
       signed = "#{path}?#{query.merge(key: google_maps_key).to_query}"
       signature = sign_gmap_bus_api_url(signed, cryptographic_key)
       domain + signed + "&signature=#{signature}"
     else
       "#{domain}#{path}?#{query.to_query}"
+    end
+  end
+
+  sig { params(key_type: Symbol).returns(T.nilable(String)) }
+  def lookup_google_maps_key(key_type)
+    case key_type
+    when :api
+      Rails.application.credentials.dig(:google_maps, :api_key)
+    when :email
+      Rails.application.credentials.dig(:google_maps, :email_key)
+    when :server
+      Rails.application.credentials.dig(:google_maps, :server_key)
+    else
+      raise "Unexpected value"
     end
   end
 

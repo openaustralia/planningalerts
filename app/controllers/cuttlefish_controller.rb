@@ -12,7 +12,7 @@ class CuttlefishController < ApplicationController
     delivery_event = T.cast(params[:delivery_event], T.nilable(ActionController::Parameters))
 
     # First check that key is what we expect. Otherwise ignore this request
-    if params[:key] != ENV["CUTTLEFISH_WEBHOOK_KEY"]
+    if params[:key] != Rails.application.credentials.dig(:cuttlefish, :webhook_key)
       head :forbidden
       return
     end

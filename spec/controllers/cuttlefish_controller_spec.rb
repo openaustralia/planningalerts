@@ -6,7 +6,7 @@ describe CuttlefishController do
   context "when has a webhook key" do
     before do
       allow(ENV).to receive(:[])
-      allow(ENV).to receive(:[]).with("CUTTLEFISH_WEBHOOK_KEY").and_return("abc123")
+      allow(Rails.application.credentials).to receive(:dig).with(:cuttlefish, :webhook_key).and_return("abc123")
       allow(NotifySlackCommentDeliveryService).to receive(:call)
     end
 

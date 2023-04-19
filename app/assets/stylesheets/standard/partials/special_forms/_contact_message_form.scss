@@ -1,0 +1,55 @@
+.formtastic#new_contact_message { 
+  @include float-form(100%, 100%, 100%, 0, "buttons-left", left, "select-auto");
+  margin-top: 0;
+
+  label {
+    margin: .75em 0 .25em;
+    padding: 0;
+    font-size: 1em;
+  }
+
+  textarea, select {
+    padding: 0.5em;
+  }
+
+  input[type="file"] {
+    border: 0;
+  }
+
+  textarea, input, select {
+    font-family: $blueprint-font-family;
+    font-size: 100%;
+  }
+
+  textarea { 
+    resize: vertical;
+  }
+
+  .inline-hints,
+  .inline-errors, .errors {
+    margin: 0;
+  }
+
+  .actions {
+    margin-top: 0.75em;
+    padding: 0;
+    // Formtastic overrides
+    width: 100%;
+
+    li {
+      text-align: left !important;
+    }
+  }
+
+  .g-recaptcha { 
+    margin: 1.75em 0 .25em;
+  }
+
+  .error textarea, .error input, .error .inline-errors, .errors {
+    background: #fdd;
+  }
+
+  ul.errors {
+    list-style: none;
+  } 
+}

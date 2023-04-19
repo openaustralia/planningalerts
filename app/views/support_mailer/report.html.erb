@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html charset=UTF-8">
+  </head>
+  <body>
+    <p>
+      The abuse report was completed by <%= @report.name %> (<%= @report.email %>) who said:
+    </p>
+
+    <blockquote><%= @report.details %></blockquote>
+
+    <p>
+      The
+      <%= link_to "original comment", comment_url(@report.comment) %>
+      was written by <%= link_to @report.comment.name, admin_user_url(@report.comment.user) %> who said:
+    </p>
+
+    <blockquote><%= @report.comment.text %></blockquote>
+
+    <p><%= link_to "Edit/hide/delete this comment", edit_admin_comment_url(@report.comment) %></p>
+  </body>
+</html>

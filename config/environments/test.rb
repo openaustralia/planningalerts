@@ -7,6 +7,17 @@ require "active_support/core_ext/integer/time"
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
+  ## User settings (START)
+
+  # Used to generate urls outside of the request cycle (in mailer, sidekiq, etc..)
+  config.x.host = "localhost"
+  # Needs to be set in test for sidekiq initialiser to work
+  # The value is kind of irrelevant actually
+  # TODO: Fix this
+  config.x.sidekiq_redis_url = "redis://localhost:6379/0"
+
+  ## User settings (END)
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Turn false under Spring and add config.action_view.cache_template_loading = true.

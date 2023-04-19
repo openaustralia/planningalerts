@@ -1,3 +1,4 @@
+authentication: <%= Rails.application.credentials[:skylight_authentication] %>
 enable_sidekiq: true
 deploy:
   git_sha: <%= File.read("REVISION").strip %>

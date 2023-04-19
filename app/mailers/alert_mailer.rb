@@ -4,7 +4,6 @@
 class AlertMailer < ApplicationMailer
   extend T::Sig
 
-  include EmailFrom
   helper :application, :applications, :comments
 
   sig do
@@ -30,7 +29,6 @@ class AlertMailer < ApplicationMailer
     )
 
     mail(
-      from: email_from,
       to: alert.email,
       subject: render_to_string(
         partial: "subject",

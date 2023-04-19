@@ -2,6 +2,19 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  ## User settings (START)
+
+  # Used to generate urls outside of the request cycle (in mailer, sidekiq, etc..)
+  config.x.host = "www.planningalerts.org.au"
+  # For logging API calls and full text search (searchkick)
+  config.x.elasticsearch_url = Rails.application.credentials.dig(:elasticsearch, :url)
+  # Services using redis
+  config.x.sidekiq_redis_url = Rails.application.credentials[:sidekiq_redis_url]
+  config.x.rack_attack_redis_url = Rails.application.credentials[:rack_attack_redis_url]
+  config.x.flipper_redis_url = Rails.application.credentials[:flipper_redis_url]
+
+  ## User settings (END)
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -19,11 +32,12 @@ Rails.application.configure do
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
+  config.require_master_key = true
 
-  # Disable serving static files from the `/public` folder by default since
-  # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+  config.public_file_server.enabled = true
+  config.public_file_server.headers = {
+    "Cache-Control" => "public, max-age=#{1.year.to_i}"
+  }
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = Uglifier.new(harmony: true)
@@ -39,8 +53,8 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  # Store uploaded files on S3 (see config/storage.yml).
+  config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -53,12 +67,7 @@ Rails.application.configure do
   # We're depending on the load balancer to do the redirection. Disabling the redirect
   # in rails itself makes it easier to test in development and when contacting the
   # server directly (not going through the load balancer)
-  # Also turn off HSTS includeSubDomains because we DON'T want HSTS on
-  # the email subdomain which points at Cuttlefish and depends on it
-  # working with http
-  # TODO: Get rid of "expires: 0" to re-enable HSTS
-  # This is currently setup to expire anyone who has HSTS cached in their browser
-  config.ssl_options = { redirect: false, hsts: { subdomains: false, expires: 0 } }
+  config.ssl_options = { redirect: false, hsts: { expires: 1.hour } }
 
   # Set to :debug to see everything in the log.
   config.log_level = :warn
@@ -66,9 +75,7 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
-  # Use a different cache store in production but we don't want staging to use it
-  # in case there could be conflicts
-  config.cache_store = :mem_cache_store if ENV["STAGE"] == "production" 
+  config.cache_store = [:mem_cache_store] + YAML.load_file("config/memcache.yml")["servers"]
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
@@ -81,16 +88,16 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.default_url_options = {
-    host: ENV["HOST"], protocol: "https"
+    host: Rails.configuration.x.host, protocol: "https"
   }
 
   # Send mails to the locally running instance of Cuttlefish
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: ENV["CUTTLEFISH_SERVER"],
+    address: Rails.application.credentials.dig(:cuttlefish, :server),
     port: 2525,
-    user_name: ENV["CUTTLEFISH_USER_NAME"],
-    password: ENV["CUTTLEFISH_PASSWORD"],
+    user_name: Rails.application.credentials.dig(:cuttlefish, :user_name),
+    password: Rails.application.credentials.dig(:cuttlefish, :password),
     authentication: :plain
   }
 

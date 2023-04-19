@@ -1,0 +1,46 @@
+- content_for :page_title, "About"
+
+%h3 About PlanningAlerts
+%p
+  You'd probably know if your next door neighbour was going to knock their house down (you'd get a letter through
+  the door telling you they had applied for planning permission and asking you what you thought about it). But you'd
+  probably never find out if the old cinema or pub 5 streets away is going to be converted into luxury flats until
+  the bulldozers turned up.
+%p
+  PlanningAlerts is a free service which searches as many planning authority websites as it can find and emails
+  you details of applications near you. The aim of this to enable shared scrutiny of what is being built (and&nbsp;
+  %a{ href: "http://www.flickr.com/photos/kentjohnson/3634555801/", title: "Carlton and United Brewery Site, Broadway Sydney" }> knocked down
+  )
+  in peoples' communities.
+%p
+  PlanningAlerts is brought to you by the charity the&nbsp;
+  %a{ href: "http://www.openaustraliafoundation.org.au" }> OpenAustralia Foundation
+  \.
+  It was created by Matthew Landauer and Katherine Szuminska.
+%h4#contributors Contributors
+%p Thanks goes to these wonderful people:
+%ul.contributors= render partial: "contributor", collection: contributors.shuffle
+%p
+  If you #{link_to "contribute", get_involved_path} to the project you will get to be on this list.
+
+%p
+  = link_to "Menu", "http://thenounproject.com/term/menu/45517/"
+  and
+  = link_to "External Link", "http://thenounproject.com/term/external-link/45763/"
+  icons designed by
+  = link_to "useiconic.com", "https://useiconic.com/"
+  and
+  = link_to "Email", "https://thenounproject.com/icon/email-5392262/"
+  icon designed by
+  = link_to "Kawalan Icon", "https://thenounproject.com/kawalan.studio/"
+  from
+  #{link_to "the Noun Project", "http://thenounproject.com/"}.
+
+%p
+  PlanningAlerts uses Google Maps services with support of a
+  #{link_to "Google Earth Outreach Grant", "http://www.google.com/earth/outreach/index.html"}.
+
+%p
+  You are using version
+  = link_to APP_VERSION, "https://github.com/openaustralia/planningalerts/commit/#{APP_VERSION}"
+  of PlanningAlerts.

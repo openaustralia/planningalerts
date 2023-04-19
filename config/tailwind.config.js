@@ -6,7 +6,8 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
     './app/views/**/*.{erb,haml,html,slim}',
-    './app/themes/tailwind/views/**/*.{erb,haml,html,slim}'
+    './app/themes/tailwind/views/**/*.{erb,haml,html,slim}',
+    './app/components/tailwind/*.{erb,haml,html,slim}',
   ],
   theme: {
     extend: {
@@ -16,15 +17,17 @@ module.exports = {
       },
     },
     colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      white: '#ffffff',
-      fuchsia: '#CD4A9A',
-      lavender: '#9786AD',
-      yellow: '#F4BE53',
-      orange: '#E98E07',
-      blue: '#414860',
-      green: '#038A81',
+      'transparent': 'transparent',
+      'current': 'currentColor',
+      'white': '#ffffff',
+      'off-white': "#eeeeee",
+      'fuchsia': '#CD4A9A',
+      'lavender': '#9786AD',
+      'yellow': '#F4BE53',
+      'orange': '#E98E07',
+      'navy': '#414860',
+      'green': '#038A81',
+      'darker-orange': '#BA671D',
     }
 },
   plugins: [

@@ -66,14 +66,16 @@ class ApplicationsController < ApplicationController
     @sort = T.let(sort, T.nilable(String))
     per_page = 30
     @page = T.let(params_page, T.nilable(String))
-    result = GoogleGeocodeService.call(T.must(@q))
+    return unless @q
+
+    result = GoogleGeocodeService.call(address: @q, key: Rails.application.credentials.dig(:google_maps, :server_key))
     top = result.top
     if top.nil?
       @full_address = @q
       @other_addresses = T.let([], T.nilable(T::Array[String]))
       @error = T.let(result.error, T.nilable(String))
       @trending = T.let(Application.trending.limit(4), T.untyped)
-      render "home/index"
+      render "address"
     else
       @full_address = T.let(top.full_address, T.nilable(String))
       @alert = Alert.new(address: @q, user: User.new)
@@ -87,6 +89,11 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def search
+    unless Flipper.enabled?(:full_text_search, current_user)
+      render plain: t(".full_text_search_not_enabled")
+      return
+    end
+
     params_q = T.cast(params[:q], T.nilable(String))
 
     # TODO: Fix this hacky ugliness

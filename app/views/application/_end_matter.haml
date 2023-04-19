@@ -1,0 +1,1 @@
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.dig(:google_maps, :api_key)}&v=3&libraries=places&region=au&callback=initialiseAllMaps", async: true

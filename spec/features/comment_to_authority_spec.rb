@@ -115,9 +115,9 @@ describe "Give feedback" do
     expect(page).to have_content("The comment has been reported and a moderator will look into it as soon as possible.")
     expect(page).to have_content("Thanks for taking the time let us know about this.")
 
-    expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq(1)
-    open_email("moderator@planningalerts.org.au")
-    expect(current_email).to be_delivered_from("Joe Reporter <moderator@planningalerts.org.au>")
+    expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
+    open_email("contact@planningalerts.org.au")
+    expect(current_email).to be_delivered_from("Joe Reporter <contact@planningalerts.org.au>")
     expect(current_email).to have_reply_to("Joe Reporter <reporter@foo.com>")
     expect(current_email).to have_subject("PlanningAlerts: Abuse report")
   end
@@ -134,9 +134,9 @@ describe "Give feedback" do
     expect(page).to have_content("The comment has been reported and a moderator will look into it as soon as possible.")
     expect(page).to have_content("Thanks for taking the time let us know about this.")
 
-    expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq(1)
-    open_email("moderator@planningalerts.org.au")
-    expect(current_email).to be_delivered_from("moderator@planningalerts.org.au")
+    expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
+    open_email("contact@planningalerts.org.au")
+    expect(current_email).to be_delivered_from("contact@planningalerts.org.au")
     expect(current_email).to have_reply_to("reporter@foo.com")
     expect(current_email).to have_subject("PlanningAlerts: Abuse report")
   end

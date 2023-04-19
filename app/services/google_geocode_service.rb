@@ -4,39 +4,33 @@
 class GoogleGeocodeService
   extend T::Sig
 
-  sig { params(address: String).returns(GeocoderResults) }
-  def self.call(address)
-    new(address).call
+  sig { params(address: String, key: String).returns(GeocoderResults) }
+  def self.call(address:, key:)
+    new(address:, key:).call
   end
 
-  sig { params(address: String).void }
-  def initialize(address)
+  sig { params(address: String, key: String).void }
+  def initialize(address:, key:)
     @address = address
+    @key = key
   end
 
   sig { returns(GeocoderResults) }
   def call
     return error("Please enter a street address") if address == ""
 
-    params = {
-      address:,
-      key: ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil),
-      region: "au",
-      sensor: false
-    }
-    response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
+    parsed_response = call_google_api(address)
 
-    status = response.parsed_response["status"]
     # TODO: Raise a proper error class here
-    raise "Google geocoding error #{status}" unless %w[OK ZERO_RESULTS].include?(status)
+    raise "Google geocoding error" if parsed_response.nil?
 
-    if status != "OK"
+    if parsed_response["status"] != "OK"
       return error(
         "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
       )
     end
 
-    results = response.parsed_response["results"]
+    results = parsed_response["results"]
     results = results.select do |result|
       country = component(result, "country")
       # Even though we've biased the results towards au by using region: "au",
@@ -85,6 +79,26 @@ class GoogleGeocodeService
 
   sig { returns(String) }
   attr_reader :address
+
+  sig { returns(String) }
+  attr_reader :key
+
+  # Returns nil if status is not valid
+  sig { params(address: String).returns(T.nilable(T::Hash[String, T.untyped])) }
+  def call_google_api_no_caching(address)
+    params = { address:, key:, region: "au", sensor: false }
+    response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
+    response.parsed_response if %w[OK ZERO_RESULTS].include?(response.parsed_response["status"])
+  end
+
+  # This caches the returned value for 24 hours but only if it's valid (non nil)
+  sig { params(address: String).returns(T.nilable(T::Hash[String, T.untyped])) }
+  def call_google_api(address)
+    # If we need to expire all the cached values for some reason then increment the version number below
+    Rails.cache.fetch("google_geocode_service/v1/#{address}", expires_in: 24.hours, skip_nil: true) do
+      call_google_api_no_caching(address)
+    end
+  end
 
   sig { params(text: String).returns(GeocoderResults) }
   def error(text)

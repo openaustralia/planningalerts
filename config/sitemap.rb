@@ -1,12 +1,17 @@
 # Depending on values in env variables for access to AWS
-SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new('planningalerts-sitemaps-production', region: 'ap-southeast-2')
+SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
+  "planningalerts-sitemaps-production",
+  access_key_id: Rails.application.credentials.dig(:sitemaps, :aws, :access_key_id),
+  secret_access_key: Rails.application.credentials.dig(:sitemaps, :aws, :secret_access_key),
+  region: "ap-southeast-2"
+)
 
-SitemapGenerator::Sitemap.sitemaps_host = "https://planningalerts-sitemaps-production.s3.amazonaws.com/"
+SitemapGenerator::Sitemap.sitemaps_path = "sitemaps/"
 
 # The directory to write sitemaps to locally
 SitemapGenerator::Sitemap.public_path = 'tmp/sitemaps/'
 
-SitemapGenerator::Sitemap.default_host = root_url(host: ENV.fetch("HOST", nil), protocol: "https")
+SitemapGenerator::Sitemap.default_host = root_url(host: Rails.configuration.x.host, protocol: "https")
 
 SitemapGenerator::Sitemap.create do
   add api_howto_path, changefreq: "monthly"

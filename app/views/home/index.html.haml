@@ -1,0 +1,10 @@
+- content_for :meta_description, Rails.configuration.planningalerts_meta_description
+
+%h3
+  Find out for free what is being built and knocked down in your area and receive email
+  alerts when something new is planned.
+
+= render "applications/address_search_form", q: @q, error: @error
+
+
+= render "home/trending", applications: @trending

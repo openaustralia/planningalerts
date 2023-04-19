@@ -1,0 +1,86 @@
+- content_for :page_title, @authority.full_name
+%h3= yield :page_title
+
+- if @authority.population_2021
+  %p
+    Population #{number_with_delimiter @authority.population_2021} (2021 census)
+
+- if @authority.covered?
+  - if @authority.broken? && @authority.applications.count != 0
+    %p
+      %span.highlight It looks like something might be wrong. The latest new application was received #{time_ago_in_words(@authority.date_last_new_application_scraped)} ago.
+      = link_to "Why?", faq_path(anchor: "broken_scraper")
+
+  - if @authority.applications.empty?
+    %p
+      No applications for #{@authority.full_name} have yet been collected.
+  - else
+    %p
+      For #{@authority.full_name} #{@authority.applications.where("first_date_scraped >= ?", 1.week.ago).count} new applications have been collected in the last week, #{@authority.applications.where("first_date_scraped >= ?", 1.month.ago).count} in the last month and #{@authority.applications.count} since #{@authority.earliest_date.strftime("%-d %b %Y")}, when this authority was first added to PlanningAlerts. That's a
+      = link_to "median", "http://en.wikipedia.org/wiki/Median"
+      of #{@authority.median_new_applications_per_week} applications per week (ignoring weeks without any new applications at all).
+
+    %p
+      Browse all
+      = link_to "recent applications", authority_applications_path(@authority.short_name_encoded)
+      or
+      = link_to "comments on applications", authority_comments_path(@authority.short_name_encoded)
+
+    .chart#applications-chart
+    .chart#comments-chart
+
+    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min.js"
+    = javascript_include_tag "bar_graph"
+    :javascript
+      barGraph(
+        "#applications-chart",
+        "#{per_week_authority_applications_url(@authority.short_name_encoded, format: :json)}",
+        "new applications scraped"
+      );
+
+      barGraph(
+        "#comments-chart",
+        "#{per_week_authority_comments_url(@authority.short_name_encoded, format: :json)}",
+        "comments posted"
+      );
+
+  %h4 Under the Hood
+  %p
+    Are you a developer or keen to learn some new things and help out in the process?
+    Then, #{link_to "look under the hood", authority_under_the_hood_path(@authority.short_name_encoded)},
+    see more about how the information gets into PlanningAlerts, what problems are
+    happening and what you might do to help fix them.
+  %p= link_to "Look under the hood", authority_under_the_hood_path(@authority.short_name_encoded)
+
+- else
+  %p
+    This authority is
+    %strong
+      not yet covered by PlanningAlerts.
+    This is because either
+    %ul
+      %li a scraper has not yet been written for it or...
+      %li the authority doesn't publish the information in a way that a scraper can read or...
+      %li the authority doesn't publish the information online at all!
+
+  %h3 How you can help
+
+  %p
+    %strong
+      If you're a developer
+    you can help by writing a scraper. It can be in PHP, Python or Ruby. Read the
+    #{link_to "step by step guide to writing a scraper for PlanningAlerts", how_to_write_a_scraper_path}.
+  %p
+    %strong
+      If you're not a developer
+    you can ask your developer friend to help (see above) or
+    = link_to "lobby your authority", how_to_lobby_your_local_council_path
+    to make it easy for us to add their planning data to our system.
+  %p
+    %strong
+      If you work for the authority
+    you can help by publishing the data in a simple machine readable format.
+
+  %h3 Questions?
+
+  %p= link_to "Contact us", documentation_contact_path

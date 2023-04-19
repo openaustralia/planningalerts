@@ -2,6 +2,19 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  ## User settings (START)
+
+  # Used to generate urls outside of the request cycle (in mailer, sidekiq, etc..)
+  config.x.host = "localhost"
+  # For logging API calls and full text search (searchkick)
+  config.x.elasticsearch_url = "http://elasticsearch:9200"
+  # Services using redis
+  config.x.sidekiq_redis_url = "redis://redis:6379/0"
+  config.x.rack_attack_redis_url = "redis://redis:6379/1"
+  config.x.flipper_redis_url = "redis://redis:6379/2"
+  
+  ## User settings (END)
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -96,4 +109,7 @@ Rails.application.configure do
 
   # Allow access from github codespaces preview
   config.hosts << /.*\.preview\.app\.github\.dev/
+
+  # Uncommment to allow local access for Matthew (for previewing on mobile etc)
+  #config.hosts << "orpington.local"
 end

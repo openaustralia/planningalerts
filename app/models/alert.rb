@@ -8,11 +8,16 @@ class Alert < ApplicationRecord
   # TODO: Remove accepts_nested_attributes_for after users purely sign up for alerts by being logged in
   accepts_nested_attributes_for :user
 
-  VALID_RADIUS_METERS_VALUES = T.let([
-    Rails.configuration.planningalerts_small_zone_size,
-    Rails.configuration.planningalerts_medium_zone_size,
-    Rails.configuration.planningalerts_large_zone_size
-  ].freeze, T::Array[Integer])
+  DEFAULT_RADIUS = 2000
+
+  # This sets the allowable alert radii as well as human readable names for them
+  # The default alert radius is the largest size
+  RADIUS_DESCRIPTIONS = T.let(
+    { 200 => "street", 800 => "neighbourhood", DEFAULT_RADIUS => "suburb" }.freeze,
+    T::Hash[Integer, String]
+  )
+
+  VALID_RADIUS_METERS_VALUES = T.let(RADIUS_DESCRIPTIONS.keys.freeze, T::Array[Integer])
 
   validates :radius_meters, numericality: { greater_than: 0 }
   validates :radius_meters, inclusion: { in: VALID_RADIUS_METERS_VALUES }
@@ -127,7 +132,8 @@ class Alert < ApplicationRecord
 
   sig { void }
   def geocode_from_address
-    @geocode_result = T.let(GoogleGeocodeService.call(address), T.nilable(GeocoderResults))
+    geocode_result = GoogleGeocodeService.call(address:, key: Rails.application.credentials.dig(:google_maps, :server_key))
+    @geocode_result = T.let(geocode_result, T.nilable(GeocoderResults))
 
     r = T.must(@geocode_result)
     top = r.top

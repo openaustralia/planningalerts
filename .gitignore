@@ -1,5 +1,4 @@
 .bundle
-.env.local
 .env.development
 db/*.sqlite3
 log/*.log
@@ -12,8 +11,10 @@ tmp/capybara
 tmp/miniprofiler
 tmp/sitemaps
 tmp/boundaries
+tmp/restart.txt
+tmp/storage
 coverage
-config/database.yml
+storage/*
 rerun.txt
 webrat.log
 .DS_Store
@@ -29,3 +30,6 @@ planningalerts-app.sublime-project
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+/config/credentials/production.key
+/config/credentials/development.key

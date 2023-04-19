@@ -25,7 +25,7 @@ class ReportsController < ApplicationController
     )
 
     if @report.save
-      ReportMailer.notify(@report).deliver_later
+      SupportMailer.report(@report).deliver_later
       redirect_to thank_you_comment_reports_url(@comment)
     else
       render "new"

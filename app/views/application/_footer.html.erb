@@ -1,0 +1,58 @@
+<div id="donations-wrapper">
+  <div class="donations-banner pa-container media">
+    <h4>Find PlanningAlerts useful?</h4>
+    <p class="media-body">
+      This independent project is run by a local charity, the
+      <%= link_to "OpenAustralia Foundation", "https://www.openaustraliafoundation.org.au", title: "The OpenAustralia Foundation builds free tools to simplify the discovery and use of public data." %>.
+      PlanningAlerts is powered by small, tax-deductible donations from the people who use it to stay informed about changes to their
+      local&nbsp;area. If&nbsp;you find it useful, chip in to support&nbsp;PlanningAlerts.
+    </p>
+    <%= link_to "Back PlanningAlerts", donate_url, class: "button button-rounded button-large button-action media-object", title: "Make a donation to support PlanningAlerts", onClick: "_gaq.push(['_trackEvent', 'Donations', 'click donation link', 'donations footer banner']);" %>
+  </div>
+</div>
+<div id="footer-wrapper">
+  <div class="pa-container" id="footer">
+    <ul class="keepintouch">
+      <li>If you have a question or need help
+        <%= link_to "Contact us", documentation_contact_path %>
+      </li>
+      <li>
+        Chat with us on Twitter
+        <%= link_to "@PlanningAlerts", "http://twitter.com/planningalerts" %>
+        <%= link_to "@OpenAustralia", "http://twitter.com/openaustralia" %>
+      </li>
+      <li>
+        Source code
+        <%= link_to "github.com/openaustralia/planningalerts", "https://github.com/openaustralia/planningalerts" %>
+      </li>
+    </ul>
+    <div class="oaf">
+      <h4>
+        An
+        <a href="http://openaustraliafoundation.org.au" title="The OpenAustralia Foundation">OpenAustralia Foundation</a>
+        Project
+      </h4>
+      <h5>Other wonderful projects from us</h5>
+      <ul>
+        <li>
+          <%= link_to "Right To Know", "https://www.righttoknow.org.au/" %>
+        </li>
+        <li>
+          <%= link_to "They Vote For You", "https://theyvoteforyou.org.au/" %>
+        </li>
+        <li>
+          <%= link_to "OpenAustralia.org", "https://www.openaustralia.org.au/" %>
+        </li>
+      </ul>
+      <h5>Read our blog</h5>
+      <ul>
+        <li>
+          <%= link_to "openaustraliafoundation.org.au/blog", "https://www.openaustraliafoundation.org.au/blog/" %>
+        </li>
+      </ul>
+    </div>
+    <% if Flipper.enabled?(:switch_themes, current_user) %>
+      <%= button_to "Toggle theme", toggle_theme_path, class: "btn btn-outline-primary" %>
+    <% end %>
+  </div>
+</div>

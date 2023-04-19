@@ -3,7 +3,8 @@
 
 class Report < ApplicationRecord
   belongs_to :comment
-  # Only newer reports have users attached to them
+  # Only newer reports have users attached to them and newer reports can also lack a user if the
+  # user has been deleted.
   belongs_to :user, optional: true
 
   validates :email, presence: true

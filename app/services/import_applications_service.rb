@@ -4,18 +4,22 @@
 class ImportApplicationsService
   extend T::Sig
 
-  sig { params(authority: Authority, logger: Logger).void }
-  def self.call(authority:, logger:)
+  sig { params(authority: Authority, logger: Logger, scrape_delay: Integer, morph_api_key: String).void }
+  def self.call(authority:, logger:, scrape_delay:, morph_api_key:)
     new(
       authority:,
-      logger:
+      logger:,
+      scrape_delay:,
+      morph_api_key:
     ).call
   end
 
-  sig { params(authority: Authority, logger: Logger).void }
-  def initialize(authority:, logger:)
+  sig { params(authority: Authority, logger: Logger, scrape_delay: Integer, morph_api_key: String).void }
+  def initialize(authority:, logger:, scrape_delay:, morph_api_key:)
     @authority = authority
     @logger = logger
+    @scrape_delay = scrape_delay
+    @morph_api_key = morph_api_key
   end
 
   sig { void }
@@ -45,16 +49,6 @@ class ImportApplicationsService
 
   private
 
-  sig { returns(Integer) }
-  def scrape_delay
-    T.must(ENV.fetch("SCRAPE_DELAY", nil)).to_i
-  end
-
-  sig { returns(String) }
-  def morph_api_key
-    T.must(ENV.fetch("MORPH_API_KEY", nil))
-  end
-
   sig { returns(Date) }
   def start_date
     Time.zone.today - scrape_delay
@@ -65,6 +59,12 @@ class ImportApplicationsService
 
   sig { returns(Logger) }
   attr_reader :logger
+
+  sig { returns(Integer) }
+  attr_reader :scrape_delay
+
+  sig { returns(String) }
+  attr_reader :morph_api_key
 
   # Import all the applications for this authority from morph.io
   sig { void }

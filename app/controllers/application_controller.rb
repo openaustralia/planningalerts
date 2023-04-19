@@ -12,14 +12,12 @@ class ApplicationController < ActionController::Base
 
   include Pundit::Authorization
 
-  theme :theme_resolver
-
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-
+  before_action :update_view_path_for_theme
   before_action :configure_permitted_parameters, if: :devise_controller?
   # This stores the location on every request so that we can always redirect back after logging in
   # See https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D
@@ -58,14 +56,11 @@ class ApplicationController < ActionController::Base
     Rack::MiniProfiler.authorize_request
   end
 
-  sig { returns(String) }
-  def theme_resolver
-    # Only show a different theme if the user is an admin
-    if session[:theme] && current_user&.admin?
-      session[:theme]
-    else
-      "standard"
-    end
+  sig { void }
+  def update_view_path_for_theme
+    return unless Flipper.enabled?(:switch_themes, current_user) && session[:theme] == "tailwind"
+
+    prepend_view_path(Rails.root.join("app/views/_tailwind"))
   end
 
   sig { void }

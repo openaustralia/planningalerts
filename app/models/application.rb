@@ -12,7 +12,7 @@ class Application < ApplicationRecord
   extend Kaminari::ConfigurationMethods::ClassMethods
 
   searchkick highlight: [:description],
-             index_name: "pa_applications_#{ENV.fetch('STAGE', nil)}",
+             index_name: "pa_applications_#{Rails.env}",
              locations: [:location],
              callbacks: :async
 
@@ -133,7 +133,11 @@ class Application < ApplicationRecord
 
   sig { params(address: String).returns(T::Hash[Symbol, T.untyped]) }
   def self.geocode_attributes(address)
-    r = GeocodeService.call(address)
+    r = GeocodeService.call(
+      address:,
+      google_key: Rails.application.credentials.dig(:google_maps, :server_key),
+      mappify_key: Rails.application.credentials[:mappify_api_key]
+    )
     top = r.top
     if top
       {
