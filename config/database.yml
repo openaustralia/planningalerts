@@ -66,3 +66,35 @@ test: &TEST
   host: postgres
   username: postgres
   password: password
+
+production:
+  <<: *default
+  host: <%= Rails.application.credentials.dig(:database, :mysql, :host) %>
+  database: pa-production
+  # For mysql read-only access (during maintenance switch out to the two lines below)
+  # username: pa-production-readonly
+  # password: "<%= Rails.application.credentials.dig(:database, :mysql, :password_readonly) %>"
+  username: pa-production
+  password: "<%= Rails.application.credentials.dig(:database, :mysql, :password) %>"
+
+# For postgres production uncomment the lines below
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: pa-production
+#   # Set pool to the same as the sidekiq concurrency
+#   pool: 10
+#   host: "<%= Rails.application.credentials.dig(:database, :postgres, :host) %>"
+#   username: pa-production
+#   password: "<%= Rails.application.credentials.dig(:database, :postgres, :password) %>"
+
+# For postgres production READ-ONLY uncomment the lines below
+# production:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: pa-production
+#   # Set pool to the same as the sidekiq concurrency
+#   pool: 10
+#   host: "<%= Rails.application.credentials.dig(:database, :postgres, :host) %>"
+#   username: pa-production-readonly
+#   password: "<%= Rails.application.credentials.dig(:database, :postgres, :password_readonly) %>"
