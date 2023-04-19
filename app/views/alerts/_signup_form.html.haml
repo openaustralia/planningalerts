@@ -1,0 +1,18 @@
+- if current_user.nil?
+  %p
+    = link_to "Create an account", new_user_registration_path
+    or
+    = link_to "sign in", new_user_session_path
+    to create an alert.
+- else
+  = semantic_form_for alert do |f|
+    = f.inputs do
+      - if address_hidden
+        = f.input :address, as: :hidden
+      - else
+        = f.input :address, label: "Enter a street address",
+                            placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
+                            input_html: { class: "address-autocomplete-input", autofocus: true }
+    = f.actions do
+      = f.action :submit, label: "Create alert",
+                          button_html: { class: "button button-rounded button-large button-action" }

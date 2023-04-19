@@ -1,0 +1,22 @@
+- if sort == "time"
+  = render(Standard::DropdownComponent.new) do |component|
+    - component.with_button do
+      within
+      = meters_in_words(radius)
+    :ruby
+      component.with_menu do |menu|
+        Alert::VALID_RADIUS_METERS_VALUES.each do |radius_option|
+          menu.with_item(disabled: radius.to_i == radius_option) { link_to "within #{meters_in_words(radius_option)}", { q:, radius: (radius_option == 2000 ? nil : radius_option) } }
+        end
+      end
+- else
+  = render(Standard::DropdownComponent.new) do |component|
+    - component.with_button do
+      within the last
+      = days_in_words(time)
+    :ruby
+      component.with_menu do |menu|
+        [364 / 4, 365 / 2, 365, 365 * 2, 365 * 5, 365 * 10].each do |time_option|
+          menu.with_item(disabled: time == time_option) { link_to "within the last #{days_in_words(time_option)}", { q:, sort:, time: (time_option == 365 ? nil : time_option) } }
+        end
+      end

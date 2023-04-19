@@ -3,9 +3,16 @@
 require "#{File.dirname(__FILE__)}/../spec_helper"
 
 describe "GoogleGeocodeService" do
+  # This is a special maps api key which is just for running these tests
+  # It is disabled in the google cloud console:
+  # https://console.cloud.google.com/apis/credentials/key/f9bf39f1-8c05-4c64-9646-2691ab734432?project=planningalerts-214303&authuser=1&organizationId=142099235345
+  # Normally this isn't a problem as requests are recorded with vcr and played
+  # back so no actual external web requests are run during tests.
+  let(:key) { "AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q" }
+
   let(:result) do
     VCR.use_cassette(:google_geocoder) do
-      GoogleGeocodeService.call(address)
+      GoogleGeocodeService.call(address:, key:)
     end
   end
   let(:error) { result.error }

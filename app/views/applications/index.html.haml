@@ -1,0 +1,20 @@
+- content_for :page_title, @description
+
+%h3= @description
+
+.attention
+  = render "alerts/signup_introduction"
+  = render "alerts/frequency"
+  = render "privacy_policy"
+  = render "alerts/signup_form", alert: @alert, address_hidden: false
+
+- if @authority&.broken?
+  - if @authority.date_last_new_application_scraped.nil?
+    %span.highlight There are no applications yet for this authority
+  - else
+    %span.highlight It looks like something might be wrong. The latest new application was received #{time_ago_in_words(@authority.date_last_new_application_scraped)} ago.
+    = link_to "Why?", faq_path(anchor: "broken_scraper")
+
+= paginate @applications
+%ol.applications= render partial: "application", collection: @applications
+= paginate @applications

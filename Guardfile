@@ -11,6 +11,7 @@ guard :livereload do
   watch(%r{config/locales/.+\.yml$})
   watch(%r{stylesheets/.+\.(scss|sass)$})
   watch(%r{stylesheets/\w+/.+\.(scss|sass)$})
+  watch(%r{app/components/.+\.(rb|erb)})
   # Rails Assets Pipeline
   watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*}) { |m| "/assets/#{m[2]}" }
 end

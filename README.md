@@ -23,7 +23,6 @@ $ cd planningalerts
 ```
 
 **Setup The Database**
- * Create your own database config file - `cp config/database.yml.example config/database.yml`
  * Set up the databases - `docker compose run web bin/rake db:setup`
 
  **Start the application**

@@ -147,10 +147,16 @@ module GeneratedPathHelpersModule
   def confirmed_comment_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def contact_messages_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def cuttlefish_event_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def destroy_user_session_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def documentation_contact_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def donations_create_path(*args); end
@@ -355,6 +361,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def thank_you_comment_reports_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def thank_you_contact_messages_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def toggle_theme_path(*args); end

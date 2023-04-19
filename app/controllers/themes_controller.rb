@@ -6,7 +6,7 @@ class ThemesController < ApplicationController
 
   sig { void }
   def toggle
-    session[:theme] = session[:theme] == "tailwind" ? "standard" : "tailwind"
-    redirect_to root_url
+    session[:theme] = ("tailwind" if session[:theme] != "tailwind")
+    redirect_back(fallback_location: root_path)
   end
 end

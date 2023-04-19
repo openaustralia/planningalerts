@@ -1,4 +1,4 @@
-Rack::Attack.cache.store = ActiveSupport::Cache::RedisCacheStore.new(url: ENV["RACK_ATTACK_REDIS_URL"])
+Rack::Attack.cache.store = ActiveSupport::Cache::RedisCacheStore.new(url: Rails.configuration.x.rack_attack_redis_url)
 
 Rack::Attack.throttle(
   "limit api requests",

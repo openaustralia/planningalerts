@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/openaustralia/themes_on_rails
-  revision: ee7f13f93379e69a8d638268236848ea1d1042e9
-  specs:
-    themes_on_rails (0.4.0)
-      concurrent-ruby
-      rails (>= 3.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -169,7 +161,6 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     chunky_png (1.4.0)
-    climate_control (1.2.0)
     coderay (1.1.3)
     colorize (0.8.1)
     compass (1.0.3)
@@ -198,7 +189,6 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    daemons (1.4.1)
     dalli (3.2.3)
     date (3.3.3)
     dbf (4.2.2)
@@ -438,6 +428,8 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (5.0.1)
+    puma (6.1.1)
+      nio4r (~> 2.0)
     pundit (2.3.0)
       activesupport (>= 3.0.0)
     raabro (1.4.0)
@@ -501,6 +493,8 @@ GEM
       unparser
     rdf (3.2.9)
       link_header (~> 0.0, >= 0.0.8)
+    recaptcha (5.12.3)
+      json
     redcarpet (3.5.1)
     redis (4.8.0)
     regexp_parser (2.6.1)
@@ -662,10 +656,6 @@ GEM
     temple (0.9.1)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
-    thin (1.8.1)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (>= 1, < 3)
     thor (1.2.1)
     tilt (2.0.11)
     timecop (0.9.6)
@@ -747,7 +737,6 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capybara
-  climate_control
   compass-blueprint
   compass-rails (= 3.1.0)
   counter_culture
@@ -787,6 +776,7 @@ DEPENDENCIES
   octokit
   oj
   pg
+  puma
   pundit (~> 2.2)
   rabl
   rack-attack
@@ -799,6 +789,7 @@ DEPENDENCIES
   rake
   rb-fsevent
   rb-inotify
+  recaptcha
   redcarpet
   rest-client
   rexml
@@ -829,8 +820,6 @@ DEPENDENCIES
   susy
   tailwindcss-rails (~> 2.0)
   tapioca
-  themes_on_rails!
-  thin
   timecop
   typhoeus
   uglifier

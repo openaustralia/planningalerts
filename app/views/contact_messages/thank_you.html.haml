@@ -1,0 +1,10 @@
+- content_for :page_title, "Thank you!"
+.attention
+  %h3= yield :page_title
+  %p Thank you for getting in touch. We will get back to you as soon as we can.
+
+  %p
+    We are a tiny team with a very large email inbox. So, it probably will take us a little while to get back to you.
+    We try to get back to everyone but sometimes things slip through the cracks.
+
+  = link_to "Return to Planning Alerts", root_path

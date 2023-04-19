@@ -164,4 +164,10 @@ FactoryBot.define do
   factory :subscription do
     sequence(:email) { |s| "mary#{s}@enterpriserealty.com.au" }
   end
+
+  factory :contact_message do
+    email { "eliza@example.org" }
+    reason { "I have a privacy concern" }
+    details { "I included my address in my comment by accident. Please remove it." }
+  end
 end

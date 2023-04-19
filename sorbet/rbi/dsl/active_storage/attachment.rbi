@@ -6,6 +6,7 @@
 
 class ActiveStorage::Attachment
   include GeneratedAssociationMethods
+  include GeneratedAttributeMethods
   extend CommonRelationMethods
   extend GeneratedRelationMethods
 
@@ -242,19 +243,19 @@ class ActiveStorage::Attachment
   end
 
   module GeneratedAssociationMethods
-    sig { returns(T.untyped) }
+    sig { returns(T.nilable(::ActiveStorage::Blob)) }
     def blob; end
 
-    sig { params(value: T.untyped).void }
+    sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
     def blob=(value); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Blob) }
     def build_blob(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Blob) }
     def create_blob(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(::ActiveStorage::Blob) }
     def create_blob!(*args, &blk); end
 
     sig { returns(T.untyped) }
@@ -263,7 +264,7 @@ class ActiveStorage::Attachment
     sig { params(value: T.untyped).void }
     def record=(value); end
 
-    sig { returns(T.untyped) }
+    sig { returns(T.nilable(::ActiveStorage::Blob)) }
     def reload_blob; end
 
     sig { returns(T.untyped) }
@@ -451,6 +452,350 @@ class ActiveStorage::Attachment
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def without(*args, &blk); end
+  end
+
+  module GeneratedAttributeMethods
+    sig { returns(::Integer) }
+    def blob_id; end
+
+    sig { params(value: ::Integer).returns(::Integer) }
+    def blob_id=(value); end
+
+    sig { returns(T::Boolean) }
+    def blob_id?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def blob_id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def blob_id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def blob_id_came_from_user?; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def blob_id_change; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def blob_id_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def blob_id_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def blob_id_in_database; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def blob_id_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def blob_id_previously_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def blob_id_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def blob_id_was; end
+
+    sig { void }
+    def blob_id_will_change!; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def created_at; end
+
+    sig { params(value: ::ActiveSupport::TimeWithZone).returns(::ActiveSupport::TimeWithZone) }
+    def created_at=(value); end
+
+    sig { returns(T::Boolean) }
+    def created_at?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def created_at_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def created_at_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def created_at_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def created_at_change; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def created_at_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def created_at_changed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def created_at_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def created_at_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def created_at_previously_changed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def created_at_previously_was; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def created_at_was; end
+
+    sig { void }
+    def created_at_will_change!; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id; end
+
+    sig { params(value: ::Integer).returns(::Integer) }
+    def id=(value); end
+
+    sig { returns(T::Boolean) }
+    def id?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def id_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def id_change; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def id_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def id_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def id_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def id_previously_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_was; end
+
+    sig { void }
+    def id_will_change!; end
+
+    sig { returns(::String) }
+    def name; end
+
+    sig { params(value: ::String).returns(::String) }
+    def name=(value); end
+
+    sig { returns(T::Boolean) }
+    def name?; end
+
+    sig { returns(T.nilable(::String)) }
+    def name_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def name_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def name_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def name_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def name_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def name_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def name_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def name_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def name_previously_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def name_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def name_was; end
+
+    sig { void }
+    def name_will_change!; end
+
+    sig { returns(::Integer) }
+    def record_id; end
+
+    sig { params(value: ::Integer).returns(::Integer) }
+    def record_id=(value); end
+
+    sig { returns(T::Boolean) }
+    def record_id?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def record_id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def record_id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def record_id_came_from_user?; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def record_id_change; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def record_id_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def record_id_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def record_id_in_database; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def record_id_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def record_id_previously_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def record_id_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def record_id_was; end
+
+    sig { void }
+    def record_id_will_change!; end
+
+    sig { returns(::String) }
+    def record_type; end
+
+    sig { params(value: ::String).returns(::String) }
+    def record_type=(value); end
+
+    sig { returns(T::Boolean) }
+    def record_type?; end
+
+    sig { returns(T.nilable(::String)) }
+    def record_type_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def record_type_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def record_type_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def record_type_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def record_type_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def record_type_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def record_type_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def record_type_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def record_type_previously_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def record_type_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def record_type_was; end
+
+    sig { void }
+    def record_type_will_change!; end
+
+    sig { void }
+    def restore_blob_id!; end
+
+    sig { void }
+    def restore_created_at!; end
+
+    sig { void }
+    def restore_id!; end
+
+    sig { void }
+    def restore_name!; end
+
+    sig { void }
+    def restore_record_id!; end
+
+    sig { void }
+    def restore_record_type!; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def saved_change_to_blob_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_blob_id?; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def saved_change_to_created_at; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_created_at?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def saved_change_to_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_id?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_name; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_name?; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def saved_change_to_record_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_record_id?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_record_type; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_record_type?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_blob_id?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_created_at?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_id?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_name?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_record_id?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_record_type?; end
   end
 
   module GeneratedRelationMethods

@@ -1,0 +1,208 @@
+// Only apply the blueprint form styles to forms with
+// a class of "bp". This makes it easier to style
+// forms from scratch if you need to.
+
+//form {
+//  @include blueprint-form; }
+
+@import "formtastic_base";
+
+//$fb-light-text: $font-color;
+$fb-gradient-style: matte;
+$fb-font-size: 1.3em;
+$fb-line-height: 1em;
+
+// Override blueprint interaction style
+// Remove this hack if we remove blueprint
+body .error a {
+  color: $link-color;
+}
+
+#error_explanation {
+  @extend .error;
+
+  h2 {
+    font-size: 1em;
+  }
+}
+
+input,
+textarea {
+  border: 2px solid #bbb;
+}
+
+// TODO: Do this in a non-hacky/generic way.
+// This is like this to get around conflicts between formtastic and blueprint
+#new_alert,
+#new_comment,
+#new_report,
+.address-search,
+#new_feed,
+#new_user {
+  .error {
+    input,
+    textarea {
+      border-color: $form-error-color;
+    }
+
+    .inline-errors {
+      color: $form-error-color;
+    }
+  }
+}
+
+textarea {
+  line-height: 1.5;
+}
+
+.actions input, .btn {
+  margin-top: 1em;
+  // @include fancy-button-allow-disable($orange);
+  font-weight: normal;
+}
+
+a.btn:hover {
+  text-decoration: none;
+}
+
+.formtastic {
+  @include float-form(100%, 25%, 75%, 0, "buttons-left", left, "select-auto");
+  margin-top: 2em;
+  margin-bottom: 2em;
+
+  // Make text field sit nicely at the expected full width
+  input, textarea {
+    box-sizing: border-box;
+    color: $font-color;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+
+    &.error {
+      background: inherit;
+      border: inherit;
+      color: inherit;
+    }
+  }
+
+  .inline-hints {
+    @include quiet;
+    font-size: 0.8em;
+
+    img {
+      vertical-align: middle;
+      margin-left: 5px;
+    }
+  }
+
+  div.inline-hints p {
+    padding-top: 0.5em;
+  }
+
+  .inline-errors {
+    color: $error-color;
+  }
+
+  label {
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+
+  label p {
+    font-weight: normal;
+  }
+
+  li.string, li.stringish, li.email {
+    label {
+      text-align: right;
+      width: 23%;
+      padding: .5em 2% 0 0;
+    }
+
+    input, textarea {
+      font-size: 1.1em;
+      padding: .5em;
+    }
+  }
+
+  li.boolean {
+    label {
+      // This is so nasty and wrong
+      margin-left: 25%;
+      width: 100%;
+    }
+
+    input {
+      width: 20px;
+    }
+  }
+
+  fieldset.daterange {
+    legend {
+      width: 25%;
+      float: left;
+    }
+
+    ol {
+      display: inline-block;
+    }
+
+    input {
+      width: 9em;
+    }
+
+    li {
+      margin-right: 1em;
+      display: inline-block;
+      float: left;
+    }
+
+    label {
+      display: none;
+    }
+
+    .inline-errors {
+      margin-left: 0;
+    }
+
+    .error {
+      padding-top: 0;
+    }
+  }
+}
+
+// Special formatting for specific forms
+
+.formtastic.user {
+  input.button {
+    white-space: normal;
+  }
+}
+
+body form.alert {
+  background: inherit;
+  border-color: inherit;
+  border: inherit;
+
+  p {
+    margin-bottom: 1em;
+  }
+}
+
+form.donate {
+  input[type="submit"] {
+    font-weight: normal;
+    margin-left: 1em;
+  }
+
+  input#amount_donate, label, span {
+    font-size: 1.3em;
+  }
+}
+
+@import "special_forms/alert_widget_form";
+@import "special_forms/autocomplete";
+@import "special_forms/comment_form";
+@import "special_forms/payment_form";
+@import "special_forms/contact_message_form";

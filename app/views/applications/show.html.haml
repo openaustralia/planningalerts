@@ -1,0 +1,95 @@
+- content_for :page_title, page_title(@application)
+- content_for :meta_description, @application.description
+- content_for :extra_meta_tags do
+  %meta{ name: "twitter:card", content: "summary" }
+  %meta{ name: "twitter:site", content: "@PlanningAlerts" }
+  %meta{ name: "twitter:title", content: @application.address }
+  %meta{ name: "twitter:description", content: (@application.description[0..199] if @application.description) }
+  %meta{ name: "twitter:image", content: google_static_map_url(lat: @application.lat, lng: @application.lng, size: "512x512") }
+  %meta{ property: "og:url", content: application_url(@application) }
+  %meta{ property: "og:type", content: "place" }
+  %meta{ property: "og:title", content: @application.address }
+  %meta{ property: "og:description", content: (@application.description[0..199] if @application.description) }
+  %meta{ property: "og:image", content: google_static_map_url(lat: @application.lat, lng: @application.lng, size: "512x512") }
+  %meta{ property: "og:image:width", content: 512 }
+  %meta{ property: "og:image:height", content: 512 }
+  - if @application.location
+    %meta{ property: "place:location:latitude", content: @application.lat }
+    %meta{ property: "place:location:longitude", content: @application.lng }
+
+#main
+  #application
+    %article#application-info
+      %header
+        %h3.address= @application.address
+
+      -# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map"
+      = render "applications/map", application: @application
+
+      %p.description= @application.description
+      = link_to @application.info_url, class: "button button-rounded", target: "_blank", rel: "noopener" do
+        = image_tag "standard/external_link.png", size: "10x10", alt: "External link"
+        Read more information
+
+      %footer
+        %p.dates= render "applications/scraped_and_received_text", application: @application
+        %p.source (Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded)}, reference #{@application.council_reference})
+
+      #comments-area
+        - if @comments.present?
+          %h4= pluralize(@comments.count, "Comment")
+          - if current_user.nil?
+            %p
+              = link_to "Create an account", new_user_registration_path
+              or
+              = link_to "sign in", new_user_session_path
+              to have your say by adding your own comment.
+          - else
+            %p.small.quiet
+              Have your say by #{link_to "adding your own comment", "#add-comment", class: "link-to-comment-form"}.
+          %ol#comments
+            - @comments.each do |comment|
+              %li= render comment, with_address: false
+
+        %h4#add-comment Have your say on this application
+        - if @application.authority.email.present?
+          = render "comments/form_introduction", application: @application
+          - if current_user.nil?
+            %p
+              = link_to "Create an account", new_user_registration_path
+              or
+              = link_to "sign in", new_user_session_path
+              to make a comment
+          - else
+            = render "comments/form", application: @application, comment: @comment
+        - else
+          = render "comments/no_authority_email_explanation", application: @application
+
+#sidebar
+  #alert
+    .attention
+      = render "alerts/signup_introduction"
+      - if current_user.nil?
+        = link_to "Create an account", new_user_registration_path
+        or
+        = link_to "sign in", new_user_session_path
+        to create an alert.
+      - else
+        = semantic_form_for @alert do |f|
+          = f.inputs do
+            = f.input :address, label: "Enter a street address", placeholder: "Enter a street address"
+          = f.actions do
+            = f.action :submit, label: "Create alert", button_html: { class: "button button-rounded button-action button-large" }
+
+  #application-stats
+    - if @application.no_alerted
+      %p.no_alerted
+        - if @application.no_alerted == 1
+          1 person was
+        - else
+          #{@application.no_alerted} people were
+        notified of this application via
+        = link_to "email alerts", new_alert_path
+    = link_to "Recent nearby applications", nearby_application_url(@application, sort: "time"), class: "button button-rounded"
+
+  = render "applications/social_share", application: @application

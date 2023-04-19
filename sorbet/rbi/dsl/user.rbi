@@ -225,6 +225,20 @@ class User
     def comments=(value); end
 
     sig { returns(T::Array[T.untyped]) }
+    def contact_message_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def contact_message_ids=(ids); end
+
+    # This method is created by ActiveRecord on the `User` class because it declared `has_many :contact_messages`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
+    sig { returns(::ContactMessage::PrivateCollectionProxy) }
+    def contact_messages; end
+
+    sig { params(value: T::Enumerable[::ContactMessage]).void }
+    def contact_messages=(value); end
+
+    sig { returns(T::Array[T.untyped]) }
     def report_ids; end
 
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }

@@ -22,11 +22,11 @@ set :repo_url, "https://github.com/openaustralia/planningalerts.git"
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml", 'config/master.key'
-append :linked_files, "config/database.yml", ".env.production", "public/sitemap.xml"
+append :linked_files, "config/memcache.yml", "config/credentials/production.key"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "tmp/webpacker", "public/system", "vendor", "storage"
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/sitemaps"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -52,12 +52,32 @@ set :aws_ec2_default_filters, (proc {
       name: "tag:#{fetch(:aws_ec2_application_tag)}",
       values: [fetch(:aws_ec2_application)]
     },
+    # Uncomment the following lines (and set the value) if you want to only deploy to blue or green
+    # The default is to deploy to both blue AND green
+    # {
+    #   name: "tag:BlueGreen",
+    #   values: ["blue"]
+    # },
     {
       name: 'instance-state-name',
       values: ['running']
     }
   ]
 })
+
+# Doing this so that when we get the host names in upload_memcache_config they can also
+# be used inside the network to contact the memcache servers
+set :aws_ec2_contact_point, :public_dns
+
+desc "upload memcache.yml configuration"
+task :upload_memcache_config do
+  # Each host is also running memcached. So...
+  servers = roles(:app).map(&:hostname)
+  memcache_config = { "servers" => servers }.to_yaml
+  on roles(:app) do
+    upload! StringIO.new(memcache_config), "#{shared_path}/config/memcache.yml"
+  end
+end
 
 namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
@@ -100,3 +120,4 @@ end
 before "deploy:restart", "foreman:restart"
 before "foreman:restart", "foreman:enable"
 before "foreman:enable", "foreman:export"
+before "deploy:restart", "upload_memcache_config"

@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :nullify
   # Same for reports but they're not public
   has_many :reports, dependent: :nullify
+  has_many :contact_messages, dependent: :nullify
 
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)

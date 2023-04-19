@@ -58,18 +58,31 @@ en:
         name: "Your name"
         email: "Your email"
         address: "Your street address"
+      contact_message:
+        # TODO: Using "I" and "your" in the same form. Fix this.
+        name: "Your name"
+        email: "Your email"
+        reason: "I'm getting in touch because"
+        details: "Please tell us briefly about your request"
+        attachments: "Attach files or screenshots"
     hints:
       comment:
         text: "Have you made a donation or gift to a Councillor or Council employee? <a href=\"%{link}\" data-target=\"%{target}\" class=\"%{class}\">You may need to disclose this</a>"
         name: "Please use your real full name if possible."
         email: "We never display your email address."
         address: "We never display your street address. <a href=\"%{link}\" data-target=\"%{target}\" class=\"%{class}\">Why do you need my address?</a>"
+      contact_message:
+        name: "Or <a href=\"%{link}\">sign in</a>"
+        details: "Some questions that might help you describe your request: What are you trying to do? What happens when you try to do that? What have you tried to fix it? How do you think we could help? Please include a link to the page on the site where this happened."
     placeholders:
       comment:
         text: "Be polite, clear, and to the point so your comment gets listened to."
         name: "e.g. Jane Citizen"
         email: "e.g. your@email.com"
         address: "e.g. 1 Sowerby St, Goulburn, NSW 2580"
+    actions:
+      contact_message:
+        create: "Send message to the Planning Alerts team"
   errors:
     messages:
       not_a_date: "is not a date"
@@ -81,14 +94,17 @@ en:
     create:
       success: "API key created"
       already_have_key: "You already have an API key"
+  applications:
+    search:
+      full_text_search_not_enabled: "You do not have access to full text search. It is currently only available to some users. Contact us if you would like access"
   comments:
     create:
       not_filled_out: Some of the comment wasn't filled out completely. See below.
   comment_mailer:
     notify_authority:
       subject: "Comment on application %{council_reference}"
-  report_mailer:
-    notify:
+  support_mailer:
+    report:
       subject: "PlanningAlerts: Abuse report"
   users:
     activations:

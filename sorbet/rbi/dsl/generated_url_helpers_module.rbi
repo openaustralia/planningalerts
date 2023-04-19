@@ -147,10 +147,16 @@ module GeneratedUrlHelpersModule
   def confirmed_comment_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def contact_messages_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def cuttlefish_event_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def destroy_user_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def documentation_contact_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def donations_create_url(*args); end
@@ -355,6 +361,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def thank_you_comment_reports_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def thank_you_contact_messages_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def toggle_theme_url(*args); end

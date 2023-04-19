@@ -18,9 +18,9 @@ describe "Sign up for alerts" do
       postcode: "2773",
       full_address: "24 Bruce Rd, Glenbrook NSW 2773"
     )
-    allow(GoogleGeocodeService).to receive(:call).with("24 Bruce Rd, Glenbrook").and_return(GeocoderResults.new([g], nil))
-    allow(GoogleGeocodeService).to receive(:call).with("24 Bruce Rd, Glenbrook NSW 2773").and_return(GeocoderResults.new([g], nil))
-    allow(GoogleGeocodeService).to receive(:call).with("Bruce Rd").and_return(
+    allow(GoogleGeocodeService).to receive(:call).with(address: "24 Bruce Rd, Glenbrook", key: nil).and_return(GeocoderResults.new([g], nil))
+    allow(GoogleGeocodeService).to receive(:call).with(address: "24 Bruce Rd, Glenbrook NSW 2773", key: nil).and_return(GeocoderResults.new([g], nil))
+    allow(GoogleGeocodeService).to receive(:call).with(address: "Bruce Rd", key: nil).and_return(
       GeocoderResults.new([], "Please enter a full street address, including suburb and state, e.g. Bruce Rd, Victoria")
     )
   end

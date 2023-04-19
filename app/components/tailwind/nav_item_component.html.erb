@@ -1,0 +1,3 @@
+<li class="<%= class_names("px-4", "py-1", { "bg-yellow" => @selected, "text-darker-orange" => @selected }) %>">
+  <%= link_to content, @href, class: class_names("hover:underline" => !@selected) %>
+</li>

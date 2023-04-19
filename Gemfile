@@ -82,6 +82,9 @@ gem "sanitize"
 gem "dotenv-rails"
 gem "foreman"
 
+# Figure out who is likely to be human
+gem "recaptcha", require: "recaptcha/rails"
+
 # Site search
 gem "searchkick"
 
@@ -95,11 +98,6 @@ gem "formtastic"
 # Speed up json parsing
 # TODO: Double check where this is being used
 gem "oj"
-
-# For theming (so we can run our proper theme at the same time as an
-# experimental tailwind based theme)
-# Using our fork to add Rails 6 & 7 support and fix a bad memory leak
-gem "themes_on_rails", git: "https://github.com/openaustralia/themes_on_rails"
 
 # For logging API calls to elasticsearch
 # We can't upgrade elasticsearch gem until we've upgraded the server
@@ -148,8 +146,10 @@ gem "skylight"
 # For making more reusable and testable components
 gem "view_component"
 
-# For generating sitemaps for search engines and uploading them to S3
+# For uploading sitemaps to S3 and uploading attachments to S3 using active storage
 gem "aws-sdk-s3", "~> 1"
+
+# For generating sitemaps for search engines
 gem "sitemap_generator"
 
 # For accessing wikidata
@@ -163,9 +163,11 @@ gem "rubyzip"
 # To profile code in development and production
 gem "rack-mini-profiler"
 
+# Using this webserver for development and production
+gem "puma"
+
 group :test do
   gem "capybara"
-  gem "climate_control"
   # For some reason upgrading to email_spec 2.2.1 completely breaks things for us
   # TODO: Figure out what's going on fix this properly
   gem "email_spec", "2.2.0"
@@ -198,9 +200,6 @@ group :development do
   gem "rack-livereload"
   gem "rb-fsevent"
   gem "rb-inotify", require: false
-
-  # Using this webserver for development
-  gem "thin"
 
   # For a better error page in development
   gem "better_errors"

@@ -92,7 +92,6 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include SessionHelpers, type: :feature
-  config.include EnvHelpers
   config.include MockLocationHelpers
   config.include AutocompleteHelpers
 
