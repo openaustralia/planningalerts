@@ -17,7 +17,7 @@
       <% if @report.comment.user %>
         <%= link_to @report.comment.name, admin_user_url(@report.comment.user) %>
       <% else %>
-        <%= @report.comment.name %>(<%= @report.comment.email %>) (a deleted user)
+        <%= @report.comment.name %> (a deleted user)
       <% end %>
       who said:
     </p>
