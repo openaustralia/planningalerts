@@ -12,8 +12,8 @@ ALTER SCHEMA 'pa-production' RENAME TO 'public'
 -- truncate:  Ensure all tables are empty first (especially schema_migrations).
 --            WARNING: THIS WILL SMOKE YOUR DATABASE!
 
-WITH data only, truncate;
+WITH data only, truncate
 
 SET MySQL PARAMETERS
     net_read_timeout  = '120',
-    net_write_timeout = '120'
+    net_write_timeout = '120';
