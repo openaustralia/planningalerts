@@ -13,3 +13,7 @@ ALTER SCHEMA 'pa-production' RENAME TO 'public'
 --            WARNING: THIS WILL SMOKE YOUR DATABASE!
 
 WITH data only, truncate;
+
+SET MySQL PARAMETERS
+    net_read_timeout  = '120',
+    net_write_timeout = '120'
