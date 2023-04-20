@@ -54,10 +54,10 @@ set :aws_ec2_default_filters, (proc {
     },
     # Uncomment the following lines (and set the value) if you want to only deploy to blue or green
     # The default is to deploy to both blue AND green
-    # {
-    #   name: "tag:BlueGreen",
-    #   values: ["blue"]
-    # },
+    {
+      name: "tag:BlueGreen",
+      values: ["green"]
+    },
     {
       name: 'instance-state-name',
       values: ['running']
