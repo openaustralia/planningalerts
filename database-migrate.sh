@@ -9,3 +9,11 @@
 # Then,
 # sh database-migrate.sh
 pgloader --verbose database-migrate-commands
+
+#
+# To run things in PRODUCTION
+#
+# RAILS_ENV=production rails db:create
+# RAILS_ENV=production rails db:schema:load
+# RAILS_ENV=production rails runner database_migrate_template.rb
+# pgloader --verbose database-migrate-commands.production
