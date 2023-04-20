@@ -120,5 +120,5 @@ end
 # TODO: Reinstate these as soon as we've moved fully over the postgres version
 # before "deploy:restart", "foreman:restart"
 # before "foreman:restart", "foreman:enable"
-# before "foreman:enable", "foreman:export"
+before "foreman:enable", "foreman:export"
 before "deploy:check:linked_files", "upload_memcache_config"
