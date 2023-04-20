@@ -11,6 +11,8 @@ Rails.application.configure do
 
   # Used to generate urls outside of the request cycle (in mailer, sidekiq, etc..)
   config.x.host = "localhost"
+  # For logging API calls and full text search (searchkick)
+  config.x.elasticsearch_url = "http://localhost:9200"
   # Needs to be set in test for sidekiq initialiser to work
   # The value is kind of irrelevant actually
   # TODO: Fix this
