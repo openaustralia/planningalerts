@@ -15,22 +15,6 @@ services:
     command: "bin/dev"
     tty: true
 
-  database:
-    # Using same version as used in production
-    # TODO: Upgrade when we can
-    image: mysql:5.7
-    ports:
-      # Give access to the database from your host machine. This is useful
-      # if you want to poke around with something like mysql workbench.
-      # Note that we're forwarding this to port 13306 on the host machine so
-      # that it doesn't conflict with any mysql server you might have running there.
-      - 13306:3306
-    volumes:
-      - database_data:/var/lib/mysql
-    environment:
-      # The values below need to be the same in config/database.yml
-      MYSQL_ROOT_PASSWORD: password
-
   postgres:
     # Same version as used in production
     image: postgres:15.2

@@ -389,7 +389,6 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.2.3)
-    mysql2 (0.5.4)
     nenv (0.3.0)
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
@@ -764,7 +763,6 @@ DEPENDENCIES
   jb
   kaminari
   mini_racer
-  mysql2
   nokogiri
   octokit
   oj
