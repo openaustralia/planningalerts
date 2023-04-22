@@ -71,7 +71,7 @@ production:
   host: "<%= Rails.application.credentials.dig(:database, :postgres, :host) %>"
   database: pa-production
   # For postgres read-only access (during maintenance switch out the two lines below)
-  username: pa-production-readonly
-  password: "<%= Rails.application.credentials.dig(:database, :postgres, :password_readonly) %>"
-  # username: pa-production
-  # password: "<%= Rails.application.credentials.dig(:database, :postgres, :password) %>"
+  # username: pa-production-readonly
+  # password: "<%= Rails.application.credentials.dig(:database, :postgres, :password_readonly) %>"
+  username: pa-production
+  password: "<%= Rails.application.credentials.dig(:database, :postgres, :password) %>"
