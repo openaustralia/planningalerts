@@ -54,10 +54,9 @@ set :aws_ec2_default_filters, (proc {
     },
     # Uncomment the following lines (and set the value) if you want to only deploy to blue or green
     # The default is to deploy to both blue AND green
-    # TODO: Comment out the lines below once the migration is complete
     {
       name: "tag:BlueGreen",
-      values: ["blue"]
+      values: ["green"]
     },
     {
       name: 'instance-state-name',
@@ -121,4 +120,4 @@ end
 before "deploy:restart", "foreman:restart"
 before "foreman:restart", "foreman:enable"
 before "foreman:enable", "foreman:export"
-before "deploy:restart", "upload_memcache_config"
+before "deploy:check:linked_files", "upload_memcache_config"

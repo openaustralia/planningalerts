@@ -12,8 +12,8 @@ class Authority < ApplicationRecord
 
   validates :state, inclusion: { in: %w[NSW VIC QLD SA WA TAS NT ACT] }
 
-  scope(:enabled, -> { where("disabled = 0 or disabled is null") })
-  scope(:active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') })
+  scope(:enabled, -> { where(disabled: false) })
+  scope(:active, -> { where(disabled: false).where("morph_name != '' AND morph_name IS NOT NULL") })
 
   sig { void }
   def short_name_encoded_is_unique
@@ -64,8 +64,7 @@ class Authority < ApplicationRecord
   sig { returns(T::Array[[Date, Integer]]) }
   def new_applications_per_week
     # Sunday is the beginning of the week (and the date returned here)
-    # Have to compensate for MySQL which treats Monday as the beginning of the week
-    h = applications.order("first_date_scraped DESC").group("CAST(SUBDATE(first_date_scraped, WEEKDAY(first_date_scraped) + 1) AS DATE)").count
+    h = applications.group("DATE(first_date_scraped) - CAST(EXTRACT(DOW FROM first_date_scraped) AS INT)").count
     min = h.keys.min
     max = Time.zone.today - Time.zone.today.wday
     (min..max).step(7) do |date|
@@ -84,10 +83,7 @@ class Authority < ApplicationRecord
 
     e = earliest_date
     if e
-      # Have to compensate for MySQL which treats Monday as the beginning of the week
-      results = comments.visible.group(
-        "CAST(SUBDATE(confirmed_at, WEEKDAY(confirmed_at) + 1) AS DATE)"
-      ).count
+      results = comments.visible.group("DATE(confirmed_at) - CAST(EXTRACT(DOW FROM confirmed_at) AS INT)").count
 
       earliest_week_with_applications = e.at_beginning_of_week.to_date
       latest_week = Time.zone.today.at_beginning_of_week

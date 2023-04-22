@@ -11,12 +11,15 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
-  create_table "active_admin_comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "active_admin_comments", id: :serial, force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
     t.integer "author_id"
     t.string "author_type"
-    t.text "body", size: :medium
+    t.text "body"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.string "namespace"
@@ -25,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["resource_type", "resource_id"], name: "index_admin_notes_on_resource_type_and_resource_id"
   end
 
-  create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
+  create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -35,7 +38,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8mb4", force: :cascade do |t|
+  create_table "active_storage_blobs", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -47,17 +50,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb4", force: :cascade do |t|
+  create_table "active_storage_variant_records", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "alerts", id: :integer, charset: "utf8mb4", force: :cascade do |t|
+  create_table "alerts", id: :serial, force: :cascade do |t|
     t.string "address", limit: 120, default: "", null: false
     t.datetime "last_sent", precision: nil
-    t.float "lat", limit: 53, null: false
-    t.float "lng", limit: 53, null: false
+    t.float "lat", null: false
+    t.float "lng", null: false
     t.string "confirm_id", limit: 20
     t.boolean "confirmed", default: false, null: false
     t.integer "radius_meters", null: false
@@ -73,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["user_id"], name: "fk_rails_d4053234e7"
   end
 
-  create_table "api_keys", id: :integer, charset: "utf8mb4", force: :cascade do |t|
+  create_table "api_keys", id: :serial, force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "value", null: false
     t.boolean "bulk", default: false, null: false
@@ -86,7 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["value"], name: "index_api_keys_on_value"
   end
 
-  create_table "application_redirects", id: :integer, charset: "utf8mb4", force: :cascade do |t|
+  create_table "application_redirects", id: :serial, force: :cascade do |t|
     t.integer "application_id", null: false
     t.integer "redirect_application_id", null: false
     t.datetime "created_at", precision: nil, null: false
@@ -95,7 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["redirect_application_id"], name: "fk_rails_24f1a5992a"
   end
 
-  create_table "application_versions", charset: "utf8mb4", force: :cascade do |t|
+  create_table "application_versions", force: :cascade do |t|
     t.integer "application_id", null: false
     t.bigint "previous_version_id"
     t.boolean "current", null: false
@@ -106,9 +109,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.date "date_received"
     t.date "on_notice_from"
     t.date "on_notice_to"
-    t.timestamp "date_scraped", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.float "lat", limit: 53
-    t.float "lng", limit: 53
+    t.datetime "date_scraped", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.float "lat"
+    t.float "lng"
     t.string "suburb", limit: 50
     t.string "state", limit: 10
     t.string "postcode", limit: 4
@@ -125,21 +128,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["suburb"], name: "index_application_versions_on_suburb"
   end
 
-  create_table "applications", id: :integer, charset: "utf8mb4", force: :cascade do |t|
+  create_table "applications", id: :serial, force: :cascade do |t|
     t.string "council_reference", limit: 50, default: "", null: false
     t.integer "authority_id", null: false
     t.integer "no_alerted"
     t.integer "visible_comments_count", default: 0, null: false
-    t.timestamp "first_date_scraped", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "first_date_scraped", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.text "address"
     t.text "description"
     t.string "info_url", limit: 1024
     t.date "date_received"
     t.date "on_notice_from"
     t.date "on_notice_to"
-    t.timestamp "date_scraped", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.float "lat", limit: 53
-    t.float "lng", limit: 53
+    t.datetime "date_scraped", precision: nil, default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.float "lat"
+    t.float "lng"
     t.string "suburb", limit: 50
     t.string "state", limit: 10
     t.string "postcode", limit: 4
@@ -157,7 +160,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["visible_comments_count"], name: "index_applications_on_visible_comments_count"
   end
 
-  create_table "authorities", id: :integer, charset: "utf8mb4", force: :cascade do |t|
+  create_table "authorities", id: :serial, force: :cascade do |t|
     t.string "full_name", limit: 200, default: "", null: false
     t.string "short_name", limit: 100, default: "", null: false
     t.boolean "disabled", null: false
@@ -175,8 +178,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 
-  create_table "comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
-    t.text "text", size: :medium
+  create_table "comments", id: :serial, force: :cascade do |t|
+    t.text "text"
     t.string "name"
     t.integer "application_id", null: false
     t.string "confirm_id"
@@ -197,7 +200,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["user_id"], name: "fk_rails_03de2dc08c"
   end
 
-  create_table "contact_messages", charset: "utf8mb4", force: :cascade do |t|
+  create_table "contact_messages", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
     t.string "email", null: false
@@ -207,7 +210,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "daily_api_usages", charset: "utf8mb4", force: :cascade do |t|
+  create_table "daily_api_usages", force: :cascade do |t|
     t.integer "api_key_id", null: false
     t.date "date", null: false
     t.integer "count", default: 0, null: false
@@ -216,7 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["date"], name: "index_daily_api_usages_on_date"
   end
 
-  create_table "email_batches", id: :integer, charset: "utf8mb4", force: :cascade do |t|
+  create_table "email_batches", id: :serial, force: :cascade do |t|
     t.integer "no_emails", null: false
     t.integer "no_applications", null: false
     t.integer "no_comments", null: false
@@ -225,13 +228,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["created_at"], name: "index_email_batches_on_created_at"
   end
 
-  create_table "geocode_queries", charset: "utf8mb4", force: :cascade do |t|
+  create_table "geocode_queries", force: :cascade do |t|
     t.string "query", default: "", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "geocode_results", charset: "utf8mb4", force: :cascade do |t|
+  create_table "geocode_results", force: :cascade do |t|
     t.string "geocoder", default: "", null: false
     t.float "lat"
     t.float "lng"
@@ -245,7 +248,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["geocode_query_id"], name: "index_geocode_results_on_geocode_query_id"
   end
 
-  create_table "github_issues", charset: "utf8mb4", force: :cascade do |t|
+  create_table "github_issues", force: :cascade do |t|
     t.integer "authority_id", null: false
     t.string "github_repo", null: false
     t.integer "github_number", null: false
@@ -254,10 +257,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["authority_id"], name: "index_github_issues_on_authority_id"
   end
 
-  create_table "reports", id: :integer, charset: "utf8mb4", force: :cascade do |t|
+  create_table "reports", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.text "details", size: :medium
+    t.text "details"
     t.integer "comment_id", null: false
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
@@ -265,12 +268,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_011018) do
     t.index ["comment_id"], name: "fk_rails_bc3addd41c"
   end
 
-  create_table "stats", id: :integer, charset: "utf8mb4", force: :cascade do |t|
+  create_table "stats", id: :serial, force: :cascade do |t|
     t.string "key", limit: 25, default: "", null: false
     t.integer "value", null: false
   end
 
-  create_table "users", id: :integer, charset: "utf8mb4", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", limit: 128, default: "", null: false
     t.string "password_salt", default: "", null: false

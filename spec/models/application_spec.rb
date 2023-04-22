@@ -78,8 +78,9 @@ describe Application do
 
     it "is the initial date scraped" do
       date_scraped = application.first_date_scraped
-      expect(updated_application.first_date_scraped).to eq date_scraped
-      expect(updated_application.current_version.date_scraped).not_to eq date_scraped
+      # Round times to the nearest second to handle precision being finite when saving to database
+      expect(updated_application.first_date_scraped.round).to eq date_scraped.round
+      expect(updated_application.current_version.date_scraped.round).not_to eq date_scraped.round
     end
   end
 

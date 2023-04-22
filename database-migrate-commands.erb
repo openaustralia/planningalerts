@@ -1,0 +1,19 @@
+-- See https://github.com/dimitri/pgloader/blob/master/pgloader.1.md for 
+-- connection string options.
+
+LOAD DATABASE
+    FROM mysql://pa-production:<%= Rails.application.credentials.dig(:database, :mysql, :password) %>@<%= Rails.application.credentials.dig(:database, :mysql, :host) %>/pa-production
+    INTO pgsql://pa-production:<%= Rails.application.credentials.dig(:database, :postgres, :password) %>@<%= Rails.application.credentials.dig(:database, :postgres, :host) %>/pa-production
+
+ALTER SCHEMA 'pa-production' RENAME TO 'public'
+
+-- data-only: We don't need pgloader to touch the schema as Rails does a better
+--            job using rake db:schema:load.
+-- truncate:  Ensure all tables are empty first (especially schema_migrations).
+--            WARNING: THIS WILL SMOKE YOUR DATABASE!
+
+WITH data only, truncate
+
+SET MySQL PARAMETERS
+    net_read_timeout  = '120',
+    net_write_timeout = '120';

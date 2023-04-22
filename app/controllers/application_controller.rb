@@ -36,9 +36,10 @@ class ApplicationController < ActionController::Base
 
   sig { params(error: StandardError).void }
   def check_for_write_during_maintenance_mode(error)
-    # Checking for mysql specific response that we don't have permission which means
+    # Checking for mysql and postgres responses that we don't have permission which means
     # we're trying to do a write operation when we're only allowed to do read operations.
-    raise error unless Flipper.enabled?(:maintenance_mode) && error.message.match?(/command denied to user/i)
+    raise error unless Flipper.enabled?(:maintance_mode) &&
+                       (error.message.match?(/command denied to user/i) || error.message.match?(/PG::InsufficientPrivilege/))
 
     Rails.logger.warn "Write attempted during maintenance mode: #{error}"
 
