@@ -81,6 +81,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Create database
+        run: bin/rails db:create
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Sorbet type checking
