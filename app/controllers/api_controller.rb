@@ -64,7 +64,7 @@ class ApiController < ApplicationController
     location_text = location.to_s
     applications = if Flipper.enabled?(:use_postgis, T.must(@current_api_key).user)
                      point = RGeo::Geographic.spherical_factory.point(location.lng, location.lat)
-                     Application.where("ST_DWithin(lonlat, '#{point}', #{radius})")
+                     Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius)
                    else
                      Application.near([location.lat, location.lng], radius / 1000, units: :km)
                    end

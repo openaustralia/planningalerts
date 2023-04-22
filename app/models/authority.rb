@@ -142,6 +142,6 @@ class Authority < ApplicationRecord
 
   sig { returns(ActiveRecord::Relation) }
   def alerts
-    Alert.active.where("ST_Covers('#{boundary}', lonlat)")
+    Alert.active.where("ST_Covers(?, lonlat)", boundary.to_s)
   end
 end

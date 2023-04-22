@@ -83,7 +83,7 @@ class ApplicationsController < ApplicationController
       @applications = if Flipper.enabled?(:use_postgis, current_user)
                         point = RGeo::Geographic.spherical_factory.point(top.lng, top.lat)
                         Application.select("*", "ST_Distance(lonlat, '#{point}')/1000 AS distance")
-                                   .where("ST_DWithin(lonlat, '#{point}', #{radius})")
+                                   .where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius)
                                    .order(:distance)
                       else
                         Application.near([top.lat, top.lng], radius / 1000, units: :km)

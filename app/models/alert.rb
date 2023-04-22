@@ -93,7 +93,7 @@ class Alert < ApplicationRecord
   def recent_new_applications
     result = if Flipper.enabled?(:use_postgis, user)
                point = RGeo::Geographic.spherical_factory.point(lng, lat)
-               Application.where("ST_DWithin(lonlat, '#{point}', #{radius_meters})")
+               Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
              else
                Application.near([lat, lng], radius_km, units: :km)
              end
@@ -106,7 +106,7 @@ class Alert < ApplicationRecord
   def applications_with_new_comments
     result = if Flipper.enabled?(:use_postgis, user)
                point = RGeo::Geographic.spherical_factory.point(lng, lat)
-               Application.where("ST_DWithin(lonlat, '#{point}', #{radius_meters})")
+               Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
              else
                Application.near([lat, lng], radius_km, units: :km)
              end
