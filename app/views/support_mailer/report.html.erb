@@ -13,7 +13,13 @@
     <p>
       The
       <%= link_to "original comment", comment_url(@report.comment) %>
-      was written by <%= link_to @report.comment.name, admin_user_url(@report.comment.user) %> who said:
+      was written by
+      <% if @report.comment.user %>
+        <%= link_to @report.comment.name, admin_user_url(@report.comment.user) %>
+      <% else %>
+        <%= @report.comment.name %> (a deleted user)
+      <% end %>
+      who said:
     </p>
 
     <blockquote><%= @report.comment.text %></blockquote>

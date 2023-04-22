@@ -56,7 +56,7 @@ set :aws_ec2_default_filters, (proc {
     # The default is to deploy to both blue AND green
     # {
     #   name: "tag:BlueGreen",
-    #   values: ["blue"]
+    #   values: ["green"]
     # },
     {
       name: 'instance-state-name',
@@ -120,4 +120,4 @@ end
 before "deploy:restart", "foreman:restart"
 before "foreman:restart", "foreman:enable"
 before "foreman:enable", "foreman:export"
-before "deploy:restart", "upload_memcache_config"
+before "deploy:check:linked_files", "upload_memcache_config"
