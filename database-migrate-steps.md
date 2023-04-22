@@ -41,6 +41,7 @@ web2.green.planningalerts.org.au)
   * Edit `Procfile.production` on postgres branch and uncomment worker line
   * Deploy
   * Confirm from admin console of app that workers are running
+9. Reenable cron jobs
 
 ## Clean up
 

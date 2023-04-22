@@ -18,7 +18,8 @@ Sidekiq.configure_server do |config|
     # We only want the cron jobs to be running in production.
     # There's too much room for things to go badly wrong otherwise
     if Rails.env.production?
-      Sidekiq::Cron::Job.load_from_hash YAML.load_file("config/cron.yml")
+      # TODO: Re-enable cron jobs once migration completed
+      # Sidekiq::Cron::Job.load_from_hash YAML.load_file("config/cron.yml")
     end
   end
 end
