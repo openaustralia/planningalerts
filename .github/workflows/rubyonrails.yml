@@ -16,7 +16,7 @@ jobs:
     services:
       # We're using postgres 15.2 in production currently
       postgres:
-        image: postgres:15.2
+        image: postgis/postgis:15-3.3
         ports:
           - 5432:5432
         env:
@@ -39,7 +39,7 @@ jobs:
           --health-retries 5       
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/rails_test"
+      DATABASE_URL: "postgis://postgres:postgres@localhost:5432/rails_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -62,7 +62,7 @@ jobs:
     services:
       # We're using postgres 15.2 in production currently
       postgres:
-        image: postgres:15.2
+        image: postgis/postgis:15-3.3
         ports:
           - 5432:5432
         env:
@@ -76,7 +76,7 @@ jobs:
     env:
       # TODO: Don't run in test environment so we don't need --environment=test below
       RAILS_ENV: test
-      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/rails_test"
+      DATABASE_URL: "postgis://postgres:postgres@localhost:5432/rails_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
