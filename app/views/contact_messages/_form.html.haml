@@ -5,8 +5,7 @@
       = f.input :email
     = f.input :reason, collection: ContactMessage::REASONS_LONG, prompt: "-- Select closest relevant --"
     = f.input :details, input_html: { rows: 8 }
-    - if Flipper.enabled?(:attachments_on_contact_form, current_user)
-      = f.input :attachments, as: :file, input_html: { multiple: true, data: { direct_upload_url: rails_direct_uploads_url } }
+    = f.input :attachments, as: :file, input_html: { multiple: true, data: { direct_upload_url: rails_direct_uploads_url } }
     - if current_user.nil? && Rails.application.credentials[:recaptcha]
       = recaptcha_tags
       %p.inline-hints

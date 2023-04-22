@@ -7,8 +7,6 @@ describe "Contact us" do
 
   context "when not signed in" do
     it "fills out the contact us form and the admins receive an email" do
-      Flipper.enable(:attachments_on_contact_form)
-
       visit "/help/contact"
       fill_in "Your name", with: "Matthew Landauer"
       fill_in "Your email", with: "matthew@oaf.org.au"
