@@ -1,3 +1,2 @@
 web: rvm . do bundle exec puma -C config/puma.rb
-# TODO: Reenable worker once migration is done
-# worker: rvm . do bundle exec sidekiq -q default -q mailers -q searchkick -e production
+worker: rvm . do bundle exec sidekiq -q default -q mailers -q searchkick -e production
