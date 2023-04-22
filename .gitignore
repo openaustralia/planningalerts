@@ -33,5 +33,3 @@ planningalerts-app.sublime-project
 
 /config/credentials/production.key
 /config/credentials/development.key
-
-database-migrate-commands.production
