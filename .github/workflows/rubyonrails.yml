@@ -60,22 +60,23 @@ jobs:
   type_check:
     runs-on: ubuntu-latest
     services:
-      # We're using mysql 5.7 in production currently
-      mysql:
-        image: mysql:5.7
+      # We're using postgres 15.2 in production currently
+      postgres:
+        image: postgres:15.2
         ports:
-          - 3306:3306
+          - 5432:5432
         env:
-          MYSQL_DATABASE: rails_test
-          MYSQL_USER: rails
-          MYSQL_PASSWORD: password
-          MYSQL_ROOT_PASSWORD: rootpassword
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     env:
       # TODO: Don't run in test environment so we don't need --environment=test below
       RAILS_ENV: test
-      DATABASE_URL: "mysql2://rails:password@127.0.0.1:3306/rails_test?encoding=utf8mb4&collation=utf8mb4_general_ci"
+      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/rails_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -83,6 +84,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+      - name: Create database
+        run: bin/rails db:create
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Sorbet type checking
