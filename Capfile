@@ -12,8 +12,7 @@ install_plugin Capistrano::SCM::Git
 # require "capistrano/rvm"
 require "capistrano/bundler"
 require "capistrano/rails/assets"
-# TODO: Re-enable migrations as soon as we have completed the database migration
-# require "capistrano/rails/migrations"
+require "capistrano/rails/migrations"
 require "capistrano/passenger"
 require "capistrano/honeybadger"
 require "capistrano/aws"
