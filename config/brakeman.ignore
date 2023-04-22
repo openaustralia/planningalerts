@@ -1,0 +1,29 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "2eb65b3a9cc645431b29f91a447497fccccc438f0998b3893bf86ba16e29562e",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/controllers/applications_controller.rb",
+      "line": 85,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Application.select(\"*\", \"ST_Distance(lonlat, '#{RGeo::Geographic.spherical_factory.point(GoogleGeocodeService.call(:address => T.let(T.cast(params[:q], T.nilable(String)), T.nilable(String)), :key => Rails.application.credentials.dig(:google_maps, :server_key)).top.lng, GoogleGeocodeService.call(:address => T.let(T.cast(params[:q], T.nilable(String)), T.nilable(String)), :key => Rails.application.credentials.dig(:google_maps, :server_key)).top.lat)}')/1000 AS distance\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "ApplicationsController",
+        "method": "address"
+      },
+      "user_input": "params[:q]",
+      "confidence": "High",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    }
+  ],
+  "updated": "2023-04-22 18:13:13 +0000",
+  "brakeman_version": "5.4.0"
+}
