@@ -113,10 +113,17 @@ class Authority < ApplicationRecord
     Authority.short_name_encoded(short_name)
   end
 
+  sig { params(name: String).returns(T.nilable(Integer)) }
+  def self.find_id_short_name_encoded(name)
+    select(:id, :short_name).to_a.find { |a| a.short_name_encoded == name }&.id
+  end
+
+  # TODO: Replace this with using friendly_id gem
+  # TODO: Also loads the whole boundary into memory. Do we want this?
   sig { params(name: String).returns(T.nilable(Authority)) }
   def self.find_short_name_encoded(name)
-    # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
-    all.to_a.find { |a| a.short_name_encoded == name }
+    id = find_id_short_name_encoded(name)
+    find(id) if id
   end
 
   sig { params(name: String).returns(Authority) }
