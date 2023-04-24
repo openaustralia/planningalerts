@@ -1,13 +1,13 @@
-<div class="h-8 bg-orange">
+<div class="bg-orange">
   <%= render Tailwind::ContainerComponent.new do %>
-    <div class="flex items-baseline">
-      <div class="text-[#EEEEEE] font-extrabold text-xl font-['Inter_var'] sm:hidden">
-          Planning Alerts
+    <div class="flex flex-row-reverse items-center h-8">
+      <div class="text-[#704608] font-medium text-sm">
+          An OpenAustralia Foundation project
       </div>
     </div>
   <% end %>
 </div>
-<div class="hidden pt-4 pb-5 sm:pb-6 sm:pt-8 bg-yellow sm:block">
+<div class="hidden pt-4 pb-5 sm:py-8 bg-yellow sm:block">
   <%= render Tailwind::ContainerComponent.new do %>
     <%= render "logo_block" %>
   <% end %>
