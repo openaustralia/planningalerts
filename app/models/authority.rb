@@ -149,6 +149,7 @@ class Authority < ApplicationRecord
 
   sig { returns(ActiveRecord::Relation) }
   def alerts
-    Alert.active.where("ST_Covers(?, lonlat)", boundary.to_s)
+    # Doing this as a sub-query so we don't send a long boundary string to the database
+    Alert.active.where("ST_Covers((?), lonlat)", Authority.where(id:).limit(1).select(:boundary))
   end
 end
