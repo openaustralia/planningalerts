@@ -1,3 +1,8 @@
-<li class="<%= class_names("px-4", "py-1", { "bg-yellow" => @selected, "text-darker-orange" => @selected }) %>">
-  <%= link_to content, @href, class: class_names("hover:underline" => !@selected) %>
+<li class="px-4">
+  <%# TODO: Make the link wider than the text for easier clicking %>
+  <%= link_to @href, class: class_names("inline-block", "h-full", "flex", "border-b-4", { "border-fuchsia" => @selected, "border-transparent" => !@selected }) do %>
+    <div class="m-auto">
+      <%= content %>
+    </div>
+  <% end %>
 </li>

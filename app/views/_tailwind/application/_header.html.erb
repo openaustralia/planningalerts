@@ -1,19 +1,22 @@
-<div class="bg-orange">
+<div class="h-8 bg-orange">
   <%= render Tailwind::ContainerComponent.new do %>
     <div class="flex items-baseline">
       <div class="text-[#EEEEEE] font-extrabold text-xl font-['Inter_var'] sm:hidden">
           Planning Alerts
       </div>
-
-      <nav class="ml-auto w-fit">
-        <%= render "menu_mobile" %>
-        <%= render "menu_desktop" %>
-      </nav>
     </div>
   <% end %>
 </div>
 <div class="hidden pt-4 pb-5 sm:pb-6 sm:pt-8 bg-yellow sm:block">
   <%= render Tailwind::ContainerComponent.new do %>
     <%= render "logo_block" %>
+  <% end %>
+</div>
+<div class="bg-[#F3F2F2]">
+  <%= render Tailwind::ContainerComponent.new do %>
+    <nav class="w-fit">
+      <%= render "menu_mobile" %>
+      <%= render "menu_desktop" %>
+    </nav>
   <% end %>
 </div>
