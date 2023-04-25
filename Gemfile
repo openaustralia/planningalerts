@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem "bootsnap", require: false
-gem "rails", "7.0.4.2"
+gem "rails", "7.0.4.3"
 gem "rake"
 
 gem "pg"

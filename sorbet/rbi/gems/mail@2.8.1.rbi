@@ -127,7 +127,7 @@ module Mail
     # source://mail//lib/mail/mail.rb#151
     def first(*args, &block); end
 
-    # source://actionmailbox/7.0.4.2/lib/action_mailbox/mail_ext/from_source.rb#4
+    # source://actionmailbox/7.0.4.3/lib/action_mailbox/mail_ext/from_source.rb#4
     def from_source(source); end
 
     # source://mail//lib/mail/mail.rb#233
@@ -276,7 +276,7 @@ class Mail::Address
   # source://mail//lib/mail/elements/address.rb#25
   def initialize(value = T.unsafe(nil)); end
 
-  # source://actionmailbox/7.0.4.2/lib/action_mailbox/mail_ext/address_equality.rb#5
+  # source://actionmailbox/7.0.4.3/lib/action_mailbox/mail_ext/address_equality.rb#5
   def ==(other_address); end
 
   # Returns the address that is in the address itself.  That is, the
@@ -425,7 +425,7 @@ class Mail::Address
   def strip_domain_comments(value); end
 
   class << self
-    # source://actionmailbox/7.0.4.2/lib/action_mailbox/mail_ext/address_wrapping.rb#5
+    # source://actionmailbox/7.0.4.3/lib/action_mailbox/mail_ext/address_wrapping.rb#5
     def wrap(address); end
   end
 end
@@ -3550,7 +3550,7 @@ class Mail::Message
   # source://mail//lib/mail/message.rb#512
   def bcc=(val); end
 
-  # source://actionmailbox/7.0.4.2/lib/action_mailbox/mail_ext/addresses.rb#21
+  # source://actionmailbox/7.0.4.3/lib/action_mailbox/mail_ext/addresses.rb#21
   def bcc_addresses; end
 
   # Returns an array of addresses (the encoded value) in the Bcc field,
@@ -3659,7 +3659,7 @@ class Mail::Message
   # source://mail//lib/mail/message.rb#553
   def cc=(val); end
 
-  # source://actionmailbox/7.0.4.2/lib/action_mailbox/mail_ext/addresses.rb#17
+  # source://actionmailbox/7.0.4.3/lib/action_mailbox/mail_ext/addresses.rb#17
   def cc_addresses; end
 
   # Returns an array of addresses (the encoded value) in the Cc field,
@@ -3978,7 +3978,7 @@ class Mail::Message
   # source://mail//lib/mail/message.rb#670
   def from=(val); end
 
-  # source://actionmailbox/7.0.4.2/lib/action_mailbox/mail_ext/addresses.rb#5
+  # source://actionmailbox/7.0.4.3/lib/action_mailbox/mail_ext/addresses.rb#5
   def from_address; end
 
   # Returns an array of addresses (the encoded value) in the From field,
@@ -4371,10 +4371,10 @@ class Mail::Message
   # source://mail//lib/mail/message.rb#751
   def received=(val); end
 
-  # source://actionmailbox/7.0.4.2/lib/action_mailbox/mail_ext/recipients.rb#5
+  # source://actionmailbox/7.0.4.3/lib/action_mailbox/mail_ext/recipients.rb#5
   def recipients; end
 
-  # source://actionmailbox/7.0.4.2/lib/action_mailbox/mail_ext/addresses.rb#9
+  # source://actionmailbox/7.0.4.3/lib/action_mailbox/mail_ext/addresses.rb#9
   def recipients_addresses; end
 
   # source://mail//lib/mail/message.rb#755
@@ -4845,7 +4845,7 @@ class Mail::Message
   # source://mail//lib/mail/message.rb#1193
   def to=(val); end
 
-  # source://actionmailbox/7.0.4.2/lib/action_mailbox/mail_ext/addresses.rb#13
+  # source://actionmailbox/7.0.4.3/lib/action_mailbox/mail_ext/addresses.rb#13
   def to_addresses; end
 
   # Returns an array of addresses (the encoded value) in the To field,
@@ -4869,7 +4869,7 @@ class Mail::Message
   # source://mail//lib/mail/message.rb#1811
   def without_attachments!; end
 
-  # source://actionmailbox/7.0.4.2/lib/action_mailbox/mail_ext/addresses.rb#25
+  # source://actionmailbox/7.0.4.3/lib/action_mailbox/mail_ext/addresses.rb#25
   def x_original_to_addresses; end
 
   private
@@ -7941,16 +7941,15 @@ Mail::SenderField::NAME = T.let(T.unsafe(nil), String)
 #
 # source://mail//lib/mail/network/delivery_methods/sendmail.rb#40
 class Mail::Sendmail
-  # @raise [ArgumentError]
   # @return [Sendmail] a new instance of Sendmail
   #
   # source://mail//lib/mail/network/delivery_methods/sendmail.rb#51
   def initialize(values); end
 
-  # source://mail//lib/mail/network/delivery_methods/sendmail.rb#60
+  # source://mail//lib/mail/network/delivery_methods/sendmail.rb#64
   def deliver!(mail); end
 
-  # source://mail//lib/mail/network/delivery_methods/sendmail.rb#56
+  # source://mail//lib/mail/network/delivery_methods/sendmail.rb#60
   def destinations_for(envelope); end
 
   # Returns the value of attribute settings.
@@ -7967,8 +7966,28 @@ class Mail::Sendmail
 
   private
 
-  # source://mail//lib/mail/network/delivery_methods/sendmail.rb#79
+  # - support for delivery using string arguments
+  #
+  # source://mail//lib/mail/network/delivery_methods/sendmail.rb#129
+  def deprecation_warn; end
+
+  # + support for delivery using string arguments (deprecated)
+  #
+  # source://mail//lib/mail/network/delivery_methods/sendmail.rb#97
+  def old_deliver(envelope); end
+
+  # source://mail//lib/mail/network/delivery_methods/sendmail.rb#88
   def popen(command, &block); end
+
+  # The following is an adaptation of ruby 1.9.2's shellwords.rb file,
+  # with the following modifications:
+  #
+  # - Wraps in double quotes
+  # - Allows '+' to accept email addresses with them
+  # - Allows '~' as it is not unescaped in double quotes
+  #
+  # source://mail//lib/mail/network/delivery_methods/sendmail.rb#118
+  def shellquote(address); end
 end
 
 # source://mail//lib/mail/network/delivery_methods/sendmail.rb#41
@@ -8609,7 +8628,7 @@ module Mail::VERSION
 end
 
 # source://mail//lib/mail/version.rb#8
-Mail::VERSION::BUILD = T.let(T.unsafe(nil), Integer)
+Mail::VERSION::BUILD = T.let(T.unsafe(nil), T.untyped)
 
 # source://mail//lib/mail/version.rb#5
 Mail::VERSION::MAJOR = T.let(T.unsafe(nil), Integer)

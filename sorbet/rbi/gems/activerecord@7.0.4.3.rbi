@@ -7849,28 +7849,28 @@ class ActiveRecord::Base
   extend ::CounterCulture::Extensions::ClassMethods
   extend ::Devise::Models
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#68
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
   def __callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#68
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
   def __callbacks?; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _before_commit_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _commit_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _create_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _destroy_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _find_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _initialize_callbacks; end
 
   # source://activerecord//lib/active_record/reflection.rb#11
@@ -7879,64 +7879,64 @@ class ActiveRecord::Base
   # source://activerecord//lib/active_record/reflection.rb#11
   def _reflections?; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _rollback_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_before_commit_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_commit_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_create_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_destroy_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_find_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_initialize_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_rollback_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_save_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_touch_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_update_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_validate_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_validation_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _save_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _touch_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _update_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _validate_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _validation_callbacks; end
 
-  # source://activemodel/7.0.4.2/lib/active_model/validations.rb#52
+  # source://activemodel/7.0.4.3/lib/active_model/validations.rb#52
   def _validators; end
 
-  # source://activemodel/7.0.4.2/lib/active_model/validations.rb#52
+  # source://activemodel/7.0.4.3/lib/active_model/validations.rb#52
   def _validators?; end
 
   # source://activerecord//lib/active_record/reflection.rb#12
@@ -7945,16 +7945,16 @@ class ActiveRecord::Base
   # source://activerecord//lib/active_record/reflection.rb#12
   def aggregate_reflections?; end
 
-  # source://activemodel/7.0.4.2/lib/active_model/attribute_methods.rb#73
+  # source://activemodel/7.0.4.3/lib/active_model/attribute_methods.rb#73
   def attribute_aliases; end
 
-  # source://activemodel/7.0.4.2/lib/active_model/attribute_methods.rb#73
+  # source://activemodel/7.0.4.3/lib/active_model/attribute_methods.rb#73
   def attribute_aliases?; end
 
-  # source://activemodel/7.0.4.2/lib/active_model/attribute_methods.rb#74
+  # source://activemodel/7.0.4.3/lib/active_model/attribute_methods.rb#74
   def attribute_method_matchers; end
 
-  # source://activemodel/7.0.4.2/lib/active_model/attribute_methods.rb#74
+  # source://activemodel/7.0.4.3/lib/active_model/attribute_methods.rb#74
   def attribute_method_matchers?; end
 
   # source://activerecord//lib/active_record/reflection.rb#13
@@ -8026,10 +8026,10 @@ class ActiveRecord::Base
   # source://activerecord//lib/active_record/encryption/encryptable_record.rb#11
   def encrypted_attributes?; end
 
-  # source://activemodel/7.0.4.2/lib/active_model/serializers/json.rb#15
+  # source://activemodel/7.0.4.3/lib/active_model/serializers/json.rb#15
   def include_root_in_json; end
 
-  # source://activemodel/7.0.4.2/lib/active_model/serializers/json.rb#15
+  # source://activemodel/7.0.4.3/lib/active_model/serializers/json.rb#15
   def include_root_in_json?; end
 
   # source://activerecord//lib/active_record/locking/optimistic.rb#56
@@ -8044,7 +8044,7 @@ class ActiveRecord::Base
   # source://activerecord//lib/active_record/core.rb#20
   def logger?; end
 
-  # source://activemodel/7.0.4.2/lib/active_model/naming.rb#244
+  # source://activemodel/7.0.4.3/lib/active_model/naming.rb#244
   def model_name(*_arg0, **_arg1, &_arg2); end
 
   # source://activerecord//lib/active_record/nested_attributes.rb#15
@@ -8137,22 +8137,22 @@ class ActiveRecord::Base
   # source://activerecord//lib/active_record/model_schema.rb#171
   def type_for_attribute(*_arg0, **_arg1, &_arg2); end
 
-  # source://activemodel/7.0.4.2/lib/active_model/validations.rb#48
+  # source://activemodel/7.0.4.3/lib/active_model/validations.rb#48
   def validation_context; end
 
   private
 
-  # source://activemodel/7.0.4.2/lib/active_model/validations.rb#48
+  # source://activemodel/7.0.4.3/lib/active_model/validations.rb#48
   def validation_context=(_arg0); end
 
   class << self
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
     def __callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
     def __callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
     def __callbacks?; end
 
     # source://activerecord//lib/active_record/readonly_attributes.rb#8
@@ -8164,40 +8164,40 @@ class ActiveRecord::Base
     # source://activerecord//lib/active_record/readonly_attributes.rb#8
     def _attr_readonly?; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _before_commit_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _before_commit_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _commit_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _commit_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _create_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _create_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _destroy_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _destroy_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _find_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _find_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _initialize_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _initialize_callbacks=(value); end
 
     # source://activerecord//lib/active_record/reflection.rb#11
@@ -8209,70 +8209,70 @@ class ActiveRecord::Base
     # source://activerecord//lib/active_record/reflection.rb#11
     def _reflections?; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _rollback_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _rollback_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _save_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _save_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _touch_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _touch_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _update_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _update_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _validate_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _validate_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _validation_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _validation_callbacks=(value); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/validations.rb#52
+    # source://activemodel/7.0.4.3/lib/active_model/validations.rb#52
     def _validators; end
 
-    # source://activemodel/7.0.4.2/lib/active_model/validations.rb#52
+    # source://activemodel/7.0.4.3/lib/active_model/validations.rb#52
     def _validators=(value); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/validations.rb#52
+    # source://activemodel/7.0.4.3/lib/active_model/validations.rb#52
     def _validators?; end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#144
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#144
     def after_create(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#144
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#144
     def after_destroy(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#144
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#144
     def after_find(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#144
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#144
     def after_initialize(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#144
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#144
     def after_save(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#144
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#144
     def after_touch(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#144
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#144
     def after_update(*args, **options, &block); end
 
     # source://activerecord//lib/active_record/reflection.rb#12
@@ -8287,16 +8287,16 @@ class ActiveRecord::Base
     # source://activerecord//lib/active_record/core.rb#82
     def application_record_class?; end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#137
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#137
     def around_create(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#137
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#137
     def around_destroy(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#137
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#137
     def around_save(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#137
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#137
     def around_update(*args, **options, &block); end
 
     # source://activerecord//lib/active_record/core.rb#129
@@ -8305,22 +8305,22 @@ class ActiveRecord::Base
     # source://activerecord//lib/active_record/core.rb#133
     def asynchronous_queries_tracker; end
 
-    # source://activemodel/7.0.4.2/lib/active_model/attribute_methods.rb#73
+    # source://activemodel/7.0.4.3/lib/active_model/attribute_methods.rb#73
     def attribute_aliases; end
 
-    # source://activemodel/7.0.4.2/lib/active_model/attribute_methods.rb#73
+    # source://activemodel/7.0.4.3/lib/active_model/attribute_methods.rb#73
     def attribute_aliases=(value); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/attribute_methods.rb#73
+    # source://activemodel/7.0.4.3/lib/active_model/attribute_methods.rb#73
     def attribute_aliases?; end
 
-    # source://activemodel/7.0.4.2/lib/active_model/attribute_methods.rb#74
+    # source://activemodel/7.0.4.3/lib/active_model/attribute_methods.rb#74
     def attribute_method_matchers; end
 
-    # source://activemodel/7.0.4.2/lib/active_model/attribute_methods.rb#74
+    # source://activemodel/7.0.4.3/lib/active_model/attribute_methods.rb#74
     def attribute_method_matchers=(value); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/attribute_methods.rb#74
+    # source://activemodel/7.0.4.3/lib/active_model/attribute_methods.rb#74
     def attribute_method_matchers?; end
 
     # source://activerecord//lib/active_record/attributes.rb#11
@@ -8341,16 +8341,16 @@ class ActiveRecord::Base
     # source://activerecord//lib/active_record/reflection.rb#13
     def automatic_scope_inversing?; end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#130
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#130
     def before_create(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#130
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#130
     def before_destroy(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#130
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#130
     def before_save(*args, **options, &block); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/callbacks.rb#130
+    # source://activemodel/7.0.4.3/lib/active_model/callbacks.rb#130
     def before_update(*args, **options, &block); end
 
     # source://activerecord//lib/active_record/core.rb#68
@@ -8530,13 +8530,13 @@ class ActiveRecord::Base
     # source://activerecord//lib/active_record/model_schema.rb#157
     def implicit_order_column?; end
 
-    # source://activemodel/7.0.4.2/lib/active_model/serializers/json.rb#15
+    # source://activemodel/7.0.4.3/lib/active_model/serializers/json.rb#15
     def include_root_in_json; end
 
-    # source://activemodel/7.0.4.2/lib/active_model/serializers/json.rb#15
+    # source://activemodel/7.0.4.3/lib/active_model/serializers/json.rb#15
     def include_root_in_json=(value); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/serializers/json.rb#15
+    # source://activemodel/7.0.4.3/lib/active_model/serializers/json.rb#15
     def include_root_in_json?; end
 
     # source://activerecord//lib/active_record/model_schema.rb#160
@@ -9739,22 +9739,22 @@ class ActiveRecord::ConnectionAdapters::AbstractAdapter
   # source://activerecord//lib/active_record/connection_adapters/abstract_adapter.rb#82
   def initialize(connection, logger = T.unsafe(nil), config = T.unsafe(nil)); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#68
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
   def __callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#68
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
   def __callbacks?; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _checkin_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#940
   def _checkout_callbacks; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_checkin_callbacks(&block); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#928
   def _run_checkout_callbacks(&block); end
 
   # Checks whether the connection to the database is still active. This includes
@@ -10384,25 +10384,25 @@ class ActiveRecord::ConnectionAdapters::AbstractAdapter
   def without_prepared_statement?(binds); end
 
   class << self
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
     def __callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
     def __callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
     def __callbacks?; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _checkin_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _checkin_callbacks=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#932
     def _checkout_callbacks; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#936
     def _checkout_callbacks=(value); end
 
     # source://activerecord//lib/active_record/connection_adapters/abstract_adapter.rb#68
@@ -11309,7 +11309,7 @@ class ActiveRecord::ConnectionAdapters::ConnectionPool
 
   # Returns the value of attribute connection_class.
   #
-  # source://activesupport/7.0.4.2/lib/active_support/deprecation/method_wrappers.rb#63
+  # source://activesupport/7.0.4.3/lib/active_support/deprecation/method_wrappers.rb#63
   def connection_klass(*args, **_arg1, &block); end
 
   # Returns an array containing the connections currently in the pool.
@@ -12618,6 +12618,2252 @@ class ActiveRecord::ConnectionAdapters::PoolManager
   # source://activerecord//lib/active_record/connection_adapters/pool_manager.rb#10
   def shard_names; end
 end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#7
+module ActiveRecord::ConnectionAdapters::PostgreSQL; end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#229
+class ActiveRecord::ConnectionAdapters::PostgreSQL::AlterTable < ::ActiveRecord::ConnectionAdapters::AlterTable
+  # @return [AlterTable] a new instance of AlterTable
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#232
+  def initialize(td); end
+
+  # Returns the value of attribute constraint_validations.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#230
+  def constraint_validations; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#237
+  def validate_constraint(name); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#8
+class ActiveRecord::ConnectionAdapters::PostgreSQL::Column < ::ActiveRecord::ConnectionAdapters::Column
+  # @return [Column] a new instance of Column
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#11
+  def initialize(*_arg0, serial: T.unsafe(nil), generated: T.unsafe(nil), **_arg3); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#53
+  def ==(other); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#30
+  def array; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#30
+  def array?; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#48
+  def encode_with(coder); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#35
+  def enum?; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#53
+  def eql?(other); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#9
+  def fmod(*_arg0, **_arg1, &_arg2); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#26
+  def has_default?; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#60
+  def hash; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#43
+  def init_with(coder); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#9
+  def oid(*_arg0, **_arg1, &_arg2); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#17
+  def serial?; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#39
+  def sql_type; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#21
+  def virtual?; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#6
+module ActiveRecord::ConnectionAdapters::PostgreSQL::ColumnMethods
+  extend ::ActiveSupport::Concern
+
+  # Defines the primary key field.
+  # Use of the native PostgreSQL UUID type is supported, and can be used
+  # by defining your tables as such:
+  #
+  #   create_table :stuffs, id: :uuid do |t|
+  #     t.string :content
+  #     t.timestamps
+  #   end
+  #
+  # By default, this will use the <tt>gen_random_uuid()</tt> function from the
+  # +pgcrypto+ extension. As that extension is only available in
+  # PostgreSQL 9.4+, for earlier versions an explicit default can be set
+  # to use <tt>uuid_generate_v4()</tt> from the +uuid-ossp+ extension instead:
+  #
+  #   create_table :stuffs, id: false do |t|
+  #     t.primary_key :id, :uuid, default: "uuid_generate_v4()"
+  #     t.uuid :foo_id
+  #     t.timestamps
+  #   end
+  #
+  # To enable the appropriate extension, which is a requirement, use
+  # the +enable_extension+ method in your migrations.
+  #
+  # To use a UUID primary key without any of the extensions, set the
+  # +:default+ option to +nil+:
+  #
+  #   create_table :stuffs, id: false do |t|
+  #     t.primary_key :id, :uuid, default: nil
+  #     t.uuid :foo_id
+  #     t.timestamps
+  #   end
+  #
+  # You may also pass a custom stored procedure that returns a UUID or use a
+  # different UUID generation function from another library.
+  #
+  # Note that setting the UUID primary key default value to +nil+ will
+  # require you to assure that you always provide a UUID value before saving
+  # a record (as primary keys cannot be +nil+). This might be done via the
+  # +SecureRandom.uuid+ method and a +before_save+ callback, for instance.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#48
+  def primary_key(name, type = T.unsafe(nil), **options); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#6
+module ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements
+  # Begins a transaction.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#109
+  def begin_db_transaction; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#113
+  def begin_isolated_db_transaction(isolation); end
+
+  # Commits a transaction.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#119
+  def commit_db_transaction; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#70
+  def exec_delete(sql, name = T.unsafe(nil), binds = T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#90
+  def exec_insert(sql, name = T.unsafe(nil), binds = T.unsafe(nil), pk = T.unsafe(nil), sequence_name = T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#53
+  def exec_query(sql, name = T.unsafe(nil), binds = T.unsafe(nil), prepare: T.unsafe(nil), async: T.unsafe(nil)); end
+
+  # Aborts a transaction.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#124
+  def exec_rollback_db_transaction; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#70
+  def exec_update(sql, name = T.unsafe(nil), binds = T.unsafe(nil)); end
+
+  # Executes an SQL statement, returning a PG::Result object on success
+  # or raising a PG::Error exception otherwise.
+  # Note: the PG::Result object is manually memory managed; if you don't
+  # need it specifically, you may want consider the <tt>exec_query</tt> wrapper.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#39
+  def execute(sql, name = T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#7
+  def explain(arel, binds = T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#132
+  def high_precision_current_timestamp; end
+
+  # Queries the database and returns the results in an Array-like object
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#13
+  def query(sql, name = T.unsafe(nil)); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#29
+  def write_query?(sql); end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#141
+  def build_truncate_statements(table_names); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#137
+  def execute_batch(statements, name = T.unsafe(nil)); end
+
+  # Returns the current ID of a table's sequence.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#146
+  def last_insert_id_result(sequence_name); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#75
+  def sql_for_insert(sql, pk, binds); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#150
+  def suppress_composite_primary_key(pk); end
+end
+
+# From https://www.postgresql.org/docs/current/functions-datetime.html#FUNCTIONS-DATETIME-CURRENT
+#
+# source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#129
+ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements::HIGH_PRECISION_CURRENT_TIMESTAMP = T.let(T.unsafe(nil), Arel::Nodes::SqlLiteral)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/database_statements.rb#24
+ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements::READ_QUERY = T.let(T.unsafe(nil), Regexp)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/explain_pretty_printer.rb#6
+class ActiveRecord::ConnectionAdapters::PostgreSQL::ExplainPrettyPrinter
+  # Pretty prints the result of an EXPLAIN in a way that resembles the output of the
+  # PostgreSQL shell:
+  #
+  #                                     QUERY PLAN
+  #   ------------------------------------------------------------------------------
+  #    Nested Loop Left Join  (cost=0.00..37.24 rows=8 width=0)
+  #      Join Filter: (posts.user_id = users.id)
+  #      ->  Index Scan using users_pkey on users  (cost=0.00..8.27 rows=1 width=4)
+  #            Index Cond: (id = 1)
+  #      ->  Seq Scan on posts  (cost=0.00..28.88 rows=8 width=4)
+  #            Filter: (posts.user_id = 1)
+  #   (6 rows)
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/explain_pretty_printer.rb#20
+  def pp(result); end
+end
+
+# Value Object to hold a schema qualified name.
+# This is usually the name of a PostgreSQL relation but it can also represent
+# schema qualified type names. +schema+ and +identifier+ are unquoted to prevent
+# double quoting.
+#
+# source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#10
+class ActiveRecord::ConnectionAdapters::PostgreSQL::Name
+  # @return [Name] a new instance of Name
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#14
+  def initialize(schema, identifier); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#30
+  def ==(o); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#30
+  def eql?(o); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#35
+  def hash; end
+
+  # Returns the value of attribute identifier.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#12
+  def identifier; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#22
+  def quoted; end
+
+  # Returns the value of attribute schema.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#12
+  def schema; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#18
+  def to_s; end
+
+  protected
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#40
+  def parts; end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#45
+  def unquote(part); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#11
+ActiveRecord::ConnectionAdapters::PostgreSQL::Name::SEPARATOR = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#6
+module ActiveRecord::ConnectionAdapters::PostgreSQL::OID; end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Array < ::ActiveModel::Type::Value
+  include ::ActiveModel::Type::Helpers::Mutable
+
+  # @return [Array] a new instance of Array
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#15
+  def initialize(subtype, delimiter = T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#56
+  def ==(other); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#34
+  def cast(value); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#71
+  def changed_in_place?(raw_old_value, new_value); end
+
+  # Returns the value of attribute delimiter.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#12
+  def delimiter; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#23
+  def deserialize(value); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#75
+  def force_equality?(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#13
+  def limit(*_arg0, **_arg1, &_arg2); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#67
+  def map(value, &block); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#13
+  def precision(*_arg0, **_arg1, &_arg2); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#13
+  def scale(*_arg0, **_arg1, &_arg2); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#47
+  def serialize(value); end
+
+  # Returns the value of attribute subtype.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#12
+  def subtype; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#13
+  def type(*_arg0, **_arg1, &_arg2); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#62
+  def type_cast_for_schema(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#13
+  def user_input_in_time_zone(*_arg0, **_arg1, &_arg2); end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#80
+  def type_cast_array(value, method); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/array.rb#10
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Array::Data < ::Struct
+  # Returns the value of attribute encoder
+  #
+  # @return [Object] the current value of encoder
+  def encoder; end
+
+  # Sets the attribute encoder
+  #
+  # @param value [Object] the value to set the attribute encoder to.
+  # @return [Object] the newly set value
+  def encoder=(_); end
+
+  # Returns the value of attribute values
+  #
+  # @return [Object] the current value of values
+  def values; end
+
+  # Sets the attribute values
+  #
+  # @param value [Object] the value to set the attribute values to.
+  # @return [Object] the newly set value
+  def values=(_); end
+
+  class << self
+    def [](*_arg0); end
+    def inspect; end
+    def keyword_init?; end
+    def members; end
+    def new(*_arg0); end
+  end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Bit < ::ActiveModel::Type::Value
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit.rb#12
+  def cast_value(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit.rb#25
+  def serialize(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit.rb#8
+  def type; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit.rb#29
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Bit::Data
+  # @return [Data] a new instance of Data
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit.rb#30
+  def initialize(value); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit.rb#38
+  def binary?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit.rb#42
+  def hex?; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit.rb#34
+  def to_s; end
+
+  private
+
+  # Returns the value of attribute value.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit.rb#47
+  def value; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit_varying.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::BitVarying < ::ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Bit
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bit_varying.rb#8
+  def type; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bytea.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Bytea < ::ActiveModel::Type::Binary
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/bytea.rb#8
+  def deserialize(value); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/cidr.rb#9
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Cidr < ::ActiveModel::Type::Value
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/cidr.rb#31
+  def cast_value(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/cidr.rb#23
+  def serialize(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/cidr.rb#10
+  def type; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/cidr.rb#14
+  def type_cast_for_schema(value); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/date.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Date < ::ActiveRecord::Type::Date
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/date.rb#8
+  def cast_value(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/date.rb#20
+  def type_cast_for_schema(value); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/date_time.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::DateTime < ::ActiveRecord::Type::DateTime
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/date_time.rb#8
+  def cast_value(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/date_time.rb#20
+  def type_cast_for_schema(value); end
+
+  protected
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/date_time.rb#29
+  def real_type_unless_aliased(real_type); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/decimal.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Decimal < ::ActiveModel::Type::Decimal
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/decimal.rb#8
+  def infinity(options = T.unsafe(nil)); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/enum.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Enum < ::ActiveModel::Type::Value
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/enum.rb#8
+  def type; end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/enum.rb#13
+  def cast_value(value); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/hstore.rb#9
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Hstore < ::ActiveModel::Type::Value
+  include ::ActiveModel::Type::Helpers::Mutable
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/hstore.rb#81
+  def accessor; end
+
+  # Will compare the Hash equivalents of +raw_old_value+ and +new_value+.
+  # By comparing hashes, this avoids an edge case where the order of
+  # the keys change between the two hashes, and they would not be marked
+  # as equal.
+  #
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/hstore.rb#89
+  def changed_in_place?(raw_old_value, new_value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/hstore.rb#18
+  def deserialize(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/hstore.rb#71
+  def serialize(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/hstore.rb#14
+  def type; end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/hstore.rb#94
+  def escape_hstore(value); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/hstore.rb#10
+ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Hstore::ERROR = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/inet.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Inet < ::ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Cidr
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/inet.rb#8
+  def type; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/interval.rb#9
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Interval < ::ActiveModel::Type::Value
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/interval.rb#14
+  def cast_value(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/interval.rb#29
+  def serialize(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/interval.rb#10
+  def type; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/interval.rb#42
+  def type_cast_for_schema(value); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/jsonb.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Jsonb < ::ActiveRecord::Type::Json
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/jsonb.rb#8
+  def type; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/legacy_point.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::LegacyPoint < ::ActiveModel::Type::Value
+  include ::ActiveModel::Type::Helpers::Mutable
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/legacy_point.rb#14
+  def cast(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/legacy_point.rb#28
+  def serialize(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/legacy_point.rb#10
+  def type; end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/legacy_point.rb#37
+  def number_for_point(number); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/macaddr.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Macaddr < ::ActiveModel::Type::String
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/macaddr.rb#12
+  def changed?(old_value, new_value, _new_value_before_type_cast); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/macaddr.rb#17
+  def changed_in_place?(raw_old_value, new_value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/macaddr.rb#8
+  def type; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/money.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Money < ::ActiveModel::Type::Decimal
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/money.rb#16
+  def cast_value(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/money.rb#12
+  def scale; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/money.rb#8
+  def type; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/oid.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Oid < ::ActiveRecord::Type::UnsignedInteger
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/oid.rb#8
+  def type; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/point.rb#9
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Point < ::ActiveModel::Type::Value
+  include ::ActiveModel::Type::Helpers::Mutable
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/point.rb#16
+  def cast(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/point.rb#33
+  def serialize(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/point.rb#12
+  def type; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/point.rb#44
+  def type_cast_for_schema(value); end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/point.rb#57
+  def build_point(x, y); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/point.rb#53
+  def number_for_point(number); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Range < ::ActiveModel::Type::Value
+  # @return [Range] a new instance of Range
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#11
+  def initialize(subtype, type = T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#44
+  def ==(other); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#20
+  def cast_value(value); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#56
+  def force_equality?(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#50
+  def map(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#34
+  def serialize(value); end
+
+  # Returns the value of attribute subtype.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#8
+  def subtype; end
+
+  # Returns the value of attribute type.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#8
+  def type; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#16
+  def type_cast_for_schema(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#9
+  def user_input_in_time_zone(*_arg0, **_arg1, &_arg2); end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#69
+  def extract_bounds(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#98
+  def infinity(negative: T.unsafe(nil)); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#108
+  def infinity?(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#61
+  def type_cast_single(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#65
+  def type_cast_single_for_database(value); end
+
+  # When formatting the bound values of range types, PostgreSQL quotes
+  # the bound value using double-quotes in certain conditions. Within
+  # a double-quoted string, literal " and \ characters are themselves
+  # escaped. In input, PostgreSQL accepts multiple escape styles for "
+  # (either \" or "") but in output always uses "".
+  # See:
+  # * https://www.postgresql.org/docs/current/rangetypes.html#RANGETYPES-IO
+  # * https://www.postgresql.org/docs/current/rowtypes.html#ROWTYPES-IO-SYNTAX
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/range.rb#87
+  def unquote(value); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/specialized_string.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::SpecializedString < ::ActiveModel::Type::String
+  # @return [SpecializedString] a new instance of SpecializedString
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/specialized_string.rb#10
+  def initialize(type, **options); end
+
+  # Returns the value of attribute type.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/specialized_string.rb#8
+  def type; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/timestamp.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Timestamp < ::ActiveRecord::ConnectionAdapters::PostgreSQL::OID::DateTime
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/timestamp.rb#8
+  def type; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/timestamp_with_time_zone.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::TimestampWithTimeZone < ::ActiveRecord::ConnectionAdapters::PostgreSQL::OID::DateTime
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/timestamp_with_time_zone.rb#12
+  def cast_value(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/timestamp_with_time_zone.rb#8
+  def type; end
+end
+
+# This class uses the data from PostgreSQL pg_type table to build
+# the OID -> Type mapping.
+#   - OID is an integer representing the type.
+#   - Type is an OID::Type object.
+# This class has side effects on the +store+ passed during initialization.
+#
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#14
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::TypeMapInitializer
+  # @return [TypeMapInitializer] a new instance of TypeMapInitializer
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#15
+  def initialize(store); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#52
+  def query_conditions_for_array_types; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#36
+  def query_conditions_for_known_type_names; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#44
+  def query_conditions_for_known_type_types; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#19
+  def run(records); end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#104
+  def alias_type(oid, target); end
+
+  # @raise [ArgumentError]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#117
+  def assert_valid_registration(oid, oid_type); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#95
+  def register(oid, oid_type = T.unsafe(nil), &block); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#69
+  def register_array_type(row); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#89
+  def register_composite_type(row); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#81
+  def register_domain_type(row); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#65
+  def register_enum_type(row); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#61
+  def register_mapped_type(row); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#75
+  def register_range_type(row); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/type_map_initializer.rb#109
+  def register_with_subtype(oid, target_oid); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/uuid.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Uuid < ::ActiveModel::Type::Value
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/uuid.rb#16
+  def changed?(old_value, new_value, _new_value_before_type_cast); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/uuid.rb#21
+  def changed_in_place?(raw_old_value, new_value); end
+
+  # source://activemodel/7.0.4.3/lib/active_model/type/value.rb#31
+  def serialize(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/uuid.rb#12
+  def type; end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/uuid.rb#27
+  def cast_value(value); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/uuid.rb#8
+ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Uuid::ACCEPTABLE_UUID = T.let(T.unsafe(nil), Regexp)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/vector.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Vector < ::ActiveModel::Type::Value
+  # +delim+ corresponds to the `typdelim` column in the pg_types
+  # table.  +subtype+ is derived from the `typelem` column in the
+  # pg_types table.
+  #
+  # @return [Vector] a new instance of Vector
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/vector.rb#13
+  def initialize(delim, subtype); end
+
+  # FIXME: this should probably split on +delim+ and use +subtype+
+  # to cast the values.  Unfortunately, the current Rails behavior
+  # is to just return the string.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/vector.rb#21
+  def cast(value); end
+
+  # Returns the value of attribute delim.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/vector.rb#8
+  def delim; end
+
+  # Returns the value of attribute subtype.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/vector.rb#8
+  def subtype; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/xml.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Xml < ::ActiveModel::Type::String
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/xml.rb#12
+  def serialize(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/xml.rb#8
+  def type; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/xml.rb#17
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Xml::Data
+  # @return [Data] a new instance of Data
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/xml.rb#18
+  def initialize(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/oid/xml.rb#22
+  def to_s; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#6
+module ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#25
+  def check_int_in_range(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#150
+  def column_name_matcher; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#154
+  def column_name_with_order_matcher; end
+
+  # Escapes binary strings for bytea input to the database.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#14
+  def escape_bytea(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#146
+  def lookup_cast_type_from_column(column); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#41
+  def quote(value); end
+
+  # Quotes column names for use in SQL queries.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#97
+  def quote_column_name(name); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#115
+  def quote_default_expression(value, column); end
+
+  # Quotes schema names for use in SQL queries.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#88
+  def quote_schema_name(name); end
+
+  # Quotes strings for use in SQL input.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#71
+  def quote_string(s); end
+
+  # Checks the following cases:
+  #
+  # - table_name
+  # - "table.name"
+  # - schema_name.table_name
+  # - schema_name."table.name"
+  # - "schema.name".table_name
+  # - "schema.name"."table.name"
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#83
+  def quote_table_name(name); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#92
+  def quote_table_name_for_assignment(table, attr); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#111
+  def quoted_binary(value); end
+
+  # Quote date/time values for use in SQL input.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#102
+  def quoted_date(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#128
+  def type_cast(value); end
+
+  # Unescapes bytea output from a database to the binary string it represents.
+  # NOTE: This is NOT an inverse of escape_bytea! This is only to be used
+  # on escaped binary output from database drive.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#21
+  def unescape_bytea(value); end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#207
+  def determine_encoding_of_strings_in_array(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#192
+  def encode_array(array_data); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#203
+  def encode_range(range); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#225
+  def infinity?(value); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#188
+  def lookup_cast_type(sql_type); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#214
+  def type_cast_array(values); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#221
+  def type_cast_range_value(value); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#158
+ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting::COLUMN_NAME = T.let(T.unsafe(nil), Regexp)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#171
+ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting::COLUMN_NAME_WITH_ORDER = T.let(T.unsafe(nil), Regexp)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting::IntegerOutOf64BitRange < ::StandardError
+  # @return [IntegerOutOf64BitRange] a new instance of IntegerOutOf64BitRange
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/quoting.rb#8
+  def initialize(msg); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/referential_integrity.rb#6
+module ActiveRecord::ConnectionAdapters::PostgreSQL::ReferentialIntegrity
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/referential_integrity.rb#41
+  def all_foreign_keys_valid?; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/referential_integrity.rb#7
+  def disable_referential_integrity; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/schema_creation.rb#6
+class ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaCreation < ::ActiveRecord::ConnectionAdapters::SchemaCreation
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_creation.rb#67
+  def add_column_options!(sql, options); end
+
+  # Returns any SQL string to go between CREATE and TABLE. May be nil.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_creation.rb#88
+  def table_modifier_in_create(o); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_creation.rb#12
+  def visit_AddForeignKey(o); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_creation.rb#8
+  def visit_AlterTable(o); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_creation.rb#31
+  def visit_ChangeColumnDefinition(o); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_creation.rb#23
+  def visit_CheckConstraintDefinition(o); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_creation.rb#27
+  def visit_ValidateConstraint(name); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/schema_dumper.rb#6
+class ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaDumper < ::ActiveRecord::ConnectionAdapters::SchemaDumper
+  private
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_dumper.rb#46
+  def default_primary_key?(column); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_dumper.rb#50
+  def explicit_primary_key_default?(column); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_dumper.rb#8
+  def extensions(stream); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_dumper.rb#68
+  def extract_expression_for_virtual_column(column); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_dumper.rb#31
+  def prepare_column_options(column); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_dumper.rb#64
+  def schema_expression(column); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_dumper.rb#54
+  def schema_type(column); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_dumper.rb#19
+  def types(stream); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#6
+module ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaStatements
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#396
+  def add_column(table_name, column_name, type, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#444
+  def add_index(table_name, column_name, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#402
+  def change_column(table_name, column_name, type, **options); end
+
+  # Adds comment for given table column or drops it if +comment+ is a +nil+
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#424
+  def change_column_comment(table_name, column_name, comment_or_changes); end
+
+  # Changes the default value of a table column.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#410
+  def change_column_default(table_name, column_name, default_or_changes); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#414
+  def change_column_null(table_name, column_name, null, default = T.unsafe(nil)); end
+
+  # Adds comment for given table or drops it if +comment+ is a +nil+
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#431
+  def change_table_comment(table_name, comment_or_changes); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#524
+  def check_constraints(table_name); end
+
+  # Returns the current client message level.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#237
+  def client_min_messages; end
+
+  # Set the client message level.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#242
+  def client_min_messages=(level); end
+
+  # Returns the current database collation.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#189
+  def collation; end
+
+  # PostgreSQL requires the ORDER BY columns in the select list for distinct queries, and
+  # requires that the ORDER BY include the distinct column.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#587
+  def columns_for_distinct(columns, orders); end
+
+  # Create a new PostgreSQL database. Options include <tt>:owner</tt>, <tt>:template</tt>,
+  # <tt>:encoding</tt> (defaults to utf8), <tt>:collation</tt>, <tt>:ctype</tt>,
+  # <tt>:tablespace</tt>, and <tt>:connection_limit</tt> (note that MySQL uses
+  # <tt>:charset</tt> while PostgreSQL uses <tt>:encoding</tt>).
+  #
+  # Example:
+  #   create_database config[:database], config
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#22
+  def create_database(name, options = T.unsafe(nil)); end
+
+  # Creates a schema for the given schema name.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#210
+  def create_schema(schema_name); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#603
+  def create_schema_dumper(options); end
+
+  # Returns the current database ctype.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#194
+  def ctype; end
+
+  # Returns the current database name.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#174
+  def current_database; end
+
+  # Returns the current schema name.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#179
+  def current_schema; end
+
+  # Returns the sequence name for a table's primary key or some other specified key.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#247
+  def default_sequence_name(table_name, pk = T.unsafe(nil)); end
+
+  # Drops a PostgreSQL database.
+  #
+  # Example:
+  #   drop_database 'matt_development'
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#53
+  def drop_database(name); end
+
+  # Drops the schema for the given schema name.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#215
+  def drop_schema(schema_name, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#57
+  def drop_table(table_name, **options); end
+
+  # Returns the current database encoding format.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#184
+  def encoding; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#483
+  def foreign_keys(table_name); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#520
+  def foreign_table_exists?(table_name); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#516
+  def foreign_tables; end
+
+  # Verifies existence of an index with a given name.
+  #
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#68
+  def index_name_exists?(table_name, index_name); end
+
+  # Returns an array of indexes for the given table.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#86
+  def indexes(table_name); end
+
+  # Returns a table's primary key and belonging sequence.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#303
+  def pk_and_sequence_for(table); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#356
+  def primary_keys(table_name); end
+
+  # Drops the database specified on the +name+ attribute
+  # and creates it again using the provided +options+.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#9
+  def recreate_database(name, options = T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#454
+  def remove_index(table_name, column_name = T.unsafe(nil), **options); end
+
+  # Renames a column in a table.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#438
+  def rename_column(table_name, column_name, new_column_name); end
+
+  # Renames an index of a table. Raises error if length of new
+  # index name is greater than allowed limit.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#477
+  def rename_index(table_name, old_name, new_name); end
+
+  # Renames a table.
+  # Also renames a table's primary key sequence if the sequence name exists and
+  # matches the Active Record default.
+  #
+  # Example:
+  #   rename_table('octopuses', 'octopi')
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#378
+  def rename_table(table_name, new_name); end
+
+  # Resets the sequence of a table's primary key to the maximum value.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#275
+  def reset_pk_sequence!(table, pk = T.unsafe(nil), sequence = T.unsafe(nil)); end
+
+  # Returns true if schema exists.
+  #
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#63
+  def schema_exists?(name); end
+
+  # Returns an array of schema names.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#199
+  def schema_names; end
+
+  # Returns the active schema search path.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#232
+  def schema_search_path; end
+
+  # Sets the schema search path to a string of comma-separated schema names.
+  # Names beginning with $ have to be quoted (e.g. $user => '$user').
+  # See: https://www.postgresql.org/docs/current/static/ddl-schemas.html
+  #
+  # This should be not be called manually but set in database.yml.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#224
+  def schema_search_path=(schema_csv); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#255
+  def serial_sequence(table, column); end
+
+  # Sets the sequence of a table's primary key to the specified value.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#260
+  def set_pk_sequence!(table, value); end
+
+  # Returns a comment stored in database for given table
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#159
+  def table_comment(table_name); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#152
+  def table_options(table_name); end
+
+  # Maps logical Rails types to PostgreSQL-specific data types.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#549
+  def type_to_sql(type, limit: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), array: T.unsafe(nil), enum_type: T.unsafe(nil), **_arg6); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#599
+  def update_table_definition(table_name, base); end
+
+  # Validates the given check constraint.
+  #
+  #   validate_check_constraint :products, name: "price_check"
+  #
+  # The +options+ hash accepts the same keys as add_check_constraint[rdoc-ref:ConnectionAdapters::SchemaStatements#add_check_constraint].
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#645
+  def validate_check_constraint(table_name, **options); end
+
+  # Validates the given constraint.
+  #
+  # Validates the constraint named +constraint_name+ on +accounts+.
+  #
+  #   validate_constraint :accounts, :constraint_name
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#612
+  def validate_constraint(table_name, constraint_name); end
+
+  # Validates the given foreign key.
+  #
+  # Validates the foreign key on +accounts.branch_id+.
+  #
+  #   validate_foreign_key :accounts, :branches
+  #
+  # Validates the foreign key on +accounts.owner_id+.
+  #
+  #   validate_foreign_key :accounts, column: :owner_id
+  #
+  # Validates the foreign key named +special_fk_name+ on the +accounts+ table.
+  #
+  #   validate_foreign_key :accounts, name: :special_fk_name
+  #
+  # The +options+ hash accepts the same keys as SchemaStatements#add_foreign_key.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#634
+  def validate_foreign_key(from_table, to_table = T.unsafe(nil), **options); end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#732
+  def add_column_for_alter(table_name, column_name, type, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#764
+  def add_index_opclass(quoted_columns, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#771
+  def add_options_for_index_columns(quoted_columns, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#745
+  def change_column_default_for_alter(table_name, column_name, default_or_changes); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#737
+  def change_column_for_alter(table_name, column_name, type, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#760
+  def change_column_null_for_alter(table_name, column_name, null, default = T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#660
+  def create_alter_table(name); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#656
+  def create_table_definition(name, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#776
+  def data_source_sql(name = T.unsafe(nil), type: T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#720
+  def extract_foreign_key_action(specifier); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#728
+  def extract_foreign_key_deferrable(deferrable, deferred); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#805
+  def extract_schema_qualified_name(string); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#692
+  def fetch_type_metadata(column_name, sql_type, oid, fmod); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#664
+  def new_column_from_field(table_name, field); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#787
+  def quoted_scope(name = T.unsafe(nil), type: T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#652
+  def schema_creation; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_statements.rb#704
+  def sequence_name_from_parts(table_name, column_name, suffix); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#225
+class ActiveRecord::ConnectionAdapters::PostgreSQL::Table < ::ActiveRecord::ConnectionAdapters::Table
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::ColumnMethods
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def bigserial(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def bit(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def bit_varying(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def box(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def cidr(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def circle(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def citext(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def daterange(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def enum(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def hstore(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def inet(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def int4range(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def int8range(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def interval(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def jsonb(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def line(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def lseg(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def ltree(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def macaddr(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def money(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def numrange(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def oid(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def path(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def point(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def polygon(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def serial(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def timestamptz(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def tsrange(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def tstzrange(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def tsvector(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def uuid(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def xml(*names, **options); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#192
+class ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition < ::ActiveRecord::ConnectionAdapters::TableDefinition
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::ColumnMethods
+
+  # @return [TableDefinition] a new instance of TableDefinition
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#197
+  def initialize(*_arg0, **_arg1); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def bigserial(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def bit(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def bit_varying(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def box(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def cidr(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def circle(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def citext(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def daterange(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def enum(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def hstore(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def inet(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def int4range(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def int8range(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def interval(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def jsonb(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def line(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def lseg(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def ltree(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def macaddr(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def money(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#202
+  def new_column_definition(name, type, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def numrange(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def oid(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def path(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def point(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def polygon(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def serial(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def timestamptz(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def tsrange(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def tstzrange(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def tsvector(*names, **options); end
+
+  # Returns the value of attribute unlogged.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#195
+  def unlogged; end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def uuid(*names, **options); end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#272
+  def xml(*names, **options); end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#212
+  def aliased_types(name, fallback); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/schema_definitions.rb#216
+  def integer_like_primary_key_type(type, options); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/type_metadata.rb#7
+class ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+  include ::ActiveRecord::ConnectionAdapters::Deduplicable
+  extend ::ActiveRecord::ConnectionAdapters::Deduplicable::ClassMethods
+
+  # @return [TypeMetadata] a new instance of TypeMetadata
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/type_metadata.rb#14
+  def initialize(type_metadata, oid: T.unsafe(nil), fmod: T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/type_metadata.rb#20
+  def ==(other); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/type_metadata.rb#20
+  def eql?(other); end
+
+  # Returns the value of attribute fmod.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/type_metadata.rb#12
+  def fmod; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/type_metadata.rb#28
+  def hash; end
+
+  # Returns the value of attribute oid.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/type_metadata.rb#12
+  def oid; end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/type_metadata.rb#36
+  def deduplicated; end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#54
+module ActiveRecord::ConnectionAdapters::PostgreSQL::Utils
+  extend ::ActiveRecord::ConnectionAdapters::PostgreSQL::Utils
+
+  # Returns an instance of <tt>ActiveRecord::ConnectionAdapters::PostgreSQL::Name</tt>
+  # extracted from +string+.
+  # +schema+ is +nil+ if not specified in +string+.
+  # +schema+ and +identifier+ exclude surrounding quotes (regardless of whether provided in +string+)
+  # +string+ supports the range of schema/table references understood by PostgreSQL, for example:
+  #
+  # * <tt>table_name</tt>
+  # * <tt>"table.name"</tt>
+  # * <tt>schema_name.table_name</tt>
+  # * <tt>schema_name."table.name"</tt>
+  # * <tt>"schema_name".table_name</tt>
+  # * <tt>"schema.name"."table name"</tt>
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql/utils.rb#69
+  def extract_schema_qualified_name(string); end
+end
+
+# The PostgreSQL adapter works with the native C (https://github.com/ged/ruby-pg) driver.
+#
+# Options:
+#
+# * <tt>:host</tt> - Defaults to a Unix-domain socket in /tmp. On machines without Unix-domain sockets,
+#   the default is to connect to localhost.
+# * <tt>:port</tt> - Defaults to 5432.
+# * <tt>:username</tt> - Defaults to be the same as the operating system name of the user running the application.
+# * <tt>:password</tt> - Password to be used if the server demands password authentication.
+# * <tt>:database</tt> - Defaults to be the same as the username.
+# * <tt>:schema_search_path</tt> - An optional schema search path for the connection given
+#   as a string of comma-separated schema names. This is backward-compatible with the <tt>:schema_order</tt> option.
+# * <tt>:encoding</tt> - An optional client encoding that is used in a <tt>SET client_encoding TO
+#   <encoding></tt> call on the connection.
+# * <tt>:min_messages</tt> - An optional client min messages that is used in a
+#   <tt>SET client_min_messages TO <min_messages></tt> call on the connection.
+# * <tt>:variables</tt> - An optional hash of additional parameters that
+#   will be used in <tt>SET SESSION key = val</tt> calls on the connection.
+# * <tt>:insert_returning</tt> - An optional boolean to control the use of <tt>RETURNING</tt> for <tt>INSERT</tt> statements
+#   defaults to true.
+#
+# Any further options are used as connection parameters to libpq. See
+# https://www.postgresql.org/docs/current/static/libpq-connect.html for the
+# list of parameters.
+#
+# In addition, default connection parameters of libpq can be set per environment variables.
+# See https://www.postgresql.org/docs/current/static/libpq-envars.html .
+#
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#73
+class ActiveRecord::ConnectionAdapters::PostgreSQLAdapter < ::ActiveRecord::ConnectionAdapters::AbstractAdapter
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::ReferentialIntegrity
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaStatements
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements
+
+  # Initializes and connects a PostgreSQL adapter.
+  #
+  # @return [PostgreSQLAdapter] a new instance of PostgreSQLAdapter
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#281
+  def initialize(connection, logger, connection_parameters, config); end
+
+  # Is this connection alive and ready for queries?
+  #
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#307
+  def active?; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#514
+  def build_insert_sql(insert); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#533
+  def check_version; end
+
+  # Given a name and an array of values, creates an enum type.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#472
+  def create_enum(name, values); end
+
+  # :singleton-method:
+  # PostgreSQL allows the creation of "unlogged" tables, which do not record
+  # data in the PostgreSQL Write-Ahead Log. This can make the tables faster,
+  # but significantly increases the risk of data loss if the database
+  # crashes. As a result, this should not be used in production
+  # environments. If you would like all created tables to be unlogged in
+  # the test environment you can add the following line to your test.rb
+  # file:
+  #
+  #   ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.create_unlogged_tables = true
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#103
+  def create_unlogged_tables; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#103
+  def create_unlogged_tables=(_arg0); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#103
+  def create_unlogged_tables?; end
+
+  # :singleton-method:
+  # PostgreSQL supports multiple types for DateTimes. By default, if you use +datetime+
+  # in migrations, Rails will translate this to a PostgreSQL "timestamp without time zone".
+  # Change this in an initializer to use another NATIVE_DATABASE_TYPES. For example, to
+  # store DateTimes as "timestamp with time zone":
+  #
+  #   ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.datetime_type = :timestamptz
+  #
+  # Or if you are adding a custom type:
+  #
+  #   ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NATIVE_DATABASE_TYPES[:my_custom_type] = { name: "my_custom_type_name" }
+  #   ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.datetime_type = :my_custom_type
+  #
+  # If you're using +:ruby+ as your +config.active_record.schema_format+ and you change this
+  # setting, you should immediately run <tt>bin/rails db:migrate</tt> to update the types in your schema.rb.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#121
+  def datetime_type; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#121
+  def datetime_type=(_arg0); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#121
+  def datetime_type?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#510
+  def default_index_type?(index); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#439
+  def disable_extension(name); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#354
+  def discard!; end
+
+  # Disconnects from the database if already connected. Otherwise, this
+  # method does nothing.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#347
+  def disconnect!; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#433
+  def enable_extension(name); end
+
+  # Returns a list of defined enum types, and their values.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#458
+  def enum_types; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#445
+  def extension_available?(name); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#449
+  def extension_enabled?(name); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#453
+  def extensions; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#419
+  def get_advisory_lock(lock_id); end
+
+  # Returns the version of the connected PostgreSQL server.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#505
+  def get_database_version; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#252
+  def index_algorithms; end
+
+  # Returns the configured supported identifier length supported by PostgreSQL
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#490
+  def max_identifier_length; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#360
+  def native_database_types; end
+
+  # source://activerecord//lib/active_record/connection_adapters/abstract_adapter.rb#649
+  def postgresql_version; end
+
+  # Close then reopen the connection.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#322
+  def reconnect!; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#426
+  def release_advisory_lock(lock_id); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#316
+  def reload_type_map; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#333
+  def reset!; end
+
+  # Set the authorized user for this session
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#495
+  def session_auth=(user); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#372
+  def set_standard_conforming_strings; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#380
+  def supports_advisory_locks?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#177
+  def supports_bulk_alter?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#205
+  def supports_check_constraints?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#229
+  def supports_comments?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#411
+  def supports_common_table_expressions?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#221
+  def supports_datetime_with_precision?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#376
+  def supports_ddl_transactions?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#213
+  def supports_deferrable_constraints?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#384
+  def supports_explain?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#193
+  def supports_expression_index?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#388
+  def supports_extensions?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#201
+  def supports_foreign_keys?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#396
+  def supports_foreign_tables?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#181
+  def supports_index_sort_order?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#241
+  def supports_insert_conflict_target?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#241
+  def supports_insert_on_conflict?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#241
+  def supports_insert_on_duplicate_skip?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#241
+  def supports_insert_on_duplicate_update?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#237
+  def supports_insert_returning?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#225
+  def supports_json?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#415
+  def supports_lazy_transactions?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#392
+  def supports_materialized_views?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#404
+  def supports_optimizer_hints?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#189
+  def supports_partial_index?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#185
+  def supports_partitioned_indexes?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#400
+  def supports_pgcrypto_uuid?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#233
+  def supports_savepoints?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#197
+  def supports_transaction_isolation?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#209
+  def supports_validate_constraints?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#217
+  def supports_views?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#248
+  def supports_virtual_columns?; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#500
+  def use_insert_returning?; end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#991
+  def add_pg_decoders; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#966
+  def add_pg_encoders; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#936
+  def arel_visitor; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#940
+  def build_statement_pool; end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#944
+  def can_perform_case_insensitive_comparison_for?(column); end
+
+  # Returns the list of a table's column names, data types, and default values.
+  #
+  # The underlying query is roughly:
+  #  SELECT column.name, column.type, default.value, column.comment
+  #    FROM column LEFT JOIN default
+  #      ON column.table_id = default.table_id
+  #     AND column.num = default.column_num
+  #   WHERE column.table_id = get_table_id('table_name')
+  #     AND column.num > 0
+  #     AND NOT column.is_dropped
+  #   ORDER BY column.num
+  #
+  # If the table name is not prefixed with a schema, the database will
+  # take the first match from the schema search path.
+  #
+  # Query implementation notes:
+  #  - format_type includes the column size constraint, e.g. varchar(50)
+  #  - ::regclass is a function that gives the id for a table name
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#915
+  def column_definitions(table_name); end
+
+  # Configures the encoding, verbosity, schema search path, and time zone of the connection.
+  # This is called by #connect and should not be called manually.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#860
+  def configure_connection; end
+
+  # Connects to a PostgreSQL server and sets up the adapter depending on the
+  # connected server's characteristics.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#851
+  def connect; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#1032
+  def construct_coder(row, coder_class); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#773
+  def exec_cache(sql, name, binds, async: T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#757
+  def exec_no_cache(sql, name, binds, async: T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#740
+  def execute_and_clear(sql, name, binds, prepare: T.unsafe(nil), async: T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#646
+  def extract_default_function(default_value, default); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#931
+  def extract_table_ref_from_insert_sql(sql); end
+
+  # Extracts the value from a PostgreSQL column default definition.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#620
+  def extract_value_from_default(default); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#701
+  def get_oid_type(oid, fmod, column_name, sql_type = T.unsafe(nil)); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#650
+  def has_default_function?(default_value, default); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#819
+  def in_transaction?; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#614
+  def initialize_type_map(m = T.unsafe(nil)); end
+
+  # Annoyingly, the code for prepared statements whose return value may
+  # have changed is FEATURE_NOT_SUPPORTED.
+  #
+  # This covers various different error types so we need to do additional
+  # work to classify the exception definitively as a
+  # ActiveRecord::PreparedStatementCacheExpired
+  #
+  # Check here for more details:
+  # https://git.postgresql.org/gitweb/?p=postgresql.git;a=blob;f=src/backend/utils/cache/plancache.c#l573
+  #
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#811
+  def is_cached_plan_failure?(e); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#714
+  def load_additional_types(oids = T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#723
+  def load_types_queries(initializer, oids); end
+
+  # Prepare the statement if it hasn't been prepared, return
+  # the statement key.
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#831
+  def prepare_statement(sql, binds); end
+
+  # Returns the statement identifier for the client side cache
+  # of statements
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#825
+  def sql_key(sql); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#666
+  def translate_exception(exception, message:, sql:, binds:); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#610
+  def type_map; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#974
+  def update_typemap_for_default_timezone; end
+
+  class << self
+    # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#103
+    def create_unlogged_tables; end
+
+    # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#103
+    def create_unlogged_tables=(value); end
+
+    # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#103
+    def create_unlogged_tables?; end
+
+    # @return [Boolean]
+    #
+    # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#300
+    def database_exists?(config); end
+
+    # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#121
+    def datetime_type; end
+
+    # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#121
+    def datetime_type=(value); end
+
+    # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#121
+    def datetime_type?; end
+
+    # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#540
+    def initialize_type_map(m); end
+
+    # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#364
+    def native_database_types; end
+
+    # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#77
+    def new_client(conn_params); end
+  end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#74
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::ADAPTER_NAME = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#661
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::DEADLOCK_DETECTED = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#662
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::DUPLICATE_DATABASE = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#738
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::FEATURE_NOT_SUPPORTED = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#658
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::FOREIGN_KEY_VIOLATION = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#663
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::LOCK_NOT_AVAILABLE = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#1037
+class ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::MoneyDecoder < ::PG::SimpleDecoder
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#1040
+  def decode(value, tuple = T.unsafe(nil), field = T.unsafe(nil)); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#1038
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::MoneyDecoder::TYPE = T.let(T.unsafe(nil), ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Money)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#123
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NATIVE_DATABASE_TYPES = T.let(T.unsafe(nil), Hash)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#657
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NOT_NULL_VIOLATION = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#656
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NUMERIC_VALUE_OUT_OF_RANGE = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#170
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID = ActiveRecord::ConnectionAdapters::PostgreSQL::OID
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#664
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::QUERY_CANCELED = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#660
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::SERIALIZATION_FAILURE = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#256
+class ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::StatementPool < ::ActiveRecord::ConnectionAdapters::StatementPool
+  # @return [StatementPool] a new instance of StatementPool
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#257
+  def initialize(connection, max); end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#263
+  def next_key; end
+
+  private
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#273
+  def connection_active?; end
+
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#268
+  def dealloc(key); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#659
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::UNIQUE_VIOLATION = T.let(T.unsafe(nil), String)
+
+# See https://www.postgresql.org/docs/current/static/errcodes-appendix.html
+#
+# source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#655
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::VALUE_LIMIT_VIOLATION = T.let(T.unsafe(nil), String)
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/column.rb#67
+ActiveRecord::ConnectionAdapters::PostgreSQLColumn = ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+
+# source://activerecord//lib/active_record/connection_adapters/postgresql/type_metadata.rb#42
+ActiveRecord::ConnectionAdapters::PostgreSQLTypeMetadata = ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
 
 # source://activerecord//lib/active_record/connection_adapters/abstract/schema_definitions.rb#86
 class ActiveRecord::ConnectionAdapters::PrimaryKeyDefinition < ::Struct
@@ -14643,6 +16889,52 @@ class ActiveRecord::ConnectionAdapters::SqlTypeMetadata
   def deduplicated; end
 end
 
+# source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#5
+class ActiveRecord::ConnectionAdapters::StatementPool
+  include ::Enumerable
+
+  # @return [StatementPool] a new instance of StatementPool
+  #
+  # source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#10
+  def initialize(statement_limit = T.unsafe(nil)); end
+
+  # source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#23
+  def [](key); end
+
+  # source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#31
+  def []=(sql, stmt); end
+
+  # source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#38
+  def clear; end
+
+  # source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#45
+  def delete(key); end
+
+  # source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#15
+  def each(&block); end
+
+  # @return [Boolean]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#19
+  def key?(key); end
+
+  # source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#27
+  def length; end
+
+  private
+
+  # source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#51
+  def cache; end
+
+  # @raise [NotImplementedError]
+  #
+  # source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#55
+  def dealloc(stmt); end
+end
+
+# source://activerecord//lib/active_record/connection_adapters/statement_pool.rb#8
+ActiveRecord::ConnectionAdapters::StatementPool::DEFAULT_STATEMENT_LIMIT = T.let(T.unsafe(nil), Integer)
+
 # Represents an SQL table in an abstract way for updating a table.
 # Also see TableDefinition and {connection.create_table}[rdoc-ref:SchemaStatements#create_table]
 #
@@ -15668,6 +17960,14 @@ module ActiveRecord::ConnectionHandling
 
   # source://activerecord//lib/active_record/connection_handling.rb#256
   def lookup_connection_handler(handler_key); end
+
+  # source://activerecord-postgis-adapter/8.0.1/lib/active_record/connection_adapters/postgis/create_connection.rb#29
+  def postgis_connection(config); end
+
+  # Establishes a connection to the database that's used by all Active Record objects
+  #
+  # source://activerecord//lib/active_record/connection_adapters/postgresql_adapter.rb#25
+  def postgresql_connection(config); end
 
   # @return [Boolean]
   #
@@ -17305,10 +19605,10 @@ class ActiveRecord::DestroyAssociationAsyncJob < ::ActiveJob::Base
   def owner_destroyed?(owner, ensuring_owner_was_method); end
 
   class << self
-    # source://activejob/7.0.4.2/lib/active_job/queue_name.rb#56
+    # source://activejob/7.0.4.3/lib/active_job/queue_name.rb#56
     def queue_name; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/rescuable.rb#13
+    # source://activesupport/7.0.4.3/lib/active_support/rescuable.rb#13
     def rescue_handlers; end
   end
 end
@@ -17491,10 +19791,10 @@ module ActiveRecord::Encryption
   # source://activerecord//lib/active_record/encryption/configurable.rb#10
   def config; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#56
+  # source://activesupport/7.0.4.3/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#56
   def custom_contexts; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#100
+  # source://activesupport/7.0.4.3/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#100
   def custom_contexts=(obj); end
 
   # source://activerecord//lib/active_record/encryption/contexts.rb#17
@@ -17510,10 +19810,10 @@ module ActiveRecord::Encryption
     # source://activerecord//lib/active_record/encryption/configurable.rb#10
     def config; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#48
+    # source://activesupport/7.0.4.3/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#48
     def custom_contexts; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#92
+    # source://activesupport/7.0.4.3/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#92
     def custom_contexts=(obj); end
 
     # source://activerecord//lib/active_record/encryption/contexts.rb#17
@@ -18808,7 +21108,7 @@ class ActiveRecord::Encryption::Properties
   # source://activerecord//lib/active_record/encryption/properties.rb#37
   def iv=(value); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/core_ext/module/delegation.rb#302
+  # source://activesupport/7.0.4.3/lib/active_support/core_ext/module/delegation.rb#302
   def method_missing(method, *args, **_arg2, &block); end
 
   # source://activerecord//lib/active_record/encryption/properties.rb#68
@@ -18824,7 +21124,7 @@ class ActiveRecord::Encryption::Properties
   # source://activerecord//lib/active_record/encryption/properties.rb#73
   def data; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/core_ext/module/delegation.rb#294
+  # source://activesupport/7.0.4.3/lib/active_support/core_ext/module/delegation.rb#294
   def respond_to_missing?(name, include_private = T.unsafe(nil)); end
 end
 
@@ -21390,7 +23690,7 @@ class ActiveRecord::InternalMetadata < ::ActiveRecord::Base
     # source://activerecord//lib/active_record/internal_metadata.rb#28
     def []=(key, value); end
 
-    # source://activemodel/7.0.4.2/lib/active_model/validations.rb#52
+    # source://activemodel/7.0.4.3/lib/active_model/validations.rb#52
     def _validators; end
 
     # Creates an internal metadata table with columns +key+ and +value+
@@ -24678,23 +26978,23 @@ class ActiveRecord::NoDatabaseError < ::ActiveRecord::StatementInvalid
   # source://activerecord//lib/active_record/errors.rb#245
   def initialize(message = T.unsafe(nil)); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+  # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
   def _actions; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+  # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
   def _actions=(_arg0); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+  # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
   def _actions?; end
 
   class << self
-    # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+    # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
     def _actions; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+    # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
     def _actions=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+    # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
     def _actions?; end
 
     # source://activerecord//lib/active_record/errors.rb#250
@@ -24843,13 +27143,13 @@ class ActiveRecord::PendingMigrationError < ::ActiveRecord::MigrationError
   # source://activerecord//lib/active_record/migration.rb#146
   def initialize(message = T.unsafe(nil)); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+  # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
   def _actions; end
 
-  # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+  # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
   def _actions=(_arg0); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+  # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
   def _actions?; end
 
   private
@@ -24858,13 +27158,13 @@ class ActiveRecord::PendingMigrationError < ::ActiveRecord::MigrationError
   def detailed_migration_message; end
 
   class << self
-    # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+    # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
     def _actions; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+    # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
     def _actions=(value); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/actionable_error.rb#15
+    # source://activesupport/7.0.4.3/lib/active_support/actionable_error.rb#15
     def _actions?; end
   end
 end
@@ -25763,6 +28063,39 @@ module ActiveRecord::Persistence::ClassMethods
   def instantiate_instance_of(klass, attributes, column_types = T.unsafe(nil), &block); end
 end
 
+# source://activerecord//lib/active_record/connection_adapters/postgresql/oid/point.rb#4
+class ActiveRecord::Point < ::Struct
+  # Returns the value of attribute x
+  #
+  # @return [Object] the current value of x
+  def x; end
+
+  # Sets the attribute x
+  #
+  # @param value [Object] the value to set the attribute x to.
+  # @return [Object] the newly set value
+  def x=(_); end
+
+  # Returns the value of attribute y
+  #
+  # @return [Object] the current value of y
+  def y; end
+
+  # Sets the attribute y
+  #
+  # @param value [Object] the value to set the attribute y to.
+  # @return [Object] the newly set value
+  def y=(_); end
+
+  class << self
+    def [](*_arg0); end
+    def inspect; end
+    def keyword_init?; end
+    def members; end
+    def new(*_arg0); end
+  end
+end
+
 # source://activerecord//lib/active_record/relation/predicate_builder.rb#4
 class ActiveRecord::PredicateBuilder
   # @return [PredicateBuilder] a new instance of PredicateBuilder
@@ -26143,10 +28476,10 @@ module ActiveRecord::QueryLogs
     # source://activerecord//lib/active_record/query_logs.rb#77
     def cache_query_log_tags=(val); end
 
-    # source://activesupport/7.0.4.2/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#48
+    # source://activesupport/7.0.4.3/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#48
     def cached_comment; end
 
-    # source://activesupport/7.0.4.2/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#92
+    # source://activesupport/7.0.4.3/lib/active_support/core_ext/module/attribute_accessors_per_thread.rb#92
     def cached_comment=(obj); end
 
     # source://activerecord//lib/active_record/query_logs.rb#81
@@ -30597,7 +32930,7 @@ class ActiveRecord::SchemaMigration < ::ActiveRecord::Base
   def version; end
 
   class << self
-    # source://activemodel/7.0.4.2/lib/active_model/validations.rb#52
+    # source://activemodel/7.0.4.3/lib/active_model/validations.rb#52
     def _validators; end
 
     # source://activerecord//lib/active_record/schema_migration.rb#41
@@ -32117,7 +34450,7 @@ module ActiveRecord::Tasks::DatabaseTasks
   # source://activerecord//lib/active_record/tasks/database_tasks.rb#457
   def schema_dump_path(db_config, format = T.unsafe(nil)); end
 
-  # source://activesupport/7.0.4.2/lib/active_support/deprecation/method_wrappers.rb#63
+  # source://activesupport/7.0.4.3/lib/active_support/deprecation/method_wrappers.rb#63
   def schema_file_type(*args, **_arg1, &block); end
 
   # @return [Boolean]
@@ -33152,6 +35485,8 @@ end
 #
 # source://activerecord//lib/active_record/type/internal/timezone.rb#4
 module ActiveRecord::Type
+  extend ::ActiveRecord::ConnectionAdapters::PostGIS::Type
+
   class << self
     # source://activerecord//lib/active_record/type.rb#49
     def adapter_name_from(model); end
@@ -33162,7 +35497,7 @@ module ActiveRecord::Type
     # source://activerecord//lib/active_record/type.rb#45
     def default_value; end
 
-    # source://activerecord//lib/active_record/type.rb#41
+    # source://activerecord-postgis-adapter/8.0.1/lib/active_record/connection_adapters/postgis/type.rb#9
     def lookup(*args, adapter: T.unsafe(nil), **kwargs); end
 
     # Add a new type to the registry, allowing it to be referenced as a
@@ -34148,6 +36483,9 @@ module Arel
 
     # source://activerecord//lib/arel.rb#50
     def fetch_attribute(value, &block); end
+
+    # source://rgeo-activerecord/7.0.1/lib/rgeo/active_record/spatial_expressions.rb#253
+    def spatial(arg); end
 
     # Wrap a known-safe SQL string for passing to query methods, e.g.
     #
@@ -37118,6 +39456,12 @@ class Arel::Visitors::Dot < ::Arel::Visitors::Visitor
   # source://activerecord//lib/arel/visitors/dot.rb#196
   def visit_NilClass(o); end
 
+  # source://activerecord//lib/arel/visitors/dot.rb#196
+  def visit_RGeo_Cartesian_BoundingBox(o); end
+
+  # source://activerecord//lib/arel/visitors/dot.rb#196
+  def visit_RGeo_Feature_Instance(o); end
+
   # source://activerecord//lib/arel/visitors/dot.rb#225
   def visit_Set(o); end
 
@@ -37257,6 +39601,9 @@ class Arel::Visitors::MySQL < ::Arel::Visitors::ToSql
   # source://activerecord//lib/arel/visitors/mysql.rb#12
   def visit_Arel_Nodes_UnqualifiedColumn(o, collector); end
 end
+
+# source://activerecord-postgis-adapter/8.0.1/lib/active_record/connection_adapters/postgis/arel_tosql.rb#24
+Arel::Visitors::PostGISSuperclass = Arel::Visitors::PostgreSQL
 
 # source://activerecord//lib/arel/visitors/postgresql.rb#5
 class Arel::Visitors::PostgreSQL < ::Arel::Visitors::ToSql
@@ -37818,6 +40165,9 @@ class Arel::Visitors::Visitor
   # source://activerecord//lib/arel/visitors/visitor.rb#10
   def accept(object, collector = T.unsafe(nil)); end
 
+  # source://rgeo-activerecord/7.0.1/lib/rgeo/active_record/arel_spatial_queries.rb#79
+  def visit_RGeo_ActiveRecord_SpatialConstantNode(node, collector); end
+
   private
 
   # Returns the value of attribute dispatch.
@@ -37842,3 +40192,6 @@ module Arel::WindowPredications
   # source://activerecord//lib/arel/window_predications.rb#5
   def over(expr = T.unsafe(nil)); end
 end
+
+class PG::SimpleCoder < ::PG::Coder; end
+class PG::SimpleDecoder < ::PG::SimpleCoder; end
