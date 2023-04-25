@@ -1,9 +1,9 @@
 <div x-data="{ open: false }">
-  <button x-on:click="open = true; bodyScrolling = false" type="button" class="inline-flex items-center h-16 text-sm rounded-lg text-navy lg:hidden focus:outline-none">
-    <span class="pr-2 text-lg font-medium">Menu</span>
+  <button x-on:click="open = true; bodyScrolling = false" type="button" class="flex flex-row-reverse items-center w-full h-16 text-sm rounded-lg sm:flex-row text-navy lg:hidden focus:outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
       <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
     </svg>
+    <span class="px-2 text-lg font-medium">Menu</span>
   </button>
   <div x-show="open" x-cloak class="fixed top-0 left-0 w-full h-full overflow-y-scroll text-2xl text-right text-white bg-orange">
     <div class="fixed w-full bg-orange">
