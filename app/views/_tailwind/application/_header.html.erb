@@ -7,21 +7,22 @@
     </div>
   <% end %>
 </div>
-<div class="hidden pt-4 pb-5 sm:block sm:py-8 bg-yellow">
-  <%= render Tailwind::ContainerComponent.new do %>
-    <%= render "logo_block" %>
-  <% end %>
-</div>
-<div class="sm:bg-[#F3F2F2]">
-  <%= render Tailwind::ContainerComponent.new do %>
-    <nav>
-      <%= render "menu_mobile" %>
-      <%= render "menu_desktop" %>
-    </nav>
-  <% end %>
-</div>
-<%= render Tailwind::ContainerComponent.new do %>
-  <div class="font-['Inter_var'] font-extrabold text-5xl text-navy sm:hidden">
-    Planning Alerts
+<div class="flex flex-col">
+  <div>
+    <div class="bg-transparent sm:bg-yellow">
+      <%= render Tailwind::ContainerComponent.new do %>
+        <div class="pt-2 sm:py-8">
+          <%= render "logo_block" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+  <div class="sm:bg-[#F3F2F2] order-first sm:order-none">
+    <%= render Tailwind::ContainerComponent.new do %>
+      <nav>
+        <%= render "menu_mobile" %>
+        <%= render "menu_desktop" %>
+      </nav>
+    <% end %>
+  </div>
+</div>
