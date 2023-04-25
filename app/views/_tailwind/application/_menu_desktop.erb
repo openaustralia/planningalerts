@@ -1,6 +1,6 @@
 <div class="hidden lg:block">
   <ul class="flex justify-between h-16 text-lg font-medium text-navy">
-    <div class="flex">
+    <div class="flex space-x-8">
       <%= render Tailwind::NavItemComponent.new(href: root_path, selected: current_page?(root_path)).with_content("Home") %>
       <%= render Tailwind::NavItemComponent.new(href: address_applications_path, selected: current_page?(address_applications_path)).with_content("Search Applications") %>
       <%= render Tailwind::NavItemComponent.new(href: authorities_path, selected: current_page?(authorities_path)).with_content("Coverage") %>
