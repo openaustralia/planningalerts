@@ -10,28 +10,41 @@ module Tailwindcss; end
 # source://tailwindcss-rails//lib/tailwindcss/commands.rb#4
 module Tailwindcss::Commands
   class << self
-    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#58
+    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#75
     def compile_command(debug: T.unsafe(nil), **kwargs); end
 
-    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#18
+    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#24
     def executable(exe_path: T.unsafe(nil)); end
 
-    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#14
+    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#20
     def platform; end
 
-    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#69
-    def watch_command(poll: T.unsafe(nil), **kwargs); end
+    # @return [Boolean]
+    #
+    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#94
+    def rails_css_compressor?; end
+
+    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#86
+    def watch_command(always: T.unsafe(nil), poll: T.unsafe(nil), **kwargs); end
   end
 end
 
+# source://tailwindcss-rails//lib/tailwindcss/commands.rb#5
+Tailwindcss::Commands::DEFAULT_DIR = T.let(T.unsafe(nil), String)
+
+# raised when TAILWINDCSS_INSTALL_DIR does not exist
+#
+# source://tailwindcss-rails//lib/tailwindcss/commands.rb#16
+class Tailwindcss::Commands::DirectoryNotFoundException < ::StandardError; end
+
 # raised when the tailwindcss executable could not be found where we expected it to be
 #
-# source://tailwindcss-rails//lib/tailwindcss/commands.rb#10
+# source://tailwindcss-rails//lib/tailwindcss/commands.rb#12
 class Tailwindcss::Commands::ExecutableNotFoundException < ::StandardError; end
 
 # raised when the host platform is not supported by upstream tailwindcss's binary releases
 #
-# source://tailwindcss-rails//lib/tailwindcss/commands.rb#6
+# source://tailwindcss-rails//lib/tailwindcss/commands.rb#8
 class Tailwindcss::Commands::UnsupportedPlatformException < ::StandardError; end
 
 # source://tailwindcss-rails//lib/tailwindcss/engine.rb#4

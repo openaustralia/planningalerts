@@ -5194,7 +5194,7 @@ class Nokogiri::XML::NodeSet
   # of elements and if each element is equal to the corresponding
   # element in the other NodeSet
   #
-  # source://nokogiri//lib/nokogiri/xml/node_set.rb#392
+  # source://nokogiri//lib/nokogiri/xml/node_set.rb#393
   def ==(other); end
 
   def [](*_arg0); end
@@ -5312,7 +5312,7 @@ class Nokogiri::XML::NodeSet
   # Returns a new NodeSet containing all the children of all the nodes in
   # the NodeSet
   #
-  # source://nokogiri//lib/nokogiri/xml/node_set.rb#405
+  # source://nokogiri//lib/nokogiri/xml/node_set.rb#406
   def children; end
 
   def clone; end
@@ -5333,7 +5333,7 @@ class Nokogiri::XML::NodeSet
   #
   #  ⚡ This is an experimental feature, available since v1.14.0
   #
-  # source://nokogiri//lib/nokogiri/xml/node_set.rb#439
+  # source://nokogiri//lib/nokogiri/xml/node_set.rb#440
   def deconstruct; end
 
   def delete(_arg0); end
@@ -5402,7 +5402,7 @@ class Nokogiri::XML::NodeSet
 
   # Return a nicely formated string representation
   #
-  # source://nokogiri//lib/nokogiri/xml/node_set.rb#426
+  # source://nokogiri//lib/nokogiri/xml/node_set.rb#427
   def inspect; end
 
   # Get the last element of the NodeSet.
@@ -5415,7 +5415,7 @@ class Nokogiri::XML::NodeSet
   # Removes the last element from set and returns it, or +nil+ if
   # the set is empty
   #
-  # source://nokogiri//lib/nokogiri/xml/node_set.rb#373
+  # source://nokogiri//lib/nokogiri/xml/node_set.rb#374
   def pop; end
 
   def push(_arg0); end
@@ -5442,7 +5442,7 @@ class Nokogiri::XML::NodeSet
   # Returns a new NodeSet containing all the nodes in the NodeSet
   # in reverse order
   #
-  # source://nokogiri//lib/nokogiri/xml/node_set.rb#416
+  # source://nokogiri//lib/nokogiri/xml/node_set.rb#417
   def reverse; end
 
   # Set attributes on each Node in the NodeSet, or get an
@@ -5483,7 +5483,7 @@ class Nokogiri::XML::NodeSet
   # Returns the first element of the NodeSet and removes it.  Returns
   # +nil+ if the set is empty.
   #
-  # source://nokogiri//lib/nokogiri/xml/node_set.rb#382
+  # source://nokogiri//lib/nokogiri/xml/node_set.rb#383
   def shift; end
 
   def size; end
@@ -5520,12 +5520,12 @@ class Nokogiri::XML::NodeSet
 
   # Convert this NodeSet to XHTML
   #
-  # source://nokogiri//lib/nokogiri/xml/node_set.rb#357
+  # source://nokogiri//lib/nokogiri/xml/node_set.rb#358
   def to_xhtml(*args); end
 
   # Convert this NodeSet to XML
   #
-  # source://nokogiri//lib/nokogiri/xml/node_set.rb#363
+  # source://nokogiri//lib/nokogiri/xml/node_set.rb#364
   def to_xml(*args); end
 
   def unlink; end
@@ -5610,7 +5610,7 @@ class Nokogiri::XML::NodeSet
   def |(_arg0); end
 end
 
-# source://nokogiri//lib/nokogiri/xml/node_set.rb#443
+# source://nokogiri//lib/nokogiri/xml/node_set.rb#444
 Nokogiri::XML::NodeSet::IMPLIED_XPATH_CONTEXTS = T.let(T.unsafe(nil), Array)
 
 # Struct representing an {XML Schema Notation}[https://www.w3.org/TR/xml/#Notations]
