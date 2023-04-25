@@ -5,5 +5,8 @@
     the application for
     &ldquo;<%= application.description %>&rdquo;
   </div>
-  <div class="font-normal text-navy"><%= pluralize(application.visible_comments_count, "comment") %></div>
+  <div class="inline-block px-3 py-1 mt-4 font-normal text-white rounded-lg bg-fuchsia">
+    <%= pluralize(application.visible_comments_count, "comment") %>
+  </div>
+  <span class="relative inline-block text-6xl font-normal text-navy left-1 top-6">&rdquo;</span>
 <% end %>
