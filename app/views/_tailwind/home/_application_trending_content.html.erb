@@ -1,4 +1,9 @@
 <%= link_to application do %>
-  <div class="text-orange"><%= application.address %></div>
+  <div class="font-normal text-navy">
+    In
+    <span class="font-bold"><%= application.suburb %>, <%= application.state %></span>
+    the planning applications for
+    &ldquo;<%= application.description %>&rdquo;
+  </div>
   <div class="font-normal text-navy"><%= pluralize(application.visible_comments_count, "comment") %></div>
 <% end %>
