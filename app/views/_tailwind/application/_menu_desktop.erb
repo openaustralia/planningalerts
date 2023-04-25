@@ -9,7 +9,12 @@
       <%= render Tailwind::NavItemComponent.new(href: about_path, selected: current_page?(about_path)).with_content("About") %>
     </div>
     <% if current_user %>
-      <%= render Tailwind::NavItemComponent.new(href: profile_path, selected: current_page?(profile_path)).with_content(current_user.name_with_fallback) %>
+      <%= render Tailwind::NavItemComponent.new(href: profile_path, selected: current_page?(profile_path)) do %>
+        <div class="flex space-x-3">
+          <div><%= current_user.name_with_fallback %></div>
+          <div><%= render "application/svg/user" %></div>
+        </div>
+      <% end %>
     <% else %>
       <%= render Tailwind::NavItemComponent.new(href: new_user_session_path, selected: current_page?(new_user_session_path)).with_content("Sign In") %>
     <% end %>
