@@ -5,7 +5,7 @@ class CuttlefishController < ApplicationController
   extend T::Sig
 
   # Because this is an API
-  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
 
   sig { void }
   def event
