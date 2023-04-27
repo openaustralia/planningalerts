@@ -17,6 +17,10 @@ RUN apt install watchman
 # Needed for rgeo geos support. See https://github.com/rgeo/rgeo/issues/227#issuecomment-1145169888
 RUN apt-get install -y libgeos++-dev libgeos-dev
 
+# Support for PA handling incoming email
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y postfix
+RUN postconf -e "maillog_file=/dev/stdout"
+
 USER deploy
 
 COPY --chown=deploy:deploy Gemfile /app/Gemfile
