@@ -21,6 +21,11 @@ RUN apt-get install -y libgeos++-dev libgeos-dev
 RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y postfix
 RUN postconf -e "maillog_file=/dev/stdout"
 
+# Useful for testing SMTP server
+# Example usage:
+# swaks --to donotreply@planningalerts.org.au --server postfix:25
+RUN apt-get install -y swaks
+
 USER deploy
 
 COPY --chown=deploy:deploy Gemfile /app/Gemfile
