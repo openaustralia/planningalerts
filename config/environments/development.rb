@@ -112,4 +112,8 @@ Rails.application.configure do
 
   # Uncommment to allow local access for Matthew (for previewing on mobile etc)
   #config.hosts << "orpington.local"
+
+  # For actionmailbox
+  config.hosts << "web"
+  config.action_mailbox.ingress = :relay
 end
