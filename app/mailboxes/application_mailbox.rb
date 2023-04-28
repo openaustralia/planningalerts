@@ -1,3 +1,5 @@
+# typed: strict
+
 class ApplicationMailbox < ActionMailbox::Base
-  # routing /something/i => :somewhere
+  routing(/^do-not-reply@/ => :do_not_replies)
 end
