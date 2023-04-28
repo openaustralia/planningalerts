@@ -15,4 +15,13 @@ class SupportPreview < ActionMailer::Preview
     contact_message = FactoryBot.build_stubbed(:contact_message, name: user.name, email: user.email, details: "Please do some stuff.\n\nAnd here is a second paragraph.", user:)
     SupportMailer.contact_message(contact_message)
   end
+
+  def reply_to_do_not_reply
+    mail = Mail.new do
+      from "fred@foo.bar"
+      to "do-not-reply@planningalerts.org.au"
+      body "I don't know how to do this"
+    end
+    ReplyToDoNotReplyMailer.reply(mail)
+  end
 end
