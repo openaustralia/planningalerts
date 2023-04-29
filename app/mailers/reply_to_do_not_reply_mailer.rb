@@ -14,7 +14,8 @@ class ReplyToDoNotReplyMailer < ApplicationMailer
       "References" => reply.references
     )
     mail(
-      to: reply.to
+      to: reply.to,
+      subject: reply.subject
     )
   end
 end

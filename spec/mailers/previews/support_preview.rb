@@ -22,6 +22,7 @@ class SupportPreview < ActionMailer::Preview
       to "do-not-reply@planningalerts.org.au"
       body "I don't know how to do this"
     end
+    mail.subject = "Please help me solve this problem"
     ReplyToDoNotReplyMailer.reply(mail)
   end
 end
