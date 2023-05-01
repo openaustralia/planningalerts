@@ -19,7 +19,7 @@ class SupportPreview < ActionMailer::Preview
   def reply_to_do_not_reply
     mail = Mail.new do
       from "fred@foo.bar"
-      to "do-not-reply@planningalerts.org.au"
+      to "no-reply@planningalerts.org.au"
       body "I don't know how to do this"
     end
     mail.subject = "Please help me solve this problem"
