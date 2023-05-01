@@ -14,6 +14,7 @@ class ReplyToNoReplyMailer < ApplicationMailer
       "References" => reply.references
     )
     mail(
+      from: "PlanningAlerts <no-reply@planningalerts.org.au>",
       to: reply.to,
       subject: reply.subject
     )
