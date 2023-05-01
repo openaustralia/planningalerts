@@ -93,8 +93,10 @@ class Application < ApplicationRecord
   sig { returns(T.untyped) }
   def find_all_nearest_or_recent
     if location
-      nearbys(Application.nearby_and_recent_max_distance_km, units: :km)
-        .where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+      point = RGeo::Geographic.spherical_factory.point(lng, lat)
+      Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, Application.nearby_and_recent_max_distance_km * 1000)
+                 .where.not(id:)
+                 .where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     else
       Application.none
     end
