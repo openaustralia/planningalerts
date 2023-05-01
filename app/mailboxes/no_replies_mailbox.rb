@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class DoNotRepliesMailbox < ApplicationMailbox
+class NoRepliesMailbox < ApplicationMailbox
   extend T::Sig
 
   sig { void }
