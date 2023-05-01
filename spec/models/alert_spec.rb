@@ -4,6 +4,7 @@ require "spec_helper"
 
 describe Alert do
   let(:address) { "24 Bruce Road, Glenbrook" }
+  let(:factory) { RGeo::Geographic.spherical_factory(srid: 4326) }
 
   describe "confirm_id" do
     let(:object) do
@@ -290,15 +291,15 @@ describe Alert do
     let(:alert) { create(:alert, last_sent:, radius_meters:) }
 
     # Position test application around the point of the alert
-    let(:p1) { alert.location.endpoint(0.0, 501.0) } # 501 m north of alert
+    let(:p1) { alert.location.endpoint(0.0, 502.0) } # 502 m north of alert
     let(:p2) { alert.location.endpoint(0.0, 499.0) } # 499 m north of alert
     let(:p3) { alert.location.endpoint(45.0, Math.sqrt(2) * 499) } # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
     let(:p4) { alert.location.endpoint(90.0, 499.0) } # 499 m east of alert
 
-    let!(:app1) { create(:geocoded_application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago) }
-    let!(:app2) { create(:geocoded_application, lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago) }
-    let!(:app3) { create(:geocoded_application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago) }
-    let!(:app4) { create(:geocoded_application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago) }
+    let!(:app1) { create(:geocoded_application, lat: p1.lat, lng: p1.lng, lonlat: factory.point(p1.lng, p1.lat), date_scraped: 5.minutes.ago) }
+    let!(:app2) { create(:geocoded_application, lat: p2.lat, lng: p2.lng, lonlat: factory.point(p2.lng, p2.lat), date_scraped: 12.hours.ago) }
+    let!(:app3) { create(:geocoded_application, lat: p3.lat, lng: p3.lng, lonlat: factory.point(p3.lng, p3.lat), date_scraped: 2.days.ago) }
+    let!(:app4) { create(:geocoded_application, lat: p4.lat, lng: p4.lng, lonlat: factory.point(p4.lng, p4.lat), date_scraped: 4.days.ago) }
 
     context "with a search radius which includes all applications" do
       let(:radius_meters) { 2000 }
@@ -351,7 +352,8 @@ describe Alert do
               council_reference: app2.council_reference,
               attributes: {
                 lat: p.lat,
-                lng: p.lng
+                lng: p.lng,
+                lonlat: factory.point(p.lng, p.lat)
               }
             )
           end
@@ -384,7 +386,6 @@ describe Alert do
         it "returns applications within the user's search area" do
           # Doing this hacky workaround so that we can have this unusual radius
           alert.radius_meters = 500
-          alert.save!(validate: false)
           expect(alert.recent_new_applications).to contain_exactly(app2, app4)
         end
       end
@@ -394,7 +395,7 @@ describe Alert do
   describe "#new_comments" do
     let(:alert) { create(:alert, address:, radius_meters: 2000) }
     let(:p1) { alert.location.endpoint(0.0, 501.0) } # 501 m north of alert
-    let(:application) { create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "") }
+    let(:application) { create(:application, lat: p1.lat, lng: p1.lng, lonlat: factory.point(p1.lng, p1.lat), suburb: "", state: "", postcode: "") }
 
     it "sees a new comment when there are new comments on an application" do
       comment1 = create(:confirmed_comment, application:)
@@ -431,11 +432,12 @@ describe Alert do
   end
 
   describe "#applications_with_new_comments" do
-    let(:alert) { create(:alert, address:, radius_meters: 2000, lat: 1.0, lng: 2.0) }
+    let(:alert) { create(:alert, address:, radius_meters: 2000, lat: 1.0, lng: 2.0, lonlat: factory.point(2.0, 1.0)) }
     let(:near_application) do
       create(:application,
              lat: 1.0,
              lng: 2.0,
+             lonlat: factory.point(2.0, 1.0),
              address:,
              suburb: "Glenbrook",
              state: "NSW",
@@ -446,6 +448,7 @@ describe Alert do
       create(:application,
              lat: alert.location.endpoint(0.0, 5001.0).lat,
              lng: alert.location.endpoint(0.0, 5001.0).lng,
+             lonlat: factory.point(alert.location.endpoint(0.0, 5001.0).lng, alert.location.endpoint(0.0, 5001.0).lat),
              address:,
              suburb: "Glenbrook",
              state: "NSW",
@@ -507,6 +510,7 @@ describe Alert do
         last_sent: Time.utc(2021, 9, 9, 16, 28, 49),
         lat: -32.9364626,
         lng: 151.6784514,
+        lonlat: factory.point(151.6784514, -32.9364626),
         radius_meters: 2000
       )
       authority = create(:authority, disabled: false)
@@ -528,6 +532,7 @@ describe Alert do
           address: "1 Bank Street, CARDIFF NSW 2285",
           lat: -32.9456848,
           lng: 151.662601,
+          lonlat: factory.point(151.662601, -32.9456848),
           suburb: "Cardiff",
           state: "NSW",
           postcode: "2285",

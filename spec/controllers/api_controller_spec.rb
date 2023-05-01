@@ -312,7 +312,7 @@ describe ApiController do
       scope3 = Application.none
       scope4 = Application.none
 
-      allow(Application).to receive(:near).and_return(scope1)
+      allow(Application).to receive(:where).and_return(scope1)
       allow(scope1).to receive(:reorder).and_return(scope2)
       allow(scope2).to receive(:includes).and_return(scope3)
       allow(scope3).to receive(:page).and_return(scope4)
