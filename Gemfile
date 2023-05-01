@@ -52,8 +52,6 @@ gem "kaminari"
 gem "geokit"
 # rexml is used by geokit but is no longer by default in ruby 3.1
 gem "rexml"
-# geocoder is only used for the near activerecord method
-gem "geocoder"
 
 # CSS related stuff
 gem "autoprefixer-rails"

@@ -287,7 +287,6 @@ GEM
     fugit (1.8.0)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
-    geocoder (1.8.1)
     geokit (1.13.1)
     globalid (1.1.0)
       activesupport (>= 5.0)
@@ -754,7 +753,6 @@ DEPENDENCIES
   foreman
   formtastic
   foundation-icons-sass-rails
-  geocoder
   geokit
   graphql-client
   growl
