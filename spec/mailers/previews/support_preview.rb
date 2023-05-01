@@ -16,7 +16,7 @@ class SupportPreview < ActionMailer::Preview
     SupportMailer.contact_message(contact_message)
   end
 
-  def reply_to_do_not_reply
+  def reply_to_no_reply
     mail = Mail.new do
       from "fred@foo.bar"
       to "no-reply@planningalerts.org.au"
