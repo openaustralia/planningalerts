@@ -107,8 +107,8 @@ describe AlertMailer do
         expect(email.to).to eq([alert.email])
       end
 
-      it "is from the main planningalerts email address" do
-        expect(email.from).to eq(["contact@planningalerts.org.au"])
+      it "is from the planningalerts no reply email address" do
+        expect(email.from).to eq(["no-reply@planningalerts.org.au"])
         # @email.from_addrs.first.name.should == "PlanningAlerts.org.au"
       end
 
