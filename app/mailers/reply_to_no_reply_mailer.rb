@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class ReplyToDoNotReplyMailer < ApplicationMailer
+class ReplyToNoReplyMailer < ApplicationMailer
   extend T::Sig
 
   sig { params(mail: Mail::Message).returns(T.any(Mail::Message, ActionMailer::MessageDelivery)) }

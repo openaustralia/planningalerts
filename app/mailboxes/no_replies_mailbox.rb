@@ -6,6 +6,6 @@ class NoRepliesMailbox < ApplicationMailbox
 
   sig { void }
   def process
-    ReplyToDoNotReplyMailer.reply(mail).deliver_now
+    ReplyToNoReplyMailer.reply(mail).deliver_now
   end
 end

@@ -23,6 +23,6 @@ class SupportPreview < ActionMailer::Preview
       body "I don't know how to do this"
     end
     mail.subject = "Please help me solve this problem"
-    ReplyToDoNotReplyMailer.reply(mail)
+    ReplyToNoReplyMailer.reply(mail)
   end
 end
