@@ -27,7 +27,8 @@ class DocumentationController < ApplicationController
 
   sig { void }
   def contact
-    @contact_message = T.let(ContactMessage.new, T.nilable(ContactMessage))
+    # Allow the auto reply to no-reply to prepopulate the email field to make things a tiny bit easier
+    @contact_message = T.let(ContactMessage.new(name: params[:name], email: params[:email]), T.nilable(ContactMessage))
   end
 
   sig { void }

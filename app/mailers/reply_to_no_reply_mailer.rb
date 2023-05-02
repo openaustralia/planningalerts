@@ -9,6 +9,9 @@ class ReplyToNoReplyMailer < ApplicationMailer
     # So we don't have to figure out the intricacies of how to set the in-reply-to and references headers
     reply = mail.reply
 
+    # We're pre-populating the user's email address for the contact form
+    @email = T.let(reply.to.first, T.nilable(String))
+
     headers(
       "In-Reply-To" => reply.in_reply_to,
       "References" => reply.references,
