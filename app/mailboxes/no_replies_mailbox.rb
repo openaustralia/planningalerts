@@ -3,7 +3,7 @@
 
 class NoRepliesMailbox < ApplicationMailbox
   extend T::Sig
-  before_processing :require_human
+  before_processing :check_auto_submitted, :check_precedence
 
   sig { void }
   def process
@@ -14,9 +14,18 @@ class NoRepliesMailbox < ApplicationMailbox
 
   # Checks that this isn't some kind of automatically generated email
   sig { void }
-  def require_human
+  def check_auto_submitted
     auto_submitted = mail.header["Auto-Submitted"]
-    return if auto_submitted.nil? || auto_submitted.value == "no"
+    return unless auto_submitted && auto_submitted.value != "no"
+
+    bounced!
+  end
+
+  sig { void }
+  def check_precedence
+    precedence = mail.header["Precedence"]
+    # See https://datatracker.ietf.org/doc/html/rfc3834#section-7
+    return unless precedence && %w[list junk bulk].include?(precedence.value)
 
     bounced!
   end

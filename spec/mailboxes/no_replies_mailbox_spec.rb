@@ -17,4 +17,9 @@ RSpec.describe NoRepliesMailbox do
     inbound_email = process(from: "matthew@oaf.org.au", "Auto-Submitted" => "auto-generated")
     expect(inbound_email).to have_bounced
   end
+
+  it "ignores junk mail" do
+    inbound_email = process(from: "matthew@oaf.org.au", "Precedence" => "junk")
+    expect(inbound_email).to have_bounced
+  end
 end
