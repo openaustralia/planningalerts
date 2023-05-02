@@ -20,9 +20,6 @@ https://dev.planningalerts.org.au/applications/3?utm_campaign=view-comment&utm_m
 
 ============================================================
 
-Need some help? Contact us by visiting:
-https://dev.planningalerts.org.au/help/contact
-
 PlanningAlerts exists as a free, independent project because people like you back it with a small monthly donation.
 
 Back PlanningAlerts here:
@@ -34,3 +31,5 @@ Discover our other projects: https://www.openaustraliafoundation.org.au/projects
 To change the size of the area you’re interested in: https://dev.planningalerts.org.au/profile/alerts/1/edit
 
 To unsubscribe from alerts for this address: https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
+
+Need some help? Contact us: https://dev.planningalerts.org.au/help/contact
