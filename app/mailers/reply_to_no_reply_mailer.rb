@@ -12,7 +12,8 @@ class ReplyToNoReplyMailer < ApplicationMailer
     headers(
       "In-Reply-To" => reply.in_reply_to,
       "References" => reply.references,
-      "Auto-Submitted" => "auto-replied"
+      "Auto-Submitted" => "auto-replied",
+      "Precedence" => "auto_reply"
     )
     mail(
       from: "PlanningAlerts <no-reply@planningalerts.org.au>",
