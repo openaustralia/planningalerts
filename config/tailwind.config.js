@@ -15,6 +15,9 @@ module.exports = {
         sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
         display: ['Playfair Display'],
       },
+      backgroundImage: {
+        'header-pattern': "url('tailwind/header-pattern.svg')"
+      }
     },
     colors: {
       'transparent': 'transparent',
