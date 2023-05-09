@@ -5,7 +5,7 @@
     We bring you the trending applications so you can see what people find most popular or contentious.
   </p>
   <ol class="grid pl-10 mt-10 text-xl font-bold list-decimal gap-y-6 gap-x-10 columns-1 md:grid-rows-3 md:grid-flow-col text-fuchsia">
-    <%= render partial: "home/application_trending", collection: applications, as: :application %>
+    <%= render partial: "home/application_trending", collection: applications.limit(6), as: :application %>
   </ol>
   <div class="pt-14">
     <%= link_to "> View more trending applications", trending_applications_path, class: "text-xl font-bold text-yellow" %>
