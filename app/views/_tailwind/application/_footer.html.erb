@@ -1,7 +1,7 @@
-<div class="my-32">
+<div class="pt-32 pb-64 bg-green">
   <%= render Tailwind::ContainerComponent.new do %>
     <% if Flipper.enabled?(:switch_themes, current_user) %>
-      <%= button_to "Toggle theme", toggle_theme_path, class: "text-navy hover:text-white border border-navy hover:bg-navy focus:ring-4 focus:outline-none focus:ring-navy font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" %>
+      <%= button_to "Toggle theme", toggle_theme_path, class: "text-white bg-navy font-medium rounded-lg text-sm px-5 py-2.5 text-center" %>
     <% end %>
   <% end %>
 </div>
