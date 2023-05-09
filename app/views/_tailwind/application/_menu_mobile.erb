@@ -1,5 +1,5 @@
 <div x-data="{ open: false }">
-  <button x-on:click="open = true; bodyScrolling = false" type="button" class="flex flex-row-reverse items-center w-full h-16 text-sm rounded-lg sm:flex-row text-navy lg:hidden focus:outline-none">
+  <button x-on:click="open = true; bodyScrolling = false" type="button" class="flex flex-row-reverse items-center w-full h-16 text-sm rounded-lg sm:flex-row text-navy md:hidden focus:outline-none">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
       <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
     </svg>
@@ -21,10 +21,8 @@
         <ul>
           <li><%= link_to "Home", root_path, class: class_names("underline" => current_page?(root_path)) %></li>
           <li><%= link_to "Search Applications", address_applications_path, class: class_names("underline" => current_page?(address_applications_path)) %></li>
-          <li><%= link_to "Coverage", authorities_path, class: class_names("underline" => current_page?(authorities_path)) %></li>
-          <li><%= link_to "Help", faq_path, class: class_names("underline" => current_page?(faq_path)) %></li>
           <li><%= link_to "Get the Data", api_howto_path, class: class_names("underline" => current_page?(api_howto_path)) %></li>
-          <li><%= link_to "About", about_path, class: class_names("underline" => current_page?(about_path)) %></li>
+          <li><%= link_to "Help", faq_path, class: class_names("underline" => current_page?(faq_path)) %></li>
           <li>
             <% if current_user %>
               <%= link_to current_user.name_with_fallback, profile_path, class: class_names("underline" => current_page?(profile_path)) %>
@@ -38,6 +36,8 @@
           <li><%= link_to "Get Involved", "#" %></li>
           <li><%= link_to "Source Code", "#" %></li>
           <li><%= link_to "Blog", "#" %></li>
+          <li><%= link_to "About", about_path, class: class_names("underline" => current_page?(about_path)) %></li>
+          <li><%= link_to "Coverage", authorities_path, class: class_names("underline" => current_page?(authorities_path)) %></li>
         </ul>
       </div>
     <% end %>
