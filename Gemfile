@@ -196,7 +196,7 @@ group :development do
   gem "rb-inotify", require: false
 
   gem "rails_live_reload"
-  
+
   # For a better error page in development
   gem "better_errors"
   gem "binding_of_caller"
