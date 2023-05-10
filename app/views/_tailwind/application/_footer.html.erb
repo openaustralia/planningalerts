@@ -1,15 +1,15 @@
 <div class="oaf-footer bg-[#03827a] text-white font-sans text-lg py-20">
     <%= render Tailwind::ContainerComponent.new do %>
         <h2 class="pb-2 text-3xl font-extrabold font-logo">Planning Alerts</h2>
-        <div class="grid grid-cols-12">
-            <div class="col-span-5">
+        <div class="grid grid-cols-12 gap-6 md:gap-4">
+            <div class="col-span-12 md:col-span-5">
                 <div>
                     <p>A site to help anyone submit a Freedom of Information request. Planning Alerts also publishes and archives requests and responses, building a massive archive of information.</p>
                 </div>
             </div>
 
-            <div class="col-span-4">
-                <nav class="grid grid-cols-2 font-semibold">
+            <div class="col-span-12 md:col-span-4">
+                <nav class="grid grid-cols-1 font-semibold md:gap-2 md:grid-cols-2">
                     <ul>
                         <li><%= link_to "Make a request", "#" %></li>
                         <li><%= link_to "Browse requests", "#" %></li>
@@ -24,7 +24,7 @@
                 </nav>
             </div>
 
-            <div class="col-span-3 bg-[#2B948D] p-6">
+            <div class="col-span-12 md:col-span-3 bg-[#2B948D] p-6">
                 <div class="oaf-footer__donate">
                     <p>Your tax deductible donations keep this site and others like it running</p>
                     <a href="https://www.oaf.org.au/donate/" class="inline-block px-4 py-2 mt-4 font-semibold oaf-footer__donate__button bg-navy">
@@ -37,7 +37,7 @@
     <hr class="mt-12 text-[#479590]">
     <%= render Tailwind::ContainerComponent.new do %>
         <div class="grid grid-cols-12 gap-4 pt-16 row">
-            <div class="col-span-5">
+            <div class="col-span-12 md:col-span-5">
                 <div class="oaf-footer__orgs">
                     <p class="oaf-footer__org">
                         Built and maintained by
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="col-span-4">
+            <div class="col-span-12 md:col-span-4">
                 <div class="space-y-8 oaf-footer__legal">
                     <p>
                         <a href="https://www.oaf.org.au/" class="underline">OpenAustralia Foundation</a> is a <a href="https://www.acnc.gov.au/charity/55c2c06e21ac71e9359a0590b9fc100e" class="underline">registered charity</a> in Australia - company limited by guarantee and endorsed as a deductible gift recipient.
@@ -62,7 +62,7 @@
             </div>
         </div>
         <% if Flipper.enabled?(:switch_themes, current_user) %>
-            <%= button_to "Toggle theme", toggle_theme_path, class: "text-white bg-navy font-medium rounded-lg text-sm px-5 py-2.5 text-center" %>
+            <%= button_to "Toggle theme", toggle_theme_path, class: "text-white bg-navy font-medium rounded-lg text-sm px-5 py-2.5 my-10 text-center" %>
         <% end %>
     <% end %>
 </div>
