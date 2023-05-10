@@ -215,9 +215,6 @@ GEM
     elasticsearch-transport (7.17.7)
       faraday (~> 1)
       multi_json
-    em-websocket (0.5.3)
-      eventmachine (>= 0.12.9)
-      http_parser.rb (~> 0)
     email_spec (2.2.0)
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
@@ -234,7 +231,6 @@ GEM
       tzinfo
     ethon (0.16.0)
       ffi (>= 1.15.0)
-    eventmachine (1.2.7)
     execjs (2.8.1)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -305,11 +301,6 @@ GEM
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.1)
-    guard-livereload (2.5.2)
-      em-websocket (~> 0.5)
-      guard (~> 2.8)
-      guard-compat (~> 1.0)
-      multi_json (~> 1.8)
     guard-rspec (4.7.3)
       guard (~> 2.1)
       guard-compat (~> 1.1)
@@ -336,7 +327,6 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
-    http_parser.rb (0.6.0)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -439,8 +429,6 @@ GEM
       rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
-    rack-livereload (0.3.17)
-      rack
     rack-mini-profiler (3.0.0)
       rack (>= 1.2.0)
     rack-protection (3.0.5)
@@ -472,6 +460,11 @@ GEM
       loofah (~> 2.19, >= 2.19.1)
     rails_autolink (1.1.7)
       rails (> 3.1)
+    rails_live_reload (0.3.4)
+      listen
+      nio4r
+      railties
+      websocket-driver
     railties (7.0.4.3)
       actionpack (= 7.0.4.3)
       activesupport (= 7.0.4.3)
@@ -757,7 +750,6 @@ DEPENDENCIES
   graphql-client
   growl
   guard
-  guard-livereload
   guard-rspec
   guard-rubocop
   haml
@@ -777,11 +769,11 @@ DEPENDENCIES
   rabl
   rack-attack
   rack-cors
-  rack-livereload
   rack-mini-profiler
   rails (= 7.0.4.3)
   rails-controller-testing
   rails_autolink
+  rails_live_reload
   rake
   rb-fsevent
   rb-inotify

@@ -3,19 +3,6 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
-guard :livereload do
-  watch(%r{app/views/.+\.(erb|haml|slim)$})
-  watch(%r{themes/\w+/views/.+\.(erb|haml|slim)$})
-  watch(%r{app/helpers/.+\.rb$})
-  watch(%r{public/.+\.(css|js|html)$})
-  watch(%r{config/locales/.+\.yml$})
-  watch(%r{stylesheets/.+\.(scss|sass)$})
-  watch(%r{stylesheets/\w+/.+\.(scss|sass)$})
-  watch(%r{app/components/.+\.(rb|erb)})
-  # Rails Assets Pipeline
-  watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*}) { |m| "/assets/#{m[2]}" }
-end
-
 guard :rspec, cmd: "bin/rspec" do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }

@@ -190,13 +190,13 @@ group :development do
   # For guard and associated bits
   gem "growl"
   gem "guard"
-  gem "guard-livereload"
   gem "guard-rspec"
   gem "guard-rubocop"
-  gem "rack-livereload"
   gem "rb-fsevent"
   gem "rb-inotify", require: false
 
+  gem "rails_live_reload"
+  
   # For a better error page in development
   gem "better_errors"
   gem "binding_of_caller"
