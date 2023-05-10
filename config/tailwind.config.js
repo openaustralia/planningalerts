@@ -17,7 +17,8 @@ module.exports = {
         logo: ['Inter var']
       },
       backgroundImage: {
-        'header-pattern': "url('tailwind/header-pattern.svg')"
+        'header-pattern': "url('tailwind/header-pattern.svg')",
+        'oaf-logo': "url('tailwind/oaf-logo-white')"
       }
     },
     colors: {
