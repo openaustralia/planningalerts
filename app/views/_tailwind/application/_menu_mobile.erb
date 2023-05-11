@@ -25,6 +25,9 @@
           <li><%= link_to "Coverage", authorities_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(authorities_path)) %></li>
           <li class="mt-8">
             <% if current_user %>
+              <div class="inline-block mr-2">
+                <%= render "application/svg/user" %>
+              </div>
               <%= link_to current_user.name_with_fallback, profile_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(profile_path)) %>
             <% else %>
               <%= link_to "Sign In", new_user_session_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(new_user_session_path)) %>
