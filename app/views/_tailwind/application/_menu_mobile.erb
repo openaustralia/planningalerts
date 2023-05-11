@@ -12,27 +12,26 @@
       <h2 class="inline-block text-3xl font-extrabold text-navy font-logo">
         Planning Alerts
       </h2>
-      <div class="mt-8">
+      <div class="mt-8 font-medium">
         <ul>
           <li><%= link_to "Home", root_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(root_path)) %></li>
           <li><%= link_to "Search Applications", address_applications_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(address_applications_path)) %></li>
           <li><%= link_to "Get the Data", api_howto_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(api_howto_path)) %></li>
           <li><%= link_to "Help", faq_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(faq_path)) %></li>
-          <li>
+          <li><%= link_to "About", about_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(about_path)) %></li>
+          <li><%= link_to "Source code", "https://github.com/openaustralia/planningalerts" %></li>
+          <li><%= link_to "Get involved", get_involved_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(get_involved_path)) %></li>
+          <li><%= link_to "Help", faq_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(faq_path)) %></li>
+          <li><%= link_to "Contact us", documentation_contact_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(documentation_contact_path)) %></li>
+          <li><%= link_to "Coverage", authorities_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(authorities_path)) %></li>
+          <li><%= link_to "API", api_howto_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(api_howto_path)) %></li>
+          <li class="mt-8">
             <% if current_user %>
-              <%= link_to current_user.name_with_fallback, profile_path, class: class_names("underline" => current_page?(profile_path)) %>
+              <%= link_to current_user.name_with_fallback, profile_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(profile_path)) %>
             <% else %>
-              <%= link_to "Sign In", new_user_session_path, class: class_names("underline" => current_page?(new_user_session_path)) %>
+              <%= link_to "Sign In", new_user_session_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(new_user_session_path)) %>
             <% end %>
           </li>
-        </ul>
-        <ul class="mt-8 font-light">
-          <li><%= link_to "Contact", "#" %></li>
-          <li><%= link_to "Get Involved", "#" %></li>
-          <li><%= link_to "Source Code", "#" %></li>
-          <li><%= link_to "Blog", "#" %></li>
-          <li><%= link_to "About", about_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(about_path)) %></li>
-          <li><%= link_to "Coverage", authorities_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(authorities_path)) %></li>
         </ul>
       </div>
     </div>
