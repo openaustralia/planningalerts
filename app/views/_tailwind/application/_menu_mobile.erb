@@ -14,10 +14,10 @@
       </h2>
       <div class="mt-8">
         <ul>
-          <li><%= link_to "Home", root_path, class: class_names("underline" => current_page?(root_path)) %></li>
-          <li><%= link_to "Search Applications", address_applications_path, class: class_names("underline" => current_page?(address_applications_path)) %></li>
-          <li><%= link_to "Get the Data", api_howto_path, class: class_names("underline" => current_page?(api_howto_path)) %></li>
-          <li><%= link_to "Help", faq_path, class: class_names("underline" => current_page?(faq_path)) %></li>
+          <li><%= link_to "Home", root_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(root_path)) %></li>
+          <li><%= link_to "Search Applications", address_applications_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(address_applications_path)) %></li>
+          <li><%= link_to "Get the Data", api_howto_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(api_howto_path)) %></li>
+          <li><%= link_to "Help", faq_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(faq_path)) %></li>
           <li>
             <% if current_user %>
               <%= link_to current_user.name_with_fallback, profile_path, class: class_names("underline" => current_page?(profile_path)) %>
@@ -31,8 +31,8 @@
           <li><%= link_to "Get Involved", "#" %></li>
           <li><%= link_to "Source Code", "#" %></li>
           <li><%= link_to "Blog", "#" %></li>
-          <li><%= link_to "About", about_path, class: class_names("underline" => current_page?(about_path)) %></li>
-          <li><%= link_to "Coverage", authorities_path, class: class_names("underline" => current_page?(authorities_path)) %></li>
+          <li><%= link_to "About", about_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(about_path)) %></li>
+          <li><%= link_to "Coverage", authorities_path, class: class_names("decoration-fuchsia", "decoration-2", "underline" => current_page?(authorities_path)) %></li>
         </ul>
       </div>
     </div>
