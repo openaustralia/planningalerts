@@ -21,10 +21,8 @@
           <li><%= link_to "About", about_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(about_path)) %></li>
           <li><%= link_to "Source code", "https://github.com/openaustralia/planningalerts" %></li>
           <li><%= link_to "Get involved", get_involved_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(get_involved_path)) %></li>
-          <li><%= link_to "Help", faq_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(faq_path)) %></li>
           <li><%= link_to "Contact us", documentation_contact_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(documentation_contact_path)) %></li>
           <li><%= link_to "Coverage", authorities_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(authorities_path)) %></li>
-          <li><%= link_to "API", api_howto_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(api_howto_path)) %></li>
           <li class="mt-8">
             <% if current_user %>
               <%= link_to current_user.name_with_fallback, profile_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(profile_path)) %>
