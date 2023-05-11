@@ -26,6 +26,7 @@ module.exports = {
       'current': 'currentColor',
       'white': '#ffffff',
       'off-white': "#eeeeee",
+      'light-grey': '#F3F2F2',
       'fuchsia': '#CD4A9A',
       'lavender': '#9786AD',
       'yellow': '#F4BE53',
