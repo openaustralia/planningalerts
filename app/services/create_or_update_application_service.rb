@@ -5,7 +5,7 @@ class CreateOrUpdateApplicationService
   extend T::Sig
 
   VALID_ATTRIBUTES = T.let(
-    %i[address description info_url date_received on_notice_from on_notice_to date_scraped lat lng suburb state postcode comment_email comment_authority].freeze,
+    %i[address description info_url date_received on_notice_from on_notice_to date_scraped lat lng lonlat suburb state postcode comment_email comment_authority].freeze,
     T::Array[Symbol]
   )
 

@@ -14,13 +14,19 @@ module.exports = {
       fontFamily: {
         sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
         display: ['Playfair Display'],
+        logo: ['Inter var']
       },
+      backgroundImage: {
+        'header-pattern': "url('tailwind/header-pattern.svg')",
+        'oaf-logo': "url('tailwind/oaf-logo-white')"
+      }
     },
     colors: {
       'transparent': 'transparent',
       'current': 'currentColor',
       'white': '#ffffff',
       'off-white': "#eeeeee",
+      'light-grey': '#F3F2F2',
       'fuchsia': '#CD4A9A',
       'lavender': '#9786AD',
       'yellow': '#F4BE53',

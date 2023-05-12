@@ -8,7 +8,8 @@ describe "Searching for development application near an address" do
            address: "24 Bruce Road Glenbrook",
            description: "A lovely house",
            lat: -33.772609,
-           lng: 150.624256)
+           lng: 150.624256,
+           lonlat: RGeo::Geographic.spherical_factory(srid: 4326).point(150.624256, -33.772609))
     # It's more elegant to mock out the geocoder rather than using VCR
     g = GeocodedLocation.new(
       lat: -33.772607,

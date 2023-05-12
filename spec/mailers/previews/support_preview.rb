@@ -15,4 +15,14 @@ class SupportPreview < ActionMailer::Preview
     contact_message = FactoryBot.build_stubbed(:contact_message, name: user.name, email: user.email, details: "Please do some stuff.\n\nAnd here is a second paragraph.", user:)
     SupportMailer.contact_message(contact_message)
   end
+
+  def reply_to_no_reply
+    mail = Mail.new do
+      from "fred@foo.bar"
+      to "no-reply@planningalerts.org.au"
+      body "I don't know how to do this"
+    end
+    mail.subject = "Please help me solve this problem"
+    ReplyToNoReplyMailer.reply(mail)
+  end
 end

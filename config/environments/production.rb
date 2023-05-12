@@ -17,6 +17,9 @@ Rails.application.configure do
 
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Prepare the ingress controller used to receive mail
+  # config.action_mailbox.ingress = :relay
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -123,4 +126,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailbox.ingress = :relay
 end

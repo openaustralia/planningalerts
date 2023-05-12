@@ -56,9 +56,6 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Insert livereload js
-  config.middleware.insert_before(ActionDispatch::DebugExceptions, Rack::LiveReload, source: :vendored)
-
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
@@ -112,4 +109,8 @@ Rails.application.configure do
 
   # Uncommment to allow local access for Matthew (for previewing on mobile etc)
   #config.hosts << "orpington.local"
+
+  # For actionmailbox
+  config.hosts << "web"
+  config.action_mailbox.ingress = :relay
 end

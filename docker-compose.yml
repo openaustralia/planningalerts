@@ -14,6 +14,18 @@ services:
     command: "bin/dev"
     tty: true
 
+  postfix:
+    build: .
+    volumes:
+      - .:/app
+      - gem_cache:/usr/local/bundle/gems
+    ports:
+      - "2525:25"
+    depends_on:
+      - postgres
+    user: root
+    command: postfix start-fg
+
   postgres:
     # Same version as used in production
     image: postgis/postgis:15-3.3

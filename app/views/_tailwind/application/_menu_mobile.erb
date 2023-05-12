@@ -1,0 +1,44 @@
+<div x-data="{ open: false }">
+  <button x-on:click="open = true; bodyScrolling = false" type="button" class="flex flex-row-reverse items-center w-full h-16 text-sm rounded-lg text-navy md:hidden focus:outline-none">
+    <%= render "application/svg/hamburger" %>
+    <span class="px-2 text-lg font-medium">Menu</span>
+  </button>
+  <div x-show="open" x-cloak class="fixed top-0 left-0 w-full h-full py-24 overflow-y-scroll text-2xl text-navy bg-light-grey">
+    <div class="max-w-sm px-10 mx-auto">
+      <button x-on:click="open = false; bodyScrolling = true" class="inline-flex items-center">
+        <%= render "application/svg/close" %>
+        <span class="pr-2 text-lg font-medium">Close</span>
+      </button>
+      <h2 class="inline-block text-3xl font-extrabold text-navy font-logo">
+        Planning Alerts
+      </h2>
+      <div class="mt-8 font-medium">
+        <ul>
+          <li><%= link_to "Home", root_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(root_path)) %></li>
+          <li><%= link_to "Search Applications", address_applications_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(address_applications_path)) %></li>
+          <li><%= link_to "Get the Data", api_howto_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(api_howto_path)) %></li>
+          <li><%= link_to "Help", faq_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(faq_path)) %></li>
+          <li><%= link_to "About", about_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(about_path)) %></li>
+          <li><%= link_to "Source code", "https://github.com/openaustralia/planningalerts" %></li>
+          <li><%= link_to "Get involved", get_involved_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(get_involved_path)) %></li>
+          <li><%= link_to "Contact us", documentation_contact_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(documentation_contact_path)) %></li>
+          <li><%= link_to "Coverage", authorities_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(authorities_path)) %></li>
+          <li class="mt-8">
+            <% if current_user %>
+              <div class="inline-block mr-2">
+                <%= render "application/svg/user" %>
+              </div>
+              <%= link_to current_user.name_with_fallback, profile_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(profile_path)) %>
+            <% else %>
+              <%= link_to "Sign In", new_user_session_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(new_user_session_path)) %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+      <p class="mt-10 text-lg font-regular">
+        Built and maintained by
+        <a href="https://www.oaf.org.au/" class="underline">OpenAustralia Foundation</a>
+      </p>
+    </div>
+  </div>
+</div>

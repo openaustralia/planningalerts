@@ -1,14 +1,10 @@
 # typed: strict
 # frozen_string_literal: true
 
-require "geocoder/stores/active_record"
-
 class Application < ApplicationRecord
   extend T::Sig
 
   # For sorbet
-  include Geocoder::Store::ActiveRecord
-  extend Geocoder::Model::ActiveRecord
   extend Kaminari::ConfigurationMethods::ClassMethods
 
   searchkick highlight: [:description],
@@ -20,11 +16,6 @@ class Application < ApplicationRecord
   has_many :comments, dependent: :restrict_with_exception
   has_many :versions, -> { order(id: :desc) }, class_name: "ApplicationVersion", dependent: :destroy, inverse_of: :application
   has_one :current_version, -> { where(current: true) }, class_name: "ApplicationVersion", inverse_of: :application, dependent: :restrict_with_exception
-
-  # Even though we're not using the geocoder gem to do our geocoding we still need this here because we're using
-  # the gem for the near and nearbys functions which depend on some other functions that this creates. It's a bit
-  # ugly for sure but we want to get rid of the geocoder gem entirely. So, we'll live with it until then.
-  geocoded_by :address, latitude: :lat, longitude: :lng
 
   validates :council_reference, presence: true
   validates :council_reference, uniqueness: { scope: :authority_id, case_sensitive: false }
@@ -93,8 +84,10 @@ class Application < ApplicationRecord
   sig { returns(T.untyped) }
   def find_all_nearest_or_recent
     if location
-      nearbys(Application.nearby_and_recent_max_distance_km, units: :km)
-        .where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+      point = RGeo::Geographic.spherical_factory.point(lng, lat)
+      Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, Application.nearby_and_recent_max_distance_km * 1000)
+                 .where.not(id:)
+                 .where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     else
       Application.none
     end

@@ -53,6 +53,7 @@ FactoryBot.define do
       factory :geocoded_application do
         lat { 1.0 }
         lng { 2.0 }
+        lonlat { RGeo::Geographic.spherical_factory(srid: 4326).point(2.0, 1.0) }
         suburb { "Sydney" }
         state { "NSW" }
         postcode { "2000" }
@@ -136,6 +137,7 @@ FactoryBot.define do
     sequence(:address) { |s| "#{s} Illawarra Road Marrickville 2204" }
     lat { -33.911105 }
     lng { 151.155503 }
+    lonlat { RGeo::Geographic.spherical_factory(srid: 4326).point(151.155503, -33.911105) }
     radius_meters { 2000 }
 
     factory :unconfirmed_alert do

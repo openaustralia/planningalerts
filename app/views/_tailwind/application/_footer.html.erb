@@ -1,7 +1,69 @@
-<div class="my-32">
+<footer class="bg-[#03827a] text-white font-sans text-lg py-20">
   <%= render Tailwind::ContainerComponent.new do %>
+    <h2 class="pb-2 text-3xl font-extrabold font-logo">Planning Alerts</h2>
+    <div class="grid grid-cols-12 gap-6 md:gap-4">
+      <div class="col-span-12 md:col-span-5">
+        <div class="space-y-2">
+          <p>Find out what is being built and knocked down in your community and have your say.</p>
+          <p>Run for the benefit of the general public. Not the government. Not developers.</p>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-4">
+        <nav class="grid grid-cols-1 font-semibold md:gap-2 md:grid-cols-2">
+          <ul>
+            <li><%= link_to "About", about_path %></li>
+            <li><%= link_to "Source code", "https://github.com/openaustralia/planningalerts" %></li>
+            <li><%= link_to "Get involved", get_involved_path %></li>
+          </ul>
+          <ul>
+            <li><%= link_to "Help", faq_path %></li>
+            <li><%= link_to "Contact us", documentation_contact_path %></li>
+            <li><%= link_to "Coverage", authorities_path %></li>
+            <li><%= link_to "API", api_howto_path %></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="col-span-12 md:col-span-3 bg-[#2B948D] p-6">
+        <div>
+          <p>Your tax deductible donations keep this site and others like it running</p>
+          <a href="https://www.oaf.org.au/donate/" class="inline-block px-4 py-2 mt-4 font-semibold bg-navy">
+            Donate now
+          </a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <hr class="mt-12 text-[#479590]">
+  <%= render Tailwind::ContainerComponent.new do %>
+    <div class="grid grid-cols-12 gap-4 pt-16 row">
+      <div class="col-span-12 md:col-span-5">
+        <div>
+          <p>
+            Built and maintained by
+            <a href="https://www.oaf.org.au/" class="block h-6 mt-4 bg-no-repeat bg-oaf-logo">
+              <span class="hidden">OpenAustralia Foundation</span>
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-4">
+        <div class="space-y-8">
+          <p>
+            <a href="https://www.oaf.org.au/" class="underline">OpenAustralia Foundation</a> is a <a href="https://www.acnc.gov.au/charity/55c2c06e21ac71e9359a0590b9fc100e" class="underline">registered charity</a> in Australia - company limited by guarantee and endorsed as a deductible gift recipient.
+            ABN&nbsp;<a href="https://www.abr.business.gov.au/ABN/View/24138089942" class="underline">24&nbsp;138&nbsp;089&nbsp;942</a>.
+          </p>
+          <p>
+            We acknowledge the traditional owners of the land now known as Australia.
+          We pay our respects to their elders past, present and emerging.
+          </p>
+        </div>
+      </div>
+    </div>
     <% if Flipper.enabled?(:switch_themes, current_user) %>
-      <%= button_to "Toggle theme", toggle_theme_path, class: "text-navy hover:text-white border border-navy hover:bg-navy focus:ring-4 focus:outline-none focus:ring-navy font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" %>
+      <%= button_to "Toggle theme", toggle_theme_path, class: "text-white bg-navy font-medium rounded-lg text-sm px-5 py-2.5 my-10 text-center" %>
     <% end %>
   <% end %>
-</div>
+</footer>

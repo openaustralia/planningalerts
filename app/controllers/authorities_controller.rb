@@ -11,6 +11,8 @@ class AuthoritiesController < ApplicationController
     @authorities = T.let(Authority.enabled, T.untyped)
     @authorities = @authorities.order(population_2021: :desc) if params[:order] == "population"
     @authorities = @authorities.order(:state, :full_name)
+    # Limit what we're loading to stop the boundary data from getting loaded
+    @authorities = @authorities.select(:id, :state, :short_name, :full_name, :population_2021, :updated_at, :morph_name)
   end
 
   sig { void }

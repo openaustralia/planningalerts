@@ -28,11 +28,6 @@ class CommentsController < ApplicationController
     application = Application.find(params[:application_id])
     @application = T.let(application, T.nilable(Application))
 
-    # First check if the honeypot field has been filled out by a spam bot
-    # If so, make it look like things worked but don't actually do anything
-    # TODO: Do we still need this given that we now require a login?
-    return if params[:little_sweety].present?
-
     params_comment = T.cast(params[:comment], ActionController::Parameters)
 
     comment = Comment.new(

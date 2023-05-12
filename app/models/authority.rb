@@ -42,12 +42,7 @@ class Authority < ApplicationRecord
 
   sig { returns(Integer) }
   def self.total_population_2021_covered_by_all_active_authorities
-    sum = 0
-    Authority.active.each do |a|
-      population = a.population_2021
-      sum += population if population
-    end
-    sum
+    Authority.active.sum(:population_2021)
   end
 
   sig { returns(Float) }
@@ -149,6 +144,7 @@ class Authority < ApplicationRecord
 
   sig { returns(ActiveRecord::Relation) }
   def alerts
-    Alert.active.where("ST_Covers(?, lonlat)", boundary.to_s)
+    # Doing this as a sub-query so we don't send a long boundary string to the database
+    Alert.active.where("ST_Covers((?), lonlat)", Authority.where(id:).limit(1).select(:boundary))
   end
 end

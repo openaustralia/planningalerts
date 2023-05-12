@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem "bootsnap", require: false
-gem "rails", "7.0.4.2"
+gem "rails", "7.0.4.3"
 gem "rake"
 
 gem "pg"
@@ -52,8 +52,6 @@ gem "kaminari"
 gem "geokit"
 # rexml is used by geokit but is no longer by default in ruby 3.1
 gem "rexml"
-# geocoder is only used for the near activerecord method
-gem "geocoder"
 
 # CSS related stuff
 gem "autoprefixer-rails"
@@ -192,12 +190,12 @@ group :development do
   # For guard and associated bits
   gem "growl"
   gem "guard"
-  gem "guard-livereload"
   gem "guard-rspec"
   gem "guard-rubocop"
-  gem "rack-livereload"
   gem "rb-fsevent"
   gem "rb-inotify", require: false
+
+  gem "rails_live_reload"
 
   # For a better error page in development
   gem "better_errors"
