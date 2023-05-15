@@ -6,6 +6,7 @@ set :repo_url, "https://github.com/openaustralia/planningalerts.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, "puma-capistrano"
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
@@ -54,10 +55,10 @@ set :aws_ec2_default_filters, (proc {
     },
     # Uncomment the following lines (and set the value) if you want to only deploy to blue or green
     # The default is to deploy to both blue AND green
-    # {
-    #   name: "tag:BlueGreen",
-    #   values: ["green"]
-    # },
+    {
+      name: "tag:BlueGreen",
+      values: ["blue"]
+    },
     {
       name: 'instance-state-name',
       values: ['running']
