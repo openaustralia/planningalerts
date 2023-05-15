@@ -62,3 +62,5 @@ prune_bundler true
 plugin :tmp_restart
 
 pidfile "tmp/pids/puma.pid"
+
+# Just adding a random line to make a new commit
