@@ -17,7 +17,7 @@ port 8000
 environment ENV.fetch("RAILS_ENV") { "development" }
 
 # For the benefit of phased restarts
-directory File.expand_path("..", __dir__)
+directory "/srv/www/production/current"
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
