@@ -156,9 +156,6 @@ gem "wikidata"
 gem "rgeo-shapefile"
 gem "rubyzip"
 
-# To profile code in development and production
-gem "rack-mini-profiler"
-
 # Using this webserver for development and production
 gem "puma"
 
@@ -182,6 +179,9 @@ group :test do
 end
 
 group :development do
+  # To profile code in development
+  gem "rack-mini-profiler"
+
   # For static type checking
   gem "sorbet"
   gem "spoom"
