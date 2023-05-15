@@ -55,6 +55,8 @@ prune_bundler true
 #   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 # end
 
+# Just adding a comment to make a new commit
+
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
 
