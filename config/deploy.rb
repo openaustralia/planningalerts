@@ -42,6 +42,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :ssh_options, verify_host_key: :secure
 
 set :rails_env, "production"
+set :puma_phased_restart, true
 
 set :aws_ec2_regions, ['ap-southeast-2']
 # We don't want to use the stage tag to filter because we have both production and staging on the same machine
