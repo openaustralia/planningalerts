@@ -42,6 +42,9 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :ssh_options, verify_host_key: :secure
 
 set :rails_env, "production"
+
+# See https://github.com/puma/puma/blob/master/docs/restart.md
+# Note that phased restarts will NOT upgrade puma. So disable this if upgrading puma
 set :puma_phased_restart, true
 
 set :aws_ec2_regions, ['ap-southeast-2']
