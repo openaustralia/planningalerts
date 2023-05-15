@@ -203,11 +203,12 @@ group :development do
 
   # For deployment
   gem "capistrano", require: false
+  # For puma 6 support we're using the "unreleased" version on github
+  gem "capistrano3-puma", require: false, github: "seuros/capistrano-puma"
   gem "capistrano-aws"
   gem "capistrano-bundler", require: false
   gem "capistrano-rails", require: false
   gem "capistrano-rvm", require: false
-  gem "capistrano3-puma"
 
   # Help with code quality
   gem "brakeman"

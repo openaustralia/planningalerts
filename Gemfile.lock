@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/seuros/capistrano-puma.git
+  revision: 2cc11846540489edda10d83e026c9bea04e6fab1
+  specs:
+    capistrano3-puma (6.0.0.beta.1)
+      capistrano (~> 3.7)
+      capistrano-bundler
+      puma (>= 5.1, < 7.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -149,9 +158,6 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    capistrano3-puma (1.2.1)
-      capistrano (~> 3.0)
-      puma (>= 2.6)
     capybara (3.38.0)
       addressable
       matrix
@@ -727,7 +733,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
-  capistrano3-puma
+  capistrano3-puma!
   capybara
   compass-blueprint
   compass-rails (= 3.1.0)
