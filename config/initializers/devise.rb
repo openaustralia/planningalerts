@@ -165,7 +165,13 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  # We've increased this to 2 months from the default of 2 weeks because lots
+  # of our users are occasional users of the site and not particularly comfortable
+  # with technology always and so signing in can be difficult for them. Note the
+  # "expire_all_remember_me_on_sign_out" is on which should mean that when users do
+  # decide to logout all devices will be logged out at the same time. This is the
+  # security vs usability trade off we are making.
+  config.remember_for = 2.months
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
