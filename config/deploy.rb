@@ -42,8 +42,6 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :ssh_options, verify_host_key: :secure
 
 set :rails_env, "production"
-# TODO: This way of restarting passenger is deprecated. So, it would be good to move over to the new way
-set :passenger_restart_with_touch, true
 
 set :aws_ec2_regions, ['ap-southeast-2']
 # We don't want to use the stage tag to filter because we have both production and staging on the same machine
@@ -118,7 +116,7 @@ namespace :foreman do
   end
 end
 
-before "deploy:restart", "foreman:restart"
+before "deploy:finishing", "foreman:restart"
 before "foreman:restart", "foreman:enable"
 before "foreman:enable", "foreman:export"
 before "deploy:check:linked_files", "upload_memcache_config"
