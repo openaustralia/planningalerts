@@ -12,21 +12,21 @@
       </li>
       <li class="contents">
         <%= link_to new_alert_path, class: "contents" do %>
-          <span class="mb-8 sm:col-start-2 sm:row-start-1">You received</span>
+          <span class="mb-8 sm:col-start-2 sm:row-start-1">People received</span>
           <span class="font-bold sm:col-start-2 sm:row-start-2 text-7xl text-orange"><%= number_with_delimiter(EmailBatch.total_sent_in_past_week) %></span>
           <span class="mb-12 sm:col-start-2 sm:row-start-3 text-orange">email alerts</span>
         <% end %>
       </li>
       <li class="contents">
         <%= link_to new_alert_path, class: "contents" do %>
-          <span class="mb-8 sm:col-start-1 sm:row-start-4 lg:col-start-3 lg:row-start-1">You signed up for</span>
+          <span class="mb-8 sm:col-start-1 sm:row-start-4 lg:col-start-3 lg:row-start-1">People signed up for</span>
           <span class="font-bold sm:col-start-1 sm:row-start-5 lg:col-start-3 lg:row-start-2 text-7xl text-green"><%= number_with_delimiter(Alert.active.in_past_week.count) %></span>
           <span class="mb-12 sm:col-start-1 sm:row-start-6 lg:col-start-3 lg:row-start-3 text-green">new email alerts</span>
         <% end %>
       </li>
       <li class="contents">
         <%= link_to comments_path, class: "contents" do %>
-          <span class="mb-8 sm:col-start-2 sm:row-start-4 lg:col-start-4 lg:row-start-1">You made</span>
+          <span class="mb-8 sm:col-start-2 sm:row-start-4 lg:col-start-4 lg:row-start-1">People wrote</span>
           <span class="font-bold sm:col-start-2 sm:row-start-5 lg:col-start-4 lg:row-start-2 text-7xl text-lavender"><%= number_with_delimiter(Comment.visible.in_past_week.count) %></span>
           <span class="mb-12 sm:col-start-2 sm:row-start-6 lg:col-start-4 lg:row-start-3 text-lavender">new comments</span>
         <% end %>
