@@ -32,7 +32,9 @@ workers 3
 # you need to make sure to reconnect any threads in the `on_worker_boot`
 # block.
 
-preload_app!
+# Disabled preload_app! and enabled prune_bundler to allow phased restarts
+# preload_app!
+prune_bundler true
 
 # If you are preloading your application and using Active Record, it's
 # recommended that you close any connections to the database before workers
