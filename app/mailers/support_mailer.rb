@@ -19,6 +19,9 @@ class SupportMailer < ApplicationMailer
   sig { params(contact_message: ContactMessage).returns(T.any(Mail::Message, ActionMailer::MessageDelivery)) }
   def contact_message(contact_message)
     @contact_message = T.let(contact_message, T.nilable(ContactMessage))
+    # Lookup user based on email address. So, we don't KNOW for sure that this is the right person
+    # and this can obviously be impersonated
+    @possible_user = T.let(User.find_by(email: contact_message.email), T.nilable(User))
     mail(
       to: "contact@planningalerts.org.au",
       from: "#{contact_message.name} <contact@planningalerts.org.au>",

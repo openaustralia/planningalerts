@@ -10,9 +10,14 @@ class SupportPreview < ActionMailer::Preview
     SupportMailer.report(report)
   end
 
-  def contact_message
+  def contact_message_logged_in_user
     user = FactoryBot.build_stubbed(:user, name: "Fred", email: "fred@foo.bar")
     contact_message = FactoryBot.build_stubbed(:contact_message, name: user.name, email: user.email, details: "Please do some stuff.\n\nAnd here is a second paragraph.", user:)
+    SupportMailer.contact_message(contact_message)
+  end
+
+  def contact_message_not_logged_in_user
+    contact_message = FactoryBot.build_stubbed(:contact_message, name: "Fred", email: "fred@foo.bar", details: "Please do some stuff.\n\nAnd here is a second paragraph.")
     SupportMailer.contact_message(contact_message)
   end
 
