@@ -27,13 +27,14 @@ module.exports = {
       'white': '#ffffff',
       'off-white': "#eeeeee",
       'light-grey': '#F3F2F2',
-      'fuchsia': '#CD4A9A',
-      'lavender': '#9786AD',
+      'fuchsia': '#CA3F94',
+      'lavender': '#826D9C',
       'yellow': '#F4BE53',
-      'orange': '#E98E07',
+      'orange': '#D37708',
       'navy': '#414860',
-      'green': '#038A81',
+      'green': '#03827A',
       'darker-orange': '#BA671D',
+      'warm-grey': '#767676',
     }
 },
   plugins: [
