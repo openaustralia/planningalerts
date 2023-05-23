@@ -2,32 +2,32 @@
   <section class="mt-12 text-xl text-navy">
     <h3 class="mb-12 text-4xl font-semibold">This week at Planning Alerts</h4>
     <ul class="grid text-center sm:grid-cols-2 lg:grid-cols-4">
-      <li class="contents">
-        <%= link_to applications_path, class: "contents text-fuchsia" do %>
-          <span class="mb-8 text-navy">We collected</span>
-          <span class="font-bold text-7xl"><%= number_with_delimiter(Application.in_past_week.count) %></span>
-          <span class="mb-12">new applications</span>
+      <li>
+        <%= link_to applications_path, class: "text-fuchsia" do %>
+          <span class="block mb-8 text-navy">We collected</span>
+          <span class="block font-bold text-7xl"><%= number_with_delimiter(Application.in_past_week.count) %></span>
+          <span class="block mb-12">new applications</span>
         <% end %>
       </li>
-      <li class="contents">
-        <%= link_to new_alert_path, class: "contents text-orange" do %>
-          <span class="mb-8 sm:col-start-2 sm:row-start-1 text-navy">People received</span>
-          <span class="font-bold sm:col-start-2 sm:row-start-2 text-7xl"><%= number_with_delimiter(EmailBatch.total_sent_in_past_week) %></span>
-          <span class="mb-12 sm:col-start-2 sm:row-start-3">email alerts</span>
+      <li>
+        <%= link_to new_alert_path, class: "text-orange" do %>
+          <span class="block mb-8 text-navy">People received</span>
+          <span class="block font-bold text-7xl"><%= number_with_delimiter(EmailBatch.total_sent_in_past_week) %></span>
+          <span class="block mb-12">email alerts</span>
         <% end %>
       </li>
-      <li class="contents">
+      <li>
         <%= link_to new_alert_path, class: "contents text-green" do %>
-          <span class="mb-8 sm:col-start-1 sm:row-start-4 lg:col-start-3 lg:row-start-1 text-navy">People signed up for</span>
-          <span class="font-bold sm:col-start-1 sm:row-start-5 lg:col-start-3 lg:row-start-2 text-7xl"><%= number_with_delimiter(Alert.active.in_past_week.count) %></span>
-          <span class="mb-12 sm:col-start-1 sm:row-start-6 lg:col-start-3 lg:row-start-3">new email alerts</span>
+          <span class="block mb-8 text-navy">People signed up for</span>
+          <span class="block font-bold text-7xl"><%= number_with_delimiter(Alert.active.in_past_week.count) %></span>
+          <span class="block mb-12">new email alerts</span>
         <% end %>
       </li>
-      <li class="contents">
+      <li>
         <%= link_to comments_path, class: "contents text-lavender" do %>
-          <span class="mb-8 sm:col-start-2 sm:row-start-4 lg:col-start-4 lg:row-start-1 text-navy">People wrote</span>
-          <span class="font-bold sm:col-start-2 sm:row-start-5 lg:col-start-4 lg:row-start-2 text-7xl"><%= number_with_delimiter(Comment.visible.in_past_week.count) %></span>
-          <span class="mb-12 sm:col-start-2 sm:row-start-6 lg:col-start-4 lg:row-start-3">new comments</span>
+          <span class="block mb-8 text-navy">People wrote</span>
+          <span class="block font-bold text-7xl"><%= number_with_delimiter(Comment.visible.in_past_week.count) %></span>
+          <span class="block mb-12">new comments</span>
         <% end %>
       </li>
     </ul>
