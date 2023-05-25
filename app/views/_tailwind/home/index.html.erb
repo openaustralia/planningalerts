@@ -21,7 +21,9 @@
       <% end %>
     </div>
 
-    <%= form.button "Search for applications", name: nil, class: "text-2xl font-semibold text-white bg-green px-11 sm:px-16 py-3 sm:py-4" %>
+    <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", bg: :green) do %>
+      Search for applications
+    <% end %>
   <% end %>
 </div>
 

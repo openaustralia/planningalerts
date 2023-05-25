@@ -1,7 +1,5 @@
 <% if @tag == :a %>
-  <a href="<%= @href %>" class="inline-block px-4 py-2 font-semibold text-white bg-navy">
-    <%= content %>
-  </a>
+  <%= link_to content, @href, class: (@classes + %w[inline-block]) %>
 <% elsif @tag == :button %>
-  <%= button_tag content, class: "px-4 py-2 font-semibold text-white bg-navy" %>
+  <%= button_tag content, name: nil, class: @classes %>
 <% end %>
