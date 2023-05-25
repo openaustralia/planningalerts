@@ -5,8 +5,8 @@ module Tailwind
   class ButtonComponent < ViewComponent::Base
     extend T::Sig
 
-    sig { params(tag: Symbol, size: String, bg: Symbol, href: T.nilable(String)).void }
-    def initialize(tag:, size:, bg:, href: nil)
+    sig { params(tag: Symbol, size: String, colour: Symbol, href: T.nilable(String)).void }
+    def initialize(tag:, size:, colour:, href: nil)
       super
       raise "Unexpected tag: #{tag}" unless %i[a button].include?(tag)
       raise "href not set" if href.nil? && tag == :a
@@ -20,11 +20,11 @@ module Tailwind
         raise "Unexpected size #{size}"
       end
 
-      case bg
+      case colour
       when :navy, :green
-        classes << "bg-#{bg}"
+        classes << "bg-#{colour}"
       else
-        raise "Unexpected bg #{bg}"
+        raise "Unexpected colour #{colour}"
       end
 
       classes += %w[font-semibold text-white]
