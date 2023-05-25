@@ -28,9 +28,11 @@
       <div class="col-span-12 md:col-span-3 bg-[#2B948D] p-6">
         <div>
           <p>Your tax deductible donations keep this site and others like it running</p>
-          <%= render Tailwind::ButtonComponent.new(href: "https://www.oaf.org.au/donate/") do %>
-            Donate now
-          <% end %>
+          <div class="mt-4">
+            <%= render Tailwind::ButtonComponent.new(tag: :a, href: "https://www.oaf.org.au/donate/") do %>
+              Donate now
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
@@ -69,8 +71,10 @@
       </div>
     </div>
     <% if Flipper.enabled?(:switch_themes, current_user) %>
-      <%= form_with url: toggle_theme_path do |form| %>
-        <%= button_tag "Toggle theme", class: "text-white bg-navy font-medium rounded-lg text-sm px-5 py-2.5 my-10 text-center" %>
+      <%= form_with url: toggle_theme_path, class: "my-10" do |form| %>
+        <%= render Tailwind::ButtonComponent.new(tag: :button) do %>
+          Toggle theme
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
