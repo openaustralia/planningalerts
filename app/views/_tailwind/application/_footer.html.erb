@@ -69,7 +69,9 @@
       </div>
     </div>
     <% if Flipper.enabled?(:switch_themes, current_user) %>
-      <%= button_to "Toggle theme", toggle_theme_path, class: "text-white bg-navy font-medium rounded-lg text-sm px-5 py-2.5 my-10 text-center" %>
+      <%= form_with url: toggle_theme_path do |form| %>
+        <%= button_tag "Toggle theme", class: "text-white bg-navy font-medium rounded-lg text-sm px-5 py-2.5 my-10 text-center" %>
+      <% end %>
     <% end %>
   <% end %>
 </footer>
