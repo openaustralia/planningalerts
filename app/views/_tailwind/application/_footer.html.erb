@@ -28,9 +28,9 @@
       <div class="col-span-12 md:col-span-3 bg-[#2B948D] p-6">
         <div>
           <p>Your tax deductible donations keep this site and others like it running</p>
-          <a href="https://www.oaf.org.au/donate/" class="inline-block px-4 py-2 mt-4 font-semibold bg-navy">
+          <%= render Tailwind::ButtonComponent.new(href: "https://www.oaf.org.au/donate/") do %>
             Donate now
-          </a>
+          <% end %>
         </div>
       </div>
     </div>
