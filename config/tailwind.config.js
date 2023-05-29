@@ -7,7 +7,7 @@ module.exports = {
     './app/javascript/**/*.js',
     './app/views/**/*.{erb,haml,html,slim}',
     './app/themes/tailwind/views/**/*.{erb,haml,html,slim}',
-    './app/components/tailwind/*.{erb,haml,html,slim}',
+    './app/components/tailwind/*.{erb,haml,html,slim,rb}',
   ],
   theme: {
     extend: {

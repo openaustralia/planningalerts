@@ -21,8 +21,12 @@ module Tailwind
       end
 
       case colour
-      when :navy, :green
-        classes << "bg-#{colour}"
+      # Listing out each class specifically so that it doesn't get removed
+      # by tailwind in the compilation
+      when :navy
+        classes << "bg-navy"
+      when :green
+        classes << "bg-green"
       else
         raise "Unexpected colour #{colour}"
       end
