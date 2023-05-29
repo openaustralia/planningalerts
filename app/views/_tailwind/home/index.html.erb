@@ -7,26 +7,7 @@
   </div>
 </div>
 
-<div class="px-6 py-10 sm:py-16 bg-navy sm:px-28">
-  <%= form_with url: address_applications_path, method: :get, class: "space-y-4 sm:space-y-8 text-center" do |form| %>
-    <%= form.label :q, "Enter a street address", class: "font-semibold text-3xl sm:text-4xl text-white" %>
-    <%# TODO: Re-enable autofocus:true below after finished testing with livereload %>
-    <div class="space-y-2">
-      <%= form.text_field :q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", class: "text-2xl w-full px-4 py-3 sm:py-4 placeholder-shown:truncate", required: "required" %>
-      <%= button_tag type: "button", class: "text-white sm:text-xl block w-full" do %>
-        <div class="inline-block mr-2 align-middle">
-          <%= render "application/svg/location" %>
-        </div>
-        <span class="underline">or use my current location</span>
-      <% end %>
-    </div>
-
-    <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", colour: :green) do %>
-      Search for applications
-    <% end %>
-  <% end %>
-</div>
-
+<%= render "search_for_applications" %>
 <%= render "how_it_works" %>
 <hr class="text-[#D2CFC1] mt-8">
 <%= render "trending", applications: @trending %>
