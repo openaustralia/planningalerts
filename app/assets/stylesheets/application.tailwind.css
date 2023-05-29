@@ -2,7 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-[x-cloak] { display: none !important; }
+[x-cloak] {
+  display: none !important;
+}
+
+.pac-icon {
+  display: none !important;
+}
+
+.pac-item {
+  @apply !px-4 !py-3 !text-2xl !font-sans text-navy;
+}
+
+.pac-item-query {
+  @apply !pr-2 !text-2xl !font-sans text-navy;
+}
+
+.pac-matched {
+  @apply !font-medium;
+}
 
 /*
 

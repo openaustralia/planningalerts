@@ -5,7 +5,7 @@
     <div class="space-y-2">
       <%= form.text_field :q,
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
-                          class: "address-autocomplete-input text-2xl w-full px-4 py-3 sm:py-4 placeholder-shown:truncate",
+                          class: "text-2xl text-navy w-full px-4 py-3 sm:py-4 placeholder-shown:truncate",
                           required: "required",
                           "x-init" => "autocomplete = new google.maps.places.Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']});" %>
       <%= button_tag type: "button", class: "text-white sm:text-xl block w-full" do %>
