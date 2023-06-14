@@ -8,13 +8,14 @@
 
   %body
     = render "header"
+    = render "eofy_fundraiser"
     - if @alert.user.requires_activation?
       = render "activate_account_call_to_action", alert: @alert
     - unless @comments.empty?
       = render "comments", comments: @comments, alert: @alert
     - unless @applications.empty?
       = render "applications", alert: @alert, applications: @applications
-    = render "donation_banner"
+    -# = render "donation_banner"
     .footer-outer
       .footer-inner
         = render "footer_main"

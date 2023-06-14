@@ -56,6 +56,25 @@
   }
 }
 
+.eofy-fundraiser {
+  font-size: 20px;
+  padding-bottom: 0;
+  background-color: #eee;
+  .button {
+    display: inline-block;
+    background-color: darken($orange, 2%);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      background-color: lighten($orange, 20%);
+    }
+  }
+}
+
 .cta-button {
   display: inline-block;
   border-radius: 5px;
