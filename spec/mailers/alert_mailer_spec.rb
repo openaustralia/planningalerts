@@ -71,6 +71,7 @@ describe AlertMailer do
     end
 
     it "nicelies format (in HTML) a list of multiple planning applications" do
+      # File.write("spec/mailers/regression/alert_mailer/email3.html", email.html_part.body.to_s.gsub("\r\n", "\n"))
       expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email3.html").read.gsub("\n", "\r\n"))
     end
   end
@@ -87,6 +88,7 @@ describe AlertMailer do
     end
 
     it "nicelies format (in HTML) a list of multiple planning applications" do
+      # File.write("spec/mailers/regression/alert_mailer/email2.html", email.html_part.body.to_s.gsub("\r\n", "\n"))
       expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email2.html").read.gsub("\n", "\r\n"))
     end
   end
@@ -140,6 +142,7 @@ describe AlertMailer do
         end
 
         it "has a specific body" do
+          # File.write("spec/mailers/regression/alert_mailer/email1.html", html_body.gsub("\r\n", "\n"))
           expect(html_body).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email1.html").read.gsub("\n", "\r\n"))
         end
       end
