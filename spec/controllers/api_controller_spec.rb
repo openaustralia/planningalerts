@@ -216,6 +216,7 @@ describe ApiController do
       allow(scope3).to receive(:page).and_return(scope4)
       allow(scope4).to receive(:per).and_return(result)
       get :suburb_postcode, params: { key: key.value, format: "geojson", postcode: "2780" }
+      # rubocop:disable Rails/ResponseParsedBody
       expect(JSON.parse(response.body)).to eq(
         "type" => "FeatureCollection",
         "features" => [
@@ -240,6 +241,7 @@ describe ApiController do
           }
         ]
       )
+      # rubocop:enable Rails/ResponseParsedBody
     end
 
     it "finds recent applications for a suburb" do

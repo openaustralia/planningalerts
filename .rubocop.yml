@@ -50,6 +50,11 @@ Naming/BlockForwarding: # new in 1.24
   Enabled: true
   EnforcedStyle: explicit
 
+# A bit too blanket of a rule. There are places where you just want to test more than one item
+# and you're not testing for different behaviour. So, just numbering should be fine
+RSpec/IndexedLet:
+  Enabled: false
+
 # Disable a bunch of metrics to do with code complexity. These as are all
 # a bit hard-nosed. Maybe after we've done a pass with Code Climate we
 # can revisit these
@@ -544,8 +549,6 @@ FactoryBot/RedundantFactoryOption: # new in 2.23
 RSpec/BeEmpty: # new in 2.20
   Enabled: true
 RSpec/ContainExactly: # new in 2.19
-  Enabled: true
-RSpec/IndexedLet: # new in 2.20
   Enabled: true
 RSpec/MatchArray: # new in 2.19
   Enabled: true
