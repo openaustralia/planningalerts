@@ -57,8 +57,8 @@ class CommentsController < ApplicationController
     render "applications/show"
   end
 
-  sig { void }
   # TODO: We should leave this working until March 2023 to alllow people to still confirm old comments
+  sig { void }
   def confirmed
     @comment = T.let(Comment.find_by(confirm_id: params[:id]), T.nilable(Comment))
     if @comment

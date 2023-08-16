@@ -11,9 +11,9 @@ class AlertsController < ApplicationController
     @alert = Alert.new(address: params[:address])
   end
 
-  sig { void }
   # TODO: We should leave this working until March 2023 to alllow people to still do things from old alert emails
   # TODO: Redirect this to the alerts profile page
+  sig { void }
   def edit
     alert = Alert.find_by!(confirm_id: params[:confirm_id])
     @alert = T.let(alert, T.nilable(Alert))
@@ -44,8 +44,8 @@ class AlertsController < ApplicationController
     end
   end
 
-  sig { void }
   # TODO: We should leave this working until March 2023 to alllow people to still do things from old alert emails
+  sig { void }
   def confirmed
     @alert = Alert.find_by!(confirm_id: params[:confirm_id])
     @alert.confirm!
@@ -55,15 +55,15 @@ class AlertsController < ApplicationController
     user.confirm if user && !user.confirmed?
   end
 
-  sig { void }
   # TODO: We should leave this working until March 2023 to alllow people to still do things from old alert emails
+  sig { void }
   def unsubscribe
     @alert = Alert.find_by(confirm_id: params[:confirm_id])
     @alert&.unsubscribe!
   end
 
-  sig { void }
   # TODO: We should leave this working until March 2023 to alllow people to still do things from old alert emails
+  sig { void }
   def update
     params_alert = T.cast(params[:alert], ActionController::Parameters)
     params_radius_meters = T.cast(params_alert[:radius_meters], String)
