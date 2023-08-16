@@ -10,14 +10,14 @@ module ViewComponent::Slotable
   mixes_in_class_methods GeneratedClassMethods
 
   module GeneratedClassMethods
-    def slots; end
-    def slots=(value); end
-    def slots?; end
+    def registered_slots; end
+    def registered_slots=(value); end
+    def registered_slots?; end
   end
 
   module GeneratedInstanceMethods
-    def slots; end
-    def slots=(value); end
-    def slots?; end
+    def registered_slots; end
+    def registered_slots=(value); end
+    def registered_slots?; end
   end
 end

@@ -26,8 +26,8 @@ class Administrate::ApplicationController
     sig { params(resource: T.untyped).returns(T.untyped) }
     def nav_link_state(resource); end
 
-    sig { returns(T.untyped) }
-    def new_resource; end
+    sig { params(params: T.untyped).returns(T.untyped) }
+    def new_resource(params = T.unsafe(nil)); end
 
     sig { params(_arg0: T.untyped, _arg1: T.untyped, _arg2: T.untyped).returns(T.untyped) }
     def resource_class(*_arg0, **_arg1, &_arg2); end

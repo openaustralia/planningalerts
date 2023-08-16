@@ -9,6 +9,7 @@ class ActiveStorage::Blob
   include GeneratedAttributeMethods
   extend CommonRelationMethods
   extend GeneratedRelationMethods
+  include GeneratedSecureTokenMethods
 
   sig { returns(ActiveStorage::Attached::One) }
   def preview_image; end
@@ -101,6 +102,30 @@ class ActiveStorage::Blob
 
     sig do
       params(
+        start: T.untyped,
+        finish: T.untyped,
+        batch_size: Integer,
+        error_on_ignore: T.untyped,
+        order: Symbol,
+        block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)
+      ).returns(T.nilable(T::Enumerator[::ActiveStorage::Blob]))
+    end
+    def find_each(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, order: :asc, &block); end
+
+    sig do
+      params(
+        start: T.untyped,
+        finish: T.untyped,
+        batch_size: Integer,
+        error_on_ignore: T.untyped,
+        order: Symbol,
+        block: T.nilable(T.proc.params(object: T::Array[::ActiveStorage::Blob]).void)
+      ).returns(T.nilable(T::Enumerator[T::Enumerator[::ActiveStorage::Blob]]))
+    end
+    def find_in_batches(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, order: :asc, &block); end
+
+    sig do
+      params(
         attributes: T.untyped,
         block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)
       ).returns(::ActiveStorage::Blob)
@@ -152,6 +177,19 @@ class ActiveStorage::Blob
 
     sig { returns(Array) }
     def ids; end
+
+    sig do
+      params(
+        of: Integer,
+        start: T.untyped,
+        finish: T.untyped,
+        load: T.untyped,
+        error_on_ignore: T.untyped,
+        order: Symbol,
+        block: T.nilable(T.proc.params(object: PrivateRelation).void)
+      ).returns(T.nilable(::ActiveRecord::Batches::BatchEnumerator))
+    end
+    def in_batches(of: 1000, start: nil, finish: nil, load: false, error_on_ignore: nil, order: :asc, &block); end
 
     sig { params(record: T.untyped).returns(T::Boolean) }
     def include?(record); end
@@ -1147,6 +1185,11 @@ class ActiveStorage::Blob
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def without(*args, &blk); end
+  end
+
+  module GeneratedSecureTokenMethods
+    sig { returns(T::Boolean) }
+    def regenerate_key; end
   end
 
   class PrivateAssociationRelation < ::ActiveRecord::AssociationRelation
