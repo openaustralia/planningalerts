@@ -60,17 +60,11 @@ describe ApplicationsHelper do
 
   describe "on_notice_text" do
     before do
-      allow(application).to receive(:address).and_return("foo")
-      allow(application).to receive(:lat).and_return(1.0)
-      allow(application).to receive(:lng).and_return(2.0)
-      allow(application).to receive(:location).and_return(Location.new(lat: 1.0, lng: 2.0))
-      allow(application).to receive(:date_received).and_return(nil)
-      allow(application).to receive(:date_scraped).and_return(Time.zone.now)
+      allow(application).to receive_messages(address: "foo", lat: 1.0, lng: 2.0, location: Location.new(lat: 1.0, lng: 2.0), date_received: nil, date_scraped: Time.zone.now)
     end
 
     it "says when the application is on notice (and hasn't started yet)" do
-      allow(application).to receive(:on_notice_from).and_return(Time.zone.today + 2.days)
-      allow(application).to receive(:on_notice_to).and_return(Time.zone.today + 16.days)
+      allow(application).to receive_messages(on_notice_from: Time.zone.today + 2.days, on_notice_to: Time.zone.today + 16.days)
       expect(helper.on_notice_text(application)).to eq(
         "The period to have your comment officially considered by the planning authority <strong>starts in 2 days</strong> and finishes 14 days later."
       )
@@ -78,8 +72,7 @@ describe ApplicationsHelper do
 
     describe "period started today" do
       it "says when the application is on notice" do
-        allow(application).to receive(:on_notice_from).and_return(Time.zone.today)
-        allow(application).to receive(:on_notice_to).and_return(Time.zone.today + 14.days)
+        allow(application).to receive_messages(on_notice_from: Time.zone.today, on_notice_to: Time.zone.today + 14.days)
         expect(helper.on_notice_text(application)).to eq(
           "<strong>You have 14 days left</strong> to have your comment officially considered by the planning authority. The period for comment started today."
         )
@@ -88,8 +81,7 @@ describe ApplicationsHelper do
 
     describe "period started a day ago" do
       it "says when the application is on notice" do
-        allow(application).to receive(:on_notice_from).and_return(Time.zone.today - 1.day)
-        allow(application).to receive(:on_notice_to).and_return(Time.zone.today + 13.days)
+        allow(application).to receive_messages(on_notice_from: Time.zone.today - 1.day, on_notice_to: Time.zone.today + 13.days)
         expect(helper.on_notice_text(application)).to eq(
           "<strong>You have 13 days left</strong> to have your comment officially considered by the planning authority. The period for comment started yesterday."
         )
@@ -98,8 +90,7 @@ describe ApplicationsHelper do
 
     describe "period is in progress" do
       before do
-        allow(application).to receive(:on_notice_from).and_return(Time.zone.today - 2.days)
-        allow(application).to receive(:on_notice_to).and_return(Time.zone.today + 12.days)
+        allow(application).to receive_messages(on_notice_from: Time.zone.today - 2.days, on_notice_to: Time.zone.today + 12.days)
       end
 
       it "says when the application is on notice" do
@@ -118,8 +109,7 @@ describe ApplicationsHelper do
 
     describe "period is finishing today" do
       it "says when the application is on notice" do
-        allow(application).to receive(:on_notice_from).and_return(Time.zone.today - 14.days)
-        allow(application).to receive(:on_notice_to).and_return(Time.zone.today)
+        allow(application).to receive_messages(on_notice_from: Time.zone.today - 14.days, on_notice_to: Time.zone.today)
         expect(helper.on_notice_text(application)).to eq(
           "<strong>Today is the last day</strong> to have your comment officially considered by the planning authority. The period for comment started 14 days ago."
         )
@@ -128,8 +118,7 @@ describe ApplicationsHelper do
 
     describe "period is finished" do
       before do
-        allow(application).to receive(:on_notice_from).and_return(Time.zone.today - 16.days)
-        allow(application).to receive(:on_notice_to).and_return(Time.zone.today - 2.days)
+        allow(application).to receive_messages(on_notice_from: Time.zone.today - 16.days, on_notice_to: Time.zone.today - 2.days)
       end
 
       it "says when the application is on notice" do

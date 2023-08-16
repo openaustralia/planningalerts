@@ -13,7 +13,7 @@ FactoryBot.define do
   end
 
   factory :application_with_no_version, class: "Application" do
-    association :authority
+    authority
     council_reference { "001" }
     date_scraped { 10.minutes.ago }
     address { "A test address" }
@@ -62,7 +62,7 @@ FactoryBot.define do
   end
 
   factory :application_version do
-    association :application, factory: :application_with_no_version
+    application factory: %i[application_with_no_version]
     date_scraped { |_b| 10.minutes.ago }
     address { "A test address" }
     description { "pretty" }
@@ -80,7 +80,7 @@ FactoryBot.define do
 
   factory :application_redirect do
     application_id { 1 }
-    association :redirect_application, factory: :application_with_no_version
+    redirect_application factory: %i[application_with_no_version]
   end
 
   factory :comment do
@@ -88,7 +88,7 @@ FactoryBot.define do
     name { "Matthew Landauer" }
     text { "a comment" }
     address { "12 Foo Street" }
-    association :application, factory: :geocoded_application
+    application factory: %i[geocoded_application]
 
     trait :confirmed do
       confirmed { true }

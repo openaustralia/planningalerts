@@ -28,7 +28,7 @@ describe CommentsController do
       it "returns an empty Array as json" do
         get_authority_comments_per_week
 
-        expect(JSON.parse(response.body)).to eq([])
+        expect(response.parsed_body).to eq([])
       end
     end
 
@@ -47,7 +47,7 @@ describe CommentsController do
 
       get_authority_comments_per_week
 
-      expect(JSON.parse(response.body)).to eq(
+      expect(response.parsed_body).to eq(
         [
           ["2015-12-20", 3],
           ["2015-12-27", 0],

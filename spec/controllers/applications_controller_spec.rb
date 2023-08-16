@@ -33,8 +33,7 @@ describe ApplicationsController do
         id: 1
       )
 
-      allow(application).to receive(:location).and_return(nil)
-      allow(application).to receive(:find_all_nearest_or_recent).and_return([])
+      allow(application).to receive_messages(location: nil, find_all_nearest_or_recent: [])
 
       # TODO: Can this line be removed? It seems to be a duplicate of
       # expectation on final line.

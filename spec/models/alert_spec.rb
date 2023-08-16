@@ -52,7 +52,7 @@ describe Alert do
 
       alert.save
 
-      expect(alert).to be_invalid
+      expect(alert).not_to be_valid
       expect(alert.errors[:address]).to eq(["some error message"])
     end
 

@@ -68,7 +68,7 @@ describe ApiController do
         # rubocop:enable RSpec/MessageChain
         get :all, params: { key: key.value, format: "js" }
         expect(response).to have_http_status(:ok)
-        expect(JSON.parse(response.body)).to eq(
+        expect(response.parsed_body).to eq(
           "application_count" => 1,
           "max_id" => 10,
           "applications" => [{
@@ -138,7 +138,7 @@ describe ApiController do
       allow(scope3).to receive(:page).and_return(scope4)
       allow(scope4).to receive(:per).and_return(result)
       get :suburb_postcode, params: { key: key.value, format: "js", postcode: "2780" }
-      expect(JSON.parse(response.body)).to eq(
+      expect(response.parsed_body).to eq(
         [{
           "application" => {
             "id" => 10,
@@ -176,7 +176,7 @@ describe ApiController do
       allow(scope3).to receive(:page).and_return(scope4)
       allow(scope4).to receive(:per).and_return(result)
       get :suburb_postcode, params: { key: key.value, format: "js", v: "2", postcode: "2780" }
-      expect(JSON.parse(response.body)).to eq(
+      expect(response.parsed_body).to eq(
         "application_count" => 1,
         "page_count" => 5,
         "applications" => [{
