@@ -4,8 +4,8 @@
 
 # typed: false
 
-module ::Multipart::Post::Parts; end
-module ::Multipart::Post::UploadIO; end
 module ::Parts; end
-module ::UploadIO; end
 module ActiveSupport::Dependencies::ModuleConstMissing; end
+module Net::SSH::Loggable; end
+module Rails::Dom::Testing::Assertions::SelectorAssertions::CountDescribable; end
+module URI::Escape; end
