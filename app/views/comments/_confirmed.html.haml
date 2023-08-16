@@ -2,7 +2,7 @@
   %h1.page-title Thanks, your comment has been sent!
   %p
     Your comment has been sent to #{comment.recipient_display_name}
-    and #{link_to 'posted below', comment_path(comment)}.
+    and #{link_to "posted below", comment_path(comment)}.
   = link_to "Share your comment on Facebook",
     "https://www.facebook.com/sharer/sharer.php?u=#{comment_url(comment)}&t=",
     title: "Share this planning application on Facebook",

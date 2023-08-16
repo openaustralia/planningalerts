@@ -18,20 +18,19 @@ linters:
       # These cops are incredibly noisy when it comes to HAML templates, so we
       # ignore them.
       ignored_cops:
-        - Lint/BlockAlignment
-        - Lint/EndAlignment
+        - Layout/ArgumentAlignment
+        - Layout/IndentationConsistency
+        - Layout/BlockAlignment
+        - Layout/EndAlignment
         - Lint/Void
-        - Layout/AlignHash
-        - Layout/AlignParameters
         - Layout/ElseAlignment
         - Layout/EndOfLine
         - Layout/IndentationWidth
-        - Layout/TrailingBlankLines
         - Layout/TrailingWhitespace
         - Layout/TrailingEmptyLines
         - Metrics/BlockLength
         - Metrics/BlockNesting
-        - Metrics/LineLength
+        - Layout/LineLength
         - Naming/FileName
         - Style/FrozenStringLiteralComment
         - Style/IfUnlessModifier
