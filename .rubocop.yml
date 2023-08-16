@@ -3,6 +3,8 @@ require:
   - rubocop-sorbet
   - rubocop-rake
   - rubocop-rspec
+  - rubocop-capybara
+  - rubocop-factory_bot
 
 AllCops:
   Exclude:
