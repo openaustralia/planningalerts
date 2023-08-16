@@ -322,7 +322,7 @@ describe ApiController do
     it "errors when using deprecated API call" do
       get :point, params: { format: "rss", address: "24 Bruce Road Glenbrook" }
       expect(response.body).to eq("Bad request: Invalid parameter(s) used: address")
-      expect(response.code).to eq("400")
+      expect(response).to have_http_status(:bad_request)
     end
 
     it_behaves_like "an authenticated API" do

@@ -11,7 +11,7 @@ describe ApplicationsController do
     describe "error checking on parameters used" do
       it "does not do error checking on the normal html sites" do
         get :index, params: { address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle" }
-        expect(response.code).to eq("200")
+        expect(response).to have_http_status(:ok)
       end
     end
 
