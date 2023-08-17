@@ -49,7 +49,11 @@ class ApplicationController < ActionController::Base
 
   sig { void }
   def update_view_path_for_theme
-    return unless Flipper.enabled?(:switch_themes, current_user) && session[:theme] == "tailwind"
+    # We're intentionally not checking whether the feature flag is enabled here because we want
+    # the new theme to be shown even if you're logged out. The feature flag just enables the button
+    # that allows you to do the switching. Cookies are signed so the value can be manipulated by
+    # users outside of pushing the button
+    return unless cookies.signed[:planningalerts_theme] == "tailwind"
 
     prepend_view_path(Rails.root.join("app/views/_tailwind"))
   end

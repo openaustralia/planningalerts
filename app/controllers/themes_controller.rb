@@ -6,7 +6,7 @@ class ThemesController < ApplicationController
 
   sig { void }
   def toggle
-    session[:theme] = ("tailwind" if session[:theme] != "tailwind")
+    cookies.signed[:planningalerts_theme] = ("tailwind" if cookies.signed[:planningalerts_theme] != "tailwind")
     redirect_back(fallback_location: root_path)
   end
 end
