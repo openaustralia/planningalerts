@@ -49,13 +49,16 @@ class ApplicationController < ActionController::Base
 
   sig { void }
   def update_view_path_for_theme
+    prepend_view_path(Rails.root.join("app/views/_tailwind")) if show_tailwind_theme?
+  end
+
+  sig { returns(T::Boolean) }
+  def show_tailwind_theme?
     # We're intentionally not checking whether the feature flag is enabled here because we want
     # the new theme to be shown even if you're logged out. The feature flag just enables the button
     # that allows you to do the switching. Cookies are signed so the value can be manipulated by
     # users outside of pushing the button
-    return unless cookies.signed[:planningalerts_theme] == "tailwind"
-
-    prepend_view_path(Rails.root.join("app/views/_tailwind"))
+    cookies.signed[:planningalerts_theme] == "tailwind"
   end
 
   sig { void }
