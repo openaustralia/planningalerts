@@ -1,0 +1,19 @@
+<div class="login-block">
+  <h2>Sign in to PlanningAlerts</h2>
+  <p class="login-explanation">
+    New to PlanningAlerts?
+    <%= link_to "Create an account", new_user_registration_path %>.
+  </p>
+  <%= semantic_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :email, label: "Your email", placeholder: "your@email.com", input_html: { autofocus: true, autocomplete: "email" } %>
+      <%= f.input :password, placeholder: "••••••••", input_html: { autocomplete: "current-password" } %>
+      <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+      <%= f.input :remember_me, as: :hidden, input_html: { value: true } %>
+    <% end %>
+
+    <%= f.actions do %>
+      <%= f.action :submit, label: "Sign in", button_html: { class: "button button-rounded button-large button-action" } %>
+    <% end %>
+  <% end %>
+</div>
