@@ -35,6 +35,8 @@ module.exports = {
       'green': '#03827A',
       'darker-orange': '#BA671D',
       'warm-grey': '#767676',
+      // TODO: Come up with a less bad name than this
+      'light-grey2': '#D2CDC1'
     }
 },
   plugins: [

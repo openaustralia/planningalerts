@@ -1,11 +1,11 @@
-<h1 class="text-4xl font-bold text-fuchsia font-display">Sign in to PlanningAlerts</h1>
+<h1 class="text-4xl font-bold text-fuchsia font-display">Sign in to Planning Alerts</h1>
 
 <%= form_with model: resource, url: session_path(resource_name) do |f| %>
   <%= f.label "Your email", class: "font-bold text-2xl" %>
-  <%= f.text_field :email, class: "text-2xl", placeholder: "your@email.com", autofocus: true, autocomplete: "email" %>
+  <%= f.text_field :email, class: "text-2xl block text-warm-grey border-light-grey2", placeholder: "your@email.com", autofocus: true, autocomplete: "email" %>
   <%= f.label "Password", class: "font-bold text-2xl" %>
-  <%= f.text_field :password, class: "text-2xl", placeholder: "••••••••", autocomplete: "current-password" %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-2xl font-light underline" %>
+  <%= f.text_field :password, class: "text-2xl block text-warm-grey border-light-grey2", placeholder: "••••••••", autocomplete: "current-password" %>
+  <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-2xl font-light underline block" %>
   <%= f.hidden_field :remember_me, value: true %>
   <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", colour: :green) do %>
     Sign in
