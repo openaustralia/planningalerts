@@ -1,20 +1,34 @@
 <h1 class="my-20 text-4xl font-bold text-center text-fuchsia font-display">Sign in to Planning&nbsp;Alerts</h1>
 
 <%= form_with model: resource, url: session_path(resource_name) do |f| %>
-  <%= f.label "Your email", class: "font-bold text-2xl pl-2 mb-1 block" %>
-  <%= f.text_field :email, class: "text-2xl block text-warm-grey border-light-grey2 px-4 mb-5 w-full", placeholder: "your@email.com", autofocus: true, autocomplete: "email" %>
-  <%= f.label "Password", class: "font-bold text-2xl pl-2 mb-1 block" %>
-  <%= f.text_field :password, class: "text-2xl block text-warm-grey border-light-grey2 px-4 mb-2 w-full", placeholder: "••••••••", autocomplete: "current-password" %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-2xl font-light underline block mb-8" %>
-  <%= f.hidden_field :remember_me, value: true %>
-  <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", colour: :green) do %>
-    Sign in
+  <div class="flex flex-col items-center">
+    <div class="w-full">
+      <%= f.label "Your email", class: "font-bold text-2xl pl-2 mb-1 block" %>
+      <%= f.text_field :email, class: "text-2xl block text-warm-grey border-light-grey2 px-4 mb-5 w-full", placeholder: "your@email.com", autofocus: true, autocomplete: "email" %>
+    </div>
+    <div class="w-full">
+      <%= f.label "Password", class: "font-bold text-2xl pl-2 mb-1 block" %>
+      <%= f.text_field :password, class: "text-2xl block text-warm-grey border-light-grey2 px-4 mb-2 w-full", placeholder: "••••••••", autocomplete: "current-password" %>
+      <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-2xl font-light underline block mb-8" %>
+    </div>
+    <%= f.hidden_field :remember_me, value: true %>
+    <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", colour: :green) do %>
+      Sign in
+    <% end %>
+  </div>
+<% end %>
+
+<hr class="mt-14 text-[#D2CFC1]">
+
+<div class="flex flex-col items-center mb-36">
+  <h2 class="mt-20 text-2xl font-bold">New to Planning Alerts?</h2>
+  <p class="text-2xl">Get started here. It's easy.</p>
+
+  <div class="my-12">
+    <%= image_tag "tailwind/new-to-planning-alerts-illustration.svg" %>
+  </div>
+
+  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", colour: :green, href: new_user_registration_path) do %>
+    Create an account
   <% end %>
-<% end %>
-
-<h2 class="text-2xl font-bold">New to PlanningAlerts?</h2>
-<p class="text-2xl">Get started here. It's easy.</p>
-
-<%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", colour: :green, href: new_user_registration_path) do %>
-  Create an account
-<% end %>
+</div>
