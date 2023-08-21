@@ -13,7 +13,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
-        display: ['Playfair Display'],
+        display: ['Merriweather'],
         logo: ['Inter var']
       },
       backgroundImage: {
