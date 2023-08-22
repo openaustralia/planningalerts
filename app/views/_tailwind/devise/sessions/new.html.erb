@@ -6,11 +6,11 @@
     <div class="flex flex-col items-center">
       <div class="w-full">
         <%= f.label :email, "Your email", class: "mb-1 block" %>
-        <%= f.text_field :email, class: "block px-4 mb-5 w-full", placeholder: "your@email.com", autofocus: true, autocomplete: "email" %>
+        <%= f.text_field :email, class: "block mb-5 w-full", placeholder: "your@email.com", autofocus: true, autocomplete: "email" %>
       </div>
       <div class="w-full">
         <%= f.label :password, class: "mb-1 block" %>
-        <%= f.password_field :password, class: "block px-4 mb-2 w-full", placeholder: "••••••••", autocomplete: "current-password" %>
+        <%= f.password_field :password, class: "block mb-2 w-full", placeholder: "••••••••", autocomplete: "current-password" %>
         <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-2xl text-navy font-light underline block mb-8" %>
       </div>
       <%= f.hidden_field :remember_me, value: true %>

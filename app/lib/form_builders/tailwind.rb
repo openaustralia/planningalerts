@@ -16,12 +16,12 @@ module FormBuilders
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def text_field(method, options = {})
-      super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey border-light-grey2 #{options[:class]}"))
+      super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey border-light-grey2 px-4 #{options[:class]}"))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def password_field(method, options = {})
-      super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey border-light-grey2 #{options[:class]}"))
+      super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey border-light-grey2 px-4 #{options[:class]}"))
     end
 
     sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, String]).returns(ActionView::OutputBuffer) }
