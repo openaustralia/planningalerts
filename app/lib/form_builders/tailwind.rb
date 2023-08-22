@@ -23,5 +23,17 @@ module FormBuilders
     def password_field(method, options = {})
       super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey border-light-grey2 #{options[:class]}"))
     end
+
+    sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, String]).returns(ActionView::OutputBuffer) }
+    def button(value = nil, options = {})
+      raise "Can't use options on button for the time being" unless options.empty?
+
+      # Ugly workaround because sorbet doesn't know about @template
+      # Really would like the following line to just be "t = @template"
+      t = instance_variable_get(:@template)
+      t.render ::Tailwind::ButtonComponent.new(tag: :button, size: "2xl", colour: :green) do
+        value
+      end
+    end
   end
 end

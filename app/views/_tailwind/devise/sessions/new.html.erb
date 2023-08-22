@@ -14,9 +14,7 @@
         <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-2xl text-navy font-light underline block mb-8" %>
       </div>
       <%= f.hidden_field :remember_me, value: true %>
-      <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", colour: :green) do %>
-        Sign in
-      <% end %>
+      <%= f.button "Sign in" %>
     </div>
   <% end %>
 
