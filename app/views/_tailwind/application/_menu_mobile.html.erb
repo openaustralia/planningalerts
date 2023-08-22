@@ -3,7 +3,7 @@
     <%= render "application/svg/hamburger" %>
     <span class="px-2 text-lg font-medium">Menu</span>
   </button>
-  <div x-show="open" x-cloak class="fixed top-0 left-0 w-full h-full py-24 overflow-y-scroll text-2xl text-navy bg-light-grey">
+  <div x-show="open" x-cloak class="fixed top-0 left-0 z-50 w-full h-full py-24 overflow-y-scroll text-2xl text-navy bg-light-grey">
     <div class="max-w-sm px-10 mx-auto">
       <button x-on:click="open = false; bodyScrolling = true" class="inline-flex items-center">
         <%= render "application/svg/close" %>
