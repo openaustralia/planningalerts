@@ -2,6 +2,7 @@
   <h1 class="my-20 text-4xl font-bold text-center text-fuchsia font-display">Sign in to Planning&nbsp;Alerts</h1>
 
   <%= form_with model: resource, url: session_path(resource_name) do |f| %>
+    <%# TODO: Add error display and styling %>
     <div class="flex flex-col items-center">
       <div class="w-full">
         <%= f.label "Your email", class: "font-bold text-2xl text-navy pl-2 mb-1 block" %>
