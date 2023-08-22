@@ -9,7 +9,7 @@
       </div>
       <div class="w-full">
         <%= f.label "Password", class: "font-bold text-2xl text-navy pl-2 mb-1 block" %>
-        <%= f.text_field :password, class: "text-2xl block text-warm-grey border-light-grey2 px-4 mb-2 w-full", placeholder: "••••••••", autocomplete: "current-password" %>
+        <%= f.password_field :password, class: "text-2xl block text-warm-grey border-light-grey2 px-4 mb-2 w-full", placeholder: "••••••••", autocomplete: "current-password" %>
         <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-2xl text-navy font-light underline block mb-8" %>
       </div>
       <%= f.hidden_field :remember_me, value: true %>
