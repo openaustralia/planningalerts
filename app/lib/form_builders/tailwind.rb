@@ -14,6 +14,7 @@ module FormBuilders
       super(method, text, options.merge(class: "font-bold text-2xl text-navy #{options[:class]}"))
     end
 
+    # TODO: Remove the duplication in the text field methods below
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def text_field(method, options = {})
       super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey border-light-grey2 px-4 #{options[:class]}"))
@@ -21,6 +22,11 @@ module FormBuilders
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def password_field(method, options = {})
+      super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey border-light-grey2 px-4 #{options[:class]}"))
+    end
+
+    sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
+    def email_field(method, options = {})
       super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey border-light-grey2 px-4 #{options[:class]}"))
     end
 
