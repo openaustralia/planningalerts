@@ -14,7 +14,7 @@ module.exports = {
       fontFamily: {
         sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
         display: ['Merriweather'],
-        logo: ['Inter var']
+        logo: ['Inter']
       },
       backgroundImage: {
         'header-pattern': "url('tailwind/header-pattern.svg')",
