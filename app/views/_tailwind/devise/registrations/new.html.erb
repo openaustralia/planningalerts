@@ -26,9 +26,16 @@
   </div>
 
   <hr class="mt-16 text-[#D2CFC1]">
-  <p>
-    Already have an account?
-    <%= link_to "Sign in", new_user_session_path %> or
-    <%= link_to "activate", new_users_activation_path %>.
-  </p>
+  <div class="flex mt-8">
+    <%= image_tag "tailwind/already-have-an-account-illustration.svg" %>
+    <div class="flex-grow text-2xl font-bold text-center text-navy">
+      <p>
+        Already have an account?
+      </p>
+      <p>
+        <%= link_to "Sign in", new_user_session_path, class: "underline" %> or
+        <%= link_to "activate", new_users_activation_path, class: "underline" %>.
+      </p>
+    </div>
+  </div>
 </div>
