@@ -10,7 +10,7 @@
           within
           <%= link_to meters_in_words(alert.radius_meters.to_f), edit_profile_alert_path(alert), class: "text-orange underline" %>
         </p>
-        <%= tag.div class: "map", data: { lat: alert.lat, lng: alert.lng, address: alert.address, zoom: 13, radius_meters: alert.radius_meters } %>
+        <%= tag.div class: "map h-80 bg-google-maps-green", data: { lat: alert.lat, lng: alert.lng, address: alert.address, zoom: 13, radius_meters: alert.radius_meters } %>
         <p class="text-2xl font-normal text-navy">
           <% if alert.last_sent %>
             Last email sent:

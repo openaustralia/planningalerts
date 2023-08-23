@@ -36,7 +36,11 @@ module.exports = {
       'darker-orange': '#BA671D',
       'warm-grey': '#767676',
       // TODO: Come up with a less bad name than this
-      'light-grey2': '#D2CDC1'
+      'light-grey2': '#D2CDC1',
+      // A green colour that you might see on a map. Display this while loading the map
+      // Note that we're using the same colour when initialising the google map so that
+      // everything matches
+      'google-maps-green': '#d1e6d9'
     }
 },
   plugins: [
