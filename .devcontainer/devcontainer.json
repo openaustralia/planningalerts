@@ -35,7 +35,8 @@
 				"syler.sass-indented",
 				"bradlc.vscode-tailwindcss",
 				"jock.svg",
-				"heybourn.headwind"
+				"heybourn.headwind",
+				"figma.figma-vscode-extension"
 			]
 		}
 	},
