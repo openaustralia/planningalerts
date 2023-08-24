@@ -5,6 +5,8 @@
 
 <ul class="mt-10 text-xl font-semibold text-orange">
   <li><%= link_to "Your alerts", profile_alerts_path, class: "underline" %></li>
+  <%# TODO: Make the create new alert actually go somewhere %>
+  <li><%= link_to "Create new alert", "#" %></li>
   <li><%= link_to "Your comments", comments_profile_path %></li>
   <li><%= link_to "Edit account", edit_user_registration_path %></li>
 </ul>
@@ -31,7 +33,6 @@
   <%= current_user.email %>
   <%= link_to "Change", edit_user_registration_path %>
 </p>
-<%= render "alerts", alerts: @alerts %>
 
 <%
 =end
