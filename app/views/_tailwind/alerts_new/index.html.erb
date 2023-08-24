@@ -1,7 +1,12 @@
-<%= render "menu" %>
-<hr class="mt-10 text-navy">
-<h2 class="mt-8 text-3xl font-bold text-navy font-display">Your alerts</h2>
-<%= render "alerts", alerts: @alerts %>
+<div class="grid-cols-3 gap-16 md:grid">
+  <div>
+    <%= render "menu" %>
+  </div>
+  <div class="col-span-2">
+    <h2 class="mt-8 text-3xl font-bold text-navy font-display">Your alerts</h2>
+    <%= render "alerts", alerts: @alerts %>
+  </div>
+</div>
 
 <%
 =begin
