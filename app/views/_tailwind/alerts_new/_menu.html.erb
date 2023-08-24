@@ -1,0 +1,19 @@
+<h1 class="text-xl font-bold text-navy">Your account</h1>
+<p class="mt-1 text-4xl font-bold text-navy font-display">
+  <%= current_user.name_with_fallback %>
+</p>
+
+<ul class="mt-10 text-xl font-semibold list-inside text-orange list-image-dash">
+  <li><%= link_to "Your alerts", profile_alerts_path, class: "ml-4 underline" %></li>
+  <%# TODO: Make the create new alert actually go somewhere %>
+  <li><%= link_to "Create new alert", "#", class: "ml-4" %></li>
+  <li><%= link_to "Your comments", comments_profile_path, class: "ml-4" %></li>
+  <li><%= link_to "Edit account", edit_user_registration_path, class: "ml-4" %></li>
+</ul>
+
+<% if current_user.admin? %>
+  <ul class="mt-10 text-xl font-semibold list-inside text-orange list-image-dash">
+    <li><%= link_to "Administration panel", admin_root_path, class: "ml-4" %></li>
+    <li><%= link_to "Feature flags", admin_flipper_path, class: "ml-4" %></li>
+  </ul>
+<% end %>
