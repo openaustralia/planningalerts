@@ -6,24 +6,14 @@
 <div class="grid-cols-3 gap-16 mt-10 md:grid">
   <div class="mb-8">
     <%= render "menu" %>
-    <hr class="mt-10 text-navy md:hidden">
   </div>
   <div class="col-span-2">
     <h2 class="text-3xl font-bold text-navy font-display">Your alerts</h2>
+    <p class="mt-5 text-2xl font-normal text-navy">
+      Alerts are sent to your email at
+      <%= current_user.email %>
+      <%= link_to "Change", edit_user_registration_path, class: "text-orange underline font-bold" %>
+    </p>
     <%= render "alerts", alerts: @alerts %>
   </div>
 </div>
-
-<%
-=begin
-%>
-
-<p>
-  Alerts are sent to your email at
-  <%= current_user.email %>
-  <%= link_to "Change", edit_user_registration_path %>
-</p>
-
-<%
-=end
-%>
