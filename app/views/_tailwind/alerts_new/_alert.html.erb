@@ -15,15 +15,16 @@
   <div>
     <h4 class="mt-5 text-2xl font-bold text-navy">Alert distance</h4>
     <%= form_with model: [:profile, alert], builder: FormBuilders::Tailwind do |f| %>
-
+      <%# TODO: Get the proper radius values here %>
+      <%= f.select :radius_meters, [["200 metres", 200], ["500 metres", 500]], {}, class: "w-full text-navy text-2xl font-normal py-4 mt-2 border-light-grey2" %>
+      <%# TODO: Update radius on map when we change the select above %>
+      <%= tag.div class: "map h-80 bg-google-maps-green mt-4", data: { lat: alert.lat, lng: alert.lng, address: alert.address, zoom: 13, radius_meters: alert.radius_meters } %>
+      <div class="my-6">
+        <%= f.button "Update distance" %>
+      </div>
     <% end %>
-    <p class="text-2xl font-normal text-navy">
-      within
-      <%= link_to meters_in_words(alert.radius_meters.to_f), edit_profile_alert_path(alert), class: "text-orange underline" %>
-    </p>
-    <%= tag.div class: "map h-80 bg-google-maps-green mt-4", data: { lat: alert.lat, lng: alert.lng, address: alert.address, zoom: 13, radius_meters: alert.radius_meters } %>
   </div>
   <%= form_with model: [:profile, alert], method: :delete, data: { confirm: "Are you sure you want to unsubscribe for email alerts for #{alert.address}?" }, builder: FormBuilders::Tailwind do |f| %>
-    <% f.button "Delete alert" %>
+    <% f.button "Delete this alert" %>
   <% end %>
 </li>
