@@ -8,6 +8,8 @@ class AlertsNewController < ApplicationController
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 
+  layout "profile"
+
   sig { void }
   def index
     @alerts = T.let(policy_scope(Alert), T.nilable(ActiveRecord::Relation))

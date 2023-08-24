@@ -6,6 +6,8 @@ class ProfilesController < ApplicationController
 
   before_action :authenticate_user!
 
+  layout "profile"
+
   sig { void }
   def show; end
 

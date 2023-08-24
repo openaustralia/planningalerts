@@ -15,7 +15,7 @@
     <%= render "header" %>
     <%= render Tailwind::ContainerComponent.new do %>
       <div class="my-9 sm:my-16">
-        <%= yield %>
+        <%= content_for?(:content) ? yield(:content) : yield %>
       </div>
     <% end %>
     <%= render "footer" %>
