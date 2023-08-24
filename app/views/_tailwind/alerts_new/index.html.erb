@@ -1,9 +1,15 @@
-<div class="grid-cols-3 gap-16 md:grid">
-  <div>
+<h1 class="text-xl font-bold text-navy">Your account</h1>
+<p class="mt-1 text-4xl font-bold text-navy font-display">
+  <%= current_user.name_with_fallback %>
+</p>
+
+<div class="grid-cols-3 gap-16 mt-10 md:grid">
+  <div class="mb-8">
     <%= render "menu" %>
+    <hr class="mt-10 text-navy md:hidden">
   </div>
   <div class="col-span-2">
-    <h2 class="mt-8 text-3xl font-bold text-navy font-display">Your alerts</h2>
+    <h2 class="text-3xl font-bold text-navy font-display">Your alerts</h2>
     <%= render "alerts", alerts: @alerts %>
   </div>
 </div>

@@ -1,9 +1,4 @@
-<h1 class="text-xl font-bold text-navy">Your account</h1>
-<p class="mt-1 text-4xl font-bold text-navy font-display">
-  <%= current_user.name_with_fallback %>
-</p>
-
-<ul class="mt-10 ml-5 text-xl font-semibold text-orange list-image-dash">
+<ul class="ml-5 text-xl font-semibold text-orange list-image-dash">
   <li><%= link_to "Your alerts", profile_alerts_path, class: "block ml-4 underline" %></li>
   <%# TODO: Make the create new alert actually go somewhere %>
   <li><%= link_to "Create new alert", "#", class: "block ml-4" %></li>
@@ -17,4 +12,3 @@
     <li><%= link_to "Feature flags", admin_flipper_path, class: "block ml-4" %></li>
   </ul>
 <% end %>
-<hr class="mt-10 text-navy">
