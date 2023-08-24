@@ -3,7 +3,8 @@
   <%# TODO: Make the create new alert actually go somewhere %>
   <li><%= link_to "Create new alert", "#", class: "block ml-4" %></li>
   <li><%= link_to "Your comments", comments_profile_path, class: "block ml-4" %></li>
-  <li><%= link_to "Edit account", edit_user_registration_path, class: "block ml-4" %></li>
+  <li><%= link_to "Edit account", edit_user_registration_path, class: "block ml-4" %></li> 
+  <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "cursor-pointer block ml-4" %></li>
 </ul>
 
 <% if current_user.admin? %>
