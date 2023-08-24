@@ -1,9 +1,0 @@
-<% if alerts.empty? %>
-  <p class="mt-4 text-2xl font-bold text-navy">You do not have any alerts<p>
-<% else %>
-  <ul>
-    <% alerts.each do |alert| %>
-      <%= render "alert", alert: %>
-    <% end %>
-  </ul>
-<% end %>

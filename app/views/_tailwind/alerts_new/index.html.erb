@@ -14,6 +14,14 @@
       <%= current_user.email %>
       <%= link_to "Change", edit_user_registration_path, class: "text-orange underline font-bold" %>
     </p>
-    <%= render "alerts", alerts: @alerts %>
+    <% if @alerts.empty? %>
+      <p class="mt-4 text-2xl font-bold text-navy">You do not have any alerts<p>
+    <% else %>
+      <ul>
+        <% @alerts.each do |alert| %>
+          <%= render "alert", alert: %>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 </div>
