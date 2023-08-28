@@ -1,15 +1,35 @@
 <h2 class="text-3xl font-bold text-navy font-display">Your alerts</h2>
-<p class="mt-5 text-2xl font-normal text-navy">
-  Alerts are sent to your email at
-  <%= current_user.email %>
-  <%= link_to "Change", edit_user_registration_path, class: "text-orange underline font-bold" %>
-</p>
+<div>
+  <p class="mt-3 text-2xl font-normal text-navy">
+    Alerts are sent to your email at
+    <%= current_user.email %>
+  </p>
+  <%= link_to "Change", edit_user_registration_path, class: "text-orange underline font-bold text-2xl mt-1 inline-block" %>
+</div>
+
 <% if @alerts.empty? %>
   <p class="mt-4 text-2xl font-bold text-navy">You do not have any alerts<p>
 <% else %>
-  <ul>
+  <ul class="mt-11">
     <% @alerts.each do |alert| %>
-      <%= render "alert", alert: %>
+      <%# TODO: Add visual indication that this is clickable %>
+      <li class="py-4 border-t text-light-grey">
+        <%= link_to edit_profile_alert_path(alert) do %>
+          <dl>
+            <dt class="hidden">Address</dt>
+            <dd class="text-3xl font-bold text-navy"><%= alert.address %></dd>
+            <dt class="mt-5 text-2xl font-bold leading-6 text-navy">Last email sent</dt>
+            <dd class="text-2xl font-normal text-navy">
+              <% if @alert.last_sent %>
+                <%= time_ago_in_words(@alert.last_sent) %>
+                ago
+              <% else %>
+                not yet sent
+              <% end %>
+            </dd>
+          </dl>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% end %>
