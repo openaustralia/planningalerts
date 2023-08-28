@@ -16,12 +16,12 @@
     <h4 class="mt-5 text-2xl font-bold text-navy">Alert distance</h4>
     <%= form_with model: [:profile, alert], builder: FormBuilders::Tailwind do |f| %>
       <%# TODO: Add tick to current value %>
-      <div x-data="{radius_meters: <%= alert.radius_meters %>, circle: null}" x-init="$watch('radius_meters', value => circle.setRadius(parseInt(value)))">
+      <div x-data="{radius_meters: <%= alert.radius_meters %>, circle: null}" x-init="$watch('radius_meters', value => circle.setRadius(value))">
         <%= f.select :radius_meters,
                      Alert::VALID_RADIUS_METERS_VALUES.map { |r| [meters_in_words(r), r] },
                      {},
                      class: "w-full text-navy text-2xl font-normal py-4 mt-2 border-light-grey2",
-                     "x-model": "radius_meters" %>
+                     "x-model.number": "radius_meters" %>
         <%= tag.div class: "map h-80 bg-google-maps-green mt-4",
                     data: { lat: alert.lat, lng: alert.lng, address: alert.address, zoom: 13, radius_meters: alert.radius_meters },
                     "x-data" => true,
