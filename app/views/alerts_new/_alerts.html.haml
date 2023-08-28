@@ -12,11 +12,5 @@
             = link_to meters_in_words(alert.radius_meters.to_f), edit_profile_alert_path(alert)
             of
             = alert.address
-          .last-sent
-            - if alert.last_sent
-              Last sent
-              = time_ago_in_words(alert.last_sent)
-              ago
-            - else
-              Not yet sent
+          .last-sent= last_sent_in_words(alert.last_sent)
           .unsubscribe= button_to "Unsubscribe", [:profile, alert], method: :delete, data: { confirm: "Are you sure you want to unsubscribe for email alerts for #{alert.address}?" }, class: "button button-action"

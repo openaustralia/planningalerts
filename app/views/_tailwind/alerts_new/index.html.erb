@@ -20,12 +20,7 @@
             <dd class="text-3xl font-bold text-navy"><%= alert.address %></dd>
             <dt class="mt-5 text-2xl font-bold leading-6 text-navy">Last email sent</dt>
             <dd class="text-2xl font-normal text-navy">
-              <% if @alert.last_sent %>
-                <%= time_ago_in_words(@alert.last_sent) %>
-                ago
-              <% else %>
-                not yet sent
-              <% end %>
+              <%= last_sent_in_words(@alert.last_sent) %>
             </dd>
           </dl>
         <% end %>

@@ -4,12 +4,7 @@
 <div>
   <h4 class="text-2xl font-bold leading-6 mt-14 text-navy">Last email sent</h4>
   <p class="text-2xl font-normal text-navy">
-    <% if @alert.last_sent %>
-      <%= time_ago_in_words(@alert.last_sent) %>
-      ago
-    <% else %>
-      not yet sent
-    <% end %>
+    <%= last_sent_in_words(@alert.last_sent) %>
   </p>
 </div>
 
