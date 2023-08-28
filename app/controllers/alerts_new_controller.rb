@@ -8,7 +8,7 @@ class AlertsNewController < ApplicationController
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
 
-  layout "profile"
+  layout "profile", except: :edit
 
   sig { void }
   def index
