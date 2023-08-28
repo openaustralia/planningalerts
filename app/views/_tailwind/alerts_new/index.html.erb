@@ -12,17 +12,19 @@
 <% else %>
   <ul class="mt-11">
     <% @alerts.each do |alert| %>
-      <%# TODO: Add visual indication that this is clickable %>
       <li class="py-4 border-t text-light-grey">
         <%= link_to edit_profile_alert_path(alert) do %>
-          <dl>
-            <dt class="hidden">Address</dt>
-            <dd class="text-3xl font-bold text-navy"><%= alert.address %></dd>
-            <dt class="mt-5 text-2xl font-bold leading-6 text-navy">Last email sent</dt>
-            <dd class="text-2xl font-normal text-navy">
-              <%= last_sent_in_words(@alert.last_sent) %>
-            </dd>
-          </dl>
+          <div class="flex items-baseline justify-between">
+            <dl>
+              <dt class="hidden">Address</dt>
+              <dd class="text-3xl font-bold text-navy"><%= alert.address %></dd>
+              <dt class="mt-5 text-2xl font-bold leading-6 text-navy">Last email sent</dt>
+              <dd class="text-2xl font-normal text-navy">
+                <%= last_sent_in_words(@alert.last_sent) %>
+              </dd>
+            </dl>
+            <%= image_tag "tailwind/right-arrow.svg", class: "pb-1" %>
+          </div>
         <% end %>
       </li>
     <% end %>
