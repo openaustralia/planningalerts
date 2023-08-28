@@ -21,7 +21,9 @@
                    {},
                    class: "w-full text-navy text-2xl font-normal py-4 mt-2 border-light-grey2" %>
       <%# TODO: Update radius on map when we change the select above %>
-      <%= tag.div class: "map h-80 bg-google-maps-green mt-4", data: { lat: alert.lat, lng: alert.lng, address: alert.address, zoom: 13, radius_meters: alert.radius_meters } %>
+      <div x-data x-on:map-loaded.window="initialiseAlertMap($refs.map)">
+        <%= tag.div class: "map h-80 bg-google-maps-green mt-4", data: { lat: alert.lat, lng: alert.lng, address: alert.address, zoom: 13, radius_meters: alert.radius_meters }, "x-ref" => "map" %>
+      </div>
       <div class="my-6">
         <%# TODO: Make this button grey %>
         <%= f.button "Update distance" %>
