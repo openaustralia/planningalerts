@@ -22,6 +22,10 @@
       <%= tag.div class: "map h-80 bg-google-maps-green mt-4",
                   data: { lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: @alert.radius_meters },
                   "x-data" => true,
+                  "x-ref" => "map",
+                  # This handles both when google maps is ready before alpine and the
+                  # other way around
+                  "x-init" => "if('google' in window) circle = initialiseAlertMap($el)",
                   "x-on:map-loaded.window" => "circle = initialiseAlertMap($el)" %>
     </div>
     <div class="mt-6">
