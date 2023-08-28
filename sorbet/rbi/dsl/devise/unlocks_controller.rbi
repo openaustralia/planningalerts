@@ -17,7 +17,6 @@ class Devise::UnlocksController
     include ::ActionView::Helpers::OutputSafetyHelper
     include ::ActionView::Helpers::TagHelper
     include ::ActionView::Helpers::UrlHelper
-    include ::ActionView::Helpers::DateHelper
     include ::ActionView::Helpers::AssetTagHelper
     include ::ActionView::Helpers::SanitizeHelper
     include ::ActionView::Helpers::TextHelper
@@ -25,6 +24,7 @@ class Devise::UnlocksController
     include ::ApplicationHelper
     include ::Admin::ApplicationHelper
     include ::AlertMailerHelper
+    include ::ActionView::Helpers::DateHelper
     include ::AlertsHelper
     include ::ApplicationsHelper
     include ::ActionDispatch::Routing::PolymorphicRoutes

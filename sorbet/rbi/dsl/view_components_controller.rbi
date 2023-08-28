@@ -15,7 +15,6 @@ class ViewComponentsController
     include ::Admin::ApplicationHelper
     include ::ActionView::Helpers::AssetUrlHelper
     include ::ActionView::Helpers::UrlHelper
-    include ::ActionView::Helpers::DateHelper
     include ::ActionView::Helpers::AssetTagHelper
     include ::ActionView::Helpers::SanitizeHelper
     include ::ActionView::Helpers::CaptureHelper
@@ -25,6 +24,7 @@ class ViewComponentsController
     include ::AlertMailerHelper
     include ::Kernel
     include ::ApplicationHelper
+    include ::ActionView::Helpers::DateHelper
     include ::AlertsHelper
     include ::ApplicationsHelper
     include ::ActionDispatch::Routing::PolymorphicRoutes
