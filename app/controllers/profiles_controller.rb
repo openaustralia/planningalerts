@@ -9,7 +9,9 @@ class ProfilesController < ApplicationController
   layout "profile"
 
   sig { void }
-  def show; end
+  def show
+    redirect_to profile_alerts_url if show_tailwind_theme?
+  end
 
   sig { void }
   def comments
