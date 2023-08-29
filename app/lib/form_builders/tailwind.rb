@@ -40,5 +40,18 @@ module FormBuilders
         value
       end
     end
+
+    sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
+    def street_address_field(method, options = {})
+      options = {
+        placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
+        # This handles both when google maps is ready before alpine and the
+        # other way around
+        "x-data" => "{ initAfterMaps() { new google.maps.places.Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']})} }",
+        "x-init" => "if('google' in window) initAfterMaps()",
+        "x-on:map-loaded.window" => "initAfterMaps()"
+      }.merge(options)
+      text_field(method, options)
+    end
   end
 end
