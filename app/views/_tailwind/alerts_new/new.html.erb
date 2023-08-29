@@ -7,10 +7,9 @@
   <ul class="mt-8 list-none">
     <%# TODO: Switch order of descriptions %>
     <%= f.collection_radio_buttons :radius_meters, Alert::VALID_RADIUS_METERS_VALUES, ->(r) { r }, ->(r) { size_option_sentence(r) } do |b| %>
-      <li>
-        <%# TODO: Style radio button like design %>
-        <%= b.radio_button %>
-        <%= b.label class: "ml-2" %>
+      <li class="flex items-center">
+        <%= b.radio_button class: "w-5 h-5 text-warm-grey" %>
+        <%= b.label class: "ml-3 text-navy text-2xl" %>
       </li>
     <% end %>
   </ul>
