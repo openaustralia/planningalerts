@@ -1,5 +1,8 @@
 <% if @tag == :a %>
   <%= link_to content, @href, class: (@classes + %w[inline-block]) %>
 <% elsif @tag == :button %>
-  <%= button_tag content, name: nil, class: @classes %>
+  <%= button_tag name: nil, class: (@classes + %w[flex gap-4]) do %>
+    <% if @icon_path %><%= image_tag @icon_path %><% end %>
+    <%= content %>
+  <% end %>
 <% end %>

@@ -5,8 +5,8 @@ module Tailwind
   class ButtonComponent < ViewComponent::Base
     extend T::Sig
 
-    sig { params(tag: Symbol, size: String, type: Symbol, href: T.nilable(String)).void }
-    def initialize(tag:, size:, type:, href: nil)
+    sig { params(tag: Symbol, size: String, type: Symbol, href: T.nilable(String), icon: T.nilable(Symbol)).void }
+    def initialize(tag:, size:, type:, href: nil, icon: nil)
       super
       raise "Unexpected tag: #{tag}" unless %i[a button].include?(tag)
       raise "href not set" if href.nil? && tag == :a
@@ -31,10 +31,21 @@ module Tailwind
       else
         raise "Unexpected type #{type}"
       end
+
+      case icon
+      when nil
+        icon_path = nil
+      when :trash
+        icon_path = "tailwind/trash.svg"
+      else
+        raise "Unexpected icon #{icon}"
+      end
+
       classes += %w[font-semibold text-white]
       @classes = T.let(classes, T.nilable(T::Array[String]))
       @tag = tag
       @href = href
+      @icon_path = T.let(icon_path, T.nilable(String))
     end
   end
 end
