@@ -1,8 +1,8 @@
 <div class="px-6 py-10 sm:py-16 bg-navy sm:px-28">
-  <%= form_with url: address_applications_path, method: :get, class: "space-y-4 sm:space-y-8 text-center" do |form| %>
+  <%= form_with url: address_applications_path, method: :get, class: "space-y-4 sm:space-y-8 flex flex-col items-center" do |form| %>
     <%= form.label :q, "Enter a street address", class: "font-semibold text-3xl sm:text-4xl text-white" %>
     <%# TODO: Re-enable autofocus:true below after finished testing with livereload %>
-    <div class="space-y-2">
+    <div class="w-full space-y-2">
       <%= form.text_field :q,
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                           class: "text-2xl text-navy w-full px-4 py-3 sm:py-4 placeholder-shown:truncate",
