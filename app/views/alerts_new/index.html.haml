@@ -14,6 +14,7 @@
     = f.input :address, label: "Enter a street address",
                         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                         input_html: { class: "address-autocomplete-input" }
+    = f.input :radius_meters, as: :hidden
   = f.actions do
     = f.action :submit, label: "Create alert",
                         button_html: { class: "button button-rounded button-large button-action" }

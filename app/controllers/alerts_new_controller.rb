@@ -13,7 +13,7 @@ class AlertsNewController < ApplicationController
   sig { void }
   def index
     @alerts = T.let(policy_scope(Alert), T.nilable(ActiveRecord::Relation))
-    @alert = Alert.new
+    @alert = Alert.new(radius_meters: Alert::DEFAULT_RADIUS)
   end
 
   sig { void }
@@ -33,12 +33,12 @@ class AlertsNewController < ApplicationController
   def create
     params_alert = T.cast(params[:alert], ActionController::Parameters)
     address = T.cast(params_alert[:address], String)
+    params_radius_meters = T.cast(params_alert[:radius_meters], String)
 
     alert = Alert.new(
       user: current_user,
       address:,
-      # TODO: Don't set the default radius here
-      radius_meters: Alert::DEFAULT_RADIUS,
+      radius_meters: params_radius_meters.to_i,
       # Because we're logged in we don't need to go through the whole email confirmation step
       confirmed: true
     )
