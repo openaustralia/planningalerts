@@ -14,29 +14,19 @@ module FormBuilders
       super(method, text, options.merge(class: "font-bold text-2xl text-navy #{options[:class]}"))
     end
 
-    # TODO: Remove the duplication in the text field methods below
-    # TODO: Add support for errors to other fields
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def text_field(method, options = {})
-      style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate px-4 py-3"
-      style << " "
-      style << if object.errors[method].any?
-                 "border-red"
-               else
-                 "border-light-grey2"
-               end
-      Rails.logger.info style
-      super(method, options.merge(class: "#{style} #{options[:class]}"))
+      super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}"))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def password_field(method, options = {})
-      super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate border-light-grey2 px-4 py-3 #{options[:class]}"))
+      super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}"))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def email_field(method, options = {})
-      super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate border-light-grey2 px-4 py-3 #{options[:class]}"))
+      super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}"))
     end
 
     sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, T.any(String, Symbol)]).returns(ActionView::OutputBuffer) }
@@ -69,6 +59,18 @@ module FormBuilders
     end
 
     private
+
+    sig { params(method: Symbol).returns(String) }
+    def text_like_field_style(method)
+      style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate px-4 py-3"
+      style << " "
+      style << if object.errors[method].any?
+                 "border-red"
+               else
+                 "border-light-grey2"
+               end
+      style
+    end
 
     # Ugly workarounds because sorbet doesn't know about @object and @template
     sig { returns(T.untyped) }
