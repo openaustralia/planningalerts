@@ -5,7 +5,7 @@
   <%# TODO: Show errors %>
   <%= f.text_field :address,
                    placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
-                   class: "mt-2 py-3 block w-full address-autocomplete-input",
+                   class: "mt-2 py-3 block w-full",
                    # This handles both when google maps is ready before alpine and the
                    # other way around
                    "x-data" => "{ initAfterMaps() { new google.maps.places.Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']})} }",
