@@ -37,7 +37,7 @@ module FormBuilders
       # Ugly workaround because sorbet doesn't know about @template
       # Really would like the following line to just be "t = @template"
       t = instance_variable_get(:@template)
-      t.render ::Tailwind::ButtonComponent.new(tag: :button, size: "2xl", colour: :green) do
+      t.render ::Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do
         value
       end
     end

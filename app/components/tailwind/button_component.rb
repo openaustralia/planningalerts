@@ -5,8 +5,8 @@ module Tailwind
   class ButtonComponent < ViewComponent::Base
     extend T::Sig
 
-    sig { params(tag: Symbol, size: String, colour: Symbol, href: T.nilable(String)).void }
-    def initialize(tag:, size:, colour:, href: nil)
+    sig { params(tag: Symbol, size: String, type: Symbol, href: T.nilable(String)).void }
+    def initialize(tag:, size:, type:, href: nil)
       super
       raise "Unexpected tag: #{tag}" unless %i[a button].include?(tag)
       raise "href not set" if href.nil? && tag == :a
@@ -20,17 +20,15 @@ module Tailwind
         raise "Unexpected size #{size}"
       end
 
-      case colour
-      # Listing out each class specifically so that it doesn't get removed
-      # by tailwind in the compilation
-      when :navy
-        classes << "bg-navy"
-      when :green
+      case type
+      when :primary
         classes << "bg-green"
+      # This is not strictly an "inverse" but is good to be used on darker coloured backgrounds
+      when :inverse
+        classes << "bg-navy"
       else
-        raise "Unexpected colour #{colour}"
+        raise "Unexpected type #{type}"
       end
-
       classes += %w[font-semibold text-white]
       @classes = T.let(classes, T.nilable(T::Array[String]))
       @tag = tag
