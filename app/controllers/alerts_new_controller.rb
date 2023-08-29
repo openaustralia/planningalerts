@@ -18,7 +18,7 @@ class AlertsNewController < ApplicationController
 
   sig { void }
   def new
-    @alert = Alert.new
+    @alert = Alert.new(radius_meters: Alert::DEFAULT_RADIUS)
     authorize @alert
   end
 
@@ -37,6 +37,7 @@ class AlertsNewController < ApplicationController
     alert = Alert.new(
       user: current_user,
       address:,
+      # TODO: Don't set the default radius here
       radius_meters: Alert::DEFAULT_RADIUS,
       # Because we're logged in we don't need to go through the whole email confirmation step
       confirmed: true
