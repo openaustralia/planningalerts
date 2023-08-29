@@ -17,6 +17,12 @@ class AlertsNewController < ApplicationController
   end
 
   sig { void }
+  def new
+    @alert = Alert.new
+    authorize @alert
+  end
+
+  sig { void }
   def edit
     alert = Alert.find(params[:id])
     authorize alert

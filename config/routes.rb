@@ -88,7 +88,8 @@ Rails.application.routes.draw do
 
   resource :profile, only: [:show] do
     resources :api_keys, only: :create
-    resources :alerts, only: %i[index edit update destroy create], controller: :alerts_new
+    resources :alerts, except: :show, controller: :alerts_new
+    
     get :comments
   end
 

@@ -1,0 +1,24 @@
+<h2 class="text-3xl font-bold text-navy font-display">Create new alert</h2>
+
+<%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind do |f| %>
+  <%= f.label :address, "Enter a street address", class: "block mt-12" %>
+  <%# TODO: Should placeholder-shown:truncate be set for every text field? %>
+  <%# TODO: Show errors %>
+  <%# TODO: Add address autocomplete %>
+  <%= f.text_field :address,
+                   placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
+                   class: "mt-2 py-3 block w-full placeholder-shown:truncate address-autocomplete-input" %>
+  <div class="mt-8 list-none">
+    <%# TODO: Switch order of descriptions %>
+    <%= f.collection_radio_buttons :radius_meters, Alert::VALID_RADIUS_METERS_VALUES, ->(r) { r }, ->(r) { size_option_sentence(r) } do |b| %>
+      <li>
+        <%# TODO: Style radio button like design %>
+        <%= b.radio_button %>
+        <%= b.label class: "ml-2" %>
+      </li>
+    <% end %>
+  </div>
+  <div class="mt-12">
+    <%= f.button "Create alert" %>
+  </div>
+<% end %>
