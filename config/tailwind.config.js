@@ -8,6 +8,7 @@ module.exports = {
     './app/views/**/*.{erb,haml,html,slim}',
     './app/themes/tailwind/views/**/*.{erb,haml,html,slim}',
     './app/components/tailwind/*.{erb,haml,html,slim,rb}',
+    './app/lib/form_builders/*.rb'
   ],
   theme: {
     extend: {
@@ -43,7 +44,10 @@ module.exports = {
       // A green colour that you might see on a map. Display this while loading the map
       // Note that we're using the same colour when initialising the google map so that
       // everything matches
-      'google-maps-green': '#d1e6d9'
+      'google-maps-green': '#d1e6d9',
+      // This red colour does not come from the designs. It's just there
+      // to show error states on forms
+      'red': '#bb0000'
     }
 },
   plugins: [

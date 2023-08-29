@@ -4,6 +4,13 @@
   <%= f.label :address, "Enter a street address", class: "block mt-12" %>
   <%# TODO: Show errors %>
   <%= f.street_address_field :address, class: "mt-2 block w-full" %>
+  <% if @alert.errors.key?(:address) %>
+    <p class="mt-2 text-2xl text-red">
+      <% @alert.errors.messages_for(:address).each do |message| %>
+        <%= message %>.
+      <% end %>
+    </p>
+  <% end %>
   <ul class="mt-8 list-none">
     <%= f.collection_radio_buttons :radius_meters, Alert::VALID_RADIUS_METERS_VALUES, ->(r) { r }, ->(r) { size_option_sentence_alternate(r) } do |b| %>
       <li class="flex items-center">

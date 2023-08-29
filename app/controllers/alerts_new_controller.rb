@@ -52,7 +52,11 @@ class AlertsNewController < ApplicationController
       @alert = T.let(alert, T.nilable(Alert))
       # TODO: Is there a more sensible way of doing this?
       @alerts = T.let(policy_scope(Alert), T.nilable(ActiveRecord::Relation))
-      render :index
+      if show_tailwind_theme?
+        render :new
+      else
+        render :index
+      end
     end
   end
 

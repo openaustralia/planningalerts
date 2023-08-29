@@ -15,9 +15,20 @@ module FormBuilders
     end
 
     # TODO: Remove the duplication in the text field methods below
+    # TODO: Add support for errors to other fields
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def text_field(method, options = {})
-      super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate border-light-grey2 px-4 py-3 #{options[:class]}"))
+      style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate px-4 py-3"
+      style << " "
+      # Workaround for sorbet
+      object = instance_variable_get(:@object)
+      style << if object.errors[method].any?
+                 "border-red"
+               else
+                 "border-light-grey2"
+               end
+      Rails.logger.info style
+      super(method, options.merge(class: "#{style} #{options[:class]}"))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
