@@ -53,6 +53,16 @@ module FormBuilders
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
+    def error(method, options = {})
+      object = instance_variable_get(:@object)
+      template = instance_variable_get(:@template)
+      return "" unless object.errors.key?(:address)
+
+      m = "#{object.errors.messages_for(method).join('. ')}."
+      template.content_tag(:p, m, options.merge(class: "text-2xl text-red #{options[:class]}"))
+    end
+
+    sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def street_address_field(method, options = {})
       options = {
         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
