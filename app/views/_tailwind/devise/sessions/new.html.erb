@@ -6,7 +6,7 @@
     <div class="flex flex-col items-center">
       <div class="w-full">
         <%= f.label :email, "Your email", class: "mb-1 block" %>
-        <%= f.text_field :email, class: "block mb-5 w-full", placeholder: "your@email.com", autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, class: "block mb-5 w-full", placeholder: "your@email.com", autofocus: true, autocomplete: "email" %>
       </div>
       <div class="w-full">
         <%= f.label :password, class: "mb-1 block" %>
