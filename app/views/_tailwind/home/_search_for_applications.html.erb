@@ -9,8 +9,9 @@
                           required: "required",
                           # This handles both when google maps is ready before alpine and the
                           # other way around
-                          "x-init" => "if('google' in window) autocomplete = new google.maps.places.Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']});",
-                          "x-on:map-loaded.window" => "autocomplete = new google.maps.places.Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']});" %>
+                          "x-data" => "{ initAfterMaps() { new google.maps.places.Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']})} }",
+                          "x-init" => "if('google' in window) initAfterMaps()",
+                          "x-on:map-loaded.window" => "initAfterMaps()" %>
       <%= button_tag type: "button", class: "text-white sm:text-xl block w-full" do %>
         <div class="inline-block mr-2 align-middle">
           <%= render "application/svg/location" %>
