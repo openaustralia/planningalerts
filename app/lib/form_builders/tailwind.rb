@@ -20,8 +20,6 @@ module FormBuilders
     def text_field(method, options = {})
       style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate px-4 py-3"
       style << " "
-      # Workaround for sorbet
-      object = instance_variable_get(:@object)
       style << if object.errors[method].any?
                  "border-red"
                else
@@ -43,19 +41,14 @@ module FormBuilders
 
     sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, T.any(String, Symbol)]).returns(ActionView::OutputBuffer) }
     def button(value = nil, options = {})
-      # Ugly workaround because sorbet doesn't know about @template
-      # Really would like the following line to just be "t = @template"
-      t = instance_variable_get(:@template)
       options = { tag: :button, size: "2xl", type: :primary }.merge(options)
-      t.render ::Tailwind::ButtonComponent.new(**T.unsafe(options)) do
+      template.render ::Tailwind::ButtonComponent.new(**T.unsafe(options)) do
         value
       end
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def error(method, options = {})
-      object = instance_variable_get(:@object)
-      template = instance_variable_get(:@template)
       return "" unless object.errors.key?(:address)
 
       m = "#{object.errors.messages_for(method).join('. ')}."
@@ -73,6 +66,19 @@ module FormBuilders
         "x-on:map-loaded.window" => "initAfterMaps()"
       }.merge(options)
       text_field(method, options)
+    end
+
+    private
+
+    # Ugly workarounds because sorbet doesn't know about @object and @template
+    sig { returns(T.untyped) }
+    def object
+      instance_variable_get(:@object)
+    end
+
+    sig { returns(T.untyped) }
+    def template
+      instance_variable_get(:@template)
     end
   end
 end
