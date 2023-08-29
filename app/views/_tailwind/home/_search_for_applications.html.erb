@@ -7,8 +7,10 @@
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                           class: "text-2xl text-navy w-full px-4 py-3 sm:py-4 placeholder-shown:truncate",
                           required: "required",
-                          # TODO: This should only try to set up autocomplete once google stuff has loaded
-                          "x-init" => "autocomplete = new google.maps.places.Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']});" %>
+                          # This handles both when google maps is ready before alpine and the
+                          # other way around
+                          "x-init" => "if('google' in window) autocomplete = new google.maps.places.Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']});",
+                          "x-on:map-loaded.window" => "autocomplete = new google.maps.places.Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']});" %>
       <%= button_tag type: "button", class: "text-white sm:text-xl block w-full" do %>
         <div class="inline-block mr-2 align-middle">
           <%= render "application/svg/location" %>
