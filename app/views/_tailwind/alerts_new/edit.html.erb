@@ -40,6 +40,6 @@
 <%# TODO: Add standard spacer before footer - do that in layout %>
 <div class="mt-8">
   <%= form_with model: [:profile, @alert], method: :delete, data: { confirm: "Are you sure you want to unsubscribe for email alerts for #{@alert.address}?" }, builder: FormBuilders::Tailwind do |f| %>
-    <% f.button "Delete this alert" %>
+    <% f.button "Delete this alert", type: :secondary %>
   <% end %>
 </div>

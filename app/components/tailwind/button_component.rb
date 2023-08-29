@@ -23,6 +23,8 @@ module Tailwind
       case type
       when :primary
         classes << "bg-green"
+      when :secondary
+        classes << "bg-warm-grey"
       # This is not strictly an "inverse" but is good to be used on darker coloured backgrounds
       when :inverse
         classes << "bg-navy"

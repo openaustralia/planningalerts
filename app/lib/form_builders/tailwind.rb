@@ -30,14 +30,13 @@ module FormBuilders
       super(method, options.merge(class: "text-2xl text-navy placeholder:text-warm-grey border-light-grey2 px-4 #{options[:class]}"))
     end
 
-    sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, String]).returns(ActionView::OutputBuffer) }
+    sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, T.any(String, Symbol)]).returns(ActionView::OutputBuffer) }
     def button(value = nil, options = {})
-      raise "Can't use options on button for the time being" unless options.empty?
-
       # Ugly workaround because sorbet doesn't know about @template
       # Really would like the following line to just be "t = @template"
       t = instance_variable_get(:@template)
-      t.render ::Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do
+      options = { tag: :button, size: "2xl", type: :primary }.merge(options)
+      t.render ::Tailwind::ButtonComponent.new(**T.unsafe(options)) do
         value
       end
     end
