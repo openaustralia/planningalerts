@@ -17,20 +17,7 @@ module FormBuilders
     # TODO: Add error-cross to password_field and email_field
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def text_field(method, options = {})
-      if error?(method)
-        template.content_tag(
-          :div,
-          super(method, options.merge(class: "#{text_like_field_style2(method)} #{options[:class]}")) +
-            template.content_tag(
-              :div,
-              template.image_tag("tailwind/error-cross.svg"),
-              class: "absolute inset-y-0 flex items-center pointer-events-none right-4"
-            ),
-          class: "relative"
-        )
-      else
-        super(method, options.merge(class: "#{text_like_field_style2(method)} #{options[:class]}"))
-      end
+      wrap_field(method, super(method, options.merge(class: "#{text_like_field_style2(method)} #{options[:class]}")))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
@@ -73,6 +60,25 @@ module FormBuilders
     end
 
     private
+
+    # Wraps a text field (or email or password field) in an extra div so that we can show the little error cross icon on the right
+    sig { params(method: Symbol, field: String).returns(String) }
+    def wrap_field(method, field)
+      if error?(method)
+        template.content_tag(
+          :div,
+          field +
+            template.content_tag(
+              :div,
+              template.image_tag("tailwind/error-cross.svg"),
+              class: "absolute inset-y-0 flex items-center pointer-events-none right-4"
+            ),
+          class: "relative"
+        )
+      else
+        field
+      end
+    end
 
     sig { params(method: Symbol).returns(String) }
     def label_style(method)
