@@ -11,7 +11,7 @@ module FormBuilders
         options = options.merge(text)
         text = nil
       end
-      super(method, text, options.merge(class: "font-bold text-2xl text-navy #{options[:class]}"))
+      super(method, text, options.merge(class: "#{label_style} #{options[:class]}"))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
@@ -59,6 +59,11 @@ module FormBuilders
     end
 
     private
+
+    sig { returns(String) }
+    def label_style
+      "font-bold text-2xl text-navy"
+    end
 
     sig { params(method: Symbol).returns(String) }
     def text_like_field_style(method)
