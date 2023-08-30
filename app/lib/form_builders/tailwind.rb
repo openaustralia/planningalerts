@@ -69,12 +69,13 @@ module FormBuilders
     def text_like_field_style(method)
       style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate px-4 py-3"
       style << " "
-      style << if object.errors[method].any?
-                 "border-red"
-               else
-                 "border-light-grey2"
-               end
+      style << (error?(method) ? "border-red" : "border-light-grey2")
       style
+    end
+
+    sig { params(method: Symbol).returns(T::Boolean) }
+    def error?(method)
+      object.errors[method].any?
     end
 
     # Ugly workarounds because sorbet doesn't know about @object and @template
