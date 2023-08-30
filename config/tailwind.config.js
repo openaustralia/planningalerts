@@ -47,7 +47,8 @@ module.exports = {
       'google-maps-green': '#d1e6d9',
       // This red colour does not come from the designs. It's just there
       // to show error states on forms
-      'red': '#bb0000'
+      'red': '#bb0000',
+      'error-red': '#B90000'
     }
 },
   plugins: [
