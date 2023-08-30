@@ -14,6 +14,9 @@
   <body x-data="{ bodyScrolling: true }" x-bind:class="{ 'overflow-hidden': !bodyScrolling}">
     <%= render "header" %>
     <%= render Tailwind::ContainerComponent.new do %>
+      <%# TODO: Make it that we can add the flashes somewhere else for particular pages %>
+      <%= render "flashes" %>
+
       <div class="my-9 sm:my-16">
         <%= content_for?(:content) ? yield(:content) : yield %>
       </div>
