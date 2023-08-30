@@ -14,20 +14,19 @@ module FormBuilders
       super(method, text, options.merge(class: "#{label_style(method)} #{options[:class]}"))
     end
 
-    # TODO: Add error-cross to password_field and email_field
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def text_field(method, options = {})
-      wrap_field(method, super(method, options.merge(class: "#{text_like_field_style2(method)} #{options[:class]}")))
+      wrap_field(method, super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}")))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def password_field(method, options = {})
-      super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}"))
+      wrap_field(method, super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}")))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def email_field(method, options = {})
-      super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}"))
+      wrap_field(method, super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}")))
     end
 
     sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, T.any(String, Symbol)]).returns(ActionView::OutputBuffer) }
@@ -90,14 +89,6 @@ module FormBuilders
 
     sig { params(method: Symbol).returns(String) }
     def text_like_field_style(method)
-      style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate px-4 py-3"
-      style << " "
-      style << (error?(method) ? "border-error-red" : "border-light-grey2")
-      style
-    end
-
-    sig { params(method: Symbol).returns(String) }
-    def text_like_field_style2(method)
       style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate py-3"
       style << " "
       style << (error?(method) ? "border-error-red pl-4 pr-16" : "border-light-grey2 px-4")
