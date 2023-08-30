@@ -20,7 +20,7 @@ module FormBuilders
       if error?(method)
         template.content_tag(
           :div,
-          super(method, options.merge(class: "pr-16 #{text_like_field_style(method)} #{options[:class]}")) +
+          super(method, options.merge(class: "#{text_like_field_style2(method)} #{options[:class]}")) +
             template.content_tag(
               :div,
               template.image_tag("tailwind/error-cross.svg"),
@@ -29,7 +29,7 @@ module FormBuilders
           class: "relative"
         )
       else
-        super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}"))
+        super(method, options.merge(class: "#{text_like_field_style2(method)} #{options[:class]}"))
       end
     end
 
@@ -87,6 +87,14 @@ module FormBuilders
       style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate px-4 py-3"
       style << " "
       style << (error?(method) ? "border-error-red" : "border-light-grey2")
+      style
+    end
+
+    sig { params(method: Symbol).returns(String) }
+    def text_like_field_style2(method)
+      style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate py-3"
+      style << " "
+      style << (error?(method) ? "border-error-red pl-4 pr-16" : "border-light-grey2 px-4")
       style
     end
 
