@@ -141,6 +141,8 @@ If all looks good then thank the contributor for helping tens of thousands of pe
 
 Our awesome contributors can be found on the [PlanningAlerts site](https://www.planningalerts.org.au/about).
 
+This project is tested with BrowserStack.
+
 ## License
 
 GPLv2, see the LICENSE file for full details.
