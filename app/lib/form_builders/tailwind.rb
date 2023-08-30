@@ -11,7 +11,7 @@ module FormBuilders
         options = options.merge(text)
         text = nil
       end
-      super(method, text, options.merge(class: "#{label_style} #{options[:class]}"))
+      super(method, text, options.merge(class: "#{label_style(method)} #{options[:class]}"))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
@@ -42,7 +42,7 @@ module FormBuilders
       return "" unless object.errors.key?(:address)
 
       m = "#{object.errors.messages_for(method).join('. ')}."
-      template.content_tag(:p, m, options.merge(class: "text-2xl text-red #{options[:class]}"))
+      template.content_tag(:p, m, options.merge(class: "text-2xl text-error-red #{options[:class]}"))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
@@ -60,16 +60,19 @@ module FormBuilders
 
     private
 
-    sig { returns(String) }
-    def label_style
-      "font-bold text-2xl text-navy"
+    sig { params(method: Symbol).returns(String) }
+    def label_style(method)
+      style = +"font-bold text-2xl"
+      style << " "
+      style << (error?(method) ? "text-error-red" : "text-navy")
+      style
     end
 
     sig { params(method: Symbol).returns(String) }
     def text_like_field_style(method)
       style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate px-4 py-3"
       style << " "
-      style << (error?(method) ? "border-red" : "border-light-grey2")
+      style << (error?(method) ? "border-error-red" : "border-light-grey2")
       style
     end
 

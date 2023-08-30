@@ -3,7 +3,7 @@
 <%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind do |f| %>
   <%= f.label :address, "Enter a street address", class: "block mt-12" %>
   <%= f.street_address_field :address, class: "mt-2 block w-full" %>
-  <%= f.error :address, class: "mt-2" %>
+  <%= f.error :address, class: "mt-5" %>
   <ul class="mt-8 list-none">
     <%= f.collection_radio_buttons :radius_meters, Alert::VALID_RADIUS_METERS_VALUES, ->(r) { r }, ->(r) { size_option_sentence_alternate(r) } do |b| %>
       <li class="flex items-center">
