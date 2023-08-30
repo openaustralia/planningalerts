@@ -14,9 +14,23 @@ module FormBuilders
       super(method, text, options.merge(class: "#{label_style(method)} #{options[:class]}"))
     end
 
+    # TODO: Add error-cross to password_field and email_field
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def text_field(method, options = {})
-      super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}"))
+      if error?(method)
+        template.content_tag(
+          :div,
+          super(method, options.merge(class: "pr-16 #{text_like_field_style(method)} #{options[:class]}")) +
+            template.content_tag(
+              :div,
+              template.image_tag("tailwind/error-cross.svg"),
+              class: "absolute inset-y-0 flex items-center pointer-events-none right-4"
+            ),
+          class: "relative"
+        )
+      else
+        super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}"))
+      end
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
