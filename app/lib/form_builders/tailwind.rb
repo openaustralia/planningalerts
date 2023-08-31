@@ -39,7 +39,7 @@ module FormBuilders
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def error(method, options = {})
-      return "" unless object.errors.key?(:address)
+      return "" unless object.errors.key?(method)
 
       m = "#{object.errors.messages_for(method).join('. ')}."
       template.content_tag(:p, m, options.merge(class: "text-2xl text-error-red #{options[:class]}"))
