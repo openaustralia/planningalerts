@@ -2,7 +2,6 @@
 
 <%= form_with model: resource, url: registration_path(resource_name), method: :put, builder: FormBuilders::Tailwind, class: "border-b border-light-grey pb-8" do |f| %>
   <%# TODO: What actually goes here and is it needed on other devise forms? %>
-  <%# TODO: Style this error message %>
   <%= render "devise/shared/error_messages", resource: %>
 
   <div>

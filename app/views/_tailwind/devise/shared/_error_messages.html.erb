@@ -1,0 +1,8 @@
+<%# TODO: Style this error message by an actual design - not just something I made up on the spot! %>
+<% if resource.errors.any? %>
+  <p class="mb-8 text-2xl text-error-red">
+    <%= I18n.t("errors.messages.not_saved",
+               count: resource.errors.count,
+               resource: resource.class.model_name.human.downcase) %>
+  </p>
+<% end %>
