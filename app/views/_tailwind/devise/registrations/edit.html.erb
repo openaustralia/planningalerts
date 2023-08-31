@@ -1,0 +1,63 @@
+<h3 class="pb-10 text-3xl font-bold text-navy font-display">Edit your account</h3>
+
+<%= form_with model: resource, url: registration_path(resource_name), method: :put, builder: FormBuilders::Tailwind, class: "border-b border-light-grey pb-8" do |f| %>
+  <%# TODO: What actually goes here and is it needed on other devise forms? %>
+  <%= render "devise/shared/error_messages", resource: %>
+
+  <div>
+    <%= f.label :name, class: "block mb-1" %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "block w-full" %>
+    <p class="mt-2 text-base italic text-warm-grey">Please use your full name</p>
+  </div>
+  <div class="mt-7">
+    <%= f.label :email, class: "block mb-1" %>
+    <%= f.email_field :email, required: true, autocomplete: "email", class: "block w-full" %>
+    <% if resource.pending_reconfirmation? %>
+      <%# TODO: How do we style this? %>
+      <p class="mt-2 text-base italic text-warm-grey">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+    <% end %>
+  </div>
+  <div class="mt-7">
+    <%= f.label :password, class: "block mb-1" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "block w-full" %>
+    <p class="mt-2 text-base italic text-warm-grey">Leave blank if you don't want to change it</p>
+  </div>
+  <div class="mt-7">
+    <%= f.label :current_password, class: "block mb-1" %>
+    <%= f.password_field :current_password, required: true, autocomplete: "current-password", class: "block w-full" %>
+    <p class="mt-2 text-base italic text-warm-grey">We need your current password to confirm your changes</p>
+  </div>
+  <div class="mt-10">
+    <%= f.button "Update" %>
+  </div>
+<% end %>
+
+<h3 class="pb-10 mt-20 text-3xl font-bold text-navy font-display">Close your account</h3>
+
+<p class="text-2xl text-navy">
+  Warning! This permanently removes your account and any alerts you have
+  and can not be undone.
+</p>
+<%# TODO: Add extra info about what happens to your comments %>
+
+<%# TODO: Make a helper that implements this as a simple button_to %>
+<%= form_with url: registration_path(resource_name), method: :delete, data: { confirm: "This will permanently remove your account and can not be undone. Are you sure?" }, builder: FormBuilders::Tailwind, class: "mt-10" do |f| %>
+  <%# TODO: Wording on button doesn't match heading %>
+  <% f.button "Close my account", type: :secondary, icon: :trash %>
+<% end %>
+
+<%
+=begin
+%>
+
+<% unless resource.comments.visible.empty? %>
+  <p>
+    Note that the <%= link_to pluralize(resource.comments.visible.count, "comment"), comments_profile_path %> you have made (including the name attached
+    to the comment) will <strong>not</strong> be removed
+    as it is part of the public record. However the private information, your email address, <strong>will</strong> be removed.
+  </p>
+<% end %>
+
+<%
+=end
+%>
