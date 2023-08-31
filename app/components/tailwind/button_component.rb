@@ -37,6 +37,7 @@ module Tailwind
         icon_path = nil
       when :trash
         icon_path = "tailwind/trash.svg"
+        icon_alt = "Trash icon"
       else
         raise "Unexpected icon #{icon}"
       end
@@ -46,6 +47,7 @@ module Tailwind
       @tag = tag
       @href = href
       @icon_path = T.let(icon_path, T.nilable(String))
+      @icon_alt = T.let(icon_alt, T.nilable(String))
     end
   end
 end

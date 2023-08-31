@@ -15,7 +15,7 @@
         <%= link_to "Create your first one", new_profile_alert_path, class: "text-orange text-2xl font-bold underline" %>
       </div>
     </div>
-    <%= image_tag "tailwind/woman-looking-off-illustration.svg", class: "mt-6" %>
+    <%= image_tag "tailwind/woman-looking-off-illustration.svg", class: "mt-6", alt: "Illustration of a woman looking off into the distance" %>
   </div>
 <% else %>
   <ul class="mt-11">
@@ -31,7 +31,7 @@
                 <%= last_sent_in_words(@alert.last_sent) %>
               </dd>
             </dl>
-            <%= image_tag "tailwind/right-arrow.svg", class: "pb-1" %>
+            <%= image_tag "tailwind/right-arrow.svg", class: "pb-1", alt: "Right arrow" %>
           </div>
         <% end %>
       </li>

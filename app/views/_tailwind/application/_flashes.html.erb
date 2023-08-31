@@ -1,13 +1,13 @@
 <% if flash.notice %>
   <div class="flex items-center px-4 py-3 mt-8 text-2xl font-bold text-white rounded-lg bg-lavender">
-    <%= image_tag "tailwind/tick.svg", class: "mr-5" %>
+    <%= image_tag "tailwind/tick.svg", class: "mr-5", alt: "Tick" %>
     <p><%= flash.notice %></p>
   </div>
 <% end %>
 
 <% if flash.alert %>
   <div class="flex items-center px-4 py-3 mt-8 text-2xl font-bold text-white rounded-lg bg-error-red">
-    <%= image_tag "tailwind/warning.svg", class: "mr-5" %>
+    <%= image_tag "tailwind/warning.svg", class: "mr-5", alt: "Warning sign" %>
     <p><%= flash.alert %></p>
   </div>
 <% end %>

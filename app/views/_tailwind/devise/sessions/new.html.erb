@@ -25,7 +25,7 @@
     <p class="text-2xl text-navy">Get started here. It's easy.</p>
 
     <div class="my-12">
-      <%= image_tag "tailwind/new-to-planning-alerts-illustration.svg" %>
+      <%= image_tag "tailwind/new-to-planning-alerts-illustration.svg", alt: "Illustration of three people standing in front of a building having a conversation" %>
     </div>
 
     <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_registration_path) do %>
