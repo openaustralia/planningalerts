@@ -69,7 +69,7 @@ module FormBuilders
           field +
             template.content_tag(
               :div,
-              template.image_tag("tailwind/error-cross.svg"),
+              template.image_tag("tailwind/error-cross.svg", "aria-hidden": true),
               class: "absolute inset-y-0 flex items-center pointer-events-none right-4"
             ),
           class: "relative"
