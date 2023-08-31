@@ -13,9 +13,9 @@
                           "x-init" => "if('google' in window) initAfterMaps()",
                           "x-on:map-loaded.window" => "initAfterMaps()" %>
       <%= button_tag type: "button", class: "text-white sm:text-xl block w-full" do %>
-        <div class="inline-block mr-2 align-middle">
+        <span class="inline-block mr-2 align-middle">
           <%= render "application/svg/location" %>
-        </div>
+        </span>
         <%# TODO: Make geolocate button work %>
         <span class="underline">or use my current location</span>
       <% end %>
