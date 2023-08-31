@@ -1,5 +1,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<% if yield(:meta_description) %>
+  <meta name="description" content="<%= yield(:meta_description) %>">
+<% end %>
+<title><%= yield(:page_title).presence || "Email alerts of planning applications near you" %> | PlanningAlerts</title>
+
 <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
