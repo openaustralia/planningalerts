@@ -1,6 +1,6 @@
 <% content_for :page_title, "Your comments" %>
 
-<h2 class="mb-8 text-3xl font-bold text-navy font-display"><%= yield(:page_title) %></h2>
+<h2 class="text-3xl font-bold text-navy font-display"><%= yield(:page_title) %></h2>
 
 <% if @comments.empty? %>
   <%# TODO: We don't yet have a design for this bit %>
@@ -17,7 +17,7 @@
         <%# TODO: Show a special message if the comment has been hidden %>
         <%# TODO: We need that tailwind plugin for styling formatted text %>
         <%# TODO: Fixup spacing with multiple comments %>
-        <div class="flex pb-8 border-b border-light-grey">
+        <div class="flex pb-10 border-b pt-14 border-light-grey">
           <div class="mr-6 text-navy text-7xl" aria-hidden="true">”</div>
           <div>
             <div class="text-2xl text-navy">
