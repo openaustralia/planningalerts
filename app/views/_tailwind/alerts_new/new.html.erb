@@ -4,14 +4,17 @@
   <%= f.label :address, "Enter a street address", class: "block mt-12" %>
   <%= f.street_address_field :address, class: "mt-2 block w-full" %>
   <%= f.error :address, class: "mt-5" %>
-  <ul class="mt-8 list-none">
+
+  <fieldset class="mt-8 list-none">
+    <legend class="sr-only">Alert distance</legend>
     <%= f.collection_radio_buttons :radius_meters, Alert::VALID_RADIUS_METERS_VALUES, ->(r) { r }, ->(r) { size_option_sentence_alternate(r) } do |b| %>
-      <li class="flex items-center">
+      <div class="flex items-center">
         <%= b.radio_button class: "w-5 h-5 text-warm-grey" %>
         <%= b.label class: "ml-3 text-navy text-2xl" %>
-      </li>
+      </div>
     <% end %>
-  </ul>
+  </fieldset>
+
   <div class="mt-12">
     <%= f.button "Create alert" %>
   </div>
