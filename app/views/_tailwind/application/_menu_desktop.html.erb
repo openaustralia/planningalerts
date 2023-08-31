@@ -1,20 +1,22 @@
 <div class="hidden md:block">
-  <ul class="flex justify-between h-16 text-lg font-medium text-navy">
-    <div class="flex space-x-8">
+  <div class="flex justify-between h-16 text-lg font-medium text-navy">
+    <ul class="flex space-x-8">
       <%= render Tailwind::NavItemComponent.new(href: root_path, selected: current_page?(root_path)).with_content("Home") %>
       <%= render Tailwind::NavItemComponent.new(href: address_applications_path, selected: current_page?(address_applications_path)).with_content("Search Applications") %>
       <%= render Tailwind::NavItemComponent.new(href: api_howto_path, selected: current_page?(api_howto_path)).with_content("Get the Data") %>
       <%= render Tailwind::NavItemComponent.new(href: faq_path, selected: current_page?(faq_path)).with_content("Help") %>
-    </div>
-    <% if current_user %>
-      <%= render Tailwind::NavItemComponent.new(href: profile_path, selected: current_page?(profile_path)) do %>
-        <div class="flex space-x-3">
-          <div><%= current_user.name_with_fallback %></div>
-          <div><%= render "application/svg/user" %></div>
-        </div>
+    </ul>
+    <ul class="flex">
+      <% if current_user %>
+        <%= render Tailwind::NavItemComponent.new(href: profile_path, selected: current_page?(profile_path)) do %>
+          <div class="flex space-x-3">
+            <div><%= current_user.name_with_fallback %></div>
+            <div><%= render "application/svg/user" %></div>
+          </div>
+        <% end %>
+      <% else %>
+        <%= render Tailwind::NavItemComponent.new(href: new_user_session_path, selected: current_page?(new_user_session_path)).with_content("Sign In") %>
       <% end %>
-    <% else %>
-      <%= render Tailwind::NavItemComponent.new(href: new_user_session_path, selected: current_page?(new_user_session_path)).with_content("Sign In") %>
-    <% end %>
-  </ul>
+    </ul>
+  </div>
 </div>
