@@ -11,57 +11,7 @@
   <ol>
     <% @comments.each do |comment| %>
       <li>
-        <%# TODO: Extract this out into a partial %>
-        <%# TODO: This needs to link to the comment %>
-        <%# TODO: This should also information about the application or address %>
-        <%# TODO: Show a special message if the comment has been hidden %>
-        <%# TODO: We need that tailwind plugin for styling formatted text %>
-        <%# TODO: Fixup spacing with multiple comments %>
-        <div class="flex pt-6 pb-10 border-b border-light-grey">
-          <div class="mt-8 mr-6 text-navy text-7xl" aria-hidden="true">”</div>
-          <div>
-            <div class="prose-2xl">
-              <%= comment_as_html(comment.text) %>
-            </div>
-            <div class="mt-4 text-lg text-navy">
-              <time datetime="<%= comment.confirmed_at.strftime("%F") %>">
-                <%= time_ago_in_words(comment.confirmed_at) %> ago
-              </time>
-            </div>
-            <div class="mt-4">
-              <% if comment.last_delivered_successfully.nil? %>
-                <p class="text-lg font-bold text-orange">Sent to the planning authority</p>
-              <% elsif comment.last_delivered_successfully %>
-                <p class="text-lg font-bold text-orange">Delivered to the planning authority</p>
-                <p class="text-lg text-navy">
-                  This comment was successfully delivered to the
-                  email server of
-                  <%= comment.application.comment_authority_with_fallback %>
-                  at
-                  <%= comment.last_delivered_at %>
-                </p>
-              <% else %>
-                <p class="text-lg font-bold text-orange">There was a problem delivering this to the planning authority</p>
-                <p class="text-lg text-navy">
-                  The comment was hard bounced by the email server of
-                  <%= comment.application.comment_authority_with_fallback %>
-                  at
-                  <%= comment.last_delivered_at %>
-                  Please follow up by
-                  <%# TODO: Style this link %>
-                  <%= link_to "contacting us", documentation_contact_path %>
-                  so that we can try to help resolve this issue
-                </p>
-              <% end %>
-            </div>
-            <%# TODO: Link to actual page %>
-            <div class="mt-8">
-              <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: "#") do %>
-                View email preview
-              <% end %>
-            </div>
-          </div>
-        </div>
+        <%= render "comment", comment: %>
       </li>
     <% end %>
   </ol>
