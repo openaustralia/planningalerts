@@ -41,7 +41,7 @@
     </div>
     <%# TODO: Link to actual page %>
     <div class="mt-8">
-      <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: "#") do %>
+      <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: comment_preview_profile_path(comment)) do %>
         View email preview
       <% end %>
     </div>

@@ -91,6 +91,7 @@ Rails.application.routes.draw do
     resources :alerts, except: :show, controller: :alerts_new
     
     get :comments
+    get "comments/:id/preview", to: "profiles#comment_preview", as: :comment_preview
   end
 
   resources :alerts, only: %i[new create update edit], path_names: { new: "signup", edit: "area" }, param: :confirm_id do

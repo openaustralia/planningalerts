@@ -1,0 +1,37 @@
+<%= link_to "Back to your comments", comments_profile_path, class: "text-orange text-2xl font-bold underline" %>
+
+<h2 class="text-3xl font-bold text-navy font-display">Email Preview</h2>
+
+<div class="bg-[#ECEBE5] px-16 py-14 text-2xl font-normal text-navy">
+<p>To: xxxxxxxx</p>
+<p>Subject: xxxxxxx</p>
+
+<p class="mt-8">For the attention of the General Manager / Planning Manager / Planning Department</p>
+
+<table class="mt-8">
+  <tr>
+    <td class="font-semibold align-top">Application:</td>
+    <td class="align-bottom"><%= @comment.application.council_reference %></td>
+  </tr>
+  <tr>
+    <td class="font-semibold align-top">Address:</td>
+    <td class="align-bottom"><%= @comment.application.address %></td>
+  </tr>
+  <tr>
+    <td class="font-semibold align-top">Description:</td>
+    <td class="align-bottom"><%= @comment.application.description %></td>
+  </tr>
+  <tr>
+    <td class="font-semibold align-top">Name of commenter:</td>
+    <td class="align-bottom"><%= @comment.name %></td>
+  </tr>
+  <tr>
+    <td class="font-semibold align-top">Address of commenter:</td>
+    <td class="align-bottom"><%= @comment.address %></td>
+  </tr>
+  <tr>
+    <td class="font-semibold align-top">Email of commenter:</td>
+    <td class="align-bottom"><%= @comment.email %></td>
+  </tr>
+</table>
+</div>
