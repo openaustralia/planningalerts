@@ -23,7 +23,16 @@ module.exports = {
       },
       listStyleImage: {
         dash: "url('tailwind/dash.svg')"
-      }
+      },
+      typography: (theme) => ({
+        '2xl': {
+          css: {
+            color: theme('colors.navy'),
+            // Because the default was too big
+            lineHeight: '2rem'
+          }
+        }
+      }),
     },
     colors: {
       'transparent': 'transparent',
@@ -47,7 +56,7 @@ module.exports = {
       'google-maps-green': '#d1e6d9',
       'error-red': '#B90000'
     }
-},
+  },
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/aspect-ratio'),
