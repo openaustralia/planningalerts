@@ -1,33 +1,33 @@
 <% cache "stats", expires_in: 1.hour do %>
   <section class="mt-12 text-xl text-navy">
     <h3 class="mb-12 text-4xl font-semibold">This week at Planning Alerts</h3>
-    <ul class="grid text-center sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="grid gap-12 text-center sm:grid-cols-2 lg:grid-cols-4">
       <li>
         <%= link_to applications_path, class: "text-fuchsia" do %>
           <span class="block mb-8 text-navy">We collected</span>
           <span class="block font-bold text-7xl"><%= number_with_delimiter(Application.in_past_week.count) %></span>
-          <span class="block mb-12">new applications</span>
+          <span class="block">new applications</span>
         <% end %>
       </li>
       <li>
         <%= link_to new_alert_path, class: "text-orange" do %>
           <span class="block mb-8 text-navy">People received</span>
           <span class="block font-bold text-7xl"><%= number_with_delimiter(EmailBatch.total_sent_in_past_week) %></span>
-          <span class="block mb-12">email alerts</span>
+          <span class="block">email alerts</span>
         <% end %>
       </li>
       <li>
         <%= link_to new_alert_path, class: "contents text-green" do %>
           <span class="block mb-8 text-navy">People signed up for</span>
           <span class="block font-bold text-7xl"><%= number_with_delimiter(Alert.active.in_past_week.count) %></span>
-          <span class="block mb-12">new email alerts</span>
+          <span class="block">new email alerts</span>
         <% end %>
       </li>
       <li>
         <%= link_to comments_path, class: "contents text-lavender" do %>
           <span class="block mb-8 text-navy">People wrote</span>
           <span class="block font-bold text-7xl"><%= number_with_delimiter(Comment.visible.in_past_week.count) %></span>
-          <span class="block mb-12">new comments</span>
+          <span class="block">new comments</span>
         <% end %>
       </li>
     </ul>
