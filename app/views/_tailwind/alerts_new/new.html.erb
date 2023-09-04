@@ -1,9 +1,11 @@
 <h2 class="text-3xl font-bold text-navy font-display">Create new alert</h2>
 
-<%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind do |f| %>
-  <%= f.label :address, "Enter a street address", class: "block mt-12" %>
-  <%= f.street_address_field :address, class: "mt-2 block w-full" %>
-  <%= f.error :address, class: "mt-5" %>
+<%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind, class: "mt-12" do |f| %>
+  <div>
+    <%= f.label :address, "Enter a street address" %>
+    <%= f.street_address_field :address, class: "mt-2 block w-full" %>
+    <%= f.error :address, class: "mt-5" %>
+  </div>
 
   <fieldset class="mt-8 list-none">
     <legend class="sr-only">Alert distance</legend>
