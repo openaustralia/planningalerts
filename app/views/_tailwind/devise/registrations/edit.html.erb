@@ -8,7 +8,7 @@
     <%= f.label :name, class: "block mb-1" %>
     <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "block w-full" %>
     <%= f.error :name, class: "mt-2" %>
-    <p class="mt-2 text-base italic text-warm-grey">Please use your full name</p>
+    <%= f.hint "Please use your full name", class: "mt-2" %>
   </div>
   <div class="mt-7">
     <%= f.label :email, class: "block mb-1" %>
@@ -16,20 +16,20 @@
     <%= f.error :email, class: "mt-2" %>
     <% if resource.pending_reconfirmation? %>
       <%# TODO: How do we style this? %>
-      <p class="mt-2 text-base italic text-warm-grey">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <%= f.hint "Currently waiting confirmation for: #{resource.unconfirmed_email}", class: "mt-2" %>
     <% end %>
   </div>
   <div class="mt-7">
     <%= f.label :password, class: "block mb-1" %>
     <%= f.password_field :password, autocomplete: "new-password", class: "block w-full" %>
     <%= f.error :password, class: "mt-2" %>
-    <p class="mt-2 text-base italic text-warm-grey">Leave blank if you don't want to change it</p>
+    <%= f.hint "Leave blank if you don't want to change it", class: "mt-2" %>
   </div>
   <div class="mt-7">
     <%= f.label :current_password, class: "block mb-1" %>
     <%= f.password_field :current_password, required: true, autocomplete: "current-password", class: "block w-full" %>
     <%= f.error :current_password, class: "mt-2" %>
-    <p class="mt-2 text-base italic text-warm-grey">We need your current password to confirm your changes</p>
+    <%= f.hint "We need your current password to confirm your changes", class: "mt-2" %>
   </div>
   <div class="mt-10">
     <%= f.button "Update" %>

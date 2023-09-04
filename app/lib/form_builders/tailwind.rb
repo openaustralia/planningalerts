@@ -45,6 +45,11 @@ module FormBuilders
       template.content_tag(:p, m, options.merge(class: "text-2xl text-error-red #{options[:class]}"))
     end
 
+    sig { params(text: String, options: T::Hash[Symbol, String]).returns(String) }
+    def hint(text, options = {})
+      template.content_tag(:p, text, options.merge(class: "text-base italic text-warm-grey #{options[:class]}"))
+    end
+
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def street_address_field(method, options = {})
       options = {
