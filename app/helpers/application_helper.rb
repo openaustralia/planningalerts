@@ -8,6 +8,7 @@ module ApplicationHelper
   # For sorbet
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
+  include ActionView::Helpers::FormHelper
   include Kernel
 
   sig { params(path: String, extra_classes: T::Array[Symbol], block: T.untyped).returns(T.untyped) }
@@ -139,5 +140,18 @@ module ApplicationHelper
   sig { returns(String) }
   def donate_url
     "https://www.oaf.org.au/donate/planningalerts/"
+  end
+
+  sig { params(name: String, path: T.untyped, options: T::Hash[Symbol, String]).returns(String) }
+  def pa_button_to(name, path, options = {})
+    form_with(
+      url: url_for(path),
+      builder: FormBuilders::Tailwind,
+      class: options.delete(:form_class),
+      method: options.delete(:method),
+      data: options.delete(:data)
+    ) do |f|
+      f.button name, options
+    end
   end
 end

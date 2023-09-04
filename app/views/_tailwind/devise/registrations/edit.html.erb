@@ -44,11 +44,10 @@
 </p>
 <%# TODO: Add extra info about what happens to your comments %>
 
-<%# TODO: Make a helper that implements this as a simple button_to %>
-<%= form_with url: registration_path(resource_name), method: :delete, data: { confirm: "This will permanently remove your account and can not be undone. Are you sure?" }, builder: FormBuilders::Tailwind, class: "mt-10" do |f| %>
-  <%# TODO: Wording on button doesn't match heading %>
-  <% f.button "Close my account", type: :secondary, icon: :trash %>
-<% end %>
+<%# TODO: Wording on button doesn't match heading %>
+<%= pa_button_to "Close my account", registration_path(resource_name),
+                 method: :delete, type: :secondary, icon: :trash, form_class: "mt-10",
+                 data: { confirm: "This will permanently remove your account and can not be undone. Are you sure?" } %>
 
 <%
 =begin
