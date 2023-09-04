@@ -22,6 +22,10 @@ class Rails::Conductor::ActionMailbox::InboundEmails::SourcesController
     include ::ActionView::Helpers::TagHelper
     include ::ActionView::Helpers::TextHelper
     include ::AlertMailerHelper
+    include ::ActionView::Helpers::FormTagHelper
+    include ::ActionView::ModelNaming
+    include ::ActionView::RecordIdentifier
+    include ::ActionView::Helpers::FormHelper
     include ::Kernel
     include ::ApplicationHelper
     include ::ActionView::Helpers::DateHelper

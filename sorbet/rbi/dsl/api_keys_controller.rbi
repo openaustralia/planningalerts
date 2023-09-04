@@ -20,6 +20,10 @@ class ApiKeysController
     include ::ActionView::Helpers::AssetTagHelper
     include ::ActionView::Helpers::SanitizeHelper
     include ::ActionView::Helpers::TextHelper
+    include ::ActionView::Helpers::FormTagHelper
+    include ::ActionView::ModelNaming
+    include ::ActionView::RecordIdentifier
+    include ::ActionView::Helpers::FormHelper
     include ::Kernel
     include ::ApplicationHelper
     include ::Admin::ApplicationHelper
