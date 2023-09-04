@@ -71,10 +71,8 @@
       </div>
     </div>
     <% if Flipper.enabled?(:switch_themes, current_user) %>
-      <%= form_with url: toggle_theme_path, class: "my-10" do |form| %>
-        <%= render Tailwind::ButtonComponent.new(tag: :button, size: "lg", type: :inverse) do %>
-          Toggle theme
-        <% end %>
+      <%= form_with url: toggle_theme_path, class: "my-10", builder: FormBuilders::Tailwind do |f| %>
+        <%= f.button "Toggle theme", size: "lg", type: :inverse %>
       <% end %>
     <% end %>
   <% end %>
