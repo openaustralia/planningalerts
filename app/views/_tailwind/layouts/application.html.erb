@@ -9,7 +9,7 @@
       <%# TODO: Make it that we can add the flashes somewhere else for particular pages %>
       <%= render "flashes" %>
 
-      <div class="my-9 sm:my-16">
+      <div class="mb-64 mt-9 sm:mt-16">
         <%= content_for?(:content) ? yield(:content) : yield %>
       </div>
     <% end %>
