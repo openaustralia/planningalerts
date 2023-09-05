@@ -4,7 +4,6 @@
     current_page:  a page object for the currently displayed page
     total_pages:   total number of pages
     per_page:      number of items to fetch per page
-    remote:        data-remote
--%>
+    remote:        data-remote -%>
 <%# Not using t("views.pagination.previous") because we only want to override it in the tailwind theme %>
 <%= link_to_unless current_page.first?, "&lsaquo; Previous page".html_safe, url, rel: "prev", remote:, class: "underline" %>
