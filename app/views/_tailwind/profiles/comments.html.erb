@@ -6,14 +6,13 @@
   <%# TODO: We don't yet have a design for this bit %>
   <p class="text-2xl text-navy">You have not made any comments</p>
 <% else %>
-  <%# TODO: Design the pagination %>
-  <%= paginate @comments %>
-  <ol>
+  <ol class="mt-20">
     <% @comments.each do |comment| %>
-      <li>
+      <li class="mb-12 border-b border-light-grey">
         <%= render "comment", comment: %>
       </li>
     <% end %>
   </ol>
+  <%# TODO: Design the pagination %>
   <%= paginate @comments %>
 <% end %>

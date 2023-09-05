@@ -1,13 +1,20 @@
 <%# TODO: This needs to link to the comment %>
-<%# TODO: Show a special message if the comment has been hidden %>
 <%# TODO: Fixup spacing with multiple comments %>
-<p class="mt-16 text-2xl text-navy">
+<% if comment.hidden %>
+  <p class="py-3 text-2xl mb-9 text-navy bg-light-grey px-7">
+    This comment is hidden from public view.
+    <%# TODO: Where does this link to? %>
+    <%= link_to "Why?", "#", class: "underline" %>
+  </p>
+<% end %>
+
+<p class="text-2xl text-navy">
   In response to <%= comment.application.authority.full_name %>,
   application reference <%= comment.application.council_reference %> for
   <strong><%= comment.application.address %></strong>
   you said:
 </p>
-<div class="flex pt-4 pb-10 border-b border-light-grey">
+<div class="flex pt-4 pb-10">
   <div class="mt-8 mr-6 text-navy text-7xl" aria-hidden="true">”</div>
   <div>
     <div class="prose-2xl">
