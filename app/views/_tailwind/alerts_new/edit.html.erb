@@ -11,13 +11,15 @@
 <div class="pb-24 border-b text-light-grey">
   <%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind, class: "mt-5" do |f| %>
     <%= f.label :radius_meters, "Alert distance" %>
-    <%# TODO: Add tick to current value %>
     <div x-data="{radius_meters: <%= @alert.radius_meters %>, circle: null}"
          <%# This handles both when google maps is ready before alpine and the other way around %>
          x-init="if('google' in window) circle = initialiseAlertMap($refs.map); $watch('radius_meters', value => circle.setRadius(value))"
          x-on:map-loaded.window="circle = initialiseAlertMap($refs.map)">
       <%= f.select :radius_meters,
-                   Alert::VALID_RADIUS_METERS_VALUES.map { |r| [meters_in_words(r), r] },
+                   # Using unicode tick (rather than an image) so that we don't have to other horrible things
+                   # rubocop:disable Rails/OutputSafety
+                   Alert::VALID_RADIUS_METERS_VALUES.map { |r| [(meters_in_words(r) + (r == @alert.radius_meters ? " &check;" : "")).html_safe, r] },
+                   # rubocop:enable Rails/OutputSafety
                    {},
                    class: "w-full text-navy text-2xl font-normal py-4 mt-2 border-light-grey2",
                    "x-model.number": "radius_meters" %>
