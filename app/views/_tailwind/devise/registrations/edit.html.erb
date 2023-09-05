@@ -42,25 +42,16 @@
   Warning! This permanently removes your account and any alerts you have
   and can not be undone.
 </p>
-<%# TODO: Add extra info about what happens to your comments %>
-
-<%# TODO: Wording on button doesn't match heading %>
-<%= pa_button_to "Close my account", registration_path(resource_name),
-                 method: :delete, type: :secondary, icon: :trash, form_class: "mt-10",
-                 data: { confirm: "This will permanently remove your account and can not be undone. Are you sure?" } %>
-
-<%
-=begin
-%>
 
 <% unless resource.comments.visible.empty? %>
-  <p>
-    Note that the <%= link_to pluralize(resource.comments.visible.count, "comment"), comments_profile_path %> you have made (including the name attached
-    to the comment) will <strong>not</strong> be removed
-    as it is part of the public record. However the private information, your email address, <strong>will</strong> be removed.
+  <p class="mt-8 text-2xl text-navy">
+    Note that the
+    <%= link_to pluralize(resource.comments.visible.count, "comment"), comments_profile_path, class: "text-orange underline" %>
+    you have made (including the name attached to the comment) will not be removed
+    as it is part of the public record. However the private information, your email address, will be removed.
   </p>
 <% end %>
 
-<%
-=end
-%>
+<%= pa_button_to "Close your account", registration_path(resource_name),
+                 method: :delete, type: :secondary, icon: :trash, form_class: "mt-12",
+                 data: { confirm: "This will permanently remove your account and can not be undone. Are you sure?" } %>
