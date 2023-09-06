@@ -1,12 +1,11 @@
-<div>
+<%# Switches between these two blocks at "sm" breakpoint %>
+<div class="hidden sm:block">
+  <%= image_tag "tailwind/logo.svg" %>
+</div>
+<div class="sm:hidden">
   <div>
-    <span class="sm:px-5 sm:py-2 text-navy sm:text-[#EEEEEE] sm:bg-fuchsia font-extrabold text-5xl inline-block font-logo">
+    <span class="inline-block text-5xl font-extrabold text-navy font-logo">
       Planning Alerts
-    </span>
-  </div>
-  <div class="hidden sm:block">
-    <span class="inline-block px-3 py-1 text-xs font-semibold text-white sm:px-5 sm:text-sm bg-lavender font-logo">
-      Email alerts of planning applications near you
     </span>
   </div>
 </div>
