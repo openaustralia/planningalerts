@@ -14,8 +14,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
-        display: ['Merriweather', ...defaultTheme.fontFamily.serif],
-        logo: ['Inter', ...defaultTheme.fontFamily.sans]
+        display: ['Merriweather', ...defaultTheme.fontFamily.serif]
       },
       backgroundImage: {
         'header-pattern': "url('tailwind/header-pattern.svg')",
