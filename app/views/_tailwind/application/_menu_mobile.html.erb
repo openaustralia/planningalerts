@@ -9,9 +9,7 @@
         <%= render "application/svg/close" %>
         <span class="pr-2 text-lg font-medium">Close</span>
       </button>
-      <h2 class="inline-block text-3xl font-extrabold text-navy font-logo">
-        Planning Alerts
-      </h2>
+      <%= image_tag "tailwind/logo-navy.svg", class: "w-60", alt: "Planning Alerts" %>
       <div class="mt-8 font-medium">
         <ul>
           <li><%= link_to "Home", root_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(root_path)) %></li>
