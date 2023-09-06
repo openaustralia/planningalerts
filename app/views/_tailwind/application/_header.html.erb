@@ -20,7 +20,9 @@
     <div class="sm:bg-yellow sm:bg-header-pattern xl:bg-center">
       <%= render Tailwind::ContainerComponent.new do %>
         <div class="pt-2 sm:py-8">
-          <%= render "logo_block" %>
+          <%# Switches between these two blocks at "sm" breakpoint %>
+          <%= image_tag "tailwind/logo.svg", class: "hidden sm:block" %>
+          <%= image_tag "tailwind/logo-on-white.svg", class: "sm:hidden" %>
         </div>
       <% end %>
     </div>
