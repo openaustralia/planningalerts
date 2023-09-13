@@ -58,12 +58,47 @@ class ApplicationController < ActionController::Base
     # the new theme to be shown even if you're logged out. The feature flag just enables the button
     # that allows you to do the switching. Cookies are signed so the value can be manipulated by
     # users outside of pushing the button
+    u = current_user
+    if u
+      r = show_tailwind_theme_user?
+      # Synchronise the cookie with what's stored with the user
+      update_tailwind_theme_cookie(r)
+      r
+    else
+      show_tailwind_theme_cookie?
+    end
+  end
+
+  sig { returns(T::Boolean) }
+  def show_tailwind_theme_cookie?
     cookies.signed[:planningalerts_theme] == "tailwind"
+  end
+
+  sig { returns(T::Boolean) }
+  def show_tailwind_theme_user?
+    u = current_user
+    raise unless u
+
+    u.tailwind_theme
   end
 
   sig { params(tailwind: T::Boolean).void }
   def update_tailwind_theme(tailwind)
+    update_tailwind_theme_cookie(tailwind)
+    update_tailwind_theme_user(tailwind)
+  end
+
+  sig { params(tailwind: T::Boolean).void }
+  def update_tailwind_theme_cookie(tailwind)
     cookies.signed[:planningalerts_theme] = ("tailwind" if tailwind)
+  end
+
+  sig { params(tailwind: T::Boolean).void }
+  def update_tailwind_theme_user(tailwind)
+    u = current_user
+    return unless u
+
+    u.update!(tailwind_theme: tailwind)
   end
 
   sig { void }
