@@ -61,6 +61,11 @@ class ApplicationController < ActionController::Base
     cookies.signed[:planningalerts_theme] == "tailwind"
   end
 
+  sig { params(tailwind: T::Boolean).void }
+  def update_tailwind_theme(tailwind)
+    cookies.signed[:planningalerts_theme] = ("tailwind" if tailwind)
+  end
+
   sig { void }
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password) }
