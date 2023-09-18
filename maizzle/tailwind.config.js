@@ -4,6 +4,7 @@ module.exports = {
     screens: {
       sm: {max: '600px'},
       xs: {max: '425px'},
+      "dark-mode": { raw: "(prefers-color-scheme: dark)" }
     },
     extend: {
       colors: {
