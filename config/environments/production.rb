@@ -94,6 +94,8 @@ Rails.application.configure do
     host: Rails.configuration.x.host, protocol: "https"
   }
 
+  config.asset_host = "https://#{Rails.configuration.x.host}"
+
   # Send mails to the locally running instance of Cuttlefish
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
