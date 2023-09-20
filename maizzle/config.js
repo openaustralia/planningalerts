@@ -24,4 +24,11 @@ module.exports = {
       },
     },
   },
+  posthtml: {
+    options: {
+      directives: [
+        { name: '%=', start: '<', end: '>' }
+      ],
+    },
+  }
 }
