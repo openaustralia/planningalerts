@@ -1,49 +1,31 @@
+<script props>
+  module.exports = {
+    address: props.address,
+    name: props.name,
+    distance: props.distance
+  }
+</script>
+
 <div class="p-8 border border-solid border-light-grey">
-  <p class="mt-0">Martha commented:</p>
+  <p class="mt-0">{{ name }} commented:</p>
   <table class="mt-4">
     <tr>
       <td valign="top" class="pt-2 pr-4 text-7xl">
         ”
       </td>
       <td valign="top">
-        <p>
-          It has recently come to my attention that a planning application has been submitted
-          for 813 Hight Street, Reservoir.
-        </p>
-        <p>
-          My concern is with the application for ground floor shops and nine (9) dwellings,
-          above, with a reduction in the car parking requirements.
-        </p>
-        <p>
-          Currently, there are already parking issues in the area, with insufficient parking
-          bays available. Residents of Wild Street and Henry Street are constantly complaining
-          about cars parked on "their" street. We often find abusive notes left on vehicles,
-          harassment of staff when in the street, and stupid acts of vandalism. We are a
-          business on High Street and staff already have difficulty finding parking as it
-          is. It appears that the council is not concerned for its local businesses or residents
-          and allowing a new building with reduced parking is irresponsible and inconsiderate.
-          I understand that the council and developers want to make as much money as possible but
-          it is extremely unfair to cause such distress and inconvenience to everyone else.
-          I strongly oppose such a development and would like further information as to how to
-          make this a formal objection.
-        </p>
-        <p>
-          Regards<br>
-          Louise
-        </p>
+        <content />
         <p class="mt-8 mb-1">
           Comment made on:
         </p>
         <p class="m-0 font-bold">
-          6 Kahibah Road, Umina Beach, NSW
+          {{ address }}
         </p>
         <p class="mt-1">
-          800 metres away
+          {{ distance }} away
         </p>
         <p>
-          S4.55 to Modify Approved Dwelling and Garage including Deletion of Clerestory,
-          Addition of Laminated Beam, Relocation of Laundry, Deletion of Stairs and
-          Expansion of Workshop  
+          <slot:description />
         </p>
         <p class="mt-6">
           <a href="#" class="text-2xl font-bold no-underline text-orange">View comment on Planning Alerts</a>
