@@ -23,7 +23,22 @@
 
 <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
-
+<dl class="grid grid-cols-[18rem_1fr] text-navy text-2xl">
+  <dt class="font-bold">Description</dt>
+  <dd><%= @application.description %></dd>
+  <dt class="font-bold">Planning Authority</dt>
+  <dd>Central Coast Council</dd>
+  <dt class="font-bold">& Reference number</dt>
+  <dd>
+    <div>
+      <%= @application.council_reference %>
+    </div>
+    <%# TODO: Link off to actual page %>
+    <%# TODO: Add disclosure information %>
+    <%# TODO: Add disclosure triangle icon %>
+    <%= link_to "What is a reference number?", "#", class: "text-fuchsia text-xl underline" %>
+  </dd>
+</dl>
 <%
 =begin
 %>
@@ -31,9 +46,6 @@
 <div id="main">
   <div id="application">
     <article id="application-info">
-      <p class="description">
-        <%= @application.description %>
-      </p>
       <%= link_to @application.info_url, class: "button button-rounded", target: "_blank", rel: "noopener" do %>
         <%= image_tag "standard/external_link.png", size: "10x10", alt: "External link" %>
         Read more information
