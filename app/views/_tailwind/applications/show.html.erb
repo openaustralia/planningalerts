@@ -1,9 +1,3 @@
-This will become the application detail page
-
-<%
-=begin
-%>
-
 <% content_for :page_title, page_title(@application) %>
 <% content_for :meta_description, @application.description %>
 <% content_for :extra_meta_tags do %>
@@ -24,6 +18,13 @@ This will become the application detail page
     <meta content="<%= @application.lng %>" property="place:location:longitude">
   <% end %>
 <% end %>
+
+This will become the application detail page
+
+<%
+=begin
+%>
+
 <div id="main">
   <div id="application">
     <article id="application-info">
