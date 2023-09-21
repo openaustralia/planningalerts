@@ -19,7 +19,10 @@
   <% end %>
 <% end %>
 
-This will become the application detail page
+<h1 class="text-4xl font-bold text-navy"><%= @application.address %></h1>
+
+<%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
+<%= render "applications/map", application: @application %>
 
 <%
 =begin
@@ -28,13 +31,6 @@ This will become the application detail page
 <div id="main">
   <div id="application">
     <article id="application-info">
-      <header>
-        <h3 class="address">
-          <%= @application.address %>
-        </h3>
-      </header>
-      <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
-      <%= render "applications/map", application: @application %>
       <p class="description">
         <%= @application.description %>
       </p>
