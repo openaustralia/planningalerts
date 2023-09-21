@@ -17,6 +17,7 @@ module.exports = {
       source: 'src/templates',
       destination: {
         path: 'build_local',
+        extension: 'erb'
       },
       assets: {
         source: 'src/images',
