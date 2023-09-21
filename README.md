@@ -37,6 +37,15 @@ $ cd planningalerts
 
 In development all emails are sent locally to [mailcatcher](https://mailcatcher.me/). The emails can be viewed at http://localhost:1080.
 
+Email templates for the new tailwind based theme are developed using [Maizzle](https://maizzle.com/). The development workflow goes as follows:
+```
+cd maizzle
+npm run dev production
+```
+
+Then point your browser at http://localhost:3000/rails/mailers/. As you edit the templates in `maizzle/src/templates`, the templates will
+get automatically compiled to the erb template in the main rails app tree and will also refresh the browser.
+
 ### Type checking
 
 We're using [Sorbet](https://sorbet.org/) to add type checking to Ruby which otherwise is a dynamic language. To run the type checker:
