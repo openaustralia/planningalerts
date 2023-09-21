@@ -19,11 +19,12 @@
   <% end %>
 <% end %>
 
-<h1 class="text-4xl font-bold text-navy"><%= @application.address %></h1>
+<h1 class="mb-10 text-4xl font-bold text-navy"><%= @application.address %></h1>
 
 <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
-<dl class="grid grid-cols-[18rem_1fr] text-navy text-2xl">
+
+<dl class="mt-16 grid grid-cols-[18rem_1fr] text-navy text-2xl">
   <dt class="font-bold">Description</dt>
   <dd><%= @application.description %></dd>
   <dt class="font-bold">Planning Authority</dt>
