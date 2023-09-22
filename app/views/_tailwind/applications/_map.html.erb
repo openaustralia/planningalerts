@@ -3,14 +3,14 @@
         <%# This handles both when google maps is ready before alpine and the other way around %>
         x-init="if('google' in window) initialiseBasicMapWithMarker($refs.map)"
         x-on:map-loaded.window="initialiseBasicMapWithMarker($refs.map)">
-    <%= tag.div class: "bg-google-maps-green w-[592px] h-[592px] ",
+    <%= tag.div class: "bg-google-maps-green w-[528px] h-[528px]",
                 data: { lat: application.lat, lng: application.lng, address: application.address, zoom: 16 },
                 "x-ref" => "map" %>
   </div>
   <div x-data
        x-init="if('google' in window) initialisePano($refs.pano)"
        x-on:map-loaded.window="initialisePano($refs.pano)">
-    <%= tag.div class: "w-[592px] h-[592px]",
+    <%= tag.div class: "w-[528px] h-[528px]",
                 data: { lat: application.lat, lng: application.lng, address: application.address },
                 "x-ref" => "pano" %>
   </div>
