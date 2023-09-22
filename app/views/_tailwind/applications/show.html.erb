@@ -28,7 +28,11 @@
   <dt class="font-bold">Description</dt>
   <dd><%= @application.description %></dd>
   <dt class="font-bold">Planning Authority</dt>
-  <dd>Central Coast Council</dd>
+  <dd>
+    <%= link_to @application.authority.full_name,
+                authority_path(@application.authority.short_name_encoded),
+                class: "hover:underline" %>
+  </dd>
   <dt class="font-bold">& Reference number</dt>
   <dd>
     <div>
@@ -55,7 +59,6 @@
         <p class="dates">
           <%= render "applications/scraped_and_received_text", application: @application %>
         </p>
-        <p class="source">(Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded)}, reference #{@application.council_reference})</p>
       </footer>
       <div id="comments-area">
         <% if @comments.present? %>
