@@ -36,6 +36,7 @@
   <dt class="font-bold">& Reference number</dt>
   <dd>
     <div>
+    <%# TODO: Add ability to copy with a click %>
       <%= @application.council_reference %>
     </div>
     <%# TODO: Link off to actual page %>
@@ -45,6 +46,7 @@
   </dd>
 </dl>
 
+<%# TODO: Add icons next to labels %>
 <dl class="text-2xl text-navy grid grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-14">
   <dt class="py-1 font-bold">Date sourced</dt>
   <dd class="py-1">
@@ -67,11 +69,6 @@
         <%= image_tag "standard/external_link.png", size: "10x10", alt: "External link" %>
         Read more information
       <% end %>
-      <footer>
-        <p class="dates">
-          <%= render "applications/scraped_and_received_text", application: @application %>
-        </p>
-      </footer>
       <div id="comments-area">
         <% if @comments.present? %>
           <h4>
