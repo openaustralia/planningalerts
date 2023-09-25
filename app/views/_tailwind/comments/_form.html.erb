@@ -25,7 +25,15 @@
       <div class="text-xs font-bold underline text-fuchsia">Why do you need my address?</div>
     </div>
   </div>
-  <div class="flex gap-4 mt-8">
+  <div class="flex items-center p-12 mt-12 bg-light-grey">
+    <p class="text-2xl text-navy">
+      Your comment will be published here and also sent automatically to
+      <strong><%= application.comment_authority_with_fallback %></strong>.
+      They may consider these submissions when they decide whether to approve this application. 
+    </p>
+    <%= image_tag "tailwind/illustration/send-comment.svg" %>
+  </div>
+  <div class="flex gap-4 mt-12">
     <%= f.button "Review and publish" %>
     <%# TODO: Make clear form do the right thing %>
     <%= f.button "Clear form", type: :secondary %>
