@@ -1,20 +1,31 @@
-<%# TODO: Check all hints and placeholder are same as in locale %>
+<%# TODO: Make this go to a new review page instead of just publishing immediately %>
 <%= form_with model: [application, comment], builder: FormBuilders::Tailwind do |f| %>
   <div>
     <%= f.label :text, "Your comment", class: "sr-only" %>
-    <%# TODO: Add placeholder %>
-    <%# TODO: Add required %>
-    <%= f.text_area :text, rows: 10, class: "block w-full" %>
+    <%= f.text_area :text,
+                    rows: 10,
+                    class: "block w-full",
+                    required: true,
+                    placeholder: "Be polite, clear and to the point so your comment gets listened to." %>
+    <%= f.error :text, class: "mt-2" %>
+    <%# TODO: Make sure that we include the notice about donations to councillors %>
   </div>
   <div class="mt-5">
     <%= f.label :name, "Your full name" %>
-    <%= f.text_field :name, class: "mt-1 block w-full" %>
+    <%= f.text_field :name,
+                     class: "mt-1 block w-full",
+                     required: true,
+                     placeholder: "e.g. Jane Citizen" %>
     <%= f.error :name, class: "mt-2" %>
-    <%= f.hint "Your name will be posted publicly here on Planning Alerts and sent to the local council/planning authority", class: "mt-2" %>
+    <%# TODO: Should this include the actual name of the planning authority instead to make it more specific and meaningful? %>
+    <%= f.hint "Your name will be posted publicly here on Planning Alerts and sent to the planning authority", class: "mt-2" %>
   </div>
   <div class="mt-5">
     <%= f.label :address, "Your address" %>
-    <%= f.text_field :address, class: "mt-1 block w-full" %>
+    <%= f.street_address_field :address,
+                               class: "mt-1 block w-full",
+                               required: true,
+                               placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580" %>
     <%= f.error :address, class: "mt-2" %>
     <div class="flex items-baseline justify-between">
       <%# TODO: Hint needs to be smaller font size here %>
@@ -40,36 +51,3 @@
 <% end %>
 
 <%# TODO: Add illustration of person at the bottom of the page %>
-
-<%
-=begin
-%>
-
-<%= semantic_form_for [application, comment] do |f| %>
-  <%= f.inputs id: "comment-base-inputgroup" do %>
-    <%= f.input :text, as: :text, input_html: { rows: "10" }, %>
-      hint: t("formtastic.hints.comment.text", link: faq_path(anchor: "disclosure"), target: "#disclosure_explanation", class: "hideable")
-    <% end %>
-    <div class="inline-hints hideable-target" id="disclosure_explanation">
-      <%= render partial: "documentation/disclosure_explanation" %>
-    </div>
-    <%= f.input :name %>
-  <% end %>
-  <%= f.inputs id: "comment-detail-inputgroup" do %>
-    <%= f.input :address, input_html: { class: "address-autocomplete-input" }, %>
-      hint: t("formtastic.hints.comment.address", link: faq_path(anchor: "address"), target: "#faq_commenting_address", class: "hideable")
-    <% end %>
-    <div class="inline-hints hideable-target" id="faq_commenting_address">
-      <%= render partial: "documentation/faq_commenting_address" %>
-    </div>
-  <% end %>
-  <%= f.actions id: "comment-action-inputgroup" do %>
-    <%= f.action :submit, label: "Post your public comment", %>
-      button_html: { class: "button button-action" }
-    <% end %>
-  <% end %>
-<% end %>
-
-<%
-=end
-%>
