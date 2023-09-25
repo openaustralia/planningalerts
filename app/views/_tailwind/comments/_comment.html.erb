@@ -69,10 +69,8 @@
         </div>
         <p class="comment-meta hideable-target" id="delivery-info-<%= comment.id %>">
           <% if comment.last_delivered_successfully.nil? %>
-            <% # %>
-              Don't display any extra message if the comment has been sent but not yet delivered
-              Do we want to stick with this?
-            <% end %>
+            <%# Don't display any extra message if the comment has been sent but not yet delivered %>
+            <%# Do we want to stick with this? %>
           <% elsif comment.last_delivered_successfully %>
             This comment was successfully delivered to the
             email server of
@@ -94,6 +92,6 @@
   </div>
 </figure>
 
-<% 
+<%
 =end
 %>
