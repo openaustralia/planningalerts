@@ -65,7 +65,11 @@
     <%= link_to "email alerts", new_alert_path, class: "text-fuchsia font-bold underline" %>
   </dd>
   <dt class="py-1 font-bold">Comments</dt>
-  <dd class="py-1 border-t border-light-grey2">3 comments made here on Planning Alerts</dd>
+  <dd class="py-1 border-t border-light-grey2">
+    <%# TODO: Ensure that #comments exists %>
+    <%= link_to pluralize(@comments.count, "comment"), "#comments", class: "text-fuchsia font-bold underline" %>
+    made here on Planning Alerts
+  </dd>
 </dl>
 
 <%
