@@ -14,13 +14,13 @@
   <strong><%= comment.application.address %></strong>
   you said:
 </p>
-<div class="flex pt-4 pb-10">
-  <div class="mt-8 mr-6 text-navy text-7xl" aria-hidden="true">”</div>
+<div class="flex pt-12 pb-10">
+  <div class="mr-6 text-navy text-7xl" aria-hidden="true">”</div>
   <div>
-    <div class="prose-2xl">
+    <div class="prose prose-2xl">
       <%= comment_as_html(comment.text) %>
     </div>
-    <div class="mt-4 text-lg text-navy">
+    <div class="mt-12 text-lg text-navy">
       <time datetime="<%= comment.confirmed_at.strftime("%F") %>">
         <%= time_ago_in_words(comment.confirmed_at) %> ago
       </time>
