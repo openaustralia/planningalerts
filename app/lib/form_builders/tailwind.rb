@@ -20,6 +20,11 @@ module FormBuilders
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
+    def text_area(method, options = {})
+      wrap_field(method, super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}")))
+    end
+
+    sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def password_field(method, options = {})
       wrap_field(method, super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}")))
     end

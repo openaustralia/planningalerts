@@ -2,7 +2,6 @@
 <%= form_with model: [application, comment], builder: FormBuilders::Tailwind do |f| %>
   <div>
     <%= f.label :text, "Your comment", class: "sr-only" %>
-    <%# TODO: Update the form builder to format the text area %>
     <%# TODO: Add placeholder %>
     <%# TODO: Add required %>
     <%= f.text_area :text, rows: 10, class: "block w-full" %>
