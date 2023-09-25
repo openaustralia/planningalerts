@@ -120,6 +120,14 @@
   <% @comments.each do |comment| %>
     <div class="mt-12"><%= render comment %></div>
   <% end %>
+  <div class="flex gap-6">
+    <div class="mt-36 text-navy text-7xl">”</div>
+    <div class="pt-10 border-t border-dashed mt-14 border-warm-grey">
+      <h3 class="mb-3 text-3xl font-bold text-navy font-display">Add your own comment<h3>
+      <%# TODO: Handle logged out state %>
+      <%= render "comments/form", application: @application, comment: @comment %>
+    </div>
+  </div>
 </section>
 
 <%

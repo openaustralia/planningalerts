@@ -1,0 +1,66 @@
+<%# TODO: Check all hints and placeholder are same as in locale %>
+<%= form_with model: [application, comment], builder: FormBuilders::Tailwind do |f| %>
+  <div>
+    <%= f.label :text, "Your comment", class: "sr-only" %>
+    <%# TODO: Update the form builder to format the text area %>
+    <%# TODO: Add placeholder %>
+    <%# TODO: Add required %>
+    <%= f.text_area :text, rows: 10, class: "block w-full" %>
+  </div>
+  <div class="mt-5">
+    <%= f.label :name, "Your full name" %>
+    <%= f.text_field :name, class: "mt-1 block w-full" %>
+    <%= f.error :name, class: "mt-2" %>
+    <%= f.hint "Your name will be posted publicly here on Planning Alerts and sent to the local council/planning authority", class: "mt-2" %>
+  </div>
+  <div class="mt-5">
+    <%= f.label :address, "Your address" %>
+    <%= f.text_field :address, class: "mt-1 block w-full" %>
+    <%= f.error :address, class: "mt-2" %>
+    <div class="flex items-baseline justify-between">
+      <%# TODO: Hint needs to be smaller font size here %>
+      <%= f.hint "Your street address will never be displayed here on Planning Alerts", class: "mt-2" %>
+      <%# TODO: Make disclosure work %>
+      <%# TODO: Add disclosure icon %>
+      <div class="text-xs font-bold underline text-fuchsia">Why do you need my address?</div>
+    </div>
+  </div>
+  <div class="flex gap-4 mt-8">
+    <%= f.button "Review and publish" %>
+    <%# TODO: Make clear form do the right thing %>
+    <%= f.button "Clear form", type: :secondary %>
+  </div>
+<% end %>
+
+<%
+=begin
+%>
+
+<%= semantic_form_for [application, comment] do |f| %>
+  <%= f.inputs id: "comment-base-inputgroup" do %>
+    <%= f.input :text, as: :text, input_html: { rows: "10" }, %>
+      hint: t("formtastic.hints.comment.text", link: faq_path(anchor: "disclosure"), target: "#disclosure_explanation", class: "hideable")
+    <% end %>
+    <div class="inline-hints hideable-target" id="disclosure_explanation">
+      <%= render partial: "documentation/disclosure_explanation" %>
+    </div>
+    <%= f.input :name %>
+  <% end %>
+  <%= f.inputs id: "comment-detail-inputgroup" do %>
+    <%= f.input :address, input_html: { class: "address-autocomplete-input" }, %>
+      hint: t("formtastic.hints.comment.address", link: faq_path(anchor: "address"), target: "#faq_commenting_address", class: "hideable")
+    <% end %>
+    <div class="inline-hints hideable-target" id="faq_commenting_address">
+      <%= render partial: "documentation/faq_commenting_address" %>
+    </div>
+  <% end %>
+  <%= f.actions id: "comment-action-inputgroup" do %>
+    <%= f.action :submit, label: "Post your public comment", %>
+      button_html: { class: "button button-action" }
+    <% end %>
+  <% end %>
+<% end %>
+
+<%
+=end
+%>
