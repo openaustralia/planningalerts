@@ -88,6 +88,25 @@
   <% end %>
 </div>
 
+<div class="flex items-center gap-8 bg-light-grey px-14 pt-14 mt-14">
+  <%# TODO: Is h2 correct here? %>
+  <div class="pb-14">
+    <h2 class="mb-2 text-3xl font-bold font-display text-navy">Save this search as an email alert?</h2>
+    <p class="text-2xl text-navy">Save your search for applications within 2 kilometres of 25 Agate Avenue, Pearl Beach, NSW?</p>
+  <div class="flex gap-3 mt-8">
+    <%# TODO: Make this button work %>
+    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: "#") do %>
+      Save
+    <% end %>
+    <%# TODO: Make this button work %>
+    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: "#") do %>
+      No thanks
+    <% end %>
+  </div>
+  </div>
+  <%= image_tag "tailwind/illustration/save-search.svg", class: "self-end" %>
+</div>
+
 <%
 =begin
 %>
