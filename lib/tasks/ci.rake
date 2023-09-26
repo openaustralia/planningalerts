@@ -25,4 +25,7 @@ namespace :ci do
     # Security audit application code
     sh "bin/brakeman -q -w2"
   end
+
+  desc "Run everything that gets run on CI"
+  task all: %i[test type lint]
 end
