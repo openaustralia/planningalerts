@@ -22,12 +22,15 @@ module Tailwind
 
       case type
       when :primary
-        classes << "bg-green"
+        classes << "text-white bg-green"
       when :secondary
-        classes << "bg-warm-grey"
+        classes << "text-white bg-warm-grey"
       # This is not strictly an "inverse" but is good to be used on darker coloured backgrounds
       when :inverse
-        classes << "bg-navy"
+        classes << "text-white bg-navy"
+      # TODO: Don't like that we have two "inverse" types
+      when :inverse_primary
+        classes << "text-green bg-white border-2"
       else
         raise "Unexpected type #{type}"
       end
@@ -42,7 +45,7 @@ module Tailwind
         raise "Unexpected icon #{icon}"
       end
 
-      classes += %w[font-semibold text-white]
+      classes += %w[font-semibold]
       @classes = T.let(classes, T.nilable(T::Array[String]))
       @tag = tag
       @href = href

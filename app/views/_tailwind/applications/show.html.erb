@@ -89,8 +89,16 @@
   <%# TODO: This should link to an interstitial page %>
   <%# TODO: The interstitial page should use target: "_blank", rel: "noopener" on the link to the external site %>
   <%# TODO: Add icon %>
+  <%# TODO: Handle situation when authority name is very long %>
   <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: @application.info_url) do %>
     View more at <%= @application.authority.full_name %> website
+  <% end %>
+</div>
+
+<%# TODO: Point this button at a new page for sharing the application %>
+<div class="mt-2">
+  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :inverse_primary, href: "#") do %>
+    Share this application
   <% end %>
 </div>
 
