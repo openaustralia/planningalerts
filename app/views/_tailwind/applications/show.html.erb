@@ -79,7 +79,6 @@
 </dl>
 
 <div class="mt-12">
-  <%# TODO: Make sure that #add-comment exists %>
   <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: "#add-comment") do %>
     Make a comment on this application
   <% end %>
@@ -124,7 +123,6 @@
   <%# TODO: Add count %>
   <p class="text-2xl text-navy">
     Comment made here were sent to <strong>Central Coast Council</strong>.
-    <%# TODO: Make sure that #add-comment exists %>
     <%= link_to "Add your own comment", "#add-comment", class: "text-fuchsia font-bold" %>.
   </p>
   <% @comments.each do |comment| %>
@@ -132,11 +130,11 @@
   <% end %>
   <div class="flex gap-6">
     <div class="mt-36 text-navy text-7xl">”</div>
-    <div class="pt-10 border-t border-dashed mt-14 border-warm-grey">
+    <section class="pt-10 border-t border-dashed mt-14 border-warm-grey" id="add-comment">
       <h3 class="mb-3 text-3xl font-bold text-navy font-display">Add your own comment<h3>
       <%# TODO: Handle logged out state %>
       <%= render "comments/form", application: @application, comment: @comment %>
-    </div>
+    </section>
   </div>
 </section>
 
