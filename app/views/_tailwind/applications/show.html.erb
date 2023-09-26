@@ -46,14 +46,24 @@
   </dd>
 </dl>
 
-<%# TODO: Add icons next to labels %>
+<%# TODO: The icons next to the labels are not all the same size / proportion %>
 <dl class="text-2xl text-navy grid grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-14">
-  <dt class="py-1 font-bold">Date sourced</dt>
+  <dt class="py-1 font-bold">
+    <div class="flex gap-4">
+      <%= image_tag "tailwind/calendar.svg", width: 23 %>
+      <div>Date sourced</div>
+    </div>
+  </dt>
   <dd class="py-1">
     <%= render "applications/scraped_and_received_text", application: @application %>
   </dd>
   <%# TODO: Do we show the notified line if nobody has been notified? %>
-  <dt class="py-1 font-bold">Notified</dt>
+  <dt class="py-1 font-bold">
+    <div class="flex gap-4">
+      <%= image_tag "tailwind/letter.svg", width: 23 %>
+      <div>Notified</div>
+    </div>
+  </dt>
   <dd class="py-1 border-t border-light-grey2">
     <% if @application.no_alerted == 1 %>
       1 person was
@@ -64,7 +74,12 @@
     notified of this application via Planning Alerts
     <%= link_to "email alerts", new_alert_path, class: "text-fuchsia font-bold underline" %>
   </dd>
-  <dt class="py-1 font-bold">Comments</dt>
+  <dt class="py-1 font-bold">
+    <div class="flex gap-4">
+      <%= image_tag "tailwind/comments.svg", width: 23 %>
+      <div>Comments</div>
+    </div>
+  </dt>
   <dd class="py-1 border-t border-light-grey2">
     <%# TODO: Ensure that #comments exists %>
     <%= link_to pluralize(@comments.count, "comment"), "#comments", class: "text-fuchsia font-bold underline" %>
