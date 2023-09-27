@@ -102,18 +102,28 @@
   <% end %>
 </div>
 
-<%# TODO: Also add logged out state %>
 <div class="flex items-center gap-8 bg-light-grey px-14 pt-14 mt-14">
   <%# TODO: Is h2 correct here? %>
   <div class="pb-14">
     <h2 class="mb-2 text-3xl font-bold font-display text-navy">Save this search as an email alert?</h2>
-    <%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind do |f| %>
-      <p class="mb-8 text-2xl text-navy">
-        Save your search for applications within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>?
+    <% if current_user.nil? %>
+      <p class="text-2xl text-navy">
+        <%= link_to "Create an account", new_user_registration_path, class: "text-fuchsia font-bold hover:underline" %>
+        or
+        <%= link_to "sign in", new_user_session_path, class: "text-fuchsia font-bold hover:underline" %>.
       </p>
-      <%= f.hidden_field :address %>
-      <%= f.hidden_field :radius_meters %>
-      <%= f.button "Save" %>
+      <p class="text-2xl text-navy">
+        It only takes a moment.
+      </p>
+    <% else %>
+      <%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind do |f| %>
+        <p class="mb-8 text-2xl text-navy">
+          Save your search for applications within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>?
+        </p>
+        <%= f.hidden_field :address %>
+        <%= f.hidden_field :radius_meters %>
+        <%= f.button "Save" %>
+      <% end %>
     <% end %>
   </div>
   <%= image_tag "tailwind/illustration/save-search.svg", class: "self-end" %>
