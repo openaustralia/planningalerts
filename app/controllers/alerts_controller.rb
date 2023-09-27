@@ -55,7 +55,7 @@ class AlertsController < ApplicationController
     user.confirm if user && !user.confirmed?
   end
 
-  # TODO: We should leave this working until March 2023 to alllow people to still do things from old alert emails
+  # This is still being used to do one click unsubscribes from email alerts
   sig { void }
   def unsubscribe
     @alert = Alert.find_by(confirm_id: params[:confirm_id])
