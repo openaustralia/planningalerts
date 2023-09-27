@@ -102,12 +102,13 @@
   <% end %>
 </div>
 
-<div class="flex items-center gap-8 bg-light-grey px-14 pt-14 mt-14">
+<%# TODO: Only show this block if we don't have an alert covering this area? %>
+<div class="flex items-center justify-between gap-8 bg-light-grey px-14 pt-14 mt-14">
   <%# TODO: Is h2 correct here? %>
   <div class="pb-14">
-    <h2 class="mb-2 text-3xl font-bold font-display text-navy">Save this search as an email alert?</h2>
+    <h2 class="text-3xl font-bold font-display text-navy">Save this search as an email alert?</h2>
     <% if current_user.nil? %>
-      <p class="text-2xl text-navy">
+      <p class="mt-4 text-2xl text-navy">
         <%= link_to "Create an account", new_user_registration_path, class: "text-fuchsia font-bold hover:underline" %>
         or
         <%= link_to "sign in", new_user_session_path, class: "text-fuchsia font-bold hover:underline" %>.
@@ -117,7 +118,7 @@
       </p>
     <% else %>
       <%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind do |f| %>
-        <p class="mb-8 text-2xl text-navy">
+        <p class="mt-2 mb-8 text-2xl text-navy">
           Save your search for applications within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>?
         </p>
         <%= f.hidden_field :address %>
