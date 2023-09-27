@@ -122,6 +122,7 @@
 <section class="border-t mt-14 pt-14 border-light-grey2" id="comments">
   <h2 class="mb-6 text-3xl font-bold text-navy font-display">Comments on this application</h2>
   <%# TODO: Add count %>
+  <%# TODO: Handle situation with 0 comments differently %>
   <p class="text-2xl text-navy">
     Comment made here were sent to <strong><%= @application.comment_authority_with_fallback %></strong>.
     <%= link_to "Add your own comment", "#add-comment", class: "text-fuchsia font-bold" %>.
