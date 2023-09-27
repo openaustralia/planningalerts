@@ -121,7 +121,7 @@ class ApplicationsController < ApplicationController
     )
     @comment = T.let(comment, T.nilable(Comment))
     # Required for new email alert signup form
-    @alert = Alert.new(address: application.address, user: User.new)
+    @alert = Alert.new(address: application.address, radius_meters: Alert::DEFAULT_RADIUS, user: User.new)
 
     respond_to do |format|
       format.html
