@@ -1,17 +1,6 @@
-<%# TODO: Link to correct place %>
-<%= link_to "Report this comment", "#", class: "text-fuchsia text-xl hover:underline" %>
-
-<%
-=begin
-%>
-
-<% if current_user&.admin? %>
-  <%= link_to "admin", admin_comment_path(comment), class: "comment-action" %>
-<% end %>
 <% unless current_page?(new_comment_report_path(comment.id)) %>
-  <%= link_to "report comment", new_comment_report_path(comment), title: "Report this comment by #{comment.name} for removal", class: "comment-action" %>
+  <%= link_to "Report this comment", new_comment_report_path(comment), class: "text-fuchsia text-xl hover:underline" %>
 <% end %>
-
-<%
-=end
-%>
+<% if current_user&.admin? %>
+  <%= link_to "Admin", admin_comment_path(comment), class: "block text-fuchsia text-xl hover:underline" %>
+<% end %>
