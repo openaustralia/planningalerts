@@ -1,0 +1,26 @@
+<%# TODO: Add disclosure icon on the right as per the design %>
+<%# TODO: Animate the icon? %>
+<% if comment.last_delivered_successfully.nil? %>
+  <%# TODO: Do we style this as a link even though it isn't? %>
+  <p class="text-xl font-bold text-fuchsia">Sent to the planning authority</p>
+<% elsif comment.last_delivered_successfully %>
+  <details class="text-xl text-navy">
+    <summary class="font-bold text-fuchsia">Delivered to the planning authority</summary>
+    <%# TODO: Use more sensible time zone %>
+    This comment was successfully delivered to the email server of
+    <%= comment.application.comment_authority_with_fallback %>
+    at
+    <%= comment.last_delivered_at %>
+  </details>
+<% else %>
+  <details class="text-xl text-navy">
+    <summary class="font-bold text-fuchsia">There was a problem delivering this to the planning authority</summary>
+    The comment was hard bounced by the email server of
+    <%= comment.application.comment_authority_with_fallback %>
+    at
+    <%= comment.last_delivered_at %>
+    Please follow up by
+    <%= link_to "contacting us", documentation_contact_path %>
+    so that we can try to help resolve this issue
+  </details>
+<% end %>
