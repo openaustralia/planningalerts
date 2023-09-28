@@ -26,11 +26,14 @@
     </div>
 
     <% if comment.visible? %>
-      <%# TODO: Add disclosure icon %>
-      <%# TODO: Make it work %>
-      <%# TODO: Progressive enhancement? %>
+      <%# TODO: Add disclosure icon on the right as per the design %>
+      <%# TODO: Animate the icon? %>
       <%# TODO: Make this show the correct thing %>
-      <div class="text-xl font-bold text-fuchsia">Delivered to the planning authority</div>
+      <details class="text-xl text-navy">
+        <summary class="font-bold text-fuchsia">Delivered to the planning authority</summary>
+        This comment was successfully delivered to the
+        email server of Foobar council on 23 Sep 2023 5:00 (AEST).
+      </details>
       <div class="mt-4">
         <%= render "comments/actions", comment: %>
       </div>
