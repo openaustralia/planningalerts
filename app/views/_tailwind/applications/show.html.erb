@@ -137,7 +137,7 @@
   <%# TODO: Add count %>
   <%# TODO: Handle situation with 0 comments differently %>
   <p class="text-2xl text-navy">
-    Comment made here were sent to <strong><%= @application.comment_authority_with_fallback %></strong>.
+    Comments made here were sent to <strong><%= @application.comment_authority_with_fallback %></strong>.
     <%= link_to "Add your own comment", "#add-comment", class: "text-fuchsia font-bold" %>.
   </p>
   <% @comments.each do |comment| %>
