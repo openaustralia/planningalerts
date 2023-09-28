@@ -28,7 +28,7 @@ function initialisePano(elem) {
   // Can't yet figure out how to make the POV point at the marker
   var pointToLookAt = new google.maps.LatLng(lat, lng);
   var myPano = new  google.maps.StreetViewPanorama(elem,
-    {position: pointToLookAt, navigationControl: false, addressControl: false, zoom: 0, scrollwheel: false, fullscreenControl: false});
+    {position: pointToLookAt, navigationControl: false, addressControl: false, zoom: 0, scrollwheel: false, fullscreenControl: false, linksControl: false});
   google.maps.event.addListener(myPano, 'position_changed', function() {
     // Orient the camera to face the position we're interested in
     var angle = computeAngle(pointToLookAt, myPano.getPosition());
