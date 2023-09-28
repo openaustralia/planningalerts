@@ -9,16 +9,16 @@
     <%# TODO: Use more sensible time zone %>
     This comment was successfully delivered to the email server of
     <%= comment.application.comment_authority_with_fallback %>
-    at
-    <%= comment.last_delivered_at %>
+    on
+    <%= comment.last_delivered_at.utc.to_fs(:long) %> UTC
   <% end %>
 <% else %>
   <%= render Tailwind::DisclosureComponent.new do |component| %>
     <% component.with_summary { "There was a problem delivering this to the planning authority" } %>
     The comment was hard bounced by the email server of
     <%= comment.application.comment_authority_with_fallback %>
-    at
-    <%= comment.last_delivered_at %>
+    on
+    <%= comment.last_delivered_at.utc.to_fs(:long) %> UTC
     Please follow up by
     <%= link_to "contacting us", documentation_contact_path %>
     so that we can try to help resolve this issue
