@@ -1,10 +1,12 @@
 <details class="text-xl text-navy group">
   <summary class="font-bold list-none text-fuchsia">
     <%= summary %>
+    <%# TODO: Don't like the animation. Feels strangly weird rotating around the middle %>
     <span class="w-0 h-0 inline-block
     border-l-[8px] border-l-transparent
-    border-t-[12px] border-t-fuchsia
-    border-r-[8px] border-r-transparent group-open:rotate-180"><span>
+    border-t-[14px] border-t-fuchsia
+    border-r-[8px] border-r-transparent
+    group-open:-rotate-180 transition duration-300"><span>
   </summary>
   <%= content %>
 </details>
