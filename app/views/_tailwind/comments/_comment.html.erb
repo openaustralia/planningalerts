@@ -6,6 +6,7 @@
   <div>
     <div class="prose prose-2xl">
       <% if comment.visible? %>
+        <%# TODO: Clip long comment %>
         <%= comment_as_html(comment.text) %>
       <% else %>
         <em>This comment was hidden by site administrators</em>
@@ -28,12 +29,30 @@
     <% if comment.visible? %>
       <%# TODO: Add disclosure icon on the right as per the design %>
       <%# TODO: Animate the icon? %>
-      <%# TODO: Make this show the correct thing %>
-      <details class="text-xl text-navy">
-        <summary class="font-bold text-fuchsia">Delivered to the planning authority</summary>
-        This comment was successfully delivered to the
-        email server of Foobar council on 23 Sep 2023 5:00 (AEST).
-      </details>
+      <% if comment.last_delivered_successfully.nil? %>
+        <%# TODO: Do we style this as a link even though it isn't? %>
+        <p class="text-xl font-bold text-fuchsia">Sent to the planning authority</p>
+      <% elsif comment.last_delivered_successfully %>
+        <details class="text-xl text-navy">
+          <summary class="font-bold text-fuchsia">Delivered to the planning authority</summary>
+          <%# TODO: Use more sensible time zone %>
+          This comment was successfully delivered to the email server of
+          <%= comment.application.comment_authority_with_fallback %>
+          at
+          <%= comment.last_delivered_at %>
+        </details>
+      <% else %>
+        <details class="text-xl text-navy">
+          <summary class="font-bold text-fuchsia">There was a problem delivering this to the planning authority</summary>
+          The comment was hard bounced by the email server of
+          <%= comment.application.comment_authority_with_fallback %>
+          at
+          <%= comment.last_delivered_at %>
+          Please follow up by
+          <%= link_to "contacting us", documentation_contact_path %>
+          so that we can try to help resolve this issue
+        </details>
+      <% end %>
       <div class="mt-4">
         <%= render "comments/actions", comment: %>
       </div>
@@ -58,42 +77,6 @@
         <em>Hidden by site administrators</em>
       <% end %>
     </blockquote>
-    <% if comment.visible? %>
-      <footer>
-        <p class="comment-meta">
-          <% if comment.last_delivered_successfully.nil? %>
-            sent to the planning authority
-          <% else %>
-            <%= link_to comment.last_delivered_successfully ? "delivered to the planning authority" : "there was a problem delivering this to the planning authority", %>
-              { anchor: "delivery-info-#{comment.id}" }, class: "hideable", data: { target: "#delivery-info-#{comment.id}" }
-            <% end %>
-          <% end %>
-        </p>
-        <div class="comment-actions">
-          <%= render "comments/actions", comment: %>
-        </div>
-        <p class="comment-meta hideable-target" id="delivery-info-<%= comment.id %>">
-          <% if comment.last_delivered_successfully.nil? %>
-            <%# Don't display any extra message if the comment has been sent but not yet delivered %>
-            <%# Do we want to stick with this? %>
-          <% elsif comment.last_delivered_successfully %>
-            This comment was successfully delivered to the
-            email server of
-            <%= comment.application.comment_authority_with_fallback %>
-            at
-            <%= comment.last_delivered_at %>
-          <% else %>
-            The comment was hard bounced by the email server of
-            <%= comment.application.comment_authority_with_fallback %>
-            at
-            <%= comment.last_delivered_at %>
-            Please follow up by
-            <%= link_to "contacting us", documentation_contact_path %>
-            so that we can try to help resolve this issue
-          <% end %>
-        </p>
-      </footer>
-    <% end %>
   </div>
 </figure>
 
