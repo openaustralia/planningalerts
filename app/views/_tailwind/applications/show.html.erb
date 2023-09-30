@@ -135,9 +135,21 @@
   <%= image_tag "tailwind/illustration/save-search.svg", class: "self-end" %>
 </div>
 
-<section class="border-t mt-14 pt-14 border-light-grey2" id="comments">
-  <h2 class="mb-6 text-3xl font-bold text-navy font-display">Comments on this application</h2>
-  <%# TODO: Add count %>
+<section class="pt-20 border-t mt-14 border-light-grey2" id="comments">
+  <h2 class="inline-block mb-6 text-3xl font-bold text-navy font-display">Comments on this application</h2>
+  <% if @comments.count > 0 %>
+    <div class="relative inline-block ml-4 -top-6">
+      <div class="inline-block px-4 py-2 text-4xl font-bold text-white rounded-2xl bg-lavender">
+        <%= @comments.count %>
+      </div>
+      <div class="w-0 h-0 absolute right-4
+        border-l-[6px] border-l-transparent
+        border-t-[14px] border-t-lavender
+        border-r-[6px] border-r-transparent">
+      </div>
+    </div>
+  <% end %>
+
   <%# TODO: Handle situation with 0 comments differently %>
   <p class="text-2xl text-navy">
     Comments made here were sent to <strong><%= @application.comment_authority_with_fallback %></strong>.
