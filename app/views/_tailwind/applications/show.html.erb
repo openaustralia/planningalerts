@@ -39,10 +39,12 @@
     <%# TODO: Add ability to copy with a click %>
       <%= @application.council_reference %>
     </div>
-    <%# TODO: Link off to actual page %>
-    <%# TODO: Add disclosure information %>
-    <%# TODO: Add disclosure triangle icon %>
-    <%= link_to "What is a reference number?", "#", class: "text-fuchsia text-2xl font-bold underline" %>
+    <%= render Tailwind::DisclosureComponent.new(size: "2xl") do |component| %>
+      <% component.with_summary { "What is a reference number?" } %>
+      <%# TODO: Improve this terrible text. This is just a placeholder first go. %>
+      The reference number is created by the planning authority and is used by them to identify this application.
+      If you talk to the planning authority directly or use their website you will need this number to find or refer to this application. 
+    <% end %>
   </dd>
 </dl>
 
