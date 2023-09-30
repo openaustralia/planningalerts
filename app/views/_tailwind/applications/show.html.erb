@@ -163,35 +163,7 @@
 <div id="main">
   <div id="application">
     <article id="application-info">
-      <%= link_to @application.info_url, class: "button button-rounded", target: "_blank", rel: "noopener" do %>
-        <%= image_tag "standard/external_link.png", size: "10x10", alt: "External link" %>
-        Read more information
-      <% end %>
       <div id="comments-area">
-        <% if @comments.present? %>
-          <h4>
-            <%= pluralize(@comments.count, "Comment") %>
-          </h4>
-          <% if current_user.nil? %>
-            <p>
-              <%= link_to "Create an account", new_user_registration_path %>
-              or
-              <%= link_to "sign in", new_user_session_path %>
-              to have your say by adding your own comment.
-            </p>
-          <% else %>
-            <p class="small quiet">
-              Have your say by #{link_to "adding your own comment", "#add-comment", class: "link-to-comment-form"}.
-            </p>
-          <% end %>
-          <ol id="comments">
-            <% @comments.each do |comment| %>
-              <li>
-                <%= render comment, with_address: false %>
-              </li>
-            <% end %>
-          </ol>
-        <% end %>
         <h4 id="add-comment">Have your say on this application</h4>
         <% if @application.authority.email.present? %>
           <%= render "comments/form_introduction", application: @application %>
@@ -211,32 +183,6 @@
       </div>
     </article>
   </div>
-</div>
-<div id="sidebar">
-  <div id="alert">
-    <div class="attention">
-      <%= render "alerts/signup_introduction" %>
-      <% if current_user.nil? %>
-        <%= link_to "Create an account", new_user_registration_path %>
-        or
-        <%= link_to "sign in", new_user_session_path %>
-        to create an alert.
-      <% else %>
-        <%= semantic_form_for @alert do |f| %>
-          <%= f.inputs do %>
-            <%= f.input :address, label: "Enter a street address", placeholder: "Enter a street address" %>
-          <% end %>
-          <%= f.actions do %>
-            <%= f.action :submit, label: "Create alert", button_html: { class: "button button-rounded button-action button-large" } %>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-  <div id="application-stats">
-    <%= link_to "Recent nearby applications", nearby_application_url(@application, sort: "time"), class: "button button-rounded" %>
-  </div>
-  <%= render "applications/social_share", application: @application %>
 </div>
 
 <%
