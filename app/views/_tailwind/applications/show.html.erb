@@ -148,10 +148,25 @@
   <% end %>
   <div class="flex gap-6">
     <div class="mt-36 text-navy text-7xl">”</div>
-    <section class="pt-10 border-t border-dashed mt-14 border-warm-grey" id="add-comment">
+    <section class="pt-10 border-t border-dashed mt-14 border-warm-grey grow" id="add-comment">
       <h3 class="mb-3 text-3xl font-bold text-navy font-display">Add your own comment<h3>
-      <%# TODO: Handle logged out state %>
-      <%= render "comments/form", application: @application, comment: @comment %>
+      <% if current_user.nil? %>
+        <div class="px-4 py-3 bg-light-grey">
+          <p class="text-2xl opacity-50 text-navy">Be polite, clear and to the point so your comment gets listened to.</p>
+          <div class="flex justify-center py-12">
+            <div class="inline-grid grid-cols-2 gap-3">
+              <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_registration_path) do %>
+                Create an account
+              <% end %>
+              <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_session_path) do %>
+                Sign in
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <%= render "comments/form", application: @application, comment: @comment %>
+      <% end %>
     </section>
   </div>
 </section>
@@ -164,19 +179,8 @@
   <div id="application">
     <article id="application-info">
       <div id="comments-area">
-        <h4 id="add-comment">Have your say on this application</h4>
         <% if @application.authority.email.present? %>
           <%= render "comments/form_introduction", application: @application %>
-          <% if current_user.nil? %>
-            <p>
-              <%= link_to "Create an account", new_user_registration_path %>
-              or
-              <%= link_to "sign in", new_user_session_path %>
-              to make a comment
-            </p>
-          <% else %>
-            <%= render "comments/form", application: @application, comment: @comment %>
-          <% end %>
         <% else %>
           <%= render "comments/no_authority_email_explanation", application: @application %>
         <% end %>
