@@ -84,7 +84,8 @@
 </dl>
 
 <div class="mt-12">
-  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: "#add-comment") do %>
+  <%# TODO: This button currently has much larger left and right padding than the design %>
+  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: "#add-comment", icon: :edit) do %>
     Make a comment on this application
   <% end %>
 </div>
@@ -94,7 +95,7 @@
   <%# TODO: The interstitial page should use target: "_blank", rel: "noopener" on the link to the external site %>
   <%# TODO: Add icon %>
   <%# TODO: Handle situation when authority name is very long %>
-  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: @application.info_url) do %>
+  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: @application.info_url, icon: :external) do %>
     View more at <%= @application.authority.full_name %> website
   <% end %>
 </div>

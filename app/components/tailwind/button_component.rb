@@ -41,6 +41,12 @@ module Tailwind
       when :trash
         icon_path = "tailwind/trash.svg"
         icon_alt = "Trash icon"
+      when :edit
+        icon_path = "tailwind/pencil.svg"
+        icon_alt = "Pencil icon"
+      when :external
+        icon_path = "tailwind/external.svg"
+        icon_alt = "External link icon"
       else
         raise "Unexpected icon #{icon}"
       end
