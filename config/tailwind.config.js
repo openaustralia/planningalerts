@@ -32,6 +32,11 @@ module.exports = {
           }
         }
       }),
+      screens: {
+        // Overriding the default so that the xl breakpoint occurs at exactly where
+        // the main content area is at it's maximum width
+        'xl': '1152px'
+      }
     },
     colors: {
       'transparent': 'transparent',
