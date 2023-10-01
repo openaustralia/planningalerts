@@ -18,6 +18,13 @@ module ApplicationHelper
     link_to(body, url, class: "#{html_options[:class]} text-fuchsia font-bold hover:underline")
   end
 
+  # Only to be used in tailwind theme
+  # TODO: Generalise to support all the variants
+  sig { params(body: String, url: String, html_options: T::Hash[Symbol, String]).returns(String) }
+  def pa_link_to_unless_current(body, url, html_options = {})
+    link_to_unless_current(body, url, class: "#{html_options[:class]} text-fuchsia font-bold hover:underline")
+  end
+
   sig { params(path: String, extra_classes: T::Array[Symbol], block: T.untyped).returns(T.untyped) }
   def menu_item(path, extra_classes: [], &block)
     li_selected(current_page?(path), extra_classes:) do
