@@ -24,7 +24,7 @@
 <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
 
-<dl class="mt-16 grid grid-cols-[18rem_1fr] text-navy text-2xl">
+<dl class="mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-2xl">
   <dt class="font-bold">Description</dt>
   <dd><%= @application.description %></dd>
   <dt class="font-bold">Planning Authority</dt>
@@ -49,18 +49,18 @@
 </dl>
 
 <%# TODO: The icons next to the labels are not all the same size / proportion %>
-<dl class="text-2xl text-navy grid grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-14">
-  <dt class="py-1 font-bold">
+<dl class="text-2xl text-navy grid md:grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-14">
+  <dt class="font-bold md:py-1">
     <div class="flex gap-4">
       <%= image_tag "tailwind/calendar.svg", width: 23 %>
       <div>Date sourced</div>
     </div>
   </dt>
-  <dd class="py-1">
+  <dd class="md:py-1">
     <%= render "applications/scraped_and_received_text", application: @application %>
   </dd>
   <%# TODO: Do we show the notified line if nobody has been notified? %>
-  <dt class="py-1 font-bold">
+  <dt class="font-bold md:py-1">
     <div class="flex gap-4">
       <%= image_tag "tailwind/letter.svg", width: 23 %>
       <div>Notified</div>
@@ -68,17 +68,17 @@
   </dt>
   <%# TODO: The link in notified text should go to the new alert sign up page %>
   <%# TODO: Should we have the link at all now? %>
-  <dd class="py-1 border-t border-light-grey2">
+  <dd class="md:py-1 md:border-t border-light-grey2">
     <%= render "notified_text", application: @application %>
   </dd>
   <%# TODO: What to do if there are 0 comments? %>
-  <dt class="py-1 font-bold">
+  <dt class="font-bold md:py-1">
     <div class="flex gap-4">
       <%= image_tag "tailwind/comments.svg", width: 23 %>
       <div>Comments</div>
     </div>
   </dt>
-  <dd class="py-1 border-t border-light-grey2">
+  <dd class="md:py-1 md:border-t border-light-grey2">
     <%= render "comments_text", comments: @comments %>
   </dd>
 </dl>
