@@ -2,5 +2,5 @@
   <%= link_to "Report this comment", new_comment_report_path(comment), class: "text-fuchsia text-xl hover:underline" %>
 <% end %>
 <% if current_user&.admin? %>
-  <%= link_to "Admin", admin_comment_path(comment), class: "block text-fuchsia text-xl hover:underline" %>
+  <%= pa_link_to "Admin", admin_comment_path(comment), class: "block text-xl" %>
 <% end %>

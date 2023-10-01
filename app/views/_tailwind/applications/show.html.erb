@@ -29,9 +29,8 @@
   <dd><%= @application.description %></dd>
   <dt class="font-bold">Planning Authority</dt>
   <dd>
-    <%= link_to @application.authority.full_name,
-                authority_path(@application.authority.short_name_encoded),
-                class: "hover:underline" %>
+    <%= pa_link_to @application.authority.full_name,
+                   authority_path(@application.authority.short_name_encoded) %>
   </dd>
   <dt class="font-bold">& Reference number</dt>
   <dd>
@@ -114,9 +113,9 @@
     <h2 class="text-3xl font-bold font-display text-navy">Save this search as an email alert?</h2>
     <% if current_user.nil? %>
       <p class="mt-4 text-2xl text-navy">
-        <%= link_to "Create an account", new_user_registration_path, class: "text-fuchsia font-bold hover:underline" %>
+        <%= pa_link_to "Create an account", new_user_registration_path %>
         or
-        <%= link_to "sign in", new_user_session_path, class: "text-fuchsia font-bold hover:underline" %>.
+        <%= pa_link_to "sign in", new_user_session_path %>.
       </p>
       <p class="text-2xl text-navy">
         It only takes a moment.
@@ -153,7 +152,7 @@
   <%# TODO: Handle situation with 0 comments differently %>
   <p class="text-2xl text-navy">
     Comments made here were sent to <strong><%= @application.comment_authority_with_fallback %></strong>.
-    <%= link_to "Add your own comment", "#add-comment", class: "text-fuchsia font-bold" %>.
+    <%= pa_link_to "Add your own comment", "#add-comment" %>.
   </p>
   <% @comments.each do |comment| %>
     <div class="mt-12"><%= render comment %></div>
