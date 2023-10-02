@@ -26,29 +26,8 @@
       </time>
     </div>
     <div class="mt-4">
-      <% if comment.last_delivered_successfully.nil? %>
-        <p class="text-lg font-bold text-orange">Sent to the planning authority</p>
-      <% elsif comment.last_delivered_successfully %>
-        <p class="text-lg font-bold text-orange">Delivered to the planning authority</p>
-        <p class="text-lg text-navy">
-          This comment was successfully delivered to the
-          email server of
-          <%= comment.application.comment_authority_with_fallback %>
-          at
-          <%= comment.last_delivered_at %>
-        </p>
-      <% else %>
-        <p class="text-lg font-bold text-orange">There was a problem delivering this to the planning authority</p>
-        <p class="text-lg text-navy">
-          The comment was hard bounced by the email server of
-          <%= comment.application.comment_authority_with_fallback %>
-          at
-          <%= comment.last_delivered_at %>
-          Please follow up by
-          <%= pa_link_to "contacting us", documentation_contact_path %>
-          so that we can try to help resolve this issue
-        </p>
-      <% end %>
+      <%# # TODO: We want the disclosure always open (or no disclosure) instead of what's on the public comments page %>
+      <%= render "comments/delivery_status", comment: %>
     </div>
   </div>
 </div>
