@@ -27,11 +27,15 @@
                                required: true,
                                placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580" %>
     <%= f.error :address, class: "mt-2" %>
-    <div class="flex items-baseline justify-between">
-      <%= f.hint "Your street address will never be displayed here on Planning Alerts", class: "mt-2" %>
-      <%# TODO: Make disclosure work %>
-      <%# TODO: Add disclosure icon %>
-      <div class="text-base font-bold underline text-fuchsia">Why do you need my address?</div>
+    <%= f.hint "Your street address will never be displayed here on Planning Alerts", class: "mt-2" %>
+    <%# TODO: Need an actual design for the left aligned version here %>
+    <div class="mt-2">
+      <%= render Tailwind::DisclosureComponent.new(size: "base") do |component| %>
+        <% component.with_summary { "Why do you need my address?" } %>
+        <div class="prose">
+          <%= render "documentation/faq_commenting_address" %>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="flex items-center p-12 mt-12 bg-light-grey">
