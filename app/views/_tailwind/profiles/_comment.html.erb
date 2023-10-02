@@ -4,7 +4,7 @@
   <p class="py-3 text-2xl mb-9 text-navy bg-light-grey px-7">
     This comment is hidden from public view.
     <%# TODO: Where does this link to? %>
-    <%= link_to "Why?", "#", class: "underline" %>
+    <%= pa_link_to "Why?", "#" %>
   </p>
 <% end %>
 
@@ -45,8 +45,7 @@
           at
           <%= comment.last_delivered_at %>
           Please follow up by
-          <%# TODO: Style this link %>
-          <%= link_to "contacting us", documentation_contact_path %>
+          <%= pa_link_to "contacting us", documentation_contact_path %>
           so that we can try to help resolve this issue
         </p>
       <% end %>

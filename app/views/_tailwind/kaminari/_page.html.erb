@@ -6,8 +6,4 @@
     total_pages:   total number of pages
     per_page:      number of items to fetch per page
     remote:        data-remote -%>
-<% if page.current? %>
-  <span class="underline"><%= page %></span>
-<% else %>
-  <%= link_to page, url, { remote:, rel: page.rel } %>
-<% end %>
+<%= pa_link_to_unless page.current?, page, url, { remote:, rel: page.rel } %>

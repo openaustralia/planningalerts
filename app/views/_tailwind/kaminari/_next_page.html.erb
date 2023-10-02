@@ -6,4 +6,4 @@
     per_page:      number of items to fetch per page
     remote:        data-remote -%>
 <%# Not using t("views.pagination.next") because we only want to override it in the tailwind theme %>
-<%= link_to_unless current_page.last?, "Next page &rsaquo;".html_safe, url, rel: "next", remote:, class: "underline" %>
+<%= pa_link_to_unless current_page.last?, "Next page &rsaquo;".html_safe, url, rel: "next", remote: %>

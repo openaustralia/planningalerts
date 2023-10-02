@@ -6,7 +6,7 @@
     remote:        data-remote
     paginator:     the paginator that renders the pagination tags inside -%>
 <%= paginator.render do -%>
-  <nav role="navigation" aria-label="pager" class="flex justify-between text-2xl font-bold text-orange">
+  <nav role="navigation" aria-label="pager" class="flex justify-between text-2xl font-bold text-navy">
     <%= prev_page_tag unless current_page.first? %>
     <div class="flex gap-4">
       <% each_page do |page| -%>
