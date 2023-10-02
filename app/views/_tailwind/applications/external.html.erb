@@ -24,7 +24,14 @@
   </div>
 
   <%# TODO: Make this copyable with a single click %>
-  <div class="mt-4 text-2xl text-navy">DA/862/2023</div>
+  <%# TODO: Use actual content %>
+  <div class="flex items-baseline mt-4">
+    <div class="px-8 py-2 mt-4 text-2xl select-all text-navy bg-light-grey">DA/862/2023</div>
+    <button class="flex items-baseline gap-2 px-4 py-2 text-2xl font-semibold text-white bg-warm-grey">
+      <%= image_tag "tailwind/copy-to-clipboard.svg" %>
+      <div>Copy</div>
+    </button>
+  </div>
 
   <div class="mt-20">
     <%# TODO: This should use target: "_blank", rel: "noopener" on the link to the external site %>
