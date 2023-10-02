@@ -23,13 +23,18 @@
     </p>
   </div>
 
-  <%# TODO: Make this copyable with a single click %>
+  <%# TODO: Don't want the button changing size when pressing copy %>
   <%# TODO: Use actual content %>
-  <div class="flex items-baseline mt-4">
-    <div class="px-8 py-2 mt-4 text-2xl select-all text-navy bg-light-grey">DA/862/2023</div>
-    <button class="flex items-baseline gap-2 px-4 py-2 text-2xl font-semibold text-white bg-warm-grey">
+  <div class="flex items-baseline mt-4" x-data="{ copied: false }">
+    <div class="px-8 py-2 mt-4 text-2xl select-all text-navy bg-light-grey" x-ref="value">DA/862/2023</div>
+    <button class="flex items-baseline gap-2 px-4 py-2 text-2xl font-semibold text-white bg-warm-grey"
+            x-on:click="
+              navigator.clipboard.writeText($refs.value.innerText);
+              copied = true;
+              setTimeout(() => { copied = false }, 500)"
+            x-bind:disabled="copied">
       <%= image_tag "tailwind/copy-to-clipboard.svg" %>
-      <div>Copy</div>
+      <div x-text="copied ? 'Copied' : 'Copy' ">Copy</div>
     </button>
   </div>
 
