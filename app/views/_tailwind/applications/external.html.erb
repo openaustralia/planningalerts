@@ -1,0 +1,36 @@
+<%= pa_link_to "< Back to application", @application, class: "text-2xl" %>
+
+<div class="flex flex-col items-center max-w-4xl m-auto mt-16 text-center">
+  <%= image_tag "tailwind/illustration/send-comment2.svg" %>
+
+  <%# TODO: Update content %>
+  <h1 class="mt-16 text-4xl font-bold text-navy font-display">
+    We will now try to direct you to this application on the Central Coast Council website
+  </h1>
+
+  <div class="text-2xl text-navy mt-14">
+    <p class="font-bold">
+      This may not work!
+    </p>
+    <p>
+      (It will depend on how friendly the system that planning authority uses)
+    </p>
+    <p class="mt-4">
+      If we can't find the application we'll at least take you to the planning authority's homepage.
+    </p>
+    <p class="mt-4">
+      Here's the application reference number:
+    </p>
+  </div>
+
+  <%# TODO: Make this copyable with a single click %>
+  <div class="mt-4 text-2xl text-navy">DA/862/2023</div>
+
+  <div class="mt-20">
+    <%# TODO: This should use target: "_blank", rel: "noopener" on the link to the external site %>
+    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: @application.info_url) do %>
+      Continue to
+      <span class="font-normal"><%= @application.authority.full_name %> website</span>
+    <% end %>
+  </div>
+</div>

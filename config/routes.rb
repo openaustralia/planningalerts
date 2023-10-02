@@ -124,6 +124,7 @@ Rails.application.routes.draw do
   resources :applications, only: %i[index show] do
     member do
       get :nearby
+      get :external
     end
     collection do
       get :address

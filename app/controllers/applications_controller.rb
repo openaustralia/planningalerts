@@ -146,6 +146,12 @@ class ApplicationsController < ApplicationController
     @applications = @applications.reorder("first_date_scraped DESC") if @sort == "time"
   end
 
+  sig { void }
+  def external
+    application = Application.find(params[:id])
+    @application = T.let(application, T.nilable(Application))
+  end
+
   private
 
   sig { void }

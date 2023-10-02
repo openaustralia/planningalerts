@@ -13,21 +13,21 @@ module ApplicationHelper
 
   # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
-  sig { params(body: T.untyped, url: String, html_options: T::Hash[Symbol, String]).returns(String) }
+  sig { params(body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, String]).returns(String) }
   def pa_link_to(body, url, html_options = {})
     link_to(body, url, class: "#{html_options[:class]} text-fuchsia font-bold hover:underline")
   end
 
   # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
-  sig { params(body: T.untyped, url: String, html_options: T::Hash[Symbol, String]).returns(String) }
+  sig { params(body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, String]).returns(String) }
   def pa_link_to_unless_current(body, url, html_options = {})
     link_to_unless_current(body, url, class: "#{html_options[:class]} text-fuchsia font-bold hover:underline")
   end
 
   # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
-  sig { params(condition: T::Boolean, body: T.untyped, url: String, html_options: T::Hash[Symbol, String]).returns(String) }
+  sig { params(condition: T::Boolean, body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, String]).returns(String) }
   def pa_link_to_unless(condition, body, url, html_options = {})
     link_to_unless(condition, body, url, class: "#{html_options[:class]} text-fuchsia font-bold hover:underline")
   end
