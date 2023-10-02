@@ -3,9 +3,8 @@
 <div class="flex flex-col items-center max-w-4xl m-auto mt-16 text-center">
   <%= image_tag "tailwind/illustration/send-comment2.svg" %>
 
-  <%# TODO: Update content %>
   <h1 class="mt-16 text-4xl font-bold text-navy font-display">
-    We will now try to direct you to this application on the Central Coast Council website
+    We will now try to direct you to this application on the <%= @application.authority.full_name %> website
   </h1>
 
   <div class="text-2xl text-navy mt-14">
@@ -23,10 +22,8 @@
     </p>
   </div>
 
-  <%# TODO: Don't want the button changing size when pressing copy %>
-  <%# TODO: Use actual content %>
   <div class="flex items-baseline mt-4" x-data="{ copied: false }">
-    <div class="px-8 py-2 mt-4 text-2xl select-all text-navy bg-light-grey" x-ref="value">DA/862/2023</div>
+    <div class="px-8 py-2 mt-4 text-2xl select-all text-navy bg-light-grey" x-ref="value"><%= @application.council_reference %></div>
     <button class="flex items-baseline gap-2 px-4 py-2 text-2xl font-semibold text-white w-28 bg-warm-grey"
             x-on:click="
               navigator.clipboard.writeText($refs.value.innerText);
