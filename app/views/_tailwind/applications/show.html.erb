@@ -107,9 +107,9 @@
 </div>
 
 <%# TODO: Only show this block if we don't have an alert covering this area? %>
-<div class="flex items-center justify-between gap-8 bg-light-grey px-14 pt-14 mt-14">
+<div class="flex flex-col items-center justify-between gap-8 md:flex-row bg-light-grey px-14 mt-14">
   <%# TODO: Is h2 correct here? %>
-  <div class="pb-14">
+  <div class="pt-14 md:pb-14">
     <h2 class="text-3xl font-bold font-display text-navy">Save this search as an email alert?</h2>
     <% if current_user.nil? %>
       <p class="mt-4 text-2xl text-navy">
@@ -131,7 +131,7 @@
       <% end %>
     <% end %>
   </div>
-  <%= image_tag "tailwind/illustration/save-search.svg", class: "self-end" %>
+  <%= image_tag "tailwind/illustration/save-search.svg", class: "self-end md:pt-14" %>
 </div>
 
 <section class="pt-20 border-t mt-14 border-light-grey2" id="comments">
