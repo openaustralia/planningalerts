@@ -24,12 +24,15 @@
 
   <div class="flex items-baseline mt-4" x-data="{ copied: false }">
     <div class="px-8 py-2 mt-4 text-2xl select-all text-navy bg-light-grey" x-ref="value"><%= @application.council_reference %></div>
-    <button class="flex items-baseline gap-2 px-4 py-2 text-2xl font-semibold text-white w-28 bg-warm-grey"
+    <%# We only want the button to appear once javascript (and alpine) are going %>
+    <%# Using invisible here so that we avoid content reflow when javascript is running %>
+    <button class="flex items-baseline invisible gap-2 px-4 py-2 text-2xl font-semibold text-white w-28 bg-warm-grey"
             x-on:click="
               navigator.clipboard.writeText($refs.value.innerText);
               copied = true;
               setTimeout(() => { copied = false }, 750)"
-            x-bind:disabled="copied">
+            x-bind:disabled="copied"
+            x-bind:class="{ 'invisible': false }">
       <%= image_tag "tailwind/copy-to-clipboard.svg", "x-show": "!copied" %>
       <div x-text="copied ? 'Copied' : 'Copy' ">Copy</div>
     </button>
