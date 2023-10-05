@@ -6,6 +6,7 @@
     </div>
   <% end %>
 <% elsif @tag == :button %>
+  <%# TODO: I really don't think we want 'name: nil' in general %>
   <%= button_tag name: nil, class: @classes do %>
   <div class="flex items-baseline justify-center gap-4">
     <% if @icon_path %><%= image_tag @icon_path, alt: @icon_alt %><% end %>
