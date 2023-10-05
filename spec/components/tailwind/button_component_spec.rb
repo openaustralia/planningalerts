@@ -21,7 +21,7 @@ RSpec.describe Tailwind::ButtonComponent, type: :component do
 
   it "renders an extra large button" do
     render_inline(described_class.new(tag: :button, size: "2xl", type: :primary)) { "Hello world!" }
-    expect(page).to have_button(class: %w[px-11 sm:px-16 py-3 sm:py-4 text-2xl])
+    expect(page).to have_button(class: %w[px-10 py-3 sm:py-4 text-2xl])
   end
 
   it "renders a primary button in white on green" do

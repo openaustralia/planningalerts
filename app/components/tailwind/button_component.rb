@@ -15,7 +15,7 @@ module Tailwind
       when "lg"
         classes += %w[px-4 py-2 text-lg]
       when "2xl"
-        classes += %w[px-11 sm:px-16 py-3 sm:py-4 text-2xl]
+        classes += %w[px-10 py-3 sm:py-4 text-2xl]
       else
         raise "Unexpected size #{size}"
       end
