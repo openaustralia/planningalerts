@@ -201,6 +201,9 @@ module GeneratedUrlHelpersModule
   def export_confirmed_emails_admin_users_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def external_application_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def faq_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

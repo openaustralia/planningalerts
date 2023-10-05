@@ -201,6 +201,9 @@ module GeneratedPathHelpersModule
   def export_confirmed_emails_admin_users_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def external_application_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def faq_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
