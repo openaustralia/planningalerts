@@ -27,8 +27,7 @@
   </div>
 
   <div class="mt-20">
-    <%# TODO: This should use target: "_blank", rel: "noopener" on the link to the external site %>
-    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: @application.info_url) do %>
+    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: @application.info_url, open_in_new_tab: true) do %>
       Continue to
       <span class="font-normal"><%= @application.authority.full_name %> website</span>
     <% end %>
