@@ -5,8 +5,8 @@ module Tailwind
   class ButtonComponent < ViewComponent::Base
     extend T::Sig
 
-    sig { params(tag: Symbol, size: String, type: Symbol, href: T.nilable(String), icon: T.nilable(Symbol)).void }
-    def initialize(tag:, size:, type:, href: nil, icon: nil)
+    sig { params(tag: Symbol, size: String, type: Symbol, href: T.nilable(String), icon: T.nilable(Symbol), open_in_new_tab: T::Boolean).void }
+    def initialize(tag:, size:, type:, href: nil, icon: nil, open_in_new_tab: false)
       super
 
       classes = %w[font-semibold]
@@ -57,9 +57,14 @@ module Tailwind
 
         classes << "inline-block"
         options = { class: classes }
+        if open_in_new_tab
+          options[:target] = "_blank"
+          options[:rel] = "noopener"
+        end
       when :button
         # TODO: I really don't think we want 'name: nil' in general
         options = { name: nil, class: classes }
+        raise "open_in_new_tab only makes sense when using a tag" if open_in_new_tab
       else
         raise "Unexpected tag: #{tag}"
       end

@@ -53,4 +53,9 @@ RSpec.describe Tailwind::ButtonComponent, type: :component do
     render_inline(described_class.new(tag: :a, size: "lg", type: :primary, href: "/foo")) { "Hello world!" }
     expect(page).to have_link(class: "inline-block")
   end
+
+  it "renders links to open new tabs" do
+    render_inline(described_class.new(tag: :a, size: "lg", type: :primary, href: "/foo", open_in_new_tab: true)) { "Hello world!" }
+    expect(page).to have_css("a[target='_blank'][rel='noopener']")
+  end
 end
