@@ -18,6 +18,9 @@
     <meta content="<%= @application.lng %>" property="place:location:longitude">
   <% end %>
 <% end %>
+<% content_for :footer_illustration do %>
+  <%= image_tag "tailwind/illustration/bottom-of-page-man.svg" %>
+<% end %>
 
 <h1 class="mb-10 text-4xl font-bold text-navy"><%= @application.address %></h1>
 
