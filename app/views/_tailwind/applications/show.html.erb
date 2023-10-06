@@ -93,8 +93,6 @@
 </div>
 
 <div class="mt-2">
-  <%# TODO: This should link to an interstitial page %>
-  <%# TODO: Add icon %>
   <%# TODO: Handle situation when authority name is very long %>
   <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: external_application_path(@application), icon: :external) do %>
     View more at <%= @application.authority.full_name %> website
