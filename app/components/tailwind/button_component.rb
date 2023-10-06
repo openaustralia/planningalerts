@@ -47,6 +47,10 @@ module Tailwind
       when :external
         icon_path = "tailwind/external.svg"
         icon_alt = "External link icon"
+      when :share
+        # TODO: Share icon is not visually consistent with external link icon
+        icon_path = "tailwind/share.svg"
+        icon_alt = "Share icon"
       else
         raise "Unexpected icon #{icon}"
       end
