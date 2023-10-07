@@ -1,3 +1,7 @@
+<% content_for :footer_illustration do %>
+  <%= image_tag "tailwind/illustration/bottom-of-page-man.svg" %>
+<% end %>
+
 <h1 class="text-4xl font-bold text-navy font-display">Review and publish</h1>
 
 <%# TODO: Make sure that there is consistency on formatting of h1, h2, h3, etc. across the site %>
@@ -100,4 +104,36 @@
       </p>
     </div>
   </div>
+
+  <div class="flex justify-end">
+    <div class="relative mt-12">
+      <section class="max-w-3xl py-8 pl-16 pr-32 text-2xl text-white rounded-3xl bg-lavender">
+        <h3 class="font-bold">Why do we include the privacy notice?</h3>
+
+        <p class="mt-6">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pharetra cursus quam,
+          at malesuada augue. Donec sit amet cursus libero. Donec aliquam magna sit amet ornare
+          ultrices.
+        </p>
+      </section>
+      <div class="w-0 h-0 absolute -top-24 left-16
+        border-l-[19px] border-l-transparent
+        border-b-[127px] border-b-lavender
+        border-r-[19px] border-r-transparent">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pt-20 border-t border-dashed border-cool-blue-gray mt-14">
+  <h2 class="text-3xl font-bold text-navy">Have you made a donation or gift to a Councillor or Council employee?</h2>
+  <p class="mt-6 text-2xl text-navy">You may need to disclose this.</p>
+  <p class="mt-6 text-2xl text-navy">
+    In NSW, for example, it is an offence if you fail to disclose this when making a
+    submission under the
+    <%# TODO: This link is broken %>
+    <%= pa_link_to "Environmental Planning and Assessment Act 1979", "http://www.austlii.edu.au/au/legis/nsw/consol_act/epaaa1979389/s147.html" %>.
+    If this applies to you, please ensure you contact the council responsible so that
+    you can make this disclosure.
+  </p>
 </section>
