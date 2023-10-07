@@ -84,4 +84,7 @@ class CommentsController < ApplicationController
       format.json { render json: authority.comments_per_week }
     end
   end
+
+  sig { void }
+  def preview; end
 end

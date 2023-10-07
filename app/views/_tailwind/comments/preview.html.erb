@@ -1,0 +1,103 @@
+<h1 class="text-4xl font-bold text-navy font-display">Review and publish</h1>
+
+<%# TODO: Make sure that there is consistency on formatting of h1, h2, h3, etc. across the site %>
+<h2 class="text-3xl font-bold text-navy mt-14">Your comment</h2>
+<p class="text-3xl text-navy">Does this look right?</p>
+
+<article class="flex gap-6 mt-10">
+  <div class="text-navy text-7xl">”</div>
+  <div>
+    <div class="prose prose-2xl">
+      <p>
+        We are not against development of the site in general, however the house seems
+        excessive in size and adversely impacts on the adjoining properties in particular
+        but also on the immediate area. This new house will block out all direct afternoon
+        sunlight for our entire backyard due to its size. Similarly, number 3 Agate Ave
+        will have the same problem but in the morning to midday period. It seems unfair
+        for two properties to both lose half their backyard sunlight due to the size of
+        the new dwelling.
+      </p>
+    </div>
+
+    <%# TODO: Smaller line height? %>
+    <div class="mt-8 text-xl font-bold text-navy">
+      Martha Azalia
+    </div>
+    <p class="text-xl font-bold text-navy">(Your address is automatically hidden when published on our website)</p>
+
+    <div class="mt-12">
+      <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :secondary, href: "#", icon: :edit).with_content("Edit comment")  %>
+    </div>
+
+    <div class="mt-4">
+      <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary).with_content("Publish (and send to Central Coast Council)") %>
+    </div>
+  </div>
+</article>
+
+<section class="pt-16 mt-20 border-t border-dashed border-cool-blue-gray">
+  <h2 class="text-3xl font-bold text-navy">Email preview</h2>
+
+  <p class="mt-8 text-2xl text-navy">
+    Your comment and details will also automatically be sent to <strong>Central Coast Council</strong>.
+    They may consider your submission when they decide whether to approve this application.
+  </p>
+  <p class="mt-4 text-2xl text-navy">
+    Here's a preview (nobody but you and the council will see this):
+  </p>
+
+  <div class="px-20 py-16 mt-8 text-2xl text-navy bg-random-gray">
+    <p>To: xxxxxxxx</p>
+    <p>Subject: xxxxxxx</p>
+
+    <p class="mt-8">For the attention of the General Manager / Planning Manager / Planning Department</p>
+
+    <div class="grid mt-8 grid-cols-[18rem_1fr]">
+      <div class="font-semibold">Application:</div>
+      <div>DA/862/2023</div>
+      <div class="font-semibold">Address:</div>
+      <div>1 Agate Avenue, Pearl Beach, NSW</div>
+      <div class="font-semibold">Description:</div>
+      <div>Demolition of existing structures and construction of 7 storey shop top housing development, 3 basement level carparking and associated works.</div>
+      <div class="font-semibold">Name of commenter:</div>
+      <div>Martha Azalia</div>
+      <div class="font-semibold">Address of commenter:</div>
+      <div>18 Illawarra Road</div>
+      <div class="font-semibold">Email of commenter:</div>
+      <div>foo@bar.com</div>
+    </div>
+
+    <p class="mt-8 font-semibold">Comment</p>
+    <p class="mt-2">
+      We are not against development of the site in general, however the house seems
+      excessive in size and adversely impacts on the adjoining properties in particular
+      but also on the immediate area. This new house will block out all direct afternoon
+      sunlight for our entire backyard due to its size. Similarly, number 3 Agate Ave will
+      have the same problem but in the morning to midday period. It seems unfair for two
+      properties to both lose half their backyard sunlight due to the size of the new dwelling.
+    </p>
+
+    <div class="text-lg">
+      <p class="mt-8">
+        This comment was submitted via PlanningAlerts, a free service run by the charity
+        <span class="underline">the OpenAustralia Foundation</span> for the public good.
+        <span class="underline">View this application on PlanningAlerts</span>
+      </p>
+
+      <p class="mt-4">
+        <span class="font-bold">Important Privacy Notice</span> - Please Read
+      </p>
+      <p>
+        The email address and street address are provided to Central Coast Council only
+        so you can contact, identify and verify Martha, in response to 27-B/6, and not
+        for any other purpose. You, Central Coast Council do NOT have permission to publish,
+        nor share with anyone outside Inner West Council the email address and street address
+        without express written permission from Martha.
+      </p>
+      <p class="mt-4">
+        We specifically confirm that any consent given in any form (including pursuant to
+        your privacy policy) to disclose personal information to third parties is withdrawn.
+      </p>
+    </div>
+  </div>
+</section>

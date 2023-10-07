@@ -52,6 +52,10 @@ module.exports = {
       'green': '#03827A',
       'darker-orange': '#BA671D',
       'warm-grey': '#767676',
+      'cool-blue-gray': '#737A92',
+      // This is only used for the background of the email preview I think
+      // TODO: Use another gray
+      'random-gray': '#ECEBE5',
       // TODO: Come up with a less bad name than this
       'light-grey2': '#D2CDC1',
       // A green colour that you might see on a map. Display this while loading the map
