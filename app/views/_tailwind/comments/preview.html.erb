@@ -12,20 +12,12 @@
   <div class="text-navy text-7xl">”</div>
   <div>
     <div class="prose prose-2xl">
-      <p>
-        We are not against development of the site in general, however the house seems
-        excessive in size and adversely impacts on the adjoining properties in particular
-        but also on the immediate area. This new house will block out all direct afternoon
-        sunlight for our entire backyard due to its size. Similarly, number 3 Agate Ave
-        will have the same problem but in the morning to midday period. It seems unfair
-        for two properties to both lose half their backyard sunlight due to the size of
-        the new dwelling.
-      </p>
+      <%= comment_as_html(@comment.text) %>
     </div>
 
     <%# TODO: Smaller line height? %>
     <div class="mt-8 text-xl font-bold text-navy">
-      Martha Azalia
+      <%= @comment.name %>
     </div>
     <p class="text-xl font-bold text-navy">(Your address is automatically hidden when published on our website)</p>
 
@@ -34,7 +26,9 @@
     </div>
 
     <div class="mt-4">
-      <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary).with_content("Publish (and send to Central Coast Council)") %>
+      <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do %>
+        Publish (and send to <%= @comment.application.comment_authority_with_fallback %>)
+      <% end %>
     </div>
   </div>
 </article>
@@ -43,7 +37,7 @@
   <h2 class="text-3xl font-bold text-navy">Email preview</h2>
 
   <p class="mt-8 text-2xl text-navy">
-    Your comment and details will also automatically be sent to <strong>Central Coast Council</strong>.
+    Your comment and details will also automatically be sent to <strong><%= @comment.application.comment_authority_with_fallback %></strong>.
     They may consider your submission when they decide whether to approve this application.
   </p>
   <p class="mt-4 text-2xl text-navy">
