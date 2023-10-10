@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
   extend T::Sig
 
   before_action :authenticate_user!, only: :create
+  # TODO: Add checks for all other actions on this controller
+  after_action :verify_authorized, only: :preview
 
   sig { void }
   def index
@@ -88,6 +90,7 @@ class CommentsController < ApplicationController
   sig { void }
   def preview
     comment = Comment.find(params[:id])
+    authorize(comment)
     @comment = T.let(comment, T.nilable(Comment))
   end
 end
