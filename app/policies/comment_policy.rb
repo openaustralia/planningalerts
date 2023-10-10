@@ -20,6 +20,7 @@ class CommentPolicy < ApplicationPolicy
   sig { returns(T::Boolean) }
   def preview?
     # Can only preview your own comments
-    comment.user_id == user.id
+    # TODO: Remove temporary powers for admins to view all previews
+    comment.user_id == user.id || user.admin?
   end
 end
