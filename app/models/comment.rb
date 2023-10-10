@@ -53,9 +53,9 @@ class Comment < ApplicationRecord
     CommentMailer.notify_authority(self).deliver_later
   end
 
-  sig { returns(T.nilable(String)) }
+  sig { returns(String) }
   def recipient_display_name
-    application&.authority&.full_name
+    T.must(application).comment_authority_with_fallback
   end
 
   private
