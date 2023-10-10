@@ -86,5 +86,8 @@ class CommentsController < ApplicationController
   end
 
   sig { void }
-  def preview; end
+  def preview
+    comment = Comment.find(params[:id])
+    @comment = T.let(comment, T.nilable(Comment))
+  end
 end

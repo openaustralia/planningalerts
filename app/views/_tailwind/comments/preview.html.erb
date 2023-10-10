@@ -50,6 +50,17 @@
     Here's a preview (nobody but you and the council will see this):
   </p>
 
+  <%# TODO: Don't use random gray colour #ccc here %>
+  <div class="px-20 py-16 mt-8 text-2xl text-navy prose-tr:border-[#ccc] prose-hr:border-[#ccc] bg-random-gray">
+    <p>To: <%= @comment.application.comment_email_with_fallback %></p>
+    <p>Subject: <%= t("comment_mailer.notify_authority.subject", council_reference: @comment.application.council_reference) %></p>
+
+    <div class="mt-8 prose prose-2xl">
+      <%= render "comment_mailer/notify_authority", comment: @comment %>
+    </div>
+  </div>
+
+  <%# TODO: Get rid of this static version as soon as the one above is up to scratch %>
   <div class="px-20 py-16 mt-8 text-2xl text-navy bg-random-gray">
     <p>To: xxxxxxxx</p>
     <p>Subject: xxxxxxx</p>
