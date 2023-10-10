@@ -5,7 +5,8 @@ module Tailwind
   class ButtonComponent < ViewComponent::Base
     extend T::Sig
 
-    sig { params(tag: Symbol, size: String, type: Symbol, href: T.nilable(String), icon: T.nilable(Symbol), open_in_new_tab: T::Boolean).void }
+    # href is untyped to support passing objects or paths or arrays to construct urls from
+    sig { params(tag: Symbol, size: String, type: Symbol, href: T.untyped, icon: T.nilable(Symbol), open_in_new_tab: T::Boolean).void }
     def initialize(tag:, size:, type:, href: nil, icon: nil, open_in_new_tab: false)
       super
 
