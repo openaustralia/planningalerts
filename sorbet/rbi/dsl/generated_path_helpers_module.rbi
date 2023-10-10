@@ -273,6 +273,9 @@ module GeneratedPathHelpersModule
   def per_week_authority_comments_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def preview_comment_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def preview_view_component_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

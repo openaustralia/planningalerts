@@ -273,6 +273,9 @@ module GeneratedUrlHelpersModule
   def per_week_authority_comments_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def preview_comment_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def preview_view_component_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
