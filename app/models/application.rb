@@ -64,7 +64,7 @@ class Application < ApplicationRecord
   end
 
   sig { returns(String) }
-  def comment_authority_with_fallback
+  def comment_recipient_full_name
     comment_authority.presence || T.must(authority).full_name
   end
 

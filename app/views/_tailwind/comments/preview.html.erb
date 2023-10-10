@@ -27,7 +27,7 @@
 
     <div class="mt-4">
       <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do %>
-        Publish (and send to <%= @comment.comment_authority_with_fallback %>)
+        Publish (and send to <%= @comment.comment_recipient_full_name %>)
       <% end %>
     </div>
   </div>
@@ -37,7 +37,7 @@
   <h2 class="text-3xl font-bold text-navy">Email preview</h2>
 
   <p class="mt-8 text-2xl text-navy">
-    Your comment and details will also automatically be sent to <strong><%= @comment.comment_authority_with_fallback %></strong>.
+    Your comment and details will also automatically be sent to <strong><%= @comment.comment_recipient_full_name %></strong>.
     They may consider your submission when they decide whether to approve this application.
   </p>
   <p class="mt-4 text-2xl text-navy">

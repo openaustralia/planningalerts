@@ -26,7 +26,7 @@ class Comment < ApplicationRecord
   scope(:in_past_week, -> { where("confirmed_at > ?", 7.days.ago) })
 
   delegate :email, to: :user
-  delegate :comment_authority_with_fallback, to: :application
+  delegate :comment_recipient_full_name, to: :application
 
   counter_culture :application,
                   column_name: proc { |comment| comment.visible? ? "visible_comments_count" : nil },

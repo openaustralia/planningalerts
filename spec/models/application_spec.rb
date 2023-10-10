@@ -104,14 +104,14 @@ describe Application do
     end
   end
 
-  describe "#comment_authority_with_fallback" do
+  describe "#comment_recipient_full_name" do
     let(:authority) { create(:authority, full_name: "Foo Council") }
 
     context "when application has comment_authority set to nil" do
       let(:application) { create(:geocoded_application, authority:) }
 
       it "returns the the full name of the authority" do
-        expect(application.comment_authority_with_fallback).to eq "Foo Council"
+        expect(application.comment_recipient_full_name).to eq "Foo Council"
       end
     end
 
@@ -119,7 +119,7 @@ describe Application do
       let(:application) { create(:geocoded_application, authority:, comment_authority: "Special Council") }
 
       it "returns the overridden name connected to the application" do
-        expect(application.comment_authority_with_fallback).to eq "Special Council"
+        expect(application.comment_recipient_full_name).to eq "Special Council"
       end
     end
   end
