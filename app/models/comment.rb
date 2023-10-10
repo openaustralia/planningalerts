@@ -28,10 +28,11 @@ class Comment < ApplicationRecord
   delegate :email, to: :user
   delegate :comment_recipient_full_name, to: :application
 
+  # TODO: Rename the counter to confirmed_comments_count
   counter_culture :application,
-                  column_name: proc { |comment| comment.visible? ? "visible_comments_count" : nil },
+                  column_name: proc { |comment| comment.confirmed? ? "visible_comments_count" : nil },
                   column_names: {
-                    "comments.confirmed = true and comments.hidden = false" => "visible_comments_count"
+                    "comments.confirmed = true" => "visible_comments_count"
                   }
 
   # TODO: Change confirmed in schema to be null: false
