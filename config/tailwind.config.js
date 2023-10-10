@@ -24,6 +24,13 @@ module.exports = {
         dash: "url('tailwind/dash.svg')"
       },
       typography: (theme) => ({
+        'xl': {
+          css: {
+            color: theme('colors.navy'),
+            // Because the default was too big
+            lineHeight: '1.75rem'
+          }
+        },
         '2xl': {
           css: {
             color: theme('colors.navy'),
