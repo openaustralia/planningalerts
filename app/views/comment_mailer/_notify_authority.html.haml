@@ -3,22 +3,22 @@
 %table
   %tr
     %th{ scope: "row", align: "left", valign: "top" } Application
-    %td= comment.application.council_reference
+    %td{ valign: "top" }= comment.application.council_reference
   %tr
     %th{ scope: "row", align: "left", valign: "top" } Address
-    %td= comment.application.address
+    %td{ valign: "top" }= comment.application.address
   %tr
     %th{ scope: "row", align: "left", valign: "top" } Description
-    %td= comment.application.description
+    %td{ valign: "top" }= comment.application.description
   %tr
     %th{ scope: "row", align: "left", valign: "top" } Name of commenter
-    %td= comment.name
+    %td{ valign: "top" }= comment.name
   %tr
     %th{ scope: "row", align: "left", valign: "top" } Address of commenter
-    %td= comment.address
+    %td{ valign: "top" }= comment.address
   %tr
     %th{ scope: "row", align: "left", valign: "top" } Email of commenter
-    %td= comment.email
+    %td{ valign: "top" }= comment.email
 
 %h4 Comment
 = comment_as_html(comment.text)
