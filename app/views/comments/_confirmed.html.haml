@@ -1,7 +1,7 @@
 .notice-comment-confirmed
   %h1.page-title Thanks, your comment has been sent!
   %p
-    Your comment has been sent to #{comment.recipient_display_name}
+    Your comment has been sent to #{comment.application.comment_authority_with_fallback}
     and #{link_to "posted below", comment_path(comment)}.
   = link_to "Share your comment on Facebook",
     "https://www.facebook.com/sharer/sharer.php?u=#{comment_url(comment)}&t=",
