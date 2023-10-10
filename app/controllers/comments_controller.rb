@@ -4,7 +4,7 @@
 class CommentsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, only: :create
+  before_action :authenticate_user!, only: %i[create preview]
   # TODO: Add checks for all other actions on this controller
   after_action :verify_authorized, only: :preview
 
