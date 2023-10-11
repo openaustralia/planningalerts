@@ -40,16 +40,23 @@ class CommentsController < ApplicationController
       user: current_user,
       # Because we're logged in we don't need to go through the whole email confirmation step
       confirmed: true,
-      confirmed_at: Time.current,
-      # TODO: This will be different when we have the previewed step in the new design
-      previewed: true,
-      previewed_at: Time.current
+      confirmed_at: Time.current
     )
+    if show_tailwind_theme?
+      comment.previewed = false
+    else
+      comment.previewed = true
+      comment.previewed_at = Time.current
+    end
     @comment = T.let(comment, T.nilable(Comment))
 
     if comment.save
-      comment.send_comment!
-      redirect_to application, notice: render_to_string(partial: "confirmed", locals: { comment: })
+      if show_tailwind_theme?
+        redirect_to preview_comment_path(comment)
+      else
+        comment.send_comment!
+        redirect_to application, notice: render_to_string(partial: "confirmed", locals: { comment: })
+      end
       return
     end
 
@@ -57,7 +64,8 @@ class CommentsController < ApplicationController
     flash.now[:error] = t(".not_filled_out")
 
     # HACK: Required for new email alert signup form
-    @alert = T.let(Alert.new(address: application.address), T.nilable(Alert))
+    @alert = T.let(Alert.new(address: application.address, radius_meters: Alert::DEFAULT_RADIUS), T.nilable(Alert))
+    @comments = T.let(application.comments.confirmed_and_previewed.order(:confirmed_at), T.untyped)
 
     render "applications/show"
   end

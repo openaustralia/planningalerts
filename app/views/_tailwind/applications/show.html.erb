@@ -71,7 +71,7 @@
   <%# TODO: The link in notified text should go to the new alert sign up page %>
   <%# TODO: Should we have the link at all now? %>
   <dd class="md:py-1 md:border-t border-light-grey2">
-    <%= render "notified_text", application: @application %>
+    <%= render "applications/notified_text", application: @application %>
   </dd>
   <%# TODO: What to do if there are 0 comments? %>
   <dt class="font-bold md:py-1">
@@ -81,7 +81,7 @@
     </div>
   </dt>
   <dd class="md:py-1 md:border-t border-light-grey2">
-    <%= render "comments_text", comments: @comments %>
+    <%= render "applications/comments_text", comments: @comments %>
   </dd>
 </dl>
 
