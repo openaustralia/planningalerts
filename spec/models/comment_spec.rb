@@ -48,9 +48,9 @@ describe Comment do
   end
 
   context "when new comment for a planning authority" do
-    let(:comment_to_authority) do
-      create(:comment)
-    end
+    let(:comment_to_authority) { create(:comment) }
+    let(:application) { create(:application) }
+    let(:user) { create(:user) }
 
     it "is not valid without an address" do
       comment_to_authority.address = nil
@@ -67,6 +67,38 @@ describe Comment do
     it "handles emojis in the comment text" do
       comment_to_authority.text = "🙏🏼"
       expect { comment_to_authority.save! }.not_to raise_error
+    end
+
+    context "with unpreviewed comments" do
+      it "is valid to have one comment on an application for a particular user" do
+        comment = build(:comment, application:, user:, previewed: false)
+        expect(comment).to be_valid
+      end
+
+      it "is not valid to have more than one comment on an application for a particular user" do
+        pending "because we haven't implemented the validation yet"
+        create(:comment, application:, user:, previewed: false)
+        comment = build(:comment, application:, user:, previewed: false)
+        expect(comment).not_to be_valid
+      end
+
+      it "is valid to have more than one comment on an application from different users" do
+        create(:comment, application:, user: create(:user), previewed: false)
+        comment = build(:comment, application:, user: create(:user), previewed: false)
+        expect(comment).to be_valid
+      end
+
+      it "is valid for a user to have comments on more than one application" do
+        create(:comment, application: create(:application), user:, previewed: false)
+        comment = build(:comment, application: create(:application), user:, previewed: false)
+        expect(comment).to be_valid
+      end
+    end
+
+    it "is valid to have more than one previewed comment on an application for a user" do
+      create(:comment, application:, user:, previewed: true)
+      comment = build(:comment, application:, user:, previewed: true)
+      expect(comment).to be_valid
     end
   end
 end
