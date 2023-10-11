@@ -53,6 +53,46 @@ describe "Give feedback" do
       expect(page).to have_content("Your comment has been sent to Foo and posted below.")
     end
 
+    it "Adding a comment (in the new design) should take you to a preview page" do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit(application_path(application))
+
+      fill_in("Your comment", with: "I think this is a really good ideas")
+      fill_in("Your full name", with: "Matthew Landauer")
+      fill_in("Your address", with: "11 Foo Street")
+      click_button("Review and publish")
+
+      expect(page).to have_content("Does this look right?")
+      expect(page).to have_content("I think this is a really good ideas")
+    end
+
+    it "Adding a comment (in the new design) should not be immediately visible" do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit(application_path(application))
+
+      fill_in("Your comment", with: "I think this is a really good ideas")
+      fill_in("Your full name", with: "Matthew Landauer")
+      fill_in("Your address", with: "11 Foo Street")
+      click_button("Review and publish")
+
+      visit(application_path(application))
+      expect(page).not_to have_content("I think this is a really good ideas")
+    end
+
+    it "Adding a comment (in the new design) should be pre-populated in the form when you return" do
+      pending "because we haven't implemented this"
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit(application_path(application))
+
+      fill_in("Your comment", with: "I think this is a really good ideas")
+      fill_in("Your full name", with: "Matthew Landauer")
+      fill_in("Your address", with: "11 Foo Street")
+      click_button("Review and publish")
+
+      visit(application_path(application))
+      expect(page).to have_content("I think this is a really good ideas")
+    end
+
     it "Unconfirmed comment should not be shown" do
       create(:comment, confirmed: false, text: "I think this is a really good ideas", application:)
 
