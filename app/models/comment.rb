@@ -18,6 +18,7 @@ class Comment < ApplicationRecord
   validates :name, presence: true
   validates :text, presence: true
   validates :address, presence: true
+  validates :user_id, uniqueness: { scope: %i[application_id previewed] }, unless: :previewed?
 
   before_create :set_confirm_info
 

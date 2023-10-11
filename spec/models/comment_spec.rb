@@ -76,7 +76,6 @@ describe Comment do
       end
 
       it "is not valid to have more than one comment on an application for a particular user" do
-        pending "because we haven't implemented the validation yet"
         create(:comment, application:, user:, previewed: false)
         comment = build(:comment, application:, user:, previewed: false)
         expect(comment).not_to be_valid
