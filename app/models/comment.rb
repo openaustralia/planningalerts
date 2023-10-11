@@ -23,6 +23,7 @@ class Comment < ApplicationRecord
   before_create :set_confirm_info
 
   scope(:confirmed, -> { where(confirmed: true) })
+  scope(:confirmed_and_previewed, -> { where(confirmed: true, previewed: true) })
   scope(:visible, -> { where(confirmed: true, hidden: false) })
   scope(:in_past_week, -> { where("confirmed_at > ?", 7.days.ago) })
 
