@@ -958,6 +958,96 @@ class Comment
     sig { void }
     def name_will_change!; end
 
+    sig { returns(T::Boolean) }
+    def previewed; end
+
+    sig { params(value: T::Boolean).returns(T::Boolean) }
+    def previewed=(value); end
+
+    sig { returns(T::Boolean) }
+    def previewed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def previewed_at; end
+
+    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def previewed_at=(value); end
+
+    sig { returns(T::Boolean) }
+    def previewed_at?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def previewed_at_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def previewed_at_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def previewed_at_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def previewed_at_change; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def previewed_at_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def previewed_at_changed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def previewed_at_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def previewed_at_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def previewed_at_previously_changed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def previewed_at_previously_was; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def previewed_at_was; end
+
+    sig { void }
+    def previewed_at_will_change!; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def previewed_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def previewed_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def previewed_came_from_user?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def previewed_change; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def previewed_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def previewed_changed?; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def previewed_in_database; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def previewed_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def previewed_previously_changed?; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def previewed_previously_was; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def previewed_was; end
+
+    sig { void }
+    def previewed_will_change!; end
+
     sig { void }
     def restore_address!; end
 
@@ -990,6 +1080,12 @@ class Comment
 
     sig { void }
     def restore_name!; end
+
+    sig { void }
+    def restore_previewed!; end
+
+    sig { void }
+    def restore_previewed_at!; end
 
     sig { void }
     def restore_text!; end
@@ -1065,6 +1161,18 @@ class Comment
 
     sig { returns(T::Boolean) }
     def saved_change_to_name?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def saved_change_to_previewed; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_previewed?; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def saved_change_to_previewed_at; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_previewed_at?; end
 
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def saved_change_to_text; end
@@ -1251,6 +1359,12 @@ class Comment
 
     sig { returns(T::Boolean) }
     def will_save_change_to_name?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_previewed?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_previewed_at?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_text?; end
