@@ -40,7 +40,10 @@ class CommentsController < ApplicationController
       user: current_user,
       # Because we're logged in we don't need to go through the whole email confirmation step
       confirmed: true,
-      confirmed_at: Time.current
+      confirmed_at: Time.current,
+      # TODO: This will be different when we have the previewed step in the new design
+      previewed: true,
+      previewed_at: Time.current
     )
     @comment = T.let(comment, T.nilable(Comment))
 

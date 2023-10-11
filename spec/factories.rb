@@ -89,6 +89,7 @@ FactoryBot.define do
     text { "a comment" }
     address { "12 Foo Street" }
     application factory: %i[geocoded_application]
+    previewed { false }
 
     trait :confirmed do
       confirmed { true }
