@@ -63,7 +63,7 @@ describe "Give feedback" do
 
     context "when confirming the comment" do
       let(:comment) do
-        create(:comment, confirmed: false, text: "I think this is a really good ideas", application:)
+        create(:comment, confirmed: false, previewed: true, text: "I think this is a really good ideas", application:)
       end
 
       it "publishes the comment" do
@@ -86,7 +86,7 @@ describe "Give feedback" do
     end
 
     it "Viewing the comment on the application page" do
-      comment = create(:comment, confirmed: false, text: "I think this is a really good ideas", application:)
+      comment = create(:comment, confirmed: false, previewed: true, text: "I think this is a really good ideas", application:)
 
       visit(confirmed_comment_path(id: comment.confirm_id))
 
