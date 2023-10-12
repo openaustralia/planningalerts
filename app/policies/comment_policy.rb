@@ -32,7 +32,13 @@ class CommentPolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def destroy?
-    # Can only desroy your own comments that have not yet been published
+    # Can only destroy your own comments that have not yet been published
+    comment.user_id == user.id && !comment.previewed
+  end
+
+  sig { returns(T::Boolean) }
+  def publish?
+    # Can only publish your own comments that have not yet been published
     comment.user_id == user.id && !comment.previewed
   end
 end

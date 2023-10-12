@@ -120,7 +120,6 @@ describe "Give feedback" do
       end
 
       it "Publishing a comment should make the comment visible to everyone" do
-        pending "Not yet implemented"
         fill_in("Your comment", with: "I think this is a really good ideas")
         fill_in("Your full name", with: "Matthew Landauer")
         fill_in("Your address", with: "11 Foo Street")

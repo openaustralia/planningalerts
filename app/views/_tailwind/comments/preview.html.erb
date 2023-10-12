@@ -26,7 +26,7 @@
     </div>
 
     <div class="mt-4">
-      <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do %>
+      <%= pa_button_to publish_application_comment_path(@comment) do %>
         Publish (and send to <%= @comment.comment_recipient_full_name %>)
       <% end %>
     </div>

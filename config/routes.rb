@@ -132,9 +132,12 @@ Rails.application.routes.draw do
       get :trending
     end
     resources :comments, only: [:create, :update] do
-      # This little hack allows us to put the "clear" button inside the form rather than having a seperate form
-      # just for that button
-      patch '' => 'comments#destroy', on: :member, constraints: QueryParamsPresentConstraint.new(:clear)
+      member do
+        # This little hack allows us to put the "clear" button inside the form rather than having a seperate form
+        # just for that button
+        patch '' => 'comments#destroy', constraints: QueryParamsPresentConstraint.new(:clear)
+        post :publish
+      end
     end
     resources :versions, only: [:index], controller: "application_versions"
   end

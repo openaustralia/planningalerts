@@ -4,9 +4,9 @@
 class CommentsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, only: %i[create preview update destroy]
+  before_action :authenticate_user!, only: %i[create preview update destroy publish]
   # TODO: Add checks for all other actions on this controller
-  after_action :verify_authorized, only: %i[preview update destroy]
+  after_action :verify_authorized, only: %i[preview update destroy publish]
 
   sig { void }
   def index
@@ -119,6 +119,17 @@ class CommentsController < ApplicationController
     comment = Comment.find(params[:id])
     authorize(comment)
     @comment = T.let(comment, T.nilable(Comment))
+  end
+
+  sig { void }
+  def publish
+    comment = Comment.find(params[:id])
+    authorize(comment)
+    comment.update!(previewed: true, previewed_at: Time.current)
+
+    comment.send_comment!
+    # TODO: Update notice that's displayed - currently it's rendering code!
+    redirect_to comment.application, notice: render_to_string(partial: "confirmed", locals: { comment: })
   end
 
   private

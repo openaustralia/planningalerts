@@ -163,8 +163,12 @@ module ApplicationHelper
     "https://www.oaf.org.au/donate/planningalerts/"
   end
 
-  sig { params(name: String, path: T.untyped, options: T::Hash[Symbol, String]).returns(String) }
-  def pa_button_to(name, path, options = {})
+  sig { params(name: String, path: T.untyped, options: T::Hash[Symbol, String], block: T.nilable(T.proc.void)).returns(String) }
+  def pa_button_to(name, path = nil, options = {}, &block)
+    if block_given?
+      path = name
+      name = capture(&block)
+    end
     form_with(
       url: url_for(path),
       builder: FormBuilders::Tailwind,
