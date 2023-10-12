@@ -118,6 +118,18 @@ describe "Give feedback" do
 
         expect(page).not_to have_content("I think this is a really good ideas")
       end
+
+      it "Publishing a comment should make the comment visible to everyone" do
+        pending "Not yet implemented"
+        fill_in("Your comment", with: "I think this is a really good ideas")
+        fill_in("Your full name", with: "Matthew Landauer")
+        fill_in("Your address", with: "11 Foo Street")
+        click_button("Review and publish")
+        click_button("Publish")
+        within("#comments") do
+          expect(page).to have_content("I think this is a really good ideas")
+        end
+      end
     end
 
     it "Unconfirmed comment should not be shown" do
