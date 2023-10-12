@@ -131,7 +131,7 @@ Rails.application.routes.draw do
       get :search
       get :trending
     end
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :update]
     resources :versions, only: [:index], controller: "application_versions"
   end
 

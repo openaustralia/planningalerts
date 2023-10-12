@@ -66,7 +66,7 @@ describe "Give feedback" do
       expect(page).to have_content("I think this is a really good ideas")
     end
 
-    it "Adding a comment (in the new design) should not be immediately visible" do
+    it "Adding a comment (in the new design) should not be immediately publically visible in the comments section" do
       sign_in create(:confirmed_user, tailwind_theme: true)
       visit(application_path(application))
 
@@ -76,11 +76,12 @@ describe "Give feedback" do
       click_button("Review and publish")
 
       visit(application_path(application))
-      expect(page).not_to have_content("I think this is a really good ideas")
+      within("#comments") do
+        expect(page).not_to have_content("I think this is a really good ideas")
+      end
     end
 
     it "Adding a comment (in the new design) should be pre-populated in the form when you return" do
-      pending "because we haven't implemented this"
       sign_in create(:confirmed_user, tailwind_theme: true)
       visit(application_path(application))
 
@@ -90,7 +91,9 @@ describe "Give feedback" do
       click_button("Review and publish")
 
       visit(application_path(application))
-      expect(page).to have_content("I think this is a really good ideas")
+      within("#add-comment") do
+        expect(page).to have_content("I think this is a really good ideas")
+      end
     end
 
     it "Unconfirmed comment should not be shown" do

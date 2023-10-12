@@ -113,12 +113,19 @@ class ApplicationsController < ApplicationController
     application = Application.find(params[:id])
     @application = T.let(application, T.nilable(Application))
     @comments = T.let(application.comments.confirmed_and_previewed.order(:confirmed_at), T.untyped)
-    comment = Comment.new(
-      application:,
-      user: User.new,
-      # If the user is logged in by default populate the name on the comment with their name
-      name: current_user&.name
-    )
+    # If this user has already written a comment that hasn't been previewed (i.e. confirmed on the preview page)
+    # then prepopulate the form so that they can edit their comment before it's finally sent
+    unpreviewed_comment = Comment.find_by(application:, user: current_user, previewed: false)
+    comment = if show_tailwind_theme? && current_user && unpreviewed_comment
+                unpreviewed_comment
+              else
+                Comment.new(
+                  application:,
+                  user: User.new,
+                  # If the user is logged in by default populate the name on the comment with their name
+                  name: current_user&.name
+                )
+              end
     @comment = T.let(comment, T.nilable(Comment))
     # Required for new email alert signup form
     @alert = Alert.new(address: application.address, radius_meters: Alert::DEFAULT_RADIUS, user: User.new)
