@@ -15,7 +15,7 @@ class QueryParamsPresentConstraint
   end
 
   def matches?(request)
-    @params.all? { |p| request.params[p.to_s].present? }
+    @params.all? { |p| request.params.key?(p.to_s) }
   end
 end
 
@@ -131,7 +131,11 @@ Rails.application.routes.draw do
       get :search
       get :trending
     end
-    resources :comments, only: [:create, :update]
+    resources :comments, only: [:create, :update] do
+      # This little hack allows us to put the "clear" button inside the form rather than having a seperate form
+      # just for that button
+      patch '' => 'comments#destroy', on: :member, constraints: QueryParamsPresentConstraint.new(:clear)
+    end
     resources :versions, only: [:index], controller: "application_versions"
   end
 

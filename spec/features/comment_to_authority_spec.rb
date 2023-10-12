@@ -114,7 +114,6 @@ describe "Give feedback" do
     end
 
     it "Deleting a comment that hasn't yet been published" do
-      pending "not built yet"
       sign_in create(:confirmed_user, tailwind_theme: true)
       visit(application_path(application))
 

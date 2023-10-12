@@ -29,4 +29,10 @@ class CommentPolicy < ApplicationPolicy
     # Can only edit your own comments that have not yet been published
     comment.user_id == user.id && !comment.previewed
   end
+
+  sig { returns(T::Boolean) }
+  def destroy?
+    # Can only desroy your own comments that have not yet been published
+    comment.user_id == user.id && !comment.previewed
+  end
 end

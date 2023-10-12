@@ -6,8 +6,8 @@ module Tailwind
     extend T::Sig
 
     # href is untyped to support passing objects or paths or arrays to construct urls from
-    sig { params(tag: Symbol, size: String, type: Symbol, href: T.untyped, icon: T.nilable(Symbol), open_in_new_tab: T::Boolean).void }
-    def initialize(tag:, size:, type:, href: nil, icon: nil, open_in_new_tab: false)
+    sig { params(tag: Symbol, size: String, type: Symbol, href: T.untyped, icon: T.nilable(Symbol), open_in_new_tab: T::Boolean, name: T.nilable(String)).void }
+    def initialize(tag:, size:, type:, href: nil, icon: nil, open_in_new_tab: false, name: nil)
       super
 
       classes = %w[font-semibold]
@@ -67,8 +67,7 @@ module Tailwind
           options[:rel] = "noopener"
         end
       when :button
-        # TODO: I really don't think we want 'name: nil' in general
-        options = { name: nil, class: classes }
+        options = { name:, class: classes }
         raise "open_in_new_tab only makes sense when using a tag" if open_in_new_tab
       else
         raise "Unexpected tag: #{tag}"

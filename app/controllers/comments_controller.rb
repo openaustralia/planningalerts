@@ -4,9 +4,9 @@
 class CommentsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, only: %i[create preview update]
+  before_action :authenticate_user!, only: %i[create preview update destroy]
   # TODO: Add checks for all other actions on this controller
-  after_action :verify_authorized, only: %i[preview update]
+  after_action :verify_authorized, only: %i[preview update destroy]
 
   sig { void }
   def index
@@ -76,6 +76,14 @@ class CommentsController < ApplicationController
     authorize(comment)
     comment.update!(comment_params)
     redirect_to preview_comment_path(comment)
+  end
+
+  sig { void }
+  def destroy
+    comment = Comment.find(params[:id])
+    authorize(comment)
+    comment.destroy!
+    redirect_to application_path(comment.application, anchor: "add-comment")
   end
 
   # TODO: We should leave this working until March 2023 to alllow people to still confirm old comments
