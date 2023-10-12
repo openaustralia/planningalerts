@@ -113,6 +113,22 @@ describe "Give feedback" do
       expect(page).to have_content("Matthew Landauer")
     end
 
+    it "Deleting a comment that hasn't yet been published" do
+      pending "not built yet"
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit(application_path(application))
+
+      fill_in("Your comment", with: "I think this is a really good ideas")
+      fill_in("Your full name", with: "Matthew Landauer")
+      fill_in("Your address", with: "11 Foo Street")
+      click_button("Review and publish")
+
+      visit(application_path(application))
+      click_button("Clear form")
+
+      expect(page).not_to have_content("I think this is a really good ideas")
+    end
+
     it "Unconfirmed comment should not be shown" do
       create(:comment, confirmed: false, text: "I think this is a really good ideas", application:)
 
