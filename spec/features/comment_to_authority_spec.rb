@@ -53,79 +53,71 @@ describe "Give feedback" do
       expect(page).to have_content("Your comment has been sent to Foo and posted below.")
     end
 
-    it "Adding a comment (in the new design) should take you to a preview page" do
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit(application_path(application))
-
-      fill_in("Your comment", with: "I think this is a really good ideas")
-      fill_in("Your full name", with: "Matthew Landauer")
-      fill_in("Your address", with: "11 Foo Street")
-      click_button("Review and publish")
-
-      expect(page).to have_content("Does this look right?")
-      expect(page).to have_content("I think this is a really good ideas")
-    end
-
-    it "Adding a comment (in the new design) should not be immediately publically visible in the comments section" do
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit(application_path(application))
-
-      fill_in("Your comment", with: "I think this is a really good ideas")
-      fill_in("Your full name", with: "Matthew Landauer")
-      fill_in("Your address", with: "11 Foo Street")
-      click_button("Review and publish")
-
-      visit(application_path(application))
-      within("#comments") do
-        expect(page).not_to have_content("I think this is a really good ideas")
+    context "when on the new design" do
+      before do
+        sign_in create(:confirmed_user, tailwind_theme: true)
+        visit(application_path(application))
       end
-    end
 
-    it "Adding a comment (in the new design) should be pre-populated in the form when you return" do
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit(application_path(application))
+      it "Adding a comment should take you to a preview page" do
+        fill_in("Your comment", with: "I think this is a really good ideas")
+        fill_in("Your full name", with: "Matthew Landauer")
+        fill_in("Your address", with: "11 Foo Street")
+        click_button("Review and publish")
 
-      fill_in("Your comment", with: "I think this is a really good ideas")
-      fill_in("Your full name", with: "Matthew Landauer")
-      fill_in("Your address", with: "11 Foo Street")
-      click_button("Review and publish")
-
-      visit(application_path(application))
-      within("#add-comment") do
+        expect(page).to have_content("Does this look right?")
         expect(page).to have_content("I think this is a really good ideas")
       end
-    end
 
-    it "Editing a comment that hasn't yet been published" do
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit(application_path(application))
+      it "Adding a comment should not be immediately publically visible in the comments section" do
+        fill_in("Your comment", with: "I think this is a really good ideas")
+        fill_in("Your full name", with: "Matthew Landauer")
+        fill_in("Your address", with: "11 Foo Street")
+        click_button("Review and publish")
 
-      fill_in("Your comment", with: "I think this is a really good ideas")
-      fill_in("Your full name", with: "Matthew Landauer")
-      fill_in("Your address", with: "11 Foo Street")
-      click_button("Review and publish")
+        visit(application_path(application))
+        within("#comments") do
+          expect(page).not_to have_content("I think this is a really good ideas")
+        end
+      end
 
-      visit(application_path(application))
-      fill_in("Your comment", with: "I'm not so sure this is a good idea")
-      click_button("Review and publish")
-      expect(page).to have_content("Does this look right?")
-      expect(page).to have_content("I'm not so sure this is a good idea")
-      expect(page).to have_content("Matthew Landauer")
-    end
+      it "Adding a comment should be pre-populated in the form when you return" do
+        fill_in("Your comment", with: "I think this is a really good ideas")
+        fill_in("Your full name", with: "Matthew Landauer")
+        fill_in("Your address", with: "11 Foo Street")
+        click_button("Review and publish")
 
-    it "Deleting a comment that hasn't yet been published" do
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit(application_path(application))
+        visit(application_path(application))
+        within("#add-comment") do
+          expect(page).to have_content("I think this is a really good ideas")
+        end
+      end
 
-      fill_in("Your comment", with: "I think this is a really good ideas")
-      fill_in("Your full name", with: "Matthew Landauer")
-      fill_in("Your address", with: "11 Foo Street")
-      click_button("Review and publish")
+      it "Editing a comment that hasn't yet been published" do
+        fill_in("Your comment", with: "I think this is a really good ideas")
+        fill_in("Your full name", with: "Matthew Landauer")
+        fill_in("Your address", with: "11 Foo Street")
+        click_button("Review and publish")
 
-      visit(application_path(application))
-      click_button("Clear form")
+        visit(application_path(application))
+        fill_in("Your comment", with: "I'm not so sure this is a good idea")
+        click_button("Review and publish")
+        expect(page).to have_content("Does this look right?")
+        expect(page).to have_content("I'm not so sure this is a good idea")
+        expect(page).to have_content("Matthew Landauer")
+      end
 
-      expect(page).not_to have_content("I think this is a really good ideas")
+      it "Deleting a comment that hasn't yet been published" do
+        fill_in("Your comment", with: "I think this is a really good ideas")
+        fill_in("Your full name", with: "Matthew Landauer")
+        fill_in("Your address", with: "11 Foo Street")
+        click_button("Review and publish")
+
+        visit(application_path(application))
+        click_button("Clear form")
+
+        expect(page).not_to have_content("I think this is a really good ideas")
+      end
     end
 
     it "Unconfirmed comment should not be shown" do
