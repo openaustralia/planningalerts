@@ -23,4 +23,10 @@ class CommentPolicy < ApplicationPolicy
     # TODO: Remove temporary powers for admins to view all previews
     comment.user_id == user.id || user.admin?
   end
+
+  sig { returns(T::Boolean) }
+  def update?
+    # Can only edit your own comments that have not yet been published
+    comment.user_id == user.id && !comment.previewed
+  end
 end

@@ -4,9 +4,9 @@
 class CommentsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, only: %i[create preview]
+  before_action :authenticate_user!, only: %i[create preview update]
   # TODO: Add checks for all other actions on this controller
-  after_action :verify_authorized, only: :preview
+  after_action :verify_authorized, only: %i[preview update]
 
   sig { void }
   def index
@@ -70,6 +70,14 @@ class CommentsController < ApplicationController
     render "applications/show"
   end
 
+  sig { void }
+  def update
+    comment = Comment.find(params[:id])
+    authorize(comment)
+    comment.update!(comment_params)
+    redirect_to preview_comment_path(comment)
+  end
+
   # TODO: We should leave this working until March 2023 to alllow people to still confirm old comments
   sig { void }
   def confirmed
@@ -103,5 +111,12 @@ class CommentsController < ApplicationController
     comment = Comment.find(params[:id])
     authorize(comment)
     @comment = T.let(comment, T.nilable(Comment))
+  end
+
+  private
+
+  sig { returns(ActionController::Parameters) }
+  def comment_params
+    T.cast(params.require(:comment), ActionController::Parameters).permit(:text, :name, :address)
   end
 end
