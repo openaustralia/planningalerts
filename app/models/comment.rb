@@ -25,7 +25,7 @@ class Comment < ApplicationRecord
   scope(:confirmed, -> { where(confirmed: true) })
   scope(:confirmed_and_previewed, -> { where(confirmed: true, previewed: true) })
   scope(:visible, -> { where(confirmed: true, hidden: false) })
-  scope(:in_past_week, -> { where("confirmed_at > ?", 7.days.ago) })
+  scope(:in_past_week, -> { where("previewed_at > ?", 7.days.ago) })
 
   delegate :email, to: :user
   delegate :comment_recipient_full_name, to: :application
@@ -48,7 +48,8 @@ class Comment < ApplicationRecord
   def confirm!
     return if confirmed
 
-    update!(confirmed: true, confirmed_at: Time.current)
+    # We're using previewed_at effectively as a "published_at"
+    update!(confirmed: true, confirmed_at: Time.current, previewed_at: Time.current)
     send_comment!
   end
 

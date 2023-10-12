@@ -40,10 +40,10 @@ describe CommentsController do
         id: 1
       )
 
-      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
-      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
-      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
-      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2016, 1, 4))
+      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26), previewed_at: Date.new(2015, 12, 26))
+      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26), previewed_at: Date.new(2015, 12, 26))
+      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26), previewed_at: Date.new(2015, 12, 26))
+      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2016, 1, 4), previewed_at: Date.new(2016, 1, 4))
 
       get_authority_comments_per_week
 

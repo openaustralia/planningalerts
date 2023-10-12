@@ -103,6 +103,7 @@ FactoryBot.define do
     factory :confirmed_comment do
       confirmed { true }
       confirmed_at { 5.minutes.ago }
+      previewed_at { 5.minutes.ago }
     end
   end
 

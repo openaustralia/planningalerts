@@ -21,8 +21,8 @@
     <% end %>
 
     <div class="<%= class_names("text-xl", "text-navy", "mt-6" => !comment.visible?) %>">
-      <%= time_tag comment.confirmed_at do %>
-        <%= time_ago_in_words(comment.confirmed_at).capitalize %> ago
+      <%= time_tag comment.previewed_at do %>
+        <%= time_ago_in_words(comment.previewed_at).capitalize %> ago
       <% end %>
     </div>
 

@@ -8,7 +8,8 @@ describe "Admin edits comment" do
            previewed: true,
            name: "Alena",
            id: 1,
-           confirmed_at: 3.days.ago)
+           confirmed_at: 3.days.ago,
+           previewed_at: 3.days.ago)
   end
 
   it "successfully" do

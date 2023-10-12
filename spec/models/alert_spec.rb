@@ -413,6 +413,7 @@ describe Alert do
     it "does not see old confirmed comments" do
       old_comment = create(:confirmed_comment,
                            confirmed_at: alert.cutoff_time - 1,
+                           previewed_at: alert.cutoff_time - 1,
                            application:)
 
       expect(alert.new_comments).not_to eql [old_comment]
@@ -471,6 +472,7 @@ describe Alert do
       it "does not return the application it belongs to" do
         create(:confirmed_comment,
                confirmed_at: alert.cutoff_time - 1,
+               previewed_at: alert.cutoff_time - 1,
                application: near_application)
 
         expect(alert.applications_with_new_comments).to eq []

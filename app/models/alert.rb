@@ -104,7 +104,7 @@ class Alert < ApplicationRecord
     result = Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
     result.reorder(first_date_scraped: :desc)
           .joins(:comments)
-          .where("comments.confirmed_at > ?", cutoff_time)
+          .where("comments.previewed_at > ?", cutoff_time)
           .where("comments.confirmed" => true)
           .where("comments.hidden" => false)
           .distinct
@@ -115,7 +115,7 @@ class Alert < ApplicationRecord
     comments = T.let([], T::Array[Comment])
     # Doing this in this roundabout way because I'm not sure how to use "near" together with joins
     applications_with_new_comments.each do |application|
-      comments += application.comments.visible.where("comments.confirmed_at > ?", cutoff_time)
+      comments += application.comments.visible.where("comments.previewed_at > ?", cutoff_time)
     end
     comments
   end
