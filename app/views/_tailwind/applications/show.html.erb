@@ -157,28 +157,29 @@
   <% @comments.each do |comment| %>
     <div class="mt-12"><%= render comment %></div>
   <% end %>
-  <div class="flex gap-6">
-    <div class="mt-36 text-navy text-7xl">”</div>
-    <section class="pt-10 border-t border-dashed mt-14 border-warm-grey grow" id="add-comment">
-      <h3 class="mb-3 text-3xl font-bold text-navy font-display">Add your own comment<h3>
-      <% if current_user.nil? %>
-        <div class="px-4 py-3 bg-light-grey">
-          <p class="text-2xl opacity-50 text-navy">Be polite, clear and to the point so your comment gets listened to.</p>
-          <div class="flex justify-center py-12">
-            <div class="inline-grid grid-cols-2 gap-3">
-              <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_registration_path) do %>
-                Create an account
-              <% end %>
-              <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_session_path) do %>
-                Sign in
-              <% end %>
-            </div>
+</section>
+
+<section class="flex gap-6 mt-14" id="add-comment">
+  <div class="mt-20 text-navy text-7xl">”</div>
+  <div class="pt-10 border-t border-dashed border-warm-grey grow">
+    <h2 class="mb-3 text-3xl font-bold text-navy font-display">Add your own comment<h2>
+    <% if current_user.nil? %>
+      <div class="px-4 py-3 bg-light-grey">
+        <p class="text-2xl opacity-50 text-navy">Be polite, clear and to the point so your comment gets listened to.</p>
+        <div class="flex justify-center py-12">
+          <div class="inline-grid grid-cols-2 gap-3">
+            <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_registration_path) do %>
+              Create an account
+            <% end %>
+            <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_session_path) do %>
+              Sign in
+            <% end %>
           </div>
         </div>
-      <% else %>
-        <%= render "comments/form", application: @application, comment: @comment %>
-      <% end %>
-    </section>
+      </div>
+    <% else %>
+      <%= render "comments/form", application: @application, comment: @comment %>
+    <% end %>
   </div>
 </section>
 
