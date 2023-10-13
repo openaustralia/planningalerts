@@ -63,12 +63,5 @@ module Admin
       comment.send_comment!
       redirect_to({ action: :show }, notice: t(".success"))
     end
-
-    sig { void }
-    def confirm
-      comment = Comment.find(params[:id])
-      comment.confirm!
-      redirect_to({ action: :show }, notice: t(".success"))
-    end
   end
 end
