@@ -128,8 +128,9 @@ class CommentsController < ApplicationController
     comment.update!(previewed: true, previewed_at: Time.current)
 
     comment.send_comment!
-    # TODO: Update notice that's displayed - currently it's rendering code!
-    redirect_to comment.application, notice: render_to_string(partial: "confirmed", locals: { comment: })
+    # The flash is used to show a special alert box above the specific new comment
+    # which allows the user to share it on Facebook, etc..
+    redirect_to comment.application, flash: { published_comment_id: comment.id }
   end
 
   private

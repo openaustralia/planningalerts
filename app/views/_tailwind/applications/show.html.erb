@@ -155,7 +155,7 @@
     <%= pa_link_to "Add your own comment", "#add-comment" %>.
   </p>
   <% @comments.each do |comment| %>
-    <div class="mt-12"><%= render comment %></div>
+    <div class="mt-12"><%= render comment, show_share_alert: (comment.id == flash[:published_comment_id]) %></div>
   <% end %>
 </section>
 
