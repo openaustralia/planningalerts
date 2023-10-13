@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Admin edits comment" do
   before do
-    create(:confirmed_comment,
+    create(:published_comment,
            previewed: true,
            name: "Alena",
            id: 1,

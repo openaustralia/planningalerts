@@ -378,20 +378,20 @@ describe Alert do
     let(:application) { create(:application, lat: p1.lat, lng: p1.lng, lonlat: factory.point(p1.lng, p1.lat), suburb: "", state: "", postcode: "") }
 
     it "sees a new comment when there are new comments on an application" do
-      comment1 = create(:confirmed_comment, application:)
+      comment1 = create(:published_comment, application:)
 
       expect(alert.new_comments).to eql [comment1]
     end
 
     it "only sees two new comments when there are two new comments on a single application" do
-      comment1 = create(:confirmed_comment, application:)
-      comment2 = create(:confirmed_comment, application:)
+      comment1 = create(:published_comment, application:)
+      comment2 = create(:published_comment, application:)
 
       expect(alert.new_comments).to eql [comment1, comment2]
     end
 
     it "does not see old confirmed comments" do
-      old_comment = create(:confirmed_comment,
+      old_comment = create(:published_comment,
                            confirmed_at: alert.cutoff_time - 1,
                            published_at: alert.cutoff_time - 1,
                            application:)
@@ -399,14 +399,14 @@ describe Alert do
       expect(alert.new_comments).not_to eql [old_comment]
     end
 
-    it "does not see unconfirmed comments" do
-      unconfirmed_comment = create(:unconfirmed_comment, application:)
+    it "does not see unpublished comments" do
+      unpublished_comment = create(:comment, application:)
 
-      expect(alert.new_comments).not_to eql [unconfirmed_comment]
+      expect(alert.new_comments).not_to eql [unpublished_comment]
     end
 
     it "does not see hidden comments" do
-      hidden_comment = create(:confirmed_comment, hidden: true, application:)
+      hidden_comment = create(:published_comment, hidden: true, application:)
 
       expect(alert.new_comments).not_to eql [hidden_comment]
     end
@@ -442,7 +442,7 @@ describe Alert do
 
     context "when there is a new comment near by" do
       it "returns the application it belongs to" do
-        create(:confirmed_comment, application: near_application)
+        create(:published_comment, application: near_application)
 
         expect(alert.applications_with_new_comments).to eq [near_application]
       end
@@ -450,7 +450,7 @@ describe Alert do
 
     context "when there is an old comment near by" do
       it "does not return the application it belongs to" do
-        create(:confirmed_comment,
+        create(:published_comment,
                confirmed_at: alert.cutoff_time - 1,
                published_at: alert.cutoff_time - 1,
                application: near_application)
@@ -461,7 +461,7 @@ describe Alert do
 
     context "when there is an unconfirmed comment near by" do
       it "does not return the application it belongs to" do
-        create(:unconfirmed_comment, application: near_application)
+        create(:comment, application: near_application)
 
         expect(alert.applications_with_new_comments).to eq []
       end
@@ -469,7 +469,7 @@ describe Alert do
 
     context "when there is a hidden comment near by" do
       it "does not return the application it belongs to" do
-        create(:confirmed_comment, hidden: true, application: near_application)
+        create(:published_comment, hidden: true, application: near_application)
 
         expect(alert.applications_with_new_comments).to eq []
       end
@@ -477,7 +477,7 @@ describe Alert do
 
     context "when there is a new comment far away" do
       it "does not return the application it belongs to" do
-        create(:confirmed_comment, application: far_away_application)
+        create(:published_comment, application: far_away_application)
 
         expect(alert.applications_with_new_comments).to eq []
       end

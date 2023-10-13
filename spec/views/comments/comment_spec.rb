@@ -14,7 +14,7 @@ describe "comments/_comment" do
   end
 
   it "adds rel='no-follow' to links in the comment text" do
-    comment = create(:confirmed_comment,
+    comment = create(:published_comment,
                      text: 'This is a link to <a href="http://openaustralia.org">openaustralia.org</a>',
                      application:)
     expected_html = "<blockquote class='comment-text'>
@@ -27,7 +27,7 @@ describe "comments/_comment" do
   end
 
   it "formats simple text in separate paragraphs with p tags" do
-    comment = create(:confirmed_comment,
+    comment = create(:published_comment,
                      text: "This is the first paragraph\nAnd the next line\n\nThis is a new paragraph",
                      application:)
     expected_html = "<blockquote class='comment-text'>
@@ -43,7 +43,7 @@ describe "comments/_comment" do
   end
 
   it "gets rid of nasty javascript and strip out images" do
-    comment = create(:confirmed_comment,
+    comment = create(:published_comment,
                      text: "<a href=\"javascript:document.location='http://www.google.com/'\">A nasty link</a><img src=\"http://foo.co\">",
                      application:)
     expected_html = "<blockquote class='comment-text'>

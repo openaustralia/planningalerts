@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Admin hides comment" do
   before do
-    create(:confirmed_comment, id: 1)
+    create(:published_comment, id: 1)
   end
 
   it "successfully" do

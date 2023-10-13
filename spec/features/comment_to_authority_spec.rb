@@ -156,7 +156,7 @@ describe "Give feedback" do
   end
 
   it "Reporting abuse on a confirmed comment" do
-    comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
+    comment = create(:published_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
 
     sign_in create(:confirmed_user, email: "reporter@foo.com", name: "Joe Reporter")
     visit(new_comment_report_path(comment))
@@ -175,7 +175,7 @@ describe "Give feedback" do
   end
 
   it "reporting abuse when user doesn't have a name set" do
-    comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
+    comment = create(:published_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
 
     sign_in create(:confirmed_user, email: "reporter@foo.com")
     visit(new_comment_report_path(comment))

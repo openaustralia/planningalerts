@@ -16,7 +16,7 @@ describe CommentMailer do
     end
 
     let(:comment) do
-      create(:confirmed_comment,
+      create(:published_comment,
              user: create(:user, email: "foo@bar.com"),
              name: "Matthew",
              application:,

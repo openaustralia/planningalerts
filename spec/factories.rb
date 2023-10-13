@@ -89,19 +89,10 @@ FactoryBot.define do
     text { "a comment" }
     address { "12 Foo Street" }
     application factory: %i[geocoded_application]
+    confirmed { true }
     previewed { false }
 
-    trait :confirmed do
-      confirmed { true }
-      confirmed_at { 5.minutes.ago }
-    end
-
-    factory :unconfirmed_comment do
-      confirmed { false }
-    end
-
-    factory :confirmed_comment do
-      confirmed { true }
+    factory :published_comment do
       previewed { true }
       confirmed_at { 5.minutes.ago }
       published_at { 5.minutes.ago }
