@@ -24,7 +24,7 @@ class Comment < ApplicationRecord
 
   scope(:confirmed, -> { where(confirmed: true) })
   scope(:confirmed_and_previewed, -> { where(confirmed: true, previewed: true) })
-  scope(:visible, -> { where(confirmed: true, hidden: false) })
+  scope(:visible, -> { where(confirmed: true, previewed: true, hidden: false) })
   scope(:in_past_week, -> { where("published_at > ?", 7.days.ago) })
 
   delegate :email, to: :user
@@ -41,7 +41,7 @@ class Comment < ApplicationRecord
 
   sig { returns(T::Boolean) }
   def visible?
-    !!confirmed && !hidden
+    !!confirmed && !!previewed && !hidden
   end
 
   sig { void }
