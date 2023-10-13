@@ -142,19 +142,12 @@ FactoryBot.define do
     lng { 151.155503 }
     lonlat { RGeo::Geographic.spherical_factory(srid: 4326).point(151.155503, -33.911105) }
     radius_meters { 2000 }
+    confirmed { true }
+    confirm_id { "1234" }
 
-    factory :unconfirmed_alert do
-      confirmed { false }
-    end
-
-    factory :confirmed_alert do
-      confirmed { true }
-      confirm_id { "1234" }
-
-      factory :unsubscribed_alert do
-        unsubscribed { true }
-        unsubscribed_at { Time.zone.now }
-      end
+    factory :unsubscribed_alert do
+      unsubscribed { true }
+      unsubscribed_at { Time.zone.now }
     end
   end
 

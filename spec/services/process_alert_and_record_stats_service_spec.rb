@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe ProcessAlertAndRecordStatsService do
   context "with two confirmed alerts" do
-    let(:alert) { create(:confirmed_alert) }
+    let(:alert) { create(:alert) }
 
     before do
       allow(ProcessAlertService).to receive(:call).with(alert:).and_return([1, 5, 1])

@@ -143,7 +143,7 @@ describe Alert do
       end
 
       it "is valid for another alert at the same address for a different user" do
-        expect(build(:confirmed_alert, address:)).to be_valid
+        expect(build(:alert, address:)).to be_valid
       end
 
       it "is valid for an unsubscribed alert at the same address for the same user" do
@@ -193,26 +193,6 @@ describe Alert do
     it "is valid when it is one of the allowed values" do
       alert = build(:alert, radius_meters: "2000")
       expect(alert).to be_valid
-    end
-  end
-
-  describe "confirmed" do
-    it "is false when alert is created" do
-      expect(create(:alert).confirmed).to be false
-    end
-
-    it "is able to be set to false" do
-      alert = build(:alert)
-      alert.confirmed = false
-      alert.save!
-      expect(alert.confirmed).to be(false)
-    end
-
-    it "is able to set to true" do
-      alert = build(:alert)
-      alert.confirmed = true
-      alert.save!
-      expect(alert.confirmed).to be(true)
     end
   end
 

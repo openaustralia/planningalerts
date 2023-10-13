@@ -176,39 +176,13 @@ describe "Sign up for alerts" do
     # end
   end
 
-  context "when there is already an unconfirmed alert for the address" do
-    around do |test|
-      Timecop.freeze(Time.utc(2017, 1, 4, 14, 35)) { test.run }
-    end
-
-    let(:user) { create(:confirmed_user, email: "example@example.com") }
-
-    before do
-      create(:unconfirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
-                                 user:,
-                                 created_at: 3.days.ago,
-                                 updated_at: 3.days.ago)
-    end
-
-    it "successfully" do
-      sign_in user
-      visit "/alerts/signup"
-
-      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-      click_button("Create alert")
-
-      # Not convinced this is the correct behaviour. Hmmm...
-      expect(page).to have_content("You already have an alert for that address")
-    end
-  end
-
   context "when there is already an confirmed alert for the address" do
     let(:user) { create(:confirmed_user, email: "jenny@email.org") }
     let!(:preexisting_alert) do
-      create(:confirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
-                               user:,
-                               created_at: 3.days.ago,
-                               updated_at: 3.days.ago)
+      create(:alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
+                     user:,
+                     created_at: 3.days.ago,
+                     updated_at: 3.days.ago)
     end
 
     it "see the confirmation page, so we don't leak information, but also get a notice about the signup attempt" do

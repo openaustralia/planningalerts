@@ -9,7 +9,7 @@ describe AlertsController do
 
   describe "#unsubscribe" do
     it "marks the alert as unsubscribed" do
-      alert = create(:confirmed_alert)
+      alert = create(:alert)
 
       get :unsubscribe, params: { confirm_id: alert.confirm_id }
 
