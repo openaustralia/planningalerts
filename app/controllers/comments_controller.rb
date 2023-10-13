@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
     end
     @description = T.let(description, T.nilable(String))
 
-    @comments = T.let(comments_to_display.confirmed.includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
+    @comments = T.let(comments_to_display.confirmed_and_previewed.includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
   end
 
   sig { void }
