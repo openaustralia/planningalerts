@@ -129,6 +129,18 @@ describe "Give feedback" do
           expect(page).to have_content("I think this is a really good ideas")
         end
       end
+
+      it "Publishing a comment sends it to the planning authority" do
+        fill_in("Your comment", with: "I think this is a really good ideas")
+        fill_in("Your full name", with: "Matthew Landauer")
+        fill_in("Your address", with: "11 Foo Street")
+        click_button("Review and publish")
+        click_button("Publish")
+
+        expect(unread_emails_for("feedback@foo.gov.au").size).to eq(1)
+        open_email("feedback@foo.gov.au")
+        expect(current_email.default_part_body.to_s).to include("I think this is a really good ideas")
+      end
     end
 
     it "Unconfirmed comment should not be shown" do
