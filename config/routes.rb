@@ -93,7 +93,7 @@ Rails.application.routes.draw do
     get :comments
   end
 
-  resources :alerts, only: %i[new create update edit], path_names: { new: "signup", edit: "area" }, param: :confirm_id do
+  resources :alerts, only: %i[new create], path_names: { new: "signup" }, param: :confirm_id do
     member do
       get :unsubscribe
     end

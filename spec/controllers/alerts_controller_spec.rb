@@ -21,18 +21,4 @@ describe AlertsController do
       expect(response).to be_successful
     end
   end
-
-  describe "#edit_area" do
-    it "404S if the alert can't be found" do
-      expect do
-        get :edit, params: { confirm_id: "38457982345874" }
-      end.to raise_error(ActiveRecord::RecordNotFound)
-    end
-
-    it "supports head requests" do
-      alert = create(:confirmed_alert)
-      head :edit, params: { confirm_id: alert.confirm_id }
-      expect(response).to be_successful
-    end
-  end
 end
