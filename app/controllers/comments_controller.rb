@@ -4,6 +4,8 @@
 class CommentsController < ApplicationController
   extend T::Sig
 
+  include CommentsHelper
+
   before_action :authenticate_user!, only: %i[create preview update destroy publish]
   # TODO: Add checks for all other actions on this controller
   after_action :verify_authorized, only: %i[preview update destroy publish]
@@ -130,7 +132,7 @@ class CommentsController < ApplicationController
     comment.send_comment!
     # The flash is used to show a special alert box above the specific new comment
     # which allows the user to share it on Facebook, etc..
-    redirect_to comment.application, flash: { published_comment_id: comment.id }
+    redirect_to comment_path(comment), flash: { published_comment_id: comment.id }
   end
 
   private
