@@ -1,13 +1,17 @@
 <% if flash.notice %>
-  <%= render Tailwind::AlertComponent.new(type: :success) do %>
-    <%# Using sanitize here so that we can put html in the flash message safely %>
-    <%= sanitize(flash.notice) %>
-  <% end %>
+  <div class="mt-8">
+    <%= render Tailwind::AlertComponent.new(type: :success) do %>
+      <%# Using sanitize here so that we can put html in the flash message safely %>
+      <%= sanitize(flash.notice) %>
+    <% end %>
+  </div>
 <% end %>
 
 <% if flash.alert %>
-  <%= render Tailwind::AlertComponent.new(type: :warning) do %>
-    <%# Using sanitize here so that we can put html in the flash message safely %>
-    <%= sanitize(flash.alert) %>
-  <% end %>
+  <div class="mt-8">
+    <%= render Tailwind::AlertComponent.new(type: :warning) do %>
+      <%# Using sanitize here so that we can put html in the flash message safely %>
+      <%= sanitize(flash.alert) %>
+    <% end %>
+  </div>
 <% end %>
