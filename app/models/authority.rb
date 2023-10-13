@@ -78,7 +78,7 @@ class Authority < ApplicationRecord
 
     e = earliest_date
     if e
-      results = comments.visible.group("DATE(previewed_at) - CAST(EXTRACT(DOW FROM previewed_at) AS INT)").count
+      results = comments.visible.group("DATE(published_at) - CAST(EXTRACT(DOW FROM published_at) AS INT)").count
 
       earliest_week_with_applications = e.at_beginning_of_week.to_date
       latest_week = Time.zone.today.at_beginning_of_week

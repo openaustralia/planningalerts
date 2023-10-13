@@ -970,51 +970,6 @@ class Comment
     sig { returns(T::Boolean) }
     def previewed?; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def previewed_at; end
-
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def previewed_at=(value); end
-
-    sig { returns(T::Boolean) }
-    def previewed_at?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def previewed_at_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def previewed_at_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def previewed_at_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def previewed_at_change; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def previewed_at_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def previewed_at_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def previewed_at_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def previewed_at_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def previewed_at_previously_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def previewed_at_previously_was; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def previewed_at_was; end
-
-    sig { void }
-    def previewed_at_will_change!; end
-
     sig { returns(T.nilable(T::Boolean)) }
     def previewed_before_last_save; end
 
@@ -1050,6 +1005,51 @@ class Comment
 
     sig { void }
     def previewed_will_change!; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def published_at; end
+
+    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def published_at=(value); end
+
+    sig { returns(T::Boolean) }
+    def published_at?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def published_at_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def published_at_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def published_at_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def published_at_change; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def published_at_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def published_at_changed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def published_at_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def published_at_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def published_at_previously_changed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def published_at_previously_was; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def published_at_was; end
+
+    sig { void }
+    def published_at_will_change!; end
 
     sig { void }
     def restore_address!; end
@@ -1088,7 +1088,7 @@ class Comment
     def restore_previewed!; end
 
     sig { void }
-    def restore_previewed_at!; end
+    def restore_published_at!; end
 
     sig { void }
     def restore_text!; end
@@ -1172,10 +1172,10 @@ class Comment
     def saved_change_to_previewed?; end
 
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def saved_change_to_previewed_at; end
+    def saved_change_to_published_at; end
 
     sig { returns(T::Boolean) }
-    def saved_change_to_previewed_at?; end
+    def saved_change_to_published_at?; end
 
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def saved_change_to_text; end
@@ -1367,7 +1367,7 @@ class Comment
     def will_save_change_to_previewed?; end
 
     sig { returns(T::Boolean) }
-    def will_save_change_to_previewed_at?; end
+    def will_save_change_to_published_at?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_text?; end

@@ -21,8 +21,8 @@
       <%= comment_as_html(comment.text) %>
     </div>
     <div class="mt-12 text-lg text-navy">
-      <time datetime="<%= comment.previewed_at.strftime("%F") %>">
-        <%= time_ago_in_words(comment.previewed_at) %> ago
+      <time datetime="<%= comment.published_at.strftime("%F") %>">
+        <%= time_ago_in_words(comment.published_at) %> ago
       </time>
     </div>
     <div class="mt-4">

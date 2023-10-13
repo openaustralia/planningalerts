@@ -81,6 +81,9 @@ module GeneratedPathHelpersModule
   def api_howto_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def application_comment_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def application_comments_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -292,6 +295,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def profile_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def publish_application_comment_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def rails_blob_path(*args); end

@@ -18,7 +18,7 @@ class CommentDashboard < Administrate::BaseDashboard
     confirmed: YesNoBooleanField,
     confirmed_at: Field::DateTime,
     previewed: YesNoBooleanField,
-    previewed_at: Field::DateTime,
+    published_at: Field::DateTime,
     hidden: YesNoBooleanField,
     last_delivered_at: Field::DateTime,
     last_delivered_successfully: YesNoBooleanField,
@@ -53,7 +53,7 @@ class CommentDashboard < Administrate::BaseDashboard
     confirmed
     confirmed_at
     previewed
-    previewed_at
+    published_at
     created_at
     updated_at
     address

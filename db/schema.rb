@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_12_041601) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_13_053722) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -209,14 +209,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_12_041601) do
     t.boolean "last_delivered_successfully"
     t.integer "user_id"
     t.boolean "previewed", null: false
-    t.datetime "previewed_at"
+    t.datetime "published_at"
     t.index ["application_id"], name: "index_comments_on_application_id"
     t.index ["confirm_id"], name: "index_comments_on_confirm_id"
     t.index ["confirmed"], name: "index_comments_on_confirmed"
     t.index ["confirmed_at", "confirmed", "hidden"], name: "index_comments_on_confirmed_at_and_confirmed_and_hidden"
     t.index ["hidden"], name: "index_comments_on_hidden"
     t.index ["previewed", "confirmed"], name: "index_comments_on_previewed_and_confirmed"
-    t.index ["previewed_at", "previewed", "confirmed", "hidden"], name: "index_comments_on_previewed_at_and_others"
+    t.index ["published_at", "previewed", "confirmed", "hidden"], name: "index_comments_on_previewed_at_and_others"
     t.index ["user_id"], name: "fk_rails_03de2dc08c"
   end
 
