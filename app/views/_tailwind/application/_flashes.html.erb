@@ -1,15 +1,13 @@
 <% if flash.notice %>
-  <div class="flex items-center px-4 py-3 mt-8 text-2xl font-bold text-white rounded-lg bg-lavender">
-    <%= image_tag "tailwind/tick.svg", class: "mr-5", alt: "Tick" %>
+  <%= render Tailwind::AlertComponent.new(type: :success) do %>
     <%# Using sanitize here so that we can put html in the flash message safely %>
-    <p><%= sanitize(flash.notice) %></p>
-  </div>
+    <%= sanitize(flash.notice) %>
+  <% end %>
 <% end %>
 
 <% if flash.alert %>
-  <div class="flex items-center px-4 py-3 mt-8 text-2xl font-bold text-white rounded-lg bg-error-red">
-    <%= image_tag "tailwind/warning.svg", class: "mr-5", alt: "Warning sign" %>
+  <%= render Tailwind::AlertComponent.new(type: :warning) do %>
     <%# Using sanitize here so that we can put html in the flash message safely %>
-    <p><%= sanitize(flash.alert) %></p>
-  </div>
+    <%= sanitize(flash.alert) %>
+  <% end %>
 <% end %>
