@@ -86,23 +86,6 @@ class CommentsController < ApplicationController
     redirect_to application_path(comment.application, anchor: "add-comment")
   end
 
-  # TODO: We should leave this working until March 2023 to alllow people to still confirm old comments
-  sig { void }
-  def confirmed
-    @comment = T.let(Comment.find_by(confirm_id: params[:id]), T.nilable(Comment))
-    if @comment
-      @comment.confirm!
-
-      # Confirm the attached user if it isn't already confirmed
-      user = @comment.user
-      user.confirm if user && !user.confirmed?
-
-      redirect_to @comment.application, notice: render_to_string(partial: "confirmed", locals: { comment: @comment })
-    else
-      render plain: "", status: :not_found
-    end
-  end
-
   sig { void }
   def per_week
     params_authority_id = T.cast(params[:authority_id], String)

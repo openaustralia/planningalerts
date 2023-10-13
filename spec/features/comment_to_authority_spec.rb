@@ -153,47 +153,6 @@ describe "Give feedback" do
 
       expect(page).not_to have_content("I think this is a really good ideas")
     end
-
-    context "when confirming the comment" do
-      let(:comment) do
-        create(:comment, confirmed: false, previewed: true, text: "I think this is a really good ideas", application:)
-      end
-
-      it "publishes the comment" do
-        visit(confirmed_comment_path(id: comment.confirm_id))
-
-        expect(page).to have_content("Your comment has been sent to Foo and posted below.")
-        expect(page).to have_content("I think this is a really good ideas")
-
-        expect(unread_emails_for("feedback@foo.gov.au").size).to eq(1)
-        open_email("feedback@foo.gov.au")
-        expect(current_email.default_part_body.to_s).to include("I think this is a really good ideas")
-      end
-
-      it "twice should not send the comment twice" do
-        visit(confirmed_comment_path(id: comment.confirm_id))
-        visit(confirmed_comment_path(id: comment.confirm_id))
-
-        expect(unread_emails_for("feedback@foo.gov.au").size).to eq(1)
-      end
-    end
-
-    it "Viewing the comment on the application page" do
-      comment = create(:comment, confirmed: false, previewed: true, text: "I think this is a really good ideas", application:)
-
-      visit(confirmed_comment_path(id: comment.confirm_id))
-
-      expect(page).to have_content("commented less than a minute ago")
-      expect(page).to have_content("I think this is a really good ideas")
-    end
-
-    it "Sharing new comment on facebook" do
-      comment = create(:unconfirmed_comment, application:)
-
-      visit(confirmed_comment_path(id: comment.confirm_id))
-
-      expect(page).to have_content("Share your comment on Facebook")
-    end
   end
 
   it "Reporting abuse on a confirmed comment" do

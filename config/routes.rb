@@ -144,7 +144,6 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:index] do
     member do
-      get :confirmed
       # "preview" route only currently used in tailwind theme
       get :preview
     end
