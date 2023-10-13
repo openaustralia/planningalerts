@@ -131,11 +131,6 @@ class Alert < ApplicationRecord
   end
 
   sig { void }
-  def confirm!
-    update!(confirmed: true)
-  end
-
-  sig { void }
   def geocode_from_address
     geocode_result = GoogleGeocodeService.call(address:, key: Rails.application.credentials.dig(:google_maps, :server_key))
     @geocode_result = T.let(geocode_result, T.nilable(GeocoderResults))
