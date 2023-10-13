@@ -45,14 +45,6 @@ class Comment < ApplicationRecord
   end
 
   sig { void }
-  def confirm!
-    return if confirmed
-
-    update!(confirmed: true, confirmed_at: Time.current, published_at: Time.current)
-    send_comment!
-  end
-
-  sig { void }
   def send_comment!
     CommentMailer.notify_authority(self).deliver_later
   end

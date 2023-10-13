@@ -25,28 +25,6 @@ describe Comment do
     end
   end
 
-  describe "#confirm!" do
-    context "when already confirmed" do
-      let(:comment) do
-        build(:confirmed_comment)
-      end
-
-      it "does not run after_confirm callback" do
-        allow(comment).to receive(:after_confirm)
-        comment.confirm!
-        expect(comment).not_to have_received(:after_confirm)
-      end
-
-      it "does not change the confirmed_at time" do
-        time_before_confirmed_again = comment.confirmed_at
-
-        comment.confirm!
-
-        expect(comment.confirmed_at).to eql time_before_confirmed_again
-      end
-    end
-  end
-
   context "when new comment for a planning authority" do
     let(:comment_to_authority) { create(:comment) }
     let(:application) { create(:application) }
