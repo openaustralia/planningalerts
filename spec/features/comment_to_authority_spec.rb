@@ -119,27 +119,30 @@ describe "Give feedback" do
         expect(page).not_to have_content("I think this is a really good ideas")
       end
 
-      it "Publishing a comment should make the comment visible to everyone" do
-        fill_in("Your comment", with: "I think this is a really good ideas")
-        fill_in("Your full name", with: "Matthew Landauer")
-        fill_in("Your address", with: "11 Foo Street")
-        click_button("Review and publish")
-        click_button("Publish")
-        within("#comments") do
-          expect(page).to have_content("I think this is a really good ideas")
+      context "when publishing a comment" do
+        before do
+          fill_in("Your comment", with: "I think this is a really good ideas")
+          fill_in("Your full name", with: "Matthew Landauer")
+          fill_in("Your address", with: "11 Foo Street")
+          click_button("Review and publish")
+          click_button("Publish")
         end
-      end
 
-      it "Publishing a comment sends it to the planning authority" do
-        fill_in("Your comment", with: "I think this is a really good ideas")
-        fill_in("Your full name", with: "Matthew Landauer")
-        fill_in("Your address", with: "11 Foo Street")
-        click_button("Review and publish")
-        click_button("Publish")
+        it "makes the comment visible to everyone" do
+          within("#comments") do
+            expect(page).to have_content("I think this is a really good ideas")
+          end
+        end
 
-        expect(unread_emails_for("feedback@foo.gov.au").size).to eq(1)
-        open_email("feedback@foo.gov.au")
-        expect(current_email.default_part_body.to_s).to include("I think this is a really good ideas")
+        it "sends it to the planning authority" do
+          expect(unread_emails_for("feedback@foo.gov.au").size).to eq(1)
+          open_email("feedback@foo.gov.au")
+          expect(current_email.default_part_body.to_s).to include("I think this is a really good ideas")
+        end
+
+        it "suggests you share it on facebook" do
+          expect(page).to have_content("Share your comment on Facebook")
+        end
       end
     end
 
