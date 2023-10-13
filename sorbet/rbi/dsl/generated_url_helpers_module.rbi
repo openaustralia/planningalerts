@@ -72,9 +72,6 @@ module GeneratedUrlHelpersModule
   def admin_users_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def alert_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -144,12 +141,6 @@ module GeneratedUrlHelpersModule
   def confirm_admin_comment_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def confirmed_alert_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def confirmed_comment_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def contact_messages_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -181,9 +172,6 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def edit_admin_user_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def edit_alert_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def edit_profile_alert_url(*args); end

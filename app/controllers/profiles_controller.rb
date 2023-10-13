@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
   sig { void }
   def comments
     # We also want to include comments that have been hidden
-    comments = T.must(current_user).comments.confirmed_and_previewed.order(published_at: :desc).page(params[:page])
+    comments = T.must(current_user).comments.previewed.order(published_at: :desc).page(params[:page])
     @comments = T.let(comments, T.nilable(ActiveRecord::Relation))
   end
 end

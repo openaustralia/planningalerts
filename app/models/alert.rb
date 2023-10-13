@@ -31,8 +31,7 @@ class Alert < ApplicationRecord
   before_validation :geocode_from_address, unless: :geocoded?
   before_create :set_confirm_info
 
-  scope(:confirmed, -> { where(confirmed: true) })
-  scope(:active, -> { where(confirmed: true, unsubscribed: false) })
+  scope(:active, -> { where(unsubscribed: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
 
   delegate :email, to: :user
@@ -105,7 +104,6 @@ class Alert < ApplicationRecord
     result.reorder(first_date_scraped: :desc)
           .joins(:comments)
           .where("comments.published_at > ?", cutoff_time)
-          .where("comments.confirmed" => true)
           .where("comments.hidden" => false)
           .distinct
   end

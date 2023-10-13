@@ -72,9 +72,6 @@ module GeneratedPathHelpersModule
   def admin_users_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def alert_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def alerts_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -144,12 +141,6 @@ module GeneratedPathHelpersModule
   def confirm_admin_comment_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def confirmed_alert_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def confirmed_comment_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def contact_messages_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -181,9 +172,6 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def edit_admin_user_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def edit_alert_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def edit_profile_alert_path(*args); end

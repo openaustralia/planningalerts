@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
     end
     @description = T.let(description, T.nilable(String))
 
-    @comments = T.let(comments_to_display.confirmed_and_previewed.includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
+    @comments = T.let(comments_to_display.previewed.includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
   end
 
   sig { void }
@@ -65,7 +65,7 @@ class CommentsController < ApplicationController
 
     # HACK: Required for new email alert signup form
     @alert = T.let(Alert.new(address: application.address, radius_meters: Alert::DEFAULT_RADIUS), T.nilable(Alert))
-    @comments = T.let(application.comments.confirmed_and_previewed.order(:published_at), T.untyped)
+    @comments = T.let(application.comments.previewed.order(:published_at), T.untyped)
 
     render "applications/show"
   end

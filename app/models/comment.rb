@@ -22,26 +22,25 @@ class Comment < ApplicationRecord
 
   before_create :set_confirm_info
 
-  scope(:confirmed, -> { where(confirmed: true) })
-  scope(:confirmed_and_previewed, -> { where(confirmed: true, previewed: true) })
-  scope(:visible, -> { where(confirmed: true, previewed: true, hidden: false) })
+  scope(:previewed, -> { where(previewed: true) })
+  scope(:visible, -> { where(previewed: true, hidden: false) })
   scope(:in_past_week, -> { where("published_at > ?", 7.days.ago) })
 
   delegate :email, to: :user
   delegate :comment_recipient_full_name, to: :application
 
-  # TODO: Rename the counter to confirmed_comments_count
+  # TODO: Rename the counter to published_comments_count
   counter_culture :application,
-                  column_name: proc { |comment| comment.confirmed? && comment.previewed? ? "visible_comments_count" : nil },
+                  column_name: proc { |comment| comment.previewed? ? "visible_comments_count" : nil },
                   column_names: {
-                    "comments.confirmed = true and comments.previewed = true" => "visible_comments_count"
+                    "comments.previewed = true" => "visible_comments_count"
                   }
 
   # TODO: Change confirmed in schema to be null: false
 
   sig { returns(T::Boolean) }
   def visible?
-    !!confirmed && !!previewed && !hidden
+    !!previewed && !hidden
   end
 
   sig { void }
