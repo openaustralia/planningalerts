@@ -5,8 +5,6 @@ class Alert < ApplicationRecord
   extend T::Sig
 
   belongs_to :user
-  # TODO: Remove accepts_nested_attributes_for after users purely sign up for alerts by being logged in
-  accepts_nested_attributes_for :user
 
   DEFAULT_RADIUS = 2000
 

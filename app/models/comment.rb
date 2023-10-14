@@ -12,9 +12,6 @@ class Comment < ApplicationRecord
   belongs_to :user, optional: true
   has_many :reports, dependent: :destroy
 
-  # TODO: Remove accepts_nested_attributes_for after users purely sign up for alerts by being logged in
-  accepts_nested_attributes_for :user
-
   validates :name, presence: true
   validates :text, presence: true
   validates :address, presence: true
