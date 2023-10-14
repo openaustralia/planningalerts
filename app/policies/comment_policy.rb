@@ -27,18 +27,18 @@ class CommentPolicy < ApplicationPolicy
   sig { returns(T::Boolean) }
   def update?
     # Can only edit your own comments that have not yet been published
-    comment.user_id == user.id && !comment.previewed
+    comment.user_id == user.id && !comment.published
   end
 
   sig { returns(T::Boolean) }
   def destroy?
     # Can only destroy your own comments that have not yet been published
-    comment.user_id == user.id && !comment.previewed
+    comment.user_id == user.id && !comment.published
   end
 
   sig { returns(T::Boolean) }
   def publish?
     # Can only publish your own comments that have not yet been published
-    comment.user_id == user.id && !comment.previewed
+    comment.user_id == user.id && !comment.published
   end
 end

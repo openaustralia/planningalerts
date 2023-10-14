@@ -268,9 +268,6 @@ class Comment
 
     sig { params(value: T.nilable(::User)).void }
     def user=(value); end
-
-    sig { params(attributes: T.untyped).returns(T.untyped) }
-    def user_attributes=(attributes); end
   end
 
   module GeneratedAssociationRelationMethods
@@ -282,12 +279,6 @@ class Comment
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def annotate(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def confirmed(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def confirmed_and_previewed(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def create_with(*args, &blk); end
@@ -405,7 +396,7 @@ class Comment
     def preload(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def previewed(*args, &blk); end
+    def published(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def readonly(*args, &blk); end
@@ -558,141 +549,6 @@ class Comment
 
     sig { void }
     def application_id_will_change!; end
-
-    sig { returns(T.nilable(::String)) }
-    def confirm_id; end
-
-    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
-    def confirm_id=(value); end
-
-    sig { returns(T::Boolean) }
-    def confirm_id?; end
-
-    sig { returns(T.nilable(::String)) }
-    def confirm_id_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def confirm_id_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def confirm_id_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def confirm_id_change; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def confirm_id_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def confirm_id_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def confirm_id_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def confirm_id_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def confirm_id_previously_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def confirm_id_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def confirm_id_was; end
-
-    sig { void }
-    def confirm_id_will_change!; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def confirmed; end
-
-    sig { params(value: T.nilable(T::Boolean)).returns(T.nilable(T::Boolean)) }
-    def confirmed=(value); end
-
-    sig { returns(T::Boolean) }
-    def confirmed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at; end
-
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at=(value); end
-
-    sig { returns(T::Boolean) }
-    def confirmed_at?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def confirmed_at_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_at_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def confirmed_at_change; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def confirmed_at_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_at_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def confirmed_at_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_at_previously_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at_previously_was; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at_was; end
-
-    sig { void }
-    def confirmed_at_will_change!; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def confirmed_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def confirmed_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(T::Boolean), T.nilable(T::Boolean)])) }
-    def confirmed_change; end
-
-    sig { returns(T.nilable([T.nilable(T::Boolean), T.nilable(T::Boolean)])) }
-    def confirmed_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_changed?; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def confirmed_in_database; end
-
-    sig { returns(T.nilable([T.nilable(T::Boolean), T.nilable(T::Boolean)])) }
-    def confirmed_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_previously_changed?; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def confirmed_previously_was; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def confirmed_was; end
-
-    sig { void }
-    def confirmed_will_change!; end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at; end
@@ -965,49 +821,13 @@ class Comment
     def name_will_change!; end
 
     sig { returns(T::Boolean) }
-    def previewed; end
+    def published; end
 
     sig { params(value: T::Boolean).returns(T::Boolean) }
-    def previewed=(value); end
+    def published=(value); end
 
     sig { returns(T::Boolean) }
-    def previewed?; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def previewed_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def previewed_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def previewed_came_from_user?; end
-
-    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def previewed_change; end
-
-    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def previewed_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def previewed_changed?; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def previewed_in_database; end
-
-    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def previewed_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def previewed_previously_changed?; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def previewed_previously_was; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def previewed_was; end
-
-    sig { void }
-    def previewed_will_change!; end
+    def published?; end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def published_at; end
@@ -1054,20 +874,47 @@ class Comment
     sig { void }
     def published_at_will_change!; end
 
+    sig { returns(T.nilable(T::Boolean)) }
+    def published_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def published_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def published_came_from_user?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def published_change; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def published_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def published_changed?; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def published_in_database; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def published_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def published_previously_changed?; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def published_previously_was; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def published_was; end
+
+    sig { void }
+    def published_will_change!; end
+
     sig { void }
     def restore_address!; end
 
     sig { void }
     def restore_application_id!; end
-
-    sig { void }
-    def restore_confirm_id!; end
-
-    sig { void }
-    def restore_confirmed!; end
-
-    sig { void }
-    def restore_confirmed_at!; end
 
     sig { void }
     def restore_created_at!; end
@@ -1088,7 +935,7 @@ class Comment
     def restore_name!; end
 
     sig { void }
-    def restore_previewed!; end
+    def restore_published!; end
 
     sig { void }
     def restore_published_at!; end
@@ -1113,24 +960,6 @@ class Comment
 
     sig { returns(T::Boolean) }
     def saved_change_to_application_id?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def saved_change_to_confirm_id; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_confirm_id?; end
-
-    sig { returns(T.nilable([T.nilable(T::Boolean), T.nilable(T::Boolean)])) }
-    def saved_change_to_confirmed; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_confirmed?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def saved_change_to_confirmed_at; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_confirmed_at?; end
 
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def saved_change_to_created_at; end
@@ -1169,10 +998,10 @@ class Comment
     def saved_change_to_name?; end
 
     sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def saved_change_to_previewed; end
+    def saved_change_to_published; end
 
     sig { returns(T::Boolean) }
-    def saved_change_to_previewed?; end
+    def saved_change_to_published?; end
 
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def saved_change_to_published_at; end
@@ -1340,15 +1169,6 @@ class Comment
     def will_save_change_to_application_id?; end
 
     sig { returns(T::Boolean) }
-    def will_save_change_to_confirm_id?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_confirmed?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_confirmed_at?; end
-
-    sig { returns(T::Boolean) }
     def will_save_change_to_created_at?; end
 
     sig { returns(T::Boolean) }
@@ -1367,7 +1187,7 @@ class Comment
     def will_save_change_to_name?; end
 
     sig { returns(T::Boolean) }
-    def will_save_change_to_previewed?; end
+    def will_save_change_to_published?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_published_at?; end
@@ -1391,12 +1211,6 @@ class Comment
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def annotate(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def confirmed(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def confirmed_and_previewed(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def create_with(*args, &blk); end
@@ -1480,7 +1294,7 @@ class Comment
     def preload(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def previewed(*args, &blk); end
+    def published(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def readonly(*args, &blk); end

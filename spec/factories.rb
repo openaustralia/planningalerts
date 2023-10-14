@@ -89,10 +89,10 @@ FactoryBot.define do
     text { "a comment" }
     address { "12 Foo Street" }
     application factory: %i[geocoded_application]
-    previewed { false }
+    published { false }
 
     factory :published_comment do
-      previewed { true }
+      published { true }
       published_at { 5.minutes.ago }
     end
   end

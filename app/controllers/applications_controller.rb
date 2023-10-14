@@ -112,12 +112,12 @@ class ApplicationsController < ApplicationController
   def show
     application = Application.find(params[:id])
     @application = T.let(application, T.nilable(Application))
-    @comments = T.let(application.comments.previewed.order(:published_at), T.untyped)
-    # If this user has already written a comment that hasn't been previewed (i.e. published on the preview page)
+    @comments = T.let(application.comments.published.order(:published_at), T.untyped)
+    # If this user has already written a comment that hasn't been published
     # then prepopulate the form so that they can edit their comment before it's finally sent
-    unpreviewed_comment = Comment.find_by(application:, user: current_user, previewed: false)
-    comment = if show_tailwind_theme? && current_user && unpreviewed_comment
-                unpreviewed_comment
+    draft_comment = Comment.find_by(application:, user: current_user, published: false)
+    comment = if show_tailwind_theme? && current_user && draft_comment
+                draft_comment
               else
                 Comment.new(
                   application:,

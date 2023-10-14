@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_14_171414) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_14_180731) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -204,12 +204,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_14_171414) do
     t.datetime "last_delivered_at", precision: nil
     t.boolean "last_delivered_successfully"
     t.integer "user_id"
-    t.boolean "previewed", null: false
+    t.boolean "published", null: false
     t.datetime "published_at"
     t.index ["application_id"], name: "index_comments_on_application_id"
     t.index ["hidden"], name: "index_comments_on_hidden"
-    t.index ["previewed"], name: "index_comments_on_previewed"
-    t.index ["published_at", "previewed", "hidden"], name: "index_comments_on_published_at_and_previewed_and_hidden"
+    t.index ["published"], name: "index_comments_on_published"
+    t.index ["published_at", "published", "hidden"], name: "index_comments_on_published_at_and_published_and_hidden"
     t.index ["user_id"], name: "fk_rails_03de2dc08c"
   end
 

@@ -14,7 +14,7 @@ class CommentDashboard < Administrate::BaseDashboard
     id: Field::Number,
     address: Field::String,
     application: Field::BelongsTo,
-    previewed: YesNoBooleanField,
+    published: YesNoBooleanField,
     published_at: Field::DateTime,
     hidden: YesNoBooleanField,
     last_delivered_at: Field::DateTime,
@@ -46,7 +46,7 @@ class CommentDashboard < Administrate::BaseDashboard
     text
     user
     name
-    previewed
+    published
     published_at
     created_at
     updated_at

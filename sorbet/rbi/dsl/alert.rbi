@@ -236,9 +236,6 @@ class Alert
 
     sig { params(value: T.nilable(::User)).void }
     def user=(value); end
-
-    sig { params(attributes: T.untyped).returns(T.untyped) }
-    def user_attributes=(attributes); end
   end
 
   module GeneratedAssociationRelationMethods
@@ -253,9 +250,6 @@ class Alert
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def annotate(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def confirmed(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def create_with(*args, &blk); end
@@ -520,51 +514,6 @@ class Alert
 
     sig { void }
     def confirm_id_will_change!; end
-
-    sig { returns(T::Boolean) }
-    def confirmed; end
-
-    sig { params(value: T::Boolean).returns(T::Boolean) }
-    def confirmed=(value); end
-
-    sig { returns(T::Boolean) }
-    def confirmed?; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def confirmed_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def confirmed_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_came_from_user?; end
-
-    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def confirmed_change; end
-
-    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def confirmed_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_changed?; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def confirmed_in_database; end
-
-    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def confirmed_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_previously_changed?; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def confirmed_previously_was; end
-
-    sig { returns(T.nilable(T::Boolean)) }
-    def confirmed_was; end
-
-    sig { void }
-    def confirmed_will_change!; end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at; end
@@ -1023,9 +972,6 @@ class Alert
     def restore_confirm_id!; end
 
     sig { void }
-    def restore_confirmed!; end
-
-    sig { void }
     def restore_created_at!; end
 
     sig { void }
@@ -1081,12 +1027,6 @@ class Alert
 
     sig { returns(T::Boolean) }
     def saved_change_to_confirm_id?; end
-
-    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def saved_change_to_confirmed; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_confirmed?; end
 
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def saved_change_to_created_at; end
@@ -1410,9 +1350,6 @@ class Alert
     def will_save_change_to_confirm_id?; end
 
     sig { returns(T::Boolean) }
-    def will_save_change_to_confirmed?; end
-
-    sig { returns(T::Boolean) }
     def will_save_change_to_created_at?; end
 
     sig { returns(T::Boolean) }
@@ -1470,9 +1407,6 @@ class Alert
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def annotate(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def confirmed(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def create_with(*args, &blk); end

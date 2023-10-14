@@ -147,7 +147,7 @@ describe "Give feedback" do
     end
 
     it "Unpublished comment should not be shown" do
-      create(:comment, previewed: false, text: "I think this is a really good ideas", application:)
+      create(:comment, published: false, text: "I think this is a really good ideas", application:)
 
       visit(application_path(application))
 

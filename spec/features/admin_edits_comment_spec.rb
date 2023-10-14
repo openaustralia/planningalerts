@@ -5,7 +5,7 @@ require "spec_helper"
 describe "Admin edits comment" do
   before do
     create(:published_comment,
-           previewed: true,
+           published: true,
            name: "Alena",
            id: 1,
            published_at: 3.days.ago)

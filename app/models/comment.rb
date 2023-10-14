@@ -15,10 +15,10 @@ class Comment < ApplicationRecord
   validates :name, presence: true
   validates :text, presence: true
   validates :address, presence: true
-  validates :user_id, uniqueness: { scope: %i[application_id previewed] }, unless: :previewed?
+  validates :user_id, uniqueness: { scope: %i[application_id published] }, unless: :published?
 
-  scope(:previewed, -> { where(previewed: true) })
-  scope(:visible, -> { where(previewed: true, hidden: false) })
+  scope(:published, -> { where(published: true) })
+  scope(:visible, -> { where(published: true, hidden: false) })
   scope(:in_past_week, -> { where("published_at > ?", 7.days.ago) })
 
   delegate :email, to: :user
@@ -26,14 +26,14 @@ class Comment < ApplicationRecord
 
   # TODO: Rename the counter to published_comments_count
   counter_culture :application,
-                  column_name: proc { |comment| comment.previewed? ? "visible_comments_count" : nil },
+                  column_name: proc { |comment| comment.published? ? "visible_comments_count" : nil },
                   column_names: {
-                    "comments.previewed = true" => "visible_comments_count"
+                    "comments.published = true" => "visible_comments_count"
                   }
 
   sig { returns(T::Boolean) }
   def visible?
-    !!previewed && !hidden
+    !!published && !hidden
   end
 
   sig { void }

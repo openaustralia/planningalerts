@@ -25,34 +25,34 @@ describe Comment do
       expect { comment_to_authority.save! }.not_to raise_error
     end
 
-    context "with unpreviewed comments" do
+    context "with unpublished comments" do
       it "is valid to have one comment on an application for a particular user" do
-        comment = build(:comment, application:, user:, previewed: false)
+        comment = build(:comment, application:, user:, published: false)
         expect(comment).to be_valid
       end
 
       it "is not valid to have more than one comment on an application for a particular user" do
-        create(:comment, application:, user:, previewed: false)
-        comment = build(:comment, application:, user:, previewed: false)
+        create(:comment, application:, user:, published: false)
+        comment = build(:comment, application:, user:, published: false)
         expect(comment).not_to be_valid
       end
 
       it "is valid to have more than one comment on an application from different users" do
-        create(:comment, application:, user: create(:user), previewed: false)
-        comment = build(:comment, application:, user: create(:user), previewed: false)
+        create(:comment, application:, user: create(:user), published: false)
+        comment = build(:comment, application:, user: create(:user), published: false)
         expect(comment).to be_valid
       end
 
       it "is valid for a user to have comments on more than one application" do
-        create(:comment, application: create(:application), user:, previewed: false)
-        comment = build(:comment, application: create(:application), user:, previewed: false)
+        create(:comment, application: create(:application), user:, published: false)
+        comment = build(:comment, application: create(:application), user:, published: false)
         expect(comment).to be_valid
       end
     end
 
-    it "is valid to have more than one previewed comment on an application for a user" do
-      create(:comment, application:, user:, previewed: true)
-      comment = build(:comment, application:, user:, previewed: true)
+    it "is valid to have more than one published comment on an application for a user" do
+      create(:comment, application:, user:, published: true)
+      comment = build(:comment, application:, user:, published: true)
       expect(comment).to be_valid
     end
   end

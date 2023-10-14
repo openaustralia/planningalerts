@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
     end
     @description = T.let(description, T.nilable(String))
 
-    @comments = T.let(comments_to_display.previewed.includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
+    @comments = T.let(comments_to_display.published.includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
   end
 
   sig { void }
@@ -40,9 +40,9 @@ class CommentsController < ApplicationController
       user: current_user
     )
     if show_tailwind_theme?
-      comment.previewed = false
+      comment.published = false
     else
-      comment.previewed = true
+      comment.published = true
       comment.published_at = Time.current
     end
     @comment = T.let(comment, T.nilable(Comment))
@@ -62,7 +62,7 @@ class CommentsController < ApplicationController
 
     # HACK: Required for new email alert signup form
     @alert = T.let(Alert.new(address: application.address, radius_meters: Alert::DEFAULT_RADIUS), T.nilable(Alert))
-    @comments = T.let(application.comments.previewed.order(:published_at), T.untyped)
+    @comments = T.let(application.comments.published.order(:published_at), T.untyped)
 
     render "applications/show"
   end
@@ -105,7 +105,7 @@ class CommentsController < ApplicationController
   def publish
     comment = Comment.find(params[:id])
     authorize(comment)
-    comment.update!(previewed: true, published_at: Time.current)
+    comment.update!(published: true, published_at: Time.current)
 
     comment.send_comment!
     # The flash is used to show a special alert box above the specific new comment
