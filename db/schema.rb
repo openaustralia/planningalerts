@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_13_194621) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_14_171414) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -72,7 +72,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_13_194621) do
     t.float "lat", null: false
     t.float "lng", null: false
     t.string "confirm_id", limit: 20
-    t.boolean "confirmed", default: false, null: false
     t.integer "radius_meters", null: false
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
@@ -198,25 +197,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_13_194621) do
     t.text "text"
     t.string "name"
     t.integer "application_id", null: false
-    t.string "confirm_id"
-    t.boolean "confirmed"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.string "address"
     t.boolean "hidden", default: false, null: false
-    t.datetime "confirmed_at", precision: nil
     t.datetime "last_delivered_at", precision: nil
     t.boolean "last_delivered_successfully"
     t.integer "user_id"
     t.boolean "previewed", null: false
     t.datetime "published_at"
     t.index ["application_id"], name: "index_comments_on_application_id"
-    t.index ["confirm_id"], name: "index_comments_on_confirm_id"
-    t.index ["confirmed"], name: "index_comments_on_confirmed"
-    t.index ["confirmed_at", "confirmed", "hidden"], name: "index_comments_on_confirmed_at_and_confirmed_and_hidden"
     t.index ["hidden"], name: "index_comments_on_hidden"
-    t.index ["previewed", "confirmed"], name: "index_comments_on_previewed_and_confirmed"
-    t.index ["published_at", "previewed", "confirmed", "hidden"], name: "index_comments_on_previewed_at_and_others"
+    t.index ["previewed"], name: "index_comments_on_previewed"
+    t.index ["published_at", "previewed", "hidden"], name: "index_comments_on_published_at_and_previewed_and_hidden"
     t.index ["user_id"], name: "fk_rails_03de2dc08c"
   end
 

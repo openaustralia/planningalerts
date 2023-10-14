@@ -390,9 +390,8 @@ describe Alert do
       expect(alert.new_comments).to eql [comment1, comment2]
     end
 
-    it "does not see old confirmed comments" do
+    it "does not see old published comments" do
       old_comment = create(:published_comment,
-                           confirmed_at: alert.cutoff_time - 1,
                            published_at: alert.cutoff_time - 1,
                            application:)
 
@@ -451,7 +450,6 @@ describe Alert do
     context "when there is an old comment near by" do
       it "does not return the application it belongs to" do
         create(:published_comment,
-               confirmed_at: alert.cutoff_time - 1,
                published_at: alert.cutoff_time - 1,
                application: near_application)
 
@@ -459,7 +457,7 @@ describe Alert do
       end
     end
 
-    context "when there is an unconfirmed comment near by" do
+    context "when there is an unpublished comment near by" do
       it "does not return the application it belongs to" do
         create(:comment, application: near_application)
 

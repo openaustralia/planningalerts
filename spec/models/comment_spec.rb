@@ -3,28 +3,6 @@
 require "spec_helper"
 
 describe Comment do
-  describe "confirm_id" do
-    let(:object) do
-      VCR.use_cassette("planningalerts") { create(:comment) }
-    end
-
-    it "is a string" do
-      expect(object.confirm_id).to be_instance_of(String)
-    end
-
-    it "is not the same for two different objects" do
-      another_object = VCR.use_cassette("planningalerts") do
-        create(:comment)
-      end
-
-      expect(object.confirm_id).not_to eq another_object.confirm_id
-    end
-
-    it "only includes hex characters and is exactly twenty characters long" do
-      expect(object.confirm_id).to match(/^[0-9a-f]{20}$/)
-    end
-  end
-
   context "when new comment for a planning authority" do
     let(:comment_to_authority) { create(:comment) }
     let(:application) { create(:application) }

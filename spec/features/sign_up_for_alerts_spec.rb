@@ -176,7 +176,7 @@ describe "Sign up for alerts" do
     # end
   end
 
-  context "when there is already an confirmed alert for the address" do
+  context "when there is already an alert for the address" do
     let(:user) { create(:confirmed_user, email: "jenny@email.org") }
     let!(:preexisting_alert) do
       create(:alert, address: "24 Bruce Rd, Glenbrook NSW 2773",

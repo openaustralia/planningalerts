@@ -146,8 +146,8 @@ describe "Give feedback" do
       end
     end
 
-    it "Unconfirmed comment should not be shown" do
-      create(:comment, confirmed: false, text: "I think this is a really good ideas", application:)
+    it "Unpublished comment should not be shown" do
+      create(:comment, previewed: false, text: "I think this is a really good ideas", application:)
 
       visit(application_path(application))
 
@@ -155,7 +155,7 @@ describe "Give feedback" do
     end
   end
 
-  it "Reporting abuse on a confirmed comment" do
+  it "Reporting abuse on a published comment" do
     comment = create(:published_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
 
     sign_in create(:confirmed_user, email: "reporter@foo.com", name: "Joe Reporter")

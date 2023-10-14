@@ -37,10 +37,7 @@ class CommentsController < ApplicationController
       text: params_comment[:text],
       address: params_comment[:address],
       application: @application,
-      user: current_user,
-      # Because we're logged in we don't need to go through the whole email confirmation step
-      confirmed: true,
-      confirmed_at: Time.current
+      user: current_user
     )
     if show_tailwind_theme?
       comment.previewed = false

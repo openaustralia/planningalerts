@@ -20,8 +20,6 @@ class Comment < ApplicationRecord
   validates :address, presence: true
   validates :user_id, uniqueness: { scope: %i[application_id previewed] }, unless: :previewed?
 
-  before_create :set_confirm_info
-
   scope(:previewed, -> { where(previewed: true) })
   scope(:visible, -> { where(previewed: true, hidden: false) })
   scope(:in_past_week, -> { where("published_at > ?", 7.days.ago) })
@@ -36,8 +34,6 @@ class Comment < ApplicationRecord
                     "comments.previewed = true" => "visible_comments_count"
                   }
 
-  # TODO: Change confirmed in schema to be null: false
-
   sig { returns(T::Boolean) }
   def visible?
     !!previewed && !hidden
@@ -46,13 +42,5 @@ class Comment < ApplicationRecord
   sig { void }
   def send_comment!
     CommentMailer.notify_authority(self).deliver_later
-  end
-
-  private
-
-  sig { void }
-  def set_confirm_info
-    # TODO: Should check that this is unique across all objects and if not try again
-    self.confirm_id = Digest::MD5.hexdigest(Kernel.rand.to_s + Time.zone.now.to_s)[0...20]
   end
 end

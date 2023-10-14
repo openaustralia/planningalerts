@@ -8,7 +8,6 @@ describe "Admin edits comment" do
            previewed: true,
            name: "Alena",
            id: 1,
-           confirmed_at: 3.days.ago,
            published_at: 3.days.ago)
   end
 

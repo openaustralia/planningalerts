@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe ProcessAlertAndRecordStatsService do
-  context "with two confirmed alerts" do
+  context "with two alerts" do
     let(:alert) { create(:alert) }
 
     before do

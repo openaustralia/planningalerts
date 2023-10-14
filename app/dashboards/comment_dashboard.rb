@@ -14,9 +14,6 @@ class CommentDashboard < Administrate::BaseDashboard
     id: Field::Number,
     address: Field::String,
     application: Field::BelongsTo,
-    confirm_id: Field::String,
-    confirmed: YesNoBooleanField,
-    confirmed_at: Field::DateTime,
     previewed: YesNoBooleanField,
     published_at: Field::DateTime,
     hidden: YesNoBooleanField,
@@ -49,9 +46,6 @@ class CommentDashboard < Administrate::BaseDashboard
     text
     user
     name
-    confirm_id
-    confirmed
-    confirmed_at
     previewed
     published_at
     created_at

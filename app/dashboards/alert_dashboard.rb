@@ -14,7 +14,6 @@ class AlertDashboard < Administrate::BaseDashboard
     id: Field::Number,
     address: Field::String,
     confirm_id: Field::String,
-    confirmed: YesNoBooleanField,
     last_delivered_at: Field::DateTime,
     last_delivered_successfully: YesNoBooleanField,
     last_processed: Field::DateTime,
@@ -38,7 +37,6 @@ class AlertDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = T.let(%i[
     user
     address
-    confirmed
     unsubscribed
   ].freeze, T::Array[Symbol])
 
@@ -52,7 +50,6 @@ class AlertDashboard < Administrate::BaseDashboard
     lat
     lng
     confirm_id
-    confirmed
     radius_meters
     created_at
     updated_at
@@ -73,7 +70,6 @@ class AlertDashboard < Administrate::BaseDashboard
     lat
     lng
     confirm_id
-    confirmed
     radius_meters
     unsubscribed
     last_processed

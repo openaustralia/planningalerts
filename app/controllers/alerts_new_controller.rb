@@ -38,9 +38,7 @@ class AlertsNewController < ApplicationController
     alert = Alert.new(
       user: current_user,
       address:,
-      radius_meters: params_radius_meters.to_i,
-      # Because we're logged in we don't need to go through the whole email confirmation step
-      confirmed: true
+      radius_meters: params_radius_meters.to_i
     )
     authorize alert
     # Ensures the address is normalised into a consistent form
