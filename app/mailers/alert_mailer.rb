@@ -34,7 +34,8 @@ class AlertMailer < ApplicationMailer
       subject: render_to_string(
         partial: "subject",
         locals: { applications:, comments:, alert: }
-      ).strip
+      ).strip,
+      template_path: ("_tailwind/alert_mailer" if T.must(alert.user).tailwind_theme)
     )
   end
 end
