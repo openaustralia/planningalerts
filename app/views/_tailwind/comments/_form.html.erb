@@ -1,4 +1,3 @@
-<%# TODO: Make this go to a new review page instead of just publishing immediately %>
 <%= form_with model: [application, comment], builder: FormBuilders::Tailwind do |f| %>
   <div>
     <%= f.label :text, "Your comment", class: "sr-only" %>
@@ -51,5 +50,3 @@
     <%= f.button "Clear form", name: "clear", type: :secondary %>
   </div>
 <% end %>
-
-<%# TODO: Add illustration of person at the bottom of the page %>
