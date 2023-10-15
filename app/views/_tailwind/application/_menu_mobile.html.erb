@@ -26,7 +26,7 @@
               <div class="inline-block mr-2">
                 <%= render "application/svg/user" %>
               </div>
-              <%= link_to current_user.name_with_fallback, profile_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(profile_path)) %>
+              <%= link_to current_user.name_with_fallback, profile_alerts_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(profile_alerts_path)) %>
             <% else %>
               <%= link_to "Sign In", new_user_session_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(new_user_session_path)) %>
             <% end %>
