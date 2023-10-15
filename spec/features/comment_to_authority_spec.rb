@@ -59,64 +59,48 @@ describe "Give feedback" do
         visit(application_path(application))
       end
 
-      it "Adding a comment should take you to a preview page" do
-        fill_in("Your comment", with: "I think this is a really good ideas")
-        fill_in("Your full name", with: "Matthew Landauer")
-        fill_in("Your address", with: "11 Foo Street")
-        click_button("Review and publish")
-
-        expect(page).to have_content("Does this look right?")
-        expect(page).to have_content("I think this is a really good ideas")
-      end
-
-      it "Adding a comment should not be immediately publically visible in the comments section" do
-        fill_in("Your comment", with: "I think this is a really good ideas")
-        fill_in("Your full name", with: "Matthew Landauer")
-        fill_in("Your address", with: "11 Foo Street")
-        click_button("Review and publish")
-
-        visit(application_path(application))
-        within("#comments") do
-          expect(page).not_to have_content("I think this is a really good ideas")
+      context "when drafting a comment" do
+        before do
+          fill_in("Your comment", with: "I think this is a really good ideas")
+          fill_in("Your full name", with: "Matthew Landauer")
+          fill_in("Your address", with: "11 Foo Street")
+          click_button("Review and publish")
         end
-      end
 
-      it "Adding a comment should be pre-populated in the form when you return" do
-        fill_in("Your comment", with: "I think this is a really good ideas")
-        fill_in("Your full name", with: "Matthew Landauer")
-        fill_in("Your address", with: "11 Foo Street")
-        click_button("Review and publish")
-
-        visit(application_path(application))
-        within("#add-comment") do
+        it "takes you to a preview page" do
+          expect(page).to have_content("Does this look right?")
           expect(page).to have_content("I think this is a really good ideas")
         end
-      end
 
-      it "Editing a comment that hasn't yet been published" do
-        fill_in("Your comment", with: "I think this is a really good ideas")
-        fill_in("Your full name", with: "Matthew Landauer")
-        fill_in("Your address", with: "11 Foo Street")
-        click_button("Review and publish")
+        it "is not immediately publically visible in the comments section" do
+          visit(application_path(application))
+          within("#comments") do
+            expect(page).not_to have_content("I think this is a really good ideas")
+          end
+        end
 
-        visit(application_path(application))
-        fill_in("Your comment", with: "I'm not so sure this is a good idea")
-        click_button("Review and publish")
-        expect(page).to have_content("Does this look right?")
-        expect(page).to have_content("I'm not so sure this is a good idea")
-        expect(page).to have_content("Matthew Landauer")
-      end
+        it "pre-populates the form when you return" do
+          visit(application_path(application))
+          within("#add-comment") do
+            expect(page).to have_content("I think this is a really good ideas")
+          end
+        end
 
-      it "Deleting a comment that hasn't yet been published" do
-        fill_in("Your comment", with: "I think this is a really good ideas")
-        fill_in("Your full name", with: "Matthew Landauer")
-        fill_in("Your address", with: "11 Foo Street")
-        click_button("Review and publish")
+        it "allows you to edit a comment that hasn't yet been published" do
+          visit(application_path(application))
+          fill_in("Your comment", with: "I'm not so sure this is a good idea")
+          click_button("Review and publish")
+          expect(page).to have_content("Does this look right?")
+          expect(page).to have_content("I'm not so sure this is a good idea")
+          expect(page).to have_content("Matthew Landauer")
+        end
 
-        visit(application_path(application))
-        click_button("Clear form")
+        it "allows you to delete a comment that hasn't yet been published" do
+          visit(application_path(application))
+          click_button("Clear form")
 
-        expect(page).not_to have_content("I think this is a really good ideas")
+          expect(page).not_to have_content("I think this is a really good ideas")
+        end
       end
 
       context "when publishing a comment" do
