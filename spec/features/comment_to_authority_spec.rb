@@ -59,6 +59,10 @@ describe "Give feedback" do
         visit(application_path(application))
       end
 
+      it "disables the clear form button" do
+        expect(page).to have_button("Clear form", disabled: true)
+      end
+
       context "when drafting a comment" do
         before do
           fill_in("Your comment", with: "I think this is a really good ideas")

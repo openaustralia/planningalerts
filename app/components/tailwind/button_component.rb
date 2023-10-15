@@ -6,8 +6,11 @@ module Tailwind
     extend T::Sig
 
     # href is untyped to support passing objects or paths or arrays to construct urls from
-    sig { params(tag: Symbol, size: String, type: Symbol, href: T.untyped, icon: T.nilable(Symbol), open_in_new_tab: T::Boolean, name: T.nilable(String)).void }
-    def initialize(tag:, size:, type:, href: nil, icon: nil, open_in_new_tab: false, name: nil)
+    sig do
+      params(tag: Symbol, size: String, type: Symbol, href: T.untyped, icon: T.nilable(Symbol),
+             open_in_new_tab: T::Boolean, name: T.nilable(String), disabled: T::Boolean).void
+    end
+    def initialize(tag:, size:, type:, href: nil, icon: nil, open_in_new_tab: false, name: nil, disabled: false)
       super
 
       classes = %w[font-semibold]
@@ -35,6 +38,8 @@ module Tailwind
       else
         raise "Unexpected type #{type}"
       end
+
+      classes += %w[cursor-not-allowed opacity-40] if disabled && tag == :button
 
       case icon
       when nil
@@ -72,6 +77,10 @@ module Tailwind
       else
         raise "Unexpected tag: #{tag}"
       end
+
+      raise "Can't use disabled with a link at the moment" if disabled && tag == :a
+
+      options[:disabled] = true if disabled
 
       @options = T.let(options, T.nilable(T::Hash[Symbol, T.nilable(String)]))
       @tag = tag

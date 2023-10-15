@@ -47,6 +47,6 @@
   </div>
   <div class="flex gap-4 mt-12">
     <%= f.button "Review and publish" %>
-    <%= f.button "Clear form", name: "clear", type: :secondary %>
+    <%= f.button "Clear form", name: "clear", type: :secondary, disabled: !comment.persisted? %>
   </div>
 <% end %>
