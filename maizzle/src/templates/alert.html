@@ -35,12 +35,14 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   </x-application>
   <x-divider space-y="24px" class="bg-slate-200" />
   <x-spacer height="16px" />
-  <x-comment address="6 Kahibah Road, Umina Beach, NSW" name="Martha" distance="800 metres">
-    <fill:description>
-      S4.55 to Modify Approved Dwelling and Garage including Deletion of Clerestory,
-      Addition of Laminated Beam, Relocation of Laundry, Deletion of Stairs and
-      Expansion of Workshop  
-    </fill:description>
+  <x-comment name="Martha">
+    <fill:application>
+      <x-application address="6 Kahibah Road, Umina Beach, NSW">
+        S4.55 to Modify Approved Dwelling and Garage including Deletion of Clerestory,
+        Addition of Laminated Beam, Relocation of Laundry, Deletion of Stairs and
+        Expansion of Workshop    
+      </x-application>
+    </fill:application>
 
     <p>
       It has recently come to my attention that a planning application has been submitted

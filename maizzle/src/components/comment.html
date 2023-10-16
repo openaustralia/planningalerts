@@ -1,8 +1,6 @@
 <script props>
   module.exports = {
-    address: props.address,
-    name: props.name,
-    distance: props.distance
+    name: props.name
   }
 </script>
 
@@ -15,18 +13,10 @@
       </td>
       <td valign="top">
         <content />
-        <p class="mt-8 mb-1">
+        <p class="mt-8 mb-6">
           Comment made on:
         </p>
-        <p class="m-0 font-bold">
-          {{ address }}
-        </p>
-        <p class="mt-1">
-          {{ distance }} away
-        </p>
-        <p>
-          <slot:description />
-        </p>
+        <slot:application />
         <p class="mt-6">
           <a href="#" class="text-2xl font-bold no-underline hover:underline text-fuchsia">View comment on Planning Alerts</a>
         </p>
