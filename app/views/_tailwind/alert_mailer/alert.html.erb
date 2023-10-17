@@ -22,11 +22,20 @@
   <![endif]-->
   <title><%= subject(@alert, @applications, @comments) %></title>
   <style>
-    .hover-bg-light-grey:hover {
-      background-color: #F3F2F2 !important
+    .hover-border-t-2:hover {
+      border-top-width: 2px !important
+    }
+    .hover-border-navy:hover {
+      border-color: #414860 !important
+    }
+    .hover-pt-23px:hover {
+      padding-top: 23px !important
     }
     .hover-underline:hover {
       text-decoration-line: underline !important
+    }
+    .active-bg-light-grey:active {
+      background-color: #F3F2F2 !important
     }
     @media (max-width: 600px) {
       .sm-px-4 {
@@ -120,7 +129,7 @@
             </table>
             <div role="separator" style="line-height: 56px">&zwj;</div>
             <% @applications.each do |application| %> <a href="<%= application_url_with_tracking(id: application.id) %>" style="text-decoration-line: none">
-              <table class="hover-bg-light-grey" style="width: 100%; border: 0px solid #e2e8f0; border-top: 1px solid #e2e8f0; padding-top: 24px; padding-bottom: 24px" cellpadding="0" cellspacing="0" role="none">
+              <table class="hover-pt-23px hover-border-navy hover-border-t-2 active-bg-light-grey" style="width: 100%; border: 0px solid #e2e8f0; border-top: 1px solid #e2e8f0; padding-top: 24px; padding-bottom: 24px" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
                     <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
