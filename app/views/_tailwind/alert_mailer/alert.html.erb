@@ -174,7 +174,7 @@
             <% end %> <div role="separator" style="line-height: 48px">&zwj;</div>
             <h2 style="font-size: 20px; font-weight: 700; color: #414860;">Alert Details</h2>
             <p style="font-size: 18px; color: #414860;">
-              200 meters from 89 Bridge Rd, Richmond VIC 3121
+              <%= meters_in_words(@alert.radius_meters) %> from <%= @alert.address %>
             </p>
             <div role="separator" style="line-height: 16px">&zwj;</div>
             <div>

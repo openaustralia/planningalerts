@@ -48,7 +48,7 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   <x-spacer height="48px" />
   <h2 class="text-xl font-bold text-navy">Alert Details</h2>
   <p class="text-lg text-navy">
-    200 meters from 89 Bridge Rd, Richmond VIC 3121
+    <%= meters_in_words(@alert.radius_meters) %> from <%= @alert.address %>
   </p>
   <x-spacer height="16px" />
   <x-button href="<%= edit_profile_alert_url(@alert) %>">
