@@ -82,12 +82,12 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
     200 meters from 89 Bridge Rd, Richmond VIC 3121
   </p>
   <x-spacer height="16px" />
-  <x-button href="#">
+  <x-button href="<%= edit_profile_alert_url(@alert) %>">
     <img src="<%= image_url('tailwind/pencil.png') %>" class="pr-2">
     Modify this alert
   </x-button>
   <x-spacer height="8px" />
-  <x-button.secondary href="#">
+  <x-button.secondary href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>">
     <img src="<%= image_url('tailwind/trash.png') %>" class="pr-2">
     Unsubscribe from this alert
   </x-button.secondary>
