@@ -119,9 +119,8 @@
               </tr>
             </table>
             <div role="separator" style="line-height: 56px">&zwj;</div>
-            <div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 0px 0">&zwj;</div>
             <% @applications.each do |application| %> <a href="<%= application_url_with_tracking(id: application.id) %>" style="text-decoration-line: none">
-              <table class="hover-bg-light-grey" style="width: 100%; padding-top: 24px; padding-bottom: 24px;" cellpadding="0" cellspacing="0" role="none">
+              <table class="hover-bg-light-grey" style="width: 100%; border: 0px solid #e2e8f0; border-top: 1px solid #e2e8f0; padding-top: 24px; padding-bottom: 24px" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
                     <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
@@ -135,8 +134,8 @@
                 </tr>
               </table>
             </a>
-            <div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 0px 0;">&zwj;</div>
-            <% end %> <div role="separator" style="line-height: 24px">&zwj;</div>
+            <% end %><div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 0px 0">&zwj;</div>
+            <div role="separator" style="line-height: 24px">&zwj;</div>
             <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div>
             <div style="border: 1px solid #f3f2f2; padding: 32px">
               <p style="margin-top: 0;"><%= comment.name %> commented:</p>

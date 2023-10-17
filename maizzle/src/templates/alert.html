@@ -21,15 +21,14 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
     </tr>
   </table>
   <x-spacer height="56px" />
-  <x-divider space-y="0px" class="bg-slate-200" />
   <% @applications.each do |application| %>
     <x-application address="<%= application.address %>"
                    url="<%= application_url_with_tracking(id: application.id) %>"
                    map="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>">
       <%= application.description %>
     </x-application>
-    <x-divider space-y="0px" class="bg-slate-200" />
   <% end %>
+  <x-divider space-y="0px" class="bg-slate-200" />
   <x-spacer height="24px" />
   <% @comments.each do |comment| %>
     <x-spacer height="16px" />
