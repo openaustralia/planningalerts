@@ -26,55 +26,21 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   <x-spacer height="32px" />
   <x-divider space-y="24px" class="bg-slate-200" />
   <% @applications.each do |application| %>
-    <a href="#" class="no-underline group">
-      <table>
-        <tr>
-          <td class="w-[180px] xs:w-full xs:inline-block" valign="top">
-            <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150">
-          </td>
-          <td valign="top" class="h-[150px] xs:w-full xs:inline-block xs:mt-4">
-            <h2 class="m-0 text-lg font-bold line-clamp-1 text-fuchsia dark-mode:text-white group-hover:underline"><%= application.address %></h2>
-            <p class="mt-0 text-navy line-clamp-6"><%= application.description %></p>
-          </td>
-        </tr>
-      </table>  
-    </a>
+    <x-application address="<%= application.address %>" map="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>">
+      <%= application.description %>
+    </x-application>
     <x-divider space-y="24px" class="bg-slate-200" />
   <% end %>
   <% @comments.each do |comment| %>
     <x-spacer height="16px" />
-    <div class="p-8 border border-solid border-light-grey">
-      <p class="mt-0"><%= comment.name %> commented:</p>
-      <table class="mt-4">
-        <tr>
-          <td valign="top" class="pt-2 pr-4 text-7xl">
-            ”
-          </td>
-          <td valign="top">
-            <%= comment_as_html(comment.text) %>
-            <p class="mt-8 mb-6">
-              Comment made on:
-            </p>
-            <a href="#" class="no-underline group">
-              <table>
-                <tr>
-                  <td class="w-[180px] xs:w-full xs:inline-block" valign="top">
-                    <img alt="Map of <%= comment.application.address %>" src="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>" width="150" height="150">
-                  </td>
-                  <td valign="top" class="h-[150px] xs:w-full xs:inline-block xs:mt-4">
-                    <h2 class="m-0 text-lg font-bold line-clamp-1 text-fuchsia dark-mode:text-white group-hover:underline"><%= comment.application.address %></h2>
-                    <p class="mt-0 text-navy line-clamp-6"><%= comment.application.description %></p>
-                  </td>
-                </tr>
-              </table>  
-            </a>
-            <p class="mt-6">
-              <a href="#" class="text-xl font-bold no-underline hover:underline text-fuchsia">View comment on Planning Alerts</a>
-            </p>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <x-comment name="<%= comment.name %>">
+      <%= comment_as_html(comment.text) %>
+      <fill:application>
+        <x-application address="<%= comment.application.address %>" map="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>">
+          <%= comment.application.description %>
+        </x-application>
+      </fill:application>
+    </x-comment>
   <% end %>
   <x-spacer height="48px" />
   <h2 class="text-xl font-bold text-navy">Alert Details</h2>

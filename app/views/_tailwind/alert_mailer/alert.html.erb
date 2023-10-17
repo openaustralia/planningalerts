@@ -123,8 +123,7 @@
             </table>
             <div role="separator" style="line-height: 32px">&zwj;</div>
             <div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 24px 0">&zwj;</div>
-            <% @applications.each do |application| %>
-            <a href="#" class="group" style="text-decoration-line: none">
+            <% @applications.each do |application| %><a href="#" class="group" style="text-decoration-line: none">
               <table cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
@@ -132,7 +131,9 @@
                   </td>
                   <td valign="top" class="xs-w-full xs-inline-block xs-mt-4" style="height: 150px">
                     <h2 class="dark-mode-text-white group-hover-underline" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94"><%= application.address %></h2>
-                    <p style="margin-top: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860"><%= application.description %></p>
+                    <p style="margin-top: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860">
+                      <%= application.description %>
+                    </p>
                   </td>
                 </tr>
               </table>
@@ -147,12 +148,9 @@
                   <td valign="top" style="padding-right: 16px; padding-top: 8px; font-size: 72px">
                     ”
                   </td>
-                  <td valign="top">
-                    <%= comment_as_html(comment.text) %>
-                    <p style="margin-bottom: 24px; margin-top: 32px">
+                  <td valign="top"> <%= comment_as_html(comment.text) %> <p style="margin-bottom: 24px; margin-top: 32px">
                       Comment made on:
-                    </p>
-                    <a href="#" class="group" style="text-decoration-line: none;">
+                    </p><a href="#" class="group" style="text-decoration-line: none;">
                       <table cellpadding="0" cellspacing="0" role="none">
                         <tr>
                           <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
@@ -160,7 +158,9 @@
                           </td>
                           <td valign="top" class="xs-w-full xs-inline-block xs-mt-4" style="height: 150px">
                             <h2 class="dark-mode-text-white group-hover-underline" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94"><%= comment.application.address %></h2>
-                            <p style="margin-top: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860;"><%= comment.application.description %></p>
+                            <p style="margin-top: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860;">
+                              <%= comment.application.description %>
+                            </p>
                           </td>
                         </tr>
                       </table>
