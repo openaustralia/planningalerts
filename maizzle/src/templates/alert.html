@@ -25,15 +25,22 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   </table>
   <x-spacer height="32px" />
   <x-divider space-y="24px" class="bg-slate-200" />
-  <x-application address="6 Kahibah Road, Umina Beach, NSW">
-    S4.55 to Modify Approved Dwelling and Garage including Deletion of Clerestory, Addition of Laminated Beam,
-    Relocation of Laundry, Deletion of Stairs and Expansion of Workshop
-  </x-application>
-  <x-divider space-y="24px" class="bg-slate-200" />
-  <x-application address="6 Kahibah Road, Umina Beach, NSW">
-    Building subdivision
-  </x-application>
-  <x-divider space-y="24px" class="bg-slate-200" />
+  <% @applications.each do |application| %>
+    <a href="#" class="no-underline group">
+      <table>
+        <tr>
+          <td class="w-[180px] xs:w-full xs:inline-block" valign="top">
+            <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150">
+          </td>
+          <td valign="top" class="h-[150px] xs:w-full xs:inline-block xs:mt-4">
+            <h2 class="m-0 text-lg font-bold line-clamp-1 text-fuchsia dark-mode:text-white group-hover:underline"><%= application.address %></h2>
+            <p class="mt-0 text-navy line-clamp-6"><%= application.description %></p>
+          </td>
+        </tr>
+      </table>  
+    </a>
+    <x-divider space-y="24px" class="bg-slate-200" />
+  <% end %>
   <x-spacer height="16px" />
   <x-comment name="Martha">
     <fill:application>

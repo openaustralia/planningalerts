@@ -45,12 +45,20 @@ class AlertsPreview < ActionMailer::Preview
       confirm_id: "1234",
       id: 1
     )
-    application = Application.new(
+    application1 = Application.new(
       id: 1,
-      address: "50 Illawarra Road Marrickville 2204",
-      lat: -33.904130,
-      lng: 151.161630,
-      description: "Something is happening here"
+      address: "6 Kahibah Road, Umina Beach, NSW",
+      lat: -33.90413,
+      lng: 151.16163,
+      description: "S4.55 to Modify Approved Dwelling and Garage including Deletion of Clerestory, Addition of Laminated Beam, " \
+                   "Relocation of Laundry, Deletion of Stairs and Expansion of Workshop"
+    )
+    application2 = Application.new(
+      id: 2,
+      address: "6 Kahibah Road, Umina Beach, NSW",
+      lat: -33.90413,
+      lng: 151.16163,
+      description: "Building subdivision"
     )
     comment = Comment.new(
       application: Application.new(
@@ -62,7 +70,7 @@ class AlertsPreview < ActionMailer::Preview
       name: "Martha"
     )
 
-    AlertMailer.alert(alert:, applications: [application], comments: [comment])
+    AlertMailer.alert(alert:, applications: [application1, application2], comments: [comment])
   end
 
   def alert_account_requires_activation
