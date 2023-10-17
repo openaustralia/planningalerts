@@ -138,55 +138,29 @@
               </table>
             </a>
             <div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 24px 0;">&zwj;</div>
-            <% end %> <div role="separator" style="line-height: 16px">&zwj;</div>
+            <% end %>
+            <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div>
             <div style="border: 1px solid #f3f2f2; padding: 32px">
-              <p style="margin-top: 0;">Martha commented:</p>
+              <p style="margin-top: 0;"><%= comment.name %> commented:</p>
               <table style="margin-top: 16px" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td valign="top" style="padding-right: 16px; padding-top: 8px; font-size: 72px">
                     ”
                   </td>
                   <td valign="top">
-                    <p>
-                      It has recently come to my attention that a planning application has been submitted
-                      for 813 Hight Street, Reservoir.
-                    </p>
-                    <p>
-                      My concern is with the application for ground floor shops and nine (9) dwellings,
-                      above, with a reduction in the car parking requirements.
-                    </p>
-                    <p>
-                      Currently, there are already parking issues in the area, with insufficient parking
-                      bays available. Residents of Wild Street and Henry Street are constantly complaining
-                      about cars parked on "their" street. We often find abusive notes left on vehicles,
-                      harassment of staff when in the street, and stupid acts of vandalism. We are a
-                      business on High Street and staff already have difficulty finding parking as it
-                      is. It appears that the council is not concerned for its local businesses or residents
-                      and allowing a new building with reduced parking is irresponsible and inconsiderate.
-                      I understand that the council and developers want to make as much money as possible but
-                      it is extremely unfair to cause such distress and inconvenience to everyone else.
-                      I strongly oppose such a development and would like further information as to how to
-                      make this a formal objection.
-                    </p>
-                    <p>
-                      Regards<br>
-                      Louise
-                    </p>
+                    <%= comment_as_html(comment.text) %>
                     <p style="margin-bottom: 24px; margin-top: 32px">
                       Comment made on:
-                    </p><a href="#" class="group" style="text-decoration-line: none;">
+                    </p>
+                    <a href="#" class="group" style="text-decoration-line: none;">
                       <table cellpadding="0" cellspacing="0" role="none">
                         <tr>
                           <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
-                            <img alt="Map of 6 Kahibah Road, Umina Beach, NSW" src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCmdTv4mqSQKa2BfUvQUU3mEuj6vxnEiHI&amp;maptype=roadmap&amp;markers=color%3Ared%7C-33.90413%2C151.16163&amp;size=150x150&amp;zoom=16&amp;signature=i7QiFQ-M5phHMw9HKccQv-gReEc=" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
+                            <img alt="Map of <%= comment.application.address %>" src="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
                           </td>
                           <td valign="top" class="xs-w-full xs-inline-block xs-mt-4" style="height: 150px">
-                            <h2 class="dark-mode-text-white group-hover-underline" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94">6 Kahibah Road, Umina Beach, NSW</h2>
-                            <p style="margin-top: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860;">
-                              S4.55 to Modify Approved Dwelling and Garage including Deletion of Clerestory,
-                              Addition of Laminated Beam, Relocation of Laundry, Deletion of Stairs and
-                              Expansion of Workshop
-                            </p>
+                            <h2 class="dark-mode-text-white group-hover-underline" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94"><%= comment.application.address %></h2>
+                            <p style="margin-top: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860;"><%= comment.application.description %></p>
                           </td>
                         </tr>
                       </table>
@@ -198,7 +172,7 @@
                 </tr>
               </table>
             </div>
-            <div role="separator" style="line-height: 48px">&zwj;</div>
+            <% end %> <div role="separator" style="line-height: 48px">&zwj;</div>
             <h2 style="font-size: 20px; font-weight: 700; color: #414860;">Alert Details</h2>
             <p style="font-size: 18px; color: #414860;">
               200 meters from 89 Bridge Rd, Richmond VIC 3121
