@@ -39,7 +39,6 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
       <%= comment_as_html(comment.text) %>
       <fill:application>
         <x-application address="<%= comment.application.address %>"
-                       url="<%= application_url_with_tracking(id: comment.application.id) %>"
                        map="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>">
           <%= comment.application.description %>
         </x-application>

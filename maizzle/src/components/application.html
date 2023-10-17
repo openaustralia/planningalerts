@@ -6,16 +6,31 @@
   }
 </script>
 
-<a href="{{{ url }}}" class="no-underline group">
+<if condition="url">
+  <a href="{{{ url }}}" class="no-underline group">
+    <table>
+      <tr>
+        <td class="w-[180px] xs:w-full xs:inline-block" valign="top">
+          <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
+        </td>
+        <td valign="top" class="h-[150px] xs:w-full xs:inline-block xs:mt-4">
+          <h2 class="m-0 text-lg font-bold line-clamp-1 text-fuchsia dark-mode:text-white group-hover:underline">{{{ address }}}</h2>
+          <p class="mt-0 text-navy line-clamp-6"><content /></p>
+        </td>
+      </tr>
+    </table>  
+  </a>  
+</if>
+<else>
   <table>
     <tr>
       <td class="w-[180px] xs:w-full xs:inline-block" valign="top">
         <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
       </td>
       <td valign="top" class="h-[150px] xs:w-full xs:inline-block xs:mt-4">
-        <h2 class="m-0 text-lg font-bold line-clamp-1 text-fuchsia dark-mode:text-white group-hover:underline">{{{ address }}}</h2>
+        <h2 class="m-0 text-lg font-bold line-clamp-1 dark-mode:text-white">{{{ address }}}</h2>
         <p class="mt-0 text-navy line-clamp-6"><content /></p>
       </td>
     </tr>
   </table>  
-</a>
+</else>
