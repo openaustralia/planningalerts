@@ -111,10 +111,7 @@
               <tr>
                 <td class="xs-w-full xs-inline-block" style="width: 50%">
                   <p>Hello,</p>
-                  <p>
-                    We found 2 new planning applications for you near 89
-                    Bridge Rd, Richmond VIC 3121.
-                  </p>
+                  <p>We found <%= subject(@alert, @applications, @comments) %>.</p>
                   <p>Thanks,<br>Planning Alerts team</p>
                 </td>
                 <td class="xs-text-left xs-w-full xs-inline-block" style="width: 50%; text-align: right"> <img src="<%= image_url('tailwind/illustration/dancing-man.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0" alt="">
