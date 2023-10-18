@@ -1,7 +1,6 @@
 ---
 title: <%= subject(@alert, @applications, @comments) %>
-<!-- TODO: Use first application or first comment for the preHeader instead (up to around 80 characters)-->
-preheader: <%= subject(@alert, @applications, @comments) %>
+preheader: <%= preheader(@applications, @comments) %>
 bodyClass: bg-white dark-mode:bg-[#333]
 permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
 ---

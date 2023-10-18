@@ -70,4 +70,30 @@ module AlertMailerHelper
 
     "#{items} near #{alert.address}"
   end
+
+  # Returns a short snippit of text (up to 100 characters) that's used as a preview by email clients
+  sig do
+    params(
+      applications: T::Array[Application],
+      comments: T::Array[Comment]
+    ).returns(String)
+  end
+  def preheader(applications, comments)
+    # We show applications first in the email if there are any otherwise a comment would come first
+    if applications.empty?
+      preheader_comment(T.must(comments.first))
+    else
+      preheader_application(T.must(applications.first))
+    end
+  end
+
+  sig { params(comment: Comment).returns(String) }
+  def preheader_comment(comment)
+    "#{comment.name} commented \"#{comment.text}\"".truncate(100)
+  end
+
+  sig { params(application: Application).returns(String) }
+  def preheader_application(application)
+    "#{application.address}: #{application.description}".truncate(100)
+  end
 end
