@@ -152,9 +152,9 @@
                   <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
                     <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
                   </td>
-                  <td valign="top" class="xs-w-full xs-inline-block xs-mt-4" style="height: 150px">
+                  <td valign="top" class="xs-w-full xs-inline-block xs-mt-4">
                     <h2 class="dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94"><%= application.address %></h2>
-                    <p class="dark-mode-text-white" style="margin-top: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860">
+                    <p class="dark-mode-text-white" style="margin-top: 0; margin-bottom: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860">
                       <%= application.description %>
                     </p>
                   </td>
@@ -165,7 +165,7 @@
             <div role="separator" style="line-height: 24px">&zwj;</div>
             <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div><a href="<%= comment_url_with_tracking(comment:) %>" style="text-decoration-line: none;">
               <div class="hover-pt-31px hover-border-t-2 hover-border-t-navy dark-mode-text-white active-bg-light-grey" style="border: 1px solid #f3f2f2; padding: 32px; color: #414860">
-                <p style="margin-top: 0;"><%= comment.name %> commented:</p>
+                <p style="margin-top: 0"><%= comment.name %> commented:</p>
                 <table style="margin-top: 16px" cellpadding="0" cellspacing="0" role="none">
                   <tr>
                     <td valign="top" class="xs-block xs-h-8" style="padding-right: 16px; padding-top: 8px; font-size: 72px">”</td>
