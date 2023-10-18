@@ -59,6 +59,9 @@
       .xs-inline-block {
         display: inline-block !important
       }
+      .xs-h-8 {
+        height: 32px !important
+      }
       .xs-w-full {
         width: 100% !important
       }
@@ -159,10 +162,8 @@
                 <p style="margin-top: 0;"><%= comment.name %> commented:</p>
                 <table style="margin-top: 16px" cellpadding="0" cellspacing="0" role="none">
                   <tr>
-                    <td valign="top" style="padding-right: 16px; padding-top: 8px; font-size: 72px">
-                      ”
-                    </td>
-                    <td valign="top"> <%= comment_as_html(comment.text) %> <p style="margin-bottom: 24px; margin-top: 32px">
+                    <td valign="top" class="xs-block xs-h-8" style="padding-right: 16px; padding-top: 8px; font-size: 72px">”</td>
+                    <td valign="top" class="xs-block"> <%= comment_as_html(comment.text) %> <p style="margin-bottom: 24px; margin-top: 32px">
                         Comment made on:
                       </p>
                       <table cellpadding="0" cellspacing="0" role="none">
