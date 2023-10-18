@@ -32,7 +32,8 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   <x-spacer height="24px" />
   <% @comments.each do |comment| %>
     <x-spacer height="16px" />
-    <x-comment name="<%= comment.name %>">
+    <x-comment name="<%= comment.name %>"
+               url="<%= comment_url_with_tracking(comment:) %>">
       <%= comment_as_html(comment.text) %>
       <fill:application>
         <x-application address="<%= comment.application.address %>"
