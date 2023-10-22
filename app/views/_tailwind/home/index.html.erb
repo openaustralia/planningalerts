@@ -1,7 +1,7 @@
 <% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 
 <%= render "banner" %>
-<%= render "applications/address_search_form" %>
+<%= render "applications/address_search_form", q: nil %>
 <%= render "how_it_works" %>
 <hr class="text-[#D2CFC1] mt-8">
 <%= render "trending", applications: @trending %>
