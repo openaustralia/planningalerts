@@ -19,12 +19,11 @@
         <% end %>
       </p>
     </div>
-    <%# TODO: Make speech bubble the correct size %>
     <%# TODO: Make it the right width at different numbers %>
     <%# TODO: Make the triangle at the bottom on the left here %>
     <% if application.visible_comments_count.positive? %>
       <div class="text-2xl text-navy">
-        <%= render Tailwind::SpeechBubbleComponent.new do %>
+        <%= render Tailwind::SpeechBubbleComponent.new(size: "2xl") do %>
           <%= application.visible_comments_count %>
         <% end %>
         <%= application.visible_comments_count == 1 ? "comment" : "comments" %>
