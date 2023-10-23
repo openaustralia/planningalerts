@@ -138,7 +138,7 @@
   <h2 class="inline-block mb-6 text-3xl font-bold text-navy font-display">Comments on this application</h2>
   <% if @comments.count > 0 %>
     <div class="relative inline-block ml-4 -top-6">
-      <%= render Tailwind::SpeechBubbleComponent.new(size: "4xl") do %>
+      <%= render Tailwind::SpeechBubbleComponent.new(size: "4xl", alignment: :right) do %>
         <%= @comments.count %>
       <% end %>
     </div>
