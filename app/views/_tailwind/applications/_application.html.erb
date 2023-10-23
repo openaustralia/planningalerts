@@ -5,9 +5,7 @@
       <p class="text-2xl text-navy">
         <%# Local variable highlights is optional. Only use it if it is there %>
         <% if local_assigns.key? :highlights %>
-          <%# rubocop:disable Rails/OutputSafety %>
-          <%= local_assigns[:highlights][:description].html_safe %>
-          <%# rubocop:enable Rails/OutputSafety %>
+          <%= local_assigns[:highlights][:description].html_safe %><%# erblint:disable Rubocop %>
         <% else %>
           <%= application.description %>
         <% end %>
