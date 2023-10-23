@@ -1,10 +1,29 @@
-<h1>This will be the address search results page</h1>
+<% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
+
+<%# TODO: Handle what happens when you're on the search page (@q is nil) %>
+<%= render "address_search_form", q: @q, error: @error %>
+
+<h2>Search results</h2>
+
+<div class="flex justify-between">
+  <p>Sorted by most recent first</p>
+  <p>Next page ></p>
+</div>
+
+<%# TODO: Add "save this search" here %>
+
+<ul>
+  <% @applications.each do |application| %>
+    <li>
+      <%= render application %>
+    </li>
+  <% end %>
+</ul>
 
 <%
 =begin
 %>
 
-<% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 <% if @q.nil? || @error %>
   <h3>
     Search for applications near an address

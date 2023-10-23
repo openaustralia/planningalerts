@@ -1,0 +1,45 @@
+<p>This is an application</p>
+
+<%
+=begin
+%>
+
+<li>
+  <article class="application">
+    <%= link_to application do %>
+      <% if application.visible_comments_count.positive? %>
+        <div class="comments">
+          <%= pluralize(application.visible_comments_count, "comment") %>
+        </div>
+      <% end %>
+      <div class="address">
+        <%= application.address %>
+      </div>
+      <div class="appinfo">
+        <% if application.respond_to? :distance %>
+          <%= time_ago_in_words(application.first_date_scraped) %>
+          ago,
+          <%= km_in_words(application.distance.to_f) %>
+          away
+        <% else %>
+          <%= time_ago_in_words(application.first_date_scraped) %>
+          ago
+        <% end %>
+      </div>
+      <p class="description">
+        <%# Local variable highlights is optional. Only use it if it is there %>
+        <% if local_assigns.key? :highlights %>
+          <%# rubocop:disable Rails/OutputSafety %>
+          <%= local_assigns[:highlights][:description].html_safe %>
+          <%# rubocop:enable Rails/OutputSafety %>
+        <% else %>
+          <%= application.description %>
+        <% end %>
+      </p>
+    <% end %>
+  </article>
+</li>
+
+<%
+=end
+%>
