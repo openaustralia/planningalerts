@@ -1,28 +1,30 @@
 <% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 
-<%# TODO: Handle what happens when you're on the search page (@q is nil) %>
 <%= render "address_search_form", q: @q, error: @error %>
 
-<section class="pt-16">
-  <h2 class="text-3xl font-bold text-navy font-display">Search results</h2>
+<%# TODO: if this is not a search results page show more stuff as per design %>
+<% if @applications %>
+  <section class="pt-16">
+    <h2 class="text-3xl font-bold text-navy font-display">Search results</h2>
 
-  <%# TODO: You should be able to change this %>
-  <p class="pt-6 text-2xl text-navy">Sorted by most recent first</p>
+    <%# TODO: You should be able to change this %>
+    <p class="pt-6 text-2xl text-navy">Sorted by most recent first</p>
 
-  <%# TODO: This should be on the same line as the sort order %>
-  <%= render "pagination", applications: @applications %>
+    <%# TODO: This should be on the same line as the sort order %>
+    <%= render "pagination", applications: @applications %>
 
-  <%# TODO: Add "save this search" here %>
-  <%# # TODO: We want some area of the applications screen to not be a link %>
-  <ul class="divide-y divide-light-grey2">
-    <% @applications.each do |application| %>
-      <li>
-        <%= render application %>
-      </li>
-    <% end %>
-  </ul>
-  <%= render "pagination", applications: @applications %>
-</section>
+    <%# TODO: Add "save this search" here %>
+    <%# # TODO: We want some area of the applications screen to not be a link %>
+    <ul class="divide-y divide-light-grey2">
+      <% @applications.each do |application| %>
+        <li>
+          <%= render application %>
+        </li>
+      <% end %>
+    </ul>
+    <%= render "pagination", applications: @applications %>
+  </section>
+<% end %>
 
 <%
 =begin
