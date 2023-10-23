@@ -1,10 +1,22 @@
-<article>
-  <h3 class="text-2xl font-bold text-fuchsia"><%= application.address %></h3>
-  <p class="text-2xl text-navy"><%= application.description %></p>
-  <p class="text-lg text-warm-grey">Found 1 month ago, 800 metres away</p>
-  <p class="text-2xl text-navy"><%= pluralize(application.visible_comments_count, "comment") %></p>
-</article>
-
+<%= link_to application do%>
+  <article class="flex justify-between">
+    <div class="max-w-xl">
+      <h3 class="text-2xl font-bold text-fuchsia"><%= application.address %></h3>
+      <p class="text-2xl text-navy"><%= application.description %></p>
+      <p class="text-lg text-warm-grey">
+        <% if application.respond_to? :distance %>
+          Found <%= time_ago_in_words(application.first_date_scraped) %> ago,
+          <%= km_in_words(application.distance.to_f) %> away
+        <% else %>
+          Found <%= time_ago_in_words(application.first_date_scraped) %> ago
+        <% end %>
+      </p>
+    </div>
+    <% if application.visible_comments_count.positive? %>
+      <p class="text-2xl text-navy"><%= pluralize(application.visible_comments_count, "comment") %></p>
+    <% end %>
+  </article>
+<% end %>
 <%
 =begin
 %>
