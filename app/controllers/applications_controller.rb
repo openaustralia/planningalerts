@@ -104,7 +104,9 @@ class ApplicationsController < ApplicationController
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
     @q = params_q
-    @applications = Application.search(@q, fields: [:description], order: { first_date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: params[:page], per_page:) if @q
+    # TODO: Get actual visual design for how we want highlighted words to appear in search results
+    tag = show_tailwind_theme? ? "<strong>" : "<span class=\"highlight\">"
+    @applications = Application.search(@q, fields: [:description], order: { first_date_scraped: :desc }, highlight: { tag: }, page: params[:page], per_page:) if @q
     @description = @q ? "Search: #{@q}" : "Search"
   end
 
