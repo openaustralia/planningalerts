@@ -22,6 +22,9 @@
         It only takes a moment.
       </p>
     </div>
-    <%= image_tag "tailwind/illustration/save-search.svg", class: "self-end md:pt-14" %>
+    <%# On this page we want the box to be less tall than on the application detail page %>
+    <div class="self-end overflow-hidden h-[240px] md:pt-4">
+      <%= image_tag "tailwind/illustration/save-search.svg" %>
+    </div>
   </div>
 <% end %>
