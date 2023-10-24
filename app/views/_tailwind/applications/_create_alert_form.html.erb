@@ -4,8 +4,10 @@
       <%= image_tag "tailwind/bookmark.svg" %>
       <p class="text-2xl font-bold text-navy">Save this search as an email alert</p>
     </div>
-    <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do %>
-      Save
+    <%= form_with model: [:profile, alert], builder: FormBuilders::Tailwind do |f| %>
+      <%= f.hidden_field :address %>
+      <%= f.hidden_field :radius_meters %>
+      <%= f.button "Save" %>
     <% end %>
   </div>
 <% else %>

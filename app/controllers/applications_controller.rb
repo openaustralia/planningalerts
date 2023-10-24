@@ -78,7 +78,7 @@ class ApplicationsController < ApplicationController
       render "address"
     else
       @full_address = T.let(top.full_address, T.nilable(String))
-      @alert = Alert.new(address: @q, user: User.new)
+      @alert = Alert.new(address: @q, user: User.new, radius_meters: Alert::DEFAULT_RADIUS)
       @other_addresses = T.must(result.rest).map(&:full_address)
       point = RGeo::Geographic.spherical_factory.point(top.lng, top.lat)
       @applications = Application.select("*", "ST_Distance(lonlat, '#{point}')/1000 AS distance")

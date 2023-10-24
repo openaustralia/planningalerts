@@ -16,7 +16,7 @@
     <%= render "pagination", applications: @applications %>
 
     <div class="mt-12 mb-4">
-      <%= render "create_alert_form" %>
+      <%= render "create_alert_form", alert: @alert %>
     </div>
 
     <%# TODO: Add "save this search" here %>
@@ -30,7 +30,7 @@
     </ul>
 
     <div class="mt-12 mb-4">
-      <%= render "create_alert_form" %>
+      <%= render "create_alert_form", alert: @alert %>
     </div>
 
     <%= render "pagination", applications: @applications %>
