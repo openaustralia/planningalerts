@@ -14,11 +14,11 @@
         <% if @page.nil? %>
           <%= render "sort_options", sort: @sort, extra_params: { q: @q } %>
         <% else %>
-          <%= link_to_prev_page @applications, "< Previous page", class: "text-fuchsia text-2xl font-bold" %>
+          <%= render "link_to_prev_page", applications: @applications %>
         <% end %>
       </div>
       <div>
-        <%= link_to_next_page @applications, "Next page >", class: "text-fuchsia text-2xl font-bold" %>
+        <%= render "link_to_next_page", applications: @applications %>
       </div>
     </div>
 
@@ -44,10 +44,10 @@
 
     <div class="flex justify-between mt-6">
       <div>
-        <%= link_to_prev_page @applications, "< Previous page", class: "text-fuchsia text-2xl font-bold" %>
+        <%= render "link_to_prev_page", applications: @applications %>
       </div>
       <div>
-        <%= link_to_next_page @applications, "Next page >", class: "text-fuchsia text-2xl font-bold" %>
+        <%= render "link_to_next_page", applications: @applications %>
       </div>
     </div>
   </section>
