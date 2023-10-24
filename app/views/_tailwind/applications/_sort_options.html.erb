@@ -1,5 +1,6 @@
 <%# TODO: Style this as per designs. Need to make it accessible and degrade gracefully (with javascript switched off) %>
-<p class="pt-6 text-2xl text-navy">
+<%# TODO: We're only going to show this on the first page so we can simplify things a little %>
+<p class="text-2xl text-navy">
   Sorted by
   <%= pa_link_to_unless_current "most recent first", { sort: "time", page: nil }.merge(extra_params) %>
   <%= pa_link_to_unless_current "closest first", { sort: "distance", page: nil }.merge(extra_params) %>

@@ -7,12 +7,22 @@
   <section class="pt-16">
     <h2 class="text-3xl font-bold text-navy font-display">Search results</h2>
 
-    <%# TODO: Add support for extra options that are behind feature flag %>
-    <%= render "sort_options", sort: @sort, extra_params: { q: @q } %>
+    <div class="flex justify-between pt-6">
+      <div>
+        <%# TODO: Add support for extra options that are behind feature flag %>
+        <%# We only want to show the sort options on the first page %>
+        <% if @page.nil? %>
+          <%= render "sort_options", sort: @sort, extra_params: { q: @q } %>
+        <% else %>
+          <%= link_to_prev_page @applications, "< Previous page", class: "text-fuchsia text-2xl font-bold" %>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to_next_page @applications, "Next page >", class: "text-fuchsia text-2xl font-bold" %>
+      </div>
+    </div>
 
     <%# TODO: If there are other possible addresses that match show those %>
-    <%# TODO: This should be on the same line as the sort order %>
-    <%= render "pagination", applications: @applications %>
 
     <div class="mt-12 mb-4">
       <%= render "create_alert_form", alert: @alert %>
@@ -32,7 +42,14 @@
       <%= render "create_alert_form", alert: @alert %>
     </div>
 
-    <%= render "pagination", applications: @applications %>
+    <div class="flex justify-between mt-6">
+      <div>
+        <%= link_to_prev_page @applications, "< Previous page", class: "text-fuchsia text-2xl font-bold" %>
+      </div>
+      <div>
+        <%= link_to_next_page @applications, "Next page >", class: "text-fuchsia text-2xl font-bold" %>
+      </div>
+    </div>
   </section>
 <% end %>
 
