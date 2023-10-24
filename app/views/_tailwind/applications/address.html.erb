@@ -15,18 +15,9 @@
     <%# TODO: This should be on the same line as the sort order %>
     <%= render "pagination", applications: @applications %>
 
-    <%# TODO: Add create email alert notice %>
-    <%# TODO: Handle logged out state %>
-    <%# TODO: Make it work %>
     <%# TODO: Add this at the bottom of the results too %>
-    <div class="flex items-center justify-between px-4 py-2 mt-12 mb-4 bg-light-grey">
-      <div class="flex gap-6 pl-4">
-        <%= image_tag "tailwind/bookmark.svg" %>
-        <p class="text-2xl font-bold text-navy">Save this search as an email alert</p>
-      </div>
-      <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do %>
-        Save
-      <% end %>
+    <div class="mt-12 mb-4">
+      <%= render "create_alert_form" %>
     </div>
 
     <%# TODO: Add "save this search" here %>
