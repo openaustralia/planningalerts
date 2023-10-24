@@ -8,11 +8,14 @@
     <h2 class="text-3xl font-bold text-navy font-display">Search results</h2>
 
     <%# TODO: You should be able to change this %>
+    <%# TODO: Add support for extra options that are behind feature flag %>
     <p class="pt-6 text-2xl text-navy">Sorted by most recent first</p>
 
+    <%# TODO: If there are other possible addresses that match show those %>
     <%# TODO: This should be on the same line as the sort order %>
     <%= render "pagination", applications: @applications %>
 
+    <%# TODO: Add create email alert notice %>
     <%# TODO: Add "save this search" here %>
     <%# # TODO: We want some area of the applications screen to not be a link %>
     <ul class="divide-y divide-light-grey2">
