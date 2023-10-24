@@ -1,5 +1,9 @@
-<%# TODO: You should be able to change this %>
-<p class="pt-6 text-2xl text-navy">Sorted by most recent first</p>
+<%# TODO: Style this as per designs. Need to make it accessible and degrade gracefully (with javascript switched off) %>
+<p class="pt-6 text-2xl text-navy">
+  Sorted by
+  <%= pa_link_to_unless_current "most recent first", { sort: "time", page: nil }.merge(extra_params) %>
+  <%= pa_link_to_unless_current "closest first", { sort: "distance", page: nil }.merge(extra_params) %>
+</p>
 
 <%
 =begin
