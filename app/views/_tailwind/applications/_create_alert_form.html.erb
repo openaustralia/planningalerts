@@ -1,11 +1,15 @@
-<%# TODO: Handle logged out state %>
 <%# TODO: Make it work %>
-<div class="flex items-center justify-between px-4 py-2 bg-light-grey">
-  <div class="flex gap-6 pl-4">
-    <%= image_tag "tailwind/bookmark.svg" %>
-    <p class="text-2xl font-bold text-navy">Save this search as an email alert</p>
+<% if current_user %>
+  <div class="flex items-center justify-between px-4 py-2 bg-light-grey">
+    <div class="flex gap-6 pl-4">
+      <%= image_tag "tailwind/bookmark.svg" %>
+      <p class="text-2xl font-bold text-navy">Save this search as an email alert</p>
+    </div>
+    <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do %>
+      Save
+    <% end %>
   </div>
-  <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do %>
-    Save
-  <% end %>
-</div>
+<% else %>
+  <%# TODO: Handle logged out state %>
+  <p>Show something else when you're not logged in</p>
+<% end %>
