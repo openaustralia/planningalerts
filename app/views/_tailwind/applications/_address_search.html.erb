@@ -42,29 +42,40 @@
 
 <section class="py-12 mt-8 text-2xl border-t border-light-grey2 text-navy">
   <h2 class="pb-2 text-3xl font-bold text-navy font-display">Coverage</h2>
-  <p class="pt-4">
-    We currently cover
-    <%= Authority.percentage_population_covered_by_all_active_authorities.to_i %>% of
-    Australia's population within <%= Authority.active.count %> authorities.
-    For this number we're only counting places where the main planning authority is covered.
-    As an example, most of Victoria is covered by the SPEAR system but not all Victorian
-    planning applications go through it. So, we don't include SPEAR in our population count.
-  </p>
-  <p class="pt-4">
-    We don't yet cover the whole country, but we are working on it.
-    New authorities are being added all the time.
-  </p>
-  <p class="pt-4">
-    If you are a programmer and would like to write a scraper for your local authority,
-    or work for a local authority and would like to make your data available,
-    <%= pa_link_to "find out how you can get involved", get_involved_path %>.
-  </p>
+
+  <div class="flex items-start justify-between">
+    <div class="max-w-2xl">
+      <p class="pt-4">
+        We currently cover
+        <%= Authority.percentage_population_covered_by_all_active_authorities.to_i %>% of
+        Australia's population within <%= Authority.active.count %> authorities.
+        For this number we're only counting places where the main planning authority is covered.
+        As an example, most of Victoria is covered by the SPEAR system but not all Victorian
+        planning applications go through it. So, we don't include SPEAR in our population count.
+      </p>
+      <p class="pt-4">
+        We don't yet cover the whole country, but we are working on it.
+        New authorities are being added all the time.
+      </p>
+      <p class="pt-4">
+        If you are a programmer and would like to write a scraper for your local authority,
+        or work for a local authority and would like to make your data available,
+        <%= pa_link_to "find out how you can get involved", get_involved_path %>.
+      </p>
+    </div>
+    <div class="relative font-black text-7xl font-display text-warm-grey">
+      <%= image_tag "tailwind/illustration/coverage.svg" %>
+      <div class="absolute left-16 top-14">
+        <%= Authority.percentage_population_covered_by_all_active_authorities.to_i %><span class="text-4xl">%</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="py-12 text-2xl border-t text-navy border-light-grey2">
   <%# TODO: Better heading? %>
   <h2 class="pb-2 text-3xl font-bold text-navy font-display">Planning Data</h2>
-  <div class="flex justify-between">
+  <div class="flex items-start justify-between">
     <div class="max-w-2xl">
       <p class="pt-4">
         From time to time planning authorities change their websites which breaks the scrapers
