@@ -1,4 +1,3 @@
-<%# TODO: Hide select initially and unhide with javascript %>
 <div x-data="{ link: '<%= sort == "time" ? "time" : "distance" %>' }"
      x-init="$watch('link', value => {
        url = new URL(window.location);
@@ -6,18 +5,29 @@
        window.location = url.toString();
      })"
      class="text-2xl text-navy">
-  <%= label_tag "sort", "Sorted by", class: "mr-2" %>
-  <%= select_tag "sort",
-                 options_for_select(
-                   [
-                     ["most recent", "time"],
-                     ["closest", "distance"]
-                   ]
-                 ),
-                 class: "pl-4 py-3 pr-16 border-navy text-2xl text-navy",
-                 "x-model" => "link" %>
+  <%# Hiding the select tag initially. It gets unhidden by javascript %>
+  <div class="invisible" x-bind:class="{ invisible: false }">
+    <%= label_tag "sort", "Sorted by", class: "mr-2" %>
+    <%= select_tag "sort",
+                   options_for_select(
+                     [
+                       ["most recent", "time"],
+                       ["closest", "distance"]
+                     ]
+                   ),
+                   class: "pl-4 py-3 pr-16 border-navy text-2xl text-navy",
+                   "x-model" => "link" %>
+  </div>
   <noscript>
-    <%= pa_link_to_unless sort == "time", "most recent first", { sort: "time" }.merge(extra_params) %>
-    <%= pa_link_to_unless sort == "distance", "closest first", { sort: "distance" }.merge(extra_params) %>
+    <p>
+      Sorted by
+      <% if sort == "time" %>
+        most recent.
+        <%= pa_link_to "closest", { sort: "distance" }.merge(extra_params) %>
+      <% else %>
+        closest.
+        <%= pa_link_to "most recent", { sort: "time" }.merge(extra_params) %>
+      <% end %>
+    </p>
   </noscript>
 </div>
