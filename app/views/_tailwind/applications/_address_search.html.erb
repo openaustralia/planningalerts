@@ -4,12 +4,12 @@
 
 <%# TODO: Show more stuff as per design %>
 
-<div class="grid grid-cols-2 gap-6 mt-20">
-  <section>
-    <h2 class="text-3xl font-bold text-navy font-display">Most commented applications</h2>
+<div class="grid grid-flow-col grid-rows-[repeat(3,_max-content)] gap-6 mt-20">
+  <h2 class="text-3xl font-bold text-navy font-display">Most commented applications</h2>
+  <div class="space-y-8">
     <%# TODO: Replace this with Application.trending.limit(3) %>
     <% Application.limit(3).each do |application| %>
-      <%= link_to application do %>
+      <%= link_to application, class: "block" do %>
         <article>
           <h3 class="text-2xl font-bold text-fuchsia"><%= application.address %></h3>
           <p class="text-2xl font-bold text-navy">Commented on <%= pluralize(application.visible_comments_count, "time") %></p>
@@ -19,12 +19,13 @@
         </article>
       <% end %>
     <% end %>
-    <%= pa_link_to "View more trending applications", trending_applications_path, class: "text-2xl" %>
-  </section>
-  <section>
-    <h2 class="text-3xl font-bold text-navy font-display">Latest applications across Australia</h2>
+  </div>
+  <%= pa_link_to "View more trending applications", trending_applications_path, class: "text-2xl pt-6" %>
+  <h2 class="text-3xl font-bold text-navy font-display">Latest applications across Australia</h2>
+  <div class="space-y-8">
+    <%# TODO: Probably want some ordering that shows applications from different places %>
     <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
-      <%= link_to application do %>
+      <%= link_to application, class: "block" do %>
         <article>
           <h3 class="text-2xl font-bold text-fuchsia"><%= application.address %></h3>
           <p class="text-2xl font-bold text-navy">
@@ -36,6 +37,6 @@
         </article>
       <% end %>
     <% end %>
-    <%= pa_link_to "View more latest applications", applications_path, class: "text-2xl" %>
-  </section>
+  </div>
+  <%= pa_link_to "View more latest applications", applications_path, class: "text-2xl pt-6" %>
 </div>
