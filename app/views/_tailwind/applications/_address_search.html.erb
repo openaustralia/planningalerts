@@ -3,3 +3,24 @@
 <%= render "address_search_form", q: nil, error: %>
 
 <%# TODO: Show more stuff as per design %>
+
+<div class="grid grid-cols-2 gap-6 mt-20">
+  <section>
+    <h2 class="text-3xl font-bold text-navy font-display">Most commented applications</h2>
+    <%# TODO: Replace this with Application.trending.limit(3) %>
+    <% Application.limit(3).each do |application| %>
+      <%= link_to application do %>
+        <article>
+          <h3 class="text-2xl font-bold text-fuchsia"><%= application.address %></h3>
+          <p class="text-2xl font-bold text-navy">Commented on <%= pluralize(application.visible_comments_count, "time") %></p>
+          <%# TODO: Limit length of description %>
+          <p class="text-2xl text-navy">for "<%= application.description %>"</p>
+          <%# TODO: Add map like the design? %>
+        </article>
+      <% end %>
+    <% end %>
+  </section>
+  <section>
+    <h2 class="text-3xl font-bold text-navy font-display">Latest applications across Australia</h2>
+  </section>
+</div>
