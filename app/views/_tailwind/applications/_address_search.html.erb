@@ -7,8 +7,7 @@
 <div class="grid grid-flow-col grid-rows-[repeat(3,_max-content)] gap-6 mt-20">
   <h2 class="text-3xl font-bold text-navy font-display">Most commented applications</h2>
   <div class="space-y-8">
-    <%# TODO: Replace this with Application.trending.limit(3) %>
-    <% Application.limit(3).each do |application| %>
+    <% Application.trending.limit(3).each do |application| %>
       <%= link_to application, class: "block" do %>
         <article>
           <h3 class="text-2xl font-bold text-fuchsia"><%= application.address %></h3>
