@@ -1,0 +1,117 @@
+<% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
+
+<%= render "address_search_form", q:, error: %>
+
+<%# TODO: if this is not a search results page show more stuff as per design %>
+<% if applications %>
+  <section class="pt-16">
+    <h2 class="text-3xl font-bold text-navy font-display">Search results</h2>
+
+    <div class="flex justify-between pt-6">
+      <div>
+        <%# TODO: Add support for extra options that are behind feature flag %>
+        <%# We only want to show the sort options on the first page %>
+        <% if page.nil? %>
+          <%= render "sort_options", sort:, extra_params: { q: } %>
+        <% else %>
+          <%= render "link_to_prev_page", applications: %>
+        <% end %>
+      </div>
+      <div>
+        <%= render "link_to_next_page", applications: %>
+      </div>
+    </div>
+
+    <%# TODO: If there are other possible addresses that match show those %>
+
+    <div class="mt-12 mb-4">
+      <%= render "create_alert_form", alert: %>
+    </div>
+
+    <%# TODO: Add "save this search" here %>
+    <%# # TODO: We want some area of the applications screen to not be a link %>
+    <ul class="divide-y divide-light-grey2">
+      <% applications.each do |application| %>
+        <li>
+          <%= render application %>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="mt-12 mb-4">
+      <%= render "create_alert_form", alert: %>
+    </div>
+
+    <div class="flex justify-between mt-6">
+      <div>
+        <%= render "link_to_prev_page", applications: %>
+      </div>
+      <div>
+        <%= render "link_to_next_page", applications: %>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<%
+=begin
+%>
+
+<% if q.nil? || error %>
+  <h3>
+    Search for applications near an address
+  </h3>
+  <%= render "address_search_form", q:, error: %>
+<% else %>
+  <h3>
+    Applications within
+    <% if Flipper.enabled?(:extra_options_on_address_search, current_user) %>
+      the last
+      <%= days_in_words(time) %>
+      and
+    <% end %>
+    <%= meters_in_words(radius) %>
+    of
+    <%= full_address %>
+  </h3>
+  <% unless other_addresses.empty? %>
+    <h4>Or did you want?</h4>
+    <ul>
+      <% other_addresses.each do |a| %>
+        <li>
+          <%= link_to a, q: a %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%# TODO: Figure out how to handle no results when extra_options_on_address_search is enabled %>
+  <% if applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user) %>
+    <%= render "no_applications", full_address:, q: %>
+  <% else %>
+    <div class="attention">
+      <%= render "alerts/signup_introduction" %>
+      <%= render "alerts/frequency" %>
+      <%= render "privacy_policy" %>
+      <%= render "alerts/signup_form", alert:, address_hidden: true %>
+    </div>
+    <div class="filter-and-sort-options">
+      <div class="sort-options">
+        <%= render "sort_options", sort:, extra_params: { q: } %>
+      </div>
+      <% if Flipper.enabled?(:extra_options_on_address_search, current_user) %>
+        <div class="filter-options">
+          <%= render "filter_options", sort:, q:, radius:, time: %>
+        </div>
+      <% end %>
+    </div>
+    <%= render "pagination", applications: %>
+    <ol class="applications">
+      <%= render partial: "application", collection: applications %>
+    </ol>
+    <%= render "pagination", applications: %>
+  <% end %>
+<% end %>
+
+<%
+=end
+%>
