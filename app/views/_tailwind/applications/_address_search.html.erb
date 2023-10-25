@@ -64,12 +64,17 @@
 <section class="py-12 text-2xl border-t text-navy border-light-grey2">
   <%# TODO: Better heading? %>
   <h2 class="pb-2 text-3xl font-bold text-navy font-display">Planning Data</h2>
-  <p class="pt-4">
-    From time to time planning authorities change their websites which breaks the scrapers
-    that gather the planning data. Help by providing a
-    <%= pa_link_to "donation", donate_url %> to help us fix it.
-  </p>
-  <p class="pt-4">
-    <%= pa_link_to "Check if planning data is broken for your authority", authorities_path %>
-  </p>
+  <div class="flex justify-between">
+    <div class="max-w-2xl">
+      <p class="pt-4">
+        From time to time planning authorities change their websites which breaks the scrapers
+        that gather the planning data. Help by providing a
+        <%= pa_link_to "donation", donate_url %> to help us fix it.
+      </p>
+      <p class="pt-4">
+        <%= pa_link_to "Check if planning data is broken for your authority", authorities_path %>
+      </p>
+    </div>
+    <%= image_tag "tailwind/illustration/mechanic.svg" %>
+  </div>
 </section>
