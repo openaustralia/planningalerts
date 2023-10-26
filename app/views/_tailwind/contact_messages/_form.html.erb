@@ -1,0 +1,59 @@
+<%= form_with model: contact_message, builder: FormBuilders::Tailwind do |f| %>
+  <%# TODO: Ask people to sign in to make it easier for them if they aren't %>
+  <%# TODO: Only show name and email fields if not signed in %>
+  <div>
+    <%= f.label :name, "Your name", class: "block mb-3" %>
+    <%= f.text_field :name, class: "block w-full" %>
+    <%= f.error :name, class: "mt-2" %>
+  </div>
+  <div class="mt-8">
+    <%= f.label :email, "Your email", class: "block mb-3" %>
+    <%= f.email_field :email, class: "block w-full" %>
+    <%= f.error :email, class: "mt-2" %>
+  </div>
+  <div class="mt-8">
+    <%= f.label :reason, "I'm getting in touch because", class: "block mb-3" %>
+    <%# TODO: Extract style of select into form builder %>
+    <%# TODO: Make sure that we can't choose "Please select" %>
+    <%# TODO: Get rid of the blue hover state in the select %>
+    <%= f.select :reason, [["Please select", ""]] + ContactMessage::REASONS_LONG, {},
+                 class: "block text-navy text-2xl active:bg-light-grey" %>
+    <%= f.error :reason, class: "mt-2" %>
+  </div>
+  <div class="mt-8">
+    <%= f.button "Send message to the Planning Alerts team" %>
+  </div>
+<% end %>
+
+<%
+=begin
+%>
+
+<%= semantic_form_for contact_message do |f| %>
+  <%= f.inputs do %>
+    <% if current_user.nil? %>
+      <%= f.input :name, hint: t("formtastic.hints.contact_message.name", link: new_user_session_path) %>
+      <%= f.input :email %>
+    <% end %>
+    <%= f.input :reason, collection: ContactMessage::REASONS_LONG, prompt: "-- Select closest relevant --" %>
+    <%= f.input :details, input_html: { rows: 8 } %>
+    <%= f.input :attachments, as: :file, input_html: { multiple: true, data: { direct_upload_url: rails_direct_uploads_url } } %>
+    <% if current_user.nil? && Rails.application.credentials[:recaptcha] %>
+      <%= recaptcha_tags %>
+      <p class="inline-hints">
+        Or
+        <%= link_to "sign in", new_user_session_path %>
+        to remove this annoying reCaptcha
+      </p>
+    <% end %>
+    <%= f.semantic_errors :base %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, button_html: { class: "button button-action" } %>
+  <% end %>
+  <p>We run this site, not the Government!</p>
+<% end %>
+
+<%
+=end
+%>
