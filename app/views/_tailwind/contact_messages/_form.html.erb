@@ -1,19 +1,19 @@
 <%= form_with model: contact_message, builder: FormBuilders::Tailwind do |f| %>
-  <%# TODO: Ask people to sign in to make it easier for them if they aren't %>
-  <%# TODO: Only show name and email fields if not signed in %>
-  <div>
-    <%= f.label :name, "Your name", class: "block mb-3" %>
-    <%= f.text_field :name, class: "block w-full" %>
-    <%= f.error :name, class: "mt-2" %>
-    <%= f.hint do %>
-      Or <%= pa_link_to "sign in", new_user_session_path %>
-    <% end %>
-  </div>
-  <div class="mt-8">
-    <%= f.label :email, "Your email", class: "block mb-3" %>
-    <%= f.email_field :email, class: "block w-full" %>
-    <%= f.error :email, class: "mt-2" %>
-  </div>
+  <% if current_user.nil? %>
+    <div>
+      <%= f.label :name, "Your name", class: "block mb-3" %>
+      <%= f.text_field :name, class: "block w-full" %>
+      <%= f.error :name, class: "mt-2" %>
+      <%= f.hint do %>
+        Or <%= pa_link_to "sign in", new_user_session_path %>
+      <% end %>
+    </div>
+    <div class="mt-8">
+      <%= f.label :email, "Your email", class: "block mb-3" %>
+      <%= f.email_field :email, class: "block w-full" %>
+      <%= f.error :email, class: "mt-2" %>
+    </div>
+  <% end %>
   <div class="mt-8">
     <%= f.label :reason, "I'm getting in touch because", class: "block mb-3" %>
     <%# TODO: Extract style of select into form builder %>
@@ -29,6 +29,7 @@
     <%= f.text_area :details, class: "block w-full", rows: 8 %>
     <%= f.error :details, class: "mt-2" %>
   </div>
+  <%# TODO: Add big box with helpful questions to ask yourself %>
   <div class="mt-8">
     <%= f.label :attachments, "Attach files or screenshots", class: "block mb-3" %>
     <%# TODO: Style this %>
@@ -37,49 +38,18 @@
                      multiple: true, data: { direct_upload_url: rails_direct_uploads_url },
                      class: "block" %>
   </div>
-  <%# TODO: Only show recaptcha when user is logged out and recaptcha is configured %>
-  <div class="mt-12">
-    <%= recaptcha_tags %>
-    <%# TODO: Make sure recaptcha errors are shown here %>
-    <%= f.error :base, class: "mt-2" %>
-    <%= f.hint class: "mt-2" do %>
-      Or <%= pa_link_to "sign in", new_user_session_path %> to remove this annoying reCaptcha
-    <% end %>
-  </div>
+  <% if current_user.nil? && Rails.application.credentials[:recaptcha] %>
+    <div class="mt-12">
+      <%= recaptcha_tags %>
+      <%# TODO: Make sure recaptcha errors are shown here %>
+      <%= f.error :base, class: "mt-2" %>
+      <%= f.hint class: "mt-2" do %>
+        Or <%= pa_link_to "sign in", new_user_session_path %> to remove this annoying reCaptcha
+      <% end %>
+    </div>
+  <% end %>
   <div class="mt-8">
     <%= f.button "Send message to the Planning Alerts team" %>
   </div>
+  <p class="mt-6 text-2xl text-navy">We run this site, not the Government!</p>
 <% end %>
-
-<%
-=begin
-%>
-
-<%= semantic_form_for contact_message do |f| %>
-  <%= f.inputs do %>
-    <% if current_user.nil? %>
-      <%= f.input :name, hint: t("formtastic.hints.contact_message.name", link: new_user_session_path) %>
-      <%= f.input :email %>
-    <% end %>
-    <%= f.input :reason, collection: ContactMessage::REASONS_LONG, prompt: "-- Select closest relevant --" %>
-    <%= f.input :details, input_html: { rows: 8 } %>
-    <%= f.input :attachments, as: :file, input_html: { multiple: true, data: { direct_upload_url: rails_direct_uploads_url } } %>
-    <% if current_user.nil? && Rails.application.credentials[:recaptcha] %>
-      <%= recaptcha_tags %>
-      <p class="inline-hints">
-        Or
-        <%= link_to "sign in", new_user_session_path %>
-        to remove this annoying reCaptcha
-      </p>
-    <% end %>
-    <%= f.semantic_errors :base %>
-  <% end %>
-  <%= f.actions do %>
-    <%= f.action :submit, button_html: { class: "button button-action" } %>
-  <% end %>
-  <p>We run this site, not the Government!</p>
-<% end %>
-
-<%
-=end
-%>
