@@ -5,6 +5,7 @@
     <%= f.label :name, "Your name", class: "block mb-3" %>
     <%= f.text_field :name, class: "block w-full" %>
     <%= f.error :name, class: "mt-2" %>
+    <%= f.hint "Or #{pa_link_to 'sign in', new_user_session_path}".html_safe %>
   </div>
   <div class="mt-8">
     <%= f.label :email, "Your email", class: "block mb-3" %>
