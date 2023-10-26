@@ -19,8 +19,9 @@
     <%# TODO: Extract style of select into form builder %>
     <%# TODO: Make sure that we can't choose "Please select" %>
     <%# TODO: Get rid of the blue hover state in the select %>
+    <%# TODO: The grey border here does not match the design but matches other form elements %>
     <%= f.select :reason, [["Please select", ""]] + ContactMessage::REASONS_LONG, {},
-                 class: "block text-navy text-2xl active:bg-light-grey" %>
+                 class: "block text-navy text-2xl border-light-grey2" %>
     <%= f.error :reason, class: "mt-2" %>
   </div>
   <div class="mt-8">
