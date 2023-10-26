@@ -12,10 +12,16 @@ module ApplicationHelper
   include Kernel
 
   # Only to be used in tailwind theme
+  sig { returns(String) }
+  def pa_link_classes
+    "text-fuchsia font-bold underline hover:text-fuchsia-darker active:bg-sun-yellow"
+  end
+
+  # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
   sig { params(body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, String]).returns(String) }
   def pa_link_to(body, url, html_options = {})
-    html_options[:class] = "#{html_options[:class]} text-fuchsia font-bold hover:underline"
+    html_options[:class] = "#{html_options[:class]} #{pa_link_classes}"
     link_to(body, url, html_options)
   end
 
@@ -23,7 +29,7 @@ module ApplicationHelper
   # TODO: Generalise to support all the variants
   sig { params(body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, String]).returns(String) }
   def pa_link_to_unless_current(body, url, html_options = {})
-    html_options[:class] = "#{html_options[:class]} text-fuchsia font-bold hover:underline"
+    html_options[:class] = "#{html_options[:class]} #{pa_link_classes}"
     link_to_unless_current(body, url, html_options)
   end
 
@@ -31,7 +37,7 @@ module ApplicationHelper
   # TODO: Generalise to support all the variants
   sig { params(condition: T::Boolean, body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, String]).returns(String) }
   def pa_link_to_unless(condition, body, url, html_options = {})
-    html_options[:class] = "#{html_options[:class]} text-fuchsia font-bold hover:underline"
+    html_options[:class] = "#{html_options[:class]} #{pa_link_classes}"
     link_to_unless(condition, body, url, html_options)
   end
 
