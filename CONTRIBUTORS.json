@@ -175,6 +175,11 @@
     "github": "mlandauer"
   },
   {
+    "name": "Mutaz Al-Ashhab",
+    "email_md5": "c6c0df6a739872f428cba25a792f4b9b",
+    "github": "Taz17"
+  },
+  {
     "name": "Nick Evershed",
     "email_md5": "7289b45ea6e9ac313bd4c34d7f4e461b",
     "github": "nickjevershed"
@@ -208,5 +213,10 @@
     "name": "Tim Ansell",
     "email_md5": "ddc397c8b591167f0a26cd3320aa794f",
     "github": "mithro"
+  },
+  {
+    "name": "Tseyi Okorodudu",
+    "email_md5": "3978ba2d4f4a9b7f086e21b023aeb473",
+    "github": "tseyiokorodudu"
   }
 ]
