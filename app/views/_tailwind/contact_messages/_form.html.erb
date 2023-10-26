@@ -5,7 +5,9 @@
     <%= f.label :name, "Your name", class: "block mb-3" %>
     <%= f.text_field :name, class: "block w-full" %>
     <%= f.error :name, class: "mt-2" %>
-    <%= f.hint "Or #{pa_link_to 'sign in', new_user_session_path}".html_safe %>
+    <%= f.hint do %>
+      Or <%= pa_link_to "sign in", new_user_session_path %>
+    <% end %>
   </div>
   <div class="mt-8">
     <%= f.label :email, "Your email", class: "block mb-3" %>
@@ -40,8 +42,9 @@
     <%= recaptcha_tags %>
     <%# TODO: Make sure recaptcha errors are shown here %>
     <%= f.error :base, class: "mt-2" %>
-    <%# TODO: Add link to hint %>
-    <%= f.hint "Or sign in to remove this annoying reCaptcha", class: "mt-2" %>
+    <%= f.hint class: "mt-2" do %>
+      Or <%= pa_link_to "sign in", new_user_session_path %> to remove this annoying reCaptcha
+    <% end %>
   </div>
   <div class="mt-8">
     <%= f.button "Send message to the Planning Alerts team" %>

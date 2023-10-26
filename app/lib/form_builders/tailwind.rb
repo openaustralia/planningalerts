@@ -50,9 +50,13 @@ module FormBuilders
       template.content_tag(:p, m, options.merge(class: "text-2xl text-error-red #{options[:class]}"))
     end
 
-    sig { params(text: String, options: T::Hash[Symbol, String]).returns(String) }
-    def hint(text, options = {})
-      template.content_tag(:p, text, options.merge(class: "text-base italic text-warm-grey #{options[:class]}"))
+    sig { params(text_or_options: T.untyped, options: T::Hash[Symbol, String], block: T.untyped).returns(String) }
+    def hint(text_or_options = nil, options = {}, &block)
+      if block_given?
+        template.content_tag(:p, (text_or_options || {}).merge(class: "text-base italic text-warm-grey #{options[:class]}"), &block)
+      else
+        template.content_tag(:p, text_or_options, options.merge(class: "text-base italic text-warm-grey #{options[:class]}"))
+      end
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
