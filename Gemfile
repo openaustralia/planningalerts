@@ -176,6 +176,9 @@ group :test do
   gem "webmock"
   # FIXME: stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"
+  # For automated accessibility testing
+  gem "axe-core-capybara"
+  gem "axe-core-rspec"
 end
 
 group :development do
