@@ -36,7 +36,8 @@
 				"bradlc.vscode-tailwindcss",
 				"jock.svg",
 				"heybourn.headwind",
-				"figma.figma-vscode-extension"
+				"figma.figma-vscode-extension",
+				"github.vscode-github-actions"
 			]
 		}
 	},
