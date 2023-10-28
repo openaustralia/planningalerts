@@ -14,9 +14,10 @@ require "rspec/rails"
 require "email_spec"
 require "rspec/active_model/mocks"
 require "pundit/rspec"
+require "axe-rspec"
+require "capybara/rails"
 
 Capybara.javascript_driver = :selenium_headless
-Capybara.server = :webrick
 
 VCR.configure do |c|
   c.cassette_library_dir = "spec/fixtures/vcr_cassettes"
@@ -25,7 +26,7 @@ VCR.configure do |c|
   # which automatically downloads the webdriver for headless testing
   c.ignore_hosts "github.com"
   c.ignore_request do |request|
-    URI(request.uri).host =~ /s3.amazonaws.com/
+    URI(request.uri).host =~ /objects.githubusercontent.com/
     # false
     # URI(request.uri).port == 7777
   end
@@ -109,7 +110,7 @@ RSpec.configure do |config|
   end
 
   # For testing use a memory adapter with all features disabled by default
-  config.before do
-    Flipper.instance = Flipper.new(Flipper::Adapters::Memory.new)
+  Flipper.configure do |c|
+    c.default { Flipper.new(Flipper::Adapters::Memory.new) }
   end
 end
