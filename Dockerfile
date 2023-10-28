@@ -40,6 +40,9 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesourc
 RUN apt-get update
 RUN apt-get install -y nodejs
 
+# Install firefox for running some integration tests
+RUN apt-get update; apt-get install -y firefox-esr
+
 USER deploy
 
 COPY --chown=deploy:deploy Gemfile /app/Gemfile
