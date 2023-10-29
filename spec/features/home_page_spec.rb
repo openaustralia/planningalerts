@@ -5,12 +5,24 @@ require "spec_helper"
 describe "Home page" do
   include Devise::Test::IntegrationHelpers
 
-  it "is accessible", js: true do
-    pending "there are accessibility issues to fix on the home page in the new design"
-    sign_in create(:confirmed_user, tailwind_theme: true)
-    visit root_path
-    # page.save_screenshot("screenshot.png")
-    # save_and_open_screenshot
-    expect(page).to be_axe_clean
+  describe "accessibility tests", js: true do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit root_path
+    end
+
+    it "passes most" do
+      expect(page).to be_axe_clean.skipping("color-contrast", "page-has-heading-one")
+    end
+
+    it "passes color-contrast" do
+      pending "there are still outstanding issues"
+      expect(page).to be_axe_clean.checking_only("color-contrast")
+    end
+
+    it "passes page-has-heading-one" do
+      pending "there are still outstanding issues"
+      expect(page).to be_axe_clean.checking_only("page-has-heading-one")
+    end
   end
 end
