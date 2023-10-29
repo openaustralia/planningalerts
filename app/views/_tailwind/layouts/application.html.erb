@@ -5,23 +5,25 @@
   </head>
   <body x-data="{ bodyScrolling: true }" x-bind:class="{ 'overflow-hidden': !bodyScrolling}">
     <%= render "header" %>
-    <%= render Tailwind::ContainerComponent.new do %>
-      <%# TODO: Make it that we can add the flashes somewhere else for particular pages %>
-      <%= render "flashes" %>
+    <main>
+      <%= render Tailwind::ContainerComponent.new do %>
+        <%# TODO: Make it that we can add the flashes somewhere else for particular pages %>
+        <%= render "flashes" %>
 
-      <div class="mb-64 mt-9 sm:mt-16">
-        <%= content_for?(:content) ? yield(:content) : yield %>
-      </div>
-      <%# This is for an illustration that is stuck to the top of the
-      footer on the right hand side %>
-      <% if content_for?(:footer_illustration) %>
-        <div class="flex justify-end">
-          <div class="pr-24">
-            <%= yield(:footer_illustration) %>
-          </div>
+        <div class="mb-64 mt-9 sm:mt-16">
+          <%= content_for?(:content) ? yield(:content) : yield %>
         </div>
+        <%# This is for an illustration that is stuck to the top of the
+        footer on the right hand side %>
+        <% if content_for?(:footer_illustration) %>
+          <div class="flex justify-end">
+            <div class="pr-24">
+              <%= yield(:footer_illustration) %>
+            </div>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </main>
     <%= render "footer" %>
     <%= render "end_matter" %>
   </body>
