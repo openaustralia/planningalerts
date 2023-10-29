@@ -12,17 +12,12 @@ describe "Home page" do
     end
 
     it "passes most" do
-      expect(page).to be_axe_clean.skipping("color-contrast", "page-has-heading-one")
+      expect(page).to be_axe_clean.skipping("color-contrast")
     end
 
     it "passes color-contrast" do
       pending "there are still outstanding issues"
       expect(page).to be_axe_clean.checking_only("color-contrast")
-    end
-
-    it "passes page-has-heading-one" do
-      pending "there are still outstanding issues"
-      expect(page).to be_axe_clean.checking_only("page-has-heading-one")
     end
   end
 end
