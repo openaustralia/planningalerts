@@ -75,6 +75,21 @@ describe "Searching for development application near an address" do
     end
   end
 
+  describe "accessibility tests for search applications page in new design", js: true do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit address_applications_path
+    end
+
+    it "main content passes" do
+      expect(page).to be_axe_clean.within("main")
+    end
+
+    it "mostly passes" do
+      expect(page).to be_axe_clean.skipping("color-contrast")
+    end
+  end
+
   # Having trouble getting this to work
   # context "with javascript" do
   #   scenario "autocomplete results are displayed", js: true do

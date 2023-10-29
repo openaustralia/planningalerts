@@ -1,5 +1,7 @@
 <% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 
+<h1 class="sr-only">Search Applications</h1>
+
 <%= render "address_search_form", q: nil, error: %>
 
 <%# TODO: Show more stuff as per design %>
@@ -64,7 +66,7 @@
       </p>
     </div>
     <div class="relative font-black text-7xl font-display text-warm-grey">
-      <%= image_tag "tailwind/illustration/coverage.svg" %>
+      <%= image_tag "tailwind/illustration/coverage.svg", alt: "" %>
       <div class="absolute left-16 top-14">
         <%= Authority.percentage_population_covered_by_all_active_authorities.to_i %><span class="text-4xl">%</span>
       </div>
@@ -86,6 +88,6 @@
         <%= pa_link_to "Check if planning data is broken for your authority", authorities_path %>
       </p>
     </div>
-    <%= image_tag "tailwind/illustration/mechanic.svg" %>
+    <%= image_tag "tailwind/illustration/mechanic.svg", alt: "" %>
   </div>
 </section>
