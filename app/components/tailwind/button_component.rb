@@ -46,17 +46,13 @@ module Tailwind
         icon_path = nil
       when :trash
         icon_path = "tailwind/trash.svg"
-        icon_alt = "Trash icon"
       when :edit
         icon_path = "tailwind/pencil.svg"
-        icon_alt = "Pencil icon"
       when :external
         icon_path = "tailwind/external.svg"
-        icon_alt = "External link icon"
       when :share
         # TODO: Share icon is not visually consistent with external link icon
         icon_path = "tailwind/share.svg"
-        icon_alt = "Share icon"
       else
         raise "Unexpected icon #{icon}"
       end
@@ -86,7 +82,6 @@ module Tailwind
       @tag = tag
       @href = href
       @icon_path = T.let(icon_path, T.nilable(String))
-      @icon_alt = T.let(icon_alt, T.nilable(String))
     end
   end
 end

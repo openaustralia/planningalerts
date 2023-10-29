@@ -39,9 +39,9 @@ RSpec.describe Tailwind::ButtonComponent, type: :component do
     expect(page).to have_button(class: "font-semibold")
   end
 
-  it "renders a trash icon" do
+  it "renders an icon" do
     render_inline(described_class.new(tag: :button, size: "2xl", type: :primary, icon: :trash)) { "Hello world!" }
-    expect(page).to have_css("img[alt='Trash icon']")
+    expect(page).to have_css("img")
   end
 
   it "renders a link tag" do
