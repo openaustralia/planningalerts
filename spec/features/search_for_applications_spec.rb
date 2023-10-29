@@ -3,6 +3,10 @@
 require "spec_helper"
 
 describe "Searching for development application near an address" do
+  # TODO: Include this in spec/spec_helper.rb instead
+  # See https://github.com/heartcombo/devise#controller-tests
+  include Devise::Test::IntegrationHelpers
+
   before do
     create(:geocoded_application,
            address: "24 Bruce Road Glenbrook",
@@ -33,6 +37,41 @@ describe "Searching for development application near an address" do
     within "ol.applications" do
       expect(page).to have_content "24 Bruce Road"
       expect(page).to have_content "A lovely house"
+    end
+  end
+
+  it "returns results in the new design" do
+    sign_in create(:confirmed_user, tailwind_theme: true)
+    visit root_path
+
+    fill_in "Enter a street address", with: "24 Bruce Road, Glenbrook"
+    click_button "Search"
+
+    expect(page).to have_content "Search results"
+
+    within "main ul" do
+      expect(page).to have_content "24 Bruce Road"
+      expect(page).to have_content "A lovely house"
+    end
+  end
+
+  describe "accessibility tests in new design", js: true do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit root_path
+
+      fill_in "Enter a street address", with: "24 Bruce Road, Glenbrook"
+      click_button "Search"
+    end
+
+    it "main content passes" do
+      # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
+      expect(page).to be_axe_clean.within("main")
+    end
+
+    it "page passes most" do
+      # Also doing check across whole page so we catch issues like h1 not being used
+      expect(page).to be_axe_clean.skipping("color-contrast")
     end
   end
 

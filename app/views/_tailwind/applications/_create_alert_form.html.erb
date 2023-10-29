@@ -1,7 +1,7 @@
 <% if current_user %>
   <div class="flex items-center justify-between px-4 py-2 bg-light-grey">
     <div class="flex gap-6 pl-4">
-      <%= image_tag "tailwind/bookmark.svg" %>
+      <%= image_tag "tailwind/bookmark.svg", alt: "" %>
       <p class="text-2xl font-bold text-navy">Save this search as an email alert</p>
     </div>
     <%= form_with model: [:profile, alert], builder: FormBuilders::Tailwind do |f| %>

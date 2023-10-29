@@ -3,6 +3,8 @@
 require "spec_helper"
 
 describe "Home page" do
+  # TODO: Include this in spec/spec_helper.rb instead
+  # See https://github.com/heartcombo/devise#controller-tests
   include Devise::Test::IntegrationHelpers
 
   describe "accessibility tests", js: true do
