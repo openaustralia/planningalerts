@@ -7,12 +7,28 @@ describe "Browsing basic documentation pages" do
   # See https://github.com/heartcombo/devise#controller-tests
   include Devise::Test::IntegrationHelpers
 
-  it "has an about page" do
-    visit about_path
-    expect(page).to have_content "The aim of this to enable shared scrutiny of what is being built"
+  describe "about page" do
+    it "has an about page" do
+      visit about_path
+      expect(page).to have_content "The aim of this to enable shared scrutiny of what is being built"
+    end
   end
 
-  describe "in the new design" do
+  describe "about page in the new design" do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit about_path
+    end
+
+    describe "accessibility test", js: true do
+      it "main content passes" do
+        # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
+        expect(page).to be_axe_clean.within("main")
+      end
+    end
+  end
+
+  describe "help page in the new design" do
     before do
       sign_in create(:confirmed_user, tailwind_theme: true)
       visit faq_path
