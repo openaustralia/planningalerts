@@ -74,4 +74,23 @@ describe "Browsing basic documentation pages" do
       end
     end
   end
+
+  describe "api page in the new design" do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit api_howto_path
+    end
+
+    describe "accessibility tests", js: true do
+      it "main content passes" do
+        # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
+        expect(page).to be_axe_clean.within("main")
+      end
+
+      it "page passes most" do
+        # Also doing check across whole page so we catch issues like h1 not being used
+        expect(page).to be_axe_clean.skipping("color-contrast")
+      end
+    end
+  end
 end
