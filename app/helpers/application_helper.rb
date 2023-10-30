@@ -41,6 +41,12 @@ module ApplicationHelper
     link_to_unless(condition, body, url, html_options)
   end
 
+  sig { params(email_address: String, name: T.nilable(String), html_options: T.untyped).returns(String) }
+  def pa_mail_to(email_address, name = nil, html_options = {})
+    html_options[:class] = "#{html_options[:class]} #{pa_link_classes}"
+    mail_to(email_address, name, html_options)
+  end
+
   sig { params(path: String, extra_classes: T::Array[Symbol], block: T.untyped).returns(T.untyped) }
   def menu_item(path, extra_classes: [], &block)
     li_selected(current_page?(path), extra_classes:) do
