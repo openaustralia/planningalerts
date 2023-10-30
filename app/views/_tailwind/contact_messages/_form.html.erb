@@ -33,11 +33,11 @@
   <%# TODO: Add big box with helpful questions to ask yourself %>
   <div class="mt-8">
     <%= f.label :attachments, "Attach files or screenshots", class: "block mb-3" %>
-    <%# TODO: Style this %>
     <%# TODO: Extract style to form helper %>
+    <%# TODO: Can we change the text on the button? %>
     <%= f.file_field :attachments,
                      multiple: true, data: { direct_upload_url: rails_direct_uploads_url },
-                     class: "block" %>
+                     class: "block file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green file:border-2 file:px-8 file:py-4 file:mr-4" %>
   </div>
   <% if current_user.nil? && Rails.application.credentials[:recaptcha] %>
     <div class="mt-12">
@@ -49,7 +49,7 @@
       <% end %>
     </div>
   <% end %>
-  <div class="mt-8">
+  <div class="mt-12">
     <%= f.button "Send message to the Planning Alerts team" %>
   </div>
   <p class="mt-6 text-2xl text-navy">We run this site, not the Government!</p>
