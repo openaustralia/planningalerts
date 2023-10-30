@@ -1,6 +1,6 @@
 <%= content_for :page_title, "Get the Data" %>
 
-<h1 class="text-4xl font-bold text-navy font-display"><%= yield :page_title %></h1> 
+<h1 class="text-4xl font-bold text-navy font-display"><%= yield :page_title %></h1>
 
 <%# TODO: Do we want line length to be limited as prose is doing here? %>
 <%# Make links automatically styled correctly in prose %>
@@ -22,34 +22,39 @@
   </p>
 </div>
 
+<div class="flex justify-between gap-8 px-12 py-8 mt-12 bg-light-grey">
+  <div class="text-2xl text-navy">
+    <% if current_user %>
+      <% if api_key %>
+        <p>
+          The API examples below contain your API key:
+          <span class="font-bold"><%= api_key %></span>
+        </p>
+      <% else %>
+        <p>
+          You need an API key to try out the examples below and use the API for yourself.
+        </p>
+        <div class="mt-8 mb-4">
+          <%= pa_button_to "Create API key", profile_api_keys_path, method: :post %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>
+        To use the API you will to
+        <%= pa_link_to "register for an account", new_user_registration_path %>
+        or
+        <%= pa_link_to "sign in", new_user_session_path %>
+        to your existing account. Once you've done that, return to this page
+        and the you will be able to create an API key here.
+      </p>
+    <% end %>
+  </div>
+  <%= image_tag "tailwind/illustration/key.svg", alt: "" %>
+</div>
+
 <%
 =begin
 %>
-
-%hr
-.notice
-  %p
-    - if current_user
-      - if api_key
-        The API examples below contain your API key:
-        = api_key
-      - else
-        You need an API key to try out the examples below and use the API for yourself.
-        = button_to "Create API key", profile_api_keys_path, method: :post, class: "button button-rounded"
-    - else
-      To use the API you will to
-      = link_to "register for an account", new_user_registration_path
-      or
-      = link_to "sign in", new_user_session_path
-      to your existing account. (Note that this is different
-      than having signed up for an email alert). Once you've done that, return to this page
-      and the you will be able to create an API key here.
-
-  - if current_user.nil?
-    %p
-      = link_to "Register for an account", new_user_registration_path, class: "button button-rounded"
-      or
-      = link_to "Sign in", new_user_session_path, class: "button button-rounded"
 
 %h4 API documentation
 .apiitem
@@ -161,6 +166,6 @@ Don't use the service (or information obtained from the service) to market goods
 %p
 Don't use the service (or information obtained from the service) to harass or intimidate a person.
 
-<% 
+<%
 =end
 %>
