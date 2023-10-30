@@ -54,7 +54,7 @@
 
 <section class="mt-24">
   <h2 class="text-3xl font-bold text-navy font-display">API documentation</h2>
-  <section class="max-w-4xl mt-12">
+  <section class="max-w-4xl mt-16">
     <h3 class="text-2xl font-bold text-navy">
       Single Location by longitude/latitude
     </h3>
@@ -71,51 +71,78 @@
       <% end %>
     <% end %>
   </section>
+  <section class="max-w-4xl mt-16">
+    <h3 class="text-2xl font-bold text-navy">
+      Area by longitude/latitude
+    </h3>
+    <p class="mt-8 text-2xl text-navy">
+      Return applications within a rectangle defined by longitude/latitude.
+    </p>
+    <code class="block my-8 text-2xl break-all text-navy">
+      <%= api_example_area_url_html(format: "json", key: api_key) %>
+    </code>
+    <% if api_key %>
+      <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: api_example_area_url(format: "json", key: api_key)) do %>
+        View example
+      <% end %>
+    <% end %>
+  </section>
+  <section class="max-w-4xl mt-16">
+    <h3 class="text-2xl font-bold text-navy">
+      Planning authority
+    </h3>
+    <p class="mt-8 text-2xl text-navy">
+      Return applications for a specific planning authority (e.g. a local council) by authority short name. To discover the authority short name
+      to use here, find the planning authority on the
+      <%= pa_link_to "list of authorities", authorities_path %>
+      and follow the link. The url has the authority short name in it.
+    </p>
+    <code class="block my-8 text-2xl break-all text-navy">
+      <%= api_example_authority_url_html(format: "json", key: api_key) %>
+    </code>
+    <% if api_key %>
+      <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: api_example_authority_url(format: "json", key: api_key)) do %>
+        View example
+      <% end %>
+    <% end %>
+  </section>
+  <section class="max-w-4xl mt-16">
+    <h3 class="text-2xl font-bold text-navy">
+      Postcode
+    </h3>
+    <p class="mt-8 text-2xl text-navy">
+      Return applications for a specific postcode area
+    </p>
+    <code class="block my-8 text-2xl break-all text-navy">
+      <%= api_example_postcode_url_html(format: "json", key: api_key) %>
+    </code>
+    <% if api_key %>
+      <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: api_example_postcode_url(format: "json", key: api_key)) do %>
+        View example
+      <% end %>
+    <% end %>
+  </section>
+  <section class="max-w-4xl mt-16">
+    <h3 class="text-2xl font-bold text-navy">
+      Suburb
+    </h3>
+    <p class="mt-8 text-2xl text-navy">
+      Return applications in a suburb. Including &ldquo;state&rdquo; and &ldquo;postcode&rdquo; in the search is optional.
+    </p>
+    <code class="block my-8 text-2xl break-all text-navy">
+      <%= api_example_suburb_state_and_postcode_url_html(format: "json", key: api_key) %>
+    </code>
+    <% if api_key %>
+      <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: api_example_suburb_state_and_postcode_url(format: "json", key: api_key)) do %>
+        View example
+      <% end %>
+    <% end %>
+  </section>
 </section>
 
 <%
 =begin
 %>
-
-.apiitem
-  %h5
-    Area by longitude/latitude
-  %p.apidefinition
-    Return applications within a rectangle defined by longitude/latitude.
-  %code= api_example_area_url_html(format: "json", key: api_key)
-  - if api_key
-    .apiexamples
-      = link_to "Example", api_example_area_url(format: "json", key: api_key), class: "button button-rounded"
-.apiitem
-  %h5
-    Planning authority
-  %p.apidefinition
-    Return applications for a specific planning authority (e.g. a local council) by authority short name. To discover the authority short name
-    to use here, find the planning authority on the
-    = link_to "list of authorities", authorities_path
-    and follow the link. The url has the authority short name in it.
-  %code= api_example_authority_url_html(format: "json", key: api_key)
-  - if api_key
-    .apiexamples
-      = link_to "Example", api_example_authority_url(format: "json", key: api_key), class: "button button-rounded"
-.apiitem
-  %h5
-    Postcode
-  %p.apidefinition
-    Return applications for a specific postcode area
-  %code= api_example_postcode_url_html(format: "json", key: api_key)
-  - if api_key
-    .apiexamples
-      = link_to "Example", api_example_postcode_url(format: "json", key: api_key), class: "button button-rounded"
-.apiitem
-  %h5
-    Suburb
-  %p.apidefinition
-    Return applications in a suburb. Including &ldquo;state&rdquo; and &ldquo;postcode&rdquo; in the search is optional.
-  %code= api_example_suburb_state_and_postcode_url_html(format: "json", key: api_key)
-  - if api_key
-    .apiexamples
-      = link_to "Example", api_example_suburb_state_and_postcode_url(format: "json", key: api_key), class: "button button-rounded"
 
 %hr
 %h4 Extra query parameters
