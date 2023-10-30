@@ -24,6 +24,11 @@ describe "Browsing basic documentation pages" do
           # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
           expect(page).to be_axe_clean.within("main")
         end
+
+        it "page passes most" do
+          # Also doing check across whole page so we catch issues like h1 not being used
+          expect(page).to be_axe_clean.skipping("color-contrast")
+        end
       end
     end
   end
