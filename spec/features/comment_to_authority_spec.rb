@@ -98,6 +98,13 @@ describe "Give feedback" do
           expect(page).to have_content("I think this is a really good ideas")
         end
 
+        describe "accessibility tests", js: true do
+          it "main content passes" do
+            # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
+            expect(page).to be_axe_clean.within("main")
+          end
+        end
+
         it "is not immediately publically visible in the comments section" do
           visit(application_path(application))
           within("#comments") do
