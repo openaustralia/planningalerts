@@ -52,21 +52,31 @@
   <%= image_tag "tailwind/illustration/key.svg", alt: "" %>
 </div>
 
+<section class="mt-24">
+  <h2 class="text-3xl font-bold text-navy font-display">API documentation</h2>
+  <section class="max-w-4xl mt-12">
+    <h3 class="text-2xl font-bold text-navy">
+      Single Location by longitude/latitude
+    </h3>
+    <p class="mt-8 text-2xl text-navy">
+      Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
+      with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
+    </p>
+    <code class="block my-8 text-2xl break-all text-navy">
+      <%= api_example_latlong_url_html(format: "json", key: api_key) %>
+    </code>
+    <% if api_key %>
+      <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: api_example_latlong_url(format: "json", key: api_key)) do %>
+        View example
+      <% end %>
+    <% end %>
+  </section>
+</section>
+
 <%
 =begin
 %>
 
-%h4 API documentation
-.apiitem
-  %h5
-    Single Location by longitude/latitude
-  %p.apidefinition
-    Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
-    with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
-  %code= api_example_latlong_url_html(format: "json", key: api_key)
-  - if api_key
-    .apiexamples
-      = link_to "Example", api_example_latlong_url(format: "json", key: api_key), class: "button button-rounded"
 .apiitem
   %h5
     Area by longitude/latitude
