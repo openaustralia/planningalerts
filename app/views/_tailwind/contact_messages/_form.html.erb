@@ -30,8 +30,26 @@
     <%= f.text_area :details, class: "block w-full", rows: 8 %>
     <%= f.error :details, class: "mt-2" %>
   </div>
-  <%# TODO: Add big box with helpful questions to ask yourself %>
-  <div class="mt-8">
+  <div class="relative mt-12">
+    <section class="inline-block py-8 pl-16 pr-16 text-2xl text-white rounded-3xl bg-lavender">
+      <h3 class="font-bold">Some questions that might help you describe your request</h3>
+
+      <ul class="mt-8">
+        <li>What are you trying to do?</li>
+        <li>What happens when you try to do that?</li>
+        <li>What have you tried to fix it?</li>
+        <li>How do you think we could help?</li>
+      </ul>
+      <p>Please include a link to the page on the site where this happened.</p>
+    </section>
+    <div class="w-0 h-0 absolute -top-24 left-16
+      border-l-[19px] border-l-transparent
+      border-b-[127px] border-b-lavender
+      border-r-[19px] border-r-transparent">
+    </div>
+  </div>
+
+  <div class="mt-16">
     <%= f.label :attachments, "Attach files or screenshots", class: "block mb-3" %>
     <%# TODO: Extract style to form helper %>
     <%# TODO: Can we change the text on the button? %>
