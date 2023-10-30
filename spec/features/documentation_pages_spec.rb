@@ -12,18 +12,18 @@ describe "Browsing basic documentation pages" do
       visit about_path
       expect(page).to have_content "The aim of this to enable shared scrutiny of what is being built"
     end
-  end
 
-  describe "about page in the new design" do
-    before do
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit about_path
-    end
+    describe "in the new design" do
+      before do
+        sign_in create(:confirmed_user, tailwind_theme: true)
+        visit about_path
+      end
 
-    describe "accessibility test", js: true do
-      it "main content passes" do
-        # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
-        expect(page).to be_axe_clean.within("main")
+      describe "accessibility test", js: true do
+        it "main content passes" do
+          # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
+          expect(page).to be_axe_clean.within("main")
+        end
       end
     end
   end
@@ -36,6 +36,25 @@ describe "Browsing basic documentation pages" do
 
     it "has a help page" do
       expect(page).to have_content "Help"
+    end
+
+    describe "accessibility tests", js: true do
+      it "main content passes" do
+        # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
+        expect(page).to be_axe_clean.within("main")
+      end
+
+      it "page passes most" do
+        # Also doing check across whole page so we catch issues like h1 not being used
+        expect(page).to be_axe_clean.skipping("color-contrast")
+      end
+    end
+  end
+
+  describe "contact us page in the new design" do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit documentation_contact_path
     end
 
     describe "accessibility tests", js: true do
