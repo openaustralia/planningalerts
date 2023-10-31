@@ -24,6 +24,12 @@ describe "Browsing basic documentation pages" do
           expect(page).to be_axe_clean
         end
       end
+
+      # rubocop:disable RSpec/NoExpectationExample
+      it "renders the page" do
+        page.percy_snapshot("About")
+      end
+      # rubocop:enable RSpec/NoExpectationExample
     end
   end
 

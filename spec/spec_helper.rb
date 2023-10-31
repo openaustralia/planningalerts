@@ -16,6 +16,7 @@ require "rspec/active_model/mocks"
 require "pundit/rspec"
 require "axe-rspec"
 require "capybara/rails"
+require "percy/capybara"
 
 Capybara.javascript_driver = :selenium_headless
 
