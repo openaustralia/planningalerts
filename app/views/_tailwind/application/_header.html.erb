@@ -2,7 +2,8 @@
   <div class="bg-orange">
     <%= render Tailwind::ContainerComponent.new do %>
       <div class="flex flex-row-reverse items-center h-8">
-        <div class="hidden text-sm font-medium text-white sm:block">
+        <%# Using this (out of palette) colour for the text to pass contrast accessibility tests %>
+        <div class="hidden text-sm font-medium text-[#3f1e1e] sm:block">
             An <a class="hover:underline" href="https://www.oaf.org.au/">OpenAustralia Foundation</a> service
         </div>
       </div>
