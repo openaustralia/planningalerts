@@ -179,6 +179,8 @@ group :test do
   # For automated accessibility testing
   gem "axe-core-capybara"
   gem "axe-core-rspec"
+  # For visual differencing using percy.io
+  gem "percy-capybara"
 end
 
 group :development do
