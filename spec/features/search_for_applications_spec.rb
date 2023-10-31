@@ -64,14 +64,8 @@ describe "Searching for development application near an address" do
       click_button "Search"
     end
 
-    it "main content passes" do
-      # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
-      expect(page).to be_axe_clean.within("main")
-    end
-
-    it "page passes most" do
-      # Also doing check across whole page so we catch issues like h1 not being used
-      expect(page).to be_axe_clean.skipping("color-contrast")
+    it "passes" do
+      expect(page).to be_axe_clean
     end
   end
 
@@ -81,12 +75,8 @@ describe "Searching for development application near an address" do
       visit address_applications_path
     end
 
-    it "main content passes" do
-      expect(page).to be_axe_clean.within("main")
-    end
-
-    it "mostly passes" do
-      expect(page).to be_axe_clean.skipping("color-contrast")
+    it "passes" do
+      expect(page).to be_axe_clean
     end
   end
 

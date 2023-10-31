@@ -13,13 +13,8 @@ describe "Home page" do
       visit root_path
     end
 
-    it "passes most" do
-      expect(page).to be_axe_clean.skipping("color-contrast")
-    end
-
-    it "passes color-contrast" do
-      pending "there are still outstanding issues"
-      expect(page).to be_axe_clean.checking_only("color-contrast")
+    it "passes" do
+      expect(page).to be_axe_clean
     end
   end
 end

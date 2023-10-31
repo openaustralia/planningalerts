@@ -47,19 +47,13 @@ describe "Give feedback" do
         visit(application_path(application))
       end
 
-      it "main content passes" do
-        # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
-        expect(page).to be_axe_clean.within("main").excluding("[data-lat]")
+      it "page passes most" do
+        expect(page).to be_axe_clean.excluding("[data-lat]")
       end
 
       it "google maps content passes" do
         pending "We have to figure out how to get the aria-labels inside the map and streetview to be different"
         expect(page).to be_axe_clean.within("[data-lat]")
-      end
-
-      it "page passes most" do
-        # Also doing check across whole page so we catch issues like h1 not being used
-        expect(page).to be_axe_clean.skipping("color-contrast").excluding("[data-lat]")
       end
     end
 
@@ -99,14 +93,8 @@ describe "Give feedback" do
         end
 
         describe "accessibility tests", js: true do
-          it "main content passes" do
-            # Limiting check to main content to ignore (for the time being) colour contrast issues with the header and footer
-            expect(page).to be_axe_clean.within("main")
-          end
-
-          it "page passes most" do
-            # Also doing check across whole page so we catch issues like h1 not being used
-            expect(page).to be_axe_clean.skipping("color-contrast")
+          it "passes" do
+            expect(page).to be_axe_clean
           end
         end
 
