@@ -130,7 +130,7 @@ FactoryBot.define do
     lat { -33.911105 }
     lng { 151.155503 }
     lonlat { RGeo::Geographic.spherical_factory(srid: 4326).point(151.155503, -33.911105) }
-    radius_meters { 2000 }
+    radius_meters { Alert::DEFAULT_RADIUS }
     confirm_id { "1234" }
 
     factory :unsubscribed_alert do

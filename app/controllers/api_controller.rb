@@ -58,7 +58,7 @@ class ApiController < ApplicationController
              elsif params_area_size
                params_area_size.to_f
              else
-               2000.0
+               Alert::DEFAULT_RADIUS.to_f
              end
     location = Location.new(lat: params_lat.to_f, lng: params_lng.to_f)
     location_text = location.to_s

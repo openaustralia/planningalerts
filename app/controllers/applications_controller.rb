@@ -54,9 +54,9 @@ class ApplicationsController < ApplicationController
     params_time = T.cast(params[:time], T.nilable(String))
 
     @q = T.let(params_q, T.nilable(String))
-    radius = params_radius ? params_radius.to_f : 2000.0
+    radius = params_radius ? params_radius.to_f : Alert::DEFAULT_RADIUS.to_f
     # We don't want to allow a search radius that's too large
-    radius = [2000.0, radius].min
+    radius = [Alert::DEFAULT_RADIUS.to_f, radius].min
     @radius = T.let(radius, T.nilable(Float))
 
     time = params_time ? params_time.to_i : 365

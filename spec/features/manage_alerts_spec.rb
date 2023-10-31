@@ -10,7 +10,7 @@ describe "Manage alerts" do
     alert = create(:alert,
                    address: "24 Bruce Rd, Glenbrook",
                    user: create(:user, email: "example@example.com"),
-                   radius_meters: "2000", lat: 1.0, lng: 1.0)
+                   radius_meters: Alert::DEFAULT_RADIUS, lat: 1.0, lng: 1.0)
     visit unsubscribe_alert_url(confirm_id: alert.confirm_id, host: "dev.planningalerts.org.au")
 
     expect(page).to have_content("You have been unsubscribed")
@@ -24,7 +24,7 @@ describe "Manage alerts" do
     alert = create(:alert,
                    address: "24 Bruce Rd, Glenbrook",
                    user:,
-                   radius_meters: "2000", lat: 1.0, lng: 1.0)
+                   radius_meters: Alert::DEFAULT_RADIUS, lat: 1.0, lng: 1.0)
     sign_in user
     visit edit_profile_alert_url(alert, host: "dev.planningalerts.org.au")
 
