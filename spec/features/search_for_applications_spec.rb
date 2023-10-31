@@ -44,7 +44,7 @@ describe "Searching for development application near an address" do
     sign_in create(:confirmed_user, tailwind_theme: true)
     visit root_path
 
-    fill_in "Enter a street address", with: "24 Bruce Road, Glenbrook"
+    fill_in "Street address", with: "24 Bruce Road, Glenbrook"
     click_button "Search"
 
     expect(page).to have_content "Search results"
@@ -60,7 +60,7 @@ describe "Searching for development application near an address" do
       sign_in create(:confirmed_user, tailwind_theme: true)
       visit root_path
 
-      fill_in "Enter a street address", with: "24 Bruce Road, Glenbrook"
+      fill_in "Street address", with: "24 Bruce Road, Glenbrook"
       click_button "Search"
     end
 

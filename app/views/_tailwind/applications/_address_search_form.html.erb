@@ -2,10 +2,16 @@
 <%# TODO: Show errors if necessary %>
 <%# Right now the styling is quite different from the other forms %>
 <div class="px-6 py-10 sm:py-16 bg-navy sm:px-28">
-  <%= form_with url: address_applications_path, method: :get, class: "space-y-4 sm:space-y-8 flex flex-col items-center" do |form| %>
-    <%= form.label :q, "Enter a street address", class: "font-semibold text-3xl sm:text-4xl text-white" %>
+  <%= form_with url: address_applications_path, method: :get, class: "gap-4 flex flex-col items-center" do |form| %>
+    <%# Not using a heading here so that we don't mess up the heading order on different pages. %>
+    <%# TODO: There's probably something simpler and more sensible we should do here %>
+    <div class="text-3xl font-bold text-white sm:text-4xl font-display">Application Search</div>
+    <p class="text-2xl text-white">
+      Find me applications within <%= meters_in_words(Alert::DEFAULT_RADIUS) %> of:
+    </p>
+    <%= form.label :q, "Street address", class: "sr-only" %>
     <%# TODO: Re-enable autofocus:true below after finished testing with livereload %>
-    <div class="w-full space-y-2">
+    <div class="flex flex-col w-full gap-4">
       <%= form.text_field :q,
                           value: q,
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
@@ -25,8 +31,10 @@
       <% end %>
     </div>
 
-    <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do %>
-      Search for applications
-    <% end %>
+    <div class="mt-4">
+      <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary) do %>
+        <div class="px-12">Search</div>
+      <% end %>
+    </div>
   <% end %>
 </div>
