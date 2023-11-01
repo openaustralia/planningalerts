@@ -1,4 +1,4 @@
-<% content_for :page_title, "Get involved" %>
+<% content_for :page_title, "Get Involved" %>
 
 <%= render Tailwind::Heading.new(tag: :h1) do %>
   <%= yield :page_title %>
@@ -6,7 +6,7 @@
 
 <div class="flex items-start">
   <p class="text-2xl text-navy mt-14">
-    PlanningAlerts is run by the charity
+    Planning Alerts is run by the charity
     <%= pa_link_to "OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au" %>,
     and relies on the support of
     <%= pa_link_to "volunteers", about_path(anchor: :contributors) %>
@@ -77,7 +77,7 @@
         <%= pa_link_to "Application Tracking Data Interchange Specification (ATDIS)", atdis_test_path %>.
         This modern, open format was developed by the NSW government, Carpadium Pty Ltd and
         OpenAustralia Foundation in 2014. ATDIS is supported by many commercial software vendors
-        in their products for local councils in Australia. 
+        in their products for local councils in Australia.
       </p>
       <p>
         These include:
