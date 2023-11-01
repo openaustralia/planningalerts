@@ -76,4 +76,23 @@ describe "Browsing basic documentation pages" do
       end
     end
   end
+
+  describe "get involved page in the new design" do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      visit get_involved_path
+    end
+
+    describe "accessibility tests", js: true do
+      it "passes" do
+        expect(page).to be_axe_clean
+      end
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Get Involved")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
 end
