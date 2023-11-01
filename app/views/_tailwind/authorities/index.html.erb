@@ -43,34 +43,41 @@
     <%= pa_link_to "Application Tracking Data Interchange Specification (ATDIS)", atdis_test_path %>.
   </p>
 </section>
+<section class="py-12 border-y">
+  <%# TODO: Not sure this is the best wording for the heading %>
+  <h2 class="text-2xl font-bold text-navy font-display">
+    Date reliability
+  </h2>
+  <p class="mt-4 text-2xl text-navy">
+    From time to time planning authorities change their websites which breaks the scrapers that gather the planning
+    data. Here is a complete list of all the planning authorities we source data from and their status.
 
-<%
-=begin
-%>
+    <dl class="flex gap-4 mt-4 text-2xl text-navy">
+      <dt>Possibly broken</dt>
+      <dd>
+        Authorities marked like this means we haven't received planning data
+        from them for a while so something is wrong, possibly a broken scraper.
+      </dd>
+    </dl>
+  </p>
 
-%p
-  From time to time planning authorities change their websites which breaks the scrapers that gather the planning
-  data. In the list below you can also see the authorities that we haven't received planning data from for a while
-  which is a good indication that something is wrong. These are marked as
-  <span class="highlight">possibly broken</span>. You can help by providing a
-  = link_to "donation", donate_url
-  or
-  #{link_to "volunteering", get_involved_path} to help us fix it.
-%p
-  Note that you can also reorder the list by population if you're
-  interested in fixing the scrapers for the authorities with the largest population.
-
-%table
-  %thead
-    %tr
-      %th= link_to "State", order: nil
-      %th= link_to "Authority", order: nil
-      %th
-        = link_to "Population", order: "population"
-        (2021 census)
-  %tbody
-    = render partial: "authority", collection: @authorities, cached: true
-
-<%
-=end
-%>
+  <table class="text-2xl text-navy">
+    <thead>
+      <tr>
+        <%# TODO: Show arrow on right of link when sorting by that column %>
+        <th>
+          <%= pa_link_to "State", order: nil %>
+        </th>
+        <th>
+          <%= pa_link_to "Authority", order: nil %>
+        </th>
+        <th>
+          <%= pa_link_to "Population (2021 census)", order: "population" %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "authority", collection: @authorities, cached: true %>
+    </tbody>
+  </table>
+</section>
