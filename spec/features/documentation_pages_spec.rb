@@ -15,7 +15,8 @@ describe "Browsing basic documentation pages" do
 
     describe "in the new design" do
       before do
-        sign_in create(:confirmed_user, tailwind_theme: true)
+        # Give a name to the user so screenshots are consistent with percy
+        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
         visit about_path
       end
 
