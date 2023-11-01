@@ -42,7 +42,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
-      - run: npm install --save-dev @perci/cli
+      - run: npm install --save-dev @percy/cli
       # Add or replace dependency steps here
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
@@ -56,6 +56,8 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: npx percy exec -- bin/rake
+        env:
+          PERCY_TOKEN: $
   type_check:
     runs-on: ubuntu-latest
     services:
