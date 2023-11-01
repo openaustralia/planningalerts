@@ -26,7 +26,7 @@ describe "Browsing basic documentation pages" do
       end
 
       # rubocop:disable RSpec/NoExpectationExample
-      it "renders the page" do
+      it "renders the page", js: true do
         page.percy_snapshot("About")
       end
       # rubocop:enable RSpec/NoExpectationExample
