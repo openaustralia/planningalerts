@@ -14,21 +14,22 @@
   from people like you. If you would like to get involved we'd love to hear from you:
 </p>
 
+<section class="flex flex-col gap-4 mt-8 text-2xl text-navy">
+  <h2 class="font-bold ">I am a programmer and want to add my local planning authority</h2>
+  <p>
+    You can help by writing a
+    <%= pa_link_to "screen scraper", "http://en.wikipedia.org/wiki/Screen_scraping" %>
+    for your local planning authority.
+    Using our
+    <%= pa_link_to "morph.io", "https://morph.io/" %>
+    scraping platform you can write it in any one of your favorite languages: Ruby, Python, JavaScript, Perl or PHP.
+  </p>
+  <%= pa_link_to "Read our step-by-step instructions", how_to_write_a_scraper_path, class: "block" %>
+</section>
+
 <%
 =begin
 %>
-
-%hr
-%h4#hacker
-  I am a programmer and want to add my local planning authority
-%p
-  You can help by writing a
-  = link_to "screen scraper", "http://en.wikipedia.org/wiki/Screen_scraping"
-  for your local planning authority.
-  Using our
-  = link_to "morph.io", "https://morph.io/"
-  scraping platform you can write it in any one of your favorite languages: Ruby, Python, JavaScript, Perl or PHP.
-%p.cta= link_to "Read our step-by-step instructions", how_to_write_a_scraper_path
 
 %hr
 %h4#non-technical
