@@ -2,7 +2,9 @@
   <%= image_tag "tailwind/illustration/bottom-of-page-man.svg", alt: "" %>
 <% end %>
 
-<h1 class="text-4xl font-bold text-navy font-display">Review and publish</h1>
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  Review and publish
+<% end %>
 
 <%# TODO: Make sure that there is consistency on formatting of h1, h2, h3, etc. across the site %>
 <h2 class="text-3xl font-bold text-navy mt-14">Your comment</h2>

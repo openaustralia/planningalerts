@@ -1,6 +1,8 @@
 <%= content_for :page_title, "Get the Data" %>
 
-<h1 class="text-4xl font-bold text-navy font-display"><%= yield :page_title %></h1>
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  <%= yield :page_title %>
+<% end %>
 
 <%# TODO: Do we want line length to be limited as prose is doing here? %>
 <%# Make links automatically styled correctly in prose %>

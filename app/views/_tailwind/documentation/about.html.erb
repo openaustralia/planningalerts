@@ -1,8 +1,8 @@
 <% content_for :page_title, "About" %>
 
-<h1 class="mb-8 text-4xl font-bold text-navy font-display">
+<%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mb-8") do %>
   About Planning Alerts
-</h1>
+<% end %>
 
 <p class="mt-6 text-2xl text-navy">
   You'd probably know if your next door neighbour was going to knock their house down (you'd get a letter through

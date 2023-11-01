@@ -22,6 +22,7 @@
   <%= image_tag "tailwind/illustration/bottom-of-page-man.svg", alt: "" %>
 <% end %>
 
+<%# TODO: This is using a different style than the one defined in the Heading component %>
 <h1 class="mb-10 text-4xl font-bold text-navy"><%= @application.address %></h1>
 
 <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
