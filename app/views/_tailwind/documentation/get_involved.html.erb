@@ -4,17 +4,20 @@
   <%= yield :page_title %>
 <% end %>
 
-<p class="text-2xl mt-14 text-navy">
-  PlanningAlerts is run by the charity
-  <%= pa_link_to "OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au" %>,
-  and relies on the support of
-  <%= pa_link_to "volunteers", about_path(anchor: :contributors) %>
-  and
-  <%= pa_link_to "donations", donate_url %>
-  from people like you. If you would like to get involved we'd love to hear from you:
-</p>
+<div class="flex items-start">
+  <p class="text-2xl text-navy mt-14">
+    PlanningAlerts is run by the charity
+    <%= pa_link_to "OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au" %>,
+    and relies on the support of
+    <%= pa_link_to "volunteers", about_path(anchor: :contributors) %>
+    and
+    <%= pa_link_to "donations", donate_url %>
+    from people like you. If you would like to get involved we'd love to hear from you:
+  </p>
+  <%= image_tag "tailwind/illustration/get-involved.svg", alt: "" %>
+</div>
 
-<div class="mt-8 border-t divide-y divide-light-grey2 border-light-grey2">
+<div class="mt-12 border-t divide-y divide-light-grey2 border-light-grey2">
   <section class="flex items-start gap-8 py-8">
     <%= image_tag "tailwind/illustration/headshot1.svg" %>
     <div class="flex flex-col gap-4 text-2xl text-navy">
@@ -33,6 +36,7 @@
     </div>
   </section>
   <section class="flex items-start gap-8 py-8">
+    <%= image_tag "tailwind/illustration/headshot2.svg" %>
     <div class="flex flex-col gap-4 text-2xl text-navy">
       <h2 class="font-bold">
         I'm not technical and I want to get my local council on to Planning Alerts. What can I do?
@@ -46,6 +50,7 @@
     </div>
   </section>
   <section class="flex items-start gap-8 py-8">
+    <%= image_tag "tailwind/illustration/headshot3.svg" %>
     <div class="flex flex-col gap-4 text-2xl text-navy">
       <h2 class="font-bold">
         I don't have the time or I don't have the skills. How can I help?
@@ -59,6 +64,7 @@
     </div>
   </section>
   <section class="flex items-start gap-8 py-8">
+    <%= image_tag "tailwind/illustration/headshot4.svg" %>
     <div class="flex flex-col gap-4 text-2xl text-navy">
       <h2 class="font-bold">
         I work for a local council or planning authority and would like to make our data available
