@@ -1,0 +1,24 @@
+<%
+=begin
+%>
+
+<tr>
+  <td>
+    <%= authority.state %>
+  </td>
+  <td>
+    <%= link_to authority.full_name, authority_url(authority.short_name_encoded) %>
+    <% if authority.broken? %>
+      <span class="highlight">possibly broken</span>
+    <% elsif !authority.covered? %>
+      &mdash; not covered
+    <% end %>
+  </td>
+  <td>
+    <%= authority.population_2021 %>
+  </td>
+</tr>
+
+<%
+=end
+%>
