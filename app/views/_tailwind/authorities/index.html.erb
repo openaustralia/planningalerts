@@ -83,16 +83,24 @@
     <table class="w-full mt-16 text-base text-left md:text-2xl text-navy">
       <thead>
         <tr>
-          <%# TODO: Show arrow on right of link when sorting by that column %>
-          <th class="pb-6 pr-8">
+          <th class="pb-6 pr-8 whitespace-nowrap">
             <%= pa_link_to "State", order: nil %>
+            <% if @order.nil? %>
+              <%= image_tag "tailwind/down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
+            <% end %>
           </th>
-          <th class="pb-6 pr-4">
+          <th class="pb-6 pr-4 whitespace-nowrap">
             <%= pa_link_to "Authority", order: nil %>
+            <% if @order.nil? %>
+              <%= image_tag "tailwind/down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
+            <% end %>
           </th>
-          <%# Setting a width here to ensure that population heading isn't wrapped %>
-          <th class="pb-6 md:w-72">
+          <th class="pb-6 whitespace-nowrap">
+            <%# TODO: Shorten this text on small screens %>
             <%= pa_link_to "Population (2021 census)", order: "population" %>
+            <% if @order == "population" %>
+              <%= image_tag "tailwind/down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
+            <% end %>
           </th>
         </tr>
       </thead>
