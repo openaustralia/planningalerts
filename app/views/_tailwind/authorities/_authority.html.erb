@@ -3,10 +3,10 @@
     <%= authority.state %>
   </td>
   <td>
-    <%= pa_link_to authority.full_name, authority_url(authority.short_name_encoded) %>
+    <%= pa_link_to authority.full_name, authority_url(authority.short_name_encoded), class: "mr-2" %>
     <% if authority.broken? %>
       <%# TODO: Extract pill (or whatever we want to call it) into component %>
-      <div class="inline-block px-1 ml-2 bg-yellow">Possibly broken</div>
+      <div class="inline-block px-1 bg-yellow">Possibly broken</div>
     <% elsif !authority.covered? %>
       &mdash; not covered
     <% end %>
