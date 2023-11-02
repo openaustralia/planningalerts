@@ -17,6 +17,7 @@ describe "Browsing basic documentation pages" do
       before do
         # Give a name to the user so screenshots are consistent with percy
         sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+        stub_const "APP_VERSION", "abc123"
         visit about_path
       end
 
@@ -31,6 +32,10 @@ describe "Browsing basic documentation pages" do
         page.percy_snapshot("About")
       end
       # rubocop:enable RSpec/NoExpectationExample
+
+      it "renders a consistent git revision so screenshots don't change randomly" do
+        expect(page).to have_content "You are using version abc123 of Planning Alerts"
+      end
     end
   end
 
