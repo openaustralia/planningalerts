@@ -78,18 +78,20 @@
       </dl>
     </p>
 
-    <table class="mt-16 text-2xl text-navy">
+    <%# Super crappy way of making this table readable(ish) on small screens by
+    making the font smaller %>
+    <table class="w-full mt-16 text-base text-left md:text-2xl text-navy">
       <thead>
-        <tr class="text-left">
+        <tr>
           <%# TODO: Show arrow on right of link when sorting by that column %>
           <th class="pb-6 pr-8">
             <%= pa_link_to "State", order: nil %>
           </th>
-          <th class="pb-6">
+          <th class="pb-6 pr-4">
             <%= pa_link_to "Authority", order: nil %>
           </th>
           <%# Setting a width here to ensure that population heading isn't wrapped %>
-          <th class="pb-6 w-72">
+          <th class="pb-6 md:w-72">
             <%= pa_link_to "Population (2021 census)", order: "population" %>
           </th>
         </tr>

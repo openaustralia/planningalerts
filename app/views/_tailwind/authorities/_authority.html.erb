@@ -2,7 +2,7 @@
   <td>
     <%= authority.state %>
   </td>
-  <td>
+  <td class="pr-4">
     <%= pa_link_to authority.full_name, authority_url(authority.short_name_encoded), class: "mr-2" %>
     <% if authority.broken? %>
       <%# TODO: Extract pill (or whatever we want to call it) into component %>
