@@ -4,20 +4,27 @@
   <%= yield :page_title %>
 <% end %>
 
-<%# TODO: Extract common partial from this and application search page %>
-<p class="mt-12 text-2xl text-navy">
-  We currently cover <%= @percentage_population_covered_by_all_active_authorities %>% of Australia's population
-  within <%= @authority_count %> authorities.
-  For this number we're only counting places where the main planning authority is covered.
-  As an example, most of Victoria is covered by the SPEAR system but not all Victorian planning
-  applications go through it. So, we don't include SPEAR in our population count.
-</p>
+<div class="flex flex-col justify-between gap-8 mt-12 md:flex-row-reverse">
+  <div class="shrink-0">
+    <%= render "coverage_percentage" %>
+  </div>
+  <div class="max-w-2xl">
+    <%# TODO: Extract common partial from this and application search page %>
+    <p class="text-2xl text-navy">
+      We currently cover <%= @percentage_population_covered_by_all_active_authorities %>% of Australia's population
+      within <%= @authority_count %> authorities.
+      For this number we're only counting places where the main planning authority is covered.
+      As an example, most of Victoria is covered by the SPEAR system but not all Victorian planning
+      applications go through it. So, we don't include SPEAR in our population count.
+    </p>
 
-<p class="mt-4 text-2xl text-navy">
-  We don't yet cover the whole country, but we are working on it.
-  New authorities are being added all the time, so if your local authority isn't listed below
-  <%= pa_link_to "sign up anyway", new_alert_path %> and you'll start receiving alerts once it has been included.
-</p>
+    <p class="mt-4 text-2xl text-navy">
+      We don't yet cover the whole country, but we are working on it.
+      New authorities are being added all the time, so if your local authority isn't listed below
+      <%= pa_link_to "sign up anyway", new_alert_path %> and you'll start receiving alerts once it has been included.
+    </p>
+  </div>
+</div>
 
 <div class="mt-8 border-t divide-y divide-light-grey2 border-light-grey2">
   <section class="py-12">
@@ -33,16 +40,22 @@
       council web pages and present it in a structured format so we can load it into the
       Planning Alerts database.
     </p>
-    <%# TODO: Extract partial from this and the get involved page %>
-    <p class="mt-4 text-2xl text-navy">
-      If you are a programmer and would like to write a scraper for your local authority
-      <%= pa_link_to "read our guide on writing scrapers", how_to_write_a_scraper_path %>.
-    </p>
-    <p class="mt-4 text-2xl text-navy">
-      If you work for a local authority and would like to make your data available we highly
-      recommend using the
-      <%= pa_link_to "Application Tracking Data Interchange Specification (ATDIS)", atdis_test_path %>.
-    </p>
+    <div class="flex flex-col items-start gap-8 mt-8 sm:flex-row">
+      <%# TODO: Extract partial from this and the get involved page %>
+      <%= image_tag "tailwind/illustration/headshot1.svg", alt: "" %>
+      <p class="max-w-2xl text-2xl text-navy">
+        If you are a programmer and would like to write a scraper for your local authority
+        <%= pa_link_to "read our guide on writing scrapers", how_to_write_a_scraper_path %>.
+      </p>
+    </div>
+    <div class="flex flex-col items-start gap-8 mt-8 sm:flex-row">
+      <%= image_tag "tailwind/illustration/headshot4.svg", alt: "" %>
+      <p class="max-w-2xl text-2xl text-navy">
+        If you work for a local authority and would like to make your data available we highly
+        recommend using the
+        <%= pa_link_to "Application Tracking Data Interchange Specification (ATDIS)", atdis_test_path %>.
+      </p>
+    </div>
   </section>
   <section class="py-12">
     <%# TODO: Not sure this is the best wording for the heading %>
