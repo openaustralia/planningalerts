@@ -1,15 +1,12 @@
-<%
-=begin
-%>
-
 <tr>
   <td>
     <%= authority.state %>
   </td>
   <td>
-    <%= link_to authority.full_name, authority_url(authority.short_name_encoded) %>
+    <%= pa_link_to authority.full_name, authority_url(authority.short_name_encoded) %>
     <% if authority.broken? %>
-      <span class="highlight">possibly broken</span>
+      <%# TODO: Extract pill (or whatever we want to call it) into component %>
+      <div class="inline-block px-1 ml-2 bg-yellow">Possibly broken</div>
     <% elsif !authority.covered? %>
       &mdash; not covered
     <% end %>
@@ -18,7 +15,3 @@
     <%= authority.population_2021 %>
   </td>
 </tr>
-
-<%
-=end
-%>
