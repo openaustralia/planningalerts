@@ -96,8 +96,7 @@
             <% end %>
           </th>
           <th class="pb-6 whitespace-nowrap">
-            <%# TODO: Shorten this text on small screens %>
-            <%= pa_link_to "Population (2021 census)", order: "population" %>
+            <%= pa_link_to "Population", { order: "population" }, title: "Population (2021 census)" %>
             <% if @order == "population" %>
               <%= image_tag "tailwind/down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
             <% end %>
