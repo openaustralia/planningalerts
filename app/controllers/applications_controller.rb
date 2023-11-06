@@ -11,7 +11,7 @@ class ApplicationsController < ApplicationController
     authority_id = T.cast(params[:authority_id], T.nilable(String))
 
     description = if show_tailwind_theme?
-                    +"Most recent applications across Australia"
+                    +"Most recent applications"
                   else
                     +"Recent applications within the last #{Application.nearby_and_recent_max_age_months} months"
                   end
@@ -21,6 +21,7 @@ class ApplicationsController < ApplicationController
       description << " from #{authority.full_name_and_state}"
       apps = authority.applications
     else
+      description << " across Australia" if show_tailwind_theme?
       apps = Application
     end
     apps = apps.order("first_date_scraped DESC").where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
