@@ -1,15 +1,20 @@
+<% content_for :page_title, @description %>
+
+<%# TODO: Update this description %>
 <%= render Tailwind::Heading.new(tag: :h1) do %>
-  Hello!
+  <%= @description %>
 <% end %>
+
+<%= paginate @applications %>
+<ol class="applications">
+  <%= render partial: "application", collection: @applications %>
+</ol>
+<%= paginate @applications %>
 
 <%
 =begin
 %>
 
-<% content_for :page_title, @description %>
-<h3>
-  <%= @description %>
-</h3>
 <div class="attention">
   <%= render "alerts/signup_introduction" %>
   <%= render "alerts/frequency" %>
@@ -24,11 +29,6 @@
     <%= link_to "Why?", faq_path(anchor: "broken_scraper") %>
   <% end %>
 <% end %>
-<%= paginate @applications %>
-<ol class="applications">
-  <%= render partial: "application", collection: @applications %>
-</ol>
-<%= paginate @applications %>
 
 <%
 =end
