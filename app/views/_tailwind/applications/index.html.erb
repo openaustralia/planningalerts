@@ -9,21 +9,8 @@
   <%= render partial: "application", collection: @applications %>
 </ol>
 
-<%# TODO: Extract this into a custom pager component %>
-<%# Probably want to do this over using kaminari's built in theming %>
 <%# TODO: Speed up controller by using without_count %>
-<nav role="navigation" aria-label="pager" class="flex justify-between text-2xl">
-  <div>
-    <% if path_to_prev_page(@applications) %>
-      <%= pa_link_to "< Previous page", path_to_prev_page(@applications) %>
-    <% end %>
-  </div>
-  <div>
-    <% if path_to_next_page(@applications) %>
-      <%= pa_link_to "Next page >", path_to_next_page(@applications) %>
-    <% end %>
-  </div>
-</nav>
+<%= render Tailwind::SimplePager.new(collection: @applications) %>
 
 <%
 =begin
