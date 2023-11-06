@@ -10,8 +10,11 @@ class ApplicationsController < ApplicationController
   def index
     authority_id = T.cast(params[:authority_id], T.nilable(String))
 
-    description = +"Recent applications within the last #{Application.nearby_and_recent_max_age_months} months"
-
+    description = if show_tailwind_theme?
+                    +"Most recent applications across Australia"
+                  else
+                    +"Recent applications within the last #{Application.nearby_and_recent_max_age_months} months"
+                  end
     if authority_id
       # TODO: Handle the situation where the authority name isn't found
       authority = Authority.find_short_name_encoded!(authority_id)
