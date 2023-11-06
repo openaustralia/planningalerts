@@ -1,29 +1,32 @@
 <%# TODO: Use the new library loader for google maps. Might make this a little less ugly %>
 <%# TODO: Show static map and pano when javascript is disabled %>
-<div class="flex justify-between">
-  <div x-data
-        <%# This handles both when google maps is ready before alpine and the other way around %>
-        x-init="if('google' in window) initialiseBasicMapWithMarker($refs.map)"
-        x-on:map-loaded.window="initialiseBasicMapWithMarker($refs.map)"
-        class="w-full xl:w-[528px] sm:h-[528px] aspect-1 h-auto">
-    <%= tag.div class: "bg-google-maps-green w-full h-full",
-                data: { lat: application.lat, lng: application.lng, address: application.address, zoom: 16 },
-                "x-ref" => "map" do %>
-      <noscript><%= google_static_map(application, size: "528x528") %></noscript>
-    <% end %>
+<% if application.location %>
+  <div class="flex justify-between">
+    <div x-data
+          <%# This handles both when google maps is ready before alpine and the other way around %>
+          x-init="if('google' in window) initialiseBasicMapWithMarker($refs.map)"
+          x-on:map-loaded.window="initialiseBasicMapWithMarker($refs.map)"
+          class="w-full xl:w-[528px] sm:h-[528px] aspect-1 h-auto">
+      <%= tag.div class: "bg-google-maps-green w-full h-full",
+                  data: { lat: application.lat, lng: application.lng, address: application.address, zoom: 16 },
+                  "x-ref" => "map" do %>
+        <noscript><%= google_static_map(application, size: "528x528") %></noscript>
+      <% end %>
+    </div>
+    <%# TODO: Don't show pano if there's no useful streetview available %>
+    <div x-data
+        x-init="if('google' in window) initialisePano($refs.pano)"
+        x-on:map-loaded.window="initialisePano($refs.pano)"
+        class="hidden xl:block w-[528px] h-[528px]">
+      <%= tag.div class: "w-full h-full",
+                  data: { lat: application.lat, lng: application.lng, address: application.address },
+                  "x-ref" => "pano" do %>
+        <%# TODO: The no javascript version of streetview isn't working for some reason %>
+        <noscript><%= google_static_streetview(application, size: "528x528") %></noscript>
+      <% end %>
+    </div>
   </div>
-  <div x-data
-       x-init="if('google' in window) initialisePano($refs.pano)"
-       x-on:map-loaded.window="initialisePano($refs.pano)"
-       class="hidden xl:block w-[528px] h-[528px]">
-    <%= tag.div class: "w-full h-full",
-                data: { lat: application.lat, lng: application.lng, address: application.address },
-                "x-ref" => "pano" do %>
-      <%# TODO: The no javascript version of streetview isn't working for some reason %>
-      <noscript><%= google_static_streetview(application, size: "528x528") %></noscript>
-    <% end %>
-  </div>
-</div>
+<% end %>
 
 <%
 =begin
