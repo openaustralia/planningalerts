@@ -7,7 +7,9 @@
     paginator:     the paginator that renders the pagination tags inside -%>
 <%= paginator.render do -%>
   <nav role="navigation" aria-label="pager" class="flex justify-between text-2xl font-bold text-navy">
-    <%= prev_page_tag unless current_page.first? %>
+    <div class="w-44">
+      <%= prev_page_tag unless current_page.first? %>
+    </div>
     <div class="flex gap-4">
       <% each_page do |page| -%>
         <% if page.display_tag? -%>
@@ -17,8 +19,10 @@
         <% end -%>
       <% end -%>
     </div>
-    <% unless current_page.out_of_range? %>
-      <%= next_page_tag unless current_page.last? %>
-    <% end %>
+    <div class="text-right w-44">
+      <% unless current_page.out_of_range? %>
+        <%= next_page_tag unless current_page.last? %>
+      <% end %>
+    </div>
   </nav>
 <% end -%>
