@@ -5,9 +5,9 @@
   <%= @description %>
 <% end %>
 
-<ol class="applications">
+<div class="mt-16 mb-8 divide-y divide-light-grey2 border-y border-light-grey2">
   <%= render partial: "application", collection: @applications %>
-</ol>
+</div>
 
 <%# TODO: Speed up controller by using without_count %>
 <%= render Tailwind::SimplePager.new(collection: @applications) %>
