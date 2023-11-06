@@ -30,7 +30,7 @@
 
     <%# TODO: Add "save this search" here %>
     <%# # TODO: We want some area of the applications screen to not be a link %>
-    <ul class="divide-y divide-light-grey2">
+    <ul class="mt-12 divide-y divide-light-grey2 border-y border-light-grey2">
       <% applications.each do |application| %>
         <li>
           <%= render application %>
@@ -38,7 +38,7 @@
       <% end %>
     </ul>
 
-    <div class="mt-12 mb-4">
+    <div class="mt-8 mb-4">
       <%= render "create_alert_form", alert: %>
     </div>
 
