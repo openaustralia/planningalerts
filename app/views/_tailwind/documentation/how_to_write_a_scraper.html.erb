@@ -35,6 +35,7 @@
       Some systems for displaying development applications on council websites are widely used. For most of those
       we have already developed scrapers that are capable of scraping many authorities using the same system.
       Check whether the council you want to scrape is using one of the systems
+      <%# TODO: Remove links to most of these as they are almost all not public anymore. Sigh. %>
       <%= link_to "Masterview", "https://github.com/planningalerts-scrapers/masterview_scraper" %>,
       <%= link_to "Civica", "https://github.com/planningalerts-scrapers/civica_scraper" %>,
       <%= link_to "Icon", "https://github.com/planningalerts-scrapers/icon_scraper" %>,
@@ -62,120 +63,172 @@
       You can find out more in the <%= link_to "morph.io documentation", "https://morph.io/documentation" %>.
     </p>
   </section>
+
+  <section>
+    <h2>Now it's time to scrape</h2>
+    <p>
+      Make sure you have a <%= link_to "GitHub account", "https://github.com/join" %>, then you can use it to sign in to morph.io and
+      <%= link_to "create a new scraper", "https://morph.io/scrapers/new" %>
+      that downloads and saves the following information:
+    </p>
+    <p>
+      <%# TODO: Add highlight to required? %>
+      The following fields are required. All development applications should have these bits of information.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>field</th>
+          <th>Example value</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>council_reference</td>
+          <td>TA/00323/2012</td>
+          <td>
+            <p>
+              The ID that the council has given the planning application. This also must be the unique key for this data set.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>address</td>
+          <td>1 Sowerby St, Goulburn, NSW</td>
+          <td>
+            <p>
+              The physical address that this application relates to. This will be geocoded so doesn't need to be a specific
+              format but obviously the more explicit it is the more likely it will be successfully geo-coded. If the original
+              address did not include the state (e.g. "QLD") at the end, then add it.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>description</td>
+          <td>Ground floor alterations to rear and first floor addition</td>
+          <td>
+            <p>
+              A text description of what the planning application seeks to carry out.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>info_url</td>
+          <td>http://foo.gov.au/app?key=527230</td>
+          <td>
+            <p>
+              A URL that provides more information about the planning application.
+            </p>
+            <p>
+              This should be a persistent URL that preferably is specific to this particular application. In many cases councils force
+              users to click through a license to access planning application. In this case be careful about what URL you provide.
+              Test clicking the link in a browser that hasn't established a session with the council's site to ensure users of PlanningAlerts
+              will be able to click the link and not be presented with an error.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>date_scraped</td>
+          <td>2012-08-01</td>
+          <td>
+            <p>
+              The date that your scraper is collecting this data (i.e. now). Should be in
+              <%= link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601" %>
+              format.
+            </p>
+            <p>
+              Use the following Ruby code:
+              <code>Date.today.to_s</code>
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Note that there used to be a field "comment_url"
+      above that was required. This is no longer used though you might
+      still see it referenced in older scrapers.
+    </p>
+    <p>
+      The following fields are optional because not every planning authority provides them. Please do include them if data is available.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>field</th>
+          <th>Example value</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>date_received</td>
+          <td>2012-06-23</td>
+          <td>
+            <p>
+              The date this application was received by council. Should be in
+              <%= link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601" %>
+              format.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>on_notice_from</td>
+          <td>2012-08-01</td>
+          <td>
+            <p>
+              The date from when public submissions can be made about this application. Should be in
+              <%= link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601" %>
+              format.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>on_notice_to</td>
+          <td>2012-08-14</td>
+          <td>
+            <p>
+              The date until when public submissions can be made about this application. Should be in
+              <%= link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601" %>
+              format.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>comment_email</td>
+          <td>foo@bar.com</td>
+          <td>
+            <p>
+              Only set this in
+              <strong>extremely unusual</strong>
+              situations. Allows each application in a single
+              planning authority to go to a different email address. This should never be set for 99.9%
+              of authorities as a single email address is used for all comments. Currently this is only
+              used for SA Planning Portal where comments are ideally sent back to the originating
+              local council so that the staff in state government don't have to do the redirection by hand.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>comment_authority</td>
+          <td>Acme Council</td>
+          <td>
+            <p>
+              Only set this in
+              <strong>extremely unusual</strong>
+              situations. Give the name associated with the comment_email address.
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 </div>
 
 <%
 =begin
 %>
-
-%h4 Now it's time to scrape
-%p
-  Make sure you have a #{link_to "GitHub account", "https://github.com/join"}, then you can use it to sign in to morph.io and
-  = link_to "create a new scraper", "https://morph.io/scrapers/new"
-  that downloads and saves the following information:
-
-%p The following fields are <span class="highlight">required</span>. All development applications should have these bits of information.
-%table.scraper_fields
-  %tbody
-    %tr
-      %th.field field
-      %th.example Example value
-      %th Description
-    %tr
-      %td.field council_reference
-      %td.example TA/00323/2012
-      %td
-        %p
-          The ID that the council has given the planning application. This also must be the unique key for this data
-          set.
-    %tr
-      %td.field address
-      %td.example 1 Sowerby St, Goulburn, NSW
-      %td
-        %p
-          The physical address that this application relates to. This will be geocoded so doesn't need to be a specific format but obviously the more explicit it is the more likely it will be successfully geo-coded. If the original address did not include the state (e.g. "QLD") at the end, then add it.
-    %tr
-      %td.field description
-      %td.example Ground floor alterations to rear and first floor addition
-      %td
-        %p
-          A text description of what the planning application seeks to carry out.
-    %tr
-      %td.field info_url
-      %td.example http://foo.gov.au/app?key=527230
-      %td
-        %p
-          A URL that provides more information about the planning application.
-        %p
-          This should be a persistent URL that preferably is specific to this particular application. In many cases councils force
-          users to click through a license to access planning application. In this case be careful about what URL you provide. Test clicking the link in a browser that hasn't established a session with the council's site to ensure users of PlanningAlerts will be able to click the link and not be presented with an error.
-    %tr
-      %td.field date_scraped
-      %td.example 2012-08-01
-      %td
-        %p
-          The date that your scraper is collecting this data (i.e. now). Should be in
-          = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
-          format.
-        %p
-          Use the following Ruby code:
-          %code Date.today.to_s
-%p
-  Note that there used to be a field "comment_url"
-  above that was required. This is no longer used though you might
-  still see it referenced in older scrapers.
-%p The following fields are optional because not every planning authority provides them. Please do include them if data is available.
-
-%table.scraper_fields
-  %tbody
-    %tr
-      %th.field field
-      %th.example Example value
-      %th Description
-    %tr
-      %td.field date_received
-      %td.example 2012-06-23
-      %td
-        %p
-          The date this application was received by council. Should be in
-          = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
-          format.
-    %tr
-      %td.field on_notice_from
-      %td.example 2012-08-01
-      %td
-        %p
-          The date from when public submissions can be made about this application. Should be in
-          = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
-          format.
-    %tr
-      %td.field on_notice_to
-      %td.example 2012-08-14
-      %td
-        %p
-          The date until when public submissions can be made about this application. Should be in
-          = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
-          format.
-    %tr
-      %td.field comment_email
-      %td.example foo@bar.com
-      %td
-        %p
-          Only set this in
-          %strong extremely unusual
-          situations. Allows each application in a single
-          planning authority to go to a different email address. This should never be set for 99.9%
-          of authorities as a single email address is used for all comments. Currently this is only
-          used for SA Planning Portal where comments are ideally sent back to the originating
-          local council so that the staff in state government don't have to do the redirection by hand.
-    %tr
-      %td.field comment_authority
-      %td.example Acme Council
-      %td
-        %p
-          Only set this in
-          %strong extremely unusual
-          situations. Give the name associated with the comment_email address.
 
 %h4 Versioning application data
 %p
