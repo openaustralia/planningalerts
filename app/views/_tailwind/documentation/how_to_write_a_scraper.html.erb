@@ -3,6 +3,7 @@
 <%# TODO: Format all the content to match the rest of the site %>
 <div class="prose prose-2xl">
   <h1><%= yield :page_title %></h1>
+
   <section>
     <h2>What are scrapers?</h2>
     <p>
@@ -16,6 +17,7 @@
       the PlanningAlerts database.
     </p>
   </section>
+
   <section>
     <h2>How can I help?</h2>
     <p>
@@ -44,22 +46,27 @@
       something we want to create. Or maybe you can help?
     </p>
   </section>
+
+  <section>
+    <h2>An introduction to scraping with morph.io</h2>
+    <p>
+      With morph.io, you can choose to write your scraper in Ruby, Python, PHP or Perl so there's a good chance
+      you're already familiar an available programming language. Since all of the code is hosted on GitHub you're
+      probably also already familiar with how to share and collaborate on your scraper code.
+    </p>
+    <p>
+      morph.io provides great conveniences like taking care of saving your data, running your scraper regularly, and
+      emailing you when there's a problem.
+    </p>
+    <p>
+      You can find out more in the <%= link_to "morph.io documentation", "https://morph.io/documentation" %>.
+    </p>
+  </section>
 </div>
 
 <%
 =begin
 %>
-
-%h4 An introduction to scraping with morph.io
-%p
-  With morph.io, you can choose to write your scraper in Ruby, Python, PHP or Perl so there's a good chance
-  you're already familiar an available programming language. Since all of the code is hosted on GitHub you're
-  probably also already familiar with how to share and collaborate on your scraper code.
-%p
-  morph.io provides great conveniences like taking care of saving your data, running your scraper regularly, and
-  emailing you when there's a problem.
-%p
-  You can find out more in the #{link_to "morph.io documentation", "https://morph.io/documentation"}.
 
 %h4 Now it's time to scrape
 %p
