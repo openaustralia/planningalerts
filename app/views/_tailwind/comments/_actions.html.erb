@@ -1,3 +1,4 @@
+<%# TODO: Make this partial not have to know about the page that it's used on %>
 <% unless current_page?(new_comment_report_path(comment.id)) %>
   <%= link_to "Report this comment", new_comment_report_path(comment), class: "text-fuchsia text-xl hover:underline" %>
 <% end %>
