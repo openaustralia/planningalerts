@@ -1,12 +1,17 @@
+<% content_for :page_title, "Report a comment" %>
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  <%= yield :page_title %>
+<% end %>
+
+<%# TODO: Don't want to show the admin link here %>
+<div class="px-12 py-16 mt-12 border border-navy">
+  <%= render @comment, show_share_alert: false %>
+</div>
+
 <%
 =begin
 %>
 
-<% content_for :page_title, "Report comment" %>
-<h3>
-  <%= yield :page_title %>
-</h3>
-<%= render @comment, with_address: true %>
 <p>
   This form is for reporting comments that should be removed. Reasons can include that
   the comment is spam, abusive, unlawful or harassing &mdash; in other words, where people are going
