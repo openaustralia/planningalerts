@@ -1,0 +1,27 @@
+<%
+=begin
+%>
+
+<% content_for :page_title, "Report comment" %>
+<h3>
+  <%= yield :page_title %>
+</h3>
+<%= render @comment, with_address: true %>
+<p>
+  This form is for reporting comments that should be removed. Reasons can include that
+  the comment is spam, abusive, unlawful or harassing &mdash; in other words, where people are going
+  out of their way to cause harm. Please explain clearly why
+  you think the comment should be removed.
+</p>
+<%= semantic_form_for [@comment, @report] do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :details, label: "Why should this comment be removed?", as: :text %>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, label: "Send report", button_html: { class: "button button-action" } %>
+  <% end %>
+<% end %>
+
+<%
+=end
+%>
