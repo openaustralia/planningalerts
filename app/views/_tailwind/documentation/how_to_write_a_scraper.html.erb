@@ -7,14 +7,14 @@
   <section>
     <h2>What are scrapers?</h2>
     <p>
-      To be able to display and send alerts for planning applications, PlanningAlerts needs to download applications from as many councils as possible. As the vast majority of councils don't supply the data in a reusable,
+      To be able to display and send alerts for planning applications, Planning Alerts needs to download applications from as many councils as possible. As the vast majority of councils don't supply the data in a reusable,
       machine-readable format we need to write
       <%= link_to "web scrapers", "https://secure.wikimedia.org/wikipedia/en/wiki/Web_scraping" %>
       for each local government authority.
     </p>
     <p>
       These scrapers fetch the data from council web pages and present it in a structured format so we can load it into
-      the PlanningAlerts database.
+      the Planning Alerts database.
     </p>
   </section>
 
@@ -22,7 +22,7 @@
     <h2>How can I help?</h2>
     <p>
       If you have some computer programming experience, you should be able to work out how to prepare a scraper for
-      PlanningAlerts. All PlanningAlerts scrapers are hosted on our <%= link_to "morph.io", "https://morph.io/" %>
+      Planning Alerts. All Planning Alerts scrapers are hosted on our <%= link_to "morph.io", "https://morph.io/" %>
       scraping platform, which takes care of all the boring bits of scraping for you (well, most of the boring bits!).
     </p>
     <p>
@@ -123,7 +123,7 @@
             <p>
               This should be a persistent URL that preferably is specific to this particular application. In many cases councils force
               users to click through a license to access planning application. In this case be careful about what URL you provide.
-              Test clicking the link in a browser that hasn't established a session with the council's site to ensure users of PlanningAlerts
+              Test clicking the link in a browser that hasn't established a session with the council's site to ensure users of Planning Alerts
               will be able to click the link and not be presented with an error.
             </p>
           </td>
@@ -247,7 +247,7 @@
     </p>
     <pre><code>ScraperWiki.save_sqlite(['council_reference'], record)</code></pre>
     <p>
-      When the main PlanningAlerts system reads the latest application data from your
+      When the main Planning Alerts system reads the latest application data from your
       scraper on morph.io it automatically keeps track of the changes that occur
       on indidivual applications. That way you can make sure that nothing truly gets
       overwritten. There is always a history of what fields changed when. At the moment
@@ -256,7 +256,7 @@
     </p>
     <p>
       If you get stuck, have a look at
-      <%= link_to "the scrapers already written for PlanningAlerts", "https://morph.io/planningalerts-scrapers" %>
+      <%= link_to "the scrapers already written for Planning Alerts", "https://morph.io/planningalerts-scrapers" %>
       and
       <%= link_to "post on the morph.io forum", "https://help.morph.io/" %>
       if you have any questions.
@@ -277,11 +277,11 @@
       <%= link_to "contact us", documentation_contact_path %>
       and we'll fork it into the
       <%= link_to "planningalerts-scrapers organization", "https://morph.io/planningalerts-scrapers" %>
-      and import it into PlanningAlerts.
+      and import it into Planning Alerts.
     </p>
     <p>
       The last thing to do is look up on Wikipedia how many people live within the council you've just covered so you can
-      pat yourself on the back knowing that you've just helped tens of thousands of people get PlanningAlerts.
+      pat yourself on the back knowing that you've just helped tens of thousands of people get Planning Alerts.
     </p>
   </section>
 </div>
