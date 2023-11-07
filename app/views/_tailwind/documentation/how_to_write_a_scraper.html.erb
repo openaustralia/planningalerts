@@ -262,27 +262,26 @@
       if you have any questions.
     </p>
   </section>
+
+  <section>
+    <h2>Scheduling the scraper</h2>
+    <p>
+      Set the scraper to run once per day. This can be done on morph.io on the settings page of the scraper.
+    </p>
+  </section>
+
+  <section>
+    <h2>Finishing up</h2>
+    <p>
+      Once you've finished your scraper and it's successfully downloading planning applications,
+      <%= link_to "contact us", documentation_contact_path %>
+      and we'll fork it into the
+      <%= link_to "planningalerts-scrapers organization", "https://morph.io/planningalerts-scrapers" %>
+      and import it into PlanningAlerts.
+    </p>
+    <p>
+      The last thing to do is look up on Wikipedia how many people live within the council you've just covered so you can
+      pat yourself on the back knowing that you've just helped tens of thousands of people get PlanningAlerts.
+    </p>
+  </section>
 </div>
-
-<%
-=begin
-%>
-
-%h4 Scheduling the scraper
-%p
-  Set the scraper to run once per day. This can be done on morph.io on the settings page of the scraper.
-
-%h4 Finishing up
-%p
-  Once you've finished your scraper and it's successfully downloading planning applications,
-  = link_to "contact us", documentation_contact_path
-  and we'll fork it into the
-  = link_to "planningalerts-scrapers organization", "https://morph.io/planningalerts-scrapers"
-  and import it into PlanningAlerts.
-%p
-  The last thing to do is look up on Wikipedia how many people live within the council you've just covered so you can
-  pat yourself on the back knowing that you've just helped tens of thousands of people get PlanningAlerts.
-
-<%
-=end
-%>
