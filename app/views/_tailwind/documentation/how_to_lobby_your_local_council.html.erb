@@ -8,28 +8,46 @@
   Here are just a few of the arguments that you can use when lobbying your local council to publish its planning data in a machine readable format. These are jumping off points to get you started.
 </p>
 
-<%
-=begin
-%>
+<ol class="flex flex-col gap-4 mt-8 text-2xl text-navy">
+  <li class="[counter-increment:section] bg-light-grey flex items-start gap-8 px-8 py-4">
+    <div class="before:[content:counter(section)] bg-lavender shrink-0 text-3xl text-white w-16 h-16 rounded-full flex items-center justify-center font-semibold">
+    </div>
+    <p>
+      Be prepared for the first response being "No". That's normal. Have your arguments ready and be persistent.
+    </p>
+  </li>
+  <%# TODO: This section is out of date with broken links %>
+  <li class="[counter-increment:section] bg-light-grey flex items-start gap-8 px-8 py-4">
+    <div class="before:[content:counter(section)] bg-lavender shrink-0 text-3xl text-white w-16 h-16 rounded-full flex items-center justify-center font-semibold">
+    </div>
+    <p>
+      Use Mosman Council as an example of what good local councils can do.
+      They provide a
+      <%= pa_link_to "list of machine readable feeds", "http://portal.mosman.nsw.gov.au/pages/xc.track/ChooseFeed.aspx" %>
+      which are licensed under a
+      <%= pa_link_to "Creative Commons licence", "https://creativecommons.org/licenses/by/2.5/au/" %>.
+    </p>
+  </li>
+  <%# TODO: This section is out of date with broken links %>
+  <li class="[counter-increment:section] bg-light-grey flex items-start gap-8 px-8 py-4">
+    <div class="before:[content:counter(section)] bg-lavender shrink-0 text-3xl text-white w-16 h-16 rounded-full flex items-center justify-center font-semibold">
+    </div>
+    <div>
+      <p>
+        In NSW the
+        <%= pa_link_to "Government Information (Public Access) Act 2009", "http://www.legislation.nsw.gov.au/viewtop/inforce/act+52+2009+FIRST+0+N/" %>
+        (the GIPA Act) places requirements on local councils to publish the information they hold
+        about development applications on their websites. For further arguments you can use, see the Federal Government's "<%= pa_link_to "Declaration of Open Government", "http://www.finance.gov.au/e-government/strategy-and-governance/gov2/declaration-of-open-government.html" %>"
+        of 2010 in which it was stated that the government supports
+      </p>
+      <blockquote class="mt-4">
+        &ldquo;&hellip; strengthening citizen’s rights of access to information, establishing a pro-disclosure culture across Australian Government agencies including through online innovation, and making government information more accessible and usable&rdquo;
+      </blockquote>
+    </div>
+  </li>
+</ol>
 
-%p
-  Be prepared for the first response being "No". That's normal. Have your arguments ready and be persistent.
-
-%p
-  Use Mosman Council as an example of what good local councils can do. They provide a #{link_to "list of machine readable feeds", "http://portal.mosman.nsw.gov.au/pages/xc.track/ChooseFeed.aspx"} which are licensed under a #{link_to "Creative Commons licence", "https://creativecommons.org/licenses/by/2.5/au/"}.
-%p
-  In NSW the
-  = link_to "Government Information (Public Access) Act 2009", "http://www.legislation.nsw.gov.au/viewtop/inforce/act+52+2009+FIRST+0+N/"
-  (the GIPA Act) places requirements on local councils to publish the information they hold
-  about development applications on their websites. For further arguments you can use, see the Federal Government's "#{link_to "Declaration of Open Government", "http://www.finance.gov.au/e-government/strategy-and-governance/gov2/declaration-of-open-government.html"}"
-  of 2010 in which it was stated that the government supports
-
-%blockquote
-  &ldquo;&hellip; strengthening citizen’s rights of access to information, establishing a pro-disclosure culture across Australian Government agencies including through online innovation, and making government information more accessible and usable&rdquo;
-
-%p
-  Would you like to discuss the best approach? Have questions? Then #{link_to "contact us", documentation_contact_path}.
-
-<%
-=end
-%>
+<p class="mt-12 text-2xl text-navy">
+  Would you like to discuss the best approach? Have questions? Then
+  <%= pa_link_to "contact us", documentation_contact_path %>.
+</p>
