@@ -100,4 +100,23 @@ describe "Browsing basic documentation pages" do
     end
     # rubocop:enable RSpec/NoExpectationExample
   end
+
+  describe "how to lobby your council in the new design" do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      visit how_to_lobby_your_local_council_path
+    end
+
+    describe "accessibility tests", js: true do
+      it "passes" do
+        expect(page).to be_axe_clean
+      end
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Lobby your council")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
 end
