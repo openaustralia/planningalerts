@@ -1,6 +1,6 @@
 <section>
-  <h2 class="mt-20 text-4xl font-semibold text-navy">Most commented applications</h2>
-  <p class="mt-4 text-xl text-navy">
+  <h2 class="mt-20 text-4xl font-bold text-navy font-display">Most commented applications</h2>
+  <p class="mt-4 text-2xl text-navy">
     Some planning applications attract considerably more community interest than others.
     We bring you the trending applications so you can see what people find most popular or contentious.
   </p>
@@ -8,6 +8,6 @@
     <%= render partial: "home/application_trending", collection: applications.limit(6), as: :application %>
   </ol>
   <div class="pt-14">
-    <%= pa_link_to "> View more trending applications", trending_applications_path, class: "text-xl" %>
+    <%= pa_link_to "View more trending applications", trending_applications_path, class: "text-xl" %>
   </div>
 </section>
