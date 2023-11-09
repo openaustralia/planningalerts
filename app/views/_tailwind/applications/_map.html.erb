@@ -3,21 +3,17 @@
 <% if application.location %>
   <div class="flex justify-between">
     <div x-data
-          x-init="initialiseBasicMapWithMarker2($refs.map)"
+          x-init="initialiseBasicMapWithMarker2($refs.map, <%= { lat: application.lat, lng: application.lng, address: application.address, zoom: 16 }.to_json %>)"
           class="w-full xl:w-[528px] sm:h-[528px] aspect-1 h-auto">
-      <%= tag.div class: "bg-google-maps-green w-full h-full",
-                  data: { lat: application.lat, lng: application.lng, address: application.address, zoom: 16 },
-                  "x-ref" => "map" do %>
+      <%= tag.div class: "bg-google-maps-green w-full h-full", "x-ref" => "map" do %>
         <noscript><%= google_static_map(application, size: "528x528") %></noscript>
       <% end %>
     </div>
     <%# TODO: Don't show pano if there's no useful streetview available %>
     <div x-data
-        x-init="initialisePano2($refs.pano)"
+        x-init="initialisePano2($refs.pano, <%= { lat: application.lat, lng: application.lng, address: application.address }.to_json %>)"
         class="hidden xl:block w-[528px] h-[528px]">
-      <%= tag.div class: "w-full h-full",
-                  data: { lat: application.lat, lng: application.lng, address: application.address },
-                  "x-ref" => "pano" do %>
+      <%= tag.div class: "w-full h-full", "x-ref" => "pano" do %>
         <%# TODO: The no javascript version of streetview isn't working for some reason %>
         <noscript><%= google_static_streetview(application, size: "528x528") %></noscript>
       <% end %>

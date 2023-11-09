@@ -12,7 +12,7 @@
   <%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind, class: "mt-5" do |f| %>
     <%= f.label :radius_meters, "Alert distance" %>
     <div x-data="{radius_meters: <%= @alert.radius_meters %>, circle: null}"
-         x-init="circle = await initialiseAlertMap2($refs.map); $watch('radius_meters', value => circle.setRadius(value))">
+         x-init="circle = await initialiseAlertMap2($refs.map, <%= { lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: @alert.radius_meters }.to_json %>); $watch('radius_meters', value => circle.setRadius(value))">
       <%= f.select :radius_meters,
                    # Using unicode tick (rather than an image) so that we don't have to other horrible things
                    # rubocop:disable Rails/OutputSafety
@@ -22,9 +22,7 @@
                    class: "w-full text-navy text-2xl font-normal py-4 mt-2 border-light-grey2",
                    "x-model.number": "radius_meters" %>
       <%# TODO: Add a fallback for the map (probably just tell the user) if javascript is disabled %>
-      <%= tag.div class: "h-80 bg-google-maps-green mt-4",
-                  data: { lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: @alert.radius_meters },
-                  "x-ref" => "map" %>
+      <%= tag.div class: "h-80 bg-google-maps-green mt-4", "x-ref" => "map" %>
     </div>
     <div class="mt-6">
       <%= f.button "Update distance" %>
