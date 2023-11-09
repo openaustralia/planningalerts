@@ -13,8 +13,7 @@
     </div>
     <%# TODO: Don't show pano if there's no useful streetview available %>
     <div x-data
-        x-init="if('google' in window) initialisePano($refs.pano)"
-        x-on:map-loaded.window="initialisePano($refs.pano)"
+        x-init="initialisePano2($refs.pano)"
         class="hidden xl:block w-[528px] h-[528px]">
       <%= tag.div class: "w-full h-full",
                   data: { lat: application.lat, lng: application.lng, address: application.address },
