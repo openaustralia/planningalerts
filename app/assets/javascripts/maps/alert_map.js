@@ -13,20 +13,6 @@ function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
   });
 };
 
-async function drawCircleOnMap2(map, centre_lat, centre_lng, radius_in_metres) {
-  const { Circle } = await google.maps.importLibrary("maps");
-
-  return new Circle({
-    strokeColor: "#FF0000",
-    strokeOpacity: 0.2,
-    fillColor: "#FF0000",
-    fillOpacity: 0.1,
-    map: map,
-    center: { lat: centre_lat, lng: centre_lng },
-    radius: radius_in_metres,
-  });
-};
-
 function initialiseAlertMap(map_div) {
   var lat = Number(map_div.dataset.lat);
   var lng = Number(map_div.dataset.lng);
@@ -35,13 +21,3 @@ function initialiseAlertMap(map_div) {
   var map = initialiseBasicMapWithMarker(map_div);
   return drawCircleOnMap(map, lat, lng, radius_meters);
 }
-
-async function initialiseAlertMap2(map_div) {
-  var lat = Number(map_div.dataset.lat);
-  var lng = Number(map_div.dataset.lng);
-  var radius_meters = Number(map_div.dataset.radiusMeters);
-
-  var map = await initialiseBasicMapWithMarker2(map_div);
-  return drawCircleOnMap2(map, lat, lng, radius_meters);
-}
-
