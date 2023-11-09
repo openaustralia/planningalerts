@@ -17,11 +17,11 @@
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                           class: "text-2xl text-navy w-full px-4 py-3 sm:py-4 placeholder-shown:truncate",
                           required: "required",
-                          # This handles both when google maps is ready before alpine and the
-                          # other way around
-                          "x-data" => "{ initAfterMaps() { new google.maps.places.Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']})} }",
-                          "x-init" => "if('google' in window) initAfterMaps()",
-                          "x-on:map-loaded.window" => "initAfterMaps()" %>
+                          "x-data" => "{ async initAutocomplete() {
+                                           const { Autocomplete } = await google.maps.importLibrary('places');
+                                           new Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']})}
+                                       }",
+                          "x-init" => "initAutocomplete()" %>
       <%= button_tag type: "button", class: "text-white sm:text-xl block w-full" do %>
         <span class="inline-block mr-2 align-middle">
           <%= render "application/svg/location" %>
