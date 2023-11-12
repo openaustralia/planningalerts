@@ -24,7 +24,7 @@
 
       <%= tag.div class: "h-80 bg-google-maps-green mt-4",
                   "x-data" => "{ circle: null }",
-                  "x-init" => "circle = await initialiseAlertMap2($el, #{{ lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: @alert.radius_meters }.to_json}); $watch('radius_meters', value => circle.setRadius(value))" %>%
+                  "x-init" => "circle = await initialiseAlertMap2($el, { lat: #{@alert.lat}, lng: #{@alert.lng}, address: '#{@alert.address}', zoom: 13, radius_meters: radius_meters}); $watch('radius_meters', value => circle.setRadius(value))" %>%
     </div>
     <div class="mt-6">
       <%= f.button "Update distance" %>
