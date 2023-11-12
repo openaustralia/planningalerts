@@ -1,0 +1,5 @@
+<%# TODO: Allow height of map to be adjusted %>
+<%# TODO: Add a fallback for the map (probably just tell the user) if javascript is disabled %>
+<%= tag.div class: "h-80 bg-google-maps-green",
+            "x-data" => "{ circle: null }",
+            "x-init" => "circle = await initialiseAlertMap2($el, { lat: #{@lat}, lng: #{@lng}, address: '#{@address}', zoom: #{@zoom}, radius_meters: #{@radius_meters}}); $watch('#{@radius_meters}', value => circle.setRadius(value))" %>%
