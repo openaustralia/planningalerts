@@ -1,11 +1,9 @@
 <%# TODO: Show static map and pano when javascript is disabled %>
 <% if application.location %>
   <div class="flex justify-between">
-    <div x-data
-          x-init="initialiseBasicMapWithMarker2($refs.map, <%= { lat: application.lat, lng: application.lng, address: application.address, zoom: 16 }.to_json %>)"
-          class="<%= class_names("w-full", "sm:h-[528px]", "aspect-1", "h-auto", "xl:w-[528px]" => !Flipper.enabled?(:disable_streetview_in_app, current_user)) %>">
-      <%= tag.div class: "bg-google-maps-green w-full h-full", "x-ref" => "map" do %>
-        <noscript><%= google_static_map(application, size: "528x528") %></noscript>
+    <div class="<%= class_names("w-full", "sm:h-[528px]", "aspect-1", "h-auto", "xl:w-[528px]" => !Flipper.enabled?(:disable_streetview_in_app, current_user)) %>">
+      <%= render Tailwind::Map.new(lat: application.lat, lng: application.lng, address: application.address, zoom: 16) do %>
+        <%= google_static_map(application, size: "528x528") %>
       <% end %>
     </div>
     <%# TODO: Don't show pano if there's no useful streetview available %>
