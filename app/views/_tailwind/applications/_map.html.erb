@@ -1,6 +1,7 @@
 <%# TODO: Show static map and pano when javascript is disabled %>
 <% if application.location %>
-  <div class="flex justify-between">
+  <%# Only using map class here to help target accessibility tests in rspec/features/comment_to_authority_spec.rb %>
+  <div class="flex justify-between map">
     <div class="<%= class_names("w-full", "sm:h-[528px]", "aspect-1", "h-auto", "xl:w-[528px]" => !Flipper.enabled?(:disable_streetview_in_app, current_user)) %>">
       <%= render Tailwind::Map.new(lat: application.lat, lng: application.lng, address: application.address, zoom: 16) do %>
         <%= google_static_map(application, size: "528x528") %>

@@ -48,12 +48,12 @@ describe "Give feedback" do
       end
 
       it "page passes most" do
-        expect(page).to be_axe_clean.excluding(".bg-google-maps-green")
+        expect(page).to be_axe_clean.excluding(".map")
       end
 
       it "google maps content passes" do
         pending "We have to figure out how to get the aria-labels inside the map and streetview to be different"
-        expect(page).to be_axe_clean.within(".bg-google-maps-green")
+        expect(page).to be_axe_clean.within(".map")
       end
     end
 
