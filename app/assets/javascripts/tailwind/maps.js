@@ -37,7 +37,6 @@ async function initialiseBasicMapWithMarker2(map_div, params) {
       center: center,
       fullscreenControl: false,
       streetViewControl: false,
-      draggable: false,
       backgroundColor: "#d1e6d9"
     }
   );
