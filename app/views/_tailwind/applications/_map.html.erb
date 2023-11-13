@@ -10,12 +10,10 @@
     </div>
     <%# TODO: Don't show pano if there's no useful streetview available %>
     <% unless Flipper.enabled?(:disable_streetview_in_app, current_user) %>
-      <div x-data
-          x-init="initialisePano2($refs.pano, <%= { lat: application.lat, lng: application.lng, address: application.address }.to_json %>)"
-          class="hidden xl:block w-[528px] h-[528px]">
-        <%= tag.div class: "w-full h-full", "x-ref" => "pano" do %>
+      <div x-data class="hidden xl:block w-[528px] h-[528px]">
+        <%= render Tailwind::Streetview.new(lat: application.lat, lng: application.lng, address: application.address) do %>
           <%# TODO: The no javascript version of streetview isn't working for some reason %>
-          <noscript><%= google_static_streetview(application, size: "528x528") %></noscript>
+          <%= google_static_streetview(application, size: "528x528") %>
         <% end %>
       </div>
     <% end %>
