@@ -1,17 +1,24 @@
+<% content_for :page_title do %>
+  Application information for <%= @authority.full_name %>
+<% end %>
+
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  Application information <span class="block text-2xl font-bold font-display">for <%= @authority.full_name %></span>
+<% end %>
+
+<%# TODO: Add boundary map %>
+
+<% if @authority.population_2021 %>
+  <p class="py-4 mt-8 text-2xl border-y text-navy border-light-grey2">Population <%= number_with_delimiter @authority.population_2021 %> (2021 census)</p>
+<% end %>
+
 <%
 =begin
 %>
 
-- content_for :page_title, @authority.full_name
-%h3= yield :page_title
-
 - if @authority.boundary && Flipper.enabled?(:show_authority_map, current_user)
   - bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
   .authority-map{ data: { json: boundary_authority_url(format: :json), sw: { lng: bb.min_x, lat: bb.min_y }, ne: { lng: bb.max_x, lat: bb.max_y } } }
-
-- if @authority.population_2021
-  %p
-    Population #{number_with_delimiter @authority.population_2021} (2021 census)
 
 - if Flipper.enabled?(:show_authority_map, current_user) && @authority.alerts
   %p
