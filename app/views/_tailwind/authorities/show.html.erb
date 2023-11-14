@@ -16,35 +16,50 @@
 
 <%# TODO: Handle situation where the authority is "broken" %>
 
-<h2 class="mt-12 text-2xl font-bold text-navy">Applications collected by Planning Alerts</h2>
+<section class="py-12">
+  <h2 class="text-3xl font-bold text-navy">Applications collected by Planning Alerts</h2>
+  <table class="mt-8 text-2xl text-navy">
+    <tbody>
+      <tr>
+        <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.week.ago).count %></td>
+        <th class="font-normal text-left">in the last week</th>
+      </tr>
+      <tr>
+        <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.month.ago).count %></td>
+        <th class="font-normal text-left">in the last month</th>
+      </tr>
+      <tr>
+        <td class="pr-8 font-bold text-7xl"><%= @authority.applications.count %></td>
+        <th class="font-normal text-left">
+          since <%= @authority.earliest_date.strftime("%-d %b %Y") %>
+          (when this authority was first added to Planning Alerts)
+        </th>
+      </tr>
+      <tr>
+        <td class="pr-8 font-bold text-7xl"><%= @authority.median_new_applications_per_week %></td>
+        <th class="font-normal text-left">
+          <%= pa_link_to "median", "http://en.wikipedia.org/wiki/Median" %>
+          per week
+          (ignoring weeks without any new applications at all)
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
-<table class="mt-8 text-2xl text-navy">
-  <tbody>
-    <tr>
-      <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.week.ago).count %></td>
-      <th class="font-normal text-left">in the last week</th>
-    </tr>
-    <tr>
-      <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.month.ago).count %></td>
-      <th class="font-normal text-left">in the last month</th>
-    </tr>
-    <tr>
-      <td class="pr-8 font-bold text-7xl"><%= @authority.applications.count %></td>
-      <th class="font-normal text-left">
-        since <%= @authority.earliest_date.strftime("%-d %b %Y") %>
-        (when this authority was first added to Planning Alerts)
-      </th>
-    </tr>
-    <tr>
-      <td class="pr-8 font-bold text-7xl"><%= @authority.median_new_applications_per_week %></td>
-      <th class="font-normal text-left">
-        <%= pa_link_to "median", "http://en.wikipedia.org/wiki/Median" %>
-        per week
-        (ignoring weeks without any new applications at all)
-      </th>
-    </tr>
-  </tbody>
-</table>
+<section class="pt-12 pb-24 border-y border-light-grey2">
+  <h2 class="text-3xl font-bold text-navy">Browse applications from <%= @authority.full_name %></h2>
+  <ul class="mt-8 text-2xl text-navy">
+    <li>
+      View all
+      <%= pa_link_to "recent applications", authority_applications_path(@authority.short_name_encoded) %>
+    </li>
+    <li>
+      View all
+      <%= pa_link_to "comments on applications", authority_comments_path(@authority.short_name_encoded) %>
+    </li>
+  </ul>
+</section>
 
 <%
 =begin
@@ -72,12 +87,6 @@
   - if @authority.applications.empty?
     %p
       No applications for #{@authority.full_name} have yet been collected.
-
-    %p
-      Browse all
-      = link_to "recent applications", authority_applications_path(@authority.short_name_encoded)
-      or
-      = link_to "comments on applications", authority_comments_path(@authority.short_name_encoded)
 
     .chart#applications-chart
     .chart#comments-chart
