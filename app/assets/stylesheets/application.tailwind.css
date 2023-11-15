@@ -22,6 +22,86 @@
   @apply !font-medium;
 }
 
+/* TODO: Get rid of this ugly mess for styling the charts on the authority detail page as soon as we can */
+.chart {
+  text {
+    @apply fill-navy;
+    font-size: .875em;
+  }
+
+  .chart-area {
+    @apply fill-[#d7e4f3];
+  }
+
+  .y-axis,
+  .x-axis {
+    line {
+      @apply stroke-1 stroke-light-grey2;
+    }
+
+    .domain {
+      @apply hidden;
+    }
+  }
+}
+
+.chart-title {
+  width: 100%;
+  float: none;
+  clear: both;
+}
+
+.x-axis-baseline {
+  @apply stroke-2 stroke-light-grey2 fill-none;
+}
+
+.chart-line {
+  @apply fill-none stroke-[#346eb0] stroke-2;
+
+  &.chart-clipping-below {
+    display: none;
+  }
+}
+
+.chart-with-callout {
+  svg {
+    width: 100%;
+    height: auto;
+
+    @apply sm:float-left sm:clear-left sm:w-4/5;
+  }
+
+  .chart-callout {
+    @apply sm:float-right sm:w-1/5;
+  }
+
+  text {
+    @apply text-xs;
+  }
+}
+
+.chart-callout-heading {
+  display: block;
+}
+
+.chart-callout-subheading {
+  display: block;
+  font-weight: normal;
+}
+
+.chart-overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus {
+  circle {
+    stroke: #346eb0;
+    stroke-width: 2px;
+    fill: transparent;
+  }
+}
+
 /*
 
 @layer components {

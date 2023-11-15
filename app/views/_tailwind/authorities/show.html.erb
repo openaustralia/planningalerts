@@ -48,6 +48,7 @@
 </section>
 
 <section class="pt-12 pb-24 border-y border-light-grey2">
+  <%# TODO: This title isn't right because the section has comments in it too %>
   <h2 class="text-3xl font-bold text-navy">Browse applications from <%= @authority.full_name %></h2>
   <ul class="mt-8 text-2xl text-navy">
     <li>
@@ -59,6 +60,23 @@
       <%= pa_link_to "comments on applications", authority_comments_path(@authority.short_name_encoded) %>
     </li>
   </ul>
+</section>
+
+<section>
+  <h2 class="py-12 pb-24 text-3xl font-bold text-navy">Number of new applications scraped over time</h2>
+  <%# TODO: Move over to using alpinejs to initialise the chart %>
+  <div class="chart" id="applications-chart">
+  </div>
+
+  <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min.js" %>
+  <%= javascript_include_tag "bar_graph" %>
+  <script>
+    barGraph(
+      "#applications-chart",
+      "<%= per_week_authority_applications_url(@authority.short_name_encoded, format: :json) %>",
+      "new applications scraped"
+    );
+  </script>
 </section>
 
 <%
