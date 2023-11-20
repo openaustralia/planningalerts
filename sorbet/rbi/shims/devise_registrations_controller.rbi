@@ -2,6 +2,6 @@
 
 module Devise
   class RegistrationsController
-    def resource; end
+    def create; end
   end
 end
