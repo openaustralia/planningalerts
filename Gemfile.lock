@@ -378,6 +378,7 @@ GEM
     launchy (2.5.2)
       addressable (~> 2.8)
     libv8-node (18.16.0.0-aarch64-linux)
+    libv8-node (18.16.0.0-arm64-darwin)
     libv8-node (18.16.0.0-x86_64-linux)
     link_header (0.0.8)
     listen (3.8.0)
@@ -424,6 +425,8 @@ GEM
     netrc (0.11.0)
     nio4r (2.5.9)
     nokogiri (1.15.4-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.15.4-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
@@ -653,6 +656,7 @@ GEM
     sorbet (0.5.11139)
       sorbet-static (= 0.5.11139)
     sorbet-runtime (0.5.11139)
+    sorbet-static (0.5.11139-universal-darwin)
     sorbet-static (0.5.11139-x86_64-linux)
     sorbet-static-and-runtime (0.5.11139)
       sorbet (= 0.5.11139)
@@ -681,6 +685,8 @@ GEM
       prettier_print (>= 1.2.0)
     sysexits (1.2.0)
     tailwindcss-rails (2.0.30-aarch64-linux)
+      railties (>= 6.0.0)
+    tailwindcss-rails (2.0.30-arm64-darwin)
       railties (>= 6.0.0)
     tailwindcss-rails (2.0.30-x86_64-linux)
       railties (>= 6.0.0)
@@ -760,6 +766,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
