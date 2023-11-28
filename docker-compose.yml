@@ -1,6 +1,12 @@
 services:
   web:
     build: .
+    # Sorbet doesn't currently build for Linux ARM64 (see https://github.com/sorbet/sorbet/issues/4119)
+    # So, we're forced to build the container as linux/amd64 always and lean on Rosetta
+    # on Apple silicon for running this.
+    # Important: if you're on Apple Silicon ensure that "Use Rosetta for x86/amd64 emulation on Apple Silicon"
+    # is switched on in Docker Desktop.
+    platform: linux/amd64
     volumes:
       - .:/app
       - gem_cache:/usr/local/bundle/gems
@@ -16,6 +22,8 @@ services:
 
   postfix:
     build: .
+    # Same as "web" service above because of sorbet we need to build as amd64
+    platform: linux/amd64
     volumes:
       - .:/app
       - gem_cache:/usr/local/bundle/gems
@@ -29,6 +37,9 @@ services:
   postgres:
     # Same version as used in production
     image: postgis/postgis:15-3.3
+    # There isn't yet a linux/arm64 build of postgis on docker
+    # See https://github.com/postgis/docker-postgis/issues/216
+    platform: linux/amd64
     ports:
       # Give access to the database from your host machine. This is useful
       # if you want to poke around.
