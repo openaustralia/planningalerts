@@ -71,13 +71,19 @@ describe "Searching for development application near an address" do
 
   describe "accessibility tests for search applications page in new design", js: true do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true)
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
       visit address_applications_path
     end
 
     it "passes" do
       expect(page).to be_axe_clean
     end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Application search")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
   end
 
   # Having trouble getting this to work
