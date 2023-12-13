@@ -33,10 +33,12 @@ describe "Contact us" do
   context "when signed in" do
     let(:user) { create(:confirmed_user, name: "Matthew Landauer", email: "matthew@oaf.org.au") }
 
-    before { sign_in user }
+    before do
+      sign_in user
+      visit "/help/contact"
+    end
 
     it "less information needs to be filled out and the admins receive an email" do
-      visit "/help/contact"
       select "The address or map location is wrong", from: "I'm getting in touch because"
       fill_in "Please tell us briefly about your request", with: "Actually nothing is wrong here. Sorry."
       click_button "Send message to the Planning Alerts team"
@@ -48,5 +50,24 @@ describe "Contact us" do
       expect(current_email.default_part_body.to_s).to include("Actually nothing is wrong here. Sorry")
       expect(current_email).to have_reply_to("matthew@oaf.org.au")
     end
+  end
+
+  context "when signed in in new theme" do
+    let(:user) { create(:confirmed_user, name: "Matthew Landauer", email: "matthew@oaf.org.au", tailwind_theme: true) }
+
+    before do
+      sign_in user
+      visit "/help/contact"
+    end
+
+    it "passes automated accessibility tests", js: true do
+      expect(page).to be_axe_clean
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Contact us")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
   end
 end
