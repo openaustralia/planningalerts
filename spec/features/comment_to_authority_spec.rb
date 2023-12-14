@@ -104,6 +104,12 @@ describe "Give feedback" do
           end
         end
 
+        # rubocop:disable RSpec/NoExpectationExample
+        it "renders a snapshot for a visual diff", js: true do
+          page.percy_snapshot("Comment preview")
+        end
+        # rubocop:enable RSpec/NoExpectationExample
+
         it "is not immediately publically visible in the comments section" do
           visit(application_path(application))
           within("#comments") do
