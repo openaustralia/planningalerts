@@ -43,7 +43,7 @@ describe "Give feedback" do
 
     describe "accessibility tests in new design", js: true do
       before do
-        sign_in create(:confirmed_user, tailwind_theme: true)
+        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
         visit(application_path(application))
       end
 
@@ -55,6 +55,12 @@ describe "Give feedback" do
         pending "We have to figure out how to get the aria-labels inside the map and streetview to be different"
         expect(page).to be_axe_clean.within(".map")
       end
+
+      # rubocop:disable RSpec/NoExpectationExample
+      it "renders a snapshot for a visual diff", js: true do
+        page.percy_snapshot("Application")
+      end
+      # rubocop:enable RSpec/NoExpectationExample
     end
 
     it "Adding a comment" do
