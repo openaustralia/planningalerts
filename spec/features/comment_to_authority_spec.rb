@@ -77,7 +77,7 @@ describe "Give feedback" do
 
     context "when on the new design" do
       before do
-        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng", email: "foo@bar.com")
         visit(application_path(application))
       end
 
