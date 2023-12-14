@@ -43,7 +43,7 @@ describe "Give feedback" do
 
     describe "accessibility tests in new design", js: true do
       before do
-        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng", email: "foo@bar.com")
         visit(application_path(application))
       end
 
