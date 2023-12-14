@@ -36,7 +36,7 @@ describe "Give feedback" do
   context "when the authority is contactable" do
     let(:application) do
       authority = create(:contactable_authority,
-                         full_name: "Foo",
+                         full_name: "Byron Shire Council",
                          email: "feedback@foo.gov.au")
       create(:geocoded_application, id: "1", authority:)
     end
@@ -72,12 +72,12 @@ describe "Give feedback" do
       fill_in("Your street address", with: "11 Foo Street")
       click_button("Post your public comment")
 
-      expect(page).to have_content("Your comment has been sent to Foo and posted below.")
+      expect(page).to have_content("Your comment has been sent to Byron Shire Council and posted below.")
     end
 
     context "when on the new design" do
       before do
-        sign_in create(:confirmed_user, tailwind_theme: true)
+        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
         visit(application_path(application))
       end
 
