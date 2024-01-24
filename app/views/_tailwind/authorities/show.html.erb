@@ -124,24 +124,6 @@
     %p
       No applications for #{@authority.full_name} have yet been collected.
 
-    .chart#applications-chart
-    .chart#comments-chart
-
-    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min.js"
-    = javascript_include_tag "bar_graph"
-    :javascript
-      barGraph(
-        "#applications-chart",
-        "#{per_week_authority_applications_url(@authority.short_name_encoded, format: :json)}",
-        "new applications scraped"
-      );
-
-      barGraph(
-        "#comments-chart",
-        "#{per_week_authority_comments_url(@authority.short_name_encoded, format: :json)}",
-        "comments posted"
-      );
-
   %h4 Under the Hood
   %p
     Are you a developer or keen to learn some new things and help out in the process?
