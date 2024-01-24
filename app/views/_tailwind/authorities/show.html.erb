@@ -13,6 +13,7 @@
       tag.div class: "w-full h-80 bg-google-maps-green my-8",
               "x-init" => "
         const { Map } = await google.maps.importLibrary('maps');
+        const { LatLng, LatLngBounds } = await google.maps.importLibrary('core');
         var map = new Map($el,
           {
             zoom: 4,
@@ -21,9 +22,9 @@
             streetViewControl: false,
             backgroundColor: '#d1e6d9'
           });
-          var sw = new google.maps.LatLng(#{bb.min_y}, #{bb.min_x});
-          var ne = new google.maps.LatLng(#{bb.max_y}, #{bb.max_x});
-          var bounds = new google.maps.LatLngBounds(sw, ne);
+          var sw = new LatLng(#{bb.min_y}, #{bb.min_x});
+          var ne = new LatLng(#{bb.max_y}, #{bb.max_x});
+          var bounds = new LatLngBounds(sw, ne);
           map.fitBounds(bounds);
           map.data.loadGeoJson('#{boundary_authority_url(format: :json)}');
                " %>
