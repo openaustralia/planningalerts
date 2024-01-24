@@ -2,6 +2,7 @@
 %h3= yield :page_title
 
 - if @authority.boundary && Flipper.enabled?(:show_authority_map, current_user)
+  -# TODO: Probably want to precompute the bounding box when the boundary data is loaded instead
   - bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
   .authority-map{ data: { json: boundary_authority_url(format: :json), sw: { lng: bb.min_x, lat: bb.min_y }, ne: { lng: bb.max_x, lat: bb.max_y } } }
 
