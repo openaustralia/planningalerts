@@ -45,12 +45,6 @@
   }
 }
 
-.chart-title {
-  width: 100%;
-  float: none;
-  clear: both;
-}
-
 .x-axis-baseline {
   @apply stroke-2 stroke-light-grey2 fill-none;
 }
