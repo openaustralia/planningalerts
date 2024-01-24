@@ -4,6 +4,7 @@ require "spec_helper"
 
 describe "Give feedback" do
   include Devise::Test::IntegrationHelpers
+  include ActiveSupport::Testing::TimeHelpers
 
   # In order to affect the outcome of a development application
   # As a citizen
@@ -60,7 +61,7 @@ describe "Give feedback" do
       it "renders a snapshot for a visual diff", js: true do
         # Note that we're ensuring that the application has a static first_date_scraped and we freeze the current
         # time so that the page should always have the same text on it
-        Timecop.freeze(Date.new(2023, 6, 1)) do
+        travel_to(Date.new(2023, 6, 1)) do
           page.percy_snapshot("Application")
         end
       end
