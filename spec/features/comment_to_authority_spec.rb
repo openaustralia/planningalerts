@@ -38,7 +38,7 @@ describe "Give feedback" do
       authority = create(:contactable_authority,
                          full_name: "Byron Shire Council",
                          email: "feedback@foo.gov.au")
-      create(:geocoded_application, id: "1", authority:)
+      create(:geocoded_application, id: "1", authority:, date_scraped: Date.new(2023, 1, 1))
     end
 
     describe "accessibility tests in new design", js: true do
@@ -58,7 +58,11 @@ describe "Give feedback" do
 
       # rubocop:disable RSpec/NoExpectationExample
       it "renders a snapshot for a visual diff", js: true do
-        page.percy_snapshot("Application")
+        # Note that we're ensuring that the application has a static first_date_scraped and we freeze the current
+        # time so that the page should always have the same text on it
+        Timecop.freeze(Date.new(2023, 6, 1)) do
+          page.percy_snapshot("Application")
+        end
       end
       # rubocop:enable RSpec/NoExpectationExample
     end
