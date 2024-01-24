@@ -15,6 +15,7 @@
 <%# TODO: Show number of alerts set up inside the authority %>
 
 <%# TODO: Handle situation where the authority is "broken" %>
+<%# TODO: Handle situation where the authority is not covered yet %>
 
 <div class="divide-y divide-light-grey2">
   <section class="py-12">
@@ -95,6 +96,20 @@
       "comments posted"
     );
   </script>
+
+  <section class="pt-12 pb-24">
+    <h2 class="pb-12 text-3xl font-bold text-navy">Under the Hood</h2>
+    <p class="text-2xl text-navy">
+      Are you a developer or keen to learn some new things and help out in the process?
+      Then, <%= pa_link_to "look under the hood", authority_under_the_hood_path(@authority.short_name_encoded) %>,
+      see more about how the information gets into PlanningAlerts, what problems are
+      happening and what you might do to help fix them.
+    </p>
+    <p class="mt-6 text-2xl text-navy">
+      <%= pa_link_to "Look under the hood", authority_under_the_hood_path(@authority.short_name_encoded) %>
+    </p>
+
+  </section>
 </div>
 
 <%
@@ -123,14 +138,6 @@
   - if @authority.applications.empty?
     %p
       No applications for #{@authority.full_name} have yet been collected.
-
-  %h4 Under the Hood
-  %p
-    Are you a developer or keen to learn some new things and help out in the process?
-    Then, #{link_to "look under the hood", authority_under_the_hood_path(@authority.short_name_encoded)},
-    see more about how the information gets into PlanningAlerts, what problems are
-    happening and what you might do to help fix them.
-  %p= link_to "Look under the hood", authority_under_the_hood_path(@authority.short_name_encoded)
 
 - else
   %p
