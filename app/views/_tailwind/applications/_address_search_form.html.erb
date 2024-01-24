@@ -11,7 +11,20 @@
     </p>
     <%= form.label :q, "Street address", class: "sr-only" %>
     <%# TODO: Re-enable autofocus:true below after finished testing with livereload %>
-    <div class="flex flex-col w-full gap-4">
+    <div class="flex flex-col w-full gap-4" x-data="{
+      loading: false,
+      address: '',
+      async geolocate(event) {
+        this.loading = true;
+        try {
+          this.address = await getAddress();
+        } catch(err) {
+          // Hacky way to show an error message
+          alert(err);
+        }
+        this.loading = false;
+      }
+    }">
       <%= form.text_field :q,
                           value: q,
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
@@ -21,13 +34,13 @@
                                            const { Autocomplete } = await google.maps.importLibrary('places');
                                            new Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']})}
                                        }",
-                          "x-init" => "initAutocomplete()" %>
-      <%= button_tag type: "button", class: "text-white sm:text-xl block w-full" do %>
+                          "x-init" => "initAutocomplete()",
+                          "x-model.fill" => "address" %>
+      <%= button_tag type: "button", class: "text-white sm:text-xl block w-full", "@click": "geolocate($event)", "x-bind:disabled": "loading" do %>
         <span class="inline-block mr-2 align-middle">
           <%= render "application/svg/location" %>
         </span>
-        <%# TODO: Make geolocate button work %>
-        <span class="underline">or use my current location</span>
+        <span :class="loading ? '' : 'underline'" x-text="loading ? 'getting current location...' : 'or use my current location'">or use my current location</span>
       <% end %>
     </div>
 
