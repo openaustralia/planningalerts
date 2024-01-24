@@ -43,8 +43,12 @@ describe "Give feedback" do
 
     describe "accessibility tests in new design", js: true do
       before do
-        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
-        visit(application_path(application))
+        # Note that we're ensuring that the application has a static first_date_scraped and we freeze the current
+        # time so that the page should always have the same text on it
+        Timecop.freeze(Date.new(2023, 6, 1)) do
+          sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+          visit(application_path(application))
+        end
       end
 
       it "page passes most" do
@@ -58,11 +62,7 @@ describe "Give feedback" do
 
       # rubocop:disable RSpec/NoExpectationExample
       it "renders a snapshot for a visual diff", js: true do
-        # Note that we're ensuring that the application has a static first_date_scraped and we freeze the current
-        # time so that the page should always have the same text on it
-        Timecop.freeze(Date.new(2023, 6, 1)) do
-          page.percy_snapshot("Application")
-        end
+        page.percy_snapshot("Application")
       end
       # rubocop:enable RSpec/NoExpectationExample
     end
