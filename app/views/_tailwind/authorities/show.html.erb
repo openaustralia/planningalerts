@@ -7,9 +7,9 @@
 <% end %>
 
 <% if @authority.boundary && Flipper.enabled?(:show_authority_map, current_user) %>
-  <%# # TODO: Probably want to precompute the bounding box when the boundary data is loaded instead %>
+  <%# TODO: Probably want to precompute the bounding box when the boundary data is loaded instead %>
+  <%# TODO: Load the boundary data asynchronously so that it doesn't hold up a page load %>
   <%= bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
-      # TODO: Load the boundary data asynchronously so that it doesn't hold up a page load
       tag.div class: "w-full h-80 bg-google-maps-green my-8",
               "x-init" => "
         const { Map } = await google.maps.importLibrary('maps');
