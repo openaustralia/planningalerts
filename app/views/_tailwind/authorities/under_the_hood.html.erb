@@ -1,0 +1,88 @@
+<% content_for :page_title, "Under the hood for #{@authority.full_name}" %>
+
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  Under the hood
+  <span class="block mt-1 text-2xl font-bold font-display">for <%= @authority.full_name %></span>
+<% end %>
+
+<p class="mt-12 text-2xl text-navy">
+  More of the gory details of how information gets into PlanningAlerts. This is
+  here so you can see and learn how it's done but also so you are able to
+  fix things and see in detail what isn't working.
+</p>
+
+<p class="mt-24 text-2xl text-navy">
+  The steps
+  <ol class="pl-6 ml-3 text-2xl list-decimal list-outside text-navy">
+    <li>
+      Applications are published on the
+      <%= @authority.full_name %>
+      website in a human readable, non-structured form.
+    </li>
+    <li>
+      The latest scraper code on Github is loaded by our scraping
+      platform <%= pa_link_to "morph.io", "https://morph.io" %>.
+    </li>
+    <li>
+      The
+      <%= pa_link_to "scraper #{@authority.morph_name}", morph_url(@authority) %>
+      on our scraping platform
+      <%= pa_link_to "morph.io", "https://morph.io" %>
+      collects the information daily and converts it into a machine-readable
+      format.
+    </li>
+    <li>
+      If the scraper errors anyone who is
+      <%= pa_link_to "watching the scraper", morph_watchers_url(@authority) %>
+      on morph.io gets informed via a daily email alert.
+    </li>
+    <li>
+      The machine readable data is
+      <%= pa_link_to "validated, imported and geocoded", anchor: "import" %>
+      by PlanningAlerts daily. If there are any validation errors on an
+      application, the application is skipped and the error is logged.
+      See below for the most recent logs.
+    </li>
+    <li>
+      The information is published on PlanningAlerts, made available via the
+      <%= pa_link_to "API", api_howto_path %>, and people are informed of new
+      applications via email alerts.
+    </li>
+  </ol>
+</p>
+
+<%
+=begin
+%>
+
+%h4#import Most recent import logs
+
+.log_lines= simple_format @authority.last_scraper_run_log
+
+%h4 What you can do next
+
+%p If something isn't right with the scraper or the data coming in then you could do one or several of the following
+%ul
+  %li
+    = link_to "Report or view scraper issues", github_issues_url
+  %li
+    = link_to "Fork the scraper on Github", github_url(@authority)
+    and try to fix it
+  %li
+    If it's an issue with the council website, then contact
+    = @authority.full_name
+  %li
+    Contact us for help
+
+%p If everything is working fine right now but you want to help if something goes wrong
+%ul
+  %li
+    = link_to "Watch the scraper", morph_url(@authority)
+    on morph.io, so you will get an email if it errors. Press the "Watch" button in the top right while you're logged in to morph.io.
+  %li
+    #{link_to "View any scraper issues", github_issues_url}.
+    Help fix them or comment on them if they are out of date
+
+<%
+=end
+%>

@@ -3,7 +3,7 @@
 <% end %>
 
 <%= render Tailwind::Heading.new(tag: :h1) do %>
-  Application information <span class="block text-2xl font-bold font-display">for <%= @authority.full_name %></span>
+  Application information <span class="block mt-1 text-2xl font-bold font-display">for <%= @authority.full_name %></span>
 <% end %>
 
 <% if @authority.boundary && Flipper.enabled?(:show_authority_map, current_user) %>
