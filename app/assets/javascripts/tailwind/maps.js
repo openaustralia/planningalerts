@@ -67,3 +67,21 @@ async function drawCircleOnMap2(map, centre_lat, centre_lng, radius_in_metres) {
     radius: radius_in_metres,
   });
 };
+
+async function initialiseAuthorityMap(el, params) {
+  const { Map } = await google.maps.importLibrary('maps');
+  const { LatLng, LatLngBounds } = await google.maps.importLibrary('core');
+  var map = new Map(el,
+    {
+      zoom: 4,
+      center: { lat: -28, lng: 137 },
+      fullscreenControl: false,
+      streetViewControl: false,
+      backgroundColor: '#d1e6d9'
+    });
+  var sw = new LatLng(params.sw.lat, params.sw.lng);
+  var ne = new LatLng(params.ne.lat, params.ne.lng);
+  var bounds = new LatLngBounds(sw, ne);
+  map.fitBounds(bounds);
+  map.data.loadGeoJson(params.json);
+}
