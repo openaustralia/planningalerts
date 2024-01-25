@@ -11,23 +11,26 @@
   <%# TODO: Load the boundary data asynchronously so that it doesn't hold up a page load %>
   <%= bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
       tag.div class: "w-full h-80 bg-google-maps-green my-8",
-              "x-init" => "
-        const { Map } = await google.maps.importLibrary('maps');
-        const { LatLng, LatLngBounds } = await google.maps.importLibrary('core');
-        var map = new Map($el,
-          {
-            zoom: 4,
-            center: { lat: -28, lng: 137 },
-            fullscreenControl: false,
-            streetViewControl: false,
-            backgroundColor: '#d1e6d9'
-          });
-          var sw = new LatLng(#{bb.min_y}, #{bb.min_x});
-          var ne = new LatLng(#{bb.max_y}, #{bb.max_x});
-          var bounds = new LatLngBounds(sw, ne);
-          map.fitBounds(bounds);
-          map.data.loadGeoJson('#{boundary_authority_url(format: :json)}');
-               " %>
+              "x-data" => "{
+                async initMap(el, params) {
+                  const { Map } = await google.maps.importLibrary('maps');
+                  const { LatLng, LatLngBounds } = await google.maps.importLibrary('core');
+                  var map = new Map($el,
+                    {
+                      zoom: 4,
+                      center: { lat: -28, lng: 137 },
+                      fullscreenControl: false,
+                      streetViewControl: false,
+                      backgroundColor: '#d1e6d9'
+                    });
+                  var sw = new LatLng(params.sw.lat, params.sw.lng);
+                  var ne = new LatLng(params.ne.lat, params.ne.lng);
+                  var bounds = new LatLngBounds(sw, ne);
+                  map.fitBounds(bounds);
+                  map.data.loadGeoJson(params.json);
+                }
+              }",
+              "x-init" => "initMap($el, #{{ json: boundary_authority_url(format: :json), sw: { lng: bb.min_x, lat: bb.min_y }, ne: { lng: bb.max_x, lat: bb.max_y } }.to_json})" %>
 <% end %>
 
 <% if @authority.population_2021 %>
