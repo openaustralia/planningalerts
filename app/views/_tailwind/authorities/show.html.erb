@@ -8,7 +8,6 @@
 
 <% if @authority.boundary && Flipper.enabled?(:show_authority_map, current_user) %>
   <%# TODO: Probably want to precompute the bounding box when the boundary data is loaded instead %>
-  <%# TODO: Load the boundary data asynchronously so that it doesn't hold up a page load %>
   <% bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary) %>
   <div class="w-full my-8 h-80 bg-google-maps-green"
        x-init="initialiseAuthorityMap($el, <%= { json: boundary_authority_url(format: :json), sw: { lng: bb.min_x, lat: bb.min_y }, ne: { lng: bb.max_x, lat: bb.max_y } }.to_json %>)">

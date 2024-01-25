@@ -84,5 +84,10 @@ async function initialiseAuthorityMap(el, params) {
   var ne = new LatLng(params.ne.lat, params.ne.lng);
   var bounds = new LatLngBounds(sw, ne);
   map.fitBounds(bounds);
-  map.data.loadGeoJson(params.json);
+  map.addListener('tilesloaded', function() {
+    // Only load the boundary once the map has displayed. Do this because loading the boundary can
+    // take a while and the map is already showing roughly where the council is without the boundary
+    // and so it is immediately useful
+    map.data.loadGeoJson(params.json);
+});
 }
