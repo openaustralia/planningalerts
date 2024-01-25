@@ -51,13 +51,15 @@
   </ol>
 </p>
 
+<section id="import" class="mt-24">
+  <h2 class="text-3xl font-bold text-navy">Most recent import logs</h2>
+  <%# TODO Is making the panel scrollable the right thing to do here? %>
+  <pre class="py-8 mt-12 overflow-x-scroll font-mono text-2xl bg-light-grey text-navy"><%= @authority.last_scraper_run_log %></pre>
+</section>
+
 <%
 =begin
 %>
-
-%h4#import Most recent import logs
-
-.log_lines= simple_format @authority.last_scraper_run_log
 
 %h4 What you can do next
 
