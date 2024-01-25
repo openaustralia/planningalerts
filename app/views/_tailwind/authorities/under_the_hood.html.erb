@@ -51,40 +51,44 @@
   </ol>
 </p>
 
-<section id="import" class="mt-24">
+<section id="import" class="py-12 mt-12">
   <h2 class="text-3xl font-bold text-navy">Most recent import logs</h2>
   <%# TODO Is making the panel scrollable the right thing to do here? %>
   <pre class="py-8 mt-12 overflow-x-scroll font-mono text-2xl bg-light-grey text-navy"><%= @authority.last_scraper_run_log %></pre>
 </section>
 
-<%
-=begin
-%>
-
-%h4 What you can do next
-
-%p If something isn't right with the scraper or the data coming in then you could do one or several of the following
-%ul
-  %li
-    = link_to "Report or view scraper issues", github_issues_url
-  %li
-    = link_to "Fork the scraper on Github", github_url(@authority)
-    and try to fix it
-  %li
-    If it's an issue with the council website, then contact
-    = @authority.full_name
-  %li
-    Contact us for help
-
-%p If everything is working fine right now but you want to help if something goes wrong
-%ul
-  %li
-    = link_to "Watch the scraper", morph_url(@authority)
-    on morph.io, so you will get an email if it errors. Press the "Watch" button in the top right while you're logged in to morph.io.
-  %li
-    #{link_to "View any scraper issues", github_issues_url}.
-    Help fix them or comment on them if they are out of date
-
-<%
-=end
-%>
+<section class="py-12">
+  <h2 class="text-3xl font-bold text-navy">What you can do next</h2>
+  <p class="mt-8 text-2xl text-navy">
+    If something isn't right with the scraper or the data coming in then you could do one or several of the following
+    <ul class="pl-8 mt-4 text-2xl list-disc text-navy">
+      <li>
+        <%= pa_link_to "Report or view scraper issues", github_issues_url %>
+      </li>
+      <li>
+        <%= pa_link_to "Fork the scraper on Github", github_url(@authority) %>
+        and try to fix it
+      </li>
+      <li>
+        If it's an issue with the council website, then contact
+        <%= @authority.full_name %>
+      </li>
+      <li>
+        Contact us for help
+      </li>
+    </ul>
+  </p>
+  <p class="mt-8 text-2xl text-navy">
+    If everything is working fine right now but you want to help if something goes wrong
+    <ul class="pl-8 mt-4 text-2xl list-disc text-navy">
+      <li>
+        <%= pa_link_to "Watch the scraper", morph_url(@authority) %>
+        on morph.io, so you will get an email if it errors. Press the "Watch" button in the top right while you're logged in to morph.io.
+      </li>
+      <li>
+        <%= pa_link_to "View any scraper issues", github_issues_url %>.
+        Help fix them or comment on them if they are out of date
+      </li>
+    </ul>
+  </p>
+</section>
