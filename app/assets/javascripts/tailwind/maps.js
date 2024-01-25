@@ -2,10 +2,11 @@
 
 async function initialisePano2(elem, params) {
   const { StreetViewPanorama } = await google.maps.importLibrary("streetView");
-  const { Marker } = await google.maps.importLibrary("marker")
+  const { Marker } = await google.maps.importLibrary("marker");
+  const { LatLng } = await google.maps.importLibrary("core");
 
   // Can't yet figure out how to make the POV point at the marker
-  var pointToLookAt = new google.maps.LatLng(params.lat, params.lng);
+  var pointToLookAt = new LatLng(params.lat, params.lng);
   var myPano = new StreetViewPanorama(elem,
     {
       position: pointToLookAt,
@@ -16,7 +17,7 @@ async function initialisePano2(elem, params) {
       fullscreenControl: false,
       linksControl: false
     });
-  google.maps.event.addListener(myPano, 'position_changed', function() {
+  myPano.addListener('position_changed', function() {
     // Orient the camera to face the position we're interested in
     var angle = computeAngle(pointToLookAt, myPano.getPosition());
     myPano.setPov({heading:angle, pitch:0, zoom:1});
