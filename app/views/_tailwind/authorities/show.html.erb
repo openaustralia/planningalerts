@@ -19,8 +19,6 @@
   <p class="py-4 mt-8 text-2xl border-y text-navy border-light-grey2">Population <%= number_with_delimiter @authority.population_2021 %> (2021 census)</p>
 <% end %>
 
-<%# TODO: Show number of alerts set up inside the authority %>
-
 <%# TODO: Handle situation where the authority is "broken" %>
 <%# TODO: Handle situation where the authority is not covered yet %>
 
@@ -121,15 +119,6 @@
 <%
 =begin
 %>
-
-- if Flipper.enabled?(:show_authority_map, current_user) && @authority.alerts
-  %p
-    - if @authority.alerts.count == 1
-      1 alert is
-    - else
-      = @authority.alerts.count
-      alerts are
-    set up inside the area covered by this authority
 
 - if @authority.covered?
   - if @authority.broken? && @authority.applications.count != 0
