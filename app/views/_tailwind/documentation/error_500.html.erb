@@ -1,0 +1,18 @@
+<% content_for :page_title, "We're sorry, but something went wrong (500)" %> 
+
+
+<div class="flex flex-col items-center max-w-2xl m-auto text-center">
+  <%= image_tag "tailwind/illustration/500.svg", class: "my-24" %>
+
+  <%= render Tailwind::Heading.new(tag: :h1) do %>
+    We're sorry, but something went wrong
+  <% end %>
+
+  <p class="my-8 text-2xl text-navy">
+    We've been notified about this issue and we'll take a look at it shortly.
+  </p>
+
+  <p class="text-2xl text-navy">
+    <%= pa_link_to "Go to our home page", root_url %>
+  </p>
+</div>
