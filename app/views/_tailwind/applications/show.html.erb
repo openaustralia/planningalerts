@@ -153,16 +153,16 @@
   </p>
   <% @comments.each do |comment| %>
     <div class="pt-12" id="comment<%= comment.id %>">
-      <% if comment.id == flash[:published_comment_id] %>
+      <% if true %>
         <div class="mb-8">
           <%= render Tailwind::AlertComponent.new(type: :success) do %>
-            <div class="m-4 font-normal leading-9">
-              <h2 class="text-3xl font-bold">Thanks, your comment has been sent</h2>
-              <p>
-                Your comment has been sent to <span class="font-bold"><%= comment.comment_recipient_full_name %></span> and posted below.
+            <div class="m-4 mb-6 text-3xl">
+              <p class="mb-6">
+                Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
               </p>
-              <%# TODO: Not sure how this link should be styled %>
-              <%= link_to "Share your comment on Facebook", "https://www.facebook.com/sharer/sharer.php?u=#{comment_url(Comment.first)}&t=", class: "underline" %>
+              <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", icon: :share, type: :inverse_lavender, href: "https://www.facebook.com/sharer/sharer.php?u=#{comment_url(Comment.first)}&t=") do %>
+                Share on Facebook
+              <% end %>
             </div>
           <% end %>
         </div>

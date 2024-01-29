@@ -32,9 +32,11 @@ module Tailwind
       # This is not strictly an "inverse" but is good to be used on darker coloured backgrounds
       when :inverse
         classes << "text-white bg-navy"
-      # TODO: Don't like that we have two "inverse" types
+      # TODO: Don't like that we have three "inverse" types!
       when :inverse_primary
         classes << "text-green bg-white border-2"
+      when :inverse_lavender
+        classes << "text-lavender bg-white"
       else
         raise "Unexpected type #{type}"
       end
