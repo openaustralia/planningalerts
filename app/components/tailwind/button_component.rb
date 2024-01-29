@@ -41,8 +41,7 @@ module Tailwind
 
       classes += %w[cursor-not-allowed opacity-40] if disabled && tag == :button
 
-      # Using inlined svg icons so that we can style them with tailwind to set the colours
-      # TODO: Don't hardcode the icon colours
+      # Using inlined svg icons so that we can set their colour based on the current text colour
       case icon
       when nil
         icon_path = nil
