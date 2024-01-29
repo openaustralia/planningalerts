@@ -41,18 +41,20 @@ module Tailwind
 
       classes += %w[cursor-not-allowed opacity-40] if disabled && tag == :button
 
+      # Using inlined svg icons so that we can style them with tailwind to set the colours
+      # TODO: Don't hardcode the icon colours
       case icon
       when nil
         icon_path = nil
       when :trash
-        icon_path = "tailwind/trash.svg"
+        icon_path = "application/svg/trash"
       when :edit
-        icon_path = "tailwind/pencil.svg"
+        icon_path = "application/svg/pencil"
       when :external
-        icon_path = "tailwind/external.svg"
+        icon_path = "application/svg/external"
       when :share
         # TODO: Share icon is not visually consistent with external link icon
-        icon_path = "tailwind/share.svg"
+        icon_path = "application/svg/share"
       else
         raise "Unexpected icon #{icon}"
       end
