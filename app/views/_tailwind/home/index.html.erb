@@ -2,8 +2,9 @@
 
 <%= render "banner" %>
 <%= render "applications/address_search_form", q: nil %>
-<%= render "how_it_works" %>
-<hr class="text-[#D2CFC1]">
-<%= render "trending", applications: @trending %>
-<hr class="text-[#D2CFC1]">
-<%= render "stats" %>
+
+<div class="divide-y divide-[#D2CFC1]">
+  <%= render "how_it_works" %>
+  <%= render "trending", applications: @trending %>
+  <%= render "stats" %>
+</div>
