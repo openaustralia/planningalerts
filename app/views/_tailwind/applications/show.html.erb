@@ -155,9 +155,9 @@
     <div class="pt-12" id="comment<%= comment.id %>">
       <% if comment.id == flash[:published_comment_id] %>
         <div class="mb-8">
-          <%= render Tailwind::AlertComponent.new(type: :success) do %>
-            <div class="m-4 mb-6 text-3xl">
-              <p class="mb-6">
+          <%= render Tailwind::AlertComponent.new(type: :congratulations) do %>
+            <div class="mb-4 ml-4 text-3xl">
+              <p class="mb-8">
                 Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
               </p>
               <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", icon: :share, type: :inverse_lavender, href: "https://www.facebook.com/sharer/sharer.php?u=#{comment_url(Comment.first)}&t=") do %>
