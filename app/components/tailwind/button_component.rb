@@ -43,23 +43,6 @@ module Tailwind
 
       classes += %w[cursor-not-allowed opacity-40] if disabled && tag == :button
 
-      # Using inlined svg icons so that we can set their colour based on the current text colour
-      case icon
-      when nil
-        icon_path = nil
-      when :trash
-        icon_path = "application/svg/trash"
-      when :edit
-        icon_path = "application/svg/pencil"
-      when :external
-        icon_path = "application/svg/external"
-      when :share
-        # TODO: Share icon is not visually consistent with external link icon
-        icon_path = "application/svg/share"
-      else
-        raise "Unexpected icon #{icon}"
-      end
-
       case tag
       when :a
         raise "href not set" if href.nil?
@@ -84,7 +67,7 @@ module Tailwind
       @options = T.let(options, T.nilable(T::Hash[Symbol, T.nilable(String)]))
       @tag = tag
       @href = href
-      @icon_path = T.let(icon_path, T.nilable(String))
+      @icon = icon
     end
   end
 end
