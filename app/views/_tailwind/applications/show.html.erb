@@ -153,7 +153,7 @@
   </p>
   <% @comments.each do |comment| %>
     <div class="pt-12" id="comment<%= comment.id %>">
-      <% if true %>
+      <% if comment.id == flash[:published_comment_id] %>
         <div class="mb-8">
           <%= render Tailwind::AlertComponent.new(type: :success) do %>
             <div class="m-4 mb-6 text-3xl">
