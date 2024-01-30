@@ -167,7 +167,7 @@ describe "Give feedback" do
         end
 
         it "suggests you share it on facebook" do
-          expect(page).to have_content("Share your comment on Facebook")
+          expect(page).to have_content("Share on Facebook")
         end
       end
     end
