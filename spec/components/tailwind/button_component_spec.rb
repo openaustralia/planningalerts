@@ -41,7 +41,7 @@ RSpec.describe Tailwind::ButtonComponent, type: :component do
 
   it "renders an icon" do
     render_inline(described_class.new(tag: :button, size: "2xl", type: :primary, icon: :trash)) { "Hello world!" }
-    expect(page).to have_css("img")
+    expect(page).to have_css("svg")
   end
 
   it "renders a link tag" do
