@@ -8,7 +8,7 @@ This is the code for the [web application](https://www.planningalerts.org.au/) s
 
 If you're interested in contributing a scraper read our [step-by-step guide to writing scrapers](https://www.planningalerts.org.au/how_to_write_a_scraper) on our scraping platform, [morph.io](https://morph.io/).
 
-PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au). It was created by Matthew Landauer and Katherine Szuminska.
+PlanningAlerts is brought to you by the [OpenAustralia Foundation](https://www.oaf.org.au/). It was created by Matthew Landauer and Katherine Szuminska.
 
 ## Development
 
