@@ -26,13 +26,14 @@ module Tailwind
 
       case type
       when :primary
-        classes << "text-white bg-green"
+        classes << "text-white bg-green hover:bg-dark-green active:ring-4 ring-sun-yellow"
       when :secondary
-        classes << "text-white bg-warm-grey"
+        classes << "text-white bg-warm-grey hover:bg-dark-warm-grey active:ring-4 ring-sun-yellow"
       # This is not strictly an "inverse" but is good to be used on darker coloured backgrounds
       when :inverse
-        classes << "text-white bg-navy"
+        classes << "text-white bg-navy hover:text-navy hover:bg-white hover:ring-2 hover:ring-navy active:ring-4 active:ring-sun-yellow"
       # TODO: Don't like that we have three "inverse" types!
+      # TODO: Need interactive states for inverse_primary and inverse_lavender
       when :inverse_primary
         classes << "text-green bg-white border-2"
       when :inverse_lavender
