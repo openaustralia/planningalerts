@@ -3,7 +3,7 @@
     <%= render Tailwind::ContainerComponent.new do %>
       <div class="flex flex-row-reverse items-center h-8">
         <%# Using this (out of palette) colour for the text to pass contrast accessibility tests %>
-        <%= link_to "https://www.oaf.org.au", class: "active:bg-sun-yellow p-1" do %>
+        <%= link_to "https://www.oaf.org.au", class: "focus:bg-sun-yellow p-1" do %>
           <div class="hidden text-sm font-medium text-dark-brown sm:block hover:text-dark-navy">
               An <span class="underline">OpenAustralia Foundation</span> service
           </div>

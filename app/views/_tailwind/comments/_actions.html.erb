@@ -1,7 +1,7 @@
 <%# TODO: Make this partial not have to know about the page that it's used on %>
 <% unless current_page?(new_comment_report_path(comment.id)) %>
   <%# TODO: Wrap this link style into the standard pa_link_to helper %>
-  <%= link_to "Report this comment", new_comment_report_path(comment), class: "text-fuchsia text-xl hover:underline hover:text-fuchsia-darker active:bg-sun-yellow" %>
+  <%= link_to "Report this comment", new_comment_report_path(comment), class: "text-fuchsia text-xl hover:underline hover:text-fuchsia-darker focus:bg-sun-yellow" %>
 <% end %>
 <% if current_user&.admin? %>
   <%= pa_link_to "Admin", admin_comment_path(comment), class: "block text-xl" %>

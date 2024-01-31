@@ -14,7 +14,7 @@ module ApplicationHelper
   # Only to be used in tailwind theme
   sig { returns(String) }
   def pa_link_classes
-    "text-fuchsia font-bold underline hover:text-fuchsia-darker active:bg-sun-yellow"
+    "text-fuchsia font-bold underline hover:text-fuchsia-darker focus:bg-sun-yellow"
   end
 
   # Only to be used in tailwind theme
