@@ -8,7 +8,7 @@
     = link_to "Application Tracking Data Interchange Specification", atdis_specification_path
     (ATDIS) is a modern, straightforward specification for publishing development
     applications online in a consistent machine readable format. It has been developed by the
-    #{link_to "NSW Department of Planning & Environment", "http://www.planning.nsw.gov.au/"},
+    #{link_to "NSW Department of Planning & Environment", "https://www.planning.nsw.gov.au/"},
     = link_to "Carpadium Pty Ltd", "http://www.carpadium.com/"
     and the
     #{link_to "OpenAustralia Foundation", "https://www.oaf.org.au"}.
@@ -43,7 +43,7 @@
 
 = semantic_form_for @feed, url: atdis_test_path do |f|
   = f.inputs do
-    = f.input :base_url, label: "ATDIS Base URL", placeholder: "http://www.council.nsw.gov.au/atdis/1.0"
+    = f.input :base_url, label: "ATDIS Base URL", placeholder: "https://www.council.nsw.gov.au/atdis/1.0"
   = f.inputs do
     = f.input :page, label: "Page Number", as: :number, min: 1
   %div{ "x-data": "{show: #{@feed.filters_set?}}" }
