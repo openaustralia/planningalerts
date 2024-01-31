@@ -19,8 +19,8 @@ class AlertMailer < ApplicationMailer
     @comments = T.let(comments, T.nilable(T::Array[Comment]))
 
     headers(
-      # The List-Unsubscribe header appears not to be working in gmail anymore
-      # TODO: Figure out what's going on. Is it fixable?
+      # The unsubscribe URL needs to accept a post
+      "List-Unsubscribe-Post" => "List-Unsubscribe=One-Click",
       "List-Unsubscribe" => "<#{unsubscribe_alert_url(confirm_id: alert.confirm_id)}>",
       # This special header sets arbitrary metadata on the email in Cuttlefish
       # It's not sent on in the outgoing email

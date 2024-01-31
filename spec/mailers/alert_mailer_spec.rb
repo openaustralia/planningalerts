@@ -56,6 +56,7 @@ describe AlertMailer do
 
     it "has the unsubscribe header" do
       expect(email.header["List-Unsubscribe"].to_s).to eq("<https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe>")
+      expect(email.header["List-Unsubscribe-Post"].to_s).to eq("List-Unsubscribe=One-Click")
     end
   end
 

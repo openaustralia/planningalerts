@@ -96,6 +96,7 @@ Rails.application.routes.draw do
   resources :alerts, only: %i[new create], path_names: { new: "signup" }, param: :confirm_id do
     member do
       get :unsubscribe
+      post :unsubscribe
     end
   end
 
