@@ -70,8 +70,5 @@
         <% end %>
       </div>
     </div>
-    <% if Flipper.enabled?(:switch_themes, current_user) %>
-      <%= pa_button_to "Toggle theme", toggle_theme_path, size: "lg", type: :inverse, form_class: "my-10" %>
-    <% end %>
   <% end %>
 </footer>
