@@ -91,6 +91,8 @@ Rails.application.routes.draw do
     resources :alerts, except: :show, controller: :alerts_new
     
     get :comments
+    # The design route is temporary and only needed for early testers of the new tailwind based theme
+    get :design
   end
 
   resources :alerts, only: %i[new create], path_names: { new: "signup" }, param: :confirm_id do

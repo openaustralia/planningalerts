@@ -7,6 +7,12 @@
   <li><div class="pl-4"><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "text-fuchsia hover:underline font-bold cursor-pointer" %></div></li>
 </ul>
 
+<% if Flipper.enabled?(:switch_themes, current_user) %>
+  <ul class="mt-10 ml-5 text-xl list-image-dash">
+    <li><div class="pl-4"><%= pa_link_to "Switch me back to the original design for Planning Alerts", design_profile_path %></div></li>
+  </ul>
+<% end %>
+
 <% if current_user.admin? %>
   <ul class="mt-10 ml-5 text-xl list-image-dash">
     <li><div class="pl-4"><%= pa_link_to_unless_current "Administration panel", admin_root_path %></div></li>
