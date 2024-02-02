@@ -147,6 +147,9 @@ module GeneratedPathHelpersModule
   def cuttlefish_event_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def design_profile_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def destroy_user_session_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
