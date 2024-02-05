@@ -6,7 +6,7 @@
 
 <%# TODO: Show more stuff as per design %>
 
-<div class="grid grid-flow-col grid-rows-[repeat(3,_max-content)] auto-cols-fr gap-6 mt-20">
+<div class="grid sm:grid-flow-col grid-rows-[repeat(3,_max-content)] auto-cols-fr gap-6 mt-20">
   <h2 class="text-3xl font-bold text-navy font-display">Most commented applications</h2>
   <div class="space-y-8">
     <% Application.trending.limit(3).each do |application| %>
