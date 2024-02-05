@@ -103,7 +103,7 @@ module FormBuilders
 
     sig { params(method: Symbol).returns(String) }
     def text_like_field_style(method)
-      style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate py-3"
+      style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate py-3 focus:ring-4 focus:ring-sun-yellow"
       style << " "
       style << (error?(method) ? "border-error-red pl-4 pr-16" : "border-light-grey2 px-4")
       style

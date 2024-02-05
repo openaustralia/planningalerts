@@ -28,7 +28,7 @@
       <%= form.text_field :q,
                           value: q,
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
-                          class: "text-2xl text-navy w-full px-4 py-3 sm:py-4 placeholder-shown:truncate",
+                          class: "text-2xl text-navy w-full px-4 py-3 sm:py-4 placeholder-shown:truncate focus:ring-4 focus:ring-sun-yellow",
                           required: "required",
                           "x-data" => "{ async initAutocomplete() {
                                            const { Autocomplete } = await google.maps.importLibrary('places');
