@@ -37,6 +37,7 @@
                           "x-init" => "initAutocomplete()",
                           "x-model.fill" => "address" %>
       <%= button_tag type: "button", class: "text-white sm:text-xl inline", "@click": "geolocate($event)", "x-bind:disabled": "loading" do %>
+        <%# TODO: Fix occasional clipping of icon problem %>
         <span class="inline-block mr-2 align-middle">
           <%= render "application/svg/location" %>
         </span>
