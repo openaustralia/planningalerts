@@ -118,7 +118,7 @@ module FormBuilders
     # TODO: Handle error conditions
     sig { returns(String) }
     def select_style
-      "text-2xl text-navy border-light-grey2 py-4"
+      "text-2xl text-navy border-light-grey2 py-4 focus:ring-4 focus:ring-sun-yellow"
     end
 
     sig { params(method: Symbol).returns(T::Boolean) }

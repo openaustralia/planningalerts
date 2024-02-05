@@ -17,7 +17,6 @@
   <div class="mt-8">
     <%= f.label :reason, "I'm getting in touch because", class: "block mb-3" %>
     <%# TODO: Make sure that we can't choose "Please select" %>
-    <%# TODO: Get rid of the blue hover state in the select %>
     <%# TODO: The grey border here does not match the design but matches other form elements %>
     <%= f.select :reason, [["Please select", ""]] + ContactMessage::REASONS_LONG, {}, class: "block" %>
     <%= f.error :reason, class: "mt-2" %>
