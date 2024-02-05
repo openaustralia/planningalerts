@@ -45,9 +45,9 @@
 <section class="py-12 mt-8 text-2xl border-t border-light-grey2 text-navy">
   <h2 class="pb-2 text-3xl font-bold text-navy font-display">Coverage</h2>
 
-  <div class="flex items-start justify-between">
+  <div class="flex flex-col-reverse items-start justify-between gap-8 pt-4 md:flex-row">
     <div class="max-w-2xl">
-      <p class="pt-4">
+      <p>
         We currently cover
         <%= Authority.percentage_population_covered_by_all_active_authorities.to_i %>% of
         Australia's population within <%= Authority.active.count %> authorities.
@@ -65,14 +65,16 @@
         <%= pa_link_to "find out how you can get involved", get_involved_path %>.
       </p>
     </div>
-    <%= render "authorities/coverage_percentage" %>
+    <div class="flex-shrink-0">
+      <%= render "authorities/coverage_percentage" %>
+    </div>
   </div>
 </section>
 
 <section class="py-12 text-2xl border-t text-navy border-light-grey2">
   <%# TODO: Better heading? %>
   <h2 class="pb-2 text-3xl font-bold text-navy font-display">Planning Data</h2>
-  <div class="flex items-start justify-between">
+  <div class="flex flex-col items-start justify-between gap-8 md:flex-row">
     <div class="max-w-2xl">
       <p class="pt-4">
         From time to time planning authorities change their websites which breaks the scrapers
