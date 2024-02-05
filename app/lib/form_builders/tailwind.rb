@@ -42,6 +42,13 @@ module FormBuilders
       end
     end
 
+    # TODO: Use better types for choices
+    # TODO: Handle error conditions
+    sig { params(method: Symbol, choices: T.untyped, options: T::Hash[Symbol, String], html_options: T::Hash[Symbol, String]).returns(String) }
+    def select(method, choices = nil, options = {}, html_options = {})
+      super(method, choices, options, html_options.merge(class: "text-2xl text-navy border-light-grey2 py-4 #{html_options[:class]}"))
+    end
+
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def error(method, options = {})
       return "" unless object.errors.key?(method)

@@ -18,7 +18,7 @@
                    Alert::VALID_RADIUS_METERS_VALUES.map { |r| [(meters_in_words(r) + (r == @alert.radius_meters ? " &check;" : "")).html_safe, r] },
                    # rubocop:enable Rails/OutputSafety
                    {},
-                   class: "w-full text-navy text-2xl font-normal py-4 border-light-grey2",
+                   class: "w-full",
                    "x-model.number": "radius_meters" %>
       <div class="h-80">
         <%= render Tailwind::MapWithRadius.new(lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: "radius_meters") do %>
