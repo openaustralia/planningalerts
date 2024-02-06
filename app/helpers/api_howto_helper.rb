@@ -38,7 +38,10 @@ module ApiHowtoHelper
     format:, key:, lat: Rails.configuration.planningalerts_api_example_lat, lng: Rails.configuration.planningalerts_api_example_lng,
     radius: Rails.configuration.planningalerts_api_example_size
   )
-    applications_url(host: api_host, format:, lat:, lng:, radius:, key:)
+    applications_url(
+      host: api_host, port: api_port,
+      format:, lat:, lng:, radius:, key:
+    )
   end
 
   sig do
@@ -58,7 +61,8 @@ module ApiHowtoHelper
     top_right_lng: Rails.configuration.planningalerts_api_example_top_right_lng
   )
     applications_url(
-      host: api_host, format:,
+      host: api_host, port: api_port,
+      format:,
       bottom_left_lat:, bottom_left_lng:,
       top_right_lat:, top_right_lng:,
       key:
@@ -68,7 +72,8 @@ module ApiHowtoHelper
   sig { params(format: String, key: T.nilable(String), authority: String).returns(String) }
   def api_example_authority_url(format:, key:, authority: Rails.configuration.planningalerts_api_example_authority)
     authority_applications_url(
-      host: api_host, format:, authority_id: authority,
+      host: api_host, port: api_port,
+      format:, authority_id: authority,
       key:
     )
   end
@@ -82,7 +87,7 @@ module ApiHowtoHelper
     ).returns(String)
   end
   def api_example_postcode_url(format:, key:, postcode: Rails.configuration.planningalerts_api_example_postcode, extra_params: {})
-    T.unsafe(self).applications_url({ host: api_host, format:, postcode:, key: }.merge(extra_params))
+    T.unsafe(self).applications_url({ host: api_host, port: api_port, format:, postcode:, key: }.merge(extra_params))
   end
 
   sig do
@@ -102,7 +107,7 @@ module ApiHowtoHelper
     postcode: Rails.configuration.planningalerts_api_example_postcode
   )
     applications_url(
-      host: api_host, format:, suburb:, state:, postcode:,
+      host: api_host, port: api_port, format:, suburb:, state:, postcode:,
       key:
     )
   end

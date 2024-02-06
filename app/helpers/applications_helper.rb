@@ -204,4 +204,9 @@ module ApplicationsHelper
   def api_host
     Rails.env.development? ? "localhost" : "api.planningalerts.org.au"
   end
+
+  sig { returns(T.nilable(Integer)) }
+  def api_port
+    Rails.env.development? ? 3000 : nil
+  end
 end
