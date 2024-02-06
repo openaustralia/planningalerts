@@ -80,6 +80,12 @@ describe "Browsing basic documentation pages" do
         expect(page).to be_axe_clean
       end
     end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("API")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
   end
 
   describe "get involved page in the new design" do
