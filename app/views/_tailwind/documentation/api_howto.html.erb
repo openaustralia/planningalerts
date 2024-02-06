@@ -24,13 +24,13 @@
   </p>
 </div>
 
-<div class="flex justify-between gap-8 px-12 py-8 mt-12 bg-light-grey">
+<div class="flex flex-col justify-between gap-8 px-12 py-8 mt-12 md:flex-row bg-light-grey">
   <div class="text-2xl text-navy">
     <% if current_user %>
       <% if api_key %>
-        <p>
+        <p class>
           The API examples below contain your API key:
-          <span class="font-bold"><%= api_key %></span>
+          <span class="font-bold break-all"><%= api_key %></span>
         </p>
       <% else %>
         <p>
@@ -51,7 +51,7 @@
       </p>
     <% end %>
   </div>
-  <%= image_tag "tailwind/illustration/key.svg", alt: "" %>
+  <%= image_tag "tailwind/illustration/key.svg", alt: "", size: "287x189" %>
 </div>
 
 <section class="mt-24">
