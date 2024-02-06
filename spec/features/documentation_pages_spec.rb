@@ -71,7 +71,7 @@ describe "Browsing basic documentation pages" do
 
   describe "api page in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true)
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
       visit api_howto_path
     end
 
