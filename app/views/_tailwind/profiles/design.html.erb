@@ -1,16 +1,11 @@
-<% content_for :page_title, "Switch me back" %>
+<% content_for :page_title, "Switch design" %>
 
 <h2 class="text-3xl font-bold text-navy font-display"><%= yield(:page_title) %></h2>
 
 <p class="mt-12 text-2xl text-navy">
-  So there's something about the new design which isn't working for you or doesn't work. That's a shame
-  but you know what, we expected that and that's why we released the new design to a select group of which
-  you are part.
-</p>
-<p class="mt-8 text-2xl text-navy">
-  Please help and make things better by letting us know what is making you switch back. Contact us.
+  Thanks for helping us by trying out the new design!
 </p>
 
 <div class="mt-12">
-  <%= pa_button_to "Take me back to the original design", toggle_theme_path %>
+  <%= pa_button_to "Switch back to the original design", toggle_theme_path %>
 </div>

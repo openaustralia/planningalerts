@@ -15,9 +15,7 @@
   %li= link_to "Your alerts", profile_alerts_path
   %li= link_to "Your comments", comments_profile_path
   %li= link_to "Edit account", edit_user_registration_path
-
-%ul
   - if Flipper.enabled?(:switch_themes, current_user)
-    %li= link_to "Try out a brand new design for Planning Alerts!", design_profile_path
+    %li= link_to "Switch design", design_profile_path
 
 = button_to "Sign out", destroy_user_session_path, method: :delete, class: "button button-action button-rounded"
