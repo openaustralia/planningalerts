@@ -107,8 +107,8 @@ Rails.application.configure do
   # Allow access from github codespaces preview
   config.hosts << /.*\.preview\.app\.github\.dev/
 
-  # Uncommment to allow local access for Matthew (for previewing on mobile etc)
-  #config.hosts << "orpington.local"
+  # This is to allow local access for Matthew (for previewing on mobile etc)
+  config.hosts << "orpington.local"
 
   # For actionmailbox
   config.hosts << "web"
