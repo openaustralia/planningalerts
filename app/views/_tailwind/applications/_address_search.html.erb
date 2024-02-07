@@ -4,10 +4,9 @@
 
 <%= render "address_search_form", q: nil, error: %>
 
-<%# TODO: Show more stuff as per design %>
-
-<div class="grid sm:grid-flow-col grid-rows-[repeat(3,_max-content)] auto-cols-fr gap-6 mt-20">
+<div class="grid sm:grid-flow-col grid-rows-[repeat(4,_max-content)] auto-cols-fr gap-12 mt-20">
   <h2 class="text-3xl font-bold text-navy font-display">Most commented applications</h2>
+  <%= image_tag "tailwind/illustration/people-talking.svg", alt: "" %>
   <div class="space-y-8">
     <% Application.trending.limit(3).each do |application| %>
       <%= link_to application, class: "block focus:bg-sun-yellow" do %>
@@ -16,13 +15,13 @@
           <p class="text-2xl font-bold text-navy">Commented on <%= pluralize(application.visible_comments_count, "time") %></p>
           <%# TODO: Limit length of description %>
           <p class="text-2xl text-navy">for "<%= application.description %>"</p>
-          <%# TODO: Add map like the design? %>
         </article>
       <% end %>
     <% end %>
   </div>
   <%= pa_link_to "View more trending applications", trending_applications_path, class: "text-2xl mt-6" %>
   <h2 class="text-3xl font-bold text-navy font-display">Latest applications across Australia</h2>
+  <%= image_tag "tailwind/illustration/houses.svg", alt: "" %>
   <div class="space-y-8">
     <%# TODO: Probably want some ordering that shows applications from different places %>
     <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
@@ -34,7 +33,6 @@
           </p>
           <%# TODO: Limit length of description %>
           <p class="text-2xl text-navy"><%= application.description %></p>
-          <%# TODO: Add state illustration like the design? %>
         </article>
       <% end %>
     <% end %>
