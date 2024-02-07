@@ -5,7 +5,7 @@
 <% if applications %>
   <section class="pt-16">
     <%# TODO: This is smaller than the "standard" h1 heading defined in the component %>
-    <h1 class="text-3xl font-bold text-navy font-display">Search results</h1>
+    <%= render Tailwind::Heading.new(tag: :h1, size: "3xl").with_content("Search results") %>
 
     <div class="flex justify-between pt-6">
       <div>
