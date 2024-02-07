@@ -35,7 +35,6 @@
 </div>
 
 <%# TODO: Show an error of some sort if the last delivery was not successful %>
-<%# TODO: Add standard spacer before footer - do that in layout %>
 <%= pa_button_to "Delete this alert", [:profile, @alert],
                  method: :delete, type: :secondary, icon: :trash, form_class: "mt-8",
                  data: { confirm: "Are you sure you want to unsubscribe for email alerts for #{@alert.address}?" } %>
