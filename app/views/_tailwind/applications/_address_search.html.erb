@@ -1,7 +1,6 @@
 <% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 
-<h1 class="sr-only">Search Applications</h1>
-
+<%= render Tailwind::Heading.new(tag: :h1, extra_classes: "sr-only").with_content("Search Applications") %>
 <%= render "address_search_form", q: nil, error: %>
 
 <div class="grid sm:grid-flow-col grid-rows-[repeat(4,_max-content)] auto-cols-fr gap-12 mt-20">
