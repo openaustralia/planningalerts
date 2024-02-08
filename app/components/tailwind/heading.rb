@@ -14,9 +14,9 @@ module Tailwind
 
       font_class = case font
                    when "display"
-                     "display-font"
+                     "font-display"
                    when "sans"
-                     "display-sans"
+                     "font-sans"
                    else
                      raise "Unexpected font #{font}"
                    end
