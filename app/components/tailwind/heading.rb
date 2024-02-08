@@ -12,26 +12,28 @@ module Tailwind
 
       raise "Invalid tag" unless tag == :h1
 
+      size_class = case size
+                   when "3xl"
+                     "text-3xl"
+                   # 4xl is the default size for h1
+                   when "4xl", nil
+                     "text-4xl"
+                   else
+                     raise "Unexpected size #{size}"
+                   end
+
+      color_class = case color
+                    when "fuchsia"
+                      "text-fuchsia"
+                    when "navy", nil
+                      "text-navy"
+                    else
+                      raise "Unexpected color #{color}"
+                    end
+
       @extra_classes = extra_classes
-
-      case size
-      when "3xl"
-        @size_class = T.let("text-3xl", String)
-      # 4xl is the default size for h1
-      when "4xl", nil
-        @size_class = T.let("text-4xl", String)
-      else
-        raise "Unexpected size #{size}"
-      end
-
-      case color
-      when "fuchsia"
-        @color_class = T.let("text-fuchsia", String)
-      when "navy", nil
-        @color_class = T.let("text-navy", String)
-      else
-        raise "Unexpected color #{color}"
-      end
+      @size_class = T.let(size_class, String)
+      @color_class = T.let(color_class, String)
     end
   end
 end
