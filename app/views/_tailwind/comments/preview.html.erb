@@ -7,7 +7,8 @@
 <% end %>
 
 <%# TODO: Make sure that there is consistency on formatting of h1, h2, h3, etc. across the site %>
-<h2 class="text-3xl font-bold text-navy mt-14">Your comment</h2>
+<%# TODO: Using non-standard font %>
+<%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "mt-14").with_content("Your comment") %>
 <p class="text-3xl text-navy">Does this look right?</p>
 
 <article class="flex gap-6 mt-10">
@@ -36,7 +37,8 @@
 </article>
 
 <section class="pt-16 mt-20 border-t border-dashed border-cool-blue-gray">
-  <h2 class="text-3xl font-bold text-navy">Email preview</h2>
+  <%# TODO: Using non-standard font %>
+  <%= render Tailwind::Heading.new(tag: :h2, font: "sans").with_content("Email preview") %>
 
   <p class="mt-8 text-2xl text-navy">
     Your comment and details will also automatically be sent to <strong><%= @comment.comment_recipient_full_name %></strong>.
@@ -82,7 +84,10 @@
 </section>
 
 <section class="pt-20 border-t border-dashed border-cool-blue-gray mt-14">
-  <h2 class="text-3xl font-bold text-navy">Have you made a donation or gift to a Councillor or Council employee?</h2>
+  <%# TODO: Using a non-standard font %>
+  <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
+    Have you made a donation or gift to a Councillor or Council employee?
+  <% end %>
   <p class="mt-6 text-2xl text-navy">You may need to disclose this.</p>
   <p class="mt-6 text-2xl text-navy">
     In NSW, for example, it is an offence if you fail to disclose this when making a
