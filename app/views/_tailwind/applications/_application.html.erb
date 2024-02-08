@@ -3,7 +3,9 @@
     <div>
       <div class="flex items-end gap-6">
         <%# TODO: Extract out link style that's used here %>
-        <h2 class="text-2xl font-bold underline text-fuchsia group-hover:text-fuchsia-darker"><%= application.address %></h2>
+        <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", color: "fuchsia", font: "sans", extra_classes: "underline group-hover:text-fuchsia-darker") do %>
+          <%= application.address %>
+        <% end %>
         <%# TODO: Make it the right width at different numbers %>
         <% if application.visible_comments_count.positive? %>
           <div class="pb-1 text-lg font-bold text-lavender">

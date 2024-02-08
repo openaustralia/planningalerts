@@ -6,9 +6,20 @@ module Tailwind
     extend T::Sig
 
     # TODO: Perhaps we should allow the size override to work by saying we want an h1 heading but with the styling of an h2?
-    sig { params(tag: Symbol, size: T.nilable(String), color: T.nilable(String), extra_classes: String).void }
-    def initialize(tag:, size: nil, color: nil, extra_classes: "")
+    sig { params(tag: Symbol, size: T.nilable(String), color: T.nilable(String), font: T.nilable(String), extra_classes: String).void }
+    def initialize(tag:, size: nil, color: nil, font: nil, extra_classes: "")
       super
+
+      font ||= "display"
+
+      font_class = case font
+                   when "display"
+                     "display-font"
+                   when "sans"
+                     "display-sans"
+                   else
+                     raise "Unexpected font #{font}"
+                   end
 
       default_size = case tag
                      when :h1
@@ -24,6 +35,8 @@ module Tailwind
       size_class = case size
                    when "xl"
                      "text-xl"
+                   when "2xl"
+                     "text-2xl"
                    when "3xl"
                      "text-3xl"
                    when "4xl"
@@ -45,6 +58,7 @@ module Tailwind
       @size_class = T.let(size_class, String)
       @color_class = T.let(color_class, String)
       @tag = tag
+      @font_class = T.let(font_class, String)
     end
   end
 end

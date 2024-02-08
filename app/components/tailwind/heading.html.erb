@@ -1,10 +1,10 @@
 <%# TODO: Not sure whether we should be setting max width on all headings %>
 <% if @tag == :h1 %>
-  <h1 class="<%= @size_class %> font-bold <%= @color_class %> font-display max-w-4xl <%= @extra_classes %>">
+  <h1 class="<%= @size_class %> font-bold <%= @color_class %> <%= @font_class %> max-w-4xl <%= @extra_classes %>">
     <%= content %>
   </h1>
 <% elsif @tag == :h2 %>
-  <h2 class="<%= @size_class %> font-bold <%= @color_class %> font-display <%= @extra_classes %>">
+  <h2 class="<%= @size_class %> font-bold <%= @color_class %> <%= @font_class %> <%= @extra_classes %>">
     <%= content %>
   </h2>
 <% end %>
