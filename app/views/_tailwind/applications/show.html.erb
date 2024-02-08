@@ -136,7 +136,7 @@
 </div>
 
 <section class="pt-20 border-t mt-14 border-light-grey2" id="comments">
-  <h2 class="inline-block mb-6 text-3xl font-bold text-navy font-display">Comments on this application</h2>
+  <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "inline-block mb-6").with_content("Comments on this application") %>
   <% if @comments.count > 0 %>
     <div class="relative inline-block ml-4 -top-6">
       <%= render Tailwind::SpeechBubbleComponent.new(size: "4xl", alignment: :right) do %>
