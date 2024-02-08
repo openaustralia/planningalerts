@@ -174,7 +174,7 @@
 <section class="flex gap-6 mt-14" id="add-comment">
   <div class="mt-20 text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
-    <h2 class="mb-3 text-3xl font-bold text-navy font-display">Add your own comment<h2>
+    <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mb-3").with_content("Add your own comment") %>
     <% if current_user.nil? %>
       <div class="px-4 py-3 bg-light-grey">
         <p class="text-2xl opacity-50 text-navy">Be polite, clear and to the point so your comment gets listened to.</p>
