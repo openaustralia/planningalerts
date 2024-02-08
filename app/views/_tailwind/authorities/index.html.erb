@@ -28,9 +28,10 @@
 
 <div class="mt-8 border-t divide-y divide-light-grey2 border-light-grey2">
   <section class="py-12">
-    <h2 class="text-2xl font-bold text-navy font-display">
+    <%# TODO: This is using a smaller size than standard for h2 %>
+    <%= render Tailwind::Heading.new(tag: :h2, size: "2xl") do %>
       Where does application data come from?
-    </h2>
+    <% end %>
     <%# TODO: This paragraph is the same as used in "how to write a scraper". Extract partial? %>
     <p class="mt-4 text-2xl text-navy">
       To be able to display and send alerts for planning applications,
@@ -59,9 +60,10 @@
   </section>
   <section class="py-12">
     <%# TODO: Not sure this is the best wording for the heading %>
-    <h2 class="text-2xl font-bold text-navy font-display">
+    <%# TODO: This is using a smaller size than standard %>
+    <%= render Tailwind::Heading.new(tag: :h2, size: "2xl") do %>
       Date reliability
-    </h2>
+    <% end %>
     <p class="mt-4 text-2xl text-navy">
       From time to time planning authorities change their websites which breaks the scrapers that gather the planning
       data. Here is a complete list of all the planning authorities we source data from and their status.
