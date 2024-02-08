@@ -1,8 +1,8 @@
 <div class="sm:grid sm:items-center sm:grid-cols-2 sm:gap-7 mb-9 sm:mb-7">
   <%# TODO: This is using a different style than the standard Heading component %>
-  <h1 class="text-3xl font-bold sm:text-5xl font-display text-navy">
+  <%= render Tailwind::Heading.new(tag: :h1, size: "3xl", extra_classes: "sm:text-5xl") do %>
     Find out for free what is being built and knocked down in your area.
-  </h1>
+  <% end %>
   <div class="mt-9 sm:mt-0 justify-self-end">
     <%= image_tag "tailwind/illustration/banner.svg", alt: "", size: "465x340" %>
   </div>
