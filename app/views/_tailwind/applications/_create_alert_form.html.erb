@@ -12,9 +12,9 @@
   </div>
 <% else %>
   <div class="flex flex-col items-center justify-between gap-8 md:flex-row bg-light-grey px-14 mt-14">
-    <%# TODO: Is h2 correct here? %>
     <div class="pt-14 md:pb-14">
-      <h2 class="text-3xl font-bold font-display text-navy">Save this search as an email alert?</h2>
+      <%# TODO: Font is inconsistent with what's used in the "signed in" variant above %>
+      <p class="text-3xl font-bold font-display text-navy">Save this search as an email alert?</p>
       <p class="mt-4 text-2xl text-navy">
         <%= pa_link_to "Create an account", new_user_registration_path %>
         or
