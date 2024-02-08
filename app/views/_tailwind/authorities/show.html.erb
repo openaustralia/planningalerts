@@ -23,7 +23,10 @@
 
 <div class="divide-y divide-light-grey2">
   <section class="py-12">
-    <h2 class="text-3xl font-bold text-navy">Applications collected by Planning Alerts</h2>
+    <%# TODO: This is using a different font than standard %>
+    <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
+      Applications collected by Planning Alerts
+    <% end %>
     <table class="mt-8 text-2xl text-navy">
       <tbody>
         <tr>
@@ -55,7 +58,10 @@
 
   <section class="pt-12 pb-24">
     <%# TODO: This title isn't right because the section has comments in it too %>
-    <h2 class="text-3xl font-bold text-navy">Browse applications from <%= @authority.full_name %></h2>
+    <%# TODO: Using a non-standard font for h2 %>
+    <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
+      Browse applications from <%= @authority.full_name %>
+    <% end %>
     <ul class="mt-8 text-2xl text-navy">
       <li>
         View all
@@ -69,7 +75,10 @@
   </section>
 
   <section class="pt-12 pb-24">
-    <h2 class="pb-12 text-3xl font-bold text-navy">Number of new applications scraped over time</h2>
+    <%# TODO: Using non-standard font %>
+    <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "pb-12") do %>
+      Number of new applications scraped over time
+    <% end %>
     <div class="h-52">
       <div class="chart bg-fuchsia" id="applications-chart">
       </div>
@@ -77,7 +86,10 @@
   </section>
 
   <section class="clear-both pt-12 pb-24">
-    <h2 class="pb-12 text-3xl font-bold text-navy">Number of comments posted over time</h2>
+    <%# TODO: Using non-standard font %>
+    <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "pb-12") do %>
+      Number of comments posted over time
+    <% end %>
     <div class="h-52">
       <div class="chart bg-fuchsia" id="comments-chart">
       </div>
@@ -101,7 +113,10 @@
   </script>
 
   <section class="pt-12 pb-24">
-    <h2 class="pb-12 text-3xl font-bold text-navy">Under the Hood</h2>
+    <%# TODO: Using non-standard font %>
+    <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "pb-12") do %>
+      Under the Hood
+    <% end %>
     <p class="text-2xl text-navy">
       Are you a developer or keen to learn some new things and help out in the process?
       Then, <%= pa_link_to "look under the hood", authority_under_the_hood_path(@authority.short_name_encoded) %>,
