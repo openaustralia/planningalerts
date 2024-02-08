@@ -4,7 +4,7 @@
 <%= render "address_search_form", q: nil, error: %>
 
 <div class="grid sm:grid-flow-col grid-rows-[repeat(4,_max-content)] auto-cols-fr gap-12 mt-20">
-  <h2 class="text-3xl font-bold text-navy font-display">Most commented applications</h2>
+  <%= render Tailwind::Heading.new(tag: :h2).with_content("Most commented applications") %>
   <%# Wrapping in a div to make the bottom of the illustrations match up %>
   <div class="flex items-end">
     <%= image_tag "tailwind/illustration/people-talking.svg", alt: "" %>
@@ -22,7 +22,7 @@
     <% end %>
   </div>
   <%= pa_link_to "View more trending applications", trending_applications_path, class: "text-2xl mt-6" %>
-  <h2 class="text-3xl font-bold text-navy font-display">Latest applications across Australia</h2>
+  <%= render Tailwind::Heading.new(tag: :h2).with_content("Latest applications across Australia") %>
   <div class="flex items-end">
     <%= image_tag "tailwind/illustration/houses.svg", alt: "" %>
   </div>
@@ -45,7 +45,7 @@
 </div>
 
 <section class="py-12 mt-8 text-2xl border-t border-light-grey2 text-navy">
-  <h2 class="pb-2 text-3xl font-bold text-navy font-display">Coverage</h2>
+  <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-2").with_content("Coverage") %>
 
   <div class="flex flex-col-reverse items-start justify-between gap-8 pt-4 md:flex-row">
     <div class="max-w-2xl">
@@ -75,7 +75,8 @@
 
 <section class="py-12 text-2xl border-t text-navy border-light-grey2">
   <%# TODO: Better heading? %>
-  <h2 class="pb-2 text-3xl font-bold text-navy font-display">Planning Data</h2>
+  <%# TODO: Do we want to include something like pb-2 for all headings in the component? %>
+  <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-2").with_content("Planning Data") %>
   <div class="flex flex-col items-start justify-between gap-8 md:flex-row">
     <div class="max-w-2xl">
       <p class="pt-4">
