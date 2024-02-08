@@ -1,6 +1,5 @@
 <div class="max-w-lg mx-auto">
   <%# TODO: This is using a different style than the standard component Heading %>
-  <%# TODO: Use text-pretty as standard for headings instead of "&nbsp;" once we've updated tailwind to a version that supports it %>
   <%= render Tailwind::Heading.new(tag: :h1, color: "fuchsia", extra_classes: "my-20 text-center") do %>
     Sign in to Planning&nbsp;Alerts
   <% end %>
