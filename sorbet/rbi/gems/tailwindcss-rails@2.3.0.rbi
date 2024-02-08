@@ -10,21 +10,21 @@ module Tailwindcss; end
 # source://tailwindcss-rails//lib/tailwindcss/commands.rb#4
 module Tailwindcss::Commands
   class << self
-    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#75
+    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#76
     def compile_command(debug: T.unsafe(nil), **kwargs); end
 
-    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#24
+    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#25
     def executable(exe_path: T.unsafe(nil)); end
 
-    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#20
+    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#21
     def platform; end
 
     # @return [Boolean]
     #
-    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#94
+    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#100
     def rails_css_compressor?; end
 
-    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#86
+    # source://tailwindcss-rails//lib/tailwindcss/commands.rb#92
     def watch_command(always: T.unsafe(nil), poll: T.unsafe(nil), **kwargs); end
   end
 end
@@ -34,23 +34,26 @@ Tailwindcss::Commands::DEFAULT_DIR = T.let(T.unsafe(nil), String)
 
 # raised when TAILWINDCSS_INSTALL_DIR does not exist
 #
-# source://tailwindcss-rails//lib/tailwindcss/commands.rb#16
+# source://tailwindcss-rails//lib/tailwindcss/commands.rb#17
 class Tailwindcss::Commands::DirectoryNotFoundException < ::StandardError; end
 
 # raised when the tailwindcss executable could not be found where we expected it to be
 #
-# source://tailwindcss-rails//lib/tailwindcss/commands.rb#12
+# source://tailwindcss-rails//lib/tailwindcss/commands.rb#13
 class Tailwindcss::Commands::ExecutableNotFoundException < ::StandardError; end
+
+# source://tailwindcss-rails//lib/tailwindcss/commands.rb#6
+Tailwindcss::Commands::GEM_NAME = T.let(T.unsafe(nil), String)
 
 # raised when the host platform is not supported by upstream tailwindcss's binary releases
 #
-# source://tailwindcss-rails//lib/tailwindcss/commands.rb#8
+# source://tailwindcss-rails//lib/tailwindcss/commands.rb#9
 class Tailwindcss::Commands::UnsupportedPlatformException < ::StandardError; end
 
 # source://tailwindcss-rails//lib/tailwindcss/engine.rb#4
 class Tailwindcss::Engine < ::Rails::Engine
   class << self
-    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
     def __callbacks; end
   end
 end

@@ -92,10 +92,10 @@ module Nokogiri
 
     # @return [Boolean]
     #
-    # source://nokogiri//lib/nokogiri/version/info.rb#205
+    # source://nokogiri//lib/nokogiri/version/info.rb#206
     def jruby?; end
 
-    # source://nokogiri//lib/nokogiri/version/info.rb#210
+    # source://nokogiri//lib/nokogiri/version/info.rb#211
     def libxml2_patches; end
 
     # Create a new Nokogiri::XML::DocumentFragment
@@ -110,12 +110,12 @@ module Nokogiri
 
     # @return [Boolean]
     #
-    # source://nokogiri//lib/nokogiri/version/info.rb#200
+    # source://nokogiri//lib/nokogiri/version/info.rb#201
     def uses_gumbo?; end
 
     # @return [Boolean]
     #
-    # source://nokogiri//lib/nokogiri/version/info.rb#192
+    # source://nokogiri//lib/nokogiri/version/info.rb#193
     def uses_libxml?(requirement = T.unsafe(nil)); end
   end
 end
@@ -718,22 +718,6 @@ Nokogiri::CSS::XPathVisitor::DoctypeConfig::XML = T.let(T.unsafe(nil), Symbol)
 
 # source://nokogiri//lib/nokogiri/css/xpath_visitor.rb#10
 Nokogiri::CSS::XPathVisitor::WILDCARD_NAMESPACES = T.let(T.unsafe(nil), TrueClass)
-
-# source://nokogiri//lib/nokogiri/css/xpath_visitor.rb#339
-module Nokogiri::CSS::XPathVisitorAlwaysUseBuiltins
-  class << self
-    # source://nokogiri//lib/nokogiri/css/xpath_visitor.rb#340
-    def new; end
-  end
-end
-
-# source://nokogiri//lib/nokogiri/css/xpath_visitor.rb#349
-module Nokogiri::CSS::XPathVisitorOptimallyUseBuiltins
-  class << self
-    # source://nokogiri//lib/nokogiri/css/xpath_visitor.rb#350
-    def new; end
-  end
-end
 
 # Some classes in Nokogiri are namespaced as a group, for example
 # Document, DocumentFragment, and Builder.
@@ -1821,29 +1805,15 @@ module Nokogiri::HTML5
     # source://nokogiri//lib/nokogiri/html5.rb#238
     def fragment(string, encoding = T.unsafe(nil), **options); end
 
-    # Fetch and parse a HTML document from the web, following redirects,
-    # handling https, and determining the character encoding using HTML5
-    # rules.  +uri+ may be a +String+ or a +URI+.  +options+ contains
-    # http headers and special options.  Everything which is not a
-    # special option is considered a header.  Special options include:
-    #  * :follow_limit => number of redirects which are followed
-    #  * :basic_auth => [username, password]
-    #
-    # source://nokogiri//lib/nokogiri/html5.rb#249
-    def get(uri, options = T.unsafe(nil)); end
-
     # Parse an HTML 5 document. Convenience method for {Nokogiri::HTML5::Document.parse}
     #
     # source://nokogiri//lib/nokogiri/html5.rb#232
     def parse(string, url = T.unsafe(nil), encoding = T.unsafe(nil), **options, &block); end
 
-    # source://nokogiri//lib/nokogiri/html5.rb#260
+    # source://nokogiri//lib/nokogiri/html5.rb#243
     def read_and_encode(string, encoding); end
 
     private
-
-    # source://nokogiri//lib/nokogiri/html5.rb#286
-    def get_impl(uri, options = T.unsafe(nil)); end
 
     # Charset sniffing is a complex and controversial topic that understandably isn't done _by
     # default_ by the Ruby Net::HTTP library.  This being said, it is a very real problem for
@@ -1857,7 +1827,7 @@ module Nokogiri::HTML5
     # http://bugs.ruby-lang.org/issues/2567
     # http://www.w3.org/TR/html5/syntax.html#determining-the-character-encoding
     #
-    # source://nokogiri//lib/nokogiri/html5.rb#347
+    # source://nokogiri//lib/nokogiri/html5.rb#281
     def reencode(body, content_type = T.unsafe(nil)); end
   end
 end
@@ -2118,7 +2088,7 @@ Nokogiri::VERSION = T.let(T.unsafe(nil), String)
 
 # Detailed version info about Nokogiri and the installed extension dependencies.
 #
-# source://nokogiri//lib/nokogiri/version/info.rb#222
+# source://nokogiri//lib/nokogiri/version/info.rb#223
 Nokogiri::VERSION_INFO = T.let(T.unsafe(nil), Hash)
 
 # source://nokogiri//lib/nokogiri/version/info.rb#7
@@ -2182,7 +2152,7 @@ class Nokogiri::VersionInfo
   # source://nokogiri//lib/nokogiri/version/info.rb#88
   def to_hash; end
 
-  # source://nokogiri//lib/nokogiri/version/info.rb#180
+  # source://nokogiri//lib/nokogiri/version/info.rb#181
   def to_markdown; end
 
   # source://nokogiri//lib/nokogiri/version/info.rb#72
@@ -2249,8 +2219,6 @@ class Nokogiri::XML::Attr < ::Nokogiri::XML::Node
   #  - +value+ → (String) The value of the attribute.
   #  - +namespace+ → (Namespace, nil) The Namespace of the attribute, or +nil+ if there is no namespace.
   #
-  #  ⚡ This is an experimental feature, available since v1.14.0
-  #
   #  *Example*
   #
   #    doc = Nokogiri::XML.parse(<<~XML)
@@ -2282,6 +2250,8 @@ class Nokogiri::XML::Attr < ::Nokogiri::XML::Node
   #    #        prefix = "noko",
   #    #        href = "http://nokogiri.org/ns/noko"
   #    #        })}
+  #
+  #  Since v1.14.0
   #
   # source://nokogiri//lib/nokogiri/xml/attr.rb#55
   def deconstruct_keys(keys); end
@@ -2769,13 +2739,13 @@ end
 class Nokogiri::XML::Document < ::Nokogiri::XML::Node
   # @return [Document] a new instance of Document
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#178
+  # source://nokogiri//lib/nokogiri/xml/document.rb#177
   def initialize(*args); end
 
-  # source://nokogiri//lib/nokogiri/xml/document.rb#394
+  # source://nokogiri//lib/nokogiri/xml/document.rb#393
   def <<(node_or_tags); end
 
-  # source://nokogiri//lib/nokogiri/xml/document.rb#394
+  # source://nokogiri//lib/nokogiri/xml/document.rb#393
   def add_child(node_or_tags); end
 
   def canonicalize(*_arg0); end
@@ -2817,17 +2787,17 @@ class Nokogiri::XML::Document < ::Nokogiri::XML::Node
   #
   #   {"xmlns:foo" => "baz"}
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#317
+  # source://nokogiri//lib/nokogiri/xml/document.rb#316
   def collect_namespaces; end
 
   # Create a CDATA Node containing +string+
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#262
+  # source://nokogiri//lib/nokogiri/xml/document.rb#261
   def create_cdata(string, &block); end
 
   # Create a Comment Node containing +string+
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#267
+  # source://nokogiri//lib/nokogiri/xml/document.rb#266
   def create_comment(string, &block); end
 
   # :call-seq:
@@ -2878,14 +2848,14 @@ class Nokogiri::XML::Document < ::Nokogiri::XML::Node
   #
   #   doc.create_element("div") { |node| node["class"] = "blue" if before_noon? }
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#232
+  # source://nokogiri//lib/nokogiri/xml/document.rb#231
   def create_element(name, *contents_or_attrs, &block); end
 
   def create_entity(*_arg0); end
 
   # Create a Text Node with +string+
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#257
+  # source://nokogiri//lib/nokogiri/xml/document.rb#256
   def create_text_node(string, &block); end
 
   # :call-seq: deconstruct_keys(array_of_names) → Hash
@@ -2898,8 +2868,6 @@ class Nokogiri::XML::Document < ::Nokogiri::XML::Node
   #  In the future, other keys may allow accessing things like doctype and processing
   #  instructions. If you have a use case and would like this functionality, please let us know
   #  by opening an issue or a discussion on the github project.
-  #
-  #  ⚡ This is an experimental feature, available since v1.14.0
   #
   #  *Example*
   #
@@ -2927,22 +2895,24 @@ class Nokogiri::XML::Document < ::Nokogiri::XML::Node
   #    doc.deconstruct_keys([:root])
   #    # => {:root=>nil}
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#458
+  #  Since v1.14.0
+  #
+  # source://nokogiri//lib/nokogiri/xml/document.rb#457
   def deconstruct_keys(keys); end
 
   # Apply any decorators to +node+
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#365
+  # source://nokogiri//lib/nokogiri/xml/document.rb#364
   def decorate(node); end
 
   # Get the list of decorators given +key+
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#324
+  # source://nokogiri//lib/nokogiri/xml/document.rb#323
   def decorators(key); end
 
   # A reference to +self+
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#277
+  # source://nokogiri//lib/nokogiri/xml/document.rb#276
   def document; end
 
   def dup(*_arg0); end
@@ -2966,12 +2936,12 @@ class Nokogiri::XML::Document < ::Nokogiri::XML::Node
   # Create a Nokogiri::XML::DocumentFragment from +tags+
   # Returns an empty fragment if +tags+ is nil.
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#386
+  # source://nokogiri//lib/nokogiri/xml/document.rb#385
   def fragment(tags = T.unsafe(nil)); end
 
   # The name of this document.  Always returns "document"
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#272
+  # source://nokogiri//lib/nokogiri/xml/document.rb#271
   def name; end
 
   # When `true`, reparented elements without a namespace will inherit their new parent's
@@ -3074,7 +3044,7 @@ class Nokogiri::XML::Document < ::Nokogiri::XML::Node
 
   # Get the hash of namespaces on the root Nokogiri::XML::Node
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#379
+  # source://nokogiri//lib/nokogiri/xml/document.rb#378
   def namespaces; end
 
   def remove_namespaces!; end
@@ -3096,10 +3066,10 @@ class Nokogiri::XML::Document < ::Nokogiri::XML::Node
   #   irb> doc.slop!
   #   ... which does absolutely nothing.
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#354
+  # source://nokogiri//lib/nokogiri/xml/document.rb#353
   def slop!; end
 
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1280
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1286
   def to_xml(*args, &block); end
 
   def url; end
@@ -3107,7 +3077,7 @@ class Nokogiri::XML::Document < ::Nokogiri::XML::Node
   # Validate this Document against it's DTD.  Returns a list of errors on
   # the document or +nil+ when there is no DTD.
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#332
+  # source://nokogiri//lib/nokogiri/xml/document.rb#331
   def validate; end
 
   def version; end
@@ -3119,12 +3089,12 @@ class Nokogiri::XML::Document < ::Nokogiri::XML::Node
   #
   # See XPathVisitor for more information.
   #
-  # source://nokogiri//lib/nokogiri/xml/document.rb#414
+  # source://nokogiri//lib/nokogiri/xml/document.rb#413
   def xpath_doctype; end
 
   private
 
-  # source://nokogiri//lib/nokogiri/xml/document.rb#466
+  # source://nokogiri//lib/nokogiri/xml/document.rb#465
   def inspect_attributes; end
 
   class << self
@@ -3172,7 +3142,7 @@ class Nokogiri::XML::Document < ::Nokogiri::XML::Node
   end
 end
 
-# source://nokogiri//lib/nokogiri/xml/document.rb#464
+# source://nokogiri//lib/nokogiri/xml/document.rb#463
 Nokogiri::XML::Document::IMPLIED_XPATH_CONTEXTS = T.let(T.unsafe(nil), Array)
 
 # source://nokogiri//lib/nokogiri/xml/document.rb#19
@@ -3220,8 +3190,6 @@ class Nokogiri::XML::DocumentFragment < ::Nokogiri::XML::Node
   #  root elements, you should deconstruct the array returned by
   #  <tt>DocumentFragment#elements</tt>.
   #
-  #  ⚡ This is an experimental feature, available since v1.14.0
-  #
   #  *Example*
   #
   #    frag = Nokogiri::HTML5.fragment(<<~HTML)
@@ -3252,6 +3220,8 @@ class Nokogiri::XML::DocumentFragment < ::Nokogiri::XML::Node
   #    #       children = [ #(Text "shortcut")]
   #    #       }),
   #    #     #(Element:0x398 { name = "div", children = [ #(Text "End")] })]
+  #
+  #  Since v1.14.0
   #
   # source://nokogiri//lib/nokogiri/xml/document_fragment.rb#190
   def deconstruct; end
@@ -3461,8 +3431,6 @@ class Nokogiri::XML::Namespace
   #  - +prefix+ → (String, nil) The namespace's prefix, or +nil+ if there is no prefix (e.g., default namespace).
   #  - +href+ → (String) The namespace's URI
   #
-  #  ⚡ This is an experimental feature, available since v1.14.0
-  #
   #  *Example*
   #
   #    doc = Nokogiri::XML.parse(<<~XML)
@@ -3488,7 +3456,9 @@ class Nokogiri::XML::Namespace
   #    doc.root.elements.last.namespace.deconstruct_keys([:prefix, :href])
   #    # => {:prefix=>"noko", :href=>"http://nokogiri.org/ns/noko"}
   #
-  # source://nokogiri//lib/nokogiri/xml/namespace.rb#47
+  #  Since v1.14.0
+  #
+  # source://nokogiri//lib/nokogiri/xml/namespace.rb#46
   def deconstruct_keys(keys); end
 
   # Returns the value of attribute document.
@@ -3501,7 +3471,7 @@ class Nokogiri::XML::Namespace
 
   private
 
-  # source://nokogiri//lib/nokogiri/xml/namespace.rb#53
+  # source://nokogiri//lib/nokogiri/xml/namespace.rb#52
   def inspect_attributes; end
 end
 
@@ -3601,12 +3571,12 @@ class Nokogiri::XML::Node
   # Compare two Node objects with respect to their Document.  Nodes from
   # different documents cannot be compared.
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1256
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1262
   def <=>(other); end
 
   # Test to see if this Node is equal to +other+
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1246
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1252
   def ==(other); end
 
   # :call-seq: [](name) → (String, nil)
@@ -3681,7 +3651,7 @@ class Nokogiri::XML::Node
 
   # Accept a visitor.  This method calls "visit" on +visitor+ with self.
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1240
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1246
   def accept(visitor); end
 
   # Add +node_or_tags+ as a child of this Node.
@@ -3789,7 +3759,7 @@ class Nokogiri::XML::Node
   # Get a list of ancestor Node for this Node.  If +selector+ is given,
   # the ancestors must match +selector+
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1209
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1215
   def ancestors(selector = T.unsafe(nil)); end
 
   # :call-seq: append_class(names) → self
@@ -3942,14 +3912,14 @@ class Nokogiri::XML::Node
 
   def blank?; end
 
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1407
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1414
   def canonicalize(mode = T.unsafe(nil), inclusive_namespaces = T.unsafe(nil), with_comments = T.unsafe(nil)); end
 
   # Returns true if this is a CDATA
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1130
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1136
   def cdata?; end
 
   def child; end
@@ -3993,7 +3963,7 @@ class Nokogiri::XML::Node
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1125
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1131
   def comment?; end
 
   def content; end
@@ -4009,7 +3979,7 @@ class Nokogiri::XML::Node
 
   # Get the path to this node as a CSS expression
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1200
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1206
   def css_path; end
 
   # :call-seq: deconstruct_keys(array_of_names) → Hash
@@ -4024,8 +3994,6 @@ class Nokogiri::XML::Node
   #  - +elements+ → (Array<Node>) The child elements of this node. 💡 Note this does not include text nodes.
   #  - +content+ → (String) The contents of all the text nodes in this node's subtree. See #content.
   #  - +inner_html+ → (String) The inner markup for the children of this node. See #inner_html.
-  #
-  #  ⚡ This is an experimental feature, available since v1.14.0
   #
   #  *Example*
   #
@@ -4061,7 +4029,9 @@ class Nokogiri::XML::Node
   #    #         value = "def"
   #    #         })]}
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1468
+  #  Since v1.14.0
+  #
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1475
   def deconstruct_keys(keys); end
 
   # Decorate this node with the decorators set up in this node's Document
@@ -4086,7 +4056,7 @@ class Nokogiri::XML::Node
   # Fetch the Nokogiri::HTML4::ElementDescription for this node.  Returns
   # nil on XML documents and on unknown tags.
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1167
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1173
   def description; end
 
   # Do xinclude substitution on the subtree below node. If given a block, a
@@ -4104,7 +4074,7 @@ class Nokogiri::XML::Node
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1145
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1151
   def document?; end
 
   def dup(*_arg0); end
@@ -4118,14 +4088,14 @@ class Nokogiri::XML::Node
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1181
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1187
   def elem?; end
 
   # Returns true if this is an Element node
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1181
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1187
   def element?; end
 
   def element_children; end
@@ -4144,7 +4114,7 @@ class Nokogiri::XML::Node
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1160
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1166
   def fragment?; end
 
   # :call-seq: [](name) → (String, nil)
@@ -4186,7 +4156,7 @@ class Nokogiri::XML::Node
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1140
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1146
   def html?; end
 
   # Get the inner_html for this node's Node#children
@@ -4460,7 +4430,7 @@ class Nokogiri::XML::Node
   #   #     "xmlns"=>"http://example.com/root",
   #   #     "xmlns:in_scope"=>"http://example.com/in_scope"}
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1116
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1122
   def namespaces; end
 
   def native_content=(_arg0); end
@@ -4542,14 +4512,14 @@ class Nokogiri::XML::Node
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1150
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1156
   def processing_instruction?; end
 
   # Is this a read only node?
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1175
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1181
   def read_only?; end
 
   def remove; end
@@ -4633,7 +4603,7 @@ class Nokogiri::XML::Node
   #     config.format.as_xml
   #   end
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1280
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1286
   def serialize(*args, &block); end
 
   # :call-seq: []=(name, value) → value
@@ -4691,7 +4661,7 @@ class Nokogiri::XML::Node
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1155
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1161
   def text?; end
 
   # Serialize this Node to HTML
@@ -4701,13 +4671,13 @@ class Nokogiri::XML::Node
   # See Node#write_to for a list of +options+.  For formatted output,
   # use Node#to_xhtml instead.
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1306
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1313
   def to_html(options = T.unsafe(nil)); end
 
   # Turn this node in to a string.  If the document is HTML, this method
   # returns html.  If the document is XML, this method returns XML.
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1190
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1196
   def to_s; end
 
   def to_str; end
@@ -4717,7 +4687,7 @@ class Nokogiri::XML::Node
   #
   # See Node#write_to for a list of +options+
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1327
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1334
   def to_xhtml(options = T.unsafe(nil)); end
 
   # Serialize this Node to XML using +options+
@@ -4725,7 +4695,7 @@ class Nokogiri::XML::Node
   #
   # See Node#write_to for a list of +options+
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1316
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1323
   def to_xml(options = T.unsafe(nil)); end
 
   # Yields self and all children to +block+ recursively.
@@ -4733,7 +4703,7 @@ class Nokogiri::XML::Node
   # @yield [_self]
   # @yieldparam _self [Nokogiri::XML::Node] the object that the method was called on
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1233
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1239
   def traverse(&block); end
 
   def type; end
@@ -4802,7 +4772,7 @@ class Nokogiri::XML::Node
   #
   # See Node#write_to for a list of +options+
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1384
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1391
   def write_html_to(io, options = T.unsafe(nil)); end
 
   # :call-seq:
@@ -4836,7 +4806,7 @@ class Nokogiri::XML::Node
   #
   # See Node#write_to for a list of +options+
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1392
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1399
   def write_xhtml_to(io, options = T.unsafe(nil)); end
 
   # Write Node as XML to +io+ with +options+
@@ -4845,21 +4815,21 @@ class Nokogiri::XML::Node
   #
   # See Node#write_to for a list of options
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1402
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1409
   def write_xml_to(io, options = T.unsafe(nil)); end
 
   # Returns true if this is an XML::Document node
   #
   # @return [Boolean]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1135
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1141
   def xml?; end
 
   protected
 
   # @raise [ArgumentError]
   #
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1482
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1489
   def coerce(data); end
 
   private
@@ -4872,7 +4842,7 @@ class Nokogiri::XML::Node
   def add_next_sibling_node(_arg0); end
   def add_previous_sibling_node(_arg0); end
 
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1516
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1523
   def add_sibling(next_or_previous, node_or_tags); end
 
   def compare(_arg0); end
@@ -4881,10 +4851,10 @@ class Nokogiri::XML::Node
   def html_standard_serialize(_arg0); end
   def in_context(_arg0, _arg1); end
 
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1555
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1562
   def inspect_attributes; end
 
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1504
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1511
   def keywordify(keywords); end
 
   def native_write_to(_arg0, _arg1, _arg2, _arg3); end
@@ -4894,10 +4864,10 @@ class Nokogiri::XML::Node
   def set(_arg0, _arg1); end
   def set_namespace(_arg0); end
 
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1541
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1548
   def to_format(save_option, options); end
 
-  # source://nokogiri//lib/nokogiri/xml/node.rb#1548
+  # source://nokogiri//lib/nokogiri/xml/node.rb#1555
   def write_format_to(save_option, io, options); end
 
   class << self
@@ -4925,10 +4895,10 @@ Nokogiri::XML::Node::CDATA_SECTION_NODE = T.let(T.unsafe(nil), Integer)
 # source://nokogiri//lib/nokogiri/xml/node.rb#77
 Nokogiri::XML::Node::COMMENT_NODE = T.let(T.unsafe(nil), Integer)
 
-# source://nokogiri//lib/nokogiri/xml/node.rb#1415
+# source://nokogiri//lib/nokogiri/xml/node.rb#1422
 Nokogiri::XML::Node::DECONSTRUCT_KEYS = T.let(T.unsafe(nil), Array)
 
-# source://nokogiri//lib/nokogiri/xml/node.rb#1416
+# source://nokogiri//lib/nokogiri/xml/node.rb#1423
 Nokogiri::XML::Node::DECONSTRUCT_METHODS = T.let(T.unsafe(nil), Hash)
 
 # DOCB document node type
@@ -4986,7 +4956,7 @@ Nokogiri::XML::Node::ENTITY_REF_NODE = T.let(T.unsafe(nil), Integer)
 # source://nokogiri//lib/nokogiri/xml/node.rb#87
 Nokogiri::XML::Node::HTML_DOCUMENT_NODE = T.let(T.unsafe(nil), Integer)
 
-# source://nokogiri//lib/nokogiri/xml/node.rb#1559
+# source://nokogiri//lib/nokogiri/xml/node.rb#1566
 Nokogiri::XML::Node::IMPLIED_XPATH_CONTEXTS = T.let(T.unsafe(nil), Array)
 
 # Namespace declaration type
@@ -5145,7 +5115,7 @@ Nokogiri::XML::Node::SaveOptions::NO_XHTML = T.let(T.unsafe(nil), Integer)
 # source://nokogiri//lib/nokogiri/xml/node.rb#67
 Nokogiri::XML::Node::TEXT_NODE = T.let(T.unsafe(nil), Integer)
 
-# source://nokogiri//lib/nokogiri/xml/node.rb#1538
+# source://nokogiri//lib/nokogiri/xml/node.rb#1545
 Nokogiri::XML::Node::USING_LIBXML_WITH_BROKEN_SERIALIZATION = T.let(T.unsafe(nil), FalseClass)
 
 # XInclude end type
@@ -5336,7 +5306,7 @@ class Nokogiri::XML::NodeSet
   #
   #  Returns the members of this NodeSet as an array, to use in pattern matching.
   #
-  #  ⚡ This is an experimental feature, available since v1.14.0
+  #  Since v1.14.0
   #
   # source://nokogiri//lib/nokogiri/xml/node_set.rb#440
   def deconstruct; end
@@ -6131,9 +6101,11 @@ class Nokogiri::XML::ProcessingInstruction < ::Nokogiri::XML::Node
   end
 end
 
-# Nokogiri::XML::Reader parses an XML document similar to the way a cursor
-# would move.  The Reader is given an XML document, and yields nodes
-# to an each block.
+# Nokogiri::XML::Reader parses an XML document similar to the way a cursor would move. The
+# Reader is given an XML document, and yields nodes to an each block.
+#
+# The Reader parser might be good for when you need the speed and low memory usage of the SAX
+# parser, but do not want to write a Document handler.
 #
 # Here is an example of usage:
 #
@@ -6150,28 +6122,26 @@ end
 #
 #     end
 #
-# Note that Nokogiri::XML::Reader#each can only be called once!!  Once
-# the cursor moves through the entire document, you must parse the
-# document again.  So make sure that you capture any information you
-# need during the first iteration.
+# ⚠ Nokogiri::XML::Reader#each can only be called once! Once the cursor moves through the entire
+# document, you must parse the document again. It may be better to capture all information you
+# need during a single iteration.
 #
-# The Reader parser is good for when you need the speed of a SAX parser,
-# but do not want to write a Document handler.
+# ⚠ libxml2 does not support error recovery in the Reader parser. The `RECOVER` ParseOption is
+# ignored. If a syntax error is encountered during parsing, an exception will be raised.
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#32
+# source://nokogiri//lib/nokogiri/xml/reader.rb#33
 class Nokogiri::XML::Reader
   include ::Enumerable
 
   # @return [Reader] a new instance of Reader
   #
-  # source://nokogiri//lib/nokogiri/xml/reader.rb#79
+  # source://nokogiri//lib/nokogiri/xml/reader.rb#80
   def initialize(source, url = T.unsafe(nil), encoding = T.unsafe(nil)); end
 
   def attribute(_arg0); end
   def attribute_at(_arg0); end
   def attribute_count; end
   def attribute_hash; end
-  def attribute_nodes; end
 
   # Get the attributes and namespaces of the current node as a Hash.
   #
@@ -6180,7 +6150,7 @@ class Nokogiri::XML::Reader
   # [Returns]
   #   (Hash<String, String>) Attribute names and values, and namespace prefixes and hrefs.
   #
-  # source://nokogiri//lib/nokogiri/xml/reader.rb#92
+  # source://nokogiri//lib/nokogiri/xml/reader.rb#93
   def attributes; end
 
   def attributes?; end
@@ -6190,7 +6160,7 @@ class Nokogiri::XML::Reader
 
   # Move the cursor through the document yielding the cursor to the block
   #
-  # source://nokogiri//lib/nokogiri/xml/reader.rb#98
+  # source://nokogiri//lib/nokogiri/xml/reader.rb#99
   def each; end
 
   def empty_element?; end
@@ -6198,12 +6168,12 @@ class Nokogiri::XML::Reader
 
   # A list of errors encountered while parsing
   #
-  # source://nokogiri//lib/nokogiri/xml/reader.rb#72
+  # source://nokogiri//lib/nokogiri/xml/reader.rb#73
   def errors; end
 
   # A list of errors encountered while parsing
   #
-  # source://nokogiri//lib/nokogiri/xml/reader.rb#72
+  # source://nokogiri//lib/nokogiri/xml/reader.rb#73
   def errors=(_arg0); end
 
   def inner_xml; end
@@ -6220,7 +6190,7 @@ class Nokogiri::XML::Reader
 
   # The XML source
   #
-  # source://nokogiri//lib/nokogiri/xml/reader.rb#75
+  # source://nokogiri//lib/nokogiri/xml/reader.rb#76
   def source; end
 
   def state; end
@@ -6236,90 +6206,90 @@ end
 
 # Attribute node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#39
+# source://nokogiri//lib/nokogiri/xml/reader.rb#40
 Nokogiri::XML::Reader::TYPE_ATTRIBUTE = T.let(T.unsafe(nil), Integer)
 
 # CDATA node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#43
+# source://nokogiri//lib/nokogiri/xml/reader.rb#44
 Nokogiri::XML::Reader::TYPE_CDATA = T.let(T.unsafe(nil), Integer)
 
 # Comment node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#51
+# source://nokogiri//lib/nokogiri/xml/reader.rb#52
 Nokogiri::XML::Reader::TYPE_COMMENT = T.let(T.unsafe(nil), Integer)
 
 # Document node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#53
+# source://nokogiri//lib/nokogiri/xml/reader.rb#54
 Nokogiri::XML::Reader::TYPE_DOCUMENT = T.let(T.unsafe(nil), Integer)
 
 # Document Fragment node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#57
+# source://nokogiri//lib/nokogiri/xml/reader.rb#58
 Nokogiri::XML::Reader::TYPE_DOCUMENT_FRAGMENT = T.let(T.unsafe(nil), Integer)
 
 # Document Type node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#55
+# source://nokogiri//lib/nokogiri/xml/reader.rb#56
 Nokogiri::XML::Reader::TYPE_DOCUMENT_TYPE = T.let(T.unsafe(nil), Integer)
 
 # Element node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#37
+# source://nokogiri//lib/nokogiri/xml/reader.rb#38
 Nokogiri::XML::Reader::TYPE_ELEMENT = T.let(T.unsafe(nil), Integer)
 
 # Element end node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#65
+# source://nokogiri//lib/nokogiri/xml/reader.rb#66
 Nokogiri::XML::Reader::TYPE_END_ELEMENT = T.let(T.unsafe(nil), Integer)
 
 # Entity end node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#67
+# source://nokogiri//lib/nokogiri/xml/reader.rb#68
 Nokogiri::XML::Reader::TYPE_END_ENTITY = T.let(T.unsafe(nil), Integer)
 
 # Entity node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#47
+# source://nokogiri//lib/nokogiri/xml/reader.rb#48
 Nokogiri::XML::Reader::TYPE_ENTITY = T.let(T.unsafe(nil), Integer)
 
 # Entity Reference node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#45
+# source://nokogiri//lib/nokogiri/xml/reader.rb#46
 Nokogiri::XML::Reader::TYPE_ENTITY_REFERENCE = T.let(T.unsafe(nil), Integer)
 
-# source://nokogiri//lib/nokogiri/xml/reader.rb#35
+# source://nokogiri//lib/nokogiri/xml/reader.rb#36
 Nokogiri::XML::Reader::TYPE_NONE = T.let(T.unsafe(nil), Integer)
 
 # Notation node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#59
+# source://nokogiri//lib/nokogiri/xml/reader.rb#60
 Nokogiri::XML::Reader::TYPE_NOTATION = T.let(T.unsafe(nil), Integer)
 
 # PI node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#49
+# source://nokogiri//lib/nokogiri/xml/reader.rb#50
 Nokogiri::XML::Reader::TYPE_PROCESSING_INSTRUCTION = T.let(T.unsafe(nil), Integer)
 
 # Significant Whitespace node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#63
+# source://nokogiri//lib/nokogiri/xml/reader.rb#64
 Nokogiri::XML::Reader::TYPE_SIGNIFICANT_WHITESPACE = T.let(T.unsafe(nil), Integer)
 
 # Text node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#41
+# source://nokogiri//lib/nokogiri/xml/reader.rb#42
 Nokogiri::XML::Reader::TYPE_TEXT = T.let(T.unsafe(nil), Integer)
 
 # Whitespace node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#61
+# source://nokogiri//lib/nokogiri/xml/reader.rb#62
 Nokogiri::XML::Reader::TYPE_WHITESPACE = T.let(T.unsafe(nil), Integer)
 
 # XML Declaration node type
 #
-# source://nokogiri//lib/nokogiri/xml/reader.rb#69
+# source://nokogiri//lib/nokogiri/xml/reader.rb#70
 Nokogiri::XML::Reader::TYPE_XML_DECLARATION = T.let(T.unsafe(nil), Integer)
 
 # Nokogiri::XML::RelaxNG is used for validating XML against a
@@ -7284,18 +7254,41 @@ end
 #   doc   = Nokogiri::XML(File.read('some_file.xml'))
 #   xslt  = Nokogiri::XSLT(File.read('some_transformer.xslt'))
 #
-#   puts xslt.transform(doc)
+#   xslt.transform(doc) # => Nokogiri::XML::Document
 #
-# See Nokogiri::XSLT::Stylesheet#transform for more transformation
-# information.
+# Many XSLT transformations include serialization behavior to emit a non-XML document. For these
+# cases, please take care to invoke the #serialize method on the result of the transformation:
 #
-# source://nokogiri//lib/nokogiri/xslt/stylesheet.rb#17
+#   doc   = Nokogiri::XML(File.read('some_file.xml'))
+#   xslt  = Nokogiri::XSLT(File.read('some_transformer.xslt'))
+#   xslt.serialize(xslt.transform(doc)) # => String
+#
+# or use the #apply_to method, which is a shortcut for `serialize(transform(document))`:
+#
+#   doc   = Nokogiri::XML(File.read('some_file.xml'))
+#   xslt  = Nokogiri::XSLT(File.read('some_transformer.xslt'))
+#   xslt.apply_to(doc) # => String
+#
+# See Nokogiri::XSLT::Stylesheet#transform for more information and examples.
+#
+# source://nokogiri//lib/nokogiri/xslt/stylesheet.rb#29
 class Nokogiri::XSLT::Stylesheet
-  # Apply an XSLT stylesheet to an XML::Document.
-  # +params+ is an array of strings used as XSLT parameters.
-  # returns serialized document
+  # :call-seq:
+  #   apply_to(document, params = []) -> String
   #
-  # source://nokogiri//lib/nokogiri/xslt/stylesheet.rb#22
+  # Apply an XSLT stylesheet to an XML::Document and serialize it properly. This method is
+  # equivalent to calling #serialize on the result of #transform.
+  #
+  # [Parameters]
+  # - +document+ is an instance of XML::Document to transform
+  # - +params+ is an array of strings used as XSLT parameters, passed into #transform
+  #
+  # [Returns]
+  #   A string containing the serialized result of the transformation.
+  #
+  # See Nokogiri::XSLT::Stylesheet#transform for more information and examples.
+  #
+  # source://nokogiri//lib/nokogiri/xslt/stylesheet.rb#44
   def apply_to(document, params = T.unsafe(nil)); end
 
   def serialize(_arg0); end
