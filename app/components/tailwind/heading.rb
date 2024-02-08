@@ -10,15 +10,23 @@ module Tailwind
     def initialize(tag:, size: nil, color: nil, extra_classes: "")
       super
 
-      raise "Invalid tag" unless tag == :h1
+      default_size = case tag
+                     when :h1
+                       "4xl"
+                     when :h2
+                       "3xl"
+                     else
+                       raise "Unexpected tag #{tag}"
+                     end
+
+      size ||= default_size
 
       size_class = case size
                    when "xl"
                      "text-xl"
                    when "3xl"
                      "text-3xl"
-                   # 4xl is the default size for h1
-                   when "4xl", nil
+                   when "4xl"
                      "text-4xl"
                    else
                      raise "Unexpected size #{size}"
@@ -36,6 +44,7 @@ module Tailwind
       @extra_classes = extra_classes
       @size_class = T.let(size_class, String)
       @color_class = T.let(color_class, String)
+      @tag = tag
     end
   end
 end
