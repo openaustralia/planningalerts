@@ -13,6 +13,8 @@ module Tailwind
       raise "Invalid tag" unless tag == :h1
 
       size_class = case size
+                   when "xl"
+                     "text-xl"
                    when "3xl"
                      "text-3xl"
                    # 4xl is the default size for h1
