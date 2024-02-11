@@ -57,7 +57,7 @@
 <section class="mt-24">
   <h2 class="text-3xl font-bold text-navy font-display">API documentation</h2>
   <section class="max-w-4xl">
-    <h3 class="sr-only">API methods</h3>
+    <%= render Tailwind::Heading.new(tag: :h3, extra_classes: "sr-only").with_content("API methods") %>
     <section class="mt-16">
       <h4 class="text-2xl font-bold text-navy">
         Single Location by longitude/latitude
@@ -145,7 +145,8 @@
   </section>
   <section class="pt-8 mt-16 border-t border-t-warm-grey">
     <div class="max-w-4xl">
-      <h3 class="text-3xl font-bold text-navy font-display">Extra query parameters</h3>
+      <%# TODO: Using non-standard style %>
+      <%= render Tailwind::Heading.new(tag: :h3, size: "3xl").with_content("Extra query parameters") %>
       <p class="mt-8 text-2xl text-navy">
         There are several parameters that can be applied to each of the above queries for extra usefulness.
       </p>
@@ -175,9 +176,10 @@
     </div>
   </section>
   <section class="pt-8 mt-16 text-2xl border-t text-navy border-t-warm-grey">
-    <h3 class="text-3xl font-bold text-navy font-display">
+    <%# TODO: Using non-standard style %>
+    <%= render Tailwind::Heading.new(tag: :h3, size: "3xl") do %>
       Warning about client side API queries
-    </h3>
+    <% end %>
     <p class="mt-8">
       Client-side API queries are supported using
       <%= pa_link_to "CORS", "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" %>. You might do this, for example,
@@ -191,9 +193,8 @@
     </p>
   </section>
   <section id="usage" class="pt-8 mt-16 text-2xl border-t text-navy border-t-warm-grey">
-    <h3 class="text-3xl font-bold text-navy font-display">
-      Usage
-    </h3>
+    <%# TODO: Using non-standard style %>
+    <%= render Tailwind::Heading.new(tag: :h3, size: "3xl").with_content("Usage") %>
     <p class="mt-8">
       Low volume,
       <strong>non&ndash;commercial</strong>
@@ -216,9 +217,8 @@
     </p>
   </section>
   <section class="pt-8 mt-16 text-2xl border-t text-navy border-t-warm-grey">
-    <h3 class="text-3xl font-bold text-navy font-display">
-      Be Nice
-    </h3>
+    <%# TODO: Using non-standard style %>
+    <%= render Tailwind::Heading.new(tag: :h3, size: "3xl").with_content("Be Nice") %>
     <p class="mt-8">
       The Planning Alerts service is intended to help people be aware of what's happening in their local neighborhood, and to enable a civil discussion about those changes.
     </p>

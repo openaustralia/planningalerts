@@ -26,6 +26,8 @@ module Tailwind
                        "4xl"
                      when :h2
                        "3xl"
+                     when :h3
+                       "2xl"
                      else
                        raise "Unexpected tag #{tag}"
                      end

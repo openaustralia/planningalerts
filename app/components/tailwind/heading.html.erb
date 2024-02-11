@@ -7,4 +7,8 @@
   <h2 class="<%= @size_class %> font-bold <%= @color_class %> <%= @font_class %> <%= @extra_classes %>">
     <%= content %>
   </h2>
+<% elsif @tag == :h3 %>
+  <h3 class="<%= @size_class %> font-bold <%= @color_class %> <%= @font_class %> <%= @extra_classes %>">
+    <%= content %>
+  </h3>
 <% end %>
