@@ -10,26 +10,6 @@ module Tailwind
     def initialize(tag:, size: nil, color: nil, font: nil, weight: nil, extra_classes: "")
       super
 
-      font ||= "display"
-      font_class = case font
-                   when "display"
-                     "font-display"
-                   when "sans"
-                     "font-sans"
-                   else
-                     raise "Unexpected font #{font}"
-                   end
-
-      weight ||= "bold"
-      weight_class = case weight
-                     when "semibold"
-                       "font-semibold"
-                     when "bold"
-                       "font-bold"
-                     else
-                       raise "Unexpected weight #{weight}"
-                     end
-
       default_size = case tag
                      when :h1
                        "4xl"
@@ -41,40 +21,62 @@ module Tailwind
                        raise "Unexpected tag #{tag}"
                      end
 
+      # Set the default styling
       size ||= default_size
+      weight ||= "bold"
+      color ||= "navy"
+      font ||= "display"
 
-      size_class = case size
-                   when "xl"
-                     "text-xl"
-                   when "2xl"
-                     "text-2xl"
-                   when "3xl"
-                     "text-3xl"
-                   when "4xl"
-                     "text-4xl"
-                   else
-                     raise "Unexpected size #{size}"
-                   end
+      c = []
 
-      color_class = case color
-                    when "fuchsia"
-                      "text-fuchsia"
-                    when "navy", nil
-                      "text-navy"
-                    else
-                      raise "Unexpected color #{color}"
-                    end
+      c << case size
+           when "xl"
+             "text-xl"
+           when "2xl"
+             "text-2xl"
+           when "3xl"
+             "text-3xl"
+           when "4xl"
+             "text-4xl"
+           else
+             raise "Unexpected size #{size}"
+           end
 
+      c << case weight
+           when "semibold"
+             "font-semibold"
+           when "bold"
+             "font-bold"
+           else
+             raise "Unexpected weight #{weight}"
+           end
+
+      c << case color
+           when "fuchsia"
+             "text-fuchsia"
+           when "navy"
+             "text-navy"
+           else
+             raise "Unexpected color #{color}"
+           end
+
+      c << case font
+           when "display"
+             "font-display"
+           when "sans"
+             "font-sans"
+           else
+             raise "Unexpected font #{font}"
+           end
 
       # TODO: Not sure whether we should be setting max width on all headings
-      c = if tag == :h1
-            "#{size_class} #{weight_class} #{color_class} #{font_class} max-w-4xl #{extra_classes}"
-          else
-            "#{size_class} #{weight_class} #{color_class} #{font_class} #{extra_classes}"
-          end
+      c << "max-w-4xl" if tag == :h1
+
+      # These extra classes can't override the default styling because they're at the end
+      c << extra_classes
 
       @tag = tag
-      @class = T.let(c, String)
+      @class = T.let(c, T::Array[String])
     end
   end
 end
