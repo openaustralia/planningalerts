@@ -10,7 +10,7 @@ module Tailwind
     # Doing this very long winded way to ensure that tailwind doesn't remove styles being used here
     VALID_SIZE_CLASSES = T.let(%w[text-xl text-2xl text-3xl text-4xl].freeze, T::Array[String])
     VALID_WEIGHT_CLASSES = T.let(%w[font-semibold font-bold].freeze, T::Array[String])
-    VALID_COLOR_CLASSES = T.let(%w[text-fuchsia text-navy].freeze, T::Array[String])
+    VALID_COLOR_CLASSES = T.let(%w[text-fuchsia text-navy text-white].freeze, T::Array[String])
     VALID_FONT_CLASSES = T.let(%w[font-display font-sans].freeze, T::Array[String])
 
     # TODO: Perhaps we should allow the size override to work by saying we want an h1 heading but with the styling of an h2?
