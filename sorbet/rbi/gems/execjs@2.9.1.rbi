@@ -34,7 +34,7 @@ module ExecJS
     # source://execjs//lib/execjs/module.rb#13
     def runtime=(runtime); end
 
-    # source://execjs//lib/execjs/runtimes.rb#96
+    # source://execjs//lib/execjs/runtimes.rb#108
     def runtimes; end
 
     # @return [Boolean]
@@ -108,103 +108,133 @@ class ExecJS::DuktapeRuntime::Context < ::ExecJS::Runtime::Context
   def wrap_error(e); end
 end
 
-# Encodes strings as UTF-8
-#
-# source://execjs//lib/execjs/encoding.rb#3
-module ExecJS::Encoding
-  # workaround for jruby bug http://jira.codehaus.org/browse/JRUBY-6588
-  # workaround for rbx bug https://github.com/rubinius/rubinius/issues/1729
-  #
-  # source://execjs//lib/execjs/encoding.rb#21
-  def encode(string); end
-end
-
 # source://execjs//lib/execjs/module.rb#5
 class ExecJS::Error < ::StandardError; end
 
-# source://execjs//lib/execjs/external_runtime.rb#5
+# source://execjs//lib/execjs/external_runtime.rb#6
 class ExecJS::ExternalRuntime < ::ExecJS::Runtime
   # @return [ExternalRuntime] a new instance of ExternalRuntime
   #
-  # source://execjs//lib/execjs/external_runtime.rb#92
+  # source://execjs//lib/execjs/external_runtime.rb#93
   def initialize(options); end
 
   # @return [Boolean]
   #
-  # source://execjs//lib/execjs/external_runtime.rb#109
+  # source://execjs//lib/execjs/external_runtime.rb#116
   def available?; end
 
   # @return [Boolean]
   #
-  # source://execjs//lib/execjs/external_runtime.rb#114
+  # source://execjs//lib/execjs/external_runtime.rb#121
   def deprecated?; end
 
-  # source://execjs//lib/execjs/external_runtime.rb#211
+  # source://execjs//lib/execjs/external_runtime.rb#209
   def exec_runtime(filename); end
 
   # Returns the value of attribute name.
   #
-  # source://execjs//lib/execjs/external_runtime.rb#90
+  # source://execjs//lib/execjs/external_runtime.rb#91
   def name; end
 
   protected
 
-  # source://execjs//lib/execjs/external_runtime.rb#159
+  # source://execjs//lib/execjs/external_runtime.rb#157
   def encode_source(source); end
 
-  # source://execjs//lib/execjs/external_runtime.rb#164
+  # source://execjs//lib/execjs/external_runtime.rb#162
   def encode_unicode_codepoints(str); end
 
-  # source://execjs//lib/execjs/external_runtime.rb#226
+  # source://execjs//lib/execjs/external_runtime.rb#224
   def exec_runtime_error(output); end
 
-  # source://execjs//lib/execjs/external_runtime.rb#145
-  def generate_compile_method(path); end
-
-  # source://execjs//lib/execjs/external_runtime.rb#155
+  # source://execjs//lib/execjs/external_runtime.rb#153
   def json2_source; end
 
-  # source://execjs//lib/execjs/external_runtime.rb#235
+  # source://execjs//lib/execjs/external_runtime.rb#233
   def which(command); end
 
   private
 
-  # source://execjs//lib/execjs/external_runtime.rb#119
+  # source://execjs//lib/execjs/external_runtime.rb#126
   def binary; end
 
-  # source://execjs//lib/execjs/external_runtime.rb#123
+  # source://execjs//lib/execjs/external_runtime.rb#130
   def locate_executable(command); end
 end
 
-# source://execjs//lib/execjs/external_runtime.rb#6
+# source://execjs//lib/execjs/external_runtime.rb#7
 class ExecJS::ExternalRuntime::Context < ::ExecJS::Runtime::Context
   # @return [Context] a new instance of Context
   #
-  # source://execjs//lib/execjs/external_runtime.rb#7
+  # source://execjs//lib/execjs/external_runtime.rb#8
   def initialize(runtime, source = T.unsafe(nil), options = T.unsafe(nil)); end
 
-  # source://execjs//lib/execjs/external_runtime.rb#45
+  # source://execjs//lib/execjs/external_runtime.rb#46
   def call(identifier, *args); end
 
-  # source://execjs//lib/execjs/external_runtime.rb#17
+  # source://execjs//lib/execjs/external_runtime.rb#18
   def eval(source, options = T.unsafe(nil)); end
 
-  # source://execjs//lib/execjs/external_runtime.rb#25
+  # source://execjs//lib/execjs/external_runtime.rb#26
   def exec(source, options = T.unsafe(nil)); end
 
   protected
 
   # See Tempfile.create on Ruby 2.1
   #
-  # source://execjs//lib/execjs/external_runtime.rb#51
+  # source://execjs//lib/execjs/external_runtime.rb#52
   def create_tempfile(basename); end
 
-  # source://execjs//lib/execjs/external_runtime.rb#67
+  # source://execjs//lib/execjs/external_runtime.rb#68
   def extract_result(output, filename); end
 
-  # source://execjs//lib/execjs/external_runtime.rb#60
+  # source://execjs//lib/execjs/external_runtime.rb#61
   def write_to_tempfile(contents); end
 end
+
+# source://execjs//lib/execjs/graaljs_runtime.rb#4
+class ExecJS::GraalJSRuntime < ::ExecJS::Runtime
+  # @return [Boolean]
+  #
+  # source://execjs//lib/execjs/graaljs_runtime.rb#125
+  def available?; end
+
+  # source://execjs//lib/execjs/graaljs_runtime.rb#121
+  def name; end
+end
+
+# source://execjs//lib/execjs/graaljs_runtime.rb#5
+class ExecJS::GraalJSRuntime::Context < ::ExecJS::Runtime::Context
+  # @return [Context] a new instance of Context
+  #
+  # source://execjs//lib/execjs/graaljs_runtime.rb#6
+  def initialize(runtime, source = T.unsafe(nil), options = T.unsafe(nil)); end
+
+  # source://execjs//lib/execjs/graaljs_runtime.rb#37
+  def call(source, *args); end
+
+  # source://execjs//lib/execjs/graaljs_runtime.rb#28
+  def eval(source, options = T.unsafe(nil)); end
+
+  def eval_in_context(code); end
+
+  # source://execjs//lib/execjs/graaljs_runtime.rb#19
+  def exec(source, options = T.unsafe(nil)); end
+
+  private
+
+  # source://execjs//lib/execjs/graaljs_runtime.rb#64
+  def convert_js_to_ruby(value); end
+
+  # source://execjs//lib/execjs/graaljs_runtime.rb#97
+  def convert_ruby_to_js(value); end
+
+  # source://execjs//lib/execjs/graaljs_runtime.rb#51
+  def translate; end
+end
+
+# source://execjs//lib/execjs/graaljs_runtime.rb#49
+ExecJS::GraalJSRuntime::Context::ForeignException = RuntimeError
 
 # source://execjs//lib/execjs/mini_racer_runtime.rb#4
 class ExecJS::MiniRacerRuntime < ::ExecJS::Runtime
@@ -245,87 +275,85 @@ end
 # source://execjs//lib/execjs/module.rb#7
 class ExecJS::ProgramError < ::ExecJS::Error; end
 
-# source://execjs//lib/execjs/ruby_rhino_runtime.rb#4
+# source://execjs//lib/execjs/ruby_rhino_runtime.rb#5
 class ExecJS::RubyRhinoRuntime < ::ExecJS::Runtime
   # @return [Boolean]
   #
-  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#90
+  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#95
   def available?; end
 
-  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#86
+  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#91
   def name; end
 end
 
-# source://execjs//lib/execjs/ruby_rhino_runtime.rb#5
+# source://execjs//lib/execjs/ruby_rhino_runtime.rb#6
 class ExecJS::RubyRhinoRuntime::Context < ::ExecJS::Runtime::Context
   # @return [Context] a new instance of Context
   #
-  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#6
+  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#7
   def initialize(runtime, source = T.unsafe(nil), options = T.unsafe(nil)); end
 
-  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#34
+  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#35
   def call(properties, *args); end
 
-  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#24
+  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#25
   def eval(source, options = T.unsafe(nil)); end
 
-  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#16
+  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#17
   def exec(source, options = T.unsafe(nil)); end
 
-  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#40
+  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#45
   def unbox(value); end
 
-  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#61
+  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#66
   def wrap_error(e); end
 
   private
 
   # Disables bytecode compiling which limits you to 64K scripts
   #
-  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#77
+  # source://execjs//lib/execjs/ruby_rhino_runtime.rb#82
   def fix_memory_limit!(context); end
 end
 
 # Abstract base class for runtimes
 #
-# source://execjs//lib/execjs/runtime.rb#5
+# source://execjs//lib/execjs/runtime.rb#3
 class ExecJS::Runtime
   # @raise [NotImplementedError]
   # @return [Boolean]
   #
-  # source://execjs//lib/execjs/runtime.rb#80
+  # source://execjs//lib/execjs/runtime.rb#76
   def available?; end
 
-  # source://execjs//lib/execjs/runtime.rb#68
+  # source://execjs//lib/execjs/runtime.rb#64
   def compile(source, options = T.unsafe(nil)); end
 
-  # source://execjs//lib/execjs/runtime.rb#44
+  # source://execjs//lib/execjs/runtime.rb#40
   def context_class; end
 
   # @return [Boolean]
   #
-  # source://execjs//lib/execjs/runtime.rb#76
+  # source://execjs//lib/execjs/runtime.rb#72
   def deprecated?; end
 
-  # source://execjs//lib/execjs/runtime.rb#58
+  # source://execjs//lib/execjs/runtime.rb#54
   def eval(source, options = T.unsafe(nil)); end
 
-  # source://execjs//lib/execjs/runtime.rb#48
+  # source://execjs//lib/execjs/runtime.rb#44
   def exec(source, options = T.unsafe(nil)); end
 
   # @raise [NotImplementedError]
   #
-  # source://execjs//lib/execjs/runtime.rb#40
+  # source://execjs//lib/execjs/runtime.rb#36
   def name; end
 end
 
-# source://execjs//lib/execjs/runtime.rb#6
+# source://execjs//lib/execjs/runtime.rb#4
 class ExecJS::Runtime::Context
-  include ::ExecJS::Encoding
-
   # @return [Context] a new instance of Context
   #
-  # source://execjs//lib/execjs/runtime.rb#9
+  # source://execjs//lib/execjs/runtime.rb#5
   def initialize(runtime, source = T.unsafe(nil), options = T.unsafe(nil)); end
 
   # Evaluates +source+ as an expression (which should be of type
@@ -337,7 +365,7 @@ class ExecJS::Runtime::Context
   #
   # @raise [NotImplementedError]
   #
-  # source://execjs//lib/execjs/runtime.rb#35
+  # source://execjs//lib/execjs/runtime.rb#31
   def call(source, *args); end
 
   # Evaluates the +source+ as an expression and returns the result.
@@ -347,7 +375,7 @@ class ExecJS::Runtime::Context
   #
   # @raise [NotImplementedError]
   #
-  # source://execjs//lib/execjs/runtime.rb#25
+  # source://execjs//lib/execjs/runtime.rb#21
   def eval(source, options = T.unsafe(nil)); end
 
   # Evaluates the +source+ in the context of a function body and returns the
@@ -358,7 +386,7 @@ class ExecJS::Runtime::Context
   #
   # @raise [NotImplementedError]
   #
-  # source://execjs//lib/execjs/runtime.rb#17
+  # source://execjs//lib/execjs/runtime.rb#13
   def exec(source, options = T.unsafe(nil)); end
 end
 
@@ -368,54 +396,60 @@ class ExecJS::RuntimeError < ::ExecJS::Error; end
 # source://execjs//lib/execjs/module.rb#8
 class ExecJS::RuntimeUnavailable < ::ExecJS::RuntimeError; end
 
-# source://execjs//lib/execjs/runtimes.rb#9
+# source://execjs//lib/execjs/runtimes.rb#10
 module ExecJS::Runtimes
   class << self
-    # source://execjs//lib/execjs/runtimes.rb#56
+    # source://execjs//lib/execjs/runtimes.rb#66
     def autodetect; end
 
-    # source://execjs//lib/execjs/runtimes.rb#62
+    # source://execjs//lib/execjs/runtimes.rb#72
     def best_available; end
 
-    # source://execjs//lib/execjs/runtimes.rb#66
+    # source://execjs//lib/execjs/runtimes.rb#76
     def from_environment; end
 
-    # source://execjs//lib/execjs/runtimes.rb#78
+    # source://execjs//lib/execjs/runtimes.rb#88
     def names; end
 
-    # source://execjs//lib/execjs/runtimes.rb#82
+    # source://execjs//lib/execjs/runtimes.rb#92
     def runtimes; end
   end
 end
 
-# source://execjs//lib/execjs/runtimes.rb#10
+# source://execjs//lib/execjs/runtimes.rb#28
+ExecJS::Runtimes::Bun = T.let(T.unsafe(nil), ExecJS::ExternalRuntime)
+
+# source://execjs//lib/execjs/runtimes.rb#11
 ExecJS::Runtimes::Disabled = T.let(T.unsafe(nil), ExecJS::DisabledRuntime)
 
-# source://execjs//lib/execjs/runtimes.rb#12
+# source://execjs//lib/execjs/runtimes.rb#13
 ExecJS::Runtimes::Duktape = T.let(T.unsafe(nil), ExecJS::DuktapeRuntime)
 
-# source://execjs//lib/execjs/runtimes.rb#41
+# source://execjs//lib/execjs/runtimes.rb#17
+ExecJS::Runtimes::GraalJS = T.let(T.unsafe(nil), ExecJS::GraalJSRuntime)
+
+# source://execjs//lib/execjs/runtimes.rb#51
 ExecJS::Runtimes::JScript = T.let(T.unsafe(nil), ExecJS::ExternalRuntime)
 
-# source://execjs//lib/execjs/runtimes.rb#25
+# source://execjs//lib/execjs/runtimes.rb#35
 ExecJS::Runtimes::JavaScriptCore = T.let(T.unsafe(nil), ExecJS::ExternalRuntime)
 
-# source://execjs//lib/execjs/runtimes.rb#16
+# source://execjs//lib/execjs/runtimes.rb#19
 ExecJS::Runtimes::MiniRacer = T.let(T.unsafe(nil), ExecJS::MiniRacerRuntime)
 
-# source://execjs//lib/execjs/runtimes.rb#18
+# source://execjs//lib/execjs/runtimes.rb#21
 ExecJS::Runtimes::Node = T.let(T.unsafe(nil), ExecJS::ExternalRuntime)
 
-# source://execjs//lib/execjs/runtimes.rb#14
+# source://execjs//lib/execjs/runtimes.rb#15
 ExecJS::Runtimes::RubyRhino = T.let(T.unsafe(nil), ExecJS::RubyRhinoRuntime)
 
-# source://execjs//lib/execjs/runtimes.rb#34
+# source://execjs//lib/execjs/runtimes.rb#44
 ExecJS::Runtimes::SpiderMonkey = T.let(T.unsafe(nil), ExecJS::ExternalRuntime)
 
-# source://execjs//lib/execjs/runtimes.rb#34
+# source://execjs//lib/execjs/runtimes.rb#44
 ExecJS::Runtimes::Spidermonkey = T.let(T.unsafe(nil), ExecJS::ExternalRuntime)
 
-# source://execjs//lib/execjs/runtimes.rb#48
+# source://execjs//lib/execjs/runtimes.rb#58
 ExecJS::Runtimes::V8 = T.let(T.unsafe(nil), ExecJS::ExternalRuntime)
 
 # source://execjs//lib/execjs/version.rb#2
