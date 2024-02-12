@@ -1,6 +1,4 @@
-<%# TODO: Using non-standard style %>
-<%# TODO: I think this h3 actually needs to be an h2 %>
-<%= render Tailwind::Heading.new(tag: :h3, size: "3xl", extra_classes: "pb-10").with_content("Edit your account") %>
+<%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-10").with_content("Edit your account") %>
 
 <%= form_with model: resource, url: registration_path(resource_name), method: :put, builder: FormBuilders::Tailwind, class: "border-b border-light-grey pb-8" do |f| %>
   <%# TODO: What actually goes here and is it needed on other devise forms? %>
