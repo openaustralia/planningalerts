@@ -37,7 +37,8 @@
 				"jock.svg",
 				"heybourn.headwind",
 				"figma.figma-vscode-extension",
-				"github.vscode-github-actions"
+				"github.vscode-github-actions",
+				"gruntfuggly.todo-tree"
 			]
 		}
 	},
