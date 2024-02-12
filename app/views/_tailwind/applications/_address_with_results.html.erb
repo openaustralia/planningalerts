@@ -1,11 +1,11 @@
 <% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 
+<%= render Tailwind::Heading.new(tag: :h1, extra_classes: "sr-only").with_content("Search Applications") %>
 <%= render "address_search_form", q:, error: %>
 
 <% if applications %>
   <section class="pt-16">
-    <%# TODO: This is smaller than the "standard" h1 heading defined in the component %>
-    <%= render Tailwind::Heading.new(tag: :h1, size: "3xl").with_content("Search results") %>
+    <%= render Tailwind::Heading.new(tag: :h2).with_content("Search results") %>
 
     <div class="flex justify-between pt-6">
       <div>
