@@ -5,9 +5,8 @@
 <% end %>
 
 <section class="mt-8">
-  <h2 class="text-2xl font-bold text-navy">
-    Contact a planning authority
-  </h2>
+  <%# TODO: Non-standard style %>
+  <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans").with_content("Contact a planning authority") %>
 
   <p class="mt-6 text-2xl text-navy">
     Are you trying to get in touch with your local council or state planning authority?
@@ -24,9 +23,7 @@
 </section>
 
 <section class="mt-16">
-  <h2 class="text-2xl font-bold text-navy">
-    Contact the Planning Alerts team
-  </h2>
+  <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans").with_content("Contact the Planning Alerts team") %>
   <p class="mt-6 text-2xl text-navy">
     Did we mention that we're a <strong>tiny team</strong> and <strong>not</strong> the government?
     We do our best to respond to everyone but sometimes things slip through the cracks.

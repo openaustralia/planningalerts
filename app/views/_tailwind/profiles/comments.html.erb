@@ -1,6 +1,6 @@
 <% content_for :page_title, "Your comments" %>
 
-<h2 class="text-3xl font-bold text-navy font-display"><%= yield(:page_title) %></h2>
+<%= render Tailwind::Heading.new(tag: :h2).with_content(yield(:page_title)) %>
 
 <% if @comments.empty? %>
   <%# TODO: We don't yet have a design for this bit %>

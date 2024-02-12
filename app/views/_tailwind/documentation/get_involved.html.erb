@@ -21,9 +21,10 @@
   <section class="flex flex-col items-start gap-8 py-8 sm:flex-row">
     <%= image_tag "tailwind/illustration/headshot1.svg", alt: "" %>
     <div class="flex flex-col gap-4 text-2xl text-navy">
-      <h2 class="font-bold">
+      <%# TODO: Using non-standard style %>
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans") do %>
         I am a programmer and want to add my local planning authority
-      </h2>
+      <% end %>
       <p>
         You can help by writing a
         <%= pa_link_to "web scraper", "https://en.wikipedia.org/wiki/Web_scraping" %>
@@ -40,9 +41,10 @@
   <section class="flex flex-col items-start gap-8 py-8 sm:flex-row">
     <%= image_tag "tailwind/illustration/headshot2.svg", alt: "" %>
     <div class="flex flex-col gap-4 text-2xl text-navy">
-      <h2 class="font-bold">
+      <%# TODO: Using non-standard style %>
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans") do %>
         I'm not technical and I want to get my local council on to Planning Alerts. What can I do?
-      </h2>
+      <% end %>
       <p>
         You can lobby your local council to publish its planning data in a machine readable format. Email the council planning department and General Manager. Contact your councillors and get them to support your mission.
       </p>
@@ -54,9 +56,10 @@
   <section class="flex flex-col items-start gap-8 py-8 sm:flex-row">
     <%= image_tag "tailwind/illustration/headshot3.svg", alt: "" %>
     <div class="flex flex-col gap-4 text-2xl text-navy">
-      <h2 class="font-bold">
+      <%# TODO: Using non-standard style %>
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans") do %>
         I don't have the time or I don't have the skills. How can I help?
-      </h2>
+      <% end %>
       <p>
         If you value the service provided by Planning Alerts but simply don't have the time or
         the specialist skills to help out personally then the best thing that you can do is
@@ -68,9 +71,10 @@
   <section class="flex flex-col items-start gap-8 py-8 sm:flex-row">
     <%= image_tag "tailwind/illustration/headshot4.svg", alt: "" %>
     <div class="flex flex-col gap-4 text-2xl text-navy">
-      <h2 class="font-bold">
+      <%# TODO: Using non-standard style %>
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans") do %>
         I work for a local council or planning authority and would like to make our data available
-      </h2>
+      <% end %>
       <p>
         The most important thing you can do is publish your data in a simple machine-readable format that is freely available on the internet.
       </p>
