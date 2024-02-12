@@ -55,13 +55,11 @@
 </div>
 
 <section class="mt-24">
-  <h2 class="text-3xl font-bold text-navy font-display">API documentation</h2>
+  <%= render Tailwind::Heading.new(tag: :h2).with_content("API documentation") %>
   <section class="max-w-4xl">
     <%= render Tailwind::Heading.new(tag: :h3, extra_classes: "sr-only").with_content("API methods") %>
     <section class="mt-16">
-      <h4 class="text-2xl font-bold text-navy">
-        Single Location by longitude/latitude
-      </h4>
+      <%= render Tailwind::Heading.new(tag: :h4).with_content("Single Location by longitude/latitude") %>
       <p class="mt-8 text-2xl text-navy">
         Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
         with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
@@ -76,9 +74,7 @@
       <% end %>
     </section>
     <section class="mt-16">
-      <h4 class="text-2xl font-bold text-navy">
-        Area by longitude/latitude
-      </h4>
+      <%= render Tailwind::Heading.new(tag: :h4).with_content("Area by longitude/latitude") %>
       <p class="mt-8 text-2xl text-navy">
         Return applications within a rectangle defined by longitude/latitude.
       </p>
@@ -92,9 +88,7 @@
       <% end %>
     </section>
     <section class="mt-16">
-      <h4 class="text-2xl font-bold text-navy">
-        Planning authority
-      </h4>
+      <%= render Tailwind::Heading.new(tag: :h4).with_content("Planning authority") %>
       <p class="mt-8 text-2xl text-navy">
         Return applications for a specific planning authority (e.g. a local council) by authority short name. To discover the authority short name
         to use here, find the planning authority on the
@@ -111,9 +105,7 @@
       <% end %>
     </section>
     <section class="mt-16">
-      <h4 class="text-2xl font-bold text-navy">
-        Postcode
-      </h4>
+      <%= render Tailwind::Heading.new(tag: :h4).with_content("Postcode") %>
       <p class="mt-8 text-2xl text-navy">
         Return applications for a specific postcode area
       </p>
@@ -127,9 +119,7 @@
       <% end %>
     </section>
     <section class="mt-16">
-      <h4 class="text-2xl font-bold text-navy">
-        Suburb
-      </h4>
+      <%= render Tailwind::Heading.new(tag: :h4).with_content("Suburb") %>
       <p class="mt-8 text-2xl text-navy">
         Return applications in a suburb. Including &ldquo;state&rdquo; and &ldquo;postcode&rdquo; in the search is optional.
       </p>
@@ -151,9 +141,7 @@
         There are several parameters that can be applied to each of the above queries for extra usefulness.
       </p>
       <section class="mt-12">
-        <h4 class="text-2xl font-bold text-navy">
-          page
-        </h4>
+        <%= render Tailwind::Heading.new(tag: :h4).with_content("page") %>
         <p class="mt-8 text-2xl text-navy">
           API calls return a maximum of <%= Application.max_per_page %> results. To retrieve more results simply do another request with page
           set to 2, 3, etc&hellip; Not setting the page parameter is the same as requesting page 1.
@@ -163,9 +151,7 @@
         </code>
       </section>
       <section class="mt-12">
-        <h4 class="text-2xl font-bold text-navy">
-          count
-        </h4>
+        <%= render Tailwind::Heading.new(tag: :h4).with_content("count") %>
         <p class="mt-8 text-2xl text-navy">
           API calls by default return a maximum of <%= Application.max_per_page %> results. To return less than that per page simply set the count parameter to the maximum number you want to return.
         </p>
