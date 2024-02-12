@@ -7,10 +7,10 @@ module Tailwind
 
     DEFAULT_SIZES = T.let({ h1: "4xl", h2: "3xl", h3: "2xl" }.freeze, T::Hash[Symbol, String])
     # Doing this very long winded way to ensure that tailwind doesn't remove styles being used here
-    SIZES = T.let({ "xl" => "text-xl", "2xl" => "text-2xl", "3xl" => "text-3xl", "4xl" => "text-4xl" }.freeze, T::Hash[String, String])
-    WEIGHTS = T.let({ "semibold" => "font-semibold", "bold" => "font-semibold" }.freeze, T::Hash[String, String])
-    COLORS = T.let({ "fuchsia" => "text-fuchsia", "navy" => "text-navy" }.freeze, T::Hash[String, String])
-    FONTS = T.let({ "display" => "font-display", "sans" => "font-sans" }.freeze, T::Hash[String, String])
+    VALID_SIZE_CLASSES = T.let(%w[text-xl text-2xl text-3xl text-4xl].freeze, T::Array[String])
+    VALID_WEIGHT_CLASSES = T.let(%w[font-semibold font-bold].freeze, T::Array[String])
+    VALID_COLOR_CLASSES = T.let(%w[text-fuchsia text-navy].freeze, T::Array[String])
+    VALID_FONT_CLASSES = T.let(%w[font-display font-sans].freeze, T::Array[String])
 
     # TODO: Perhaps we should allow the size override to work by saying we want an h1 heading but with the styling of an h2?
     sig { params(tag: Symbol, size: T.nilable(String), color: T.nilable(String), font: T.nilable(String), weight: T.nilable(String), extra_classes: String).void }
@@ -26,12 +26,12 @@ module Tailwind
       color ||= "navy"
       font ||= "display"
 
-      raise "Unexpected size #{size}" unless SIZES.key?(size)
-      raise "Unexpected weight #{weight}" unless WEIGHTS.key?(weight)
-      raise "Unexpected color #{color}" unless COLORS.key?(color)
-      raise "Unexpected font #{font}" unless FONTS.key?(font)
+      raise "Unexpected size #{size}" unless VALID_SIZE_CLASSES.include?("text-#{size}")
+      raise "Unexpected weight #{weight}" unless VALID_WEIGHT_CLASSES.include?("font-#{weight}")
+      raise "Unexpected color #{color}" unless VALID_COLOR_CLASSES.include?("text-#{color}")
+      raise "Unexpected font #{font}" unless VALID_FONT_CLASSES.include?("font-#{font}")
 
-      c = [SIZES[size], WEIGHTS[weight], COLORS[color], FONTS[font]]
+      c = ["text-#{size}", "font-#{weight}", "text-#{color}", "font-#{font}"]
 
       # TODO: Not sure whether we should be setting max width on all headings
       c << "max-w-4xl" if tag == :h1
