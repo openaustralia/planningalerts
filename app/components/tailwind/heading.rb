@@ -65,12 +65,16 @@ module Tailwind
                       raise "Unexpected color #{color}"
                     end
 
-      @extra_classes = extra_classes
-      @size_class = T.let(size_class, String)
-      @color_class = T.let(color_class, String)
+
+      # TODO: Not sure whether we should be setting max width on all headings
+      c = if tag == :h1
+            "#{size_class} #{weight_class} #{color_class} #{font_class} max-w-4xl #{extra_classes}"
+          else
+            "#{size_class} #{weight_class} #{color_class} #{font_class} #{extra_classes}"
+          end
+
       @tag = tag
-      @font_class = T.let(font_class, String)
-      @weight_class = T.let(weight_class, String)
+      @class = T.let(c, String)
     end
   end
 end
