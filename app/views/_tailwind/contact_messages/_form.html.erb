@@ -29,7 +29,9 @@
   </div>
   <div class="relative inline-block mt-12">
     <section class="px-16 py-8 text-2xl text-white rounded-3xl bg-lavender">
-      <h3 class="font-bold">Some questions that might help you describe your request</h3>
+      <%= render Tailwind::Heading.new(tag: :h3, color: "white", font: "sans") do %>
+        Some questions that might help you describe your request
+      <% end %>
 
       <ul class="mt-8">
         <li>What are you trying to do?</li>
