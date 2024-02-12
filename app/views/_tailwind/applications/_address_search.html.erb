@@ -13,7 +13,7 @@
     <% Application.trending.limit(3).each do |application| %>
       <%= link_to application, class: "block focus:bg-sun-yellow" do %>
         <article>
-          <h3 class="text-2xl font-bold text-fuchsia"><%= application.address %></h3>
+          <%= render Tailwind::Heading.new(tag: :h3, color: "fuchsia", font: "sans").with_content(application.address) %>
           <p class="text-2xl font-bold text-navy">Commented on <%= pluralize(application.visible_comments_count, "time") %></p>
           <%# TODO: Limit length of description %>
           <p class="text-2xl text-navy">for "<%= application.description %>"</p>
@@ -31,7 +31,7 @@
     <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
       <%= link_to application, class: "block focus:bg-sun-yellow" do %>
         <article>
-          <h3 class="text-2xl font-bold text-fuchsia"><%= application.address %></h3>
+          <%= render Tailwind::Heading.new(tag: :h3, color: "fuchsia", font: "sans").with_content(application.address) %>
           <p class="text-2xl font-bold text-navy">
             <%= time_ago_in_words(application.first_date_scraped) %> ago
           </p>
