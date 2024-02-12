@@ -23,7 +23,8 @@
   <%= image_tag "tailwind/illustration/bottom-of-page-man.svg", alt: "" %>
 <% end %>
 
-<%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mb-10").with_content(@application.address) %>
+<%# TODO: Using non-standard style %>
+<%= render Tailwind::Heading.new(tag: :h1, font: "sans", extra_classes: "mb-10").with_content(@application.address) %>
 
 <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
