@@ -9,10 +9,13 @@
 
     <div class="flex justify-between pt-6">
       <div>
-        <%# TODO: Add support for extra options that are behind feature flag %>
         <%# We only want to show the sort options on the first page %>
         <% if page.nil? %>
+          <%# TODO: Sort options and filter options should be on the same line %>
           <%= render "sort_options", sort:, extra_params: { q: } %>
+          <% if Flipper.enabled?(:extra_options_on_address_search, current_user) %>
+            <%= render "filter_options", sort:, q:, radius:, time: %>
+          <% end %>
         <% else %>
           <%= render "link_to_prev_page", applications: %>
         <% end %>
