@@ -1,7 +1,7 @@
 <% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 
 <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "sr-only").with_content("Search Applications") %>
-<%= render "address_search_form", q:, error: %>
+<%= render "address_search_form", q:, error: nil %>
 
 <%# TODO: Need a proper design for this section %>
 <%# TODO: When this section shows up it's not actually clear what the current search is for %>
@@ -19,11 +19,10 @@
   </section>
 <% end %>
 
-<%# TODO: Do we want to keep this template for when there are no errors? %>
 <%# TODO: Remove duplication of heading %>
 <%# TODO: Figure out how to handle no results when extra_options_on_address_search is enabled %>
 <%# TODO: Add filter option for no filtering (e.g. any distance or any time) because the filtering in its current is very confusing in its behaviour %>
-<% if error.nil? && applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user)%>
+<% if applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user)%>
   <section class="pt-16">
     <%= render "no_applications", full_address:, q: %>
   </section>

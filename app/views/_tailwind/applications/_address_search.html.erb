@@ -1,93 +1,95 @@
 <% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 
 <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "sr-only").with_content("Search Applications") %>
-<%= render "address_search_form", q: nil, error: %>
+<%= render "address_search_form", q:, error: %>
 
-<div class="grid sm:grid-flow-col grid-rows-[repeat(4,_max-content)] auto-cols-fr gap-12 mt-20">
-  <%= render Tailwind::Heading.new(tag: :h2).with_content("Most commented applications") %>
-  <%# Wrapping in a div to make the bottom of the illustrations match up %>
-  <div class="flex items-end">
-    <%= image_tag "tailwind/illustration/people-talking.svg", alt: "" %>
-  </div>
-  <div class="space-y-8">
-    <% Application.trending.limit(3).each do |application| %>
-      <%= link_to application, class: "block focus:bg-sun-yellow" do %>
-        <article>
-          <%= render Tailwind::Heading.new(tag: :h3, color: "fuchsia", font: "sans").with_content(application.address) %>
-          <p class="text-2xl font-bold text-navy">Commented on <%= pluralize(application.visible_comments_count, "time") %></p>
-          <%# TODO: Limit length of description %>
-          <p class="text-2xl text-navy">for "<%= application.description %>"</p>
-        </article>
+<% if error.nil? %>
+  <div class="grid sm:grid-flow-col grid-rows-[repeat(4,_max-content)] auto-cols-fr gap-12 mt-20">
+    <%= render Tailwind::Heading.new(tag: :h2).with_content("Most commented applications") %>
+    <%# Wrapping in a div to make the bottom of the illustrations match up %>
+    <div class="flex items-end">
+      <%= image_tag "tailwind/illustration/people-talking.svg", alt: "" %>
+    </div>
+    <div class="space-y-8">
+      <% Application.trending.limit(3).each do |application| %>
+        <%= link_to application, class: "block focus:bg-sun-yellow" do %>
+          <article>
+            <%= render Tailwind::Heading.new(tag: :h3, color: "fuchsia", font: "sans").with_content(application.address) %>
+            <p class="text-2xl font-bold text-navy">Commented on <%= pluralize(application.visible_comments_count, "time") %></p>
+            <%# TODO: Limit length of description %>
+            <p class="text-2xl text-navy">for "<%= application.description %>"</p>
+          </article>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <%= pa_link_to "View more trending applications", trending_applications_path, class: "text-2xl mt-6" %>
-  <%= render Tailwind::Heading.new(tag: :h2).with_content("Latest applications across Australia") %>
-  <div class="flex items-end">
-    <%= image_tag "tailwind/illustration/houses.svg", alt: "" %>
-  </div>
-  <div class="space-y-8">
-    <%# TODO: Probably want some ordering that shows applications from different places %>
-    <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
-      <%= link_to application, class: "block focus:bg-sun-yellow" do %>
-        <article>
-          <%= render Tailwind::Heading.new(tag: :h3, color: "fuchsia", font: "sans").with_content(application.address) %>
-          <p class="text-2xl font-bold text-navy">
-            <%= time_ago_in_words(application.first_date_scraped) %> ago
-          </p>
-          <%# TODO: Limit length of description %>
-          <p class="text-2xl text-navy"><%= application.description %></p>
-        </article>
+    </div>
+    <%= pa_link_to "View more trending applications", trending_applications_path, class: "text-2xl mt-6" %>
+    <%= render Tailwind::Heading.new(tag: :h2).with_content("Latest applications across Australia") %>
+    <div class="flex items-end">
+      <%= image_tag "tailwind/illustration/houses.svg", alt: "" %>
+    </div>
+    <div class="space-y-8">
+      <%# TODO: Probably want some ordering that shows applications from different places %>
+      <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
+        <%= link_to application, class: "block focus:bg-sun-yellow" do %>
+          <article>
+            <%= render Tailwind::Heading.new(tag: :h3, color: "fuchsia", font: "sans").with_content(application.address) %>
+            <p class="text-2xl font-bold text-navy">
+              <%= time_ago_in_words(application.first_date_scraped) %> ago
+            </p>
+            <%# TODO: Limit length of description %>
+            <p class="text-2xl text-navy"><%= application.description %></p>
+          </article>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-  <%= pa_link_to "View more latest applications", applications_path, class: "text-2xl mt-6" %>
-</div>
-
-<section class="py-12 mt-8 text-2xl border-t border-light-grey2 text-navy">
-  <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-2").with_content("Coverage") %>
-
-  <div class="flex flex-col-reverse items-start justify-between gap-8 pt-4 md:flex-row">
-    <div class="max-w-2xl">
-      <p>
-        We currently cover
-        <%= Authority.percentage_population_covered_by_all_active_authorities.to_i %>% of
-        Australia's population within <%= Authority.active.count %> authorities.
-        For this number we're only counting places where the main planning authority is covered.
-        As an example, most of Victoria is covered by the SPEAR system but not all Victorian
-        planning applications go through it. So, we don't include SPEAR in our population count.
-      </p>
-      <p class="pt-4">
-        We don't yet cover the whole country, but we are working on it.
-        New authorities are being added all the time.
-      </p>
-      <p class="pt-4">
-        If you are a programmer and would like to write a scraper for your local authority,
-        or work for a local authority and would like to make your data available,
-        <%= pa_link_to "find out how you can get involved", get_involved_path %>.
-      </p>
     </div>
-    <div class="flex-shrink-0">
-      <%= render "authorities/coverage_percentage" %>
-    </div>
+    <%= pa_link_to "View more latest applications", applications_path, class: "text-2xl mt-6" %>
   </div>
-</section>
 
-<section class="py-12 text-2xl border-t text-navy border-light-grey2">
-  <%# TODO: Better heading? %>
-  <%# TODO: Do we want to include something like pb-2 for all headings in the component? %>
-  <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-2").with_content("Planning Data") %>
-  <div class="flex flex-col items-start justify-between gap-8 md:flex-row">
-    <div class="max-w-2xl">
-      <p class="pt-4">
-        From time to time planning authorities change their websites which breaks the scrapers
-        that gather the planning data. Help by providing a
-        <%= pa_link_to "donation", donate_url %> to help us fix it.
-      </p>
-      <p class="pt-4">
-        <%= pa_link_to "Check if planning data is broken for your authority", authorities_path %>
-      </p>
+  <section class="py-12 mt-8 text-2xl border-t border-light-grey2 text-navy">
+    <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-2").with_content("Coverage") %>
+
+    <div class="flex flex-col-reverse items-start justify-between gap-8 pt-4 md:flex-row">
+      <div class="max-w-2xl">
+        <p>
+          We currently cover
+          <%= Authority.percentage_population_covered_by_all_active_authorities.to_i %>% of
+          Australia's population within <%= Authority.active.count %> authorities.
+          For this number we're only counting places where the main planning authority is covered.
+          As an example, most of Victoria is covered by the SPEAR system but not all Victorian
+          planning applications go through it. So, we don't include SPEAR in our population count.
+        </p>
+        <p class="pt-4">
+          We don't yet cover the whole country, but we are working on it.
+          New authorities are being added all the time.
+        </p>
+        <p class="pt-4">
+          If you are a programmer and would like to write a scraper for your local authority,
+          or work for a local authority and would like to make your data available,
+          <%= pa_link_to "find out how you can get involved", get_involved_path %>.
+        </p>
+      </div>
+      <div class="flex-shrink-0">
+        <%= render "authorities/coverage_percentage" %>
+      </div>
     </div>
-    <%= image_tag "tailwind/illustration/mechanic.svg", alt: "" %>
-  </div>
-</section>
+  </section>
+
+  <section class="py-12 text-2xl border-t text-navy border-light-grey2">
+    <%# TODO: Better heading? %>
+    <%# TODO: Do we want to include something like pb-2 for all headings in the component? %>
+    <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-2").with_content("Planning Data") %>
+    <div class="flex flex-col items-start justify-between gap-8 md:flex-row">
+      <div class="max-w-2xl">
+        <p class="pt-4">
+          From time to time planning authorities change their websites which breaks the scrapers
+          that gather the planning data. Help by providing a
+          <%= pa_link_to "donation", donate_url %> to help us fix it.
+        </p>
+        <p class="pt-4">
+          <%= pa_link_to "Check if planning data is broken for your authority", authorities_path %>
+        </p>
+      </div>
+      <%= image_tag "tailwind/illustration/mechanic.svg", alt: "" %>
+    </div>
+  </section>
+<% end %>
