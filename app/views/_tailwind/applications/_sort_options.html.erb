@@ -18,6 +18,8 @@
                    "x-model" => "link" %>
   </div>
   <noscript>
+    <%# The label "Sorted by" can't be extracted out and needs to be here
+    because noscript is always added as a block %>
     <p>
       Sorted by
       <% if sort == "time" %>
