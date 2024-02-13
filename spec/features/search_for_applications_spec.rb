@@ -86,7 +86,7 @@ describe "Searching for development application near an address" do
     # rubocop:enable RSpec/NoExpectationExample
   end
 
-  describe "search address outside australia in new design", js: true do
+  describe "search address outside australia in new design" do
     before do
       allow(GoogleGeocodeService).to receive(:call).with(
         address: "Bruce Road, USA",
@@ -110,6 +110,30 @@ describe "Searching for development application near an address" do
     # rubocop:disable RSpec/NoExpectationExample
     it "renders a snapshot for a visual diff", js: true do
       page.percy_snapshot("Application search outside Australia")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
+
+  describe "no results in new design" do
+    before do
+      # Hacky way to just remove all the applications
+      ApplicationVersion.destroy_all
+      Application.destroy_all
+
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      visit address_applications_path
+
+      fill_in "Street address", with: "24 Bruce Road, Glenbrook"
+      click_button "Search"
+    end
+
+    it "lets the user know there's a problem" do
+      expect(page).to have_content("Unfortunately, we don't know of any applications near 24 Bruce Rd, Glenbrook NSW 2773")
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Application search no results")
     end
     # rubocop:enable RSpec/NoExpectationExample
   end
