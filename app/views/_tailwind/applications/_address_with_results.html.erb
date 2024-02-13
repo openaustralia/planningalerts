@@ -22,7 +22,7 @@
 <%# TODO: Remove duplication of heading %>
 <%# TODO: Figure out how to handle no results when extra_options_on_address_search is enabled %>
 <%# TODO: Add filter option for no filtering (e.g. any distance or any time) because the filtering in its current is very confusing in its behaviour %>
-<% if applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user)%>
+<% if applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user) %>
   <section class="pt-16">
     <%= render "no_applications", full_address:, q: %>
   </section>
