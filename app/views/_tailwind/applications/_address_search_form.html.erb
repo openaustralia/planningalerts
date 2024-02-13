@@ -1,6 +1,6 @@
 <%# TODO: It would be good to integrate this back with our standard tailwind form builder %>
-<%# TODO: Show errors if necessary %>
 <%# Right now the styling is quite different from the other forms %>
+<%# TODO: Reuse at least some of the styling from the default form builder %>
 <div class="px-6 py-10 sm:py-16 bg-navy sm:px-28">
   <%= form_with url: address_applications_path, method: :get, class: "gap-4 flex flex-col items-center" do |form| %>
     <%# Not using a heading here so that we don't mess up the heading order on different pages. %>
@@ -25,10 +25,11 @@
         this.loading = false;
       }
     }">
+      <%# TODO: Do we want this to show the little red cross like other form fields on error? %>
       <%= form.text_field :q,
                           value: q,
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
-                          class: "text-2xl text-navy w-full px-4 py-3 sm:py-4 placeholder-shown:truncate focus:ring-4 focus:ring-sun-yellow",
+                          class: class_names("text-2xl", "text-navy", "w-full", "px-4", "py-3", "sm:py-4", "placeholder-shown:truncate", "focus:ring-4", "focus:ring-sun-yellow", "border-error-red" => error),
                           required: "required",
                           "x-data" => "{ async initAutocomplete() {
                                            const { Autocomplete } = await google.maps.importLibrary('places');
@@ -36,6 +37,13 @@
                                        }",
                           "x-init" => "initAutocomplete()",
                           "x-model.fill" => "address" %>
+      <% if error %>
+        <%# TODO: Add color to tailwind config %>
+        <%# TODO: This is the only box in the whole design with rounded corners. Huh? %>
+        <p class="text-error-red bg-[#E8CDCD] w-full text-center py-4 text-2xl px-4 rounded-lg">
+          <%= error %>
+        </p>
+      <% end %>
       <%= button_tag type: "button", class: "text-white sm:text-xl inline focus:text-navy focus:bg-sun-yellow", "@click": "geolocate($event)", "x-bind:disabled": "loading" do %>
         <%# TODO: Fix occasional clipping of icon problem %>
         <span class="inline-block mr-2 align-middle">
