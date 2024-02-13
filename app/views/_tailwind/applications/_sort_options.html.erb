@@ -1,34 +1,6 @@
-<div x-data="{ link: '<%= url_for({ sort: }.merge(extra_params)) %>' }"
-     x-init="$watch('link', value => {
-       window.location = value;
-     })"
-     class="text-2xl text-navy">
-  <%# TODO: Extract this into a component because we're bound to want it elsewhere %>
-  <%# Hiding the select tag initially. It gets unhidden by javascript %>
-  <div class="invisible" x-bind:class="{ invisible: false }">
-    <%= label_tag "sort", "Sorted by", class: "mr-2" %>
-    <%= select_tag "sort",
-                   options_for_select(
-                     [
-                       ["most recent", url_for({ sort: "time" }.merge(extra_params))],
-                       ["closest", url_for({ sort: "distance" }.merge(extra_params))]
-                     ]
-                   ),
-                   class: "pl-4 py-3 pr-16 border-navy text-2xl text-navy focus:ring-4 focus:ring-sun-yellow",
-                   "x-model" => "link" %>
-  </div>
-  <noscript>
-    <%# The label "Sorted by" can't be extracted out and needs to be here
-    because noscript is always added as a block %>
-    <p>
-      Sorted by
-      <% if sort == "time" %>
-        most recent.
-        <%= pa_link_to "closest", { sort: "distance" }.merge(extra_params) %>
-      <% else %>
-        closest.
-        <%= pa_link_to "most recent", { sort: "time" }.merge(extra_params) %>
-      <% end %>
-    </p>
-  </noscript>
-</div>
+<%= render Tailwind::SelectLinks.new(
+      id: "sort",
+      label: "Sorted by",
+      container: [["most recent", url_for({ sort: "time" }.merge(extra_params))], ["closest", url_for({ sort: "distance" }.merge(extra_params))]],
+      value: url_for({ sort: }.merge(extra_params))
+    ) %>
