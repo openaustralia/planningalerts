@@ -2,11 +2,10 @@
      x-init="$watch('link', value => { window.location = value; })"
      class="inline-block text-2xl text-navy">
   <%# Hiding the select tag initially. It gets unhidden by javascript %>
-  <%# TODO: Disable the currently selected item %>
   <div class="invisible" x-bind:class="{ invisible: false }">
     <%= label_tag @id, @label, class: "mr-2" %>
     <%= select_tag @id,
-                   options_for_select(@container),
+                   options_for_select(@container, disabled: @value),
                    class: "pl-4 py-3 pr-16 border-navy text-2xl text-navy focus:ring-4 focus:ring-sun-yellow",
                    "x-model" => "link" %>
   </div>
