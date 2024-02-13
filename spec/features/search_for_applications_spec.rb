@@ -86,6 +86,34 @@ describe "Searching for development application near an address" do
     # rubocop:enable RSpec/NoExpectationExample
   end
 
+  describe "search address outside australia in new design", js: true do
+    before do
+      allow(GoogleGeocodeService).to receive(:call).with(
+        address: "Bruce Road, USA",
+        key: nil
+      ).and_return(GeocoderResults.new(
+                     [],
+                     "Unfortunately we only cover Australia. It looks like that address is in another country."
+                   ))
+
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      visit address_applications_path
+
+      fill_in "Street address", with: "Bruce Road, USA"
+      click_button "Search"
+    end
+
+    it "lets the user know there's a problem" do
+      expect(page).to have_content("It looks like that address is in another country")
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Application search outside Australia")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
+
   # Having trouble getting this to work
   # context "with javascript" do
   #   scenario "autocomplete results are displayed", js: true do
