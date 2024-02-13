@@ -19,7 +19,13 @@
   </section>
 <% end %>
 
-<% if applications %>
+<%# TODO: Do we want to keep this template for when there are no errors? %>
+<%# TODO: Remove duplication of heading %>
+<% if error.nil? && applications.empty? %>
+  <section class="pt-16">
+    <%= render "no_applications", full_address:, q: %>
+  </section>
+<% elsif applications %>
   <section class="pt-16">
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Search results") %>
 
