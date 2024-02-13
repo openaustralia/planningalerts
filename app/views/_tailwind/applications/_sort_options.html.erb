@@ -1,8 +1,6 @@
-<div x-data="{ link: '<%= sort == "time" ? "time" : "distance" %>' }"
+<div x-data="{ link: '<%= url_for({ sort: }.merge(extra_params)) %>' }"
      x-init="$watch('link', value => {
-       url = new URL(window.location);
-       url.searchParams.set('sort', value);
-       window.location = url.toString();
+       window.location = value;
      })"
      class="text-2xl text-navy">
   <%# TODO: Extract this into a component because we're bound to want it elsewhere %>
@@ -12,8 +10,8 @@
     <%= select_tag "sort",
                    options_for_select(
                      [
-                       ["most recent", "time"],
-                       ["closest", "distance"]
+                       ["most recent", url_for({ sort: "time" }.merge(extra_params))],
+                       ["closest", url_for({ sort: "distance" }.merge(extra_params))]
                      ]
                    ),
                    class: "pl-4 py-3 pr-16 border-navy text-2xl text-navy focus:ring-4 focus:ring-sun-yellow",
