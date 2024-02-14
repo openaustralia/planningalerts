@@ -53,8 +53,7 @@
     <p>To: <%= @comment.application.comment_email_with_fallback %></p>
     <p>Subject: <%= t("comment_mailer.notify_authority.subject", council_reference: @comment.application.council_reference) %></p>
 
-    <div class="mt-8 prose prose-xl prose-tr:border-none prose-hr:border-[#ccc] prose-td:py-0 prose-th:w-56 prose-table:text-xl">
-
+    <div class="mt-8 prose prose-xl prose-tr:border-none prose-hr:border-[#ccc] prose-td:py-0 prose-th:w-56 prose-table:text-xl prose-tr:flex sm:prose-tr:table-row prose-tr:flex-col prose-td:pl-0">
       <%= render "comment_mailer/notify_authority", comment: @comment %>
     </div>
   </div>
