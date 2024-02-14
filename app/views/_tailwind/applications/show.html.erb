@@ -199,25 +199,3 @@
     <% end %>
   </div>
 </section>
-
-<%
-=begin
-%>
-
-<div id="main">
-  <div id="application">
-    <article id="application-info">
-      <div id="comments-area">
-        <% if @application.authority.email.present? %>
-          <%= render "comments/form_introduction", application: @application %>
-        <% else %>
-          <%= render "comments/no_authority_email_explanation", application: @application %>
-        <% end %>
-      </div>
-    </article>
-  </div>
-</div>
-
-<%
-=end
-%>
