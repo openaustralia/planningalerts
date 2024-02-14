@@ -11,26 +11,3 @@
 
 <%# TODO: Speed up controller by using without_count %>
 <%= render Tailwind::SimplePager.new(collection: @applications) %>
-
-<%
-=begin
-%>
-
-<div class="attention">
-  <%= render "alerts/signup_introduction" %>
-  <%= render "alerts/frequency" %>
-  <%= render "privacy_policy" %>
-  <%= render "alerts/signup_form", alert: @alert, address_hidden: false %>
-</div>
-<% if @authority&.broken? %>
-  <% if @authority.date_last_new_application_scraped.nil? %>
-    <span class="highlight">There are no applications yet for this authority</span>
-  <% else %>
-    <span class="highlight">It looks like something might be wrong. The latest new application was received #{time_ago_in_words(@authority.date_last_new_application_scraped)} ago.</span>
-    <%= link_to "Why?", faq_path(anchor: "broken_scraper") %>
-  <% end %>
-<% end %>
-
-<%
-=end
-%>
