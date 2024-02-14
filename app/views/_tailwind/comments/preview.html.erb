@@ -49,7 +49,7 @@
   </p>
 
   <%# TODO: Don't use random gray colour #ccc here %>
-  <div class="inline-block px-20 py-16 mt-8 text-xl text-navy bg-random-gray">
+  <div class="inline-block p-8 mt-8 text-xl sm:py-16 sm:px-20 text-navy bg-random-gray">
     <p>To: <%= @comment.application.comment_email_with_fallback %></p>
     <p>Subject: <%= t("comment_mailer.notify_authority.subject", council_reference: @comment.application.council_reference) %></p>
 
@@ -59,7 +59,7 @@
   </div>
 
   <div class="flex justify-end">
-    <div class="relative mt-12">
+    <div class="relative mt-16 sm:mt-12">
       <section class="max-w-3xl p-8 text-2xl text-white sm:pl-16 sm:pr-32 rounded-3xl bg-lavender">
         <%= render Tailwind::Heading.new(tag: :h3, color: "white", font: "sans").with_content("Why do we include the privacy notice?") %>
 
@@ -73,7 +73,7 @@
           for your active consent if they want to publish or pass on your private information.
         </p>
       </section>
-      <div class="w-0 h-0 absolute -top-24 left-16
+      <div class="w-0 h-0 absolute -top-24 left-8 sm:left-16
         border-l-[19px] border-l-transparent
         border-b-[127px] border-b-lavender
         border-r-[19px] border-r-transparent">
