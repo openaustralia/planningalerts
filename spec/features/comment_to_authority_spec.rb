@@ -17,6 +17,29 @@ describe "Give feedback" do
     expect(page).to have_content("To comment on this application you will need to go to the original source")
   end
 
+  describe "an authority without a feedback email in the new design" do
+    before do
+      authority = create(:authority, full_name: "Byron Shire Council")
+      application = create(:geocoded_application, id: "1", authority:, date_scraped: Date.new(2023, 1, 1))
+      # Note that we're ensuring that the application has a static first_date_scraped and we freeze the current
+      # time so that the page should always have the same text on it
+      Timecop.freeze(Date.new(2023, 6, 1)) do
+        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+        visit(application_path(application))
+      end
+    end
+
+    it "lets the user know what to do instead" do
+      expect(page).to have_content("To comment on this application you will need to go to the original source")
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Application authority without feedback email")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
+
   it "Getting an error message if the comment form isn’t completed correctly" do
     authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
     application = create(:geocoded_application, id: "1", authority:)
