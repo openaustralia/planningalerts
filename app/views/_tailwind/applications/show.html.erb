@@ -172,12 +172,15 @@
   <% end %>
 </section>
 
-<%# TODO: If there is no commenting email address then this section should be hidden (and replaced with some explanatory text) %>
 <section class="flex gap-6 mt-14" id="add-comment">
   <div class="mt-20 text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
     <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mb-3").with_content("Add your own comment") %>
-    <% if current_user.nil? %>
+
+    <% if !@application.authority.email.present? %>
+      <%# TODO: Need a proper design for this section %>
+      <%= render "comments/no_authority_email_explanation", application: @application %>
+    <% elsif current_user.nil? %>
       <div class="px-4 py-3 bg-light-grey">
         <p class="text-2xl opacity-50 text-navy">Be polite, clear and to the point so your comment gets listened to.</p>
         <div class="flex justify-center py-12">

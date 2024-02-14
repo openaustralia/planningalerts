@@ -1,0 +1,22 @@
+<p class="mt-6 text-2xl text-navy">
+  To comment on this application you will need to go to the
+  <%# TODO: This should link to the interstitial page instead %>
+  original source on <%= pa_link_to application.authority.full_name, application.info_url %>
+  and find any instructions from there.
+</p>
+
+<p class="mt-6 text-2xl text-navy">
+  This is because unfortunately we don't know an email address for this authority
+  to send official comments to. If you can find one please <%= pa_link_to "let us know", documentation_contact_path %>.
+</p>
+
+<%
+=begin
+%>
+
+- if application.on_notice_to
+  %p= on_notice_text(application)
+
+<%
+=end
+%>
