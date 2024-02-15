@@ -64,8 +64,7 @@ function barGraph(selector, url, metric) {
 
     var focusCallout = d3.select(selector)
           .append("div")
-          .attr("class", "chart-callout")
-          .append("h5"),
+          .attr("class", "chart-callout"),
         focusCalloutValue = focusCallout.append("span")
           .attr("class", "chart-callout-heading"),
         focusCalloutDate = focusCallout.append("span")
