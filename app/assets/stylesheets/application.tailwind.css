@@ -23,26 +23,29 @@
 }
 
 /* TODO: Get rid of this ugly mess for styling the charts on the authority detail page as soon as we can */
-.chart {
-  text {
-    @apply fill-navy;
-    font-size: .875em;
-  }
+.chart text {
+  @apply fill-navy;
+  font-size: .875em;
+}
 
-  .chart-area {
-    @apply fill-[#d7e4f3];
-  }
+.chart .chart-area {
+  @apply fill-[#d7e4f3];
+}
 
-  .y-axis,
-  .x-axis {
-    line {
-      @apply stroke-1 stroke-light-grey2;
-    }
+.chart .x-axis line {
+  @apply stroke-1 stroke-light-grey2;
+}
 
-    .domain {
-      @apply hidden;
-    }
-  }
+.chart .y-axis line {
+  @apply stroke-1 stroke-light-grey2;
+}
+
+.chart .x-axis .domain {
+  @apply hidden;
+}
+
+.chart .y-axis .domain {
+  @apply hidden;
 }
 
 .x-axis-baseline {
@@ -51,27 +54,25 @@
 
 .chart-line {
   @apply fill-none stroke-[#346eb0] stroke-2;
-
-  &.chart-clipping-below {
-    display: none;
-  }
 }
 
-.chart-with-callout {
-  svg {
-    width: 100%;
-    height: auto;
+.chart-line.chart-clipping-below {
+  display: none;
+}
 
-    @apply sm:float-left sm:clear-left sm:w-4/5;
-  }
+.chart-with-callout svg {
+  width: 100%;
+  height: auto;
 
-  .chart-callout {
-    @apply sm:float-right sm:w-1/5;
-  }
+  @apply sm:float-left sm:clear-left sm:w-4/5;
+}
 
-  text {
-    @apply text-xs;
-  }
+.chart-with-callout .chart-callout {
+  @apply sm:float-right sm:w-1/5;
+}
+
+.chart-with-callout text {
+  @apply text-xs;
 }
 
 .chart-callout-heading {
@@ -88,12 +89,10 @@
   pointer-events: all;
 }
 
-.focus {
-  circle {
-    stroke: #346eb0;
-    stroke-width: 2px;
-    fill: transparent;
-  }
+.focus circle {
+  stroke: #346eb0;
+  stroke-width: 2px;
+  fill: transparent;
 }
 
 /*
