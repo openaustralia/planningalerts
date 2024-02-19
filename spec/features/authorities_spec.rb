@@ -54,15 +54,13 @@ describe "Authorities" do
       end
     end
 
-    # Commented out the percy snapshot for the authority detail page because it contains
-    # graphs which I haven't managed to get to render correctly on percy yet. So, to
-    # avoid confusion, don't include them
-    #
-    # it "renders the page", js: true do
-    #   # Wait for javascript graph drawing to finish
-    #   find("#applications-chart .chart-line.chart-clipping-above")
-    #   find("#comments-chart .chart-line.chart-clipping-above")
-    #   page.percy_snapshot("Authority")
-    # end
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders the page", js: true do
+      # Wait for javascript graph drawing to finish
+      find("#applications-chart .chart-line.chart-clipping-above")
+      find("#comments-chart .chart-line.chart-clipping-above")
+      page.percy_snapshot("Authority")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
   end
 end
