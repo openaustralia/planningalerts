@@ -190,13 +190,16 @@
       Standard agreements for commercial use are at
       <%= pa_link_to "oaf.org.au/standard-agreements/planningalerts-commercial", "https://www.oaf.org.au/standard-agreements/planningalerts-commercial/" %>.
       Please
-      <%= pa_mail_to "contact@planningalerts.org.au", "contact us" %>
+      <%= pa_link_to "contact us", documentation_contact_path(reason: "I want API access or commercial use") %>
       for
       <strong>commercial</strong>
       use. Commercial users may include Real Estate Agencies, Architects, Planners or Builders.
     </p>
     <p class="mt-8">
-      Also, please <%= pa_mail_to "contact@planningalerts.org.au", "get in touch" %> if you intend to use the service on a large scale. In order to maintain quality of service for our API users, this service is rate limited by default to approximately 1000 requests per day.
+      Also, please
+      <%= pa_link_to "get in touch", documentation_contact_path(reason: "I want API access or commercial use") %>
+      if you intend to use the service on a large scale.
+      In order to maintain quality of service for our API users, this service is rate limited by default to approximately 1000 requests per day.
     </p>
     <p class="mt-8">
       We offer a range of paid options, from rate&ndash;limited to unlimited use of this service.
