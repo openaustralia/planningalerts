@@ -129,9 +129,13 @@ module FormBuilders
 
     # TODO: How do we keep this styling consistent with the styles in Tailwind::ButtonComponent?
     # TODO: Need interactive states - these need a design
+    # "No files selected" gets truncated on narrow screens. It would be better if it wrapped to the next line instead.
+    # However, that would probably require hiding the actual file attachment button and making a new one that triggers
+    # the same action that and then probably have to wrap some javascript around it to make it update the text correctly.
+    # Not sure it's worth the effort at this stage.
     sig { returns(String) }
     def file_field_style
-      "file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green file:border-2 file:px-8 file:py-4 file:mr-4"
+      "w-full sm:w-auto file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green file:border-2 file:px-8 file:py-4 file:mr-4"
     end
 
     sig { params(method: Symbol).returns(T::Boolean) }
