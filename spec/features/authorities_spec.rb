@@ -36,16 +36,13 @@ describe "Authorities" do
       sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
       authority = create(:authority, full_name: "Byron Shire Council", morph_name: "planningalerts-scrapers/byron")
       # We need it to have at least one application so it's not "broken"
-      # TODO: I don't we think we need all the application information here
       # TODO: I suspect we'll need to lock down the date of the application so that percy snapshots are consistent
-      create(:geocoded_application,
-             authority:,
-             address: "24 Bruce Road Glenbrook",
-             description: "A lovely house",
-             lat: -33.772609,
-             lng: 150.624256,
-             lonlat: RGeo::Geographic.spherical_factory(srid: 4326).point(150.624256, -33.772609))
-      visit authority_path(authority.short_name_encoded)
+      create(:geocoded_application, authority:, council_reference: "1", date_scraped: Date.new(2020, 1, 1))
+      create(:geocoded_application, authority:, council_reference: "2", date_scraped: Date.new(2020, 1, 8))
+      create(:geocoded_application, authority:, council_reference: "3", date_scraped: Date.new(2020, 1, 15))
+      Timecop.freeze(Date.new(2020, 1, 22)) do
+        visit authority_path(authority.short_name_encoded)
+      end
     end
 
     describe "accessibility test", js: true do
