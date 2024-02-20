@@ -34,6 +34,11 @@ module FormBuilders
       wrap_field(method, super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}")))
     end
 
+    sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
+    def file_field(method, options = {})
+      super(method, options.merge(class: "file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green file:border-2 file:px-8 file:py-4 file:mr-4 #{options[:class]}"))
+    end
+
     sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, T.any(String, Symbol)]).returns(ActionView::OutputBuffer) }
     def button(value = nil, options = {})
       options = { tag: :button, size: "2xl", type: :primary }.merge(options)

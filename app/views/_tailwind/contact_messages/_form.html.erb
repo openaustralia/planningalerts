@@ -50,11 +50,10 @@
 
   <div class="mt-16">
     <%= f.label :attachments, "Attach files or screenshots", class: "block mb-3" %>
-    <%# TODO: Extract style to form helper %>
     <%# TODO: Can we change the text on the button? %>
     <%= f.file_field :attachments,
-                     multiple: true, data: { direct_upload_url: rails_direct_uploads_url },
-                     class: "block file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green file:border-2 file:px-8 file:py-4 file:mr-4" %>
+                     multiple: true,
+                     data: { direct_upload_url: rails_direct_uploads_url } %>
   </div>
   <% if current_user.nil? && Rails.application.credentials[:recaptcha] %>
     <div class="mt-12">
