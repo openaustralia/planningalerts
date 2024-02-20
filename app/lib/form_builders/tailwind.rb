@@ -127,6 +127,8 @@ module FormBuilders
       style << (error?(method) ? "border-error-red" : "border-light-grey2")
     end
 
+    # TODO: How do we keep this styling consistent with the styles in Tailwind::ButtonComponent?
+    # TODO: Need interactive states - these need a design
     sig { returns(String) }
     def file_field_style
       "file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green file:border-2 file:px-8 file:py-4 file:mr-4"
