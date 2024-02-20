@@ -120,9 +120,10 @@
     </div>
   <% end %>
 
-  <%# TODO: Handle situation with 0 comments differently %>
   <p class="text-2xl text-navy">
-    Comments made here were sent to <strong><%= @application.comment_recipient_full_name %></strong>.
+    Comments made here
+    <%= @comments.empty? ? "will be" : "were" %>
+    sent to <strong><%= @application.comment_recipient_full_name %></strong>.
     <%= pa_link_to "Add your own comment", "#add-comment" %>.
   </p>
   <% @comments.each do |comment| %>
