@@ -124,7 +124,10 @@
     Comments made here
     <%= @comments.empty? ? "will be" : "were" %>
     sent to <strong><%= @application.comment_recipient_full_name %></strong>.
-    <%= pa_link_to "Add your own comment", "#add-comment" %>.
+    <%# No need for shortcut link if there are no comments because that section is directly underneath %>
+    <% unless @comments.empty? %>
+      <%= pa_link_to "Add your own comment", "#add-comment" %>.
+    <% end %>
   </p>
   <% @comments.each do |comment| %>
     <div class="pt-12" id="comment<%= comment.id %>">
