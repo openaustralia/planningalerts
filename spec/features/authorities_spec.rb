@@ -79,4 +79,34 @@ describe "Authorities" do
     end
     # rubocop:enable RSpec/NoExpectationExample
   end
+
+  describe "detail page for an authority with a broken scraper in the new design" do
+    before do
+      # Give a name to the user so screenshots are consistent with percy
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      authority = create(:authority, full_name: "Byron Shire Council", morph_name: "planningalerts-scrapers/byron")
+      # We need it to have at least one application so it's not "broken"
+      # TODO: I suspect we'll need to lock down the date of the application so that percy snapshots are consistent
+      create(:geocoded_application, authority:, council_reference: "1", date_scraped: Date.new(2020, 1, 1))
+      create(:geocoded_application, authority:, council_reference: "2", date_scraped: Date.new(2020, 1, 8))
+      create(:geocoded_application, authority:, council_reference: "3", date_scraped: Date.new(2020, 1, 15))
+      # This date is more than 2 week after the latest application
+      Timecop.freeze(Date.new(2020, 2, 1)) do
+        visit authority_path(authority.short_name_encoded)
+      end
+    end
+
+    it "lets the user know that there's a problem" do
+      expect(page).to have_content("It looks like something might be wrong")
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders the page", js: true do
+      # Wait for javascript graph drawing to finish
+      find("#applications-chart .chart-line.chart-clipping-above")
+      find("#comments-chart .chart-line.chart-clipping-above")
+      page.percy_snapshot("Authority broken scraper")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
 end

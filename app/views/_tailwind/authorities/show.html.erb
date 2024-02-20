@@ -18,8 +18,6 @@
   <p class="py-4 mt-8 text-2xl border-y text-navy border-light-grey2">Population <%= number_with_delimiter @authority.population_2021 %> (2021 census)</p>
 <% end %>
 
-<%# TODO: Handle situation where the authority is "broken" %>
-
 <% if @authority.covered? %>
   <div class="divide-y divide-light-grey2">
     <section class="py-12">
@@ -30,6 +28,14 @@
       <% if @authority.applications.empty? %>
         <p class="mt-8 text-2xl text-navy">No applications have yet been collected.</p>
       <% else %>
+        <% if @authority.broken? %>
+          <%# TODO: We need a proper design for this warning message %>
+          <p class="mt-8 text-2xl text-navy">
+            It looks like something might be wrong.
+            The last new application was received <%= time_ago_in_words(@authority.date_last_new_application_scraped) %> ago.
+            <%= pa_link_to "Why?", faq_path(anchor: "broken_scraper") %>
+          </p>
+        <% end %>
         <table class="mt-8 text-2xl text-navy">
           <tbody>
             <tr>
@@ -167,16 +173,3 @@
     </p>
   </section>
 <% end %>
-
-<%
-=begin
-%>
-
-- if @authority.broken? && @authority.applications.count != 0
-  %p
-    %span.highlight It looks like something might be wrong. The latest new application was received #{time_ago_in_words(@authority.date_last_new_application_scraped)} ago.
-    = link_to "Why?", faq_path(anchor: "broken_scraper")
-
-<%
-=end
-%>
