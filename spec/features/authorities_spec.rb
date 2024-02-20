@@ -60,4 +60,23 @@ describe "Authorities" do
     end
     # rubocop:enable RSpec/NoExpectationExample
   end
+
+  describe "detail page for a covered authority with no applications in the new design" do
+    before do
+      # Give a name to the user so screenshots are consistent with percy
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      authority = create(:authority, full_name: "Byron Shire Council", morph_name: "planningalerts-scrapers/byron")
+      visit authority_path(authority.short_name_encoded)
+    end
+
+    it "lets the user know that there are no applications" do
+      expect(page).to have_content("No applications have yet been collected")
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders the page", js: true do
+      page.percy_snapshot("Authority no applications")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
 end

@@ -27,90 +27,96 @@
       <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
         Applications collected by Planning Alerts
       <% end %>
-      <table class="mt-8 text-2xl text-navy">
-        <tbody>
-          <tr>
-            <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.week.ago).count %></td>
-            <th class="font-normal text-left">in the last week</th>
-          </tr>
-          <tr>
-            <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.month.ago).count %></td>
-            <th class="font-normal text-left">in the last month</th>
-          </tr>
-          <tr>
-            <td class="pr-8 font-bold text-7xl"><%= @authority.applications.count %></td>
-            <th class="font-normal text-left">
-              since <%= @authority.earliest_date.strftime("%-d %b %Y") %>
-              (when this authority was first added to Planning Alerts)
-            </th>
-          </tr>
-          <tr>
-            <td class="pr-8 font-bold text-7xl"><%= @authority.median_new_applications_per_week %></td>
-            <th class="font-normal text-left">
-              <%= pa_link_to "median", "https://en.wikipedia.org/wiki/Median" %>
-              per week
-              (ignoring weeks without any new applications at all)
-            </th>
-          </tr>
-        </tbody>
-      </table>
+      <% if @authority.applications.empty? %>
+        <p class="mt-8 text-2xl text-navy">No applications have yet been collected.</p>
+      <% else %>
+        <table class="mt-8 text-2xl text-navy">
+          <tbody>
+            <tr>
+              <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.week.ago).count %></td>
+              <th class="font-normal text-left">in the last week</th>
+            </tr>
+            <tr>
+              <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.month.ago).count %></td>
+              <th class="font-normal text-left">in the last month</th>
+            </tr>
+            <tr>
+              <td class="pr-8 font-bold text-7xl"><%= @authority.applications.count %></td>
+              <th class="font-normal text-left">
+                since <%= @authority.earliest_date.strftime("%-d %b %Y") %>
+                (when this authority was first added to Planning Alerts)
+              </th>
+            </tr>
+            <tr>
+              <td class="pr-8 font-bold text-7xl"><%= @authority.median_new_applications_per_week %></td>
+              <th class="font-normal text-left">
+                <%= pa_link_to "median", "https://en.wikipedia.org/wiki/Median" %>
+                per week
+                (ignoring weeks without any new applications at all)
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
     </section>
 
-    <section class="pt-12 pb-24">
-      <%# TODO: This title isn't right because the section has comments in it too %>
-      <%# TODO: Using a non-standard font for h2 %>
-      <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
-        Browse applications from <%= @authority.full_name %>
-      <% end %>
-      <ul class="mt-8 text-2xl text-navy">
-        <li>
-          View all
-          <%= pa_link_to "recent applications", authority_applications_path(@authority.short_name_encoded) %>
-        </li>
-        <li>
-          View all
-          <%= pa_link_to "comments on applications", authority_comments_path(@authority.short_name_encoded) %>
-        </li>
-      </ul>
-    </section>
+    <% unless @authority.applications.empty? %>
+      <section class="pt-12 pb-24">
+        <%# TODO: This title isn't right because the section has comments in it too %>
+        <%# TODO: Using a non-standard font for h2 %>
+        <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
+          Browse applications from <%= @authority.full_name %>
+        <% end %>
+        <ul class="mt-8 text-2xl text-navy">
+          <li>
+            View all
+            <%= pa_link_to "recent applications", authority_applications_path(@authority.short_name_encoded) %>
+          </li>
+          <li>
+            View all
+            <%= pa_link_to "comments on applications", authority_comments_path(@authority.short_name_encoded) %>
+          </li>
+        </ul>
+      </section>
 
-    <section class="pt-12 pb-24">
-      <%# TODO: Using non-standard font %>
-      <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "pb-12") do %>
-        Number of new applications scraped over time
-      <% end %>
-      <div class="h-52">
-        <div class="chart bg-fuchsia" id="applications-chart">
+      <section class="pt-12 pb-24">
+        <%# TODO: Using non-standard font %>
+        <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "pb-12") do %>
+          Number of new applications scraped over time
+        <% end %>
+        <div class="h-52">
+          <div class="chart bg-fuchsia" id="applications-chart">
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="clear-both pt-12 pb-24">
-      <%# TODO: Using non-standard font %>
-      <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "pb-12") do %>
-        Number of comments posted over time
-      <% end %>
-      <div class="h-52">
-        <div class="chart bg-fuchsia" id="comments-chart">
+      <section class="clear-both pt-12 pb-24">
+        <%# TODO: Using non-standard font %>
+        <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "pb-12") do %>
+          Number of comments posted over time
+        <% end %>
+        <div class="h-52">
+          <div class="chart bg-fuchsia" id="comments-chart">
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <%# TODO: Move over to using alpinejs to initialise the chart %>
-    <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min.js" %>
-    <%= javascript_include_tag "tailwind/bar_graph" %>
-    <script>
-      barGraph(
-        "#applications-chart",
-        "<%= per_week_authority_applications_url(@authority.short_name_encoded, format: :json) %>",
-        "new applications scraped"
-      );
-      barGraph(
-        "#comments-chart",
-        "<%= per_week_authority_comments_url(@authority.short_name_encoded, format: :json) %>",
-        "comments posted"
-      );
-    </script>
+      <%# TODO: Move over to using alpinejs to initialise the chart %>
+      <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min.js" %>
+      <%= javascript_include_tag "tailwind/bar_graph" %>
+      <script>
+        barGraph(
+          "#applications-chart",
+          "<%= per_week_authority_applications_url(@authority.short_name_encoded, format: :json) %>",
+          "new applications scraped"
+        );
+        barGraph(
+          "#comments-chart",
+          "<%= per_week_authority_comments_url(@authority.short_name_encoded, format: :json) %>",
+          "comments posted"
+        );
+      </script>
+    <% end %>
 
     <section class="pt-12 pb-24">
       <%# TODO: Using non-standard font %>
@@ -170,10 +176,6 @@
   %p
     %span.highlight It looks like something might be wrong. The latest new application was received #{time_ago_in_words(@authority.date_last_new_application_scraped)} ago.
     = link_to "Why?", faq_path(anchor: "broken_scraper")
-
-- if @authority.applications.empty?
-  %p
-    No applications for #{@authority.full_name} have yet been collected.
 
 <%
 =end
