@@ -36,7 +36,7 @@ module FormBuilders
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def file_field(method, options = {})
-      super(method, options.merge(class: "file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green file:border-2 file:px-8 file:py-4 file:mr-4 #{options[:class]}"))
+      super(method, options.merge(class: "#{file_field_style} #{options[:class]}"))
     end
 
     sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, T.any(String, Symbol)]).returns(ActionView::OutputBuffer) }
@@ -125,6 +125,11 @@ module FormBuilders
     def select_style(method)
       style = +"text-2xl text-navy py-4 focus:ring-4 focus:ring-sun-yellow "
       style << (error?(method) ? "border-error-red" : "border-light-grey2")
+    end
+
+    sig { returns(String) }
+    def file_field_style
+      "file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green file:border-2 file:px-8 file:py-4 file:mr-4"
     end
 
     sig { params(method: Symbol).returns(T::Boolean) }
