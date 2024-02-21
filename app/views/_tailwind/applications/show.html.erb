@@ -151,7 +151,8 @@
 </section>
 
 <section class="flex gap-6 mt-14" id="add-comment">
-  <div class="mt-20 text-navy text-7xl">”</div>
+  <%# Hide the big quotation mark on small displays so we don't end up with a weird large left margin %>
+  <div class="hidden mt-20 sm:block text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
     <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mb-3").with_content("Add your own comment") %>
 
