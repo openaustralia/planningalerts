@@ -25,6 +25,7 @@ class DocumentationController < ApplicationController
   sig { void }
   def how_to_lobby_your_local_council; end
 
+  # TODO: Move this action to ContactMessagesController#new
   sig { void }
   def contact
     # Allow the auto reply to no-reply to prepopulate the email field to make things a tiny bit easier
