@@ -68,11 +68,7 @@ describe "Browsing basic documentation pages" do
       end
     end
 
-    # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
-      page.percy_snapshot("Contact us")
-    end
-    # rubocop:enable RSpec/NoExpectationExample
+    # TODO: Percy snapshot is being done in contact_us_spec.rb - very confusing
   end
 
   describe "api page in the new design" do
