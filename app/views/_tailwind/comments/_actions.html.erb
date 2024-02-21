@@ -2,7 +2,7 @@
 <% unless current_page?(new_comment_report_path(comment.id)) %>
   <%# TODO: Wrap this link style into the standard pa_link_to helper %>
   <%= link_to "Report this comment", new_comment_report_path(comment), class: "text-fuchsia text-xl hover:underline hover:text-fuchsia-darker focus:bg-sun-yellow" %>
-<% end %>
-<% if current_user&.admin? %>
-  <%= pa_link_to "Admin", admin_comment_path(comment), class: "block text-xl" %>
+  <% if current_user&.admin? %>
+    <%= pa_link_to "Admin", admin_comment_path(comment), class: "block text-xl" %>
+  <% end %>
 <% end %>
