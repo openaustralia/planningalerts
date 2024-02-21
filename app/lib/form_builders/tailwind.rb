@@ -21,7 +21,7 @@ module FormBuilders
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
     def text_area(method, options = {})
-      wrap_field(method, super(method, options.merge(class: "#{text_like_field_style(method)} #{options[:class]}")))
+      wrap_field(method, super(method, options.merge(class: "#{text_area_style(method)} #{options[:class]}")))
     end
 
     sig { params(method: Symbol, options: T::Hash[Symbol, String]).returns(String) }
@@ -115,7 +115,14 @@ module FormBuilders
 
     sig { params(method: Symbol).returns(String) }
     def text_like_field_style(method)
-      style = +"text-2xl text-navy placeholder:text-warm-grey placeholder-shown:truncate py-3 focus:ring-4 focus:ring-sun-yellow"
+      style = text_area_style(method)
+      style << " placeholder-shown:truncate"
+      style
+    end
+
+    sig { params(method: Symbol).returns(String) }
+    def text_area_style(method)
+      style = +"text-2xl text-navy placeholder:text-warm-grey py-3 focus:ring-4 focus:ring-sun-yellow"
       style << " "
       style << (error?(method) ? "border-error-red pl-4 pr-16" : "border-light-grey2 px-4")
       style
