@@ -58,7 +58,7 @@ describe "Browsing basic documentation pages" do
 
   describe "contact us page in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true)
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
       visit documentation_contact_path
     end
 
@@ -67,6 +67,12 @@ describe "Browsing basic documentation pages" do
         expect(page).to be_axe_clean
       end
     end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Contact us")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
   end
 
   describe "api page in the new design" do
