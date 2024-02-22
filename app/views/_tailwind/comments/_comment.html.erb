@@ -25,13 +25,11 @@
       <% end %>
     </div>
 
-    <% if comment.visible? %>
+    <%# TODO: Make this partial not have to know about the page that it's used on %>
+    <% if comment.visible? && !current_page?(new_comment_report_path(comment.id)) %>
       <%= render "comments/delivery_status", comment: %>
       <div class="mt-4">
-        <%# TODO: Make this partial not have to know about the page that it's used on %>
-        <% unless current_page?(new_comment_report_path(comment.id)) %>
-          <%= render "comments/actions", comment: %>
-        <% end %>
+        <%= render "comments/actions", comment: %>
       </div>
     <% end %>
   </div>
