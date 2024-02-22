@@ -9,33 +9,30 @@
 <%# TODO: Make sure that there is consistency on formatting of h1, h2, h3, etc. across the site %>
 <%# TODO: Using non-standard font %>
 <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "mt-14").with_content("Your comment") %>
-<p class="text-3xl text-navy">Does this look right?</p>
+<p class="mb-10 text-3xl text-navy">Does this look right?</p>
 
 <%# TODO: Can we use the comments partial here so that we can make sure it has consistent formatting? %>
-<article class="flex flex-col gap-2 mt-10 sm:gap-6 sm:flex-row">
-  <div class="h-8 text-navy text-7xl">”</div>
-  <div>
-    <div class="prose prose-2xl">
-      <%= comment_as_html(@comment.text) %>
-    </div>
-
-    <%# TODO: Smaller line height? %>
-    <div class="mt-8 text-xl font-bold text-navy">
-      <%= @comment.name %>
-    </div>
-    <p class="text-xl font-bold text-navy">(Your address is automatically hidden when published on our website)</p>
-
-    <div class="mt-12">
-      <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :secondary, href: application_path(@comment.application, anchor: "add-comment"), icon: :edit).with_content("Edit comment") %>
-    </div>
-
-    <div class="mt-4">
-      <%= pa_button_to publish_application_comment_path(@comment) do %>
-        Publish (and send to <%= @comment.comment_recipient_full_name %>)
-      <% end %>
-    </div>
+<%= render Tailwind::QuotedBlock.new do %>
+  <div class="prose prose-2xl">
+    <%= comment_as_html(@comment.text) %>
   </div>
-</article>
+
+  <%# TODO: Smaller line height? %>
+  <div class="mt-8 text-xl font-bold text-navy">
+    <%= @comment.name %>
+  </div>
+  <p class="text-xl font-bold text-navy">(Your address is automatically hidden when published on our website)</p>
+
+  <div class="mt-12">
+    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :secondary, href: application_path(@comment.application, anchor: "add-comment"), icon: :edit).with_content("Edit comment") %>
+  </div>
+
+  <div class="mt-4">
+    <%= pa_button_to publish_application_comment_path(@comment) do %>
+      Publish (and send to <%= @comment.comment_recipient_full_name %>)
+    <% end %>
+  </div>
+<% end %>
 
 <section class="pt-16 mt-20 border-t border-dashed border-cool-blue-gray">
   <%# TODO: Using non-standard font %>

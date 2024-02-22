@@ -1,34 +1,31 @@
 <%# TODO: Do we want a version of this partial that accepts "with_address" and optionally shows the address for the comments index page? %>
-<article class="flex flex-col items-start gap-2 sm:gap-6 sm:flex-row">
-  <div class="h-8 text-navy text-7xl">”</div>
-  <div>
-    <% if comment.visible? %>
-      <%# TODO: Use blockquote for the body of the comment? %>
-      <%= render "comments/comment_text", comment: %>
+<%= render Tailwind::QuotedBlock.new do %>
+  <% if comment.visible? %>
+    <%# TODO: Use blockquote for the body of the comment? %>
+    <%= render "comments/comment_text", comment: %>
 
-      <%# TODO: Smaller line height? %>
-      <div class="mt-2 text-xl font-bold text-navy">
-        <%= comment.name %>
-      </div>
+    <%# TODO: Smaller line height? %>
+    <div class="mt-2 text-xl font-bold text-navy">
+      <%= comment.name %>
+    </div>
 
-      <%= render "comments/comment_date", comment: %>
+    <%= render "comments/comment_date", comment: %>
 
-      <%# This bit with the delivery status and actions can be hidden by setting show_extra: false %>
-      <% if show_extra %>
-        <%= render "comments/delivery_status", comment: %>
-        <div class="mt-4">
-          <%= render "comments/actions", comment: %>
-        </div>
-      <% end %>
-    <% else %>
-      <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
-
-      <div class="mt-6">
-        <%= render "comments/comment_date", comment: %>
+    <%# This bit with the delivery status and actions can be hidden by setting show_extra: false %>
+    <% if show_extra %>
+      <%= render "comments/delivery_status", comment: %>
+      <div class="mt-4">
+        <%= render "comments/actions", comment: %>
       </div>
     <% end %>
-  </div>
-</article>
+  <% else %>
+    <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
+
+    <div class="mt-6">
+      <%= render "comments/comment_date", comment: %>
+    </div>
+  <% end %>
+<% end %>
 
 <%
 =begin

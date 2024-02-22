@@ -17,9 +17,8 @@
     <strong><%= comment.application.address %></strong>
     you said:
   </p>
-  <div class="flex mt-12 mb-10">
-    <div class="mr-6 text-navy text-7xl" aria-hidden="true">”</div>
-    <div>
+  <div class="mt-12 mb-10">
+    <%= render Tailwind::QuotedBlock.new do %>
       <%= render "comments/comment_text", comment: %>
       <%# TODO: This space between the text and the date looks too big to me %>
       <div class="mt-12">
@@ -29,6 +28,6 @@
         <%# # TODO: We want the disclosure always open (or no disclosure) instead of what's on the public comments page %>
         <%= render "comments/delivery_status", comment: %>
       </div>
-    </div>
+    <% end %>
   </div>
 <% end %>
