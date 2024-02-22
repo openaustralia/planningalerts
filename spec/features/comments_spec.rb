@@ -62,9 +62,11 @@ describe "Comments pages" do
 
         before do
           create(:published_comment,
+                 application: application1,
                  text: "I am a resident the suburb. I object to the development application. My main concerns are the potential impacts on local wildlife.",
                  user: signed_in_user)
           create(:published_comment,
+                 application: application2,
                  text: "I disagree. I think this is a very thoughtful and considered development. It should go ahead",
                  user: signed_in_user)
           visit comments_profile_path
