@@ -56,6 +56,10 @@ describe "Comments pages" do
       end
 
       describe "you have made one comment" do
+        let(:authority) { create(:authority, full_name: "Byron Shire Council") }
+        let(:application1) { create(:geocoded_application, address: "24 Bruce Road Glenbrook", council_reference: "27B/6", authority:) }
+        let(:application2) { create(:geocoded_application, address: "351 Pacific Hwy, Coffs Harbour NSW 2450", council_reference: "001", authority:) }
+
         before do
           create(:published_comment,
                  text: "I am a resident the suburb. I object to the development application. My main concerns are the potential impacts on local wildlife.",
