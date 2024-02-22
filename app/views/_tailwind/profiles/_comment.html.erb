@@ -21,10 +21,9 @@
     <div class="mr-6 text-navy text-7xl" aria-hidden="true">”</div>
     <div>
       <%= render "comments/comment_text", comment: %>
-      <div class="mt-12 text-lg text-navy">
-        <time datetime="<%= comment.published_at.strftime("%F") %>">
-          <%= time_ago_in_words(comment.published_at) %> ago
-        </time>
+      <%# TODO: This space between the text and the date looks too big to me %>
+      <div class="mt-12">
+        <%= render "comments/comment_date", comment: %>
       </div>
       <div class="mt-4">
         <%# # TODO: We want the disclosure always open (or no disclosure) instead of what's on the public comments page %>

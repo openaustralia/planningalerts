@@ -16,10 +16,8 @@
       </div>
     <% end %>
 
-    <div class="<%= class_names("text-xl", "text-navy", "mt-6" => !comment.visible?) %>">
-      <%= time_tag comment.published_at do %>
-        <%= time_ago_in_words(comment.published_at).capitalize %> ago
-      <% end %>
+    <div class="<%= class_names("mt-6" => !comment.visible?) %>">
+      <%= render "comments/comment_date", comment: %>
     </div>
 
     <%# This bit with the delivery status and actions can be hidden by setting show_extra: false %>
