@@ -2,29 +2,29 @@
 <article class="flex flex-col items-start gap-2 sm:gap-6 sm:flex-row">
   <div class="h-8 text-navy text-7xl">”</div>
   <div>
-    <%# TODO: Use blockquote for the body of the comment? %>
     <% if comment.visible? %>
+      <%# TODO: Use blockquote for the body of the comment? %>
       <%= render "comments/comment_text", comment: %>
-    <% else %>
-      <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
-    <% end %>
 
-    <% if comment.visible? %>
       <%# TODO: Smaller line height? %>
       <div class="mt-2 text-xl font-bold text-navy">
         <%= comment.name %>
       </div>
-    <% end %>
 
-    <div class="<%= class_names("mt-6" => !comment.visible?) %>">
       <%= render "comments/comment_date", comment: %>
-    </div>
 
-    <%# This bit with the delivery status and actions can be hidden by setting show_extra: false %>
-    <% if comment.visible? && show_extra %>
-      <%= render "comments/delivery_status", comment: %>
-      <div class="mt-4">
-        <%= render "comments/actions", comment: %>
+      <%# This bit with the delivery status and actions can be hidden by setting show_extra: false %>
+      <% if show_extra %>
+        <%= render "comments/delivery_status", comment: %>
+        <div class="mt-4">
+          <%= render "comments/actions", comment: %>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
+
+      <div class="mt-6">
+        <%= render "comments/comment_date", comment: %>
       </div>
     <% end %>
   </div>
