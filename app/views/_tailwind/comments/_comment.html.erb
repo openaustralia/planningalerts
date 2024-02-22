@@ -25,8 +25,8 @@
       <% end %>
     </div>
 
-    <%# TODO: Make this partial not have to know about the page that it's used on %>
-    <% if comment.visible? && !current_page?(new_comment_report_path(comment.id)) %>
+    <%# This bit with the delivery status and actions can be hidden by setting show_extra: false %>
+    <% if comment.visible? && show_extra %>
       <%= render "comments/delivery_status", comment: %>
       <div class="mt-4">
         <%= render "comments/actions", comment: %>
