@@ -6,8 +6,10 @@ describe "Comments pages" do
   include Devise::Test::IntegrationHelpers
 
   describe "in the new design" do
+    let(:signed_in_user) { create(:confirmed_user, tailwind_theme: true, name: "Jane Ng") }
+
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in(signed_in_user)
     end
 
     describe "index page" do
@@ -49,6 +51,28 @@ describe "Comments pages" do
         # rubocop:disable RSpec/NoExpectationExample
         it "renders the page", js: true do
           page.percy_snapshot("Your comments empty")
+        end
+        # rubocop:enable RSpec/NoExpectationExample
+      end
+
+      describe "you have made one comment" do
+        before do
+          create(:published_comment,
+                 text: "I am a resident the suburb. I object to the development application. My main concerns are the potential impacts on local wildlife.",
+                 user: signed_in_user)
+          create(:published_comment,
+                 text: "I disagree. I think this is a very thoughtful and considered development. It should go ahead",
+                 user: signed_in_user)
+          visit comments_profile_path
+        end
+
+        it "passes accessibility tests", js: true do
+          expect(page).to be_axe_clean
+        end
+
+        # rubocop:disable RSpec/NoExpectationExample
+        it "renders the page", js: true do
+          page.percy_snapshot("Your comments")
         end
         # rubocop:enable RSpec/NoExpectationExample
       end
