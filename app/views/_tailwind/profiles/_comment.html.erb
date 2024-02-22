@@ -20,9 +20,7 @@
   <div class="flex mt-12 mb-10">
     <div class="mr-6 text-navy text-7xl" aria-hidden="true">”</div>
     <div>
-      <div class="prose prose-2xl">
-        <%= comment_as_html(comment.text) %>
-      </div>
+      <%= render "comments/comment_text", comment: %>
       <div class="mt-12 text-lg text-navy">
         <time datetime="<%= comment.published_at.strftime("%F") %>">
           <%= time_ago_in_words(comment.published_at) %> ago

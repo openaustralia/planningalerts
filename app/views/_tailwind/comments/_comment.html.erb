@@ -3,14 +3,11 @@
   <div class="h-8 text-navy text-7xl">”</div>
   <div>
     <%# TODO: Use blockquote for the body of the comment? %>
-    <div class="prose prose-2xl">
-      <% if comment.visible? %>
-        <%# TODO: Clip long comment %>
-        <%= comment_as_html(comment.text) %>
-      <% else %>
-        <em>This comment was hidden by site administrators</em>
-      <% end %>
-    </div>
+    <% if comment.visible? %>
+      <%= render "comments/comment_text", comment: %>
+    <% else %>
+      <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
+    <% end %>
 
     <% if comment.visible? %>
       <%# TODO: Smaller line height? %>
