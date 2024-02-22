@@ -22,7 +22,7 @@
         <% end %>
       <% end %>
     </div>
-    <%= pa_link_to "View more trending applications", trending_applications_path, class: "text-2xl mt-6" %>
+    <%= pa_link_to "View more trending applications", trending_applications_path, extra_classes: "text-2xl mt-6" %>
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Latest applications across Australia") %>
     <div class="flex items-end">
       <%= image_tag "tailwind/illustration/houses.svg", alt: "" %>
@@ -42,7 +42,7 @@
         <% end %>
       <% end %>
     </div>
-    <%= pa_link_to "View more latest applications", applications_path, class: "text-2xl mt-6" %>
+    <%= pa_link_to "View more latest applications", applications_path, extra_classes: "text-2xl mt-6" %>
   </div>
 
   <section class="py-12 mt-8 text-2xl border-t border-light-grey2 text-navy">

@@ -1,4 +1,4 @@
-<%= pa_link_to "< Back to menu", profile_alerts_path, class: "text-2xl" %>
+<%= pa_link_to "< Back to menu", profile_alerts_path, extra_classes: "text-2xl" %>
 
 <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mt-14").with_content(@alert.address) %>
 <div>

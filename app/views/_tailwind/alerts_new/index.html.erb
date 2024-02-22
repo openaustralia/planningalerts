@@ -4,7 +4,7 @@
     Alerts are sent to your email at
     <%= current_user.email %>
   </p>
-  <%= pa_link_to "Change", edit_user_registration_path, class: "text-2xl mt-1 inline-block" %>
+  <%= pa_link_to "Change", edit_user_registration_path, extra_classes: "text-2xl mt-1 inline-block" %>
 </div>
 
 <% if @alerts.empty? %>
@@ -12,7 +12,7 @@
     <div class="flex justify-center flex-grow">
       <div class="ml-12 mr-4">
         <p class="text-2xl font-normal text-navy">You have no saved alerts</p>
-        <%= pa_link_to "Create your first one", new_profile_alert_path, class: "text-2xl" %>
+        <%= pa_link_to "Create your first one", new_profile_alert_path, extra_classes: "text-2xl" %>
       </div>
     </div>
     <%= image_tag "tailwind/illustration/woman-looking-off.svg", class: "mt-6", alt: "" %>

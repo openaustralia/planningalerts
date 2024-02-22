@@ -1,7 +1,7 @@
 <% content_for :page_title, "Report a comment" %>
 
 <div class="mb-8">
-  <%= pa_link_to "< Back to application", @comment.application, class: "text-2xl" %>
+  <%= pa_link_to "< Back to application", @comment.application, extra_classes: "text-2xl" %>
 </div>
 
 <%= render Tailwind::Heading.new(tag: :h1) do %>

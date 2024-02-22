@@ -19,26 +19,26 @@ module ApplicationHelper
 
   # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
-  sig { params(body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, String]).returns(String) }
-  def pa_link_to(body, url, html_options = {})
-    html_options[:class] = "#{html_options[:class]} #{pa_link_classes}"
-    link_to(body, url, html_options)
+  sig { params(body: T.untyped, url: T.untyped, extra_classes: T.nilable(String)).returns(String) }
+  def pa_link_to(body, url, extra_classes: nil)
+    # These extra classes can't override the default styling because they're at the end
+    link_to(body, url, class: "#{pa_link_classes} #{extra_classes}")
   end
 
   # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
-  sig { params(body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, String]).returns(String) }
-  def pa_link_to_unless_current(body, url, html_options = {})
-    html_options[:class] = "#{html_options[:class]} #{pa_link_classes}"
-    link_to_unless_current(body, url, html_options)
+  sig { params(body: T.untyped, url: T.untyped, extra_classes: T.nilable(String)).returns(String) }
+  def pa_link_to_unless_current(body, url, extra_classes: nil)
+    # These extra classes can't override the default styling because they're at the end
+    link_to_unless_current(body, url, class: "#{pa_link_classes} #{extra_classes}")
   end
 
   # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
-  sig { params(condition: T::Boolean, body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, String]).returns(String) }
-  def pa_link_to_unless(condition, body, url, html_options = {})
-    html_options[:class] = "#{html_options[:class]} #{pa_link_classes}"
-    link_to_unless(condition, body, url, html_options)
+  sig { params(condition: T::Boolean, body: T.untyped, url: T.untyped, extra_classes: T.nilable(String)).returns(String) }
+  def pa_link_to_unless(condition, body, url, extra_classes: nil)
+    # These extra classes can't override the default styling because they're at the end
+    link_to_unless(condition, body, url, class: "#{pa_link_classes} #{extra_classes}")
   end
 
   sig { params(email_address: String, name: T.nilable(String), html_options: T.untyped).returns(String) }
