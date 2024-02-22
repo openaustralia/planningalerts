@@ -5,15 +5,6 @@ require "spec_helper"
 describe "Comments pages" do
   include Devise::Test::IntegrationHelpers
 
-  before do
-    create(:published_comment,
-           text: "I am a resident the suburb. I object to the development application. My main concerns are the potential impacts on local wildlife.",
-           name: "Andrew Citizen")
-    create(:published_comment,
-           text: "I disagree. I think this is a very thoughtful and considered development. It should go ahead",
-           name: "Another Citizen")
-  end
-
   describe "in the new design" do
     before do
       sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
@@ -21,6 +12,12 @@ describe "Comments pages" do
 
     describe "index page" do
       before do
+        create(:published_comment,
+               text: "I am a resident the suburb. I object to the development application. My main concerns are the potential impacts on local wildlife.",
+               name: "Andrew Citizen")
+        create(:published_comment,
+               text: "I disagree. I think this is a very thoughtful and considered development. It should go ahead",
+               name: "Another Citizen")
         visit comments_path
       end
 
@@ -33,6 +30,28 @@ describe "Comments pages" do
         page.percy_snapshot("Recent comments")
       end
       # rubocop:enable RSpec/NoExpectationExample
+    end
+
+    describe "your comments page in profile" do
+      describe "no comments yet" do
+        before do
+          visit comments_profile_path
+        end
+
+        it "lets the user know" do
+          expect(page).to have_content("You haven't made any comments yet")
+        end
+
+        it "passes accessibility tests", js: true do
+          expect(page).to be_axe_clean
+        end
+
+        # rubocop:disable RSpec/NoExpectationExample
+        it "renders the page", js: true do
+          page.percy_snapshot("Your comments empty")
+        end
+        # rubocop:enable RSpec/NoExpectationExample
+      end
     end
   end
 end
