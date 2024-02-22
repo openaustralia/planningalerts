@@ -127,4 +127,30 @@ describe "Browsing basic documentation pages" do
     end
     # rubocop:enable RSpec/NoExpectationExample
   end
+
+  describe "404 page in the new design" do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      visit "/404"
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("404")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
+
+  describe "500 page in the new design" do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      visit "/500"
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("500")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
 end
