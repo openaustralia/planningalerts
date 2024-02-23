@@ -65,11 +65,27 @@ describe "Comments pages" do
                  application: application1,
                  text: "I am a resident the suburb. I object to the development application. My main concerns are the potential impacts on local wildlife.",
                  user: signed_in_user)
-          create(:published_comment,
+          create(:delivered_comment,
                  application: application2,
                  text: "I disagree. I think this is a very thoughtful and considered development. It should go ahead",
                  user: signed_in_user)
+          create(:delivery_failed_comment,
+                 application: application2,
+                 text: "This message is not going to go through, is it?",
+                 user: signed_in_user)
           visit comments_profile_path
+        end
+
+        it "has a comment that has been sent but not yet received" do
+          expect(page).to have_content("Sent to the planning authority")
+        end
+
+        it "has a comment that has been succesfully received" do
+          expect(page).to have_content("Delivered to the planning authority")
+        end
+
+        it "has a comment that failed to be delivered" do
+          expect(page).to have_content("There was a problem delivering this")
         end
 
         it "passes accessibility tests", js: true do

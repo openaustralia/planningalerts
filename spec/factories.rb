@@ -94,6 +94,16 @@ FactoryBot.define do
     factory :published_comment do
       published { true }
       published_at { 5.minutes.ago }
+
+      factory :delivered_comment do
+        last_delivered_successfully { true }
+        last_delivered_at { 5.minutes.ago }
+      end
+
+      factory :delivery_failed_comment do
+        last_delivered_successfully { false }
+        last_delivered_at { 5.minutes.ago }
+      end
     end
   end
 
