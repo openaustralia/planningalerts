@@ -1,16 +1,16 @@
+<% if comment.hidden %>
+  <p class="py-3 text-2xl mb-9 text-navy bg-light-grey px-7">
+    This comment is hidden from public view.
+    <%# TODO: Where should this link go to? %>
+    <%= pa_link_to "Why?", "#" %>
+  </p>
+<% end %>
+
 <%# TODO: Fixup spacing with multiple comments %>
 <%# TODO: Factor out what's common between this partial and comments/_comment %>
 <%# TODO: Add hover state for link block %>
 <%# TODO: Do we want to follow the right arrow pattern used elsewhere? %>
 <%= link_to comment, class: "block focus:bg-sun-yellow" do %>
-  <% if comment.hidden %>
-    <p class="py-3 text-2xl mb-9 text-navy bg-light-grey px-7">
-      This comment is hidden from public view.
-      <%# TODO: Where should this link go to? %>
-      <%= pa_link_to "Why?", "#" %>
-    </p>
-  <% end %>
-
   <p class="text-2xl text-navy">
     In response to <%= comment.application.authority.full_name %>,
     application reference <%= comment.application.council_reference %> for
