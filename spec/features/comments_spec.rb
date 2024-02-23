@@ -67,14 +67,17 @@ describe "Comments pages" do
             create(:published_comment,
                    application: application1,
                    text: "I am a resident the suburb. I object to the development application. My main concerns are the potential impacts on local wildlife.",
+                   published_at: 15.minutes.ago,
                    user: signed_in_user)
             create(:delivered_comment,
                    application: application2,
                    text: "I disagree. I think this is a very thoughtful and considered development. It should go ahead",
+                   published_at: 10.minutes.ago,
                    user: signed_in_user)
             create(:delivery_failed_comment,
                    application: application2,
                    text: "This message is not going to go through, is it?",
+                   published_at: 5.minutes.ago,
                    user: signed_in_user)
             visit comments_profile_path
           end
