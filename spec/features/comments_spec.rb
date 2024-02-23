@@ -61,19 +61,23 @@ describe "Comments pages" do
         let(:application2) { create(:geocoded_application, address: "351 Pacific Hwy, Coffs Harbour NSW 2450", council_reference: "001", authority:) }
 
         before do
-          create(:published_comment,
-                 application: application1,
-                 text: "I am a resident the suburb. I object to the development application. My main concerns are the potential impacts on local wildlife.",
-                 user: signed_in_user)
-          create(:delivered_comment,
-                 application: application2,
-                 text: "I disagree. I think this is a very thoughtful and considered development. It should go ahead",
-                 user: signed_in_user)
-          create(:delivery_failed_comment,
-                 application: application2,
-                 text: "This message is not going to go through, is it?",
-                 user: signed_in_user)
-          visit comments_profile_path
+          # Because we can see absolute times in the email delivery text we need to set the current time
+          # to get consistent snapshots for percy.io
+          Timecop.freeze(Date.new(2023, 6, 1)) do
+            create(:published_comment,
+                   application: application1,
+                   text: "I am a resident the suburb. I object to the development application. My main concerns are the potential impacts on local wildlife.",
+                   user: signed_in_user)
+            create(:delivered_comment,
+                   application: application2,
+                   text: "I disagree. I think this is a very thoughtful and considered development. It should go ahead",
+                   user: signed_in_user)
+            create(:delivery_failed_comment,
+                   application: application2,
+                   text: "This message is not going to go through, is it?",
+                   user: signed_in_user)
+            visit comments_profile_path
+          end
         end
 
         it "has a comment that has been sent but not yet received" do
