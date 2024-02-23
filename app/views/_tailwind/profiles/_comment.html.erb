@@ -10,24 +10,25 @@
 <%# TODO: Factor out what's common between this partial and comments/_comment %>
 <%# TODO: Add hover state for link block %>
 <%# TODO: Do we want to follow the right arrow pattern used elsewhere? %>
-<%= link_to comment, class: "block focus:bg-sun-yellow" do %>
-  <p class="text-2xl text-navy">
-    In response to <%= comment.application.authority.full_name %>,
-    application reference <%= comment.application.council_reference %> for
-    <strong><%= comment.application.address %></strong>
-    you said:
-  </p>
-  <div class="mt-12 mb-10">
-    <%= render Tailwind::QuotedBlock.new do %>
+<p class="text-2xl text-navy">
+  In response to <%= comment.application.authority.full_name %>,
+  application reference <%= comment.application.council_reference %> for
+  <strong><%= comment.application.address %></strong>
+  you said:
+</p>
+<div class="mt-12 mb-10">
+  <%= render Tailwind::QuotedBlock.new do %>
+    <%= link_to comment, class: "block focus:bg-sun-yellow" do %>
       <%= render "comments/comment_text", comment: %>
       <%# TODO: This space between the text and the date looks too big to me %>
       <div class="mt-12">
         <%= render "comments/comment_date", comment: %>
       </div>
-      <div class="mt-4">
-        <%# # TODO: We want the disclosure always open (or no disclosure) instead of what's on the public comments page %>
-        <%= render "comments/delivery_status", comment: %>
-      </div>
     <% end %>
-  </div>
-<% end %>
+    <%# The delivery status can have a link in it so we don't want that inside the link to the comment above %>
+    <div class="mt-4">
+      <%= render "comments/delivery_status", always_open: true, comment: %>
+    </div>
+  <% end %>
+</div>
+

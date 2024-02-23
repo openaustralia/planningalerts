@@ -13,7 +13,7 @@
 
     <%# This bit with the delivery status and actions can be hidden by setting show_extra: false %>
     <% if show_extra %>
-      <%= render "comments/delivery_status", comment: %>
+      <%= render "comments/delivery_status", always_open: false, comment: %>
       <div class="mt-4">
         <%= render "comments/actions", comment: %>
       </div>
