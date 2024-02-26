@@ -1,7 +1,6 @@
 <% cache "stats", expires_in: 1.hour do %>
   <section class="pt-12 text-xl text-navy">
-    <%# TODO: Non-standard style %>
-    <%= render Tailwind::Heading.new(tag: :h2, size: "4xl", extra_classes: "mb-12").with_content("This week at Planning Alerts") %>
+    <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mb-12").with_content("This week at Planning Alerts") %>
     <ul class="grid gap-12 text-center sm:grid-cols-2 lg:grid-cols-4">
       <li>
         <%= link_to applications_path, class: "text-fuchsia focus:bg-sun-yellow block" do %>
