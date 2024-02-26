@@ -21,8 +21,7 @@
 <% if @authority.covered? %>
   <div class="divide-y divide-light-grey2">
     <section class="py-12">
-      <%# TODO: This is using a different font than standard %>
-      <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
+      <%= render Tailwind::Heading.new(tag: :h2) do %>
         Applications collected by Planning Alerts
       <% end %>
       <% if @authority.applications.empty? %>
@@ -69,8 +68,7 @@
     <% unless @authority.applications.empty? %>
       <section class="pt-12 pb-24">
         <%# TODO: This title isn't right because the section has comments in it too %>
-        <%# TODO: Using a non-standard font for h2 %>
-        <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
+        <%= render Tailwind::Heading.new(tag: :h2) do %>
           Browse applications from <%= @authority.full_name %>
         <% end %>
         <ul class="mt-8 text-2xl text-navy">
@@ -86,8 +84,7 @@
       </section>
 
       <section class="pt-12 pb-24">
-        <%# TODO: Using non-standard font %>
-        <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "pb-12") do %>
+        <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-12") do %>
           Number of new applications scraped over time
         <% end %>
         <div class="h-52">
@@ -97,8 +94,7 @@
       </section>
 
       <section class="clear-both pt-12 pb-24">
-        <%# TODO: Using non-standard font %>
-        <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "pb-12") do %>
+        <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-12") do %>
           Number of comments posted over time
         <% end %>
         <div class="h-52">
@@ -125,8 +121,7 @@
     <% end %>
 
     <section class="pt-12 pb-24">
-      <%# TODO: Using non-standard font %>
-      <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "pb-12") do %>
+      <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-12") do %>
         Under the Hood
       <% end %>
       <p class="text-2xl text-navy">
