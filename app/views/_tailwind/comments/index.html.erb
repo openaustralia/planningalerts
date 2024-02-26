@@ -9,5 +9,5 @@
   <%= render @comments, show_extra: true %>
 </div>
 
-<%# TODO: Speed up controller by using without_count %>
+<%# TODO: Speed up controller by using without_count after removing old theme %>
 <%= render Tailwind::SimplePager.new(collection: @comments) %>
