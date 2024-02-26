@@ -13,9 +13,9 @@
 
 <%# TODO: Can we use the comments partial here so that we can make sure it has consistent formatting? %>
 <%= render Tailwind::QuotedBlock.new do %>
-  <div class="prose prose-2xl">
+  <%= render Tailwind::Prose.new do %>
     <%= comment_as_html(@comment.text) %>
-  </div>
+  <% end %>
 
   <%# TODO: Smaller line height? %>
   <div class="mt-8 text-xl font-bold text-navy">

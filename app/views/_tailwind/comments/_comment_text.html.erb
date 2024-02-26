@@ -1,4 +1,4 @@
-<div class="prose prose-2xl">
+<%= render Tailwind::Prose.new do %>
   <%# TODO: Clip long comment %>
   <%= comment_as_html(comment.text) %>
-</div>
+<% end %>

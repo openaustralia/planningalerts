@@ -2,7 +2,7 @@
   Why do you need my address when I comment on an application?
 </dt>
 <dd>
-  <div class="prose prose-2xl">
+  <%= render Tailwind::Prose.new do %>
     <%= render partial: "faq_commenting_address" %>
-  </div>
+  <% end %>
 </dd>
