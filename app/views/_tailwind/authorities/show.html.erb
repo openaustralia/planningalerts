@@ -88,7 +88,11 @@
           Number of new applications scraped over time
         <% end %>
         <div class="h-52">
-          <div class="chart bg-fuchsia" id="applications-chart">
+          <div class="chart bg-fuchsia"
+               x-init="barGraph(
+                         $el,
+                         '<%= per_week_authority_applications_url(@authority.short_name_encoded, format: :json) %>',
+                         'new applications scraped')">
           </div>
         </div>
       </section>
@@ -98,26 +102,17 @@
           Number of comments posted over time
         <% end %>
         <div class="h-52">
-          <div class="chart bg-fuchsia" id="comments-chart">
+          <div class="chart bg-fuchsia"
+               x-init="barGraph(
+                         $el,
+                         '<%= per_week_authority_comments_url(@authority.short_name_encoded, format: :json) %>',
+                         'comments posted')">
           </div>
         </div>
       </section>
 
-      <%# TODO: Move over to using alpinejs to initialise the chart %>
       <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min.js" %>
       <%= javascript_include_tag "tailwind/bar_graph" %>
-      <script>
-        barGraph(
-          "#applications-chart",
-          "<%= per_week_authority_applications_url(@authority.short_name_encoded, format: :json) %>",
-          "new applications scraped"
-        );
-        barGraph(
-          "#comments-chart",
-          "<%= per_week_authority_comments_url(@authority.short_name_encoded, format: :json) %>",
-          "comments posted"
-        );
-      </script>
     <% end %>
 
     <section class="pt-12 pb-24">
