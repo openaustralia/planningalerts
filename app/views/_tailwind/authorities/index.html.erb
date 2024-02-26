@@ -28,8 +28,7 @@
 
 <div class="mt-8 border-t divide-y divide-light-grey2 border-light-grey2">
   <section class="py-12">
-    <%# TODO: This is using a smaller size than standard for h2 %>
-    <%= render Tailwind::Heading.new(tag: :h2, size: "2xl") do %>
+    <%= render Tailwind::Heading.new(tag: :h2) do %>
       Where does application data come from?
     <% end %>
     <%# TODO: This paragraph is the same as used in "how to write a scraper". Extract partial? %>
@@ -60,8 +59,7 @@
   </section>
   <section class="py-12">
     <%# TODO: Not sure this is the best wording for the heading %>
-    <%# TODO: This is using a smaller size than standard %>
-    <%= render Tailwind::Heading.new(tag: :h2, size: "2xl") do %>
+    <%= render Tailwind::Heading.new(tag: :h2) do %>
       Date reliability
     <% end %>
     <p class="mt-4 text-2xl text-navy">
