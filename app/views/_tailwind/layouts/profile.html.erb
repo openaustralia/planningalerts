@@ -1,9 +1,8 @@
 <% content_for :content do %>
-  <%# TODO: This is using a different style than the standard Heading component %>
-  <%= render Tailwind::Heading.new(tag: :h1, size: "xl").with_content("Your account") %>
-  <p class="mt-1 text-4xl font-bold text-navy font-display">
+  <%= render Tailwind::Heading.new(tag: :h1) do %>
+    <div class="text-xl">Your account</div>
     <%= current_user.name_with_fallback %>
-  </p>
+  <% end %>
 
   <div class="grid-cols-3 gap-16 mt-10 md:grid">
     <div class="mb-8">
