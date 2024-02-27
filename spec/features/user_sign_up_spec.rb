@@ -26,6 +26,7 @@ describe "Signing up for an API account" do
   describe "resending confirmation instructions in new design" do
     before do
       sign_in create(:confirmed_user, tailwind_theme: true)
+      visit root_path
       sign_out :user
       visit new_user_confirmation_path
     end
