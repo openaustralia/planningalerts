@@ -5,16 +5,12 @@ require "spec_helper"
 describe "Activate account" do
   include Devise::Test::IntegrationHelpers
 
-  context "with a confirmed user that has not been activated in the new design" do
+  context "when in the new design" do
     before do
       # Do this weird dance to get us on to the new theme
       sign_in create(:confirmed_user, tailwind_theme: true)
       visit root_path
       sign_out :user
-
-      u = User.new(email: "matthew@oaf.org.au", from_alert_or_comment: true, confirmed_at: Time.zone.now)
-      u.skip_confirmation_notification!
-      u.save!(validate: false)
       visit new_users_activation_path
     end
 
