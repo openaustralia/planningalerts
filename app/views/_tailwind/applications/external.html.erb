@@ -27,7 +27,7 @@
   </div>
 
   <div class="mt-20">
-    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: @application.info_url, open_in_new_tab: true) do %>
+    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: @application.info_url, open_in_new_tab: true, icon: :external) do %>
       Continue to
       <span class="font-normal"><%= @application.authority.full_name %> website</span>
     <% end %>
