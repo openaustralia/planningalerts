@@ -1,0 +1,34 @@
+<%# TODO: This page needs a proper design %>
+
+<div class="max-w-lg mx-auto">
+  <%= render Tailwind::Heading.new(tag: :h1, color: "fuchsia", extra_classes: "my-20 text-center") do %>
+    Resend confirmation instructions
+  <% end %>
+
+  <%= form_with model: resource, url: confirmation_path(resource_name), builder: FormBuilders::Tailwind do |f| %>
+    <div>
+      <%= f.label :email, class: "block" %>
+      <%= f.email_field :email, class: "mt-1 block w-full", autocomplete: "email", autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+      <%= f.error :email, class: "mt-2" %>
+    </div>
+    <div class="flex justify-center mt-8">
+      <%= f.button "Resend confirmation instructions" %>
+    </div>
+  <% end %>
+
+</div>
+
+<%
+=begin
+%>
+
+<div class="login-block">
+  <p class="login-explanation">
+    Or you could <%= link_to "create an account", new_user_registration_path %> or
+    <%= link_to "sign in", new_user_session_path %>.
+  </p>
+</div>
+
+<%
+=end
+%>
