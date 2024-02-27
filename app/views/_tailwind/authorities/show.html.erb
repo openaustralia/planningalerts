@@ -1,9 +1,9 @@
 <% content_for :page_title do %>
-  Application information for <%= @authority.full_name %>
+  Application Information for <%= @authority.full_name %>
 <% end %>
 
 <%= render Tailwind::Heading.new(tag: :h1) do %>
-  Application information <span class="block mt-1 text-2xl font-bold font-display">for <%= @authority.full_name %></span>
+  Application Information <span class="block mt-1 text-2xl font-bold font-display">for <%= @authority.full_name %></span>
 <% end %>
 
 <% if @authority.boundary && Flipper.enabled?(:show_authority_map, current_user) %>
