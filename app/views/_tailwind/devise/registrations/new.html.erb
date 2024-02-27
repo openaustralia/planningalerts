@@ -41,6 +41,9 @@
         <%= pa_link_to "Sign in", new_user_session_path %> or
         <%= pa_link_to "activate", new_users_activation_path %>.
       </p>
+      <p class="mt-8">
+        <%= pa_link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+      </p>
     </div>
   </div>
 </div>
