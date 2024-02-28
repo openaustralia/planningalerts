@@ -29,14 +29,14 @@
 <%= render "applications/map", application: @application %>
 
 <dl class="mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-2xl">
-  <dt class="font-bold">Description</dt>
+  <dt class="font-bold font-display">Description</dt>
   <dd><%= @application.description %></dd>
-  <dt class="font-bold">Planning Authority</dt>
+  <dt class="font-bold font-display">Planning Authority</dt>
   <dd>
     <%= pa_link_to @application.authority.full_name,
                    authority_path(@application.authority.short_name_encoded) %>
   </dd>
-  <dt class="font-bold">& Reference number</dt>
+  <dt class="font-bold font-display">& Reference number</dt>
   <dd>
     <div>
     <%# TODO: Add ability to copy with a click %>
