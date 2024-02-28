@@ -10,7 +10,6 @@
       Find me applications within <%= meters_in_words(Alert::DEFAULT_RADIUS) %> of:
     </p>
     <%= form.label :q, "Street address", class: "sr-only" %>
-    <%# TODO: Re-enable autofocus:true below after finished testing with livereload %>
     <div class="flex flex-col items-center w-full gap-4" x-data="{
       loading: false,
       address: '',
@@ -31,6 +30,7 @@
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                           class: class_names("text-2xl", "text-navy", "w-full", "px-4", "py-3", "sm:py-4", "placeholder-shown:truncate", "focus:ring-4", "focus:ring-sun-yellow", "border-error-red" => error),
                           required: "required",
+                          autofocus: true,
                           "x-data" => "{ async initAutocomplete() {
                                            const { Autocomplete } = await google.maps.importLibrary('places');
                                            new Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']})}
