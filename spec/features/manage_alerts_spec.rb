@@ -19,6 +19,44 @@ describe "Manage alerts" do
                                 user: User.find_by(email: "example@example.com"))).to be_nil
   end
 
+  describe "Unsubscribe from an email alert in the new design" do
+    let(:user) { create(:confirmed_user, tailwind_theme: true, name: "Jane Ng") }
+    let(:alert) do
+      # Adding arbitrary coordinates so that geocoding is not carried out
+      create(:alert,
+             address: "24 Bruce Rd, Glenbrook",
+             user: create(:user, email: "example@example.com"),
+             radius_meters: Alert::DEFAULT_RADIUS, lat: 1.0, lng: 1.0)
+    end
+
+    before do
+      sign_in user
+      visit unsubscribe_alert_path(confirm_id: alert.confirm_id)
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Alert unsubscribe")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
+
+  describe "Unsubscribe from a non-existent email alert in the new design" do
+    let(:user) { create(:confirmed_user, tailwind_theme: true, name: "Jane Ng") }
+
+    before do
+      sign_in user
+      # This is an invalid confirm_id
+      visit unsubscribe_alert_path(confirm_id: "abcd")
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Alert unsubscribe invalid")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
+
   it "Change size of email alert" do
     user = create(:confirmed_user, email: "example@example.com")
     alert = create(:alert,
