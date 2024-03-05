@@ -59,5 +59,9 @@ class AtdisController < ApplicationController
   end
 
   sig { void }
-  def specification; end
+  def specification
+    return unless show_tailwind_theme?
+
+    redirect_to "https://github.com/openaustralia/atdis/raw/master/docs/ATDIS-1.0.2%20Application%20Tracking%20Data%20Interchange%20Specification%20(v1.0.2).pdf"
+  end
 end
