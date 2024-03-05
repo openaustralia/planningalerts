@@ -69,5 +69,23 @@ describe "Contact us" do
       page.percy_snapshot("Contact us")
     end
     # rubocop:enable RSpec/NoExpectationExample
+
+    describe "after filling in a valid report" do
+      before do
+        select "The address or map location is wrong", from: "I'm getting in touch because"
+        fill_in "Please tell us briefly about your request", with: "Actually nothing is wrong here. Sorry."
+        click_button "Send message to the Planning Alerts team"
+      end
+
+      it "says thank you" do
+        expect(page).to have_content("Thank you for getting in touch")
+      end
+
+      # rubocop:disable RSpec/NoExpectationExample
+      it "renders a snapshot for a visual diff of the thank you page", js: true do
+        page.percy_snapshot("Contact us thank you")
+      end
+      # rubocop:enable RSpec/NoExpectationExample
+    end
   end
 end
