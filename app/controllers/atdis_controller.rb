@@ -6,6 +6,11 @@ class AtdisController < ApplicationController
 
   sig { void }
   def test
+    if show_tailwind_theme?
+      redirect_to get_involved_path
+      return
+    end
+
     if params[:url].present?
       feed = Feed.create_from_url(params[:url])
       begin

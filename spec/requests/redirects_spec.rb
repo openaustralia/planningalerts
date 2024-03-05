@@ -60,5 +60,16 @@ describe "redirects" do
       get atdis_specification_path
       expect(response).to redirect_to "https://github.com/openaustralia/atdis/raw/master/docs/ATDIS-1.0.2%20Application%20Tracking%20Data%20Interchange%20Specification%20(v1.0.2).pdf"
     end
+
+    it "does not redirect the test page in the origina design" do
+      get atdis_test_path
+      expect(response).not_to be_redirect
+    end
+
+    it "redirects the test page to the get involved page in the new design" do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      get atdis_test_path
+      expect(response).to redirect_to get_involved_path
+    end
   end
 end
