@@ -23,6 +23,21 @@ describe "Signing up for an API account" do
     expect(current_email.default_part_body.to_s).to include("Please confirm your account email by clicking the link below")
   end
 
+  describe "Check your email page in the new design" do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit root_path
+      sign_out :user
+      visit check_email_users_activation_path
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders the page", js: true do
+      page.percy_snapshot("Registration check email")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
+
   describe "resending confirmation instructions in new design" do
     before do
       sign_in create(:confirmed_user, tailwind_theme: true)
