@@ -35,10 +35,12 @@ module ApplicationHelper
 
   # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
-  sig { params(condition: T::Boolean, body: T.untyped, url: T.untyped, extra_classes: T.nilable(String), title: T.nilable(String)).returns(String) }
-  def pa_link_to_unless(condition, body, url, extra_classes: nil, title: nil)
+  # TODO: The signature is not consistent with pa_link_to. This is currently used by kamanari pager.
+  sig { params(condition: T::Boolean, body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, T.untyped]).returns(String) }
+  def pa_link_to_unless(condition, body, url, html_options = {})
     # These extra classes can't override the default styling because they're at the end
-    link_to_unless(condition, body, url, class: "#{pa_link_classes} #{extra_classes}", title:)
+    html_options[:class] = "#{pa_link_classes} #{html_options[:class]}"
+    link_to_unless(condition, body, url, html_options)
   end
 
   sig { params(path: String, extra_classes: T::Array[Symbol], block: T.untyped).returns(T.untyped) }
