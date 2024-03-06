@@ -28,7 +28,7 @@ describe "Signing up for an API account" do
       sign_in create(:confirmed_user, tailwind_theme: true)
       visit root_path
       sign_out :user
-      visit check_email_users_activation_path
+      visit check_email_user_registration_path
     end
 
     # rubocop:disable RSpec/NoExpectationExample
