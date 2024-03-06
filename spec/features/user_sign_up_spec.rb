@@ -41,4 +41,24 @@ describe "Signing up for an API account" do
     end
     # rubocop:enable RSpec/NoExpectationExample
   end
+
+  describe "reset your password in the new design" do
+    before do
+      sign_in create(:confirmed_user, tailwind_theme: true)
+      visit root_path
+      sign_out :user
+      # Need to be logged out to visit the reset password page
+      visit new_user_password_path
+    end
+
+    it "tells you what to do" do
+      expect(page).to have_content("Send me reset password instructions")
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders the page", js: true do
+      page.percy_snapshot("Reset password")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
 end
