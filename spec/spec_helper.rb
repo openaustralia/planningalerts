@@ -17,6 +17,7 @@ require "pundit/rspec"
 require "axe-rspec"
 require "capybara/rails"
 require "percy/capybara"
+require "flipper/adapters/pstore"
 
 Capybara.javascript_driver = :selenium_headless
 
@@ -110,8 +111,18 @@ RSpec.configure do |config|
     Rack::Attack.enabled = false
   end
 
-  # For testing use a memory adapter with all features disabled by default
-  Flipper.configure do |c|
-    c.default { Flipper.new(Flipper::Adapters::Memory.new) }
+  config.before do
+    # See https://github.com/flippercloud/flipper/issues/261#issuecomment-427138651
+    FileUtils.rm "tmp/flipper.pstore", force: true
+  end
+end
+
+# For testing use a pstore adapter
+# Using this over the standard in-memory adapter for testing so that flipper
+# will still work with capybara with js: true.
+Flipper.configure do |config|
+  config.adapter do
+    pstore_path = Rails.root.join("tmp/flipper.pstore")
+    Flipper::Adapters::PStore.new(pstore_path)
   end
 end

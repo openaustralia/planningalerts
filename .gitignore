@@ -33,3 +33,4 @@ planningalerts-app.sublime-project
 
 /config/credentials/production.key
 /config/credentials/development.key
+tmp/flipper.pstore

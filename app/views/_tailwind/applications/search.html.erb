@@ -1,0 +1,27 @@
+<% content_for :page_title, @description %>
+
+<%# TODO: This page needs a proper design %>
+
+<%= form_with url: search_applications_path, method: :get, builder: FormBuilders::Tailwind, class: "my-24" do |f| %>
+  <%= f.text_field :q, value: @q, class: "block", size: 50, autofocus: @applications.nil?, placeholder: "Tree work" %>
+  <div class="mt-5">
+    <%= f.button "Search" %>
+  </div>
+<% end %>
+
+<% if @applications %>
+  <% if @applications.any? %>
+    <%# TODO: Do we want to use simpler pagination (no page numbers) here so it's more consistent with pagination elsewhere? %>
+    <%= paginate @applications %>
+    <%# TODO: Extract list of applications as a component? %>
+    <ul class="mt-12 divide-y divide-light-grey2 border-y border-light-grey2">
+      <% @applications.each do |application| %>
+        <li><%= render application %></li>
+      <% end %>
+    </ul>
+    <%# TODO: Do we want to use simpler pagination (no page numbers) here so it's more consistent with pagination elsewhere? %>
+    <%= paginate @applications %>
+  <% else %>
+    <p class="text-2xl text-navy">Sorry, no results found!</p>
+  <% end %>
+<% end %>

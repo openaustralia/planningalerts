@@ -147,7 +147,7 @@ module FormBuilders
 
     sig { params(method: Symbol).returns(T::Boolean) }
     def error?(method)
-      object.errors[method].any?
+      !object.nil? && object.errors[method].any?
     end
 
     # Ugly workarounds because sorbet doesn't know about @object and @template

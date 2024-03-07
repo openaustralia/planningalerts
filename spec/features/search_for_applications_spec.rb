@@ -138,6 +138,23 @@ describe "Searching for development application near an address" do
     # rubocop:enable RSpec/NoExpectationExample
   end
 
+  describe "search results by text in new design" do
+    let(:user) { create(:confirmed_user, tailwind_theme: true, name: "Jane Ng") }
+
+    before do
+      sign_in user
+      Flipper.enable :full_text_search
+      # TODO: Would it be better to only enable the feature temporarily?
+      visit search_applications_path
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", js: true do
+      page.percy_snapshot("Application text search")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
+
   # Having trouble getting this to work
   # context "with javascript" do
   #   scenario "autocomplete results are displayed", js: true do
