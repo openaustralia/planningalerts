@@ -171,6 +171,23 @@ describe "Searching for development application near an address" do
       end
       # rubocop:enable RSpec/NoExpectationExample
     end
+
+    describe "search with two results" do
+      let(:application1) { create(:application) }
+      let(:application2) { create(:application) }
+
+      before do
+        allow(Application).to receive(:search).and_return(Kaminari.paginate_array([application1, application2]).page(1))
+        fill_in "q", with: "tree"
+        click_button "Search"
+      end
+
+      # rubocop:disable RSpec/NoExpectationExample
+      it "renders a snapshot for a visual diff", js: true do
+        page.percy_snapshot("Application text search results")
+      end
+      # rubocop:enable RSpec/NoExpectationExample
+    end
   end
 
   # Having trouble getting this to work
