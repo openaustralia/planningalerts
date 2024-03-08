@@ -91,3 +91,50 @@ async function initialiseAuthorityMap(el, params) {
     map.data.loadGeoJson(params.json);
 });
 }
+
+async function initialiseGeocodingMap(map_div) {
+  const { Map, InfoWindow } = await google.maps.importLibrary('maps');
+  const { Marker } = await google.maps.importLibrary("marker");
+
+  var g = JSON.parse(map_div.dataset.google);
+  var m = JSON.parse(map_div.dataset.mappify);
+  var googleLatLng = {lat: g.lat, lng: g.lng};
+  var mappifyLatLng = {lat: m.lat, lng: m.lng};
+
+  console.log("googleLatLng", googleLatLng);
+  console.log("mappifyLatLng", mappifyLatLng);
+
+  var map = new Map(map_div, { zoom: 13, center: googleLatLng });
+
+  // TODO: Generalise to any number of geocoder results
+
+  var googleInfowindow = new InfoWindow({
+    content: g.html
+  });
+
+  var mappifyInfowindow = new InfoWindow({
+    content: m.html
+  });
+
+  var googleMarker = new Marker({
+    position: googleLatLng,
+    map: map,
+    title: 'Google',
+    label: "G"
+  });
+
+  var mappifyMarker = new Marker({
+    position: mappifyLatLng,
+    map: map,
+    title: 'Mappify',
+    label: "M"
+  });
+
+  googleMarker.addListener('click', function() {
+    googleInfowindow.open(map, googleMarker);
+  });
+
+  mappifyMarker.addListener('click', function() {
+    mappifyInfowindow.open(map, mappifyMarker);
+  });
+}

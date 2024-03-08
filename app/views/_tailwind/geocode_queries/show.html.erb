@@ -1,0 +1,32 @@
+<%= render Tailwind::Heading.new(tag: :h1).with_content(@geocode_query.query) %>
+
+<dl class="grid grid-cols-2 mt-12 text-2xl text-navy">
+  <dt>
+    Google address
+  </dt>
+  <dd>
+    <%= @geocode_query.result("google").full_address %>
+  </dd>
+  <dt>
+    Mappify address
+  </dt>
+  <dd>
+    <%= @geocode_query.result("mappify").full_address %>
+  </dd>
+</dl>
+
+<div class="h-[500px] mt-12">
+  <%= tag.div class: "w-full h-full bg-google-maps-green", data:
+      {
+        google: {
+          lat: @geocode_query.result("google").lat,
+          lng: @geocode_query.result("google").lng,
+          html: render("geocode_results/result", result: @geocode_query.result("google"))
+        },
+        mappify: {
+          lat: @geocode_query.result("mappify").lat,
+          lng: @geocode_query.result("mappify").lng,
+          html: render("geocode_results/result", result: @geocode_query.result("mappify"))
+        }
+      }, "x-init" => "initialiseGeocodingMap($el)" %>
+</div>
