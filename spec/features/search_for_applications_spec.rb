@@ -153,6 +153,24 @@ describe "Searching for development application near an address" do
       page.percy_snapshot("Application text search")
     end
     # rubocop:enable RSpec/NoExpectationExample
+
+    describe "search with no results" do
+      before do
+        allow(Application).to receive(:search).and_return([])
+        fill_in "q", with: "tree"
+        click_button "Search"
+      end
+
+      it "lets the user know there are no results" do
+        expect(page).to have_content("no results found")
+      end
+
+      # rubocop:disable RSpec/NoExpectationExample
+      it "renders a snapshot for a visual diff", js: true do
+        page.percy_snapshot("Application text search no results")
+      end
+      # rubocop:enable RSpec/NoExpectationExample
+    end
   end
 
   # Having trouble getting this to work
