@@ -1,7 +1,6 @@
 <% content_for :page_title, page_title(@application) %>
 <% content_for :meta_description, @application.description %>
 <% content_for :extra_meta_tags do %>
-  <%# TODO: Remove twitter stuff here %>
   <meta content="summary" name="twitter:card">
   <meta content="@PlanningAlerts" name="twitter:site">
   <meta content="<%= @application.address %>" name="twitter:title">
