@@ -11,16 +11,14 @@
 
 <% if @applications %>
   <% if @applications.any? %>
-    <%# TODO: Do we want to use simpler pagination (no page numbers) here so it's more consistent with pagination elsewhere? %>
-    <%= paginate @applications %>
+    <%= render Tailwind::SimplePager.new(collection: @applications) %>
     <%# TODO: Extract list of applications as a component? %>
     <ul class="mt-12 divide-y divide-light-grey2 border-y border-light-grey2">
       <% @applications.each do |application| %>
         <li><%= render application %></li>
       <% end %>
     </ul>
-    <%# TODO: Do we want to use simpler pagination (no page numbers) here so it's more consistent with pagination elsewhere? %>
-    <%= paginate @applications %>
+    <%= render Tailwind::SimplePager.new(collection: @applications) %>
   <% else %>
     <p class="text-2xl text-navy">Sorry, no results found!</p>
   <% end %>

@@ -12,5 +12,5 @@
       </li>
     <% end %>
   </ol>
-  <%= paginate @comments %>
+  <%= render Tailwind::SimplePager.new(collection: @comments) %>
 <% end %>
