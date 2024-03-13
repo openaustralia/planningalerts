@@ -18,7 +18,7 @@ class AlertsNewController < ApplicationController
 
   sig { void }
   def new
-    @alert = Alert.new(radius_meters: Alert::DEFAULT_RADIUS)
+    @alert = Alert.new(radius_meters: Alert::DEFAULT_RADIUS, address: params[:address])
     authorize @alert
   end
 

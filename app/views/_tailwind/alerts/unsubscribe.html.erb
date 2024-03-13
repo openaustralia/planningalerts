@@ -12,13 +12,11 @@
   </p>
   <p class="mt-8 text-2xl text-navy">
     If this was a mistake
-    <%# TODO: The url below will get redirected. Send to correct path %>
-    <%= pa_link_to "you could always create a new alert for the same address", new_alert_path(address: @alert.address) %>
+    <%= pa_link_to "you could always create a new alert for the same address", new_profile_alert_path(address: @alert.address) %>
   </p>
 <% else %>
   <p class="mt-8 text-2xl text-navy">
     If this was a mistake
-    <%# TODO: The url below will get redirected. Send to correct path %>
-    <%= pa_link_to "you could always create a new alert", new_alert_path %>
+    <%= pa_link_to "you could always create a new alert", new_profile_alert_path %>
   </p>
 <% end %>
