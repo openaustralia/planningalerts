@@ -30,22 +30,24 @@
   <section class="pt-16">
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Search results") %>
 
-    <div class="flex justify-between pt-6">
-      <div>
-        <%# We only want to show the sort options on the first page %>
-        <% if page.nil? %>
-          <%= render "sort_options", sort:, extra_params: { q: } %>
-          <% if Flipper.enabled?(:extra_options_on_address_search, current_user) %>
-            <%= render "filter_options", sort:, q:, radius:, time: %>
-          <% end %>
-        <% else %>
-          <%= render Tailwind::SimplePager::Prev.new(collection: applications) %>
-        <% end %>
-      </div>
-      <div>
-        <%= render Tailwind::SimplePager::Next.new(collection: applications) %>
-      </div>
-    </div>
+    <div class="pt-6">
+      <%# We only want to show the sort options on the first page %>
+      <% if page.nil? %>
+        <div class="flex justify-between">
+          <div>
+            <%= render "sort_options", sort:, extra_params: { q: } %>
+            <% if Flipper.enabled?(:extra_options_on_address_search, current_user) %>
+              <%= render "filter_options", sort:, q:, radius:, time: %>
+            <% end %>
+          </div>
+          <div>
+            <%= render Tailwind::SimplePager::Next.new(collection: applications) %>
+          </div>
+        </div>
+      <% else %>
+        <%= render Tailwind::SimplePager.new(collection: applications) %>
+      <% end %>
+    <div>
 
     <div class="mt-12 mb-4">
       <%= render "create_alert_form", alert: %>
@@ -63,13 +65,8 @@
       <%= render "create_alert_form", alert: %>
     </div>
 
-    <div class="flex justify-between mt-6">
-      <div>
-        <%= render Tailwind::SimplePager::Prev.new(collection: applications) %>
-      </div>
-      <div>
-        <%= render Tailwind::SimplePager::Next.new(collection: applications) %>
-      </div>
+    <div class="mt-6">
+      <%= render Tailwind::SimplePager.new(collection: applications) %>
     </div>
   </section>
 <% end %>
