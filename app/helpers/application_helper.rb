@@ -12,34 +12,39 @@ module ApplicationHelper
   include Kernel
 
   # Only to be used in tailwind theme
-  sig { returns(String) }
-  def pa_link_classes
-    "text-fuchsia font-bold underline hover:text-fuchsia-darker focus:bg-sun-yellow"
+  sig { params(quiet: T::Boolean).returns(String) }
+  def pa_link_classes(quiet:)
+    c = "text-fuchsia hover:text-fuchsia-darker focus:bg-sun-yellow"
+    if quiet
+      "#{c} hover:underline"
+    else
+      "#{c} font-bold underline"
+    end
   end
 
   # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
-  sig { params(body: T.untyped, url: T.untyped, extra_classes: T.nilable(String), title: T.nilable(String)).returns(String) }
-  def pa_link_to(body, url, extra_classes: nil, title: nil)
+  sig { params(body: T.untyped, url: T.untyped, extra_classes: T.nilable(String), title: T.nilable(String), quiet: T::Boolean).returns(String) }
+  def pa_link_to(body, url, extra_classes: nil, title: nil, quiet: false)
     # These extra classes can't override the default styling because they're at the end
-    link_to(body, url, class: "#{pa_link_classes} #{extra_classes}", title:)
+    link_to(body, url, class: "#{pa_link_classes(quiet:)} #{extra_classes}", title:)
   end
 
   # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
-  sig { params(body: T.untyped, url: T.untyped, extra_classes: T.nilable(String), title: T.nilable(String)).returns(String) }
-  def pa_link_to_unless_current(body, url, extra_classes: nil, title: nil)
+  sig { params(body: T.untyped, url: T.untyped, extra_classes: T.nilable(String), title: T.nilable(String), quiet: T::Boolean).returns(String) }
+  def pa_link_to_unless_current(body, url, extra_classes: nil, title: nil, quiet: false)
     # These extra classes can't override the default styling because they're at the end
-    link_to_unless_current(body, url, class: "#{pa_link_classes} #{extra_classes}", title:)
+    link_to_unless_current(body, url, class: "#{pa_link_classes(quiet:)} #{extra_classes}", title:)
   end
 
   # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
   # TODO: The signature is not consistent with pa_link_to. This is currently used by kamanari pager.
-  sig { params(condition: T::Boolean, body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, T.untyped]).returns(String) }
-  def pa_link_to_unless(condition, body, url, html_options = {})
+  sig { params(condition: T::Boolean, body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, T.untyped], quiet: T::Boolean).returns(String) }
+  def pa_link_to_unless(condition, body, url, html_options = {}, quiet: false)
     # These extra classes can't override the default styling because they're at the end
-    html_options[:class] = "#{pa_link_classes} #{html_options[:class]}"
+    html_options[:class] = "#{pa_link_classes(quiet:)} #{html_options[:class]}"
     link_to_unless(condition, body, url, html_options)
   end
 
