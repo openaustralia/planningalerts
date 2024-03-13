@@ -1,2 +1,4 @@
 <%# TODO: Make this use pa_link_to helper instead %>
-<%= link_to_next_page applications, "Next page >", class: "text-fuchsia text-2xl font-bold" %>
+<% if path_to_next_page(applications) %>
+  <%= link_to "Next page >", path_to_next_page(applications), class: "text-fuchsia text-2xl font-bold" %>
+<% end %>
