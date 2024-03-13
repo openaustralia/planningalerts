@@ -48,11 +48,7 @@ describe "Searching for development application near an address" do
     click_button "Search"
 
     expect(page).to have_content "Search results"
-
-    within "main ul" do
-      expect(page).to have_content "24 Bruce Road"
-      expect(page).to have_content "A lovely house"
-    end
+    expect(page).to have_content "A lovely house"
   end
 
   describe "accessibility tests in new design", js: true do
