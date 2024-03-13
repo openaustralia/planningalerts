@@ -39,11 +39,11 @@
             <%= render "filter_options", sort:, q:, radius:, time: %>
           <% end %>
         <% else %>
-          <%= render "link_to_prev_page", applications: %>
+          <%= render Tailwind::SimplePager::Prev.new(collection: applications) %>
         <% end %>
       </div>
       <div>
-        <%= render "link_to_next_page", applications: %>
+        <%= render Tailwind::SimplePager::Next.new(collection: applications) %>
       </div>
     </div>
 
@@ -65,10 +65,10 @@
 
     <div class="flex justify-between mt-6">
       <div>
-        <%= render "link_to_prev_page", applications: %>
+        <%= render Tailwind::SimplePager::Prev.new(collection: applications) %>
       </div>
       <div>
-        <%= render "link_to_next_page", applications: %>
+        <%= render Tailwind::SimplePager::Next.new(collection: applications) %>
       </div>
     </div>
   </section>
