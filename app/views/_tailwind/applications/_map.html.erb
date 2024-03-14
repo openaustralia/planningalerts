@@ -6,7 +6,7 @@
         <%= google_static_map(application, size: "528x528") %>
       <% end %>
     </div>
-    <%# TODO: Don't show pano if there's no useful streetview available %>
+    <%# TODO: #1813 Don't show pano if there's no useful streetview available %>
     <% unless Flipper.enabled?(:disable_streetview_in_app, current_user) %>
       <div x-data class="hidden xl:block w-[528px] h-[528px]">
         <%= render Tailwind::Streetview.new(lat: application.lat, lng: application.lng, address: application.address) do %>
