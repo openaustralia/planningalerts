@@ -12,7 +12,7 @@
       <div x-data class="hidden xl:block w-[528px] h-[528px]">
         <%= render Tailwind::Streetview.new(lat: application.lat, lng: application.lng, address: application.address) do %>
           <%# Note that the "Disable Javascript" extension for firefox and chrome has a bug in it where it doesn't show
-          the second noscript when js is disabled https://github.com/dpacassi/disable-javascript/issues/79#issuecomment-743995262. 
+          the second noscript when js is disabled https://github.com/dpacassi/disable-javascript/issues/79#issuecomment-743995262.
           However, when you turn off javascript in the browser settings it does show the contents
           of the second noscript. This is very confusing and sent me down a long rabbit-hole trying to figure out what
           was going on. %>
