@@ -42,9 +42,8 @@
     </div>
     <%= render Tailwind::DisclosureComponent.new(size: "2xl") do |component| %>
       <% component.with_summary { "What is a reference number?" } %>
-      <%# TODO: Improve this terrible text. This is just a placeholder first go. %>
-      The reference number is created by the planning authority and is used by them to identify this application.
-      If you talk to the planning authority directly or use their website you will need this number to find or refer to this application.
+      This was created by <%= @application.authority.full_name %> to identify this application. You will need this if you talk
+      directly with them or use their website.
     <% end %>
   </dd>
 </dl>
