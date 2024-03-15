@@ -64,7 +64,7 @@
         </p>
       </div>
       <div class="flex-shrink-0">
-        <%= render "authorities/coverage_percentage" %>
+        <%= render "authorities/coverage_percentage", percentage: Authority.percentage_population_covered_by_all_active_authorities.to_i %>
       </div>
     </div>
   </section>

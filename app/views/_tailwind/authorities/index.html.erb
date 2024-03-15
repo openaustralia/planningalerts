@@ -6,7 +6,7 @@
 
 <div class="flex flex-col justify-between gap-8 mt-12 md:flex-row-reverse">
   <div class="shrink-0">
-    <%= render "coverage_percentage" %>
+    <%= render "coverage_percentage", percentage: @percentage_population_covered_by_all_active_authorities %>
   </div>
   <div class="max-w-2xl">
     <%= render "coverage_explanation",
