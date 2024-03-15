@@ -95,7 +95,7 @@ class Application < ApplicationRecord
 
   sig { returns(ActiveRecord::Relation) }
   def self.trending
-    where("first_date_scraped > ?", 4.weeks.ago).order(visible_comments_count: :desc)
+    where("first_date_scraped > ?", 6.months.ago).order(visible_comments_count: :desc)
   end
 
   sig { params(description: String).returns(String) }
