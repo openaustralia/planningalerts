@@ -50,14 +50,9 @@
 
     <div class="flex flex-col-reverse items-start justify-between gap-8 pt-4 md:flex-row">
       <div class="max-w-2xl">
-        <p>
-          We currently cover
-          <%= Authority.percentage_population_covered_by_all_active_authorities.to_i %>% of
-          Australia's population within <%= Authority.active.count %> authorities.
-          For this number we're only counting places where the main planning authority is covered.
-          As an example, most of Victoria is covered by the SPEAR system but not all Victorian
-          planning applications go through it. So, we don't include SPEAR in our population count.
-        </p>
+        <%= render "authorities/coverage_explanation",
+                   percentage: Authority.percentage_population_covered_by_all_active_authorities.to_i,
+                   count: Authority.active.count %>
         <p class="pt-4">
           We don't yet cover the whole country, but we are working on it.
           New authorities are being added all the time.

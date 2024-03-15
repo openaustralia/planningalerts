@@ -9,15 +9,9 @@
     <%= render "coverage_percentage" %>
   </div>
   <div class="max-w-2xl">
-    <%# TODO: Extract common partial from this and application search page %>
-    <p class="text-2xl text-navy">
-      We currently cover <%= @percentage_population_covered_by_all_active_authorities %>% of Australia's population
-      within <%= @authority_count %> authorities.
-      For this number we're only counting places where the main planning authority is covered.
-      As an example, most of Victoria is covered by the SPEAR system but not all Victorian planning
-      applications go through it. So, we don't include SPEAR in our population count.
-    </p>
-
+    <%= render "coverage_explanation",
+               percentage: @percentage_population_covered_by_all_active_authorities,
+               count: @authority_count %>
     <p class="mt-4 text-2xl text-navy">
       We don't yet cover the whole country, but we are working on it.
       New authorities are being added all the time, so if your local authority isn't listed below
