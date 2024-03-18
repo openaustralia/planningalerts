@@ -195,12 +195,7 @@ Rails.application.routes.draw do
     resources :paid, only: [:new, :create]
   end
 
-  namespace :api_keys do
-    resource :non_commercial, only: [:new, :create]
-    resources :requests, only: [:new]
-    resources :paid, only: [:new, :create]
-  end
-
+  get "api/howto" => "documentation#api_howto"
   get "about" => "documentation#about"
   get "faq" => "documentation#faq"
   get "getinvolved", to: redirect("/get_involved")
