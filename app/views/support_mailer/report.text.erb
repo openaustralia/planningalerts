@@ -1,0 +1,11 @@
+The abuse report was completed by <%= @report.name %> (<%= @report.email %>) who said:
+<%= @report.details %>
+
+The original comment was written by <%= @report.comment.name %> who said:
+<%= @report.comment.text %>
+
+The original comment can be found at:
+<%= comment_url(@report.comment) %>
+
+To edit/hide/delete this comment:
+<%= edit_admin_comment_url(@report.comment) %>

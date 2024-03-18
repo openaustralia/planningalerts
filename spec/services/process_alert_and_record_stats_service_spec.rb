@@ -3,39 +3,39 @@
 require "spec_helper"
 
 describe ProcessAlertAndRecordStatsService do
-  context "with two confirmed alerts" do
-    let(:alert) { create(:confirmed_alert) }
+  context "with two alerts" do
+    let(:alert) { create(:alert) }
 
-    before(:each) do
-      allow(ProcessAlertService).to receive(:call).with(alert: alert).and_return([1, 5, 1, 1])
+    before do
+      allow(ProcessAlertService).to receive(:call).with(alert:).and_return([1, 5, 1])
     end
 
-    it "should process the individual alert" do
-      expect(ProcessAlertService).to receive(:call).with(alert: alert).and_return([1, 5, 1, 1])
+    it "processes the individual alert" do
+      allow(ProcessAlertService).to receive(:call).with(alert:).and_return([1, 5, 1])
       allow(Alert).to receive(:find).with(alert.id).and_return(alert)
-      ProcessAlertAndRecordStatsService.call(alert_id: alert.id)
+      described_class.call(alert:)
+      expect(ProcessAlertService).to have_received(:call).with(alert:)
     end
 
-    it "should create a record of the batch of sent email alerts" do
+    it "creates a record of the batch of sent email alerts" do
       allow(Alert).to receive(:find).with(alert.id).and_return(alert)
 
-      ProcessAlertAndRecordStatsService.call(alert_id: alert.id)
+      described_class.call(alert:)
       expect(EmailBatch.count).to eq 1
       batch = EmailBatch.first
       expect(batch.no_emails).to eq 1
       expect(batch.no_applications).to eq 5
       expect(batch.no_comments).to eq 1
-      expect(batch.no_replies).to eq 1
     end
 
-    it "should increment the global stats" do
+    it "increments the global stats" do
       # Starting point
       Stat.increment_emails_sent(5)
       Stat.increment_applications_sent(10)
 
       allow(Alert).to receive(:find).with(alert.id).and_return(alert)
 
-      ProcessAlertAndRecordStatsService.call(alert_id: alert.id)
+      described_class.call(alert:)
       expect(Stat.emails_sent).to eq 6
       expect(Stat.applications_sent).to eq 15
     end

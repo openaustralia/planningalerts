@@ -1,9 +1,0 @@
-.councillor-image-wrapper
-  .councillor-image
-    - if councillor.image_url.present?
-      = image_tag councillor.image_url,
-                  alt: "Photo of #{councillor.name}",
-                  class: "u-photo"
-    - else
-      %abbr.councillor-initials{ title: councillor.name }
-        = councillor.initials

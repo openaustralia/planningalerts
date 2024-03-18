@@ -5,20 +5,15 @@ class Authority < ApplicationRecord
   extend T::Sig
 
   has_many :applications, dependent: :restrict_with_exception
-  has_many :councillors, dependent: :restrict_with_exception
   has_many :comments, through: :applications
-  has_many :councillor_contributions, dependent: :restrict_with_exception
   has_one :github_issue, dependent: :destroy
 
   validate :short_name_encoded_is_unique
 
-  validates :state, inclusion: {
-    in: %w[NSW VIC QLD SA WA TAS NT ACT],
-    message: "%<value> is not a state in Australia"
-  }
+  validates :state, inclusion: { in: %w[NSW VIC QLD SA WA TAS NT ACT] }
 
-  scope(:enabled, -> { where("disabled = 0 or disabled is null") })
-  scope(:active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') })
+  scope(:enabled, -> { where(disabled: false) })
+  scope(:active, -> { where(disabled: false).where("morph_name != '' AND morph_name IS NOT NULL") })
 
   sig { void }
   def short_name_encoded_is_unique
@@ -28,18 +23,9 @@ class Authority < ApplicationRecord
     errors.add(:short_name, "is not unique when encoded")
   end
 
-  sig { returns(T::Array[Councillor]) }
-  def councillors_available_for_contact
-    if write_to_councillors_enabled?
-      councillors.where(current: true).shuffle
-    else
-      []
-    end
-  end
-
   sig { returns(String) }
   def full_name_and_state
-    full_name + ", " + state
+    "#{full_name}, #{state}"
   end
 
   sig { returns(T::Boolean) }
@@ -47,50 +33,33 @@ class Authority < ApplicationRecord
     morph_name.present?
   end
 
-  # Hardcoded total population of Australia (2017 estimate)
-  # From http://stat.data.abs.gov.au/Index.aspx?DataSetCode=ABS_ERP_LGA2017
+  # Total population of Australia based on the 2021 Census
+  # https://www.abs.gov.au/statistics/people/population/population-census/2021
   sig { returns(Integer) }
-  def self.total_population_2017
-    24597528
+  def self.total_population_2021
+    25422788
   end
 
   sig { returns(Integer) }
-  def self.total_population_2017_covered_by_all_active_authorities
-    sum = 0
-    Authority.active.each do |a|
-      population = a.population_2017
-      sum += population if population
-    end
-    sum
+  def self.total_population_2021_covered_by_all_active_authorities
+    Authority.active.sum(:population_2021)
   end
 
   sig { returns(Float) }
   def self.percentage_population_covered_by_all_active_authorities
-    (total_population_2017_covered_by_all_active_authorities.to_f / total_population_2017) * 100
-  end
-
-  # Returns an array of arrays [date, number_of_applications_that_date]
-  sig { returns(T::Array[T::Array[[Date, Integer]]]) }
-  def new_applications_per_day
-    h = applications.with_first_version.order("date_scraped DESC").group("CAST(date_scraped AS DATE)").count
-    # For any dates not in h fill them in with zeros
-    (h.keys.min..Time.zone.today).each do |date|
-      h[date] = 0 unless h.key?(date)
-    end
-    h.sort
+    (total_population_2021_covered_by_all_active_authorities.to_f / total_population_2021) * 100
   end
 
   sig { returns(T.nilable(Integer)) }
   def median_new_applications_per_week
-    v = new_applications_per_week.select { |a| a[1].positive? }.map { |a| a[1] }.sort
+    v = new_applications_per_week.select { |a| a[1].positive? }.pluck(1).sort
     v[v.count / 2]
   end
 
   sig { returns(T::Array[[Date, Integer]]) }
   def new_applications_per_week
     # Sunday is the beginning of the week (and the date returned here)
-    # Have to compensate for MySQL which treats Monday as the beginning of the week
-    h = applications.with_first_version.order("date_scraped DESC").group("CAST(SUBDATE(date_scraped, WEEKDAY(date_scraped) + 1) AS DATE)").count
+    h = applications.group("DATE(first_date_scraped) - CAST(EXTRACT(DOW FROM first_date_scraped) AS INT)").count
     min = h.keys.min
     max = Time.zone.today - Time.zone.today.wday
     (min..max).step(7) do |date|
@@ -109,10 +78,7 @@ class Authority < ApplicationRecord
 
     e = earliest_date
     if e
-      # Have to compensate for MySQL which treats Monday as the beginning of the week
-      results = comments.visible.group(
-        "CAST(SUBDATE(confirmed_at, WEEKDAY(confirmed_at) + 1) AS DATE)"
-      ).count
+      results = comments.visible.group("DATE(published_at) - CAST(EXTRACT(DOW FROM published_at) AS INT)").count
 
       earliest_week_with_applications = e.at_beginning_of_week.to_date
       latest_week = Time.zone.today.at_beginning_of_week
@@ -128,8 +94,7 @@ class Authority < ApplicationRecord
   # When this authority started on PlanningAlerts. Just the date of the earliest scraped application
   sig { returns(T.nilable(Time)) }
   def earliest_date
-    earliest_application = applications.with_first_version.order("date_scraped").first
-    earliest_application&.first_date_scraped
+    applications.minimum(:first_date_scraped)
   end
 
   # So that the encoding function can be used elsewhere
@@ -143,10 +108,17 @@ class Authority < ApplicationRecord
     Authority.short_name_encoded(short_name)
   end
 
+  sig { params(name: String).returns(T.nilable(Integer)) }
+  def self.find_id_short_name_encoded(name)
+    select(:id, :short_name).to_a.find { |a| a.short_name_encoded == name }&.id
+  end
+
+  # TODO: Replace this with using friendly_id gem
+  # TODO: Also loads the whole boundary into memory. Do we want this?
   sig { params(name: String).returns(T.nilable(Authority)) }
   def self.find_short_name_encoded(name)
-    # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
-    all.find { |a| a.short_name_encoded == name }
+    id = find_id_short_name_encoded(name)
+    find(id) if id
   end
 
   sig { params(name: String).returns(Authority) }
@@ -158,45 +130,21 @@ class Authority < ApplicationRecord
     r
   end
 
-  sig { returns(T::Boolean) }
-  def write_to_councillors_enabled?
-    ENV["COUNCILLORS_ENABLED"] == "true" ? write_to_councillors_enabled : false
-  end
-
-  sig { params(popolo: Everypolitician::Popolo::JSON).returns(T::Array[Councillor]) }
-  def load_councillors(popolo)
-    popolo_councillors = PopoloCouncillors.new(popolo)
-    persons = popolo_councillors.for_authority(full_name)
-
-    persons.map do |person|
-      councillor = councillors.find_or_create_by(name: person.name)
-
-      no_longer_councillor = person.end_date.present? && Date.parse(person.end_date) <= Time.zone.today
-
-      councillor.current = false if no_longer_councillor
-      councillor.popolo_id = person.id
-      councillor.image_url = councillor.cached_image_url if councillor.cached_image_available?
-      councillor.update(email: person.email, party: person.party)
-
-      councillor
-    end
-  end
-
-  sig { returns(String) }
-  def popolo_url
-    "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/data/#{state.upcase}/local_councillor_popolo.json"
-  end
-
   # When the last entirely new application was scraped. Applications being updated is ignored.
   sig { returns(T.nilable(Time)) }
   def date_last_new_application_scraped
-    latest_application = applications.with_first_version.order("date_scraped DESC").first
-    latest_application&.first_date_scraped
+    applications.maximum(:first_date_scraped)
   end
 
   # If the latest application is over two weeks old, the scraper's probably broken
   sig { returns(T::Boolean) }
   def broken?
     applications.recent.empty?
+  end
+
+  sig { returns(ActiveRecord::Relation) }
+  def alerts
+    # Doing this as a sub-query so we don't send a long boundary string to the database
+    Alert.active.where("ST_Covers((?), lonlat)", Authority.where(id:).limit(1).select(:boundary))
   end
 end

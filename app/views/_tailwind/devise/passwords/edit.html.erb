@@ -1,0 +1,25 @@
+<%# TODO: This page needs a proper design %>
+<%# TODO: Extract out component for this centred block %>
+<div class="max-w-lg mx-auto">
+  <%# This is using a different style than the standard Heading component %>
+  <%= render Tailwind::Heading.new(tag: :h1, color: "fuchsia", extra_classes: "my-20 text-center").with_content("Change your password") %>
+
+  <%= form_with model: resource, url: password_path(resource_name), method: :put, builder: FormBuilders::Tailwind do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div class="flex flex-col items-center">
+      <div class="w-full">
+        <%= f.label :password, "New password", class: "block" %>
+        <%= f.password_field :password, class: "mt-1 block w-full", autofocus: true, autocomplete: "new-password" %>
+        <%= f.error :password, class: "mt-2" %>
+        <% if @minimum_password_length %>
+          <p class="mt-2 text-2xl font-light text-navy"><%= @minimum_password_length %> characters minimum</p>
+        <% end %>
+      </div>
+
+      <div class="mt-8">
+        <%= f.button "Change my password" %>
+      </div>
+    </div>
+  <% end %>
+</div>

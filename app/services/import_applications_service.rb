@@ -1,21 +1,25 @@
 # typed: strict
 # frozen_string_literal: true
 
-class ImportApplicationsService < ApplicationService
+class ImportApplicationsService
   extend T::Sig
 
-  sig { params(authority: Authority, logger: Logger).void }
-  def self.call(authority:, logger:)
+  sig { params(authority: Authority, logger: Logger, scrape_delay: Integer, morph_api_key: String).void }
+  def self.call(authority:, logger:, scrape_delay:, morph_api_key:)
     new(
-      authority: authority,
-      logger: logger
+      authority:,
+      logger:,
+      scrape_delay:,
+      morph_api_key:
     ).call
   end
 
-  sig { params(authority: Authority, logger: Logger).void }
-  def initialize(authority:, logger:)
+  sig { params(authority: Authority, logger: Logger, scrape_delay: Integer, morph_api_key: String).void }
+  def initialize(authority:, logger:, scrape_delay:, morph_api_key:)
     @authority = authority
     @logger = logger
+    @scrape_delay = scrape_delay
+    @morph_api_key = morph_api_key
   end
 
   sig { void }
@@ -23,7 +27,7 @@ class ImportApplicationsService < ApplicationService
     time = Benchmark.ms { import_applications_date_range }
     logger.info "Took #{(time / 1000).to_i} s to import applications from #{authority.full_name_and_state}"
 
-    SyncGithubIssueForAuthorityService.call(logger: logger, authority: authority)
+    SyncGithubIssueForAuthorityService.call(logger:, authority:)
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
@@ -40,20 +44,10 @@ class ImportApplicationsService < ApplicationService
     filters = []
     filters << "`authority_label` = '#{authority.scraper_authority_label}'" if authority.scraper_authority_label.present?
     filters << "`date_scraped` >= '#{start_date}'"
-    "select * from `data` where " + filters.join(" and ")
+    "select * from `data` where #{filters.join(' and ')}"
   end
 
   private
-
-  sig { returns(Integer) }
-  def scrape_delay
-    T.must(ENV["SCRAPE_DELAY"]).to_i
-  end
-
-  sig { returns(String) }
-  def morph_api_key
-    T.must(ENV["MORPH_API_KEY"])
-  end
 
   sig { returns(Date) }
   def start_date
@@ -66,6 +60,12 @@ class ImportApplicationsService < ApplicationService
   sig { returns(Logger) }
   attr_reader :logger
 
+  sig { returns(Integer) }
+  attr_reader :scrape_delay
+
+  sig { returns(String) }
+  attr_reader :morph_api_key
+
   # Import all the applications for this authority from morph.io
   sig { void }
   def import_applications_date_range
@@ -73,7 +73,7 @@ class ImportApplicationsService < ApplicationService
     error_count = 0
     import_data.each do |r|
       CreateOrUpdateApplicationService.call(
-        authority: authority,
+        authority:,
         council_reference: r.council_reference,
         attributes: {
           address: r.address,
@@ -82,7 +82,9 @@ class ImportApplicationsService < ApplicationService
           date_received: r.date_received,
           date_scraped: r.date_scraped,
           on_notice_from: r.on_notice_from,
-          on_notice_to: r.on_notice_to
+          on_notice_to: r.on_notice_to,
+          comment_email: r.comment_email,
+          comment_authority: r.comment_authority
         }
       )
       count += 1
@@ -99,14 +101,16 @@ class ImportApplicationsService < ApplicationService
 
   class ImportRecord < T::Struct
     const :council_reference, String
-    const :address, String
+    const :address, T.nilable(String)
     const :description, T.nilable(String)
     const :info_url, String
     const :date_received, T.nilable(String)
     const :date_scraped, ActiveSupport::TimeWithZone
-    # on_notice_from and on_notice_to are optional
+    # on_notice_from, on_notice_to, comment_email and comment_authority are optional
     const :on_notice_from, T.nilable(String)
     const :on_notice_to, T.nilable(String)
+    const :comment_email, T.nilable(String)
+    const :comment_authority, T.nilable(String)
   end
 
   sig { returns(T::Array[ImportRecord]) }
@@ -131,7 +135,9 @@ class ImportApplicationsService < ApplicationService
         date_scraped: Time.zone.now,
         # on_notice_from and on_notice_to tags are optional
         on_notice_from: a["on_notice_from"],
-        on_notice_to: a["on_notice_to"]
+        on_notice_to: a["on_notice_to"],
+        comment_email: a["comment_email"],
+        comment_authority: a["comment_authority"]
       )
     end
   end

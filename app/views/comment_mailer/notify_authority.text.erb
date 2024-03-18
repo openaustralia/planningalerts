@@ -7,7 +7,7 @@ Name of commenter:    <%= @comment.name %>
 Address of commenter: <%= @comment.address %>
 Email of commenter:   <%= @comment.email %>
 
-<%= @comment.text.html_safe %>
+<%= @comment.text %>
 
 =============================================================================
 <%= render "footer", comment: @comment -%>

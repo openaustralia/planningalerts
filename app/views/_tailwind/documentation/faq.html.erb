@@ -1,0 +1,22 @@
+<% content_for :page_title, "Help" %>
+
+<%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mb-16") do %>
+  <%= yield :page_title %>
+<% end %>
+
+<div class="flex flex-col items-start justify-between gap-8 md:flex-row-reverse">
+  <%= image_tag "tailwind/illustration/help.svg", alt: "" %>
+  <dl class="max-w-2xl text-2xl text-navy">
+    <%= render "documentation/faqs/what_does_it_do" %>
+    <%= render "documentation/faqs/where_does_data_come_from" %>
+    <%= render "documentation/faqs/what_is_a_planning_authority" %>
+    <%= render "documentation/faqs/how_to_stop_alerts" %>
+    <%= render "documentation/faqs/coverage" %>
+    <%= render "documentation/faqs/broken_scraper" %>
+    <%= render "documentation/faqs/can_i_help" %>
+    <%= render "documentation/faqs/can_i_copy_data" %>
+    <%= render "documentation/faqs/link_not_direct" %>
+    <%= render "documentation/faqs/disclosure" %>
+    <%= render "documentation/faqs/address" %>
+  </dl>
+</div>

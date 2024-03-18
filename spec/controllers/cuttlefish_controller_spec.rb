@@ -3,32 +3,32 @@
 require "spec_helper"
 
 describe CuttlefishController do
-  context "has a webhook key" do
-    before { expect(ENV).to receive(:[]).with("CUTTLEFISH_WEBHOOK_KEY").and_return("abc123") }
+  context "when has a webhook key" do
+    before do
+      allow(ENV).to receive(:[])
+      allow(Rails.application.credentials).to receive(:dig).with(:cuttlefish, :webhook_key).and_return("abc123")
+      allow(NotifySlackCommentDeliveryService).to receive(:call)
+    end
 
-    it "should not allow an incorrect webhook key" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
-
+    it "does not allow an incorrect webhook key" do
       post :event, params: { key: "wrong" }, format: :json
-      expect(response.status).to eq(403)
+      expect(response).to have_http_status(:forbidden)
+      expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
-    it "should allow a correct webhook key" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
-
+    it "allows a correct webhook key" do
       post :event, params: { key: "abc123" }, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
+      expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
-    it "should accept a test event but do nothing" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
-
+    it "accepts a test event but do nothing" do
       post :event, params: { key: "abc123", test_event: {} }, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
+      expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
-    it "should accept a delivery event for an alert email and record a succesful delivery" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "accepts a delivery event for an alert email and record a succesful delivery" do
       alert = create(:alert, id: 123)
       params = {
         key: "abc123",
@@ -51,15 +51,15 @@ describe CuttlefishController do
         }
       }
 
-      post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      post :event, params:, format: :json
+      expect(response).to have_http_status(:ok)
       alert.reload
       expect(alert.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(alert.last_delivered_successfully).to eq true
+      expect(alert.last_delivered_successfully).to be true
+      expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
-    it "should accept a delivery event for an alert email and do nothing" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "accepts a delivery event for an alert email and do nothing" do
       alert = create(:alert, id: 123)
       params = {
         key: "abc123",
@@ -82,15 +82,15 @@ describe CuttlefishController do
         }
       }
 
-      post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      post :event, params:, format: :json
+      expect(response).to have_http_status(:ok)
       alert.reload
       expect(alert.last_delivered_at).to be_nil
       expect(alert.last_delivered_successfully).to be_nil
+      expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
-    it "should accept a delivery event for an alert email and record a failed delivery" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "accepts a delivery event for an alert email and record a failed delivery" do
       alert = create(:alert, id: 123)
       params = {
         key: "abc123",
@@ -113,15 +113,15 @@ describe CuttlefishController do
         }
       }
 
-      post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      post :event, params:, format: :json
+      expect(response).to have_http_status(:ok)
       alert.reload
       expect(alert.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(alert.last_delivered_successfully).to eq false
+      expect(alert.last_delivered_successfully).to be false
+      expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
-    it "should accept a succesful delivery event for a comment email" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "accepts a succesful delivery event for a comment email" do
       comment = create(:comment, id: 12)
       params = {
         key: "abc123",
@@ -143,22 +143,16 @@ describe CuttlefishController do
           }
         }
       }
-      post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      post :event, params:, format: :json
+      expect(response).to have_http_status(:ok)
       comment.reload
       expect(comment.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(comment.last_delivered_successfully).to eq true
+      expect(comment.last_delivered_successfully).to be true
+      expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
-    it "should accept a hard bounce delivery event for a comment email and do something" do
+    it "accepts a hard bounce delivery event for a comment email and do something" do
       comment = create(:comment, id: 12)
-      expect(NotifySlackCommentDeliveryService).to receive(:call).with(
-        comment: comment,
-        to: "joy@smart-unlimited.com",
-        status: "hard_bounce",
-        extended_status: "hard bounce",
-        email_id: 123
-      )
 
       params = {
         key: "abc123",
@@ -180,16 +174,22 @@ describe CuttlefishController do
           }
         }
       }
-      post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      post :event, params:, format: :json
+      expect(response).to have_http_status(:ok)
       comment.reload
       expect(comment.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(comment.last_delivered_successfully).to eq false
+      expect(comment.last_delivered_successfully).to be false
+      expect(NotifySlackCommentDeliveryService).to have_received(:call).with(
+        comment:,
+        to: "joy@smart-unlimited.com",
+        status: "hard_bounce",
+        extended_status: "hard bounce",
+        email_id: 123
+      )
     end
 
-    it "should accept a soft bounce delivery event for a comment email and do something" do
+    it "accepts a soft bounce delivery event for a comment email and do something" do
       comment = create(:comment, id: 12)
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
 
       params = {
         key: "abc123",
@@ -211,11 +211,12 @@ describe CuttlefishController do
           }
         }
       }
-      post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      post :event, params:, format: :json
+      expect(response).to have_http_status(:ok)
       comment.reload
       expect(comment.last_delivered_at).to be_nil
       expect(comment.last_delivered_successfully).to be_nil
+      expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
   end
 end

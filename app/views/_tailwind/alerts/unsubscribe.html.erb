@@ -1,0 +1,22 @@
+<% content_for :page_title, "Unsubscribed" %>
+
+<%# TODO: This page needs an actual proper design %>
+<%# TODO: What shall we do if the user is actually logged in when they're on this page? %>
+<%= render Tailwind::Heading.new(tag: :h1).with_content("You have been unsubscribed") %>
+
+<% if @alert %>
+  <p class="mt-8 text-2xl text-navy">
+    You will no longer receive email alerts for any planning applications we find near
+    <%= @alert.address %>
+    (within <%= meters_in_words(@alert.radius_meters.to_f) %>).
+  </p>
+  <p class="mt-8 text-2xl text-navy">
+    If this was a mistake
+    <%= pa_link_to "you could always create a new alert for the same address", new_profile_alert_path(address: @alert.address) %>
+  </p>
+<% else %>
+  <p class="mt-8 text-2xl text-navy">
+    If this was a mistake
+    <%= pa_link_to "you could always create a new alert", new_profile_alert_path %>
+  </p>
+<% end %>

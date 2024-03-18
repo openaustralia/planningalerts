@@ -4,9 +4,11 @@
 class ApiController < ApplicationController
   extend T::Sig
 
-  before_action :check_api_parameters, except: %i[howto]
-  before_action :require_api_key, except: %i[howto]
+  before_action :check_api_parameters
+  before_action :require_api_key
   before_action :authenticate_bulk_api, only: %i[all date_scraped]
+  before_action :log_api_call
+  before_action :update_api_usage
 
   # This is disabled because at least one commercial user of the API is doing
   # GET requests for JSONP instead of using XHR
@@ -14,152 +16,104 @@ class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token,
                      only: %i[authority suburb_postcode point area date_scraped all]
 
-  class AuthorityParams < T::Struct
-    const :authority_id, String
-  end
-
   sig { void }
   def authority
-    typed_params = TypedParams[AuthorityParams].new.extract!(params)
-    # TODO: Handle the situation where the authority name isn't found
-    authority = Authority.find_short_name_encoded!(typed_params.authority_id)
-    apps = authority.applications.with_current_version.order("date_scraped DESC")
-    api_render(apps, "Recent applications from #{authority.full_name_and_state}")
-  end
+    params_authority_id = T.cast(params[:authority_id], String)
 
-  class SuburbPostcodeParams < T::Struct
-    const :suburb, T.nilable(String)
-    const :state, T.nilable(String)
-    const :postcode, T.nilable(String)
+    # TODO: Handle the situation where the authority name isn't found
+    authority = Authority.find_short_name_encoded!(params_authority_id)
+    apps = authority.applications.order(first_date_scraped: :desc)
+    api_render(apps, "Recent applications from #{authority.full_name_and_state}")
   end
 
   sig { void }
   def suburb_postcode
-    typed_params = TypedParams[SuburbPostcodeParams].new.extract!(params)
-    apps = Application.with_current_version.order("date_scraped DESC")
+    apps = Application.order(first_date_scraped: :desc)
     descriptions = []
-    if typed_params.suburb
-      descriptions << typed_params.suburb
-      apps = apps.where(application_versions: { suburb: typed_params.suburb })
+    if params[:suburb]
+      descriptions << params[:suburb]
+      apps = apps.where(suburb: params[:suburb])
     end
-    if typed_params.state
-      descriptions << typed_params.state
-      apps = apps.where(application_versions: { state: typed_params.state })
+    if params[:state]
+      descriptions << params[:state]
+      apps = apps.where(state: params[:state])
     end
     # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-    if typed_params.postcode
-      descriptions << typed_params.postcode
-      apps = apps.where(application_versions: { postcode: typed_params.postcode })
+    if params[:postcode]
+      descriptions << params[:postcode]
+      apps = apps.where(postcode: params[:postcode])
     end
     api_render(apps, "Recent applications in #{descriptions.join(', ')}")
   end
 
-  class PointParams < T::Struct
-    const :radius, T.nilable(Float)
-    const :area_size, T.nilable(Float)
-    const :address, T.nilable(String)
-    const :lat, T.nilable(Float)
-    const :lng, T.nilable(Float)
-  end
-
   sig { void }
   def point
-    typed_params = TypedParams[PointParams].new.extract!(params)
-    radius = typed_params.radius || typed_params.area_size || 2000.0
-    address = typed_params.address
-    # Search by address in the API is deprecated. See
-    # https://github.com/openaustralia/planningalerts/issues/1356
-    # TODO: Remove this as soon as nobody is using it anymore or a
-    # date has passed that we've set
-    if address
-      location = GoogleGeocodeService.call(address).top
-      if location.nil?
-        render_error("could not geocode address", :bad_request)
-        return
-      end
-      location_text = location.full_address
-    else
-      location = Location.new(lat: typed_params.lat.to_f, lng: typed_params.lng.to_f)
-      location_text = location.to_s
-    end
+    params_radius = T.cast(params[:radius], T.nilable(T.any(String, Numeric)))
+    params_area_size = T.cast(params[:area_size], T.nilable(T.any(String, Numeric)))
+    params_lat = T.cast(params[:lat], T.any(String, Numeric))
+    params_lng = T.cast(params[:lng], T.any(String, Numeric))
+
+    radius = if params_radius
+               params_radius.to_f
+             elsif params_area_size
+               params_area_size.to_f
+             else
+               Alert::DEFAULT_RADIUS.to_f
+             end
+    location = Location.new(lat: params_lat.to_f, lng: params_lng.to_f)
+    location_text = location.to_s
+    point = RGeo::Geographic.spherical_factory.point(location.lng, location.lat)
+    applications = Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius)
+    applications = applications.reorder(first_date_scraped: :desc)
     api_render(
-      Application.with_current_version.order("date_scraped DESC").near(
-        [location.lat, location.lng], radius / 1000,
-        units: :km,
-        latitude: "application_versions.lat",
-        longitude: "application_versions.lng"
-      ),
+      applications,
       "Recent applications within #{help.meters_in_words(radius)} of #{location_text}"
     )
   end
 
-  class AreaParams < T::Struct
-    const :bottom_left_lat, Float
-    const :bottom_left_lng, Float
-    const :top_right_lat, Float
-    const :top_right_lng, Float
-  end
-
   sig { void }
   def area
-    typed_params = TypedParams[AreaParams].new.extract!(params)
-    lat0 = typed_params.bottom_left_lat
-    lng0 = typed_params.bottom_left_lng
-    lat1 = typed_params.top_right_lat
-    lng1 = typed_params.top_right_lng
+    lat0 = params[:bottom_left_lat]
+    lng0 = params[:bottom_left_lng]
+    lat1 = params[:top_right_lat]
+    lng1 = params[:top_right_lng]
     api_render(
-      Application.with_current_version.order("date_scraped DESC").where("lat > ? AND lng > ? AND lat < ? AND lng < ?", lat0, lng0, lat1, lng1),
+      Application.order(first_date_scraped: :desc).where(lat: lat0..lat1, lng: lng0..lng1),
       "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
     )
   end
 
-  class DateScrapedParams < T::Struct
-    const :date_scraped, String
-  end
-
   sig { void }
   def date_scraped
-    typed_params = TypedParams[DateScrapedParams].new.extract!(params)
+    params_date_scraped = T.cast(params[:date_scraped], String)
+
     begin
-      date = Date.parse(typed_params.date_scraped)
+      date = Date.parse(params_date_scraped)
     rescue ArgumentError => e
       raise e unless e.message == "invalid date"
     end
 
     if date
-      api_render(Application.with_current_version.order("date_scraped DESC").where("application_versions.date_scraped" => date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
+      api_render(Application.order(date_scraped: :desc).where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       render_error("invalid date_scraped", :bad_request)
     end
-  end
-
-  class AllParams < T::Struct
-    const :since_id, T.nilable(Integer)
   end
 
   # Note that this returns results in a slightly different format than the
   # other API calls because the paging is done differently (via scrape time rather than page number)
   sig { void }
   def all
-    typed_params = TypedParams[AllParams].new.extract!(params)
     # TODO: Check that params page and v aren't being used
-    LogApiCallJob.perform_later(
-      api_key: request.query_parameters["key"],
-      ip_address: request.remote_ip,
-      query: request.fullpath,
-      params: params.to_h,
-      user_agent: request.headers["User-Agent"],
-      time_as_float: Time.zone.now.to_f
-    )
-    apps = Application.with_current_version.order("applications.id")
-    apps = apps.where("applications.id > ?", typed_params.since_id) if typed_params.since_id
+    apps = Application.includes(:authority).order(:id)
+    apps = apps.where("id > ?", params[:since_id]) if params[:since_id]
 
     # Max number of records that we'll show
     limit = 1000
 
     applications = apps.limit(limit).to_a
     last = applications.last
-    last = Application.with_current_version.order("applications.id").last if last.nil?
+    last = Application.order(:id).last if last.nil?
     max_id = last.id if last
 
     respond_to do |format|
@@ -180,9 +134,6 @@ class ApiController < ApplicationController
     end
   end
 
-  sig { void }
-  def howto; end
-
   private
 
   sig { void }
@@ -193,7 +144,7 @@ class ApiController < ApplicationController
       page
       postcode
       suburb state
-      address lat lng radius area_size
+      lat lng radius area_size
       bottom_left_lat bottom_left_lng top_right_lat top_right_lng
       count v key since_id date_scraped
     ]
@@ -208,93 +159,96 @@ class ApiController < ApplicationController
     )
   end
 
-  class RequireApiKeyParams < T::Struct
-    const :key, T.nilable(String)
+  sig { void }
+  def require_api_key
+    params_key = T.cast(params[:key], T.nilable(String))
+
+    if params_key
+      @current_api_key = T.let(ApiKey.find_valid(params_key), T.nilable(ApiKey))
+      # return if everything is fine
+      return if @current_api_key
+    end
+
+    render_error("not authorised - use a valid api key", :unauthorized)
   end
 
   sig { void }
-  def require_api_key
-    typed_params = TypedParams[RequireApiKeyParams].new.extract!(params)
-    if typed_params.key && ApiKey.where(value: typed_params.key, disabled: false).exists?
-      # Everything is fine
-      return
-    end
+  def authenticate_bulk_api
+    # This should only be called after require_api_key doesn't error so @current_api_key should always be non-nil
+    return if T.must(@current_api_key).bulk?
 
-    render_error(
-      "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes",
-      :unauthorized
+    render_error("no bulk api access", :unauthorized)
+  end
+
+  sig { void }
+  def log_api_call
+    LogApiCallJob.perform_async(
+      request.query_parameters["key"],
+      request.remote_ip,
+      request.fullpath,
+      permitted_params.merge(
+        controller: params[:controller],
+        action: params[:action],
+        format: params[:format]
+      ).to_h,
+      request.headers["User-Agent"],
+      Time.zone.now.to_f
     )
+  end
+
+  sig { void }
+  def update_api_usage
+    # This is doing everything in UTC which means that the "daily" period does *not* start at midnight Australian time which is somewhat
+    # confusing. It's not hugely important in the grand scheme of things as the daily usage is more used to see the order of magnitude
+    # of usage. The detailed usage of users is capped via the rack middleware which is going to be accurate.
+    # TODO: Switch over to using an Australian time zone
+    UpdateApiUsageJob.perform_async(T.must(T.must(@current_api_key).id), Time.zone.today.to_s)
   end
 
   sig { params(error_text: String, status: Symbol).void }
   def render_error(error_text, status)
     respond_to do |format|
       format.json do
-        render json: { error: error_text }, status: status
+        render json: { error: error_text }, status:
       end
       # Use of the js extension is deprecated. See
       # https://github.com/openaustralia/planningalerts/issues/679
       # TODO: Remove when it's no longer used
       format.js do
-        render json: { error: error_text }, status: status, content_type: Mime[:json]
+        render json: { error: error_text }, status:, content_type: Mime[:json]
       end
       format.geojson do
-        render json: { error: error_text }, status: status
+        render json: { error: error_text }, status:
       end
       format.rss do
-        render plain: error_text, status: status
+        render plain: error_text, status:
       end
     end
-  end
-
-  class AuthenticateBulkApiParams < T::Struct
-    const :key, String
-  end
-
-  sig { void }
-  def authenticate_bulk_api
-    typed_params = TypedParams[AuthenticateBulkApiParams].new.extract!(params)
-    return if ApiKey.where(value: typed_params.key, bulk: true).exists?
-
-    render_error("no bulk api access", :unauthorized)
-  end
-
-  class PerPageParams < T::Struct
-    const :count, T.nilable(Integer)
   end
 
   sig { returns(Integer) }
   def per_page
-    typed_params = TypedParams[PerPageParams].new.extract!(params)
+    params_count = T.cast(params[:count], T.nilable(T.any(String, Numeric)))
+
     # Allow to set number of returned applications up to a maximum
-    count = typed_params.count
-    if count && count <= Application.per_page
+    count = params_count&.to_i
+    if count && count <= Application.max_per_page
       count
     else
-      Application.per_page
+      Application.max_per_page
     end
   end
 
-  class ApiRenderParams < T::Struct
-    const :page, T.nilable(Integer)
-    const :v, T.nilable(String)
-  end
-
-  sig { params(apps: Application::RelationType, description: String).void }
+  sig { params(apps: T.untyped, description: String).void }
   def api_render(apps, description)
-    typed_params = TypedParams[ApiRenderParams].new.extract!(params)
-    applications = apps.includes(:authority).paginate(page: typed_params.page, per_page: per_page)
-    @applications = T.let(applications, T.nilable(T.any(Application::RelationType, T::Array[Application])))
+    # typed_params = TypedParams[ApiRenderParams].new.extract!(params)
+    applications = apps.includes(:authority).page(params[:page]).per(per_page)
+    @applications = T.let(applications, T.untyped)
     @description = T.let(description, T.nilable(String))
 
-    LogApiCallJob.perform_later(
-      api_key: request.query_parameters["key"],
-      ip_address: request.remote_ip,
-      query: request.fullpath,
-      params: params.to_h,
-      user_agent: request.headers["User-Agent"],
-      time_as_float: Time.zone.now.to_f
-    )
+    # In Rails 6.0 variants seem to not be able to be a string
+    variants = :v2 if params[:v] == "2"
+
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
       format.rss do
@@ -305,7 +259,7 @@ class ApiController < ApplicationController
       format.json do
         # TODO: Document use of v parameter
         render "index", formats: :json,
-                        variants: typed_params.v
+                        variants:
       end
       # Use of the js extension is deprecated. See
       # https://github.com/openaustralia/planningalerts/issues/679
@@ -314,7 +268,7 @@ class ApiController < ApplicationController
         # TODO: Document use of v parameter
         render "index", formats: :json,
                         content_type: Mime[:json],
-                        variants: typed_params.v
+                        variants:
       end
       format.geojson do
         render "index"
@@ -331,5 +285,14 @@ class ApiController < ApplicationController
     include Singleton
     include ApplicationHelper
     include ActionView::Helpers::TextHelper
+  end
+
+  sig { returns(T.untyped) }
+  def permitted_params
+    params.permit(
+      :authority_id, :suburb, :state, :postcode, :radius, :area_size,
+      :lat, :lng, :bottom_left_lat, :bottom_left_lng, :top_right_lat,
+      :top_right_lng, :date_scraped, :since_id, :key, :count, :page, :v
+    )
   end
 end

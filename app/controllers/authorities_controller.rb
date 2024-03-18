@@ -1,36 +1,52 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class AuthoritiesController < ApplicationController
-  class IndexParams < T::Struct
-    const :order, T.nilable(String)
-  end
+  extend T::Sig
 
+  sig { void }
   def index
-    typed_params = TypedParams[IndexParams].new.extract!(params)
-    @authority_count = Authority.active.count
-    @percentage_population_covered_by_all_active_authorities = Authority.percentage_population_covered_by_all_active_authorities.to_i
-    @authorities = Authority.enabled
-    @authorities = @authorities.order(population_2017: :desc) if typed_params.order == "population"
+    @authority_count = T.let(Authority.active.count, T.nilable(Integer))
+    @percentage_population_covered_by_all_active_authorities = T.let(Authority.percentage_population_covered_by_all_active_authorities.to_i, T.nilable(Integer))
+    params_order = T.cast(params[:order], T.nilable(String))
+    @order = T.let(params_order, T.nilable(String))
+    @authorities = T.let(Authority.enabled, T.untyped)
+    @authorities = @authorities.order(population_2021: :desc) if params[:order] == "population"
     @authorities = @authorities.order(:state, :full_name)
+    # Limit what we're loading to stop the boundary data from getting loaded
+    @authorities = @authorities.select(:id, :state, :short_name, :full_name, :population_2021, :updated_at, :morph_name)
   end
 
-  class ShowParams < T::Struct
-    const :id, String
-  end
-
+  sig { void }
   def show
-    typed_params = TypedParams[ShowParams].new.extract!(params)
+    params_id = T.cast(params[:id], String)
+
     # TODO: Use something like the friendly_id gem instead
-    @authority = Authority.find_short_name_encoded!(typed_params.id)
+    @authority = T.let(Authority.find_short_name_encoded!(params_id), T.nilable(Authority))
   end
 
-  class UnderTheHoodParams < T::Struct
-    const :authority_id, String
-  end
-
+  sig { void }
   def under_the_hood
-    typed_params = TypedParams[UnderTheHoodParams].new.extract!(params)
-    @authority = Authority.find_short_name_encoded!(typed_params.authority_id)
+    params_authority_id = T.cast(params[:authority_id], String)
+
+    @authority = Authority.find_short_name_encoded!(params_authority_id)
+  end
+
+  sig { void }
+  def boundary
+    params_id = T.cast(params[:id], String)
+
+    # TODO: Use something like the friendly_id gem instead
+    authority = T.let(Authority.find_short_name_encoded!(params_id), Authority)
+
+    respond_to do |format|
+      format.json do
+        # Utterly ridiculous - Google maps api says it handles geojson though
+        # in fact it only can handle or "feature" or "featurecollection". So,
+        # we have to wrap perfectly valid geojson.
+        geometry = RGeo::GeoJSON.encode(authority.boundary)
+        render json: { type: "Feature", geometry: }
+      end
+    end
   end
 end

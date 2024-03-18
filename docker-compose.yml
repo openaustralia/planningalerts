@@ -1,0 +1,88 @@
+services:
+  web:
+    build: .
+    # Sorbet doesn't currently build for Linux ARM64 (see https://github.com/sorbet/sorbet/issues/4119)
+    # So, we're forced to build the container as linux/amd64 always and lean on Rosetta
+    # on Apple silicon for running this.
+    # Important: if you're on Apple Silicon ensure that "Use Rosetta for x86/amd64 emulation on Apple Silicon"
+    # is switched on in Docker Desktop.
+    platform: linux/amd64
+    volumes:
+      - .:/app
+      - gem_cache:/usr/local/bundle/gems
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+      - mailcatcher
+      - elasticsearch
+    command: "bin/dev"
+    tty: true
+
+  postfix:
+    build: .
+    # Same as "web" service above because of sorbet we need to build as amd64
+    platform: linux/amd64
+    volumes:
+      - .:/app
+      - gem_cache:/usr/local/bundle/gems
+    ports:
+      - "2525:25"
+    depends_on:
+      - postgres
+    user: root
+    command: postfix start-fg
+
+  postgres:
+    # Same version as used in production
+    image: postgis/postgis:15-3.3
+    # There isn't yet a linux/arm64 build of postgis on docker
+    # See https://github.com/postgis/docker-postgis/issues/216
+    platform: linux/amd64
+    ports:
+      # Give access to the database from your host machine. This is useful
+      # if you want to poke around.
+      # Note that we're forwarding this to port 15432 on the host machine so
+      # that it doesn't conflict with any postgres server you might have running there.
+      - 15432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      # The values below need to be the same in config/database.yml
+      POSTGRES_PASSWORD: password
+
+  redis:
+    # TODO: Try switching to alpine variant for slimmer images
+    # We're also using redis 6.2 in production
+    image: redis:6.2
+    ports:
+      - "6379"
+    volumes:
+      - redis_data:/data
+
+  mailcatcher:
+    build:
+      context: .
+      dockerfile: Dockerfile.mailcatcher
+    ports:
+      - "1080:1080"
+
+  elasticsearch:
+    # Using version 7.17.7 in production. So matching here
+    # TODO: Upgrade when we can
+    image: elasticsearch:7.17.7
+    ports:
+      - "9200"
+    mem_limit: 1073741824
+    environment:
+      - "discovery.type=single-node"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+
+volumes:
+  gem_cache:
+  database_data:
+  postgres_data:
+  redis_data:
+  elasticsearch_data:

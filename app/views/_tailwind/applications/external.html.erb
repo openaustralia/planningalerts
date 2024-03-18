@@ -1,0 +1,35 @@
+<%= pa_link_to "< Back to application", @application, extra_classes: "text-2xl" %>
+
+<div class="flex flex-col items-center max-w-4xl m-auto mt-16 text-center">
+  <%= image_tag "tailwind/illustration/send-comment2.svg", alt: "" %>
+
+  <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mt-16") do %>
+    We will now try to direct you to this application on the <%= @application.authority.full_name %> website
+  <% end %>
+
+  <div class="text-2xl text-navy mt-14">
+    <p class="font-bold">
+      This may not work!
+    </p>
+    <p>
+      (It will depend on how friendly the system that planning authority uses)
+    </p>
+    <p class="mt-4">
+      If we can't take you directly to the application page we'll take you to a nearby page instead.
+    </p>
+    <p class="mt-4">
+      You'll probably need the application reference number:
+    </p>
+  </div>
+
+  <div class="mt-8">
+    <%= render Tailwind::ClickToCopyComponent.new.with_content(@application.council_reference) %>
+  </div>
+
+  <div class="mt-20">
+    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: @application.info_url, open_in_new_tab: true, icon: :external) do %>
+      Continue to
+      <span class="font-normal"><%= @application.authority.full_name %> website</span>
+    <% end %>
+  </div>
+</div>

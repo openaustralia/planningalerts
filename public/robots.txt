@@ -1,5 +1,7 @@
 # See http://www.robotstxt.org/wc/norobots.html for documentation on how to use the robots.txt file
 
+Sitemap: https://www.planningalerts.org.au/sitemaps/sitemap.xml.gz
+
 # Generally we don't want search pages indexed
 
 User-agent: *
@@ -11,5 +13,8 @@ Disallow: /authorities/*/comments
 Allow: /applications/
 Disallow: /applications
 Disallow: /applications/*/nearby
+Disallow: /applications/search
 Disallow: /comments
 Disallow: /geocode_queries
+
+

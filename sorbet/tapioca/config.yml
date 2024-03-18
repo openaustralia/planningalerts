@@ -1,0 +1,3 @@
+dsl:
+  exclude:
+  - ActiveRecordFixtures

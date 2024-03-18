@@ -1,0 +1,17 @@
+.box.eofy-fundraiser
+  %table
+    %tr
+      %td
+        - if Time.zone.now < Time.new(2023, 7, 1, 0, 0, 0, "+10")
+          %p
+            Only
+            = distance_of_time_in_words(Time.zone.now, Time.new(2023, 7, 1, 0, 0, 0, "+10"))
+            until the end of the financial year!
+        %p
+          PlanningAlerts
+          %strong
+            urgently needs your help
+          to keep running for the next 12 months
+          &mdash;
+        %p
+          = link_to "Donate now", "https://donate.planningalerts.org.au?utm_source=pa_alert", class: "button"

@@ -1,0 +1,72 @@
+<% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
+
+<%= render Tailwind::Heading.new(tag: :h1, extra_classes: "sr-only").with_content("Search Applications") %>
+<%= render "address_search_form", q:, error: nil %>
+
+<%# TODO: Need a proper design for this section %>
+<%# TODO: When this section shows up it's not actually clear what the current search is for %>
+<% unless other_addresses.empty? %>
+  <section class="pt-16">
+    <%= render Tailwind::Heading.new(tag: :h2).with_content("Or did you want?") %>
+
+    <ul class="pt-8 text-2xl text-navy">
+      <% other_addresses.each do |a| %>
+        <li>
+          <%= pa_link_to a, q: a %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<%# TODO: Remove duplication of heading %>
+<%# TODO: Figure out how to handle no results when extra_options_on_address_search is enabled %>
+<%# TODO: Add filter option for no filtering (e.g. any distance or any time) because the filtering in its current is very confusing in its behaviour %>
+<% if applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user) %>
+  <section class="pt-16">
+    <%= render "no_applications", full_address:, q: %>
+  </section>
+<% elsif applications %>
+  <section class="pt-16">
+    <%= render Tailwind::Heading.new(tag: :h2).with_content("Search results") %>
+
+    <div class="pt-6">
+      <%# We only want to show the sort options on the first page %>
+      <% if page.nil? %>
+        <div class="flex justify-between">
+          <div>
+            <%= render "sort_options", sort:, extra_params: { q: } %>
+            <% if Flipper.enabled?(:extra_options_on_address_search, current_user) %>
+              <%= render "filter_options", sort:, q:, radius:, time: %>
+            <% end %>
+          </div>
+          <div>
+            <%= render Tailwind::SimplePager::Next.new(collection: applications) %>
+          </div>
+        </div>
+      <% else %>
+        <%= render Tailwind::SimplePager.new(collection: applications) %>
+      <% end %>
+    <div>
+
+    <div class="mt-12 mb-4">
+      <%= render "create_alert_form", alert: %>
+    </div>
+
+    <ul class="mt-12 divide-y divide-light-grey2 border-y border-light-grey2">
+      <% applications.each do |application| %>
+        <li>
+          <%= render application %>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="mt-8 mb-4">
+      <%= render "create_alert_form", alert: %>
+    </div>
+
+    <div class="mt-6">
+      <%= render Tailwind::SimplePager.new(collection: applications) %>
+    </div>
+  </section>
+<% end %>

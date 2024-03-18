@@ -1,83 +1,122 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  class IndexParams < T::Struct
-    const :authority_id, T.nilable(String)
-    const :page, T.nilable(Integer)
-  end
+  extend T::Sig
 
+  before_action :authenticate_user!, only: %i[create preview update destroy publish]
+  # TODO: Add checks for all other actions on this controller
+  after_action :verify_authorized, only: %i[preview update destroy publish]
+
+  sig { void }
   def index
-    typed_params = TypedParams[IndexParams].new.extract!(params)
-    @description = +"Recent comments"
-    authority_id = typed_params.authority_id
+    authority_id = T.cast(params[:authority_id], T.nilable(String))
+
+    description = +"Recent comments"
     if authority_id
       authority = Authority.find_short_name_encoded!(authority_id)
       comments_to_display = authority.comments
-      @description << " on applications from #{authority.full_name_and_state}"
+      description << " on applications from #{authority.full_name_and_state}"
     else
       comments_to_display = Comment.all
     end
+    @description = T.let(description, T.nilable(String))
 
-    @comments = comments_to_display.confirmed.order("confirmed_at DESC").paginate page: typed_params.page
-    @rss = comments_url(typed_params.serialize.merge(format: "rss", page: nil))
-
-    respond_to do |format|
-      format.html
-      format.rss
-      format.js { render content_type: Mime[:json] }
-    end
+    @comments = T.let(comments_to_display.published.includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
   end
 
-  class ConfirmedParams < T::Struct
-    const :id, String
-  end
+  sig { void }
+  def create
+    application = Application.find(params[:application_id])
+    @application = T.let(application, T.nilable(Application))
 
-  def confirmed
-    typed_params = TypedParams[ConfirmedParams].new.extract!(params)
-    @comment = Comment.find_by(confirm_id: typed_params.id)
-    if @comment
-      @comment.confirm!
-      # rubocop:disable Rails/OutputSafety
-      redirect_to @comment.application, notice: render_to_string(partial: "confirmed", locals: { comment: @comment }).html_safe
-      # rubocop:enable Rails/OutputSafety
+    params_comment = T.cast(params[:comment], ActionController::Parameters)
+
+    comment = Comment.new(
+      name: params_comment[:name],
+      text: params_comment[:text],
+      address: params_comment[:address],
+      application: @application,
+      user: current_user
+    )
+    if show_tailwind_theme?
+      comment.published = false
     else
-      render plain: "", status: :not_found
+      comment.published = true
+      comment.published_at = Time.current
     end
+    @comment = T.let(comment, T.nilable(Comment))
+
+    if comment.save
+      if show_tailwind_theme?
+        redirect_to preview_comment_path(comment)
+      else
+        comment.send_comment!
+        redirect_to application, notice: render_to_string(partial: "confirmed", locals: { comment: })
+      end
+      return
+    end
+
+    # TODO: This seems to have a lot repeated from Application#show
+    flash.now[:error] = t(".not_filled_out")
+
+    # HACK: Required for new email alert signup form
+    @alert = T.let(Alert.new(address: application.address, radius_meters: Alert::DEFAULT_RADIUS), T.nilable(Alert))
+    @comments = T.let(application.comments.published.order(:published_at), T.untyped)
+
+    render "applications/show"
   end
 
-  class PerWeekParams < T::Struct
-    const :authority_id, String
+  sig { void }
+  def update
+    comment = Comment.find(params[:id])
+    authorize(comment)
+    comment.update!(comment_params)
+    redirect_to preview_comment_path(comment)
   end
 
+  sig { void }
+  def destroy
+    comment = Comment.find(params[:id])
+    authorize(comment)
+    comment.destroy!
+    redirect_to application_path(comment.application, anchor: "add-comment")
+  end
+
+  sig { void }
   def per_week
-    typed_params = TypedParams[PerWeekParams].new.extract!(params)
-    authority = Authority.find_short_name_encoded!(typed_params.authority_id)
+    params_authority_id = T.cast(params[:authority_id], String)
+
+    authority = Authority.find_short_name_encoded!(params_authority_id)
 
     respond_to do |format|
       format.json { render json: authority.comments_per_week }
     end
   end
 
-  class WriteitReplyHookParams < T::Struct
-    const :message_id, T.nilable(String)
+  sig { void }
+  def preview
+    comment = Comment.find(params[:id])
+    authorize(comment)
+    @comment = T.let(comment, T.nilable(Comment))
   end
 
-  def writeit_reply_webhook
-    typed_params = TypedParams[WriteitReplyHookParams].new.extract!(params)
-    message_id = typed_params.message_id
-    if message_id.nil?
-      render plain: "No message_id", status: :not_found
-      return
-    end
+  sig { void }
+  def publish
+    comment = Comment.find(params[:id])
+    authorize(comment)
+    comment.update!(published: true, published_at: Time.current)
 
-    comment = Comment.find_by(writeit_message_id: message_id[%r{/api/v1/message/(\d*)/}, 1])
-    if comment.nil?
-      render plain: "Comment not found.", status: :not_found
-      return
-    end
+    comment.send_comment!
+    # The flash is used to show a special alert box above the specific new comment
+    # which allows the user to share it on Facebook, etc..
+    redirect_to helpers.comment_path(comment), flash: { published_comment_id: comment.id }
+  end
 
-    comment.create_replies_from_writeit!
-    render plain: "Processing inbound message.", status: :ok
+  private
+
+  sig { returns(ActionController::Parameters) }
+  def comment_params
+    T.cast(params.require(:comment), ActionController::Parameters).permit(:text, :name, :address)
   end
 end

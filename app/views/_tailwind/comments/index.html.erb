@@ -1,0 +1,13 @@
+<%# TODO: This whole page has not had any design applied to it yet %>
+
+<% content_for :page_title, @description %>
+<%= render Tailwind::Heading.new(tag: :h1).with_content(@description) %>
+
+<%# TODO: We need to know what address each comment is for in this list (pass with_address: true) %>
+<%# TODO: Do we want the comments to have the right arrow the same as the applications on the applications index page? %>
+<div class="flex flex-col gap-12 mt-16 mb-8">
+  <%= render @comments, show_extra: true %>
+</div>
+
+<%# TODO: Speed up controller by using without_count after removing old theme %>
+<%= render Tailwind::SimplePager.new(collection: @comments) %>

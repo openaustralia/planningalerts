@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+  display: none !important;
+}
+
+.pac-icon {
+  display: none !important;
+}
+
+.pac-item {
+  @apply !px-4 !py-3 !text-2xl !font-sans text-navy;
+}
+
+.pac-item-query {
+  @apply !pr-2 !text-2xl !font-sans text-navy;
+}
+
+.pac-matched {
+  @apply !font-medium;
+}
+
+/* TODO: Get rid of this ugly mess for styling the charts on the authority detail page as soon as we can */
+.chart text {
+  @apply fill-navy;
+  font-size: .875em;
+}
+
+.chart .chart-area {
+  @apply fill-[#d7e4f3];
+}
+
+.chart .x-axis line {
+  @apply stroke-1 stroke-light-grey2;
+}
+
+.chart .y-axis line {
+  @apply stroke-1 stroke-light-grey2;
+}
+
+.chart .x-axis .domain {
+  @apply hidden;
+}
+
+.chart .y-axis .domain {
+  @apply hidden;
+}
+
+.x-axis-baseline {
+  @apply stroke-2 stroke-light-grey2 fill-none;
+}
+
+.chart-line {
+  @apply fill-none stroke-[#346eb0] stroke-2;
+}
+
+.chart-line.chart-clipping-below {
+  display: none;
+}
+
+.chart-with-callout svg {
+  width: 100%;
+  height: auto;
+
+  @apply sm:float-left sm:clear-left sm:w-4/5;
+}
+
+.chart-with-callout .chart-callout {
+  @apply sm:float-right sm:w-1/5;
+}
+
+.chart-with-callout text {
+  @apply text-xs;
+}
+
+.chart-callout-heading {
+  display: block;
+}
+
+.chart-callout-subheading {
+  display: block;
+  font-weight: normal;
+}
+
+.chart-overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  stroke: #346eb0;
+  stroke-width: 2px;
+  fill: transparent;
+}
+
+/*
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-blue-200;
+  }
+}
+
+*/

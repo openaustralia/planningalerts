@@ -1,0 +1,53 @@
+<%# This template is generated automically by maizzle and should not be edited by hand! Go to "maizzle/src/templates". %>
+<x-main>
+  <div class="font-sans text-lg sm:px-4 text-navy dark-mode:text-white">
+    <table align="center">
+      <tr>
+        <td class="w-[552px] max-w-full">
+          <table width="100%" class="font-logo">
+            <tr>
+              <td class="bg-[#E98E07] h-6"></td>
+            </tr>
+            <tr>
+              <td class="px-12 py-6 bg-yellow xs:px-6 xs:py-3">
+                <table>
+                  <tr>
+                    <td class="px-4 py-1 bg-fuchsia">
+                      <h1 class="m-0 text-4xl font-extrabold text-white xs:text-2xl">Planning Alerts</h1>
+                    </td>
+                  </tr>
+                </table>
+                <table>
+                  <tr>
+                    <td class="px-4 py-2 text-xs xs:text-[8px] font-semibold text-white bg-lavender">Email alerts of planning applications near you</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+
+          <!-- TODO: Get Jojo to check over this spacing -->
+          <div class="h-16 xs:h-6"></div>
+
+          <content />
+
+          <x-divider space-y="32px" class="bg-slate-200" />
+
+          <p>
+            <a href="<%= root_url %>" class="no-underline text-navy dark-mode:text-white hover:underline"><strong>Planning Alerts</strong></a>
+            is a free service where anyone can find out what is being built and knocked down in their area.
+          </p>
+          <p>
+            The service
+            is run by the independent charity
+            <a href="https://www.oaf.org.au/" class="no-underline text-navy dark-mode:text-white hover:underline">OpenAustralia Foundation</a>.
+          </p>
+
+          <p>
+            <a href="<%= documentation_contact_url %>" class="font-bold no-underline text-fuchsia hover:underline">Contact us</a>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</x-main>

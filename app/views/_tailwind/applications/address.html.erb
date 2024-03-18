@@ -1,0 +1,6 @@
+<%# TODO: It would be more sensible to render different views from the controller (or use routing) rather than doing it here %>
+<% if @q.nil? || @error %>
+  <%= render "address_search", q: @q, error: @error %>
+<% else %>
+  <%= render "address_with_results", q: @q, applications: @applications, sort: @sort, page: @page, alert: @alert, other_addresses: @other_addresses, full_address: @full_address, radius: @radius, time: @time %>
+<% end %>

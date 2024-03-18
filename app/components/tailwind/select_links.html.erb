@@ -1,0 +1,25 @@
+<div x-data="{ link: '<%= @value %>' }"
+     x-init="$watch('link', value => { window.location = value; })"
+     class="inline-block text-2xl text-navy">
+  <%# Hiding the select tag initially. It gets unhidden by javascript %>
+  <div class="invisible" x-bind:class="{ invisible: false }">
+    <%= label_tag @id, @label, class: "mr-2" %>
+    <%= select_tag @id,
+                   options_for_select(@container, disabled: @value),
+                   class: "pl-4 py-3 pr-16 border-navy text-2xl text-navy focus:ring-4 focus:ring-sun-yellow",
+                   "x-model" => "link" %>
+  </div>
+  <noscript>
+    <%# The label can't be extracted out and needs to be here
+    because noscript is always added as a block %>
+    <p>
+      <%= @label %>
+      <%= @container.find { |c| c[1] == @value }[0] %>.
+      <% @container.each do |c| %>
+        <% if c[1] != @value %>
+          <%= pa_link_to c[0], c[1] %>
+        <% end %>
+      <% end %>
+    </p>
+  </noscript>
+</div>

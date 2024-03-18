@@ -1,0 +1,144 @@
+#comments-area {
+  margin-top: 1em;
+  border-top: 1px solid $light-cool-highlight;
+}
+
+ol#comments {
+  @include no-bullets;
+  padding-left: 0;
+  margin-right: 0;
+}
+
+.panel {
+  border: 1px $lightest-cool-highlight solid;
+}
+
+.panel-link {
+  color: $font-color;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.panel-body {
+  @include clearfix;
+  padding: .75em 1em 1em;
+}
+
+.comment-location {
+  @extend .panel-body;
+  padding-bottom: .75em;
+}
+
+.comment-item {
+  margin-bottom: 2.5em;
+  background: $formal-comment-background-color;
+  border-color: $formal-comment-border-color;
+  border-radius: .5em;
+
+  a &:hover {
+    background: #f0f0f0;
+    -webkit-transition: background .1s linear;
+    -moz-transition: background .1s linear;
+    -o-transition: background .1s linear;
+    -ms-transition: background .1s linear;
+    transition: background .1s linear;
+  }
+
+  .comment-location {
+    border-bottom: 1px solid $formal-comment-border-color;
+    background-color: $formal-comment-header-color;
+    border-radius: .5em .5em 0 0;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  footer {
+    @include clearfix;
+    padding: .75em 0 0;
+    font-size: 0.9em;
+  }
+
+  footer .comment-meta {
+    float: left;
+    clear: left;
+    margin: 0;
+    max-width: 35em;
+
+    span {
+      display: inline-block;
+    }
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+.comment-location,
+.comment-text {
+  color: $font-color;
+}
+
+.comment-heading {
+  padding: 0 0 .75em;
+  max-width: 95%;
+}
+
+.comment-location,
+.comment-text {
+  margin: 0;
+}
+
+.comment-meta,
+.comment-meta a,
+.comment-meta a:visited {
+  @include quiet;
+}
+
+.comment-text {
+  font-style: normal;
+  border: 0;
+  padding: 0;
+
+  a {
+    word-wrap: break-word;
+  }
+}
+
+.comment-location {
+  font-size: 1em;
+}
+
+.comment-author {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.comment-time-block {
+  font-size: 0.9em;
+  display: block;
+
+  @include at-breakpoint(40em) {
+    display: inline-block;
+  }
+}
+
+.comment-actions {
+  float: right;
+  clear: right;
+
+  @include at-breakpoint(40em) {
+    padding: 0;
+  }
+}
+
+.comment-action {
+  @include quiet;
+  margin-left: .5em;
+  text-decoration: underline;
+}

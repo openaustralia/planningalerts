@@ -1,0 +1,46 @@
+.filter-and-sort-options {
+  margin: 2em 0;
+  .filter-options, .sort-options {
+    display: inline-block;
+    margin-right: 1em;
+  }
+}
+
+ul.dropdown-menu {
+  margin-top: 0.25em;
+  position: absolute;
+  background: white;
+  list-style: none;
+  padding: 0.25em 0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ddd;
+  
+  li {
+    a { 
+      text-decoration: none;
+      color: black;
+      display: block;
+      padding: 0.25em 1em;
+    }
+    a:hover {
+      background-color: #eee;
+    }
+  }
+  li.disabled {
+    a { 
+      color: #666;
+    }
+  }
+}
+
+button.dropdown-toggle {
+  font-size: 1em;
+  font-family: $blueprint-font-family;
+  padding: 0.5em 1em;
+  img { 
+    vertical-align: sub;
+  }
+}
+
+[x-cloak] { display: none !important; }

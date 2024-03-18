@@ -1,0 +1,27 @@
+<div class="login-block">
+  <h2>Create an account</h2>
+  <p class="login-explanation">
+    Already have an account?
+    <%= link_to "Sign in", new_user_session_path %> or
+    <%= link_to "activate", new_users_activation_path %>.
+  </p>
+  <p class="login-explanation">
+    <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+  </p>
+
+  <%= semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: %>
+
+    <%= f.inputs do %>
+      <%= f.input :name, label: "Your full name", input_html: { autofocus: true, autocomplete: "name" } %>
+      <%= f.input :email, input_html: { autocomplete: "email" } %>
+      <%= f.input :password, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password" } %>
+    <% end %>
+
+    <%= f.actions do %>
+      <%= f.action :submit, label: "Create my account", button_html: { class: "button button-rounded button-large button-action" } %>
+    <% end %>
+  <% end %>
+
+  <%= render "privacy_policy" %>
+</div>

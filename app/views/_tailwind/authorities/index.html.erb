@@ -1,0 +1,107 @@
+<% content_for :page_title, "Coverage" %>
+
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  <%= yield :page_title %>
+<% end %>
+
+<div class="flex flex-col justify-between gap-8 mt-12 md:flex-row-reverse">
+  <div class="shrink-0">
+    <%= render "coverage_percentage", percentage: @percentage_population_covered_by_all_active_authorities %>
+  </div>
+  <div class="max-w-2xl">
+    <%= render "coverage_explanation",
+               percentage: @percentage_population_covered_by_all_active_authorities,
+               count: @authority_count %>
+    <p class="mt-4 text-2xl text-navy">
+      We don't yet cover the whole country, but we are working on it.
+      New authorities are being added all the time, so if your local authority isn't listed below
+      <%= pa_link_to "sign up anyway", new_profile_alert_path %> and you'll start receiving alerts once it has been included.
+    </p>
+  </div>
+</div>
+
+<div class="mt-8 border-t divide-y divide-light-grey2 border-light-grey2">
+  <section class="py-12">
+    <%= render Tailwind::Heading.new(tag: :h2) do %>
+      Where does application data come from?
+    <% end %>
+    <%# TODO: This paragraph is the same as used in "how to write a scraper". Extract partial? %>
+    <p class="mt-4 text-2xl text-navy">
+      To be able to display and send alerts for planning applications,
+      Planning Alerts needs to download applications from as many councils as possible.
+      As the vast majority of councils don't supply the data in a reusable, machine-readable format
+      we write web scrapers for each local government authority. These scrapers fetch the data from
+      council web pages and present it in a structured format so we can load it into the
+      Planning Alerts database.
+    </p>
+    <div class="flex flex-col items-start gap-8 mt-8 sm:flex-row">
+      <%# TODO: Extract partial from this and the get involved page %>
+      <%= image_tag "tailwind/illustration/headshot1.svg", alt: "" %>
+      <p class="max-w-2xl text-2xl text-navy">
+        If you are a programmer and would like to write a scraper for your local authority
+        <%= pa_link_to "read our guide on writing scrapers", how_to_write_a_scraper_path %>.
+      </p>
+    </div>
+    <div class="flex flex-col items-start gap-8 mt-8 sm:flex-row">
+      <%= image_tag "tailwind/illustration/headshot4.svg", alt: "" %>
+      <p class="max-w-2xl text-2xl text-navy">
+        If you work for a local authority and would like to make your data available we highly
+        recommend using the
+        <%= pa_link_to "Application Tracking Data Interchange Specification (ATDIS)", atdis_test_path %>.
+      </p>
+    </div>
+  </section>
+  <section class="py-12">
+    <%# TODO: Not sure this is the best wording for the heading %>
+    <%= render Tailwind::Heading.new(tag: :h2) do %>
+      Date reliability
+    <% end %>
+    <p class="mt-4 text-2xl text-navy">
+      From time to time planning authorities change their websites which breaks the scrapers that gather the planning
+      data. Here is a complete list of all the planning authorities we source data from and their status.
+
+      <dl class="flex flex-col gap-4 mt-4 text-2xl sm:flex-row text-navy">
+        <dt class="shrink-0">
+          <%# TODO: Extract pill (or whatever we want to call it) into component %>
+          <div class="inline-block px-1 bg-yellow">Possibly broken</div>
+        </dt>
+        <dd>
+          Authorities marked like this means we haven't received planning data
+          from them for a while so something is wrong, possibly a broken scraper.
+        </dd>
+      </dl>
+    </p>
+
+    <%# Super crappy way of making this table readable(ish) on small screens by
+    making the font smaller %>
+    <table class="w-full mt-16 text-base text-left md:text-2xl text-navy">
+      <thead>
+        <tr>
+          <th class="pb-6 pr-8 whitespace-nowrap">
+            <%= pa_link_to "State", { order: nil }, title: "Sort by state and authority" %>
+            <% if @order.nil? %>
+              <%= image_tag "tailwind/down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
+            <% end %>
+          </th>
+          <th class="pb-6 pr-4 whitespace-nowrap">
+            <%= pa_link_to "Authority", { order: nil }, title: "Sort by state and authority" %>
+            <% if @order.nil? %>
+              <%= image_tag "tailwind/down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
+            <% end %>
+          </th>
+          <th class="pb-6 whitespace-nowrap">
+            <%= pa_link_to "Population", { order: "population" }, title: "Sort by population (2021 census)" %>
+            <% if @order == "population" %>
+              <%= image_tag "tailwind/down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
+            <% end %>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="align-top">
+        <%# Using a stupid name for the partial so that it doesn't conflict with the non-tailwind partial for the caching %>
+        <%# TODO: Rename partial once we've removed the non-tailwind theme %>
+        <%= render partial: "tailwind_authority", collection: @authorities, as: :authority, cached: true %>
+      </tbody>
+    </table>
+  </section>
+</div>

@@ -13,24 +13,17 @@ FactoryBot.define do
   end
 
   factory :application_with_no_version, class: "Application" do
-    association :authority
+    authority
     council_reference { "001" }
+    date_scraped { 10.minutes.ago }
+    address { "A test address" }
+    description { "pretty" }
+    info_url { "http://foo.com" }
 
     factory :application do
-      transient do
-        address { "A test address" }
-        description { "pretty" }
-        info_url { "http://foo.com" }
-        date_received { nil }
-        on_notice_from { nil }
-        on_notice_to { nil }
-        date_scraped { 10.minutes.ago }
-        lat { nil }
-        lng { nil }
-        suburb { nil }
-        state { nil }
-        postcode { nil }
-      end
+      date_received { nil }
+      on_notice_from { nil }
+      on_notice_to { nil }
 
       after(:create) do |application, evaluator|
         create(
@@ -42,30 +35,34 @@ FactoryBot.define do
           date_received: evaluator.date_received,
           on_notice_from: evaluator.on_notice_from,
           on_notice_to: evaluator.on_notice_to,
+          comment_email: evaluator.comment_email,
+          comment_authority: evaluator.comment_authority,
           date_scraped: evaluator.date_scraped,
           lat: evaluator.lat,
           lng: evaluator.lng,
           suburb: evaluator.suburb,
           state: evaluator.state,
           postcode: evaluator.postcode,
-          application: application
+          application:
+        )
+        application.update!(
+          first_date_scraped: evaluator.date_scraped
         )
       end
 
       factory :geocoded_application do
-        transient do
-          lat { 1.0 }
-          lng { 2.0 }
-          suburb { "Sydney" }
-          state { "NSW" }
-          postcode { "2000" }
-        end
+        lat { 1.0 }
+        lng { 2.0 }
+        lonlat { RGeo::Geographic.spherical_factory(srid: 4326).point(2.0, 1.0) }
+        suburb { "Sydney" }
+        state { "NSW" }
+        postcode { "2000" }
       end
     end
   end
 
   factory :application_version do
-    association :application, factory: :application_with_no_version
+    application factory: %i[application_with_no_version]
     date_scraped { |_b| 10.minutes.ago }
     address { "A test address" }
     description { "pretty" }
@@ -83,44 +80,30 @@ FactoryBot.define do
 
   factory :application_redirect do
     application_id { 1 }
-    association :redirect_application, factory: :application_with_no_version
-  end
-
-  factory :add_comment do
-    email { "matthew@openaustralia.org" }
-    name { "Matthew Landauer" }
-    text { "a comment" }
-    address { "12 Foo Street" }
+    redirect_application factory: %i[application_with_no_version]
   end
 
   factory :comment do
-    email { "matthew@openaustralia.org" }
+    user
     name { "Matthew Landauer" }
     text { "a comment" }
     address { "12 Foo Street" }
-    association :application, factory: :geocoded_application
+    application factory: %i[geocoded_application]
+    published { false }
 
-    trait :confirmed do
-      confirmed { true }
-      confirmed_at { 5.minutes.ago }
-    end
+    factory :published_comment do
+      published { true }
+      published_at { 5.minutes.ago }
 
-    factory :unconfirmed_comment do
-      confirmed { false }
-    end
+      factory :delivered_comment do
+        last_delivered_successfully { true }
+        last_delivered_at { 5.minutes.ago }
+      end
 
-    factory :confirmed_comment do
-      confirmed { true }
-      confirmed_at { 5.minutes.ago }
-    end
-
-    factory :comment_to_authority do
-      councillor_id { nil }
-    end
-
-    factory :comment_to_councillor do
-      address { nil }
-      association :councillor
+      factory :delivery_failed_comment do
+        last_delivered_successfully { false }
+        last_delivered_at { 5.minutes.ago }
+      end
     end
   end
 
@@ -128,21 +111,7 @@ FactoryBot.define do
     name { "Joe Reporter" }
     email { "reporter@foo.com" }
     details { "It's very rude!" }
-    comment { :comment }
-  end
-
-  factory :reply do
-    text { "Thanks for your comment, I agree" }
-    received_at { 1.day.ago }
-    association :comment
-    association :councillor
-  end
-
-  factory :councillor do
-    name { "Louise Councillor" }
-    email { "louise@council.state.gov" }
-    popolo_id { "louise_councillor" }
-    association :authority
+    comment
   end
 
   factory :user do
@@ -155,6 +124,10 @@ FactoryBot.define do
       admin { true }
       confirmed_at { 1.day.ago }
     end
+
+    factory :confirmed_user do
+      confirmed_at { Time.zone.now }
+    end
   end
 
   factory :api_key do
@@ -162,24 +135,17 @@ FactoryBot.define do
   end
 
   factory :alert do
-    email { "mary@example.org" }
+    user
     sequence(:address) { |s| "#{s} Illawarra Road Marrickville 2204" }
     lat { -33.911105 }
     lng { 151.155503 }
-    radius_meters { 2000 }
+    lonlat { RGeo::Geographic.spherical_factory(srid: 4326).point(151.155503, -33.911105) }
+    radius_meters { Alert::DEFAULT_RADIUS }
+    confirm_id { "1234" }
 
-    factory :unconfirmed_alert do
-      confirmed { false }
-    end
-
-    factory :confirmed_alert do
-      confirmed { true }
-      confirm_id { "1234" }
-
-      factory :unsubscribed_alert do
-        unsubscribed { true }
-        unsubscribed_at { Time.zone.now }
-      end
+    factory :unsubscribed_alert do
+      unsubscribed { true }
+      unsubscribed_at { Time.zone.now }
     end
   end
 
@@ -195,19 +161,9 @@ FactoryBot.define do
     sequence(:email) { |s| "mary#{s}@enterpriserealty.com.au" }
   end
 
-  factory :suggested_councillor do
-    name { "Mila Gilic" }
-    email { "mgilic@casey.vic.gov.au" }
-    councillor_contribution
-  end
-
-  factory :councillor_contribution do
-    association :contributor
-    association :authority
-  end
-
-  factory :contributor do
-    name { "Felix Chaung" }
-    email { "felix@gmail.com" }
+  factory :contact_message do
+    email { "eliza@example.org" }
+    reason { "I have a privacy concern" }
+    details { "I included my address in my comment by accident. Please remove it." }
   end
 end

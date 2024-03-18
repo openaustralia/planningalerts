@@ -2,42 +2,22 @@
 
 require "spec_helper"
 
-feature "Admin hides comment" do
-  background do
-    create(:confirmed_comment, id: 1)
+describe "Admin hides comment" do
+  before do
+    create(:published_comment, id: 1)
   end
 
-  scenario "successfully" do
+  it "successfully" do
     sign_in_as_admin
 
     click_link "Comments"
 
-    within("#comment_1") do
-      click_link "Edit"
-    end
+    click_link "Edit"
 
     check "Hidden"
     click_button "Update Comment"
 
     expect(page).to have_content("Comment was successfully updated")
-    expect(page).to have_content("Hidden Yes")
-  end
-
-  scenario "successfully when writing to councillor feature is enabled" do
-    with_modified_env COUNCILLORS_ENABLED: "true" do
-      sign_in_as_admin
-
-      click_link "Comments"
-
-      within("#comment_1") do
-        click_link "Edit"
-      end
-
-      check "Hidden"
-      click_button "Update Comment"
-
-      expect(page).to have_content("Comment was successfully updated")
-      expect(page).to have_content("Hidden Yes")
-    end
+    expect(page).to have_content("Hidden\nyes")
   end
 end

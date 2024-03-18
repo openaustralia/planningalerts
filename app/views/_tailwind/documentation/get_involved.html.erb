@@ -1,0 +1,102 @@
+<% content_for :page_title, "Get Involved" %>
+
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  <%= yield :page_title %>
+<% end %>
+
+<div class="flex flex-col items-start gap-8 lg:flex-row">
+  <p class="text-2xl text-navy mt-14">
+    Planning Alerts is run by the charity
+    <%= pa_link_to "OpenAustralia Foundation", "https://www.oaf.org.au/" %>,
+    and relies on the support of
+    <%= pa_link_to "volunteers", about_path(anchor: :contributors) %>
+    and
+    <%= pa_link_to "donations", donate_url %>
+    from people like you. If you would like to get involved we'd love to hear from you.
+  </p>
+  <%= image_tag "tailwind/illustration/get-involved.svg", alt: "" %>
+</div>
+
+<div class="mt-12 border-t divide-y divide-light-grey2 border-light-grey2">
+  <section class="flex flex-col items-start gap-8 py-8 sm:flex-row">
+    <%= image_tag "tailwind/illustration/headshot1.svg", alt: "" %>
+    <div class="flex flex-col gap-4 text-2xl text-navy">
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans") do %>
+        I am a programmer and want to add my local planning authority
+      <% end %>
+      <p>
+        You can help by writing a
+        <%= pa_link_to "web scraper", "https://en.wikipedia.org/wiki/Web_scraping" %>
+        for your local planning authority.
+        Using our
+        <%= pa_link_to "morph.io", "https://morph.io/" %>
+        scraping platform you can write it in any one of your favorite languages: Ruby, Python, JavaScript, Perl or PHP.
+      </p>
+      <p>
+        <%= pa_link_to "Read our step-by-step instructions", how_to_write_a_scraper_path %>
+      </p>
+    </div>
+  </section>
+  <section class="flex flex-col items-start gap-8 py-8 sm:flex-row">
+    <%= image_tag "tailwind/illustration/headshot2.svg", alt: "" %>
+    <div class="flex flex-col gap-4 text-2xl text-navy">
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans") do %>
+        I'm not technical and I want to get my local council on to Planning Alerts. What can I do?
+      <% end %>
+      <p>
+        You can lobby your local council to publish its planning data in a machine readable format. Email the council planning department and General Manager. Contact your councillors and get them to support your mission.
+      </p>
+      <p>
+        Here is our <%= pa_link_to "quick guide on how to lobby your local council", how_to_lobby_your_local_council_path %>.
+      </p>
+    </div>
+  </section>
+  <section class="flex flex-col items-start gap-8 py-8 sm:flex-row">
+    <%= image_tag "tailwind/illustration/headshot3.svg", alt: "" %>
+    <div class="flex flex-col gap-4 text-2xl text-navy">
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans") do %>
+        I don't have the time or I don't have the skills. How can I help?
+      <% end %>
+      <p>
+        If you value the service provided by Planning Alerts but simply don't have the time or
+        the specialist skills to help out personally then the best thing that you can do is
+        to <%= pa_link_to "donate to the OpenAustralia Foundation", donate_url %>,
+        the charity behind Planning Alerts. Your donation will go to improving the service.
+      </p>
+    </div>
+  </section>
+  <section class="flex flex-col items-start gap-8 py-8 sm:flex-row">
+    <%= image_tag "tailwind/illustration/headshot4.svg", alt: "" %>
+    <div class="flex flex-col gap-4 text-2xl text-navy">
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans") do %>
+        I work for a local council or planning authority and would like to make our data available
+      <% end %>
+      <p>
+        The most important thing you can do is publish your data in a simple machine-readable format that is freely available on the internet.
+      </p>
+      <p>
+        We highly recommend using the
+        <%= pa_link_to "Application Tracking Data Interchange Specification (ATDIS)", "https://github.com/openaustralia/atdis/raw/master/docs/ATDIS-1.0.2%20Application%20Tracking%20Data%20Interchange%20Specification%20(v1.0.2).pdf" %>.
+        This modern, open format was developed by the NSW government, Carpadium Pty Ltd and
+        OpenAustralia Foundation in 2014. ATDIS is supported by many commercial software vendors
+        in their products for local councils in Australia.
+      </p>
+      <p>
+        These include:
+        <ul class="list-disc list-inside">
+          <li><%= pa_link_to "Aten Systems", "https://www.atensystems.com/councillink" %></li>
+          <li><%= pa_link_to "Civica", "https://www.civica.com/en-au/container---product-pages/authority-enterprise-suite/" %></li>
+          <li><%= pa_link_to "Internetrix", "https://www.internetrix.com.au/" %></li>
+          <li><%= pa_link_to "ITVision", "https://www.itvision.com.au/our-solutions/synergyonline-product-suite.aspx" %></li>
+          <li><%= pa_link_to "SolOrient", "http://www.solorient.com.au/" %></li>
+          <li><%= pa_link_to "Technology One", "https://www.technologyonecorp.com/products/planningxchange" %></li>
+        </ul>
+      </p>
+      <p>
+        Please
+        <%= pa_link_to "get in touch", documentation_contact_path %>
+        if you would like to discuss how you can help.
+      </p>
+    </div>
+  </section>
+</div>

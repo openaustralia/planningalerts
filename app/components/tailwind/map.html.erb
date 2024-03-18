@@ -1,0 +1,4 @@
+<%= tag.div class: "bg-google-maps-green w-full h-full",
+            "x-init" => "initialiseBasicMapWithMarker2($el, #{{ lat: @lat, lng: @lng, address: @address, zoom: @zoom }.to_json})" do %>
+  <noscript><%= content %></noscript>
+<% end %>

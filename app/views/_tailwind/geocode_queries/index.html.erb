@@ -1,0 +1,54 @@
+<%# I don't think this page needs any kind of design right now because it's not going to be seen by anyone other than the most technical users %>
+
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  Addresses with significant differences in geocoded results
+<% end %>
+
+<p class="mt-12 text-2xl text-navy">
+  <%= pa_link_to "Download as CSV", geocode_queries_path(format: :csv) %>
+</p>
+
+<%= render Tailwind::SimplePager.new(collection: @geocode_queries) %>
+<table class="my-12 mt-8 text-2xl text-navy">
+  <thead>
+    <tr>
+      <th>
+        Address
+      </th>
+      <th>
+        Average distance to average result (to nearest metre)
+      </th>
+      <th>
+        Google address
+      </th>
+      <th>
+        Mappify address
+      </th>
+      <th>
+        Created
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @geocode_queries.each do |geocode_query| %>
+      <tr>
+        <td>
+          <%= pa_link_to geocode_query.query, geocode_query %>
+        </td>
+        <td>
+          <%= geocode_query.average_distance_to_average_result&.round %>
+        </td>
+        <td>
+          <%= geocode_query.result("google").full_address %>
+        </td>
+        <td>
+          <%= geocode_query.result("mappify").full_address %>
+        </td>
+        <td>
+          <%= time_ago_in_words(geocode_query.created_at) %> ago
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= render Tailwind::SimplePager.new(collection: @geocode_queries) %>

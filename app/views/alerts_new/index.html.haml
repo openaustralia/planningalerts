@@ -1,0 +1,20 @@
+%h2 Your alerts
+
+%p
+  Alerts are sent to your email at
+  = current_user.email
+  = link_to "Change", edit_user_registration_path
+
+= render "alerts", alerts: @alerts
+
+%h2 Create new alert
+
+= semantic_form_for [:profile, @alert] do |f|
+  = f.inputs do
+    = f.input :address, label: "Enter a street address",
+                        placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
+                        input_html: { class: "address-autocomplete-input" }
+    = f.input :radius_meters, as: :hidden
+  = f.actions do
+    = f.action :submit, label: "Create alert",
+                        button_html: { class: "button button-rounded button-large button-action" }

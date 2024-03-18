@@ -1,0 +1,5 @@
+<div class="text-xl text-navy">
+  <%= time_tag comment.published_at do %>
+    <%= time_ago_in_words(comment.published_at).capitalize %> ago
+  <% end %>
+</div>

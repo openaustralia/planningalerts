@@ -1,26 +1,29 @@
 {
   "ignored_warnings": [
     {
-      "warning_type": "File Access",
-      "warning_code": 16,
-      "fingerprint": "6ed22922c7f5d0614474bdb6098ebfb631aaf99e055d0a5a7fe59147034b8521",
-      "check_name": "FileAccess",
-      "message": "Model attribute used in file name",
-      "file": "app/models/feed.rb",
-      "line": 64,
-      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "File.read(Feed.example_path(Rails.application.routes.recognize_path(URI.parse(url).path)[:number].to_i, page))",
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "2eb65b3a9cc645431b29f91a447497fccccc438f0998b3893bf86ba16e29562e",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/controllers/applications_controller.rb",
+      "line": 85,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Application.select(\"*\", \"ST_Distance(lonlat, '#{RGeo::Geographic.spherical_factory.point(GoogleGeocodeService.call(:address => T.let(T.cast(params[:q], T.nilable(String)), T.nilable(String)), :key => Rails.application.credentials.dig(:google_maps, :server_key)).top.lng, GoogleGeocodeService.call(:address => T.let(T.cast(params[:q], T.nilable(String)), T.nilable(String)), :key => Rails.application.credentials.dig(:google_maps, :server_key)).top.lat)}')/1000 AS distance\")",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "Feed",
-        "method": "applications"
+        "class": "ApplicationsController",
+        "method": "address"
       },
-      "user_input": "Feed.example_path(Rails.application.routes.recognize_path(URI.parse(url).path)[:number].to_i, page)",
-      "confidence": "Medium",
-      "note": "Only ever done in development"
+      "user_input": "params[:q]",
+      "confidence": "High",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
     }
   ],
-  "updated": "2018-12-15 10:20:47 +1100",
-  "brakeman_version": "4.3.1"
+  "updated": "2023-04-22 18:13:13 +0000",
+  "brakeman_version": "5.4.0"
 }

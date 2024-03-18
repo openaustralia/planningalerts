@@ -2,22 +2,21 @@
 
 require "spec_helper"
 
-feature "Admin edits comment" do
-  background do
-    create(:confirmed_comment,
+describe "Admin edits comment" do
+  before do
+    create(:published_comment,
+           published: true,
            name: "Alena",
            id: 1,
-           confirmed_at: 3.days.ago)
+           published_at: 3.days.ago)
   end
 
-  scenario "successfully" do
+  it "successfully" do
     sign_in_as_admin
 
     click_link "Comments"
 
-    within("#comment_1") do
-      click_link "Edit"
-    end
+    click_link "Edit"
 
     fill_in "Name", with: "Foo"
     click_button "Update Comment"

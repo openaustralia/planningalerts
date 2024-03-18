@@ -4,20 +4,15 @@
 module ApplicationsHelper
   extend T::Sig
 
+  # For sorbet
+  include ActionView::Helpers::UrlHelper
+  include ActionView::Helpers::DateHelper
+  include ActionView::Helpers::AssetTagHelper
+  include ApplicationHelper
+
   sig { params(application: Application).returns(String) }
   def display_description_with_address(application)
     "“#{truncate(application.description, escape: false, separator: ' ')}” at #{application.address}"
-  end
-
-  sig { params(application: Application).returns(String) }
-  def scraped_and_received_text(application)
-    text = +"We found this application for you on the planning authority's website #{time_ago_in_words(application.first_date_scraped)} ago. "
-    text << if application.date_received
-              "It was received by them #{distance_of_time_in_words(application.date_received, application.first_date_scraped)} earlier."
-            else
-              "The date it was received by them was not recorded."
-            end
-    text
   end
 
   sig { params(date: Date).returns(String) }
@@ -44,24 +39,35 @@ module ApplicationsHelper
     end
   end
 
+  # Useful for when you're showing a human readable relative date (e.g. "5 days ago") but
+  # also want to have a machine readable exact date and an exact date that displays on hover
+  # to the user
+  sig { params(time: T.any(Time, Date), content: String).returns(String) }
+  def time_tag_with_hover(time, content)
+    content_tag(:time, content, datetime: time.iso8601, title: time.to_fs(:rfc822))
+  end
+
   sig { params(application: Application).returns(String) }
   def on_notice_text(application)
     t = []
-    if application.on_notice_from && (Time.zone.today < application.on_notice_from)
+    on_notice_from = application.on_notice_from
+    # This helper is only getting called when on_notice_to is set. So we can assume it is.
+    on_notice_to = T.must(application.on_notice_to)
+    if on_notice_from && (Time.zone.today < application.on_notice_from)
       t << "The period to have your comment officially considered by the planning authority"
-      t << content_tag(:strong, "starts #{days_in_future_in_words(application.on_notice_from)}")
+      t << content_tag(:strong, "starts #{days_in_future_in_words(on_notice_from)}")
       t << "and finishes #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)} later."
     elsif Time.zone.today == application.on_notice_to
       t << content_tag(:strong, "Today is the last day")
       t << "to have your comment officially considered by the planning authority."
-      t << "The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
+      t << "The period for comment started #{days_ago_in_words(on_notice_from)}." if on_notice_from
     elsif Time.zone.today < application.on_notice_to
       t << content_tag(:strong, "You have #{distance_of_time_in_words(Time.zone.today, application.on_notice_to)} left")
       t << "to have your comment officially considered by the planning authority."
-      t << "The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
+      t << "The period for comment started #{days_ago_in_words(on_notice_from)}." if on_notice_from
     else
       t << "You're too late! The period for officially commenting on this application"
-      t << safe_join([content_tag(:strong, "finished #{days_ago_in_words(application.on_notice_to)}"), "."])
+      t << safe_join([content_tag(:strong, "finished #{days_ago_in_words(on_notice_to)}"), "."])
       t << "It lasted for #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)}." if application.on_notice_from
       t << "If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will"
       t << content_tag(:strong, "not be officially considered")
@@ -73,59 +79,56 @@ module ApplicationsHelper
   sig { params(application: Application).returns(String) }
   def page_title(application)
     # Include the scraping date in the title so that multiple applications from the same address have different titles
-    "#{application.address} | #{application.first_date_scraped.to_date.to_formatted_s(:rfc822)}"
+    "#{application.address} | #{application.first_date_scraped.to_date.to_fs(:rfc822)}"
   end
 
-  sig { params(application: Application, size: String, zoom: Integer, key: String).returns(String) }
-  def google_static_map(application, size: "350x200", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
-    google_static_map_lat_lng(application.lat, application.lng, label: "Map of #{application.address}", size: size, zoom: zoom, key: key)
+  sig { params(application: Application, size: String, zoom: Integer, key: Symbol).returns(String) }
+  def google_static_map(application, size: "350x200", zoom: 16, key: :api)
+    google_static_map_lat_lng(lat: T.must(application.lat), lng: T.must(application.lng), label: "Map of #{application.address}", size:, zoom:, key:)
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
-  sig { params(lat: Float, lng: Float, size: String, label: String, zoom: Integer, key: String).returns(String) }
-  def google_static_map_lat_lng(lat, lng, size: "350x200", label: "Map", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
-    image_tag(google_static_map_url_lat_lng(lat, lng, zoom: zoom, size: size, key: key), size: size, alt: label)
+  sig { params(lat: Float, lng: Float, size: String, label: String, zoom: Integer, key: Symbol).returns(String) }
+  def google_static_map_lat_lng(lat:, lng:, size: "350x200", label: "Map", zoom: 16, key: :api)
+    url = google_static_map_url(lat:, lng:, zoom:, size:, key:)
+    image_tag(url, size:, alt: label)
   end
 
-  sig { params(application: Application, zoom: Integer, size: String, key: String).returns(T.nilable(String)) }
-  def google_static_map_url(application, zoom: 16, size: "350x200", key: "GOOGLE_MAPS_API_KEY")
-    return if application.lat.nil? || application.lng.nil?
+  sig { params(lat: T.nilable(Float), lng: T.nilable(Float), zoom: Integer, size: String, key: Symbol).returns(T.nilable(String)) }
+  def google_static_map_url(lat:, lng:, zoom: 16, size: "350x200", key: :api)
+    return if lat.nil? || lng.nil?
 
-    google_static_map_url_lat_lng(application.lat, application.lng, zoom: zoom, size: size, key: key)
-  end
-
-  sig { params(lat: Float, lng: Float, zoom: Integer, size: String, key: String).returns(String) }
-  def google_static_map_url_lat_lng(lat, lng, zoom: 16, size: "350x200", key: "GOOGLE_MAPS_API_KEY")
     google_signed_url(
       domain: "https://maps.googleapis.com",
       path: "/maps/api/staticmap",
       query: {
         maptype: "roadmap",
         markers: "color:red|#{lat},#{lng}",
-        size: size,
-        zoom: zoom
+        size:,
+        zoom:
       },
-      key: key
+      key:
     )
   end
 
-  sig { params(application: Application, size: String, fov: Integer, key: String).returns(String) }
-  def google_static_streetview_url(application, size: "350x200", fov: 90, key: "GOOGLE_MAPS_API_KEY")
+  sig { params(lat: Float, lng: Float, size: String, fov: Integer, key: Symbol).returns(String) }
+  def google_static_streetview_url(lat:, lng:, size: "350x200", fov: 90, key: :api)
     google_signed_url(
       domain: "https://maps.googleapis.com",
       path: "/maps/api/streetview",
       query: {
-        fov: fov,
-        location: "#{application.lat},#{application.lng}",
-        size: size
+        fov:,
+        location: "#{lat},#{lng}",
+        size:
       },
-      key: key
+      key:
     )
   end
 
-  sig { params(application: Application, size: String, fov: Integer, key: String).returns(String) }
-  def google_static_streetview(application, size: "350x200", fov: 90, key: "GOOGLE_MAPS_API_KEY")
-    image_tag(google_static_streetview_url(application, size: size, fov: fov, key: key), size: size, alt: "Streetview of #{application.address}")
+  sig { params(application: Application, size: String, fov: Integer, key: Symbol).returns(String) }
+  def google_static_streetview(application, size: "350x200", fov: 90, key: :api)
+    url = google_static_streetview_url(lat: T.must(application.lat), lng: T.must(application.lng), size:, fov:, key:)
+    image_tag(url, size:, alt: "Streetview of #{application.address}")
   end
 
   HEADING_SECTOR_NAMES = T.let(%w[north northeast east southeast south southwest west northwest].freeze, T::Array[String])
@@ -153,23 +156,35 @@ module ApplicationsHelper
 
   sig { params(from: Location, to: Location).returns(String) }
   def distance_and_heading_in_words(from, to)
-    meters_in_words(from.distance_to(to)) +
-      " " +
-      heading_in_words(from.heading_to(to))
+    "#{meters_in_words(from.distance_to(to))} #{heading_in_words(from.heading_to(to))}"
   end
 
   private
 
-  sig { params(domain: String, path: String, query: T::Hash[Symbol, T.any(String, Integer)], key: String).returns(String) }
-  def google_signed_url(domain:, path:, query:, key: "GOOGLE_MAPS_API_KEY")
-    google_maps_key = ENV[key]
-    cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
+  sig { params(domain: String, path: String, query: T::Hash[Symbol, T.any(String, Integer)], key: Symbol).returns(String) }
+  def google_signed_url(domain:, path:, query:, key: :api)
+    google_maps_key = lookup_google_maps_key(key)
+    cryptographic_key = Rails.application.credentials.dig(:google_maps, :cryptographic_key)
     if google_maps_key.present?
-      signed = path + "?" + query.merge(key: google_maps_key).to_query
+      signed = "#{path}?#{query.merge(key: google_maps_key).to_query}"
       signature = sign_gmap_bus_api_url(signed, cryptographic_key)
       domain + signed + "&signature=#{signature}"
     else
-      domain + path + "?" + query.to_query
+      "#{domain}#{path}?#{query.to_query}"
+    end
+  end
+
+  sig { params(key_type: Symbol).returns(T.nilable(String)) }
+  def lookup_google_maps_key(key_type)
+    case key_type
+    when :api
+      Rails.application.credentials.dig(:google_maps, :api_key)
+    when :email
+      Rails.application.credentials.dig(:google_maps, :email_key)
+    when :server
+      Rails.application.credentials.dig(:google_maps, :server_key)
+    else
+      raise "Unexpected value"
     end
   end
 
@@ -188,5 +203,10 @@ module ApplicationsHelper
   sig { returns(String) }
   def api_host
     Rails.env.development? ? "localhost" : "api.planningalerts.org.au"
+  end
+
+  sig { returns(T.nilable(Integer)) }
+  def api_port
+    Rails.env.development? ? 3000 : nil
   end
 end

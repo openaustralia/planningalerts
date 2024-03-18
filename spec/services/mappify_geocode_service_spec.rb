@@ -5,15 +5,16 @@ require "spec_helper"
 describe MappifyGeocodeService do
   let(:result) do
     VCR.use_cassette(:mappify_geocoder,
-                     match_requests_on: %i[method uri headers]) do
-      MappifyGeocodeService.call(address)
+                     match_requests_on: %i[method uri body]) do
+      described_class.call(address:, key:)
     end
   end
 
-  context "valid address" do
+  context "with valid address" do
     let(:address) { "24 Bruce Road, Glenbrook, NSW 2773" }
+    let(:key) { nil }
 
-    it "should geocode the address into a specific latitude and longitude" do
+    it "geocodes the address into a specific latitude and longitude" do
       expect(result.top.lat).to eq(-33.77260864)
       expect(result.top.lng).to eq(150.62426298)
       expect(result.top.suburb).to eq "Glenbrook"
@@ -22,36 +23,44 @@ describe MappifyGeocodeService do
       expect(result.top.full_address).to eq "24 Bruce Road, Glenbrook NSW 2773"
     end
 
-    it "should not error" do
+    it "does not error" do
       expect(result.error).to be_nil
     end
 
-    context "an API key is set in the environment variable" do
-      let(:api_key) { "12345678-1234-1234-1234-123456789abc" }
-      around do |test|
-        with_modified_env(MAPPIFY_API_KEY: api_key) { test.run }
-      end
+    context "with an API key is set in the environment variable" do
+      let(:key) { "12345678-1234-1234-1234-123456789abc" }
 
-      it "should use the api key to do the api call" do
-        expect(RestClient).to receive(:post).with(
+      it "uses the api key to do the api call" do
+        allow(RestClient).to receive(:post).with(
           "https://mappify.io/api/rpc/address/autocomplete/",
           {
             streetAddress: address,
             formatCase: true,
             boostPrefix: false,
-            apiKey: api_key
+            apiKey: key
           }.to_json,
           accept: :json, content_type: :json
-        ).and_return(double(body: { type: "completeAddressRecordArray", result: [] }.to_json))
+        ).and_return(instance_double(RestClient::Response, body: { type: "completeAddressRecordArray", result: [] }.to_json))
         result
+        expect(RestClient).to have_received(:post).with(
+          "https://mappify.io/api/rpc/address/autocomplete/",
+          {
+            streetAddress: address,
+            formatCase: true,
+            boostPrefix: false,
+            apiKey: key
+          }.to_json,
+          accept: :json, content_type: :json
+        )
       end
     end
   end
 
-  context "an invalid address" do
+  context "with an invalid address" do
     let(:address) { "rxsd23dfj" }
+    let(:key) { nil }
 
-    it "should return no results" do
+    it "returns no results" do
       expect(result.all).to be_empty
     end
   end

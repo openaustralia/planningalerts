@@ -1,0 +1,28 @@
+ul.email-alert-list {
+  list-style: none;
+  padding: 0;
+}
+
+.email-alert-list .email-alert {
+  margin-bottom: 4em;
+
+  .email-alert-main { 
+    max-width: 40em;
+  }
+
+  .unsubscribe { 
+    margin-top: 1em;
+  }
+
+  h4 {
+    margin: 16px 0;
+  }
+
+  .map { 
+    height: 300px;
+    // A green colour that you might see on a map. Display this while loading the map
+    // Note that we're using the same colour when initialising the google map so that
+    // everything matches
+    background-color: #d1e6d9;
+  }
+}

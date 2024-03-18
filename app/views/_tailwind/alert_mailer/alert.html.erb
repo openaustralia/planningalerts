@@ -1,0 +1,259 @@
+<%# This template is generated automically by maizzle and should not be edited by hand! Go to "maizzle/src/templates". %>
+<!DOCTYPE html>
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+  <meta charset="utf-8">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings xmlns:o="urn:schemas-microsoft-com:office:office">
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <style>
+    td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif; mso-line-height-rule: exactly;}
+    a[x-apple-data-detectors] {
+      color: inherit !important;
+      text-decoration: none !important;
+      font-size: inherit !important;
+      font-family: inherit !important;
+      font-weight: inherit !important;
+      line-height: inherit !important;
+    }
+  </style>
+  <![endif]-->
+  <title><%= subject(@alert, @applications, @comments) %></title>
+  <style>
+    .hover-border-t-2:hover {
+      border-top-width: 2px !important
+    }
+    .hover-border-navy:hover {
+      border-color: #414860 !important
+    }
+    .hover-border-t-navy:hover {
+      border-top-color: #414860 !important
+    }
+    .hover-pt-23px:hover {
+      padding-top: 23px !important
+    }
+    .hover-pt-31px:hover {
+      padding-top: 31px !important
+    }
+    .hover-underline:hover {
+      text-decoration-line: underline !important
+    }
+    .active-bg-light-grey:active {
+      background-color: #F3F2F2 !important
+    }
+    @media (max-width: 600px) {
+      .sm-px-4 {
+        padding-left: 16px !important;
+        padding-right: 16px !important
+      }
+    }
+    @media (max-width: 425px) {
+      .xs-mt-4 {
+        margin-top: 16px !important
+      }
+      .xs-block {
+        display: block !important
+      }
+      .xs-inline-block {
+        display: inline-block !important
+      }
+      .xs-h-6 {
+        height: 24px !important
+      }
+      .xs-h-8 {
+        height: 32px !important
+      }
+      .xs-w-full {
+        width: 100% !important
+      }
+      .xs-px-6 {
+        padding-left: 24px !important;
+        padding-right: 24px !important
+      }
+      .xs-py-3 {
+        padding-top: 12px !important;
+        padding-bottom: 12px !important
+      }
+      .xs-pt-4 {
+        padding-top: 16px !important
+      }
+      .xs-text-left {
+        text-align: left !important
+      }
+      .xs-text-2xl {
+        font-size: 24px !important
+      }
+      .xs-text-8px {
+        font-size: 8px !important
+      }
+    }
+    @media (prefers-color-scheme: dark) {
+      .dark-mode-bg-_333 {
+        background-color: #333 !important
+      }
+      .dark-mode-text-white {
+        color: #ffffff !important
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Merriweather:wght@300;400;500;700;900&display=fallback" rel="stylesheet">
+</head>
+<body class="dark-mode-bg-_333" style="margin: 0; width: 100%; background-color: #ffffff; padding: 0; -webkit-font-smoothing: antialiased; word-break: break-word">
+  <div style="display: none">
+    <%= preheader(@applications, @comments) %>
+    &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847;
+  </div>
+  <div role="article" aria-roledescription="email" aria-label="<%= subject(@alert, @applications, @comments) %>" lang="en">
+    <div class="sm-px-4 dark-mode-text-white" style="font-family: Fira Sans, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 18px; color: #414860">
+      <table align="center" cellpadding="0" cellspacing="0" role="none">
+        <tr>
+          <td style="width: 552px; max-width: 100%">
+            <table width="100%" style="font-family: Inter, Fira Sans, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif" cellpadding="0" cellspacing="0" role="none">
+              <tr>
+                <td style="height: 24px; background-color: #E98E07"></td>
+              </tr>
+              <tr>
+                <td class="xs-px-6 xs-py-3" style="background-color: #F4BE53; padding: 24px 48px">
+                  <table cellpadding="0" cellspacing="0" role="none">
+                    <tr>
+                      <td style="background-color: #CA3F94; padding: 4px 16px">
+                        <h1 class="xs-text-2xl" style="margin: 0; font-size: 36px; font-weight: 800; color: #ffffff">Planning Alerts</h1>
+                      </td>
+                    </tr>
+                  </table>
+                  <table cellpadding="0" cellspacing="0" role="none">
+                    <tr>
+                      <td class="xs-text-8px" style="background-color: #826D9C; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #ffffff">Email alerts of planning applications near you</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <div class="xs-h-6" style="height: 64px"></div>
+            <table cellpadding="0" cellspacing="0" role="none">
+              <tr>
+                <td class="xs-w-full xs-inline-block" style="width: 50%">
+                  <p>Hello,</p>
+                  <p>We found <%= subject(@alert, @applications, @comments) %>.</p>
+                  <p>Thanks,<br>Planning Alerts team</p>
+                </td>
+                <td class="xs-text-left xs-w-full xs-inline-block xs-pt-4" style="width: 50%; text-align: right"> <img src="<%= image_url('tailwind/illustration/dancing-man.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0" alt="">
+                </td>
+              </tr>
+            </table>
+            <div role="separator" style="line-height: 56px">&zwj;</div>
+            <% @applications.each do |application| %> <a href="<%= application_url_with_tracking(id: application.id) %>" style="text-decoration-line: none">
+              <table class="hover-pt-23px hover-border-navy hover-border-t-2 active-bg-light-grey" style="width: 100%; border: 0px solid #e2e8f0; border-top: 1px solid #e2e8f0; padding-top: 24px; padding-bottom: 24px" cellpadding="0" cellspacing="0" role="none">
+                <tr>
+                  <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
+                    <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
+                  </td>
+                  <td valign="top" class="xs-w-full xs-inline-block xs-mt-4">
+                    <h2 class="dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94"><%= application.address %></h2>
+                    <p class="dark-mode-text-white" style="margin-top: 0; margin-bottom: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860">
+                      <%= application.description %>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </a>
+            <% end %><div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 0px 0">&zwj;</div>
+            <div role="separator" style="line-height: 24px">&zwj;</div>
+            <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div><a href="<%= comment_url_with_tracking(comment:) %>" style="text-decoration-line: none;">
+              <div class="hover-pt-31px hover-border-t-2 hover-border-t-navy dark-mode-text-white active-bg-light-grey" style="border: 1px solid #f3f2f2; padding: 32px; color: #414860">
+                <p style="margin-top: 0"><%= comment.name %> commented:</p>
+                <table style="margin-top: 16px" cellpadding="0" cellspacing="0" role="none">
+                  <tr>
+                    <td valign="top" class="xs-block xs-h-8" style="padding-right: 16px; padding-top: 8px; font-size: 72px">”</td>
+                    <td valign="top" class="xs-block"> <%= comment_as_html(comment.text) %> <p style="margin-bottom: 24px; margin-top: 32px">
+                        Comment made on:
+                      </p>
+                      <table cellpadding="0" cellspacing="0" role="none">
+                        <tr>
+                          <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
+                            <img alt="Map of <%= comment.application.address %>" src="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
+                          </td>
+                          <td valign="top" class="xs-w-full xs-inline-block xs-mt-4" style="height: 150px">
+                            <h2 class="dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700"><%= comment.application.address %></h2>
+                            <p style="margin-top: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860;">
+                              <%= comment.application.description %>
+                            </p>
+                          </td>
+                        </tr>
+                      </table>
+                      <p style="margin-top: 24px">
+                        <a href="<%= comment_url_with_tracking(comment:) %>" class="hover-underline dark-mode-text-white" style="font-size: 20px; font-weight: 700; color: #CA3F94; text-decoration-line: none">View comment on Planning Alerts</a>
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </a>
+            <% end %> <div role="separator" style="line-height: 48px">&zwj;</div>
+            <h2 class="dark-mode-text-white" style="font-size: 20px; font-weight: 700; color: #414860">Alert Details</h2>
+            <p class="dark-mode-text-white" style="font-size: 18px; color: #414860">
+              <%= meters_in_words(@alert.radius_meters) %> from <%= @alert.address %>
+            </p>
+            <div role="separator" style="line-height: 16px">&zwj;</div>
+            <div>
+              <a href="<%= edit_profile_alert_url(@alert) %>" style="display: inline-block; background-color: #03827A; padding: 16px 32px; font-size: 18px; font-weight: 600; line-height: 1; color: #ffffff; text-decoration: none">
+                <!--[if mso]>
+      <i style="mso-font-width: -100%; letter-spacing: 32px; mso-text-raise: 30px" hidden>&nbsp;</i>
+    <![endif]-->
+                <span style="mso-text-raise: 16px">
+    <img src="<%= image_url('tailwind/pencil.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 8px" alt="">
+    Change this alert
+  </span>
+                <!--[if mso]>
+      <i style="mso-font-width: -100%; letter-spacing: 32px;" hidden>&nbsp;</i>
+    <![endif]-->
+              </a>
+            </div>
+            <div role="separator" style="line-height: 8px">&zwj;</div>
+            <div>
+              <a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" style="display: inline-block; background-color: #767676; padding: 16px 32px; font-size: 18px; font-weight: 600; line-height: 1; color: #ffffff; text-decoration: none">
+                <!--[if mso]>
+      <i style="mso-font-width: -100%; letter-spacing: 32px; mso-text-raise: 30px;" hidden>&nbsp;</i>
+    <![endif]-->
+                <span style="mso-text-raise: 16px">
+    <img src="<%= image_url('tailwind/trash.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 8px;" alt="">
+    Unsubscribe from this alert
+  </span>
+                <!--[if mso]>
+      <i style="mso-font-width: -100%; letter-spacing: 32px;" hidden>&nbsp;</i>
+    <![endif]-->
+              </a>
+            </div>
+            <div role="separator" style="line-height: 48px">&zwj;</div>
+            <div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 32px 0;">&zwj;</div>
+            <p>
+              <a href="<%= root_url %>" class="dark-mode-text-white hover-underline" style="color: #414860; text-decoration-line: none"><strong>Planning Alerts</strong></a>
+              is a free service where anyone can find out what is being built and knocked down in their area.
+            </p>
+            <p>
+              The service
+              is run by the independent charity
+              <a href="https://www.oaf.org.au/" class="dark-mode-text-white hover-underline" style="color: #414860; text-decoration-line: none">OpenAustralia Foundation</a>.
+            </p>
+            <p>
+              <a href="<%= documentation_contact_url %>" class="hover-underline" style="font-weight: 700; color: #CA3F94; text-decoration-line: none;">Contact us</a>
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

@@ -13,9 +13,13 @@ require File.expand_path("../config/environment", __dir__)
 require "rspec/rails"
 require "email_spec"
 require "rspec/active_model/mocks"
+require "pundit/rspec"
+require "axe-rspec"
+require "capybara/rails"
+require "percy/capybara"
+require "flipper/adapters/pstore"
 
 Capybara.javascript_driver = :selenium_headless
-Capybara.server = :webrick
 
 VCR.configure do |c|
   c.cassette_library_dir = "spec/fixtures/vcr_cassettes"
@@ -24,7 +28,7 @@ VCR.configure do |c|
   # which automatically downloads the webdriver for headless testing
   c.ignore_hosts "github.com"
   c.ignore_request do |request|
-    URI(request.uri).host =~ /s3.amazonaws.com/
+    URI(request.uri).host =~ /objects.githubusercontent.com/
     # false
     # URI(request.uri).port == 7777
   end
@@ -37,7 +41,7 @@ end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -57,41 +61,7 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
-  # This DatabaseCleaner setup is customised for our use of a javascript driver
-  # as part of our feature tests using Capybara
-  # https://github.com/DatabaseCleaner/database_cleaner#rspec-with-capybara-example
-  config.before(:suite) do
-    DatabaseCleaner.clean_with :truncation
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
-  end
-
-  config.before(:each, truncation: true) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
-  config.before(:each, type: :feature) do
-    # :rack_test driver's Rack app under test shares database connection
-    # with the specs, so continue to use transaction strategy for speed.
-    driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
-
-    unless driver_shares_db_connection_with_specs
-      # Driver is probably for an external browser with an app
-      # under test that does *not* share a database connection with the
-      # specs, so use truncation strategy.
-      DatabaseCleaner.strategy = :truncation
-    end
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.append_after(:each) do
-    DatabaseCleaner.clean
-  end
+  config.use_transactional_fixtures = true
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -106,7 +76,7 @@ RSpec.configure do |config|
 
   # This is a workaround for a strange thing where ActionMailer::Base.deliveries isn't being
   # cleared out correctly in feature specs. So, do it here for everything.
-  config.before(:each) do
+  config.before do
     ActionMailer::Base.deliveries = []
   end
 
@@ -125,7 +95,6 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include SessionHelpers, type: :feature
-  config.include EnvHelpers
   config.include MockLocationHelpers
   config.include AutocompleteHelpers
 
@@ -136,7 +105,24 @@ RSpec.configure do |config|
 
   # Disable searchkick during testing so that we don't need to run
   # elasticsearch locally which is a pain
+  # Also disable rack attack because we're logging in quite a bit during testing
   config.before(:suite) do
     Searchkick.disable_callbacks
+    Rack::Attack.enabled = false
+  end
+
+  config.before do
+    # See https://github.com/flippercloud/flipper/issues/261#issuecomment-427138651
+    FileUtils.rm "tmp/flipper.pstore", force: true
+  end
+end
+
+# For testing use a pstore adapter
+# Using this over the standard in-memory adapter for testing so that flipper
+# will still work with capybara with js: true.
+Flipper.configure do |config|
+  config.adapter do
+    pstore_path = Rails.root.join("tmp/flipper.pstore")
+    Flipper::Adapters::PStore.new(pstore_path)
   end
 end

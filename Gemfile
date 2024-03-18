@@ -3,46 +3,42 @@
 source "https://rubygems.org"
 
 gem "bootsnap", require: false
-gem "mysql2"
-gem "rails", "5.2.6"
+gem "rails", "~> 7.0.4"
 gem "rake"
 
-# Monkey-patch for bug where distance isn't loaded into model
-# This is the version of the gem required for rails 5.2
-# So, will need to upgrade this if we are upgrading rails.
-gem "rails_select_on_includes", "~> 5.2.1"
+gem "pg"
 
-# Caching
-# Allow us to use `caches_page`
-gem "actionpack-page_caching"
-# Need to support sweepers
-gem "rails-observers"
+# Supports postgis so we can magically do spatial queries
+gem "activerecord-postgis-adapter"
 
 # API
 gem "dalli"
-gem "rack-throttle"
+
+# For throttling API requests
+gem "rack-attack"
 
 # Admin interface
-gem "activeadmin"
+gem "administrate"
 
 # Logging in and such things
 gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
+gem "pundit", "~> 2.2"
 
 # To handle different kinds of view templates
 gem "haml"
-# Temporarily locking version of rabl because upgrading causes
-# "Gem::Package::PathError: installing into parent path"
-gem "rabl", "0.14.0"
-gem "redcarpet"
+gem "rabl"
 
 # Extra validation
-gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
-gem "validate_url", "~> 0.2.2" # 1.0.0 causes failures like "Validation failed: Comment url is not a valid URL" on mailto: links
+gem "validates_email_format_of"
+gem "validate_url"
 
-# Background queue uses sidekiq with redis
-# We need redis namespaces to seperate the production and staging environments
-gem "redis-namespace"
-gem "sidekiq"
+# Background queue uses sidekiq
+# TODO: Upgrade to sidekiq 7.0
+gem "sidekiq", "<7"
+# Run cron jobs alongside sidekiq. Only use this for jobs that need
+# to run once across a cluster. We're still using "regular" cron
+# for jobs that need to run on every machine
+gem "sidekiq-cron"
 
 # For accessing external urls
 # TODO: Just pick one and use it for everything
@@ -50,30 +46,29 @@ gem "httparty"
 gem "rest-client"
 
 # Pagination
-gem "will_paginate"
+gem "kaminari"
 
 # Geocoding and location stuff
 gem "geokit"
-# geocoder is only used for the near activerecord method
-gem "geocoder"
+# rexml is used by geokit but is no longer by default in ruby 3.1
+gem "rexml"
 
 # CSS related stuff
 gem "autoprefixer-rails"
-# Upgrading to version 5.0 of bourbon looks like a fairly big change. So, delaying this
-# See https://www.bourbon.io/docs/migrating-from-v4-to-v5/
-gem "bourbon", "~> 4.0"
+gem "bourbon"
 gem "compass-blueprint"
 # compass is no longer maintained. TODO: Move away from compass
+# We can't upgrade to ruby 3.2 until we get rid of compass
 gem "compass-rails", "3.1.0"
 gem "sass-rails"
 gem "susy"
+gem "tailwindcss-rails", "~> 2.0"
 
 # Icons
 gem "foundation-icons-sass-rails"
 
-# Javascript stuff
-gem "jquery-rails"
-gem "jquery-ui-rails"
+# Date picker with no dependencies
+gem "flatpickr"
 
 # Sanitizing and manipulating user input
 gem "rails_autolink"
@@ -83,45 +78,27 @@ gem "sanitize"
 gem "dotenv-rails"
 gem "foreman"
 
-# Councillors
-gem "everypolitician-popolo", git: "https://github.com/everypolitician/everypolitician-popolo.git", branch: "master"
-gem "mime-types", "~> 2.99" # our writeit gem version is incompatible with newer versions
-# Using master until an updated version of the Gem is released https://github.com/ciudadanointeligente/writeit-rails/issues/4
-gem "writeit-rails", git: "https://github.com/ciudadanointeligente/writeit-rails.git", branch: "master"
-
 # Figure out who is likely to be human
 gem "recaptcha", require: "recaptcha/rails"
 
 # Site search
 gem "searchkick"
 
-# Reporting exceptions
-gem "honeybadger"
-
-# For accessing the Twitter api
-gem "twitter"
-
 # Used to parse different external application feeds
 gem "atdis"
 gem "nokogiri"
 
 # For making forms a little easier
-gem "bootstrap_form", ">= 4.1.0"
 gem "formtastic"
 
 # Speed up json parsing
 # TODO: Double check where this is being used
 gem "oj"
 
-# Helps with defining attributes and type casting in form objects
-gem "virtus"
-
-# For theming (so we can run our proper theme at the same time as an
-# experimental bootstrap based theme)
-gem "themes_on_rails"
-
 # For logging API calls to elasticsearch
-gem "elasticsearch"
+# We can't upgrade elasticsearch gem until we've upgraded the server
+# TODO: Fix this
+gem "elasticsearch", "~> 7"
 gem "ruby-progressbar"
 gem "typhoeus"
 
@@ -132,19 +109,13 @@ gem "counter_culture"
 gem "rack-cors"
 
 # For type checking
-gem "sorbet-rails"
 gem "sorbet-runtime"
 
-# Only including these to keep sorbet happy
-# TODO: Figure out how to remove them
-gem "cancan"
-gem "pundit"
-
 # For automatic creation of github issues when scrapers are broken
-gem "octokit", "~> 4.0"
+gem "octokit"
 
 # For rendering json output
-gem "jpbuilder"
+gem "jb"
 
 # For sending notifications to Slack about bounced emails to authorities
 gem "slack-notifier"
@@ -153,67 +124,115 @@ gem "slack-notifier"
 # (used by load balancer)
 gem "health_check"
 
-# Using New Relic temporarily to debug some performance issues
-gem "newrelic_rpm"
+# For rendering markdown in ATDIS specification
+gem "redcarpet"
+
+# For accessing the Github GraphQL API which we're using for accessing projects
+# which we're using for managing the list of broken scrapers
+gem "graphql-client"
+
+# For feature flags
+gem "flipper"
+gem "flipper-redis"
+gem "flipper-ui"
+
+# Testing this out for application performance monitoring
+gem "skylight"
+
+# For making more reusable and testable components
+gem "view_component"
+
+# For uploading sitemaps to S3 and uploading attachments to S3 using active storage
+gem "aws-sdk-s3", "~> 1"
+
+# For generating sitemaps for search engines
+gem "sitemap_generator"
+
+# For accessing wikidata
+gem "sparql-client"
+gem "wikidata"
+
+# For reading in authority boundary data
+gem "rgeo-shapefile"
+gem "rubyzip"
+
+# Using this webserver for development and production
+gem "puma"
 
 group :test do
   gem "capybara"
-  gem "climate_control"
-  gem "database_cleaner"
-  gem "email_spec"
+  # For some reason upgrading to email_spec 2.2.1 completely breaks things for us
+  # TODO: Figure out what's going on fix this properly
+  gem "email_spec", "2.2.0"
   gem "factory_bot"
   gem "factory_bot_rails"
   gem "rails-controller-testing"
-  gem "rspec-rails", "~> 3"
+  gem "rspec-rails"
   gem "selenium-webdriver"
   gem "simplecov", require: false
   gem "timecop"
   gem "vcr"
-  gem "webdrivers", "~> 4.0"
+  gem "webdrivers"
   gem "webmock"
   # FIXME: stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"
+  # For automated accessibility testing
+  gem "axe-core-capybara"
+  gem "axe-core-rspec"
+  # For visual differencing using percy.io
+  gem "percy-capybara"
 end
 
 group :development do
+  # To profile code in development
+  gem "rack-mini-profiler"
+
   # For static type checking
   gem "sorbet"
+  gem "spoom"
+  gem "tapioca"
 
   # For guard and associated bits
   gem "growl"
   gem "guard"
-  gem "guard-livereload"
   gem "guard-rspec"
   gem "guard-rubocop"
-  gem "rack-livereload"
   gem "rb-fsevent"
   gem "rb-inotify", require: false
-  gem "spring"
-  gem "spring-commands-rspec"
 
-  # Using this webserver for development
-  gem "thin"
+  gem "rails_live_reload"
 
   # For a better error page in development
   gem "better_errors"
   gem "binding_of_caller"
 
-  # To profile code in development
-  gem "rack-mini-profiler"
-
   # For deployment
-  # TODO: Upgrade to capistrano 3
-  gem "capistrano", "~> 2"
+  gem "capistrano", require: false
+  # For puma 6 support we're using the "beta" version
+  gem "capistrano3-puma", ">= 6.0.0.beta.1", require: false
+  gem "capistrano-aws"
+  gem "capistrano-bundler", require: false
+  gem "capistrano-rails", require: false
+  gem "capistrano-rvm", require: false
 
   # Help with code quality
   gem "brakeman"
+  gem "erb_lint", require: false
   gem "haml_lint", require: false
-  gem "rubocop", "0.87.0", require: false # Using same version as defined in .codeclimate.yml
+  gem "rubocop", require: false
   gem "rubocop-rails", require: false
+  gem "rubocop-rake", require: false
+  gem "rubocop-rspec", require: false
   gem "rubocop-sorbet", require: false
+
+  # To help identify database issues
+  gem "active_record_doctor"
 end
 
 group :production do
+  # Reporting exceptions
+  gem "honeybadger"
+
   # Javascript runtime (required for precompiling assets in production)
   gem "mini_racer"
   gem "uglifier"

@@ -4,99 +4,43 @@
 class AlertsController < ApplicationController
   extend T::Sig
 
-  caches_page :statistics
-
-  class NewParams < T::Struct
-    const :address, T.nilable(String)
-    const :email, T.nilable(String)
-  end
-
-  class AlertParams < T::Struct
-    const :address, String
-    const :email, String
-  end
-
-  class CreateParams < T::Struct
-    const :alert, AlertParams
-  end
-
-  class ConfirmedParams < T::Struct
-    const :id, String
-  end
-
-  class UnsubscribeParams < T::Struct
-    const :id, String
-  end
-
-  class AreaParams < T::Struct
-    const :id, String
-    # TODO: Use an enum here?
-    const :size, T.nilable(String)
-  end
+  before_action :authenticate_user!, only: %i[new create]
 
   sig { void }
   def new
-    typed_params = TypedParams[NewParams].new.extract!(params)
-    @alert = T.let(Alert.new(typed_params.serialize), T.nilable(Alert))
-    @set_focus_control = T.let(typed_params.address ? "alert_email" : "alert_address", T.nilable(String))
+    @alert = Alert.new(address: params[:address])
+    return unless show_tailwind_theme?
+
+    redirect_to new_profile_alert_path
   end
 
   sig { void }
   def create
-    typed_params = TypedParams[CreateParams].new.extract!(params)
-    address = typed_params.alert.address
-    @address = T.let(address, T.nilable(String))
-    @alert = T.let(
-      BuildAlertService.call(
-        email: typed_params.alert.email,
-        address: address,
-        radius_meters: T.must(zone_sizes["l"])
-      ),
-      T.nilable(Alert)
+    params_alert = T.cast(params[:alert], ActionController::Parameters)
+    address = T.cast(params_alert[:address], String)
+
+    alert = Alert.new(
+      user: current_user,
+      address:,
+      radius_meters: Alert::DEFAULT_RADIUS
     )
+    authorize alert
+    # Ensures the address is normalised into a consistent form
+    alert.geocode_from_address
 
-    render "new" if @alert.present? && !@alert.save
-  end
-
-  sig { void }
-  def confirmed
-    typed_params = TypedParams[ConfirmedParams].new.extract!(params)
-    @alert = Alert.find_by!(confirm_id: typed_params.id)
-    @alert.confirm!
-  end
-
-  sig { void }
-  def unsubscribe
-    typed_params = TypedParams[UnsubscribeParams].new.extract!(params)
-    @alert = Alert.find_by(confirm_id: typed_params.id)
-    @alert&.unsubscribe!
-  end
-
-  # TODO: Split this into two actions
-  sig { void }
-  def area
-    typed_params = TypedParams[AreaParams].new.extract!(params)
-    @zone_sizes = T.let(zone_sizes, T.nilable(T::Hash[String, Integer]))
-    alert = Alert.find_by!(confirm_id: typed_params.id)
-    @alert = T.let(alert, T.nilable(Alert))
-    if request.get? || request.head?
-      @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
+    if alert.save
+      # TODO: Do something more sensible here than redirecting to the profile page
+      redirect_to profile_alerts_path, notice: "You succesfully added a new alert for #{alert.address}"
     else
-      # TODO: If we seperate this action into two then we won't need to use T.must here
-      alert.radius_meters = T.must(zone_sizes[T.must(typed_params.size)])
-      alert.save!
-      render "area_updated"
+      @alert = T.let(alert, T.nilable(Alert))
+      render :new
     end
   end
 
-  private
-
-  sig { returns(T::Hash[String, Integer]) }
-  def zone_sizes
-    {
-      "s" => Rails.application.config.planningalerts_small_zone_size,
-      "m" => Rails.application.config.planningalerts_medium_zone_size,
-      "l" => Rails.application.config.planningalerts_large_zone_size
-    }
+  # This is still being used to do one click unsubscribes from email alerts
+  sig { void }
+  def unsubscribe
+    @alert = Alert.find_by(confirm_id: params[:confirm_id])
+    @alert&.unsubscribe!
   end
 end

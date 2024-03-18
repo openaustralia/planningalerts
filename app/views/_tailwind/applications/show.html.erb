@@ -1,0 +1,179 @@
+<% content_for :page_title, page_title(@application) %>
+<% content_for :meta_description, @application.description %>
+<% content_for :extra_meta_tags do %>
+  <meta content="summary" name="twitter:card">
+  <meta content="@PlanningAlerts" name="twitter:site">
+  <meta content="<%= @application.address %>" name="twitter:title">
+  <meta content="<%= (@application.description[0..199] if @application.description) %>" name="twitter:description">
+  <meta content="<%= google_static_map_url(lat: @application.lat, lng: @application.lng, size: "512x512") %>" name="twitter:image">
+  <meta content="<%= application_url(@application) %>" property="og:url">
+  <meta content="place" property="og:type">
+  <meta content="<%= @application.address %>" property="og:title">
+  <meta content="<%= (@application.description[0..199] if @application.description) %>" property="og:description">
+  <meta content="<%= google_static_map_url(lat: @application.lat, lng: @application.lng, size: "512x512") %>" property="og:image">
+  <meta content="512" property="og:image:width">
+  <meta content="512" property="og:image:height">
+  <% if @application.location %>
+    <meta content="<%= @application.lat %>" property="place:location:latitude">
+    <meta content="<%= @application.lng %>" property="place:location:longitude">
+  <% end %>
+<% end %>
+<% content_for :footer_illustration do %>
+  <%= image_tag "tailwind/illustration/bottom-of-page-man.svg", alt: "" %>
+<% end %>
+
+<%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mb-10").with_content(@application.address) %>
+
+<%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
+<%= render "applications/map", application: @application %>
+
+<dl class="mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-2xl">
+  <dt class="font-bold font-display">Description</dt>
+  <dd><%= @application.description %></dd>
+  <dt class="mt-8 font-bold md:mt-0 font-display">Planning Authority</dt>
+  <dd>
+    <%= pa_link_to @application.authority.full_name,
+                   authority_path(@application.authority.short_name_encoded) %>
+  </dd>
+  <dt class="mt-8 font-bold font-display md:mt-0">Reference number</dt>
+  <dd>
+    <div>
+      <%= @application.council_reference %>
+    </div>
+    <%= render Tailwind::DisclosureComponent.new(size: "2xl") do |component| %>
+      <% component.with_summary { "What is a reference number?" } %>
+      This was created by <%= @application.authority.full_name %> to identify this application. You will need this if you talk
+      directly with them or use their website.
+    <% end %>
+  </dd>
+</dl>
+
+<%# TODO: The icons next to the labels are not all the same size / proportion %>
+<dl class="text-2xl text-navy grid md:grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-14">
+  <dt class="font-bold md:py-1">
+    <div class="flex gap-4">
+      <%= image_tag "tailwind/calendar.svg", width: 24, alt: "" %>
+      <div>Date sourced</div>
+    </div>
+  </dt>
+  <dd class="ml-10 md:ml-0 md:py-1">
+    <%= render "applications/scraped_and_received_text", application: @application %>
+  </dd>
+  <%# TODO: Do we show the notified line if nobody has been notified? %>
+  <dt class="pt-6 font-bold md:pt-1 md:py-1">
+    <div class="flex gap-4">
+      <%= image_tag "tailwind/letter.svg", width: 24, alt: "" %>
+      <div>Notified</div>
+    </div>
+  </dt>
+  <%# TODO: The link in notified text should go to the new alert sign up page %>
+  <%# TODO: Should we have the link at all now? %>
+  <dd class="ml-10 md:py-1 md:border-t border-light-grey2 md:ml-0">
+    <%= render "applications/notified_text", application: @application %>
+  </dd>
+  <%# TODO: What to do if there are 0 comments? %>
+  <dt class="pt-6 font-bold md:py-1 md:pt-1">
+    <div class="flex gap-4">
+      <%= image_tag "tailwind/comments.svg", width: 24, alt: "" %>
+      <div>Comments</div>
+    </div>
+  </dt>
+  <dd class="ml-10 md:py-1 md:border-t border-light-grey2 md:ml-0">
+    <%= render "applications/comments_text", comments: @comments %>
+  </dd>
+</dl>
+
+<div class="mt-12">
+  <%# TODO: This button currently has much larger left and right padding than the design %>
+  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: "#add-comment", icon: :edit) do %>
+    Make a comment on this application
+  <% end %>
+</div>
+
+<div class="mt-2">
+  <%# TODO: Handle situation when authority name is very long %>
+  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: external_application_path(@application), icon: :external) do %>
+    View more at <%= @application.authority.full_name %> website
+  <% end %>
+</div>
+
+<%# TODO: Point this button at a new page for sharing the application %>
+<div class="mt-2">
+  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :inverse_primary, href: "#", icon: :share) do %>
+    Share this application
+  <% end %>
+</div>
+
+<%= render "create_alert_form_bigger", alert: @alert %>
+
+<section class="pt-20 border-t mt-14 border-light-grey2" id="comments">
+  <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "inline-block mb-6 mr-4") do %>
+    Public comments on this application
+  <% end %>
+  <% if @comments.count > 0 %>
+    <div class="relative inline-block mt-6 mb-4 -top-6">
+      <%= render Tailwind::SpeechBubbleComponent.new(size: "4xl", alignment: :right) do %>
+        <%= @comments.count %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <p class="text-2xl text-navy">
+    Comments made here
+    <%= @comments.empty? ? "will be" : "were" %>
+    sent to <strong><%= @application.comment_recipient_full_name %></strong>.
+    <%# No need for shortcut link if there are no comments because that section is directly underneath %>
+    <% unless @comments.empty? %>
+      <%= pa_link_to "Add your own comment", "#add-comment" %>.
+    <% end %>
+  </p>
+  <% @comments.each do |comment| %>
+    <div class="pt-12" id="comment<%= comment.id %>">
+      <% if comment.id == flash[:published_comment_id] %>
+        <div class="mb-8">
+          <%= render Tailwind::AlertComponent.new(type: :congratulations) do %>
+            <div class="mb-4 ml-4 text-3xl">
+              <p class="mb-8">
+                Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
+              </p>
+              <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", icon: :share, type: :inverse_lavender, href: "https://www.facebook.com/sharer/sharer.php?u=#{comment_url(Comment.first)}&t=") do %>
+                Share on Facebook
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <%= render comment, show_extra: true %>
+    </div>
+  <% end %>
+</section>
+
+<section class="flex gap-6 mt-14" id="add-comment">
+  <%# Hide the big quotation mark on small displays so we don't end up with a weird large left margin %>
+  <%# TODO: Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
+  <div class="hidden mt-20 sm:block text-navy text-7xl">”</div>
+  <div class="pt-10 border-t border-dashed border-warm-grey grow">
+    <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mb-3").with_content("Add your own comment") %>
+
+    <% if !@application.authority.email.present? %>
+      <%# TODO: Need a proper design for this section %>
+      <%= render "comments/no_authority_email_explanation", application: @application %>
+    <% elsif current_user.nil? %>
+      <div class="px-4 py-3 bg-light-grey">
+        <p class="text-2xl opacity-50 text-navy">Be polite, clear and to the point so your comment gets listened to.</p>
+        <div class="flex justify-center py-12">
+          <div class="grid gap-3 sm:inline-grid sm:grid-cols-2">
+            <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_registration_path) do %>
+              Create an account
+            <% end %>
+            <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_session_path) do %>
+              Sign in
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <%= render "comments/form", application: @application, comment: @comment %>
+    <% end %>
+  </div>
+</section>

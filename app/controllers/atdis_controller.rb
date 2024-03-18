@@ -1,51 +1,51 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class AtdisController < ApplicationController
-  class TestParams < T::Struct
-    const :url, T.nilable(String)
-  end
+  extend T::Sig
 
+  sig { void }
   def test
-    typed_params = TypedParams[TestParams].new.extract!(params)
-    if typed_params.url.present?
-      @feed = Feed.create_from_url(typed_params.url)
+    if show_tailwind_theme?
+      redirect_to get_involved_path
+      return
+    end
+
+    if params[:url].present?
+      feed = Feed.create_from_url(params[:url])
       begin
-        @page = @feed.applications
+        @page = T.let(feed.applications, T.untyped)
       rescue RestClient::InternalServerError
-        @error = "Remote server returned an internal server error (error code 500) accessing #{typed_params.url}"
+        @error = T.let("Remote server returned an internal server error (error code 500) accessing #{params[:url]}", T.nilable(String))
       rescue RestClient::RequestTimeout
-        @error = "Timeout in request to #{typed_params.url}. Remote server did not respond in a reasonable amount of time."
+        @error = "Timeout in request to #{params[:url]}. Remote server did not respond in a reasonable amount of time."
       rescue RestClient::Exception => e
         @error = "Could not load data - #{e}"
       rescue URI::InvalidURIError
-        @error = "The url appears to be invalid #{typed_params.url}"
+        @error = "The url appears to be invalid #{params[:url]}"
       end
+      @feed = T.let(feed, T.nilable(Feed))
     else
       @feed = Feed.new
     end
   end
 
-  class FeedParams < T::Struct
-    const :base_url, String
-    const :page, Integer
-    const :lodgement_date_start, T.nilable(Date)
-    const :lodgement_date_end, T.nilable(Date)
-    const :last_modified_date_start, T.nilable(Date)
-    const :last_modified_date_end, T.nilable(Date)
-    const :street, T.nilable(String)
-    const :suburb, T.nilable(String)
-    const :postcode, T.nilable(String)
-  end
-
-  class TestRedirectParams < T::Struct
-    const :feed, FeedParams
-  end
-
   # The job here is to take ugly posted parameters and redirect to a much simpler url
+  sig { void }
   def test_redirect
-    typed_params = TypedParams[TestRedirectParams].new.extract!(params)
-    @feed = Feed.new(typed_params.feed.serialize.symbolize_keys)
+    params_feed = T.cast(params[:feed], ActionController::Parameters)
+
+    @feed = Feed.new(
+      base_url: params_feed[:base_url],
+      page: params_feed[:page],
+      lodgement_date_start: params_feed[:lodgement_date_start],
+      lodgement_date_end: params_feed[:lodgement_date_end],
+      last_modified_date_start: params_feed[:last_modified_date_start],
+      last_modified_date_end: params_feed[:last_modified_date_end],
+      street: params_feed[:street],
+      suburb: params_feed[:suburb],
+      postcode: params_feed[:postcode]
+    )
     if @feed.valid?
       redirect_to atdis_test_url(url: @feed.url)
     else
@@ -53,20 +53,20 @@ class AtdisController < ApplicationController
     end
   end
 
-  class ExampleFeedParams < T::Struct
-    const :number, Integer
-    const :page, T.nilable(Integer)
-  end
-
+  sig { void }
   def feed
-    typed_params = TypedParams[ExampleFeedParams].new.extract!(params)
-    file = Feed.example_path(typed_params.number, typed_params.page || 1)
+    file = Feed.example_path(params[:number], params[:page] || 1)
     if File.exist?(file)
-      render file: file, content_type: Mime[:json], layout: false
+      render file:, content_type: Mime[:json], layout: false
     else
       render plain: "not available", status: :not_found
     end
   end
 
-  def specification; end
+  sig { void }
+  def specification
+    return unless show_tailwind_theme?
+
+    redirect_to "https://github.com/openaustralia/atdis/raw/master/docs/ATDIS-1.0.2%20Application%20Tracking%20Data%20Interchange%20Specification%20(v1.0.2).pdf"
+  end
 end

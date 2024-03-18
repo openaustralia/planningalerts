@@ -1,0 +1,12 @@
+%form.address-search.formtastic.one-field{ "accept-charset" => "UTF-8", "action" => address_applications_path, "method" => "get" }
+  %fieldset.inputs
+    %ol
+      %li.string#q_input{ class: ("error" if error) }
+        = label_tag(:q, "Enter a street address")
+        = render "applications/address_field_with_geolocate", q:, error:
+
+  %fieldset.actions
+    %ol
+      %li.submit= submit_tag "Search", name: nil, class: "button button-rounded button-large button-action"
+
+%p After searching you can sign up for an email alert to get notified of new applications near you straight to your inbox.

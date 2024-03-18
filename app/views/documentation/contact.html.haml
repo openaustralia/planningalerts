@@ -1,0 +1,24 @@
+- content_for :page_title, "Contact us"
+
+%h2= yield :page_title
+
+%h3 Contact a planning authority
+
+%p
+  Are you trying to get in touch with your local council or state planning authority?
+  In that case please <strong>contact them directly</strong>.
+  Unfortunately we can't help you with all that official stuff because Planning Alerts is completely independent from Government.
+  Planning Alerts is a free service, built and maintained by a tiny charity, <a href="https://www.oaf.org.au/">the OpenAustralia Foundation</a>.
+
+%p
+  To find the contact details for your council or state planning authority the best way is to find their official website and look there.
+  Good luck!
+
+%h3 Contact the Planning Alerts team
+%p
+  Did we mention that we're a <strong>tiny team</strong> and <strong>not</strong> the government?
+  We do our best to respond to everyone but sometimes things slip through the cracks.
+%p
+  To help us better help you, please describe your issue with as much detail as possible and add links!
+
+= render "contact_messages/form", contact_message: @contact_message

@@ -67,6 +67,12 @@ a {
 
 @import "partials/email_subscriptions";
 
+.activate-account { 
+  background-color: #222;
+  color: white;
+  border-radius: 10px;
+}
+
 .advert {
   background: $cyan;
 }

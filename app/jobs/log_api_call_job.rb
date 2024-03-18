@@ -1,10 +1,9 @@
 # typed: strict
 # frozen_string_literal: true
 
-class LogApiCallJob < ApplicationJob
+class LogApiCallJob
   extend T::Sig
-
-  queue_as :default
+  include Sidekiq::Job
 
   # time parameter needs to be serialised as a float because rails
   # won't serialise time for us here. We also don't really want to round
@@ -19,13 +18,16 @@ class LogApiCallJob < ApplicationJob
       time_as_float: Float
     ).void
   end
-  def perform(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:)
+  def perform(api_key, ip_address, query, params, user_agent, time_as_float)
+    key = ApiKey.find_by(value: api_key) if api_key.present?
+    return if key.nil?
+
     LogApiCallService.call(
-      api_key: api_key,
-      ip_address: ip_address,
-      query: query,
-      params: params,
-      user_agent: user_agent,
+      key:,
+      ip_address:,
+      query:,
+      params:,
+      user_agent:,
       time: Time.at(time_as_float).utc
     )
   end

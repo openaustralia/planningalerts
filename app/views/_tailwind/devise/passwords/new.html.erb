@@ -1,0 +1,19 @@
+<%# TODO: This page needs a proper design %>
+<%# TODO: Extract out component for this centred block %>
+<div class="max-w-lg mx-auto">
+  <%# This is using a different style than the standard Heading component %>
+  <%= render Tailwind::Heading.new(tag: :h1, color: "fuchsia", extra_classes: "my-20 text-center").with_content("Reset your password") %>
+
+  <%= form_with model: resource, url: password_path(resource_name), builder: FormBuilders::Tailwind do |f| %>
+    <div class="flex flex-col items-center">
+      <div class="w-full">
+        <%= f.label :email, class: "block" %>
+        <%= f.email_field :email, class: "mt-1 block w-full", autofocus: true, autocomplete: "email" %>
+        <%= f.error :email, class: "mt-2" %>
+      </div>
+      <div class="mt-8">
+        <%= f.button "Send me reset password instructions" %>
+      </div>
+    </div>
+  <% end %>
+</div>

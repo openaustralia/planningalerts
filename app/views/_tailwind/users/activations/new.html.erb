@@ -1,0 +1,40 @@
+<%# TODO: This page needs a proper design %>
+
+<div class="max-w-lg mx-auto">
+  <%# This is using a different style than the standard Heading component %>
+  <%= render Tailwind::Heading.new(tag: :h1, color: "fuchsia", extra_classes: "my-20 text-center") do %>
+    Activate your account
+  <% end %>
+
+  <%= form_with model: @user, url: users_activation_path, builder: FormBuilders::Tailwind do |f| %>
+    <div>
+      <%= f.label :email, class: "block" %>
+      <%= f.email_field :email, class: "mt-1 block w-full", autocomplete: "email", autofocus: true %>
+      <%= f.error :email, class: "mt-2" %>
+    </div>
+    <%# TODO: Should this button be centered just like on the sign in page? %>
+    <div class="flex justify-center mt-8">
+      <%= f.button "Send account activation instructions" %>
+    </div>
+  <% end %>
+
+  <%# TODO: The words in this paragraph are fairly incomprehensible. Fix this. %>
+  <p class="mt-16 text-2xl text-center text-navy">
+    Note that you only need to activate your account if you've had an alert or made any
+    comments on Planning Alerts using the same email address
+  </p>
+
+  <%# TODO: Get rid of hr and custom colour here %>
+  <hr class="mt-16 text-[#D2CFC1]">
+  <div class="flex mt-8">
+    <%= image_tag "tailwind/illustration/already-have-an-account.svg", alt: "" %>
+    <div class="flex-grow text-2xl font-bold text-center text-navy">
+      <p>
+        New to Planning Alerts?
+      </p>
+      <p>
+        <%= pa_link_to "Create an account", new_user_registration_path %>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,123 +1,125 @@
-# typed: false
-# frozen_string_literal: true
+# config valid for current version and patch releases of Capistrano
+lock "~> 3.17.1"
 
-require "bundler/capistrano"
-set :stage, "test" unless exists? :stage
+set :application, "planningalerts"
+set :repo_url, "https://github.com/openaustralia/planningalerts.git"
 
-# This adds a task that precompiles assets for the asset pipeline
-load "deploy/assets"
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-set :application, "planningalerts.org.au/app"
-set :repository,  "https://github.com/openaustralia/planningalerts.git"
+# Default deploy_to directory is /var/www/my_app_name
+# set :deploy_to, "/var/www/my_app_name"
 
-set :use_sudo, false
-set :user, "deploy"
-set :scm, :git
-set :rails_env, "production" # added for delayed job
+# Default value for :format is :airbrussh.
+# set :format, :airbrussh
 
-if stage == "production"
-  server "web1.planningalerts.org.au", :app, :web, :db, primary: true
-  server "web2.planningalerts.org.au", :app, :web
-  set :deploy_to, "/srv/www/production"
-  set :app_name, "planningalerts"
-elsif stage == "test"
-  server "web1.planningalerts.org.au", :app, :web, :db, primary: true
-  server "web2.planningalerts.org.au", :app, :web
-  set :deploy_to, "/srv/www/staging"
-  set :app_name, "planningalerts-test"
-  set :honeybadger_env, "staging"
-elsif stage == "development"
-  server "web1.planningalerts.org.au.test", :app, :web, :db, primary: true
-  server "web2.planningalerts.org.au.test", :app, :web
-  set :deploy_to, "/srv/www/production"
-  set :app_name, "planningalerts"
-else
-  raise "Unknown stage: #{stage}"
-end
+# You can configure the Airbrussh format using :format_options.
+# These are the defaults.
+# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
 
-# We need to run this after our collector mongrels are up and running
+# Default value for :pty is false
+# set :pty, true
 
-before "deploy:restart", "foreman:restart"
-before "foreman:restart", "foreman:enable"
-before "foreman:enable", "foreman:export"
+# Default value for :linked_files is []
+# append :linked_files, "config/database.yml", 'config/master.key'
+append :linked_files, "config/memcache.yml", "config/credentials/production.key"
 
-# Clean up old releases so we don't fill up our disk
-after "deploy:restart", "deploy:cleanup"
+# Default value for linked_dirs is []
+# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "tmp/webpacker", "public/system", "vendor", "storage"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
-namespace :deploy do
-  desc "After a code update, we link additional config and the scrapers"
-  before "deploy:assets:precompile" do
-    links = {
-      "#{release_path}/config/database.yml" => "#{shared_path}/database.yml",
-      "#{release_path}/config/throttling.yml" => "#{shared_path}/throttling.yml",
-      "#{release_path}/config/newrelic.yml" => "#{shared_path}/newrelic.yml",
-      "#{release_path}/.env.production" => "#{shared_path}/.env.production",
-      "#{release_path}/public/sitemap.xml" => "#{shared_path}/sitemap.xml",
-      "#{release_path}/public/sitemaps" => "#{shared_path}/sitemaps",
-      "#{release_path}/public/assets" => "#{shared_path}/assets"
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for local_user is ENV['USER']
+# set :local_user, -> { `git config user.name`.chomp }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
+
+# Uncomment the following to require manually verifying the host key before first deploy.
+# set :ssh_options, verify_host_key: :secure
+
+set :rails_env, "production"
+
+# See https://github.com/puma/puma/blob/master/docs/restart.md
+# Note that phased restarts will NOT upgrade puma. So disable this if upgrading puma
+set :puma_phased_restart, true
+
+set :aws_ec2_regions, ['ap-southeast-2']
+# We don't want to use the stage tag to filter because we have both production and staging on the same machine
+set :aws_ec2_default_filters, (proc {
+  [
+    {
+      name: "tag:#{fetch(:aws_ec2_application_tag)}",
+      values: [fetch(:aws_ec2_application)]
+    },
+    # Uncomment the following lines (and set the value) if you want to only deploy to blue or green
+    # The default is to deploy to both blue AND green
+    {
+      name: "tag:BlueGreen",
+      values: ["blue"]
+    },
+    {
+      name: 'instance-state-name',
+      values: ['running']
     }
+  ]
+})
 
-    # "ln -sf <a> <b>" creates a symbolic link but deletes <b> if it already exists
-    run links.map { |a| "ln -sf #{a.last} #{a.first}" }.join(";")
-  end
+# Doing this so that when we get the host names in upload_memcache_config they can also
+# be used inside the network to contact the memcache servers
+set :aws_ec2_contact_point, :public_dns
 
-  task :restart, except: { no_release: true } do
-    run "touch #{File.join(current_path, 'tmp', 'restart.txt')}"
-  end
-
-  desc "Deploys and starts a `cold' application. Uses db:schema:load instead of Capistrano's default of db:migrate"
-  task :cold do
-    update
-    load_schema
-    start
-  end
-
-  desc "Identical to Capistrano's db:migrate task but does db:schema:load instead"
-  task :load_schema, roles: :app do
-    rake = fetch(:rake, "rake")
-    rails_env = fetch(:rails_env, "production")
-    migrate_env = fetch(:migrate_env, "")
-    migrate_target = fetch(:migrate_target, :latest)
-
-    directory =
-      case migrate_target.to_sym
-      when :current then current_path
-      when :latest  then latest_release
-      else raise ArgumentError, "unknown migration target #{migrate_target.inspect}"
-      end
-
-    run "cd #{directory} && #{rake} RAILS_ENV=#{rails_env} #{migrate_env} db:schema:load"
-  end
-
-  after "deploy:setup" do
-    run "mkdir -p #{shared_path}/sitemaps"
+desc "upload memcache.yml configuration"
+task :upload_memcache_config do
+  # Each host is also running memcached. So...
+  servers = roles(:app).map(&:hostname)
+  memcache_config = { "servers" => servers }.to_yaml
+  on roles(:app) do
+    upload! StringIO.new(memcache_config), "#{shared_path}/config/memcache.yml"
   end
 end
 
 namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
-  task :export, roles: :app do
-    run "cd #{current_path} && sudo bundle exec foreman export systemd /etc/systemd/system -e .env.production -u deploy -a #{app_name}-#{fetch(:stage)} -f Procfile.production -l #{shared_path}/log --root #{current_path}"
+  task :export do
+    on roles(:app) do
+      execute "cd #{current_path} && sudo bundle exec foreman export systemd /etc/systemd/system -e .env.production -u deploy -a #{fetch(:application)}-#{fetch(:stage)} -f Procfile.production -l #{shared_path}/log --root #{current_path}"
+    end
   end
 
   desc "Start the application services"
-  task :start, roles: :app do
-    sudo "systemctl enable #{app_name}-#{fetch(:stage)}.target"
+  task :start do
+    on roles(:app) do
+      sudo "systemctl enable #{fetch(:application)}-#{fetch(:stage)}.target"
+    end
   end
 
   desc "Stop the application services"
-  task :stop, roles: :app do
-    sudo "systemctl stop #{app_name}-#{fetch(:stage)}.target"
+  task :stop do
+    on roles(:app) do
+      sudo "systemctl stop #{fetch(:application)}-#{fetch(:stage)}.target"
+    end
   end
 
   desc "Restart the application services"
-  task :restart, roles: :app do
-    sudo "systemctl restart #{app_name}-#{fetch(:stage)}.target"
+  task :restart do
+    on roles(:app) do
+      sudo "systemctl restart #{fetch(:application)}-#{fetch(:stage)}.target"
+    end
   end
 
   # This only strictly needs to get run on the first deploy
   desc "Enable the application services"
-  task :enable, roles: :app do
-    sudo "systemctl enable #{app_name}-#{fetch(:stage)}.target"
+  task :enable do
+    on roles(:app) do
+      sudo "systemctl enable #{fetch(:application)}-#{fetch(:stage)}.target"
+    end
   end
 end
+
+before "deploy:finishing", "foreman:restart"
+before "foreman:restart", "foreman:enable"
+before "foreman:enable", "foreman:export"
+before "deploy:check:linked_files", "upload_memcache_config"

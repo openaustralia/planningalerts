@@ -1,7 +1,23 @@
 # frozen_string_literal: true
 
-load "deploy" if respond_to?(:namespace) # cap2 differentiator
-Dir["vendor/plugins/*/recipes/*.rb"].each { |plugin| load(plugin) }
+# Load DSL and set up stages
+require "capistrano/setup"
 
-load "config/deploy" # remove this line to skip loading any of the default tasks
+# Include default deployment tasks
+require "capistrano/deploy"
+
+require "capistrano/scm/git"
+install_plugin Capistrano::SCM::Git
+
+require "capistrano/rvm"
+require "capistrano/bundler"
+require "capistrano/rails/assets"
+require "capistrano/rails/migrations"
 require "capistrano/honeybadger"
+require "capistrano/aws"
+require "capistrano/puma"
+install_plugin Capistrano::Puma
+install_plugin Capistrano::Puma::Systemd
+
+# Load custom tasks from `lib/capistrano/tasks` if you have any defined
+Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }

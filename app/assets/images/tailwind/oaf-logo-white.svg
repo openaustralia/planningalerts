@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="267"
+   height="24"
+   viewBox="0 0 70.643742 6.3500014"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="oaf-logo-white.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6"
+     inkscape:cx="126.21391"
+     inkscape:cy="88.633837"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="2560"
+     inkscape:window-height="1376"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="true" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-290.64997)">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot18"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="scale(0.26458333)"><flowRegion
+         id="flowRegion20"><rect
+           id="rect22"
+           width="460"
+           height="211.42857"
+           x="125.71429"
+           y="231.09111" /></flowRegion><flowPara
+         id="flowPara24"></flowPara></flowRoot>    <g
+       aria-label="OpenAustralia Foundation"
+       transform="matrix(0.26458333,0,0,0.26458333,-50.164527,241.54498)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000005;fill-opacity:1;stroke:none"
+       id="flowRoot26">
+      <path
+         d="m 189.60427,195.393 c 0,4.704 3.792,8.52 8.64,8.52 4.896,0 8.664,-3.816 8.664,-8.52 0,-4.704 -3.768,-8.52 -8.664,-8.52 -4.848,0 -8.64,3.816 -8.64,8.52 z m 2.88,0 c 0,-3.384 2.544,-6.096 5.76,-6.096 3.24,0 5.784,2.712 5.784,6.096 0,3.384 -2.544,6.12 -5.784,6.12 -3.216,0 -5.76,-2.736 -5.76,-6.12 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4658" />
+      <path
+         d="m 209.74021,207.153 c 0,0.648 -0.024,1.752 -0.072,2.448 h 2.88 c -0.072,-0.696 -0.096,-1.8 -0.096,-2.448 v -5.064 c 0.768,1.2 2.16,1.728 3.624,1.728 3.072,0 5.424,-2.568 5.424,-5.784 0,-3.048 -2.28,-5.616 -5.28,-5.616 -1.632,0 -2.904,0.816 -3.768,2.088 v -1.872 h -3.12 c -0.168,0.48 -0.456,1.128 -0.744,1.56 h 1.152 z m 2.64,-9.024 c 0,-1.896 1.44,-3.432 3.168,-3.432 1.752,0 3.192,1.536 3.192,3.432 0,1.896 -1.44,3.432 -3.168,3.432 -1.752,0 -3.192,-1.536 -3.192,-3.432 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4660" />
+      <path
+         d="m 233.78816,198.441 c 0.024,-0.12 0.048,-0.408 0.048,-0.648 0,-2.4 -1.848,-5.352 -5.16,-5.352 -2.976,0 -5.28,2.448 -5.28,5.736 0,3.168 2.424,5.64 5.736,5.64 1.944,0 2.784,-0.504 3.576,-0.576 v -2.352 c -0.96,0.624 -1.824,0.792 -3.12,0.792 -1.968,0 -3.336,-1.488 -3.432,-3.24 z m -5.136,-4.032 c 1.392,0 2.232,1.152 2.376,2.184 h -4.896 c 0.336,-1.248 1.248,-2.184 2.52,-2.184 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4662" />
+      <path
+         d="m 243.36415,197.361 v 3.792 c 0,0.672 -0.024,1.776 -0.072,2.472 h 2.856 c -0.048,-0.696 -0.072,-1.8 -0.072,-2.472 v -3.792 c 0,-3.168 -1.368,-4.92 -3.84,-4.92 -1.464,0 -2.592,0.744 -3.168,1.704 v -1.512 h -3.096 c -0.216,0.528 -0.432,1.056 -0.768,1.584 h 1.152 v 6.936 c 0,0.672 -0.024,1.776 -0.072,2.472 h 2.856 c -0.048,-0.696 -0.072,-1.8 -0.072,-2.472 v -3.912 c 0,-1.608 0.864,-2.64 2.184,-2.64 1.176,0 2.112,0.912 2.112,2.76 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4664" />
+      <path
+         d="m 263.78815,203.625 c -0.552,-0.984 -1.248,-2.28 -1.872,-3.648 l -5.952,-13.08 h -0.792 l -5.832,13.08 c -0.6,1.368 -1.224,2.592 -1.8,3.648 h 3.048 c 0.216,-0.648 0.504,-1.368 0.936,-2.376 l 0.912,-2.184 h 5.952 l 0.936,2.232 c 0.36,0.888 0.72,1.704 0.936,2.328 z m -6.36,-6.84 h -4.032 l 2.016,-4.92 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4666" />
+      <path
+         d="m 268.0841,198.993 v -3.912 c 0,-0.648 0.048,-1.752 0.096,-2.448 h -3.216 c -0.168,0.504 -0.456,1.2 -0.72,1.584 h 1.152 v 5.112 c 0,2.952 1.608,4.512 3.864,4.512 1.512,0 2.52,-0.624 3.24,-1.776 0,0.672 0.168,1.224 0.336,1.56 h 2.616 c -0.24,-0.552 -0.36,-1.32 -0.36,-2.448 v -6.096 c 0,-0.648 0.024,-1.752 0.096,-2.448 h -2.88 c 0.072,0.696 0.096,1.8 0.096,2.448 v 3.912 c 0,1.728 -0.984,2.664 -2.16,2.664 -1.008,0 -2.16,-0.672 -2.16,-2.664 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4668" />
+      <path
+         d="m 280.73206,195.393 c 0,-0.576 0.36,-1.056 1.296,-1.056 0.696,0 2.04,0.408 2.52,1.128 v -2.616 c -0.624,-0.024 -1.512,-0.432 -2.664,-0.432 -2.448,0 -3.864,1.248 -3.864,3.216 0,3.336 4.248,3.432 4.248,5.16 0,0.696 -0.528,1.128 -1.344,1.128 -1.008,0 -2.568,-0.672 -3.144,-1.536 v 2.88 c 0.648,0.096 1.992,0.648 3.312,0.648 2.496,0 3.888,-1.392 3.888,-3.312 0,-3.504 -4.248,-3.552 -4.248,-5.208 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4670" />
+      <path
+         d="m 287.81201,189.753 c 0.048,0.576 0.072,1.344 0.072,2.136 v 0.744 h -1.656 v 2.232 h 1.656 v 4.944 c 0,2.88 1.656,4.008 3.6,4.008 0.72,0 1.296,-0.144 1.728,-0.144 v -2.352 c -0.192,0.168 -0.648,0.264 -0.984,0.264 -0.96,0 -1.68,-0.624 -1.68,-2.304 v -4.416 h 3 v -2.232 h -3 v -0.744 c 0,-0.792 0.024,-1.56 0.072,-2.136 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4672" />
+      <path
+         d="m 301.32396,192.417 c -1.344,0 -2.544,1.08 -2.952,2.688 v -2.472 h -2.856 c -0.168,0.48 -0.456,1.128 -0.744,1.584 h 1.152 v 6.96 c 0,0.816 -0.024,1.632 -0.072,2.448 h 2.856 c -0.048,-0.816 -0.072,-1.632 -0.072,-2.448 v -3.096 c 0,-1.488 0.912,-3.12 2.256,-3.12 0.648,0 1.176,0.192 1.584,0.456 v -2.88 c -0.312,0 -0.456,-0.12 -1.152,-0.12 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4674" />
+      <path
+         d="m 306.9399,194.553 c 1.8,0 2.592,1.128 2.592,2.592 v 1.008 c -0.36,-0.48 -1.344,-0.912 -2.376,-0.912 -2.472,0 -3.84,1.56 -3.84,3.432 0,1.92 1.416,3.24 3.672,3.24 1.08,0 2.088,-0.456 2.688,-1.248 0.192,0.792 0.84,1.248 1.752,1.248 0.912,0 1.392,-0.264 1.824,-0.576 v -1.632 c -0.144,0.096 -0.336,0.12 -0.552,0.12 -0.36,0 -0.648,-0.192 -0.648,-1.008 v -3.456 c 0,-3.24 -1.392,-4.944 -4.44,-4.944 -1.8,0 -2.712,0.648 -3.456,0.768 v 2.472 c 0.672,-0.624 1.464,-1.104 2.784,-1.104 z m -0.96,5.976 c 0,-0.816 0.648,-1.512 1.8,-1.512 0.984,0 1.8,0.696 1.8,1.512 0,0.864 -0.816,1.56 -1.8,1.56 -1.152,0 -1.8,-0.696 -1.8,-1.56 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4676" />
+      <path
+         d="m 318.05183,188.457 c 0,-0.768 0.024,-1.896 0.096,-2.448 h -3.216 c -0.144,0.432 -0.456,1.152 -0.72,1.584 h 1.152 v 13.584 c 0,0.816 -0.024,1.92 -0.096,2.448 h 2.88 c -0.072,-0.528 -0.096,-1.584 -0.096,-2.448 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4678" />
+      <path
+         d="m 324.00382,195.081 c 0,-0.864 0.024,-1.896 0.072,-2.448 h -3.168 c -0.192,0.504 -0.48,1.224 -0.768,1.584 h 1.152 v 6.936 c 0,0.84 -0.024,1.968 -0.072,2.472 h 2.856 c -0.048,-0.456 -0.072,-1.584 -0.072,-2.472 z m -2.88,-5.808 c 0,0.84 0.672,1.536 1.512,1.536 0.84,0 1.488,-0.696 1.488,-1.536 0,-0.84 -0.648,-1.536 -1.488,-1.536 -0.84,0 -1.512,0.696 -1.512,1.536 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4680" />
+      <path
+         d="m 329.97979,194.553 c 1.8,0 2.592,1.128 2.592,2.592 v 1.008 c -0.36,-0.48 -1.344,-0.912 -2.376,-0.912 -2.472,0 -3.84,1.56 -3.84,3.432 0,1.92 1.416,3.24 3.672,3.24 1.08,0 2.088,-0.456 2.688,-1.248 0.192,0.792 0.84,1.248 1.752,1.248 0.912,0 1.392,-0.264 1.824,-0.576 v -1.632 c -0.144,0.096 -0.336,0.12 -0.552,0.12 -0.36,0 -0.648,-0.192 -0.648,-1.008 v -3.456 c 0,-3.24 -1.392,-4.944 -4.44,-4.944 -1.8,0 -2.712,0.648 -3.456,0.768 v 2.472 c 0.672,-0.624 1.464,-1.104 2.784,-1.104 z m -0.96,5.976 c 0,-0.816 0.648,-1.512 1.8,-1.512 0.984,0 1.8,0.696 1.8,1.512 0,0.864 -0.816,1.56 -1.8,1.56 -1.152,0 -1.8,-0.696 -1.8,-1.56 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4682" />
+      <path
+         d="m 343.68372,203.625 h 3.024 c -0.048,-0.744 -0.096,-2.664 -0.096,-4.296 v -2.64 h 1.68 c 1.536,0 2.712,0.024 3.432,0.096 v -2.52 c -0.72,0.048 -1.896,0.096 -3.432,0.096 h -1.68 v -4.848 h 1.8 c 1.656,0 3.264,0.024 4.008,0.096 v -2.52 c -0.744,0.048 -2.352,0.096 -4.008,0.096 h -4.728 c 0.048,0.72 0.096,2.64 0.096,4.296 v 7.848 c 0,1.632 -0.048,3.552 -0.096,4.296 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4684" />
+      <path
+         d="m 353.64371,198.129 c 0,3.144 2.568,5.664 5.736,5.664 3.192,0 5.784,-2.52 5.784,-5.664 0,-3.168 -2.592,-5.712 -5.784,-5.712 -3.168,0 -5.736,2.568 -5.736,5.712 z m 2.568,0 c 0,-1.872 1.416,-3.36 3.168,-3.36 1.752,0 3.192,1.488 3.192,3.36 0,1.848 -1.44,3.336 -3.192,3.336 -1.752,0 -3.168,-1.488 -3.168,-3.336 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4686" />
+      <path
+         d="m 370.34768,198.993 v -3.912 c 0,-0.648 0.048,-1.752 0.096,-2.448 h -3.216 c -0.168,0.504 -0.456,1.2 -0.72,1.584 h 1.152 v 5.112 c 0,2.952 1.608,4.512 3.864,4.512 1.512,0 2.52,-0.624 3.24,-1.776 0,0.672 0.168,1.224 0.336,1.56 h 2.616 c -0.24,-0.552 -0.36,-1.32 -0.36,-2.448 v -6.096 c 0,-0.648 0.024,-1.752 0.096,-2.448 h -2.88 c 0.072,0.696 0.096,1.8 0.096,2.448 v 3.912 c 0,1.728 -0.984,2.664 -2.16,2.664 -1.008,0 -2.16,-0.672 -2.16,-2.664 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4688" />
+      <path
+         d="m 387.72363,197.361 v 3.792 c 0,0.672 -0.024,1.776 -0.072,2.472 h 2.856 c -0.048,-0.696 -0.072,-1.8 -0.072,-2.472 v -3.792 c 0,-3.168 -1.368,-4.92 -3.84,-4.92 -1.464,0 -2.592,0.744 -3.168,1.704 v -1.512 h -3.096 c -0.216,0.528 -0.432,1.056 -0.768,1.584 h 1.152 v 6.936 c 0,0.672 -0.024,1.776 -0.072,2.472 h 2.856 c -0.048,-0.696 -0.072,-1.8 -0.072,-2.472 v -3.912 c 0,-1.608 0.864,-2.64 2.184,-2.64 1.176,0 2.112,0.912 2.112,2.76 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4690" />
+      <path
+         d="m 404.59562,188.313 c 0,-0.672 0.024,-1.512 0.096,-2.304 h -3.192 c -0.168,0.408 -0.48,1.224 -0.744,1.584 h 1.152 v 6.6 c -0.672,-1.152 -2.04,-1.776 -3.6,-1.776 -3.216,0 -5.448,2.496 -5.448,5.712 0,3.072 2.232,5.664 5.256,5.664 1.512,0 2.904,-0.6 3.792,-1.968 0,0.888 -0.024,1.368 -0.048,1.8 h 2.832 c -0.072,-0.672 -0.096,-1.608 -0.096,-2.448 z m -2.616,9.816 c 0,1.896 -1.416,3.432 -3.12,3.432 -1.8,0 -3.264,-1.536 -3.264,-3.456 0,-1.872 1.44,-3.408 3.192,-3.408 1.776,0 3.192,1.536 3.192,3.432 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4692" />
+      <path
+         d="m 410.5716,194.553 c 1.8,0 2.592,1.128 2.592,2.592 v 1.008 c -0.36,-0.48 -1.344,-0.912 -2.376,-0.912 -2.472,0 -3.84,1.56 -3.84,3.432 0,1.92 1.416,3.24 3.672,3.24 1.08,0 2.088,-0.456 2.688,-1.248 0.192,0.792 0.84,1.248 1.752,1.248 0.912,0 1.392,-0.264 1.824,-0.576 v -1.632 c -0.144,0.096 -0.336,0.12 -0.552,0.12 -0.36,0 -0.648,-0.192 -0.648,-1.008 v -3.456 c 0,-3.24 -1.392,-4.944 -4.44,-4.944 -1.8,0 -2.712,0.648 -3.456,0.768 v 2.472 c 0.672,-0.624 1.464,-1.104 2.784,-1.104 z m -0.96,5.976 c 0,-0.816 0.648,-1.512 1.8,-1.512 0.984,0 1.8,0.696 1.8,1.512 0,0.864 -0.816,1.56 -1.8,1.56 -1.152,0 -1.8,-0.696 -1.8,-1.56 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4694" />
+      <path
+         d="m 419.16354,189.753 c 0.048,0.576 0.072,1.344 0.072,2.136 v 0.744 h -1.656 v 2.232 h 1.656 v 4.944 c 0,2.88 1.656,4.008 3.6,4.008 0.72,0 1.296,-0.144 1.728,-0.144 v -2.352 c -0.192,0.168 -0.648,0.264 -0.984,0.264 -0.96,0 -1.68,-0.624 -1.68,-2.304 v -4.416 h 3 v -2.232 h -3 v -0.744 c 0,-0.792 0.024,-1.56 0.072,-2.136 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4696" />
+      <path
+         d="m 429.9155,195.081 c 0,-0.864 0.024,-1.896 0.072,-2.448 h -3.168 c -0.192,0.504 -0.48,1.224 -0.768,1.584 h 1.152 v 6.936 c 0,0.84 -0.024,1.968 -0.072,2.472 h 2.856 c -0.048,-0.456 -0.072,-1.584 -0.072,-2.472 z m -2.88,-5.808 c 0,0.84 0.672,1.536 1.512,1.536 0.84,0 1.488,-0.696 1.488,-1.536 0,-0.84 -0.648,-1.536 -1.488,-1.536 -0.84,0 -1.512,0.696 -1.512,1.536 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4698" />
+      <path
+         d="m 432.38748,198.129 c 0,3.144 2.568,5.664 5.736,5.664 3.192,0 5.784,-2.52 5.784,-5.664 0,-3.168 -2.592,-5.712 -5.784,-5.712 -3.168,0 -5.736,2.568 -5.736,5.712 z m 2.568,0 c 0,-1.872 1.416,-3.36 3.168,-3.36 1.752,0 3.192,1.488 3.192,3.36 0,1.848 -1.44,3.336 -3.192,3.336 -1.752,0 -3.168,-1.488 -3.168,-3.336 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4700" />
+      <path
+         d="m 453.53143,197.361 v 3.792 c 0,0.672 -0.024,1.776 -0.072,2.472 h 2.856 c -0.048,-0.696 -0.072,-1.8 -0.072,-2.472 v -3.792 c 0,-3.168 -1.368,-4.92 -3.84,-4.92 -1.464,0 -2.592,0.744 -3.168,1.704 v -1.512 h -3.096 c -0.216,0.528 -0.432,1.056 -0.768,1.584 h 1.152 v 6.936 c 0,0.672 -0.024,1.776 -0.072,2.472 h 2.856 c -0.048,-0.696 -0.072,-1.8 -0.072,-2.472 v -3.912 c 0,-1.608 0.864,-2.64 2.184,-2.64 1.176,0 2.112,0.912 2.112,2.76 z"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:24px;font-family:'Hypatia Sans Pro';-inkscape-font-specification:'Hypatia Sans Pro, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1"
+         id="path4702" />
+    </g>
+  </g>
+</svg>

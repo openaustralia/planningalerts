@@ -18,7 +18,7 @@ class Location
 
   sig { params(lat: T.nilable(Float), lng: T.nilable(Float)).returns(T.nilable(Location)) }
   def self.build(lat:, lng:)
-    Location.new(lat: lat, lng: lng) if lat && lng
+    Location.new(lat:, lng:) if lat && lng
   end
 
   # Value returned is in metres

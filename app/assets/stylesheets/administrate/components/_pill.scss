@@ -1,0 +1,19 @@
+.pill {
+  display: inline-block;
+  padding: 0.02em 0.25em;
+  text-transform: uppercase;
+  min-width: 3em;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.pill-yes {
+  color: white;
+  background-color: $blue;
+}
+
+.pill-no {
+  color: white;
+  background-color: $grey-5;
+}

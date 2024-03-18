@@ -1,13 +1,17 @@
-//= require jquery-ui/widgets/autocomplete
-//= require jquery-ui/widgets/menu
-//= require jquery.ui.autocomplete.html.js
-//= require address_autocomplete.js
+//= require maps
 //= require geolocation
-//= require applications
 //= require event_tracking
+// Need ujs for confirmation on buttons
+//= require rails-ujs
+//= require activestorage
 
-$("#menu .toggle").click(function(){
-  $("#menu ul").slideToggle("fast", function(){
-    $("#menu ul").toggleClass("hidden").css("display", "");
-  });
+window.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll(".hideable").forEach(function(e) {
+    e.addEventListener("click", function(e) {
+      e.preventDefault();
+      var target = e.target.getAttribute("data-target");
+      document.querySelector(target).classList.toggle("hideable-target-show");  
+    })
+  })
 });
+

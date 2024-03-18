@@ -1,0 +1,53 @@
+<%= form_with model: [application, comment], builder: FormBuilders::Tailwind do |f| %>
+  <div>
+    <%= f.label :text, "Your comment", class: "sr-only" %>
+    <%= f.text_area :text,
+                    rows: 10,
+                    class: "block w-full",
+                    required: true,
+                    placeholder: "Be polite, clear and to the point so your comment gets listened to." %>
+    <%= f.error :text, class: "mt-2" %>
+    <%# TODO: Make sure that we include the notice about donations to councillors %>
+  </div>
+  <div class="mt-5">
+    <%= f.label :name, "Your full name" %>
+    <%= f.text_field :name,
+                     class: "mt-1 block w-full",
+                     required: true,
+                     placeholder: "e.g. Jane Citizen" %>
+    <%= f.error :name, class: "mt-2" %>
+    <%# TODO: Should this include the actual name of the planning authority instead to make it more specific and meaningful? %>
+    <%= f.hint "Your name will be posted publicly here on Planning Alerts and sent to the planning authority", class: "mt-2" %>
+  </div>
+  <div class="mt-5">
+    <%= f.label :address, "Your address" %>
+    <%= f.street_address_field :address,
+                               class: "mt-1 block w-full",
+                               required: true,
+                               placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580" %>
+    <%= f.error :address, class: "mt-2" %>
+    <%= f.hint "Your street address will never be displayed here on Planning Alerts", class: "mt-2" %>
+    <%# TODO: Need an actual design for the left aligned version here %>
+    <div class="mt-2">
+      <%= render Tailwind::DisclosureComponent.new(size: "base") do |component| %>
+        <% component.with_summary { "Why do you need my address?" } %>
+        <div class="prose">
+          <%= render "documentation/faq_commenting_address" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <%# TODO: How does the user know whether the submission period is open or not? %>
+  <div class="flex flex-col items-center gap-8 p-12 mt-12 md:flex-row bg-light-grey">
+    <p class="text-2xl text-navy">
+      Your comment will be published here and also sent automatically to
+      <strong><%= application.comment_recipient_full_name %></strong>.
+      They may consider these submissions when they decide whether to approve this application.
+    </p>
+    <%= image_tag "tailwind/illustration/send-comment.svg", alt: "" %>
+  </div>
+  <div class="flex flex-col gap-4 mt-12 sm:flex-row">
+    <%= f.button "Review and publish" %>
+    <%= f.button "Clear form", name: "clear", type: :secondary, disabled: !comment.persisted? %>
+  </div>
+<% end %>

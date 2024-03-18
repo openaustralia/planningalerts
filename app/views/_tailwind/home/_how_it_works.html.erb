@@ -1,0 +1,39 @@
+<section class="pb-8 text-navy">
+  <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mt-20").with_content("How it works") %>
+  <p class="mt-6 text-2xl">
+    Planning Alerts collects information from as many local councils and state planning authorities across Australia as possible, so that you can&hellip;
+  </p>
+  <ol class="grid gap-20 mt-16 text-center md:gap-6 md:grid-cols-3">
+    <li class="p-8 pt-16 text-xl bg-light-grey [counter-increment:section] relative">
+      <div class="absolute inline-block -top-10">
+        <div class="before:[content:counter(section)] flex items-center relative -left-10 justify-center bg-lavender w-20 h-20 rounded-full before:text-white before:font-semibold before:text-3xl">
+        </div>
+      </div>
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans", weight: "semibold", extra_classes: "pb-4").with_content("Search") %>
+      <%= image_tag "tailwind/illustration/search.svg", size: "200x144", class: "mx-auto mb-5", alt: "" %>
+      Search for applications in an area you're interested in
+    </li>
+    <li class="p-8 pt-16 text-xl bg-light-grey [counter-increment:section] relative">
+      <div class="absolute inline-block -top-10">
+        <div class="before:[content:counter(section)] flex items-center relative -left-10 justify-center bg-lavender w-20 h-20 rounded-full before:text-white before:font-semibold before:text-3xl">
+        </div>
+      </div>
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans", weight: "semibold", extra_classes: "pb-4").with_content("Get notified!") %>
+      <%= image_tag "tailwind/illustration/get-notified.svg", size: "200x131", class: "mx-auto mb-8", alt: "" %>
+      Sign up to receive email notifications about future developments in your search area.
+    </li>
+    <li class="p-8 pt-16 text-xl bg-light-grey [counter-increment:section] relative">
+      <div class="absolute inline-block -top-10">
+        <div class="before:[content:counter(section)] flex items-center relative -left-10 justify-center bg-lavender w-20 h-20 rounded-full before:text-white before:font-semibold before:text-3xl">
+        </div>
+      </div>
+      <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans", weight: "semibold", extra_classes: "pb-4").with_content("Comment") %>
+      <%= image_tag "tailwind/illustration/comment.svg", size: "200x165", class: "mx-auto", alt: "" %>
+      Look through the applications that interest you and comment on them. Comments get sent directly
+      to council and are posted publicly on Planning Alerts.
+    </li>
+  </ol>
+  <div class="pt-8">
+    <%= pa_link_to "Learn more about Planning Alerts", about_path, extra_classes: "text-xl" %>
+  </div>
+</section>

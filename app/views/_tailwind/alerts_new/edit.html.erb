@@ -1,0 +1,40 @@
+<%= pa_link_to "< Back to menu", profile_alerts_path, extra_classes: "text-2xl" %>
+
+<%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mt-14").with_content(@alert.address) %>
+<div>
+  <p class="text-2xl font-bold leading-6 mt-14 text-navy">Last email sent</p>
+  <p class="text-2xl font-normal text-navy">
+    <%= last_sent_in_words(@alert.last_sent) %>
+  </p>
+</div>
+
+<div class="pb-24 border-b text-light-grey">
+  <%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind, class: "mt-5" do |f| %>
+    <%= f.label :radius_meters, "Alert distance" %>
+    <div class="flex flex-col gap-4 mt-2" x-data="{radius_meters: <%= @alert.radius_meters %>}">
+      <%= f.select :radius_meters,
+                   # Using unicode tick (rather than an image) so that we don't have to other horrible things
+                   # rubocop:disable Rails/OutputSafety
+                   Alert::VALID_RADIUS_METERS_VALUES.map { |r| [(meters_in_words(r) + (r == @alert.radius_meters ? " &check;" : "")).html_safe, r] },
+                   # rubocop:enable Rails/OutputSafety
+                   {},
+                   class: "w-full",
+                   "x-model.number": "radius_meters" %>
+      <div class="h-80">
+        <%= render Tailwind::MapWithRadius.new(lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: "radius_meters") do %>
+          <div class="flex items-center justify-center h-80">
+            <p class="text-2xl text-navy">Please enable javascript to see a map showing the size and location of your alert</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="mt-6">
+      <%= f.button "Update distance" %>
+    </div>
+  <% end %>
+</div>
+
+<%# TODO: #1768 Show an error of some sort if the last delivery was not successful %>
+<%= pa_button_to "Delete this alert", [:profile, @alert],
+                 method: :delete, type: :secondary, icon: :trash, form_class: "mt-8",
+                 data: { confirm: "Are you sure you want to unsubscribe for email alerts for #{@alert.address}?" } %>

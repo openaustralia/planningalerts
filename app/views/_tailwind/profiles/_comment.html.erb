@@ -1,0 +1,33 @@
+<% if comment.hidden %>
+  <p class="py-3 text-2xl mb-9 text-navy bg-light-grey px-7">
+    This comment is hidden from public view.
+    <%# TODO: Where should this link go to? %>
+    <%= pa_link_to "Why?", "#" %>
+  </p>
+<% end %>
+
+<%# TODO: Fixup spacing with multiple comments %>
+<%# TODO: Factor out what's common between this partial and comments/_comment %>
+<%# TODO: Add hover state for link block %>
+<%# TODO: Do we want to follow the right arrow pattern used elsewhere? %>
+<p class="text-2xl text-navy">
+  In response to <%= comment.application.authority.full_name %>,
+  application reference <%= comment.application.council_reference %> for
+  <strong><%= comment.application.address %></strong>
+  you said:
+</p>
+<div class="mt-12 mb-10">
+  <%= render Tailwind::QuotedBlock.new do %>
+    <%= link_to comment, class: "block focus:bg-sun-yellow" do %>
+      <%= render "comments/comment_text", comment: %>
+      <%# TODO: This space between the text and the date looks too big to me %>
+      <div class="mt-12">
+        <%= render "comments/comment_date", comment: %>
+      </div>
+    <% end %>
+    <%# The delivery status can have a link in it so we don't want that inside the link to the comment above %>
+    <div class="mt-4">
+      <%= render "comments/delivery_status", always_open: true, comment: %>
+    </div>
+  <% end %>
+</div>

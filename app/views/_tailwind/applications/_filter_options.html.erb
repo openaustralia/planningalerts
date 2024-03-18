@@ -1,0 +1,21 @@
+<div class="inline-block ml-2">
+  <% if sort == "time" %>
+    <%= render Tailwind::SelectLinks.new(
+          id: "filter",
+          label: "within",
+          container: Alert::VALID_RADIUS_METERS_VALUES.map do |radius_option|
+            [meters_in_words(radius_option), url_for({ q:, radius: (radius_option == Alert::DEFAULT_RADIUS ? nil : radius_option) })]
+          end,
+          value: url_for({ q:, radius: (radius.to_i == Alert::DEFAULT_RADIUS ? nil : radius.to_i) })
+        ) %>
+  <% else %>
+    <%= render Tailwind::SelectLinks.new(
+          id: "filter",
+          label: "within the last",
+          container: [364 / 4, 365 / 2, 365, 365 * 2, 365 * 5, 365 * 10].map do |time_option|
+            [days_in_words(time_option), url_for({ q:, sort:, time: (time_option == 365 ? nil : time_option) })]
+          end,
+          value: url_for({ q:, sort:, time: (time == 365 ? nil : time) })
+        ) %>
+  <% end %>
+</div>

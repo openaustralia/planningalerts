@@ -4,52 +4,38 @@
 class AlertMailer < ApplicationMailer
   extend T::Sig
 
-  include EmailFrom
   helper :application, :applications, :comments
 
   sig do
     params(
       alert: Alert,
       applications: T::Array[Application],
-      comments: T::Array[Comment],
-      replies: T::Array[Reply]
-    ).returns(Mail::Message)
+      comments: T::Array[Comment]
+    ).returns(T.any(Mail::Message, ActionMailer::MessageDelivery))
   end
-  def alert(alert, applications, comments = [], replies = [])
+  def alert(alert:, applications: [], comments: [])
     @alert = T.let(alert, T.nilable(Alert))
     @applications = T.let(applications, T.nilable(T::Array[Application]))
     @comments = T.let(comments, T.nilable(T::Array[Comment]))
-    @replies = T.let(replies, T.nilable(T::Array[Reply]))
 
     headers(
-      "List-Unsubscribe" => "<" + unsubscribe_alert_url(id: alert.confirm_id) + ">",
+      # The unsubscribe URL needs to accept a post
+      "List-Unsubscribe-Post" => "List-Unsubscribe=One-Click",
+      "List-Unsubscribe" => "<#{unsubscribe_alert_url(confirm_id: alert.confirm_id)}>",
       # This special header sets arbitrary metadata on the email in Cuttlefish
       # It's not sent on in the outgoing email
-      "X-Cuttlefish-Metadata-alert-id" => alert.id.to_s
+      "X-Cuttlefish-Metadata-alert-id" => alert.id.to_s,
+      "X-Cuttlefish-Metadata-user-id" => T.must(alert.user).id.to_s
     )
 
     mail(
-      from: email_from,
+      from: "PlanningAlerts <no-reply@planningalerts.org.au>",
       to: alert.email,
       subject: render_to_string(
         partial: "subject",
-        locals: { applications: applications, comments: comments, alert: alert, replies: replies }
-      ).strip
-    )
-  end
-
-  sig { params(alert: Alert).returns(Mail::Message) }
-  def new_signup_attempt_notice(alert)
-    @alert = alert
-
-    headers(
-      "X-Cuttlefish-Metadata-alert-id" => alert.id.to_s
-    )
-
-    mail(
-      from: email_from,
-      to: alert.email,
-      subject: "Your subscription for #{alert.address}"
+        locals: { applications:, comments:, alert: }
+      ).strip,
+      template_path: ("_tailwind/alert_mailer" if T.must(alert.user).tailwind_theme)
     )
   end
 end

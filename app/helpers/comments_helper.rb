@@ -7,6 +7,11 @@ module CommentsHelper
   # to access our_sanitize
   include ApplicationHelper
 
+  # For sorbet
+  include ActionView::Helpers::TextHelper
+  # See https://sorbet.org/docs/error-reference#4002
+  T.unsafe(self).include Rails.application.routes.url_helpers
+
   sig { params(text: String).returns(String) }
   def comment_as_html(text)
     # duplicate string to avoid "can't modify frozen String"

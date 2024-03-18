@@ -1,0 +1,57 @@
+<%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-10").with_content("Edit your account") %>
+
+<%= form_with model: resource, url: registration_path(resource_name), method: :put, builder: FormBuilders::Tailwind, class: "border-b border-light-grey pb-8" do |f| %>
+  <%# TODO: What actually goes here and is it needed on other devise forms? %>
+  <%= render "devise/shared/error_messages", resource: %>
+
+  <div>
+    <%= f.label :name, class: "block mb-1" %>
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "block w-full" %>
+    <%= f.error :name, class: "mt-2" %>
+    <%= f.hint "Please use your full name", class: "mt-2" %>
+  </div>
+  <div class="mt-7">
+    <%= f.label :email, class: "block mb-1" %>
+    <%= f.email_field :email, required: true, autocomplete: "email", class: "block w-full" %>
+    <%= f.error :email, class: "mt-2" %>
+    <% if resource.pending_reconfirmation? %>
+      <%# TODO: How do we style this? %>
+      <%= f.hint "Currently waiting confirmation for: #{resource.unconfirmed_email}", class: "mt-2" %>
+    <% end %>
+  </div>
+  <div class="mt-7">
+    <%= f.label :password, class: "block mb-1" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "block w-full" %>
+    <%= f.error :password, class: "mt-2" %>
+    <%= f.hint "Leave blank if you don't want to change it", class: "mt-2" %>
+  </div>
+  <div class="mt-7">
+    <%= f.label :current_password, class: "block mb-1" %>
+    <%= f.password_field :current_password, required: true, autocomplete: "current-password", class: "block w-full" %>
+    <%= f.error :current_password, class: "mt-2" %>
+    <%= f.hint "We need your current password to confirm your changes", class: "mt-2" %>
+  </div>
+  <div class="mt-10">
+    <%= f.button "Update" %>
+  </div>
+<% end %>
+
+<%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-10 mt-20").with_content("Close your account") %>
+
+<p class="text-2xl text-navy">
+  Warning! This permanently removes your account and any alerts you have
+  and can not be undone.
+</p>
+
+<% unless resource.comments.visible.empty? %>
+  <p class="mt-8 text-2xl text-navy">
+    Note that the
+    <%= pa_link_to pluralize(resource.comments.visible.count, "comment"), comments_profile_path %>
+    you have made (including the name attached to the comment) will not be removed
+    as it is part of the public record. However the private information, your email address, will be removed.
+  </p>
+<% end %>
+
+<%= pa_button_to "Close your account", registration_path(resource_name),
+                 method: :delete, type: :secondary, icon: :trash, form_class: "mt-12",
+                 data: { confirm: "This will permanently remove your account and can not be undone. Are you sure?" } %>

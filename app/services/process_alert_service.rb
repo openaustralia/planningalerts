@@ -3,12 +3,12 @@
 
 # Process email alert and send out an email if necessary.
 # Returns number of applications and comments sent.
-class ProcessAlertService < ApplicationService
+class ProcessAlertService
   extend T::Sig
 
-  sig { params(alert: Alert).returns([Integer, Integer, Integer, Integer]) }
+  sig { params(alert: Alert).returns([Integer, Integer, Integer]) }
   def self.call(alert:)
-    new(alert: alert).call
+    new(alert:).call
   end
 
   sig { params(alert: Alert).void }
@@ -16,14 +16,16 @@ class ProcessAlertService < ApplicationService
     @alert = alert
   end
 
-  sig { returns([Integer, Integer, Integer, Integer]) }
+  sig { returns([Integer, Integer, Integer]) }
   def call
     applications = alert.recent_new_applications.to_a
     comments = alert.new_comments
-    replies = alert.new_replies
 
-    if !applications.empty? || !comments.empty? || !replies.empty?
-      AlertMailer.alert(alert, applications, comments, replies).deliver_now
+    if !applications.empty? || !comments.empty?
+      # offloading the actual sending of the email to another background job
+      # since this depends on an external service which might be down.
+      # Saves us from running the whole job again if it fails
+      AlertMailer.alert(alert:, applications:, comments:).deliver_later
       alert.last_sent = Time.zone.now
       no_emails = 1
     else
@@ -39,8 +41,8 @@ class ProcessAlertService < ApplicationService
       # rubocop:enable Rails/SkipsModelValidations
     end
 
-    # Return number of emails, applications, comments and replies sent
-    [no_emails, applications.size, comments.size, replies.size]
+    # Return number of emails, applications and comments sent
+    [no_emails, applications.size, comments.size]
   end
 
   private

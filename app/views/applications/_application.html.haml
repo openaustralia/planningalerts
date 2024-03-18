@@ -1,0 +1,19 @@
+%li
+  %article.application
+    = link_to application do
+      - if application.visible_comments_count.positive?
+        .comments= pluralize(application.visible_comments_count, "comment")
+      .address= application.address
+      .appinfo
+        - if application.respond_to? :distance
+          #{time_ago_in_words(application.first_date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
+        - else
+          #{time_ago_in_words(application.first_date_scraped)} ago
+      %p.description
+        -# Local variable highlights is optional. Only use it if it is there
+        - if local_assigns.key? :highlights
+          -# rubocop:disable Rails/OutputSafety
+          = local_assigns[:highlights][:description].html_safe
+          -# rubocop:enable Rails/OutputSafety
+        - else
+          = application.description

@@ -1,9 +1,15 @@
 # typed: strict
 # frozen_string_literal: true
 
-class CreateOrUpdateApplicationService < ApplicationService
+class CreateOrUpdateApplicationService
   extend T::Sig
 
+  VALID_ATTRIBUTES = T.let(
+    %i[address description info_url date_received on_notice_from on_notice_to date_scraped lat lng lonlat suburb state postcode comment_email comment_authority].freeze,
+    T::Array[Symbol]
+  )
+
+  # Returns created or updated application
   sig do
     params(
       authority: Authority,
@@ -12,62 +18,40 @@ class CreateOrUpdateApplicationService < ApplicationService
     ).returns(Application)
   end
   def self.call(authority:, council_reference:, attributes:)
-    new(
-      authority: authority,
-      council_reference: council_reference,
-      attributes: attributes
-    ).call
-  end
+    attributes.each_key do |key|
+      raise "Invalid attribute #{key}" unless VALID_ATTRIBUTES.include?(key)
+    end
 
-  sig { params(authority: Authority, council_reference: String, attributes: T::Hash[Symbol, T.untyped]).void }
-  def initialize(
-    authority:, council_reference:, attributes:
-  )
-    @authority = authority
-    @council_reference = council_reference
-    @attributes = T.let(attributes.stringify_keys, T::Hash[String, T.untyped])
-    # TODO: Do some sanity checking on the keys in attributes
-    # TODO: Make sure that authority_id and council_reference are not
-    # keys in attributes
-  end
-
-  # Returns created or updated application
-  sig { returns(Application) }
-  def call
     Application.transaction do
       # First check if record already exists or create a new one if it doesn't
-      application = Application.find_or_create_by!(
-        authority: authority, council_reference: council_reference
-      )
-      create_version(application)
-      application.reindex
+      application = Application.find_by(authority:, council_reference:) || Application.new(authority:, council_reference:, first_date_scraped: attributes[:date_scraped])
+      application.address = attributes[:address] if attributes.key?(:address)
+
+      # Geocode if address has changed and it hasn't already been geocoded (by passing in lat and lng from the outside)
+      attributes = attributes.merge(Application.geocode_attributes(attributes[:address])) if application.address_changed? && !(attributes[:lat] && attributes[:lng] && attributes[:suburb] && attributes[:state] && attributes[:postcode])
+
+      # If it's just the date_scraped changing and nothing else we don't want to alter the object
+      application.assign_attributes(attributes.except(:date_scraped))
+
+      # If none of the data has changed then don't save a new version
+      unless application.changed_attributes.empty?
+        application.date_scraped = attributes[:date_scraped] if attributes.key?(:date_scraped)
+        application.save!
+        create_version(application, attributes)
+        application.reindex
+      end
       application
     end
   end
 
-  private
-
-  sig { returns(Authority) }
-  attr_reader :authority
-
-  sig { returns(String) }
-  attr_reader :council_reference
-
-  sig { returns(T::Hash[String, T.untyped]) }
-  attr_reader :attributes
-
-  sig { params(application: Application).void }
-  def create_version(application)
+  sig { params(application: Application, attributes: T::Hash[Symbol, T.untyped]).void }
+  def self.create_version(application, attributes)
     previous_version = application.current_version
     new_version = ApplicationVersion.build_version(
-      application_id: application.id,
-      previous_version: previous_version,
-      attributes: attributes
+      application_id: T.must(application.id),
+      previous_version:,
+      attributes: attributes.stringify_keys
     )
-
-    # If none of the data has changed don't save the new version
-    # Comparing attributes on model so that typecasting has been done
-    return if previous_version && new_version.data_attributes.except("date_scraped") == previous_version.data_attributes.except("date_scraped")
 
     previous_version&.update(current: false)
     new_version.save!

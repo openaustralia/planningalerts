@@ -1,3 +1,5 @@
-To change the size of the area you’re interested in: <%= raw area_alert_url(id: alert.confirm_id) %>
+To change the size of the area you’re interested in: <%= edit_profile_alert_url(alert) %>
 
-To unsubscribe from alerts for this address: <%= raw unsubscribe_alert_url(id: alert.confirm_id) %>
+To unsubscribe from alerts for this address: <%= unsubscribe_alert_url(confirm_id: alert.confirm_id) %>
+
+Need some help? Contact us: <%= documentation_contact_url %>

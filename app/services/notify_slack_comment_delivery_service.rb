@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class NotifySlackCommentDeliveryService < ApplicationService
+class NotifySlackCommentDeliveryService
   extend T::Sig
 
   sig do
@@ -15,11 +15,11 @@ class NotifySlackCommentDeliveryService < ApplicationService
   end
   def self.call(comment:, to:, status:, extended_status:, email_id:)
     new(
-      comment: comment,
-      to: to,
-      status: status,
-      extended_status: extended_status,
-      email_id: email_id
+      comment:,
+      to:,
+      status:,
+      extended_status:,
+      email_id:
     ).call
   end
 
@@ -42,13 +42,14 @@ class NotifySlackCommentDeliveryService < ApplicationService
 
   sig { void }
   def call
-    notifier = Slack::Notifier.new ENV["SLACK_WEBHOOK_URL"]
-    if status == "delivered"
-      notifier.ping "A [comment](#{comment_url}) was succesfully [delivered](#{email_url}) to #{comment.application.authority.full_name} #{to}"
-    elsif status == "soft_bounce"
-      notifier.ping "A [comment](#{comment_url}) soft bounced when [delivered](#{email_url}) to #{comment.application.authority.full_name} #{to}. Their email server said \"#{extended_status}\""
-    elsif status == "hard_bounce"
-      notifier.ping "A [comment](#{comment_url}) hard bounced when [delivered](#{email_url}) to #{comment.application.authority.full_name} #{to}. Their email server said \"#{extended_status}\""
+    notifier = Slack::Notifier.new(Rails.application.credentials[:slack_webhook_url])
+    case status
+    when "delivered"
+      notifier.ping "A [comment](#{comment_url}) was succesfully [delivered](#{email_url}) to #{comment.application&.authority&.full_name} #{to}"
+    when "soft_bounce"
+      notifier.ping "A [comment](#{comment_url}) soft bounced when [delivered](#{email_url}) to #{comment.application&.authority&.full_name} #{to}. Their email server said \"#{extended_status}\""
+    when "hard_bounce"
+      notifier.ping "A [comment](#{comment_url}) hard bounced when [delivered](#{email_url}) to #{comment.application&.authority&.full_name} #{to}. Their email server said \"#{extended_status}\""
     else
       raise "Unexpected status"
     end
@@ -61,7 +62,7 @@ class NotifySlackCommentDeliveryService < ApplicationService
 
   sig { returns(String) }
   def comment_url
-    Rails.application.routes.url_helpers.admin_comment_url(comment, host: ENV["HOST"])
+    Rails.application.routes.url_helpers.admin_comment_url(comment, host: Rails.configuration.x.host)
   end
 
   private

@@ -4,6 +4,9 @@
 module AlertMailerHelper
   extend T::Sig
 
+  # For sorbet
+  include ActionView::Helpers::TextHelper
+
   sig { params(text: String).returns(String) }
   def capitalise_initial_character(text)
     first = text[0]
@@ -23,7 +26,7 @@ module AlertMailerHelper
   def application_url_with_tracking(id: nil)
     T.unsafe(self).application_url(
       base_tracking_params.merge(
-        id: id,
+        id:,
         utm_campaign: "view-application"
       )
     )
@@ -33,20 +36,9 @@ module AlertMailerHelper
   def comment_url_with_tracking(comment:)
     T.unsafe(self).application_url(
       base_tracking_params.merge(
-        id: comment.application.id,
+        id: comment.application&.id,
         anchor: "comment#{comment.id}",
         utm_campaign: "view-comment"
-      )
-    )
-  end
-
-  sig { params(reply: Reply).returns(String) }
-  def reply_url_with_tracking(reply:)
-    T.unsafe(self).application_url(
-      base_tracking_params.merge(
-        id: reply.comment.application.id,
-        anchor: "reply#{reply.id}",
-        utm_campaign: "view-reply"
       )
     )
   end
@@ -55,7 +47,7 @@ module AlertMailerHelper
   def new_comment_url_with_tracking(id: nil)
     T.unsafe(self).application_url(
       base_tracking_params.merge(
-        id: id,
+        id:,
         anchor: "add-comment",
         utm_campaign: "add-comment"
       )
@@ -66,18 +58,42 @@ module AlertMailerHelper
     params(
       alert: Alert,
       applications: T::Array[Application],
-      comments: T::Array[Comment],
-      replies: T::Array[Reply]
+      comments: T::Array[Comment]
     ).returns(String)
   end
-  def subject(alert, applications, comments, replies)
+  def subject(alert, applications, comments)
     applications_text = pluralize(applications.size, "new planning application") if applications.any?
     comments_text = pluralize(comments.size, "new comment") if comments.any?
-    replies_text = pluralize(replies.size, "new reply") if replies.any?
 
-    items = [comments_text, replies_text, applications_text].compact.to_sentence(last_word_connector: " and ")
+    items = [comments_text, applications_text].compact.to_sentence(last_word_connector: " and ")
     items += " on planning applications" if applications.empty?
 
     "#{items} near #{alert.address}"
+  end
+
+  # Returns a short snippit of text (up to 100 characters) that's used as a preview by email clients
+  sig do
+    params(
+      applications: T::Array[Application],
+      comments: T::Array[Comment]
+    ).returns(String)
+  end
+  def preheader(applications, comments)
+    # We show applications first in the email if there are any otherwise a comment would come first
+    if applications.empty?
+      preheader_comment(T.must(comments.first))
+    else
+      preheader_application(T.must(applications.first))
+    end
+  end
+
+  sig { params(comment: Comment).returns(String) }
+  def preheader_comment(comment)
+    "#{comment.name} commented \"#{comment.text}\"".truncate(100)
+  end
+
+  sig { params(application: Application).returns(String) }
+  def preheader_application(application)
+    "#{application.address}: #{application.description}".truncate(100)
   end
 end

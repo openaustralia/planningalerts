@@ -1,0 +1,268 @@
+<% content_for :page_title, "How to write a scraper" %>
+
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  <%= yield :page_title %>
+<% end %>
+
+<section>
+  <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mt-12").with_content("What are scrapers?") %>
+  <div class="flex flex-col items-start gap-8 mt-8 md:flex-row-reverse">
+    <%= image_tag "tailwind/illustration/explorer.svg", alt: "" %>
+    <div class="text-2xl text-navy">
+      <p>
+        To be able to display and send alerts for planning applications, Planning Alerts needs to download applications from as many councils as possible. As the vast majority of councils don't supply the data in a reusable,
+        machine-readable format we need to write
+        <%= link_to "web scrapers", "https://secure.wikimedia.org/wikipedia/en/wiki/Web_scraping" %>
+        for each local government authority.
+      </p>
+      <p class="mt-4">
+        These scrapers fetch the data from council web pages and present it in a structured format so we can load it into
+        the Planning Alerts database.
+      </p>
+    </div>
+  </div>
+</section>
+
+<%= render Tailwind::Prose.new do %>
+  <section>
+    <h2>How can I help?</h2>
+    <p>
+      If you have some computer programming experience, you should be able to work out how to prepare a scraper for
+      Planning Alerts. All Planning Alerts scrapers are hosted on our <%= link_to "morph.io", "https://morph.io/" %>
+      scraping platform, which takes care of all the boring bits of scraping for you (well, most of the boring bits!).
+    </p>
+    <p>
+      The next thing to do is to decide what council to scrape. Once you've picked one, look it up on
+      our
+      <%= link_to "crowd-sourced list of councils", "https://docs.google.com/spreadsheet/ccc?key=0AmvYMal8CGUsdG1tM0lEWUctR194eGN6bUh0VGFfc1E" %>
+      and have a look at their published planning applications. Quickly double-check that the council isn't <%= link_to "covered already", authorities_path %>.
+    </p>
+    <p>
+      Some systems for displaying development applications on council websites are widely used. For most of those
+      we have already developed scrapers that are capable of scraping many authorities using the same system.
+      Check whether the council you want to scrape is using one of the systems
+      Masterview, Civica, Icon, ATDIS, Horizon, Technology One or Epathway.
+      We don't yet have good documentation on how to recognise these different systems but that's
+      something we want to create. Or maybe you can help?
+    </p>
+  </section>
+
+  <section>
+    <h2>An introduction to scraping with morph.io</h2>
+    <p>
+      With morph.io, you can choose to write your scraper in Ruby, Python, PHP or Perl so there's a good chance
+      you're already familiar an available programming language. Since all of the code is hosted on GitHub you're
+      probably also already familiar with how to share and collaborate on your scraper code.
+    </p>
+    <p>
+      morph.io provides great conveniences like taking care of saving your data, running your scraper regularly, and
+      emailing you when there's a problem.
+    </p>
+    <p>
+      You can find out more in the <%= link_to "morph.io documentation", "https://morph.io/documentation" %>.
+    </p>
+  </section>
+
+  <section>
+    <h2>Now it's time to scrape</h2>
+    <p>
+      Make sure you have a <%= link_to "GitHub account", "https://github.com/join" %>, then you can use it to sign in to morph.io and
+      <%= link_to "create a new scraper", "https://morph.io/scrapers/new" %>
+      that downloads and saves the following information:
+    </p>
+    <section>
+      <h3>Required fields</h3>
+      <p>
+        The following fields are required. All development applications should have these bits of information.
+      </p>
+      <%# TODO: This table is far too wide on narrow screens currently %>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Example value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>council_reference</td>
+            <td>TA/00323/2012</td>
+            <td>
+              The ID that the council has given the planning application. This also must be the unique key for this data set.
+            </td>
+          </tr>
+          <tr>
+            <td>address</td>
+            <td>1 Sowerby St, Goulburn, NSW</td>
+            <td>
+              The physical address that this application relates to. This will be geocoded so doesn't need to be a specific
+              format but obviously the more explicit it is the more likely it will be successfully geo-coded. If the original
+              address did not include the state (e.g. "QLD") at the end, then add it.
+            </td>
+          </tr>
+          <tr>
+            <td>description</td>
+            <td>Ground floor alterations to rear and first floor addition</td>
+            <td>
+              A text description of what the planning application seeks to carry out.
+            </td>
+          </tr>
+          <tr>
+            <td>info_url</td>
+            <td>https://foo.gov.au/app?key=527230</td>
+            <td>
+              A URL that provides more information about the planning application.
+              This should be a persistent URL that preferably is specific to this particular application. In many cases councils force
+              users to click through a license to access planning application. In this case be careful about what URL you provide.
+              Test clicking the link in a browser that hasn't established a session with the council's site to ensure users of Planning Alerts
+              will be able to click the link and not be presented with an error.
+            </td>
+          </tr>
+          <tr>
+            <td>date_scraped</td>
+            <td>2012-08-01</td>
+            <td>
+              The date that your scraper is collecting this data (i.e. now). Should be in
+              <%= link_to "ISO 8601", "https://en.wikipedia.org/wiki/ISO_8601" %>
+              format.
+              Use the following Ruby code:
+              <code>Date.today.to_s</code>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Note that there used to be a field <code>comment_url</code>
+        above that was required. This is no longer used though you might
+        still see it referenced in older scrapers.
+      </p>
+    </section>
+    <section>
+      <h3>Optional fields</h3>
+      <p>
+        The following fields are optional because not every planning authority provides them. Please do include them if data is available.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>field</th>
+            <th>Example value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>date_received</td>
+            <td>2012-06-23</td>
+            <td>
+              The date this application was received by council. Should be in
+              <%= link_to "ISO 8601", "https://en.wikipedia.org/wiki/ISO_8601" %>
+              format.
+            </td>
+          </tr>
+          <tr>
+            <td>on_notice_from</td>
+            <td>2012-08-01</td>
+            <td>
+              The date from when public submissions can be made about this application. Should be in
+              <%= link_to "ISO 8601", "https://en.wikipedia.org/wiki/ISO_8601" %>
+              format.
+            </td>
+          </tr>
+          <tr>
+            <td>on_notice_to</td>
+            <td>2012-08-14</td>
+            <td>
+              The date until when public submissions can be made about this application. Should be in
+              <%= link_to "ISO 8601", "https://en.wikipedia.org/wiki/ISO_8601" %>
+              format.
+            </td>
+          </tr>
+          <tr>
+            <td>comment_email</td>
+            <td>foo@bar.com</td>
+            <td>
+              Only set this in
+              <strong>extremely unusual</strong>
+              situations. Allows each application in a single
+              planning authority to go to a different email address. This should never be set for 99.9%
+              of authorities as a single email address is used for all comments. Currently this is only
+              used for SA Planning Portal where comments are ideally sent back to the originating
+              local council so that the staff in state government don't have to do the redirection by hand.
+            </td>
+          </tr>
+          <tr>
+            <td>comment_authority</td>
+            <td>Acme Council</td>
+            <td>
+              Only set this in
+              <strong>extremely unusual</strong>
+              situations. Give the name associated with the comment_email address.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </section>
+
+  <section>
+    <h2>Versioning application data</h2>
+    <p>
+      It's important that scrapers collect the latest, most up-to-date, information. In fact,
+      if the information about an application changes (because, for instance, a council updates the
+      wording or corrects a mistake) your scraper should get the most up to date information.
+    </p>
+    <p>
+      For that reason, it's good practise for your scraper to look back a reasonable amount of
+      time (one month is good) in which you scrape all applications that might have changed in that
+      time. That way you're most likely to catch any changes. Often it's not possible to simply
+      get a list of applications that recently changed. Instead you have to scrape say a list
+      of applications that were recently received and applications that have recently been determined
+      (whether they're approved or not).
+    </p>
+    <p>
+      When you save an updated version of an application make sure you use the <code>council_reference</code>
+      field as the unique id. That way you don't end up with multiple versions of the same record.
+      If you're writing your scraper in Ruby that will look something like:
+    </p>
+    <pre><code>ScraperWiki.save_sqlite(['council_reference'], record)</code></pre>
+    <p>
+      When the main Planning Alerts system reads the latest application data from your
+      scraper on morph.io it automatically keeps track of the changes that occur
+      on indidivual applications. That way you can make sure that nothing truly gets
+      overwritten. There is always a history of what fields changed when. At the moment
+      this information is recorded in the database but isn't yet exposed to users in
+      the main application or through the data published through the API.
+    </p>
+    <p>
+      If you get stuck, have a look at
+      <%= link_to "the scrapers already written for Planning Alerts", "https://morph.io/planningalerts-scrapers" %>
+      and
+      <%= link_to "post on the morph.io forum", "https://help.morph.io/" %>
+      if you have any questions.
+    </p>
+  </section>
+
+  <section>
+    <h2>Scheduling the scraper</h2>
+    <p>
+      Set the scraper to run once per day. This can be done on morph.io on the settings page of the scraper.
+    </p>
+  </section>
+
+  <section>
+    <h2>Finishing up</h2>
+    <p>
+      Once you've finished your scraper and it's successfully downloading planning applications,
+      <%= link_to "contact us", documentation_contact_path %>
+      and we'll fork it into the
+      <%= link_to "planningalerts-scrapers organization", "https://morph.io/planningalerts-scrapers" %>
+      and import it into Planning Alerts.
+    </p>
+    <p>
+      The last thing to do is look up on Wikipedia how many people live within the council you've just covered so you can
+      pat yourself on the back knowing that you've just helped tens of thousands of people get Planning Alerts.
+    </p>
+  </section>
+<% end %>

@@ -27,9 +27,62 @@
 #   'true': 'foo'
 #
 # To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
+# available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    errors:
+      write_during_maintenance_mode: "PlanningAlerts is currently in read-only maintenance mode. Please try again later."
+      models:
+        alert:
+          attributes:
+            address:
+              taken: "You already have an alert for that address"
+            radius_meters:
+              greater_than: "isn't selected"
+        authority:
+          attributes:
+            state:
+              inclusion: "%{value} is not a state in Australia"
+        user:
+          attributes:
+            email:
+              taken: "You already have an account with that email address. Please sign into your account."
+              taken_activation: "You already have an account with that email address. Please activate your account."
+              already_activated: "Account with that email address has already been activated"
+              not_found: "We don't know recognise that email address. Is there another one you might have used?"
+  formtastic:
+    labels:
+      comment:
+        text: "Your comment"
+        name: "Your name"
+        email: "Your email"
+        address: "Your street address"
+      contact_message:
+        # TODO: Using "I" and "your" in the same form. Fix this.
+        name: "Your name"
+        email: "Your email"
+        reason: "I'm getting in touch because"
+        details: "Please tell us briefly about your request"
+        attachments: "Attach files or screenshots"
+    hints:
+      comment:
+        text: "Have you made a donation or gift to a Councillor or Council employee? <a href=\"%{link}\" data-target=\"%{target}\" class=\"%{class}\">You may need to disclose this</a>"
+        name: "Please use your real full name if possible."
+        email: "We never display your email address."
+        address: "We never display your street address. <a href=\"%{link}\" data-target=\"%{target}\" class=\"%{class}\">Why do you need my address?</a>"
+      contact_message:
+        name: "Or <a href=\"%{link}\">sign in</a>"
+        details: "Some questions that might help you describe your request: What are you trying to do? What happens when you try to do that? What have you tried to fix it? How do you think we could help? Please include a link to the page on the site where this happened."
+    placeholders:
+      comment:
+        text: "Be polite, clear, and to the point so your comment gets listened to."
+        name: "e.g. Jane Citizen"
+        email: "e.g. your@email.com"
+        address: "e.g. 1 Sowerby St, Goulburn, NSW 2580"
+    actions:
+      contact_message:
+        create: "Send message to the Planning Alerts team"
   errors:
     messages:
       not_a_date: "is not a date"
@@ -37,12 +90,43 @@ en:
       after_or_equal_to: "must be after or equal to %{date}"
       before: "must be before %{date}"
       before_or_equal_to: "must be before or equal to %{date}"
-  add_comments:
+  api_keys:
+    create:
+      success: "API key created"
+      already_have_key: "You already have an API key"
+  applications:
+    search:
+      full_text_search_not_enabled: "You do not have access to full text search. It is currently only available to some users. Contact us if you would like access"
+  comments:
     create:
       not_filled_out: Some of the comment wasn't filled out completely. See below.
-  councillor_contributions:
-    source:
-      save_problem: There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors.
-  reports:
-    create:
-      you_are_a_robot_html: Sorry, we couldn’t verify that you’re not a robot. Make sure you click the <em>I’m not a robot</em> box below and try again.
+  comment_mailer:
+    notify_authority:
+      subject: "Comment on application %{council_reference}"
+  support_mailer:
+    report:
+      subject: "PlanningAlerts: Abuse report"
+  users:
+    activations:
+      update:
+        success: "Wonderful! Your account is now activated. You are now signed in. Click on the right most menu to manage all your alerts, settings and comments."
+    activation_mailer:
+      notify:
+        subject: "PlanningAlerts: Activate your account"
+      already_activated:
+        subject: "PlanningAlerts: Activate your account"
+  admin:
+    alerts:
+      unsubscribe:
+        success: "Alert unsubscribed"
+    authorities:
+      import:
+        success: "Queued for importing!"
+    comments:
+      resend:
+        success: "Resent comment"
+      confirm:
+        success: "Comment confirmed and sent"
+    site_settings:
+      update:
+        success: "Site settings updated"

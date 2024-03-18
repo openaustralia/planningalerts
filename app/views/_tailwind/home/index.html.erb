@@ -1,0 +1,11 @@
+<% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
+
+<%= render "banner" %>
+<%= render "applications/address_search_form", q: nil, error: nil %>
+
+<div class="divide-y divide-light-grey2">
+  <%= render "how_it_works" %>
+  <%= render "trending", applications: @trending %>
+  <%= render "how_is_this_free" %>
+  <%= render "stats" %>
+</div>

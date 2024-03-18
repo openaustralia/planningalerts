@@ -1,0 +1,9 @@
+- content_for :page_title, "Sign Up"
+
+- content_for :meta_description, Rails.configuration.planningalerts_meta_description
+
+= render "signup_form", alert: @alert, address_hidden: false
+
+= render "frequency"
+= render "privacy_policy"
+= render "coverage_explanation"

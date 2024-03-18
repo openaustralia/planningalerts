@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe AuthoritiesController do
-  before :each do
+  before do
     request.env["HTTPS"] = "on"
   end
 

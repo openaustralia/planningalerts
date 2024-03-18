@@ -1,0 +1,21 @@
+- if current_user.name.present?
+  %h2= current_user.name
+  %p= current_user.email
+- else
+  %h2= current_user.email
+  %p
+    Please #{link_to "add your name to your profile", edit_user_registration_path}. It will make things easier.
+
+- if current_user.admin?
+  %ul
+    %li= link_to "Administration panel", admin_root_path
+    %li= link_to "Feature flags", admin_flipper_path
+
+%ul
+  %li= link_to "Your alerts", profile_alerts_path
+  %li= link_to "Your comments", comments_profile_path
+  %li= link_to "Edit account", edit_user_registration_path
+  - if Flipper.enabled?(:switch_themes, current_user)
+    %li= link_to "Switch design", design_profile_path
+
+= button_to "Sign out", destroy_user_session_path, method: :delete, class: "button button-action button-rounded"

@@ -1,0 +1,50 @@
+<div class="max-w-lg mx-auto">
+  <%# This is using a different style than the standard Heading component %>
+  <%= render Tailwind::Heading.new(tag: :h1, color: "fuchsia", extra_classes: "my-20 text-center").with_content("Create an account") %>
+
+  <%= form_with model: resource, url: registration_path(resource_name), builder: FormBuilders::Tailwind do |f| %>
+    <div>
+      <%= f.label :name, "Your full name", class: "block" %>
+      <%= f.text_field :name, class: "mt-1 block w-full", autofocus: true, autocomplete: "name", placeholder: "e.g. Jane Citizen" %>
+      <%= f.error :name, class: "mt-2" %>
+    </div>
+    <div class="mt-5">
+      <%= f.label :email, class: "block" %>
+      <%= f.email_field :email, class: "mt-1 block w-full", autocomplete: "email" %>
+      <%= f.error :email, class: "mt-2" %>
+    </div>
+    <div class="mt-5">
+      <%= f.label :password, "Create a password", class: "block" %>
+      <%= f.password_field :password, class: "mt-1 block w-full", autocomplete: "new-password" %>
+      <%= f.error :password, class: "mt-2" %>
+      <% if @minimum_password_length %>
+        <p class="mt-2 text-2xl font-light text-navy"><%= @minimum_password_length %> characters minimum</p>
+      <% end %>
+    </div>
+    <%# TODO: Should this button be centered just like on the sign in page? %>
+    <div class="mt-8">
+      <%= f.button "Create my account" %>
+    </div>
+  <% end %>
+
+  <div class="mt-10 text-2xl text-navy">
+    <%= render "privacy_policy" %>
+  </div>
+
+  <hr class="mt-16 text-[#D2CFC1]">
+  <div class="flex mt-8">
+    <%= image_tag "tailwind/illustration/already-have-an-account.svg", alt: "" %>
+    <div class="flex-grow text-2xl font-bold text-center text-navy">
+      <p>
+        Already have an account?
+      </p>
+      <p>
+        <%= pa_link_to "Sign in", new_user_session_path %> or
+        <%= pa_link_to "activate", new_users_activation_path %>.
+      </p>
+      <p class="mt-8">
+        <%= pa_link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+      </p>
+    </div>
+  </div>
+</div>

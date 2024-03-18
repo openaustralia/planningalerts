@@ -38,15 +38,15 @@ class Feed
   end
 
   def filters_set?
-    @street || @suburb || @postcode ||
-      @lodgement_date_start || @lodgement_date_end ||
-      @last_modified_date_start || @last_modified_date_end
+    !@street.nil? || !@suburb.nil? || !@postcode.nil? ||
+      !@lodgement_date_start.nil? || !@lodgement_date_end.nil? ||
+      !@last_modified_date_start.nil? || !@last_modified_date_end.nil?
   end
 
   def self.create_from_url(url)
     feed_options = ATDIS::Feed.options_from_url(url)
     base_url = ATDIS::Feed.base_url_from_url(url)
-    Feed.new(feed_options.merge(base_url: base_url))
+    Feed.new(feed_options.merge(base_url:))
   end
 
   # TODO: Make timezone (currently hardcoded to "Sydney") configurable
@@ -66,7 +66,7 @@ class Feed
       u = URI.parse(url)
       if u.host == "localhost"
         file = Feed.example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, page)
-        raise RestClient::ResourceNotFound unless File.exist?(file)
+        raise RestClient::NotFound unless File.exist?(file)
 
         page = ATDIS::Models::Page.read_json(File.read(file), timezone)
         page.url = url

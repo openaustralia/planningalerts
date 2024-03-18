@@ -31,18 +31,18 @@ class GeocodedLocation < Location
     @state = state
     @postcode = postcode
     @full_address = full_address
-    super(lat: lat, lng: lng)
+    super(lat:, lng:)
   end
 
   sig { returns(T::Hash[Symbol, T.any(String, Float, NilClass)]) }
   def attributes
     {
-      lat: lat,
-      lng: lng,
-      suburb: suburb,
-      state: state,
-      postcode: postcode,
-      full_address: full_address
+      lat:,
+      lng:,
+      suburb:,
+      state:,
+      postcode:,
+      full_address:
     }
   end
 end

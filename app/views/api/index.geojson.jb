@@ -1,0 +1,7 @@
+# typed: strict
+# frozen_string_literal: true
+
+{
+  type: "FeatureCollection",
+  features: render(partial: "application", collection: @applications)
+}

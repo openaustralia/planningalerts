@@ -1,14 +1,11 @@
 <%= render "header" -%>
-<% unless @comments.empty? %>
-<%= render "comments", comments: @comments, alert: @alert -%>
-<% unless @replies.empty? && @applications.empty? -%>
-
+<% if @alert.user.requires_activation? %>
+<%= render "activate_account_call_to_action", alert: @alert %>
 ============================================================
 
 <% end %>
-<% end %>
-<% unless @replies.empty? %>
-<%= render "replies", replies: @replies, alert: @alert -%>
+<% unless @comments.empty? %>
+<%= render "comments", comments: @comments, alert: @alert -%>
 <% unless @applications.empty? -%>
 
 ============================================================

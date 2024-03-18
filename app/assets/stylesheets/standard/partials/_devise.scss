@@ -1,0 +1,79 @@
+.login-block {
+  max-width: 30em;
+  margin: 2em auto;
+
+  h2 {
+    text-align: center;
+    margin: auto;
+  }
+
+  p.login-explanation {
+    text-align: center;
+  }
+
+  .formtastic#edit_user, .formtastic.user {
+    @include float-form(100%, 100%, 100%, 0, "buttons-left", left, "select-auto");
+
+    label {
+      margin: 0.75em 0 0.25em 0;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    input[type="email"], input[type="password"] { 
+      text-align: left;
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+      margin: 0 0.5em 3px 0;
+    }
+
+    li#user_remember_me_input {
+      label { 
+        width: auto;
+      }
+    }
+
+    #error_explanation h2 {
+      text-align: left;
+    }
+
+    li.error {
+      padding: 0;
+    }
+
+    .inline-hints, .inline-errors {
+      margin: 0;
+    }
+
+    .error {
+      input,
+      textarea {
+        border-color: $form-error-color;
+      }
+  
+      .inline-errors {
+        color: $form-error-color;
+      }
+    }  
+
+    .actions {
+      padding: 0;
+      width: 100%;
+
+      li {
+        width: 100%;
+
+        input {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  // Make an icon the same colour as the PlanningAlerts "logo" in the header
+  svg {
+    fill: $warm-highlight;
+  }
+}

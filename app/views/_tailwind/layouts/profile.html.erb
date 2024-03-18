@@ -1,0 +1,16 @@
+<% content_for :content do %>
+  <%= render Tailwind::Heading.new(tag: :h1) do %>
+    <div class="text-xl">Your account</div>
+    <%= current_user.name_with_fallback %>
+  <% end %>
+
+  <div class="grid-cols-3 gap-16 mt-10 md:grid">
+    <div class="mb-8">
+      <%= render "profiles/menu" %>
+    </div>
+    <div class="col-span-2">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
+<%= render template: "layouts/application" %>

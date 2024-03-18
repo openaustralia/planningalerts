@@ -1,0 +1,4 @@
+<nav role="navigation" aria-label="pager" class="flex justify-between">
+  <div><%= render Tailwind::SimplePager::Prev.new(collection: @collection) %></div>
+  <div><%= render Tailwind::SimplePager::Next.new(collection: @collection) %></div>
+</nav>

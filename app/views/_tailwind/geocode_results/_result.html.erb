@@ -1,0 +1,54 @@
+<%= render Tailwind::Heading.new(tag: :h2).with_content(result.geocoder.capitalize) %>
+
+<table class="mt-4 text-2xl text-navy">
+  <tbody>
+    <tr>
+      <th>
+        Lat
+      </th>
+      <td>
+        <%= result.lat %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Lng
+      </th>
+      <td>
+        <%= result.lng %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Suburb
+      </th>
+      <td>
+        <%= result.suburb %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        State
+      </th>
+      <td>
+        <%= result.state %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Postcode
+      </th>
+      <td>
+        <%= result.postcode %>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Address
+      </th>
+      <td>
+        <%= result.full_address %>
+      </td>
+    </tr>
+  </tbody>
+</table>

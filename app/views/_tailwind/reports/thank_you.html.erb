@@ -1,0 +1,26 @@
+<% content_for :page_title, "Report a comment" %>
+
+<div class="mb-8">
+  <%= pa_link_to "< Back to application", @comment.application, extra_classes: "text-2xl" %>
+</div>
+
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  <%= yield :page_title %>
+<% end %>
+
+<div class="flex flex-col items-center gap-8 px-20 py-12 mt-16 text-2xl lg:flex-row text-navy bg-light-grey">
+  <div>
+    <p>
+      Thank you!
+    </p>
+
+    <p class="mt-6">
+      The comment has been reported and a moderator will look into it as soon as possible.
+    </p>
+
+    <p class="mt-6">
+      Thanks for taking the time let us know about this.
+    </p>
+  </div>
+  <%= image_tag "tailwind/illustration/thank_you.svg", alt: "Illustration of a woman giving a thumbs up" %>
+</div>

@@ -1,0 +1,61 @@
+---
+title: <%= subject(@alert, @applications, @comments) %>
+preheader: <%= preheader(@applications, @comments) %>
+bodyClass: bg-white dark-mode:bg-[#333]
+permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
+---
+
+<x-standard>
+  <table>
+    <tr>
+      <td class="w-1/2 xs:w-full xs:inline-block">
+        <p>Hello,</p>
+        <p>We found <%= subject(@alert, @applications, @comments) %>.</p>
+        <p>Thanks,<br>Planning Alerts team</p>      
+      </td>
+      <td class="w-1/2 text-right xs:text-left xs:w-full xs:inline-block xs:pt-4">
+        <!-- TODO: Rotate these randomly between different celebratory images -->
+        <img src="<%= image_url('tailwind/illustration/dancing-man.png') %>">
+      </td>
+    </tr>
+  </table>
+  <x-spacer height="56px" />
+  <% @applications.each do |application| %>
+    <x-application address="<%= application.address %>"
+                   url="<%= application_url_with_tracking(id: application.id) %>"
+                   map="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>">
+      <%= application.description %>
+    </x-application>
+  <% end %>
+  <x-divider space-y="0px" class="bg-slate-200" />
+  <x-spacer height="24px" />
+  <% @comments.each do |comment| %>
+    <x-spacer height="16px" />
+    <x-comment name="<%= comment.name %>"
+               url="<%= comment_url_with_tracking(comment:) %>">
+      <%= comment_as_html(comment.text) %>
+      <fill:application>
+        <x-application address="<%= comment.application.address %>"
+                       map="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>">
+          <%= comment.application.description %>
+        </x-application>
+      </fill:application>
+    </x-comment>
+  <% end %>
+  <x-spacer height="48px" />
+  <h2 class="text-xl font-bold text-navy dark-mode:text-white">Alert Details</h2>
+  <p class="text-lg text-navy dark-mode:text-white">
+    <%= meters_in_words(@alert.radius_meters) %> from <%= @alert.address %>
+  </p>
+  <x-spacer height="16px" />
+  <x-button href="<%= edit_profile_alert_url(@alert) %>">
+    <img src="<%= image_url('tailwind/pencil.png') %>" class="pr-2">
+    Change this alert
+  </x-button>
+  <x-spacer height="8px" />
+  <x-button.secondary href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>">
+    <img src="<%= image_url('tailwind/trash.png') %>" class="pr-2">
+    Unsubscribe from this alert
+  </x-button.secondary>
+  <x-spacer height="48px" />
+</x-standard>

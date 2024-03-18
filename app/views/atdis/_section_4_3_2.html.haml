@@ -1,0 +1,24 @@
+:markdown
+  <h4 id="section4.3.2">4.3.2. Reference [Mandatory]</h4>
+
+  The `reference` record contains links to the original source material for the application at the Complying Authority. It can optionally contain a link for where Residents can comment on the application at the Complying Authority. In both cases, the links to URLs captured in the `reference` block would take the user to another location on the Complying Authority's web site.
+
+  The content behind the `more_info_url` and `comments_url` values must link to an endpoint that directly shows the information for the specific development application. The underlying content must be directly accessible without authentication, cookies or other limiting requirements for the consuming system. The data and behaviour of the pages at these links is beyond the scope of the ATDIS-1.0.2 Specification.
+
+  The `reference` record must contain the following fields:
+
+%table
+  %tr
+    %th M/O
+    %th Field
+    %th Notes
+  %tr
+    %td M
+    %td
+      %code more_info_url
+    %td Web address for more information about this application
+  %tr
+    %td O
+    %td
+      %code comments_url
+    %td Web address for commenting on this application

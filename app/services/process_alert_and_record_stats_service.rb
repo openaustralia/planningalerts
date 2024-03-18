@@ -3,24 +3,22 @@
 
 # Sends out a bunch of email alerts and
 # records the batch being sent out and updates the global statistics
-class ProcessAlertAndRecordStatsService < ApplicationService
+class ProcessAlertAndRecordStatsService
   extend T::Sig
 
-  sig { params(alert_id: Integer).void }
-  def self.call(alert_id:)
-    new(alert_id: alert_id).call
+  sig { params(alert: Alert).void }
+  def self.call(alert:)
+    new(alert:).call
   end
 
-  sig { params(alert_id: Integer).void }
-  def initialize(alert_id:)
-    @alert_id = alert_id
+  sig { params(alert: Alert).void }
+  def initialize(alert:)
+    @alert = alert
   end
 
-  # TODO: Also include no_replies in stats
   sig { void }
   def call
-    alert = Alert.find(alert_id)
-    no_emails, no_applications, no_comments, no_replies = ProcessAlertService.call(alert: alert)
+    no_emails, no_applications, no_comments = ProcessAlertService.call(alert:)
 
     # Don't need to do anything further if no email was sent
     return if no_emails.zero?
@@ -31,15 +29,14 @@ class ProcessAlertAndRecordStatsService < ApplicationService
     Stat.increment_applications_sent(no_applications)
     # TODO: Rename EmailBatch as we're not using batches anymore
     EmailBatch.create!(
-      no_emails: no_emails,
-      no_applications: no_applications,
-      no_comments: no_comments,
-      no_replies: no_replies
+      no_emails:,
+      no_applications:,
+      no_comments:
     )
   end
 
   private
 
-  sig { returns(Integer) }
-  attr_reader :alert_id
+  sig { returns(Alert) }
+  attr_reader :alert
 end

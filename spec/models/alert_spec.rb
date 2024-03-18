@@ -3,9 +3,30 @@
 require "spec_helper"
 
 describe Alert do
-  it_behaves_like "email_confirmable"
-
   let(:address) { "24 Bruce Road, Glenbrook" }
+  let(:factory) { RGeo::Geographic.spherical_factory(srid: 4326) }
+
+  describe "confirm_id" do
+    let(:object) do
+      VCR.use_cassette("planningalerts") { create(:alert) }
+    end
+
+    it "is a string" do
+      expect(object.confirm_id).to be_instance_of(String)
+    end
+
+    it "is not the same for two different objects" do
+      another_object = VCR.use_cassette("planningalerts") do
+        create(:alert)
+      end
+
+      expect(object.confirm_id).not_to eq another_object.confirm_id
+    end
+
+    it "only includes hex characters and is exactly twenty characters long" do
+      expect(object.confirm_id).to match(/^[0-9a-f]{20}$/)
+    end
+  end
 
   context "when the geocoder doesn't need to run" do
     let(:alert) { build(:alert, address: "foo", lat: 1, lng: 2) }
@@ -31,7 +52,7 @@ describe Alert do
 
       alert.save
 
-      expect(alert).to be_invalid
+      expect(alert).not_to be_valid
       expect(alert.errors[:address]).to eq(["some error message"])
     end
 
@@ -45,18 +66,18 @@ describe Alert do
     end
   end
 
-  it "should be able to accept location information if it is already known and so not use the geocoder" do
-    expect(GoogleGeocodeService).not_to receive(:call)
-
+  it "is able to accept location information if it is already known and so not use the geocoder" do
+    allow(GoogleGeocodeService).to receive(:call)
     alert = create(:alert, lat: 1.0, lng: 2.0)
 
+    expect(GoogleGeocodeService).not_to have_received(:call)
     expect(alert.lat).to eq(1.0)
     expect(alert.lng).to eq(2.0)
   end
 
   describe "geocoding" do
-    before :each do
-      expect(GoogleGeocodeService).to receive(:call).with(address).and_return(
+    before do
+      allow(GoogleGeocodeService).to receive(:call).with(address:, key: nil).and_return(
         GeocoderResults.new(
           [
             GeocodedLocation.new(
@@ -73,22 +94,22 @@ describe Alert do
       )
     end
 
-    it "should happen automatically on saving" do
-      alert = create(:alert, address: address, lat: nil, lng: nil)
+    it "happens automatically on saving" do
+      alert = create(:alert, address:, lat: nil, lng: nil)
 
       expect(alert.lat).to eq(-33.7726179)
       expect(alert.lng).to eq(150.6242341)
     end
 
-    it "should replace the address with the full resolved address obtained by geocoding" do
+    it "replaces the address with the full resolved address obtained by geocoding" do
       alert = create(:alert, address: "24 Bruce Road, Glenbrook", lat: nil, lng: nil)
 
       expect(alert.address).to eq("24 Bruce Rd, Glenbrook NSW 2773")
     end
   end
 
-  it "should be able to store the attribute location" do
-    alert = Alert.new
+  it "is able to store the attribute location" do
+    alert = described_class.new
     alert.location = Location.new(lat: 1.0, lng: 2.0)
     expect(alert.lat).to eq(1.0)
     expect(alert.lng).to eq(2.0)
@@ -96,45 +117,82 @@ describe Alert do
     expect(alert.location.lng).to eq(2.0)
   end
 
-  it "should handle location being nil" do
-    alert = Alert.new
+  it "handles location being nil" do
+    alert = described_class.new
     alert.location = nil
     expect(alert.lat).to be_nil
     expect(alert.lng).to be_nil
     expect(alert.location).to be_nil
   end
 
-  describe "radius_meters" do
-    it "should have a number" do
-      alert = build(:alert, radius_meters: "a")
-      expect(alert).not_to be_valid
-      expect(alert.errors[:radius_meters]).to eq(["isn't selected"])
+  describe "address" do
+    let(:address) { "1234 Marine Parade, NSW" }
+    let(:user) { create(:user) }
+
+    context "when there is already an alert for 1234 Marine Parade" do
+      before do
+        create(:alert, user:, address:)
+      end
+
+      it "is not valid for another alert at the same address for the same user" do
+        expect(build(:alert, user:, address:)).not_to be_valid
+      end
+
+      it "is valid for another alert at a different address for the same user" do
+        expect(build(:alert, user:, address: "Another address")).to be_valid
+      end
+
+      it "is valid for another alert at the same address for a different user" do
+        expect(build(:alert, address:)).to be_valid
+      end
+
+      it "is valid for an unsubscribed alert at the same address for the same user" do
+        expect(build(:unsubscribed_alert, user:, address:)).to be_valid
+      end
+
+      it "is valid for two unsubscribed alerts at the same address for the same user" do
+        create(:unsubscribed_alert, user:, address:)
+        expect(build(:unsubscribed_alert, user:, address:)).to be_valid
+      end
     end
 
-    it "should be greater than zero" do
-      alert = build(:alert, radius_meters: "0")
-      expect(alert).not_to be_valid
-      expect(alert.errors[:radius_meters]).to eq(["isn't selected"])
+    context "when there is already an unsubscribed alert for 1234 Marine Parade" do
+      before do
+        create(:unsubscribed_alert, user:, address:)
+      end
+
+      it "is valid for another alert at the same address for the same user" do
+        expect(build(:alert, user:, address:)).to be_valid
+      end
+
+      it "is valid for another unsubscribed alert at the same address for the same user" do
+        expect(build(:unsubscribed_alert, user:, address:)).to be_valid
+      end
     end
   end
 
-  describe "confirmed" do
-    it "should be false when alert is created" do
-      expect(create(:alert).confirmed).to be false
+  describe "radius_meters" do
+    it "has a number" do
+      alert = build(:alert, radius_meters: "a")
+      expect(alert).not_to be_valid
+      expect(alert.errors[:radius_meters]).to eq(["is not a number", "is not included in the list"])
     end
 
-    it "should be able to be set to false" do
-      alert = build(:alert)
-      alert.confirmed = false
-      alert.save!
-      expect(alert.confirmed).to eq(false)
+    it "is greater than zero" do
+      alert = build(:alert, radius_meters: "0")
+      expect(alert).not_to be_valid
+      expect(alert.errors[:radius_meters]).to eq(["isn't selected", "is not included in the list"])
     end
 
-    it "should be able to set to true" do
-      alert = build(:alert)
-      alert.confirmed = true
-      alert.save!
-      expect(alert.confirmed).to eq(true)
+    it "is only one of the allowed values" do
+      alert = build(:alert, radius_meters: "300")
+      expect(alert).not_to be_valid
+      expect(alert.errors[:radius_meters]).to eq(["is not included in the list"])
+    end
+
+    it "is valid when it is one of the allowed values" do
+      alert = build(:alert, radius_meters: "2000")
+      expect(alert).to be_valid
     end
   end
 
@@ -169,7 +227,7 @@ describe Alert do
         alert.geocode_from_address
 
         expect(alert.address).to eq original_address
-        expect(alert.location).to eq nil
+        expect(alert.location).to be_nil
       end
     end
 
@@ -181,7 +239,7 @@ describe Alert do
         alert.geocode_from_address
 
         expect(alert.address).to eq original_address
-        expect(alert.location).to eq nil
+        expect(alert.location).to be_nil
       end
     end
   end
@@ -192,7 +250,7 @@ describe Alert do
   end
 
   describe "#unsubscribe!" do
-    let(:alert) { create :alert }
+    let(:alert) { create(:alert) }
 
     it "unsubscribes the alert" do
       alert.unsubscribe!
@@ -210,39 +268,39 @@ describe Alert do
   end
 
   describe "#recent_new_applications" do
-    let(:alert) { create(:alert, last_sent: last_sent, radius_meters: radius_meters) }
+    let(:alert) { create(:alert, last_sent:, radius_meters:) }
 
     # Position test application around the point of the alert
-    let(:p1) { alert.location.endpoint(0.0, 501.0) } # 501 m north of alert
+    let(:p1) { alert.location.endpoint(0.0, 502.0) } # 502 m north of alert
     let(:p2) { alert.location.endpoint(0.0, 499.0) } # 499 m north of alert
-    let(:p3) { alert.location.endpoint(45.0, 499 * Math.sqrt(2)) } # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
+    let(:p3) { alert.location.endpoint(45.0, Math.sqrt(2) * 499) } # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
     let(:p4) { alert.location.endpoint(90.0, 499.0) } # 499 m east of alert
 
-    let!(:app1) { create(:geocoded_application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago) }
-    let!(:app2) { create(:geocoded_application, lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago) }
-    let!(:app3) { create(:geocoded_application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago) }
-    let!(:app4) { create(:geocoded_application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago) }
+    let!(:app1) { create(:geocoded_application, lat: p1.lat, lng: p1.lng, lonlat: factory.point(p1.lng, p1.lat), date_scraped: 5.minutes.ago) }
+    let!(:app2) { create(:geocoded_application, lat: p2.lat, lng: p2.lng, lonlat: factory.point(p2.lng, p2.lat), date_scraped: 12.hours.ago) }
+    let!(:app3) { create(:geocoded_application, lat: p3.lat, lng: p3.lng, lonlat: factory.point(p3.lng, p3.lat), date_scraped: 2.days.ago) }
+    let!(:app4) { create(:geocoded_application, lat: p4.lat, lng: p4.lng, lonlat: factory.point(p4.lng, p4.lat), date_scraped: 4.days.ago) }
 
     context "with a search radius which includes all applications" do
       let(:radius_meters) { 2000 }
 
-      context "never before sent an alert" do
+      context "when never before sent an alert" do
         let(:last_sent) { nil }
 
-        it "should return applications that have been scraped in the last twenty four hours if the user has never had an alert" do
+        it "returns applications that have been scraped in the last twenty four hours if the user has never had an alert" do
           expect(alert.recent_new_applications).to contain_exactly(app1, app2)
         end
       end
 
-      context "last sent an alert 3 days ago" do
+      context "when last sent an alert 3 days ago" do
         let(:last_sent) { 3.days.ago }
 
-        it "should return applications that have been scraped since the last time the user was sent an alert" do
+        it "returns applications that have been scraped since the last time the user was sent an alert" do
           expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3)
         end
 
-        context "A couple of applications are updated one day ago" do
-          before(:each) do
+        context "when a couple of applications are updated one day ago" do
+          before do
             CreateOrUpdateApplicationService.call(
               authority: app4.authority,
               council_reference: app4.council_reference,
@@ -261,48 +319,53 @@ describe Alert do
             )
           end
 
-          it "should only include applications initially scraped within the last 3 days" do
+          it "onlies include applications initially scraped within the last 3 days" do
             expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3)
           end
         end
 
-        context "One application has an updated location (way off in the distance)" do
-          before(:each) do
+        context "when one application has an updated location (way off in the distance)" do
+          before do
             p = alert.location.endpoint(0.0, 10000.0)
             CreateOrUpdateApplicationService.call(
               authority: app2.authority,
               council_reference: app2.council_reference,
               attributes: {
                 lat: p.lat,
-                lng: p.lng
+                lng: p.lng,
+                lonlat: factory.point(p.lng, p.lat)
               }
             )
           end
 
-          it "should not include the application with the updated address" do
+          it "does not include the application with the updated address" do
             expect(alert.recent_new_applications).to contain_exactly(app1, app3)
           end
         end
       end
 
-      context "last sent an alert 5 days ago" do
+      context "when last sent an alert 5 days ago" do
         let(:last_sent) { 5.days.ago }
 
-        it "should return applications that have been scraped since the last time the user was sent an alert" do
+        it "returns applications that have been scraped since the last time the user was sent an alert" do
           expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3, app4)
         end
       end
     end
 
     context "with a reduced search radius of 500 metres" do
-      let(:radius_meters) { 500 }
+      # We're setting the actual radius below. We're just using this value to get
+      # a valid initial record
+      let(:radius_meters) { 800 }
 
       # Using last_sent of 5 days ago to ensure that otherwise all applications
       # would be included if it wasn't for the search radius
-      context "last sent an alert 5 days ago" do
+      context "when last sent an alert 5 days ago" do
         let(:last_sent) { 5.days.ago }
 
-        it "should return applications within the user's search area" do
+        it "returns applications within the user's search area" do
+          # Doing this hacky workaround so that we can have this unusual radius
+          alert.radius_meters = 500
           expect(alert.recent_new_applications).to contain_exactly(app2, app4)
         end
       end
@@ -310,100 +373,52 @@ describe Alert do
   end
 
   describe "#new_comments" do
-    let(:alert) { create(:alert, address: address, radius_meters: 2000) }
+    let(:alert) { create(:alert, address:, radius_meters: 2000) }
     let(:p1) { alert.location.endpoint(0.0, 501.0) } # 501 m north of alert
-    let(:application) { create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "") }
+    let(:application) { create(:application, lat: p1.lat, lng: p1.lng, lonlat: factory.point(p1.lng, p1.lat), suburb: "", state: "", postcode: "") }
 
     it "sees a new comment when there are new comments on an application" do
-      comment1 = create(:confirmed_comment, application: application)
+      comment1 = create(:published_comment, application:)
 
       expect(alert.new_comments).to eql [comment1]
     end
 
     it "only sees two new comments when there are two new comments on a single application" do
-      comment1 = create(:confirmed_comment, application: application)
-      comment2 = create(:confirmed_comment, application: application)
+      comment1 = create(:published_comment, application:)
+      comment2 = create(:published_comment, application:)
 
       expect(alert.new_comments).to eql [comment1, comment2]
     end
 
-    it "does not see old confirmed comments" do
-      old_comment = create(:confirmed_comment,
-                           confirmed_at: alert.cutoff_time - 1,
-                           application: application)
+    it "does not see old published comments" do
+      old_comment = create(:published_comment,
+                           published_at: alert.cutoff_time - 1,
+                           application:)
 
-      expect(alert.new_comments).to_not eql [old_comment]
+      expect(alert.new_comments).not_to eql [old_comment]
     end
 
-    it "does not see unconfirmed comments" do
-      unconfirmed_comment = create(:unconfirmed_comment, application: application)
+    it "does not see unpublished comments" do
+      unpublished_comment = create(:comment, application:)
 
-      expect(alert.new_comments).to_not eql [unconfirmed_comment]
+      expect(alert.new_comments).not_to eql [unpublished_comment]
     end
 
     it "does not see hidden comments" do
-      hidden_comment = create(:confirmed_comment, hidden: true, application: application)
+      hidden_comment = create(:published_comment, hidden: true, application:)
 
-      expect(alert.new_comments).to_not eql [hidden_comment]
-    end
-  end
-
-  describe "#new_replies" do
-    let(:alert) do
-      create(:alert,
-             address: address,
-             radius_meters: 2000,
-             lat: 1.0,
-             lng: 2.0)
-    end
-
-    context "when their are no new replies" do
-      it { expect(alert.new_replies).to eq [] }
-    end
-
-    it "when there is a new reply on a nearby application it finds a new reply" do
-      application = create(:application,
-                           lat: 1.0,
-                           lng: 2.0,
-                           address: address,
-                           suburb: "Glenbrook",
-                           state: "NSW",
-                           postcode: "2773",
-                           no_alerted: 3)
-      reply = create(:reply,
-                     comment: create(:comment, application: application),
-                     received_at: 1.hour.ago)
-
-      expect(alert.new_replies).to eq [reply]
-    end
-
-    it "only finds two new reply when there are two new replies on a sinlge application" do
-      application = create(:application,
-                           lat: 1.0,
-                           lng: 2.0,
-                           address: address,
-                           suburb: "Glenbrook",
-                           state: "NSW",
-                           postcode: "2773",
-                           no_alerted: 3)
-      reply1 = create(:reply,
-                      comment: create(:comment, application: application),
-                      received_at: 1.hour.ago)
-      reply2 = create(:reply,
-                      comment: create(:comment, application: application),
-                      received_at: 2.hours.ago)
-
-      expect(alert.new_replies).to eq [reply1, reply2]
+      expect(alert.new_comments).not_to eql [hidden_comment]
     end
   end
 
   describe "#applications_with_new_comments" do
-    let(:alert) { create(:alert, address: address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
+    let(:alert) { create(:alert, address:, radius_meters: 2000, lat: 1.0, lng: 2.0, lonlat: factory.point(2.0, 1.0)) }
     let(:near_application) do
       create(:application,
              lat: 1.0,
              lng: 2.0,
-             address: address,
+             lonlat: factory.point(2.0, 1.0),
+             address:,
              suburb: "Glenbrook",
              state: "NSW",
              postcode: "2773")
@@ -413,7 +428,8 @@ describe Alert do
       create(:application,
              lat: alert.location.endpoint(0.0, 5001.0).lat,
              lng: alert.location.endpoint(0.0, 5001.0).lng,
-             address: address,
+             lonlat: factory.point(alert.location.endpoint(0.0, 5001.0).lng, alert.location.endpoint(0.0, 5001.0).lat),
+             address:,
              suburb: "Glenbrook",
              state: "NSW",
              postcode: "2773")
@@ -425,7 +441,7 @@ describe Alert do
 
     context "when there is a new comment near by" do
       it "returns the application it belongs to" do
-        create(:confirmed_comment, application: near_application)
+        create(:published_comment, application: near_application)
 
         expect(alert.applications_with_new_comments).to eq [near_application]
       end
@@ -433,17 +449,17 @@ describe Alert do
 
     context "when there is an old comment near by" do
       it "does not return the application it belongs to" do
-        create(:confirmed_comment,
-               confirmed_at: alert.cutoff_time - 1,
+        create(:published_comment,
+               published_at: alert.cutoff_time - 1,
                application: near_application)
 
         expect(alert.applications_with_new_comments).to eq []
       end
     end
 
-    context "when there is an unconfirmed comment near by" do
+    context "when there is an unpublished comment near by" do
       it "does not return the application it belongs to" do
-        create(:unconfirmed_comment, application: near_application)
+        create(:comment, application: near_application)
 
         expect(alert.applications_with_new_comments).to eq []
       end
@@ -451,7 +467,7 @@ describe Alert do
 
     context "when there is a hidden comment near by" do
       it "does not return the application it belongs to" do
-        create(:confirmed_comment, hidden: true, application: near_application)
+        create(:published_comment, hidden: true, application: near_application)
 
         expect(alert.applications_with_new_comments).to eq []
       end
@@ -459,61 +475,58 @@ describe Alert do
 
     context "when there is a new comment far away" do
       it "does not return the application it belongs to" do
-        create(:confirmed_comment, application: far_away_application)
+        create(:published_comment, application: far_away_application)
 
         expect(alert.applications_with_new_comments).to eq []
       end
     end
   end
 
-  describe "#applications_with_new_replies" do
-    let(:alert) do
-      create(:alert,
-             address: address,
-             radius_meters: 2000,
-             lat: 1.0,
-             lng: 2.0)
-    end
-
-    context "when there are no new relies near by" do
-      it { expect(alert.applications_with_new_replies).to eq [] }
-    end
-
-    context "when there is a new reply near by" do
-      it "should return the application it belongs to" do
-        application = create(:application,
-                             lat: 1.0,
-                             lng: 2.0,
-                             address: address,
-                             suburb: "Glenbrook",
-                             state: "NSW",
-                             postcode: "2773",
-                             no_alerted: 3)
-        create(:reply,
-               comment: create(:comment, application: application),
-               received_at: 1.hour.ago)
-
-        expect(alert.applications_with_new_replies).to eq [application]
-      end
-    end
-
-    context "when there is a new reply far away" do
-      it "should not return the application it belongs to" do
-        far_away = alert.location.endpoint(0.0, 5001.0) # 5001 m north of alert
-        application = create(:application,
-                             lat: far_away.lat,
-                             lng: far_away.lng,
-                             address: address,
-                             suburb: "Glenbrook",
-                             state: "NSW",
-                             postcode: "2773",
-                             no_alerted: 3)
-        create(:reply,
-               comment: create(:comment, application: application),
-               received_at: 1.hour.ago)
-
-        expect(alert.applications_with_new_replies).to eq []
-      end
+  # Related to https://github.com/openaustralia/planningalerts/issues/1547
+  context "with a problematic alert seen in production" do
+    it "does something sensible" do
+      alert = create(
+        :alert,
+        last_sent: Time.utc(2021, 9, 9, 16, 28, 49),
+        lat: -32.9364626,
+        lng: 151.6784514,
+        lonlat: factory.point(151.6784514, -32.9364626),
+        radius_meters: 2000
+      )
+      authority = create(:authority, disabled: false)
+      allow(GeocodeService).to receive(:call).with(address: ", NSW", google_key: nil, mappify_key: nil).and_return(GeocoderResults.new([], "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"))
+      CreateOrUpdateApplicationService.call(
+        authority:,
+        council_reference: "DA/2341/2021",
+        attributes: {
+          address: ", NSW",
+          description: "Construction of two storey dwelling house",
+          info_url: "https://property.lakemac.com.au/ePathway/Productio...",
+          date_scraped: "2021-09-10 02:05:17"
+        }
+      )
+      CreateOrUpdateApplicationService.call(
+        authority:,
+        council_reference: "DA/2341/2021",
+        attributes: {
+          address: "1 Bank Street, CARDIFF NSW 2285",
+          lat: -32.9456848,
+          lng: 151.662601,
+          lonlat: factory.point(151.662601, -32.9456848),
+          suburb: "Cardiff",
+          state: "NSW",
+          postcode: "2285",
+          description: "Dwelling House",
+          info_url: "https://property.lakemac.com.au/ePathway/Productio...",
+          date_scraped: "2021-09-14 02:04:04"
+        }
+      )
+      expect(GeocodeService).to have_received(:call).with(address: ", NSW", google_key: nil, mappify_key: nil)
+      a = alert.recent_new_applications.first
+      # This should pick up the location of the most recent version of the
+      # application
+      expect(a.location.lat).to eq(-32.9456848)
+      expect(a.location.lng).to eq(151.662601)
     end
   end
 end

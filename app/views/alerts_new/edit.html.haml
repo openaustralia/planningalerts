@@ -1,0 +1,16 @@
+- content_for :page_title, "Change the size of your alert"
+%h3= yield :page_title
+
+.alert-radius#map_div{ data: { lat: @alert.lat, lng: @alert.lng, address: @alert.address, radius_meters: @alert.radius_meters, zoom: 13 } }
+
+.map-settings
+  %p What size area near #{@alert.address} would you like to receive alerts for?
+
+  = form_with model: [:profile, @alert] do |f|
+    %ul.sizes
+      = f.collection_radio_buttons :radius_meters, Alert::VALID_RADIUS_METERS_VALUES, ->(r) { r }, ->(r) { size_option_sentence(r) } do |b|
+        - content_tag(:li, b.radio_button + b.label)
+      %noscript
+        %li
+          Note: viewing the alert area on a map requires javascript
+    = f.submit class: "button button-action button-rounded"

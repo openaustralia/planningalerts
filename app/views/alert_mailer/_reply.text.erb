@@ -1,7 +1,0 @@
-
-<%= capitalise_initial_character(reply.councillor.prefixed_name) %> replied to <%= reply.comment.name %>’s comment about <%= display_description_with_address(reply.comment.application) %>:
-
-<%= our_sanitize(truncate(reply.text, length: 700)) %>
-
-View reply on PlanningAlerts:
-<%= reply_url_with_tracking(reply: reply).html_safe %>

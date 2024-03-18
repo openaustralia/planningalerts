@@ -1,0 +1,13 @@
+<% content_for :page_title, @description %>
+
+<%# TODO: Update this description %>
+<%= render Tailwind::Heading.new(tag: :h1) do %>
+  <%= @description %>
+<% end %>
+
+<div class="mt-16 mb-8 divide-y divide-light-grey2 border-y border-light-grey2">
+  <%= render partial: "application", collection: @applications %>
+</div>
+
+<%# TODO: Speed up controller by using without_count after removing old theme %>
+<%= render Tailwind::SimplePager.new(collection: @applications) %>

@@ -1,0 +1,47 @@
+<%# TODO: This page needs a proper design %>
+<%# TODO: Extract out component for this centred block %>
+<div class="max-w-lg mx-auto">
+  <%# This is using a different style than the standard Heading component %>
+  <%= render Tailwind::Heading.new(tag: :h1, color: "fuchsia", extra_classes: "my-20 text-center").with_content("Activate your account") %>
+
+  <%= form_with model: @user, url: users_activation_path, method: :put, builder: FormBuilders::Tailwind do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div class="flex flex-col items-center">
+      <div class="w-full">
+        <%= f.label :name, "Your full name", class: "block" %>
+        <%= f.text_field :name, class: "mt-1 block w-full", autofocus: true, autocomplete: "name", placeholder: "e.g. Jane Citizen" %>
+        <%= f.error :name, class: "mt-2" %>
+      </div>
+
+      <div class="w-full mt-5">
+        <%= f.label :password, "Password", class: "block" %>
+        <%= f.password_field :password, class: "mt-1 block w-full", autocomplete: "new-password" %>
+        <%= f.error :password, class: "mt-2" %>
+        <% if @minimum_password_length %>
+          <p class="mt-2 text-2xl font-light text-navy"><%= @minimum_password_length %> characters minimum</p>
+        <% end %>
+      </div>
+
+      <div class="mt-8">
+        <%= f.button "Activate my account" %>
+      </div>
+    </div>
+  <% end %>
+  <div class="mt-10 text-2xl text-navy">
+    <%= render "privacy_policy" %>
+  </div>
+</div>
+
+<%
+=begin
+%>
+
+<p class="login-explanation">
+  After you have activated your account you will be able to login using your
+  email and password.
+</p>
+
+<%
+=end
+%>

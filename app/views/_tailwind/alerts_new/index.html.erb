@@ -1,0 +1,28 @@
+<%= render Tailwind::Heading.new(tag: :h2).with_content("Your alerts") %>
+<div>
+  <p class="mt-3 text-2xl font-normal text-navy">
+    Alerts are sent to your email at
+    <%= current_user.email %>
+  </p>
+  <%= pa_link_to "Change", edit_user_registration_path, extra_classes: "text-2xl mt-1 inline-block" %>
+</div>
+
+<% if @alerts.empty? %>
+  <div class="flex items-center justify-between border mt-11 border-light-grey2">
+    <div class="flex justify-center flex-grow">
+      <div class="ml-12 mr-4">
+        <p class="text-2xl font-normal text-navy">You have no saved alerts</p>
+        <%= pa_link_to "Create your first one", new_profile_alert_path, extra_classes: "text-2xl" %>
+      </div>
+    </div>
+    <%= image_tag "tailwind/illustration/woman-looking-off.svg", class: "mt-6", alt: "" %>
+  </div>
+<% else %>
+  <ul class="mt-11">
+    <% @alerts.each do |alert| %>
+      <li>
+        <%= render alert %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
