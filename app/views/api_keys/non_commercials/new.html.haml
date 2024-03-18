@@ -4,7 +4,7 @@
 
 %h4 Terms of use
 
-= semantic_form_for 'api_key_request_non_commercial' do |f|
+= semantic_form_for "api_key_request_non_commercial" do |f|
   = f.input :organisation,
             placeholder: "e.g. Acme Conservation Foundation",
             hint: "Leave this blank if you are applying as an individual",
@@ -26,7 +26,7 @@
             as: :radio,
             collection: ["0 - 100", "101 - 1000", "1001 - 10,000", "more than 10,000"],
             label: "Max API requests per day",
-            hint: "Expected maximum number of API requests per day. Take your best estimate. This doesn't have to be exact. Keep in mind that each API request returns a maximum of #{Application.per_page} applications"
+            hint: "Expected maximum number of API requests per day. Take your best estimate. This doesn't have to be exact. Keep in mind that each API request returns a maximum of #{Application.max_per_page} applications"
   = f.input :purpose,
             as: :text,
             placeholder: "e.g. \"My Local Trees\" will use the API to show all tree applications on a map. The aim is to give the members of our not-for-profit new tools to protect trees around our city."
