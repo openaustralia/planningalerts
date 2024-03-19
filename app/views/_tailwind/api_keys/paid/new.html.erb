@@ -1,0 +1,106 @@
+<%= render Tailwind::Heading.new(tag: :h1).with_content("Sign up for access to the API key") %>
+
+<p class="mt-16 text-2xl text-navy">
+  You're signing up to the ... plan
+</p>
+
+<%# TODO: This is too much detail up front. The key bit is that you will be invoiced rather than charging a credit card. %>
+<p class="mt-8 text-2xl text-navy">
+  Once you agree to the contract below, we will review your details and activate
+  your API key. You will then be invoiced for the period in advance from when you sign up to the
+  end of the calendar month (pro-rated). From then on
+  you will be invoiced on the first of each calendar month for the month of usage in advance.
+</p>
+
+<p class="mt-8 text-2xl text-navy">
+  Standard payment terms are 7 days.
+</p>
+
+<p class="mt-8 text-2xl text-navy">
+  For an annual payment you will be invoiced in advance on the day you sign up
+</p>
+
+<section class="mt-8">
+  <%# TODO: Add errors on all fields in the form %>
+  <%= form_with builder: FormBuilders::Tailwind do |f| %>
+    <%# TODO: How to style fieldset and legend? %>
+    <fieldset>
+      <legend class="text-2xl font-bold text-navy">Company</legend>
+      <div class="mt-8">
+        <%= f.label :name, "Name", class: "block mb-3" %>
+        <%= f.text_field :name, class: "block w-full", required: true %>
+      </div>
+      <div class="mt-8">
+        <%= f.label :website, "Website", class: "block mb-3" %>
+        <%= f.url_field :website, class: "block w-full" %>
+      </div>
+      <div class="mt-8">
+        <%= f.label :postal_address, "Postal address", class: "block mb-3" %>
+        <%= f.street_address_field :postal_address, class: "block w-full" %>
+      </div>
+      <div class="mt-8">
+        <%= f.label :abn, "ABN", class: "block mb-3" %>
+        <%= f.text_field :abn, class: "block w-full" %>
+      </div>
+    </fieldset>
+    <fieldset class="mt-16">
+      <legend class="text-2xl font-bold text-navy">Main contact</legend>
+      <div class="mt-8">
+        <%= f.label :name, "Name", class: "block mb-3" %>
+        <%= f.text_field :name, class: "block w-full" %>
+      </div>
+      <div class="mt-8">
+        <%= f.label :email, "Email", class: "block mb-3" %>
+        <%= f.email_field :email, class: "block w-full" %>
+      </div>
+      <div class="mt-8">
+        <%= f.label :phone, "Phone", class: "block mb-3" %>
+        <%= f.text_field :phone, class: "block w-full" %>
+      </div>
+    </fieldset>
+    <fieldset class="mt-16">
+      <legend class="text-2xl font-bold text-navy">Technical contact</legend>
+      <div class="mt-8">
+        <%= f.label :name, "Name", class: "block mb-3" %>
+        <%= f.text_field :name, class: "block w-full" %>
+      </div>
+      <div class="mt-8">
+        <%= f.label :email, "Email", class: "block mb-3" %>
+        <%= f.email_field :email, class: "block w-full" %>
+      </div>
+      <div class="mt-8">
+        <%= f.label :phone, "Phone", class: "block mb-3" %>
+        <%= f.text_field :phone, class: "block w-full" %>
+      </div>
+    </fieldset>
+    <fieldset class="mt-16">
+      <legend class="text-2xl font-bold text-navy">Billing contact</legend>
+      <div class="mt-8">
+        <%= f.label :name, "Name", class: "block mb-3" %>
+        <%= f.text_field :name, class: "block w-full" %>
+      </div>
+      <div class="mt-8">
+        <%= f.label :email, "Email", class: "block mb-3" %>
+        <%= f.email_field :email, class: "block w-full" %>
+      </div>
+      <div class="mt-8">
+        <%= f.label :phone, "Phone", class: "block mb-3" %>
+        <%= f.text_field :phone, class: "block w-full" %>
+      </div>
+    </fieldset>
+    <div class="mt-16">
+      <%= f.label :purpose, "Purpose", class: "block mb-3" %>
+      <%= f.text_area :purpose,
+                      rows: 5, class: "block w-full",
+                      placeholder: "e.g. \"My Local foo Trees\" will use the API to show all tree applications on a map. The aim is to give the members of our not-for-profit new tools to protect trees around our city." %>
+    </div>
+    <div class="mt-16">
+      <%= f.label :agree_contract, "I agree to the contract", class: "block mb-3" %>
+      <%# TODO: Style the check box with the tailwind form builder %>
+      <%= f.check_box :agree_contract %>
+    </div>
+    <div class="mt-12">
+      <%= f.button "Submit request" %>
+    </div>
+  <% end %>
+</section>
