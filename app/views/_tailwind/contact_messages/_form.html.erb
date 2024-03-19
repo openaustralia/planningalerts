@@ -18,6 +18,7 @@
     <%= f.label :reason, "I'm getting in touch because", class: "block mb-3" %>
     <%# TODO: Make sure that we can't choose "Please select" %>
     <%# TODO: The grey border here does not match the design but matches other form elements %>
+    <%# TODO: Use prompt option to make this a little nicer %>
     <%= f.select :reason, [["Please select", ""]] + ContactMessage::REASONS_LONG, {}, class: "block w-full sm:w-auto" %>
     <%= f.error :reason, class: "mt-2" %>
   </div>
