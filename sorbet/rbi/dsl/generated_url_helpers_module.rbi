@@ -78,6 +78,12 @@ module GeneratedUrlHelpersModule
   def api_howto_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def api_keys_non_commercial_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def api_keys_paid_index_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def application_comment_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -229,6 +235,15 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_alert_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_api_keys_non_commercial_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_api_keys_paid_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_api_keys_request_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_comment_report_url(*args); end

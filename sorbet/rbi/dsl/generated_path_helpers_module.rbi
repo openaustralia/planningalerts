@@ -78,6 +78,12 @@ module GeneratedPathHelpersModule
   def api_howto_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def api_keys_non_commercial_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def api_keys_paid_index_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def application_comment_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -229,6 +235,15 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_alert_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_api_keys_non_commercial_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_api_keys_paid_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_api_keys_request_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_comment_report_path(*args); end
