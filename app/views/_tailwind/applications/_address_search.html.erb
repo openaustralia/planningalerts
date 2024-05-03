@@ -4,7 +4,7 @@
 <%= render "address_search_form", q:, error: %>
 
 <% if error.nil? %>
-  <div class="grid sm:grid-flow-col grid-rows-[repeat(4,_max-content)] auto-cols-fr gap-12 mt-20">
+  <div class="grid sm:grid-flow-col grid-rows-[repeat(3,_max-content)] auto-cols-fr gap-12 mt-20">
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Most commented applications") %>
     <%# Wrapping in a div to make the bottom of the illustrations match up %>
     <div class="flex items-end">
@@ -21,8 +21,8 @@
           </article>
         <% end %>
       <% end %>
+      <%= pa_link_to "View more trending applications", trending_applications_path, extra_classes: "text-2xl inline-block" %>
     </div>
-    <%= pa_link_to "View more trending applications", trending_applications_path, extra_classes: "text-2xl mt-6" %>
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Latest applications across Australia") %>
     <div class="flex items-end">
       <%= image_tag "tailwind/illustration/houses.svg", alt: "" %>
@@ -41,8 +41,8 @@
           </article>
         <% end %>
       <% end %>
+      <%= pa_link_to "View more latest applications", applications_path, extra_classes: "text-2xl inline-block" %>
     </div>
-    <%= pa_link_to "View more latest applications", applications_path, extra_classes: "text-2xl mt-6" %>
   </div>
 
   <section class="py-12 mt-8 text-2xl border-t border-light-grey2 text-navy">
