@@ -74,18 +74,3 @@
     </div>
   </div>
 </section>
-
-<section class="pt-20 border-t border-dashed border-cool-blue-gray mt-14">
-  <%# TODO: Using a non-standard font %>
-  <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
-    Have you made a donation or gift to a Councillor or Council employee?
-  <% end %>
-  <p class="mt-6 text-2xl text-navy">You may need to disclose this.</p>
-  <p class="mt-6 text-2xl text-navy">
-    In NSW, for example, it is an offence if you fail to disclose this when making a
-    submission under the
-    <%= pa_link_to "Environmental Planning and Assessment Act 1979", "http://www.austlii.edu.au/au/legis/nsw/consol_act/epaaa1979389/s10.4.html" %>.
-    If this applies to you, please ensure you contact the council responsible so that
-    you can make this disclosure.
-  </p>
-</section>
