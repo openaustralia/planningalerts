@@ -1317,10 +1317,10 @@ class Rails::Application::RoutesReloader
   # source://railties//lib/rails/application/routes_reloader.rb#15
   def initialize; end
 
-  # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+  # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
   def __callbacks; end
 
-  # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+  # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
   def __callbacks?; end
 
   # Returns the value of attribute eager_load.
@@ -1386,13 +1386,13 @@ class Rails::Application::RoutesReloader
   def updater; end
 
   class << self
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks; end
 
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks=(value); end
 
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks?; end
   end
 end
@@ -1401,7 +1401,7 @@ end
 class Rails::ApplicationController < ::ActionController::Base
   private
 
-  # source://actionview/7.0.7/lib/action_view/layouts.rb#328
+  # source://actionview/7.0.8.1/lib/action_view/layouts.rb#328
   def _layout(lookup_context, formats); end
 
   # source://railties//lib/rails/application_controller.rb#25
@@ -1416,16 +1416,16 @@ class Rails::ApplicationController < ::ActionController::Base
   def require_local!; end
 
   class << self
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks; end
 
-    # source://actionview/7.0.7/lib/action_view/layouts.rb#209
+    # source://actionview/7.0.8.1/lib/action_view/layouts.rb#209
     def _layout; end
 
-    # source://actionview/7.0.7/lib/action_view/layouts.rb#210
+    # source://actionview/7.0.8.1/lib/action_view/layouts.rb#210
     def _layout_conditions; end
 
-    # source://actionpack/7.0.7/lib/action_controller/metal.rb#210
+    # source://actionpack/7.0.8.1/lib/action_controller/metal.rb#210
     def middleware_stack; end
   end
 end
@@ -2024,16 +2024,16 @@ class Rails::Engine < ::Rails::Railtie
   # source://railties//lib/rails/engine.rb#432
   def initialize; end
 
-  # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+  # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
   def __callbacks; end
 
-  # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+  # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
   def __callbacks?; end
 
-  # source://activesupport/7.0.7/lib/active_support/callbacks.rb#940
+  # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#940
   def _load_seed_callbacks; end
 
-  # source://activesupport/7.0.7/lib/active_support/callbacks.rb#928
+  # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#928
   def _run_load_seed_callbacks(&block); end
 
   # Returns the underlying Rack application for this engine.
@@ -2176,19 +2176,19 @@ class Rails::Engine < ::Rails::Railtie
   def load_config_initializer(initializer); end
 
   class << self
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks; end
 
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks=(value); end
 
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks?; end
 
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#932
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#932
     def _load_seed_callbacks; end
 
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#936
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#936
     def _load_seed_callbacks=(value); end
 
     # Returns the value of attribute called_from.
@@ -2407,7 +2407,7 @@ class Rails::InfoController < ::Rails::ApplicationController
 
   private
 
-  # source://actionview/7.0.7/lib/action_view/layouts.rb#328
+  # source://actionview/7.0.8.1/lib/action_view/layouts.rb#328
   def _layout(lookup_context, formats); end
 
   # source://railties//lib/rails/info_controller.rb#8
@@ -2420,16 +2420,16 @@ class Rails::InfoController < ::Rails::ApplicationController
   def with_leading_slash(path); end
 
   class << self
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks; end
 
-    # source://actionview/7.0.7/lib/action_view/layouts.rb#209
+    # source://actionview/7.0.8.1/lib/action_view/layouts.rb#209
     def _layout; end
 
-    # source://actionview/7.0.7/lib/action_view/layouts.rb#210
+    # source://actionview/7.0.8.1/lib/action_view/layouts.rb#210
     def _layout_conditions; end
 
-    # source://actionpack/7.0.7/lib/action_controller/metal.rb#210
+    # source://actionpack/7.0.8.1/lib/action_controller/metal.rb#210
     def middleware_stack; end
   end
 end
@@ -2534,7 +2534,7 @@ class Rails::MailersController < ::Rails::ApplicationController
 
   private
 
-  # source://actionview/7.0.7/lib/action_view/layouts.rb#328
+  # source://actionview/7.0.8.1/lib/action_view/layouts.rb#328
   def _layout(lookup_context, formats); end
 
   # source://railties//lib/rails/mailers_controller.rb#80
@@ -2561,13 +2561,13 @@ class Rails::MailersController < ::Rails::ApplicationController
   def show_previews?; end
 
   class << self
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks; end
 
-    # source://actionpack/7.0.7/lib/abstract_controller/helpers.rb#11
+    # source://actionpack/7.0.8.1/lib/abstract_controller/helpers.rb#11
     def _helper_methods; end
 
-    # source://actionpack/7.0.7/lib/action_controller/metal.rb#210
+    # source://actionpack/7.0.8.1/lib/action_controller/metal.rb#210
     def middleware_stack; end
   end
 end
@@ -3206,69 +3206,69 @@ end
 
 # Greatly inspired by Ara T. Howard's magnificent sekrets gem. 😘
 #
-# source://railties//lib/rails/secrets.rb#8
+# source://railties//lib/rails/secrets.rb#9
 class Rails::Secrets
   class << self
-    # source://railties//lib/rails/secrets.rb#45
+    # source://railties//lib/rails/secrets.rb#46
     def decrypt(data); end
 
-    # source://railties//lib/rails/secrets.rb#41
+    # source://railties//lib/rails/secrets.rb#42
     def encrypt(data); end
 
-    # source://railties//lib/rails/secrets.rb#37
+    # source://railties//lib/rails/secrets.rb#38
     def key; end
 
-    # source://railties//lib/rails/secrets.rb#24
+    # source://railties//lib/rails/secrets.rb#25
     def parse(paths, env:); end
 
-    # source://railties//lib/rails/secrets.rb#49
+    # source://railties//lib/rails/secrets.rb#50
     def read; end
 
-    # source://railties//lib/rails/secrets.rb#58
+    # source://railties//lib/rails/secrets.rb#59
     def read_for_editing(&block); end
 
     # Sets the attribute root
     #
     # @param value the value to set the attribute root to.
     #
-    # source://railties//lib/rails/secrets.rb#22
+    # source://railties//lib/rails/secrets.rb#23
     def root=(_arg0); end
 
-    # source://railties//lib/rails/secrets.rb#53
+    # source://railties//lib/rails/secrets.rb#54
     def write(contents); end
 
     private
 
-    # source://railties//lib/rails/secrets.rb#103
+    # source://railties//lib/rails/secrets.rb#105
     def encryptor; end
 
     # @raise [MissingKeyError]
     #
-    # source://railties//lib/rails/secrets.rb#63
+    # source://railties//lib/rails/secrets.rb#64
     def handle_missing_key; end
 
-    # source://railties//lib/rails/secrets.rb#73
+    # source://railties//lib/rails/secrets.rb#74
     def key_path; end
 
-    # source://railties//lib/rails/secrets.rb#77
+    # source://railties//lib/rails/secrets.rb#78
     def path; end
 
-    # source://railties//lib/rails/secrets.rb#81
+    # source://railties//lib/rails/secrets.rb#82
     def preprocess(path); end
 
-    # source://railties//lib/rails/secrets.rb#67
+    # source://railties//lib/rails/secrets.rb#68
     def read_key_file; end
 
-    # source://railties//lib/rails/secrets.rb#89
+    # source://railties//lib/rails/secrets.rb#90
     def writing(contents); end
   end
 end
 
-# source://railties//lib/rails/secrets.rb#9
+# source://railties//lib/rails/secrets.rb#10
 class Rails::Secrets::MissingKeyError < ::RuntimeError
   # @return [MissingKeyError] a new instance of MissingKeyError
   #
-  # source://railties//lib/rails/secrets.rb#10
+  # source://railties//lib/rails/secrets.rb#11
   def initialize; end
 end
 
@@ -3495,7 +3495,7 @@ Rails::VERSION::MAJOR = T.let(T.unsafe(nil), Integer)
 Rails::VERSION::MINOR = T.let(T.unsafe(nil), Integer)
 
 # source://railties//lib/rails/gem_version.rb#13
-Rails::VERSION::PRE = T.let(T.unsafe(nil), T.untyped)
+Rails::VERSION::PRE = T.let(T.unsafe(nil), String)
 
 # source://railties//lib/rails/gem_version.rb#15
 Rails::VERSION::STRING = T.let(T.unsafe(nil), String)
@@ -3510,20 +3510,20 @@ class Rails::WelcomeController < ::Rails::ApplicationController
 
   private
 
-  # source://actionview/7.0.7/lib/action_view/layouts.rb#328
+  # source://actionview/7.0.8.1/lib/action_view/layouts.rb#328
   def _layout(lookup_context, formats); end
 
   class << self
-    # source://activesupport/7.0.7/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks; end
 
-    # source://actionview/7.0.7/lib/action_view/layouts.rb#209
+    # source://actionview/7.0.8.1/lib/action_view/layouts.rb#209
     def _layout; end
 
-    # source://actionview/7.0.7/lib/action_view/layouts.rb#210
+    # source://actionview/7.0.8.1/lib/action_view/layouts.rb#210
     def _layout_conditions; end
 
-    # source://actionpack/7.0.7/lib/action_controller/metal.rb#210
+    # source://actionpack/7.0.8.1/lib/action_controller/metal.rb#210
     def middleware_stack; end
   end
 end

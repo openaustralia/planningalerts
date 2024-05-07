@@ -1879,7 +1879,7 @@ class Rack::MediaType
     # this method responds with the following Hash:
     #   { 'charset' => 'utf-8' }
     #
-    # source://rack//lib/rack/media_type.rb#26
+    # source://rack//lib/rack/media_type.rb#30
     def params(content_type); end
 
     # The media type (type/subtype) portion of the CONTENT_TYPE header
@@ -1894,7 +1894,7 @@ class Rack::MediaType
 
     private
 
-    # source://rack//lib/rack/media_type.rb#38
+    # source://rack//lib/rack/media_type.rb#43
     def strip_doublequotes(str); end
   end
 end
@@ -2298,10 +2298,10 @@ class Rack::Multipart::Parser
   # source://rack//lib/rack/multipart/parser.rb#180
   def initialize(boundary, tempfile, bufsize, query_parser); end
 
-  # source://rack//lib/rack/multipart/parser.rb#198
+  # source://rack//lib/rack/multipart/parser.rb#199
   def on_read(content); end
 
-  # source://rack//lib/rack/multipart/parser.rb#204
+  # source://rack//lib/rack/multipart/parser.rb#205
   def result; end
 
   # Returns the value of attribute state.
@@ -2311,34 +2311,34 @@ class Rack::Multipart::Parser
 
   private
 
-  # source://rack//lib/rack/multipart/parser.rb#296
+  # source://rack//lib/rack/multipart/parser.rb#302
   def consume_boundary; end
 
-  # source://rack//lib/rack/multipart/parser.rb#294
+  # source://rack//lib/rack/multipart/parser.rb#300
   def full_boundary; end
 
-  # source://rack//lib/rack/multipart/parser.rb#306
+  # source://rack//lib/rack/multipart/parser.rb#312
   def get_filename(head); end
 
-  # source://rack//lib/rack/multipart/parser.rb#242
+  # source://rack//lib/rack/multipart/parser.rb#248
   def handle_consume_token; end
 
-  # source://rack//lib/rack/multipart/parser.rb#371
+  # source://rack//lib/rack/multipart/parser.rb#377
   def handle_empty_content!(content); end
 
-  # source://rack//lib/rack/multipart/parser.rb#233
+  # source://rack//lib/rack/multipart/parser.rb#234
   def handle_fast_forward; end
 
-  # source://rack//lib/rack/multipart/parser.rb#275
+  # source://rack//lib/rack/multipart/parser.rb#281
   def handle_mime_body; end
 
-  # source://rack//lib/rack/multipart/parser.rb#252
+  # source://rack//lib/rack/multipart/parser.rb#258
   def handle_mime_head; end
 
-  # source://rack//lib/rack/multipart/parser.rb#216
+  # source://rack//lib/rack/multipart/parser.rb#217
   def run_parser; end
 
-  # source://rack//lib/rack/multipart/parser.rb#343
+  # source://rack//lib/rack/multipart/parser.rb#349
   def tag_multipart_encoding(filename, content_type, name, body); end
 
   class << self
@@ -2370,7 +2370,7 @@ class Rack::Multipart::Parser::BoundedIO
   def rewind; end
 end
 
-# source://rack//lib/rack/multipart/parser.rb#341
+# source://rack//lib/rack/multipart/parser.rb#347
 Rack::Multipart::Parser::CHARSET = T.let(T.unsafe(nil), String)
 
 # source://rack//lib/rack/multipart/parser.rb#87
@@ -5146,7 +5146,7 @@ module Rack::Utils
   # source://rack//lib/rack/utils.rb#352
   def byte_ranges(env, size); end
 
-  # source://rack//lib/rack/utils.rb#606
+  # source://rack//lib/rack/utils.rb#609
   def clean_path_info(path_info); end
 
   # :nocov:
@@ -5216,7 +5216,7 @@ module Rack::Utils
   # on variable length plaintext strings because it could leak length info
   # via timing attacks.
   #
-  # source://rack//lib/rack/utils.rb#392
+  # source://rack//lib/rack/utils.rb#395
   def secure_compare(a, b); end
 
   # source://rack//lib/rack/utils.rb#188
@@ -5225,7 +5225,7 @@ module Rack::Utils
   # source://rack//lib/rack/utils.rb#278
   def set_cookie_header!(header, key, value); end
 
-  # source://rack//lib/rack/utils.rb#596
+  # source://rack//lib/rack/utils.rb#599
   def status_code(status); end
 
   # Unescapes a URI escaped string with +encoding+. +encoding+ will be the
@@ -5240,7 +5240,7 @@ module Rack::Utils
   # source://rack//lib/rack/utils.rb#50
   def unescape_path(s); end
 
-  # source://rack//lib/rack/utils.rb#623
+  # source://rack//lib/rack/utils.rb#626
   def valid_path?(path); end
 
   class << self
@@ -5274,7 +5274,7 @@ module Rack::Utils
     # source://rack//lib/rack/utils.rb#352
     def byte_ranges(env, size); end
 
-    # source://rack//lib/rack/utils.rb#606
+    # source://rack//lib/rack/utils.rb#609
     def clean_path_info(path_info); end
 
     # source://rack//lib/rack/utils.rb#97
@@ -5404,7 +5404,7 @@ module Rack::Utils
     # on variable length plaintext strings because it could leak length info
     # via timing attacks.
     #
-    # source://rack//lib/rack/utils.rb#392
+    # source://rack//lib/rack/utils.rb#395
     def secure_compare(a, b); end
 
     # source://rack//lib/rack/utils.rb#188
@@ -5413,7 +5413,7 @@ module Rack::Utils
     # source://rack//lib/rack/utils.rb#278
     def set_cookie_header!(header, key, value); end
 
-    # source://rack//lib/rack/utils.rb#596
+    # source://rack//lib/rack/utils.rb#599
     def status_code(status); end
 
     # Unescapes a URI escaped string with +encoding+. +encoding+ will be the
@@ -5430,7 +5430,7 @@ module Rack::Utils
 
     # @return [Boolean]
     #
-    # source://rack//lib/rack/utils.rb#623
+    # source://rack//lib/rack/utils.rb#626
     def valid_path?(path); end
   end
 end
@@ -5444,30 +5444,30 @@ Rack::Utils::COMMON_SEP = T.let(T.unsafe(nil), Hash)
 # would be the request environment. The second of which would be the rack
 # application that the request would be forwarded to.
 #
-# source://rack//lib/rack/utils.rb#407
+# source://rack//lib/rack/utils.rb#410
 class Rack::Utils::Context
   # @return [Context] a new instance of Context
   #
-  # source://rack//lib/rack/utils.rb#410
+  # source://rack//lib/rack/utils.rb#413
   def initialize(app_f, app_r); end
 
   # Returns the value of attribute app.
   #
-  # source://rack//lib/rack/utils.rb#408
+  # source://rack//lib/rack/utils.rb#411
   def app; end
 
-  # source://rack//lib/rack/utils.rb#415
+  # source://rack//lib/rack/utils.rb#418
   def call(env); end
 
-  # source://rack//lib/rack/utils.rb#423
+  # source://rack//lib/rack/utils.rb#426
   def context(env, app = T.unsafe(nil)); end
 
   # Returns the value of attribute for.
   #
-  # source://rack//lib/rack/utils.rb#408
+  # source://rack//lib/rack/utils.rb#411
   def for; end
 
-  # source://rack//lib/rack/utils.rb#419
+  # source://rack//lib/rack/utils.rb#422
   def recontext(app); end
 end
 
@@ -5486,7 +5486,7 @@ Rack::Utils::ESCAPE_HTML_PATTERN = T.let(T.unsafe(nil), Regexp)
 #     ruby -ne 'm = /^(\d{3}),(?!Unassigned|\(Unused\))([^,]+)/.match($_) and \
 #               puts "#{m[1]} => \x27#{m[2].strip}\x27,"'
 #
-# source://rack//lib/rack/utils.rb#523
+# source://rack//lib/rack/utils.rb#526
 Rack::Utils::HTTP_STATUS_CODES = T.let(T.unsafe(nil), Hash)
 
 # A case-insensitive Hash that preserves the original case of a
@@ -5494,90 +5494,90 @@ Rack::Utils::HTTP_STATUS_CODES = T.let(T.unsafe(nil), Hash)
 #
 # @api private
 #
-# source://rack//lib/rack/utils.rb#432
+# source://rack//lib/rack/utils.rb#435
 class Rack::Utils::HeaderHash < ::Hash
   # @api private
   # @return [HeaderHash] a new instance of HeaderHash
   #
-  # source://rack//lib/rack/utils.rb#441
+  # source://rack//lib/rack/utils.rb#444
   def initialize(hash = T.unsafe(nil)); end
 
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#471
+  # source://rack//lib/rack/utils.rb#474
   def [](k); end
 
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#475
+  # source://rack//lib/rack/utils.rb#478
   def []=(k, v); end
 
   # on clear, we need to clear @names hash
   #
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#454
+  # source://rack//lib/rack/utils.rb#457
   def clear; end
 
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#482
+  # source://rack//lib/rack/utils.rb#485
   def delete(k); end
 
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#459
+  # source://rack//lib/rack/utils.rb#462
   def each; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rack//lib/rack/utils.rb#488
+  # source://rack//lib/rack/utils.rb#491
   def has_key?(k); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rack//lib/rack/utils.rb#488
+  # source://rack//lib/rack/utils.rb#491
   def include?(k); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rack//lib/rack/utils.rb#488
+  # source://rack//lib/rack/utils.rb#491
   def key?(k); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rack//lib/rack/utils.rb#488
+  # source://rack//lib/rack/utils.rb#491
   def member?(k); end
 
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#501
+  # source://rack//lib/rack/utils.rb#504
   def merge(other); end
 
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#496
+  # source://rack//lib/rack/utils.rb#499
   def merge!(other); end
 
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#506
+  # source://rack//lib/rack/utils.rb#509
   def replace(other); end
 
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#465
+  # source://rack//lib/rack/utils.rb#468
   def to_hash; end
 
   protected
 
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#513
+  # source://rack//lib/rack/utils.rb#516
   def names; end
 
   private
@@ -5586,13 +5586,13 @@ class Rack::Utils::HeaderHash < ::Hash
   #
   # @api private
   #
-  # source://rack//lib/rack/utils.rb#448
+  # source://rack//lib/rack/utils.rb#451
   def initialize_copy(other); end
 
   class << self
     # @api private
     #
-    # source://rack//lib/rack/utils.rb#433
+    # source://rack//lib/rack/utils.rb#436
     def [](headers); end
   end
 end
@@ -5603,10 +5603,10 @@ Rack::Utils::InvalidParameterError = Rack::QueryParser::InvalidParameterError
 # source://rack//lib/rack/utils.rb#23
 Rack::Utils::KeySpaceConstrainedParams = Rack::QueryParser::Params
 
-# source://rack//lib/rack/utils.rb#621
+# source://rack//lib/rack/utils.rb#624
 Rack::Utils::NULL_BYTE = T.let(T.unsafe(nil), String)
 
-# source://rack//lib/rack/utils.rb#604
+# source://rack//lib/rack/utils.rb#607
 Rack::Utils::PATH_SEPS = T.let(T.unsafe(nil), Regexp)
 
 # source://rack//lib/rack/utils.rb#19
@@ -5620,10 +5620,10 @@ Rack::Utils::RFC2822_MONTH_NAME = T.let(T.unsafe(nil), Array)
 
 # Responses with HTTP status codes that should not have an entity body
 #
-# source://rack//lib/rack/utils.rb#590
+# source://rack//lib/rack/utils.rb#593
 Rack::Utils::STATUS_WITH_NO_ENTITY_BODY = T.let(T.unsafe(nil), Hash)
 
-# source://rack//lib/rack/utils.rb#592
+# source://rack//lib/rack/utils.rb#595
 Rack::Utils::SYMBOL_TO_STATUS_CODE = T.let(T.unsafe(nil), Hash)
 
 # The Rack protocol version number implemented.
