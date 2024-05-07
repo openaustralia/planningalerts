@@ -88,12 +88,12 @@ module Sidekiq
 
     # deprecated
     #
-    # source://activesupport/7.0.4.3/lib/active_support/deprecation/method_wrappers.rb#63
+    # source://activesupport/7.0.8.1/lib/active_support/deprecation/method_wrappers.rb#63
     def default_worker_options(*args, **_arg1, &block); end
 
     # deprecated
     #
-    # source://activesupport/7.0.4.3/lib/active_support/deprecation/method_wrappers.rb#63
+    # source://activesupport/7.0.8.1/lib/active_support/deprecation/method_wrappers.rb#63
     def default_worker_options=(*args, **_arg1, &block); end
 
     # source://sidekiq//lib/sidekiq.rb#258
@@ -1174,7 +1174,7 @@ end
 # source://sidekiq//lib/sidekiq/rails.rb#6
 class Sidekiq::Rails < ::Rails::Engine
   class << self
-    # source://activesupport/7.0.4.3/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.0.8.1/lib/active_support/callbacks.rb#68
     def __callbacks; end
   end
 end
