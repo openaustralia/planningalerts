@@ -52,11 +52,11 @@
         <%# TODO: Choose a more sensible default width %>
         <%# TODO: Add arrow to box %>
         <%# TODO: When opening at bottom of screen box should open above info icon %>
-        <%# TODO: Add drop shadow as per design %>
         <%# TODO: Add animation %>
         <%# TODO: Add role %>
         <%# TODO: Make sure this all works on small screens too %>
-        <div class="absolute px-8 py-6 text-white -translate-x-1/2 w-[500px] left-1/2 bg-navy" x-show="open" x-on:click.outside="open=false">
+        <%# TODO: Drop shadow doesn't currently match what was designed %>
+        <div class="absolute px-8 py-6 text-white -translate-x-1/2 w-[500px] left-1/2 bg-navy shadow-md" x-show="open" x-on:click.outside="open=false">
           This was created by <%= @application.authority.full_name %> to identify this application. You will need this if you talk
           directly with them or use their website.
         </div>
