@@ -55,6 +55,7 @@
         <%# TODO: Add role %>
         <%# TODO: Make sure this all works on small screens too %>
         <%# TODO: Drop shadow doesn't currently match what was designed %>
+        <%# TODO: Make something work when javascript is disabled. For example see https://stackoverflow.com/a/19199858 %>
         <div class="px-8 py-6 text-white w-[500px] bg-navy shadow-md" x-show="open" x-on:click.outside="open=false" x-anchor.offset.10="$refs.button" x-transition>
           This was created by <%= @application.authority.full_name %> to identify this application. You will need this if you talk
           directly with them or use their website.
