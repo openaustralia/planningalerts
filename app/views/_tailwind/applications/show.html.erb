@@ -45,7 +45,6 @@
       <%# TODO: Extract this into a component %>
       <div class="relative inline-block" x-data="{open: false}">
         <%# TODO: Button needs hover state %>
-        <%# TODO: Click outside box should also hide box %>
         <%# TODO: Is info icon too small? How can we make the click area larger? %>
         <button x-on:click="open=!open">
           <%= render "application/svg/info" %>
@@ -56,7 +55,8 @@
         <%# TODO: Add drop shadow as per design %>
         <%# TODO: Add animation %>
         <%# TODO: Add role %>
-        <div class="absolute px-8 py-6 text-white -translate-x-1/2 w-[500px] left-1/2 bg-navy" x-show="open">
+        <%# TODO: Make sure this all works on small screens too %>
+        <div class="absolute px-8 py-6 text-white -translate-x-1/2 w-[500px] left-1/2 bg-navy" x-show="open" x-on:click.outside="open=false">
           This was created by <%= @application.authority.full_name %> to identify this application. You will need this if you talk
           directly with them or use their website.
         </div>
