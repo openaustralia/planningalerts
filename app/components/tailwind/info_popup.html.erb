@@ -2,18 +2,29 @@
   class="relative inline-block"
   x-data="{
     open: false,
+    cleanup: null,
     updatePosition() {
-      window.FloatingUIDOM.computePosition($refs.button, $refs.popover).then(({x, y}) => {
+      window.FloatingUIDOM.computePosition($refs.button, $refs.popover, {
+        placement: 'bottom',
+        middleware: [window.FloatingUIDOM.flip()],
+      }).then(({x, y}) => {
         Object.assign($refs.popover.style, {
           left: x + 'px',
-          top: y + 'px'
+          top: y + 'px',
         });
       });
     }
   }"
-  <%# TODO: Setup and cleanup autoUpdate properly to avoid performance issues %>
   x-init="
-    window.FloatingUIDOM.autoUpdate($refs.button, $refs.popover, updatePosition);
+    $watch('open', (open) => {
+      if (open) {
+        cleanup = window.FloatingUIDOM.autoUpdate($refs.button, $refs.popover, updatePosition);
+      } else {
+        if (!!cleanup) {
+          cleanup();
+        }
+      }
+    });
   ">
   <%# TODO: Button needs hover state %>
   <%# TODO: Is info icon too small? How can we make the click area larger? %>
@@ -26,7 +37,7 @@
   <%# TODO: Drop shadow doesn't currently match what was designed %>
   <%# TODO: Make something work when javascript is disabled. For example see https://stackoverflow.com/a/19199858 %>
   <%# TODO: When opening at bottom of screen box would be nice to open above info icon. (Put it on hold because a little too much effort to build right now) %>
-  <div x-ref="popover" class="absolute flex flex-col items-center py-2">
+  <div x-ref="popover" class="absolute flex flex-col items-center" x-show="open" x-on:click.outside="open=false" x-transition>
     <div class="w-0 h-0
       border-l-[17px] border-l-transparent
       border-b-[19px] border-b-navy
