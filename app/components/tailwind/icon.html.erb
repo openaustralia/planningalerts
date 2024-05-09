@@ -18,6 +18,12 @@
   <svg width="22" height="27" viewBox="0 0 22 27" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path d="M2 13.5V22.7C2 23.31 2.23705 23.895 2.65901 24.3263C3.08097 24.7577 3.65326 25 4.25 25H17.75C18.3467 25 18.919 24.7577 19.341 24.3263C19.7629 23.895 20 23.31 20 22.7V13.5M15.5 6.6L11 2M11 2L6.5 6.6M11 2V16.95" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
+<% when :info %>
+  <%# TODO: Get rid of hardcoded white colour  %>
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="10" cy="10" r="10" fill="currentColor"/>
+    <path d="M11.5777 7.538V15H9.08575V7.538H11.5777ZM10.3317 3.52C10.7517 3.52 11.0924 3.65067 11.3537 3.912C11.6244 4.17333 11.7597 4.5 11.7597 4.892C11.7597 5.284 11.6244 5.61067 11.3537 5.872C11.0924 6.13333 10.7517 6.264 10.3317 6.264C9.91175 6.264 9.56641 6.13333 9.29575 5.872C9.03441 5.61067 8.90375 5.284 8.90375 4.892C8.90375 4.5 9.03441 4.17333 9.29575 3.912C9.56641 3.65067 9.91175 3.52 10.3317 3.52Z" fill="white" />
+  </svg>
 <% else %>
   <% raise "Unexpected name #{@name}" %>
 <% end %>
