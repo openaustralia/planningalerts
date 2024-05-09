@@ -6,7 +6,17 @@
     updatePosition() {
       window.FloatingUIDOM.computePosition($refs.button, $refs.popover, {
         placement: 'bottom',
-        middleware: [window.FloatingUIDOM.shift()],
+        middleware: [
+          window.FloatingUIDOM.shift(),
+          window.FloatingUIDOM.size({
+            apply({availableWidth, availableHeight, elements}) {
+              Object.assign(elements.floating.style, {
+                maxWidth: availableWidth + 'px',
+                maxHeight: availableHeight + 'px',
+              });
+            }
+          })
+        ],
       }).then(({x, y}) => {
         Object.assign($refs.popover.style, {
           left: x + 'px',
@@ -37,13 +47,13 @@
   <%# TODO: Drop shadow doesn't currently match what was designed %>
   <%# TODO: Make something work when javascript is disabled. For example see https://stackoverflow.com/a/19199858 %>
   <%# TODO: When opening at bottom of screen box would be nice to open above info icon. (Put it on hold because a little too much effort to build right now) %>
-  <div x-ref="popover" class="absolute flex flex-col items-center" x-show="open" x-on:click.outside="open=false" x-transition>
+  <div x-ref="popover" class="w-[500px] absolute flex flex-col items-center" x-show="open" x-on:click.outside="open=false" x-transition>
     <div class="w-0 h-0
       border-l-[17px] border-l-transparent
       border-b-[19px] border-b-navy
       border-r-[17px] border-r-transparent">
     </div>
-    <div class="px-8 py-6 text-white w-[500px] bg-navy shadow-md">
+    <div class="px-8 py-6 text-white shadow-md bg-navy">
       <%= content %>
     </div>
   </div>
