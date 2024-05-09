@@ -6,7 +6,7 @@
     updatePosition() {
       window.FloatingUIDOM.computePosition($refs.button, $refs.popover, {
         placement: 'bottom',
-        middleware: [window.FloatingUIDOM.flip()],
+        middleware: [window.FloatingUIDOM.shift()],
       }).then(({x, y}) => {
         Object.assign($refs.popover.style, {
           left: x + 'px',
