@@ -1,26 +1,39 @@
-<div class="relative inline-block" x-data="{open: true}">
+<div
+  class="relative inline-block"
+  x-data="{
+    open: false,
+    updatePosition() {
+      window.FloatingUIDOM.computePosition($refs.button, $refs.popover).then(({x, y}) => {
+        Object.assign($refs.popover.style, {
+          left: x + 'px',
+          top: y + 'px'
+        });
+      });
+    }
+  }"
+  <%# TODO: Setup and cleanup autoUpdate properly to avoid performance issues %>
+  x-init="
+    window.FloatingUIDOM.autoUpdate($refs.button, $refs.popover, updatePosition);
+  ">
   <%# TODO: Button needs hover state %>
   <%# TODO: Is info icon too small? How can we make the click area larger? %>
-  <%# Using flex here to position the arrow directly below the info icon. Weird, but seems to work %>
-  <div class="flex flex-col items-center">
-    <button x-on:click="open=!open" class="text-fuchsia">
-      <%= render Tailwind::Icon.new(name: :info) %>
-    </button>
-    <%# TODO: Choose a more sensible default width %>
-    <%# TODO: Add role %>
-    <%# TODO: Make sure this all works on small screens too %>
-    <%# TODO: Drop shadow doesn't currently match what was designed %>
-    <%# TODO: Make something work when javascript is disabled. For example see https://stackoverflow.com/a/19199858 %>
-    <%# TODO: When opening at bottom of screen box would be nice to open above info icon. (Put it on hold because a little too much effort to build right now) %>
-    <div class="absolute flex flex-col items-center py-2 top-full" x-show="open" x-on:click.outside="open=false" x-transition>
-      <div class="w-0 h-0
-        border-l-[17px] border-l-transparent
-        border-b-[19px] border-b-navy
-        border-r-[17px] border-r-transparent">
-      </div>
-      <div class="px-8 py-6 text-white w-[500px] bg-navy shadow-md">
-        <%= content %>
-      </div>
+  <button x-ref="button" x-on:click="open=!open" class="text-fuchsia">
+    <%= render Tailwind::Icon.new(name: :info) %>
+  </button>
+  <%# TODO: Choose a more sensible default width %>
+  <%# TODO: Add role %>
+  <%# TODO: Make sure this all works on small screens too %>
+  <%# TODO: Drop shadow doesn't currently match what was designed %>
+  <%# TODO: Make something work when javascript is disabled. For example see https://stackoverflow.com/a/19199858 %>
+  <%# TODO: When opening at bottom of screen box would be nice to open above info icon. (Put it on hold because a little too much effort to build right now) %>
+  <div x-ref="popover" class="absolute flex flex-col items-center py-2">
+    <div class="w-0 h-0
+      border-l-[17px] border-l-transparent
+      border-b-[19px] border-b-navy
+      border-r-[17px] border-r-transparent">
+    </div>
+    <div class="px-8 py-6 text-white w-[500px] bg-navy shadow-md">
+      <%= content %>
     </div>
   </div>
 </div>
