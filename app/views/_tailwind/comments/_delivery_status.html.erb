@@ -2,26 +2,30 @@
 <%# TODO: We probably want to visually separate the whole component from its surroundings %>
 <%# TODO: We don't want the content to fill the full width %>
 <% if comment.last_delivered_successfully.nil? %>
-  <%# TODO: Do we style this as a link even though it isn't? %>
-  <p class="text-xl font-bold text-fuchsia">Sent to the planning authority</p>
+  <%# TODO: Add explanatory text that says something along the lines of "email has been created but not yet delivered. This can happen..." %>
+  <div class="text-xl text-navy">Sent to the planning authority</div>
 <% elsif comment.last_delivered_successfully %>
-  <%= render Tailwind::DisclosureComponent.new(size: "xl", always_open:) do |component| %>
-    <% component.with_summary { "Delivered to the planning authority" } %>
-    <%# TODO: Use more sensible time zone %>
-    This comment was successfully delivered to the email server of
-    <%= comment.comment_recipient_full_name %>
-    on
-    <%= comment.last_delivered_at.utc.to_fs(:long) %> UTC
-  <% end %>
+  <div class="text-xl text-navy">
+    Delivered to the planning authority
+    <%= render Tailwind::InfoPopup.new do %>
+      <%# TODO: Use more sensible time zone %>
+      This comment was successfully delivered to the email server of
+      <%= comment.comment_recipient_full_name %>
+      on
+      <%= comment.last_delivered_at.utc.to_fs(:long) %> UTC
+    <% end %>
+  </div>
 <% else %>
-  <%= render Tailwind::DisclosureComponent.new(size: "xl", always_open:) do |component| %>
-    <% component.with_summary { "There was a problem delivering this to the planning authority" } %>
-    The comment was hard bounced by the email server of
-    <%= comment.comment_recipient_full_name %>
-    on
-    <%= comment.last_delivered_at.utc.to_fs(:long) %> UTC.
-    Please follow up by
-    <%= pa_link_to "contacting us", documentation_contact_path %>
-    so that we can try to help resolve this issue
-  <% end %>
+  <div class="text-xl text-navy">
+    There was a problem delivering this to the planning authority
+    <%= render Tailwind::InfoPopup.new do %>
+      The comment was hard bounced by the email server of
+      <%= comment.comment_recipient_full_name %>
+      on
+      <%= comment.last_delivered_at.utc.to_fs(:long) %> UTC.
+      Please follow up by
+      <%= pa_link_to "contacting us", documentation_contact_path %>
+      so that we can try to help resolve this issue
+    <% end %>
+  </div>
 <% end %>
