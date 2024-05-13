@@ -45,9 +45,9 @@
       }
     });
   ">
-  <%# TODO: Button needs hover state %>
   <%# TODO: Is info icon too small? How can we make the click area larger? %>
-  <button x-ref="button" x-on:click="open=!open" class="text-fuchsia">
+  <%# TODO: Remove duplication between here and pa_link_classes view helper %>
+  <button x-ref="button" x-on:click="open=!open" class="text-fuchsia hover:text-fuchsia-darker focus:bg-sun-yellow">
     <%= render Tailwind::Icon.new(name: :info) %>
   </button>
   <%# TODO: Choose a more sensible default width %>
