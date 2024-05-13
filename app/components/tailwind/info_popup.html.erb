@@ -53,6 +53,7 @@
   <%# TODO: Choose a more sensible default width %>
   <%# TODO: Drop shadow doesn't currently match what was designed %>
   <%# TODO: Make something work when javascript is disabled. For example see https://stackoverflow.com/a/19199858 %>
+  <%# TODO: Add z depth to ensure over other content %>
   <div x-ref="popover" role="tooltip" class="w-[500px] max-w-[100vw] absolute" x-show="open" x-on:click.outside="open=false" x-transition>
     <div x-ref="arrow" class="absolute w-6 h-6 rotate-45 bg-navy"></div>
     <div class="px-8 py-6 text-white shadow-md bg-navy">

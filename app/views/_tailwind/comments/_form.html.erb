@@ -29,12 +29,14 @@
     <%= f.hint "Your street address will never be displayed here on Planning Alerts", class: "mt-2" %>
     <%# TODO: Need an actual design for the left aligned version here %>
     <div class="mt-2">
-      <%= render Tailwind::DisclosureComponent.new(size: "base") do |component| %>
-        <% component.with_summary { "Why do you need my address?" } %>
-        <div class="prose">
-          <%= render "documentation/faq_commenting_address" %>
-        </div>
-      <% end %>
+      <div class="text-navy">
+        Why do you need my address?
+        <%= render Tailwind::InfoPopup.new do %>
+          <div class="prose prose-xl prose-p:text-white">
+            <%= render "documentation/faq_commenting_address" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
   <%# TODO: How does the user know whether the submission period is open or not? %>
