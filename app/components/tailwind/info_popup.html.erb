@@ -7,19 +7,9 @@
       window.FloatingUIDOM.computePosition($refs.button, $refs.popover, {
         placement: 'bottom',
         middleware: [
-          // TODO: Flip is being very flaky right now
           window.FloatingUIDOM.flip(),
           window.FloatingUIDOM.offset(24),
           window.FloatingUIDOM.shift(),
-          // TODO: Is it possible to avoid using this if we set the max-width ourselves?
-          window.FloatingUIDOM.size({
-            apply({availableWidth, availableHeight, elements}) {
-              Object.assign(elements.floating.style, {
-                maxWidth: availableWidth + 'px',
-                maxHeight: availableHeight + 'px',
-              });
-            }
-          }),
           window.FloatingUIDOM.arrow({ element: $refs.arrow }),
         ],
       }).then(({x, y, middlewareData, placement }) => {
@@ -66,7 +56,7 @@
   <%# TODO: Drop shadow doesn't currently match what was designed %>
   <%# TODO: Make something work when javascript is disabled. For example see https://stackoverflow.com/a/19199858 %>
   <%# TODO: When opening at bottom of screen box would be nice to open above info icon. (Put it on hold because a little too much effort to build right now) %>
-  <div x-ref="popover" class="w-[500px] absolute" x-show="open" x-on:click.outside="open=false" x-transition>
+  <div x-ref="popover" class="w-[500px] max-w-[100vw] absolute" x-show="open" x-on:click.outside="open=false" x-transition>
     <div x-ref="arrow" class="absolute w-6 h-6 rotate-45 bg-navy"></div>
     <div class="px-8 py-6 text-white shadow-md bg-navy">
       <%= content %>
