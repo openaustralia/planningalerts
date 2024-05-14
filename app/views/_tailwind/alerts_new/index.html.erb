@@ -18,7 +18,7 @@
     <%= image_tag "tailwind/illustration/woman-looking-off.svg", class: "mt-6", alt: "" %>
   </div>
 <% else %>
-  <ul class="mt-11">
+  <ul class="border-t divide-y mt-11 divide-light-grey border-light-grey">
     <% @alerts.each do |alert| %>
       <li>
         <%= render alert %>
