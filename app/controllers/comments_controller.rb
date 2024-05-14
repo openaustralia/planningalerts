@@ -12,7 +12,12 @@ class CommentsController < ApplicationController
   def index
     authority_id = T.cast(params[:authority_id], T.nilable(String))
 
-    description = +"Recent comments"
+    description = if show_tailwind_theme?
+                    +"All recent comments"
+                  else
+                    +"Recent comments"
+                  end
+
     if authority_id
       authority = Authority.find_short_name_encoded!(authority_id)
       comments_to_display = authority.comments
