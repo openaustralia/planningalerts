@@ -1,40 +1,33 @@
-<%= link_to application, class: "block focus:bg-sun-yellow" do %>
-  <article class="flex items-center justify-between gap-4 px-4 py-8 group">
-    <div>
-      <div class="flex items-end gap-6">
-        <%# TODO: Extract out link style that's used here %>
-        <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", color: "fuchsia", font: "sans", extra_classes: "underline group-hover:text-fuchsia-darker") do %>
-          <%= application.address %>
+<%= render Tailwind::LinkBlock.new(url: application_path(application)) do %>
+  <div class="flex items-end gap-6">
+    <%# TODO: Extract out link style that's used here %>
+    <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", color: "fuchsia", font: "sans", extra_classes: "underline group-hover:text-fuchsia-darker") do %>
+      <%= application.address %>
+    <% end %>
+    <%# TODO: Make it the right width at different numbers %>
+    <% if application.visible_comments_count.positive? %>
+      <div class="pb-1 text-lg font-bold text-lavender">
+        <%= render Tailwind::SpeechBubbleComponent.new(size: "lg", alignment: :left) do %>
+          <%= application.visible_comments_count %>
         <% end %>
-        <%# TODO: Make it the right width at different numbers %>
-        <% if application.visible_comments_count.positive? %>
-          <div class="pb-1 text-lg font-bold text-lavender">
-            <%= render Tailwind::SpeechBubbleComponent.new(size: "lg", alignment: :left) do %>
-              <%= application.visible_comments_count %>
-            <% end %>
-            <%= application.visible_comments_count == 1 ? "comment" : "comments" %>
-          </div>
-        <% end %>
+        <%= application.visible_comments_count == 1 ? "comment" : "comments" %>
       </div>
-      <p class="max-w-xl text-2xl text-navy">
-        <%# Local variable highlights is optional. Only use it if it is there %>
-        <% if local_assigns.key? :highlights %>
-          <%= local_assigns[:highlights][:description].html_safe %><%# erblint:disable Rubocop %>
-        <% else %>
-          <%= application.description %>
-        <% end %>
-      </p>
-      <p class="text-lg text-warm-grey">
-        <% if application.respond_to? :distance %>
-          Found <%= time_ago_in_words(application.first_date_scraped) %> ago,
-          <%= km_in_words(application.distance.to_f) %> away
-        <% else %>
-          Found <%= time_ago_in_words(application.first_date_scraped) %> ago
-        <% end %>
-      </p>
-    </div>
-    <div class="text-light-grey2 group-hover:text-navy shrink-0">
-      <%= render "application/svg/point_right" %>
-    </div>
-  </article>
+    <% end %>
+  </div>
+  <p class="max-w-xl text-2xl text-navy">
+    <%# Local variable highlights is optional. Only use it if it is there %>
+    <% if local_assigns.key? :highlights %>
+      <%= local_assigns[:highlights][:description].html_safe %><%# erblint:disable Rubocop %>
+    <% else %>
+      <%= application.description %>
+    <% end %>
+  </p>
+  <p class="text-lg text-warm-grey">
+    <% if application.respond_to? :distance %>
+      Found <%= time_ago_in_words(application.first_date_scraped) %> ago,
+      <%= km_in_words(application.distance.to_f) %> away
+    <% else %>
+      Found <%= time_ago_in_words(application.first_date_scraped) %> ago
+    <% end %>
+  </p>
 <% end %>

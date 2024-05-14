@@ -1,0 +1,8 @@
+<%= link_to @url, class: "block focus:bg-sun-yellow" do %>
+  <div class="flex items-center justify-between gap-4 px-4 py-8 group">
+    <div><%= content %></div>
+    <div class="text-light-grey2 group-hover:text-navy shrink-0">
+      <%= render "application/svg/point_right" %>
+    </div>
+  </div>
+<% end %>
