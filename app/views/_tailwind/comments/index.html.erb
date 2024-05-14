@@ -5,7 +5,9 @@
 
 <%# TODO: Do we want the comments to have the right arrow the same as the applications on the applications index page? %>
 <div class="flex flex-col gap-12 mt-16 mb-8">
-  <%= render @comments, show_extra: true, show_application: true %>
+  <% @comments.each do |comment| %>
+    <%= render "comment_with_application", comment:, show_extra: true %>
+  <% end %>
 </div>
 
 <%# TODO: Speed up controller by using without_count after removing old theme %>
