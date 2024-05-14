@@ -18,10 +18,7 @@
 
         <%= render "comments/comment_date", comment: %>
 
-        <%# This bit with the delivery status and actions can be hidden by setting show_extra: false %>
-        <% if show_extra %>
-          <%= render "comments/delivery_status", comment: %>
-        <% end %>
+        <%= render "comments/delivery_status", comment: %>
       <% else %>
         <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
 
