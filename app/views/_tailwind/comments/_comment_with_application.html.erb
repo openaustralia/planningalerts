@@ -12,14 +12,16 @@
         <%= render "comments/comment_text", comment: %>
 
         <%# TODO: Smaller line height? %>
-        <div class="mt-2 text-xl font-bold text-navy">
+        <div class="mt-6 text-xl font-bold text-navy">
           <%= comment.name %>
         </div>
 
         <%= render "comments/comment_date", comment: %>
 
         <%# We're always showing the full details of the delivery status here, not just the summary with an info box %>
-        <%= render "comments/delivery_status", comment: %>
+        <div class="max-w-xl mt-6 text-xl text-warm-grey">
+          <%= render "comments/delivery_status_text_long", comment: %>
+        </div>
       <% else %>
         <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
 

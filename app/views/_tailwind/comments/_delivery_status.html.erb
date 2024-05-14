@@ -2,10 +2,10 @@
 <%# TODO: We probably want to visually separate the whole component from its surroundings %>
 <%# TODO: We don't want the content to fill the full width %>
 <div class="text-xl text-navy">
-  <%= render "delivery_status_text_short", comment: %>
+  <%= render "comments/delivery_status_text_short", comment: %>
   <%# TODO: We'd actually like to show a long explanatory message for when it's the status is just "sent" %>
   <% if !comment.last_delivered_successfully.nil? %>
     <%= render Tailwind::InfoPopup.new do %>
-      <%= render "delivery_status_text_long", comment: %>
+      <%= render "comments/delivery_status_text_long", comment: %>
     <% end %>
   <% end %>
