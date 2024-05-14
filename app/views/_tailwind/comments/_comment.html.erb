@@ -1,6 +1,12 @@
-<%# TODO: Do we want a version of this partial that accepts "with_address" and optionally shows the address for the comments index page? %>
 <%= render Tailwind::QuotedBlock.new do %>
   <% if comment.visible? %>
+    <% if show_application %>
+      <div class="mb-6 text-2xl text-navy">
+        <%= pa_link_to comment.application.address, comment.application %>
+        <%# TODO: Limit length of description to two lines (even on mobile?) %>
+        <div class="font-bold">"<%= comment.application.description %>"</div>
+      </div>
+    <% end %>
     <%# TODO: Use blockquote for the body of the comment? %>
     <%= render "comments/comment_text", comment: %>
 
