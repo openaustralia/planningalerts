@@ -18,6 +18,7 @@
 
         <%= render "comments/comment_date", comment: %>
 
+        <%# We're always showing the full details of the delivery status here, not just the summary with an info box %>
         <%= render "comments/delivery_status", comment: %>
       <% else %>
         <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>

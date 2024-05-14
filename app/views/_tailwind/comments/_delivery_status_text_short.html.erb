@@ -1,0 +1,7 @@
+<% if comment.last_delivered_successfully.nil? %>
+  Sent to the planning authority
+<% elsif comment.last_delivered_successfully %>
+  Delivered to the planning authority
+<% else %>
+  There was a problem delivering this to the planning authority
+<% end %>

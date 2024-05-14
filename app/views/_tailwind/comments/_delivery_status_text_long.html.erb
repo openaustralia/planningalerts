@@ -1,0 +1,18 @@
+<% if comment.last_delivered_successfully.nil? %>
+  <%# TODO: Add explanatory text that says something along the lines of "email has been created but not yet delivered. This can happen..." %>
+  Sent to the planning authority
+<% elsif comment.last_delivered_successfully %>
+  <%# TODO: Use more sensible time zone %>
+  This comment was successfully delivered to the email server of
+  <%= comment.comment_recipient_full_name %>
+  on
+  <%= comment.last_delivered_at.utc.to_fs(:long) %> UTC
+<% else %>
+  The comment was hard bounced by the email server of
+  <%= comment.comment_recipient_full_name %>
+  on
+  <%= comment.last_delivered_at.utc.to_fs(:long) %> UTC.
+  Please follow up by
+  <%= pa_link_to "contacting us", documentation_contact_path %>
+  so that we can try to help resolve this issue
+<% end %>
