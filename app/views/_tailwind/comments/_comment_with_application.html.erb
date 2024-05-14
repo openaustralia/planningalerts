@@ -1,35 +1,36 @@
 <%# TODO: Can we factor out common elements between this partial and _comment.html.erb? %>
-<%= render Tailwind::QuotedBlock.new do %>
-  <% if comment.visible? %>
-    <div class="mb-6 text-2xl text-navy">
-      <%= pa_link_to comment.application.address, comment.application %>
-      <%# TODO: Limit length of description to two lines (even on mobile?) %>
-      <div class="font-bold">"<%= comment.application.description %>"</div>
-    </div>
-    <%# TODO: Use blockquote for the body of the comment? %>
-    <%= render "comments/comment_text", comment: %>
+<%= render Tailwind::LinkBlock.new(url: comment_path(comment)) do %>
+  <div class="my-4">
+    <%= render Tailwind::QuotedBlock.new do %>
+      <% if comment.visible? %>
+        <div class="mb-6 text-2xl text-navy">
+          <div class="text-2xl font-bold underline text-fuchsia group-hover:text-fuchsia-darker"><%= comment.application.address %></div>
+          <%# TODO: Limit length of description to two lines (even on mobile?) %>
+          <div class="font-bold">"<%= comment.application.description %>"</div>
+        </div>
+        <%# TODO: Use blockquote for the body of the comment? %>
+        <%= render "comments/comment_text", comment: %>
 
-    <%# TODO: Smaller line height? %>
-    <div class="mt-2 text-xl font-bold text-navy">
-      <%= comment.name %>
-    </div>
+        <%# TODO: Smaller line height? %>
+        <div class="mt-2 text-xl font-bold text-navy">
+          <%= comment.name %>
+        </div>
 
-    <%= render "comments/comment_date", comment: %>
+        <%= render "comments/comment_date", comment: %>
 
-    <%# This bit with the delivery status and actions can be hidden by setting show_extra: false %>
-    <% if show_extra %>
-      <%= render "comments/delivery_status", comment: %>
-      <div class="mt-4">
-        <%= render "comments/actions", comment: %>
-      </div>
+        <%# This bit with the delivery status and actions can be hidden by setting show_extra: false %>
+        <% if show_extra %>
+          <%= render "comments/delivery_status", comment: %>
+        <% end %>
+      <% else %>
+        <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
+
+        <div class="mt-6">
+          <%= render "comments/comment_date", comment: %>
+        </div>
+      <% end %>
     <% end %>
-  <% else %>
-    <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
-
-    <div class="mt-6">
-      <%= render "comments/comment_date", comment: %>
-    </div>
-  <% end %>
+  </div>
 <% end %>
 
 <%
