@@ -2,12 +2,12 @@
 <%= render Tailwind::LinkBlock.new(url: comment_path(comment)) do %>
   <div class="my-4">
     <%= render Tailwind::QuotedBlock.new do %>
+      <div class="mb-6 text-2xl text-navy">
+        <div class="text-2xl font-bold underline text-fuchsia group-hover:text-fuchsia-darker"><%= comment.application.address %></div>
+        <%# TODO: Limit length of description to two lines (even on mobile?) %>
+        <div class="font-bold">"<%= comment.application.description %>"</div>
+      </div>
       <% if comment.visible? %>
-        <div class="mb-6 text-2xl text-navy">
-          <div class="text-2xl font-bold underline text-fuchsia group-hover:text-fuchsia-darker"><%= comment.application.address %></div>
-          <%# TODO: Limit length of description to two lines (even on mobile?) %>
-          <div class="font-bold">"<%= comment.application.description %>"</div>
-        </div>
         <%# TODO: Use blockquote for the body of the comment? %>
         <%= render "comments/comment_text", comment: %>
 
