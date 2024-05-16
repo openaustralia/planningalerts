@@ -1,13 +1,11 @@
 <div class="flex <%= @alignment_class %> <%= @padding_class %> text-2xl font-bold text-white rounded-lg <%= @bg_class %>">
   <% case @type %>
   <% when :success %>
-    <%# TODO: This colour isn't used anywhere else %>
-    <div class="text-[#BFB2CF] mr-5">
+    <div class="mr-5 text-light-lavender">
       <%= render Tailwind::Icon.new(name: :tick) %>
     </div>
   <% when :congratulations %>
-    <%# TODO: I think this colour isn't used anywhere else. At the very least should it be the same colour as #BFB2CF? %>
-    <div class="mr-5 text-[#A38FBD]">
+    <div class="mr-5 text-light-lavender">
       <%= render Tailwind::Icon.new(name: :clapping) %>
     </div>
   <% when :warning %>

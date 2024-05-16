@@ -54,6 +54,7 @@ module.exports = {
       'fuchsia': '#CA3F94',
       'fuchsia-darker': '#953A72',
       'lavender': '#826D9C',
+      'light-lavender': '#A38FBD',
       'yellow': '#F4BE53',
       'sun-yellow': '#FFDC3E',
       'orange': '#BB5C03',
