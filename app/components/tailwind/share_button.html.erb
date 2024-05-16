@@ -8,8 +8,12 @@
                          'border-light-grey2': copied,
                          'text-green': !copied, 'text-navy': copied}"
           x-on:click="if (navigator.canShare && navigator.canShare(shareData)) {
-            // TODO: Handle promise rejection
-            navigator.share(shareData)
+            try {
+              await navigator.share(shareData);
+            }
+            catch(err) {
+              console.log('Web share error', err);
+            }
           } else {
             navigator.clipboard.writeText('<%= @url %>');
             copied = true;
