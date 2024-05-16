@@ -11,7 +11,9 @@
       <%= render Tailwind::Icon.new(name: :clapping) %>
     </div>
   <% when :warning %>
-    <%= image_tag "tailwind/warning.svg", class: "mr-5", alt: "Warning" %>
+    <div class="mr-5 text-white">
+      <%= render Tailwind::Icon.new(name: :warning) %>
+    </div>
   <% else %>
     <% raise "Invalid value for type: #{type}" %>
   <% end %>
