@@ -6,7 +6,10 @@
       <%= render Tailwind::Icon.new(name: :tick) %>
     </div>
   <% when :congratulations %>
-    <%= image_tag "tailwind/clapping.svg", class: "mr-5", alt: "Congratulations" %>
+    <%# TODO: I think this colour isn't used anywhere else. At the very least should it be the same colour as #BFB2CF? %>
+    <div class="mr-5 text-[#A38FBD]">
+      <%= render Tailwind::Icon.new(name: :clapping) %>
+    </div>
   <% when :warning %>
     <%= image_tag "tailwind/warning.svg", class: "mr-5", alt: "Warning" %>
   <% else %>
