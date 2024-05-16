@@ -377,7 +377,6 @@ GEM
     language_server-protocol (3.17.0.3)
     launchy (2.5.2)
       addressable (~> 2.8)
-    libv8-node (18.16.0.0-aarch64-linux)
     libv8-node (18.16.0.0-arm64-darwin)
     libv8-node (18.16.0.0-x86_64-linux)
     link_header (0.0.8)
@@ -424,8 +423,6 @@ GEM
     net-ssh (7.2.0)
     netrc (0.11.0)
     nio4r (2.7.1)
-    nokogiri (1.16.4-aarch64-linux)
-      racc (~> 1.4)
     nokogiri (1.16.4-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.4-x86_64-linux)
@@ -534,7 +531,8 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rexml (3.2.6)
+    rexml (3.2.7)
+      strscan (>= 3.0.9)
     rgeo (3.0.0)
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
@@ -679,13 +677,12 @@ GEM
     sshkit (1.21.5)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    strscan (3.1.0)
     susy (2.2.14)
       sass (>= 3.3.0, < 3.5)
     syntax_tree (6.1.1)
       prettier_print (>= 1.2.0)
     sysexits (1.2.0)
-    tailwindcss-rails (2.3.0-aarch64-linux)
-      railties (>= 6.0.0)
     tailwindcss-rails (2.3.0-arm64-darwin)
       railties (>= 6.0.0)
     tailwindcss-rails (2.3.0-x86_64-linux)
@@ -765,7 +762,6 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
-  aarch64-linux
   arm64-darwin-23
   x86_64-linux
 
