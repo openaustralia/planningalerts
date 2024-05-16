@@ -1,4 +1,16 @@
 <div class="flex <%= @alignment_class %> <%= @padding_class %> text-2xl font-bold text-white rounded-lg <%= @bg_class %>">
-  <%= image_tag @image_src, class: "mr-5", alt: @image_alt %>
+  <% case @type %>
+  <% when :success %>
+    <%# TODO: This colour isn't used anywhere else %>
+    <div class="text-[#BFB2CF] mr-5">
+      <%= render Tailwind::Icon.new(name: :tick) %>
+    </div>
+  <% when :congratulations %>
+    <%= image_tag "tailwind/clapping.svg", class: "mr-5", alt: "Congratulations" %>
+  <% when :warning %>
+    <%= image_tag "tailwind/warning.svg", class: "mr-5", alt: "Warning" %>
+  <% else %>
+    <% raise "Invalid value for type: #{type}" %>
+  <% end %>
   <div><%= content %></div>
 </div>
