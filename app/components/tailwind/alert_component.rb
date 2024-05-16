@@ -10,7 +10,6 @@ module Tailwind
     def initialize(type:)
       super
 
-      @type = type
       case type
       when :success
         @bg_class = T.let("bg-lavender", String)
