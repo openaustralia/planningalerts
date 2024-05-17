@@ -103,7 +103,7 @@
 </div>
 
 <div class="mt-6 md:mt-2">
-  <%= render Tailwind::ShareButton.new(url: application_url(@application)) do %>
+  <%= render Tailwind::ShareButton.new(url: application_url(@application), color: :green) do %>
     Share this application
   <% end %>
 </div>
@@ -141,8 +141,8 @@
                 Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
               </p>
               <%# TODO: Use the new share method here %>
-              <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", icon: :share, type: :inverse_lavender, href: "https://www.facebook.com/sharer/sharer.php?u=#{comment_url(Comment.first)}&t=") do %>
-                Share on Facebook
+              <%= render Tailwind::ShareButton.new(url: comment_url(comment), color: :lavender) do %>
+                Share your comment
               <% end %>
             </div>
           <% end %>
