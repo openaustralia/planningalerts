@@ -140,7 +140,6 @@
               <p class="mb-8">
                 Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
               </p>
-              <%# TODO: Use the new share method here %>
               <%= render Tailwind::ShareButton.new(url: comment_url(comment), color: :lavender) do %>
                 Share your comment
               <% end %>
