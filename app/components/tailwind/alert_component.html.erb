@@ -1,6 +1,11 @@
-<div class="flex gap-5 <%= @alignment_class %> <%= @padding_class %> text-2xl font-bold text-white rounded-lg <%= @bg_class %>">
+<div x-data="{open: true}" x-show="open" x-transition class="flex gap-5 <%= @alignment_class %> <%= @padding_class %> text-2xl font-bold text-white rounded-lg <%= @bg_class %>">
   <div class="<%= @icon_class %>">
     <%= render Tailwind::Icon.new(name: @icon_name) %>
   </div>
-  <div><%= content %></div>
+  <div class="grow"><%= content %></div>
+  <%# TODO: Button needs a hover state %>
+  <%# TODO: This button doesn't do anything without javascript, so hide it until js is running %>
+  <button x-on:click="open=false">
+    <%= render Tailwind::Icon.new(name: :dismiss) %>
+  </button>
 </div>
