@@ -103,7 +103,7 @@
 </div>
 
 <div class="mt-6 md:mt-2">
-  <%= render Tailwind::ShareButton.new(url: application_url(@application), color: :green) do %>
+  <%= render Tailwind::ShareButton.new(url: application_url(@application), title: page_title(@application), color: :green) do %>
     Share this application
   <% end %>
 </div>
@@ -140,7 +140,7 @@
               <p class="mb-8">
                 Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
               </p>
-              <%= render Tailwind::ShareButton.new(url: comment_url(comment), color: :lavender) do %>
+              <%= render Tailwind::ShareButton.new(url: comment_url(comment), title: "my comment on #{page_title(@application)}", color: :lavender) do %>
                 Share your comment
               <% end %>
             </div>

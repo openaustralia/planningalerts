@@ -5,10 +5,11 @@ module Tailwind
   class ShareButton < ViewComponent::Base
     extend T::Sig
 
-    sig { params(url: String, color: Symbol).void }
-    def initialize(url:, color:)
+    sig { params(url: String, title: String, color: Symbol).void }
+    def initialize(url:, title:, color:)
       super
       @url = url
+      @title = title
       case color
       when :green
         @text_class = T.let("text-green", String)
