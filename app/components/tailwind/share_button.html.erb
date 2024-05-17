@@ -29,7 +29,7 @@
     <div class="flex items-center justify-center h-8 gap-4">
       <div>
         <div x-show="!copied"><%= render Tailwind::Icon.new(name: :share) %></div>
-        <div x-show="copied"><%= render Tailwind::Icon.new(name: :tick) %></div>
+        <div x-show="copied" class="w-6 h-6"><%= render Tailwind::Icon.new(name: :tick) %></div>
       </div>
       <div>
         <div x-show="!copied"><%= content %></div>

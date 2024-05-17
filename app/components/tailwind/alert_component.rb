@@ -16,7 +16,7 @@ module Tailwind
         @alignment_class = T.let("items-center", String)
         @padding_class = T.let("px-4 py-3", String)
         @icon_name = T.let(:tick, Symbol)
-        @icon_class = T.let("text-light-lavender", String)
+        @icon_class = T.let("text-light-lavender w-9 h-9", String)
       when :congratulations
         @bg_class = "bg-lavender"
         @alignment_class = "items-start"
