@@ -1,9 +1,9 @@
 <%# TODO: Can we factor out common elements between this partial and _comment.html.erb? %>
-<%= render Tailwind::LinkBlock.new(url: comment_path(comment)) do %>
+<%= render Tailwind::LinkBlock.new(url: comment_path(comment)) do |c| %>
   <div class="my-4">
     <%= render Tailwind::QuotedBlock.new do %>
       <div class="mb-6 text-2xl text-navy">
-        <div class="text-2xl font-bold underline text-fuchsia group-hover:text-fuchsia-darker"><%= comment.application.address %></div>
+        <div><%= c.linkify(comment.application.address) %></div>
         <%# TODO: Limit length of description to two lines (even on mobile?) %>
         <div class="font-bold">"<%= comment.application.description %>"</div>
       </div>
