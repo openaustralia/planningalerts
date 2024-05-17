@@ -189,8 +189,8 @@ describe "Give feedback" do
           expect(current_email.default_part_body.to_s).to include("I think this is a really good ideas")
         end
 
-        it "suggests you share it on facebook" do
-          expect(page).to have_content("Share on Facebook")
+        it "suggests you share your comment" do
+          expect(page).to have_content("Share your comment")
         end
       end
     end
