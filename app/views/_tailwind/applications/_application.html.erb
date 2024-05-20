@@ -22,11 +22,11 @@
     <% end %>
   </p>
   <p class="text-lg text-warm-grey">
+    Found <%= time_ago_in_words(application.first_date_scraped) %>
     <% if application.respond_to? :distance %>
-      Found <%= time_ago_in_words(application.first_date_scraped) %> ago,
-      <%= km_in_words(application.distance.to_f) %> away
+      ago, <%= km_in_words(application.distance.to_f) %> away
     <% else %>
-      Found <%= time_ago_in_words(application.first_date_scraped) %> ago
+      ago
     <% end %>
   </p>
 <% end %>
