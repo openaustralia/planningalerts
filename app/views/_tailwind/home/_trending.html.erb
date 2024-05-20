@@ -8,6 +8,6 @@
     <%= render partial: "home/application_trending", collection: applications.limit(6), as: :application %>
   </ol>
   <div class="pt-14">
-    <%= pa_link_to "View more trending applications", trending_applications_path, extra_classes: "text-xl" %>
+    <%= pa_link_to "View top 20 commented applications", trending_applications_path, extra_classes: "text-xl" %>
   </div>
 </section>
