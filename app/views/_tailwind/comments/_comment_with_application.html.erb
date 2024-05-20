@@ -4,8 +4,7 @@
     <%= render Tailwind::QuotedBlock.new do %>
       <div class="mb-6 text-2xl text-navy">
         <div><%= c.linkify(comment.application.address) %></div>
-        <%# TODO: Limit length of description to two lines (even on mobile?) %>
-        <div class="font-bold">"<%= comment.application.description %>"</div>
+        <div class="font-bold line-clamp-2"><%= comment.application.description %></div>
       </div>
       <% if comment.visible? %>
         <%# TODO: Use blockquote for the body of the comment? %>
