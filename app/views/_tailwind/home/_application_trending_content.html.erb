@@ -1,5 +1,5 @@
 <%= render Tailwind::LinkBlock.new(url: application_path(application)) do |c| %>
-  <div class="text-2xl font-normal text-navy">
+  <div class="text-2xl text-navy">
     <div><%= c.linkify(application.address) %></div>
     <div class="font-bold">commented on <%= pluralize(application.visible_comments_count, "time") %></div>
     <div class="line-clamp-4"><%= application.description %></div>
