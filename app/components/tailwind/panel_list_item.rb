@@ -5,19 +5,15 @@ module Tailwind
   class PanelListItem < ViewComponent::Base
     extend T::Sig
 
+    sig { returns(Tailwind::LinkBlock) }
+    attr_reader :link_block
+
+    delegate :linkify, to: :link_block
+
     sig { params(url: String).void }
     def initialize(url:)
       super
-      @url = url
-    end
-
-    # Helper that returns a span that is styled to look like a link
-    # but really acts more like a header. By using this helper the caller
-    # can put this anywhere inside a link block
-    sig { params(text: String).returns(String) }
-    def linkify(text)
-      # TODO: Remove duplication between this and the link styles defined in pa_link_to
-      content_tag(:span, text, class: "font-bold underline text-fuchsia group-hover:text-fuchsia-darker")
+      @link_block = T.let(Tailwind::LinkBlock.new(url:), Tailwind::LinkBlock)
     end
   end
 end
