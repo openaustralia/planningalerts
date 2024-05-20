@@ -1,4 +1,4 @@
-<%= render Tailwind::LinkBlock.new(url: edit_profile_alert_path(alert)) do |c| %>
+<%= render Tailwind::PanelListItem.new(url: edit_profile_alert_path(alert)) do |c| %>
   <dl class="text-2xl text-navy">
     <dt class="hidden">Address</dt>
     <dd><%= c.linkify(alert.address) %></dd>

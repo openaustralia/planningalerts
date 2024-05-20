@@ -1,4 +1,4 @@
-<%= render Tailwind::LinkBlock.new(url: application_path(application)) do |c| %>
+<%= render Tailwind::PanelListItem.new(url: application_path(application)) do |c| %>
   <div class="flex items-end gap-6">
     <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans") do %>
       <%= c.linkify(application.address) %>

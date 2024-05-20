@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class LinkBlock < ViewComponent::Base
+  class PanelListItem < ViewComponent::Base
     extend T::Sig
 
     sig { params(url: String).void }

@@ -1,5 +1,5 @@
 <%# TODO: Can we factor out common elements between this partial and _comment.html.erb? %>
-<%= render Tailwind::LinkBlock.new(url: comment_path(comment)) do |c| %>
+<%= render Tailwind::PanelListItem.new(url: comment_path(comment)) do |c| %>
   <div class="my-4">
     <%= render Tailwind::QuotedBlock.new do %>
       <div class="mb-6 text-2xl text-navy">
