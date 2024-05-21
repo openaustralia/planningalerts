@@ -1,29 +1,20 @@
-<% content_for :page_title, "Most commented applications across Australia" %>
+<% content_for :page_title, "Top 20 most commented" %>
 
 <%= render Tailwind::Heading.new(tag: :h1) do %>
   <%= yield :page_title %>
 <% end %>
 
-<div class="text-2xl text-navy">
-  <p class="mt-12">
-    Some planning applications attract considerably more community interest than others.
-    For instance, in 2016 hundreds of people in the local community opposed
-    <%= pa_link_to "the loss of a historic Sydney building", "https://www.planningalerts.org.au/applications/534084" %>.
-    Their efforts
-    <%= pa_link_to "succeeded in saving this building", "https://www.oaf.org.au/2016/02/10/you-saved-the-historic-alexandria-hotel-go-you/" %>,
-    their much loved hotel, due in no small part to their comments on Planning Alerts.
-  </p>
+<p class="mt-12 text-2xl text-navy">
+  This page shows you the top 20 most commented on applications from across Australia in the last six months.
+</p>
 
-  <p class="mt-6">
-    However you probably would not have heard about this application unless you lived nearby.
+<section class="mt-8">
+  <%= render Tailwind::Heading.new(tag: :h2).with_content("Journalist?") %>
+  <p class="text-2xl text-navy">
+    When you include information from Planning Alerts in a story or post, please cite it by including a link with a full URL.
+    That way your readers can see the facts for themselves, understand the broader context and write their own comment. 
   </p>
-
-  <p class="mt-6">
-    Now we bring you the trending applications so you can see what
-    people find most popular or contentious. This
-    page shows you the top 20 most commented on applications from across Australia in the last six months.
-  </p>
-</div>
+</section>
 
 <div class="mt-16 mb-8 divide-y divide-light-grey2 border-y border-light-grey2">
   <%= render partial: "application", collection: @applications %>

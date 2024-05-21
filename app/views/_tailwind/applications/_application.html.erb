@@ -22,7 +22,7 @@
     <% end %>
   </p>
   <p class="text-lg text-warm-grey">
-    Found <%= time_ago_in_words(application.first_date_scraped) %>
+    <%= time_ago_in_words(application.first_date_scraped).capitalize %>
     <% if application.respond_to? :distance %>
       ago, <%= km_in_words(application.distance.to_f) %> away
     <% else %>
