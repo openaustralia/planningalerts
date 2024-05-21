@@ -1,7 +1,7 @@
 <footer class="bg-[#03827a] text-white font-sans text-lg py-20">
   <%= render Tailwind::ContainerComponent.new do %>
     <%= image_tag "tailwind/logo-white.svg", class: "w-60 mb-2", alt: "Planning Alerts", size: "240x32" %>
-    <div class="grid grid-cols-12 gap-6 md:gap-4">
+    <div class="grid grid-cols-12 gap-8 md:gap-4">
       <div class="col-span-12 md:col-span-5">
         <div class="space-y-2">
           <p>Find out what is being built and knocked down in your community and have your say.</p>
@@ -10,17 +10,20 @@
       </div>
 
       <div class="col-span-12 md:col-span-4">
-        <nav class="grid grid-cols-1 font-semibold md:gap-2 md:grid-cols-2">
+        <nav class="grid grid-cols-1 gap-6 font-semibold md:gap-2 md:grid-cols-2">
+          <ul>
+            <%# Repeat the main nav in the footer %>
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Search Applications", address_applications_path %></li>
+            <li><%= link_to "Get the Data (API)", api_howto_path %></li>
+            <li><%= link_to "Help", faq_path %></li>
+          </ul>
           <ul>
             <li><%= link_to "About", about_path %></li>
             <li><%= link_to "Source code", "https://github.com/openaustralia/planningalerts" %></li>
             <li><%= link_to "Get involved", get_involved_path %></li>
-          </ul>
-          <ul>
-            <li><%= link_to "Help", faq_path %></li>
-            <li><%= link_to "Contact us", documentation_contact_path %></li>
             <li><%= link_to "Coverage", authorities_path %></li>
-            <li><%= link_to "API", api_howto_path %></li>
+            <li><%= link_to "Contact us", documentation_contact_path %></li>
           </ul>
         </nav>
       </div>
