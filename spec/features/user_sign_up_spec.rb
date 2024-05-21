@@ -21,6 +21,9 @@ describe "Signing up for an API account" do
     open_email("henare@oaf.org.au")
     expect(current_email).to have_subject("PlanningAlerts: Confirmation instructions")
     expect(current_email.default_part_body.to_s).to include("Please confirm your account email by clicking the link below")
+    expect(current_email.from).to eq(["no-reply@planningalerts.org.au"])
+    # TODO: This should be changed to "Planning Alerts"
+    expect(current_email[:from].display_names).to eq(["PlanningAlerts"])
   end
 
   describe "Check your email page in the new design" do
