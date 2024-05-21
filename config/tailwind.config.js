@@ -52,7 +52,7 @@ module.exports = {
       'off-white': "#eeeeee",
       'light-grey': '#F3F2F2',
       'fuchsia': '#CA3F94',
-      'fuchsia-darker': '#953A72',
+      'fuchsia-darker': '#A6156F',
       'lavender': '#826D9C',
       'light-lavender': '#A38FBD',
       'yellow': '#F4BE53',
