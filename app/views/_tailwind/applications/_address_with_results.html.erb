@@ -12,7 +12,7 @@
     <ul class="pt-8 text-2xl text-navy">
       <% other_addresses.each do |a| %>
         <li>
-          <%= pa_link_to a, q: a %>
+          <%= pa_link_to a, url_for(q: a) %>
         </li>
       <% end %>
     </ul>
