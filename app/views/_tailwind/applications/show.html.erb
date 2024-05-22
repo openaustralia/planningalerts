@@ -31,10 +31,7 @@
   <dt class="font-bold font-display">Description</dt>
   <dd><%= @application.description %></dd>
   <dt class="mt-8 font-bold md:mt-0 font-display">Planning Authority</dt>
-  <dd>
-    <%= pa_link_to @application.authority.full_name,
-                   authority_path(@application.authority.short_name_encoded) %>
-  </dd>
+  <dd><%= @application.authority.full_name %></dd>
   <dt class="mt-8 font-bold font-display md:mt-0">Reference number</dt>
   <dd>
     <div>
