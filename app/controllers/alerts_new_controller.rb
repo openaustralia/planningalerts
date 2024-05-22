@@ -77,6 +77,6 @@ class AlertsNewController < ApplicationController
     alert.unsubscribe!
 
     redirect_to profile_alerts_path,
-                notice: "You will no longer receive alerts for <span class=\"font-bold\">#{alert.address}</span>."
+                notice: "You will no longer receive alerts for <span class=\"font-bold\">#{alert.address}</span>. #{helpers.link_to 'Create again', new_profile_alert_path(address: alert.address), class: 'font-bold underline'}"
   end
 end
