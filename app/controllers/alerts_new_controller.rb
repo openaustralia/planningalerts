@@ -45,7 +45,7 @@ class AlertsNewController < ApplicationController
     alert.geocode_from_address
 
     if alert.save
-      redirect_to profile_alerts_path, notice: "You succesfully added a new alert for #{alert.address}"
+      redirect_to profile_alerts_path, notice: "You succesfully added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
     else
       @alert = T.let(alert, T.nilable(Alert))
       # TODO: Is there a more sensible way of doing this?
@@ -67,7 +67,7 @@ class AlertsNewController < ApplicationController
     authorize alert
     alert.update!(radius_meters: params_radius_meters.to_i)
 
-    redirect_to profile_alerts_path, notice: "Your alert for #{alert.address} now has a size of #{helpers.meters_in_words(alert.radius_meters.to_f)}"
+    redirect_to profile_alerts_path, notice: "Your alert for <span class=\"font-bold\">#{alert.address}</span> now has a size of #{helpers.meters_in_words(alert.radius_meters.to_f)}"
   end
 
   sig { void }
@@ -76,6 +76,7 @@ class AlertsNewController < ApplicationController
     authorize alert
     alert.unsubscribe!
 
-    redirect_to profile_alerts_path, notice: "You will no longer receive alerts for #{alert.address}"
+    redirect_to profile_alerts_path,
+                notice: "You will no longer receive alerts for <span class=\"font-bold\">#{alert.address}</span>."
   end
 end
