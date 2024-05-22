@@ -30,10 +30,14 @@
   <section class="pt-16">
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Search results") %>
 
-    <div class="pt-6">
+    <div class="mt-6 mb-4">
+      <%= render "create_alert_form", alert: %>
+    </div>
+
+    <div class="pt-12">
       <%# We only want to show the sort options on the first page %>
       <% if page.nil? %>
-        <div class="flex justify-between">
+        <div class="flex items-baseline justify-between">
           <div>
             <%= render "sort_options", sort:, extra_params: { q: } %>
             <% if Flipper.enabled?(:extra_options_on_address_search, current_user) %>
@@ -48,10 +52,6 @@
         <%= render Tailwind::SimplePager.new(collection: applications) %>
       <% end %>
     <div>
-
-    <div class="mt-12 mb-4">
-      <%= render "create_alert_form", alert: %>
-    </div>
 
     <ul class="mt-12 divide-y divide-light-grey2 border-y border-light-grey2">
       <% applications.each do |application| %>
