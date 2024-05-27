@@ -26,7 +26,8 @@
     <%# TODO: This should really ask people to explain in detail NOT briefly %>
     <%= f.label :details, "Please tell us briefly about your request", class: "block mb-3" %>
     <%= f.text_area :details, class: "block w-full", rows: 8 %>
-    <%= f.error :details, class: "mt-2" %>
+    <%# Adding padding at the bottom of the error to ensure that the arrow in the explanation box doesn't overlap with the error text %>
+    <%= f.error :details, class: "mt-2 pb-4" %>
   </div>
   <div class="relative -top-4">
     <%= render Tailwind::ExplanationBox.new do %>
