@@ -8,9 +8,11 @@ module Tailwind
     # href is untyped to support passing objects or paths or arrays to construct urls from
     sig do
       params(tag: Symbol, size: String, type: Symbol, href: T.untyped, icon: T.nilable(Symbol),
-             open_in_new_tab: T::Boolean, name: T.nilable(String), disabled: T::Boolean).void
+             open_in_new_tab: T::Boolean, name: T.nilable(String), disabled: T::Boolean,
+             confirm: T.nilable(String)).void
     end
-    def initialize(tag:, size:, type:, href: nil, icon: nil, open_in_new_tab: false, name: nil, disabled: false)
+    def initialize(tag:, size:, type:, href: nil, icon: nil, open_in_new_tab: false, name: nil, disabled: false,
+                   confirm: nil)
       super
 
       classes = %w[font-semibold]
@@ -70,6 +72,8 @@ module Tailwind
       raise "Can't use disabled with a link at the moment" if disabled && tag == :a
 
       options[:disabled] = true if disabled
+
+      options["x-on:click"] = "if (!confirm('#{confirm}')) { $event.preventDefault(); }" if confirm
 
       @options = T.let(options, T.nilable(T::Hash[Symbol, T.nilable(String)]))
       @tag = tag
