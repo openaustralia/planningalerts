@@ -46,6 +46,7 @@
   <div class="mt-16">
     <%= f.label :attachments, "Attach files or screenshots", class: "block mb-3" %>
     <%# TODO: Can we change the text on the button? %>
+    <%# TODO: Not sure the direct_upload_url works here. I think it might depend on UJS. Need to check. %>
     <%= f.file_field :attachments,
                      multiple: true,
                      data: { direct_upload_url: rails_direct_uploads_url } %>
