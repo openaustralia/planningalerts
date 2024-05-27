@@ -139,7 +139,7 @@ module FormBuilders
       style << (error?(method) ? "border-error-red" : "border-light-grey2")
     end
 
-    # TODO: How do we keep this styling consistent with the styles in Tailwind::ButtonComponent?
+    # TODO: How do we keep this styling consistent with the styles of the share component?
     # TODO: Need interactive states - these need a design
     # "No files selected" gets truncated on narrow screens. It would be better if it wrapped to the next line instead.
     # However, that would probably require hiding the actual file attachment button and making a new one that triggers
@@ -147,7 +147,7 @@ module FormBuilders
     # Not sure it's worth the effort at this stage.
     sig { returns(String) }
     def file_field_style
-      "w-full sm:w-auto file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green file:border-2 file:px-8 file:py-4 file:mr-4"
+      "w-full sm:w-auto hover:file:text-dark-green file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green hover:file:border-dark-green file:border-2 file:px-8 file:py-4 file:mr-4"
     end
 
     sig { params(method: Symbol).returns(T::Boolean) }

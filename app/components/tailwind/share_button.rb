@@ -12,7 +12,7 @@ module Tailwind
       @title = title
       case color
       when :green
-        @text_class = T.let("text-green", String)
+        @text_class = T.let("text-green hover:text-dark-green", String)
       when :lavender
         @text_class = "text-lavender"
       else
