@@ -40,10 +40,6 @@ module Tailwind
       # This is not strictly an "inverse" but is good to be used on darker coloured backgrounds
       when :inverse
         classes << "text-white bg-navy hover:text-navy hover:bg-white hover:ring-2 hover:ring-navy focus:ring-4 focus:ring-sun-yellow"
-      # TODO: Don't like that we have three "inverse" types!
-      # TODO: Need interactive states for inverse_lavender
-      when :inverse_lavender
-        classes << "text-lavender bg-white"
       else
         raise "Unexpected type #{type}"
       end
