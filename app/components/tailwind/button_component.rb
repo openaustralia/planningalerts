@@ -45,7 +45,7 @@ module Tailwind
       end
 
       # All the buttons share the same focus styling
-      classes += ["focus:ring-4", "focus:ring-sun-yellow"]
+      classes += ["focus:outline-none", "focus:ring-4", "focus:ring-sun-yellow"]
 
       classes += %w[cursor-not-allowed opacity-40] if disabled && tag == :button
 
