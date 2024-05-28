@@ -1,6 +1,6 @@
 <li>
   <%# TODO: Make the link wider than the text for easier clicking %>
-  <%= link_to @href, class: class_names("inline-block", "px-1", "h-full", "flex", "border-b-4", "focus:bg-yellow", { "border-fuchsia" => @selected, "border-transparent" => !@selected, "hover:border-light-grey2" => !@selected }) do %>
+  <%= link_to @href, class: class_names("inline-block", "px-1", "h-full", "flex", "border-b-4", "focus:bg-yellow", "focus:outline-none", { "border-fuchsia" => @selected, "border-transparent" => !@selected, "hover:border-light-grey2" => !@selected }) do %>
     <div class="m-auto">
       <%= content %>
     </div>
