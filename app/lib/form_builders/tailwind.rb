@@ -140,14 +140,14 @@ module FormBuilders
     end
 
     # TODO: How do we keep this styling consistent with the styles of the share component?
-    # TODO: Need interactive states - these need a design
     # "No files selected" gets truncated on narrow screens. It would be better if it wrapped to the next line instead.
     # However, that would probably require hiding the actual file attachment button and making a new one that triggers
     # the same action that and then probably have to wrap some javascript around it to make it update the text correctly.
     # Not sure it's worth the effort at this stage.
+    # The focus state is a bit weird. It's not on the button as you might expect but rather the whole thing
     sig { returns(String) }
     def file_field_style
-      "w-full sm:w-auto hover:file:text-dark-green file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green hover:file:border-dark-green file:border-2 file:px-8 file:py-4 file:mr-4"
+      "w-full sm:w-auto focus:outline-4 focus:outline-sun-yellow hover:file:text-dark-green file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green hover:file:border-dark-green file:border-2 file:px-8 file:py-4 file:mr-4"
     end
 
     sig { params(method: Symbol).returns(T::Boolean) }
