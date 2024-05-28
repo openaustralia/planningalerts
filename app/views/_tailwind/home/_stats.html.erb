@@ -3,31 +3,31 @@
     <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mb-12").with_content("This week at Planning Alerts") %>
     <ul class="grid gap-12 text-center sm:grid-cols-2 lg:grid-cols-4">
       <li>
-        <%= link_to applications_path, class: "text-fuchsia focus:outline-none focus:bg-sun-yellow block" do %>
+        <%= render Tailwind::LinkBlock.new(url: applications_path) do %>
           <span class="block mb-8 text-navy">We collected</span>
-          <span class="block font-bold text-7xl"><%= number_with_delimiter(Application.in_past_week.count) %></span>
-          <span class="block">new applications</span>
+          <span class="block font-bold text-7xl text-fuchsia"><%= number_with_delimiter(Application.in_past_week.count) %></span>
+          <span class="block text-fuchsia">new applications</span>
         <% end %>
       </li>
       <li>
-        <%= link_to new_profile_alert_path, class: "text-orange focus:outline-none focus:bg-sun-yellow block" do %>
+        <%= render Tailwind::LinkBlock.new(url: new_profile_alert_path) do %>
           <span class="block mb-8 text-navy">People received</span>
-          <span class="block font-bold text-7xl"><%= number_with_delimiter(EmailBatch.total_sent_in_past_week) %></span>
-          <span class="block">email alerts</span>
+          <span class="block font-bold text-7xl text-orange"><%= number_with_delimiter(EmailBatch.total_sent_in_past_week) %></span>
+          <span class="block text-orange">email alerts</span>
         <% end %>
       </li>
       <li>
-        <%= link_to new_profile_alert_path, class: "text-green focus:outline-none focus:bg-sun-yellow block" do %>
+        <%= render Tailwind::LinkBlock.new(url: new_profile_alert_path) do %>
           <span class="block mb-8 text-navy">People signed up for</span>
-          <span class="block font-bold text-7xl"><%= number_with_delimiter(Alert.active.in_past_week.count) %></span>
-          <span class="block">new email alerts</span>
+          <span class="block font-bold text-7xl text-green"><%= number_with_delimiter(Alert.active.in_past_week.count) %></span>
+          <span class="block text-green">new email alerts</span>
         <% end %>
       </li>
       <li>
-        <%= link_to comments_path, class: "text-lavender focus:outline-none focus:bg-sun-yellow block" do %>
+        <%= render Tailwind::LinkBlock.new(url: comments_path) do %>
           <span class="block mb-8 text-navy">People wrote</span>
-          <span class="block font-bold text-7xl"><%= number_with_delimiter(Comment.visible.in_past_week.count) %></span>
-          <span class="block">new comments</span>
+          <span class="block font-bold text-7xl text-lavender"><%= number_with_delimiter(Comment.visible.in_past_week.count) %></span>
+          <span class="block text-lavender">new comments</span>
         <% end %>
       </li>
     </ul>
