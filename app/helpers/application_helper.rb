@@ -14,7 +14,7 @@ module ApplicationHelper
   # Only to be used in tailwind theme
   sig { params(quiet: T::Boolean).returns(String) }
   def pa_link_classes(quiet:)
-    c = "text-fuchsia hover:text-fuchsia-darker focus:bg-sun-yellow"
+    c = "text-fuchsia hover:text-fuchsia-darker focus:outline-none focus:bg-sun-yellow"
     if quiet
       "#{c} hover:underline"
     else

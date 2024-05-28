@@ -18,7 +18,7 @@
 </p>
 <div class="mt-12 mb-10">
   <%= render Tailwind::QuotedBlock.new do %>
-    <%= link_to comment, class: "block focus:bg-sun-yellow" do %>
+    <%= link_to comment, class: "block focus:outline-none focus:bg-sun-yellow" do %>
       <%= render "comments/comment_text", comment: %>
       <%# TODO: This space between the text and the date looks too big to me %>
       <div class="mt-12">
