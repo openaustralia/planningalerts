@@ -5,37 +5,37 @@
   </button>
   <div x-show="open" x-cloak class="fixed top-0 left-0 z-50 w-full h-full py-24 overflow-y-scroll text-2xl text-navy bg-light-grey">
     <div class="max-w-sm px-10 mx-auto">
-      <button x-on:click="open = false; bodyScrolling = true" class="inline-flex items-center">
+      <button x-on:click="open = false; bodyScrolling = true" class="inline-flex items-center focus:outline-none focus:bg-sun-yellow">
         <%= render "application/svg/close" %>
         <span class="pr-2 text-lg font-medium">Close</span>
       </button>
       <%= image_tag "tailwind/logo-navy.svg", class: "w-60", alt: "Planning Alerts", size: "240x32" %>
       <div class="mt-8 font-medium">
         <ul>
-          <li><%= link_to "Home", root_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(root_path)) %></li>
-          <li><%= link_to "Search Applications", address_applications_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(address_applications_path)) %></li>
-          <li><%= link_to "Get the Data", api_howto_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(api_howto_path)) %></li>
-          <li><%= link_to "Help", faq_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(faq_path)) %></li>
-          <li class="mt-4"><%= link_to "About", about_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(about_path)) %></li>
-          <li><%= link_to "Get involved", get_involved_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(get_involved_path)) %></li>
-          <li><%= link_to "Coverage", authorities_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(authorities_path)) %></li>
-          <li><%= link_to "Source code", "https://github.com/openaustralia/planningalerts" %></li>
-          <li><%= link_to "Contact us", documentation_contact_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(documentation_contact_path)) %></li>
+          <li><%= link_to "Home", root_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(root_path)) %></li>
+          <li><%= link_to "Search Applications", address_applications_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(address_applications_path)) %></li>
+          <li><%= link_to "Get the Data", api_howto_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(api_howto_path)) %></li>
+          <li><%= link_to "Help", faq_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(faq_path)) %></li>
+          <li class="mt-4"><%= link_to "About", about_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(about_path)) %></li>
+          <li><%= link_to "Get involved", get_involved_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(get_involved_path)) %></li>
+          <li><%= link_to "Coverage", authorities_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(authorities_path)) %></li>
+          <li><%= link_to "Source code", "https://github.com/openaustralia/planningalerts", class: "focus:outline-none focus:bg-sun-yellow" %></li>
+          <li><%= link_to "Contact us", documentation_contact_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(documentation_contact_path)) %></li>
           <li class="mt-4">
             <% if current_user %>
               <div class="inline-block mr-2">
                 <%= render "application/svg/user" %>
               </div>
-              <%= link_to current_user.name_with_fallback, profile_alerts_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(profile_alerts_path)) %>
+              <%= link_to current_user.name_with_fallback, profile_alerts_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(profile_alerts_path)) %>
             <% else %>
-              <%= link_to "Sign In", new_user_session_path, class: class_names("decoration-fuchsia", "decoration-4", "underline" => current_page?(new_user_session_path)) %>
+              <%= link_to "Sign In", new_user_session_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(new_user_session_path)) %>
             <% end %>
           </li>
         </ul>
       </div>
       <p class="mt-10 text-lg font-regular">
         Built and maintained by
-        <a href="https://www.oaf.org.au/" class="underline">OpenAustralia Foundation</a>
+        <a href="https://www.oaf.org.au/" class="underline focus:outline-none focus:bg-sun-yellow">OpenAustralia Foundation</a>
       </p>
     </div>
   </div>
