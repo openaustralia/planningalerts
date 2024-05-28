@@ -5,7 +5,7 @@
   <div class="grow"><%= content %></div>
   <%# TODO: Button needs a hover state %>
   <%# TODO: This button doesn't do anything without javascript, so hide it until js is running %>
-  <button x-on:click="open=false" class="self-start">
+  <button x-on:click="open=false" class="self-start hover:text-white-hover focus:outline-none focus:bg-sun-yellow focus:text-navy">
     <%= render Tailwind::Icon.new(name: :dismiss) %>
   </button>
 </div>
