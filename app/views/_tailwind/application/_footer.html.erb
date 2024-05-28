@@ -12,18 +12,19 @@
       <div class="col-span-12 md:col-span-4">
         <nav class="grid grid-cols-1 gap-6 font-semibold md:gap-2 md:grid-cols-2">
           <ul>
+            <%# TODO: The white text hover is too strong IMHO %>
             <%# Repeat the main nav in the footer %>
-            <li><%= link_to "Home", root_path %></li>
-            <li><%= link_to "Search Applications", address_applications_path %></li>
-            <li><%= link_to "Get the Data (API)", api_howto_path %></li>
-            <li><%= link_to "Help", faq_path %></li>
+            <li><%= link_to "Home", root_path, class: "text-white hover:text-white-hover focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
+            <li><%= link_to "Search Applications", address_applications_path, class: "text-white hover:text-white-hover focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
+            <li><%= link_to "Get the Data (API)", api_howto_path, class: "text-white hover:text-white-hover focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
+            <li><%= link_to "Help", faq_path, class: "text-white hover:text-white-hover focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
           </ul>
           <ul>
-            <li><%= link_to "About", about_path %></li>
-            <li><%= link_to "Get involved", get_involved_path %></li>
-            <li><%= link_to "Coverage", authorities_path %></li>
-            <li><%= link_to "Source code", "https://github.com/openaustralia/planningalerts" %></li>
-            <li><%= link_to "Contact us", documentation_contact_path %></li>
+            <li><%= link_to "About", about_path, class: "text-white hover:text-white-hover focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
+            <li><%= link_to "Get involved", get_involved_path, class: "text-white hover:text-white-hover focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
+            <li><%= link_to "Coverage", authorities_path, class: "text-white hover:text-white-hover focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
+            <li><%= link_to "Source code", "https://github.com/openaustralia/planningalerts", class: "text-white hover:text-white-hover focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
+            <li><%= link_to "Contact us", documentation_contact_path, class: "text-white hover:text-white-hover focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
           </ul>
         </nav>
       </div>
@@ -47,7 +48,7 @@
         <div>
           <p>
             Built and maintained by
-            <a href="https://www.oaf.org.au/" class="block h-6 mt-4 bg-no-repeat bg-oaf-logo">
+            <a href="https://www.oaf.org.au/" class="block h-6 mt-4 bg-no-repeat bg-oaf-logo focus:outline-none focus:ring-4 focus:ring-sun-yellow">
               <span class="sr-only">OpenAustralia Foundation</span>
             </a>
           </p>
@@ -57,8 +58,8 @@
       <div class="col-span-12 md:col-span-4">
         <div class="space-y-8">
           <p>
-            <a href="https://www.oaf.org.au/" class="underline">OpenAustralia Foundation</a> is a <a href="https://www.acnc.gov.au/charity/charities/6bf25724-39af-e811-a960-000d3ad24282/profile" class="underline">registered charity</a> in Australia - company limited by guarantee.
-            ABN&nbsp;<a href="https://www.abr.business.gov.au/ABN/View/24138089942" class="underline">24&nbsp;138&nbsp;089&nbsp;942</a>.
+            <a href="https://www.oaf.org.au/" class="text-white underline hover:text-white-hover focus:outline-none focus:bg-sun-yellow focus:text-navy">OpenAustralia Foundation</a> is a <a href="https://www.acnc.gov.au/charity/charities/6bf25724-39af-e811-a960-000d3ad24282/profile" class="text-white underline hover:text-white-hover focus:outline-none focus:bg-sun-yellow focus:text-navy">registered charity</a> in Australia - company limited by guarantee.
+            ABN&nbsp;<a href="https://www.abr.business.gov.au/ABN/View/24138089942" class="text-white underline hover:text-white-hover focus:outline-none focus:bg-sun-yellow focus:text-navy">24&nbsp;138&nbsp;089&nbsp;942</a>.
           </p>
           <p>
             We acknowledge the traditional owners of the land now known as Australia.
@@ -67,9 +68,9 @@
         </div>
       </div>
 
-      <div class="col-span-12 md:col-span-3">
-        <%= link_to "https://www.acnc.gov.au/charity/charities/6bf25724-39af-e811-a960-000d3ad24282/profile" do %>
-          <%= image_tag "tailwind/charity-tick.svg", size: "100x100", class: "md:ml-auto", alt: "ACNC Registered Charity Tick" %>
+      <div class="flex items-start col-span-12 md:justify-end md:col-span-3">
+        <%= link_to "https://www.acnc.gov.au/charity/charities/6bf25724-39af-e811-a960-000d3ad24282/profile", class: "inline-block focus:outline-none focus:ring-4 focus:ring-sun-yellow" do %>
+          <%= image_tag "tailwind/charity-tick.svg", size: "100x100", alt: "ACNC Registered Charity Tick" %>
         <% end %>
       </div>
     </div>
