@@ -29,20 +29,23 @@ module Tailwind
       # TODO: Hover states are not subtle enough IMHO
       case type
       when :primary
-        classes << "text-white bg-green hover:bg-dark-green focus:ring-4 ring-sun-yellow"
+        classes << "text-white bg-green hover:bg-dark-green"
       # Special version of a primary button that you should only use when it is on
       # a dark background (such as navy). Its default state is the same as primary but
       # it's interactive states go lighter rather than darker
       when :primary_on_dark_background
-        classes << "text-white bg-green hover:bg-white hover:text-green hover:ring-2 hover:ring-green focus:ring-4 focus:ring-sun-yellow"
+        classes << "text-white bg-green hover:bg-white hover:text-green hover:ring-2 hover:ring-green"
       when :secondary
-        classes << "text-white bg-warm-grey hover:bg-dark-warm-grey focus:ring-4 ring-sun-yellow"
+        classes << "text-white bg-warm-grey hover:bg-dark-warm-grey"
       # This is not strictly an "inverse" but is good to be used on darker coloured backgrounds
       when :inverse
-        classes << "text-white bg-navy hover:text-navy hover:bg-white hover:ring-2 hover:ring-navy focus:ring-4 focus:ring-sun-yellow"
+        classes << "text-white bg-navy hover:text-navy hover:bg-white hover:ring-2 hover:ring-navy"
       else
         raise "Unexpected type #{type}"
       end
+
+      # All the buttons share the same focus styling
+      classes += ["focus:ring-4", "focus:ring-sun-yellow"]
 
       classes += %w[cursor-not-allowed opacity-40] if disabled && tag == :button
 
