@@ -1,0 +1,10 @@
+<%= render Tailwind::AlertComponent.new(type: :congratulations) do %>
+  <div class="mb-4 ml-4 text-3xl">
+    <p class="mb-8">
+      Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
+    </p>
+    <%= render Tailwind::ShareButton.new(url: comment_url(comment), title: "My comment on #{page_title(comment.application)}", color: :lavender) do %>
+      Share your comment
+    <% end %>
+  </div>
+<% end %>

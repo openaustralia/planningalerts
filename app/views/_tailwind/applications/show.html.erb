@@ -132,16 +132,7 @@
     <div class="pt-12" id="comment<%= comment.id %>">
       <% if comment.id == flash[:published_comment_id] %>
         <div class="mb-8">
-          <%= render Tailwind::AlertComponent.new(type: :congratulations) do %>
-            <div class="mb-4 ml-4 text-3xl">
-              <p class="mb-8">
-                Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
-              </p>
-              <%= render Tailwind::ShareButton.new(url: comment_url(comment), title: "My comment on #{page_title(@application)}", color: :lavender) do %>
-                Share your comment
-              <% end %>
-            </div>
-          <% end %>
+          <%= render "thanks_for_commenting", comment: %>
         </div>
       <% end %>
       <%= render comment, show_extra: true %>
