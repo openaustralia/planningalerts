@@ -10,31 +10,35 @@
     <div class="flex items-end">
       <%= image_tag "tailwind/illustration/people-talking.svg", alt: "" %>
     </div>
-    <ol class="space-y-8 [counter-reset:section]">
-      <%= render partial: "trending", collection: Application.trending.limit(3), as: :application %>
+    <div class="space-y-8">
+      <ol class="space-y-8 [counter-reset:section]">
+        <%= render partial: "trending", collection: Application.trending.limit(3), as: :application %>
+      </ol>
       <%= pa_link_to "View top 20 commented applications", trending_applications_path, extra_classes: "text-2xl inline-block" %>
-    </ol>
+    </div>
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Latest applications across Australia") %>
     <div class="flex items-end">
       <%= image_tag "tailwind/illustration/houses.svg", alt: "" %>
     </div>
-    <ul class="space-y-8">
-      <%# TODO: Probably want some ordering that shows applications from different places %>
-      <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
-        <li class="flex items-start gap-6">
-          <%= image_tag "tailwind/clock.svg", class: "mt-1", alt: "" %>
-          <%= render Tailwind::LinkBlock.new(url: application_path(application)) do |c| %>
-            <%# TODO: Extract this piece below as a partial %>
-            <div class="text-2xl text-navy">
-              <div><%= c.linkify application.address %></div>
-              <div class="line-clamp-4"><%= application.description %></div>
-              <div class="mt-2 text-lg text-warm-grey">Found <%= time_ago_in_words(application.first_date_scraped) %> ago</div>
-            </div>
-          <% end %>
-        </li>
-      <% end %>
+    <div class="space-y-8">
+      <ul class="space-y-8">
+        <%# TODO: Probably want some ordering that shows applications from different places %>
+        <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
+          <li class="flex items-start gap-6">
+            <%= image_tag "tailwind/clock.svg", class: "mt-1", alt: "" %>
+            <%= render Tailwind::LinkBlock.new(url: application_path(application)) do |c| %>
+              <%# TODO: Extract this piece below as a partial %>
+              <div class="text-2xl text-navy">
+                <div><%= c.linkify application.address %></div>
+                <div class="line-clamp-4"><%= application.description %></div>
+                <div class="mt-2 text-lg text-warm-grey">Found <%= time_ago_in_words(application.first_date_scraped) %> ago</div>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
       <%= pa_link_to "View more latest applications", applications_path, extra_classes: "text-2xl inline-block" %>
-    </ul>
+    </div>
   </div>
 
   <section class="py-12 mt-8 text-2xl border-t border-light-grey2 text-navy">
