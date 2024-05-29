@@ -1,4 +1,4 @@
-<div x-data="{ link: '<%= @value %>' }"
+<div x-data="{ link: '<%= j(@value) %>' }"
      x-init="$watch('link', value => { window.location = value; })"
      class="inline-block text-2xl text-navy">
   <%# Hiding the select tag initially. It gets unhidden by javascript %>

@@ -7,7 +7,7 @@
   x-bind:class="{'invisible': false}"
   x-data="{
     copied: false,
-    shareData: {url: '<%= @url %>', title: '<%= @title %>'}
+    shareData: {url: '<%= j(@url) %>', title: '<%= j(@title) %>'}
   }">
   <button class="inline-block px-10 py-3 text-2xl font-semibold border-2 sm:py-4"
           x-bind:class="{'bg-white': !copied, 'bg-light-grey2': copied,
