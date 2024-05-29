@@ -24,16 +24,13 @@
         <%= render Tailwind::LinkBlock.new(url: application_path(application)) do |c| %>
           <li class="flex items-start gap-6">
             <%= image_tag "tailwind/clock.svg", class: "mt-1", alt: "" %>
-            <div>
-              <%# TODO: Make this a regular div %>
-              <%= render Tailwind::Heading.new(tag: :h3, font: "sans") do %>
-                <%= c.linkify application.address %>
-              <% end %>
-              <p class="text-2xl font-bold text-navy">
+            <div class="text-2xl text-navy">
+              <div><%= c.linkify application.address %></div>
+              <p class="font-bold">
                 <%= time_ago_in_words(application.first_date_scraped) %> ago
               </p>
               <%# TODO: Limit length of description %>
-              <p class="text-2xl text-navy"><%= application.description %></p>
+              <p><%= application.description %></p>
             </div>
           </li>
         <% end %>
