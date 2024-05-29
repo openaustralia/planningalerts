@@ -11,8 +11,7 @@
       <%= image_tag "tailwind/illustration/people-talking.svg", alt: "" %>
     </div>
     <ol class="space-y-8 [counter-reset:section]">
-      <%# TODO: Move partial below to applications %>
-      <%= render partial: "home/application_trending", collection: Application.trending.limit(3), as: :application %>
+      <%= render partial: "trending", collection: Application.trending.limit(3), as: :application %>
       <%= pa_link_to "View more trending applications", trending_applications_path, extra_classes: "text-2xl inline-block" %>
     </ol>
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Latest applications across Australia") %>
