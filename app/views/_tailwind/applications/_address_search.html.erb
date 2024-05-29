@@ -18,24 +18,28 @@
     <div class="flex items-end">
       <%= image_tag "tailwind/illustration/houses.svg", alt: "" %>
     </div>
-    <div class="space-y-8">
+    <ul class="space-y-8">
       <%# TODO: Probably want some ordering that shows applications from different places %>
       <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
         <%= render Tailwind::LinkBlock.new(url: application_path(application)) do |c| %>
-          <article>
-            <%= render Tailwind::Heading.new(tag: :h3, font: "sans") do %>
-              <%= c.linkify application.address %>
-            <% end %>
-            <p class="text-2xl font-bold text-navy">
-              <%= time_ago_in_words(application.first_date_scraped) %> ago
-            </p>
-            <%# TODO: Limit length of description %>
-            <p class="text-2xl text-navy"><%= application.description %></p>
-          </article>
+          <li class="flex items-start gap-6">
+            <%= image_tag "tailwind/clock.svg", class: "mt-1", alt: "" %>
+            <div>
+              <%# TODO: Make this a regular div %>
+              <%= render Tailwind::Heading.new(tag: :h3, font: "sans") do %>
+                <%= c.linkify application.address %>
+              <% end %>
+              <p class="text-2xl font-bold text-navy">
+                <%= time_ago_in_words(application.first_date_scraped) %> ago
+              </p>
+              <%# TODO: Limit length of description %>
+              <p class="text-2xl text-navy"><%= application.description %></p>
+            </div>
+          </li>
         <% end %>
       <% end %>
       <%= pa_link_to "View more latest applications", applications_path, extra_classes: "text-2xl inline-block" %>
-    </div>
+    </ul>
   </div>
 
   <section class="py-12 mt-8 text-2xl border-t border-light-grey2 text-navy">
