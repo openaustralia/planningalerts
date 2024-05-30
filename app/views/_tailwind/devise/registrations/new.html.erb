@@ -1,6 +1,5 @@
 <div class="max-w-lg mx-auto">
-  <%# This is using a different style than the standard Heading component %>
-  <%= render Tailwind::Heading.new(tag: :h1, color: "fuchsia", extra_classes: "my-20 text-center").with_content("Create an account") %>
+  <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "my-20 text-center").with_content("Create an account") %>
 
   <%= form_with model: resource, url: registration_path(resource_name), builder: FormBuilders::Tailwind do |f| %>
     <div>
