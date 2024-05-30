@@ -1,2 +1,6 @@
-<%= pa_link_to pluralize(comments.count, "comment"), "#comments" %>
-made here on Planning Alerts
+<% if comments.count == 0 %>
+  <%= pa_link_to "Be the first to comment", { anchor: "add-comment" } %>
+<% else %>
+  <%= pa_link_to pluralize(comments.count, "comment"), "#comments" %>
+  made here on Planning Alerts
+<% end %>
