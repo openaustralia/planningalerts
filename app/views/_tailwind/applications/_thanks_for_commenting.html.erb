@@ -1,10 +1,43 @@
-<%= render Tailwind::AlertComponent.new(type: :congratulations) do %>
-  <div class="mb-4 ml-4 text-3xl">
-    <p class="mb-8">
-      Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
-    </p>
-    <%= render Tailwind::ShareButton.new(url: comment_url(comment), title: "My comment on #{page_title(comment.application)}", color: :lavender) do %>
-      Share your comment
-    <% end %>
-  </div>
-<% end %>
+<div class="relative" x-init="
+  const canvas = $refs.canvas;
+  canvas.confetti = canvas.confetti || (await window.confetti.create(canvas));
+  canvas.confetti({
+    particleCount: 50,
+    spread: 20,
+    origin: { y: 1.0 }
+  });
+  const end = Date.now() + 10 * 1000;
+
+  (function frame() {
+    canvas.confetti({
+      particleCount: 1,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 }
+    });
+
+    canvas.confetti({
+      particleCount: 1,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 }
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+  ">
+  <%= render Tailwind::AlertComponent.new(type: :congratulations) do %>
+    <div class="mb-4 ml-4 text-3xl">
+      <p class="mb-8">
+        Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
+      </p>
+      <%= render Tailwind::ShareButton.new(url: comment_url(comment), title: "My comment on #{page_title(comment.application)}", color: :lavender) do %>
+        Share your comment
+      <% end %>
+    </div>
+  <% end %>
+  <%# Make the canvas (which is used to show the confetti) the same size as the alert %>
+  <canvas class="absolute top-0 w-full h-full" x-ref="canvas"></canvas>
+</div>
