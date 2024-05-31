@@ -1,6 +1,14 @@
 <% if comment.last_delivered_successfully.nil? %>
-  <%# TODO: Add explanatory text that says something along the lines of "email has been created but not yet delivered. This can happen..." %>
-  Sent to the planning authority
+  <%# This is technically not quite what is going on but is close enough to be useful I think %>
+  <p>
+    This comment has been sent but has not yet been acknowledged by the email server
+    of <%= comment.comment_recipient_full_name %>. This can happen if our email system
+    or <%= comment.comment_recipient_full_name %>'s email system or network has a temporary problem.
+  </p>
+  <p class="mt-4">
+    Please check back in an hour or so. If the status hasn't changed you can
+    <%= pa_link_to "contact us", documentation_contact_path %> to figure out what's going on.
+  </p>
 <% elsif comment.last_delivered_successfully %>
   <%# TODO: Use more sensible time zone %>
   This comment was successfully delivered to the email server of
