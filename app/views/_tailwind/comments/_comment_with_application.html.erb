@@ -17,9 +17,9 @@
 
         <%= render "comments/comment_date", comment: %>
 
-        <%# We're always showing the full details of the delivery status here, not just the summary with an info box %>
+        <%# Not showing an info box here with a detailed delivery status because it might have links in it. Don't want links inside of links. %>
         <div class="max-w-xl mt-6 text-xl text-warm-grey">
-          <%= render "comments/delivery_status_text_long", comment: %>
+          <%= render "comments/delivery_status_text_short", comment: %>
         </div>
       <% else %>
         <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
