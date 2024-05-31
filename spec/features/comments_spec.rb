@@ -84,11 +84,11 @@ describe "Comments pages" do
         end
 
         it "has a comment that has been sent but not yet received" do
-          expect(page).to have_content("Sent to the planning authority")
+          expect(page).to have_content("Sent to Byron Shire Council")
         end
 
         it "has a comment that has been succesfully received" do
-          expect(page).to have_content("Delivered to the planning authority")
+          expect(page).to have_content("Delivered to Byron Shire Council")
         end
 
         it "has a comment that failed to be delivered" do
