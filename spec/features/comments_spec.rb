@@ -13,11 +13,16 @@ describe "Comments pages" do
     end
 
     describe "index page" do
+      let(:authority) { create(:authority, full_name: "Byron Shire Council") }
+      let(:application) { create(:geocoded_application, authority:) }
+
       before do
         create(:published_comment,
+               application:,
                text: "I am a resident the suburb. I object to the development application. My main concerns are the potential impacts on local wildlife.",
                name: "Andrew Citizen")
         create(:published_comment,
+               application:,
                text: "I disagree. I think this is a very thoughtful and considered development. It should go ahead",
                name: "Another Citizen")
         visit comments_path
