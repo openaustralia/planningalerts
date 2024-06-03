@@ -176,7 +176,7 @@ module ApplicationHelper
 
   sig { returns(String) }
   def donate_url
-    "https://www.oaf.org.au/donate/planningalerts/"
+    "https://donate.planningalerts.org.au/"
   end
 
   sig { params(name: String, path: T.untyped, options: T::Hash[Symbol, String], block: T.nilable(T.proc.void)).returns(String) }
