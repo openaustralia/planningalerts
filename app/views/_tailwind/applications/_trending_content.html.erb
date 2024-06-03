@@ -2,7 +2,7 @@
   <div class="text-2xl text-navy">
     <div><%= c.linkify(application.address) %></div>
     <div class="font-bold">commented on <%= pluralize(application.visible_comments_count, "time") %></div>
-    <div class="line-clamp-4"><%= application.description %></div>
+    <div class="line-clamp-2"><%= application.description %></div>
     <div class="mt-2 text-lg text-warm-grey">Found <%= time_ago_in_words(application.first_date_scraped) %> ago</div>
   </div>
 <% end %>
