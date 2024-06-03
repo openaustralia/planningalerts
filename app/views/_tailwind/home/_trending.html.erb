@@ -1,9 +1,5 @@
 <section class="pb-12">
   <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mt-20").with_content("Most commented applications") %>
-  <p class="mt-4 text-2xl text-navy">
-    Some planning applications attract considerably more community interest than others.
-    We bring you the trending applications so you can see what people find most popular or contentious.
-  </p>
   <ol class="grid mt-10 text-xl font-bold gap-y-6 columns-1 [counter-reset:section]">
     <%= render partial: "applications/trending", collection: applications.limit(3), as: :application %>
   </ol>
