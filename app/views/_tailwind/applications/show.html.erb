@@ -36,9 +36,6 @@
   <dd>
     <div>
       <%= @application.council_reference %>
-    </div>
-    <div>
-      What is a reference number?
       <%= render Tailwind::InfoPopup.new do %>
         This was created by <%= @application.authority.full_name %> to identify this application. You will need this if you talk
         directly with them or use their website.
