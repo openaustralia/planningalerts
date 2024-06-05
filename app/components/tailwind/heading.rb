@@ -5,7 +5,7 @@ module Tailwind
   class Heading < ViewComponent::Base
     extend T::Sig
 
-    DEFAULT_SIZES = T.let({ h1: "4xl", h2: "3xl", h3: "2xl", h4: "2xl" }.freeze, T::Hash[Symbol, String])
+    DEFAULT_SIZES = T.let({ h1: "3xl", h2: "2xl", h3: "xl", h4: "xl" }.freeze, T::Hash[Symbol, String])
     DEFAULT_FONTS = T.let({ h1: "display", h2: "display", h3: "sans", h4: "sans" }.freeze, T::Hash[Symbol, String])
     # Doing this very long winded way to ensure that tailwind doesn't remove styles being used here
     VALID_SIZE_CLASSES = T.let(%w[text-xl text-2xl text-3xl text-4xl].freeze, T::Array[String])
