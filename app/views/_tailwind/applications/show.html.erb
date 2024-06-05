@@ -140,9 +140,9 @@
 <section class="flex gap-6 mt-14" id="add-comment">
   <%# Hide the big quotation mark on small displays so we don't end up with a weird large left margin %>
   <%# TODO: Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
-  <div class="hidden mt-20 sm:block text-navy text-7xl">”</div>
+  <div class="hidden mt-24 sm:block text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
-    <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mb-3").with_content("Add your own comment") %>
+    <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
 
     <% if !@application.authority.email.present? %>
       <%# TODO: Need a proper design for this section %>

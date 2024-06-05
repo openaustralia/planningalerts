@@ -1,9 +1,9 @@
 <%= form_with model: [application, comment], builder: FormBuilders::Tailwind do |f| %>
   <div>
-    <%= f.label :text, "Your comment", class: "sr-only" %>
+    <%= f.label :text, "Your comment" %>
     <%= f.text_area :text,
                     rows: 10,
-                    class: "block w-full",
+                    class: "mt-1 block w-full",
                     required: true,
                     placeholder: "Be polite, clear and to the point so your comment gets listened to." %>
     <%= f.error :text, class: "mt-2" %>
