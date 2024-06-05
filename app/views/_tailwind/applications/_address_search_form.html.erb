@@ -8,7 +8,7 @@
     <div class="max-w-xl text-3xl font-bold leading-tight text-center text-white sm:text-4xl font-display sm:leading-tight">
       Find applications within <%= meters_in_words(Alert::DEFAULT_RADIUS) %> of:
     </div>
-    <div class="flex flex-col items-center w-full gap-4" x-data="{
+    <div class="flex flex-col items-center w-full gap-2" x-data="{
       loading: false,
       address: '',
       async geolocate(event) {
@@ -23,12 +23,12 @@
       }
     }">
       <div class="flex flex-col w-full gap-2">
-        <%= form.label :q, "Street address", class: "text-white font-bold text-2xl self-start" %>
+        <%= form.label :q, "Street address", class: "text-white font-bold text-xl self-start" %>
         <%# TODO: Do we want this to show the little red cross like other form fields on error? %>
         <%= form.text_field :q,
                             value: q,
                             placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
-                            class: class_names("text-2xl", "text-navy", "w-full", "px-4", "py-3", "sm:py-4", "placeholder-shown:truncate", "focus:ring-4", "focus:ring-sun-yellow", "border-error-red" => error),
+                            class: class_names("text-xl", "text-navy", "w-full", "px-4", "py-3", "sm:py-4", "placeholder-shown:truncate", "focus:ring-4", "focus:ring-sun-yellow", "border-error-red" => error),
                             required: "required",
                             autofocus: true,
                             "x-data" => "{ async initAutocomplete() {
@@ -40,14 +40,14 @@
         <% if error %>
           <%# TODO: Add color to tailwind config %>
           <%# TODO: This is the only box in the whole design with rounded corners. Huh? %>
-          <p class="text-error-red bg-[#E8CDCD] w-full text-center py-4 text-2xl px-4 rounded-lg">
+          <p class="text-error-red bg-[#E8CDCD] w-full text-center py-4 text-xl px-4 rounded-lg">
             <%= error %>
           </p>
         <% end %>
       </div>
-      <%= button_tag type: "button", class: "text-white sm:text-xl inline focus:text-navy focus:outline-none focus:bg-sun-yellow", "@click": "geolocate($event)", "x-bind:disabled": "loading" do %>
+      <%= button_tag type: "button", class: "text-white text-lg inline focus:text-navy focus:outline-none focus:bg-sun-yellow", "@click": "geolocate($event)", "x-bind:disabled": "loading" do %>
         <%# TODO: Fix occasional clipping of icon problem %>
-        <span class="inline-block mr-2 align-middle">
+        <span class="inline-block align-middle">
           <%= render "application/svg/location" %>
         </span>
         <span :class="loading ? '' : 'underline'" x-text="loading ? 'getting current location...' : 'or use my current location'">or use my current location</span>
@@ -55,7 +55,7 @@
     </div>
 
     <div class="mt-4">
-      <%= render Tailwind::ButtonComponent.new(tag: :button, size: "2xl", type: :primary_on_dark_background) do %>
+      <%= render Tailwind::ButtonComponent.new(tag: :button, size: "xl", type: :primary_on_dark_background) do %>
         <div class="px-12">Search</div>
       <% end %>
     </div>
