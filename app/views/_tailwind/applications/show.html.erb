@@ -27,7 +27,7 @@
 <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
 
-<dl class="mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-2xl">
+<dl class="mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-2xl md:gap-y-4">
   <dt class="font-bold font-display">Description</dt>
   <dd><%= @application.description %></dd>
   <dt class="mt-8 font-bold md:mt-0 font-display">Planning Authority</dt>
