@@ -22,6 +22,17 @@ module Tailwind
                           else
                             raise "Only :left or :right for alignment"
                           end
+      when "3xl"
+        box_classes = "px-4 py-2 text-3xl rounded-2xl"
+        arrow_classes = "border-l-[6px] border-t-[14px] border-r-[6px]"
+        alignment_class = case alignment
+                          when :left
+                            "left-4"
+                          when :right
+                            "right-4"
+                          else
+                            raise "Only :left or :right for alignment"
+                          end
       when "2xl"
         box_classes = "px-4 py-2 text-2xl rounded-2xl"
         arrow_classes = "border-l-[6px] border-t-[14px] border-r-[6px]"

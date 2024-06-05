@@ -4,7 +4,7 @@
     <%= render "comments/comment_text", comment: %>
 
     <%# TODO: Smaller line height? %>
-    <div class="mt-2 text-xl font-bold text-navy">
+    <div class="mt-6 text-lg font-bold text-navy">
       <%= comment.name %>
     </div>
 
@@ -18,7 +18,7 @@
       </div>
     <% end %>
   <% else %>
-    <p class="text-2xl italic text-navy">This comment was hidden by site administrators</p>
+    <p class="text-xl italic text-navy">This comment was hidden by site administrators</p>
 
     <div class="mt-6">
       <%= render "comments/comment_date", comment: %>

@@ -46,7 +46,7 @@ module FormBuilders
 
     sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, T.any(String, Symbol)]).returns(ActionView::OutputBuffer) }
     def button(value = nil, options = {})
-      options = { tag: :button, size: "2xl", type: :primary }.merge(options)
+      options = { tag: :button, size: "xl", type: :primary }.merge(options)
       template.render ::Tailwind::ButtonComponent.new(**T.unsafe(options)) do
         value
       end
@@ -64,15 +64,15 @@ module FormBuilders
       return "" unless object.errors.key?(method)
 
       m = "#{object.errors.messages_for(method).join('. ')}."
-      template.content_tag(:p, m, options.merge(class: "text-2xl text-error-red #{options[:class]}"))
+      template.content_tag(:p, m, options.merge(class: "text-xl text-error-red #{options[:class]}"))
     end
 
     sig { params(text_or_options: T.untyped, options: T::Hash[Symbol, String], block: T.untyped).returns(String) }
     def hint(text_or_options = nil, options = {}, &block)
       if block_given?
-        template.content_tag(:p, (text_or_options || {}).merge(class: "text-base italic text-warm-grey #{options[:class]}"), &block)
+        template.content_tag(:p, (text_or_options || {}).merge(class: "text-lg text-warm-grey #{options[:class]}"), &block)
       else
-        template.content_tag(:p, text_or_options, options.merge(class: "text-base italic text-warm-grey #{options[:class]}"))
+        template.content_tag(:p, text_or_options, options.merge(class: "text-lg text-warm-grey #{options[:class]}"))
       end
     end
 
@@ -112,7 +112,7 @@ module FormBuilders
 
     sig { params(method: Symbol).returns(String) }
     def label_style(method)
-      style = +"font-bold text-2xl"
+      style = +"font-bold text-xl"
       style << " "
       style << (error?(method) ? "text-error-red" : "text-navy")
       style
@@ -127,7 +127,7 @@ module FormBuilders
 
     sig { params(method: Symbol).returns(String) }
     def text_area_style(method)
-      style = +"text-2xl text-navy placeholder:text-warm-grey py-3 focus:ring-4 focus:ring-sun-yellow"
+      style = +"text-xl text-navy placeholder:text-warm-grey py-3 focus:ring-4 focus:ring-sun-yellow"
       style << " "
       style << (error?(method) ? "border-error-red pl-4 pr-16" : "border-light-grey2 px-4")
       style
@@ -135,7 +135,7 @@ module FormBuilders
 
     sig { params(method: Symbol).returns(String) }
     def select_style(method)
-      style = +"text-2xl text-navy py-4 focus:ring-4 focus:ring-sun-yellow "
+      style = +"text-xl text-navy py-4 focus:ring-4 focus:ring-sun-yellow "
       style << (error?(method) ? "border-error-red" : "border-light-grey2")
     end
 
@@ -147,7 +147,7 @@ module FormBuilders
     # The focus state is a bit weird. It's not on the button as you might expect but rather the whole thing
     sig { returns(String) }
     def file_field_style
-      "w-full sm:w-auto focus:outline-4 focus:outline-sun-yellow hover:file:text-dark-green file:text-green text-2xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green hover:file:border-dark-green file:border-2 file:px-8 file:py-4 file:mr-4"
+      "w-full sm:w-auto focus:outline-4 focus:outline-sun-yellow hover:file:text-dark-green file:text-green text-xl text-navy cursor-pointer file:bg-white file:font-semibold file:border-solid file:border-green hover:file:border-dark-green file:border-2 file:px-8 file:py-4 file:mr-4"
     end
 
     sig { params(method: Symbol).returns(T::Boolean) }

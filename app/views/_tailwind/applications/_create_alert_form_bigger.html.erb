@@ -1,20 +1,20 @@
 <%# TODO: Only show this block if we don't have an alert covering this area? %>
 <%# TODO: Remove duplication between this and applications/_create_alert_form.html.erb. These two views are annoyingly similar yet different %>
 <div class="flex flex-col items-center justify-between gap-8 md:flex-row bg-light-grey px-11 md:px-14 mt-14">
-  <div class="pt-14 md:pb-14">
-    <p class="text-3xl font-bold font-display text-navy">Save this search as an email alert?</p>
+  <div class="pt-12 md:pb-14">
+    <p class="text-2xl font-bold font-display text-navy">Save this search as an email alert?</p>
     <% if current_user.nil? %>
-      <p class="mt-4 text-2xl text-navy">
+      <p class="mt-4 text-xl text-navy">
         <%= pa_link_to "Create an account", new_user_registration_path %>
         or
         <%= pa_link_to "sign in", new_user_session_path %>.
       </p>
-      <p class="text-2xl text-navy">
+      <p class="text-xl text-navy">
         It only takes a moment.
       </p>
     <% else %>
       <%= form_with model: [:profile, alert], builder: FormBuilders::Tailwind do |f| %>
-        <p class="mt-2 mb-8 text-2xl text-navy">
+        <p class="mt-2 mb-8 text-xl text-navy">
           Save your search for applications within <%= meters_in_words(alert.radius_meters) %> of <%= alert.address %>?
         </p>
         <%= f.hidden_field :address %>
@@ -23,5 +23,5 @@
       <% end %>
     <% end %>
   </div>
-  <%= image_tag "tailwind/illustration/save-search.svg", class: "self-end md:pt-14", alt: "" %>
+  <%= image_tag "tailwind/illustration/save-search.svg", class: "self-end md:pt-8", alt: "" %>
 </div>

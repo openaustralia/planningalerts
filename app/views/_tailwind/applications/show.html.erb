@@ -27,7 +27,7 @@
 <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
 
-<dl class="mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-2xl md:gap-y-4">
+<dl class="mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-xl md:gap-y-4">
   <dt class="font-bold font-display">Description</dt>
   <dd><%= @application.description %></dd>
   <dt class="mt-8 font-bold md:mt-0 font-display">Planning Authority</dt>
@@ -45,7 +45,7 @@
 </dl>
 
 <%# TODO: The icons next to the labels are not all the same size / proportion %>
-<dl class="text-2xl text-navy grid md:grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-14">
+<dl class="text-xl text-navy grid md:grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-14">
   <dt class="font-bold md:py-1">
     <div class="flex gap-4">
       <%= image_tag "tailwind/calendar.svg", width: 24, alt: "" %>
@@ -81,7 +81,7 @@
 
 <div class="mt-12">
   <%# TODO: This button currently has much larger left and right padding than the design %>
-  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: "#add-comment", icon: :edit) do %>
+  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: "#add-comment", icon: :edit) do %>
     Make a comment now
   <% end %>
 </div>
@@ -89,11 +89,11 @@
 <div class="flex flex-col items-baseline gap-2 mt-2 md:flex-row md:gap-4">
   <%# TODO: Handle situation when authority name is very long %>
   <div class="shrink-0">
-    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: external_application_path(@application), icon: :external) do %>
+    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: external_application_path(@application), icon: :external) do %>
       More info
     <% end %>
   </div>
-  <div class="text-2xl text-navy">on the <%= @application.authority.full_name %> website</div>
+  <div class="text-xl text-navy">on the <%= @application.authority.full_name %> website</div>
 </div>
 
 <div class="mt-6 md:mt-2">
@@ -110,13 +110,13 @@
   <% end %>
   <% if @comments.count > 0 %>
     <div class="relative inline-block mt-6 mb-4 -top-6">
-      <%= render Tailwind::SpeechBubbleComponent.new(size: "4xl", alignment: :right) do %>
+      <%= render Tailwind::SpeechBubbleComponent.new(size: "3xl", alignment: :right) do %>
         <%= @comments.count %>
       <% end %>
     </div>
   <% end %>
 
-  <p class="text-2xl text-navy">
+  <p class="text-xl text-navy">
     Comments made here
     <%= @comments.empty? ? "will be" : "were" %>
     sent to <strong><%= @application.comment_recipient_full_name %></strong>.

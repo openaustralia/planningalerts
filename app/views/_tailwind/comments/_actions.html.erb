@@ -1,5 +1,5 @@
 <%# TODO: This is the only place a "quiet" link is being used. Should we get rid of it and make it the same as the others? %>
-<%= pa_link_to "Report this comment", new_comment_report_path(comment), quiet: true, extra_classes: "text-xl" %>
+<%= pa_link_to "Report this comment", new_comment_report_path(comment), quiet: true, extra_classes: "text-lg" %>
 <% if current_user&.admin? %>
-  <%= pa_link_to "Admin", admin_comment_path(comment), extra_classes: "block text-xl" %>
+  <%= pa_link_to "Admin", admin_comment_path(comment), extra_classes: "block text-lg" %>
 <% end %>
