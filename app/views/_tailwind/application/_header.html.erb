@@ -1,10 +1,10 @@
 <header>
-  <div class="bg-header-orange">
+  <div class="hidden bg-header-orange sm:block">
     <%= render Tailwind::ContainerComponent.new do %>
       <div class="flex flex-row-reverse items-center h-8">
         <%# Using this (out of palette) colour for the text to pass contrast accessibility tests %>
         <%= link_to "https://www.oaf.org.au", class: "focus:outline-none focus:bg-sun-yellow p-1" do %>
-          <div class="hidden text-sm font-medium text-dark-brown sm:block hover:text-dark-navy">
+          <div class="text-sm font-medium text-dark-brown hover:text-dark-navy">
               An <span class="underline">OpenAustralia Foundation</span> service
           </div>
         <% end %>
@@ -12,7 +12,7 @@
     <% end %>
   </div>
   <div class="flex flex-col">
-    <div class="sm:bg-light-grey sm:order-last">
+    <div class="pt-8 sm:bg-light-grey sm:order-last sm:pt-0">
       <%= render Tailwind::ContainerComponent.new do %>
         <nav aria-label="Main">
           <%= render "menu_mobile" %>
