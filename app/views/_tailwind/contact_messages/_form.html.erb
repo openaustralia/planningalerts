@@ -8,13 +8,13 @@
         Or <%= pa_link_to "sign in", new_user_session_path %>
       <% end %>
     </div>
-    <div class="mt-8">
+    <div class="my-8">
       <%= f.label :email, "Your email", class: "block mb-3" %>
       <%= f.email_field :email, class: "block w-full" %>
       <%= f.error :email, class: "mt-2" %>
     </div>
   <% end %>
-  <div class="mt-8">
+  <div>
     <%= f.label :reason, "I'm getting in touch because", class: "block mb-3" %>
     <%# TODO: Make sure that we can't choose "Please select" %>
     <%# TODO: The grey border here does not match the design but matches other form elements %>
