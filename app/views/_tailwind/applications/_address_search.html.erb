@@ -4,7 +4,7 @@
 <%= render "address_search_form", q:, error: %>
 
 <% if error.nil? %>
-  <div class="grid sm:grid-flow-col grid-rows-[repeat(3,_max-content)] auto-cols-fr gap-12 mt-20">
+  <div class="grid md:grid-flow-col grid-rows-[repeat(3,_max-content)] auto-cols-fr gap-y-8 gap-x-16 mt-20">
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Most commented applications") %>
     <%# Wrapping in a div to make the bottom of the illustrations match up %>
     <div class="flex items-end">
@@ -12,9 +12,9 @@
     </div>
     <div class="space-y-8">
       <ol class="space-y-8 [counter-reset:section]">
-        <%= render partial: "trending", collection: Application.trending.limit(3), as: :application %>
+        <%= render partial: "trending", collection: Application.all.limit(3), as: :application %>
       </ol>
-      <%= pa_link_to "View top 20 commented applications", trending_applications_path, extra_classes: "text-2xl inline-block" %>
+      <%= pa_link_to "View top 20 commented applications", trending_applications_path, extra_classes: "text-xl inline-block" %>
     </div>
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Latest applications across Australia") %>
     <div class="flex items-end">
@@ -28,7 +28,7 @@
             <%= image_tag "tailwind/clock.svg", class: "mt-1", alt: "" %>
             <%= render Tailwind::LinkBlock.new(url: application_path(application)) do |c| %>
               <%# TODO: Extract this piece below as a partial %>
-              <div class="text-2xl text-navy">
+              <div class="text-xl text-navy">
                 <div><%= c.linkify application.address %></div>
                 <div class="line-clamp-2"><%= application.description %></div>
                 <div class="mt-2 text-lg text-warm-grey">Found <%= time_ago_in_words(application.first_date_scraped) %> ago</div>
@@ -37,11 +37,11 @@
           </li>
         <% end %>
       </ul>
-      <%= pa_link_to "View more latest applications", applications_path, extra_classes: "text-2xl inline-block" %>
+      <%= pa_link_to "View more latest applications", applications_path, extra_classes: "text-xl inline-block" %>
     </div>
   </div>
 
-  <section class="py-12 mt-8 text-2xl border-t border-light-grey2 text-navy">
+  <section class="py-12 mt-8 text-xl border-t border-light-grey2 text-navy">
     <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-2").with_content("Coverage") %>
 
     <div class="flex flex-col-reverse items-start justify-between gap-8 pt-4 md:flex-row">
@@ -65,7 +65,7 @@
     </div>
   </section>
 
-  <section class="py-12 text-2xl border-t text-navy border-light-grey2">
+  <section class="py-12 text-xl border-t text-navy border-light-grey2">
     <%# TODO: Better heading? %>
     <%# TODO: Do we want to include something like pb-2 for all headings in the component? %>
     <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-2").with_content("Planning Data") %>
