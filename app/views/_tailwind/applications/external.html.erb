@@ -1,4 +1,4 @@
-<%= pa_link_to "< Back to application", @application, extra_classes: "text-2xl" %>
+<%= pa_link_to "< Back to application", @application, extra_classes: "text-xl" %>
 
 <div class="flex flex-col items-center max-w-4xl m-auto mt-16 text-center">
   <%= image_tag "tailwind/illustration/send-comment2.svg", alt: "" %>
@@ -7,7 +7,7 @@
     We will now try to direct you to this application on the <%= @application.authority.full_name %> website
   <% end %>
 
-  <div class="text-2xl text-navy mt-14">
+  <div class="text-xl text-navy mt-14">
     <p class="font-bold">
       This may not work!
     </p>
@@ -27,7 +27,7 @@
   </div>
 
   <div class="mt-20">
-    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: @application.info_url, open_in_new_tab: true, icon: :external) do %>
+    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: @application.info_url, open_in_new_tab: true, icon: :external) do %>
       Continue to
       <span class="font-normal"><%= @application.authority.full_name %> website</span>
     <% end %>
