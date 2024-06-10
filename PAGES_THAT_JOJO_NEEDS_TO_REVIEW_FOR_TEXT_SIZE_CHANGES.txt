@@ -10,3 +10,4 @@ Search page - http://localhost:3000/applications/search and http://localhost:300
 Application detail page - http://localhost:3000/applications/2010603
   Special bits: when logged out
 Most comment page - http://localhost:3000/applications/trending
+Coverage page - http://localhost:3000/authorities

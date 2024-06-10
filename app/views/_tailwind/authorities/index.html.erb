@@ -12,7 +12,7 @@
     <%= render "coverage_explanation",
                percentage: @percentage_population_covered_by_all_active_authorities,
                count: @authority_count %>
-    <p class="mt-4 text-2xl text-navy">
+    <p class="mt-4 text-xl text-navy">
       We don't yet cover the whole country, but we are working on it.
       New authorities are being added all the time, so if your local authority isn't listed below
       <%= pa_link_to "sign up anyway", new_profile_alert_path %> and you'll start receiving alerts once it has been included.
@@ -26,7 +26,7 @@
       Where does application data come from?
     <% end %>
     <%# TODO: This paragraph is the same as used in "how to write a scraper". Extract partial? %>
-    <p class="mt-4 text-2xl text-navy">
+    <p class="mt-4 text-xl text-navy">
       To be able to display and send alerts for planning applications,
       Planning Alerts needs to download applications from as many councils as possible.
       As the vast majority of councils don't supply the data in a reusable, machine-readable format
@@ -37,14 +37,14 @@
     <div class="flex flex-col items-start gap-8 mt-8 sm:flex-row">
       <%# TODO: Extract partial from this and the get involved page %>
       <%= image_tag "tailwind/illustration/headshot1.svg", alt: "" %>
-      <p class="max-w-2xl text-2xl text-navy">
+      <p class="max-w-2xl text-xl text-navy">
         If you are a programmer and would like to write a scraper for your local authority
         <%= pa_link_to "read our guide on writing scrapers", how_to_write_a_scraper_path %>.
       </p>
     </div>
     <div class="flex flex-col items-start gap-8 mt-8 sm:flex-row">
       <%= image_tag "tailwind/illustration/headshot4.svg", alt: "" %>
-      <p class="max-w-2xl text-2xl text-navy">
+      <p class="max-w-2xl text-xl text-navy">
         If you work for a local authority and would like to make your data available we highly
         recommend using the
         <%= pa_link_to "Application Tracking Data Interchange Specification (ATDIS)", atdis_test_path %>.
@@ -56,11 +56,11 @@
     <%= render Tailwind::Heading.new(tag: :h2) do %>
       Data reliability
     <% end %>
-    <p class="mt-4 text-2xl text-navy">
+    <p class="mt-4 text-xl text-navy">
       From time to time planning authorities change their websites which breaks the scrapers that gather the planning
       data. Here is a complete list of all the planning authorities we source data from and their status.
 
-      <dl class="flex flex-col gap-4 mt-4 text-2xl sm:flex-row text-navy">
+      <dl class="flex flex-col gap-4 mt-4 text-xl sm:flex-row text-navy">
         <dt class="shrink-0">
           <%# TODO: Extract pill (or whatever we want to call it) into component %>
           <div class="inline-block px-1 bg-yellow">Possibly broken</div>
@@ -74,7 +74,7 @@
 
     <%# Super crappy way of making this table readable(ish) on small screens by
     making the font smaller %>
-    <table class="w-full mt-16 text-base text-left md:text-2xl text-navy">
+    <table class="w-full mt-16 text-base text-left md:text-xl text-navy">
       <thead>
         <tr>
           <th class="pb-6 pr-8 whitespace-nowrap">
