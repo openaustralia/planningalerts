@@ -2,18 +2,18 @@
 
 <%= render Tailwind::Heading.new(tag: :h1) do %>
   Under the hood
-  <span class="block mt-1 text-2xl font-bold font-display">for <%= @authority.full_name %></span>
+  <span class="block mt-1 text-xl font-bold font-display">for <%= @authority.full_name %></span>
 <% end %>
 
-<p class="mt-12 text-2xl text-navy">
+<p class="mt-12 text-xl text-navy">
   More of the gory details of how information gets into PlanningAlerts. This is
   here so you can see and learn how it's done but also so you are able to
   fix things and see in detail what isn't working.
 </p>
 
-<p class="mt-24 text-2xl text-navy">
+<p class="mt-24 text-xl text-navy">
   The steps
-  <ol class="pl-6 ml-3 text-2xl list-decimal list-outside text-navy">
+  <ol class="pl-3 ml-3 text-xl list-decimal list-outside text-navy">
     <li>
       Applications are published on the
       <%= @authority.full_name %>
@@ -52,18 +52,16 @@
 </p>
 
 <section id="import" class="py-12 mt-12">
-  <%# TODO: Using non-standard font %>
-  <%= render Tailwind::Heading.new(tag: :h2, font: "sans").with_content("Most recent import logs") %>
+  <%= render Tailwind::Heading.new(tag: :h2).with_content("Most recent import logs") %>
   <%# TODO Is making the panel scrollable the right thing to do here? %>
-  <pre class="py-8 mt-12 overflow-x-scroll font-mono text-2xl bg-light-grey text-navy"><%= @authority.last_scraper_run_log %></pre>
+  <pre class="py-8 mt-12 overflow-x-scroll font-mono text-xl bg-light-grey text-navy"><%= @authority.last_scraper_run_log %></pre>
 </section>
 
 <section class="py-12">
-  <%# TODO: Using non-standard font %>
-  <%= render Tailwind::Heading.new(tag: :h2, font: "sans").with_content("What you can do next") %>
-  <p class="mt-8 text-2xl text-navy">
+  <%= render Tailwind::Heading.new(tag: :h2).with_content("What you can do next") %>
+  <p class="mt-8 text-xl text-navy">
     If something isn't right with the scraper or the data coming in then you could do one or several of the following
-    <ul class="pl-8 mt-4 text-2xl list-disc text-navy">
+    <ul class="pl-8 mt-4 text-xl list-disc text-navy">
       <li>
         <%= pa_link_to "Report or view scraper issues", github_issues_url %>
       </li>
@@ -80,9 +78,9 @@
       </li>
     </ul>
   </p>
-  <p class="mt-8 text-2xl text-navy">
+  <p class="mt-8 text-xl text-navy">
     If everything is working fine right now but you want to help if something goes wrong
-    <ul class="pl-8 mt-4 text-2xl list-disc text-navy">
+    <ul class="pl-8 mt-4 text-xl list-disc text-navy">
       <li>
         <%= pa_link_to "Watch the scraper", morph_url(@authority) %>
         on morph.io, so you will get an email if it errors. Press the "Watch" button in the top right while you're logged in to morph.io.

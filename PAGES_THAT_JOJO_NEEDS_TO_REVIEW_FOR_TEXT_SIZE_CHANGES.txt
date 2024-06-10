@@ -12,3 +12,4 @@ Application detail page - http://localhost:3000/applications/2010603
 Most comment page - http://localhost:3000/applications/trending
 Coverage page - http://localhost:3000/authorities
 Authority page - http://localhost:3000/authorities/blue_mountains
+Under the hood - http://localhost:3000/authorities/blue_mountains/under_the_hood
