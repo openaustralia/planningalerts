@@ -3,3 +3,4 @@ Application search results page - http://localhost:3000/applications/address?q=
 Alerts page - http://localhost:3000/profile/alerts
   Special bits: No saved alerts and with saved alerts
 Unsubscribe from email - http://localhost:3000/alerts/abcd/unsubscribe
+Edit alert - http://localhost:3000/profile/alerts/50/edit

@@ -1,9 +1,9 @@
-<%= pa_link_to "< Back to menu", profile_alerts_path, extra_classes: "text-2xl" %>
+<%= pa_link_to "< Back to menu", profile_alerts_path, extra_classes: "text-xl" %>
 
 <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mt-14").with_content(@alert.address) %>
-<div>
-  <p class="text-2xl font-bold leading-6 mt-14 text-navy">Last email sent</p>
-  <p class="text-2xl font-normal text-navy">
+<div class="text-xl text-navy">
+  <p class="font-bold leading-6 mt-14">Last email sent</p>
+  <p>
     <%= last_sent_in_words(@alert.last_sent) %>
   </p>
 </div>
@@ -23,7 +23,7 @@
       <div class="h-80">
         <%= render Tailwind::MapWithRadius.new(lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: "radius_meters") do %>
           <div class="flex items-center justify-center h-80">
-            <p class="text-2xl text-navy">Please enable javascript to see a map showing the size and location of your alert</p>
+            <p class="text-xl text-navy">Please enable javascript to see a map showing the size and location of your alert</p>
           </div>
         <% end %>
       </div>
