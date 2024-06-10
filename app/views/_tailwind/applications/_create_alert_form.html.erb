@@ -2,7 +2,7 @@
   <div class="flex items-start gap-6 px-8 py-4 mt-8 sm:pr-4 sm:py-2 sm:items-center bg-light-grey">
     <%= image_tag "tailwind/bookmark.svg", alt: "", class: "mt-2 sm:mt-0" %>
     <div class="flex flex-col gap-4 sm:flex-row sm:justify-between grow sm:items-center">
-      <p class="text-2xl font-bold text-navy">Save this search as an email alert</p>
+      <p class="text-xl font-bold text-navy">Save this search as an email alert</p>
       <%= form_with model: [:profile, alert], builder: FormBuilders::Tailwind do |f| %>
         <%= f.hidden_field :address %>
         <%= f.hidden_field :radius_meters %>
@@ -14,13 +14,13 @@
   <div class="flex flex-col items-center justify-between gap-8 md:flex-row bg-light-grey px-14 mt-14">
     <div class="pt-14 md:pb-14">
       <%# TODO: Font is inconsistent with what's used in the "signed in" variant above %>
-      <p class="text-3xl font-bold font-display text-navy">Save this search as an email alert?</p>
-      <p class="mt-4 text-2xl text-navy">
+      <p class="text-2xl font-bold font-display text-navy">Save this search as an email alert?</p>
+      <p class="mt-4 text-xl text-navy">
         <%= pa_link_to "Create an account", new_user_registration_path %>
         or
         <%= pa_link_to "sign in", new_user_session_path %>.
       </p>
-      <p class="text-2xl text-navy">
+      <p class="text-xl text-navy">
         It only takes a moment.
       </p>
     </div>

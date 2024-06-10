@@ -9,7 +9,7 @@
   <section class="pt-16">
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Or did you want?") %>
 
-    <ul class="pt-8 text-2xl text-navy">
+    <ul class="pt-8 text-xl text-navy">
       <% other_addresses.each do |a| %>
         <li>
           <%= pa_link_to a, url_for(q: a) %>

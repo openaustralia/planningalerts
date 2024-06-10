@@ -2,35 +2,35 @@
   <%= render Tailwind::Heading.new(tag: :h2).with_content("Search results") %>
   <div class="flex flex-col items-start gap-16 p-16 mt-12 md:flex-row bg-light-grey">
     <%= image_tag "tailwind/illustration/no_results" %>
-    <div>
-      <p class="text-3xl font-bold text-navy">
+    <div class="text-xl text-navy">
+      <p class="text-2xl font-bold">
         Unfortunately, we don't know of any applications near <%= full_address %>.
       </p>
-      <p class="mt-8 text-2xl text-navy">
+      <p class="mt-8">
         This is most likely because we haven't yet been able to add your local council
         or planning authority. We're working on covering the whole country but we're not
         there yet.
       </p>
-      <p class="mt-6 text-2xl text-navy">
+      <p class="mt-6">
         There is a list of the planning authorities we currently cover
         <%= pa_link_to "here", authorities_path %>.
       </p>
-      <p class="mt-6 text-2xl text-navy">
+      <p class="mt-6">
         To see an example of what the results would look like once your area is included
         see <%= pa_link_to "Bourke Street in Melbourne", address_applications_path(q: "Bourke St, Melbourne 3000") %>.
       </p>
     </div>
   </div>
 </section>
-<section class="mt-16">
+<section class="mt-16 text-xl text-navy">
   <%= render Tailwind::Heading.new(tag: :h2).with_content("You can help!") %>
-  <p class="mt-8 text-2xl text-navy">
+  <p class="mt-8">
     We are a free service brought to you by the charity the
     <%= pa_link_to "OpenAustralia Foundation", "https://www.oaf.org.au" %>.
     Donations and other kinds of support allow us to add more local authorities,
     including yours!
   </p>
-  <p class="mt-6 text-2xl text-navy">
+  <p class="mt-6">
     Check out our <%= pa_link_to "get involved", get_involved_path %> section for
     ways to help us get your search results.
   </p>

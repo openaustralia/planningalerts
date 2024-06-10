@@ -1,6 +1,6 @@
 <%= render Tailwind::PanelListItem.new(url: application_path(application)) do |c| %>
   <div class="flex items-end gap-6">
-    <%= render Tailwind::Heading.new(tag: :h2, size: "2xl", font: "sans") do %>
+    <%= render Tailwind::Heading.new(tag: :h2, size: "xl", font: "sans") do %>
       <%= c.linkify(application.address) %>
     <% end %>
     <%# TODO: Make it the right width at different numbers %>
@@ -13,7 +13,7 @@
       </div>
     <% end %>
   </div>
-  <p class="max-w-xl text-2xl text-navy">
+  <p class="max-w-xl text-xl text-navy">
     <%# Local variable highlights is optional. Only use it if it is there %>
     <% if local_assigns.key? :highlights %>
       <%= local_assigns[:highlights][:description].html_safe %><%# erblint:disable Rubocop %>
