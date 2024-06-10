@@ -21,3 +21,5 @@ Now check your email page (after registering for account) -
 Edit your account page - http://localhost:3000/users/edit
 Create an account - http://localhost:3000/users/sign_up
 Sign in - http://localhost:3000/users/sign_in
+404 page - http://localhost:3000/404
+500 page - http://localhost:3000/500
