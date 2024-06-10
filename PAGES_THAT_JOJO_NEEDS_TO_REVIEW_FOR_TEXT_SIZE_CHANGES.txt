@@ -17,3 +17,4 @@ All recent comments - http://localhost:3000/comments/
 Preview page - http://localhost:3000/comments/163477/preview
 Contact thank you - http://localhost:3000/contact_messages/thank_you
 Change your password page (after reset password) - 
+Now check your email page (after registering for account) -
