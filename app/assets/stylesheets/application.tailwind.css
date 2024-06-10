@@ -11,11 +11,11 @@
 }
 
 .pac-item {
-  @apply !px-4 !py-3 !text-2xl !font-sans text-navy;
+  @apply !px-4 !py-3 !text-xl !font-sans text-navy;
 }
 
 .pac-item-query {
-  @apply !pr-2 !text-2xl !font-sans text-navy;
+  @apply !pr-2 !text-xl !font-sans text-navy;
 }
 
 .pac-matched {
