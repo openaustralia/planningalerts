@@ -5,3 +5,4 @@ Alerts page - http://localhost:3000/profile/alerts
 Unsubscribe from email - http://localhost:3000/alerts/abcd/unsubscribe
 Edit alert - http://localhost:3000/profile/alerts/50/edit
 Create new alert - http://localhost:3000/profile/alerts/new
+About page - http://localhost:3000/about
