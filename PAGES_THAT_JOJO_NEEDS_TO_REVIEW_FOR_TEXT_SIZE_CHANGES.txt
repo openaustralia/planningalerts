@@ -19,3 +19,4 @@ Contact thank you - http://localhost:3000/contact_messages/thank_you
 Change your password page (after reset password) - 
 Now check your email page (after registering for account) -
 Edit your account page - http://localhost:3000/users/edit
+Create an account - http://localhost:3000/users/sign_up
