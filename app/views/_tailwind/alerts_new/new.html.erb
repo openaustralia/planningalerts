@@ -11,7 +11,7 @@
     <%= f.collection_radio_buttons :radius_meters, Alert::VALID_RADIUS_METERS_VALUES, ->(r) { r }, ->(r) { size_option_sentence_alternate(r) } do |b| %>
       <div class="flex items-center">
         <%= b.radio_button class: "w-5 h-5 text-warm-grey" %>
-        <%= b.label class: "ml-3 text-navy text-2xl" %>
+        <%= b.label class: "ml-3 text-navy text-xl" %>
       </div>
     <% end %>
     <%= f.error :radius_meters, class: "mt-5" %>
