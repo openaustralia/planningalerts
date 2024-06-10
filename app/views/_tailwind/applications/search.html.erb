@@ -14,12 +14,13 @@
     <%= render Tailwind::SimplePager.new(collection: @applications) %>
     <%# TODO: Extract list of applications as a component? %>
     <ul class="mt-12 divide-y divide-light-grey2 border-y border-light-grey2">
+      <%# TODO: Make highlighting of search terms work %>
       <% @applications.each do |application| %>
         <li><%= render application %></li>
       <% end %>
     </ul>
     <%= render Tailwind::SimplePager.new(collection: @applications) %>
   <% else %>
-    <p class="text-2xl text-navy">Sorry, no results found!</p>
+    <p class="text-xl text-navy">Sorry, no results found!</p>
   <% end %>
 <% end %>
