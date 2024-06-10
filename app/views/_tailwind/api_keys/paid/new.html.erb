@@ -1,22 +1,22 @@
 <%= render Tailwind::Heading.new(tag: :h1).with_content("Sign up for access to the API key") %>
 
-<p class="mt-16 text-2xl text-navy">
+<p class="mt-16 text-xl text-navy">
   You're signing up to the ... plan
 </p>
 
 <%# TODO: This is too much detail up front. The key bit is that you will be invoiced rather than charging a credit card. %>
-<p class="mt-8 text-2xl text-navy">
+<p class="mt-8 text-xl text-navy">
   Once you agree to the contract below, we will review your details and activate
   your API key. You will then be invoiced for the period in advance from when you sign up to the
   end of the calendar month (pro-rated). From then on
   you will be invoiced on the first of each calendar month for the month of usage in advance.
 </p>
 
-<p class="mt-8 text-2xl text-navy">
+<p class="mt-8 text-xl text-navy">
   Standard payment terms are 7 days.
 </p>
 
-<p class="mt-8 text-2xl text-navy">
+<p class="mt-8 text-xl text-navy">
   For an annual payment you will be invoiced in advance on the day you sign up
 </p>
 
@@ -25,7 +25,7 @@
   <%= form_with builder: FormBuilders::Tailwind do |f| %>
     <%# TODO: How to style fieldset and legend? %>
     <fieldset>
-      <legend class="text-2xl font-bold text-navy">Company</legend>
+      <legend class="text-xl font-bold text-navy">Company</legend>
       <div class="mt-8">
         <%= f.label :name, "Name", class: "block mb-3" %>
         <%= f.text_field :name, class: "block w-full", required: true %>
@@ -44,7 +44,7 @@
       </div>
     </fieldset>
     <fieldset class="mt-16">
-      <legend class="text-2xl font-bold text-navy">Main contact</legend>
+      <legend class="text-xl font-bold text-navy">Main contact</legend>
       <div class="mt-8">
         <%= f.label :name, "Name", class: "block mb-3" %>
         <%= f.text_field :name, class: "block w-full" %>
@@ -59,7 +59,7 @@
       </div>
     </fieldset>
     <fieldset class="mt-16">
-      <legend class="text-2xl font-bold text-navy">Technical contact</legend>
+      <legend class="text-xl font-bold text-navy">Technical contact</legend>
       <div class="mt-8">
         <%= f.label :name, "Name", class: "block mb-3" %>
         <%= f.text_field :name, class: "block w-full" %>
@@ -74,7 +74,7 @@
       </div>
     </fieldset>
     <fieldset class="mt-16">
-      <legend class="text-2xl font-bold text-navy">Billing contact</legend>
+      <legend class="text-xl font-bold text-navy">Billing contact</legend>
       <div class="mt-8">
         <%= f.label :name, "Name", class: "block mb-3" %>
         <%= f.text_field :name, class: "block w-full" %>

@@ -2,17 +2,17 @@
 
 <%= render Tailwind::Heading.new(tag: :h2).with_content("The Planning Alerts API is a paid service") %>
 
-<p class="mt-8 text-2xl text-navy">
+<p class="mt-8 text-xl text-navy">
   The PlanningAlerts API costs $2499 per month. We have a very straightforward short contract. We invoice monthly.
   Let's have a conversation to get things started.
   Fill out this form and we'll go from there.
 </p>
 
-<p class="mt-8 text-2xl text-navy">
+<p class="mt-8 text-xl text-navy">
   Under certain very specific circumstances we may grant you access to the API for free. You must:
 </p>
 
-<ul class="pl-6 mt-8 text-2xl list-disc list-outside text-navy">
+<ul class="pl-6 mt-8 text-xl list-disc list-outside text-navy">
   <li>
     Not be making money in any way using the API or in a related service - some more words that explain this in detail
   </li>
@@ -34,7 +34,7 @@
       <!-- Pricing Card -->
       <div class="flex flex-col max-w-md p-6 mx-auto text-center border rounded-lg text-navy border-light-grey2 xl:p-8">
         <h3 class="mb-4 text-3xl font-semibold">Community Access Grant</h3>
-        <p class="text-2xl font-light text-navy">Best option for personal use & for your next project.</p>
+        <p class="text-xl font-light text-navy">Best option for personal use & for your next project.</p>
         <div class="flex items-baseline justify-center my-8">
           <span class="mr-2 text-5xl font-extrabold">$0</span>
           <span class="text-gray-500">/month</span>
@@ -62,14 +62,14 @@
             <span>Free updates: <span class="font-semibold">6 months</span></span>
           </li>
         </ul>
-        <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_api_keys_non_commercial_path) do %>
+        <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_api_keys_non_commercial_path) do %>
           Apply
         <% end %>
       </div>
       <!-- Pricing Card -->
       <div class="flex flex-col max-w-md p-6 mx-auto text-center border rounded-lg text-navy border-light-grey2 xl:p-8">
         <h3 class="mb-4 text-3xl font-semibold">Commercial</h3>
-        <p class="text-2xl font-light text-gray-500">Relevant for multiple users, extended & premium support.</p>
+        <p class="text-xl font-light text-gray-500">Relevant for multiple users, extended & premium support.</p>
         <div class="flex items-baseline justify-center my-8">
           <span class="mr-2 text-5xl font-extrabold">$2499</span>
           <span>/month</span>
@@ -97,14 +97,14 @@
             <span>Free updates: <span class="font-semibold">24 months</span></span>
           </li>
         </ul>
-        <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_api_keys_paid_path) do %>
+        <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_api_keys_paid_path) do %>
           Get Started
         <% end %>
       </div>
       <!-- Pricing Card -->
       <div class="flex flex-col max-w-md p-6 mx-auto text-center border rounded-lg text-navy border-light-grey2 xl:p-8">
         <h3 class="mb-4 text-3xl font-semibold">Commercial+</h3>
-        <p class="text-2xl font-light text-gray-500">Relevant for multiple users, extended & premium support.</p>
+        <p class="text-xl font-light text-gray-500">Relevant for multiple users, extended & premium support.</p>
         <div class="flex flex-col my-8">
           <div class="flex items-baseline justify-center">
             <span class="mr-2 text-5xl font-extrabold">$2499</span>
@@ -135,7 +135,7 @@
             <span>Free updates: <span class="font-semibold">24 months</span></span>
           </li>
         </ul>
-        <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_api_keys_paid_path) do %>
+        <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_api_keys_paid_path) do %>
           Get Started
         <% end %>
       </div>
