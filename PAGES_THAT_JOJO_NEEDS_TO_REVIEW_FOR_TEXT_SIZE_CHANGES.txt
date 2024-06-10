@@ -16,3 +16,4 @@ Under the hood - http://localhost:3000/authorities/blue_mountains/under_the_hood
 All recent comments - http://localhost:3000/comments/
 Preview page - http://localhost:3000/comments/163477/preview
 Contact thank you - http://localhost:3000/contact_messages/thank_you
+Change your password page (after reset password) - 

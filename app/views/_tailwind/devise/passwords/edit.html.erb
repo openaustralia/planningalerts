@@ -12,7 +12,7 @@
         <%= f.password_field :password, class: "mt-1 block w-full", autofocus: true, autocomplete: "new-password" %>
         <%= f.error :password, class: "mt-2" %>
         <% if @minimum_password_length %>
-          <p class="mt-2 text-2xl font-light text-navy"><%= @minimum_password_length %> characters minimum</p>
+          <p class="mt-2 text-xl font-light text-navy"><%= @minimum_password_length %> characters minimum</p>
         <% end %>
       </div>
 
