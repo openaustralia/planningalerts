@@ -3,7 +3,7 @@
 <% end %>
 
 <%= render Tailwind::Heading.new(tag: :h1) do %>
-  Application Information <span class="block mt-1 text-2xl font-bold font-display">for <%= @authority.full_name %></span>
+  Application Information <span class="block mt-1 text-xl font-bold font-display">for <%= @authority.full_name %></span>
 <% end %>
 
 <% if @authority.boundary && Flipper.enabled?(:show_authority_map, current_user) %>
@@ -15,7 +15,7 @@
 <% end %>
 
 <% if @authority.population_2021 %>
-  <p class="py-4 mt-8 text-2xl border-y text-navy border-light-grey2">Population <%= number_with_delimiter @authority.population_2021 %> (2021 census)</p>
+  <p class="py-4 mt-8 text-xl border-y text-navy border-light-grey2">Population <%= number_with_delimiter @authority.population_2021 %> (2021 census)</p>
 <% end %>
 
 <% if @authority.covered? %>
@@ -25,17 +25,17 @@
         Applications collected by Planning Alerts
       <% end %>
       <% if @authority.applications.empty? %>
-        <p class="mt-8 text-2xl text-navy">No applications have yet been collected.</p>
+        <p class="mt-8 text-xl text-navy">No applications have yet been collected.</p>
       <% else %>
         <% if @authority.broken? %>
           <%# TODO: We need a proper design for this warning message %>
-          <p class="mt-8 text-2xl text-navy">
+          <p class="mt-8 text-xl text-navy">
             It looks like something might be wrong.
             The last new application was received <%= time_ago_in_words(@authority.date_last_new_application_scraped) %> ago.
             <%= pa_link_to "Why?", faq_path(anchor: "broken_scraper") %>
           </p>
         <% end %>
-        <table class="mt-8 text-2xl text-navy">
+        <table class="mt-8 text-xl text-navy">
           <tbody>
             <tr>
               <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.week.ago).count %></td>
@@ -71,7 +71,7 @@
         <%= render Tailwind::Heading.new(tag: :h2) do %>
           Browse applications from <%= @authority.full_name %>
         <% end %>
-        <ul class="mt-8 text-2xl text-navy">
+        <ul class="mt-8 text-xl text-navy">
           <li>
             View all
             <%= pa_link_to "recent applications", authority_applications_path(@authority.short_name_encoded) %>
@@ -119,13 +119,13 @@
       <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-12") do %>
         Under the Hood
       <% end %>
-      <p class="text-2xl text-navy">
+      <p class="text-xl text-navy">
         Are you a developer or keen to learn some new things and help out in the process?
         Then, <%= pa_link_to "look under the hood", authority_under_the_hood_path(@authority.short_name_encoded) %>,
         see more about how the information gets into PlanningAlerts, what problems are
         happening and what you might do to help fix them.
       </p>
-      <p class="mt-6 text-2xl text-navy">
+      <p class="mt-6 text-xl text-navy">
         <%= pa_link_to "Look under the hood", authority_under_the_hood_path(@authority.short_name_encoded) %>
       </p>
 
@@ -136,15 +136,15 @@
   <div class="flex flex-col items-start gap-16 p-16 mt-12 md:flex-row bg-light-grey">
     <%= image_tag "tailwind/illustration/no_results", alt: "" %>
     <div>
-      <p class="text-3xl font-bold text-navy">
+      <p class="text-2xl font-bold text-navy">
         This authority is not yet covered by Planning&nbsp;Alerts.
       </p>
-      <p class="mt-8 text-2xl text-navy">
+      <p class="mt-8 text-xl text-navy">
         This is because either
         a scraper has not yet been written for it,
         or the information is not available online or in a form that can be read by a scraper.
       </p>
-      <p class="mt-6 text-2xl text-navy">
+      <p class="mt-6 text-xl text-navy">
         There is a list of the planning authorities we currently cover
         <%= pa_link_to "here", authorities_path %>.
       </p>
@@ -152,13 +152,13 @@
   </div>
   <section class="mt-16">
     <%= render Tailwind::Heading.new(tag: :h2).with_content("You can help!") %>
-    <p class="mt-8 text-2xl text-navy">
+    <p class="mt-8 text-xl text-navy">
       We are a free service brought to you by the charity the
       <%= pa_link_to "OpenAustralia Foundation", "https://www.oaf.org.au" %>.
       Donations and other kinds of support allow us to add more local authorities,
       including this one.
     </p>
-    <p class="mt-6 text-2xl text-navy">
+    <p class="mt-6 text-xl text-navy">
       Check out our <%= pa_link_to "get involved", get_involved_path %> section.
     </p>
   </section>
