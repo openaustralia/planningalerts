@@ -1,5 +1,5 @@
 <%= render Tailwind::PanelListItem.new(url: edit_profile_alert_path(alert)) do |c| %>
-  <dl class="text-2xl text-navy">
+  <dl class="text-xl text-navy">
     <dt class="hidden">Address</dt>
     <dd><%= c.linkify(alert.address) %></dd>
     <dt class="mt-3 font-bold leading-6">Last email sent</dt>

@@ -1,6 +1,6 @@
 <% content_for :content do %>
   <%= render Tailwind::Heading.new(tag: :h1) do %>
-    <div class="text-xl">Your account</div>
+    <div class="text-lg">Your account</div>
     <%= current_user.name_with_fallback %>
   <% end %>
 

@@ -1,4 +1,4 @@
-<ul class="ml-5 text-xl font-bold text-navy list-image-dash">
+<ul class="ml-5 text-lg font-bold text-navy list-image-dash">
   <li><div class="pl-4"><%= pa_link_to_unless_current "Your alerts", profile_alerts_path %></div></li>
   <li><div class="pl-4"><%= pa_link_to_unless_current "Create new alert", new_profile_alert_path %></div></li>
   <li><div class="pl-4"><%= pa_link_to_unless_current "Your comments", comments_profile_path %></div></li>
@@ -11,7 +11,7 @@
 </ul>
 
 <% if current_user.admin? %>
-  <ul class="mt-10 ml-5 text-xl list-image-dash">
+  <ul class="mt-10 ml-5 text-lg list-image-dash">
     <li><div class="pl-4"><%= pa_link_to_unless_current "Administration panel", admin_root_path %></div></li>
     <li><div class="pl-4"><%= pa_link_to_unless_current "Feature flags", admin_flipper_path %></div></li>
   </ul>
