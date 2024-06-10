@@ -149,13 +149,13 @@
       <%= render "comments/no_authority_email_explanation", application: @application %>
     <% elsif current_user.nil? %>
       <div class="px-4 py-3 bg-light-grey">
-        <p class="text-2xl opacity-50 text-navy">Be polite, clear and to the point so your comment gets listened to.</p>
+        <p class="text-xl opacity-50 text-navy">Be polite, clear and to the point so your comment gets listened to.</p>
         <div class="flex justify-center py-12">
           <div class="grid gap-3 sm:inline-grid sm:grid-cols-2">
-            <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_registration_path) do %>
+            <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_user_registration_path) do %>
               Create an account
             <% end %>
-            <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :primary, href: new_user_session_path) do %>
+            <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_user_session_path) do %>
               Sign in
             <% end %>
           </div>
