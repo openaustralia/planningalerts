@@ -9,7 +9,7 @@
 <%# TODO: Make sure that there is consistency on formatting of h1, h2, h3, etc. across the site %>
 <%# TODO: Using non-standard font %>
 <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "mt-14").with_content("Your comment") %>
-<p class="mb-10 text-3xl text-navy">Does this look right?</p>
+<p class="mb-10 text-2xl text-navy">Does this look right?</p>
 
 <%# TODO: Can we use the comments partial here so that we can make sure it has consistent formatting? %>
 <%= render Tailwind::QuotedBlock.new do %>
@@ -24,7 +24,7 @@
   <p class="text-xl font-bold text-navy">(Your address is automatically hidden when published on our website)</p>
 
   <div class="mt-12">
-    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "2xl", type: :secondary, href: application_path(@comment.application, anchor: "add-comment"), icon: :edit).with_content("Edit comment") %>
+    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :secondary, href: application_path(@comment.application, anchor: "add-comment"), icon: :edit).with_content("Edit comment") %>
   </div>
 
   <div class="mt-4">
@@ -38,11 +38,11 @@
   <%# TODO: Using non-standard font %>
   <%= render Tailwind::Heading.new(tag: :h2, font: "sans").with_content("Email preview") %>
 
-  <p class="mt-8 text-2xl text-navy">
+  <p class="mt-8 text-xl text-navy">
     Your comment and details will also automatically be sent to <strong><%= @comment.comment_recipient_full_name %></strong>.
     They may consider your submission when they decide whether to approve this application.
   </p>
-  <p class="mt-4 text-2xl text-navy">
+  <p class="mt-4 text-xl text-navy">
     Here's a preview (nobody but you and the council will see this):
   </p>
 
