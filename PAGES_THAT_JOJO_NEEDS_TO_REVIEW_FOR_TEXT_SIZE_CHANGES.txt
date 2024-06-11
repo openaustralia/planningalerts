@@ -34,3 +34,5 @@ Now check your email page (after activing an account) -
 Activate your account page -
 First page of "Activate your account" - http://localhost:3000/users/activation/new
 
+Also still need to change all the email templates
+
