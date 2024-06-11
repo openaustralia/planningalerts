@@ -30,4 +30,5 @@ How to write a scraper - http://localhost:3000/how_to_write_a_scraper
 Your comments - http://localhost:3000/profile/comments
 Report a comment - http://localhost:3000/comments/163476/reports/new
 Thank you for reporting a comment - http://localhost:3000/comments/163476/reports/thank_you
+Now check your email page (after activing an account) -
 
