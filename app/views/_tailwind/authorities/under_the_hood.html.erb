@@ -11,19 +11,20 @@
   fix things and see in detail what isn't working.
 </p>
 
-<p class="mt-24 text-xl text-navy">
-  The steps
-  <ol class="pl-3 ml-3 text-xl list-decimal list-outside text-navy">
-    <li>
+<p class="mt-12 text-xl text-navy">
+  <span class="font-bold">The steps to getting data into Planning Alerts</span>
+  <%# TODO: Extract a numbered list like this into a component %>
+  <ol class="pt-4 pl-8 text-xl list-decimal list-outside text-navy">
+    <li class="pl-4">
       Applications are published on the
       <%= @authority.full_name %>
       website in a human readable, non-structured form.
     </li>
-    <li>
+    <li class="pl-4">
       The latest scraper code on Github is loaded by our scraping
       platform <%= pa_link_to "morph.io", "https://morph.io" %>.
     </li>
-    <li>
+    <li class="pl-4">
       The
       <%= pa_link_to "scraper #{@authority.morph_name}", morph_url(@authority) %>
       on our scraping platform
@@ -31,19 +32,19 @@
       collects the information daily and converts it into a machine-readable
       format.
     </li>
-    <li>
+    <li class="pl-4">
       If the scraper errors anyone who is
       <%= pa_link_to "watching the scraper", morph_watchers_url(@authority) %>
       on morph.io gets informed via a daily email alert.
     </li>
-    <li>
+    <li class="pl-4">
       The machine readable data is
       <%= pa_link_to "validated, imported and geocoded", { anchor: "import" } %>
       by PlanningAlerts daily. If there are any validation errors on an
       application, the application is skipped and the error is logged.
       See below for the most recent logs.
     </li>
-    <li>
+    <li class="pl-4">
       The information is published on PlanningAlerts, made available via the
       <%= pa_link_to "API", api_howto_path %>, and people are informed of new
       applications via email alerts.
@@ -60,7 +61,7 @@
 <section class="py-12">
   <%= render Tailwind::Heading.new(tag: :h2).with_content("What you can do next") %>
   <p class="mt-8 text-xl text-navy">
-    If something isn't right with the scraper or the data coming in then you could do one or several of the following
+    If something isn't right with the scraper or the data coming in then you could do one or several of the following:
     <ul class="pl-8 mt-4 text-xl list-disc text-navy">
       <li>
         <%= pa_link_to "Report or view scraper issues", github_issues_url %>
@@ -79,7 +80,7 @@
     </ul>
   </p>
   <p class="mt-8 text-xl text-navy">
-    If everything is working fine right now but you want to help if something goes wrong
+    If everything is working fine right now but you want to help if something goes wrong:
     <ul class="pl-8 mt-4 text-xl list-disc text-navy">
       <li>
         <%= pa_link_to "Watch the scraper", morph_url(@authority) %>
