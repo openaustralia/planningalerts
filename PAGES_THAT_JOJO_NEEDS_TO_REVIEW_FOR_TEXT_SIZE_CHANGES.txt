@@ -31,4 +31,6 @@ Your comments - http://localhost:3000/profile/comments
 Report a comment - http://localhost:3000/comments/163476/reports/new
 Thank you for reporting a comment - http://localhost:3000/comments/163476/reports/thank_you
 Now check your email page (after activing an account) -
+Activate your account page -
+First page of "Activate your account" - http://localhost:3000/users/activation/new
 
