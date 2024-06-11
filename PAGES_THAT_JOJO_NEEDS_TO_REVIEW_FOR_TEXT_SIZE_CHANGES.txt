@@ -24,3 +24,4 @@ Sign in - http://localhost:3000/users/sign_in
 404 page - http://localhost:3000/404
 500 page - http://localhost:3000/500
 Help page - http://localhost:3000/faq
+Get involved - http://localhost:3000/get_involved
