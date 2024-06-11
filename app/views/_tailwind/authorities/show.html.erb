@@ -1,9 +1,9 @@
 <% content_for :page_title do %>
-  Application Information for <%= @authority.full_name %>
+  Information on <%= @authority.full_name %>
 <% end %>
 
 <%= render Tailwind::Heading.new(tag: :h1) do %>
-  Application Information <span class="block mt-1 text-xl font-bold font-display">for <%= @authority.full_name %></span>
+  Information <span class="block mt-1 text-xl font-bold font-display">on <%= @authority.full_name %></span>
 <% end %>
 
 <% if @authority.boundary && Flipper.enabled?(:show_authority_map, current_user) %>
@@ -20,6 +20,25 @@
 
 <% if @authority.covered? %>
   <div class="divide-y divide-light-grey2">
+    <% unless @authority.applications.empty? %>
+      <section class="py-12">
+        <%# TODO: This title isn't right because the section has comments in it too %>
+        <%= render Tailwind::Heading.new(tag: :h2) do %>
+          Browse applications from <%= @authority.full_name %>
+        <% end %>
+        <ul class="mt-8 text-xl text-navy">
+          <li>
+            View all
+            <%= pa_link_to "recent applications", authority_applications_path(@authority.short_name_encoded) %>
+          </li>
+          <li>
+            View all
+            <%= pa_link_to "comments on applications", authority_comments_path(@authority.short_name_encoded) %>
+          </li>
+        </ul>
+      </section>
+    <% end %>
+
     <section class="py-12">
       <%= render Tailwind::Heading.new(tag: :h2) do %>
         Applications collected by Planning Alerts
@@ -37,22 +56,22 @@
         <% end %>
         <table class="mt-8 text-xl text-navy">
           <tbody>
-            <tr>
+            <tr class="flex flex-col pb-4 sm:table-row">
               <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.week.ago).count %></td>
               <th class="font-normal text-left">in the last week</th>
             </tr>
-            <tr>
+            <tr class="flex flex-col pb-4 sm:table-row">
               <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.month.ago).count %></td>
               <th class="font-normal text-left">in the last month</th>
             </tr>
-            <tr>
+            <tr class="flex flex-col pb-4 sm:table-row">
               <td class="pr-8 font-bold text-7xl"><%= @authority.applications.count %></td>
               <th class="font-normal text-left">
                 since <%= @authority.earliest_date.strftime("%-d %b %Y") %>
                 (when this authority was first added to Planning Alerts)
               </th>
             </tr>
-            <tr>
+            <tr class="flex flex-col pb-4 sm:table-row">
               <td class="pr-8 font-bold text-7xl"><%= @authority.median_new_applications_per_week %></td>
               <th class="font-normal text-left">
                 <%= pa_link_to "median", "https://en.wikipedia.org/wiki/Median" %>
@@ -66,28 +85,11 @@
     </section>
 
     <% unless @authority.applications.empty? %>
-      <section class="pt-12 pb-24">
-        <%# TODO: This title isn't right because the section has comments in it too %>
-        <%= render Tailwind::Heading.new(tag: :h2) do %>
-          Browse applications from <%= @authority.full_name %>
-        <% end %>
-        <ul class="mt-8 text-xl text-navy">
-          <li>
-            View all
-            <%= pa_link_to "recent applications", authority_applications_path(@authority.short_name_encoded) %>
-          </li>
-          <li>
-            View all
-            <%= pa_link_to "comments on applications", authority_comments_path(@authority.short_name_encoded) %>
-          </li>
-        </ul>
-      </section>
-
-      <section class="pt-12 pb-24">
+      <section class="py-12">
         <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-12") do %>
           Number of new applications scraped over time
         <% end %>
-        <div class="h-52">
+        <div class="h-40 sm:h-52">
           <div class="chart bg-fuchsia"
                x-init="barGraph(
                          $el,
@@ -97,11 +99,11 @@
         </div>
       </section>
 
-      <section class="clear-both pt-12 pb-24">
+      <section class="clear-both py-12">
         <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-12") do %>
           Number of comments posted over time
         <% end %>
-        <div class="h-52">
+        <div class="h-40 sm:h-52">
           <div class="chart bg-fuchsia"
                x-init="barGraph(
                          $el,
@@ -115,7 +117,7 @@
       <%= javascript_include_tag "tailwind/bar_graph" %>
     <% end %>
 
-    <section class="pt-12 pb-24">
+    <section class="py-12">
       <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-12") do %>
         Under the Hood
       <% end %>
