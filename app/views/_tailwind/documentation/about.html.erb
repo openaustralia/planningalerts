@@ -24,13 +24,13 @@
   It was created by Matthew Landauer and Katherine Szuminska.
 </p>
 
-<section id="contributors" class="pt-8">
+<section id="contributors" class="pt-12">
   <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mb-6").with_content("Contributors") %>
   <div class="flex flex-col items-start justify-between gap-8 lg:flex-row-reverse">
     <%= image_tag "tailwind/illustration/about.svg", class: "lg:pt-16", alt: "" %>
     <div class="text-xl text-navy">
       <p>Thanks goes to these wonderful people:</p>
-      <ul class="mt-8 columns-2">
+      <ul class="mt-8 columns-1 sm:columns-2">
         <% contributors.each do |contributor| %>
         <li>
           <%= pa_link_to contributor[:name], contributor_profile_url(contributor) %>
