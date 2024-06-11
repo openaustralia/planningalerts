@@ -1,6 +1,3 @@
-Search page - http://localhost:3000/applications/search and http://localhost:3000/applications/search?q=blip+sdfsd
-Application detail page - http://localhost:3000/applications/2010603
-  Special bits: when logged out
 Most comment page - http://localhost:3000/applications/trending
 Coverage page - http://localhost:3000/authorities
 Authority page - http://localhost:3000/authorities/blue_mountains
