@@ -1,7 +1,5 @@
-Contact thank you - http://localhost:3000/contact_messages/thank_you
 Change your password page (after reset password) - 
 Now check your email page (after registering for account) -
-Create an account - http://localhost:3000/users/sign_up
 Sign in - http://localhost:3000/users/sign_in
 404 page - http://localhost:3000/404
 500 page - http://localhost:3000/500
@@ -17,3 +15,5 @@ First page of "Activate your account" - http://localhost:3000/users/activation/n
 
 Also still need to change all the email templates
 
+Still needs an illustration:
+Contact thank you - http://localhost:3000/contact_messages/thank_you

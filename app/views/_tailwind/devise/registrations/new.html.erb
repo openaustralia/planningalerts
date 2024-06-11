@@ -1,5 +1,5 @@
 <div class="max-w-lg mx-auto">
-  <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "my-20 text-center").with_content("Create an account") %>
+  <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mt-20 mb-12 text-center").with_content("Create an account") %>
 
   <%= form_with model: resource, url: registration_path(resource_name), builder: FormBuilders::Tailwind do |f| %>
     <div>
@@ -31,7 +31,7 @@
   </div>
 
   <hr class="mt-16 text-[#D2CFC1]">
-  <div class="flex mt-8">
+  <div class="flex flex-col-reverse items-center gap-8 mt-8 sm:flex-row">
     <%= image_tag "tailwind/illustration/already-have-an-account.svg", alt: "" %>
     <div class="flex-grow text-xl font-bold text-center text-navy">
       <p>
