@@ -1,7 +1,5 @@
 Change your password page (after reset password) - 
 Now check your email page (after registering for account) -
-404 page - http://localhost:3000/404
-500 page - http://localhost:3000/500
 Help page - http://localhost:3000/faq
 Get involved - http://localhost:3000/get_involved
 How to lobby your council - http://localhost:3000/how_to_lobby_your_local_council
