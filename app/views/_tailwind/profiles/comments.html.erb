@@ -3,7 +3,7 @@
 <%= render Tailwind::Heading.new(tag: :h2).with_content(yield(:page_title)) %>
 
 <% if @comments.empty? %>
-  <p class="mt-12 text-2xl text-navy">You haven't made any comments yet.</p>
+  <p class="mt-12 text-xl text-navy">You haven't made any comments yet.</p>
 <% else %>
   <ol class="mt-20">
     <% @comments.each do |comment| %>
