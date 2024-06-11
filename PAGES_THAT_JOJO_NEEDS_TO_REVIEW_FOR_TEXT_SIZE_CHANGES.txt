@@ -1,5 +1,3 @@
-Application search results page - http://localhost:3000/applications/address?q=
-  Special bits that need looking at: Save search in logged in and logged out state. Number of comments speech bubble.
 Alerts page - http://localhost:3000/profile/alerts
   Special bits: No saved alerts and with saved alerts
 Unsubscribe from email - http://localhost:3000/alerts/abcd/unsubscribe
