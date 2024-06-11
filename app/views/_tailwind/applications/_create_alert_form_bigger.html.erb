@@ -1,7 +1,7 @@
 <%# TODO: Only show this block if we don't have an alert covering this area? %>
 <%# TODO: Remove duplication between this and applications/_create_alert_form.html.erb. These two views are annoyingly similar yet different %>
-<div class="flex flex-col items-center justify-between gap-8 md:flex-row bg-light-grey px-11 md:px-14 mt-14">
-  <div class="pt-12 md:pb-14">
+<div class="flex items-center justify-between gap-8 bg-light-grey px-14 mt-14">
+  <div class="py-10">
     <p class="text-2xl font-bold font-display text-navy">Save this search as an email alert?</p>
     <% if current_user.nil? %>
       <p class="mt-4 text-xl text-navy">
@@ -23,5 +23,7 @@
       <% end %>
     <% end %>
   </div>
-  <%= image_tag "tailwind/illustration/save-search.svg", class: "self-end md:pt-8", alt: "" %>
+  <div class="self-end overflow-hidden h-[190px] hidden md:block">
+    <%= image_tag "tailwind/illustration/save-search.svg", alt: "" %>
+  </div>
 </div>
