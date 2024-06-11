@@ -1,19 +1,22 @@
 <% content_for :page_title, "Thank you!" %>
 
-<%# TODO: This page needs a proper design %>
-<%= render Tailwind::Heading.new(tag: :h1).with_content(yield :page_title) %>
+<%# TODO: Turn this centralised small margin content into a component %>
+<div class="flex flex-col items-center max-w-2xl m-auto mt-16 text-center">
+  <%# TODO: This page needs a proper design %>
+  <%= render Tailwind::Heading.new(tag: :h1).with_content(yield :page_title) %>
 
-<div class="text-xl text-navy">
-  <p class="mt-12">
-    Thank you for getting in touch. We will get back to you as soon as we can.
-  </p>
+  <div class="text-xl text-navy">
+    <p class="mt-12">
+      Thank you for getting in touch. We will get back to you as soon as we can.
+    </p>
 
-  <p class="mt-8">
-    We are a tiny team with a very large email inbox. So, it probably will take us a little while to get back to you.
-    We try to get back to everyone but sometimes things slip through the cracks.
-  </p>
+    <p class="mt-8">
+      We are a tiny team with a very large email inbox. So, it probably will take us a little while to get back to you.
+      We try to get back to everyone but sometimes things slip through the cracks.
+    </p>
 
-  <p class="mt-8">
-    <%= pa_link_to "Return to home", root_path %>
-  </p>
+    <p class="mt-8">
+      <%= pa_link_to "Go to home", root_path %>
+    </p>
+  </div>
 </div>
