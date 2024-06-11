@@ -4,12 +4,12 @@
   Addresses with significant differences in geocoded results
 <% end %>
 
-<p class="mt-12 text-2xl text-navy">
+<p class="mt-12 text-xl text-navy">
   <%= pa_link_to "Download as CSV", geocode_queries_path(format: :csv) %>
 </p>
 
 <%= render Tailwind::SimplePager.new(collection: @geocode_queries) %>
-<table class="my-12 mt-8 text-2xl text-navy">
+<table class="my-12 mt-8 text-xl text-navy">
   <thead>
     <tr>
       <th>
