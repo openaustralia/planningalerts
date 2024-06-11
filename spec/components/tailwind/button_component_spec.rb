@@ -20,27 +20,27 @@ RSpec.describe Tailwind::ButtonComponent, type: :component do
   end
 
   it "renders an extra large button" do
-    render_inline(described_class.new(tag: :button, size: "2xl", type: :primary)) { "Hello world!" }
-    expect(page).to have_button(class: %w[px-10 py-3 sm:py-4 text-2xl])
+    render_inline(described_class.new(tag: :button, size: "xl", type: :primary)) { "Hello world!" }
+    expect(page).to have_button(class: %w[px-10 py-3 sm:py-4 text-xl])
   end
 
   it "renders a primary button in white on green" do
-    render_inline(described_class.new(tag: :button, size: "2xl", type: :primary)) { "Hello world!" }
+    render_inline(described_class.new(tag: :button, size: "xl", type: :primary)) { "Hello world!" }
     expect(page).to have_button(class: %w[text-white bg-green])
   end
 
   it "renders a secondary button in white on gray" do
-    render_inline(described_class.new(tag: :button, size: "2xl", type: :secondary)) { "Hello world!" }
+    render_inline(described_class.new(tag: :button, size: "xl", type: :secondary)) { "Hello world!" }
     expect(page).to have_button(class: %w[text-white bg-warm-grey])
   end
 
   it "renders the text as semibold" do
-    render_inline(described_class.new(tag: :button, size: "2xl", type: :primary)) { "Hello world!" }
+    render_inline(described_class.new(tag: :button, size: "xl", type: :primary)) { "Hello world!" }
     expect(page).to have_button(class: "font-semibold")
   end
 
   it "renders an icon" do
-    render_inline(described_class.new(tag: :button, size: "2xl", type: :primary, icon: :trash)) { "Hello world!" }
+    render_inline(described_class.new(tag: :button, size: "xl", type: :primary, icon: :trash)) { "Hello world!" }
     expect(page).to have_css("svg")
   end
 
