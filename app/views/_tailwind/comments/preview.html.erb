@@ -9,7 +9,9 @@
 <%# TODO: Make sure that there is consistency on formatting of h1, h2, h3, etc. across the site %>
 <%# TODO: Using non-standard font %>
 <%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "mt-14").with_content("Your comment") %>
-<p class="mb-10 text-2xl text-navy">Does this look right?</p>
+<p class="mb-10 text-xl text-navy">
+  Does this look right? This is what other people will see on Planning Alerts when you publish.
+</p>
 
 <%# TODO: Can we use the comments partial here so that we can make sure it has consistent formatting? %>
 <%= render Tailwind::QuotedBlock.new do %>
@@ -27,31 +29,35 @@
     <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :secondary, href: application_path(@comment.application, anchor: "add-comment"), icon: :edit).with_content("Edit comment") %>
   </div>
 
-  <div class="mt-4">
-    <%= pa_button_to publish_application_comment_path(@comment) do %>
-      Publish (and send to <%= @comment.comment_recipient_full_name %>)
-    <% end %>
+  <%# TODO: Extract this pattern into a component of a button with a description (instead of a long button name) %>
+  <div class="flex flex-col items-baseline gap-2 mt-4 md:flex-row md:gap-4">
+    <div class="shrink-0">
+      <%= pa_button_to publish_application_comment_path(@comment) do %>
+        Publish 
+      <% end %>
+    </div>
+    <div class="text-xl text-navy">
+      and send to <%= @comment.comment_recipient_full_name %>
+    </div>
   </div>
 <% end %>
 
-<section class="pt-16 mt-20 border-t border-dashed border-cool-blue-gray">
+<section class="pt-12 mt-12 border-t border-dashed border-cool-blue-gray">
   <%# TODO: Using non-standard font %>
-  <%= render Tailwind::Heading.new(tag: :h2, font: "sans").with_content("Email preview") %>
+  <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
+    Preview of email to be sent to <%= @comment.comment_recipient_full_name %>
+  <% end %>
 
-  <p class="mt-8 text-xl text-navy">
-    Your comment and details will also automatically be sent to <strong><%= @comment.comment_recipient_full_name %></strong>.
-    They may consider your submission when they decide whether to approve this application.
-  </p>
-  <p class="mt-4 text-xl text-navy">
-    Here's a preview (nobody but you and the council will see this):
+  <p class="my-4 text-xl text-navy">
+    Nobody but you and <%= @comment.comment_recipient_full_name %> will see this email.
   </p>
 
   <%# TODO: Don't use random gray colour #ccc here %>
-  <div class="inline-block p-8 mt-8 text-xl sm:py-16 sm:px-20 text-navy bg-random-gray">
+  <div class="p-8 mt-8 text-xl sm:py-16 sm:px-20 text-navy bg-random-gray">
     <p>To: <%= @comment.application.comment_email_with_fallback %></p>
     <p>Subject: <%= t("comment_mailer.notify_authority.subject", council_reference: @comment.application.council_reference) %></p>
 
-    <div class="mt-8 prose prose-xl prose-tr:border-none prose-hr:border-[#ccc] prose-td:py-0 prose-th:w-56 prose-table:text-xl prose-tr:flex sm:prose-tr:table-row prose-tr:flex-col prose-td:pl-0 sm:prose-td:pl-3">
+    <div class="mt-8 prose prose-xl max-w-none prose-tr:border-none prose-hr:border-[#ccc] prose-td:py-0 prose-th:w-56 prose-table:text-xl prose-tr:flex sm:prose-tr:table-row prose-tr:flex-col prose-td:pl-0 sm:prose-td:pl-3 prose-h3:text-2xl">
       <%= render "comment_mailer/notify_authority", comment: @comment %>
     </div>
   </div>
