@@ -1,6 +1,5 @@
 Change your password page (after reset password) - 
 Now check your email page (after registering for account) -
-Sign in - http://localhost:3000/users/sign_in
 404 page - http://localhost:3000/404
 500 page - http://localhost:3000/500
 Help page - http://localhost:3000/faq
