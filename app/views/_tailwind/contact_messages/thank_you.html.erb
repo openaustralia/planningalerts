@@ -1,7 +1,6 @@
 <% content_for :page_title, "Thank you!" %>
 
-<%# TODO: Turn this centralised small margin content into a component %>
-<div class="flex flex-col items-center max-w-2xl m-auto mt-16 text-center">
+<%= render Tailwind::CentreBlock.new(extra_classes: "mt-16") do %>
   <%# TODO: This page needs a proper design %>
   <%= render Tailwind::Heading.new(tag: :h1).with_content(yield :page_title) %>
 
@@ -19,4 +18,4 @@
       <%= pa_link_to "Go to home", root_path %>
     </p>
   </div>
-</div>
+<% end %>
