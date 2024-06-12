@@ -3,11 +3,7 @@
   <%= yield :page_title %>
 <% end %>
 
-<div class="px-12 py-16 mt-12 border border-navy">
-  <%= render @comment, show_extra: false %>
-</div>
-
-<p class="text-xl text-navy mt-14">
+<p class="mt-8 text-xl text-navy">
   This page is only for reporting comments that should be removed. Reasons can include that
   the comment is spam, abusive, unlawful or harassing &mdash; in other words, where people are going
   out of their way to cause harm. Please explain clearly why
@@ -16,7 +12,7 @@
 
 <%= form_with model: [@comment, @report], builder: FormBuilders::Tailwind, class: "mt-12" do |f| %>
   <div>
-    <%= f.label :details, "Why should this comment be removed?" %>
+    <%= f.label :details, "Why should the comment below be removed?" %>
     <%= f.text_area :details, class: "block w-full mt-4", rows: 8 %>
     <%= f.error :details %>
   </div>
@@ -25,3 +21,7 @@
     <%= f.button "Send report" %>
   </div>
 <% end %>
+
+<div class="px-12 py-16 mt-12 border border-navy">
+  <%= render @comment, show_extra: false %>
+</div>

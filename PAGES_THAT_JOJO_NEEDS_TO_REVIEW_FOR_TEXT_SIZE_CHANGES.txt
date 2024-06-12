@@ -1,6 +1,5 @@
 Change your password page (after reset password) - 
 Now check your email page (after registering for account) -
-Report a comment - http://localhost:3000/comments/163476/reports/new
 Thank you for reporting a comment - http://localhost:3000/comments/163476/reports/thank_you
 Now check your email page (after activing an account) -
 Activate your account page -
