@@ -1,7 +1,6 @@
 <% content_for :page_title, "Great! Now check your email" %>
 
-<%# TODO: Extract the centered column into its own component %>
-<div class="max-w-lg mx-auto mt-32 text-center">
+<%= render Tailwind::CentreBlock.new(extra_classes: "mt-32") do %>
   <%= render Tailwind::Heading.new(tag: :h1).with_content(yield :page_title) %>
 
   <%= image_tag("tailwind/illustration/check-email.svg", class: "mb-20 mt-10") %>
@@ -18,4 +17,4 @@
       If you don't get an email in the next few minutes, try checking your spam filter.
     </p>
   </div>
-</div>
+<% end %>
