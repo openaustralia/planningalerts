@@ -1,17 +1,21 @@
 <% content_for :page_title, "404 - Not Found" %>
 
-<div class="flex flex-col items-center max-w-2xl m-auto text-center">
-  <%= image_tag "tailwind/illustration/404.svg", class: "mb-12" %>
-
-  <%= render Tailwind::Heading.new(tag: :h1) do %>
+<%= render Tailwind::CentreBlock.new do %>
+  <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mb-8") do %>
     The page you were looking for doesn't exist
   <% end %>
 
-  <p class="my-8 text-xl text-navy">
-    You may have mistyped the address or the page may have moved.
-  </p>
+  <div class="flex flex-col-reverse items-center gap-8 sm:flex-col">
+    <%= image_tag "tailwind/illustration/404.svg", class: "w-[500px]" %>
 
-  <p class="text-xl text-navy">
-    <%= pa_link_to "Go to our home page", root_url %>
-  </p>
-</div>
+    <div class="text-xl text-navy">
+      <p>
+        You may have mistyped the address or the page may have moved.
+      </p>
+
+      <p class="mt-8">
+        <%= pa_link_to "Go to our home page", root_url %>
+      </p>
+    </div>
+  </div>
+<% end %>
