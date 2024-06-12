@@ -1,9 +1,10 @@
 <% content_for :page_title, "Great! Now check your email" %>
 
-<%= render Tailwind::CentreBlock.new(extra_classes: "mt-32") do %>
-  <%= render Tailwind::Heading.new(tag: :h1).with_content(yield :page_title) %>
-
-  <%= image_tag("tailwind/illustration/check-email.svg", class: "mb-20 mt-10") %>
+<%= render Tailwind::CentreBlockWithImage.new(extra_classes: "mt-16") do |c| %>
+  <% c.with_heading.with_content(yield :page_title) %>
+  <% c.with_image do %>
+    <%= image_tag("tailwind/illustration/check-email.svg") %>
+  <% end %>
 
   <div class="flex flex-col gap-6 text-xl text-navy">
     <p>
