@@ -1,7 +1,6 @@
 <%= pa_link_to "< Back to application", @application, extra_classes: "text-xl" %>
 
-<%# TODO: Turn this centralised small margin content into a component %>
-<div class="flex flex-col items-center max-w-2xl m-auto mt-16 text-center">
+<%= render Tailwind::CentreBlock.new(extra_classes: "mt-16") do %>
   <%= image_tag "tailwind/illustration/send-comment2.svg", alt: "" %>
 
   <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mt-16") do %>
@@ -31,4 +30,4 @@
     <% end %>
     <div class="text-xl text-navy">to <%= @application.authority.full_name %> website</div>
   </div>
-</div>
+<% end %>

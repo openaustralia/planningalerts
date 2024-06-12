@@ -1,3 +1,4 @@
-<div class="flex flex-col items-center max-w-2xl m-auto text-center">
+<%# extra classes are at the end so they can't override %>
+<div class="flex flex-col items-center max-w-2xl m-auto text-center <%= @extra_classes %>">
   <%= content %>
 </div>
