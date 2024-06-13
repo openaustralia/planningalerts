@@ -3,7 +3,9 @@
 <%= render Tailwind::CentreBlockWithImage.new(extra_classes: "mt-16") do |c| %>
   <%# TODO: This page needs a proper design %>
   <% c.with_heading.with_content(yield :page_title) %>
-  <%# TODO: Add image %>
+  <% c.with_image do %>
+    <%= image_tag "tailwind/illustration/thank_you2.svg", class: "mx-auto" %>
+  <% end %>
 
   <div class="text-xl text-navy">
     <p>
