@@ -1,17 +1,21 @@
 <% content_for :page_title, "We're sorry, but something went wrong (500)" %>
 
-<%= render Tailwind::CentreBlock.new do %>
-  <%= image_tag "tailwind/illustration/500.svg", class: "mb-12" %>
-
-  <%= render Tailwind::Heading.new(tag: :h1) do %>
+<%= render Tailwind::CentreBlockWithImage.new do |c| %>
+  <% c.with_heading do %>
     We're sorry, but something went wrong
   <% end %>
 
-  <p class="my-8 text-xl text-navy">
-    We've been notified about this issue and we'll take a look at it shortly.
-  </p>
+  <% c.with_image do %>
+    <%= image_tag "tailwind/illustration/500.svg" %>
+  <% end %>
 
-  <p class="text-xl text-navy">
-    <%= pa_link_to "Go to our home page", root_url %>
-  </p>
+  <div class="text-xl text-navy">
+    <p>
+      We've been notified about this issue and we'll take a look at it shortly.
+    </p>
+
+    <p class="mt-8">
+      <%= pa_link_to "Go to our home page", root_url %>
+    </p>
+  </div>
 <% end %>

@@ -4,12 +4,11 @@
   <%= pa_link_to "< Back to application", @comment.application, extra_classes: "text-xl" %>
 </div>
 
-<%= render Tailwind::CentreBlock.new(extra_classes: "mt-16") do %>
-  <%= render Tailwind::Heading.new(tag: :h1) do %>
-    <%= yield :page_title %>
+<%= render Tailwind::CentreBlockWithImage.new(extra_classes: "mt-16") do |c| %>
+  <% c.with_heading.with_content(yield :page_title) %>
+  <% c.with_image do %>
+    <%= image_tag "tailwind/illustration/thank_you.svg", alt: "Illustration of a woman giving a thumbs up" %>
   <% end %>
-
-  <%= image_tag "tailwind/illustration/thank_you.svg", alt: "Illustration of a woman giving a thumbs up", class: "my-12" %>
 
   <div class="text-xl text-navy">
     <p>
