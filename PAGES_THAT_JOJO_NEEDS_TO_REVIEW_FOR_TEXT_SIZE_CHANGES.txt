@@ -1,5 +1,4 @@
 Activate your account page - 
-Change your password page (after reset password) - 
 
 Also still need to change all the email templates
 
