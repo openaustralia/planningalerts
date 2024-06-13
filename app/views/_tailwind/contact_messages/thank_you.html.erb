@@ -1,11 +1,12 @@
 <% content_for :page_title, "Thank you!" %>
 
-<%= render Tailwind::CentreBlock.new(extra_classes: "mt-16") do %>
+<%= render Tailwind::CentreBlockWithImage.new(extra_classes: "mt-16") do |c| %>
   <%# TODO: This page needs a proper design %>
-  <%= render Tailwind::Heading.new(tag: :h1).with_content(yield :page_title) %>
+  <% c.with_heading.with_content(yield :page_title) %>
+  <%# TODO: Add image %>
 
   <div class="text-xl text-navy">
-    <p class="mt-12">
+    <p>
       Thank you for getting in touch. We will get back to you as soon as we can.
     </p>
 
