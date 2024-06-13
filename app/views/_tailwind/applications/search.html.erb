@@ -3,7 +3,7 @@
 <%# TODO: This page needs a proper design %>
 
 <%= form_with url: search_applications_path, method: :get, builder: FormBuilders::Tailwind, class: "my-24" do |f| %>
-  <%= f.text_field :q, value: @q, class: "block", size: 50, autofocus: @applications.nil?, placeholder: "Tree work" %>
+  <%= f.text_field :q, value: @q, class: "block w-full", size: 50, autofocus: @applications.nil?, placeholder: "Tree work" %>
   <div class="mt-5">
     <%= f.button "Search" %>
   </div>
