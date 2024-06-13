@@ -1,4 +1,3 @@
-Thank you for reporting a comment - http://localhost:3000/comments/163476/reports/thank_you
 Activate your account page - 
 Change your password page (after reset password) - 
 
