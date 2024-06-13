@@ -1,7 +1,6 @@
 Now check your email page (after registering for account) - http://localhost:3000/users/sign_up/check_email
 Now check your email page (after activing an account) - http://localhost:3000/users/activation/check_email
 Thank you for reporting a comment - http://localhost:3000/comments/163476/reports/thank_you
-First page of "Activate your account" - http://localhost:3000/users/activation/new
 Activate your account page - 
 Change your password page (after reset password) - 
 
