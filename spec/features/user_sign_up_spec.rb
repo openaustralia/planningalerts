@@ -70,7 +70,7 @@ describe "Signing up for an API account" do
     end
 
     it "tells you what to do" do
-      expect(page).to have_content("Send me reset password instructions")
+      expect(page).to have_content("Let's get you to create a new password")
     end
 
     # rubocop:disable RSpec/NoExpectationExample
@@ -82,7 +82,7 @@ describe "Signing up for an API account" do
     describe "putting in an email address" do
       before do
         fill_in "Email", with: "matthew@oaf.org.au"
-        click_button "Send me reset password instructions"
+        click_button "Send me an email"
       end
 
       it "tells me to check my email" do
@@ -108,7 +108,7 @@ describe "Signing up for an API account" do
         end
 
         it "tells the user what to do" do
-          expect(page).to have_content("Change your password")
+          expect(page).to have_content("Create password")
         end
 
         # rubocop:disable RSpec/NoExpectationExample
