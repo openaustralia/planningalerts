@@ -1,4 +1,1 @@
 Also still need to change all the email templates
-
-Still needs an illustration:
-Contact thank you - http://localhost:3000/contact_messages/thank_you
