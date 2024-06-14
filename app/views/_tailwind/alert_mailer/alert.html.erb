@@ -134,34 +134,22 @@
                 </table>
               </div>
             </a>
-            <% end %> <div role="separator" style="line-height: 48px">&zwj;</div>
-            <h2 class="dark-mode-text-white" style="font-size: 20px; font-weight: 700; color: #414860">Alert Details</h2>
-            <p class="dark-mode-text-white" style="font-size: 18px; color: #414860">
-              <%= meters_in_words(@alert.radius_meters) %> from <%= @alert.address %>
-            </p>
+            <% end %><div role="separator" style="background-color: #cbd5e1; height: 1px; line-height: 1px; margin: 24px 0">&zwj;</div>
             <div role="separator" style="line-height: 16px">&zwj;</div>
-            <div>
-              <a href="<%= edit_profile_alert_url(@alert) %>" style="display: inline-block; background-color: #03827A; padding: 16px 32px; font-size: 18px; font-weight: 600; line-height: 1; color: #ffffff; text-decoration: none">
-                <!--[if mso]>
-      <i style="mso-font-width: -100%; letter-spacing: 32px; mso-text-raise: 30px" hidden>&nbsp;</i>
-    <![endif]-->
-                <span style="mso-text-raise: 16px">
-    <img src="<%= image_url('tailwind/pencil.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 8px" alt="">
-    Change this alert
-  </span>
-                <!--[if mso]>
-      <i style="mso-font-width: -100%; letter-spacing: 32px;" hidden>&nbsp;</i>
-    <![endif]-->
+            <div style="background-color: #ffffff; padding: 16px 24px; color: #414860">
+              <img src="<%= image_url('tailwind/pencil.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 12px" alt="">
+              <a href="<%= edit_profile_alert_url(@alert) %>" style="font-weight: 700; color: #CA3F94;">
+                Edit Alert
               </a>
             </div>
             <div role="separator" style="line-height: 8px">&zwj;</div>
             <div>
               <a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" style="display: inline-block; background-color: #767676; padding: 16px 32px; font-size: 18px; font-weight: 600; line-height: 1; color: #ffffff; text-decoration: none">
                 <!--[if mso]>
-      <i style="mso-font-width: -100%; letter-spacing: 32px; mso-text-raise: 30px;" hidden>&nbsp;</i>
+      <i style="mso-font-width: -100%; letter-spacing: 32px; mso-text-raise: 30px" hidden>&nbsp;</i>
     <![endif]-->
                 <span style="mso-text-raise: 16px">
-    <img src="<%= image_url('tailwind/trash.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 8px;" alt="">
+    <img src="<%= image_url('tailwind/trash.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 8px" alt="">
     Unsubscribe from this alert
   </span>
                 <!--[if mso]>

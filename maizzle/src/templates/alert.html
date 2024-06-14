@@ -29,16 +29,15 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
       </fill:application>
     </x-comment>
   <% end %>
-  <x-spacer height="48px" />
-  <h2 class="text-xl font-bold text-navy dark-mode:text-white">Alert Details</h2>
-  <p class="text-lg text-navy dark-mode:text-white">
-    <%= meters_in_words(@alert.radius_meters) %> from <%= @alert.address %>
-  </p>
+  <!-- TODO: Style divider correctly -->
+  <x-divider></x-divider>
   <x-spacer height="16px" />
-  <x-button href="<%= edit_profile_alert_url(@alert) %>">
-    <img src="<%= image_url('tailwind/pencil.png') %>" class="pr-2">
-    Change this alert
-  </x-button>
+  <div class="px-6 py-4 bg-white text-navy">
+    <img src="<%= image_url('tailwind/pencil.png') %>" class="pr-3">
+    <a href="<%= edit_profile_alert_url(@alert) %>" class="font-bold text-fuchsia">
+      Edit Alert
+    </a>
+  </div>
   <x-spacer height="8px" />
   <x-button.secondary href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>">
     <img src="<%= image_url('tailwind/trash.png') %>" class="pr-2">
