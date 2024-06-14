@@ -30,15 +30,6 @@
   <![endif]-->
   <title><%= subject(@alert, @applications, @comments) %></title>
   <style>
-    .hover-border-t-2:hover {
-      border-top-width: 2px !important
-    }
-    .hover-border-t-navy:hover {
-      border-top-color: #414860 !important
-    }
-    .hover-pt-31px:hover {
-      padding-top: 31px !important
-    }
     .hover-underline:hover {
       text-decoration-line: underline !important
     }
@@ -115,10 +106,9 @@
               </table>
             </a>
             <div role="separator" style="line-height: 20px">&zwj;</div>
-            <% end %><div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 0px 0">&zwj;</div>
-            <div role="separator" style="line-height: 24px">&zwj;</div>
-            <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div><a href="<%= comment_url_with_tracking(comment:) %>" style="text-decoration-line: none;">
-              <div class="hover-pt-31px hover-border-t-2 hover-border-t-navy dark-mode-text-white active-bg-light-grey" style="border: 1px solid #f3f2f2; padding: 32px; color: #414860">
+            <% end %> <div role="separator" style="line-height: 8px">&zwj;</div>
+            <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div><a href="<%= comment_url_with_tracking(comment:) %>" class="focus-bg-sun-yellow" style="display: block; background-color: #ffffff; text-decoration-line: none;">
+              <div class="dark-mode-text-white active-bg-light-grey" style="padding: 32px; color: #414860; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)">
                 <p style="margin-top: 0"><%= comment.name %> commented:</p>
                 <table style="margin-top: 16px" cellpadding="0" cellspacing="0" role="none">
                   <tr>
@@ -132,16 +122,13 @@
                             <img alt="Map of <%= comment.application.address %>" src="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
                           </td>
                           <td valign="top" class="xs-w-full xs-inline-block xs-mt-4" style="height: 150px">
-                            <h2 class="dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700"><%= comment.application.address %></h2>
+                            <h2 class="dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94; text-decoration-line: underline"><%= comment.application.address %></h2>
                             <p style="margin-top: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860;">
                               <%= comment.application.description %>
                             </p>
                           </td>
                         </tr>
                       </table>
-                      <p style="margin-top: 24px">
-                        <a href="<%= comment_url_with_tracking(comment:) %>" class="hover-underline dark-mode-text-white" style="font-size: 20px; font-weight: 700; color: #CA3F94; text-decoration-line: none">View comment on Planning Alerts</a>
-                      </p>
                     </td>
                   </tr>
                 </table>
@@ -183,7 +170,7 @@
               </a>
             </div>
             <div role="separator" style="line-height: 48px">&zwj;</div>
-            <div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 32px 0;">&zwj;</div>
+            <div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 32px 0">&zwj;</div>
             <p>
               <a href="<%= root_url %>" class="dark-mode-text-white hover-underline" style="color: #414860; text-decoration-line: none"><strong>Planning Alerts</strong></a>
               is a free service where anyone can find out what is being built and knocked down in their area.
