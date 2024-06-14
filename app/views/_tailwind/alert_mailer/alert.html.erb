@@ -97,7 +97,7 @@
             <div class="xs-h-6" style="height: 64px"></div>
             <div role="separator" style="line-height: 56px">&zwj;</div>
             <% @applications.each do |application| %> <a href="<%= application_url_with_tracking(id: application.id) %>" style="text-decoration-line: none">
-              <table class="active-bg-light-grey" style="width: 100%; background-color: #ffffff; padding: 56px 32px 32px" cellpadding="0" cellspacing="0" role="none">
+              <table class="active-bg-light-grey" style="width: 100%; background-color: #ffffff; padding: 56px 32px 32px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td valign="top" class="xs-w-full xs-inline-block xs-mt-4">
                     <h2 class="dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94; text-decoration-line: underline"><%= application.address %></h2>
