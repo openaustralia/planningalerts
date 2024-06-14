@@ -84,12 +84,6 @@
         padding-top: 12px !important;
         padding-bottom: 12px !important
       }
-      .xs-pt-4 {
-        padding-top: 16px !important
-      }
-      .xs-text-left {
-        text-align: left !important
-      }
       .xs-text-2xl {
         font-size: 24px !important
       }
@@ -142,23 +136,12 @@
               </tr>
             </table>
             <div class="xs-h-6" style="height: 64px"></div>
-            <table cellpadding="0" cellspacing="0" role="none">
-              <tr>
-                <td class="xs-w-full xs-inline-block" style="width: 50%">
-                  <p>Hello,</p>
-                  <p>We found <%= subject(@alert, @applications, @comments) %>.</p>
-                  <p>Thanks,<br>Planning Alerts team</p>
-                </td>
-                <td class="xs-text-left xs-w-full xs-inline-block xs-pt-4" style="width: 50%; text-align: right"> <img src="<%= image_url('tailwind/illustration/dancing-man.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0" alt="">
-                </td>
-              </tr>
-            </table>
             <div role="separator" style="line-height: 56px">&zwj;</div>
             <% @applications.each do |application| %> <a href="<%= application_url_with_tracking(id: application.id) %>" style="text-decoration-line: none">
               <table class="hover-pt-23px hover-border-navy hover-border-t-2 active-bg-light-grey" style="width: 100%; border: 0px solid #e2e8f0; border-top: 1px solid #e2e8f0; padding-top: 24px; padding-bottom: 24px" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
-                    <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
+                    <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0">
                   </td>
                   <td valign="top" class="xs-w-full xs-inline-block xs-mt-4">
                     <h2 class="dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94"><%= application.address %></h2>
