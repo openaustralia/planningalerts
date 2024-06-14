@@ -11,16 +11,30 @@ module.exports = {
         'transparent': 'transparent',
         'current': 'currentColor',
         'white': '#ffffff',
+        // TODO: Come up with a better name than white-hover which is tied to its current use
+        'white-hover': '#B5B6C6',
         'off-white': "#eeeeee",
         'light-grey': '#F3F2F2',
         'fuchsia': '#CA3F94',
+        'fuchsia-darker': '#A6156F',
         'lavender': '#826D9C',
+        'light-lavender': '#A38FBD',
         'yellow': '#F4BE53',
-        'orange': '#D37708',
+        'sun-yellow': '#FFDC3E',
+        'orange': '#BB5C03',
+        'header-orange': '#D37708',
         'navy': '#414860',
+        'dark-navy': '#060F2F',
         'green': '#03827A',
+        'dark-green': '#054E4A',
         'darker-orange': '#BA671D',
         'warm-grey': '#767676',
+        'dark-warm-grey': '#434343',
+        'cool-blue-gray': '#737A92',
+        'dark-brown': '#3F1E1E',
+        // This is only used for the background of the email preview I think
+        // TODO: Use another gray
+        'random-gray': '#ECEBE5',
         // TODO: Come up with a less bad name than this
         'light-grey2': '#D2CDC1',
         // A green colour that you might see on a map. Display this while loading the map
