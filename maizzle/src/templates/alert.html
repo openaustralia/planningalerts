@@ -35,13 +35,15 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   <div class="px-6 py-4 bg-white text-navy">
     <img src="<%= image_url('tailwind/pencil.png') %>" class="pr-3">
     <a href="<%= edit_profile_alert_url(@alert) %>" class="font-bold text-fuchsia">
-      Edit Alert
+      Edit alert
     </a>
   </div>
   <x-spacer height="8px" />
-  <x-button.secondary href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>">
-    <img src="<%= image_url('tailwind/trash.png') %>" class="pr-2">
-    Unsubscribe from this alert
-  </x-button.secondary>
+  <div class="px-6 py-4 bg-white text-navy">
+    <img src="<%= image_url('tailwind/trash.png') %>" class="pr-3">
+    <a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" class="font-bold text-fuchsia">
+      Unsubscribe from alert
+    </a>
+  </div>
   <x-spacer height="48px" />
 </x-standard>
