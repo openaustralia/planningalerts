@@ -76,20 +76,6 @@
       .xs-w-full {
         width: 100% !important
       }
-      .xs-px-6 {
-        padding-left: 24px !important;
-        padding-right: 24px !important
-      }
-      .xs-py-3 {
-        padding-top: 12px !important;
-        padding-bottom: 12px !important
-      }
-      .xs-text-2xl {
-        font-size: 24px !important
-      }
-      .xs-text-8px {
-        font-size: 8px !important
-      }
     }
     @media (prefers-color-scheme: dark) {
       .dark-mode-bg-_333 {
@@ -114,27 +100,6 @@
       <table align="center" cellpadding="0" cellspacing="0" role="none">
         <tr>
           <td style="width: 552px; max-width: 100%">
-            <table width="100%" style="font-family: Inter, Fira Sans, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif" cellpadding="0" cellspacing="0" role="none">
-              <tr>
-                <td style="height: 24px; background-color: #E98E07"></td>
-              </tr>
-              <tr>
-                <td class="xs-px-6 xs-py-3" style="background-color: #F4BE53; padding: 24px 48px">
-                  <table cellpadding="0" cellspacing="0" role="none">
-                    <tr>
-                      <td style="background-color: #CA3F94; padding: 4px 16px">
-                        <h1 class="xs-text-2xl" style="margin: 0; font-size: 36px; font-weight: 800; color: #ffffff">Planning Alerts</h1>
-                      </td>
-                    </tr>
-                  </table>
-                  <table cellpadding="0" cellspacing="0" role="none">
-                    <tr>
-                      <td class="xs-text-8px" style="background-color: #826D9C; padding: 8px 16px; font-size: 12px; font-weight: 600; color: #ffffff">Email alerts of planning applications near you</td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
             <div class="xs-h-6" style="height: 64px"></div>
             <div role="separator" style="line-height: 56px">&zwj;</div>
             <% @applications.each do |application| %> <a href="<%= application_url_with_tracking(id: application.id) %>" style="text-decoration-line: none">

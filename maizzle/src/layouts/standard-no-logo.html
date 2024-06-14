@@ -1,0 +1,31 @@
+<%# This template is generated automically by maizzle and should not be edited by hand! Go to "maizzle/src/templates". %>
+<x-main>
+  <div class="font-sans text-lg sm:px-4 text-navy dark-mode:text-white">
+    <table align="center">
+      <tr>
+        <td class="w-[552px] max-w-full">
+          <!-- TODO: Get Jojo to check over this spacing -->
+          <div class="h-16 xs:h-6"></div>
+
+          <content />
+
+          <x-divider space-y="32px" class="bg-slate-200" />
+
+          <p>
+            <a href="<%= root_url %>" class="no-underline text-navy dark-mode:text-white hover:underline"><strong>Planning Alerts</strong></a>
+            is a free service where anyone can find out what is being built and knocked down in their area.
+          </p>
+          <p>
+            The service
+            is run by the independent charity
+            <a href="https://www.oaf.org.au/" class="no-underline text-navy dark-mode:text-white hover:underline">OpenAustralia Foundation</a>.
+          </p>
+
+          <p>
+            <a href="<%= documentation_contact_url %>" class="font-bold no-underline text-fuchsia hover:underline">Contact us</a>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</x-main>

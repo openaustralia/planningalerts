@@ -5,7 +5,7 @@ bodyClass: bg-white dark-mode:bg-[#333]
 permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
 ---
 
-<x-standard>
+<x-standard-no-logo>
   <x-spacer height="56px" />
   <% @applications.each do |application| %>
     <x-application address="<%= application.address %>"
