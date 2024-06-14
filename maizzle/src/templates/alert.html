@@ -13,7 +13,8 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
                    map="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>">
       <%= application.description %>
     </x-application>
-  <% end %>
+    <x-spacer height="20px" />
+    <% end %>
   <x-divider space-y="0px" class="bg-slate-200" />
   <x-spacer height="24px" />
   <% @comments.each do |comment| %>

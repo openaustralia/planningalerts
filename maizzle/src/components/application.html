@@ -8,14 +8,16 @@
 
 <if condition="url">
   <a href="{{{ url }}}" class="no-underline">
-    <table class="w-full py-6 hover:pt-[23px] border-0 border-t border-solid hover:border-navy hover:border-t-2 active:bg-light-grey border-slate-200">
+    <table class="w-full p-8 bg-white pt-14 active:bg-light-grey">
       <tr>
-        <td class="w-[180px] xs:w-full xs:inline-block" valign="top">
-          <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
-        </td>
         <td valign="top" class="xs:w-full xs:inline-block xs:mt-4">
-          <h2 class="m-0 text-lg font-bold line-clamp-1 text-fuchsia dark-mode:text-white">{{{ address }}}</h2>
+          <h2 class="m-0 text-lg font-bold underline line-clamp-1 text-fuchsia dark-mode:text-white">{{{ address }}}</h2>
           <p class="my-0 text-navy dark-mode:text-white line-clamp-6"><content /></p>
+        </td>
+        <!-- TODO: Need a space between the text and the map -->
+         <!-- TODO: Make this work on mobile -->
+        <td class="w-[150px] xs:w-full xs:inline-block" valign="top">
+          <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
         </td>
       </tr>
     </table>
