@@ -34,14 +34,14 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   <!-- TODO: Make whole white block clickable for edit and unsubscribe -->
   <div class="px-6 py-4 bg-white text-navy">
     <img src="<%= image_url('tailwind/pencil.png') %>" class="pr-3">
-    <a href="<%= edit_profile_alert_url(@alert) %>" class="font-bold text-fuchsia">
+    <a href="<%= edit_profile_alert_url(@alert) %>" class="font-bold text-fuchsia hover:text-fuchsia-darker focus:bg-sun-yellow">
       Edit alert
     </a>
   </div>
   <x-spacer height="8px" />
   <div class="px-6 py-4 bg-white text-navy">
     <img src="<%= image_url('tailwind/trash.png') %>" class="pr-3">
-    <a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" class="font-bold text-fuchsia">
+    <a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" class="font-bold text-fuchsia hover:text-fuchsia-darker focus:bg-sun-yellow">
       Unsubscribe from alert
     </a>
   </div>
