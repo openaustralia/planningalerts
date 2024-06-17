@@ -32,7 +32,7 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   <!-- TODO: Style divider correctly -->
   <x-divider />
   <a href="<%= edit_profile_alert_url(@alert) %>" class="no-underline group">
-    <table class="w-full px-6 py-4 bg-white text-navy">
+    <table class="w-full px-6 py-4 bg-white text-navy dark-mode:bg-black">
       <tr>
         <td class="w-[36px]">
           <img src="<%= image_url('tailwind/pencil.png') %>">
@@ -47,7 +47,7 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   </a>
   <x-spacer height="8px" />
   <a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" class="no-underline group">
-    <table class="w-full px-6 py-4 bg-white text-navy">
+    <table class="w-full px-6 py-4 bg-white text-navy dark-mode:bg-black">
       <tr>
         <td class="w-[36px]">
           <img src="<%= image_url('tailwind/trash.png') %>">
