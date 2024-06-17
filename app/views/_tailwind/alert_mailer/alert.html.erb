@@ -124,7 +124,7 @@
                               <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
                                 <img alt="Map of <%= comment.application.address %>" src="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
                               </td>
-                              <td valign="top" class="xs-w-full xs-inline-block xs-mt-4" style="height: 150px">
+                              <td valign="top" class="xs-w-full xs-inline-block xs-mt-4">
                                 <h2 class="group-hover-text-fuchsia-darker dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94; text-decoration-line: underline; text-decoration: underline">
                                   <span class="group-focus-bg-sun-yellow"><%= comment.application.address %></span>
                                 </h2>
