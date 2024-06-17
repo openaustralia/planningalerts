@@ -10,15 +10,14 @@
   <a href="{{{ url }}}" class="block no-underline bg-white group">
     <table class="w-full p-8 shadow-md">
       <tr>
-        <td valign="top" class="xs:w-full xs:inline-block xs:mt-4">
+        <td valign="top" class="xs:w-full xs:inline-block">
           <h2 class="m-0 text-lg font-bold underline line-clamp-1 text-fuchsia group-hover:text-fuchsia-darker dark-mode:text-white">
             <span class="group-focus:bg-sun-yellow">{{{ address }}}</span>
           </h2>
           <p class="my-0 text-navy dark-mode:text-white line-clamp-6"><content /></p>
         </td>
         <!-- TODO: Need a space between the text and the map -->
-         <!-- TODO: Make this work on mobile -->
-        <td class="w-[150px] xs:w-full xs:inline-block" valign="top">
+        <td class="w-[150px] xs:w-full xs:inline-block xs:mt-4" valign="top">
           <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
         </td>
       </tr>

@@ -92,7 +92,7 @@
             <% @applications.each do |application| %> <a href="<%= application_url_with_tracking(id: application.id) %>" class="group" style="display: block; background-color: #ffffff; text-decoration-line: none">
               <table style="width: 100%; padding: 32px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)" cellpadding="0" cellspacing="0" role="none">
                 <tr>
-                  <td valign="top" class="xs-w-full xs-inline-block xs-mt-4">
+                  <td valign="top" class="xs-w-full xs-inline-block">
                     <h2 class="group-hover-text-fuchsia-darker dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94; text-decoration-line: underline">
                       <span class="group-focus-bg-sun-yellow"><%= application.address %></span>
                     </h2>
@@ -100,7 +100,7 @@
                       <%= application.description %>
                     </p>
                   </td>
-                  <td class="xs-w-full xs-inline-block" valign="top" style="width: 150px">
+                  <td class="xs-w-full xs-inline-block xs-mt-4" valign="top" style="width: 150px">
                     <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0">
                   </td>
                 </tr>
@@ -159,10 +159,10 @@
             <div role="separator" style="line-height: 72px">&zwj;</div>
             <table cellpadding="0" cellspacing="0" role="none">
               <tr>
-                <td style="width: 188px; padding-right: 32px">
+                <td class="xs-inline-block" style="width: 188px; padding-right: 32px">
                   <img src="<%= image_url('tailwind/illustration/woman-looking-off2.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;" alt="">
                 </td>
-                <td style="vertical-align: top">
+                <td class="xs-inline-block xs-mt-4" style="vertical-align: top">
                   <p style="margin-top: 0;">
                     This email was brought to you by the Planning Alerts team.
                   </p>
