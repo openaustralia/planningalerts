@@ -111,7 +111,7 @@
             <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div><a href="<%= comment_url_with_tracking(comment:) %>" class="group" style="text-decoration-line: none;">
               <div class="dark-mode-text-white" style="background-color: #ffffff; padding: 32px; color: #414860; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)">
                 <p style="margin-top: 0"><%= comment.name %> commented:</p>
-                <table style="margin-top: 16px" cellpadding="0" cellspacing="0" role="none">
+                <table style="margin-top: 16px; background-color: #ffffff" cellpadding="0" cellspacing="0" role="none">
                   <tr>
                     <td valign="top" class="xs-block xs-h-8" style="padding-right: 16px; padding-top: 8px; font-size: 72px">”</td>
                     <td valign="top" class="xs-block"> <%= comment_as_html(comment.text) %> <p style="margin-bottom: 24px; margin-top: 32px">
