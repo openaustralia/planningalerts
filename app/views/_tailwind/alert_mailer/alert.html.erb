@@ -36,9 +36,6 @@
     .focus-bg-sun-yellow:focus {
       background-color: #FFDC3E !important
     }
-    .active-bg-light-grey:active {
-      background-color: #F3F2F2 !important
-    }
     .group:hover .group-hover-text-fuchsia-darker {
       color: #A6156F !important
     }
@@ -112,7 +109,7 @@
             <div role="separator" style="line-height: 20px">&zwj;</div>
             <% end %> <div role="separator" style="line-height: 8px">&zwj;</div>
             <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div><a href="<%= comment_url_with_tracking(comment:) %>" class="group" style="display: block; background-color: #ffffff; text-decoration-line: none;">
-              <div class="dark-mode-text-white active-bg-light-grey" style="padding: 32px; color: #414860; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)">
+              <div class="dark-mode-text-white" style="padding: 32px; color: #414860; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)">
                 <p style="margin-top: 0"><%= comment.name %> commented:</p>
                 <table style="margin-top: 16px" cellpadding="0" cellspacing="0" role="none">
                   <tr>
