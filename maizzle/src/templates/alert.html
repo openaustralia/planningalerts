@@ -30,8 +30,8 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
     </x-comment>
   <% end %>
   <!-- TODO: Style divider correctly -->
-  <x-divider></x-divider>
-  <x-spacer height="16px" />
+  <x-divider />
+  <!-- TODO: Make whole white block clickable for edit and unsubscribe -->
   <div class="px-6 py-4 bg-white text-navy">
     <img src="<%= image_url('tailwind/pencil.png') %>" class="pr-3">
     <a href="<%= edit_profile_alert_url(@alert) %>" class="font-bold text-fuchsia">
@@ -45,5 +45,4 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
       Unsubscribe from alert
     </a>
   </div>
-  <x-spacer height="48px" />
 </x-standard>

@@ -55,9 +55,6 @@
       .xs-inline-block {
         display: inline-block !important
       }
-      .xs-h-6 {
-        height: 24px !important
-      }
       .xs-h-8 {
         height: 32px !important
       }
@@ -88,7 +85,6 @@
       <table align="center" cellpadding="0" cellspacing="0" role="none">
         <tr>
           <td style="width: 552px; max-width: 100%">
-            <div class="xs-h-6" style="height: 64px"></div>
             <div role="separator" style="line-height: 56px">&zwj;</div>
             <% @applications.each do |application| %> <a href="<%= application_url_with_tracking(id: application.id) %>" class="focus-bg-sun-yellow" style="display: block; background-color: #ffffff; text-decoration-line: none">
               <table style="width: 100%; padding: 56px 32px 32px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)" cellpadding="0" cellspacing="0" role="none">
@@ -135,7 +131,6 @@
               </div>
             </a>
             <% end %><div role="separator" style="background-color: #cbd5e1; height: 1px; line-height: 1px; margin: 24px 0">&zwj;</div>
-            <div role="separator" style="line-height: 16px">&zwj;</div>
             <div style="background-color: #ffffff; padding: 16px 24px; color: #414860">
               <img src="<%= image_url('tailwind/pencil.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 12px" alt="">
               <a href="<%= edit_profile_alert_url(@alert) %>" style="font-weight: 700; color: #CA3F94;">
@@ -149,20 +144,33 @@
                 Unsubscribe from alert
               </a>
             </div>
-            <div role="separator" style="line-height: 48px">&zwj;</div>
-            <div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 32px 0">&zwj;</div>
-            <p>
-              <a href="<%= root_url %>" class="dark-mode-text-white hover-underline" style="color: #414860; text-decoration-line: none"><strong>Planning Alerts</strong></a>
-              is a free service where anyone can find out what is being built and knocked down in their area.
-            </p>
-            <p>
-              The service
-              is run by the independent charity
-              <a href="https://www.oaf.org.au/" class="dark-mode-text-white hover-underline" style="color: #414860; text-decoration-line: none">OpenAustralia Foundation</a>.
-            </p>
-            <p>
-              <a href="<%= documentation_contact_url %>" class="hover-underline" style="font-weight: 700; color: #CA3F94; text-decoration-line: none;">Contact us</a>
-            </p>
+            <div role="separator" style="background-color: #cbd5e1; height: 1px; line-height: 1px; margin: 24px 0;">&zwj;</div>
+            <div role="separator" style="line-height: 72px">&zwj;</div>
+            <table cellpadding="0" cellspacing="0" role="none">
+              <tr>
+                <td style="width: 188px; padding-right: 16px">
+                  <img src="<%= image_url('tailwind/illustration/woman-looking-off2.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;" alt="">
+                </td>
+                <td style="vertical-align: top">
+                  <p style="margin-top: 0;">
+                    This email was brought to you by the Planning Alerts team.
+                  </p>
+                  <p>
+                    <a href="<%= root_url %>" class="dark-mode-text-white hover-underline" style="color: #414860; text-decoration-line: none"><strong>Planning Alerts</strong></a>
+                    is a free service where anyone can find out what is being built and knocked down in their area.
+                  </p>
+                  <p>
+                    The service
+                    is run by the independent charity
+                    <a href="https://www.oaf.org.au/" class="dark-mode-text-white hover-underline" style="color: #414860; text-decoration-line: none">OpenAustralia Foundation</a>.
+                  </p>
+                  <p>
+                    <a href="<%= documentation_contact_url %>" class="hover-underline" style="font-weight: 700; color: #CA3F94; text-decoration-line: none;">Contact us</a>
+                  </p>
+                </td>
+              </tr>
+            </table>
+            <div role="separator" style="line-height: 144px">&zwj;</div>
           </td>
         </tr>
       </table>

@@ -4,26 +4,37 @@
     <table align="center">
       <tr>
         <td class="w-[552px] max-w-full">
-          <!-- TODO: Get Jojo to check over this spacing -->
-          <div class="h-16 xs:h-6"></div>
-
           <content />
 
-          <x-divider space-y="32px" class="bg-slate-200" />
-
-          <p>
-            <a href="<%= root_url %>" class="no-underline text-navy dark-mode:text-white hover:underline"><strong>Planning Alerts</strong></a>
-            is a free service where anyone can find out what is being built and knocked down in their area.
-          </p>
-          <p>
-            The service
-            is run by the independent charity
-            <a href="https://www.oaf.org.au/" class="no-underline text-navy dark-mode:text-white hover:underline">OpenAustralia Foundation</a>.
-          </p>
-
-          <p>
-            <a href="<%= documentation_contact_url %>" class="font-bold no-underline text-fuchsia hover:underline">Contact us</a>
-          </p>
+          <!-- TODO: Style divider correctly -->
+          <x-divider />
+          <x-spacer height="72px" />
+          <table>
+            <tr>
+              <td class="w-[188px] pr-4">
+                <img src="<%= image_url('tailwind/illustration/woman-looking-off2.png') %>">
+              </td>
+              <td class="align-top">
+                <p class="mt-0">
+                  This email was brought to you by the Planning Alerts team.
+                </p>
+                <p>
+                  <a href="<%= root_url %>" class="no-underline text-navy dark-mode:text-white hover:underline"><strong>Planning Alerts</strong></a>
+                  is a free service where anyone can find out what is being built and knocked down in their area.
+                </p>
+                <p>
+                  The service
+                  is run by the independent charity
+                  <a href="https://www.oaf.org.au/" class="no-underline text-navy dark-mode:text-white hover:underline">OpenAustralia Foundation</a>.
+                </p>
+      
+                <p>
+                  <a href="<%= documentation_contact_url %>" class="font-bold no-underline text-fuchsia hover:underline">Contact us</a>
+                </p>      
+              </td>
+            </tr>
+          </table>
+          <x-spacer height="144px" />
         </td>
       </tr>
     </table>
