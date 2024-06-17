@@ -141,19 +141,23 @@
               </div>
             </a>
             <% end %><div role="separator" style="background-color: #cbd5e1; height: 1px; line-height: 1px; margin: 24px 0">&zwj;</div>
-            <div style="background-color: #ffffff; padding: 16px 24px; color: #414860">
-              <img src="<%= image_url('tailwind/pencil.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 12px" alt="">
-              <a href="<%= edit_profile_alert_url(@alert) %>" class="hover-text-fuchsia-darker focus-bg-sun-yellow" style="font-weight: 700; color: #CA3F94;">
-                Edit alert
-              </a>
-            </div>
+            <a href="<%= edit_profile_alert_url(@alert) %>" class="group" style="text-decoration-line: none;">
+              <div style="background-color: #ffffff; padding: 16px 24px; color: #414860">
+                <img src="<%= image_url('tailwind/pencil.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 12px" alt="">
+                <span class="group-hover-text-fuchsia-darker group-focus-bg-sun-yellow" style="font-weight: 700; color: #CA3F94; text-decoration-line: underline;">
+        Edit alert
+      </span>
+              </div>
+            </a>
             <div role="separator" style="line-height: 8px">&zwj;</div>
-            <div style="background-color: #ffffff; padding: 16px 24px; color: #414860;">
-              <img src="<%= image_url('tailwind/trash.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 12px;" alt="">
-              <a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" class="hover-text-fuchsia-darker focus-bg-sun-yellow" style="font-weight: 700; color: #CA3F94;">
-                Unsubscribe from alert
-              </a>
-            </div>
+            <a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" class="group" style="text-decoration-line: none;">
+              <div style="background-color: #ffffff; padding: 16px 24px; color: #414860;">
+                <img src="<%= image_url('tailwind/trash.png') %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0; padding-right: 12px;" alt="">
+                <span class="group-hover-text-fuchsia-darker group-focus-bg-sun-yellow" style="font-weight: 700; color: #CA3F94; text-decoration-line: underline;">
+        Unsubscribe from alert
+      </span>
+              </div>
+            </a>
             <div role="separator" style="background-color: #cbd5e1; height: 1px; line-height: 1px; margin: 24px 0;">&zwj;</div>
             <div role="separator" style="line-height: 72px">&zwj;</div>
             <table cellpadding="0" cellspacing="0" role="none">
