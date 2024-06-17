@@ -89,8 +89,8 @@
         <tr>
           <td style="width: 552px; max-width: 100%">
             <div role="separator" style="line-height: 56px">&zwj;</div>
-            <% @applications.each do |application| %> <a href="<%= application_url_with_tracking(id: application.id) %>" class="group" style="display: block; background-color: #ffffff; text-decoration-line: none">
-              <table style="width: 100%; padding: 32px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)" cellpadding="0" cellspacing="0" role="none">
+            <% @applications.each do |application| %> <a href="<%= application_url_with_tracking(id: application.id) %>" class="group" style="text-decoration-line: none">
+              <table style="width: 100%; background-color: #ffffff; padding: 32px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td valign="top" class="xs-w-full xs-inline-block">
                     <h2 class="group-hover-text-fuchsia-darker dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94; text-decoration-line: underline">
@@ -108,8 +108,8 @@
             </a>
             <div role="separator" style="line-height: 20px">&zwj;</div>
             <% end %> <div role="separator" style="line-height: 8px">&zwj;</div>
-            <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div><a href="<%= comment_url_with_tracking(comment:) %>" class="group" style="display: block; background-color: #ffffff; text-decoration-line: none;">
-              <div class="dark-mode-text-white" style="padding: 32px; color: #414860; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)">
+            <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div><a href="<%= comment_url_with_tracking(comment:) %>" class="group" style="text-decoration-line: none;">
+              <div class="dark-mode-text-white" style="background-color: #ffffff; padding: 32px; color: #414860; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)">
                 <p style="margin-top: 0"><%= comment.name %> commented:</p>
                 <table style="margin-top: 16px" cellpadding="0" cellspacing="0" role="none">
                   <tr>
