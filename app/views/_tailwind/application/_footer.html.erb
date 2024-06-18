@@ -30,13 +30,12 @@
       </div>
 
       <div class="col-span-12 p-6 border border-white md:col-span-3">
-        <div>
+        <div class="flex flex-col items-start gap-4">
+          <%= image_tag "tailwind/illustration/love-letter.svg", size: "68x52", alt: "Illustration of love letter" %>
           <p>Your donations keep this site and others like it running</p>
-          <div class="mt-4">
-            <%= render Tailwind::ButtonComponent.new(tag: :a, size: "lg", type: :inverse, href: "https://donate.planningalerts.org.au") do %>
-              Donate now
-            <% end %>
-          </div>
+          <%= render Tailwind::ButtonComponent.new(tag: :a, size: "lg", type: :inverse, href: "https://donate.planningalerts.org.au") do %>
+            Donate now
+          <% end %>
         </div>
       </div>
     </div>
