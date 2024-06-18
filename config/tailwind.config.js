@@ -69,7 +69,6 @@ module.exports = {
       'warm-grey': '#767676',
       'dark-warm-grey': '#434343',
       'cool-blue-gray': '#737A92',
-      'dark-brown': '#3F1E1E',
       // This is only used for the background of the email preview I think
       // TODO: Use another gray
       'random-gray': '#ECEBE5',
