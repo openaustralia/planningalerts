@@ -36,6 +36,11 @@ class LoginAndAccountPreview < ActionMailer::Preview
     Users::ActivationMailer.notify(user, "faketoken")
   end
 
+  def activate_account_instructions_new_theme
+    user = FactoryBot.build_stubbed(:user, tailwind_theme: true)
+    Users::ActivationMailer.notify(user, "faketoken")
+  end
+
   def unlock_instructions
     user = FactoryBot.build_stubbed(:user, name: "Matthew")
     DeviseMailer.unlock_instructions(user, "faketoken")

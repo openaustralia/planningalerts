@@ -10,7 +10,10 @@ module Users
       @user = T.let(user, T.nilable(User))
       @token = T.let(token, T.nilable(String))
 
-      mail(to: user.email)
+      mail(
+        to: user.email,
+        template_path: ("_tailwind/users/activation_mailer" if user.tailwind_theme)
+      )
     end
   end
 end
