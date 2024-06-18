@@ -30,12 +30,6 @@
   <![endif]-->
   <title>Confirmation instructions</title>
   <style>
-    img {
-      max-width: 100%;
-      vertical-align: middle;
-      line-height: 1;
-      border: 0
-    }
     .hover-underline:hover {
       text-decoration-line: underline !important
     }
@@ -108,15 +102,26 @@
                 </td>
               </tr>
             </table>
-            <div class="xs-h-6" style="height: 64px"></div> <% if @resource.name.present? %>
-            <p>Welcome <%= @resource.name %>!</p>
-            <% else %>
-            <p>Welcome!</p>
-            <% end %>
-            <p>We're so happy that you're joining us on Planning Alerts.</p>
-            <p>Please confirm your account email by clicking the link below:</p>
-            <p><%= link_to "Confirm account", confirmation_url(@resource, confirmation_token: @token) %></p>
-            <p>Didn't request this email? Then you can safely ignore it.</p>
+            <div class="xs-h-6" style="height: 64px"></div>
+            <div style="text-align: center">
+              <h1 style="font-size: 36px;">Thanks for getting onboard!</h1>
+              <div>
+                <a href="<%= confirmation_url(@resource, confirmation_token: @token) %>" style="display: inline-block; background-color: #03827A; padding: 16px 32px; font-size: 18px; font-weight: 600; line-height: 1; color: #ffffff; text-decoration: none">
+                  <!--[if mso]>
+      <i style="mso-font-width: -100%; letter-spacing: 32px; mso-text-raise: 30px" hidden>&nbsp;</i>
+    <![endif]-->
+                  <span style="mso-text-raise: 16px">
+      Create my account
+    </span>
+                  <!--[if mso]>
+      <i style="mso-font-width: -100%; letter-spacing: 32px;" hidden>&nbsp;</i>
+    <![endif]-->
+                </a>
+              </div>
+              <p>(just confirming you're you)</p>
+              <img src="<%= image_url('tailwind/illustration/confirmation.png') %>" height="308" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0" alt="">
+              <p>Didn't request this email? Then you can safely ignore it.</p>
+            </div>
             <div role="separator" style="background-color: #e2e8f0; height: 1px; line-height: 1px; margin: 32px 0">&zwj;</div>
             <p>
               <a href="<%= root_url %>" class="dark-mode-text-white hover-underline" style="color: #414860; text-decoration-line: none"><strong>Planning Alerts</strong></a>

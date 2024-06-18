@@ -1,4 +1,5 @@
 ---
+<!-- TODO: Needs a new title and subject  -->
 title: Confirmation instructions
 preheader: "Please confirm your account email by clicking the link below"
 bodyClass: bg-white dark-mode:bg-[#333]
@@ -6,17 +7,14 @@ permalink: ../app/views/_tailwind/devise/mailer/confirmation_instructions.html.e
 ---
 
 <x-standard>
-  <% if @resource.name.present? %>
-    <p>Welcome <%= @resource.name %>!</p>
-  <% else %>
-    <p>Welcome!</p>
-  <% end %>
-
-  <p>We're so happy that you're joining us on Planning Alerts.</p>
-
-  <p>Please confirm your account email by clicking the link below:</p>
-
-  <p><%= link_to "Confirm account", confirmation_url(@resource, confirmation_token: @token) %></p>
-
-  <p>Didn't request this email? Then you can safely ignore it.</p>
+  <div class="text-center">
+    <h1 class="text-4xl">Thanks for getting onboard!</h1>
+    <!-- TODO: Add hover and focus states to button -->
+    <x-button href="<%= confirmation_url(@resource, confirmation_token: @token) %>">
+      Create my account
+    </x-button>    
+    <p>(just confirming you're you)</p>
+    <img src="<%= image_url('tailwind/illustration/confirmation.png') %>" height="308">
+    <p>Didn't request this email? Then you can safely ignore it.</p>
+  </div>
 </x-standard>
