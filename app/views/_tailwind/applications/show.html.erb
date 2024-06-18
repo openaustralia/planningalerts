@@ -86,8 +86,8 @@
   <% end %>
 </div>
 
+<%# TODO: Extract this into a component %>
 <div class="flex flex-col items-baseline gap-2 mt-2 md:flex-row md:gap-4">
-  <%# TODO: Handle situation when authority name is very long %>
   <div class="shrink-0">
     <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: external_application_path(@application), icon: :external) do %>
       More info
