@@ -18,6 +18,7 @@ en:
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
       confirmation_instructions:
+        # TODO: This needs to be changed to "Planning Alerts: Confirming you're you" after tailwind theme is rolled out
         subject: "PlanningAlerts: Confirmation instructions"
       reset_password_instructions:
         subject: "PlanningAlerts: Reset password instructions"
