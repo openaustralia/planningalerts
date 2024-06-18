@@ -7,7 +7,7 @@
   <div class="grid md:grid-flow-col grid-rows-[repeat(3,_max-content)] auto-cols-fr gap-y-8 gap-x-16 mt-20">
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Most commented applications") %>
     <%# Wrapping in a div to make the bottom of the illustrations match up %>
-    <div class="flex items-end">
+    <div class="flex items-end mb-4">
       <%= image_tag "tailwind/illustration/people-talking.svg", alt: "" %>
     </div>
     <div class="space-y-8">
@@ -17,7 +17,7 @@
       <%= pa_link_to "View top 20 commented applications", trending_applications_path, extra_classes: "text-xl inline-block pl-10" %>
     </div>
     <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mt-12 md:mt-0").with_content("Latest applications across Australia") %>
-    <div class="flex items-end">
+    <div class="flex items-end mb-4">
       <%= image_tag "tailwind/illustration/houses.svg", alt: "" %>
     </div>
     <div class="space-y-8">
