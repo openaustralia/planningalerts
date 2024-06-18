@@ -1,0 +1,22 @@
+---
+<!-- TODO: Needs a new title and subject  -->
+title: Activate account instructions
+preheader: "Thanks for getting onboard! (just confirming you're you)"
+bodyClass: bg-white dark-mode:bg-[#333]
+permalink: ../app/views/_tailwind/users/activation_mailer/notify.html.erb
+---
+
+<x-standard>
+  <div class="text-center">
+    <h1 class="text-4xl">Thanks for getting onboard!</h1>
+    <x-spacer height="16px" />
+    <x-button href="<%= edit_users_activation_url(token: @token) %>">
+      Activate my account
+    </x-button>    
+    <p>(just confirming you're you)</p>
+    <x-spacer height="64px" />
+    <img src="<%= image_url('tailwind/illustration/confirmation.png') %>" height="308">
+    <x-spacer height="64px" />
+    <x-ignore />
+  </div>
+</x-standard>
