@@ -9,7 +9,12 @@ class LoginAndAccountPreview < ActionMailer::Preview
   # TODO: Figure out what's going on and fix it
   def confirmation_instructions
     user = FactoryBot.build_stubbed(:user, name: "Matthew")
-    Devise::Mailer.confirmation_instructions(user, "faketoken")
+    DeviseMailer.confirmation_instructions(user, "faketoken")
+  end
+
+  def confirmation_instructions_new_theme
+    user = FactoryBot.build_stubbed(:user, name: "Matthew", tailwind_theme: true)
+    DeviseMailer.confirmation_instructions(user, "faketoken")
   end
 
   # It shows a different email address in the "to" and the body of the email.
