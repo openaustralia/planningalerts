@@ -10,7 +10,6 @@ permalink: ../app/views/_tailwind/devise/mailer/confirmation_instructions.html.e
   <div class="text-center">
     <h1 class="text-4xl">Thanks for getting onboard!</h1>
     <x-spacer height="16px" />
-    <!-- TODO: Add hover and focus states to button -->
     <x-button href="<%= confirmation_url(@resource, confirmation_token: @token) %>">
       Create my account
     </x-button>    

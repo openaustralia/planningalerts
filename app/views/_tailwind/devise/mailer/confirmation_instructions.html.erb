@@ -30,11 +30,20 @@
   <![endif]-->
   <title>Confirmation instructions</title>
   <style>
+    .hover-bg-dark-green:hover {
+      background-color: #054E4A !important
+    }
     .hover-text-fuchsia-darker:hover {
       color: #A6156F !important
     }
     .focus-bg-sun-yellow:focus {
       background-color: #FFDC3E !important
+    }
+    .focus-outline:focus {
+      outline-style: solid !important
+    }
+    .focus-outline-sun-yellow:focus {
+      outline-color: #FFDC3E !important
     }
     @media (max-width: 600px) {
       .sm-px-4 {
@@ -107,7 +116,7 @@
               <h1 style="font-size: 36px;">Thanks for getting onboard!</h1>
               <div role="separator" style="line-height: 16px">&zwj;</div>
               <div>
-                <a href="<%= confirmation_url(@resource, confirmation_token: @token) %>" style="display: inline-block; background-color: #03827A; padding: 16px 32px; font-size: 18px; font-weight: 600; line-height: 1; color: #ffffff; text-decoration: none">
+                <a href="<%= confirmation_url(@resource, confirmation_token: @token) %>" class="hover-bg-dark-green focus-outline-sun-yellow focus-outline" style="display: inline-block; background-color: #03827A; padding: 16px 32px; font-size: 18px; font-weight: 600; line-height: 1; color: #ffffff; text-decoration: none">
                   <!--[if mso]>
       <i style="mso-font-width: -100%; letter-spacing: 32px; mso-text-raise: 30px" hidden>&nbsp;</i>
     <![endif]-->
