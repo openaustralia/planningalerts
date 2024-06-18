@@ -98,7 +98,7 @@ describe "Signing up for an API account" do
         # TODO: The subject line should be changed to "Planning Alerts" in /app/config/locales/devise.en.yml
         # Do this after we've completely moved over to the new theme
         expect(current_email).to have_subject("PlanningAlerts: Reset password instructions")
-        expect(current_email.default_part_body.to_s).to include("Please click the button below and follow the instructions")
+        expect(current_email.default_part_body.to_s).to include("Thanks for confirming you are you")
       end
 
       describe "clicking the link in the email" do
