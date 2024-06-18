@@ -1,7 +1,7 @@
 ---
 <!-- TODO: Needs a new title and subject  -->
 title: Confirmation instructions
-preheader: "Please confirm your account email by clicking the link below"
+preheader: "Thanks for getting onboard! (just confirming you're you)"
 bodyClass: bg-white dark-mode:bg-[#333]
 permalink: ../app/views/_tailwind/devise/mailer/confirmation_instructions.html.erb
 ---
@@ -9,12 +9,18 @@ permalink: ../app/views/_tailwind/devise/mailer/confirmation_instructions.html.e
 <x-standard>
   <div class="text-center">
     <h1 class="text-4xl">Thanks for getting onboard!</h1>
+    <x-spacer height="16px" />
     <!-- TODO: Add hover and focus states to button -->
     <x-button href="<%= confirmation_url(@resource, confirmation_token: @token) %>">
       Create my account
     </x-button>    
     <p>(just confirming you're you)</p>
+    <x-spacer height="64px" />
     <img src="<%= image_url('tailwind/illustration/confirmation.png') %>" height="308">
+    <x-spacer height="64px" />
+    <x-divider />
+    <x-spacer height="4px" />
     <p>Didn't request this email? Then you can safely ignore it.</p>
+    <x-spacer height="4px" />
   </div>
 </x-standard>
