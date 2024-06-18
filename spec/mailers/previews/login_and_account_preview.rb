@@ -38,6 +38,11 @@ class LoginAndAccountPreview < ActionMailer::Preview
 
   def unlock_instructions
     user = FactoryBot.build_stubbed(:user, name: "Matthew")
-    Devise::Mailer.unlock_instructions(user, "faketoken")
+    DeviseMailer.unlock_instructions(user, "faketoken")
+  end
+
+  def unlock_instructions_new_theme
+    user = FactoryBot.build_stubbed(:user, name: "Matthew", tailwind_theme: true)
+    DeviseMailer.unlock_instructions(user, "faketoken")
   end
 end
