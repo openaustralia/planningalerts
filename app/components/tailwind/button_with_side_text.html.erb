@@ -1,11 +1,10 @@
 <div class="flex flex-col items-baseline gap-2 md:flex-row md:gap-4">
   <div class="shrink-0">
-    <%= render Tailwind::ButtonComponent.new(**@options) do %>
+    <%= render @button do %>
       <%= content %>
     <% end %>
   </div>
-  <%# TODO: Make the text size change if the button size changes %>
-  <div class="text-xl text-navy">
+  <div class="<%= @button.text_size_class %> text-navy">
     <%= side_text %>
   </div>
 </div>

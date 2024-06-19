@@ -10,7 +10,7 @@ module Tailwind
     sig { params(options: T.untyped).void }
     def initialize(**options)
       super
-      @options = options
+      @button = T.let(Tailwind::ButtonComponent.new(**T.unsafe(options)), Tailwind::ButtonComponent)
     end
   end
 end

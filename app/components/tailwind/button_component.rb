@@ -17,14 +17,18 @@ module Tailwind
 
       classes = %w[font-semibold]
 
+      @size = T.let(size, String)
+
       case size
       when "lg"
-        classes += %w[px-4 py-2 text-lg]
+        classes += %w[px-4 py-2]
       when "xl"
-        classes += %w[px-10 py-3 sm:py-4 text-xl]
+        classes += %w[px-10 py-3 sm:py-4]
       else
         raise "Unexpected size #{size}"
       end
+
+      classes << text_size_class
 
       # TODO: Hover states are not subtle enough IMHO
       case type
@@ -76,6 +80,18 @@ module Tailwind
       @tag = tag
       @href = href
       @icon = icon
+    end
+
+    sig { returns(String) }
+    def text_size_class
+      case @size
+      when "lg"
+        "text-lg"
+      when "xl"
+        "text-xl"
+      else
+        raise "Unexpected size #{@size}"
+      end
     end
   end
 end
