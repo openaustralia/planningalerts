@@ -29,16 +29,15 @@
     <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :secondary, href: application_path(@comment.application, anchor: "add-comment"), icon: :edit).with_content("Edit comment") %>
   </div>
 
-  <%# TODO: Extract this pattern into a component of a button with a description (instead of a long button name) %>
-  <div class="flex flex-col items-baseline gap-2 mt-4 md:flex-row md:gap-4">
-    <div class="shrink-0">
-      <%= pa_button_to publish_application_comment_path(@comment) do %>
+  <div class="mt-4">
+    <%= form_with(url: publish_application_comment_path(@comment), builder: FormBuilders::Tailwind) do %>
+      <%= render Tailwind::ButtonWithSideText.new(tag: :button, size: "xl", type: :primary) do |c| %>
         Publish
+        <% c.with_side_text do %>
+          and send to <%= @comment.comment_recipient_full_name %>
+        <% end %>
       <% end %>
-    </div>
-    <div class="text-xl text-navy">
-      and send to <%= @comment.comment_recipient_full_name %>
-    </div>
+    <% end %>
   </div>
 <% end %>
 
