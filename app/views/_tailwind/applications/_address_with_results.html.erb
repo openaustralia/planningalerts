@@ -27,7 +27,7 @@
     <%= render "no_applications", full_address:, q: %>
   </section>
 <% elsif applications %>
-  <section class="pt-16">
+  <section class="pt-16" id="results">
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Search results") %>
 
     <div class="mt-6 mb-4">
