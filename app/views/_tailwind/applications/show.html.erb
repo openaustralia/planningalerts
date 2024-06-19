@@ -86,14 +86,13 @@
   <% end %>
 </div>
 
-<%# TODO: Extract this into a component %>
-<div class="flex flex-col items-baseline gap-2 mt-2 md:flex-row md:gap-4">
-  <div class="shrink-0">
-    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: external_application_path(@application), icon: :external) do %>
-      More info
+<div class="mt-2">
+  <%= render Tailwind::ButtonWithSideText.new(tag: :a, size: "xl", type: :primary, href: external_application_path(@application), icon: :external) do |c| %>
+    More info
+    <% c.with_side_text do %>
+      on the <%= @application.authority.full_name %> website
     <% end %>
-  </div>
-  <div class="text-xl text-navy">on the <%= @application.authority.full_name %> website</div>
+  <% end %>
 </div>
 
 <div class="mt-6 md:mt-2">
