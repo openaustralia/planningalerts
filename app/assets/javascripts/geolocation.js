@@ -1,4 +1,4 @@
-function getPosition(options) {
+function getPositionByGeolocation(options) {
   return new Promise((resolve, reject) =>
     navigator.geolocation.getCurrentPosition(resolve, reject, options)
   );
@@ -20,7 +20,7 @@ function getAddressFromPosition(latitude, longitude) {
 
 async function getAddress() {
   try {
-    var pos = await getPosition({enableHighAccuracy: true, timeout: 10000});
+    var pos = await getPositionByGeolocation({enableHighAccuracy: true, timeout: 10000});
   } catch(err) {
     if (err.code == 1) { // User said no
       throw("You declined; please fill in the box above");
