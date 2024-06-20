@@ -54,6 +54,9 @@ class ApplicationController < ActionController::Base
 
   sig { returns(T::Boolean) }
   def show_tailwind_theme?
+    # To permanently switch over to the tailwind theme uncomment the line below and comment everything else out in this method
+    # return true
+
     # We're intentionally not checking whether the feature flag is enabled here because we want
     # the new theme to be shown even if you're logged out. The feature flag just enables the button
     # that allows you to do the switching. Cookies are signed so the value can be manipulated by
