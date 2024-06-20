@@ -1,17 +1,18 @@
 <div class="flex items-start gap-5 px-8 mt-8 text-xl text-white rounded-lg bg-lavender">
-  <div class="text-light-lavender shrink-0">
+  <div class="self-end text-light-lavender shrink-0">
     <%= image_tag "tailwind/illustration/celebration.svg", alt: "" %>
   </div>
-  <div class="mt-8 grow">
+  <div class="my-8 grow">
     <p class="text-3xl font-bold">Hooray, our new website is live!</p>
     <p class="mt-4">
       We've revamped our space to be simpler and more welcoming for everyone.
       Why the change?
       <%# TODO: Add link to actual blog post %>
-      <%= link_to "Discover the reasons behind our redesign", "https://www.oaf.org.au/blog/", class: "hover:opacity-80 focus:bg-sun-yellow underline" %>
+      <%= link_to "Discover the reasons behind our redesign", "https://www.oaf.org.au/blog/", class: "hover:opacity-80 focus:bg-sun-yellow underline" %>.
     </p>
   </div>
   <button class="p-2 mt-8 hover:opacity-80 focus:outline-none focus:ring-sun-yellow focus:ring-4">
     <%= render Tailwind::Icon.new(name: :dismiss) %>
   </button>
 </div>
+
