@@ -36,10 +36,12 @@
   <dd>
     <div>
       <%= @application.council_reference %>
-      <%= render Tailwind::InfoPopup.new do %>
-        This was created by <%= @application.authority.full_name %> to identify this application. You will need this if you talk
-        directly with them or use their website.
-      <% end %>
+      <div class="inline-block ml-1">
+        <%= render Tailwind::InfoPopup.new do %>
+          This was created by <%= @application.authority.full_name %> to identify this application. You will need this if you talk
+          directly with them or use their website.
+        <% end %>
+      </div>
     </div>
   </dd>
 </dl>
