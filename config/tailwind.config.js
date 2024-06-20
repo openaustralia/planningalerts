@@ -49,8 +49,6 @@ module.exports = {
       'transparent': 'transparent',
       'current': 'currentColor',
       'white': '#ffffff',
-      // TODO: Come up with a better name than white-hover which is tied to its current use
-      'white-hover': '#B5B6C6',
       'off-white': "#eeeeee",
       'light-grey': '#F3F2F2',
       'fuchsia': '#CA3F94',
