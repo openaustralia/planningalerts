@@ -1,5 +1,5 @@
 <div class="hidden md:block">
-  <div class="flex justify-between h-16 text-lg font-medium text-navy">
+  <div class="flex justify-between h-16 text-xl font-medium text-navy">
     <ul class="flex space-x-8">
       <%= render Tailwind::NavItemComponent.new(href: root_path, selected: current_page?(root_path)).with_content("Home") %>
       <%= render Tailwind::NavItemComponent.new(href: address_applications_path, selected: current_page?(address_applications_path)).with_content("Search") %>
