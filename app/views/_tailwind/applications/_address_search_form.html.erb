@@ -30,7 +30,7 @@
                             placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                             class: class_names("text-xl", "text-navy", "w-full", "px-4", "py-3", "sm:py-4", "placeholder-shown:truncate", "focus:ring-4", "focus:ring-sun-yellow", "border-error-red" => error),
                             required: "required",
-                            autofocus: true,
+                            autofocus:,
                             "x-data" => "{ async initAutocomplete() {
                                             const { Autocomplete } = await google.maps.importLibrary('places');
                                             new Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']})}

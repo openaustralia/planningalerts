@@ -1,7 +1,7 @@
 <% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 
 <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "sr-only").with_content("Search") %>
-<%= render "address_search_form", q:, error: nil %>
+<%= render "address_search_form", q:, error: nil, autofocus: false %>
 
 <%# TODO: Need a proper design for this section %>
 <%# TODO: When this section shows up it's not actually clear what the current search is for %>
