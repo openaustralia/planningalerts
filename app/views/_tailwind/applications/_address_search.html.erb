@@ -4,7 +4,7 @@
 <%= render "address_search_form", q:, error:, autofocus: true %>
 
 <% if error.nil? %>
-  <div class="grid md:grid-flow-col grid-rows-[repeat(3,_max-content)] auto-cols-fr gap-y-8 gap-x-16 mt-20">
+  <div class="grid md:grid-flow-col grid-rows-[repeat(3,_max-content)] auto-cols-fr gap-y-8 gap-x-16 mt-12">
     <%= render Tailwind::Heading.new(tag: :h2).with_content("Most commented applications") %>
     <%# Wrapping in a div to make the bottom of the illustrations match up %>
     <div class="flex items-end mb-4">
