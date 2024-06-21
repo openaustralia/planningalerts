@@ -1,14 +1,15 @@
-<%= pa_link_to "< Back to menu", profile_alerts_path, extra_classes: "text-xl" %>
+<%= pa_link_to "< Back to your alerts", profile_alerts_path, extra_classes: "text-xl" %>
 
-<%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mt-14").with_content(@alert.address) %>
-<div class="text-xl text-navy">
-  <p class="font-bold leading-6 mt-14">Last email sent</p>
+<%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mt-8").with_content(@alert.address) %>
+
+<div class="mt-8 text-xl text-navy">
+  <p class="font-bold leading-6">Last email sent</p>
   <p>
     <%= last_sent_in_words(@alert.last_sent) %>
   </p>
 </div>
 
-<div class="pb-24 border-b text-light-grey">
+<div class="pb-12 border-b text-light-grey">
   <%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind, class: "mt-5" do |f| %>
     <%= f.label :radius_meters, "Alert distance" %>
     <div class="flex flex-col gap-4 mt-2" x-data="{radius_meters: <%= j(@alert.radius_meters) %>}">
