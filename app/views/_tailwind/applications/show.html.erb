@@ -27,7 +27,7 @@
 <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
 
-<dl class="mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-xl md:gap-y-4">
+<dl class="mt-8 sm:mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-xl md:gap-y-4">
   <dt class="font-bold font-display">Description</dt>
   <dd><%= @application.description %></dd>
   <dt class="mt-8 font-bold md:mt-0 font-display">Planning Authority</dt>
@@ -47,7 +47,7 @@
 </dl>
 
 <%# TODO: The icons next to the labels are not all the same size / proportion %>
-<dl class="text-xl text-navy grid md:grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-14">
+<dl class="text-xl text-navy grid md:grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-10 sm:mt-14">
   <dt class="font-bold md:py-1">
     <div class="flex gap-4">
       <%= image_tag "tailwind/calendar.svg", width: 24, alt: "" %>
@@ -81,7 +81,7 @@
   </dd>
 </dl>
 
-<div class="mt-12">
+<div class="mt-6 sm:mt-12">
   <%# TODO: This button currently has much larger left and right padding than the design %>
   <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: "#add-comment", icon: :edit) do %>
     Make a comment now
@@ -105,7 +105,7 @@
 
 <%= render "create_alert_form_bigger", alert: @alert %>
 
-<section class="pt-20 border-t mt-14 border-light-grey2" id="comments">
+<section class="pt-8 mt-8 border-t sm:pt-20 sm:mt-14 border-light-grey2" id="comments">
   <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "inline-block mb-6 mr-4") do %>
     Public comments on this application
   <% end %>
