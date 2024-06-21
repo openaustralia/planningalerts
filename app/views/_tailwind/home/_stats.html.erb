@@ -1,5 +1,5 @@
 <% cache "stats", expires_in: 1.hour do %>
-  <section class="pt-12 text-xl text-navy">
+  <section class="pt-6 text-xl sm:pt-12 text-navy">
     <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mb-12").with_content("This week at Planning Alerts") %>
     <ul class="grid gap-12 text-center sm:grid-cols-2 lg:grid-cols-4">
       <li>
