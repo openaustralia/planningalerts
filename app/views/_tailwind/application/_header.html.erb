@@ -20,7 +20,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="pt-8 sm:bg-light-grey sm:pt-0">
+    <div class="pt-12 sm:bg-light-grey sm:pt-0">
       <%= render Tailwind::ContainerComponent.new do %>
         <nav aria-label="Main">
           <%= render "menu_mobile" %>
@@ -28,7 +28,7 @@
         </nav>
       <% end %>
     </div>
-    <div class="sm:hidden xl:bg-center pt-4">
+    <div class="sm:hidden xl:bg-center">
       <%= render Tailwind::ContainerComponent.new do %>
         <%= link_to root_path, class: "inline-block focus:outline-none focus:bg-sun-yellow" do %>
           <%= image_tag "tailwind/logo-navy.svg", size: "350x46", alt: "Planning Alerts" %>
