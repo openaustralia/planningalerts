@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     resources :api_keys, except: [:destroy, :new, :create]
     resources :api_usages, only: :index
     resources :background_jobs, only: :index
+    resources :test_emails, only: [:index, :create]
 
     root to: "users#index"
   end
