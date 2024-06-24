@@ -12,7 +12,7 @@
     <% end %>
   </div>
   <div class="flex flex-col">
-    <div class="hidden sm:block bg-yellow bg-header-pattern xl:bg-center py-8">
+    <div class="hidden py-8 sm:block bg-yellow bg-header-pattern xl:bg-center">
       <%= render Tailwind::ContainerComponent.new do %>
         <%# TODO: With focus do we want to swap colors around instead? %>
         <%= link_to root_path, class: "inline-block focus:outline-none focus:ring-4 focus:ring-sun-yellow" do %>
@@ -20,7 +20,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="pt-10 pb-2 sm:bg-light-grey sm:pt-0">
+    <div class="pt-10 pb-2 sm:bg-light-grey sm:py-0">
       <%= render Tailwind::ContainerComponent.new do %>
         <nav aria-label="Main">
           <%= render "menu_mobile" %>
