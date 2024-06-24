@@ -3,7 +3,13 @@
 <% if yield(:meta_description) %>
   <meta name="description" content="<%= yield(:meta_description) %>">
 <% end %>
-<title><%= yield(:page_title).presence || "Email alerts of planning applications near you" %> | Planning Alerts</title>
+<title>
+  <% if yield(:page_title).present? %>
+    <%= yield(:page_title) %> | Planning Alerts
+  <% else %>
+    Planning Alerts
+  <% end %>
+</title>
 
 <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
 <link rel="preconnect" href="https://fonts.googleapis.com">
