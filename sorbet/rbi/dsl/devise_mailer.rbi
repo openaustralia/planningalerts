@@ -6,7 +6,7 @@
 
 class DeviseMailer
   class << self
-    sig { params(record: T.untyped, token: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
+    sig { params(record: ::User, token: ::String, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
     def confirmation_instructions(record, token, opts = T.unsafe(nil)); end
 
     sig { params(record: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
@@ -18,10 +18,10 @@ class DeviseMailer
     sig { params(record: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
     def password_change(record, opts = T.unsafe(nil)); end
 
-    sig { params(record: T.untyped, token: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
+    sig { params(record: ::User, token: ::String, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
     def reset_password_instructions(record, token, opts = T.unsafe(nil)); end
 
-    sig { params(record: T.untyped, token: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
+    sig { params(record: ::User, token: ::String, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
     def unlock_instructions(record, token, opts = T.unsafe(nil)); end
   end
 end
