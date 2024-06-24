@@ -12,7 +12,17 @@
     <% end %>
   </div>
   <div class="flex flex-col">
-    <div class="pt-8 sm:bg-light-grey sm:order-last sm:pt-0">
+    <div class="hidden sm:block bg-yellow bg-header-pattern xl:bg-center">
+      <%= render Tailwind::ContainerComponent.new do %>
+        <div class="pt-4 sm:py-8">
+          <%# TODO: With focus do we want to swap colors around instead? %>
+          <%= link_to root_path, class: "inline-block focus:outline-none focus:ring-4 focus:ring-sun-yellow" do %>
+            <%= image_tag "tailwind/logo.svg", size: "408x96", alt: "Planning Alerts. Email alerts of planning applications near you" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="pt-8 sm:bg-light-grey sm:pt-0">
       <%= render Tailwind::ContainerComponent.new do %>
         <nav aria-label="Main">
           <%= render "menu_mobile" %>
@@ -20,14 +30,12 @@
         </nav>
       <% end %>
     </div>
-    <div class="sm:bg-yellow sm:bg-header-pattern xl:bg-center">
+    <div class="sm:hidden xl:bg-center">
       <%= render Tailwind::ContainerComponent.new do %>
         <div class="pt-4 sm:py-8">
           <%# TODO: With focus do we want to swap colors around instead? %>
           <%= link_to root_path, class: "inline-block focus:outline-none focus:ring-4 focus:ring-sun-yellow" do %>
-            <%# Switches between these two blocks at "sm" breakpoint %>
-            <%= image_tag "tailwind/logo.svg", class: "hidden sm:block", size: "408x96", alt: "Planning Alerts. Email alerts of planning applications near you" %>
-            <%= image_tag "tailwind/logo-navy.svg", class: "sm:hidden", size: "350x46", alt: "Planning Alerts" %>
+            <%= image_tag "tailwind/logo-navy.svg", size: "350x46", alt: "Planning Alerts" %>
           <% end %>
         </div>
       <% end %>
