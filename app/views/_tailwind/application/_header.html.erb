@@ -33,8 +33,7 @@
     <div class="sm:hidden xl:bg-center">
       <%= render Tailwind::ContainerComponent.new do %>
         <div class="pt-4 sm:py-8">
-          <%# TODO: With focus do we want to swap colors around instead? %>
-          <%= link_to root_path, class: "inline-block focus:outline-none focus:ring-4 focus:ring-sun-yellow" do %>
+          <%= link_to root_path, class: "inline-block focus:outline-none focus:bg-sun-yellow" do %>
             <%= image_tag "tailwind/logo-navy.svg", size: "350x46", alt: "Planning Alerts" %>
           <% end %>
         </div>
