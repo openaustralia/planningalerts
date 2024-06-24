@@ -10,6 +10,13 @@ module Users
       @user = T.let(user, T.nilable(User))
       @token = T.let(token, T.nilable(String))
 
+      headers(
+        # If we're on the tailwind theme then disable css inlining because we're already
+        # doing it with maizzle and the inlining on cuttlefish strips out media queries for
+        # responsive designs and some more modern css features
+        "X-Cuttlefish-Disable-Css-Inlining" => user.tailwind_theme.to_s
+      )
+  
       mail(
         to: user.email,
         template_path: ("_tailwind/users/activation_mailer" if user.tailwind_theme)
