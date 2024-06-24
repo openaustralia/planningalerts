@@ -25,7 +25,11 @@ class AlertMailer < ApplicationMailer
       # This special header sets arbitrary metadata on the email in Cuttlefish
       # It's not sent on in the outgoing email
       "X-Cuttlefish-Metadata-alert-id" => alert.id.to_s,
-      "X-Cuttlefish-Metadata-user-id" => T.must(alert.user).id.to_s
+      "X-Cuttlefish-Metadata-user-id" => T.must(alert.user).id.to_s,
+      # If we're on the tailwind theme then disable css inlining because we're already
+      # doing it with maizzle and the inlining on cuttlefish strips out media queries for
+      # responsive designs and some more modern css features
+      "X-Cuttlefish-Disable-Css-Inlining" => T.must(alert.user).tailwind_theme.to_s
     )
 
     mail(
