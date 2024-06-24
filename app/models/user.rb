@@ -29,10 +29,10 @@ class User < ApplicationRecord
   # Force the tailwind_theme on everyone. Do this at the same time as changing show_tailwind_theme? in ApplicationController.
   # Note that this breaks the tests currently so we're disabling in test. Ugh.
   # TODO: Get rid of this hack as soon as possible once we've released the redesign
-  # sig { returns(T::Boolean) }
-  # def tailwind_theme
-  #   Rails.env.test? ? super : true
-  # end
+  sig { returns(T::Boolean) }
+  def tailwind_theme
+    Rails.env.test? ? super : true
+  end
 
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)
