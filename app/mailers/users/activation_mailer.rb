@@ -17,6 +17,8 @@ module Users
         "X-Cuttlefish-Disable-Css-Inlining" => user.tailwind_theme.to_s
       )
 
+      attachments.inline["illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/confirmation.png").read if user.tailwind_theme
+
       mail(
         to: user.email,
         template_path: ("_tailwind/users/activation_mailer" if user.tailwind_theme)

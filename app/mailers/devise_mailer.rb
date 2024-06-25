@@ -16,12 +16,14 @@ class DeviseMailer < Devise::Mailer
   sig { params(record: User, token: String, opts: T.untyped).returns(T.untyped) }
   def confirmation_instructions(record, token, opts = {})
     headers["X-Cuttlefish-Disable-Css-Inlining"] = record.tailwind_theme.to_s
+    attachments.inline["illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/confirmation.png").read if record.tailwind_theme
     super
   end
 
   sig { params(record: User, token: String, opts: T.untyped).returns(T.untyped) }
   def reset_password_instructions(record, token, opts = {})
     headers["X-Cuttlefish-Disable-Css-Inlining"] = record.tailwind_theme.to_s
+    attachments.inline["illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/reset-password.png").read if record.tailwind_theme
     super
   end
 

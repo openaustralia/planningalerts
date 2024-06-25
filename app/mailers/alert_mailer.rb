@@ -32,6 +32,12 @@ class AlertMailer < ApplicationMailer
       "X-Cuttlefish-Disable-Css-Inlining" => T.must(alert.user).tailwind_theme.to_s
     )
 
+    if T.must(alert.user).tailwind_theme
+      attachments.inline["pencil.png"] = Rails.root.join("app/assets/images/tailwind/pencil.png").read
+      attachments.inline["trash.png"] = Rails.root.join("app/assets/images/tailwind/trash.png").read
+      attachments.inline["footer-illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/woman-looking-off2.png").read
+    end
+
     mail(
       from: "PlanningAlerts <no-reply@planningalerts.org.au>",
       to: alert.email,
