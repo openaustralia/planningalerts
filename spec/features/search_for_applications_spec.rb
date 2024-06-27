@@ -27,14 +27,17 @@ describe "Searching for development application near an address" do
   end
 
   it "successfully" do
+    # Only signing in user to get new theme
+    user = create(:confirmed_user, tailwind_theme: true)
+    sign_in user
     visit root_path
 
-    fill_in "Enter a street address", with: "24 Bruce Road, Glenbrook"
+    fill_in "Street address", with: "24 Bruce Road, Glenbrook"
     click_button "Search"
 
-    expect(page).to have_content "Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773"
+    expect(page).to have_content "Search results"
 
-    within "ol.applications" do
+    within "#results" do
       expect(page).to have_content "24 Bruce Road"
       expect(page).to have_content "A lovely house"
     end
