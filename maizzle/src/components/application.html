@@ -1,6 +1,7 @@
 <script props>
   module.exports = {
     address: props.address,
+    distance: props.distance,
     map: props.map,
     url: props.url
   }
@@ -14,7 +15,10 @@
           <h2 class="m-0 text-lg font-bold underline line-clamp-1 text-fuchsia group-hover:text-fuchsia-darker dark-mode:text-white" style="text-decoration:underline">
             <span class="group-focus:bg-sun-yellow">{{{ address }}}</span>
           </h2>
-          <p class="my-0 text-navy dark-mode:text-white line-clamp-6"><content /></p>
+          <if condition="distance">
+            <p class="mt-0 text-navy dark-mode:text-white">{{{ distance }}}</p>
+          </if>
+          <p class="my-0 text-navy dark-mode:text-white line-clamp-4"><content /></p>
         </td>
         <!-- TODO: Need a space between the text and the map -->
         <td class="w-[150px] xs:w-full xs:inline-block xs:mt-4" valign="top">

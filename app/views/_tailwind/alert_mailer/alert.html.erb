@@ -99,7 +99,8 @@
                     <h2 class="group-hover-text-fuchsia-darker dark-mode-text-white" style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px; font-weight: 700; color: #CA3F94; text-decoration-line: underline; text-decoration: underline">
                       <span class="group-focus-bg-sun-yellow"><%= application.address %></span>
                     </h2>
-                    <p class="dark-mode-text-white" style="margin-top: 0; margin-bottom: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6; color: #414860">
+                    <p class="dark-mode-text-white" style="margin-top: 0; color: #414860"><%= distance_and_heading_in_words(@alert.location, application.location) %></p>
+                    <p class="dark-mode-text-white" style="margin-top: 0; margin-bottom: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; color: #414860">
                       <%= application.description %>
                     </p>
                   </td>
@@ -115,7 +116,7 @@
               <table class="dark-mode-text-white dark-mode-bg-black" style="background-color: #ffffff; padding: 32px; color: #414860; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td>
-                    <p style="margin-top: 0"><%= comment.name %> commented:</p>
+                    <p style="margin-top: 0;"><%= comment.name %> commented:</p>
                     <table class="dark-mode-bg-black" style="margin-top: 16px; background-color: #ffffff" cellpadding="0" cellspacing="0" role="none">
                       <tr>
                         <td valign="top" class="xs-block xs-h-8" style="padding-right: 16px; padding-top: 8px; font-size: 72px">”</td>
