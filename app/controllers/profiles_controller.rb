@@ -8,9 +8,10 @@ class ProfilesController < ApplicationController
 
   layout "profile"
 
+  # TODO: Move redirect to routes
   sig { void }
   def show
-    redirect_to profile_alerts_url if show_tailwind_theme?
+    redirect_to profile_alerts_url
   end
 
   sig { void }

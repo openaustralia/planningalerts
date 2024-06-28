@@ -32,11 +32,6 @@ describe "redirects" do
   describe "applications nearby page" do
     let(:application) { create(:application) }
 
-    it "redirects to the default sort option in the original design" do
-      get nearby_application_path(application)
-      expect(response).to redirect_to nearby_application_path(application, sort: "time")
-    end
-
     it "redirects to the application page in the new design" do
       sign_in create(:confirmed_user, tailwind_theme: true)
       get nearby_application_path(application, sort: "time")

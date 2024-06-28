@@ -4,30 +4,10 @@
 class AtdisController < ApplicationController
   extend T::Sig
 
+  # TODO: Move redirect to routes
   sig { void }
   def test
-    if show_tailwind_theme?
-      redirect_to get_involved_path
-      return
-    end
-
-    if params[:url].present?
-      feed = Feed.create_from_url(params[:url])
-      begin
-        @page = T.let(feed.applications, T.untyped)
-      rescue RestClient::InternalServerError
-        @error = T.let("Remote server returned an internal server error (error code 500) accessing #{params[:url]}", T.nilable(String))
-      rescue RestClient::RequestTimeout
-        @error = "Timeout in request to #{params[:url]}. Remote server did not respond in a reasonable amount of time."
-      rescue RestClient::Exception => e
-        @error = "Could not load data - #{e}"
-      rescue URI::InvalidURIError
-        @error = "The url appears to be invalid #{params[:url]}"
-      end
-      @feed = T.let(feed, T.nilable(Feed))
-    else
-      @feed = Feed.new
-    end
+    redirect_to get_involved_path
   end
 
   # The job here is to take ugly posted parameters and redirect to a much simpler url
@@ -63,10 +43,9 @@ class AtdisController < ApplicationController
     end
   end
 
+  # TODO: Move redirect to routes
   sig { void }
   def specification
-    return unless show_tailwind_theme?
-
     redirect_to "https://github.com/openaustralia/atdis/raw/master/docs/ATDIS-1.0.2%20Application%20Tracking%20Data%20Interchange%20Specification%20(v1.0.2).pdf"
   end
 end

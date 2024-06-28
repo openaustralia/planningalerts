@@ -6,11 +6,9 @@ class AlertsController < ApplicationController
 
   before_action :authenticate_user!, only: %i[new create]
 
+  # TODO: Move redirect to routes
   sig { void }
   def new
-    @alert = Alert.new(address: params[:address])
-    return unless show_tailwind_theme?
-
     redirect_to new_profile_alert_path
   end
 

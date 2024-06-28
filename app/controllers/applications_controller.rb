@@ -10,18 +10,14 @@ class ApplicationsController < ApplicationController
   def index
     authority_id = T.cast(params[:authority_id], T.nilable(String))
 
-    description = if show_tailwind_theme?
-                    +"Most recent applications"
-                  else
-                    +"Recent applications within the last #{Application.nearby_and_recent_max_age_months} months"
-                  end
+    description = +"Most recent applications"
     if authority_id
       # TODO: Handle the situation where the authority name isn't found
       authority = Authority.find_short_name_encoded!(authority_id)
       description << " from #{authority.full_name_and_state}"
       apps = authority.applications
     else
-      description << " across Australia" if show_tailwind_theme?
+      description << " across Australia"
       apps = Application
     end
     apps = apps.order("first_date_scraped DESC").where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
@@ -109,7 +105,7 @@ class ApplicationsController < ApplicationController
 
     @q = params_q
     # TODO: Get actual visual design for how we want highlighted words to appear in search results
-    tag = show_tailwind_theme? ? "<strong>" : "<span class=\"highlight\">"
+    tag = "<strong>"
     @applications = Application.search(@q, fields: [:description], order: { first_date_scraped: :desc }, highlight: { tag: }, page: params[:page], per_page:) if @q
     @description = @q ? "Search: #{@q}" : "Search"
   end
@@ -122,7 +118,7 @@ class ApplicationsController < ApplicationController
     # If this user has already written a comment that hasn't been published
     # then prepopulate the form so that they can edit their comment before it's finally sent
     draft_comment = Comment.find_by(application:, user: current_user, published: false)
-    comment = if show_tailwind_theme? && current_user && draft_comment
+    comment = if current_user && draft_comment
                 draft_comment
               else
                 Comment.new(
@@ -141,28 +137,10 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  # TODO: Move redirect to routes
   sig { void }
   def nearby
-    params_sort = T.cast(params[:sort], T.nilable(String))
-
-    @sort = params_sort
-    if @sort != "time" && @sort != "distance"
-      redirect_to sort: "time"
-      return
-    end
-
-    # TODO: Fix this hacky ugliness
-    per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
-
-    @application = Application.find(params[:id])
-
-    if show_tailwind_theme?
-      redirect_to @application
-      return
-    end
-
-    @applications = @application.find_all_nearest_or_recent.page(params[:page]).per(per_page).without_count
-    @applications = @applications.reorder("first_date_scraped DESC") if @sort == "time"
+    redirect_to Application.find(params[:id])
   end
 
   sig { void }

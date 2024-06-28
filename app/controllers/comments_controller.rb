@@ -12,12 +12,7 @@ class CommentsController < ApplicationController
   def index
     authority_id = T.cast(params[:authority_id], T.nilable(String))
 
-    description = if show_tailwind_theme?
-                    +"All recent comments"
-                  else
-                    +"Recent comments"
-                  end
-
+    description = +"All recent comments"
     if authority_id
       authority = Authority.find_short_name_encoded!(authority_id)
       comments_to_display = authority.comments
@@ -44,21 +39,11 @@ class CommentsController < ApplicationController
       application: @application,
       user: current_user
     )
-    if show_tailwind_theme?
-      comment.published = false
-    else
-      comment.published = true
-      comment.published_at = Time.current
-    end
+    comment.published = false
     @comment = T.let(comment, T.nilable(Comment))
 
     if comment.save
-      if show_tailwind_theme?
-        redirect_to preview_comment_path(comment)
-      else
-        comment.send_comment!
-        redirect_to application, notice: render_to_string(partial: "confirmed", locals: { comment: })
-      end
+      redirect_to preview_comment_path(comment)
       return
     end
 

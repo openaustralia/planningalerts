@@ -93,11 +93,6 @@ describe ApplicationsController do
         application
       end
 
-      it "redirects if sort isn't set" do
-        get :nearby, params: { id: application.id }
-        expect(response).to redirect_to(sort: "time")
-      end
-
       it "redirects to the application page" do
         get :nearby, params: { id: application.id, sort: "time" }
         expect(response).to redirect_to(application)

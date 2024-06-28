@@ -26,7 +26,7 @@ class User < ApplicationRecord
   has_many :reports, dependent: :nullify
   has_many :contact_messages, dependent: :nullify
 
-  # Force the tailwind_theme on everyone. Do this at the same time as changing show_tailwind_theme? in ApplicationController.
+  # Force the tailwind_theme on everyone.
   sig { returns(T::Boolean) }
   def tailwind_theme
     true

@@ -51,11 +51,6 @@ class ApplicationController < ActionController::Base
     )
   end
 
-  sig { returns(T::Boolean) }
-  def show_tailwind_theme?
-    true
-  end
-
   sig { void }
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password) }
