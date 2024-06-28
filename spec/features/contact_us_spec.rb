@@ -11,7 +11,7 @@ describe "Contact us" do
       fill_in "Your name", with: "Matthew Landauer"
       fill_in "Your email", with: "matthew@oaf.org.au"
       select "The address or map location is wrong", from: "I'm getting in touch because"
-      fill_in "Please tell us briefly about your request", with: "Actually nothing is wrong here. Sorry."
+      fill_in "Your message", with: "Actually nothing is wrong here. Sorry."
       attach_file "Attach files or screenshots", "spec/fixtures/attachment.txt"
       click_button "Send message"
 
@@ -40,7 +40,7 @@ describe "Contact us" do
 
     it "less information needs to be filled out and the admins receive an email" do
       select "The address or map location is wrong", from: "I'm getting in touch because"
-      fill_in "Please tell us briefly about your request", with: "Actually nothing is wrong here. Sorry."
+      fill_in "Your message", with: "Actually nothing is wrong here. Sorry."
       click_button "Send message"
 
       expect(page).to have_content("Thank you for getting in touch")
