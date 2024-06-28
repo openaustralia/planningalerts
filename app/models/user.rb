@@ -26,12 +26,6 @@ class User < ApplicationRecord
   has_many :reports, dependent: :nullify
   has_many :contact_messages, dependent: :nullify
 
-  # Force the tailwind_theme on everyone.
-  sig { returns(T::Boolean) }
-  def tailwind_theme
-    true
-  end
-
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later

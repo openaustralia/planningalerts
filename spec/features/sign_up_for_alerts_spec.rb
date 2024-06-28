@@ -116,16 +116,7 @@ describe "Sign up for alerts" do
   end
 
   it "when via the homepage but not yet have an account" do
-    # rubocop:disable RSpec/AnyInstance
-    allow_any_instance_of(User).to receive(:tailwind_theme).and_return(true)
-    # rubocop:enable RSpec/AnyInstance
-
     create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252, lonlat: RGeo::Geographic.spherical_factory(srid: 4326).point(150.624252, -33.772812))
-
-    user = create(:confirmed_user)
-    sign_in user
-    visit root_path
-    sign_out user
 
     visit root_path
     fill_in("Street address", with: "24 Bruce Rd, Glenbrook")

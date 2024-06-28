@@ -26,17 +26,15 @@ class AlertMailer < ApplicationMailer
       # It's not sent on in the outgoing email
       "X-Cuttlefish-Metadata-alert-id" => alert.id.to_s,
       "X-Cuttlefish-Metadata-user-id" => T.must(alert.user).id.to_s,
-      # If we're on the tailwind theme then disable css inlining because we're already
+      # Disable css inlining because we're already
       # doing it with maizzle and the inlining on cuttlefish strips out media queries for
       # responsive designs and some more modern css features
-      "X-Cuttlefish-Disable-Css-Inlining" => T.must(alert.user).tailwind_theme.to_s
+      "X-Cuttlefish-Disable-Css-Inlining" => "true"
     )
 
-    if T.must(alert.user).tailwind_theme
-      attachments.inline["pencil.png"] = Rails.root.join("app/assets/images/tailwind/pencil.png").read
-      attachments.inline["trash.png"] = Rails.root.join("app/assets/images/tailwind/trash.png").read
-      attachments.inline["footer-illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/woman-looking-off2.png").read
-    end
+    attachments.inline["pencil.png"] = Rails.root.join("app/assets/images/tailwind/pencil.png").read
+    attachments.inline["trash.png"] = Rails.root.join("app/assets/images/tailwind/trash.png").read
+    attachments.inline["footer-illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/woman-looking-off2.png").read
 
     mail(
       from: "PlanningAlerts <no-reply@planningalerts.org.au>",
@@ -45,7 +43,7 @@ class AlertMailer < ApplicationMailer
         partial: "subject",
         locals: { applications:, comments:, alert: }
       ).strip,
-      template_path: ("_tailwind/alert_mailer" if T.must(alert.user).tailwind_theme)
+      template_path: "_tailwind/alert_mailer"
     )
   end
 end

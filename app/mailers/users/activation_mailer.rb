@@ -11,17 +11,17 @@ module Users
       @token = T.let(token, T.nilable(String))
 
       headers(
-        # If we're on the tailwind theme then disable css inlining because we're already
+        # Disable css inlining because we're already
         # doing it with maizzle and the inlining on cuttlefish strips out media queries for
         # responsive designs and some more modern css features
-        "X-Cuttlefish-Disable-Css-Inlining" => user.tailwind_theme.to_s
+        "X-Cuttlefish-Disable-Css-Inlining" => "true"
       )
 
-      attachments.inline["illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/confirmation.png").read if user.tailwind_theme
+      attachments.inline["illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/confirmation.png").read
 
       mail(
         to: user.email,
-        template_path: ("_tailwind/users/activation_mailer" if user.tailwind_theme)
+        template_path: "_tailwind/users/activation_mailer"
       )
     end
   end
