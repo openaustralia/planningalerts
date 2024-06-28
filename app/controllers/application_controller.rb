@@ -17,13 +17,11 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-  if Rails.env.test?
-    before_action :update_view_path_for_theme
-  else
-    # In production we don't want to do per request calls of prepend_view_path because
-    # I think it leads to a memory leak.
-    prepend_view_path Rails.root.join("app/views/_tailwind")
-  end
+
+  # In production we don't want to do per request calls of prepend_view_path because
+  # it leads to a memory leak.
+  prepend_view_path Rails.root.join("app/views/_tailwind")
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   # This stores the location on every request so that we can always redirect back after logging in
   # See https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D
@@ -51,11 +49,6 @@ class ApplicationController < ActionController::Base
       fallback_location: root_path,
       alert: t("activerecord.errors.write_during_maintenance_mode")
     )
-  end
-
-  sig { void }
-  def update_view_path_for_theme
-    prepend_view_path(Rails.root.join("app/views/_tailwind")) if show_tailwind_theme?
   end
 
   sig { returns(T::Boolean) }
