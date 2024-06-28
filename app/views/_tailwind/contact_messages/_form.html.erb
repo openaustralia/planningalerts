@@ -23,27 +23,11 @@
     <%= f.error :reason, class: "mt-2" %>
   </div>
   <div class="mt-8">
-    <%# TODO: This should really ask people to explain in detail NOT briefly %>
-    <%= f.label :details, "Please tell us briefly about your request", class: "block mb-3" %>
-    <%= f.text_area :details, class: "block w-full", rows: 8 %>
-    <%# Adding padding at the bottom of the error to ensure that the arrow in the explanation box doesn't overlap with the error text %>
-    <%= f.error :details, class: "mt-2 pb-4" %>
+    <%= f.label :details, "Your message", class: "block mb-3" %>
+    <%= f.text_area :details, placeholder: "Please describe your issue in as much detail as possible. Include screenshots or links to the page.", class: "block w-full", rows: 8 %>
+    <%= f.error :details, class: "mt-2" %>
   </div>
-  <div class="relative -top-4">
-    <%= render Tailwind::ExplanationBox.new do %>
-      <%= render Tailwind::Heading.new(tag: :h3, color: "white", font: "sans") do %>
-        Some questions that might help you describe your request
-      <% end %>
-      <ul class="mt-8">
-        <li>What are you trying to do?</li>
-        <li>What happens when you try to do that?</li>
-        <li>What have you tried to fix it?</li>
-        <li>How do you think we could help?</li>
-      </ul>
-      <p class="mt-8">Please include a link to the page on the site where this happened.</p>
-    <% end %>
-  </div>
-  <div class="mt-16">
+  <div class="mt-8">
     <%= f.label :attachments, "Attach files or screenshots", class: "block mb-3" %>
     <%# TODO: Can we change the text on the button? %>
     <%# TODO: Not sure the direct_upload_url works here. I think it might depend on UJS. Need to check. %>
@@ -52,7 +36,7 @@
                      data: { direct_upload_url: rails_direct_uploads_url } %>
   </div>
   <% if current_user.nil? && Rails.application.credentials[:recaptcha] %>
-    <div class="mt-12">
+    <div class="mt-8">
       <%= recaptcha_tags %>
       <%# TODO: Make sure recaptcha errors are shown here %>
       <%= f.error :base, class: "mt-2" %>
@@ -61,7 +45,7 @@
       <% end %>
     </div>
   <% end %>
-  <div class="mt-12">
+  <div class="mt-8">
     <%= render Tailwind::ButtonWithSideText.new(tag: :button, size: "xl", type: :primary) do |c| %>
       Send message
       <% c.with_side_text do %>
