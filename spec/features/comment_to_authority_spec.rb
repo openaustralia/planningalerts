@@ -24,7 +24,7 @@ describe "Give feedback" do
       # Note that we're ensuring that the application has a static first_date_scraped and we freeze the current
       # time so that the page should always have the same text on it
       Timecop.freeze(Date.new(2023, 6, 1)) do
-        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+        sign_in create(:confirmed_user, name: "Jane Ng")
         visit(application_path(application))
       end
     end
@@ -44,7 +44,7 @@ describe "Give feedback" do
     authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
     application = create(:geocoded_application, id: "1", authority:)
 
-    sign_in create(:confirmed_user, tailwind_theme: true)
+    sign_in create(:confirmed_user)
     visit(application_path(application))
 
     fill_in("Your comment", with: "I think this is a really good idea")
@@ -69,7 +69,7 @@ describe "Give feedback" do
         # Note that we're ensuring that the application has a static first_date_scraped and we freeze the current
         # time so that the page should always have the same text on it
         Timecop.freeze(Date.new(2023, 6, 1)) do
-          sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+          sign_in create(:confirmed_user, name: "Jane Ng")
           visit(application_path(application))
         end
       end
@@ -92,7 +92,7 @@ describe "Give feedback" do
 
     context "when on the new design" do
       before do
-        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng", email: "foo@bar.com")
+        sign_in create(:confirmed_user, name: "Jane Ng", email: "foo@bar.com")
         visit(application_path(application))
       end
 
@@ -195,7 +195,7 @@ describe "Give feedback" do
   it "Reporting abuse on a published comment" do
     comment = create(:published_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
 
-    sign_in create(:confirmed_user, email: "reporter@foo.com", name: "Joe Reporter", tailwind_theme: true)
+    sign_in create(:confirmed_user, email: "reporter@foo.com", name: "Joe Reporter")
     visit(new_comment_report_path(comment))
 
     fill_in("Why should the comment below be removed?", with: "You can't be rude to people!")
@@ -214,7 +214,7 @@ describe "Give feedback" do
   it "reporting abuse when user doesn't have a name set" do
     comment = create(:published_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
 
-    sign_in create(:confirmed_user, email: "reporter@foo.com", tailwind_theme: true)
+    sign_in create(:confirmed_user, email: "reporter@foo.com")
     visit(new_comment_report_path(comment))
 
     fill_in("Why should the comment below be removed?", with: "You can't be rude to people!")

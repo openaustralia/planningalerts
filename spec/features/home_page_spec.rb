@@ -9,7 +9,7 @@ describe "Home page" do
 
   describe "accessibility tests", js: true do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit root_path
     end
 

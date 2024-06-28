@@ -16,7 +16,7 @@ describe "Applications pages" do
 
   describe "in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
     end
 
     describe "index page" do

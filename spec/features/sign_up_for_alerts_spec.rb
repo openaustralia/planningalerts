@@ -60,7 +60,7 @@ describe "Sign up for alerts" do
     end
 
     it "successfully" do
-      sign_in create(:confirmed_user, tailwind_theme: true)
+      sign_in create(:confirmed_user)
       visit application_path(application)
 
       click_button("Save")
@@ -77,7 +77,7 @@ describe "Sign up for alerts" do
     end
 
     it "successfully" do
-      sign_in create(:confirmed_user, tailwind_theme: true)
+      sign_in create(:confirmed_user)
       visit root_path
       fill_in("Street address", with: "24 Bruce Rd, Glenbrook")
       click_button("Search")
@@ -90,7 +90,7 @@ describe "Sign up for alerts" do
 
   it "when via the homepage with a pre-existing user but not logged in" do
     create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252, lonlat: RGeo::Geographic.spherical_factory(srid: 4326).point(150.624252, -33.772812))
-    user = create(:confirmed_user, email: "example@example.com", password: "mypassword", tailwind_theme: true)
+    user = create(:confirmed_user, email: "example@example.com", password: "mypassword")
     sign_in user
     visit root_path
     sign_out user
@@ -122,7 +122,7 @@ describe "Sign up for alerts" do
 
     create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252, lonlat: RGeo::Geographic.spherical_factory(srid: 4326).point(150.624252, -33.772812))
 
-    user = create(:confirmed_user, tailwind_theme: true)
+    user = create(:confirmed_user)
     sign_in user
     visit root_path
     sign_out user

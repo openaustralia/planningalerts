@@ -53,7 +53,7 @@ describe "Contact us" do
   end
 
   context "when signed in in new theme" do
-    let(:user) { create(:confirmed_user, name: "Matthew Landauer", email: "matthew@oaf.org.au", tailwind_theme: true) }
+    let(:user) { create(:confirmed_user, name: "Matthew Landauer", email: "matthew@oaf.org.au") }
 
     before do
       sign_in user

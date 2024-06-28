@@ -12,22 +12,10 @@ class LoginAndAccountPreview < ActionMailer::Preview
     DeviseMailer.confirmation_instructions(user, "faketoken")
   end
 
-  def confirmation_instructions_new_theme
-    user = FactoryBot.build_stubbed(:user, name: "Matthew", tailwind_theme: true)
-    DeviseMailer.confirmation_instructions(user, "faketoken")
-  end
-
   # It shows a different email address in the "to" and the body of the email.
   # TODO: Figure out what's going on and fix it
   def reset_password_instructions
     user = FactoryBot.build_stubbed(:user, name: "Matthew")
-    DeviseMailer.reset_password_instructions(user, "faketoken")
-  end
-
-  # It shows a different email address in the "to" and the body of the email.
-  # TODO: Figure out what's going on and fix it
-  def reset_password_instructions_new_theme
-    user = FactoryBot.build_stubbed(:user, name: "Matthew", tailwind_theme: true)
     DeviseMailer.reset_password_instructions(user, "faketoken")
   end
 
@@ -36,18 +24,8 @@ class LoginAndAccountPreview < ActionMailer::Preview
     Users::ActivationMailer.notify(user, "faketoken")
   end
 
-  def activate_account_instructions_new_theme
-    user = FactoryBot.build_stubbed(:user, tailwind_theme: true)
-    Users::ActivationMailer.notify(user, "faketoken")
-  end
-
   def unlock_instructions
     user = FactoryBot.build_stubbed(:user, name: "Matthew")
-    DeviseMailer.unlock_instructions(user, "faketoken")
-  end
-
-  def unlock_instructions_new_theme
-    user = FactoryBot.build_stubbed(:user, name: "Matthew", tailwind_theme: true)
     DeviseMailer.unlock_instructions(user, "faketoken")
   end
 end

@@ -8,7 +8,7 @@ describe "Authorities" do
   describe "detail page for an authority that is not covered in the new design" do
     before do
       # Give a name to the user so screenshots are consistent with percy
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       authority = create(:authority, full_name: "Byron Shire Council")
       visit authority_path(authority.short_name_encoded)
     end
@@ -33,7 +33,7 @@ describe "Authorities" do
   describe "detail page for an authority in the new design" do
     before do
       # Give a name to the user so screenshots are consistent with percy
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       authority = create(:authority, full_name: "Byron Shire Council", morph_name: "planningalerts-scrapers/byron")
       # We need it to have at least one application so it's not "broken"
       # TODO: I suspect we'll need to lock down the date of the application so that percy snapshots are consistent
@@ -61,7 +61,7 @@ describe "Authorities" do
   describe "detail page for a covered authority with no applications in the new design" do
     before do
       # Give a name to the user so screenshots are consistent with percy
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       authority = create(:authority, full_name: "Byron Shire Council", morph_name: "planningalerts-scrapers/byron")
       visit authority_path(authority.short_name_encoded)
     end
@@ -80,7 +80,7 @@ describe "Authorities" do
   describe "detail page for an authority with a broken scraper in the new design" do
     before do
       # Give a name to the user so screenshots are consistent with percy
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       authority = create(:authority, full_name: "Byron Shire Council", morph_name: "planningalerts-scrapers/byron")
       # We need it to have at least one application so it's not "broken"
       # TODO: I suspect we'll need to lock down the date of the application so that percy snapshots are consistent

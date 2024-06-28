@@ -33,7 +33,6 @@ describe "redirects" do
     let(:application) { create(:application) }
 
     it "redirects to the application page in the new design" do
-      sign_in create(:confirmed_user, tailwind_theme: true)
       get nearby_application_path(application, sort: "time")
       expect(response).to redirect_to application_path(application)
     end
@@ -41,13 +40,11 @@ describe "redirects" do
 
   describe "atdis pages" do
     it "redirects to the pdf document in the new design" do
-      sign_in create(:confirmed_user, tailwind_theme: true)
       get atdis_specification_path
       expect(response).to redirect_to "https://github.com/openaustralia/atdis/raw/master/docs/ATDIS-1.0.2%20Application%20Tracking%20Data%20Interchange%20Specification%20(v1.0.2).pdf"
     end
 
     it "redirects the test page to the get involved page in the new design" do
-      sign_in create(:confirmed_user, tailwind_theme: true)
       get atdis_test_path
       expect(response).to redirect_to get_involved_path
     end

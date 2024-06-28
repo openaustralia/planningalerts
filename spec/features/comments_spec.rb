@@ -6,7 +6,7 @@ describe "Comments pages" do
   include Devise::Test::IntegrationHelpers
 
   describe "in the new design" do
-    let(:signed_in_user) { create(:confirmed_user, tailwind_theme: true, name: "Jane Ng") }
+    let(:signed_in_user) { create(:confirmed_user, name: "Jane Ng") }
 
     before do
       sign_in(signed_in_user)

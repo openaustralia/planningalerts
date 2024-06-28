@@ -28,9 +28,6 @@ describe "Signing up for an API account" do
 
   describe "Check your email page in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit root_path
-      sign_out :user
       visit check_email_user_registration_path
     end
 
@@ -43,9 +40,6 @@ describe "Signing up for an API account" do
 
   describe "resending confirmation instructions in new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit root_path
-      sign_out :user
       visit new_user_confirmation_path
     end
 
@@ -62,9 +56,7 @@ describe "Signing up for an API account" do
 
   describe "reset your password in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, email: "matthew@oaf.org.au")
-      visit root_path
-      sign_out :user
+      create(:confirmed_user, email: "matthew@oaf.org.au")
       # Need to be logged out to visit the reset password page
       visit new_user_password_path
     end

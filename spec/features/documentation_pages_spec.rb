@@ -16,7 +16,7 @@ describe "Browsing basic documentation pages" do
     describe "in the new design" do
       before do
         # Give a name to the user so screenshots are consistent with percy
-        sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+        sign_in create(:confirmed_user, name: "Jane Ng")
         stub_const "APP_VERSION", "abc123"
         visit about_path
       end
@@ -41,7 +41,7 @@ describe "Browsing basic documentation pages" do
 
   describe "help page in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true)
+      sign_in create(:confirmed_user)
       visit faq_path
     end
 
@@ -58,7 +58,7 @@ describe "Browsing basic documentation pages" do
 
   describe "contact us page in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit documentation_contact_path
     end
 
@@ -73,7 +73,7 @@ describe "Browsing basic documentation pages" do
 
   describe "api page in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit api_howto_path
     end
 
@@ -92,7 +92,7 @@ describe "Browsing basic documentation pages" do
 
   describe "get involved page in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit get_involved_path
     end
 
@@ -111,7 +111,7 @@ describe "Browsing basic documentation pages" do
 
   describe "how to lobby your council in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit how_to_lobby_your_local_council_path
     end
 
@@ -130,7 +130,7 @@ describe "Browsing basic documentation pages" do
 
   describe "404 page in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit "/404"
     end
 
@@ -143,7 +143,7 @@ describe "Browsing basic documentation pages" do
 
   describe "500 page in the new design" do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit "/500"
     end
 

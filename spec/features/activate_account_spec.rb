@@ -7,10 +7,6 @@ describe "Activate account" do
 
   context "when in the new design" do
     before do
-      # Do this weird dance to get us on to the new theme
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit root_path
-      sign_out :user
       visit new_users_activation_path
     end
 
@@ -23,10 +19,6 @@ describe "Activate account" do
 
   context "when on the check your email page in the new design" do
     before do
-      # Do this weird dance to get us on to the new theme
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit root_path
-      sign_out :user
       visit check_email_users_activation_path
     end
 
@@ -39,10 +31,6 @@ describe "Activate account" do
 
   context "when on final activate your account page in the new design" do
     before do
-      # Do this weird dance to get us on to the new theme
-      sign_in create(:confirmed_user, tailwind_theme: true)
-      visit root_path
-      sign_out :user
       # Strictly this page needs a token to function but for the purposes of this we don't need to do that
       visit edit_users_activation_path
     end
@@ -62,11 +50,6 @@ describe "Activate account" do
     end
 
     it "Successfully does an account activation" do
-      user = create(:confirmed_user, tailwind_theme: true)
-      sign_in user
-      visit root_path
-      sign_out user
-
       visit "/users/activation/new"
       fill_in "Email", with: "matthew@oaf.org.au"
       click_button "Send me an email"
@@ -102,11 +85,6 @@ describe "Activate account" do
     end
 
     it "shows an error message" do
-      user = create(:confirmed_user, tailwind_theme: true)
-      sign_in user
-      visit root_path
-      sign_out user
-
       visit "/users/activation/new"
       fill_in "Email", with: "matthew@oaf.org.au"
       click_button "Send me an email"
@@ -117,11 +95,6 @@ describe "Activate account" do
 
   context "with a non-existent user" do
     it "shows an error message" do
-      user = create(:confirmed_user, tailwind_theme: true)
-      sign_in user
-      visit root_path
-      sign_out user
-
       visit "/users/activation/new"
       fill_in "Email", with: "matthew@oaf.org.au"
       click_button "Send me an email"
@@ -139,11 +112,6 @@ describe "Activate account" do
 
     # Going through this we're effectively doing an activation and a confirmation at the same time
     it "Successfully does an account activation" do
-      user = create(:confirmed_user, tailwind_theme: true)
-      sign_in user
-      visit root_path
-      sign_out user
-
       visit "/users/activation/new"
       fill_in "Email", with: "matthew@oaf.org.au"
       click_button "Send me an email"

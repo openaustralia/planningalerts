@@ -12,7 +12,7 @@ describe "Manage alerts" do
                    user: create(:user, email: "example@example.com"),
                    radius_meters: Alert::DEFAULT_RADIUS, lat: 1.0, lng: 1.0)
 
-    user = create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+    user = create(:confirmed_user, name: "Jane Ng")
     sign_in user
     visit unsubscribe_alert_url(confirm_id: alert.confirm_id, host: "dev.planningalerts.org.au")
 
@@ -23,7 +23,7 @@ describe "Manage alerts" do
   end
 
   describe "Unsubscribe from an email alert in the new design" do
-    let(:user) { create(:confirmed_user, tailwind_theme: true, name: "Jane Ng") }
+    let(:user) { create(:confirmed_user, name: "Jane Ng") }
     let(:alert) do
       # Adding arbitrary coordinates so that geocoding is not carried out
       create(:alert,
@@ -45,7 +45,7 @@ describe "Manage alerts" do
   end
 
   describe "Unsubscribe from a non-existent email alert in the new design" do
-    let(:user) { create(:confirmed_user, tailwind_theme: true, name: "Jane Ng") }
+    let(:user) { create(:confirmed_user, name: "Jane Ng") }
 
     before do
       sign_in user
@@ -61,7 +61,7 @@ describe "Manage alerts" do
   end
 
   it "Change size of email alert" do
-    user = create(:confirmed_user, email: "example@example.com", tailwind_theme: true)
+    user = create(:confirmed_user, email: "example@example.com")
     alert = create(:alert,
                    address: "24 Bruce Rd, Glenbrook",
                    user:,

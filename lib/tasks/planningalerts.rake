@@ -95,7 +95,7 @@ namespace :planningalerts do
         lat: -33.902723,
         lng: 151.163362,
         radius_meters: 200,
-        user: User.new(email: args.email.inspect, password: "foo", tailwind_theme: true),
+        user: User.new(email: args.email.inspect, password: "foo"),
         address: "89 Bridge Rd, Richmond VIC 3121",
         confirm_id: "1234",
         id: 1

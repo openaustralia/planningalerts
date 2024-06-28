@@ -8,7 +8,7 @@ describe "Coverage" do
   describe "in the new design" do
     before do
       # Give a name to the user so screenshots are consistent with percy
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit authorities_path
     end
 

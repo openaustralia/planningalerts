@@ -27,11 +27,7 @@ describe "Searching for development application near an address" do
   end
 
   it "successfully" do
-    # Only signing in user to get new theme
-    user = create(:confirmed_user, tailwind_theme: true)
-    sign_in user
     visit root_path
-
     fill_in "Street address", with: "24 Bruce Road, Glenbrook"
     click_button "Search"
 
@@ -44,7 +40,7 @@ describe "Searching for development application near an address" do
   end
 
   it "returns results in the new design" do
-    sign_in create(:confirmed_user, tailwind_theme: true)
+    sign_in create(:confirmed_user)
     visit root_path
 
     fill_in "Street address", with: "24 Bruce Road, Glenbrook"
@@ -56,7 +52,7 @@ describe "Searching for development application near an address" do
 
   describe "accessibility tests in new design", js: true do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true)
+      sign_in create(:confirmed_user)
       visit root_path
 
       fill_in "Street address", with: "24 Bruce Road, Glenbrook"
@@ -70,7 +66,7 @@ describe "Searching for development application near an address" do
 
   describe "accessibility tests for search applications page in new design", js: true do
     before do
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit address_applications_path
     end
 
@@ -95,7 +91,7 @@ describe "Searching for development application near an address" do
                      "Unfortunately we only cover Australia. It looks like that address is in another country."
                    ))
 
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit address_applications_path
 
       fill_in "Street address", with: "Bruce Road, USA"
@@ -119,7 +115,7 @@ describe "Searching for development application near an address" do
       ApplicationVersion.destroy_all
       Application.destroy_all
 
-      sign_in create(:confirmed_user, tailwind_theme: true, name: "Jane Ng")
+      sign_in create(:confirmed_user, name: "Jane Ng")
       visit address_applications_path
 
       fill_in "Street address", with: "24 Bruce Road, Glenbrook"
@@ -138,7 +134,7 @@ describe "Searching for development application near an address" do
   end
 
   describe "search results by text in new design" do
-    let(:user) { create(:confirmed_user, tailwind_theme: true, name: "Jane Ng") }
+    let(:user) { create(:confirmed_user, name: "Jane Ng") }
 
     before do
       sign_in user
