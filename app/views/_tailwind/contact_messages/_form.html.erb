@@ -2,7 +2,7 @@
   <% if current_user.nil? %>
     <div>
       <%= f.label :name, "Your name", class: "block mb-3" %>
-      <%= f.text_field :name, class: "block w-full" %>
+      <%= f.text_field :name, size: 40, class: "block max-w-full" %>
       <%= f.error :name, class: "mt-2" %>
       <%= f.hint do %>
         Or <%= pa_link_to "sign in", new_user_session_path %>
@@ -10,7 +10,7 @@
     </div>
     <div class="my-8">
       <%= f.label :email, "Your email", class: "block mb-3" %>
-      <%= f.email_field :email, class: "block w-full" %>
+      <%= f.email_field :email, size: 40, class: "block max-w-full" %>
       <%= f.error :email, class: "mt-2" %>
     </div>
   <% end %>
