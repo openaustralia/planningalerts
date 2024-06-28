@@ -10,7 +10,6 @@ Flipper::UI.configure do |config|
     {
       "disable_streetview_in_emails" => "Disables Google streetview in email. Do this to save money",
       "disable_streetview_in_app" => "Disable Google streetview in the main application. Do this to save money",
-      "switch_themes" => "Can switch to new in progress design for the site",
       "extra_options_on_address_search" => "Add extra options to filter by time/space when searching address",
       "show_authority_map" => "Show boundary of authority on a map",
       # Very important to note that switching on maintance_mode ** is not enough **.

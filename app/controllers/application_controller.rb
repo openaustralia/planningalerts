@@ -56,25 +56,6 @@ class ApplicationController < ActionController::Base
     true
   end
 
-  sig { params(tailwind: T::Boolean).void }
-  def update_tailwind_theme(tailwind)
-    update_tailwind_theme_cookie(tailwind)
-    update_tailwind_theme_user(tailwind)
-  end
-
-  sig { params(tailwind: T::Boolean).void }
-  def update_tailwind_theme_cookie(tailwind)
-    cookies.signed[:planningalerts_theme] = ("tailwind" if tailwind)
-  end
-
-  sig { params(tailwind: T::Boolean).void }
-  def update_tailwind_theme_user(tailwind)
-    u = current_user
-    return unless u
-
-    u.update!(tailwind_theme: tailwind)
-  end
-
   sig { void }
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password) }

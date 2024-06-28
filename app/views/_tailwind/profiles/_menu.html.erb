@@ -3,9 +3,6 @@
   <li><div class="pl-4"><%= pa_link_to_unless_current "Create new alert", new_profile_alert_path %></div></li>
   <li><div class="pl-4"><%= pa_link_to_unless_current "Your comments", comments_profile_path %></div></li>
   <li><div class="pl-4"><%= pa_link_to_unless_current "Edit account", edit_user_registration_path %></div></li>
-  <% if Flipper.enabled?(:switch_themes, current_user) %>
-    <li><div class="pl-4"><%= pa_link_to_unless_current "Switch design", design_profile_path %></div></li>
-  <% end %>
   <%# Setting "Sign out" to a block breaks on ios/safari %>
   <li><div class="pl-4"><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "#{pa_link_classes(quiet: false)} cursor-pointer" %></div></li>
 </ul>
