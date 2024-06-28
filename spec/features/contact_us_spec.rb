@@ -73,7 +73,7 @@ describe "Contact us" do
     describe "after filling in a valid report" do
       before do
         select "The address or map location is wrong", from: "I'm getting in touch because"
-        fill_in "Please tell us briefly about your request", with: "Actually nothing is wrong here. Sorry."
+        fill_in "Your message", with: "Actually nothing is wrong here. Sorry."
         click_button "Send message"
       end
 
