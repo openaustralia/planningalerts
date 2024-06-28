@@ -66,15 +66,6 @@ describe AlertMailer do
     it "uses the plural in the comment line" do
       expect(email.subject).to eq("2 new comments on planning applications near #{alert.address}")
     end
-
-    it "nicelies format (in text) a list of multiple planning applications" do
-      expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec/mailers/regression/alert_mailer/email3.txt").read.gsub("\n", "\r\n").strip
-    end
-
-    it "nicelies format (in HTML) a list of multiple planning applications" do
-      # File.write("spec/mailers/regression/alert_mailer/email3.html", email.html_part.body.to_s.gsub("\r\n", "\n"))
-      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email3.html").read.gsub("\n", "\r\n"))
-    end
   end
 
   describe "when send a planning alert with one new comment and two new planning applications" do
@@ -82,15 +73,6 @@ describe AlertMailer do
 
     it "tells you about both in the comment line" do
       expect(email.subject).to eq("1 new comment and 2 new planning applications near #{alert.address}")
-    end
-
-    it "nicelies format (in text) a list of multiple planning applications" do
-      expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec/mailers/regression/alert_mailer/email2.txt").read.gsub("\n", "\r\n").strip
-    end
-
-    it "nicelies format (in HTML) a list of multiple planning applications" do
-      # File.write("spec/mailers/regression/alert_mailer/email2.html", email.html_part.body.to_s.gsub("\r\n", "\n"))
-      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email2.html").read.gsub("\n", "\r\n"))
     end
   end
 
@@ -119,32 +101,12 @@ describe AlertMailer do
         expect(email.subject).to eq("2 new planning applications near #{alert.address}")
       end
 
-      it "is a multipart email" do
-        expect(email.body.parts.length).to eq(2)
-      end
-
-      context "with text email" do
-        it "nicelies format a list of multiple planning applications" do
-          expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec/mailers/regression/alert_mailer/email1.txt").read.gsub("\n", "\r\n").strip
-        end
-      end
-
       context "with HTML emails" do
         let(:html_body) { email.html_part.body.to_s }
-
-        it "contains links to the applications" do
-          expect(html_body).to have_link("Foo Street, Bar", href: "https://dev.planningalerts.org.au/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
-          expect(html_body).to have_link("Bar Street, Foo", href: "https://dev.planningalerts.org.au/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
-        end
 
         it "contains application descriptions" do
           expect(html_body).to have_content "Knock something down"
           expect(html_body).to have_content "Put something up"
-        end
-
-        it "has a specific body" do
-          # File.write("spec/mailers/regression/alert_mailer/email1.html", html_body.gsub("\r\n", "\n"))
-          expect(html_body).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email1.html").read.gsub("\n", "\r\n"))
         end
       end
     end

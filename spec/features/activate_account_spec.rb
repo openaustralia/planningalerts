@@ -77,9 +77,11 @@ describe "Activate account" do
       open_email("matthew@oaf.org.au")
 
       expect(current_email).to have_subject("PlanningAlerts: Activate your account")
-      expect(current_email.default_part_body.to_s).to include("Please click the link below and follow the instructions.")
+      expect(current_email.default_part_body.to_s).to include("Thanks for getting onboard!")
 
-      visit_in_email("Activate my account")
+      # Do these shenanigans to get the first link in this case
+      link = links_in_email(current_email).find { |u| u =~ %r{https://dev.planningalerts.org.au} }
+      visit request_uri(link)
 
       fill_in "Your full name", with: "Matthew"
       fill_in "Password", with: "my new password"
@@ -152,9 +154,11 @@ describe "Activate account" do
       open_email("matthew@oaf.org.au")
 
       expect(current_email).to have_subject("PlanningAlerts: Activate your account")
-      expect(current_email.default_part_body.to_s).to include("Please click the link below and follow the instructions.")
+      expect(current_email.default_part_body.to_s).to include("Thanks for getting onboard!")
 
-      visit_in_email("Activate my account")
+      # Do these shenanigans to get the first link in this case
+      link = links_in_email(current_email).find { |u| u =~ %r{https://dev.planningalerts.org.au} }
+      visit request_uri(link)
 
       fill_in "Your full name", with: "Matthew"
       fill_in "Password", with: "my new password"
