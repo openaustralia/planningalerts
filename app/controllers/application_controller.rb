@@ -53,38 +53,7 @@ class ApplicationController < ActionController::Base
 
   sig { returns(T::Boolean) }
   def show_tailwind_theme?
-    # To permanently switch over to the tailwind theme uncomment the line below and comment everything else out in this method
-    # Also need to uncomment the function tailwind_theme in the user model
-    # Note that this breaks the tests currently so we're disabling in test. Ugh.
-    # TODO: Get rid of this hack as soon as possible once we've released the redesign
-    return true unless Rails.env.test?
-
-    # We're intentionally not checking whether the feature flag is enabled here because we want
-    # the new theme to be shown even if you're logged out. The feature flag just enables the button
-    # that allows you to do the switching. Cookies are signed so the value can be manipulated by
-    # users outside of pushing the button
-    u = current_user
-    if u
-      r = show_tailwind_theme_user?
-      # Synchronise the cookie with what's stored with the user
-      update_tailwind_theme_cookie(r)
-      r
-    else
-      show_tailwind_theme_cookie?
-    end
-  end
-
-  sig { returns(T::Boolean) }
-  def show_tailwind_theme_cookie?
-    cookies.signed[:planningalerts_theme] == "tailwind"
-  end
-
-  sig { returns(T::Boolean) }
-  def show_tailwind_theme_user?
-    u = current_user
-    raise unless u
-
-    u.tailwind_theme
+    true
   end
 
   sig { params(tailwind: T::Boolean).void }

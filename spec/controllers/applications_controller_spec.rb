@@ -98,9 +98,9 @@ describe ApplicationsController do
         expect(response).to redirect_to(sort: "time")
       end
 
-      it "renders something" do
+      it "redirects to the application page" do
         get :nearby, params: { id: application.id, sort: "time" }
-        expect(response).to be_successful
+        expect(response).to redirect_to(application)
       end
     end
   end
