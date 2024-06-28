@@ -17,13 +17,11 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-  if Rails.env.test?
-    before_action :update_view_path_for_theme
-  else
-    # In production we don't want to do per request calls of prepend_view_path because
-    # I think it leads to a memory leak.
-    prepend_view_path Rails.root.join("app/views/_tailwind")
-  end
+
+  # In production we don't want to do per request calls of prepend_view_path because
+  # it leads to a memory leak.
+  prepend_view_path Rails.root.join("app/views/_tailwind")
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   # This stores the location on every request so that we can always redirect back after logging in
   # See https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D
@@ -53,45 +51,9 @@ class ApplicationController < ActionController::Base
     )
   end
 
-  sig { void }
-  def update_view_path_for_theme
-    prepend_view_path(Rails.root.join("app/views/_tailwind")) if show_tailwind_theme?
-  end
-
   sig { returns(T::Boolean) }
   def show_tailwind_theme?
-    # To permanently switch over to the tailwind theme uncomment the line below and comment everything else out in this method
-    # Also need to uncomment the function tailwind_theme in the user model
-    # Note that this breaks the tests currently so we're disabling in test. Ugh.
-    # TODO: Get rid of this hack as soon as possible once we've released the redesign
-    return true unless Rails.env.test?
-
-    # We're intentionally not checking whether the feature flag is enabled here because we want
-    # the new theme to be shown even if you're logged out. The feature flag just enables the button
-    # that allows you to do the switching. Cookies are signed so the value can be manipulated by
-    # users outside of pushing the button
-    u = current_user
-    if u
-      r = show_tailwind_theme_user?
-      # Synchronise the cookie with what's stored with the user
-      update_tailwind_theme_cookie(r)
-      r
-    else
-      show_tailwind_theme_cookie?
-    end
-  end
-
-  sig { returns(T::Boolean) }
-  def show_tailwind_theme_cookie?
-    cookies.signed[:planningalerts_theme] == "tailwind"
-  end
-
-  sig { returns(T::Boolean) }
-  def show_tailwind_theme_user?
-    u = current_user
-    raise unless u
-
-    u.tailwind_theme
+    true
   end
 
   sig { params(tailwind: T::Boolean).void }

@@ -25,6 +25,7 @@ describe "Admin edits comment" do
 
     visit application_path(Comment.find(1).application)
 
-    expect(page).to have_content "Foo commented 3 days ago"
+    expect(page).to have_content "Foo"
+    expect(page).to have_content "3 days ago"
   end
 end

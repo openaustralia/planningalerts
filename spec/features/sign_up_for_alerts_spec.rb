@@ -60,12 +60,10 @@ describe "Sign up for alerts" do
     end
 
     it "successfully" do
-      sign_in create(:confirmed_user)
+      sign_in create(:confirmed_user, tailwind_theme: true)
       visit application_path(application)
 
-      within "#new_alert" do
-        click_button("Create alert")
-      end
+      click_button("Save")
 
       expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     end
@@ -79,12 +77,12 @@ describe "Sign up for alerts" do
     end
 
     it "successfully" do
-      sign_in create(:confirmed_user)
+      sign_in create(:confirmed_user, tailwind_theme: true)
       visit root_path
-      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+      fill_in("Street address", with: "24 Bruce Rd, Glenbrook")
       click_button("Search")
 
-      click_button("Create alert")
+      click_button("Save", match: :first)
 
       expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     end
@@ -92,15 +90,18 @@ describe "Sign up for alerts" do
 
   it "when via the homepage with a pre-existing user but not logged in" do
     create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252, lonlat: RGeo::Geographic.spherical_factory(srid: 4326).point(150.624252, -33.772812))
-    create(:confirmed_user, email: "example@example.com", password: "mypassword")
+    user = create(:confirmed_user, email: "example@example.com", password: "mypassword", tailwind_theme: true)
+    sign_in user
+    visit root_path
+    sign_out user
 
     visit root_path
-    fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+    fill_in("Street address", with: "24 Bruce Rd, Glenbrook")
     click_button("Search")
 
-    expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
-    expect(page).to have_content("Create an account or sign in to create an alert.")
-    click_link("sign in")
+    expect(page).to have_content("Search results")
+    expect(page).to have_content("Create an account or sign in")
+    click_link("sign in", match: :first)
 
     fill_in("Your email", with: "example@example.com")
     fill_in("Password", with: "mypassword")
@@ -108,72 +109,54 @@ describe "Sign up for alerts" do
 
     expect(page).to have_content("Signed in successfully.")
     # We should be back at the same page from where we clicked "sign in"
-    expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
-    click_button("Create alert")
+    expect(page).to have_content("Search results")
+    click_button("Save", match: :first)
 
     expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
   end
 
   it "when via the homepage but not yet have an account" do
+    # rubocop:disable RSpec/AnyInstance
+    allow_any_instance_of(User).to receive(:tailwind_theme).and_return(true)
+    # rubocop:enable RSpec/AnyInstance
+
     create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252, lonlat: RGeo::Geographic.spherical_factory(srid: 4326).point(150.624252, -33.772812))
 
+    user = create(:confirmed_user, tailwind_theme: true)
+    sign_in user
     visit root_path
-    fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+    sign_out user
+
+    visit root_path
+    fill_in("Street address", with: "24 Bruce Rd, Glenbrook")
     click_button("Search")
 
-    expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
-    expect(page).to have_content("Create an account or sign in to create an alert.")
-    click_link("Create an account")
+    expect(page).to have_content("Search results")
+    expect(page).to have_content("Create an account or sign in")
+    click_link("Create an account", match: :first)
 
     fill_in("Your full name", with: "Ms Example")
     fill_in("Email", with: "example@example.com")
-    fill_in("Password", with: "mypassword")
+    fill_in("Create a password", with: "mypassword")
     click_button("Create my account")
 
-    expect(page).to have_content("You will shortly receive an email from PlanningAlerts.org.au. Click on the link in the email")
+    expect(page).to have_content("You will shortly receive an email from PlanningAlerts.org.au")
 
     open_email("example@example.com")
     expect(current_email).to have_subject("PlanningAlerts: Confirmation instructions")
 
-    visit_in_email("Confirm account")
+    # Do these shenanigans to get the first link in this case
+    link = links_in_email(current_email).find { |u| u =~ %r{https://dev.planningalerts.org.au} }
+    visit request_uri(link)
 
     expect(page).to have_content("Your email address has been successfully confirmed and you are now logged in.")
     expect(page).to have_content("Ms Example")
 
     # We should be back at the same page from where we clicked "sign in"
-    expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
-    click_button("Create alert")
+    expect(page).to have_content("Search results")
+    click_button("Save", match: :first)
 
     expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
-  end
-
-  context "when via an authority’s applications page" do
-    before do
-      authority = create(:authority, short_name: "Glenbrook")
-      create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", authority:)
-    end
-
-    it "successfully" do
-      sign_in create(:confirmed_user)
-      visit applications_path(authority_id: "glenbrook")
-
-      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-      click_button("Create alert")
-
-      expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
-    end
-
-    # Having trouble getting this to work. I think the autocomplete
-    # web requests are not getting captured by VCR
-    # context "with javascript" do
-    #   scenario "autocomplete results are displayed", js: true do
-    #     visit applications_path(authority_id: "glenbrook")
-    #
-    #     fill_in "Enter a street address", with: "24 Bruce Road Glenb"
-    #
-    #     expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook NSW"
-    #   end
-    # end
   end
 
   context "when there is already an alert for the address" do

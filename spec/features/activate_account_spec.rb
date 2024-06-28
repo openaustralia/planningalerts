@@ -62,9 +62,14 @@ describe "Activate account" do
     end
 
     it "Successfully does an account activation" do
+      user = create(:confirmed_user, tailwind_theme: true)
+      sign_in user
+      visit root_path
+      sign_out user
+
       visit "/users/activation/new"
-      fill_in "Your email", with: "matthew@oaf.org.au"
-      click_button "Send account activation instructions to my email"
+      fill_in "Email", with: "matthew@oaf.org.au"
+      click_button "Send me an email"
 
       expect(page).to have_content "Now check your email"
 
@@ -72,9 +77,11 @@ describe "Activate account" do
       open_email("matthew@oaf.org.au")
 
       expect(current_email).to have_subject("PlanningAlerts: Activate your account")
-      expect(current_email.default_part_body.to_s).to include("Please click the link below and follow the instructions.")
+      expect(current_email.default_part_body.to_s).to include("Thanks for getting onboard!")
 
-      visit_in_email("Activate my account")
+      # Do these shenanigans to get the first link in this case
+      link = links_in_email(current_email).find { |u| u =~ %r{https://dev.planningalerts.org.au} }
+      visit request_uri(link)
 
       fill_in "Your full name", with: "Matthew"
       fill_in "Password", with: "my new password"
@@ -95,9 +102,14 @@ describe "Activate account" do
     end
 
     it "shows an error message" do
+      user = create(:confirmed_user, tailwind_theme: true)
+      sign_in user
+      visit root_path
+      sign_out user
+
       visit "/users/activation/new"
-      fill_in "Your email", with: "matthew@oaf.org.au"
-      click_button "Send account activation instructions to my email"
+      fill_in "Email", with: "matthew@oaf.org.au"
+      click_button "Send me an email"
 
       expect(page).to have_content "Account with that email address has already been activated"
     end
@@ -105,9 +117,14 @@ describe "Activate account" do
 
   context "with a non-existent user" do
     it "shows an error message" do
+      user = create(:confirmed_user, tailwind_theme: true)
+      sign_in user
+      visit root_path
+      sign_out user
+
       visit "/users/activation/new"
-      fill_in "Your email", with: "matthew@oaf.org.au"
-      click_button "Send account activation instructions to my email"
+      fill_in "Email", with: "matthew@oaf.org.au"
+      click_button "Send me an email"
 
       expect(page).to have_content "We don't know recognise that email address"
     end
@@ -122,9 +139,14 @@ describe "Activate account" do
 
     # Going through this we're effectively doing an activation and a confirmation at the same time
     it "Successfully does an account activation" do
+      user = create(:confirmed_user, tailwind_theme: true)
+      sign_in user
+      visit root_path
+      sign_out user
+
       visit "/users/activation/new"
-      fill_in "Your email", with: "matthew@oaf.org.au"
-      click_button "Send account activation instructions to my email"
+      fill_in "Email", with: "matthew@oaf.org.au"
+      click_button "Send me an email"
 
       expect(page).to have_content "Now check your email"
 
@@ -132,9 +154,11 @@ describe "Activate account" do
       open_email("matthew@oaf.org.au")
 
       expect(current_email).to have_subject("PlanningAlerts: Activate your account")
-      expect(current_email.default_part_body.to_s).to include("Please click the link below and follow the instructions.")
+      expect(current_email.default_part_body.to_s).to include("Thanks for getting onboard!")
 
-      visit_in_email("Activate my account")
+      # Do these shenanigans to get the first link in this case
+      link = links_in_email(current_email).find { |u| u =~ %r{https://dev.planningalerts.org.au} }
+      visit request_uri(link)
 
       fill_in "Your full name", with: "Matthew"
       fill_in "Password", with: "my new password"

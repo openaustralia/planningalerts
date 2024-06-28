@@ -37,11 +37,6 @@ describe "redirects" do
       expect(response).to redirect_to nearby_application_path(application, sort: "time")
     end
 
-    it "does not redirect when sort option is given in the original design" do
-      get nearby_application_path(application, sort: "time")
-      expect(response).not_to be_redirect
-    end
-
     it "redirects to the application page in the new design" do
       sign_in create(:confirmed_user, tailwind_theme: true)
       get nearby_application_path(application, sort: "time")
@@ -50,20 +45,10 @@ describe "redirects" do
   end
 
   describe "atdis pages" do
-    it "does not redirect the specification page in the original design" do
-      get atdis_specification_path
-      expect(response).not_to be_redirect
-    end
-
     it "redirects to the pdf document in the new design" do
       sign_in create(:confirmed_user, tailwind_theme: true)
       get atdis_specification_path
       expect(response).to redirect_to "https://github.com/openaustralia/atdis/raw/master/docs/ATDIS-1.0.2%20Application%20Tracking%20Data%20Interchange%20Specification%20(v1.0.2).pdf"
-    end
-
-    it "does not redirect the test page in the origina design" do
-      get atdis_test_path
-      expect(response).not_to be_redirect
     end
 
     it "redirects the test page to the get involved page in the new design" do

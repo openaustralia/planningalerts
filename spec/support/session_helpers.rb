@@ -6,10 +6,8 @@ module SessionHelpers
 
     visit admin_root_path
 
-    within("#new_user") do
-      fill_in "Your email", with: admin.email
-      fill_in "Password", with: admin.password
-    end
+    fill_in "Your email", with: admin.email
+    fill_in "Password", with: admin.password
     click_button "Sign in"
 
     expect(page).to have_content "Signed in successfully"
