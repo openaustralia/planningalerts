@@ -44,13 +44,13 @@ describe "Give feedback" do
     authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
     application = create(:geocoded_application, id: "1", authority:)
 
-    sign_in create(:confirmed_user)
+    sign_in create(:confirmed_user, tailwind_theme: true)
     visit(application_path(application))
 
     fill_in("Your comment", with: "I think this is a really good idea")
-    fill_in("Your name", with: "Matthew Landauer")
+    fill_in("Your full name", with: "Matthew Landauer")
     # Don't fill in the address
-    click_button("Post your public comment")
+    click_button("Review and publish")
 
     expect(page).to have_content("Some of the comment wasn't filled out completely. See below.")
     expect(page).not_to have_content("Now check your email")
@@ -88,18 +88,6 @@ describe "Give feedback" do
         page.percy_snapshot("Application")
       end
       # rubocop:enable RSpec/NoExpectationExample
-    end
-
-    it "Adding a comment" do
-      sign_in create(:confirmed_user)
-      visit(application_path(application))
-
-      fill_in("Your comment", with: "I think this is a really good ideas")
-      fill_in("Your name", with: "Matthew Landauer")
-      fill_in("Your street address", with: "11 Foo Street")
-      click_button("Post your public comment")
-
-      expect(page).to have_content("Your comment has been sent to Byron Shire Council and posted below.")
     end
 
     context "when on the new design" do
@@ -207,14 +195,14 @@ describe "Give feedback" do
   it "Reporting abuse on a published comment" do
     comment = create(:published_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
 
-    sign_in create(:confirmed_user, email: "reporter@foo.com", name: "Joe Reporter")
+    sign_in create(:confirmed_user, email: "reporter@foo.com", name: "Joe Reporter", tailwind_theme: true)
     visit(new_comment_report_path(comment))
 
-    fill_in("Why should this comment be removed?", with: "You can't be rude to people!")
+    fill_in("Why should the comment below be removed?", with: "You can't be rude to people!")
     click_button("Send report")
 
-    expect(page).to have_content("The comment has been reported and a moderator will look into it as soon as possible.")
-    expect(page).to have_content("Thanks for taking the time let us know about this.")
+    expect(page).to have_content("A moderator will review the comment")
+    expect(page).to have_content("Thank you for noticing!")
 
     expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
     open_email("contact@planningalerts.org.au")
@@ -226,14 +214,14 @@ describe "Give feedback" do
   it "reporting abuse when user doesn't have a name set" do
     comment = create(:published_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
 
-    sign_in create(:confirmed_user, email: "reporter@foo.com")
+    sign_in create(:confirmed_user, email: "reporter@foo.com", tailwind_theme: true)
     visit(new_comment_report_path(comment))
 
-    fill_in("Why should this comment be removed?", with: "You can't be rude to people!")
+    fill_in("Why should the comment below be removed?", with: "You can't be rude to people!")
     click_button("Send report")
 
-    expect(page).to have_content("The comment has been reported and a moderator will look into it as soon as possible.")
-    expect(page).to have_content("Thanks for taking the time let us know about this.")
+    expect(page).to have_content("A moderator will review the comment")
+    expect(page).to have_content("Thank you for noticing!")
 
     expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
     open_email("contact@planningalerts.org.au")
