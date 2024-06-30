@@ -8,12 +8,14 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
 <x-standard-image-in-footer>
   <x-spacer height="56px" />
   <% @applications.each do |application| %>
-    <x-application address="<%= application.address %>"
-                   description="<%= application.description %>"
-                   distance="<%= distance_and_heading_in_words(@alert.location, application.location) %>"
-                   url="<%= application_url_with_tracking(id: application.id) %>"
-                   map="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>"
-                   map_alignment="right" />
+    <x-box>
+      <x-application address="<%= application.address %>"
+        description="<%= application.description %>"
+        distance="<%= distance_and_heading_in_words(@alert.location, application.location) %>"
+        url="<%= application_url_with_tracking(id: application.id) %>"
+        map="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>"
+        map_alignment="right" />
+    </x-box>
     <x-spacer height="20px" />
     <% end %>
   <x-spacer height="8px" />
