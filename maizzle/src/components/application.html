@@ -1,6 +1,7 @@
 <script props>
   module.exports = {
     address: props.address,
+    description: props.description,
     distance: props.distance,
     map: props.map,
     url: props.url
@@ -25,7 +26,7 @@
         </if>
         <p class="my-0 line-clamp-4">
           <a href="{{{ url }}}" class="block no-underline text-navy dark-mode:text-white">
-            <content />
+            {{{ description }}}
           </a>
         </p>
       </td>
@@ -49,7 +50,7 @@
         <h2 class="m-0 text-lg font-bold underline line-clamp-1 text-fuchsia group-hover:text-fuchsia-darker dark-mode:text-white" style="text-decoration:underline">
           <span class="group-focus:bg-sun-yellow">{{{ address }}}</span>
         </h2>
-        <p class="mt-0 text-navy dark-mode:text-white line-clamp-6"><content /></p>
+        <p class="mt-0 text-navy dark-mode:text-white line-clamp-6">{{{ description }}}</p>
       </td>
     </tr>
   </table>  
