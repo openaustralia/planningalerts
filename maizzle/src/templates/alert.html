@@ -20,15 +20,11 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   <% @comments.each do |comment| %>
     <x-spacer height="16px" />
     <x-comment name="<%= comment.name %>"
-               url="<%= comment_url_with_tracking(comment:) %>">
-      <%= comment_as_html(comment.text) %>
-      <fill:application>
-        <x-application address="<%= comment.application.address %>"
-                       map="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>">
-          <%= comment.application.description %>
-        </x-application>
-      </fill:application>
-    </x-comment>
+               comment="<%= comment_as_html(comment.text) %>"
+               url="<%= comment_url_with_tracking(comment:) %>"
+               application_address="<%= comment.application.address %>"
+               application_map="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>"
+               application_description="<%= comment.application.description %>" />
   <% end %>
   <!-- TODO: Style divider correctly -->
   <x-divider />

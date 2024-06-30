@@ -14,12 +14,15 @@
           <tr>
             <td valign="top" class="pt-2 pr-4 text-7xl xs:block xs:h-8">”</td>
             <td valign="top" class="xs:block">
-              <content />
+              {{{ comment }}}
               <!-- TODO: "Comment made on" is not currently in the right place -->
               <p class="mt-8 mb-6">
                 Comment made on:
               </p>
-              <slot:application />
+              <x-application address="{{{ application_address }}}"
+                             map="{{{ application_map }}}">
+                {{{ application_description }}}
+              </x-application>
             </td>
           </tr>
         </table>    
