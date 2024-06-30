@@ -92,39 +92,45 @@
         <tr>
           <td style="width: 552px; max-width: 100%">
             <div role="separator" style="line-height: 56px">&zwj;</div>
-            <% @applications.each do |application| %> <table class="dark-mode-bg-black group" style="width: 100%; background-color: #ffffff; padding: 32px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)" cellpadding="0" cellspacing="0" role="none">
+            <% @applications.each do |application| %> <table class="dark-mode-bg-black" style="width: 100%; background-color: #ffffff; padding: 32px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)" cellpadding="0" cellspacing="0" role="none">
               <tr>
-                <td valign="top" class="xs-w-full xs-inline-block">
-                  <h2 style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px">
-                    <a href="<%= application_url_with_tracking(id: application.id) %>" class="group-focus-bg-sun-yellow group-hover-text-fuchsia-darker dark-mode-text-white" style="color: #CA3F94">
-                      <%= application.address %>
-                    </a>
-                  </h2>
-                  <p style="margin-top: 0">
-                    <a href="<%= application_url_with_tracking(id: application.id) %>" class="dark-mode-text-white" style="display: block; color: #414860; text-decoration-line: none">
-                      <%= distance_and_heading_in_words(@alert.location, application.location) %>
-                    </a>
-                  </p>
-                  <p style="margin-top: 0; margin-bottom: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4">
-                    <a href="<%= application_url_with_tracking(id: application.id) %>" class="dark-mode-text-white" style="display: block; color: #414860; text-decoration-line: none">
-                      <%= application.description %>
-                    </a>
-                  </p>
-                </td>
-                <td class="xs-w-full xs-inline-block xs-mt-4" valign="top" style="width: 150px"> <a href="<%= application_url_with_tracking(id: application.id) %>" style="text-decoration-line: none;">
-                    <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0">
-                  </a>
+                <td>
+                  <table style="width: 100%;" cellpadding="0" cellspacing="0" role="none">
+                    <tr>
+                      <td valign="top" class="xs-w-full xs-inline-block">
+                        <h2 style="margin: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 1; font-size: 18px">
+                          <a href="<%= application_url_with_tracking(id: application.id) %>" class="group-focus-bg-sun-yellow group-hover-text-fuchsia-darker dark-mode-text-white" style="color: #CA3F94">
+                            <%= application.address %>
+                          </a>
+                        </h2>
+                        <p style="margin-top: 0">
+                          <a href="<%= application_url_with_tracking(id: application.id) %>" class="dark-mode-text-white" style="display: block; color: #414860; text-decoration-line: none">
+                            <%= distance_and_heading_in_words(@alert.location, application.location) %>
+                          </a>
+                        </p>
+                        <p style="margin-top: 0; margin-bottom: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4">
+                          <a href="<%= application_url_with_tracking(id: application.id) %>" class="dark-mode-text-white" style="display: block; color: #414860; text-decoration-line: none">
+                            <%= application.description %>
+                          </a>
+                        </p>
+                      </td>
+                      <td class="xs-w-full xs-inline-block xs-mt-4" valign="top" style="width: 150px"> <a href="<%= application_url_with_tracking(id: application.id) %>" style="text-decoration-line: none;">
+                          <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0">
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
                 </td>
               </tr>
             </table>
             <div role="separator" style="line-height: 20px">&zwj;</div>
             <% end %> <div role="separator" style="line-height: 8px">&zwj;</div>
             <% @comments.each do |comment| %> <div role="separator" style="line-height: 16px">&zwj;</div><a href="<%= comment_url_with_tracking(comment:) %>" class="group" style="text-decoration-line: none;">
-              <table class="dark-mode-text-white dark-mode-bg-black" style="background-color: #ffffff; padding: 32px; color: #414860; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)" cellpadding="0" cellspacing="0" role="none">
+              <table class="dark-mode-bg-black" style="width: 100%; background-color: #ffffff; padding: 32px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td>
-                    <p style="margin-top: 0;"><%= comment.name %> commented:</p>
-                    <table class="dark-mode-bg-black" style="margin-top: 16px; background-color: #ffffff" cellpadding="0" cellspacing="0" role="none">
+                    <p class="dark-mode-text-white" style="margin-top: 0; color: #414860"><%= comment.name %> commented:</p>
+                    <table class="dark-mode-bg-black dark-mode-text-white" style="margin-top: 16px; background-color: #ffffff; color: #414860" cellpadding="0" cellspacing="0" role="none">
                       <tr>
                         <td valign="top" class="xs-block xs-h-8" style="padding-right: 16px; padding-top: 8px; font-size: 72px">”</td>
                         <td valign="top" class="xs-block">

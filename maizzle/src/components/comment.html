@@ -10,27 +10,23 @@
 </script>
 
 <a href="{{{ url }}}" class="no-underline group">
-  <table class="p-8 bg-white shadow-md text-navy dark-mode:text-white dark-mode:bg-black">
-    <tr>
-      <td>
-        <p class="mt-0">{{{ name }}} commented:</p>
-        <table class="mt-4 bg-white dark-mode:bg-black">
-          <tr>
-            <td valign="top" class="pt-2 pr-4 text-7xl xs:block xs:h-8">”</td>
-            <td valign="top" class="xs:block">
-              {{{ comment }}}
-              <!-- TODO: "Comment made on" is not currently in the right place -->
-              <p class="mt-8 mb-6">
-                Comment made on:
-              </p>
-              <x-application address="{{{ application_address }}}"
-                             map="{{{ application_map }}}"
-                             map_alignment="{{{ application_map_alignment }}}"
-                             description="{{{ application_description }}}" />
-            </td>
-          </tr>
-        </table>    
-      </td>
-    </tr>
-  </table>
+  <x-box>
+    <p class="mt-0 text-navy dark-mode:text-white">{{{ name }}} commented:</p>
+    <table class="mt-4 bg-white dark-mode:bg-black text-navy dark-mode:text-white">
+      <tr>
+        <td valign="top" class="pt-2 pr-4 text-7xl xs:block xs:h-8">”</td>
+        <td valign="top" class="xs:block">
+          {{{ comment }}}
+          <!-- TODO: "Comment made on" is not currently in the right place -->
+          <p class="mt-8 mb-6">
+            Comment made on:
+          </p>
+          <x-application address="{{{ application_address }}}"
+                         map="{{{ application_map }}}"
+                         map_alignment="{{{ application_map_alignment }}}"
+                         description="{{{ application_description }}}" />
+        </td>
+      </tr>
+    </table>
+  </x-box>
 </a>

@@ -10,36 +10,38 @@
 </script>
 
 <if condition="map_alignment == 'right'">
-  <table class="w-full p-8 bg-white shadow-md dark-mode:bg-black group">
-    <tr>
-      <td valign="top" class="xs:w-full xs:inline-block">
-        <h2 class="m-0 text-lg line-clamp-1 ">
-          <a href="{{{ url }}}" class="group-focus:bg-sun-yellow text-fuchsia group-hover:text-fuchsia-darker dark-mode:text-white">
-            {{{ address }}}
-          </a>
-        </h2>
-        <if condition="distance">
-          <p class="mt-0">
+  <x-box>
+    <table class="w-full">
+      <tr>
+        <td valign="top" class="xs:w-full xs:inline-block">
+          <h2 class="m-0 text-lg line-clamp-1 ">
+            <a href="{{{ url }}}" class="group-focus:bg-sun-yellow text-fuchsia group-hover:text-fuchsia-darker dark-mode:text-white">
+              {{{ address }}}
+            </a>
+          </h2>
+          <if condition="distance">
+            <p class="mt-0">
+              <a href="{{{ url }}}" class="block no-underline text-navy dark-mode:text-white">
+                {{{ distance }}}
+              </a>
+            </p>
+          </if>
+          <p class="my-0 line-clamp-4">
             <a href="{{{ url }}}" class="block no-underline text-navy dark-mode:text-white">
-              {{{ distance }}}
+              {{{ description }}}
             </a>
           </p>
-        </if>
-        <p class="my-0 line-clamp-4">
-          <a href="{{{ url }}}" class="block no-underline text-navy dark-mode:text-white">
-            {{{ description }}}
+        </td>
+        <!-- TODO: Need a space between the text and the map -->
+        <td class="w-[150px] xs:w-full xs:inline-block xs:mt-4" valign="top">
+          <!-- This link won't work on html4 email clients -->
+          <a href="{{{ url }}}" class="no-underline">
+            <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
           </a>
-        </p>
-      </td>
-      <!-- TODO: Need a space between the text and the map -->
-      <td class="w-[150px] xs:w-full xs:inline-block xs:mt-4" valign="top">
-        <!-- This link won't work on html4 email clients -->
-        <a href="{{{ url }}}" class="no-underline">
-          <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
-        </a>
-      </td>
-    </tr>
-  </table>
+        </td>
+      </tr>  
+    </table>
+  </x-box>
 </if>
 <else>
   <table>
