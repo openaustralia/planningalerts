@@ -4,11 +4,12 @@
     description: props.description,
     distance: props.distance,
     map: props.map,
-    url: props.url
+    url: props.url,
+    map_alignment: props.map_alignment
   }
 </script>
 
-<if condition="url">
+<if condition="map_alignment == 'right'">
   <table class="w-full p-8 bg-white shadow-md dark-mode:bg-black group">
     <tr>
       <td valign="top" class="xs:w-full xs:inline-block">

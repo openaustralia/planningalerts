@@ -1,7 +1,11 @@
 <script props>
   module.exports = {
     name: props.name,
-    url: props.url
+    url: props.url,
+    application_address: props.application_address,
+    application_map: props.application_map,
+    application_map_alignment: props.application_map_alignment,
+    application_description: props.application_description
   }
 </script>
 
@@ -21,6 +25,7 @@
               </p>
               <x-application address="{{{ application_address }}}"
                              map="{{{ application_map }}}"
+                             map_alignment="{{{ application_map_alignment }}}"
                              description="{{{ application_description }}}" />
             </td>
           </tr>
