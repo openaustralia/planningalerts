@@ -45,13 +45,21 @@
   <table>
     <tr>
       <td class="w-[180px] xs:w-full xs:inline-block" valign="top">
-        <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
+        <a href="{{{ url }}}" class="no-underline">
+          <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
+        </a>
       </td>
       <td valign="top" class="xs:w-full xs:inline-block xs:mt-4">
-        <h2 class="m-0 text-lg font-bold underline line-clamp-1 text-fuchsia group-hover:text-fuchsia-darker dark-mode:text-white" style="text-decoration:underline">
-          <span class="group-focus:bg-sun-yellow">{{{ address }}}</span>
+        <h2 class="m-0 text-lg line-clamp-1">
+          <a href="{{{ url }}}" class="text-fuchsia dark-mode:text-white group-hover:text-fuchsia-darker focus:bg-sun-yellow">
+            {{{ address }}}
+          </a>
         </h2>
-        <p class="mt-0 text-navy dark-mode:text-white line-clamp-6">{{{ description }}}</p>
+        <p class="mt-0 line-clamp-6">
+          <a href="{{{ url }}}" class="no-underline text-navy dark-mode:text-white">
+            {{{ description }}}
+          </a>
+        </p>
       </td>
     </tr>
   </table>  

@@ -8,24 +8,36 @@
   }
 </script>
 
-<a href="{{{ url }}}" class="no-underline group">
-  <x-box>
-    <p class="mt-0 text-navy dark-mode:text-white">{{{ name }}} commented:</p>
-    <table class="mt-4 bg-white dark-mode:bg-black text-navy dark-mode:text-white">
-      <tr>
-        <td valign="top" class="pt-2 pr-4 text-7xl xs:block xs:h-8">”</td>
-        <td valign="top" class="xs:block">
+<x-box>
+  <p class="mt-0 text-navy dark-mode:text-white">
+    <a href="{{{ url }}}" class="no-underline text-navy dark-mode:text-white">
+      {{{ name }}} commented:
+    </a>
+  </p>
+  <table class="mt-4 bg-white dark-mode:bg-black text-navy dark-mode:text-white">
+    <tr>
+      <td valign="top" class="pt-2 pr-4 text-7xl xs:block xs:h-8">
+        <a href="{{{ url }}}" class="no-underline text-navy dark-mode:text-white">
+          ”
+        </a>
+      </td>
+      <td valign="top" class="xs:block">
+        <!-- Don't think these links will generate valid html4 code because there can be p tags inside comment -->
+        <a href="{{{ url }}}" class="no-underline text-navy dark-mode:text-white">
           {{{ comment }}}
-          <!-- TODO: "Comment made on" is not currently in the right place -->
-          <p class="mt-8 mb-6">
+        </a>
+        <!-- TODO: "Comment made on" is not currently in the right place -->
+        <p class="mt-8 mb-6">
+          <a href="{{{ url }}}" class="no-underline text-navy dark-mode:text-white">
             Comment made on:
-          </p>
-          <x-application address="{{{ application_address }}}"
-                         map="{{{ application_map }}}"
-                         map_alignment="left"
-                         description="{{{ application_description }}}" />
-        </td>
-      </tr>
-    </table>
-  </x-box>
-</a>
+          </a>
+        </p>
+        <x-application address="{{{ application_address }}}"
+                       map="{{{ application_map }}}"
+                       map_alignment="left"
+                       url="{{{ url }}}"
+                       description="{{{ application_description }}}" />
+      </td>
+    </tr>
+  </table>
+</x-box>
