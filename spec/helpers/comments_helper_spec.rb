@@ -45,6 +45,29 @@ describe CommentsHelper do
     it { expect(helper.comment_as_html_no_link("watch out <script>alert('danger');</script>")).to be_html_safe }
   end
 
+  describe "#comments_as_html_paragraphs_no_link" do
+    it "wraps lines of text in HTML paragraphs" do
+      expect(helper.comment_as_html_paragraphs_no_link("This is a paragraph\n\nThis is another paragraph"))
+        .to eql ["This is a paragraph", "This is another paragraph"]
+    end
+
+    it "returns a single paragraph" do
+      expect(helper.comment_as_html_paragraphs_no_link("This is a paragraph"))
+        .to eql ["This is a paragraph"]
+    end
+
+    it "is html safe" do
+      r = helper.comment_as_html_paragraphs_no_link("This is a paragraph\n\nThis is another paragraph")
+      expect(r[0]).to be_html_safe
+      expect(r[1]).to be_html_safe
+    end
+
+    it "handles line breaks sensibly" do
+      expect(helper.comment_as_html_paragraphs_no_link("p1\nlinebreak\n\np2"))
+        .to eql ["p1\n<br>linebreak", "p2"]
+    end
+  end
+
   describe "#remove_links" do
     it "does nothing if there are no links" do
       expect(helper.remove_links("<p>Hello!</p>")).to eq "<p>Hello!</p>"

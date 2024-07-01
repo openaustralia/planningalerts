@@ -44,6 +44,21 @@ module CommentsHelper
     end
   end
 
+  sig { params(text: String).returns(T::Array[String]) }
+  def comment_as_html_paragraphs_no_link(text)
+    result = []
+    doc = Nokogiri::HTML5.fragment(comment_as_html_no_link(text))
+    doc.children.each do |child|
+      result << child.inner_html if child.name == "p"
+    end
+    # If the input is html safe then we can make the output safe too
+    if text.html_safe?
+      result
+    else
+      result.map(&:html_safe)
+    end
+  end
+
   sig { params(comment: Comment).returns(String) }
   def comment_path(comment)
     application_path(comment.application, anchor: "comment#{comment.id}")
