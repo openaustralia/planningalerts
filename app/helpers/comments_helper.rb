@@ -18,6 +18,13 @@ module CommentsHelper
     our_sanitize(simple_format(auto_link(text.dup)))
   end
 
+  # This is useful in a situation where we're wrapping a whole comment in
+  # a link and we don't want a link inside of a link
+  sig { params(text: String).returns(String) }
+  def comment_as_html_no_link(text)
+    our_sanitize(simple_format(text))
+  end
+
   sig { params(comment: Comment).returns(String) }
   def comment_path(comment)
     application_path(comment.application, anchor: "comment#{comment.id}")

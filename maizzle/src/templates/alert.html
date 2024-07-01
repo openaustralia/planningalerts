@@ -22,7 +22,7 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   <% @comments.each do |comment| %>
     <x-spacer height="16px" />
     <x-comment name="<%= comment.name %>"
-               comment="<%= comment_as_html(comment.text) %>"
+               comment="<%= comment_as_html_no_link(comment.text) %>"
                url="<%= comment_url_with_tracking(comment:) %>"
                application_address="<%= comment.application.address %>"
                application_map="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>"
