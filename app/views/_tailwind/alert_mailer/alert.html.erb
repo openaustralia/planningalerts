@@ -142,10 +142,13 @@
                           ”
                         </a>
                       </td>
-                      <td valign="top" class="xs-block"> <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none">
-                          <%= comment_as_html_no_link(comment.text) %>
-                        </a>
-                        <p style="margin-bottom: 24px; margin-top: 32px">
+                      <td valign="top" class="xs-block"> <% comment_as_html_paragraphs_no_link(comment.text).each do |p| %>
+                        <p>
+                          <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none">
+                            <%= p %>
+                          </a>
+                        </p>
+                        <% end %> <p style="margin-bottom: 24px; margin-top: 32px">
                           <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none">
                             Comment made on:
                           </a>

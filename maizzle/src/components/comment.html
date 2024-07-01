@@ -2,6 +2,7 @@
   module.exports = {
     name: props.name,
     url: props.url,
+    comment_as_paragraphs: props.comment_as_paragraphs,
     application_address: props.application_address,
     application_map: props.application_map,
     application_description: props.application_description
@@ -22,10 +23,14 @@
         </a>
       </td>
       <td valign="top" class="xs:block">
-        <!-- Don't think these links will generate valid html4 code because there can be p tags inside comment -->
-        <a href="{{{ url }}}" class="no-underline text-navy dark-mode:text-white">
-          {{{ comment }}}
-        </a>
+        <!-- Doing this weird thing here to avoid p tags being inside of a tags -->
+        <% {{{ comment_as_paragraphs }}}.each do |p| %>
+          <p>
+            <a href="{{{ url }}}" class="no-underline text-navy dark-mode:text-white">
+              <%= p %>
+            </a>
+          </p>
+        <% end %>
         <!-- TODO: "Comment made on" is not currently in the right place -->
         <p class="mt-8 mb-6">
           <a href="{{{ url }}}" class="no-underline text-navy dark-mode:text-white">
