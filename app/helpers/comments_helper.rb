@@ -22,7 +22,26 @@ module CommentsHelper
   # a link and we don't want a link inside of a link
   sig { params(text: String).returns(String) }
   def comment_as_html_no_link(text)
-    our_sanitize(simple_format(text))
+    remove_links(comment_as_html(text))
+  end
+
+  # This removes the a tags but keeps the content inside
+  sig { params(html: String).returns(String) }
+  def remove_links(html)
+    doc = Nokogiri::HTML5.fragment(html)
+    doc.search("a").each do |a|
+      # Put all the children of the links before the link
+      a.children.each { |child| a.add_previous_sibling(child) }
+      a.remove
+    end
+    # If the input is html safe then we can make the output safe too
+    if html.html_safe?
+      # rubocop:disable Rails/OutputSafety
+      doc.to_s.html_safe
+      # rubocop:enable Rails/OutputSafety
+    else
+      doc.to_s
+    end
   end
 
   sig { params(comment: Comment).returns(String) }
