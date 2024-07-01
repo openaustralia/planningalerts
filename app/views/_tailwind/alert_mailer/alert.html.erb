@@ -179,32 +179,26 @@
                   </table>
                 </td>
               </tr>
-            </table> <% end %><div role="separator" style="background-color: #cbd5e1; height: 1px; line-height: 1px; margin: 24px 0">&zwj;</div>
-            <a href="<%= edit_profile_alert_url(@alert) %>" class="group" style="text-decoration-line: none;">
+            </table> <% end %><div role="separator" style="background-color: #cbd5e1; height: 1px; line-height: 1px; margin: 24px 0">&zwj;</div><a href="<%= edit_profile_alert_url(@alert) %>" class="group" style="text-decoration-line: none;">
               <table class="dark-mode-bg-black" style="width: 100%; background-color: #ffffff; padding: 16px 24px; color: #414860" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td style="width: 36px">
                     <img src="<%= attachments['pencil.png'].url %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;" alt="">
                   </td>
                   <td>
-                    <span class="group-hover-text-fuchsia-darker group-focus-bg-sun-yellow" style="font-weight: 700; color: #CA3F94; text-decoration-line: underline; text-decoration: underline">
-            Edit alert
-          </span>
+                    <span class="group-hover-text-fuchsia-darker group-focus-bg-sun-yellow" style="font-weight: 700; color: #CA3F94; text-decoration-line: underline; text-decoration: underline">    Edit alert        </span>
                   </td>
                 </tr>
               </table>
             </a>
-            <div role="separator" style="line-height: 8px">&zwj;</div>
-            <a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" class="group" style="text-decoration-line: none;">
+            <div role="separator" style="line-height: 8px">&zwj;</div><a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" class="group" style="text-decoration-line: none;">
               <table class="dark-mode-bg-black" style="width: 100%; background-color: #ffffff; padding: 16px 24px; color: #414860" cellpadding="0" cellspacing="0" role="none">
                 <tr>
                   <td style="width: 36px;">
                     <img src="<%= attachments['trash.png'].url %>" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;" alt="">
                   </td>
                   <td>
-                    <span class="group-hover-text-fuchsia-darker group-focus-bg-sun-yellow" style="font-weight: 700; color: #CA3F94; text-decoration-line: underline; text-decoration: underline;">
-            Unsubscribe from alert
-          </span>
+                    <span class="group-hover-text-fuchsia-darker group-focus-bg-sun-yellow" style="font-weight: 700; color: #CA3F94; text-decoration-line: underline; text-decoration: underline;">    Unsubscribe from alert        </span>
                   </td>
                 </tr>
               </table>

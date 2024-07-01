@@ -30,33 +30,13 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
   <% end %>
   <!-- TODO: Style divider correctly -->
   <x-divider />
-  <a href="<%= edit_profile_alert_url(@alert) %>" class="no-underline group">
-    <table class="w-full px-6 py-4 bg-white text-navy dark-mode:bg-black">
-      <tr>
-        <td class="w-[36px]">
-          <img src="<%= attachments['pencil.png'].url %>">
-        </td>
-        <td>
-          <span class="font-bold underline text-fuchsia group-hover:text-fuchsia-darker group-focus:bg-sun-yellow" style="text-decoration:underline">
-            Edit alert
-          </span>    
-        </td>
-      </tr>
-    </table>
-  </a>
+  <x-box-button url="<%= edit_profile_alert_url(@alert) %>"
+                icon="<%= attachments['pencil.png'].url %>">
+    Edit alert
+  </x-box-button>
   <x-spacer height="8px" />
-  <a href="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>" class="no-underline group">
-    <table class="w-full px-6 py-4 bg-white text-navy dark-mode:bg-black">
-      <tr>
-        <td class="w-[36px]">
-          <img src="<%= attachments['trash.png'].url %>">
-        </td>
-        <td>
-          <span class="font-bold underline text-fuchsia group-hover:text-fuchsia-darker group-focus:bg-sun-yellow" style="text-decoration:underline">
-            Unsubscribe from alert
-          </span>    
-        </td>
-      </tr>
-    </table>
-  </a>
+  <x-box-button url="<%= unsubscribe_alert_url(confirm_id: @alert.confirm_id) %>"
+                icon="<%= attachments['trash.png'].url %>">
+    Unsubscribe from alert
+  </x-box-button>
 </x-standard>
