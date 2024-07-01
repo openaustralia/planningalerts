@@ -20,21 +20,20 @@
         </h2>
         <if condition="distance">
           <p class="mt-0">
-            <a href="{{{ url }}}" class="block no-underline text-navy dark-mode:text-white">
+            <a href="{{{ url }}}" class="block no-underline text-navy dark-mode:text-white" style="text-decoration:none">
               {{{ distance }}}
             </a>
           </p>
         </if>
         <p class="my-0 line-clamp-4">
-          <a href="{{{ url }}}" class="block no-underline text-navy dark-mode:text-white">
+          <a href="{{{ url }}}" class="block no-underline text-navy dark-mode:text-white" style="text-decoration:none">
             {{{ description }}}
           </a>
         </p>
       </td>
       <!-- TODO: Need a space between the text and the map -->
       <td class="w-[150px] xs:w-full xs:inline-block xs:mt-4" valign="top">
-        <!-- This link won't work on html4 email clients -->
-        <a href="{{{ url }}}" class="no-underline">
+        <a href="{{{ url }}}">
           <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
         </a>
       </td>
@@ -45,7 +44,7 @@
   <table>
     <tr>
       <td class="w-[180px] xs:w-full xs:inline-block" valign="top">
-        <a href="{{{ url }}}" class="no-underline">
+        <a href="{{{ url }}}">
           <img alt="Map of {{{ address }}}" src="{{{ map }}}" width="150" height="150">
         </a>
       </td>
@@ -56,7 +55,7 @@
           </a>
         </h2>
         <p class="mt-0 line-clamp-6">
-          <a href="{{{ url }}}" class="no-underline text-navy dark-mode:text-white">
+          <a href="{{{ url }}}" class="no-underline text-navy dark-mode:text-white" style="text-decoration:none">
             {{{ description }}}
           </a>
         </p>

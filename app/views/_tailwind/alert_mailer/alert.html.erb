@@ -102,17 +102,18 @@
                           </a>
                         </h2>
                         <p style="margin-top: 0">
-                          <a href="<%= application_url_with_tracking(id: application.id) %>" class="dark-mode-text-white" style="display: block; color: #414860; text-decoration-line: none">
+                          <a href="<%= application_url_with_tracking(id: application.id) %>" class="dark-mode-text-white" style="display: block; color: #414860; text-decoration-line: none; text-decoration: none">
                             <%= distance_and_heading_in_words(@alert.location, application.location) %>
                           </a>
                         </p>
                         <p style="margin-top: 0; margin-bottom: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4">
-                          <a href="<%= application_url_with_tracking(id: application.id) %>" class="dark-mode-text-white" style="display: block; color: #414860; text-decoration-line: none">
+                          <a href="<%= application_url_with_tracking(id: application.id) %>" class="dark-mode-text-white" style="display: block; color: #414860; text-decoration-line: none; text-decoration: none">
                             <%= application.description %>
                           </a>
                         </p>
                       </td>
-                      <td class="xs-w-full xs-inline-block xs-mt-4" valign="top" style="width: 150px"> <a href="<%= application_url_with_tracking(id: application.id) %>" style="text-decoration-line: none;">
+                      <td class="xs-w-full xs-inline-block xs-mt-4" valign="top" style="width: 150px">
+                        <a href="<%= application_url_with_tracking(id: application.id) %>">
                           <img alt="Map of <%= application.address %>" src="<%= google_static_map_url(lat: application.lat, lng: application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0">
                         </a>
                       </td>
@@ -128,32 +129,32 @@
               <tr>
                 <td>
                   <p class="dark-mode-text-white" style="margin-top: 0; color: #414860">
-                    <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none">
+                    <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none; text-decoration: none">
                       <%= comment.name %> commented:
                     </a>
                   </p>
                   <table class="dark-mode-bg-black dark-mode-text-white" style="margin-top: 16px; background-color: #ffffff; color: #414860" cellpadding="0" cellspacing="0" role="none">
                     <tr>
                       <td valign="top" class="xs-block xs-h-8" style="padding-right: 16px; padding-top: 8px; font-size: 72px">
-                        <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none">
+                        <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none; text-decoration: none">
                           ”
                         </a>
                       </td>
                       <td valign="top" class="xs-block"> <% comment_as_html_paragraphs_no_link(comment.text).each do |p| %>
                         <p>
-                          <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none">
+                          <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none; text-decoration: none">
                             <%= p %>
                           </a>
                         </p>
                         <% end %> <p style="margin-bottom: 24px; margin-top: 32px">
-                          <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none">
+                          <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none; text-decoration: none">
                             Comment made on:
                           </a>
                         </p>
                         <table cellpadding="0" cellspacing="0" role="none">
                           <tr>
                             <td class="xs-w-full xs-inline-block" valign="top" style="width: 180px">
-                              <a href="<%= comment_url_with_tracking(comment:) %>" style="text-decoration-line: none;">
+                              <a href="<%= comment_url_with_tracking(comment:) %>">
                                 <img alt="Map of <%= comment.application.address %>" src="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>" width="150" height="150" style="max-width: 100%; vertical-align: middle; line-height: 1; border: 0;">
                               </a>
                             </td>
@@ -164,7 +165,7 @@
                                 </a>
                               </h2>
                               <p style="margin-top: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 6">
-                                <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none">
+                                <a href="<%= comment_url_with_tracking(comment:) %>" class="dark-mode-text-white" style="color: #414860; text-decoration-line: none; text-decoration: none">
                                   <%= comment.application.description %>
                                 </a>
                               </p>
