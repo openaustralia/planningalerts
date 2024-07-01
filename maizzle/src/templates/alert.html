@@ -26,8 +26,7 @@ permalink: ../app/views/_tailwind/alert_mailer/alert.html.erb
                url="<%= comment_url_with_tracking(comment:) %>"
                application_address="<%= comment.application.address %>"
                application_map="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>"
-               application_description="<%= comment.application.description %>"
-               application_map_alignment="left" />
+               application_description="<%= comment.application.description %>" />
   <% end %>
   <!-- TODO: Style divider correctly -->
   <x-divider />
