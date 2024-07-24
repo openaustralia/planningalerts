@@ -1,5 +1,22 @@
 <% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 
+<% content_for :extra_meta_tags do %>
+  <!-- Facebook -->
+  <meta property="og:url" content="<%= root_url %>">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Planning Alerts">
+  <meta property="og:description" content="<%= yield(:meta_description) %>">
+  <meta property="og:image" content="<%= image_url("tailwind/opengraph.png") %>">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="planningalerts.org.au">
+  <meta property="twitter:url" content="<%= root_url %>">
+  <meta name="twitter:title" content="Planning Alerts">
+  <meta name="twitter:description" content="<%= yield(:meta_description) %>">
+  <meta name="twitter:image" content="<%= image_url("tailwind/opengraph.png") %>">
+<% end %>
+
 <%= render "banner" %>
 <%= render "applications/address_search_form", q: nil, error: nil, autofocus: false %>
 
