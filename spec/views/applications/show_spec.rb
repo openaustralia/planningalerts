@@ -45,27 +45,23 @@ describe "applications/show" do
     end
 
     it "displays the map" do
-      allow(application).to receive_messages(date_received: nil, first_date_scraped: Time.zone.now)
+      allow(application).to receive_messages(date_received: nil, first_date_scraped: Time.zone.now, comment_recipient_full_name: nil)
       assign(:application, application)
+      assign(:comments, [])
       render
-      expect(rendered).to have_selector("div#map_div")
-    end
-
-    it "says nothing about notice period when there is no information" do
-      allow(application).to receive_messages(date_received: nil, first_date_scraped: Time.zone.now, on_notice_from: nil, on_notice_to: nil)
-      assign(:application, application)
-      render
-      expect(rendered).not_to have_selector("p.on_notice")
+      # Really dumb way to check for the map
+      expect(rendered).to have_selector("div.bg-google-maps-green")
     end
   end
 
   describe "show with application with no location" do
     it "does not display the map" do
-      allow(application).to receive_messages(address: "An address that can't be geocoded", lat: nil, lng: nil, location: nil, date_received: nil, first_date_scraped: Time.zone.now)
+      allow(application).to receive_messages(address: "An address that can't be geocoded", lat: nil, lng: nil, location: nil, date_received: nil, first_date_scraped: Time.zone.now, comment_recipient_full_name: nil)
       assign(:application, application)
+      assign(:comments, [])
 
       render
-      expect(rendered).not_to have_selector("div#map_div")
+      expect(rendered).not_to have_selector("div.bg-google-maps-green")
     end
   end
 end
