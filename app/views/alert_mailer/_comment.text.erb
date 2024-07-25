@@ -1,7 +1,0 @@
-
-<%= comment.name %> commented on <%= display_description_with_address(comment.application) %>:
-
-<%= our_sanitize(truncate(comment.text, length: 700)) %>
-
-View comment on PlanningAlerts:
-<%= comment_url_with_tracking(comment: comment) %>
