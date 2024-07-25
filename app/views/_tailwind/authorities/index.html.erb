@@ -98,9 +98,7 @@
         </tr>
       </thead>
       <tbody class="align-top">
-        <%# Using a stupid name for the partial so that it doesn't conflict with the non-tailwind partial for the caching %>
-        <%# TODO: Rename partial once we've removed the non-tailwind theme %>
-        <%= render partial: "tailwind_authority", collection: @authorities, as: :authority, cached: true %>
+        <%= render @authorities, cached: true %>
       </tbody>
     </table>
   </section>
