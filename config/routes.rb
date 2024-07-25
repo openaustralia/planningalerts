@@ -125,7 +125,6 @@ Rails.application.routes.draw do
 
   resources :applications, only: %i[index show] do
     member do
-      get :nearby
       get :external
     end
     collection do
@@ -143,6 +142,7 @@ Rails.application.routes.draw do
     end
     resources :versions, only: [:index], controller: "application_versions"
   end
+  get "/applications/:id/nearby", to: redirect("/applications/%{id}")
 
   resources :comments, only: [:index] do
     member do

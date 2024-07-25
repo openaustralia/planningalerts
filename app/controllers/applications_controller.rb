@@ -137,12 +137,6 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  # TODO: Move redirect to routes
-  sig { void }
-  def nearby
-    redirect_to Application.find(params[:id])
-  end
-
   sig { void }
   def external
     application = Application.find(params[:id])
