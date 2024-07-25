@@ -182,10 +182,8 @@ Rails.application.routes.draw do
 
   resources :geocode_queries, only: [:index, :show]
 
-  namespace :atdis do
-    get :test
-    get :specification
-  end
+  get "/atdis/test", to: redirect("/get_involved")
+  get "/atdis/specification", to: redirect("https://github.com/openaustralia/atdis/raw/master/docs/ATDIS-1.0.2%20Application%20Tracking%20Data%20Interchange%20Specification%20(v1.0.2).pdf")
 
   namespace :api_keys do
     resource :non_commercial, only: [:new, :create]
