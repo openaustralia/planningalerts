@@ -1,0 +1,7 @@
+<%# TODO: Do a proper design for this maintenance banner. Just taken the welcome banner as a starting point %>
+<% if Flipper.enabled?(:maintenance_mode) %>
+  <div class="flex items-start gap-5 p-8 mt-8 text-xl text-white rounded-lg bg-lavender">
+    We're doing some maintenance on Planning Alerts. Is is currently in read-only mode which means you can still browse the site
+    but you won't be able to make any changes for the time being. Please try again later.
+  </div>
+<% end %>
