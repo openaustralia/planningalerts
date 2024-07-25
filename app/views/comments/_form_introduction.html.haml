@@ -1,8 +1,0 @@
-- if application.on_notice_to
-  %p= on_notice_text(application)
-%p
-  Your comment and details will be sent to
-  %strong #{application.comment_recipient_full_name}.
-  - unless application.official_submission_period_expired?
-    They may consider your submission when they decide whether to approve this application.
-  Your&nbsp;name and comment will be posted publicly above.

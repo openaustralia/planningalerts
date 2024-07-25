@@ -1,6 +1,0 @@
-%h2.comment-location
-  In
-  %strong #{comment.application.suburb} #{comment.application.state}
-  on
-  = link_to application_path(comment.application.id), title: "View application", class: "comment-application" do
-    #{display_description_with_address(comment.application)}:
