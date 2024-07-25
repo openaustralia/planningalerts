@@ -8,12 +8,6 @@ class ProfilesController < ApplicationController
 
   layout "profile"
 
-  # TODO: Move redirect to routes
-  sig { void }
-  def show
-    redirect_to profile_alerts_url
-  end
-
   sig { void }
   def comments
     # We also want to include comments that have been hidden

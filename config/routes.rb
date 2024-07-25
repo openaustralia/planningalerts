@@ -87,12 +87,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :profile, only: [:show] do
+  resource :profile, only: [] do
     resources :api_keys, only: :create
     resources :alerts, except: :show, controller: :alerts_new
     
     get :comments
   end
+  get "/profile", to: redirect("/profile/alerts")
 
   resources :alerts, only: %i[new create], path_names: { new: "signup" }, param: :confirm_id do
     member do
