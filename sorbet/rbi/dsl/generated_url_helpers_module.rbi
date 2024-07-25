@@ -225,9 +225,6 @@ module GeneratedUrlHelpersModule
   def import_admin_authority_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def nearby_application_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def new_admin_authority_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

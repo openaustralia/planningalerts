@@ -225,9 +225,6 @@ module GeneratedPathHelpersModule
   def import_admin_authority_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def nearby_application_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def new_admin_authority_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
