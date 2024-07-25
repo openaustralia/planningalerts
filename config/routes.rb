@@ -95,12 +95,12 @@ Rails.application.routes.draw do
   end
   get "/profile", to: redirect("/profile/alerts")
 
-  resources :alerts, only: %i[new create], path_names: { new: "signup" }, param: :confirm_id do
+  resources :alerts, only: [], param: :confirm_id do
     member do
       get :unsubscribe
-      post :unsubscribe
     end
   end
+  get "/alerts/signup", to: redirect("/profile/alerts/new")
 
   # Route API separately
   scope format: true do
