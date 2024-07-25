@@ -33,7 +33,7 @@ describe "redirects" do
     let(:application) { create(:application) }
 
     it "redirects to the application page in the new design" do
-      get nearby_application_path(application, sort: "time")
+      get "/applications/#{application.id}/nearby?sort=time"
       expect(response).to redirect_to application_path(application)
     end
   end

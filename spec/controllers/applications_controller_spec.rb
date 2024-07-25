@@ -71,32 +71,4 @@ describe ApplicationsController do
       expect(assigns[:radius]).to eq 2000.0
     end
   end
-
-  describe "#nearby" do
-    context "when a redirect is set up" do
-      let(:redirect) { create(:application_redirect) }
-
-      before do
-        redirect
-      end
-
-      it "redirects to another application" do
-        get :nearby, params: { id: redirect.application_id }
-        expect(response).to redirect_to(id: redirect.redirect_application_id)
-      end
-    end
-
-    context "when an application with nothing nearby" do
-      let(:application) { create(:geocoded_application) }
-
-      before do
-        application
-      end
-
-      it "redirects to the application page" do
-        get :nearby, params: { id: application.id, sort: "time" }
-        expect(response).to redirect_to(application)
-      end
-    end
-  end
 end
