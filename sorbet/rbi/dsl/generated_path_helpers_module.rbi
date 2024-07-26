@@ -75,7 +75,7 @@ module GeneratedPathHelpersModule
   def admin_users_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def alerts_path(*args); end
+  def alerts_signup_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def api_howto_path(*args); end
@@ -225,13 +225,7 @@ module GeneratedPathHelpersModule
   def import_admin_authority_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def nearby_application_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def new_admin_authority_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def new_alert_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_api_keys_non_commercial_path(*args); end
