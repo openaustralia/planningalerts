@@ -2,6 +2,6 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class Prose < ViewComponent::Base
+  class ProseComponent < ViewComponent::Base
   end
 end
