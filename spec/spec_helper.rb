@@ -98,11 +98,6 @@ RSpec.configure do |config|
   config.include MockLocationHelpers
   config.include AutocompleteHelpers
 
-  # For view tests point them at the "new" tailwind theme
-  config.before(:each, type: :view) do
-    controller.prepend_view_path Rails.root.join("app/views/_tailwind")
-  end
-
   # Disable searchkick during testing so that we don't need to run
   # elasticsearch locally which is a pain
   # Also disable rack attack because we're logging in quite a bit during testing

@@ -42,8 +42,7 @@ class AlertMailer < ApplicationMailer
       subject: render_to_string(
         partial: "subject",
         locals: { applications:, comments:, alert: }
-      ).strip,
-      template_path: "_tailwind/alert_mailer"
+      ).strip
     )
   end
 end

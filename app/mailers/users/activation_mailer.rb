@@ -19,10 +19,7 @@ module Users
 
       attachments.inline["illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/confirmation.png").read
 
-      mail(
-        to: user.email,
-        template_path: "_tailwind/users/activation_mailer"
-      )
+      mail(to: user.email)
     end
   end
 end

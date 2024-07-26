@@ -18,10 +18,6 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  # In production we don't want to do per request calls of prepend_view_path because
-  # it leads to a memory leak.
-  prepend_view_path Rails.root.join("app/views/_tailwind")
-
   before_action :configure_permitted_parameters, if: :devise_controller?
   # This stores the location on every request so that we can always redirect back after logging in
   # See https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D
