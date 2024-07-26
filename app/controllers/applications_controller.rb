@@ -4,7 +4,7 @@
 class ApplicationsController < ApplicationController
   extend T::Sig
 
-  before_action :check_application_redirect, only: %i[show nearby]
+  before_action :check_application_redirect, only: :show
 
   sig { void }
   def index
