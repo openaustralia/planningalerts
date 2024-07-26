@@ -1,6 +1,6 @@
 <header>
   <div class="hidden bg-header-orange sm:block">
-    <%= render Tailwind::ContainerComponent.new do %>
+    <%= render ContainerComponent.new do %>
       <div class="flex flex-row-reverse items-center h-8">
         <%# Using this (out of palette) colour for the text to pass contrast accessibility tests %>
         <%= link_to "https://www.oaf.org.au", class: "focus:outline-none focus:bg-sun-yellow p-1" do %>
@@ -13,7 +13,7 @@
   </div>
   <div class="flex flex-col">
     <div class="hidden py-8 sm:block bg-yellow bg-header-pattern xl:bg-center">
-      <%= render Tailwind::ContainerComponent.new do %>
+      <%= render ContainerComponent.new do %>
         <%# TODO: With focus do we want to swap colors around instead? %>
         <%= link_to root_path, class: "inline-block focus:outline-none focus:ring-4 focus:ring-sun-yellow" do %>
           <%= image_tag "tailwind/logo.svg", size: "408x96", alt: "Planning Alerts. Email alerts of planning applications near you" %>
@@ -21,7 +21,7 @@
       <% end %>
     </div>
     <div class="pt-10 pb-2 sm:bg-light-grey sm:py-0">
-      <%= render Tailwind::ContainerComponent.new do %>
+      <%= render ContainerComponent.new do %>
         <nav aria-label="Main">
           <%= render "menu_mobile" %>
           <%= render "menu_desktop" %>
@@ -29,7 +29,7 @@
       <% end %>
     </div>
     <div class="sm:hidden xl:bg-center">
-      <%= render Tailwind::ContainerComponent.new do %>
+      <%= render ContainerComponent.new do %>
         <%= link_to root_path, class: "inline-block focus:outline-none focus:bg-sun-yellow" do %>
           <%= image_tag "tailwind/logo-navy.svg", size: "350x46", alt: "Planning Alerts" %>
         <% end %>

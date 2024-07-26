@@ -1,5 +1,5 @@
 <section class="pb-12">
-  <%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "mt-6 sm:mt-12").with_content("Most commented applications") %>
+  <%= render HeadingComponent.new(tag: :h1, extra_classes: "mt-6 sm:mt-12").with_content("Most commented applications") %>
   <ol class="grid mt-10 text-xl font-bold gap-y-6 columns-1 [counter-reset:section]">
     <%= render partial: "applications/trending", collection: applications.limit(3), as: :application %>
   </ol>

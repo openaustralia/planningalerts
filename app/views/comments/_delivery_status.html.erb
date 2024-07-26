@@ -4,7 +4,7 @@
 <div class="text-lg text-navy">
   <%= render "comments/delivery_status_text_short", comment: %>
   <div class="inline-block ml-1">
-    <%= render Tailwind::InfoPopupComponent.new do %>
+    <%= render InfoPopupComponent.new do %>
       <%= render "comments/delivery_status_text_long", comment: %>
     <% end %>
   </div>

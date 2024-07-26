@@ -1,6 +1,6 @@
 <%= pa_link_to "< Back to application", @application, extra_classes: "text-xl" %>
 
-<%= render Tailwind::CentreBlockWithImageComponent.new(extra_classes: "mt-16") do |c| %>
+<%= render CentreBlockWithImageComponent.new(extra_classes: "mt-16") do |c| %>
   <% c.with_image do %>
     <%= image_tag "tailwind/illustration/send-comment2.svg", alt: "" %>
   <% end %>
@@ -22,11 +22,11 @@
   </div>
 
   <div class="mt-2">
-    <%= render Tailwind::ClickToCopyComponent.new.with_content(@application.council_reference) %>
+    <%= render ClickToCopyComponent.new.with_content(@application.council_reference) %>
   </div>
 
   <div class="flex flex-col items-center gap-4 mt-12">
-    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: @application.info_url, open_in_new_tab: true, icon: :external) do %>
+    <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: @application.info_url, open_in_new_tab: true, icon: :external) do %>
       Continue
     <% end %>
     <div class="text-xl text-navy">to <%= @application.authority.full_name %> website</div>

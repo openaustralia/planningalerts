@@ -1,0 +1,40 @@
+<%# TODO: This button needs a hover and active state %>
+<%# TODO: Use web share API (https://w3c.github.io/web-share/) to make this even more betterer on mobile %>
+<%# This is the only place that this button style is used. So, we'll just hardcode it for the time being  %>
+<%# TODO: Alignment of text and icons is not consistent when clicking button %>
+<div
+  class="invisible"
+  x-bind:class="{'invisible': false}"
+  x-data="{
+    copied: false,
+    shareData: {url: '<%= j(@url) %>', title: '<%= j(@title) %>'}
+  }">
+  <button class="inline-block px-10 py-3 text-xl font-semibold border-2 sm:py-4"
+          x-bind:class="{'bg-white': !copied, 'bg-light-grey2': copied,
+                         'border-light-grey2': copied,
+                         '<%= @text_class %>': !copied, 'text-navy': copied}"
+          x-on:click="if (navigator.canShare && navigator.canShare(shareData)) {
+            try {
+              await navigator.share(shareData);
+            }
+            catch(err) {
+              console.log('Web share error', err);
+            }
+          } else {
+            navigator.clipboard.writeText('<%= @url %>');
+            copied = true;
+            setTimeout(() => { copied = false }, 2000);
+          }">
+    <%# Giving this a constant height to avoid any content shifts when button is clicked %>
+    <div class="flex items-center justify-center h-8 gap-4">
+      <div>
+        <div x-show="!copied"><%= render IconComponent.new(name: :share) %></div>
+        <div x-show="copied" class="w-6 h-6"><%= render IconComponent.new(name: :tick) %></div>
+      </div>
+      <div>
+        <div x-show="!copied"><%= content %></div>
+        <div x-show="copied">Link copied</div>
+      </div>
+    </div>
+  </button>
+</div>

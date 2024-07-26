@@ -1,6 +1,6 @@
-<%= render Tailwind::HeadingComponent.new(tag: :h1).with_content("Request an API key") %>
+<%= render HeadingComponent.new(tag: :h1).with_content("Request an API key") %>
 
-<%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("The Planning Alerts API is a paid service") %>
+<%= render HeadingComponent.new(tag: :h2).with_content("The Planning Alerts API is a paid service") %>
 
 <p class="mt-8 text-xl text-navy">
   The PlanningAlerts API costs $2499 per month. We have a very straightforward short contract. We invoice monthly.
@@ -62,7 +62,7 @@
             <span>Free updates: <span class="font-semibold">6 months</span></span>
           </li>
         </ul>
-        <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_api_keys_non_commercial_path) do %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_api_keys_non_commercial_path) do %>
           Apply
         <% end %>
       </div>
@@ -97,7 +97,7 @@
             <span>Free updates: <span class="font-semibold">24 months</span></span>
           </li>
         </ul>
-        <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_api_keys_paid_path) do %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_api_keys_paid_path) do %>
           Get Started
         <% end %>
       </div>
@@ -135,7 +135,7 @@
             <span>Free updates: <span class="font-semibold">24 months</span></span>
           </li>
         </ul>
-        <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_api_keys_paid_path) do %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_api_keys_paid_path) do %>
           Get Started
         <% end %>
       </div>

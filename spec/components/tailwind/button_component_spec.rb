@@ -3,7 +3,7 @@
 require "spec_helper"
 require "rails_helper"
 
-RSpec.describe Tailwind::ButtonComponent, type: :component do
+RSpec.describe ButtonComponent, type: :component do
   it "renders the content" do
     render_inline(described_class.new(tag: :button, size: "lg", type: :primary)) { "Hello world!" }
     expect(page).to have_text "Hello world!"

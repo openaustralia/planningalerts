@@ -22,7 +22,7 @@
   <%= image_tag "tailwind/illustration/bottom-of-page-man.svg", alt: "" %>
 <% end %>
 
-<%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "mb-10").with_content(@application.address) %>
+<%= render HeadingComponent.new(tag: :h1, extra_classes: "mb-10").with_content(@application.address) %>
 
 <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
@@ -37,7 +37,7 @@
     <div>
       <%= @application.council_reference %>
       <div class="inline-block ml-1">
-        <%= render Tailwind::InfoPopupComponent.new do %>
+        <%= render InfoPopupComponent.new do %>
           This was created by <%= @application.authority.full_name %> to identify this application. You will need this if you talk
           directly with them or use their website.
         <% end %>
@@ -83,13 +83,13 @@
 
 <div class="mt-6 sm:mt-12">
   <%# TODO: This button currently has much larger left and right padding than the design %>
-  <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: "#add-comment", icon: :edit) do %>
+  <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: "#add-comment", icon: :edit) do %>
     Make a comment now
   <% end %>
 </div>
 
 <div class="mt-2">
-  <%= render Tailwind::ButtonWithSideTextComponent.new(tag: :a, size: "xl", type: :primary, href: external_application_path(@application), icon: :external) do |c| %>
+  <%= render ButtonWithSideTextComponent.new(tag: :a, size: "xl", type: :primary, href: external_application_path(@application), icon: :external) do |c| %>
     More info
     <% c.with_side_text do %>
       on the <%= @application.authority.full_name %> website
@@ -98,7 +98,7 @@
 </div>
 
 <div class="mt-6 md:mt-2">
-  <%= render Tailwind::ShareButtonComponent.new(url: application_url(@application), title: page_title(@application), color: :green) do %>
+  <%= render ShareButtonComponent.new(url: application_url(@application), title: page_title(@application), color: :green) do %>
     Share this application
   <% end %>
 </div>
@@ -106,12 +106,12 @@
 <%= render "applications/create_alert_form_bigger", alert: @alert %>
 
 <section class="pt-8 mt-8 border-t sm:pt-20 sm:mt-14 border-light-grey2" id="comments">
-  <%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "inline-block mb-6 mr-4") do %>
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "inline-block mb-6 mr-4") do %>
     Public comments on this application
   <% end %>
   <% if @comments.count > 0 %>
     <div class="relative inline-block mt-6 mb-4 -top-6">
-      <%= render Tailwind::SpeechBubbleComponent.new(size: "3xl", alignment: :right) do %>
+      <%= render SpeechBubbleComponent.new(size: "3xl", alignment: :right) do %>
         <%= @comments.count %>
       <% end %>
     </div>
@@ -143,7 +143,7 @@
   <%# TODO: Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
   <div class="hidden mt-24 sm:block text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
-    <%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
+    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
 
     <% if !@application.authority.email.present? %>
       <%# TODO: Need a proper design for this section %>
@@ -151,10 +151,10 @@
     <% elsif current_user.nil? %>
       <div class="px-4 py-3 bg-light-grey">
         <div class="flex flex-col justify-center gap-4 py-12 sm:flex-row">
-          <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_user_registration_path) do %>
+          <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_user_registration_path) do %>
             Create an account
           <% end %>
-          <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_user_session_path) do %>
+          <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_user_session_path) do %>
             Sign in
           <% end %>
         </div>

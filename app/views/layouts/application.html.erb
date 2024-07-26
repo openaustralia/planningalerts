@@ -6,7 +6,7 @@
   <body x-data="{ bodyScrolling: true }" x-bind:class="{ 'overflow-hidden': !bodyScrolling}">
     <%= render "header" %>
     <main>
-      <%= render Tailwind::ContainerComponent.new do %>
+      <%= render ContainerComponent.new do %>
         <%= render "maintenance" %>
         <%# render "fundraising_banner" %>
         <%= render "welcome_banner" %>

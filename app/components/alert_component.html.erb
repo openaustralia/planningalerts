@@ -1,0 +1,11 @@
+<div x-data="{open: true}" x-show="open" x-transition class="flex gap-5 <%= @alignment_class %> <%= @padding_class %> text-xl text-white rounded-lg <%= @bg_class %>">
+  <div class="<%= @icon_class %> shrink-0">
+    <%= render IconComponent.new(name: @icon_name) %>
+  </div>
+  <div class="grow"><%= content %></div>
+  <%# TODO: This button doesn't do anything without javascript, so hide it until js is running %>
+  <button x-on:click="open=false" class="self-start p-2 hover:opacity-80 focus:outline-none focus:ring-sun-yellow focus:ring-4">
+    <span class="sr-only">Close</span>
+    <%= render IconComponent.new(name: :dismiss) %>
+  </button>
+</div>

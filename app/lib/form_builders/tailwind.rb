@@ -47,7 +47,7 @@ module FormBuilders
     sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, T.any(String, Symbol)]).returns(ActionView::OutputBuffer) }
     def button(value = nil, options = {})
       options = { tag: :button, size: "xl", type: :primary }.merge(options)
-      template.render ::Tailwind::ButtonComponent.new(**T.unsafe(options)) do
+      template.render ::ButtonComponent.new(**T.unsafe(options)) do
         value
       end
     end

@@ -1,6 +1,6 @@
 <%= pa_link_to "< Back to your alerts", profile_alerts_path, extra_classes: "text-xl" %>
 
-<%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "mt-8").with_content(@alert.address) %>
+<%= render HeadingComponent.new(tag: :h2, extra_classes: "mt-8").with_content(@alert.address) %>
 
 <div class="mt-8 text-xl text-navy">
   <p class="font-bold leading-6">Last email sent</p>
@@ -22,7 +22,7 @@
                    class: "w-full",
                    "x-model.number": "radius_meters" %>
       <div class="h-80">
-        <%= render Tailwind::MapWithRadiusComponent.new(lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: "radius_meters") do %>
+        <%= render MapWithRadiusComponent.new(lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: "radius_meters") do %>
           <div class="flex items-center justify-center h-80">
             <p class="text-xl text-navy">Please enable javascript to see a map showing the size and location of your alert</p>
           </div>

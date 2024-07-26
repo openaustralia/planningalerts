@@ -1,6 +1,6 @@
 <% content_for :page_title, "Your comments" %>
 
-<%= render Tailwind::HeadingComponent.new(tag: :h2).with_content(yield(:page_title)) %>
+<%= render HeadingComponent.new(tag: :h2).with_content(yield(:page_title)) %>
 
 <% if @comments.empty? %>
   <p class="mt-12 text-xl text-navy">You haven't made any comments yet.</p>
@@ -12,5 +12,5 @@
       </li>
     <% end %>
   </ol>
-  <%= render Tailwind::SimplePagerComponent.new(collection: @comments) %>
+  <%= render SimplePagerComponent.new(collection: @comments) %>
 <% end %>

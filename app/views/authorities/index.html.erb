@@ -1,6 +1,6 @@
 <% content_for :page_title, "Coverage" %>
 
-<%= render Tailwind::HeadingComponent.new(tag: :h1) do %>
+<%= render HeadingComponent.new(tag: :h1) do %>
   <%= yield :page_title %>
 <% end %>
 
@@ -22,7 +22,7 @@
 
 <div class="mt-8 border-t divide-y divide-light-grey2 border-light-grey2">
   <section class="py-12">
-    <%= render Tailwind::HeadingComponent.new(tag: :h2) do %>
+    <%= render HeadingComponent.new(tag: :h2) do %>
       Where does application data come from?
     <% end %>
     <%# TODO: This paragraph is the same as used in "how to write a scraper". Extract partial? %>
@@ -53,7 +53,7 @@
   </section>
   <section class="py-12">
     <%# TODO: Not sure this is the best wording for the heading %>
-    <%= render Tailwind::HeadingComponent.new(tag: :h2) do %>
+    <%= render HeadingComponent.new(tag: :h2) do %>
       Data reliability
     <% end %>
     <p class="mt-4 text-xl text-navy">

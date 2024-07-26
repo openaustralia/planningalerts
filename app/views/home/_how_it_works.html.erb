@@ -1,12 +1,12 @@
 <section class="pb-8 text-navy">
-  <%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "mt-6 sm:mt-12").with_content("How it works") %>
+  <%= render HeadingComponent.new(tag: :h1, extra_classes: "mt-6 sm:mt-12").with_content("How it works") %>
   <ol class="grid gap-12 mt-12 text-center sm:gap-20 sm:mt-16 md:gap-6 md:grid-cols-3">
     <li class="p-8 pt-16 text-xl bg-light-grey [counter-increment:section] relative">
       <div class="absolute inline-block -top-8">
         <div class="before:[content:counter(section)] flex items-center relative -left-8 justify-center bg-lavender size-16 rounded-full before:text-white before:font-semibold before:text-3xl">
         </div>
       </div>
-      <%= render Tailwind::HeadingComponent.new(tag: :h2, font: "sans", weight: "semibold", extra_classes: "pb-4").with_content("Search") %>
+      <%= render HeadingComponent.new(tag: :h2, font: "sans", weight: "semibold", extra_classes: "pb-4").with_content("Search") %>
       <%= image_tag "tailwind/illustration/search.svg", size: "200x144", class: "mx-auto mb-5", alt: "" %>
       Find planning applications in your location.
     </li>
@@ -15,7 +15,7 @@
         <div class="before:[content:counter(section)] flex items-center relative -left-8 justify-center bg-lavender size-16 rounded-full before:text-white before:font-semibold before:text-3xl">
         </div>
       </div>
-      <%= render Tailwind::HeadingComponent.new(tag: :h2, font: "sans", weight: "semibold", extra_classes: "pb-4").with_content("Get notified") %>
+      <%= render HeadingComponent.new(tag: :h2, font: "sans", weight: "semibold", extra_classes: "pb-4").with_content("Get notified") %>
       <%= image_tag "tailwind/illustration/get-notified.svg", size: "128x93", class: "mx-auto my-8", alt: "" %>
       Sign up for email updates on new applications.
     </li>
@@ -24,7 +24,7 @@
         <div class="before:[content:counter(section)] flex items-center relative -left-8 justify-center bg-lavender size-16 rounded-full before:text-white before:font-semibold before:text-3xl">
         </div>
       </div>
-      <%= render Tailwind::HeadingComponent.new(tag: :h2, font: "sans", weight: "semibold", extra_classes: "pb-4").with_content("Comment") %>
+      <%= render HeadingComponent.new(tag: :h2, font: "sans", weight: "semibold", extra_classes: "pb-4").with_content("Comment") %>
       <%= image_tag "tailwind/illustration/comment.svg", size: "200x165", class: "mx-auto", alt: "" %>
       Create public comments for council consideration.
     </li>

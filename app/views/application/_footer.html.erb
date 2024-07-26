@@ -1,5 +1,5 @@
 <footer class="bg-[#03827a] text-white font-sans text-lg leading-tight py-20">
-  <%= render Tailwind::ContainerComponent.new do %>
+  <%= render ContainerComponent.new do %>
     <%= image_tag "tailwind/logo-white.svg", class: "w-60 mb-4", alt: "Planning Alerts", size: "240x32" %>
     <div class="grid grid-cols-12 gap-6 gap-y-8 md:gap-4">
       <div class="col-span-12 md:col-span-5">
@@ -33,7 +33,7 @@
         <div class="flex flex-col items-start gap-4">
           <%= image_tag "tailwind/illustration/love-letter.svg", size: "68x52", alt: "Illustration of love letter" %>
           <p>Your donations keep this site and others like it running</p>
-          <%= render Tailwind::ButtonComponent.new(tag: :a, size: "lg", type: :inverse, href: "https://donate.planningalerts.org.au") do %>
+          <%= render ButtonComponent.new(tag: :a, size: "lg", type: :inverse, href: "https://donate.planningalerts.org.au") do %>
             Donate now
           <% end %>
         </div>
@@ -41,7 +41,7 @@
     </div>
   <% end %>
   <hr class="mt-12 text-[#479590]">
-  <%= render Tailwind::ContainerComponent.new do %>
+  <%= render ContainerComponent.new do %>
     <div class="grid grid-cols-12 gap-4 pt-8 md:pt-16 row">
       <div class="col-span-12 md:col-span-5">
         <div>

@@ -1,13 +1,13 @@
 <% content_for :meta_description, Rails.configuration.planningalerts_meta_description %>
 
-<%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "sr-only").with_content("Search") %>
+<%= render HeadingComponent.new(tag: :h1, extra_classes: "sr-only").with_content("Search") %>
 <%= render "address_search_form", q:, error: nil, autofocus: false %>
 
 <%# TODO: Need a proper design for this section %>
 <%# TODO: When this section shows up it's not actually clear what the current search is for %>
 <% unless other_addresses.empty? %>
   <section class="pt-16">
-    <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("Or did you want?") %>
+    <%= render HeadingComponent.new(tag: :h2).with_content("Or did you want?") %>
 
     <ul class="pt-8 text-xl text-navy">
       <% other_addresses.each do |a| %>
@@ -28,7 +28,7 @@
   </section>
 <% elsif applications %>
   <section class="pt-16" id="results">
-    <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("Search results") %>
+    <%= render HeadingComponent.new(tag: :h2).with_content("Search results") %>
 
     <div class="mt-6 mb-4">
       <%= render "create_alert_form", alert: %>
@@ -45,11 +45,11 @@
             <% end %>
           </div>
           <div>
-            <%= render Tailwind::SimplePagerComponent::Next.new(collection: applications) %>
+            <%= render SimplePagerComponent::Next.new(collection: applications) %>
           </div>
         </div>
       <% else %>
-        <%= render Tailwind::SimplePagerComponent.new(collection: applications) %>
+        <%= render SimplePagerComponent.new(collection: applications) %>
       <% end %>
     <div>
 
@@ -66,7 +66,7 @@
     </div>
 
     <div class="mt-6">
-      <%= render Tailwind::SimplePagerComponent.new(collection: applications) %>
+      <%= render SimplePagerComponent.new(collection: applications) %>
     </div>
   </section>
 <% end %>

@@ -1,12 +1,12 @@
-<%= render Tailwind::PanelListItemComponent.new(url: application_path(application)) do |c| %>
+<%= render PanelListItemComponent.new(url: application_path(application)) do |c| %>
   <div class="flex items-end gap-6">
-    <%= render Tailwind::HeadingComponent.new(tag: :h2, size: "xl", font: "sans") do %>
+    <%= render HeadingComponent.new(tag: :h2, size: "xl", font: "sans") do %>
       <%= c.linkify(application.address) %>
     <% end %>
     <%# TODO: Make it the right width at different numbers %>
     <% if application.visible_comments_count.positive? %>
       <div class="pb-1 text-lg font-bold text-lavender">
-        <%= render Tailwind::SpeechBubbleComponent.new(size: "lg", alignment: :left) do %>
+        <%= render SpeechBubbleComponent.new(size: "lg", alignment: :left) do %>
           <%= application.visible_comments_count %>
         <% end %>
         <%= application.visible_comments_count == 1 ? "comment" : "comments" %>

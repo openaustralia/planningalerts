@@ -4,7 +4,7 @@
   <%= pa_link_to "< Back to application", @comment.application, extra_classes: "text-xl" %>
 </div>
 
-<%= render Tailwind::CentreBlockWithImageComponent.new(extra_classes: "mt-16") do |c| %>
+<%= render CentreBlockWithImageComponent.new(extra_classes: "mt-16") do |c| %>
   <% c.with_heading.with_content(yield :page_title) %>
   <% c.with_image do %>
     <%= image_tag "tailwind/illustration/thank_you.svg", alt: "Illustration of a woman giving a thumbs up" %>

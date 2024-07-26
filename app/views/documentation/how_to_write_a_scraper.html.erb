@@ -1,11 +1,11 @@
 <% content_for :page_title, "How to write a scraper" %>
 
-<%= render Tailwind::HeadingComponent.new(tag: :h1) do %>
+<%= render HeadingComponent.new(tag: :h1) do %>
   <%= yield :page_title %>
 <% end %>
 
 <section>
-  <%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "mt-12").with_content("What are scrapers?") %>
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mt-12").with_content("What are scrapers?") %>
   <div class="flex flex-col items-start gap-8 mt-8 md:flex-row-reverse">
     <%= image_tag "tailwind/illustration/explorer.svg", alt: "" %>
     <div class="text-xl text-navy">
@@ -23,7 +23,7 @@
   </div>
 </section>
 
-<%= render Tailwind::ProseComponent.new do %>
+<%= render ProseComponent.new do %>
   <section>
     <h2>How can I help?</h2>
     <p>

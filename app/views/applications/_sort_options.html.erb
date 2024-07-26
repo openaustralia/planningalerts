@@ -1,4 +1,4 @@
-<%= render Tailwind::SelectLinksComponent.new(
+<%= render SelectLinksComponent.new(
       id: "sort",
       label: "Sorted by",
       container: [["most recent", url_for({ sort: "time" }.merge(extra_params))], ["closest", url_for({ sort: "distance" }.merge(extra_params))]],

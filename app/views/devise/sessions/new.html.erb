@@ -1,5 +1,5 @@
 <div class="max-w-lg mx-auto">
-  <%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "mt-20 mb-12 text-center") do %>
+  <%= render HeadingComponent.new(tag: :h1, extra_classes: "mt-20 mb-12 text-center") do %>
     Sign in to Planning&nbsp;Alerts
   <% end %>
   <%= form_with model: resource, url: session_path(resource_name), builder: FormBuilders::Tailwind do |f| %>
@@ -22,14 +22,14 @@
   <hr class="mt-14 text-[#D2CFC1]">
 
   <div class="flex flex-col items-center mb-36">
-    <%= render Tailwind::HeadingComponent.new(tag: :h2, font: "sans", extra_classes: "mt-20 text-center").with_content("New to Planning Alerts?") %>
+    <%= render HeadingComponent.new(tag: :h2, font: "sans", extra_classes: "mt-20 text-center").with_content("New to Planning Alerts?") %>
     <p class="text-xl text-center text-navy">Get started here. It's easy.</p>
 
     <div class="my-12">
       <%= image_tag "tailwind/illustration/new-to-planning-alerts.svg", alt: "" %>
     </div>
 
-    <%= render Tailwind::ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_user_registration_path) do %>
+    <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_user_registration_path) do %>
       Create account
     <% end %>
   </div>

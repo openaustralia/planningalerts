@@ -1,6 +1,6 @@
 <% content_for :page_title, "About" %>
 
-<%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "mb-8").with_content(yield :page_title) %>
+<%= render HeadingComponent.new(tag: :h1, extra_classes: "mb-8").with_content(yield :page_title) %>
 
 <p class="mt-6 text-xl text-navy">
   You'd probably know if your next door neighbour was going to knock their house down (you'd get a letter through
@@ -23,7 +23,7 @@
 </p>
 
 <section id="contributors" class="pt-12">
-  <%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Contributors") %>
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Contributors") %>
   <div class="flex flex-col items-start justify-between gap-8 lg:flex-row-reverse">
     <%= image_tag "tailwind/illustration/about.svg", class: "lg:pt-16", alt: "" %>
     <div class="text-xl text-navy">

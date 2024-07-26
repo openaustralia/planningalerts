@@ -1,6 +1,6 @@
 <% content_for :page_title, "Help" %>
 
-<%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "mb-12") do %>
+<%= render HeadingComponent.new(tag: :h1, extra_classes: "mb-12") do %>
   <%= yield :page_title %>
 <% end %>
 

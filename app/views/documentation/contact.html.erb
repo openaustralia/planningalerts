@@ -1,11 +1,11 @@
 <% content_for :page_title, "Contact us" %>
 
-<%= render Tailwind::HeadingComponent.new(tag: :h1) do %>
+<%= render HeadingComponent.new(tag: :h1) do %>
   <%= yield :page_title %>
 <% end %>
 
 <section class="mt-12">
-  <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("Contact a planning authority") %>
+  <%= render HeadingComponent.new(tag: :h2).with_content("Contact a planning authority") %>
 
   <p class="mt-4 text-xl text-navy">
     Are you trying to get in touch with your local council or state planning authority?
@@ -22,7 +22,7 @@
 </section>
 
 <section class="mt-16">
-  <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("Contact the Planning Alerts team") %>
+  <%= render HeadingComponent.new(tag: :h2).with_content("Contact the Planning Alerts team") %>
   <div class="flex flex-col items-start gap-8 mb-8 md:gap-16 md:flex-row">
     <div>
       <p class="mt-4 text-xl text-navy">
