@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class PanelListItem < ViewComponent::Base
+  class PanelListItemComponent < ViewComponent::Base
     extend T::Sig
 
     sig { returns(Tailwind::LinkBlockComponent) }
