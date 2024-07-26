@@ -8,7 +8,7 @@
   <%= pa_link_to "Download as CSV", geocode_queries_path(format: :csv) %>
 </p>
 
-<%= render Tailwind::SimplePager.new(collection: @geocode_queries) %>
+<%= render Tailwind::SimplePagerComponent.new(collection: @geocode_queries) %>
 <table class="my-12 mt-8 text-xl text-navy">
   <thead>
     <tr>
@@ -51,4 +51,4 @@
     <% end %>
   </tbody>
 </table>
-<%= render Tailwind::SimplePager.new(collection: @geocode_queries) %>
+<%= render Tailwind::SimplePagerComponent.new(collection: @geocode_queries) %>

@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class SimplePager < ViewComponent::Base
+  class SimplePagerComponent < ViewComponent::Base
     extend T::Sig
     include ApplicationHelper
 
