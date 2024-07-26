@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class MapWithRadius < ViewComponent::Base
+  class MapWithRadiusComponent < ViewComponent::Base
     extend T::Sig
 
     # radius_meters is the name of the javascript variable that contains the radius in meters

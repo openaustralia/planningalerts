@@ -22,7 +22,7 @@
                    class: "w-full",
                    "x-model.number": "radius_meters" %>
       <div class="h-80">
-        <%= render Tailwind::MapWithRadius.new(lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: "radius_meters") do %>
+        <%= render Tailwind::MapWithRadiusComponent.new(lat: @alert.lat, lng: @alert.lng, address: @alert.address, zoom: 13, radius_meters: "radius_meters") do %>
           <div class="flex items-center justify-center h-80">
             <p class="text-xl text-navy">Please enable javascript to see a map showing the size and location of your alert</p>
           </div>
