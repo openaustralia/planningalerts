@@ -2,6 +2,6 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class InfoPopup < ViewComponent::Base
+  class InfoPopupComponent < ViewComponent::Base
   end
 end

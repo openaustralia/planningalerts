@@ -37,7 +37,7 @@
     <div>
       <%= @application.council_reference %>
       <div class="inline-block ml-1">
-        <%= render Tailwind::InfoPopup.new do %>
+        <%= render Tailwind::InfoPopupComponent.new do %>
           This was created by <%= @application.authority.full_name %> to identify this application. You will need this if you talk
           directly with them or use their website.
         <% end %>
