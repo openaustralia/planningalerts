@@ -2,6 +2,6 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class ExplanationBox < ViewComponent::Base
+  class ExplanationBoxComponent < ViewComponent::Base
   end
 end
