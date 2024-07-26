@@ -36,14 +36,14 @@
     </p>
     <div class="flex flex-col items-start gap-8 mt-12 sm:flex-row">
       <%# TODO: Extract partial from this and the get involved page %>
-      <%= image_tag "tailwind/illustration/headshot1.svg", alt: "" %>
+      <%= image_tag "illustration/headshot1.svg", alt: "" %>
       <p class="max-w-2xl text-xl text-navy">
         If you are a programmer and would like to write a scraper for your local authority
         <%= pa_link_to "read our guide on writing scrapers", how_to_write_a_scraper_path %>.
       </p>
     </div>
     <div class="flex flex-col items-start gap-8 mt-8 sm:flex-row">
-      <%= image_tag "tailwind/illustration/headshot4.svg", alt: "" %>
+      <%= image_tag "illustration/headshot4.svg", alt: "" %>
       <p class="max-w-2xl text-xl text-navy">
         If you work for a local authority and would like to make your data available we highly
         recommend using the
@@ -80,19 +80,19 @@
           <th class="pb-6 pr-8 whitespace-nowrap">
             <%= pa_link_to "State", { order: nil }, title: "Sort by state and authority" %>
             <% if @order.nil? %>
-              <%= image_tag "tailwind/down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
+              <%= image_tag "down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
             <% end %>
           </th>
           <th class="pb-6 pr-4 whitespace-nowrap">
             <%= pa_link_to "Authority", { order: nil }, title: "Sort by state and authority" %>
             <% if @order.nil? %>
-              <%= image_tag "tailwind/down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
+              <%= image_tag "down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
             <% end %>
           </th>
           <th class="pb-6 whitespace-nowrap">
             <%= pa_link_to "Population", { order: "population" }, title: "Sort by population (2021 census)" %>
             <% if @order == "population" %>
-              <%= image_tag "tailwind/down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
+              <%= image_tag "down-arrow.svg", alt: "Currently sorted by", class: "inline-block" %>
             <% end %>
           </th>
         </tr>

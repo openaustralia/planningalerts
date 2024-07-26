@@ -9,7 +9,7 @@
             setTimeout(() => { copied = false }, 750)"
           x-bind:disabled="copied"
           x-bind:class="{ 'invisible': false }">
-    <%= image_tag "tailwind/copy-to-clipboard.svg", "x-show": "!copied" %>
+    <%= image_tag "copy-to-clipboard.svg", "x-show": "!copied" %>
     <div x-text="copied ? 'Copied' : 'Copy' ">Copy</div>
   </button>
 </div>

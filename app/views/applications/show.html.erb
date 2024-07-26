@@ -19,7 +19,7 @@
   <% end %>
 <% end %>
 <% content_for :footer_illustration do %>
-  <%= image_tag "tailwind/illustration/bottom-of-page-man.svg", alt: "" %>
+  <%= image_tag "illustration/bottom-of-page-man.svg", alt: "" %>
 <% end %>
 
 <%= render HeadingComponent.new(tag: :h1, extra_classes: "mb-10").with_content(@application.address) %>
@@ -50,7 +50,7 @@
 <dl class="text-xl text-navy grid md:grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-10 sm:mt-14">
   <dt class="font-bold md:py-1">
     <div class="flex gap-4">
-      <%= image_tag "tailwind/calendar.svg", width: 24, alt: "" %>
+      <%= image_tag "calendar.svg", width: 24, alt: "" %>
       <div>Date sourced</div>
     </div>
   </dt>
@@ -60,7 +60,7 @@
   <%# TODO: Do we show the notified line if nobody has been notified? %>
   <dt class="pt-6 font-bold md:pt-1 md:py-1">
     <div class="flex gap-4">
-      <%= image_tag "tailwind/letter.svg", width: 24, alt: "" %>
+      <%= image_tag "letter.svg", width: 24, alt: "" %>
       <div>Notified</div>
     </div>
   </dt>
@@ -72,7 +72,7 @@
   <%# TODO: What to do if there are 0 comments? %>
   <dt class="pt-6 font-bold md:py-1 md:pt-1">
     <div class="flex gap-4">
-      <%= image_tag "tailwind/comments.svg", width: 24, alt: "" %>
+      <%= image_tag "comments.svg", width: 24, alt: "" %>
       <div>Comments</div>
     </div>
   </dt>

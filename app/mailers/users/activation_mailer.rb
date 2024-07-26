@@ -17,7 +17,7 @@ module Users
         "X-Cuttlefish-Disable-Css-Inlining" => "true"
       )
 
-      attachments.inline["illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/confirmation.png").read
+      attachments.inline["illustration.png"] = Rails.root.join("app/assets/images/illustration/confirmation.png").read
 
       mail(to: user.email)
     end

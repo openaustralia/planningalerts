@@ -6,8 +6,7 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
     './app/views/**/*.{erb,haml,html,slim}',
-    './app/themes/tailwind/views/**/*.{erb,haml,html,slim}',
-    './app/components/tailwind/*.{erb,haml,html,slim,rb}',
+    './app/components/*.{erb,haml,html,slim,rb}',
     './app/lib/form_builders/*.rb'
   ],
   theme: {
@@ -17,11 +16,11 @@ module.exports = {
         display: ['Merriweather', ...defaultTheme.fontFamily.serif]
       },
       backgroundImage: {
-        'header-pattern': "url('tailwind/header-pattern.svg')",
-        'oaf-logo': "url('tailwind/oaf-logo-white')"
+        'header-pattern': "url('header-pattern.svg')",
+        'oaf-logo': "url('oaf-logo-white')"
       },
       listStyleImage: {
-        dash: "url('tailwind/dash.svg')"
+        dash: "url('dash.svg')"
       },
       typography: (theme) => ({
         'xl': {

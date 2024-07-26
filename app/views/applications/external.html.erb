@@ -2,7 +2,7 @@
 
 <%= render CentreBlockWithImageComponent.new(extra_classes: "mt-16") do |c| %>
   <% c.with_image do %>
-    <%= image_tag "tailwind/illustration/send-comment2.svg", alt: "" %>
+    <%= image_tag "illustration/send-comment2.svg", alt: "" %>
   <% end %>
   <% c.with_heading do %>
     We will now try to direct you to this application on the <%= @application.authority.full_name %> website

@@ -1,6 +1,6 @@
 <% if current_user %>
   <div class="flex items-start gap-6 px-8 py-4 mt-8 sm:pr-4 sm:py-2 sm:items-center bg-light-grey">
-    <%= image_tag "tailwind/bookmark.svg", alt: "", class: "mt-2 sm:mt-0" %>
+    <%= image_tag "bookmark.svg", alt: "", class: "mt-2 sm:mt-0" %>
     <div class="flex flex-col gap-4 sm:flex-row sm:justify-between grow sm:items-center">
       <p class="text-xl font-bold text-navy">Save this search as an email alert</p>
       <%= form_with model: [:profile, alert], builder: FormBuilders::Tailwind do |f| %>
@@ -26,7 +26,7 @@
     </div>
     <%# On this page we want the box to be less tall than on the application detail page %>
     <div class="self-end overflow-hidden h-[190px] hidden md:block">
-      <%= image_tag "tailwind/illustration/save-search.svg", alt: "" %>
+      <%= image_tag "illustration/save-search.svg", alt: "" %>
     </div>
   </div>
 <% end %>

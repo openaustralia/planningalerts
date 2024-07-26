@@ -32,9 +32,9 @@ class AlertMailer < ApplicationMailer
       "X-Cuttlefish-Disable-Css-Inlining" => "true"
     )
 
-    attachments.inline["pencil.png"] = Rails.root.join("app/assets/images/tailwind/pencil.png").read
-    attachments.inline["trash.png"] = Rails.root.join("app/assets/images/tailwind/trash.png").read
-    attachments.inline["footer-illustration.png"] = Rails.root.join("app/assets/images/tailwind/illustration/woman-looking-off2.png").read
+    attachments.inline["pencil.png"] = Rails.root.join("app/assets/images/pencil.png").read
+    attachments.inline["trash.png"] = Rails.root.join("app/assets/images/trash.png").read
+    attachments.inline["footer-illustration.png"] = Rails.root.join("app/assets/images/illustration/woman-looking-off2.png").read
 
     mail(
       from: "PlanningAlerts <no-reply@planningalerts.org.au>",

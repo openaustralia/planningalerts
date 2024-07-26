@@ -1,6 +1,6 @@
 <footer class="bg-[#03827a] text-white font-sans text-lg leading-tight py-20">
   <%= render ContainerComponent.new do %>
-    <%= image_tag "tailwind/logo-white.svg", class: "w-60 mb-4", alt: "Planning Alerts", size: "240x32" %>
+    <%= image_tag "logo-white.svg", class: "w-60 mb-4", alt: "Planning Alerts", size: "240x32" %>
     <div class="grid grid-cols-12 gap-6 gap-y-8 md:gap-4">
       <div class="col-span-12 md:col-span-5">
         <div class="space-y-2">
@@ -31,7 +31,7 @@
 
       <div class="col-span-12 p-6 border border-white md:col-span-3">
         <div class="flex flex-col items-start gap-4">
-          <%= image_tag "tailwind/illustration/love-letter.svg", size: "68x52", alt: "Illustration of love letter" %>
+          <%= image_tag "illustration/love-letter.svg", size: "68x52", alt: "Illustration of love letter" %>
           <p>Your donations keep this site and others like it running</p>
           <%= render ButtonComponent.new(tag: :a, size: "lg", type: :inverse, href: "https://donate.planningalerts.org.au") do %>
             Donate now
@@ -69,7 +69,7 @@
 
       <div class="flex items-start col-span-12 md:justify-end md:col-span-3">
         <%= link_to "https://www.acnc.gov.au/charity/charities/6bf25724-39af-e811-a960-000d3ad24282/profile", class: "inline-block focus:outline-none focus:ring-4 focus:ring-sun-yellow" do %>
-          <%= image_tag "tailwind/charity-tick.svg", size: "100x100", alt: "ACNC Registered Charity Tick" %>
+          <%= image_tag "charity-tick.svg", size: "100x100", alt: "ACNC Registered Charity Tick" %>
         <% end %>
       </div>
     </div>
