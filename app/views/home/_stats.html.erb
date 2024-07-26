@@ -3,28 +3,28 @@
     <%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "mb-12").with_content("This week at Planning Alerts") %>
     <ul class="grid gap-12 text-center sm:grid-cols-2 lg:grid-cols-4">
       <li>
-        <%= render Tailwind::LinkBlock.new(url: applications_path) do %>
+        <%= render Tailwind::LinkBlockComponent.new(url: applications_path) do %>
           <span class="block mb-8 text-navy">We collected</span>
           <span class="block font-bold text-7xl text-fuchsia"><%= number_with_delimiter(Application.in_past_week.count) %></span>
           <span class="block text-fuchsia">new applications</span>
         <% end %>
       </li>
       <li>
-        <%= render Tailwind::LinkBlock.new(url: new_profile_alert_path) do %>
+        <%= render Tailwind::LinkBlockComponent.new(url: new_profile_alert_path) do %>
           <span class="block mb-8 text-navy">People received</span>
           <span class="block font-bold text-7xl text-orange"><%= number_with_delimiter(EmailBatch.total_sent_in_past_week) %></span>
           <span class="block text-orange">email alerts</span>
         <% end %>
       </li>
       <li>
-        <%= render Tailwind::LinkBlock.new(url: new_profile_alert_path) do %>
+        <%= render Tailwind::LinkBlockComponent.new(url: new_profile_alert_path) do %>
           <span class="block mb-8 text-navy">People signed up for</span>
           <span class="block font-bold text-7xl text-green"><%= number_with_delimiter(Alert.active.in_past_week.count) %></span>
           <span class="block text-green">new email alerts</span>
         <% end %>
       </li>
       <li>
-        <%= render Tailwind::LinkBlock.new(url: comments_path) do %>
+        <%= render Tailwind::LinkBlockComponent.new(url: comments_path) do %>
           <span class="block mb-8 text-navy">People wrote</span>
           <span class="block font-bold text-7xl text-lavender"><%= number_with_delimiter(Comment.visible.in_past_week.count) %></span>
           <span class="block text-lavender">new comments</span>

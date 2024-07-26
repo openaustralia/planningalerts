@@ -26,7 +26,7 @@
         <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
           <li class="flex items-start gap-6">
             <%= image_tag "tailwind/clock.svg", class: "mt-1", alt: "" %>
-            <%= render Tailwind::LinkBlock.new(url: application_path(application)) do |c| %>
+            <%= render Tailwind::LinkBlockComponent.new(url: application_path(application)) do |c| %>
               <%# TODO: Extract this piece below as a partial %>
               <div class="text-xl text-navy">
                 <div><%= c.linkify application.address %></div>

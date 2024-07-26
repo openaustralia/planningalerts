@@ -5,7 +5,7 @@ module Tailwind
   class PanelListItem < ViewComponent::Base
     extend T::Sig
 
-    sig { returns(Tailwind::LinkBlock) }
+    sig { returns(Tailwind::LinkBlockComponent) }
     attr_reader :link_block
 
     delegate :linkify, to: :link_block
@@ -13,7 +13,7 @@ module Tailwind
     sig { params(url: String).void }
     def initialize(url:)
       super
-      @link_block = T.let(Tailwind::LinkBlock.new(url:), Tailwind::LinkBlock)
+      @link_block = T.let(Tailwind::LinkBlockComponent.new(url:), Tailwind::LinkBlockComponent)
     end
   end
 end
