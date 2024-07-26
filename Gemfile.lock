@@ -283,7 +283,6 @@ GEM
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
     ffi (1.15.5)
-    flatpickr (4.6.13.0)
     flipper (0.28.3)
       concurrent-ruby (< 2)
     flipper-redis (0.28.3)
@@ -803,7 +802,6 @@ DEPENDENCIES
   erb_lint
   factory_bot
   factory_bot_rails
-  flatpickr
   flipper
   flipper-redis
   flipper-ui

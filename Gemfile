@@ -67,9 +67,6 @@ gem "tailwindcss-rails", "~> 2.0"
 # Icons
 gem "foundation-icons-sass-rails"
 
-# Date picker with no dependencies
-gem "flatpickr"
-
 # Sanitizing and manipulating user input
 gem "rails_autolink"
 gem "sanitize"
