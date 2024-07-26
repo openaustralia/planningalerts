@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class ShareButton < ViewComponent::Base
+  class ShareButtonComponent < ViewComponent::Base
     extend T::Sig
 
     sig { params(url: String, title: String, color: Symbol).void }
