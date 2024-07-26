@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class Map < ViewComponent::Base
+  class MapComponent < ViewComponent::Base
     extend T::Sig
 
     sig { params(lat: Float, lng: Float, address: String, zoom: Integer).void }
