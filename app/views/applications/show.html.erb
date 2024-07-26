@@ -89,7 +89,7 @@
 </div>
 
 <div class="mt-2">
-  <%= render Tailwind::ButtonWithSideText.new(tag: :a, size: "xl", type: :primary, href: external_application_path(@application), icon: :external) do |c| %>
+  <%= render Tailwind::ButtonWithSideTextComponent.new(tag: :a, size: "xl", type: :primary, href: external_application_path(@application), icon: :external) do |c| %>
     More info
     <% c.with_side_text do %>
       on the <%= @application.authority.full_name %> website

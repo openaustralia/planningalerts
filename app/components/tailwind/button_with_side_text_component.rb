@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class ButtonWithSideText < ViewComponent::Base
+  class ButtonWithSideTextComponent < ViewComponent::Base
     extend T::Sig
     renders_one :side_text
 
