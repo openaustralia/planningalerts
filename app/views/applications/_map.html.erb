@@ -9,7 +9,7 @@
     <%# TODO: #1813 Don't show pano if there's no useful streetview available %>
     <% unless Flipper.enabled?(:disable_streetview_in_app, current_user) %>
       <div x-data class="hidden xl:block w-[528px] h-[528px]">
-        <%= render Tailwind::Streetview.new(lat: application.lat, lng: application.lng, address: application.address) do %>
+        <%= render Tailwind::StreetviewComponent.new(lat: application.lat, lng: application.lng, address: application.address) do %>
           <%# Note that the "Disable Javascript" extension for firefox and chrome has a bug in it where it doesn't show
           the second noscript when js is disabled https://github.com/dpacassi/disable-javascript/issues/79#issuecomment-743995262.
           However, when you turn off javascript in the browser settings it does show the contents

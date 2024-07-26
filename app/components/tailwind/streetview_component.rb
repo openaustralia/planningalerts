@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class Streetview < ViewComponent::Base
+  class StreetviewComponent < ViewComponent::Base
     extend T::Sig
 
     sig { params(lat: Float, lng: Float, address: String).void }
