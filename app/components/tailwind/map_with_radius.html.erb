@@ -1,5 +1,5 @@
 <%= tag.div class: "h-full w-full bg-google-maps-green",
             "x-data" => "{ circle: null }",
-            "x-init" => "circle = await initialiseAlertMap2($el, { lat: #{j(@lat)}, lng: #{j(@lng)}, address: '#{j(@address)}', zoom: #{j(@zoom)}, radius_meters: #{j(@radius_meters)}}); $watch('#{j(@radius_meters)}', value => circle.setRadius(value))" do %>
+            "x-init" => "circle = await initialiseAlertMap($el, { lat: #{j(@lat)}, lng: #{j(@lng)}, address: '#{j(@address)}', zoom: #{j(@zoom)}, radius_meters: #{j(@radius_meters)}}); $watch('#{j(@radius_meters)}', value => circle.setRadius(value))" do %>
   <noscript><%= content %></noscript>
 <% end %>

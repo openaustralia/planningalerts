@@ -1,6 +1,6 @@
 <%# To use this component create a parent div with the required height and width otherwise
 nothing will be shown %>
 <%= tag.div class: "w-full h-full",
-            "x-init" => "initialisePano2($el, #{{ lat: @lat, lng: @lng, address: @address }.to_json})" do %>
+            "x-init" => "initialisePano($el, #{{ lat: @lat, lng: @lng, address: @address }.to_json})" do %>
   <noscript><%= content %></noscript>
 <% end %>

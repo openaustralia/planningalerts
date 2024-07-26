@@ -1,6 +1,6 @@
 //= require pano_utils
 
-async function initialisePano2(elem, params) {
+async function initialisePano(elem, params) {
   const { StreetViewPanorama } = await google.maps.importLibrary("streetView");
   const { Marker } = await google.maps.importLibrary("marker");
   const { LatLng } = await google.maps.importLibrary("core");
@@ -26,7 +26,7 @@ async function initialisePano2(elem, params) {
   panoMarker.setMap(myPano);
 }
 
-async function initialiseBasicMapWithMarker2(map_div, params) {
+async function initialiseBasicMapWithMarker(map_div, params) {
   const { Map } = await google.maps.importLibrary("maps");
   const { Marker } = await google.maps.importLibrary("marker");
 
@@ -50,12 +50,12 @@ async function initialiseBasicMapWithMarker2(map_div, params) {
   return map;
 }
 
-async function initialiseAlertMap2(map_div, params) {
-  var map = await initialiseBasicMapWithMarker2(map_div, params);
-  return drawCircleOnMap2(map, params.lat, params.lng, params.radius_meters);
+async function initialiseAlertMap(map_div, params) {
+  var map = await initialiseBasicMapWithMarker(map_div, params);
+  return drawCircleOnMap(map, params.lat, params.lng, params.radius_meters);
 }
 
-async function drawCircleOnMap2(map, centre_lat, centre_lng, radius_in_metres) {
+async function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
   const { Circle } = await google.maps.importLibrary("maps");
 
   return new Circle({
