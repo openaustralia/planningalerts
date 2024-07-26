@@ -17,7 +17,7 @@
   you said:
 </p>
 <div class="mt-12 mb-10">
-  <%= render Tailwind::QuotedBlock.new do %>
+  <%= render Tailwind::QuotedBlockComponent.new do %>
     <%= render Tailwind::LinkBlockComponent.new(url: comment_path(comment)) do %>
       <%= render "comments/comment_text", comment: %>
       <%# TODO: This space between the text and the date looks too big to me %>

@@ -1,4 +1,4 @@
-<%= render Tailwind::QuotedBlock.new do %>
+<%= render Tailwind::QuotedBlockComponent.new do %>
   <% if comment.visible? %>
     <%# TODO: Use blockquote for the body of the comment? %>
     <%= render "comments/comment_text", comment: %>

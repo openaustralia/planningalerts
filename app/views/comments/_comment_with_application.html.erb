@@ -1,7 +1,7 @@
 <%# TODO: Can we factor out common elements between this partial and _comment.html.erb? %>
 <%= render Tailwind::PanelListItemComponent.new(url: comment_path(comment)) do |c| %>
   <div class="my-4">
-    <%= render Tailwind::QuotedBlock.new do %>
+    <%= render Tailwind::QuotedBlockComponent.new do %>
       <div class="mb-6 text-xl text-navy">
         <div><%= c.linkify(comment.application.address) %></div>
         <div class="font-bold line-clamp-2"><%= comment.application.description %></div>

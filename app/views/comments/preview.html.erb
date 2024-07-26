@@ -14,7 +14,7 @@
 </p>
 
 <%# TODO: Can we use the comments partial here so that we can make sure it has consistent formatting? %>
-<%= render Tailwind::QuotedBlock.new do %>
+<%= render Tailwind::QuotedBlockComponent.new do %>
   <%= render Tailwind::ProseComponent.new do %>
     <%= comment_as_html(@comment.text) %>
   <% end %>
