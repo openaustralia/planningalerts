@@ -11,7 +11,6 @@ module ApplicationHelper
   include ActionView::Helpers::FormHelper
   include Kernel
 
-  # Only to be used in tailwind theme
   sig { params(quiet: T::Boolean).returns(String) }
   def pa_link_classes(quiet:)
     c = "text-fuchsia hover:text-fuchsia-darker focus:outline-none focus:bg-sun-yellow"
@@ -22,7 +21,6 @@ module ApplicationHelper
     end
   end
 
-  # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
   sig { params(body: T.untyped, url: T.untyped, extra_classes: T.nilable(String), title: T.nilable(String), quiet: T::Boolean).returns(String) }
   def pa_link_to(body, url, extra_classes: nil, title: nil, quiet: false)
@@ -30,7 +28,6 @@ module ApplicationHelper
     link_to(body, url, class: "#{pa_link_classes(quiet:)} #{extra_classes}", title:)
   end
 
-  # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
   sig { params(body: T.untyped, url: T.untyped, extra_classes: T.nilable(String), title: T.nilable(String), quiet: T::Boolean).returns(String) }
   def pa_link_to_unless_current(body, url, extra_classes: nil, title: nil, quiet: false)
@@ -38,7 +35,6 @@ module ApplicationHelper
     link_to_unless_current(body, url, class: "#{pa_link_classes(quiet:)} #{extra_classes}", title:)
   end
 
-  # Only to be used in tailwind theme
   # TODO: Generalise to support all the variants
   # TODO: The signature is not consistent with pa_link_to. This is currently used by kamanari pager.
   sig { params(condition: T::Boolean, body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, T.untyped], quiet: T::Boolean).returns(String) }

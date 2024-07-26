@@ -37,7 +37,7 @@ $ cd planningalerts
 
 In development all emails are sent locally to [mailcatcher](https://mailcatcher.me/). The emails can be viewed at http://localhost:1080.
 
-Email templates for the new tailwind based theme are developed using [Maizzle](https://maizzle.com/). The development workflow goes as follows:
+Email templates are developed using [Maizzle](https://maizzle.com/). The development workflow goes as follows:
 ```
 cd maizzle
 npm run dev production
