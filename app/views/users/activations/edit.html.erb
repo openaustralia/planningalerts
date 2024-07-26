@@ -3,7 +3,7 @@
 <div class="max-w-lg mx-auto">
   <%= render HeadingComponent.new(tag: :h1, extra_classes: "my-20 text-center").with_content("Activate your account") %>
 
-  <%= form_with model: @user, url: users_activation_path, method: :put, builder: FormBuilders::Tailwind do |f| %>
+  <%= form_with model: @user, url: users_activation_path, method: :put do |f| %>
     <%= f.hidden_field :reset_password_token %>
 
     <div class="flex flex-col items-center">

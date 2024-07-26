@@ -183,7 +183,6 @@ module ApplicationHelper
     end
     form_with(
       url: url_for(path),
-      builder: FormBuilders::Tailwind,
       class: options.delete(:form_class),
       method: options.delete(:method),
       data: options.delete(:data)

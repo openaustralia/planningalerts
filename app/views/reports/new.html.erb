@@ -10,7 +10,7 @@
   you think the comment should be removed.
 </p>
 
-<%= form_with model: [@comment, @report], builder: FormBuilders::Tailwind, class: "mt-12" do |f| %>
+<%= form_with model: [@comment, @report], class: "mt-12" do |f| %>
   <div>
     <%= f.label :details, "Why should the comment below be removed?" %>
     <%= f.text_area :details, class: "block w-full mt-4", rows: 8 %>

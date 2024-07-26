@@ -10,7 +10,7 @@
 
 <section class="mt-8">
   <%# TODO: Add errors on all fields in the form %>
-  <%= form_with builder: FormBuilders::Tailwind do |f| %>
+  <%= form_with do |f| %>
     <div>
       <%= f.label :organisation, "Organisation", class: "block mb-3" %>
       <%= f.text_field :organisation, class: "block w-full" %>

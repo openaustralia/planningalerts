@@ -30,7 +30,7 @@
   </div>
 
   <div class="mt-4">
-    <%= form_with(url: publish_application_comment_path(@comment), builder: FormBuilders::Tailwind) do %>
+    <%= form_with(url: publish_application_comment_path(@comment)) do %>
       <%= render ButtonWithSideTextComponent.new(tag: :button, size: "xl", type: :primary) do |c| %>
         Publish
         <% c.with_side_text do %>

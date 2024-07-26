@@ -3,7 +3,7 @@
 <div class="max-w-lg mx-auto">
   <%= render HeadingComponent.new(tag: :h1, extra_classes: "my-20 text-center").with_content("Create your new password") %>
 
-  <%= form_with model: resource, url: password_path(resource_name), method: :put, builder: FormBuilders::Tailwind do |f| %>
+  <%= form_with model: resource, url: password_path(resource_name), method: :put do |f| %>
     <%= f.hidden_field :reset_password_token %>
 
     <div class="flex flex-col items-center">

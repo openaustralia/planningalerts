@@ -5,7 +5,7 @@
     Activate your account
   <% end %>
 
-  <%= form_with model: @user, url: users_activation_path, builder: FormBuilders::Tailwind do |f| %>
+  <%= form_with model: @user, url: users_activation_path do |f| %>
     <div>
       <%= f.label :email, class: "block" %>
       <%= f.email_field :email, class: "mt-1 block w-full", autocomplete: "email", autofocus: true %>

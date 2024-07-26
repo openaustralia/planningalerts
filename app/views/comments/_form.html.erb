@@ -1,4 +1,4 @@
-<%= form_with model: [application, comment], builder: FormBuilders::Tailwind do |f| %>
+<%= form_with model: [application, comment] do |f| %>
   <div>
     <%= f.label :text, "Your comment" %>
     <%= f.text_area :text,

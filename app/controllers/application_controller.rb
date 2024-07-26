@@ -23,6 +23,8 @@ class ApplicationController < ActionController::Base
   # See https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D
   before_action :store_user_location!, if: :storable_location?
 
+  default_form_builder FormBuilders::Tailwind
+
   sig { void }
   def authenticate_active_admin_user!
     authenticate_user!

@@ -2,7 +2,7 @@
   <%= render HeadingComponent.new(tag: :h1, extra_classes: "mt-20 mb-12 text-center") do %>
     Sign in to Planning&nbsp;Alerts
   <% end %>
-  <%= form_with model: resource, url: session_path(resource_name), builder: FormBuilders::Tailwind do |f| %>
+  <%= form_with model: resource, url: session_path(resource_name) do |f| %>
     <%# TODO: Add error display and styling %>
     <div class="flex flex-col items-center">
       <div class="w-full">

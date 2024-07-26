@@ -10,7 +10,7 @@
 </div>
 
 <div class="pb-12 border-b text-light-grey">
-  <%= form_with model: [:profile, @alert], builder: FormBuilders::Tailwind, class: "mt-5" do |f| %>
+  <%= form_with model: [:profile, @alert], class: "mt-5" do |f| %>
     <%= f.label :radius_meters, "Alert distance" %>
     <div class="flex flex-col gap-4 mt-2" x-data="{radius_meters: <%= j(@alert.radius_meters) %>}">
       <%= f.select :radius_meters,
