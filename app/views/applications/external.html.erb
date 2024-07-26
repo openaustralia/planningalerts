@@ -1,6 +1,6 @@
 <%= pa_link_to "< Back to application", @application, extra_classes: "text-xl" %>
 
-<%= render Tailwind::CentreBlockWithImage.new(extra_classes: "mt-16") do |c| %>
+<%= render Tailwind::CentreBlockWithImageComponent.new(extra_classes: "mt-16") do |c| %>
   <% c.with_image do %>
     <%= image_tag "tailwind/illustration/send-comment2.svg", alt: "" %>
   <% end %>

@@ -1,6 +1,6 @@
 <% content_for :page_title, "Thank you!" %>
 
-<%= render Tailwind::CentreBlockWithImage.new(extra_classes: "mt-16") do |c| %>
+<%= render Tailwind::CentreBlockWithImageComponent.new(extra_classes: "mt-16") do |c| %>
   <%# TODO: This page needs a proper design %>
   <% c.with_heading.with_content(yield :page_title) %>
   <% c.with_image do %>

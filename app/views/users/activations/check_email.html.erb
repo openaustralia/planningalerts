@@ -1,6 +1,6 @@
 <% content_for :page_title, "Great! Now check your email" %>
 
-<%= render Tailwind::CentreBlockWithImage.new(extra_classes: "mt-16") do |c| %>
+<%= render Tailwind::CentreBlockWithImageComponent.new(extra_classes: "mt-16") do |c| %>
   <% c.with_heading.with_content(yield :page_title) %>
   <% c.with_image do %>
     <%= image_tag("tailwind/illustration/check-email.svg", alt: "") %>
