@@ -1,14 +1,4 @@
 function barGraph(selector, url, metric) {
-
-  // Add the title
-  var wrapper_element = document.querySelectorAll(selector)[0];
-
-  var title_element = document.createElement('h4');
-  title_element.classList.add("chart-title");
-  title_element.textContent = "Number of " + metric + " over time";
-
-  wrapper_element.insertBefore(title_element, wrapper_element.firstChild);
-
   // Add the chart
   d3.json(url, function(data) {
 
@@ -74,8 +64,7 @@ function barGraph(selector, url, metric) {
 
     var focusCallout = d3.select(selector)
           .append("div")
-          .attr("class", "chart-callout")
-          .append("h5"),
+          .attr("class", "chart-callout"),
         focusCalloutValue = focusCallout.append("span")
           .attr("class", "chart-callout-heading"),
         focusCalloutDate = focusCallout.append("span")

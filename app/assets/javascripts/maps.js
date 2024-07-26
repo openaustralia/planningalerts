@@ -1,55 +1,140 @@
-//= require maps/pano
-//= require maps/alert_map
-//= require maps/geocoding_map
-//= require maps/basic_map_with_marker
-//= require maps/address_autocomplete.js
+//= require pano_utils
 
-// This function is called after the google maps api is fully loaded. So, we can safely set things
-// up to use it here
-function initialiseAllMaps() {
-  // Map on the application page
-  var map_div = document.querySelector("#map_div.application");
-  if (map_div) initialiseBasicMapWithMarker(map_div);
+async function initialisePano2(elem, params) {
+  const { StreetViewPanorama } = await google.maps.importLibrary("streetView");
+  const { Marker } = await google.maps.importLibrary("marker");
+  const { LatLng } = await google.maps.importLibrary("core");
 
-  // Streetview on the application page
-  var pano = document.querySelector("#pano");
-  if (pano) initialisePano(pano);
-
-  // Alert radius map on the edit alert page
-  var map_div = document.querySelector("#map_div.alert-radius");
-  if (map_div) {
-    var circle = initialiseAlertMap(map_div);
-    document.querySelector(".sizes").addEventListener("change", function(e) {
-      circle.setRadius(parseInt(e.target.value));
+  // Can't yet figure out how to make the POV point at the marker
+  var pointToLookAt = new LatLng(params.lat, params.lng);
+  var myPano = new StreetViewPanorama(elem,
+    {
+      position: pointToLookAt,
+      navigationControl: false,
+      addressControl: false,
+      zoom: 0,
+      scrollwheel: false,
+      fullscreenControl: false,
+      linksControl: false
     });
-  }
-
-  document.querySelectorAll(".map").forEach(initialiseAlertMap);
-
-  var map_div = document.getElementById('geocoding-map');
-  if (map_div) initialiseGeocodingMap(map_div);
-
-  if (document.querySelectorAll('.address-autocomplete-input').length) {
-    initAutoComplete();
-  }
-
-  this.document.querySelectorAll(".authority-map").forEach(function(e) {
-    var map = new google.maps.Map(e,  { zoom: 4, center: { lat: -28, lng: 137 },
-      fullscreenControl: false, streetViewControl: false, backgroundColor: "#d1e6d9" });
-
-    var json = e.dataset.json;
-    var sw_lng = Number(e.dataset.swLng);
-    var sw_lat = Number(e.dataset.swLat);
-    var ne_lng = Number(e.dataset.neLng);
-    var ne_lat = Number(e.dataset.neLat);
-
-    var sw = new google.maps.LatLng(sw_lat, sw_lng);
-    var ne = new google.maps.LatLng(ne_lat, ne_lng);
-    var bounds = new google.maps.LatLngBounds(sw, ne);
-
-    map.fitBounds(bounds);
-    map.data.loadGeoJson(json);
-  });  
+  myPano.addListener('position_changed', function() {
+    // Orient the camera to face the position we're interested in
+    var angle = computeAngle(pointToLookAt, myPano.getPosition());
+    myPano.setPov({heading:angle, pitch:0, zoom:1});
+  });
+  var panoMarker = new Marker({position: pointToLookAt, title: params.address});
+  panoMarker.setMap(myPano);
 }
 
-window.initialiseAllMaps = initialiseAllMaps;
+async function initialiseBasicMapWithMarker2(map_div, params) {
+  const { Map } = await google.maps.importLibrary("maps");
+  const { Marker } = await google.maps.importLibrary("marker");
+
+  var center = { lat: params.lat, lng: params.lng };
+  var map = new Map(
+    map_div,
+    {
+      zoom: params.zoom,
+      center: center,
+      fullscreenControl: false,
+      streetViewControl: false,
+      backgroundColor: "#d1e6d9"
+    }
+  );
+  new Marker({
+    position: center,
+    map: map,
+    title: params.address
+  });
+
+  return map;
+}
+
+async function initialiseAlertMap2(map_div, params) {
+  var map = await initialiseBasicMapWithMarker2(map_div, params);
+  return drawCircleOnMap2(map, params.lat, params.lng, params.radius_meters);
+}
+
+async function drawCircleOnMap2(map, centre_lat, centre_lng, radius_in_metres) {
+  const { Circle } = await google.maps.importLibrary("maps");
+
+  return new Circle({
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.2,
+    fillColor: "#FF0000",
+    fillOpacity: 0.1,
+    map: map,
+    center: { lat: centre_lat, lng: centre_lng },
+    radius: radius_in_metres,
+  });
+};
+
+async function initialiseAuthorityMap(el, params) {
+  const { Map } = await google.maps.importLibrary('maps');
+  const { LatLng, LatLngBounds } = await google.maps.importLibrary('core');
+  var map = new Map(el,
+    {
+      zoom: 4,
+      center: { lat: -28, lng: 137 },
+      fullscreenControl: false,
+      streetViewControl: false,
+      backgroundColor: '#d1e6d9'
+    });
+  var sw = new LatLng(params.sw.lat, params.sw.lng);
+  var ne = new LatLng(params.ne.lat, params.ne.lng);
+  var bounds = new LatLngBounds(sw, ne);
+  map.fitBounds(bounds);
+  map.addListener('tilesloaded', function() {
+    // Only load the boundary once the map has displayed. Do this because loading the boundary can
+    // take a while and the map is already showing roughly where the council is without the boundary
+    // and so it is immediately useful
+    map.data.loadGeoJson(params.json);
+});
+}
+
+async function initialiseGeocodingMap(map_div) {
+  const { Map, InfoWindow } = await google.maps.importLibrary('maps');
+  const { Marker } = await google.maps.importLibrary("marker");
+
+  var g = JSON.parse(map_div.dataset.google);
+  var m = JSON.parse(map_div.dataset.mappify);
+  var googleLatLng = {lat: g.lat, lng: g.lng};
+  var mappifyLatLng = {lat: m.lat, lng: m.lng};
+
+  console.log("googleLatLng", googleLatLng);
+  console.log("mappifyLatLng", mappifyLatLng);
+
+  var map = new Map(map_div, { zoom: 13, center: googleLatLng });
+
+  // TODO: Generalise to any number of geocoder results
+
+  var googleInfowindow = new InfoWindow({
+    content: g.html
+  });
+
+  var mappifyInfowindow = new InfoWindow({
+    content: m.html
+  });
+
+  var googleMarker = new Marker({
+    position: googleLatLng,
+    map: map,
+    title: 'Google',
+    label: "G"
+  });
+
+  var mappifyMarker = new Marker({
+    position: mappifyLatLng,
+    map: map,
+    title: 'Mappify',
+    label: "M"
+  });
+
+  googleMarker.addListener('click', function() {
+    googleInfowindow.open(map, googleMarker);
+  });
+
+  mappifyMarker.addListener('click', function() {
+    mappifyInfowindow.open(map, mappifyMarker);
+  });
+}
