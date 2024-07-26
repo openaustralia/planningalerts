@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class Icon < ViewComponent::Base
+  class IconComponent < ViewComponent::Base
     extend T::Sig
 
     sig { params(name: Symbol).void }
