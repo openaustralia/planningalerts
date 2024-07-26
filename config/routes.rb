@@ -89,7 +89,7 @@ Rails.application.routes.draw do
 
   resource :profile, only: [] do
     resources :api_keys, only: :create
-    resources :alerts, except: :show, controller: :alerts_new
+    resources :alerts, except: :show
     
     get :comments
   end
