@@ -1,6 +1,6 @@
 <%= content_for :page_title, "Get the Data" %>
 
-<%= render Tailwind::Heading.new(tag: :h1) do %>
+<%= render Tailwind::HeadingComponent.new(tag: :h1) do %>
   <%= yield :page_title %>
 <% end %>
 
@@ -51,10 +51,10 @@
 </div>
 
 <section class="mt-24">
-  <%= render Tailwind::Heading.new(tag: :h2).with_content("API calls") %>
+  <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("API calls") %>
   <section class="max-w-4xl">
     <section class="mt-16">
-      <%= render Tailwind::Heading.new(tag: :h3).with_content("Single Location by longitude/latitude") %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h3).with_content("Single Location by longitude/latitude") %>
       <p class="mt-4 text-xl text-navy">
         Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
         with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
@@ -69,7 +69,7 @@
       <% end %>
     </section>
     <section class="mt-16">
-      <%= render Tailwind::Heading.new(tag: :h3).with_content("Area by longitude/latitude") %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h3).with_content("Area by longitude/latitude") %>
       <p class="mt-4 text-xl text-navy">
         Return applications within a rectangle defined by longitude/latitude.
       </p>
@@ -83,7 +83,7 @@
       <% end %>
     </section>
     <section class="mt-16">
-      <%= render Tailwind::Heading.new(tag: :h3).with_content("Planning authority") %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h3).with_content("Planning authority") %>
       <p class="mt-4 text-xl text-navy">
         Return applications for a specific planning authority (e.g. a local council) by authority short name. To discover the authority short name
         to use here, find the planning authority on the
@@ -100,7 +100,7 @@
       <% end %>
     </section>
     <section class="mt-16">
-      <%= render Tailwind::Heading.new(tag: :h3).with_content("Postcode") %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h3).with_content("Postcode") %>
       <p class="mt-4 text-xl text-navy">
         Return applications for a specific postcode area
       </p>
@@ -114,7 +114,7 @@
       <% end %>
     </section>
     <section class="mt-16">
-      <%= render Tailwind::Heading.new(tag: :h3).with_content("Suburb") %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h3).with_content("Suburb") %>
       <p class="mt-4 text-xl text-navy">
         Return applications in a suburb. Including &ldquo;state&rdquo; and &ldquo;postcode&rdquo; in the search is optional.
       </p>
@@ -131,12 +131,12 @@
   <section class="pt-8 mt-16 border-t border-t-warm-grey">
     <div class="max-w-4xl">
       <%# TODO: Using non-standard style %>
-      <%= render Tailwind::Heading.new(tag: :h2).with_content("Extra query parameters") %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("Extra query parameters") %>
       <p class="mt-8 text-xl text-navy">
         There are several parameters that can be applied to each of the above queries for extra usefulness.
       </p>
       <section class="mt-12">
-        <%= render Tailwind::Heading.new(tag: :h3).with_content("page") %>
+        <%= render Tailwind::HeadingComponent.new(tag: :h3).with_content("page") %>
         <p class="mt-4 text-xl text-navy">
           API calls return a maximum of <%= Application.max_per_page %> results. To retrieve more results simply do another request with page
           set to 2, 3, etc&hellip; Not setting the page parameter is the same as requesting page 1.
@@ -146,7 +146,7 @@
         </code>
       </section>
       <section class="mt-12">
-        <%= render Tailwind::Heading.new(tag: :h3).with_content("count") %>
+        <%= render Tailwind::HeadingComponent.new(tag: :h3).with_content("count") %>
         <p class="mt-4 text-xl text-navy">
           API calls by default return a maximum of <%= Application.max_per_page %> results. To return less than that per page simply set the count parameter to the maximum number you want to return.
         </p>
@@ -157,7 +157,7 @@
     </div>
   </section>
   <section class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
-    <%= render Tailwind::Heading.new(tag: :h2) do %>
+    <%= render Tailwind::HeadingComponent.new(tag: :h2) do %>
       Warning about client side API queries
     <% end %>
     <p class="mt-8">
@@ -173,7 +173,7 @@
     </p>
   </section>
   <section id="usage" class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
-    <%= render Tailwind::Heading.new(tag: :h2).with_content("Usage") %>
+    <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("Usage") %>
     <p class="mt-8">
       Low volume,
       <strong>non&ndash;commercial</strong>
@@ -199,7 +199,7 @@
     </p>
   </section>
   <section class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
-    <%= render Tailwind::Heading.new(tag: :h2).with_content("Be Nice") %>
+    <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("Be Nice") %>
     <p class="mt-8">
       The Planning Alerts service is intended to help people be aware of what's happening in their local neighborhood, and to enable a civil discussion about those changes.
     </p>

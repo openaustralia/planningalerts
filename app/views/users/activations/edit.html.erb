@@ -1,7 +1,7 @@
 <%# TODO: This page needs a proper design %>
 <%# TODO: Extract out component for this centred block %>
 <div class="max-w-lg mx-auto">
-  <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "my-20 text-center").with_content("Activate your account") %>
+  <%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "my-20 text-center").with_content("Activate your account") %>
 
   <%= form_with model: @user, url: users_activation_path, method: :put, builder: FormBuilders::Tailwind do |f| %>
     <%= f.hidden_field :reset_password_token %>

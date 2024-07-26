@@ -2,7 +2,7 @@
 
 <%# This page doesn't really need a "proper" design for the time being as it's not available to the end user %>
 
-<%= render Tailwind::Heading.new(tag: :h1).with_content(yield :page_title) %>
+<%= render Tailwind::HeadingComponent.new(tag: :h1).with_content(yield :page_title) %>
 
 <ul class="mt-12 divide-y divide-light-grey2">
   <%= render @application.versions %>

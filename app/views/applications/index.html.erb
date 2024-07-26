@@ -1,7 +1,7 @@
 <% content_for :page_title, @description %>
 
 <%# TODO: Update this description %>
-<%= render Tailwind::Heading.new(tag: :h1) do %>
+<%= render Tailwind::HeadingComponent.new(tag: :h1) do %>
   <%= @description %>
 <% end %>
 

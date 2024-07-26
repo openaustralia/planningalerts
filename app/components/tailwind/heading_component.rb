@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Tailwind
-  class Heading < ViewComponent::Base
+  class HeadingComponent < ViewComponent::Base
     extend T::Sig
 
     DEFAULT_SIZES = T.let({ h1: "3xl", h2: "2xl", h3: "xl", h4: "xl" }.freeze, T::Hash[Symbol, String])

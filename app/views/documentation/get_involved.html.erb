@@ -1,6 +1,6 @@
 <% content_for :page_title, "Get Involved" %>
 
-<%= render Tailwind::Heading.new(tag: :h1) do %>
+<%= render Tailwind::HeadingComponent.new(tag: :h1) do %>
   <%= yield :page_title %>
 <% end %>
 
@@ -21,7 +21,7 @@
   <section class="flex flex-col items-start gap-8 py-8 sm:gap-12 sm:flex-row">
     <%= image_tag "tailwind/illustration/headshot1.svg", alt: "" %>
     <div class="flex flex-col gap-4 text-xl text-navy">
-      <%= render Tailwind::Heading.new(tag: :h2, size: "xl", font: "sans") do %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h2, size: "xl", font: "sans") do %>
         I am a programmer and want to add my local planning authority
       <% end %>
       <p>
@@ -40,7 +40,7 @@
   <section class="flex flex-col items-start gap-8 py-8 sm:gap-12 sm:flex-row">
     <%= image_tag "tailwind/illustration/headshot2.svg", alt: "" %>
     <div class="flex flex-col gap-4 text-xl text-navy">
-      <%= render Tailwind::Heading.new(tag: :h2, size: "xl", font: "sans") do %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h2, size: "xl", font: "sans") do %>
         I'm not technical and I want to get my local council on to Planning Alerts. What can I do?
       <% end %>
       <p>
@@ -54,7 +54,7 @@
   <section class="flex flex-col items-start gap-8 py-8 sm:gap-12 sm:flex-row">
     <%= image_tag "tailwind/illustration/headshot3.svg", alt: "" %>
     <div class="flex flex-col gap-4 text-xl text-navy">
-      <%= render Tailwind::Heading.new(tag: :h2, size: "xl", font: "sans") do %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h2, size: "xl", font: "sans") do %>
         I don't have the time or I don't have the skills. How can I help?
       <% end %>
       <p>
@@ -68,7 +68,7 @@
   <section class="flex flex-col items-start gap-8 py-8 sm:gap-12 sm:flex-row">
     <%= image_tag "tailwind/illustration/headshot4.svg", alt: "" %>
     <div class="flex flex-col gap-4 text-xl text-navy">
-      <%= render Tailwind::Heading.new(tag: :h2, size: "xl", font: "sans") do %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h2, size: "xl", font: "sans") do %>
         I work for a local council or planning authority and would like to make our data available
       <% end %>
       <p>

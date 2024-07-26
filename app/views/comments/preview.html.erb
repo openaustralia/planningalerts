@@ -2,13 +2,13 @@
   <%= image_tag "tailwind/illustration/bottom-of-page-man.svg", alt: "" %>
 <% end %>
 
-<%= render Tailwind::Heading.new(tag: :h1) do %>
+<%= render Tailwind::HeadingComponent.new(tag: :h1) do %>
   Review and publish
 <% end %>
 
 <%# TODO: Make sure that there is consistency on formatting of h1, h2, h3, etc. across the site %>
 <%# TODO: Using non-standard font %>
-<%= render Tailwind::Heading.new(tag: :h2, font: "sans", extra_classes: "mt-14").with_content("Your comment") %>
+<%= render Tailwind::HeadingComponent.new(tag: :h2, font: "sans", extra_classes: "mt-14").with_content("Your comment") %>
 <p class="mb-10 text-xl text-navy">
   Does this look right? This is what other people will see on Planning Alerts when you publish.
 </p>
@@ -43,7 +43,7 @@
 
 <section class="pt-12 mt-12 border-t border-dashed border-cool-blue-gray">
   <%# TODO: Using non-standard font %>
-  <%= render Tailwind::Heading.new(tag: :h2, font: "sans") do %>
+  <%= render Tailwind::HeadingComponent.new(tag: :h2, font: "sans") do %>
     Preview of email to be sent to <%= @comment.comment_recipient_full_name %>
   <% end %>
 
@@ -64,7 +64,7 @@
   <div class="relative flex justify-end -top-4">
     <div class="max-w-3xl">
       <%= render Tailwind::ExplanationBoxComponent.new do %>
-        <%= render Tailwind::Heading.new(tag: :h3, color: "white", font: "sans").with_content("Why do we include the privacy notice?") %>
+        <%= render Tailwind::HeadingComponent.new(tag: :h3, color: "white", font: "sans").with_content("Why do we include the privacy notice?") %>
 
         <p class="mt-6">
           Different planning authorities handle your private information (email address and street address) in

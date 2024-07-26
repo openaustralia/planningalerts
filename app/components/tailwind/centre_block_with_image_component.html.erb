@@ -1,6 +1,6 @@
 <%# extra classes are at the end so they can't override %>
 <div class="flex flex-col items-center max-w-2xl m-auto text-center gap-8 <%= @extra_classes %>">
-  <%= render Tailwind::Heading.new(tag: :h1) do %>
+  <%= render Tailwind::HeadingComponent.new(tag: :h1) do %>
     <%= heading %>
   <% end %>
   <div class="flex flex-col-reverse items-center gap-8 sm:flex-col">

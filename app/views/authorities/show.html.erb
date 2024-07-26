@@ -2,7 +2,7 @@
   Information on <%= @authority.full_name %>
 <% end %>
 
-<%= render Tailwind::Heading.new(tag: :h1) do %>
+<%= render Tailwind::HeadingComponent.new(tag: :h1) do %>
   Information <span class="block mt-1 text-xl font-bold font-display">on <%= @authority.full_name %></span>
 <% end %>
 
@@ -23,7 +23,7 @@
     <% unless @authority.applications.empty? %>
       <section class="py-12">
         <%# TODO: This title isn't right because the section has comments in it too %>
-        <%= render Tailwind::Heading.new(tag: :h2) do %>
+        <%= render Tailwind::HeadingComponent.new(tag: :h2) do %>
           Browse applications from <%= @authority.full_name %>
         <% end %>
         <ul class="mt-8 text-xl text-navy">
@@ -40,7 +40,7 @@
     <% end %>
 
     <section class="py-12">
-      <%= render Tailwind::Heading.new(tag: :h2) do %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h2) do %>
         Applications collected by Planning Alerts
       <% end %>
       <% if @authority.applications.empty? %>
@@ -86,7 +86,7 @@
 
     <% unless @authority.applications.empty? %>
       <section class="py-12">
-        <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-12") do %>
+        <%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "pb-12") do %>
           Number of new applications scraped over time
         <% end %>
         <div class="h-40 sm:h-52">
@@ -100,7 +100,7 @@
       </section>
 
       <section class="clear-both py-12">
-        <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-12") do %>
+        <%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "pb-12") do %>
           Number of comments posted over time
         <% end %>
         <div class="h-40 sm:h-52">
@@ -118,7 +118,7 @@
     <% end %>
 
     <section class="py-12">
-      <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-12") do %>
+      <%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "pb-12") do %>
         Under the Hood
       <% end %>
       <p class="text-xl text-navy">
@@ -153,7 +153,7 @@
     </div>
   </div>
   <section class="mt-16">
-    <%= render Tailwind::Heading.new(tag: :h2).with_content("You can help!") %>
+    <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("You can help!") %>
     <p class="mt-8 text-xl text-navy">
       We are a free service brought to you by the charity the
       <%= pa_link_to "OpenAustralia Foundation", "https://www.oaf.org.au" %>.

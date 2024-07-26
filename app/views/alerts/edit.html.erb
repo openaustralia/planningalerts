@@ -1,6 +1,6 @@
 <%= pa_link_to "< Back to your alerts", profile_alerts_path, extra_classes: "text-xl" %>
 
-<%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mt-8").with_content(@alert.address) %>
+<%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "mt-8").with_content(@alert.address) %>
 
 <div class="mt-8 text-xl text-navy">
   <p class="font-bold leading-6">Last email sent</p>

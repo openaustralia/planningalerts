@@ -1,4 +1,4 @@
-<%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-10").with_content("Edit your account") %>
+<%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "pb-10").with_content("Edit your account") %>
 
 <%= form_with model: resource, url: registration_path(resource_name), method: :put, builder: FormBuilders::Tailwind, class: "border-b border-light-grey pb-8" do |f| %>
   <%# TODO: What actually goes here and is it needed on other devise forms? %>
@@ -36,7 +36,7 @@
   </div>
 <% end %>
 
-<%= render Tailwind::Heading.new(tag: :h2, extra_classes: "pb-10 mt-20").with_content("Close your account") %>
+<%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "pb-10 mt-20").with_content("Close your account") %>
 
 <p class="text-xl text-navy">
   Warning! This permanently removes your account and any alerts you have

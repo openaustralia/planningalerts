@@ -1,5 +1,5 @@
 <section class="pt-16">
-  <%= render Tailwind::Heading.new(tag: :h2).with_content("Search results") %>
+  <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("Search results") %>
   <div class="flex flex-col items-start gap-16 p-16 mt-12 md:flex-row bg-light-grey">
     <%= image_tag "tailwind/illustration/no_results" %>
     <div class="text-xl text-navy">
@@ -23,7 +23,7 @@
   </div>
 </section>
 <section class="mt-16 text-xl text-navy">
-  <%= render Tailwind::Heading.new(tag: :h2).with_content("You can help!") %>
+  <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("You can help!") %>
   <p class="mt-8">
     We are a free service brought to you by the charity the
     <%= pa_link_to "OpenAustralia Foundation", "https://www.oaf.org.au" %>.

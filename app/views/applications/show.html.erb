@@ -22,7 +22,7 @@
   <%= image_tag "tailwind/illustration/bottom-of-page-man.svg", alt: "" %>
 <% end %>
 
-<%= render Tailwind::Heading.new(tag: :h1, extra_classes: "mb-10").with_content(@application.address) %>
+<%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "mb-10").with_content(@application.address) %>
 
 <%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
@@ -106,7 +106,7 @@
 <%= render "applications/create_alert_form_bigger", alert: @alert %>
 
 <section class="pt-8 mt-8 border-t sm:pt-20 sm:mt-14 border-light-grey2" id="comments">
-  <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "inline-block mb-6 mr-4") do %>
+  <%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "inline-block mb-6 mr-4") do %>
     Public comments on this application
   <% end %>
   <% if @comments.count > 0 %>
@@ -143,7 +143,7 @@
   <%# TODO: Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
   <div class="hidden mt-24 sm:block text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
-    <%= render Tailwind::Heading.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
+    <%= render Tailwind::HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
 
     <% if !@application.authority.email.present? %>
       <%# TODO: Need a proper design for this section %>

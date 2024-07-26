@@ -1,6 +1,6 @@
 <%= render Tailwind::PanelListItem.new(url: application_path(application)) do |c| %>
   <div class="flex items-end gap-6">
-    <%= render Tailwind::Heading.new(tag: :h2, size: "xl", font: "sans") do %>
+    <%= render Tailwind::HeadingComponent.new(tag: :h2, size: "xl", font: "sans") do %>
       <%= c.linkify(application.address) %>
     <% end %>
     <%# TODO: Make it the right width at different numbers %>

@@ -1,7 +1,7 @@
 <%# TODO: This page needs a proper design %>
 <%# TODO: Extract out component for this centred block %>
 <div class="max-w-lg mx-auto">
-  <%= render Tailwind::Heading.new(tag: :h1, extra_classes: "my-20 text-center").with_content("Create your new password") %>
+  <%= render Tailwind::HeadingComponent.new(tag: :h1, extra_classes: "my-20 text-center").with_content("Create your new password") %>
 
   <%= form_with model: resource, url: password_path(resource_name), method: :put, builder: FormBuilders::Tailwind do |f| %>
     <%= f.hidden_field :reset_password_token %>

@@ -1,6 +1,6 @@
 <% content_for :page_title, "Under the hood for #{@authority.full_name}" %>
 
-<%= render Tailwind::Heading.new(tag: :h1) do %>
+<%= render Tailwind::HeadingComponent.new(tag: :h1) do %>
   Under the hood
   <span class="block mt-1 text-xl font-bold font-display">for <%= @authority.full_name %></span>
 <% end %>
@@ -53,13 +53,13 @@
 </p>
 
 <section id="import" class="py-12 mt-12">
-  <%= render Tailwind::Heading.new(tag: :h2).with_content("Most recent import logs") %>
+  <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("Most recent import logs") %>
   <%# TODO Is making the panel scrollable the right thing to do here? %>
   <pre class="py-8 mt-12 overflow-x-scroll font-mono text-xl bg-light-grey text-navy"><%= @authority.last_scraper_run_log %></pre>
 </section>
 
 <section class="py-12">
-  <%= render Tailwind::Heading.new(tag: :h2).with_content("What you can do next") %>
+  <%= render Tailwind::HeadingComponent.new(tag: :h2).with_content("What you can do next") %>
   <p class="mt-8 text-xl text-navy">
     If something isn't right with the scraper or the data coming in then you could do one or several of the following:
     <ul class="pl-8 mt-4 text-xl list-disc text-navy">
