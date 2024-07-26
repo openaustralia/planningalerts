@@ -1,6 +1,6 @@
 <div class="inline-block ml-2">
   <% if sort == "time" %>
-    <%= render Tailwind::SelectLinks.new(
+    <%= render Tailwind::SelectLinksComponent.new(
           id: "filter",
           label: "within",
           container: Alert::VALID_RADIUS_METERS_VALUES.map do |radius_option|
@@ -9,7 +9,7 @@
           value: url_for({ q:, radius: (radius.to_i == Alert::DEFAULT_RADIUS ? nil : radius.to_i) })
         ) %>
   <% else %>
-    <%= render Tailwind::SelectLinks.new(
+    <%= render Tailwind::SelectLinksComponent.new(
           id: "filter",
           label: "within the last",
           container: [364 / 4, 365 / 2, 365, 365 * 2, 365 * 5, 365 * 10].map do |time_option|
