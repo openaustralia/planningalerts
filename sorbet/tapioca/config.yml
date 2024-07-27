@@ -1,3 +1,9 @@
 dsl:
   exclude:
   - ActiveRecordFixtures
+
+gem:
+  exclude:
+    - spoom
+    - tapioca
+    - rbi
