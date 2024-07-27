@@ -48,7 +48,7 @@ class CreateOrUpdateApplicationService
   def self.create_version(application, attributes)
     previous_version = application.current_version
     new_version = ApplicationVersion.build_version(
-      application_id: T.must(application.id),
+      application_id: application.id,
       previous_version:,
       attributes: attributes.stringify_keys
     )
