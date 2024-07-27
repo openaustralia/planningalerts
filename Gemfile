@@ -177,7 +177,8 @@ group :development do
   # For static type checking
   gem "sorbet"
   gem "spoom"
-  gem "tapioca"
+  # TODO: Temporarily locking version. Get rid of this
+  gem "tapioca", "0.11.8"
 
   # For guard and associated bits
   gem "growl"
