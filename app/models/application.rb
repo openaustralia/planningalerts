@@ -24,7 +24,7 @@ class Application < ApplicationRecord
   validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
 
   scope(:in_past_week, -> { where("first_date_scraped > ?", 7.days.ago) })
-  scope(:recent, -> { where("first_date_scraped >= ?", 14.days.ago) })
+  scope(:recent, -> { where(first_date_scraped: 14.days.ago..) })
 
   sig { returns(T::Hash[Symbol, T.untyped]) }
   def search_data

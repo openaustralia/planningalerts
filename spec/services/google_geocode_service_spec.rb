@@ -82,7 +82,7 @@ describe "GoogleGeocodeService" do
     let(:address) { "Bathurst Rd" }
 
     it "lists potential matches and they should be in Australia" do
-      expect(result.all.count).to eq(2)
+      expect(result.count).to eq(2)
       expect(result.all[0].full_address).to eq("Bathurst Rd, Orange NSW 2800")
       expect(result.all[1].full_address).to eq("Bathurst Rd, Katoomba NSW 2780")
     end
@@ -93,7 +93,7 @@ describe "GoogleGeocodeService" do
 
     it "the first match should only return addresses in Australia" do
       expect(result.top.full_address).to eq("Sowerby St, Muswellbrook NSW 2333")
-      expect(result.all.count).to eq(3)
+      expect(result.count).to eq(3)
       expect(result.all[0].full_address).to eq("Sowerby St, Muswellbrook NSW 2333")
       expect(result.all[1].full_address).to eq("Sowerby St, Oran Park NSW 2570")
       expect(result.all[2].full_address).to eq("Sowerby St, Goulburn NSW 2580")

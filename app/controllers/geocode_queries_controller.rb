@@ -6,7 +6,7 @@ class GeocodeQueriesController < ApplicationController
 
   sig { void }
   def index
-    q = GeocodeQuery.all.order(created_at: :desc).includes(:geocode_results)
+    q = GeocodeQuery.order(created_at: :desc).includes(:geocode_results)
     respond_to do |format|
       format.html do
         @geocode_queries = T.let(q.page(params[:page]).per(50), T.nilable(ActiveRecord::Relation))

@@ -584,3 +584,15 @@ Style/SuperArguments: # new in 1.64
   Enabled: true
 Style/SuperWithArgsParentheses: # new in 1.58
   Enabled: true
+Rails/DangerousColumnNames: # new in 2.21
+  Enabled: true
+Rails/EnvLocal: # new in 2.22
+  Enabled: true
+Rails/RedundantActiveRecordAllMethod: # new in 2.21
+  Enabled: true
+Rails/SelectMap: # new in 2.21
+  Enabled: true
+Rails/UnusedRenderContent: # new in 2.21
+  Enabled: true
+Rails/WhereRange: # new in 2.25
+  Enabled: true
