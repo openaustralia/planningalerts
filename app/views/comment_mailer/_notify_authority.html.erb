@@ -1,0 +1,34 @@
+<p>For the attention of the General Manager / Planning Manager / Planning Department</p>
+
+<table>
+  <tr>
+    <th scope="row" align="left" valign="top">Application:</th>
+    <td valign="top"><%= comment.application.council_reference %></td>
+  </tr>
+  <tr>
+    <th scope="row" align="left" valign="top">Address:</th>
+    <td valign="top"><%= comment.application.address %></td>
+  </tr>
+  <tr>
+    <th scope="row" align="left" valign="top">Description:</th>
+    <td valign="top"><%= comment.application.description %></td>
+  </tr>
+  <tr>
+    <th scope="row" align="left" valign="top">Name of commenter:</th>
+    <td valign="top"><%= comment.name %></td>
+  </tr>
+  <tr>
+    <th scope="row" align="left" valign="top">Address of commenter:</th>
+    <td valign="top"><%= comment.address %></td>
+  </tr>
+  <tr>
+    <th scope="row" align="left" valign="top">Email of commenter:</th>
+    <td valign="top"><%= comment.email %></td>
+  </tr>
+</table>
+
+<h3>Comment</h3>
+<%= comment_as_html(comment.text) %>
+
+<hr>
+<%= render "comment_mailer/footer", comment: %>
