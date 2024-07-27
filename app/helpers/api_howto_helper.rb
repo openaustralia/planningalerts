@@ -114,7 +114,7 @@ module ApiHowtoHelper
 
   sig { params(format: String, key: T.nilable(String)).returns(String) }
   def api_example_latlong_url_html(format:, key:)
-    t = api_example_latlong_url(format:, key: (key || "44"), lat: "11", lng: "22", radius: "33")
+    t = api_example_latlong_url(format:, key: key || "44", lat: "11", lng: "22", radius: "33")
     t = t.sub("11", "[latitude]")
     t = t.sub("22", "[longitude]")
     t = t.sub("33", "[distance_in_metres]")
@@ -124,7 +124,7 @@ module ApiHowtoHelper
 
   sig { params(format: String, key: T.nilable(String)).returns(String) }
   def api_example_area_url_html(format:, key:)
-    t = api_example_area_url(format:, key: (key || "33"), bottom_left_lat: "11", bottom_left_lng: "22", top_right_lat: "11", top_right_lng: "22")
+    t = api_example_area_url(format:, key: key || "33", bottom_left_lat: "11", bottom_left_lng: "22", top_right_lat: "11", top_right_lng: "22")
     t = t.gsub("11", "[latitude]")
     t = t.gsub("22", "[longitude]")
     t = t.sub("33", "[key]") if key.nil?
@@ -133,7 +133,7 @@ module ApiHowtoHelper
 
   sig { params(format: String, key: T.nilable(String)).returns(String) }
   def api_example_authority_url_html(format:, key:)
-    t = api_example_authority_url(format:, key: (key || "22"), authority: "11")
+    t = api_example_authority_url(format:, key: key || "22", authority: "11")
     t = t.sub("11", "[name]")
     t = t.sub("22", "[key]") if key.nil?
     htmlify(t)
@@ -148,7 +148,7 @@ module ApiHowtoHelper
     ).returns(String)
   end
   def api_example_postcode_url_html(format:, key:, postcode: nil, extra_params: {})
-    t = api_example_postcode_url(format:, key: (key || "22"), postcode: (postcode || "11"), extra_params:)
+    t = api_example_postcode_url(format:, key: key || "22", postcode: postcode || "11", extra_params:)
     t = t.sub("11", "[postcode]")
     t = t.sub("22", "[key]") if key.nil?
     htmlify(t)
@@ -156,7 +156,7 @@ module ApiHowtoHelper
 
   sig { params(format: String, key: T.nilable(String)).returns(String) }
   def api_example_suburb_state_and_postcode_url_html(format:, key:)
-    t = api_example_suburb_state_and_postcode_url(format:, key: (key || "44"), suburb: "11", state: "22", postcode: "33")
+    t = api_example_suburb_state_and_postcode_url(format:, key: key || "44", suburb: "11", state: "22", postcode: "33")
     t = t.sub("11", "[suburb]")
     t = t.sub("22", "[state]")
     t = t.sub("33", "[postcode]")

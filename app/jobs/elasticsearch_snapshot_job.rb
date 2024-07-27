@@ -7,7 +7,7 @@ class ElasticsearchSnapshotJob
 
   sig { void }
   def perform
-    ElasticSearchClient&.snapshot&.create_repository(
+    ElasticSearchClient.snapshot&.create_repository(
       repository: "backups",
       body: {
         type: "s3",
@@ -20,7 +20,7 @@ class ElasticsearchSnapshotJob
         }
       }
     )
-    ElasticSearchClient&.snapshot&.create(
+    ElasticSearchClient.snapshot&.create(
       repository: "backups",
       snapshot: "pa-api-#{Rails.env}-#{Time.zone.now.utc.strftime('%Y.%m.%d')}",
       body: { indices: "pa-api-#{Rails.env}-*" }
