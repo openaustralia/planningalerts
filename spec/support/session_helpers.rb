@@ -8,7 +8,7 @@ module SessionHelpers
 
     fill_in "Your email", with: admin.email
     fill_in "Password", with: admin.password
-    click_button "Sign in"
+    click_on "Sign in"
 
     expect(page).to have_content "Signed in successfully"
   end

@@ -14,12 +14,12 @@ describe "Admin edits comment" do
   it "successfully" do
     sign_in_as_admin
 
-    click_link "Comments"
+    click_on "Comments"
 
-    click_link "Edit"
+    click_on "Edit"
 
     fill_in "Name", with: "Foo"
-    click_button "Update Comment"
+    click_on "Update Comment"
 
     expect(page).to have_content("Comment was successfully updated")
 

@@ -596,3 +596,13 @@ Rails/UnusedRenderContent: # new in 2.21
   Enabled: true
 Rails/WhereRange: # new in 2.25
   Enabled: true
+Capybara/ClickLinkOrButtonStyle: # new in 2.19
+  Enabled: true
+Capybara/RedundantWithinFind: # new in 2.20
+  Enabled: true
+Capybara/RSpec/HaveSelector: # new in 2.19
+  Enabled: true
+FactoryBot/ExcessiveCreateList: # new in 2.25
+  Enabled: true
+FactoryBot/IdSequence: # new in 2.24
+  Enabled: true

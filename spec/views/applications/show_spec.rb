@@ -50,7 +50,7 @@ describe "applications/show" do
       assign(:comments, [])
       render
       # Really dumb way to check for the map
-      expect(rendered).to have_selector("div.bg-google-maps-green")
+      expect(rendered).to have_css("div.bg-google-maps-green")
     end
   end
 

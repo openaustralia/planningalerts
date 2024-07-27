@@ -7,12 +7,12 @@ describe "Signing up for an API account" do
 
   it "Successfully signing up", :truncation do
     visit "/api/howto"
-    click_link "register for an account"
+    click_on "register for an account"
 
     fill_in "Your full name", with: "Henare Degan"
     fill_in "Email", with: "henare@oaf.org.au"
     fill_in "Create a password", with: "password"
-    click_button "Create my account"
+    click_on "Create my account"
 
     expect(page).to have_content "You will shortly receive an email from PlanningAlerts.org.au"
     expect(User.find_by(email: "henare@oaf.org.au").name).to eq "Henare Degan"
@@ -74,7 +74,7 @@ describe "Signing up for an API account" do
     describe "putting in an email address" do
       before do
         fill_in "Email", with: "matthew@oaf.org.au"
-        click_button "Send me an email"
+        click_on "Send me an email"
       end
 
       it "tells me to check my email" do

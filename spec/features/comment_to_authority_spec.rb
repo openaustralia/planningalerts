@@ -50,7 +50,7 @@ describe "Give feedback" do
     fill_in("Your comment", with: "I think this is a really good idea")
     fill_in("Your full name", with: "Matthew Landauer")
     # Don't fill in the address
-    click_button("Review and publish")
+    click_on("Review and publish")
 
     expect(page).to have_content("Some of the comment wasn't filled out completely. See below.")
     expect(page).to have_no_content("Now check your email")
@@ -105,7 +105,7 @@ describe "Give feedback" do
           fill_in("Your comment", with: "I think this is a really good ideas")
           fill_in("Your full name", with: "Matthew Landauer")
           fill_in("Your address", with: "11 Foo Street")
-          click_button("Review and publish")
+          click_on("Review and publish")
         end
 
         it "takes you to a preview page" do
@@ -142,7 +142,7 @@ describe "Give feedback" do
         it "allows you to edit a comment that hasn't yet been published" do
           visit(application_path(application))
           fill_in("Your comment", with: "I'm not so sure this is a good idea")
-          click_button("Review and publish")
+          click_on("Review and publish")
           expect(page).to have_content("Does this look right?")
           expect(page).to have_content("I'm not so sure this is a good idea")
           expect(page).to have_content("Matthew Landauer")
@@ -150,7 +150,7 @@ describe "Give feedback" do
 
         it "allows you to delete a comment that hasn't yet been published" do
           visit(application_path(application))
-          click_button("Clear form")
+          click_on("Clear form")
 
           expect(page).to have_no_content("I think this is a really good ideas")
         end
@@ -161,8 +161,8 @@ describe "Give feedback" do
           fill_in("Your comment", with: "I think this is a really good ideas")
           fill_in("Your full name", with: "Matthew Landauer")
           fill_in("Your address", with: "11 Foo Street")
-          click_button("Review and publish")
-          click_button("Publish")
+          click_on("Review and publish")
+          click_on("Publish")
         end
 
         it "makes the comment visible to everyone" do
@@ -199,7 +199,7 @@ describe "Give feedback" do
     visit(new_comment_report_path(comment))
 
     fill_in("Why should the comment below be removed?", with: "You can't be rude to people!")
-    click_button("Send report")
+    click_on("Send report")
 
     expect(page).to have_content("A moderator will review the comment")
     expect(page).to have_content("Thank you for noticing!")
@@ -218,7 +218,7 @@ describe "Give feedback" do
     visit(new_comment_report_path(comment))
 
     fill_in("Why should the comment below be removed?", with: "You can't be rude to people!")
-    click_button("Send report")
+    click_on("Send report")
 
     expect(page).to have_content("A moderator will review the comment")
     expect(page).to have_content("Thank you for noticing!")

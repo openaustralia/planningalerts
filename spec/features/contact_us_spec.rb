@@ -13,7 +13,7 @@ describe "Contact us" do
       select "The address or map location is wrong", from: "I'm getting in touch because"
       fill_in "Your message", with: "Actually nothing is wrong here. Sorry."
       attach_file "Attach files or screenshots", "spec/fixtures/attachment.txt"
-      click_button "Send message"
+      click_on "Send message"
 
       expect(page).to have_content("Thank you for getting in touch")
       expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
@@ -41,7 +41,7 @@ describe "Contact us" do
     it "less information needs to be filled out and the admins receive an email" do
       select "The address or map location is wrong", from: "I'm getting in touch because"
       fill_in "Your message", with: "Actually nothing is wrong here. Sorry."
-      click_button "Send message"
+      click_on "Send message"
 
       expect(page).to have_content("Thank you for getting in touch")
       expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
@@ -74,7 +74,7 @@ describe "Contact us" do
       before do
         select "The address or map location is wrong", from: "I'm getting in touch because"
         fill_in "Your message", with: "Actually nothing is wrong here. Sorry."
-        click_button "Send message"
+        click_on "Send message"
       end
 
       it "says thank you" do

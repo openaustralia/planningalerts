@@ -31,7 +31,7 @@ describe "Sign up for alerts" do
     visit "/alerts/signup"
 
     fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-    click_button("Create alert")
+    click_on("Create alert")
 
     expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     expect(
@@ -46,7 +46,7 @@ describe "Sign up for alerts" do
     visit "/alerts/signup"
 
     fill_in("Enter a street address", with: "Bruce Rd")
-    click_button("Create alert")
+    click_on("Create alert")
 
     # I think because of the way geokit works we can return different alternative
     # addresses (each of which is equally sensible)
@@ -63,7 +63,7 @@ describe "Sign up for alerts" do
       sign_in create(:confirmed_user)
       visit application_path(application)
 
-      click_button("Save")
+      click_on("Save")
 
       expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     end
@@ -80,9 +80,11 @@ describe "Sign up for alerts" do
       sign_in create(:confirmed_user)
       visit root_path
       fill_in("Street address", with: "24 Bruce Rd, Glenbrook")
-      click_button("Search")
+      within("form") do
+        click_on("Search")
+      end
 
-      click_button("Save", match: :first)
+      click_on("Save", match: :first)
 
       expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     end
@@ -97,20 +99,22 @@ describe "Sign up for alerts" do
 
     visit root_path
     fill_in("Street address", with: "24 Bruce Rd, Glenbrook")
-    click_button("Search")
+    within("form") do
+      click_on("Search")
+    end
 
     expect(page).to have_content("Search results")
     expect(page).to have_content("Create an account or sign in")
-    click_link("sign in", match: :first)
+    click_on("sign in", match: :first)
 
     fill_in("Your email", with: "example@example.com")
     fill_in("Password", with: "mypassword")
-    click_button("Sign in")
+    click_on("Sign in")
 
     expect(page).to have_content("Signed in successfully.")
     # We should be back at the same page from where we clicked "sign in"
     expect(page).to have_content("Search results")
-    click_button("Save", match: :first)
+    click_on("Save", match: :first)
 
     expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
   end
@@ -120,16 +124,18 @@ describe "Sign up for alerts" do
 
     visit root_path
     fill_in("Street address", with: "24 Bruce Rd, Glenbrook")
-    click_button("Search")
+    within("form") do
+      click_on("Search")
+    end
 
     expect(page).to have_content("Search results")
     expect(page).to have_content("Create an account or sign in")
-    click_link("Create an account", match: :first)
+    click_on("Create an account", match: :first)
 
     fill_in("Your full name", with: "Ms Example")
     fill_in("Email", with: "example@example.com")
     fill_in("Create a password", with: "mypassword")
-    click_button("Create my account")
+    click_on("Create my account")
 
     expect(page).to have_content("You will shortly receive an email from PlanningAlerts.org.au")
 
@@ -145,7 +151,7 @@ describe "Sign up for alerts" do
 
     # We should be back at the same page from where we clicked "sign in"
     expect(page).to have_content("Search results")
-    click_button("Save", match: :first)
+    click_on("Save", match: :first)
 
     expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
   end
@@ -164,7 +170,7 @@ describe "Sign up for alerts" do
       visit "/alerts/signup"
 
       fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-      click_button("Create alert")
+      click_on("Create alert")
 
       expect(page).to have_content("You already have an alert for that address")
     end
@@ -179,7 +185,7 @@ describe "Sign up for alerts" do
         visit "/alerts/signup"
 
         fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-        click_button("Create alert")
+        click_on("Create alert")
 
         expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
       end

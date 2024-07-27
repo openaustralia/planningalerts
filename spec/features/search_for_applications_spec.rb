@@ -29,7 +29,9 @@ describe "Searching for development application near an address" do
   it "successfully" do
     visit root_path
     fill_in "Street address", with: "24 Bruce Road, Glenbrook"
-    click_button "Search"
+    within("form") do
+      click_on "Search"
+    end
 
     expect(page).to have_content "Search results"
 
@@ -44,7 +46,9 @@ describe "Searching for development application near an address" do
     visit root_path
 
     fill_in "Street address", with: "24 Bruce Road, Glenbrook"
-    click_button "Search"
+    within("form") do
+      click_on "Search"
+    end
 
     expect(page).to have_content "Search results"
     expect(page).to have_content "A lovely house"
@@ -56,7 +60,9 @@ describe "Searching for development application near an address" do
       visit root_path
 
       fill_in "Street address", with: "24 Bruce Road, Glenbrook"
-      click_button "Search"
+      within("form") do
+        click_on "Search"
+      end
     end
 
     it "passes" do
@@ -95,7 +101,9 @@ describe "Searching for development application near an address" do
       visit address_applications_path
 
       fill_in "Street address", with: "Bruce Road, USA"
-      click_button "Search"
+      within("form") do
+        click_on "Search"
+      end
     end
 
     it "lets the user know there's a problem" do
@@ -119,7 +127,9 @@ describe "Searching for development application near an address" do
       visit address_applications_path
 
       fill_in "Street address", with: "24 Bruce Road, Glenbrook"
-      click_button "Search"
+      within("form") do
+        click_on "Search"
+      end
     end
 
     it "lets the user know there's a problem" do
@@ -153,7 +163,9 @@ describe "Searching for development application near an address" do
       before do
         allow(Application).to receive(:search).and_return([])
         fill_in "q", with: "tree"
-        click_button "Search"
+        within("form") do
+          click_on "Search"
+        end
       end
 
       it "lets the user know there are no results" do
@@ -174,7 +186,9 @@ describe "Searching for development application near an address" do
       before do
         allow(Application).to receive(:search).and_return(Kaminari.paginate_array([application1, application2]).page(1))
         fill_in "q", with: "tree"
-        click_button "Search"
+        within("form") do
+          click_on "Search"
+        end
       end
 
       # rubocop:disable RSpec/NoExpectationExample

@@ -52,7 +52,7 @@ describe "Activate account" do
     it "Successfully does an account activation" do
       visit "/users/activation/new"
       fill_in "Email", with: "matthew@oaf.org.au"
-      click_button "Send me an email"
+      click_on "Send me an email"
 
       expect(page).to have_content "Now check your email"
 
@@ -68,7 +68,7 @@ describe "Activate account" do
 
       fill_in "Your full name", with: "Matthew"
       fill_in "Password", with: "my new password"
-      click_button "Activate my account"
+      click_on "Activate my account"
 
       expect(page).to have_content "Your account is now activated. You are now signed in"
       expect(page).to have_content "Matthew"
@@ -87,7 +87,7 @@ describe "Activate account" do
     it "shows an error message" do
       visit "/users/activation/new"
       fill_in "Email", with: "matthew@oaf.org.au"
-      click_button "Send me an email"
+      click_on "Send me an email"
 
       expect(page).to have_content "Account with that email address has already been activated"
     end
@@ -97,7 +97,7 @@ describe "Activate account" do
     it "shows an error message" do
       visit "/users/activation/new"
       fill_in "Email", with: "matthew@oaf.org.au"
-      click_button "Send me an email"
+      click_on "Send me an email"
 
       expect(page).to have_content "We don't know recognise that email address"
     end
@@ -114,7 +114,7 @@ describe "Activate account" do
     it "Successfully does an account activation" do
       visit "/users/activation/new"
       fill_in "Email", with: "matthew@oaf.org.au"
-      click_button "Send me an email"
+      click_on "Send me an email"
 
       expect(page).to have_content "Now check your email"
 
@@ -130,7 +130,7 @@ describe "Activate account" do
 
       fill_in "Your full name", with: "Matthew"
       fill_in "Password", with: "my new password"
-      click_button "Activate my account"
+      click_on "Activate my account"
 
       expect(page).to have_content "Your account is now activated. You are now signed in"
       expect(page).to have_content "Matthew"
