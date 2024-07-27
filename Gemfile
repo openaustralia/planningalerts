@@ -135,8 +135,12 @@ gem "rubyzip"
 # Using this webserver for development and production
 gem "puma"
 
-# TODO: Upgrade sprockets as soon as we can and then get rid of it
+# Locking sprockets version
+# TODO: Get rid of this as soon as we can
 gem "sprockets", "~> 3.0"
+# Locking faraday version for the time being
+# TODO: Get this as soon as we can
+gem "faraday", "~> 1.0"
 
 group :test do
   gem "capybara"
