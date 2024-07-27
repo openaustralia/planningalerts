@@ -135,6 +135,9 @@ gem "rubyzip"
 # Using this webserver for development and production
 gem "puma"
 
+# TODO: Upgrade sprockets as soon as we can and then get rid of it
+gem "sprockets", "~> 3.0"
+
 group :test do
   gem "capybara"
   # For some reason upgrading to email_spec 2.2.1 completely breaks things for us

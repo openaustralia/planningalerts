@@ -615,7 +615,8 @@ GEM
       sorbet-static-and-runtime (>= 0.5.10187)
       syntax_tree (>= 6.1.1)
       thor (>= 0.19.2)
-    sprockets (3.7.2)
+    sprockets (3.7.3)
+      base64
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.4.2)
@@ -799,6 +800,7 @@ DEPENDENCIES
   sorbet-runtime
   sparql-client
   spoom
+  sprockets (~> 3.0)
   tailwindcss-rails (~> 2.0)
   tapioca
   timecop
