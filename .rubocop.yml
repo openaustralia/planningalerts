@@ -254,7 +254,7 @@ RSpec/IdenticalEqualityAssertion: # new in 2.4
   Enabled: true
 RSpec/SubjectDeclaration: # new in 2.5
   Enabled: true
-RSpec/Rails/AvoidSetupHook: # new in 2.4
+RSpecRails/AvoidSetupHook: # new in 2.4
   Enabled: true
 
 # Sorbet
@@ -472,9 +472,9 @@ FactoryBot/ConsistentParenthesesStyle: # new in 2.14
   Enabled: true
 FactoryBot/SyntaxMethods: # new in 2.7
   Enabled: true
-RSpec/Rails/HaveHttpStatus: # new in 2.12
+RSpecRails/HaveHttpStatus: # new in 2.12
   Enabled: true
-RSpec/Rails/InferredSpecType: # new in 2.14
+RSpecRails/InferredSpecType: # new in 2.14
   Enabled: true
 Style/ArrayIntersect: # new in 1.40
   Enabled: true
@@ -562,11 +562,11 @@ RSpec/RedundantAround: # new in 2.19
   Enabled: true
 RSpec/SkipBlockInsideExample: # new in 2.19
   Enabled: true
-RSpec/Rails/MinitestAssertions: # new in 2.17
+RSpecRails/MinitestAssertions: # new in 2.17
   Enabled: true
-RSpec/Rails/NegationBeValid: # new in 2.23
+RSpecRails/NegationBeValid: # new in 2.23
   Enabled: true
-RSpec/Rails/TravelAround: # new in 2.19
+RSpecRails/TravelAround: # new in 2.19
   Enabled: true
 Gemspec/AddRuntimeDependency: # new in 1.65
   Enabled: true
