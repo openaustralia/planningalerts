@@ -134,7 +134,7 @@ GEM
       smart_properties
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.16.0)
+    bootsnap (1.18.3)
       msgpack (~> 1.2)
     brakeman (6.0.1)
     builder (3.3.0)
