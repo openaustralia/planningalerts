@@ -644,6 +644,9 @@ class ActionText::EncryptedRichText
     Elem = type_member { { fixed: ::ActionText::EncryptedRichText } }
 
     sig { returns(T::Array[::ActionText::EncryptedRichText]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ActionText::EncryptedRichText]) }
     def to_ary; end
   end
 
@@ -735,6 +738,9 @@ class ActionText::EncryptedRichText
     def target; end
 
     sig { returns(T::Array[::ActionText::EncryptedRichText]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ActionText::EncryptedRichText]) }
     def to_ary; end
   end
 
@@ -743,6 +749,9 @@ class ActionText::EncryptedRichText
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::ActionText::EncryptedRichText } }
+
+    sig { returns(T::Array[::ActionText::EncryptedRichText]) }
+    def to_a; end
 
     sig { returns(T::Array[::ActionText::EncryptedRichText]) }
     def to_ary; end

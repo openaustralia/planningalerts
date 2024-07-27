@@ -488,8 +488,8 @@ class DailyApiUsage
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def api_key_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def api_key_id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def api_key_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def api_key_id_in_database; end
@@ -497,8 +497,8 @@ class DailyApiUsage
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def api_key_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def api_key_id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def api_key_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def api_key_id_previously_was; end
@@ -533,8 +533,8 @@ class DailyApiUsage
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def count_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def count_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def count_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def count_in_database; end
@@ -542,8 +542,8 @@ class DailyApiUsage
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def count_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def count_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def count_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def count_previously_was; end
@@ -578,8 +578,8 @@ class DailyApiUsage
     sig { returns(T.nilable([::Date, ::Date])) }
     def date_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def date_changed?; end
+    sig { params(from: ::Date, to: ::Date).returns(T::Boolean) }
+    def date_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Date)) }
     def date_in_database; end
@@ -587,8 +587,8 @@ class DailyApiUsage
     sig { returns(T.nilable([::Date, ::Date])) }
     def date_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def date_previously_changed?; end
+    sig { params(from: ::Date, to: ::Date).returns(T::Boolean) }
+    def date_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Date)) }
     def date_previously_was; end
@@ -623,8 +623,8 @@ class DailyApiUsage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -632,8 +632,8 @@ class DailyApiUsage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
@@ -828,6 +828,9 @@ class DailyApiUsage
     Elem = type_member { { fixed: ::DailyApiUsage } }
 
     sig { returns(T::Array[::DailyApiUsage]) }
+    def to_a; end
+
+    sig { returns(T::Array[::DailyApiUsage]) }
     def to_ary; end
   end
 
@@ -919,6 +922,9 @@ class DailyApiUsage
     def target; end
 
     sig { returns(T::Array[::DailyApiUsage]) }
+    def to_a; end
+
+    sig { returns(T::Array[::DailyApiUsage]) }
     def to_ary; end
   end
 
@@ -927,6 +933,9 @@ class DailyApiUsage
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::DailyApiUsage } }
+
+    sig { returns(T::Array[::DailyApiUsage]) }
+    def to_a; end
 
     sig { returns(T::Array[::DailyApiUsage]) }
     def to_ary; end

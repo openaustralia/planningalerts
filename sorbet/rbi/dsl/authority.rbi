@@ -522,8 +522,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def asgs_2021_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def asgs_2021_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def asgs_2021_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def asgs_2021_in_database; end
@@ -531,8 +531,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def asgs_2021_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def asgs_2021_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def asgs_2021_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def asgs_2021_previously_was; end
@@ -567,8 +567,8 @@ class Authority
     sig { returns(T.nilable([T.untyped, T.untyped])) }
     def boundary_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def boundary_changed?; end
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def boundary_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.untyped) }
     def boundary_in_database; end
@@ -576,8 +576,8 @@ class Authority
     sig { returns(T.nilable([T.untyped, T.untyped])) }
     def boundary_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def boundary_previously_changed?; end
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def boundary_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.untyped) }
     def boundary_previously_was; end
@@ -612,8 +612,13 @@ class Authority
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def created_at_changed?; end
+    sig do
+      params(
+        from: T.nilable(::ActiveSupport::TimeWithZone),
+        to: T.nilable(::ActiveSupport::TimeWithZone)
+      ).returns(T::Boolean)
+    end
+    def created_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_in_database; end
@@ -621,8 +626,13 @@ class Authority
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def created_at_previously_changed?; end
+    sig do
+      params(
+        from: T.nilable(::ActiveSupport::TimeWithZone),
+        to: T.nilable(::ActiveSupport::TimeWithZone)
+      ).returns(T::Boolean)
+    end
+    def created_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_previously_was; end
@@ -657,8 +667,8 @@ class Authority
     sig { returns(T.nilable([T::Boolean, T::Boolean])) }
     def disabled_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def disabled_changed?; end
+    sig { params(from: T::Boolean, to: T::Boolean).returns(T::Boolean) }
+    def disabled_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(T::Boolean)) }
     def disabled_in_database; end
@@ -666,8 +676,8 @@ class Authority
     sig { returns(T.nilable([T::Boolean, T::Boolean])) }
     def disabled_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def disabled_previously_changed?; end
+    sig { params(from: T::Boolean, to: T::Boolean).returns(T::Boolean) }
+    def disabled_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(T::Boolean)) }
     def disabled_previously_was; end
@@ -702,8 +712,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def email_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def email_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def email_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def email_in_database; end
@@ -711,8 +721,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def email_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def email_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def email_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def email_previously_was; end
@@ -747,8 +757,8 @@ class Authority
     sig { returns(T.nilable([::String, ::String])) }
     def full_name_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def full_name_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def full_name_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def full_name_in_database; end
@@ -756,8 +766,8 @@ class Authority
     sig { returns(T.nilable([::String, ::String])) }
     def full_name_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def full_name_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def full_name_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def full_name_previously_was; end
@@ -792,8 +802,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -801,8 +811,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
@@ -837,8 +847,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def last_scraper_run_log_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def last_scraper_run_log_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def last_scraper_run_log_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def last_scraper_run_log_in_database; end
@@ -846,8 +856,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def last_scraper_run_log_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def last_scraper_run_log_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def last_scraper_run_log_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def last_scraper_run_log_previously_was; end
@@ -882,8 +892,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def morph_name_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def morph_name_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def morph_name_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def morph_name_in_database; end
@@ -891,8 +901,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def morph_name_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def morph_name_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def morph_name_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def morph_name_previously_was; end
@@ -927,8 +937,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def population_2021_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def population_2021_changed?; end
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def population_2021_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def population_2021_in_database; end
@@ -936,8 +946,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def population_2021_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def population_2021_previously_changed?; end
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def population_2021_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def population_2021_previously_was; end
@@ -1116,8 +1126,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def scraper_authority_label_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def scraper_authority_label_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def scraper_authority_label_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def scraper_authority_label_in_database; end
@@ -1125,8 +1135,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def scraper_authority_label_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def scraper_authority_label_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def scraper_authority_label_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def scraper_authority_label_previously_was; end
@@ -1161,8 +1171,8 @@ class Authority
     sig { returns(T.nilable([::String, ::String])) }
     def short_name_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def short_name_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def short_name_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def short_name_in_database; end
@@ -1170,8 +1180,8 @@ class Authority
     sig { returns(T.nilable([::String, ::String])) }
     def short_name_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def short_name_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def short_name_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def short_name_previously_was; end
@@ -1206,8 +1216,8 @@ class Authority
     sig { returns(T.nilable([::String, ::String])) }
     def state_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def state_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def state_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def state_in_database; end
@@ -1215,8 +1225,8 @@ class Authority
     sig { returns(T.nilable([::String, ::String])) }
     def state_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def state_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def state_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def state_previously_was; end
@@ -1251,8 +1261,13 @@ class Authority
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_changed?; end
+    sig do
+      params(
+        from: T.nilable(::ActiveSupport::TimeWithZone),
+        to: T.nilable(::ActiveSupport::TimeWithZone)
+      ).returns(T::Boolean)
+    end
+    def updated_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_in_database; end
@@ -1260,8 +1275,13 @@ class Authority
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_previously_changed?; end
+    sig do
+      params(
+        from: T.nilable(::ActiveSupport::TimeWithZone),
+        to: T.nilable(::ActiveSupport::TimeWithZone)
+      ).returns(T::Boolean)
+    end
+    def updated_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_previously_was; end
@@ -1296,8 +1316,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def website_url_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def website_url_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def website_url_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def website_url_in_database; end
@@ -1305,8 +1325,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def website_url_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def website_url_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def website_url_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def website_url_previously_was; end
@@ -1341,8 +1361,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def wikidata_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def wikidata_id_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def wikidata_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def wikidata_id_in_database; end
@@ -1350,8 +1370,8 @@ class Authority
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def wikidata_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def wikidata_id_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def wikidata_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def wikidata_id_previously_was; end
@@ -1552,6 +1572,9 @@ class Authority
     Elem = type_member { { fixed: ::Authority } }
 
     sig { returns(T::Array[::Authority]) }
+    def to_a; end
+
+    sig { returns(T::Array[::Authority]) }
     def to_ary; end
   end
 
@@ -1643,6 +1666,9 @@ class Authority
     def target; end
 
     sig { returns(T::Array[::Authority]) }
+    def to_a; end
+
+    sig { returns(T::Array[::Authority]) }
     def to_ary; end
   end
 
@@ -1651,6 +1677,9 @@ class Authority
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::Authority } }
+
+    sig { returns(T::Array[::Authority]) }
+    def to_a; end
 
     sig { returns(T::Array[::Authority]) }
     def to_ary; end

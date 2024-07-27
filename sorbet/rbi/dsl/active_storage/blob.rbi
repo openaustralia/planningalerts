@@ -10,6 +10,7 @@ class ActiveStorage::Blob
   extend CommonRelationMethods
   extend GeneratedRelationMethods
   include GeneratedSecureTokenMethods
+  include GeneratedStoredAttributesMethods
 
   sig { returns(ActiveStorage::Attached::One) }
   def preview_image; end
@@ -563,8 +564,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def byte_size_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def byte_size_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def byte_size_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def byte_size_in_database; end
@@ -572,8 +573,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def byte_size_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def byte_size_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def byte_size_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def byte_size_previously_was; end
@@ -608,8 +609,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def checksum_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def checksum_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def checksum_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def checksum_in_database; end
@@ -617,8 +618,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def checksum_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def checksum_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def checksum_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def checksum_previously_was; end
@@ -653,8 +654,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def content_type_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def content_type_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def content_type_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def content_type_in_database; end
@@ -662,8 +663,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def content_type_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def content_type_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def content_type_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def content_type_previously_was; end
@@ -698,8 +699,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def created_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_in_database; end
@@ -707,8 +708,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def created_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_previously_was; end
@@ -743,8 +744,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([::String, ::String])) }
     def filename_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def filename_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def filename_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def filename_in_database; end
@@ -752,8 +753,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([::String, ::String])) }
     def filename_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def filename_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def filename_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def filename_previously_was; end
@@ -788,8 +789,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -797,8 +798,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
@@ -833,8 +834,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([::String, ::String])) }
     def key_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def key_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def key_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def key_in_database; end
@@ -842,8 +843,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([::String, ::String])) }
     def key_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def key_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def key_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def key_previously_was; end
@@ -878,8 +879,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([T.untyped, T.untyped])) }
     def metadata_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def metadata_changed?; end
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def metadata_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.untyped) }
     def metadata_in_database; end
@@ -887,8 +888,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([T.untyped, T.untyped])) }
     def metadata_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def metadata_previously_changed?; end
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def metadata_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.untyped) }
     def metadata_previously_was; end
@@ -1004,8 +1005,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([::String, ::String])) }
     def service_name_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def service_name_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def service_name_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def service_name_in_database; end
@@ -1013,8 +1014,8 @@ class ActiveStorage::Blob
     sig { returns(T.nilable([::String, ::String])) }
     def service_name_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def service_name_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def service_name_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def service_name_previously_was; end
@@ -1192,11 +1193,88 @@ class ActiveStorage::Blob
     def regenerate_key; end
   end
 
+  module GeneratedStoredAttributesMethods
+    sig { returns(T.untyped) }
+    def analyzed; end
+
+    sig { params(value: T.untyped).returns(T.untyped) }
+    def analyzed=(value); end
+
+    sig { returns(T.untyped) }
+    def analyzed_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def analyzed_change; end
+
+    sig { returns(T::Boolean) }
+    def analyzed_changed?; end
+
+    sig { returns(T.untyped) }
+    def analyzed_was; end
+
+    sig { returns(T.untyped) }
+    def composed; end
+
+    sig { params(value: T.untyped).returns(T.untyped) }
+    def composed=(value); end
+
+    sig { returns(T.untyped) }
+    def composed_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def composed_change; end
+
+    sig { returns(T::Boolean) }
+    def composed_changed?; end
+
+    sig { returns(T.untyped) }
+    def composed_was; end
+
+    sig { returns(T.untyped) }
+    def identified; end
+
+    sig { params(value: T.untyped).returns(T.untyped) }
+    def identified=(value); end
+
+    sig { returns(T.untyped) }
+    def identified_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def identified_change; end
+
+    sig { returns(T::Boolean) }
+    def identified_changed?; end
+
+    sig { returns(T.untyped) }
+    def identified_was; end
+
+    sig { returns(T.untyped) }
+    def saved_change_to_analyzed; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_analyzed?; end
+
+    sig { returns(T.untyped) }
+    def saved_change_to_composed; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_composed?; end
+
+    sig { returns(T.untyped) }
+    def saved_change_to_identified; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_identified?; end
+  end
+
   class PrivateAssociationRelation < ::ActiveRecord::AssociationRelation
     include CommonRelationMethods
     include GeneratedAssociationRelationMethods
 
     Elem = type_member { { fixed: ::ActiveStorage::Blob } }
+
+    sig { returns(T::Array[::ActiveStorage::Blob]) }
+    def to_a; end
 
     sig { returns(T::Array[::ActiveStorage::Blob]) }
     def to_ary; end
@@ -1290,6 +1368,9 @@ class ActiveStorage::Blob
     def target; end
 
     sig { returns(T::Array[::ActiveStorage::Blob]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ActiveStorage::Blob]) }
     def to_ary; end
   end
 
@@ -1298,6 +1379,9 @@ class ActiveStorage::Blob
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::ActiveStorage::Blob } }
+
+    sig { returns(T::Array[::ActiveStorage::Blob]) }
+    def to_a; end
 
     sig { returns(T::Array[::ActiveStorage::Blob]) }
     def to_ary; end

@@ -599,8 +599,8 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def created_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_in_database; end
@@ -608,8 +608,8 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def created_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_previously_was; end
@@ -644,8 +644,8 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -653,8 +653,8 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
@@ -689,8 +689,8 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([::String, ::String])) }
     def message_checksum_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def message_checksum_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def message_checksum_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def message_checksum_in_database; end
@@ -698,8 +698,8 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([::String, ::String])) }
     def message_checksum_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def message_checksum_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def message_checksum_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def message_checksum_previously_was; end
@@ -734,8 +734,8 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([::String, ::String])) }
     def message_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def message_id_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def message_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def message_id_in_database; end
@@ -743,8 +743,8 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([::String, ::String])) }
     def message_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def message_id_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def message_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def message_id_previously_was; end
@@ -833,8 +833,13 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([::String, ::String])) }
     def status_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def status_changed?; end
+    sig do
+      params(
+        from: T.any(::String, ::Symbol, ::Integer),
+        to: T.any(::String, ::Symbol, ::Integer)
+      ).returns(T::Boolean)
+    end
+    def status_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def status_in_database; end
@@ -842,8 +847,13 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([::String, ::String])) }
     def status_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def status_previously_changed?; end
+    sig do
+      params(
+        from: T.any(::String, ::Symbol, ::Integer),
+        to: T.any(::String, ::Symbol, ::Integer)
+      ).returns(T::Boolean)
+    end
+    def status_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def status_previously_was; end
@@ -878,8 +888,8 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def updated_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_in_database; end
@@ -887,8 +897,8 @@ class ActionMailbox::InboundEmail
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def updated_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_previously_was; end
@@ -1086,6 +1096,9 @@ class ActionMailbox::InboundEmail
     Elem = type_member { { fixed: ::ActionMailbox::InboundEmail } }
 
     sig { returns(T::Array[::ActionMailbox::InboundEmail]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ActionMailbox::InboundEmail]) }
     def to_ary; end
   end
 
@@ -1177,6 +1190,9 @@ class ActionMailbox::InboundEmail
     def target; end
 
     sig { returns(T::Array[::ActionMailbox::InboundEmail]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ActionMailbox::InboundEmail]) }
     def to_ary; end
   end
 
@@ -1185,6 +1201,9 @@ class ActionMailbox::InboundEmail
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::ActionMailbox::InboundEmail } }
+
+    sig { returns(T::Array[::ActionMailbox::InboundEmail]) }
+    def to_a; end
 
     sig { returns(T::Array[::ActionMailbox::InboundEmail]) }
     def to_ary; end

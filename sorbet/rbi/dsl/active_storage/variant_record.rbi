@@ -549,8 +549,8 @@ class ActiveStorage::VariantRecord
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def blob_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def blob_id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def blob_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def blob_id_in_database; end
@@ -558,8 +558,8 @@ class ActiveStorage::VariantRecord
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def blob_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def blob_id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def blob_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def blob_id_previously_was; end
@@ -594,8 +594,8 @@ class ActiveStorage::VariantRecord
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -603,8 +603,8 @@ class ActiveStorage::VariantRecord
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
@@ -666,8 +666,8 @@ class ActiveStorage::VariantRecord
     sig { returns(T.nilable([::String, ::String])) }
     def variation_digest_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def variation_digest_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def variation_digest_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def variation_digest_in_database; end
@@ -675,8 +675,8 @@ class ActiveStorage::VariantRecord
     sig { returns(T.nilable([::String, ::String])) }
     def variation_digest_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def variation_digest_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def variation_digest_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def variation_digest_previously_was; end
@@ -835,6 +835,9 @@ class ActiveStorage::VariantRecord
     Elem = type_member { { fixed: ::ActiveStorage::VariantRecord } }
 
     sig { returns(T::Array[::ActiveStorage::VariantRecord]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ActiveStorage::VariantRecord]) }
     def to_ary; end
   end
 
@@ -926,6 +929,9 @@ class ActiveStorage::VariantRecord
     def target; end
 
     sig { returns(T::Array[::ActiveStorage::VariantRecord]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ActiveStorage::VariantRecord]) }
     def to_ary; end
   end
 
@@ -934,6 +940,9 @@ class ActiveStorage::VariantRecord
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::ActiveStorage::VariantRecord } }
+
+    sig { returns(T::Array[::ActiveStorage::VariantRecord]) }
+    def to_a; end
 
     sig { returns(T::Array[::ActiveStorage::VariantRecord]) }
     def to_ary; end

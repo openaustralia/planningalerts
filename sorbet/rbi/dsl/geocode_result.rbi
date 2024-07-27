@@ -488,8 +488,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def created_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_in_database; end
@@ -497,8 +497,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def created_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_previously_was; end
@@ -533,8 +533,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def full_address_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def full_address_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def full_address_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def full_address_in_database; end
@@ -542,8 +542,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def full_address_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def full_address_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def full_address_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def full_address_previously_was; end
@@ -578,8 +578,8 @@ class GeocodeResult
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def geocode_query_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def geocode_query_id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def geocode_query_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def geocode_query_id_in_database; end
@@ -587,8 +587,8 @@ class GeocodeResult
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def geocode_query_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def geocode_query_id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def geocode_query_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def geocode_query_id_previously_was; end
@@ -623,8 +623,8 @@ class GeocodeResult
     sig { returns(T.nilable([::String, ::String])) }
     def geocoder_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def geocoder_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def geocoder_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def geocoder_in_database; end
@@ -632,8 +632,8 @@ class GeocodeResult
     sig { returns(T.nilable([::String, ::String])) }
     def geocoder_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def geocoder_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def geocoder_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def geocoder_previously_was; end
@@ -668,8 +668,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -677,8 +677,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
@@ -713,8 +713,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::Float), T.nilable(::Float)])) }
     def lat_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def lat_changed?; end
+    sig { params(from: T.nilable(::Float), to: T.nilable(::Float)).returns(T::Boolean) }
+    def lat_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Float)) }
     def lat_in_database; end
@@ -722,8 +722,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::Float), T.nilable(::Float)])) }
     def lat_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def lat_previously_changed?; end
+    sig { params(from: T.nilable(::Float), to: T.nilable(::Float)).returns(T::Boolean) }
+    def lat_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Float)) }
     def lat_previously_was; end
@@ -758,8 +758,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::Float), T.nilable(::Float)])) }
     def lng_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def lng_changed?; end
+    sig { params(from: T.nilable(::Float), to: T.nilable(::Float)).returns(T::Boolean) }
+    def lng_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Float)) }
     def lng_in_database; end
@@ -767,8 +767,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::Float), T.nilable(::Float)])) }
     def lng_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def lng_previously_changed?; end
+    sig { params(from: T.nilable(::Float), to: T.nilable(::Float)).returns(T::Boolean) }
+    def lng_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Float)) }
     def lng_previously_was; end
@@ -803,8 +803,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def postcode_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def postcode_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def postcode_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def postcode_in_database; end
@@ -812,8 +812,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def postcode_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def postcode_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def postcode_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def postcode_previously_was; end
@@ -947,8 +947,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def state_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def state_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def state_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def state_in_database; end
@@ -956,8 +956,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def state_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def state_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def state_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def state_previously_was; end
@@ -992,8 +992,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def suburb_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def suburb_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def suburb_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def suburb_in_database; end
@@ -1001,8 +1001,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def suburb_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def suburb_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def suburb_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def suburb_previously_was; end
@@ -1037,8 +1037,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def updated_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_in_database; end
@@ -1046,8 +1046,8 @@ class GeocodeResult
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def updated_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_previously_was; end
@@ -1227,6 +1227,9 @@ class GeocodeResult
     Elem = type_member { { fixed: ::GeocodeResult } }
 
     sig { returns(T::Array[::GeocodeResult]) }
+    def to_a; end
+
+    sig { returns(T::Array[::GeocodeResult]) }
     def to_ary; end
   end
 
@@ -1318,6 +1321,9 @@ class GeocodeResult
     def target; end
 
     sig { returns(T::Array[::GeocodeResult]) }
+    def to_a; end
+
+    sig { returns(T::Array[::GeocodeResult]) }
     def to_ary; end
   end
 
@@ -1326,6 +1332,9 @@ class GeocodeResult
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::GeocodeResult } }
+
+    sig { returns(T::Array[::GeocodeResult]) }
+    def to_a; end
 
     sig { returns(T::Array[::GeocodeResult]) }
     def to_ary; end

@@ -516,8 +516,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def blob_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def blob_id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def blob_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def blob_id_in_database; end
@@ -525,8 +525,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def blob_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def blob_id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def blob_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def blob_id_previously_was; end
@@ -561,8 +561,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def created_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_in_database; end
@@ -570,8 +570,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def created_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_previously_was; end
@@ -606,8 +606,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -615,8 +615,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
@@ -651,8 +651,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([::String, ::String])) }
     def name_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def name_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def name_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def name_in_database; end
@@ -660,8 +660,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([::String, ::String])) }
     def name_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def name_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def name_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def name_previously_was; end
@@ -696,8 +696,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def record_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def record_id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def record_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def record_id_in_database; end
@@ -705,8 +705,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def record_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def record_id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def record_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def record_id_previously_was; end
@@ -741,8 +741,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([::String, ::String])) }
     def record_type_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def record_type_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def record_type_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def record_type_in_database; end
@@ -750,8 +750,8 @@ class ActiveStorage::Attachment
     sig { returns(T.nilable([::String, ::String])) }
     def record_type_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def record_type_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def record_type_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def record_type_previously_was; end
@@ -973,6 +973,9 @@ class ActiveStorage::Attachment
     Elem = type_member { { fixed: ::ActiveStorage::Attachment } }
 
     sig { returns(T::Array[::ActiveStorage::Attachment]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ActiveStorage::Attachment]) }
     def to_ary; end
   end
 
@@ -1064,6 +1067,9 @@ class ActiveStorage::Attachment
     def target; end
 
     sig { returns(T::Array[::ActiveStorage::Attachment]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ActiveStorage::Attachment]) }
     def to_ary; end
   end
 
@@ -1072,6 +1078,9 @@ class ActiveStorage::Attachment
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::ActiveStorage::Attachment } }
+
+    sig { returns(T::Array[::ActiveStorage::Attachment]) }
+    def to_a; end
 
     sig { returns(T::Array[::ActiveStorage::Attachment]) }
     def to_ary; end

@@ -525,8 +525,8 @@ class ContactMessage
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def created_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_in_database; end
@@ -534,8 +534,8 @@ class ContactMessage
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def created_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_previously_was; end
@@ -570,8 +570,8 @@ class ContactMessage
     sig { returns(T.nilable([::String, ::String])) }
     def details_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def details_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def details_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def details_in_database; end
@@ -579,8 +579,8 @@ class ContactMessage
     sig { returns(T.nilable([::String, ::String])) }
     def details_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def details_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def details_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def details_previously_was; end
@@ -615,8 +615,8 @@ class ContactMessage
     sig { returns(T.nilable([::String, ::String])) }
     def email_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def email_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def email_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def email_in_database; end
@@ -624,8 +624,8 @@ class ContactMessage
     sig { returns(T.nilable([::String, ::String])) }
     def email_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def email_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def email_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def email_previously_was; end
@@ -660,8 +660,8 @@ class ContactMessage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -669,8 +669,8 @@ class ContactMessage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
@@ -705,8 +705,8 @@ class ContactMessage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def name_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def name_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def name_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def name_in_database; end
@@ -714,8 +714,8 @@ class ContactMessage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def name_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def name_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def name_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def name_previously_was; end
@@ -750,8 +750,8 @@ class ContactMessage
     sig { returns(T.nilable([::String, ::String])) }
     def reason_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def reason_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def reason_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def reason_in_database; end
@@ -759,8 +759,8 @@ class ContactMessage
     sig { returns(T.nilable([::String, ::String])) }
     def reason_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def reason_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def reason_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def reason_previously_was; end
@@ -867,8 +867,8 @@ class ContactMessage
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def updated_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_in_database; end
@@ -876,8 +876,8 @@ class ContactMessage
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def updated_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_previously_was; end
@@ -912,8 +912,8 @@ class ContactMessage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def user_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def user_id_changed?; end
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def user_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def user_id_in_database; end
@@ -921,8 +921,8 @@ class ContactMessage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def user_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def user_id_previously_changed?; end
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def user_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def user_id_previously_was; end
@@ -1096,6 +1096,9 @@ class ContactMessage
     Elem = type_member { { fixed: ::ContactMessage } }
 
     sig { returns(T::Array[::ContactMessage]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ContactMessage]) }
     def to_ary; end
   end
 
@@ -1187,6 +1190,9 @@ class ContactMessage
     def target; end
 
     sig { returns(T::Array[::ContactMessage]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ContactMessage]) }
     def to_ary; end
   end
 
@@ -1195,6 +1201,9 @@ class ContactMessage
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::ContactMessage } }
+
+    sig { returns(T::Array[::ContactMessage]) }
+    def to_a; end
 
     sig { returns(T::Array[::ContactMessage]) }
     def to_ary; end

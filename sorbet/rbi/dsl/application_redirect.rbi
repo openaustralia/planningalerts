@@ -504,8 +504,8 @@ class ApplicationRedirect
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def application_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def application_id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def application_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def application_id_in_database; end
@@ -513,8 +513,8 @@ class ApplicationRedirect
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def application_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def application_id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def application_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def application_id_previously_was; end
@@ -549,8 +549,8 @@ class ApplicationRedirect
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def created_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_in_database; end
@@ -558,8 +558,8 @@ class ApplicationRedirect
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def created_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_previously_was; end
@@ -594,8 +594,8 @@ class ApplicationRedirect
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -603,8 +603,8 @@ class ApplicationRedirect
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
@@ -639,8 +639,8 @@ class ApplicationRedirect
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def redirect_application_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def redirect_application_id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def redirect_application_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def redirect_application_id_in_database; end
@@ -648,8 +648,8 @@ class ApplicationRedirect
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def redirect_application_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def redirect_application_id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def redirect_application_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def redirect_application_id_previously_was; end
@@ -729,8 +729,8 @@ class ApplicationRedirect
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def updated_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_in_database; end
@@ -738,8 +738,8 @@ class ApplicationRedirect
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def updated_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_previously_was; end
@@ -901,6 +901,9 @@ class ApplicationRedirect
     Elem = type_member { { fixed: ::ApplicationRedirect } }
 
     sig { returns(T::Array[::ApplicationRedirect]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ApplicationRedirect]) }
     def to_ary; end
   end
 
@@ -992,6 +995,9 @@ class ApplicationRedirect
     def target; end
 
     sig { returns(T::Array[::ApplicationRedirect]) }
+    def to_a; end
+
+    sig { returns(T::Array[::ApplicationRedirect]) }
     def to_ary; end
   end
 
@@ -1000,6 +1006,9 @@ class ApplicationRedirect
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::ApplicationRedirect } }
+
+    sig { returns(T::Array[::ApplicationRedirect]) }
+    def to_a; end
 
     sig { returns(T::Array[::ApplicationRedirect]) }
     def to_ary; end

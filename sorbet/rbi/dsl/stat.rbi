@@ -422,8 +422,8 @@ class Stat
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -431,8 +431,8 @@ class Stat
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
@@ -467,8 +467,8 @@ class Stat
     sig { returns(T.nilable([::String, ::String])) }
     def key_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def key_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def key_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def key_in_database; end
@@ -476,8 +476,8 @@ class Stat
     sig { returns(T.nilable([::String, ::String])) }
     def key_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def key_previously_changed?; end
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def key_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def key_previously_was; end
@@ -539,8 +539,8 @@ class Stat
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def value_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def value_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def value_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def value_in_database; end
@@ -548,8 +548,8 @@ class Stat
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def value_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def value_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def value_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def value_previously_was; end
@@ -705,6 +705,9 @@ class Stat
     Elem = type_member { { fixed: ::Stat } }
 
     sig { returns(T::Array[::Stat]) }
+    def to_a; end
+
+    sig { returns(T::Array[::Stat]) }
     def to_ary; end
   end
 
@@ -796,6 +799,9 @@ class Stat
     def target; end
 
     sig { returns(T::Array[::Stat]) }
+    def to_a; end
+
+    sig { returns(T::Array[::Stat]) }
     def to_ary; end
   end
 
@@ -804,6 +810,9 @@ class Stat
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::Stat } }
+
+    sig { returns(T::Array[::Stat]) }
+    def to_a; end
 
     sig { returns(T::Array[::Stat]) }
     def to_ary; end
