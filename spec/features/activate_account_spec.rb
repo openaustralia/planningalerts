@@ -11,7 +11,7 @@ describe "Activate account" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Activate account")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -23,7 +23,7 @@ describe "Activate account" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Activate check email")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -36,7 +36,7 @@ describe "Activate account" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Activate step 2")
     end
     # rubocop:enable RSpec/NoExpectationExample

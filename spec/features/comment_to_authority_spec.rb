@@ -34,7 +34,7 @@ describe "Give feedback" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Application authority without feedback email")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -53,7 +53,7 @@ describe "Give feedback" do
     click_button("Review and publish")
 
     expect(page).to have_content("Some of the comment wasn't filled out completely. See below.")
-    expect(page).not_to have_content("Now check your email")
+    expect(page).to have_no_content("Now check your email")
   end
 
   context "when the authority is contactable" do
@@ -64,7 +64,7 @@ describe "Give feedback" do
       create(:geocoded_application, id: "1", authority:, date_scraped: Date.new(2023, 1, 1))
     end
 
-    describe "accessibility tests in new design", js: true do
+    describe "accessibility tests in new design", :js do
       before do
         # Note that we're ensuring that the application has a static first_date_scraped and we freeze the current
         # time so that the page should always have the same text on it
@@ -84,7 +84,7 @@ describe "Give feedback" do
       end
 
       # rubocop:disable RSpec/NoExpectationExample
-      it "renders a snapshot for a visual diff", js: true do
+      it "renders a snapshot for a visual diff", :js do
         page.percy_snapshot("Application")
       end
       # rubocop:enable RSpec/NoExpectationExample
@@ -113,14 +113,14 @@ describe "Give feedback" do
           expect(page).to have_content("I think this is a really good ideas")
         end
 
-        describe "accessibility tests", js: true do
+        describe "accessibility tests", :js do
           it "passes" do
             expect(page).to be_axe_clean
           end
         end
 
         # rubocop:disable RSpec/NoExpectationExample
-        it "renders a snapshot for a visual diff", js: true do
+        it "renders a snapshot for a visual diff", :js do
           page.percy_snapshot("Comment preview")
         end
         # rubocop:enable RSpec/NoExpectationExample
@@ -128,7 +128,7 @@ describe "Give feedback" do
         it "is not immediately publically visible in the comments section" do
           visit(application_path(application))
           within("#comments") do
-            expect(page).not_to have_content("I think this is a really good ideas")
+            expect(page).to have_no_content("I think this is a really good ideas")
           end
         end
 
@@ -152,7 +152,7 @@ describe "Give feedback" do
           visit(application_path(application))
           click_button("Clear form")
 
-          expect(page).not_to have_content("I think this is a really good ideas")
+          expect(page).to have_no_content("I think this is a really good ideas")
         end
       end
 
@@ -188,7 +188,7 @@ describe "Give feedback" do
 
       visit(application_path(application))
 
-      expect(page).not_to have_content("I think this is a really good ideas")
+      expect(page).to have_no_content("I think this is a really good ideas")
     end
   end
 

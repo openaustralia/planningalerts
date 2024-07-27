@@ -21,14 +21,14 @@ describe "Browsing basic documentation pages" do
         visit about_path
       end
 
-      describe "accessibility test", js: true do
+      describe "accessibility test", :js do
         it "passes" do
           expect(page).to be_axe_clean
         end
       end
 
       # rubocop:disable RSpec/NoExpectationExample
-      it "renders the page", js: true do
+      it "renders the page", :js do
         page.percy_snapshot("About")
       end
       # rubocop:enable RSpec/NoExpectationExample
@@ -49,7 +49,7 @@ describe "Browsing basic documentation pages" do
       expect(page).to have_content "Help"
     end
 
-    describe "accessibility tests", js: true do
+    describe "accessibility tests", :js do
       it "passes" do
         expect(page).to be_axe_clean
       end
@@ -62,7 +62,7 @@ describe "Browsing basic documentation pages" do
       visit documentation_contact_path
     end
 
-    describe "accessibility tests", js: true do
+    describe "accessibility tests", :js do
       it "passes" do
         expect(page).to be_axe_clean
       end
@@ -77,14 +77,14 @@ describe "Browsing basic documentation pages" do
       visit api_howto_path
     end
 
-    describe "accessibility tests", js: true do
+    describe "accessibility tests", :js do
       it "passes" do
         expect(page).to be_axe_clean
       end
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("API")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -96,14 +96,14 @@ describe "Browsing basic documentation pages" do
       visit get_involved_path
     end
 
-    describe "accessibility tests", js: true do
+    describe "accessibility tests", :js do
       it "passes" do
         expect(page).to be_axe_clean
       end
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Get Involved")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -115,14 +115,14 @@ describe "Browsing basic documentation pages" do
       visit how_to_lobby_your_local_council_path
     end
 
-    describe "accessibility tests", js: true do
+    describe "accessibility tests", :js do
       it "passes" do
         expect(page).to be_axe_clean
       end
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Lobby your council")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -135,7 +135,7 @@ describe "Browsing basic documentation pages" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("404")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -148,7 +148,7 @@ describe "Browsing basic documentation pages" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("500")
     end
     # rubocop:enable RSpec/NoExpectationExample

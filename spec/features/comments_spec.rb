@@ -28,12 +28,12 @@ describe "Comments pages" do
         visit comments_path
       end
 
-      it "passes accessibility tests", js: true do
+      it "passes accessibility tests", :js do
         expect(page).to be_axe_clean
       end
 
       # rubocop:disable RSpec/NoExpectationExample
-      it "renders the page", js: true do
+      it "renders the page", :js do
         page.percy_snapshot("Recent comments")
       end
       # rubocop:enable RSpec/NoExpectationExample
@@ -49,12 +49,12 @@ describe "Comments pages" do
           expect(page).to have_content("You haven't made any comments yet")
         end
 
-        it "passes accessibility tests", js: true do
+        it "passes accessibility tests", :js do
           expect(page).to be_axe_clean
         end
 
         # rubocop:disable RSpec/NoExpectationExample
-        it "renders the page", js: true do
+        it "renders the page", :js do
           page.percy_snapshot("Your comments empty")
         end
         # rubocop:enable RSpec/NoExpectationExample
@@ -100,12 +100,12 @@ describe "Comments pages" do
           expect(page).to have_content("There was a problem delivering this")
         end
 
-        it "passes accessibility tests", js: true do
+        it "passes accessibility tests", :js do
           expect(page).to be_axe_clean
         end
 
         # rubocop:disable RSpec/NoExpectationExample
-        it "renders the page", js: true do
+        it "renders the page", :js do
           page.percy_snapshot("Your comments")
         end
         # rubocop:enable RSpec/NoExpectationExample

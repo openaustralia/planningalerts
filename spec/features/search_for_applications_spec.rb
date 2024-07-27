@@ -50,7 +50,7 @@ describe "Searching for development application near an address" do
     expect(page).to have_content "A lovely house"
   end
 
-  describe "accessibility tests in new design", js: true do
+  describe "accessibility tests in new design", :js do
     before do
       sign_in create(:confirmed_user)
       visit root_path
@@ -64,7 +64,7 @@ describe "Searching for development application near an address" do
     end
   end
 
-  describe "accessibility tests for search applications page in new design", js: true do
+  describe "accessibility tests for search applications page in new design", :js do
     before do
       sign_in create(:confirmed_user, name: "Jane Ng")
       visit address_applications_path
@@ -75,7 +75,7 @@ describe "Searching for development application near an address" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Application search")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -103,7 +103,7 @@ describe "Searching for development application near an address" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Application search outside Australia")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -127,7 +127,7 @@ describe "Searching for development application near an address" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Application search no results")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -144,7 +144,7 @@ describe "Searching for development application near an address" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Application text search")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -161,7 +161,7 @@ describe "Searching for development application near an address" do
       end
 
       # rubocop:disable RSpec/NoExpectationExample
-      it "renders a snapshot for a visual diff", js: true do
+      it "renders a snapshot for a visual diff", :js do
         page.percy_snapshot("Application text search no results")
       end
       # rubocop:enable RSpec/NoExpectationExample
@@ -178,7 +178,7 @@ describe "Searching for development application near an address" do
       end
 
       # rubocop:disable RSpec/NoExpectationExample
-      it "renders a snapshot for a visual diff", js: true do
+      it "renders a snapshot for a visual diff", :js do
         page.percy_snapshot("Application text search results")
       end
       # rubocop:enable RSpec/NoExpectationExample

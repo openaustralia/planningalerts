@@ -38,7 +38,7 @@ describe "Manage alerts" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Alert unsubscribe")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -54,7 +54,7 @@ describe "Manage alerts" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Alert unsubscribe invalid")
     end
     # rubocop:enable RSpec/NoExpectationExample

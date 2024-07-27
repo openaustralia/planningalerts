@@ -55,6 +55,6 @@ describe SupportMailer do
   end
 
   it "doesn’t include the commenters email as this could lead to data leak" do
-    expect(notifier.text_part.body.to_s).not_to have_content("rude@foo.com")
+    expect(notifier.text_part.body.to_s).to have_no_content("rude@foo.com")
   end
 end

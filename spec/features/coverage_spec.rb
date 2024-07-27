@@ -12,14 +12,14 @@ describe "Coverage" do
       visit authorities_path
     end
 
-    describe "accessibility test", js: true do
+    describe "accessibility test", :js do
       it "passes" do
         expect(page).to be_axe_clean
       end
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Coverage")
     end
     # rubocop:enable RSpec/NoExpectationExample

@@ -61,7 +61,7 @@ describe "applications/show" do
       assign(:comments, [])
 
       render
-      expect(rendered).not_to have_selector("div.bg-google-maps-green")
+      expect(rendered).to have_no_selector("div.bg-google-maps-green")
     end
   end
 end

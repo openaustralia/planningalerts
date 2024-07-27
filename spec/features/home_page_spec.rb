@@ -7,7 +7,7 @@ describe "Home page" do
   # See https://github.com/heartcombo/devise#controller-tests
   include Devise::Test::IntegrationHelpers
 
-  describe "accessibility tests", js: true do
+  describe "accessibility tests", :js do
     before do
       sign_in create(:confirmed_user, name: "Jane Ng")
       visit root_path
@@ -18,7 +18,7 @@ describe "Home page" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Home")
     end
     # rubocop:enable RSpec/NoExpectationExample

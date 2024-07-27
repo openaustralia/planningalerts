@@ -60,12 +60,12 @@ describe "Contact us" do
       visit "/help/contact"
     end
 
-    it "passes automated accessibility tests", js: true do
+    it "passes automated accessibility tests", :js do
       expect(page).to be_axe_clean
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders a snapshot for a visual diff", js: true do
+    it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("Contact us")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -82,7 +82,7 @@ describe "Contact us" do
       end
 
       # rubocop:disable RSpec/NoExpectationExample
-      it "renders a snapshot for a visual diff of the thank you page", js: true do
+      it "renders a snapshot for a visual diff of the thank you page", :js do
         page.percy_snapshot("Contact us thank you")
       end
       # rubocop:enable RSpec/NoExpectationExample

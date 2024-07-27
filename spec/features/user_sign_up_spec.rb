@@ -5,7 +5,7 @@ require "spec_helper"
 describe "Signing up for an API account" do
   include Devise::Test::IntegrationHelpers
 
-  it "Successfully signing up", truncation: true do
+  it "Successfully signing up", :truncation do
     visit "/api/howto"
     click_link "register for an account"
 
@@ -32,7 +32,7 @@ describe "Signing up for an API account" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Registration check email")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -48,7 +48,7 @@ describe "Signing up for an API account" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Resend confirmation")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -66,7 +66,7 @@ describe "Signing up for an API account" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Reset password")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -104,7 +104,7 @@ describe "Signing up for an API account" do
         end
 
         # rubocop:disable RSpec/NoExpectationExample
-        it "renders the page", js: true do
+        it "renders the page", :js do
           page.percy_snapshot("Reset password step 2")
         end
         # rubocop:enable RSpec/NoExpectationExample

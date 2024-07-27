@@ -24,12 +24,12 @@ describe "Applications pages" do
         visit applications_path
       end
 
-      it "passes accessibility tests", js: true do
+      it "passes accessibility tests", :js do
         expect(page).to be_axe_clean
       end
 
       # rubocop:disable RSpec/NoExpectationExample
-      it "renders the page", js: true do
+      it "renders the page", :js do
         page.percy_snapshot("Most recent applications across Australia")
       end
       # rubocop:enable RSpec/NoExpectationExample

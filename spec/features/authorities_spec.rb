@@ -17,14 +17,14 @@ describe "Authorities" do
       expect(page).to have_content("This authority is not yet covered by Planning Alerts")
     end
 
-    describe "accessibility test", js: true do
+    describe "accessibility test", :js do
       it "passes" do
         expect(page).to be_axe_clean
       end
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Authority not covered")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -45,14 +45,14 @@ describe "Authorities" do
       end
     end
 
-    describe "accessibility test", js: true do
+    describe "accessibility test", :js do
       it "passes" do
         expect(page).to be_axe_clean
       end
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Authority")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -71,7 +71,7 @@ describe "Authorities" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Authority no applications")
     end
     # rubocop:enable RSpec/NoExpectationExample
@@ -98,7 +98,7 @@ describe "Authorities" do
     end
 
     # rubocop:disable RSpec/NoExpectationExample
-    it "renders the page", js: true do
+    it "renders the page", :js do
       page.percy_snapshot("Authority broken scraper")
     end
     # rubocop:enable RSpec/NoExpectationExample
