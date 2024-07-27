@@ -59,7 +59,7 @@ module Admin
 
     sig { void }
     def resend
-      comment = Comment.find(params[:id])
+      comment = Comment.find(T.cast(params[:id], String))
       comment.send_comment!
       redirect_to({ action: :show }, notice: t(".success"))
     end

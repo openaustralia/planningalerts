@@ -8,7 +8,7 @@ class ApplicationVersionsController < ApplicationController
 
   sig { void }
   def index
-    @application = T.let(Application.find(params[:application_id]), T.nilable(Application))
+    @application = T.let(Application.find(T.cast(params[:application_id], String)), T.nilable(Application))
   end
 
   private

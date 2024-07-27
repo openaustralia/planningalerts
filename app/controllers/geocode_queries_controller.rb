@@ -19,6 +19,6 @@ class GeocodeQueriesController < ApplicationController
 
   sig { void }
   def show
-    @geocode_query = T.let(GeocodeQuery.find(params[:id]), T.nilable(GeocodeQuery))
+    @geocode_query = T.let(GeocodeQuery.find(T.cast(params[:id], String)), T.nilable(GeocodeQuery))
   end
 end

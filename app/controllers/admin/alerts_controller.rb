@@ -50,7 +50,7 @@ module Admin
 
     sig { void }
     def unsubscribe
-      alert = Alert.find(params[:id])
+      alert = Alert.find(T.cast(params[:id], String))
       alert.unsubscribe!
       redirect_to({ action: :show }, notice: t(".success"))
     end

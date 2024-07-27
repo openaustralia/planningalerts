@@ -29,7 +29,7 @@ class ActiveStorage::VariantRecord
     end
     def any?(&block); end
 
-    sig { params(column_name: T.any(String, Symbol)).returns(T.untyped) }
+    sig { params(column_name: T.any(String, Symbol)).returns(Numeric) }
     def average(column_name); end
 
     sig do
@@ -40,11 +40,17 @@ class ActiveStorage::VariantRecord
     end
     def build(attributes = nil, &block); end
 
-    sig { params(operation: Symbol, column_name: T.any(String, Symbol)).returns(T.untyped) }
+    sig { params(operation: Symbol, column_name: T.any(String, Symbol)).returns(Numeric) }
     def calculate(operation, column_name); end
 
-    sig { params(column_name: T.untyped).returns(T.untyped) }
-    def count(column_name = nil); end
+    sig { params(column_name: T.nilable(T.any(String, Symbol))).returns(Integer) }
+    sig do
+      params(
+        column_name: NilClass,
+        block: T.proc.params(object: ::ActiveStorage::VariantRecord).void
+      ).returns(Integer)
+    end
+    def count(column_name = nil, &block); end
 
     sig do
       params(
@@ -90,8 +96,23 @@ class ActiveStorage::VariantRecord
     sig { returns(::ActiveStorage::VariantRecord) }
     def fifth!; end
 
-    sig { params(args: T.untyped).returns(T.untyped) }
-    def find(*args); end
+    sig do
+      params(
+        args: T.any(String, Symbol, ::ActiveSupport::Multibyte::Chars, T::Boolean, BigDecimal, Numeric, ::ActiveRecord::Type::Binary::Data, ::ActiveRecord::Type::Time::Value, Date, Time, ::ActiveSupport::Duration, T::Class[T.anything])
+      ).returns(::ActiveStorage::VariantRecord)
+    end
+    sig do
+      params(
+        args: T::Array[T.any(String, Symbol, ::ActiveSupport::Multibyte::Chars, T::Boolean, BigDecimal, Numeric, ::ActiveRecord::Type::Binary::Data, ::ActiveRecord::Type::Time::Value, Date, Time, ::ActiveSupport::Duration, T::Class[T.anything])]
+      ).returns(T::Enumerable[::ActiveStorage::VariantRecord])
+    end
+    sig do
+      params(
+        args: NilClass,
+        block: T.proc.params(object: ::ActiveStorage::VariantRecord).void
+      ).returns(T.nilable(::ActiveStorage::VariantRecord))
+    end
+    def find(args = nil, &block); end
 
     sig { params(args: T.untyped).returns(T.nilable(::ActiveStorage::VariantRecord)) }
     def find_by(*args); end
@@ -106,8 +127,17 @@ class ActiveStorage::VariantRecord
         batch_size: Integer,
         error_on_ignore: T.untyped,
         order: Symbol,
-        block: T.nilable(T.proc.params(object: ::ActiveStorage::VariantRecord).void)
-      ).returns(T.nilable(T::Enumerator[::ActiveStorage::VariantRecord]))
+        block: T.proc.params(object: ::ActiveStorage::VariantRecord).void
+      ).void
+    end
+    sig do
+      params(
+        start: T.untyped,
+        finish: T.untyped,
+        batch_size: Integer,
+        error_on_ignore: T.untyped,
+        order: Symbol
+      ).returns(T::Enumerator[::ActiveStorage::VariantRecord])
     end
     def find_each(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, order: :asc, &block); end
 
@@ -118,8 +148,17 @@ class ActiveStorage::VariantRecord
         batch_size: Integer,
         error_on_ignore: T.untyped,
         order: Symbol,
-        block: T.nilable(T.proc.params(object: T::Array[::ActiveStorage::VariantRecord]).void)
-      ).returns(T.nilable(T::Enumerator[T::Enumerator[::ActiveStorage::VariantRecord]]))
+        block: T.proc.params(object: T::Array[::ActiveStorage::VariantRecord]).void
+      ).void
+    end
+    sig do
+      params(
+        start: T.untyped,
+        finish: T.untyped,
+        batch_size: Integer,
+        error_on_ignore: T.untyped,
+        order: Symbol
+      ).returns(T::Enumerator[T::Enumerator[::ActiveStorage::VariantRecord]])
     end
     def find_in_batches(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, order: :asc, &block); end
 
@@ -156,7 +195,8 @@ class ActiveStorage::VariantRecord
     sig { params(arg: T.untyped, args: T.untyped).returns(::ActiveStorage::VariantRecord) }
     def find_sole_by(arg, *args); end
 
-    sig { params(limit: T.untyped).returns(T.untyped) }
+    sig { params(limit: NilClass).returns(T.nilable(::ActiveStorage::VariantRecord)) }
+    sig { params(limit: Integer).returns(T::Array[::ActiveStorage::VariantRecord]) }
     def first(limit = nil); end
 
     sig { returns(::ActiveStorage::VariantRecord) }
@@ -185,15 +225,26 @@ class ActiveStorage::VariantRecord
         load: T.untyped,
         error_on_ignore: T.untyped,
         order: Symbol,
-        block: T.nilable(T.proc.params(object: PrivateRelation).void)
-      ).returns(T.nilable(::ActiveRecord::Batches::BatchEnumerator))
+        block: T.proc.params(object: PrivateRelation).void
+      ).void
+    end
+    sig do
+      params(
+        of: Integer,
+        start: T.untyped,
+        finish: T.untyped,
+        load: T.untyped,
+        error_on_ignore: T.untyped,
+        order: Symbol
+      ).returns(::ActiveRecord::Batches::BatchEnumerator)
     end
     def in_batches(of: 1000, start: nil, finish: nil, load: false, error_on_ignore: nil, order: :asc, &block); end
 
     sig { params(record: T.untyped).returns(T::Boolean) }
     def include?(record); end
 
-    sig { params(limit: T.untyped).returns(T.untyped) }
+    sig { params(limit: NilClass).returns(T.nilable(::ActiveStorage::VariantRecord)) }
+    sig { params(limit: Integer).returns(T::Array[::ActiveStorage::VariantRecord]) }
     def last(limit = nil); end
 
     sig { returns(::ActiveStorage::VariantRecord) }
@@ -262,11 +313,12 @@ class ActiveStorage::VariantRecord
       params(
         column_name: T.nilable(T.any(String, Symbol)),
         block: T.nilable(T.proc.params(record: T.untyped).returns(T.untyped))
-      ).returns(T.untyped)
+      ).returns(Numeric)
     end
     def sum(column_name = nil, &block); end
 
-    sig { params(limit: T.untyped).returns(T.untyped) }
+    sig { params(limit: NilClass).returns(T.nilable(::ActiveStorage::VariantRecord)) }
+    sig { params(limit: Integer).returns(T::Array[::ActiveStorage::VariantRecord]) }
     def take(limit = nil); end
 
     sig { returns(::ActiveStorage::VariantRecord) }
@@ -369,13 +421,13 @@ class ActiveStorage::VariantRecord
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def extending(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def extract_associated(*args, &blk); end
+    sig { params(association: Symbol).returns(T::Array[T.untyped]) }
+    def extract_associated(association); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def from(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelationGroupChain) }
     def group(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -725,13 +777,13 @@ class ActiveStorage::VariantRecord
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def extending(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def extract_associated(*args, &blk); end
+    sig { params(association: Symbol).returns(T::Array[T.untyped]) }
+    def extract_associated(association); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def from(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelationGroupChain) }
     def group(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
@@ -841,6 +893,36 @@ class ActiveStorage::VariantRecord
     def to_ary; end
   end
 
+  class PrivateAssociationRelationGroupChain < PrivateAssociationRelation
+    Elem = type_member { { fixed: ::ActiveStorage::VariantRecord } }
+
+    sig { params(column_name: T.any(String, Symbol)).returns(T::Hash[T.untyped, Numeric]) }
+    def average(column_name); end
+
+    sig { params(operation: Symbol, column_name: T.any(String, Symbol)).returns(T::Hash[T.untyped, Numeric]) }
+    def calculate(operation, column_name); end
+
+    sig { params(column_name: T.untyped).returns(T::Hash[T.untyped, Integer]) }
+    def count(column_name = nil); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(T.self_type) }
+    def having(*args, &blk); end
+
+    sig { params(column_name: T.any(String, Symbol)).returns(T::Hash[T.untyped, T.untyped]) }
+    def maximum(column_name); end
+
+    sig { params(column_name: T.any(String, Symbol)).returns(T::Hash[T.untyped, T.untyped]) }
+    def minimum(column_name); end
+
+    sig do
+      params(
+        column_name: T.nilable(T.any(String, Symbol)),
+        block: T.nilable(T.proc.params(record: T.untyped).returns(T.untyped))
+      ).returns(T::Hash[T.untyped, Numeric])
+    end
+    def sum(column_name = nil, &block); end
+  end
+
   class PrivateAssociationRelationWhereChain < PrivateAssociationRelation
     Elem = type_member { { fixed: ::ActiveStorage::VariantRecord } }
 
@@ -946,6 +1028,36 @@ class ActiveStorage::VariantRecord
 
     sig { returns(T::Array[::ActiveStorage::VariantRecord]) }
     def to_ary; end
+  end
+
+  class PrivateRelationGroupChain < PrivateRelation
+    Elem = type_member { { fixed: ::ActiveStorage::VariantRecord } }
+
+    sig { params(column_name: T.any(String, Symbol)).returns(T::Hash[T.untyped, Numeric]) }
+    def average(column_name); end
+
+    sig { params(operation: Symbol, column_name: T.any(String, Symbol)).returns(T::Hash[T.untyped, Numeric]) }
+    def calculate(operation, column_name); end
+
+    sig { params(column_name: T.untyped).returns(T::Hash[T.untyped, Integer]) }
+    def count(column_name = nil); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(T.self_type) }
+    def having(*args, &blk); end
+
+    sig { params(column_name: T.any(String, Symbol)).returns(T::Hash[T.untyped, T.untyped]) }
+    def maximum(column_name); end
+
+    sig { params(column_name: T.any(String, Symbol)).returns(T::Hash[T.untyped, T.untyped]) }
+    def minimum(column_name); end
+
+    sig do
+      params(
+        column_name: T.nilable(T.any(String, Symbol)),
+        block: T.nilable(T.proc.params(record: T.untyped).returns(T.untyped))
+      ).returns(T::Hash[T.untyped, Numeric])
+    end
+    def sum(column_name = nil, &block); end
   end
 
   class PrivateRelationWhereChain < PrivateRelation

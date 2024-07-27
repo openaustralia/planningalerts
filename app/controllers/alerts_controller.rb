@@ -24,7 +24,7 @@ class AlertsController < ApplicationController
 
   sig { void }
   def edit
-    alert = Alert.find(params[:id])
+    alert = Alert.find(T.cast(params[:id], String))
     authorize alert
     @alert = T.let(alert, T.nilable(Alert))
   end
@@ -59,7 +59,7 @@ class AlertsController < ApplicationController
     params_alert = T.cast(params[:alert], ActionController::Parameters)
     params_radius_meters = T.cast(params_alert[:radius_meters], String)
 
-    alert = Alert.find(params[:id])
+    alert = Alert.find(T.cast(params[:id], String))
     authorize alert
     alert.update!(radius_meters: params_radius_meters.to_i)
 
@@ -68,7 +68,7 @@ class AlertsController < ApplicationController
 
   sig { void }
   def destroy
-    alert = Alert.find(params[:id])
+    alert = Alert.find(T.cast(params[:id], String))
     authorize alert
     alert.unsubscribe!
 

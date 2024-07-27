@@ -40,7 +40,7 @@ class Authority < ApplicationRecord
     25422788
   end
 
-  sig { returns(Integer) }
+  sig { returns(Numeric) }
   def self.total_population_2021_covered_by_all_active_authorities
     Authority.active.sum(:population_2021)
   end

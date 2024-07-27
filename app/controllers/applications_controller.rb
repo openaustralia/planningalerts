@@ -112,7 +112,7 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def show
-    application = Application.find(params[:id])
+    application = Application.find(T.cast(params[:id], String))
     @application = T.let(application, T.nilable(Application))
     @comments = T.let(application.comments.published.order(:published_at), T.untyped)
     # If this user has already written a comment that hasn't been published
@@ -139,7 +139,7 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def external
-    application = Application.find(params[:id])
+    application = Application.find(T.cast(params[:id], String))
     @application = T.let(application, T.nilable(Application))
   end
 

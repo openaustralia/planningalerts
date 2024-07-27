@@ -8,7 +8,7 @@ class ReportsController < ApplicationController
 
   sig { void }
   def new
-    @comment = T.let(Comment.visible.find(params[:comment_id]), T.nilable(Comment))
+    @comment = T.let(Comment.visible.find(T.cast(params[:comment_id], String)), T.nilable(Comment))
     @report = T.let(Report.new, T.nilable(Report))
   end
 
@@ -16,7 +16,7 @@ class ReportsController < ApplicationController
   def create
     params_report = T.cast(params[:report], ActionController::Parameters)
 
-    @comment = Comment.visible.find(params[:comment_id])
+    @comment = Comment.visible.find(T.cast(params[:comment_id], String))
     @report = @comment.reports.build(
       name: T.must(current_user).name,
       email: T.must(current_user).email,
@@ -34,6 +34,6 @@ class ReportsController < ApplicationController
 
   sig { void }
   def thank_you
-    @comment = Comment.visible.find(params[:comment_id])
+    @comment = Comment.visible.find(T.cast(params[:comment_id], String))
   end
 end

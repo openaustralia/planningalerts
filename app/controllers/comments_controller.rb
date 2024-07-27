@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
   sig { void }
   def create
-    application = Application.find(params[:application_id])
+    application = Application.find(T.cast(params[:application_id], String))
     @application = T.let(application, T.nilable(Application))
 
     params_comment = T.cast(params[:comment], ActionController::Parameters)
@@ -59,7 +59,7 @@ class CommentsController < ApplicationController
 
   sig { void }
   def update
-    comment = Comment.find(params[:id])
+    comment = Comment.find(T.cast(params[:id], String))
     authorize(comment)
     comment.update!(comment_params)
     redirect_to preview_comment_path(comment)
@@ -67,7 +67,7 @@ class CommentsController < ApplicationController
 
   sig { void }
   def destroy
-    comment = Comment.find(params[:id])
+    comment = Comment.find(T.cast(params[:id], String))
     authorize(comment)
     comment.destroy!
     redirect_to application_path(comment.application, anchor: "add-comment")
@@ -86,14 +86,14 @@ class CommentsController < ApplicationController
 
   sig { void }
   def preview
-    comment = Comment.find(params[:id])
+    comment = Comment.find(T.cast(params[:id], String))
     authorize(comment)
     @comment = T.let(comment, T.nilable(Comment))
   end
 
   sig { void }
   def publish
-    comment = Comment.find(params[:id])
+    comment = Comment.find(T.cast(params[:id], String))
     authorize(comment)
     comment.update!(published: true, published_at: Time.current)
 

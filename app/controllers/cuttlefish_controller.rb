@@ -33,7 +33,7 @@ class CuttlefishController < ApplicationController
       success = deliver_event_status == "delivered"
 
       # Check if this is from a comment
-      comment_id = delivery_event_email_meta_values["comment-id"]
+      comment_id = T.cast(delivery_event_email_meta_values["comment-id"], T.nilable(T.any(String, Numeric)))
       if comment_id
         comment = Comment.find(comment_id)
         comment.update!(
@@ -52,7 +52,7 @@ class CuttlefishController < ApplicationController
       end
 
       # Check if this is from an alert
-      alert_id = delivery_event_email_meta_values["alert-id"]
+      alert_id = T.cast(delivery_event_email_meta_values["alert-id"], T.nilable(T.any(String, Numeric)))
       if alert_id
         alert = Alert.find(alert_id)
         alert.update!(
