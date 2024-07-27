@@ -133,7 +133,9 @@ class Alert < ApplicationRecord
 
     r = T.must(@geocode_result)
     top = r.top
-    return if top.nil? || r.many?
+    # rubocop:disable Rails/RedundantActiveRecordAllMethod
+    return if top.nil? || r.all.many?
+    # rubocop:enable Rails/RedundantActiveRecordAllMethod
 
     self.location = top
     self.address = top.full_address
@@ -150,7 +152,9 @@ class Alert < ApplicationRecord
     error = @geocode_result.error
     if top.nil?
       errors.add(:address, error) if error
-    elsif @geocode_result.many?
+    # rubocop:disable Rails/RedundantActiveRecordAllMethod
+    elsif @geocode_result.all.many?
+      # rubocop:enable Rails/RedundantActiveRecordAllMethod
       errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{top.full_address}")
     end
   end
