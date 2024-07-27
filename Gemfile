@@ -178,7 +178,7 @@ group :development do
   gem "sorbet"
   gem "spoom"
   # TODO: Temporarily locking version. Get rid of this
-  gem "tapioca", "~> 0.11.8"
+  gem "tapioca", "~> 0.12.0"
 
   # For guard and associated bits
   gem "growl"
