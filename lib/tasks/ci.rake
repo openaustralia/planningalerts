@@ -18,8 +18,6 @@ namespace :ci do
   task lint: :environment do
     # Rubocop
     sh "bin/rubocop --parallel"
-    # Lint haml
-    sh "bin/haml-lint"
     # Lint erb
     sh "bin/erblint --lint-all"
     # Security audit application code

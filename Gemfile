@@ -24,9 +24,6 @@ gem "administrate"
 gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
 gem "pundit", "~> 2.2"
 
-# TODO: Get rid of this as soon as we've removed the last haml template (there are only a few left I think)
-gem "haml"
-
 # Extra validation
 gem "validates_email_format_of"
 gem "validate_url"
