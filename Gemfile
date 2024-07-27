@@ -209,6 +209,7 @@ group :development do
   gem "rubocop-rails", require: false
   gem "rubocop-rake", require: false
   gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
   gem "rubocop-sorbet", require: false
 
   # To help identify database issues

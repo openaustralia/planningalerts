@@ -558,6 +558,8 @@ GEM
       rubocop (~> 1.33)
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
+    rubocop-rspec_rails (2.29.1)
+      rubocop (~> 1.61)
     rubocop-sorbet (0.7.3)
       rubocop (>= 0.90.0)
     ruby-progressbar (1.13.0)
@@ -789,6 +791,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rake
   rubocop-rspec
+  rubocop-rspec_rails
   rubocop-sorbet
   ruby-progressbar
   rubyzip
