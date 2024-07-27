@@ -497,6 +497,9 @@ GEM
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
+    rgeo-geojson (2.2.0)
+      multi_json (~> 1.15)
+      rgeo (>= 1.0.0)
     rgeo-shapefile (3.0.0)
       dbf (~> 4.0)
       rgeo (>= 1.0)
@@ -781,6 +784,7 @@ DEPENDENCIES
   recaptcha
   rest-client
   rexml
+  rgeo-geojson
   rgeo-shapefile
   rspec-activemodel-mocks
   rspec-rails

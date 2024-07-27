@@ -143,6 +143,9 @@ gem "sprockets", "~> 3.0"
 # TODO: Get this as soon as we can
 gem "faraday", "~> 1.0"
 
+# Needed for getting boundary data into maps
+gem "rgeo-geojson"
+
 group :test do
   gem "capybara"
   # For some reason upgrading to email_spec 2.2.1 completely breaks things for us
