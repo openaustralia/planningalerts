@@ -23,54 +23,77 @@ end
 # source://haml//lib/haml/attribute_builder.rb#4
 module Haml::AttributeBuilder
   class << self
-    def build(*_arg0); end
-    def build_aria(*_arg0); end
-    def build_class(*_arg0); end
-    def build_data(*_arg0); end
-    def build_id(*_arg0); end
+    # source://haml//lib/haml/attribute_builder.rb#6
+    def build(escape_attrs, quote, format, object_ref, *hashes); end
+
+    # source://haml//lib/haml/attribute_builder.rb#69
+    def build_aria(escape_attrs, quote, *hashes); end
+
+    # source://haml//lib/haml/attribute_builder.rb#35
+    def build_class(escape_attrs, *values); end
+
+    # source://haml//lib/haml/attribute_builder.rb#65
+    def build_data(escape_attrs, quote, *hashes); end
+
+    # source://haml//lib/haml/attribute_builder.rb#31
+    def build_id(escape_attrs, *values); end
+
+    private
+
+    # source://haml//lib/haml/attribute_builder.rb#138
+    def build_boolean!(escape_attrs, quote, format, buf, key, value); end
+
+    # source://haml//lib/haml/attribute_builder.rb#75
+    def build_data_attribute(key, escape_attrs, quote, *hashes); end
+
+    # source://haml//lib/haml/attribute_builder.rb#154
+    def escape_html(escape_attrs, str); end
+
+    # source://haml//lib/haml/attribute_builder.rb#97
+    def flatten_attributes(attributes); end
+
+    # source://haml//lib/haml/attribute_builder.rb#118
+    def merge_all_attrs(hashes); end
   end
 end
 
-# source://haml//lib/haml/attribute_builder.rb#5
-Haml::AttributeBuilder::BOOLEAN_ATTRIBUTES = T.let(T.unsafe(nil), Array)
-
-# source://haml//lib/haml/attribute_compiler.rb#7
+# source://haml//lib/haml/attribute_compiler.rb#15
 class Haml::AttributeCompiler
   # @return [AttributeCompiler] a new instance of AttributeCompiler
   #
-  # source://haml//lib/haml/attribute_compiler.rb#8
+  # source://haml//lib/haml/attribute_compiler.rb#16
   def initialize(identity, options); end
 
-  # source://haml//lib/haml/attribute_compiler.rb#15
+  # source://haml//lib/haml/attribute_compiler.rb#23
   def compile(node); end
 
   private
 
-  # source://haml//lib/haml/attribute_compiler.rb#118
+  # source://haml//lib/haml/attribute_compiler.rb#123
   def attribute_builder(type, values); end
 
-  # source://haml//lib/haml/attribute_compiler.rb#93
+  # source://haml//lib/haml/attribute_compiler.rb#98
   def compile_boolean!(temple, key, values); end
 
-  # source://haml//lib/haml/attribute_compiler.rb#73
+  # source://haml//lib/haml/attribute_compiler.rb#78
   def compile_class!(temple, key, values); end
 
-  # source://haml//lib/haml/attribute_compiler.rb#114
+  # source://haml//lib/haml/attribute_compiler.rb#119
   def compile_common!(temple, key, values); end
 
-  # source://haml//lib/haml/attribute_compiler.rb#82
+  # source://haml//lib/haml/attribute_compiler.rb#87
   def compile_data!(temple, key, values); end
 
-  # source://haml//lib/haml/attribute_compiler.rb#64
+  # source://haml//lib/haml/attribute_compiler.rb#69
   def compile_id!(temple, key, values); end
 
-  # source://haml//lib/haml/attribute_compiler.rb#123
+  # source://haml//lib/haml/attribute_compiler.rb#128
   def literal_for(value); end
 
-  # source://haml//lib/haml/attribute_compiler.rb#30
+  # source://haml//lib/haml/attribute_compiler.rb#38
   def runtime_compile(node); end
 
-  # source://haml//lib/haml/attribute_compiler.rb#41
+  # source://haml//lib/haml/attribute_compiler.rb#46
   def static_compile(static_hash, dynamic_hashes); end
 end
 
@@ -113,6 +136,11 @@ end
 
 # source://haml//lib/haml/attribute_parser.rb#6
 class Haml::AttributeParser::ParseSkip < ::StandardError; end
+
+# The list of boolean attributes. You may add custom attributes to this constant.
+#
+# source://haml//lib/haml/attribute_compiler.rb#8
+Haml::BOOLEAN_ATTRIBUTES = T.let(T.unsafe(nil), Array)
 
 # source://haml//lib/haml/compiler/children_compiler.rb#5
 class Haml::Compiler
@@ -236,10 +264,13 @@ class Haml::Compiler::DoctypeCompiler
 
   private
 
-  # source://haml//lib/haml/compiler/doctype_compiler.rb#22
+  # source://haml//lib/haml/compiler/doctype_compiler.rb#24
   def html_doctype(node); end
 
-  # source://haml//lib/haml/compiler/doctype_compiler.rb#36
+  # source://haml//lib/haml/compiler/doctype_compiler.rb#47
+  def rdfa_doctype; end
+
+  # source://haml//lib/haml/compiler/doctype_compiler.rb#38
   def xml_doctype; end
 end
 
@@ -391,7 +422,7 @@ class Haml::EscapeAny < ::Haml::Escape
   # source://haml//lib/haml/escape_any.rb#17
   def on_dynamic(value); end
 
-  # source://temple/0.10.2/lib/temple/filters/escapable.rb#24
+  # source://temple/0.10.3/lib/temple/filters/escapable.rb#24
   def on_escapeany(flag, exp); end
 end
 
@@ -624,7 +655,7 @@ class Haml::ForceEscape < ::Haml::Escape
   # source://haml//lib/haml/force_escape.rb#25
   def on_escape(flag, exp); end
 
-  # source://temple/0.10.2/lib/temple/filters/escapable.rb#24
+  # source://temple/0.10.3/lib/temple/filters/escapable.rb#24
   def on_fescape(flag, exp); end
 end
 
@@ -1452,7 +1483,7 @@ module Haml::Util
   #   and the rest of the string.
   #   `["Foo (Bar (Baz bang) bop)", " (Bang (bop bip))"]` in the example above.
   #
-  # source://haml//lib/haml/util.rb#171
+  # source://haml//lib/haml/util.rb#172
   def balance(scanner, start, finish, count = T.unsafe(nil)); end
 
   # Checks that the encoding of a string is valid
@@ -1466,7 +1497,7 @@ module Haml::Util
   #   Only yields if there is an encoding error
   # @yieldparam msg [String] The error message to be raised
   #
-  # source://haml//lib/haml/util.rb#65
+  # source://haml//lib/haml/util.rb#66
   def check_encoding(str); end
 
   # Like {\#check\_encoding}, but also checks for a Ruby-style `-# coding:` comment
@@ -1489,12 +1520,12 @@ module Haml::Util
   #   Only yields if there is an encoding error
   # @yieldparam msg [String] The error message to be raised
   #
-  # source://haml//lib/haml/util.rb#112
+  # source://haml//lib/haml/util.rb#113
   def check_haml_encoding(str, &block); end
 
   # @return [Boolean]
   #
-  # source://haml//lib/haml/util.rb#200
+  # source://haml//lib/haml/util.rb#201
   def contains_interpolation?(str); end
 
   # Scans through a string looking for the interoplation-opening `#{`
@@ -1508,7 +1539,7 @@ module Haml::Util
   # @return [String] The text remaining in the scanner after all `#{`s have been processed
   # @yieldparam scan [StringScanner] The scanner scanning through the string
   #
-  # source://haml//lib/haml/util.rb#150
+  # source://haml//lib/haml/util.rb#151
   def handle_interpolation(str); end
 
   # Formats a string for use in error messages about indentation.
@@ -1516,7 +1547,7 @@ module Haml::Util
   # @param indentation [String] The string used for indentation
   # @return [String] The name of the indentation (e.g. `"12 spaces"`, `"1 tab"`)
   #
-  # source://haml//lib/haml/util.rb#187
+  # source://haml//lib/haml/util.rb#188
   def human_indentation(indentation); end
 
   # Like `Object#inspect`, but preserves non-ASCII characters rather than escaping them.
@@ -1526,7 +1557,7 @@ module Haml::Util
   # @param obj [Object]
   # @return [String]
   #
-  # source://haml//lib/haml/util.rb#129
+  # source://haml//lib/haml/util.rb#130
   def inspect_obj(obj); end
 
   # Whether or not ActionView's XSS protection is available and enabled,
@@ -1535,24 +1566,18 @@ module Haml::Util
   #
   # @return [Boolean]
   #
-  # source://haml//lib/haml/util.rb#51
+  # source://haml//lib/haml/util.rb#52
   def rails_xss_safe?; end
 
   # Silence all output to STDERR within a block.
   #
   # @yield A block in which no output will be printed to STDERR
   #
-  # source://haml//lib/haml/util.rb#37
+  # source://haml//lib/haml/util.rb#38
   def silence_warnings; end
 
-  # source://haml_lint/0.49.3/lib/haml_lint/extensions/haml_util_unescape_interpolation_tracking.rb#27
+  # source://haml//lib/haml/util.rb#205
   def unescape_interpolation(str, escape_html = T.unsafe(nil)); end
-
-  # source://haml_lint/0.49.3/lib/haml_lint/extensions/haml_util_unescape_interpolation_tracking.rb#27
-  def unescape_interpolation_with_original_tracking(str, escape_html = T.unsafe(nil)); end
-
-  # source://haml//lib/haml/util.rb#204
-  def unescape_interpolation_without_original_tracking(str, escape_html = T.unsafe(nil)); end
 
   private
 
@@ -1562,25 +1587,20 @@ module Haml::Util
   # @return [(Boolean, String or nil)] Whether the document begins with a UTF-8 BOM,
   #   and the declared encoding of the document (or nil if none is declared)
   #
-  # source://haml//lib/haml/util.rb#236
+  # source://haml//lib/haml/util.rb#237
   def parse_haml_magic_comment(str); end
 
-  # source://haml//lib/haml/util.rb#248
+  # source://haml//lib/haml/util.rb#249
   def try_parse_haml_emacs_magic_comment(scanner); end
 
   class << self
-    def escape_html(_arg0); end
+    # source://haml//lib/haml/util.rb#24
+    def escape_html(html); end
 
     # TODO: Remove unescape_interpolation's workaround and get rid of `respond_to?`.
     #
-    # source://haml//lib/haml/util.rb#29
+    # source://haml//lib/haml/util.rb#30
     def escape_html_safe(html); end
-
-    # source://haml_lint/0.49.3/lib/haml_lint/extensions/haml_util_unescape_interpolation_tracking.rb#13
-    def unescape_interpolation_to_original_cache; end
-
-    # source://haml_lint/0.49.3/lib/haml_lint/extensions/haml_util_unescape_interpolation_tracking.rb#19
-    def unescape_interpolation_to_original_cache_take_and_wipe; end
   end
 end
 

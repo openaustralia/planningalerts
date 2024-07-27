@@ -84,12 +84,6 @@ GEM
     airbrussh (1.4.2)
       sshkit (>= 1.6.1, != 1.7.0)
     ast (2.4.2)
-    atdis (0.5.2)
-      activemodel
-      activesupport
-      multi_json (~> 1.7)
-      rest-client
-      rgeo-geojson
     autoprefixer-rails (10.4.13.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
@@ -142,8 +136,6 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
-    bourbon (7.3.0)
-      thor (~> 1.0)
     brakeman (6.0.1)
     builder (3.2.4)
     capistrano (3.17.3)
@@ -177,29 +169,10 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-    chunky_png (1.4.0)
     coderay (1.1.3)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     colorize (1.1.0)
-    compass (1.0.3)
-      chunky_png (~> 1.2)
-      compass-core (~> 1.0.2)
-      compass-import-once (~> 1.0.5)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      sass (>= 3.3.13, < 3.5)
-    compass-blueprint (1.0.0)
-      compass
-    compass-core (1.0.3)
-      multi_json (~> 1.0)
-      sass (>= 3.3.0, < 3.5)
-    compass-import-once (1.0.5)
-      sass (>= 3.2, < 3.5)
-    compass-rails (3.1.0)
-      compass (~> 1.0.0)
-      sass-rails (< 5.1)
-      sprockets (< 4.0)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     counter_culture (3.4.0)
@@ -296,11 +269,6 @@ GEM
       sanitize (< 7)
     foreman (0.87.2)
     formatador (1.1.0)
-    formtastic (4.0.0)
-      actionpack (>= 5.2.0)
-    foundation-icons-sass-rails (3.0.0)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
     fugit (1.8.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
@@ -329,16 +297,10 @@ GEM
     guard-rubocop (1.5.0)
       guard (~> 2.0)
       rubocop (< 2.0)
-    haml (6.1.2)
+    haml (6.3.0)
       temple (>= 0.8.2)
       thor
       tilt
-    haml_lint (0.49.3)
-      haml (>= 4.0, < 6.2)
-      parallel (~> 1.10)
-      rainbow
-      rubocop (>= 1.0)
-      sysexits (~> 1.1)
     hashdiff (1.0.1)
     hashie (5.0.0)
     health_check (3.1.0)
@@ -454,8 +416,6 @@ GEM
     pundit (2.3.1)
       activesupport (>= 3.0.0)
     raabro (1.4.0)
-    rabl (0.16.1)
-      activesupport (>= 2.3.14)
     racc (1.7.3)
     rack (2.2.9)
     rack-attack (6.7.0)
@@ -522,7 +482,6 @@ GEM
     rdf (3.2.11)
       link_header (~> 0.0, >= 0.0.8)
     recaptcha (5.14.0)
-    redcarpet (3.6.0)
     redis (4.8.1)
     regexp_parser (2.8.1)
     responders (3.1.0)
@@ -538,8 +497,6 @@ GEM
     rgeo (3.0.0)
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
-      rgeo (>= 1.0.0)
-    rgeo-geojson (2.1.1)
       rgeo (>= 1.0.0)
     rgeo-shapefile (3.0.0)
       dbf (~> 4.0)
@@ -606,13 +563,6 @@ GEM
     sanitize (6.0.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
-    sass (3.4.25)
-    sass-rails (5.0.8)
-      railties (>= 5.2.0)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (>= 1.1, < 3)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -680,11 +630,8 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     strscan (3.1.0)
-    susy (2.2.14)
-      sass (>= 3.3.0, < 3.5)
     syntax_tree (6.1.1)
       prettier_print (>= 1.2.0)
-    sysexits (1.2.0)
     tailwindcss-rails (2.3.0-aarch64-linux)
       railties (>= 6.0.0)
     tailwindcss-rails (2.3.0-arm64-darwin)
@@ -700,7 +647,7 @@ GEM
       spoom (~> 1.2.0, >= 1.2.0)
       thor (>= 1.2.0)
       yard-sorbet
-    temple (0.10.2)
+    temple (0.10.3)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
     thor (1.3.1)
@@ -774,7 +721,6 @@ DEPENDENCIES
   active_record_doctor
   activerecord-postgis-adapter
   administrate
-  atdis
   autoprefixer-rails
   aws-sdk-s3 (~> 1)
   axe-core-capybara
@@ -782,7 +728,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap
-  bourbon
   brakeman
   capistrano
   capistrano-aws
@@ -791,8 +736,6 @@ DEPENDENCIES
   capistrano-rvm
   capistrano3-puma (>= 6.0.0.beta.1)
   capybara
-  compass-blueprint
-  compass-rails (= 3.1.0)
   counter_culture
   dalli
   devise (~> 4.2)
@@ -806,8 +749,6 @@ DEPENDENCIES
   flipper-redis
   flipper-ui
   foreman
-  formtastic
-  foundation-icons-sass-rails
   geokit
   graphql-client
   growl
@@ -815,7 +756,6 @@ DEPENDENCIES
   guard-rspec
   guard-rubocop
   haml
-  haml_lint
   health_check
   honeybadger
   httparty
@@ -829,7 +769,6 @@ DEPENDENCIES
   pg
   puma
   pundit (~> 2.2)
-  rabl
   rack-attack
   rack-cors
   rack-mini-profiler
@@ -841,7 +780,6 @@ DEPENDENCIES
   rb-fsevent
   rb-inotify
   recaptcha
-  redcarpet
   rest-client
   rexml
   rgeo-shapefile
@@ -855,7 +793,6 @@ DEPENDENCIES
   ruby-progressbar
   rubyzip
   sanitize
-  sass-rails
   searchkick
   selenium-webdriver
   sidekiq (< 7)
@@ -868,7 +805,6 @@ DEPENDENCIES
   sorbet-runtime
   sparql-client
   spoom
-  susy
   tailwindcss-rails (~> 2.0)
   tapioca
   timecop

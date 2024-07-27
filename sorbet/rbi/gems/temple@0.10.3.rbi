@@ -220,6 +220,22 @@ class Temple::Filters::DynamicInliner < ::Temple::Filter
   def on_multi(*exps); end
 end
 
+# Compile [:multi, [:static, 'foo'], [:dynamic, 'bar']] to [:dynamic, '"foo#{bar}"']
+#
+# source://temple//lib/temple/filters/dynamic_merger.rb#5
+class Temple::Filters::DynamicMerger < ::Temple::Filter
+  # source://temple//lib/temple/filters/dynamic_merger.rb#6
+  def on_multi(*exps); end
+
+  private
+
+  # source://temple//lib/temple/filters/dynamic_merger.rb#56
+  def count_newline(exps); end
+
+  # source://temple//lib/temple/filters/dynamic_merger.rb#34
+  def merge_dynamic(exps); end
+end
+
 # Try to encode input string
 #
 # @api public
@@ -685,7 +701,7 @@ Temple::Grammar::HTMLAttr = T.let(T.unsafe(nil), Temple::Mixins::GrammarDSL::Roo
 # source://temple//lib/temple/mixins/grammar_dsl.rb#168
 Temple::Grammar::HTMLIdentifier = T.let(T.unsafe(nil), Temple::Mixins::GrammarDSL::Root)
 
-# source://temple//lib/temple.rb#60
+# source://temple//lib/temple.rb#61
 module Temple::HTML; end
 
 # This filter merges html attributes (e.g. used for id and class)

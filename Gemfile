@@ -24,9 +24,8 @@ gem "administrate"
 gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
 gem "pundit", "~> 2.2"
 
-# To handle different kinds of view templates
+# TODO: Get rid of this as soon as we've removed the last haml template (there are only a few left I think)
 gem "haml"
-gem "rabl"
 
 # Extra validation
 gem "validates_email_format_of"
@@ -55,17 +54,7 @@ gem "rexml"
 
 # CSS related stuff
 gem "autoprefixer-rails"
-gem "bourbon"
-gem "compass-blueprint"
-# compass is no longer maintained. TODO: Move away from compass
-# We can't upgrade to ruby 3.2 until we get rid of compass
-gem "compass-rails", "3.1.0"
-gem "sass-rails"
-gem "susy"
 gem "tailwindcss-rails", "~> 2.0"
-
-# Icons
-gem "foundation-icons-sass-rails"
 
 # Sanitizing and manipulating user input
 gem "rails_autolink"
@@ -82,11 +71,7 @@ gem "recaptcha", require: "recaptcha/rails"
 gem "searchkick"
 
 # Used to parse different external application feeds
-gem "atdis"
 gem "nokogiri"
-
-# For making forms a little easier
-gem "formtastic"
 
 # Speed up json parsing
 # TODO: Double check where this is being used
@@ -120,9 +105,6 @@ gem "slack-notifier"
 # Provide a url endpoint that checks the health of the app
 # (used by load balancer)
 gem "health_check"
-
-# For rendering markdown in ATDIS specification
-gem "redcarpet"
 
 # For accessing the Github GraphQL API which we're using for accessing projects
 # which we're using for managing the list of broken scrapers
@@ -215,7 +197,6 @@ group :development do
   # Help with code quality
   gem "brakeman"
   gem "erb_lint", require: false
-  gem "haml_lint", require: false
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rake", require: false
