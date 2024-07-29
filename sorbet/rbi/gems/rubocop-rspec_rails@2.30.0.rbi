@@ -766,7 +766,7 @@ RuboCop::Cop::RSpecRails::TravelAround::MSG = T.let(T.unsafe(nil), String)
 # source://rubocop-rspec_rails//lib/rubocop/cop/rspec_rails/travel_around.rb#31
 RuboCop::Cop::RSpecRails::TravelAround::TRAVEL_METHOD_NAMES = T.let(T.unsafe(nil), Set)
 
-# source://rubocop-rspec_rails//lib/rubocop-rspec_rails.rb#24
+# source://rubocop-rspec_rails//lib/rubocop-rspec_rails.rb#21
 class RuboCop::Cop::Registry
   # source://rubocop/1.65.0/lib/rubocop/cop/registry.rb#51
   def initialize(cops = T.unsafe(nil), options = T.unsafe(nil)); end
@@ -837,7 +837,7 @@ class RuboCop::Cop::Registry
   # source://rubocop/1.65.0/lib/rubocop/cop/registry.rb#151
   def print_warning(name, path); end
 
-  # source://rubocop-rspec_rails//lib/rubocop-rspec_rails.rb#26
+  # source://rubocop-rspec_rails//lib/rubocop-rspec_rails.rb#23
   def qualified_cop_name(name, path, warn: T.unsafe(nil)); end
 
   # source://rubocop/1.65.0/lib/rubocop/cop/registry.rb#166
