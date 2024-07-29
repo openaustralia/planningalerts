@@ -1,4 +1,4 @@
-FROM ruby:3.2.5
+FROM ruby:3.3.4
 WORKDIR /app
 
 # Run everything as a non-root "deploy" user
