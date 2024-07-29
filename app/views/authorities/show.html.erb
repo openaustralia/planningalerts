@@ -57,11 +57,11 @@
         <table class="mt-8 text-xl text-navy">
           <tbody>
             <tr class="flex flex-col pb-4 sm:table-row">
-              <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.week.ago).count %></td>
+              <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where(first_date_scraped: 1.week.ago..).count %></td>
               <th class="font-normal text-left">in the last week</th>
             </tr>
             <tr class="flex flex-col pb-4 sm:table-row">
-              <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where("first_date_scraped >= ?", 1.month.ago).count %></td>
+              <td class="pr-8 font-bold text-7xl"><%= @authority.applications.where(first_date_scraped: 1.month.ago..).count %></td>
               <th class="font-normal text-left">in the last month</th>
             </tr>
             <tr class="flex flex-col pb-4 sm:table-row">
