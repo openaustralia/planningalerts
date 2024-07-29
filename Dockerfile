@@ -1,4 +1,4 @@
-FROM ruby:3.1.3
+FROM ruby:3.2.5
 WORKDIR /app
 
 # Run everything as a non-root "deploy" user
@@ -12,7 +12,7 @@ RUN apt-get update \
     && chmod 0440 /etc/sudoers.d/deploy
 
 # Needed for sorbet extension for vscode
-RUN apt install watchman
+RUN apt install -y watchman
 
 # Needed for rgeo geos support. See https://github.com/rgeo/rgeo/issues/227#issuecomment-1145169888
 RUN apt-get install -y libgeos++-dev libgeos-dev
