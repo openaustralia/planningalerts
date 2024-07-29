@@ -77,6 +77,9 @@ View more available Capistrano commands with:
 Upgrading Ruby in production is an unbelievably painful process right now. I'm sorry. Let's make it simpler
 but in the meantime:
 
+TODO: This section is now out of date as we now have a blue/green deploy setup that allows us to build a new
+      image with a new ruby version and deploy it side by side with the old version and switch over between them
+
 ### Update the application code
 * Change `.ruby-version`. Run tests to make sure nothing has broken.
 
