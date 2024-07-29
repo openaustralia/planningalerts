@@ -1210,3 +1210,21 @@ RuboCop::Cop::Capybara::VisibilityMatcher::MSG_TRUE = T.let(T.unsafe(nil), Strin
 
 # source://rubocop-capybara//lib/rubocop/cop/capybara/visibility_matcher.rb#46
 RuboCop::Cop::Capybara::VisibilityMatcher::RESTRICT_ON_SEND = T.let(T.unsafe(nil), Array)
+
+module RuboCop::Cop::Style; end
+
+class RuboCop::Cop::Style::TrailingCommaInArguments < ::RuboCop::Cop::Base
+  include ::RuboCop::Cop::ConfigurableEnforcedStyle
+  include ::RuboCop::Cop::RangeHelp
+
+  # source://rubocop/1.65.0/lib/rubocop/cop/style/trailing_comma_in_arguments.rb#95
+  def on_csend(node); end
+
+  # source://rubocop/1.65.0/lib/rubocop/cop/style/trailing_comma_in_arguments.rb#95
+  def on_send(node); end
+
+  class << self
+    # source://rubocop-capybara//lib/rubocop-capybara.rb#21
+    def autocorrect_incompatible_with; end
+  end
+end

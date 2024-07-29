@@ -13,16 +13,16 @@ module Flipper
   extend ::Flipper
   extend ::Forwardable
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def [](*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def adapter(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def add(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def add_expression(*args, **_arg1, &block); end
 
   # source://flipper//lib/flipper.rb#75
@@ -60,58 +60,58 @@ module Flipper
   # source://flipper//lib/flipper.rb#79
   def constant(value); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable_actor(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable_expression(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable_group(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable_percentage_of_actors(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable_percentage_of_time(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable_actor(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable_expression(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable_group(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable_percentage_of_actors(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable_percentage_of_time(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enabled?(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def exist?(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def export(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def expression(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def feature(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def features(*args, **_arg1, &block); end
 
   # Public: Fetches a group by name.
@@ -158,7 +158,7 @@ module Flipper
   # source://flipper//lib/flipper.rb#170
   def groups_registry=(registry); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def import(*args, **_arg1, &block); end
 
   # Public: Default per thread flipper instance if configured. You should not
@@ -178,10 +178,10 @@ module Flipper
   # source://flipper//lib/flipper.rb#52
   def instance=(flipper); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def memoize=(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def memoizing?(*args, **_arg1, &block); end
 
   # Public: Start here. Given an adapter returns a handy DSL to all the flipper
@@ -193,10 +193,10 @@ module Flipper
   # source://flipper//lib/flipper.rb#91
   def number(value); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def preload(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def preload_all(*args, **_arg1, &block); end
 
   # source://flipper//lib/flipper.rb#83
@@ -205,7 +205,7 @@ module Flipper
   # source://flipper//lib/flipper.rb#99
   def random(max); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def read_only?(*args, **_arg1, &block); end
 
   # Public: Use this to register a group by name.
@@ -226,19 +226,19 @@ module Flipper
   # source://flipper//lib/flipper.rb#117
   def register(name, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def remove(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def remove_expression(*args, **_arg1, &block); end
 
   # source://flipper//lib/flipper.rb#87
   def string(value); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def sync(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def sync_secret(*args, **_arg1, &block); end
 
   # Public: Clears the group registry.
@@ -736,40 +736,40 @@ class Flipper::Adapters::Sync::FeatureSynchronizer
   # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#36
   def call; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def local_actors(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def local_boolean(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def local_expression(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def local_groups(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def local_percentage_of_actors(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def local_percentage_of_time(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def remote_actors(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def remote_boolean(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def remote_expression(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def remote_groups(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def remote_percentage_of_actors(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def remote_percentage_of_time(*args, **_arg1, &block); end
 
   private
@@ -1171,7 +1171,7 @@ class Flipper::DSL
   # source://flipper//lib/flipper/dsl.rb#198
   def exist?(name); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def export(*args, **_arg1, &block); end
 
   # Public: Gets the expression for the feature.
@@ -1208,7 +1208,7 @@ class Flipper::DSL
   # source://flipper//lib/flipper/dsl.rb#255
   def group(name); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def import(*args, **_arg1, &block); end
 
   # Private: What is being used to instrument all the things.
@@ -1216,10 +1216,10 @@ class Flipper::DSL
   # source://flipper//lib/flipper/dsl.rb#11
   def instrumenter; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def memoize=(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def memoizing?(*args, **_arg1, &block); end
 
   # Public: Preload the features with the given names.
@@ -2288,7 +2288,7 @@ end
 # source://flipper//lib/flipper/gates/actor.rb#2
 module Flipper::Gates; end
 
-# source://flipper//lib/flipper/gates/actor.rb#4
+# source://flipper//lib/flipper/gates/actor.rb#3
 class Flipper::Gates::Actor < ::Flipper::Gate
   # source://flipper//lib/flipper/gates/actor.rb#14
   def data_type; end
@@ -2326,7 +2326,7 @@ class Flipper::Gates::Actor < ::Flipper::Gate
   def wrap(actor); end
 end
 
-# source://flipper//lib/flipper/gates/boolean.rb#4
+# source://flipper//lib/flipper/gates/boolean.rb#3
 class Flipper::Gates::Boolean < ::Flipper::Gate
   # source://flipper//lib/flipper/gates/boolean.rb#14
   def data_type; end
@@ -2365,7 +2365,7 @@ class Flipper::Gates::Boolean < ::Flipper::Gate
   def wrap(thing); end
 end
 
-# source://flipper//lib/flipper/gates/expression.rb#6
+# source://flipper//lib/flipper/gates/expression.rb#5
 class Flipper::Gates::Expression < ::Flipper::Gate
   # source://flipper//lib/flipper/gates/expression.rb#16
   def data_type; end
@@ -2413,7 +2413,7 @@ end
 # source://flipper//lib/flipper/gates/expression.rb#52
 Flipper::Gates::Expression::DEFAULT_PROPERTIES = T.let(T.unsafe(nil), Hash)
 
-# source://flipper//lib/flipper/gates/group.rb#4
+# source://flipper//lib/flipper/gates/group.rb#3
 class Flipper::Gates::Group < ::Flipper::Gate
   # source://flipper//lib/flipper/gates/group.rb#14
   def data_type; end
@@ -2451,7 +2451,7 @@ class Flipper::Gates::Group < ::Flipper::Gate
   def wrap(thing); end
 end
 
-# source://flipper//lib/flipper/gates/percentage_of_actors.rb#6
+# source://flipper//lib/flipper/gates/percentage_of_actors.rb#5
 class Flipper::Gates::PercentageOfActors < ::Flipper::Gate
   # source://flipper//lib/flipper/gates/percentage_of_actors.rb#16
   def data_type; end
@@ -2492,7 +2492,7 @@ end
 # source://flipper//lib/flipper/gates/percentage_of_actors.rb#26
 Flipper::Gates::PercentageOfActors::SCALING_FACTOR = T.let(T.unsafe(nil), Integer)
 
-# source://flipper//lib/flipper/gates/percentage_of_time.rb#4
+# source://flipper//lib/flipper/gates/percentage_of_time.rb#3
 class Flipper::Gates::PercentageOfTime < ::Flipper::Gate
   # source://flipper//lib/flipper/gates/percentage_of_time.rb#14
   def data_type; end
@@ -2546,7 +2546,7 @@ end
 # source://flipper//lib/flipper/instrumentation/log_subscriber.rb#7
 module Flipper::Instrumentation; end
 
-# source://flipper//lib/flipper/instrumentation/log_subscriber.rb#16
+# source://flipper//lib/flipper/instrumentation/log_subscriber.rb#8
 class Flipper::Instrumentation::LogSubscriber < ::ActiveSupport::LogSubscriber
   # Logs an adapter operation. If operation is for a feature, then that
   # feature is included in log output.
@@ -2944,7 +2944,7 @@ class Flipper::Registry::DuplicateKey < ::Flipper::Registry::Error; end
 # source://flipper//lib/flipper/registry.rb#8
 class Flipper::Registry::Error < ::StandardError; end
 
-# source://flipper//lib/flipper/registry.rb#12
+# source://flipper//lib/flipper/registry.rb#11
 class Flipper::Registry::KeyNotFound < ::Flipper::Registry::Error
   # @return [KeyNotFound] a new instance of KeyNotFound
   #

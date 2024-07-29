@@ -7,16 +7,16 @@
 
 # source://flipper-ui//lib/flipper/version.rb#1
 module Flipper
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def [](*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def adapter(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def add(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def add_expression(*args, **_arg1, &block); end
 
   # source://flipper/1.3.0/lib/flipper.rb#75
@@ -40,58 +40,58 @@ module Flipper
   # source://flipper/1.3.0/lib/flipper.rb#79
   def constant(value); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable_actor(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable_expression(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable_group(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable_percentage_of_actors(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def disable_percentage_of_time(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable_actor(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable_expression(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable_group(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable_percentage_of_actors(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enable_percentage_of_time(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def enabled?(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def exist?(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def export(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def expression(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def feature(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def features(*args, **_arg1, &block); end
 
   # source://flipper/1.3.0/lib/flipper.rb#160
@@ -112,7 +112,7 @@ module Flipper
   # source://flipper/1.3.0/lib/flipper.rb#170
   def groups_registry=(registry); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def import(*args, **_arg1, &block); end
 
   # source://flipper/1.3.0/lib/flipper.rb#45
@@ -121,10 +121,10 @@ module Flipper
   # source://flipper/1.3.0/lib/flipper.rb#52
   def instance=(flipper); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def memoize=(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def memoizing?(*args, **_arg1, &block); end
 
   # source://flipper/1.3.0/lib/flipper.rb#12
@@ -133,10 +133,10 @@ module Flipper
   # source://flipper/1.3.0/lib/flipper.rb#91
   def number(value); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def preload(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def preload_all(*args, **_arg1, &block); end
 
   # source://flipper/1.3.0/lib/flipper.rb#83
@@ -145,25 +145,25 @@ module Flipper
   # source://flipper/1.3.0/lib/flipper.rb#99
   def random(max); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def read_only?(*args, **_arg1, &block); end
 
   # source://flipper/1.3.0/lib/flipper.rb#117
   def register(name, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def remove(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def remove_expression(*args, **_arg1, &block); end
 
   # source://flipper/1.3.0/lib/flipper.rb#87
   def string(value); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def sync(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def sync_secret(*args, **_arg1, &block); end
 
   # source://flipper/1.3.0/lib/flipper.rb#140
@@ -265,7 +265,7 @@ class Flipper::UI::Action
   # source://flipper-ui//lib/flipper/ui/action.rb#151
   def json_response(object); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def params(*args, **_arg1, &block); end
 
   # source://flipper-ui//lib/flipper/ui/action.rb#278
@@ -888,7 +888,7 @@ class Flipper::UI::Decorators::Feature < ::SimpleDelegator
 
   # Public: The feature being decorated.
   #
-  # source://delegate/0.2.0/delegate.rb#318
+  # source://delegate/0.3.0/delegate.rb#318
   def feature; end
 
   # source://flipper-ui//lib/flipper/ui/decorators/feature.rb#62
@@ -909,7 +909,7 @@ end
 # source://flipper-ui//lib/flipper/ui/decorators/feature.rb#77
 Flipper::UI::Decorators::Feature::StateSortMap = T.let(T.unsafe(nil), Hash)
 
-# source://flipper-ui//lib/flipper/ui/decorators/gate.rb#7
+# source://flipper-ui//lib/flipper/ui/decorators/gate.rb#6
 class Flipper::UI::Decorators::Gate < ::SimpleDelegator
   # @return [Gate] a new instance of Gate
   #
@@ -923,7 +923,7 @@ class Flipper::UI::Decorators::Gate < ::SimpleDelegator
 
   # Public: The gate being decorated.
   #
-  # source://delegate/0.2.0/delegate.rb#318
+  # source://delegate/0.3.0/delegate.rb#318
   def gate; end
 
   # Public: The value for the gate from the adapter.

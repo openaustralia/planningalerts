@@ -441,7 +441,7 @@ end
 #     }.new
 #   })
 #
-# source://rack-protection//lib/rack/protection/encrypted_cookie.rb#65
+# source://rack-protection//lib/rack/protection/encrypted_cookie.rb#64
 class Rack::Protection::EncryptedCookie < ::Rack::Session::Abstract::Persisted
   # @return [EncryptedCookie] a new instance of EncryptedCookie
   #

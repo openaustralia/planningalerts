@@ -542,7 +542,7 @@ end
 #
 # @api private
 #
-# source://rubocop//lib/rubocop/cli/command/suggest_extensions.rb#12
+# source://rubocop//lib/rubocop/cli/command/suggest_extensions.rb#11
 class RuboCop::CLI::Command::SuggestExtensions < ::RuboCop::CLI::Command::Base
   # @api private
   #
@@ -777,7 +777,7 @@ class RuboCop::CommentConfig
   # source://rubocop//lib/rubocop/comment_config.rb#63
   def comment_only_line?(line_number); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def config(*args, **_arg1, &block); end
 
   # source://rubocop//lib/rubocop/comment_config.rb#51
@@ -801,7 +801,7 @@ class RuboCop::CommentConfig
   # source://rubocop//lib/rubocop/comment_config.rb#30
   def processed_source; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def registry(*args, **_arg1, &block); end
 
   private
@@ -977,10 +977,10 @@ class RuboCop::Config
   # source://rubocop//lib/rubocop/config.rb#30
   def initialize(hash = T.unsafe(nil), loaded_path = T.unsafe(nil)); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def [](*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def []=(*args, **_arg1, &block); end
 
   # @return [Boolean]
@@ -1019,13 +1019,13 @@ class RuboCop::Config
   # source://rubocop//lib/rubocop/config.rb#142
   def clusivity_config_for_badge?(badge); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def delete(*args, **_arg1, &block); end
 
   # source://rubocop//lib/rubocop/config.rb#108
   def deprecation_check; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def dig(*args, **_arg1, &block); end
 
   # @return [Boolean]
@@ -1033,10 +1033,10 @@ class RuboCop::Config
   # source://rubocop//lib/rubocop/config.rb#162
   def disabled_new_cops?; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def each(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def each_key(*args, **_arg1, &block); end
 
   # @return [Boolean]
@@ -1044,7 +1044,7 @@ class RuboCop::Config
   # source://rubocop//lib/rubocop/config.rb#166
   def enabled_new_cops?; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def fetch(*args, **_arg1, &block); end
 
   # @return [Boolean]
@@ -1098,10 +1098,10 @@ class RuboCop::Config
   # source://rubocop//lib/rubocop/config.rb#76
   def internal?; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def key?(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def keys(*args, **_arg1, &block); end
 
   # source://rubocop//lib/rubocop/config.rb#47
@@ -1115,10 +1115,10 @@ class RuboCop::Config
   # source://rubocop//lib/rubocop/config.rb#81
   def make_excludes_absolute; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def map(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def merge(*args, **_arg1, &block); end
 
   # source://rubocop//lib/rubocop/config.rb#247
@@ -1144,7 +1144,7 @@ class RuboCop::Config
   # source://rubocop//lib/rubocop/config.rb#207
   def possibly_include_hidden?; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def replace(*args, **_arg1, &block); end
 
   # source://rubocop//lib/rubocop/config.rb#71
@@ -1156,22 +1156,22 @@ class RuboCop::Config
   # source://rubocop//lib/rubocop/config.rb#251
   def target_rails_version; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def target_ruby_version(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def to_h(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def to_hash(*args, **_arg1, &block); end
 
   # source://rubocop//lib/rubocop/config.rb#67
   def to_s; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def transform_values(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def validate(*args, **_arg1, &block); end
 
   # source://rubocop//lib/rubocop/config.rb#58
@@ -2264,10 +2264,10 @@ class RuboCop::ConfigValidator
   # source://rubocop//lib/rubocop/config_validator.rb#26
   def initialize(config); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def for_all_cops(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def smart_loaded_path(*args, **_arg1, &block); end
 
   # source://rubocop//lib/rubocop/config_validator.rb#62
@@ -19396,7 +19396,7 @@ RuboCop::Cop::Lint::FloatOutOfRange::MSG = T.let(T.unsafe(nil), String)
 #
 #   format('Numbered format: %1$s and numbered %2$s', a_value, another)
 #
-# source://rubocop//lib/rubocop/cop/lint/format_parameter_mismatch.rb#38
+# source://rubocop//lib/rubocop/cop/lint/format_parameter_mismatch.rb#37
 class RuboCop::Cop::Lint::FormatParameterMismatch < ::RuboCop::Cop::Base
   # source://rubocop//lib/rubocop/cop/lint/format_parameter_mismatch.rb#100
   def called_on_string?(param0 = T.unsafe(nil)); end
@@ -29757,6 +29757,101 @@ class RuboCop::Cop::PunctuationCorrector
   end
 end
 
+module RuboCop::Cop::RSpec; end
+
+class RuboCop::Cop::RSpec::MultipleExpectations < ::RuboCop::Cop::RSpec::Base
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_expectations.rb#78
+  def aggregate_failures?(param0 = T.unsafe(nil), param1); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_expectations.rb#89
+  def aggregate_failures_block?(param0 = T.unsafe(nil)); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_expectations.rb#86
+  def expect?(param0 = T.unsafe(nil)); end
+
+  # source://rubocop//lib/rubocop/cop/exclude_limit.rb#11
+  def max=(value); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_expectations.rb#93
+  def on_block(node); end
+
+  private
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_expectations.rb#109
+  def example_with_aggregate_failures?(example_node); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_expectations.rb#116
+  def find_aggregate_failures(example_node); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_expectations.rb#121
+  def find_expectation(node, &block); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_expectations.rb#132
+  def flag_example(node, expectation_count:); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_expectations.rb#143
+  def max_expectations; end
+end
+
+class RuboCop::Cop::RSpec::MultipleMemoizedHelpers < ::RuboCop::Cop::RSpec::Base
+  # source://rubocop//lib/rubocop/cop/exclude_limit.rb#11
+  def max=(value); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_memoized_helpers.rb#91
+  def on_block(node); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_memoized_helpers.rb#102
+  def on_new_investigation; end
+
+  private
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_memoized_helpers.rb#111
+  def all_helpers(node); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_memoized_helpers.rb#141
+  def allow_subject?; end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_memoized_helpers.rb#109
+  def example_group_memoized_helpers; end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_memoized_helpers.rb#116
+  def helpers(node); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_memoized_helpers.rb#137
+  def max; end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/multiple_memoized_helpers.rb#127
+  def variable_nodes(node); end
+end
+
+class RuboCop::Cop::RSpec::NestedGroups < ::RuboCop::Cop::RSpec::Base
+  # source://rubocop//lib/rubocop/cop/exclude_limit.rb#11
+  def max=(value); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/nested_groups.rb#107
+  def on_top_level_group(node); end
+
+  private
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/nested_groups.rb#157
+  def allowed_groups; end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/nested_groups.rb#134
+  def count_up_nesting?(node, example_group); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/nested_groups.rb#119
+  def find_nested_example_groups(node, nesting: T.unsafe(nil), &block); end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/nested_groups.rb#144
+  def max_nesting; end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/nested_groups.rb#148
+  def max_nesting_config; end
+
+  # source://rubocop-rspec/3.0.3/lib/rubocop/cop/rspec/nested_groups.rb#140
+  def message(nesting); end
+end
+
 # Methods that calculate and return Parser::Source::Ranges
 #
 # source://rubocop//lib/rubocop/cop/mixin/range_help.rb#6
@@ -29958,7 +30053,7 @@ class RuboCop::Cop::Registry
   # @raise [AmbiguousCopName] if a bare identifier with two possible namespaces is provided
   # @return [String] Qualified cop name
   #
-  # source://rubocop-rspec_rails/2.29.1/lib/rubocop-rspec_rails.rb#26
+  # source://rubocop-rspec_rails/2.30.0/lib/rubocop-rspec_rails.rb#23
   def qualified_cop_name(name, path, warn: T.unsafe(nil)); end
 
   # source://rubocop//lib/rubocop/cop/registry.rb#166
@@ -39841,10 +39936,10 @@ class RuboCop::Cop::Style::MagicCommentFormat::CommentRange
   # source://rubocop//lib/rubocop/cop/style/magic_comment_format.rb#125
   def directives; end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def loc(*args, **_arg1, &block); end
 
-  # source://forwardable/1.3.2/forwardable.rb#229
+  # source://forwardable/1.3.3/forwardable.rb#231
   def text(*args, **_arg1, &block); end
 
   # A magic comment can contain one value (normal style) or
@@ -41995,7 +42090,7 @@ RuboCop::Cop::Style::MultipleComparison::MSG = T.let(T.unsafe(nil), String)
 #   # shareable_constant_value: literal
 #   CONST = [1, 2, 3]
 #
-# source://rubocop//lib/rubocop/cop/style/mutable_constant.rb#87
+# source://rubocop//lib/rubocop/cop/style/mutable_constant.rb#83
 class RuboCop::Cop::Style::MutableConstant < ::RuboCop::Cop::Base
   include ::RuboCop::Cop::Style::MutableConstant::ShareableConstantValue
   include ::RuboCop::Cop::FrozenStringLiteral
@@ -50888,7 +50983,7 @@ class RuboCop::Cop::Style::TrailingCommaInArguments < ::RuboCop::Cop::Base
   def on_send(node); end
 
   class << self
-    # source://rubocop-rspec/2.23.2/lib/rubocop-rspec.rb#59
+    # source://rubocop-capybara/2.21.0/lib/rubocop-capybara.rb#21
     def autocorrect_incompatible_with; end
   end
 end
