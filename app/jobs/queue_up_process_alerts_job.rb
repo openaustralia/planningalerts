@@ -4,6 +4,9 @@
 class QueueUpProcessAlertsJob
   extend T::Sig
   include Sidekiq::Job
+  # For sorbet's benefit
+  # Note that the name of this will change when we upgrade sidekiq
+  include Sidekiq::Worker::Options
 
   # Hopefully it's unlikely that this job will fail, since it only queues up other jobs
   # But if it were to fail we don't want it to retry automatically in case we end with
