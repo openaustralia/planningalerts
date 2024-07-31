@@ -57,18 +57,20 @@
   <dd class="ml-10 md:ml-0 md:py-1">
     <%= render "applications/scraped_and_received_text", application: @application %>
   </dd>
-  <%# TODO: Do we show the notified line if nobody has been notified? %>
-  <dt class="pt-6 font-bold md:pt-1 md:py-1">
-    <div class="flex gap-4">
-      <%= image_tag "letter.svg", width: 24, alt: "" %>
-      <div>Notified</div>
-    </div>
-  </dt>
-  <%# TODO: The link in notified text should go to the new alert sign up page %>
-  <%# TODO: Should we have the link at all now? %>
-  <dd class="ml-10 md:py-1 md:border-t border-light-grey2 md:ml-0">
-    <%= render "applications/notified_text", application: @application %>
-  </dd>
+  <%# Only show the notified line if people have been notified %>
+  <% if @application.no_alerted %>
+    <dt class="pt-6 font-bold md:pt-1 md:py-1">
+      <div class="flex gap-4">
+        <%= image_tag "letter.svg", width: 24, alt: "" %>
+        <div>Notified</div>
+      </div>
+    </dt>
+    <%# TODO: The link in notified text should go to the new alert sign up page %>
+    <%# TODO: Should we have the link at all now? %>
+    <dd class="ml-10 md:py-1 md:border-t border-light-grey2 md:ml-0">
+      <%= render "applications/notified_text", application: @application %>
+    </dd>
+  <% end %>
   <%# TODO: What to do if there are 0 comments? %>
   <dt class="pt-6 font-bold md:py-1 md:pt-1">
     <div class="flex gap-4">
