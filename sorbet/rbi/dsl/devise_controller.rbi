@@ -17,6 +17,7 @@ class DeviseController
     include ::ActionView::Helpers::CaptureHelper
     include ::ActionView::Helpers::OutputSafetyHelper
     include ::ActionView::Helpers::TagHelper
+    include ::ActionView::Helpers::ContentExfiltrationPreventionHelper
     include ::ActionView::Helpers::UrlHelper
     include ::ActionView::Helpers::AssetTagHelper
     include ::ActionView::Helpers::SanitizeHelper

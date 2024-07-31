@@ -18,6 +18,7 @@ class Rails::ApplicationController
     include ::ActionController::Base::HelperMethods
     include ::Admin::ApplicationHelper
     include ::ActionView::Helpers::AssetUrlHelper
+    include ::ActionView::Helpers::ContentExfiltrationPreventionHelper
     include ::ActionView::Helpers::UrlHelper
     include ::ActionView::Helpers::AssetTagHelper
     include ::ActionView::Helpers::SanitizeHelper

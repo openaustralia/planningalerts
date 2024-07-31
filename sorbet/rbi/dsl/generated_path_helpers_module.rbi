@@ -184,9 +184,6 @@ module GeneratedPathHelpersModule
   def edit_profile_alert_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def edit_rails_conductor_inbound_email_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def edit_user_password_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

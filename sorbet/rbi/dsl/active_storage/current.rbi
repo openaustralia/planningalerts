@@ -10,12 +10,6 @@ class ActiveStorage::Current
 
   class << self
     sig { returns(T.untyped) }
-    def host; end
-
-    sig { params(host: T.untyped).returns(T.untyped) }
-    def host=(host); end
-
-    sig { returns(T.untyped) }
     def url_options; end
 
     sig { params(value: T.untyped).returns(T.untyped) }
