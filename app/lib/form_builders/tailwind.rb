@@ -44,7 +44,7 @@ module FormBuilders
       super(method, options.merge(class: "#{file_field_style} #{options[:class]}"))
     end
 
-    sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, T.any(String, Symbol)]).returns(ActionView::OutputBuffer) }
+    sig { params(value: T.nilable(T.any(Symbol, String)), options: T::Hash[Symbol, T.any(String, Symbol)]).returns(ActiveSupport::SafeBuffer) }
     def button(value = nil, options = {})
       options = { tag: :button, size: "xl", type: :primary }.merge(options)
       template.render ::ButtonComponent.new(**T.unsafe(options)) do
