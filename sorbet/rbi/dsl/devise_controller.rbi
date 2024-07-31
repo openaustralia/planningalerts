@@ -38,7 +38,6 @@ class DeviseController
     include ::GeneratedUrlHelpersModule
     include ::GeneratedPathHelpersModule
     include ::ApiHowtoHelper
-    include ::AtdisHelper
     include ::AuthoritiesHelper
     include ::CommentsHelper
     include ::SignupHelper
