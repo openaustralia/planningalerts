@@ -30,6 +30,6 @@ class ContactMessagesController < ApplicationController
 
   sig { returns(ActionController::Parameters) }
   def contact_message_params
-    T.cast(params.require(:contact_message), ActionController::Parameters).permit(:name, :email, :reason, :details, { attachments: [] })
+    params.require(:contact_message).permit(:name, :email, :reason, :details, { attachments: [] })
   end
 end

@@ -107,6 +107,6 @@ class CommentsController < ApplicationController
 
   sig { returns(ActionController::Parameters) }
   def comment_params
-    T.cast(params.require(:comment), ActionController::Parameters).permit(:text, :name, :address)
+    params.require(:comment).permit(:text, :name, :address)
   end
 end
