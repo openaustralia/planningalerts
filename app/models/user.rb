@@ -26,10 +26,13 @@ class User < ApplicationRecord
   has_many :reports, dependent: :nullify
   has_many :contact_messages, dependent: :nullify
 
+  # rubocop:disable Style/ArgumentsForwarding
+  # TODO: Arguments forwarding doesn't seem to be supported by sorbet right now?
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
   end
+  # rubocop:enable Style/ArgumentsForwarding
 
   # This is currently used when creating users via an alert
   # TODO: Remove this as soon as users are purely being created by people registering
