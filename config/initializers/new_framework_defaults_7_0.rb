@@ -38,24 +38,24 @@ Rails.application.config.active_support.remove_deprecated_time_with_zone_name = 
 # This makes test cases behave closer to an actual request or job.
 # Several features that are normally disabled in test, such as Active Record query cache
 # and asynchronous queries will then be enabled.
-# Rails.application.config.active_support.executor_around_test_case = true
+Rails.application.config.active_support.executor_around_test_case = true
 
 # Define the isolation level of most of Rails internal state.
 # If you use a fiber based server or job processor, you should set it to `:fiber`.
 # Otherwise the default of `:thread` if preferable.
-# Rails.application.config.active_support.isolation_level = :thread
+Rails.application.config.active_support.isolation_level = :thread
 
 # Set both the `:open_timeout` and `:read_timeout` values for `:smtp` delivery method.
-# Rails.application.config.action_mailer.smtp_timeout = 5
+Rails.application.config.action_mailer.smtp_timeout = 5
 
 # The ActiveStorage video previewer will now use scene change detection to generate
 # better preview images (rather than the previous default of using the first frame
 # of the video).
-# Rails.application.config.active_storage.video_preview_arguments =
-#   "-vf 'select=eq(n\\,0)+eq(key\\,1)+gt(scene\\,0.015),loop=loop=-1:size=2,trim=start_frame=1' -frames:v 1 -f image2"
+Rails.application.config.active_storage.video_preview_arguments =
+  "-vf 'select=eq(n\\,0)+eq(key\\,1)+gt(scene\\,0.015),loop=loop=-1:size=2,trim=start_frame=1' -frames:v 1 -f image2"
 
 # Automatically infer `inverse_of` for associations with a scope.
-# Rails.application.config.active_record.automatic_scope_inversing = true
+Rails.application.config.active_record.automatic_scope_inversing = true
 
 # Raise when running tests if fixtures contained foreign key violations
 # Rails.application.config.active_record.verify_foreign_keys_for_fixtures = true
