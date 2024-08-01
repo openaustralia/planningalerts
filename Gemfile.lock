@@ -766,7 +766,7 @@ DEPENDENCIES
   activerecord-postgis-adapter
   administrate (~> 0.20.0)
   autoprefixer-rails
-  aws-sdk-s3 (~> 1)
+  aws-sdk-s3
   axe-core-capybara
   axe-core-rspec
   better_errors

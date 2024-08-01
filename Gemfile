@@ -119,7 +119,7 @@ gem "skylight"
 gem "view_component"
 
 # For uploading sitemaps to S3 and uploading attachments to S3 using active storage
-gem "aws-sdk-s3", "~> 1"
+gem "aws-sdk-s3"
 
 # For generating sitemaps for search engines
 gem "sitemap_generator"
