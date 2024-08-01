@@ -83,6 +83,12 @@ en:
         subject: "PlanningAlerts: Activate your account"
       already_activated:
         subject: "PlanningAlerts: Activate your account"
+  administrate:
+    field_hints:
+      authority:
+        short_name: Used to generate the authority URL. Can't be changed once created.
+        morph_name: The name of the scraper at morph.io
+        scraper_authority_label: If the scraper above supports multiple authorities enter the authority_label used
   admin:
     alerts:
       unsubscribe:
