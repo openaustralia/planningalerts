@@ -190,7 +190,7 @@ class ApiController < ApplicationController
         controller: params[:controller],
         action: params[:action],
         format: params[:format]
-      ).to_h,
+      ).to_hash,
       request.headers["User-Agent"],
       Time.zone.now.to_f
     )
