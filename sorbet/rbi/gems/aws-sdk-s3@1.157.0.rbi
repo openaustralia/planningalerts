@@ -148,72 +148,72 @@ class Aws::S3::AccessGrantsCredentialsProvider
   # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#42
   def initialize(options = T.unsafe(nil)); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#56
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#58
   def access_grants_credentials_for(options = T.unsafe(nil)); end
 
   # Returns the value of attribute s3_client.
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#77
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#79
   def s3_client; end
 
   # Sets the attribute s3_client
   #
   # @param value the value to set the attribute s3_client to.
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#77
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#79
   def s3_client=(_arg0); end
 
   private
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#154
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#156
   def account_id_for_access_grants(target, credentials); end
 
   # returns the account id for the configured credentials
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#204
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#213
   def account_id_for_credentials(region, credentials); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#131
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#133
   def broad_search_credentials_cache_characters(target, permission, credentials); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#120
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#122
   def broad_search_credentials_cache_prefix(target, permission, credentials); end
 
   # extracts bucket name from target prefix
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#236
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#245
   def bucket_name_from(target); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#183
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#185
   def bucket_region_for_access_grants(target); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#162
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#164
   def cached_account_id_for(target, credentials); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#189
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#191
   def cached_bucket_region_for(bucket); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#93
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#95
   def cached_credentials_for(target, permission, credentials); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#230
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#239
   def credentials_cache_key(target, permission, credentials); end
 
   # returns the account id associated with the access grants instance
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#173
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#175
   def new_account_id_for(target, credentials); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#197
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#199
   def new_bucket_region_for(bucket); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#142
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#144
   def new_credentials_for(target, permission, credentials); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#81
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#83
   def s3_control_client(bucket_region); end
 
-  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#220
+  # source://aws-sdk-s3//lib/aws-sdk-s3/access_grants_credentials_provider.rb#229
   def target_prefix(bucket, key, prefix); end
 end
 
@@ -26726,19 +26726,19 @@ end
 class Aws::S3::Plugins::AccessGrants < ::Seahorse::Client::Plugin
   # @api private
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#93
+  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#157
   def add_handlers(handlers, config); end
 
   # @api private
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#99
+  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#163
   def after_initialize(client); end
 
   class << self
     # @api private
     # @return [Boolean]
     #
-    # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#107
+    # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#171
     def s3control?; end
   end
 end
@@ -26749,7 +26749,7 @@ end
 class Aws::S3::Plugins::AccessGrants::Handler < ::Seahorse::Client::Handler
   # @api private
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#56
+  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#60
   def call(context); end
 
   private
@@ -26757,18 +26757,36 @@ class Aws::S3::Plugins::AccessGrants::Handler < ::Seahorse::Client::Handler
   # @api private
   # @return [Boolean]
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#83
+  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#111
   def access_grants_operation?(context); end
+
+  # Return the common prefix of the keys, regardless of the delimiter.
+  # For example, given keys ['foo/bar', 'foo/baz'], the common prefix
+  # is 'foo/ba'.
+  #
+  # @api private
+  #
+  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#123
+  def common_prefixes(keys); end
+
+  # HeadBucket is a supported call. When fetching credentials,
+  # this plugin is executed again, and becomes recursive.
+  #
+  # @api private
+  # @return [Boolean]
+  #
+  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#107
+  def credentials_head_bucket_call?(provider); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#88
+  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#116
   def s3_express_endpoint?(context); end
 
   # @api private
   #
-  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#77
+  # source://aws-sdk-s3//lib/aws-sdk-s3/plugins/access_grants.rb#99
   def with_metric(credentials, &block); end
 end
 
