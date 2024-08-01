@@ -44,48 +44,32 @@ class AuthorityDashboard < Administrate::BaseDashboard
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = T.let(%i[
-    full_name
-    short_name
-    state
-    email
-    wikidata_id
-    website_url
-    population_2021
-    asgs_2021
-    morph_name
-    scraper_authority_label
-    disabled
-    last_scraper_run_log
-  ].freeze, T::Array[Symbol])
+  SHOW_PAGE_ATTRIBUTES = T.let(
+    {
+      "Name" => %i[full_name short_name],
+      "Details" => %i[state email wikidata_id website_url population_2021 asgs_2021],
+      "Scraping" => %i[morph_name scraper_authority_label disabled last_scraper_run_log]
+    }.freeze, T::Hash[String, T::Array[Symbol]]
+  )
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = T.let(%i[
-    full_name
-    short_name
-    state
-    email
-    wikidata_id
-    website_url
-    population_2021
-    morph_name
-    scraper_authority_label
-    disabled
-  ].freeze, T::Array[Symbol])
+  FORM_ATTRIBUTES = T.let(
+    {
+      "Name" => %i[full_name short_name],
+      "Details" => %i[state email wikidata_id website_url population_2021],
+      "Scraping" => %i[morph_name scraper_authority_label disabled]
+    }.freeze, T::Hash[String, T::Array[Symbol]]
+  )
 
-  FORM_ATTRIBUTES_EDIT = T.let(%i[
-    full_name
-    state
-    email
-    wikidata_id
-    website_url
-    population_2021
-    morph_name
-    scraper_authority_label
-    disabled
-  ].freeze, T::Array[Symbol])
+  FORM_ATTRIBUTES_EDIT = T.let(
+    {
+      "" => %i[full_name],
+      "Details" => %i[state email wikidata_id website_url population_2021],
+      "Scraping" => %i[morph_name scraper_authority_label disabled]
+    }.freeze, T::Hash[String, T::Array[Symbol]]
+  )
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search

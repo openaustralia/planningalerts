@@ -60,12 +60,12 @@ class CommentDashboard < Administrate::BaseDashboard
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = T.let(%i[
-    text
-    name
-    address
-    hidden
-  ].freeze, T::Array[Symbol])
+  FORM_ATTRIBUTES = T.let(
+    {
+      "Moderate comment" => %i[text hidden],
+      "Person details" => %i[name address]
+    }.freeze, T::Hash[String, T::Array[Symbol]]
+  )
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
