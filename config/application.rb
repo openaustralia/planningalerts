@@ -51,11 +51,6 @@ module PlanningalertsApp
 
     config.exceptions_app = routes
 
-    # Precompile additional assets.
-    # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-    # TODO: Move this to config/initializers/assets.rb as is the latest way
-    config.assets.precompile += %w[tailwind.css administrate_pill.css bar_graph.js]
-
     config.assets.css_compressor = SkippingSassCompressor.new
 
     # Application configuration
