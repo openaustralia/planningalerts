@@ -213,4 +213,10 @@ describe Application do
       it { expect(application.official_submission_period_expired?).to be false }
     end
   end
+
+  describe "#search_data" do
+    it "does not try indexing the geo data directly because elasticsearch can't handle this" do
+      expect(create(:geocoded_application).search_data).not_to have_key(:lonlat)
+    end
+  end
 end

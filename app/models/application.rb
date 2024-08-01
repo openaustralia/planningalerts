@@ -30,7 +30,11 @@ class Application < ApplicationRecord
   def search_data
     # lat and lon need to be symbols (rather than strings) in search_data
     # to get valid data come through searchkick for some reason
-    attributes.symbolize_keys.merge(location: { lat:, lon: lng })
+    r = attributes.symbolize_keys.merge(location: { lat:, lon: lng })
+    # lonlat is encoded geo data and elasticsearch is unhappy to index this. So skip it.
+    # We're capturing the geodata anyway via the "location" key
+    r.delete(:lonlat)
+    r
   end
 
   # For the benefit of kaminari. Also sets the maximum number of
