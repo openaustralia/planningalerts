@@ -89,6 +89,10 @@ en:
         short_name: Used to generate the authority URL. Can't be changed once created.
         morph_name: The name of the scraper at morph.io
         scraper_authority_label: If the scraper above supports multiple authorities enter the authority_label used
+      api_key:
+        bulk: Give access to the "bulk" API which allows easy downloading of all data incrementally. Only given to select customers.
+        commercial: Are they a paying commercial customer?
+        daily_limit: Override default daily number of allowed API requests
   admin:
     alerts:
       unsubscribe:
