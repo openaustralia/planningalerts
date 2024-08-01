@@ -7,3 +7,5 @@ gem:
     - spoom
     - tapioca
     - rbi
+    - sassc-rails
+    - sprockets-rails
