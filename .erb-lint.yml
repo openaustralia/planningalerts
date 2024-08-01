@@ -7,6 +7,10 @@ exclude:
   - app/views/devise/mailer/reset_password_instructions.html.erb
   - app/views/devise/mailer/unlock_instructions.html.erb
   - app/views/users/activation_mailer/notify.html.erb
+  # These files are overridden templates from administrate so we don't want them to change too much from the original
+  - app/views/admin/application/show.html.erb
+  - app/views/admin/application/index.html.erb
+  - app/views/admin/application/_index_header.html.erb
 EnableDefaultLinters: true
 linters:
   PartialInstanceVariable:
