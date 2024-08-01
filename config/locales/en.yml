@@ -86,6 +86,8 @@ en:
   administrate:
     field_hints:
       authority:
+        email: Where comments on applications are to be sent
+        wikidata_id: The unique identifier on wikidata.org for this authority. Used to download boundary data.
         short_name: Used to generate the authority URL. Can't be changed once created.
         morph_name: The name of the scraper at morph.io
         scraper_authority_label: If the scraper above supports multiple authorities enter the authority_label used
