@@ -8,31 +8,34 @@
 # source://administrate//lib/administrate/namespace/resource.rb#1
 module Administrate
   class << self
-    # source://railties/7.0.8.4/lib/rails/engine.rb#405
+    # source://administrate//lib/administrate.rb#43
+    def deprecator; end
+
+    # source://railties/7.1.3.4/lib/rails/engine.rb#412
     def railtie_helpers_paths; end
 
-    # source://railties/7.0.8.4/lib/rails/engine.rb#394
+    # source://railties/7.1.3.4/lib/rails/engine.rb#395
     def railtie_namespace; end
 
-    # source://railties/7.0.8.4/lib/rails/engine.rb#409
+    # source://railties/7.1.3.4/lib/rails/engine.rb#416
     def railtie_routes_url_helpers(include_path_helpers = T.unsafe(nil)); end
 
-    # source://railties/7.0.8.4/lib/rails/engine.rb#397
+    # source://railties/7.1.3.4/lib/rails/engine.rb#401
     def table_name_prefix; end
 
-    # source://railties/7.0.8.4/lib/rails/engine.rb#401
+    # source://railties/7.1.3.4/lib/rails/engine.rb#408
     def use_relative_model_naming?; end
 
-    # source://administrate//lib/administrate.rb#34
+    # source://administrate//lib/administrate.rb#35
     def warn_of_deprecated_authorization_method(method); end
 
-    # source://administrate//lib/administrate.rb#24
+    # source://administrate//lib/administrate.rb#25
     def warn_of_deprecated_method(klass, method); end
 
-    # source://administrate//lib/administrate.rb#14
+    # source://administrate//lib/administrate.rb#15
     def warn_of_deprecated_option(name); end
 
-    # source://administrate//lib/administrate.rb#4
+    # source://administrate//lib/administrate.rb#5
     def warn_of_missing_resource_class; end
   end
 end
@@ -52,7 +55,7 @@ class Administrate::ApplicationController < ::ActionController::Base
 
   private
 
-  # source://actionview/7.0.8.4/lib/action_view/layouts.rb#328
+  # source://actionview/7.1.3.4/lib/action_view/layouts.rb#330
   def _layout(lookup_context, formats); end
 
   def after_resource_created_path(requested_resource); end
@@ -89,13 +92,13 @@ class Administrate::ApplicationController < ::ActionController::Base
   def valid_action?(action_name, resource = T.unsafe(nil)); end
 
   class << self
-    # source://activesupport/7.0.8.4/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
     def __callbacks; end
 
-    # source://actionpack/7.0.8.4/lib/abstract_controller/helpers.rb#11
+    # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
     def _helper_methods; end
 
-    # source://actionpack/7.0.8.4/lib/action_controller/metal.rb#210
+    # source://actionpack/7.1.3.4/lib/action_controller/metal.rb#262
     def middleware_stack; end
   end
 end
@@ -152,31 +155,31 @@ class Administrate::BaseDashboard
   # source://administrate//lib/administrate/base_dashboard.rb#43
   def attribute_types_for(attribute_names); end
 
-  # source://administrate//lib/administrate/base_dashboard.rb#85
+  # source://administrate//lib/administrate/base_dashboard.rb#91
   def collection_attributes; end
 
-  # source://administrate//lib/administrate/base_dashboard.rb#99
+  # source://administrate//lib/administrate/base_dashboard.rb#109
   def collection_includes; end
 
-  # source://administrate//lib/administrate/base_dashboard.rb#95
+  # source://administrate//lib/administrate/base_dashboard.rb#105
   def display_resource(resource); end
 
   # source://administrate//lib/administrate/base_dashboard.rb#53
   def form_attributes(action = T.unsafe(nil)); end
 
-  # source://administrate//lib/administrate/base_dashboard.rb#109
+  # source://administrate//lib/administrate/base_dashboard.rb#119
   def item_associations; end
 
-  # source://administrate//lib/administrate/base_dashboard.rb#103
+  # source://administrate//lib/administrate/base_dashboard.rb#113
   def item_includes; end
 
   # source://administrate//lib/administrate/base_dashboard.rb#71
   def permitted_attributes(action = T.unsafe(nil)); end
 
-  # source://administrate//lib/administrate/base_dashboard.rb#89
+  # source://administrate//lib/administrate/base_dashboard.rb#99
   def search_attributes; end
 
-  # source://administrate//lib/administrate/base_dashboard.rb#81
+  # source://administrate//lib/administrate/base_dashboard.rb#87
   def show_page_attributes; end
 
   # source://administrate//lib/administrate/base_dashboard.rb#63
@@ -184,13 +187,13 @@ class Administrate::BaseDashboard
 
   private
 
-  # source://administrate//lib/administrate/base_dashboard.rb#127
+  # source://administrate//lib/administrate/base_dashboard.rb#142
   def attribute_associated(attributes); end
 
-  # source://administrate//lib/administrate/base_dashboard.rb#119
+  # source://administrate//lib/administrate/base_dashboard.rb#134
   def attribute_includes(attributes); end
 
-  # source://administrate//lib/administrate/base_dashboard.rb#115
+  # source://administrate//lib/administrate/base_dashboard.rb#130
   def attribute_not_found_message(attr); end
 
   class << self
@@ -221,7 +224,7 @@ end
 # source://administrate//lib/administrate/engine.rb#19
 class Administrate::Engine < ::Rails::Engine
   class << self
-    # source://activesupport/7.0.8.4/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
     def __callbacks; end
 
     # source://administrate//lib/administrate/engine.rb#32
@@ -501,58 +504,58 @@ class Administrate::Field::HasMany < ::Administrate::Field::Associative
   # source://administrate//lib/administrate/field/has_many.rb#24
   def associated_collection(order = T.unsafe(nil)); end
 
-  # source://administrate//lib/administrate/field/has_many.rb#32
+  # source://administrate//lib/administrate/field/has_many.rb#36
   def associated_resource_options; end
 
-  # source://administrate//lib/administrate/field/has_many.rb#28
+  # source://administrate//lib/administrate/field/has_many.rb#32
   def attribute_key; end
 
-  # source://administrate//lib/administrate/field/has_many.rb#74
+  # source://administrate//lib/administrate/field/has_many.rb#78
   def data; end
 
-  # source://administrate//lib/administrate/field/has_many.rb#47
+  # source://administrate//lib/administrate/field/has_many.rb#51
   def limit; end
 
   # @return [Boolean]
   #
-  # source://administrate//lib/administrate/field/has_many.rb#70
+  # source://administrate//lib/administrate/field/has_many.rb#74
   def more_than_limit?; end
 
-  # source://administrate//lib/administrate/field/has_many.rb#85
+  # source://administrate//lib/administrate/field/has_many.rb#89
   def order; end
 
-  # source://administrate//lib/administrate/field/has_many.rb#78
+  # source://administrate//lib/administrate/field/has_many.rb#82
   def order_from_params(params); end
 
   # @return [Boolean]
   #
-  # source://administrate//lib/administrate/field/has_many.rb#51
+  # source://administrate//lib/administrate/field/has_many.rb#55
   def paginate?; end
 
-  # source://administrate//lib/administrate/field/has_many.rb#55
+  # source://administrate//lib/administrate/field/has_many.rb#59
   def permitted_attribute; end
 
-  # source://administrate//lib/administrate/field/has_many.rb#62
+  # source://administrate//lib/administrate/field/has_many.rb#66
   def resources(page = T.unsafe(nil), order = T.unsafe(nil)); end
 
-  # source://administrate//lib/administrate/field/has_many.rb#41
+  # source://administrate//lib/administrate/field/has_many.rb#45
   def selected_options; end
 
   private
 
-  # source://administrate//lib/administrate/field/has_many.rb#95
+  # source://administrate//lib/administrate/field/has_many.rb#99
   def candidate_resources; end
 
-  # source://administrate//lib/administrate/field/has_many.rb#112
+  # source://administrate//lib/administrate/field/has_many.rb#116
   def direction; end
 
-  # source://administrate//lib/administrate/field/has_many.rb#104
+  # source://administrate//lib/administrate/field/has_many.rb#108
   def display_candidate_resource(resource); end
 
-  # source://administrate//lib/administrate/field/has_many.rb#91
+  # source://administrate//lib/administrate/field/has_many.rb#95
   def includes; end
 
-  # source://administrate//lib/administrate/field/has_many.rb#108
+  # source://administrate//lib/administrate/field/has_many.rb#112
   def sort_by; end
 
   class << self
@@ -861,7 +864,7 @@ class Administrate::Order
   # source://administrate//lib/administrate/order.rb#36
   def association_attribute; end
 
-  # source://administrate//lib/administrate/order.rb#141
+  # source://administrate//lib/administrate/order.rb#142
   def association_table_name; end
 
   # Returns the value of attribute attribute.
@@ -874,7 +877,7 @@ class Administrate::Order
   # source://administrate//lib/administrate/order.rb#113
   def column_exist?(table, column_name); end
 
-  # source://administrate//lib/administrate/order.rb#137
+  # source://administrate//lib/administrate/order.rb#138
   def foreign_key(relation); end
 
   # source://administrate//lib/administrate/order.rb#50
@@ -915,10 +918,10 @@ class Administrate::Order
   # source://administrate//lib/administrate/order.rb#106
   def ordering_by_association_column?(relation); end
 
-  # source://administrate//lib/administrate/order.rb#133
+  # source://administrate//lib/administrate/order.rb#134
   def reflect_association(relation); end
 
-  # source://administrate//lib/administrate/order.rb#129
+  # source://administrate//lib/administrate/order.rb#130
   def relation_type(relation); end
 
   # source://administrate//lib/administrate/order.rb#42
@@ -977,24 +980,24 @@ class Administrate::Page::Collection < ::Administrate::Page::Base
   # source://administrate//lib/administrate/page/collection.rb#6
   def attribute_names; end
 
-  # source://administrate//lib/administrate/page/collection.rb#16
+  # source://administrate//lib/administrate/page/collection.rb#17
   def attribute_types; end
 
-  # source://administrate//lib/administrate/page/collection.rb#10
+  # source://administrate//lib/administrate/page/collection.rb#11
   def attributes_for(resource); end
 
-  # source://administrate//lib/administrate/page/collection.rb#26
+  # source://administrate//lib/administrate/page/collection.rb#27
   def order_params_for(attr, key: T.unsafe(nil)); end
 
-  # source://administrate//lib/administrate/page/collection.rb#24
+  # source://administrate//lib/administrate/page/collection.rb#25
   def ordered_by?(*_arg0, **_arg1, &_arg2); end
 
-  # source://administrate//lib/administrate/page/collection.rb#20
+  # source://administrate//lib/administrate/page/collection.rb#21
   def ordered_html_class(attr); end
 
   private
 
-  # source://administrate//lib/administrate/page/collection.rb#32
+  # source://administrate//lib/administrate/page/collection.rb#33
   def order; end
 end
 
@@ -1008,7 +1011,7 @@ class Administrate::Page::Form < ::Administrate::Page::Base
   # source://administrate//lib/administrate/page/form.rb#13
   def attributes(action = T.unsafe(nil)); end
 
-  # source://administrate//lib/administrate/page/form.rb#19
+  # source://administrate//lib/administrate/page/form.rb#27
   def page_title; end
 
   # Returns the value of attribute resource.
@@ -1020,7 +1023,7 @@ class Administrate::Page::Form < ::Administrate::Page::Base
 
   # Returns the value of attribute dashboard.
   #
-  # source://administrate//lib/administrate/page/form.rb#25
+  # source://administrate//lib/administrate/page/form.rb#33
   def dashboard; end
 end
 
@@ -1049,8 +1052,12 @@ module Administrate::Punditize
 
   private
 
+  def authorize_resource(resource); end
+  def authorized_action?(resource, action); end
+  def policy_namespace; end
   def policy_scope!(user, scope); end
   def pundit_model(record); end
+  def scoped_resource; end
 end
 
 # source://administrate//lib/administrate/resource_resolver.rb#2
@@ -1200,3 +1207,6 @@ class Administrate::Search::Query
   # source://administrate//lib/administrate/search.rb#37
   def parse_query(query); end
 end
+
+# source://administrate//lib/administrate/version.rb#2
+Administrate::VERSION = T.let(T.unsafe(nil), String)

@@ -18,8 +18,7 @@ gem "dalli"
 gem "rack-attack"
 
 # Admin interface
-# TODO: There's a breaking change in 0.20. Upgrade as soon as we can
-gem "administrate", "~> 0.19.0"
+gem "administrate", "~> 0.20.0"
 
 # Logging in and such things
 gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
