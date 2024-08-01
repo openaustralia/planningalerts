@@ -8,24 +8,6 @@
 # source://email_spec//lib/email_spec/deliveries.rb#1
 module EmailSpec; end
 
-# source://email_spec//lib/email_spec/deliveries.rb#34
-module EmailSpec::ARMailerDeliveries
-  # source://email_spec//lib/email_spec/deliveries.rb#35
-  def all_emails; end
-
-  # source://email_spec//lib/email_spec/deliveries.rb#39
-  def last_email_sent; end
-
-  # source://email_spec//lib/email_spec/deliveries.rb#51
-  def mailbox_for(address); end
-
-  # source://email_spec//lib/email_spec/deliveries.rb#55
-  def parse_to_mail(email); end
-
-  # source://email_spec//lib/email_spec/deliveries.rb#47
-  def reset_mailer; end
-end
-
 # source://email_spec//lib/email_spec/address_converter.rb#4
 class EmailSpec::AddressConverter
   include ::Singleton
@@ -71,17 +53,34 @@ end
 # source://email_spec//lib/email_spec/errors.rb#2
 class EmailSpec::CouldNotFindEmailError < ::StandardError; end
 
-# source://email_spec//lib/email_spec/deliveries.rb#72
+# source://email_spec//lib/email_spec/deliveries.rb#2
 module EmailSpec::Deliveries
-  include ::EmailSpec::MailerDeliveries
+  # source://email_spec//lib/email_spec/deliveries.rb#3
+  def all_emails; end
 
-  # source://email_spec//lib/email_spec/deliveries.rb#79
+  # source://email_spec//lib/email_spec/deliveries.rb#7
+  def last_email_sent; end
+
+  # source://email_spec//lib/email_spec/deliveries.rb#21
+  def mailbox_for(address); end
+
+  # source://email_spec//lib/email_spec/deliveries.rb#11
+  def reset_mailer; end
+
+  protected
+
+  # source://email_spec//lib/email_spec/deliveries.rb#27
+  def deliveries; end
+
+  # source://email_spec//lib/email_spec/deliveries.rb#39
   def mailer; end
+
+  # source://email_spec//lib/email_spec/deliveries.rb#43
+  def parse_ar_to_mail(email); end
 end
 
 # source://email_spec//lib/email_spec/email_viewer.rb#2
 class EmailSpec::EmailViewer
-  extend ::EmailSpec::MailerDeliveries
   extend ::EmailSpec::Deliveries
 
   class << self
@@ -111,9 +110,65 @@ class EmailSpec::EmailViewer
   end
 end
 
+# source://email_spec//lib/email_spec/extractors.rb#2
+module EmailSpec::Extractors; end
+
+# source://email_spec//lib/email_spec/extractors.rb#3
+class EmailSpec::Extractors::Base
+  # @return [Base] a new instance of Base
+  #
+  # source://email_spec//lib/email_spec/extractors.rb#6
+  def initialize(mail); end
+
+  # source://email_spec//lib/email_spec/extractors.rb#10
+  def call; end
+
+  # Returns the value of attribute mail.
+  #
+  # source://email_spec//lib/email_spec/extractors.rb#4
+  def mail; end
+
+  # Sets the attribute mail
+  #
+  # @param value the value to set the attribute mail to.
+  #
+  # source://email_spec//lib/email_spec/extractors.rb#4
+  def mail=(_arg0); end
+
+  private
+
+  # @raise [NotImplementedError]
+  #
+  # source://email_spec//lib/email_spec/extractors.rb#16
+  def part_body; end
+end
+
+# source://email_spec//lib/email_spec/extractors.rb#21
+class EmailSpec::Extractors::DefaultPartBody < ::EmailSpec::Extractors::Base
+  private
+
+  # source://email_spec//lib/email_spec/extractors.rb#24
+  def part_body; end
+end
+
+# source://email_spec//lib/email_spec/extractors.rb#29
+class EmailSpec::Extractors::HtmlPartBody < ::EmailSpec::Extractors::Base
+  private
+
+  # source://email_spec//lib/email_spec/extractors.rb#32
+  def part_body; end
+end
+
+# source://email_spec//lib/email_spec/extractors.rb#37
+class EmailSpec::Extractors::TextPartBody < ::EmailSpec::Extractors::Base
+  private
+
+  # source://email_spec//lib/email_spec/extractors.rb#40
+  def part_body; end
+end
+
 # source://email_spec//lib/email_spec/helpers.rb#6
 module EmailSpec::Helpers
-  include ::EmailSpec::MailerDeliveries
   include ::EmailSpec::Deliveries
 
   # source://email_spec//lib/email_spec/helpers.rb#21
@@ -231,303 +286,289 @@ module EmailSpec::MailExt
   def html; end
 end
 
-# source://email_spec//lib/email_spec/deliveries.rb#2
-module EmailSpec::MailerDeliveries
-  # source://email_spec//lib/email_spec/deliveries.rb#3
-  def all_emails; end
-
-  # source://email_spec//lib/email_spec/deliveries.rb#7
-  def last_email_sent; end
-
-  # source://email_spec//lib/email_spec/deliveries.rb#19
-  def mailbox_for(address); end
-
-  # source://email_spec//lib/email_spec/deliveries.rb#11
-  def reset_mailer; end
-
-  protected
-
-  # source://email_spec//lib/email_spec/deliveries.rb#25
-  def deliveries; end
-end
-
-# source://email_spec//lib/email_spec/matchers.rb#2
+# source://email_spec//lib/email_spec/matchers.rb#4
 module EmailSpec::Matchers
-  # source://email_spec//lib/email_spec/matchers.rb#145
+  # source://email_spec//lib/email_spec/matchers.rb#147
   def bcc_to(*expected_email_addresses_or_objects_that_respond_to_email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#109
+  # source://email_spec//lib/email_spec/matchers.rb#111
   def be_delivered_from(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#75
+  # source://email_spec//lib/email_spec/matchers.rb#77
   def be_delivered_to(*expected_email_addresses_or_objects_that_respond_to_email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#179
+  # source://email_spec//lib/email_spec/matchers.rb#181
   def cc_to(*expected_email_addresses_or_objects_that_respond_to_email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#109
+  # source://email_spec//lib/email_spec/matchers.rb#111
   def deliver_from(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#75
+  # source://email_spec//lib/email_spec/matchers.rb#77
   def deliver_to(*expected_email_addresses_or_objects_that_respond_to_email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#316
+  # source://email_spec//lib/email_spec/matchers.rb#329
   def have_body_text(text); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#365
+  # source://email_spec//lib/email_spec/matchers.rb#385
   def have_header(name, value); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#39
+  # source://email_spec//lib/email_spec/matchers.rb#41
   def have_reply_to(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#224
+  # source://email_spec//lib/email_spec/matchers.rb#226
   def have_subject(subject); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#269
+  # source://email_spec//lib/email_spec/matchers.rb#271
   def include_email_with_subject(*emails); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#39
+  # source://email_spec//lib/email_spec/matchers.rb#41
   def reply_to(email); end
 
   class << self
     # @private
     #
-    # source://email_spec//lib/email_spec/matchers.rb#369
+    # source://email_spec//lib/email_spec/matchers.rb#389
     def included(base); end
   end
 end
 
-# source://email_spec//lib/email_spec/matchers.rb#115
+# source://email_spec//lib/email_spec/matchers.rb#117
 class EmailSpec::Matchers::BccTo < ::EmailSpec::Matchers::EmailMatcher
   # @return [BccTo] a new instance of BccTo
   #
-  # source://email_spec//lib/email_spec/matchers.rb#117
+  # source://email_spec//lib/email_spec/matchers.rb#119
   def initialize(expected_email_addresses_or_objects_that_respond_to_email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#125
+  # source://email_spec//lib/email_spec/matchers.rb#127
   def description; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#135
+  # source://email_spec//lib/email_spec/matchers.rb#137
   def failure_message; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#139
+  # source://email_spec//lib/email_spec/matchers.rb#141
   def failure_message_when_negated; end
 
   # @return [Boolean]
   #
-  # source://email_spec//lib/email_spec/matchers.rb#129
+  # source://email_spec//lib/email_spec/matchers.rb#131
   def matches?(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#139
+  # source://email_spec//lib/email_spec/matchers.rb#141
   def negative_failure_message; end
 end
 
-# source://email_spec//lib/email_spec/matchers.rb#149
+# source://email_spec//lib/email_spec/matchers.rb#151
 class EmailSpec::Matchers::CcTo < ::EmailSpec::Matchers::EmailMatcher
   # @return [CcTo] a new instance of CcTo
   #
-  # source://email_spec//lib/email_spec/matchers.rb#151
+  # source://email_spec//lib/email_spec/matchers.rb#153
   def initialize(expected_email_addresses_or_objects_that_respond_to_email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#159
+  # source://email_spec//lib/email_spec/matchers.rb#161
   def description; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#169
+  # source://email_spec//lib/email_spec/matchers.rb#171
   def failure_message; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#173
+  # source://email_spec//lib/email_spec/matchers.rb#175
   def failure_message_when_negated; end
 
   # @return [Boolean]
   #
-  # source://email_spec//lib/email_spec/matchers.rb#163
+  # source://email_spec//lib/email_spec/matchers.rb#165
   def matches?(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#173
+  # source://email_spec//lib/email_spec/matchers.rb#175
   def negative_failure_message; end
 end
 
-# source://email_spec//lib/email_spec/matchers.rb#81
+# source://email_spec//lib/email_spec/matchers.rb#83
 class EmailSpec::Matchers::DeliverFrom < ::EmailSpec::Matchers::EmailMatcher
   # @return [DeliverFrom] a new instance of DeliverFrom
   #
-  # source://email_spec//lib/email_spec/matchers.rb#83
+  # source://email_spec//lib/email_spec/matchers.rb#85
   def initialize(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#87
+  # source://email_spec//lib/email_spec/matchers.rb#89
   def description; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#99
+  # source://email_spec//lib/email_spec/matchers.rb#101
   def failure_message; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#103
+  # source://email_spec//lib/email_spec/matchers.rb#105
   def failure_message_when_negated; end
 
   # @return [Boolean]
   #
-  # source://email_spec//lib/email_spec/matchers.rb#91
+  # source://email_spec//lib/email_spec/matchers.rb#93
   def matches?(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#103
+  # source://email_spec//lib/email_spec/matchers.rb#105
   def negative_failure_message; end
 end
 
-# source://email_spec//lib/email_spec/matchers.rb#45
+# source://email_spec//lib/email_spec/matchers.rb#47
 class EmailSpec::Matchers::DeliverTo < ::EmailSpec::Matchers::EmailMatcher
   # @return [DeliverTo] a new instance of DeliverTo
   #
-  # source://email_spec//lib/email_spec/matchers.rb#46
+  # source://email_spec//lib/email_spec/matchers.rb#48
   def initialize(expected_email_addresses_or_objects_that_respond_to_email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#54
+  # source://email_spec//lib/email_spec/matchers.rb#56
   def description; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#65
+  # source://email_spec//lib/email_spec/matchers.rb#67
   def failure_message; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#69
+  # source://email_spec//lib/email_spec/matchers.rb#71
   def failure_message_when_negated; end
 
   # @return [Boolean]
   #
-  # source://email_spec//lib/email_spec/matchers.rb#58
+  # source://email_spec//lib/email_spec/matchers.rb#60
   def matches?(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#69
+  # source://email_spec//lib/email_spec/matchers.rb#71
   def negative_failure_message; end
 end
 
-# source://email_spec//lib/email_spec/matchers.rb#3
+# source://email_spec//lib/email_spec/matchers.rb#5
 class EmailSpec::Matchers::EmailMatcher
-  # source://email_spec//lib/email_spec/matchers.rb#4
+  # source://email_spec//lib/email_spec/matchers.rb#6
   def address_array; end
 end
 
-# source://email_spec//lib/email_spec/matchers.rb#273
+# source://email_spec//lib/email_spec/matchers.rb#275
 class EmailSpec::Matchers::HaveBodyText
   # @return [HaveBodyText] a new instance of HaveBodyText
   #
-  # source://email_spec//lib/email_spec/matchers.rb#275
+  # source://email_spec//lib/email_spec/matchers.rb#277
   def initialize(text); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#279
+  # source://email_spec//lib/email_spec/matchers.rb#282
   def description; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#298
+  # source://email_spec//lib/email_spec/matchers.rb#311
   def failure_message; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#306
+  # source://email_spec//lib/email_spec/matchers.rb#319
   def failure_message_when_negated; end
+
+  # source://email_spec//lib/email_spec/matchers.rb#290
+  def in_html_part; end
+
+  # source://email_spec//lib/email_spec/matchers.rb#295
+  def in_text_part; end
 
   # @return [Boolean]
   #
-  # source://email_spec//lib/email_spec/matchers.rb#287
+  # source://email_spec//lib/email_spec/matchers.rb#300
   def matches?(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#306
+  # source://email_spec//lib/email_spec/matchers.rb#319
   def negative_failure_message; end
 end
 
-# source://email_spec//lib/email_spec/matchers.rb#320
+# source://email_spec//lib/email_spec/matchers.rb#333
 class EmailSpec::Matchers::HaveHeader
   # @return [HaveHeader] a new instance of HaveHeader
   #
-  # source://email_spec//lib/email_spec/matchers.rb#322
+  # source://email_spec//lib/email_spec/matchers.rb#335
   def initialize(name, value); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#326
+  # source://email_spec//lib/email_spec/matchers.rb#339
   def description; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#343
+  # source://email_spec//lib/email_spec/matchers.rb#356
   def failure_message; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#351
+  # source://email_spec//lib/email_spec/matchers.rb#364
   def failure_message_when_negated; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#360
+  # source://email_spec//lib/email_spec/matchers.rb#373
   def mail_headers_hash(email_headers); end
 
   # @return [Boolean]
   #
-  # source://email_spec//lib/email_spec/matchers.rb#334
+  # source://email_spec//lib/email_spec/matchers.rb#347
   def matches?(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#351
+  # source://email_spec//lib/email_spec/matchers.rb#364
   def negative_failure_message; end
 end
 
-# source://email_spec//lib/email_spec/matchers.rb#183
+# source://email_spec//lib/email_spec/matchers.rb#185
 class EmailSpec::Matchers::HaveSubject
   # @return [HaveSubject] a new instance of HaveSubject
   #
-  # source://email_spec//lib/email_spec/matchers.rb#185
+  # source://email_spec//lib/email_spec/matchers.rb#187
   def initialize(subject); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#189
+  # source://email_spec//lib/email_spec/matchers.rb#191
   def description; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#206
+  # source://email_spec//lib/email_spec/matchers.rb#208
   def failure_message; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#214
+  # source://email_spec//lib/email_spec/matchers.rb#216
   def failure_message_when_negated; end
 
   # @return [Boolean]
   #
-  # source://email_spec//lib/email_spec/matchers.rb#197
+  # source://email_spec//lib/email_spec/matchers.rb#199
   def matches?(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#214
+  # source://email_spec//lib/email_spec/matchers.rb#216
   def negative_failure_message; end
 end
 
-# source://email_spec//lib/email_spec/matchers.rb#228
+# source://email_spec//lib/email_spec/matchers.rb#230
 class EmailSpec::Matchers::IncludeEmailWithSubject
   # @return [IncludeEmailWithSubject] a new instance of IncludeEmailWithSubject
   #
-  # source://email_spec//lib/email_spec/matchers.rb#230
+  # source://email_spec//lib/email_spec/matchers.rb#232
   def initialize(subject); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#234
+  # source://email_spec//lib/email_spec/matchers.rb#236
   def description; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#251
+  # source://email_spec//lib/email_spec/matchers.rb#253
   def failure_message; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#259
+  # source://email_spec//lib/email_spec/matchers.rb#261
   def failure_message_when_negated; end
 
   # @return [Boolean]
   #
-  # source://email_spec//lib/email_spec/matchers.rb#242
+  # source://email_spec//lib/email_spec/matchers.rb#244
   def matches?(emails); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#259
+  # source://email_spec//lib/email_spec/matchers.rb#261
   def negative_failure_message; end
 end
 
-# source://email_spec//lib/email_spec/matchers.rb#13
+# source://email_spec//lib/email_spec/matchers.rb#15
 class EmailSpec::Matchers::ReplyTo
   # @return [ReplyTo] a new instance of ReplyTo
   #
-  # source://email_spec//lib/email_spec/matchers.rb#14
+  # source://email_spec//lib/email_spec/matchers.rb#16
   def initialize(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#18
+  # source://email_spec//lib/email_spec/matchers.rb#20
   def description; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#29
+  # source://email_spec//lib/email_spec/matchers.rb#31
   def failure_message; end
 
-  # source://email_spec//lib/email_spec/matchers.rb#33
+  # source://email_spec//lib/email_spec/matchers.rb#35
   def failure_message_when_negated; end
 
   # @return [Boolean]
   #
-  # source://email_spec//lib/email_spec/matchers.rb#22
+  # source://email_spec//lib/email_spec/matchers.rb#24
   def matches?(email); end
 
-  # source://email_spec//lib/email_spec/matchers.rb#33
+  # source://email_spec//lib/email_spec/matchers.rb#35
   def negative_failure_message; end
 end
 
