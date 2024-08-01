@@ -136,8 +136,7 @@ gem "rubyzip"
 gem "puma"
 
 # Locking sprockets version
-# TODO: Get rid of this as soon as we can
-gem "sprockets", "~> 3.0"
+gem "sprockets"
 # Locking faraday version for the time being
 # TODO: Get this as soon as we can
 gem "faraday", "~> 1.0"
