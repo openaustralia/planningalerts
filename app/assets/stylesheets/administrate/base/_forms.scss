@@ -85,7 +85,7 @@ textarea {
 [type="checkbox"],
 [type="radio"] {
   display: inline;
-  margin-right: $small-spacing / 2;
+  margin-right: $small-spacing * 0.5;
 }
 
 [type="file"] {
@@ -104,8 +104,4 @@ select {
     outline: $focus-outline;
     outline-offset: $focus-outline-offset;
   }
-}
-
-textarea {
-  height: 10em;
 }
