@@ -77,8 +77,11 @@ gem "oj"
 # We can't upgrade elasticsearch gem until we've upgraded the server
 # TODO: Fix this
 gem "elasticsearch", "~> 7"
+# Elasticsearch doesn't seem to include this dependency even though it's necessary
+# with faraday 2 which is needed by the gem. Weird.
+gem "faraday-net_http_persistent"
+
 gem "ruby-progressbar"
-gem "typhoeus"
 
 # For conditional counter caches (used to count visible comments)
 gem "counter_culture"
@@ -136,9 +139,6 @@ gem "puma"
 
 # Locking sprockets version
 gem "sprockets"
-# Locking faraday version for the time being
-# TODO: Get this as soon as we can
-gem "faraday", "~> 1.0"
 
 # Needed for getting boundary data into maps
 gem "rgeo-geojson"

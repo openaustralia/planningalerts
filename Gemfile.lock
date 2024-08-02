@@ -241,37 +241,20 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
-    ethon (0.16.0)
-      ffi (>= 1.15.0)
     execjs (2.9.1)
     factory_bot (6.4.6)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
-    faraday (1.10.3)
-      faraday-em_http (~> 1.0)
-      faraday-em_synchrony (~> 1.0)
-      faraday-excon (~> 1.1)
-      faraday-httpclient (~> 1.0)
-      faraday-multipart (~> 1.0)
-      faraday-net_http (~> 1.0)
-      faraday-net_http_persistent (~> 1.0)
-      faraday-patron (~> 1.0)
-      faraday-rack (~> 1.0)
-      faraday-retry (~> 1.0)
-      ruby2_keywords (>= 0.0.4)
-    faraday-em_http (1.0.0)
-    faraday-em_synchrony (1.0.0)
-    faraday-excon (1.1.0)
-    faraday-httpclient (1.0.1)
-    faraday-multipart (1.0.4)
-      multipart-post (~> 2)
-    faraday-net_http (1.0.2)
-    faraday-net_http_persistent (1.2.0)
-    faraday-patron (1.0.0)
-    faraday-rack (1.0.0)
-    faraday-retry (1.0.3)
+    faraday (2.10.1)
+      faraday-net_http (>= 2.0, < 3.2)
+      logger
+    faraday-net_http (3.1.1)
+      net-http
+    faraday-net_http_persistent (2.1.0)
+      faraday (~> 2.5)
+      net-http-persistent (~> 4.0)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
@@ -392,9 +375,10 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    multipart-post (2.4.1)
     mutex_m (0.2.0)
     nenv (0.3.0)
+    net-http (0.4.1)
+      uri
     net-http-persistent (4.0.2)
       connection_pool (~> 2.2)
     net-imap (0.4.14)
@@ -607,7 +591,6 @@ GEM
     rubocop-sorbet (0.8.5)
       rubocop (>= 1)
     ruby-progressbar (1.13.0)
-    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     sanitize (6.1.2)
       crass (~> 1.0.2)
@@ -710,13 +693,12 @@ GEM
     tilt (2.4.0)
     timecop (0.9.10)
     timeout (0.4.1)
-    typhoeus (1.4.1)
-      ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.5.0)
+    uri (0.13.0)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
@@ -796,7 +778,7 @@ DEPENDENCIES
   erb_lint
   factory_bot
   factory_bot_rails
-  faraday (~> 1.0)
+  faraday-net_http_persistent
   flipper
   flipper-redis
   flipper-ui
@@ -865,7 +847,6 @@ DEPENDENCIES
   tapioca
   terser
   timecop
-  typhoeus
   uglifier
   validate_url
   validates_email_format_of
