@@ -1,1 +1,1 @@
-Administrate::Engine.add_stylesheet("administrate_pill.css")
+Administrate::Engine.add_stylesheet("administrate_pill")
