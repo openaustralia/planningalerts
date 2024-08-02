@@ -81,13 +81,8 @@ RSpec.configure do |config|
   end
 
   require "sidekiq/testing"
-  # Disable background jobs for feature specs so that emails get
-  # processed immediately
-  config.around(:each, type: :feature) do |example|
-    Sidekiq::Testing.inline! do
-      example.run
-    end
-  end
+  # Disable background jobs for feature specs so that emails get processed immediately
+  Sidekiq::Testing.inline!
 
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers

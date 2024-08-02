@@ -3,6 +3,11 @@
 require "spec_helper"
 
 describe ApiController do
+  before do
+    # Disable the logging of the API call to elasticsearch
+    allow(LogApiCallService).to receive(:call).and_return(nil)
+  end
+
   render_views
 
   shared_examples "an authenticated API" do
