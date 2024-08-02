@@ -81,7 +81,8 @@ RSpec.configure do |config|
   end
 
   require "sidekiq/testing"
-  # Disable background jobs for feature specs so that emails get processed immediately
+  # Make everything sent to sidekiq get run immediately during tests.
+  # Makes everything a little easier to reason about
   Sidekiq::Testing.inline!
 
   config.include EmailSpec::Helpers
