@@ -7,7 +7,7 @@
 
 # Define some basic Sprockets error classes
 #
-# source://sprockets//lib/sprockets/version.rb#2
+# source://sprockets//lib/sprockets/autoload.rb#2
 module Sprockets
   extend ::Sprockets::Utils
   extend ::Sprockets::URIUtils
@@ -272,6 +272,9 @@ end
 
 # source://sprockets//lib/sprockets/autoload.rb#3
 module Sprockets::Autoload; end
+
+# source://sprockets//lib/sprockets/autoload/sassc.rb#6
+Sprockets::Autoload::SassC = SassC
 
 # source://sprockets//lib/sprockets/autoload/uglifier.rb#6
 Sprockets::Autoload::Uglifier = Uglifier
@@ -3903,7 +3906,7 @@ end
 class Sprockets::SassCompressor
   # @return [SassCompressor] a new instance of SassCompressor
   #
-  # source://sprockets//lib/sprockets/sass_compressor.rb#39
+  # source://sassc-rails/2.1.2/lib/sassc/rails/compressor.rb#7
   def initialize(options = T.unsafe(nil)); end
 
   # Returns the value of attribute cache_key.
@@ -3911,8 +3914,11 @@ class Sprockets::SassCompressor
   # source://sprockets//lib/sprockets/sass_compressor.rb#37
   def cache_key; end
 
-  # source://sprockets//lib/sprockets/sass_compressor.rb#49
-  def call(input); end
+  # source://sassc-rails/2.1.2/lib/sassc/rails/compressor.rb#17
+  def call(*args); end
+
+  # source://sassc-rails/2.1.2/lib/sassc/rails/compressor.rb#17
+  def evaluate(*args); end
 
   class << self
     # source://sprockets//lib/sprockets/sass_compressor.rb#33
@@ -3932,6 +3938,254 @@ end
 
 # source://sprockets//lib/sprockets/sass_compressor.rb#20
 Sprockets::SassCompressor::VERSION = T.let(T.unsafe(nil), String)
+
+# Deprecated: Use Sprockets::SassProcessor::Functions instead.
+#
+# source://sprockets//lib/sprockets/sass_processor.rb#312
+Sprockets::SassFunctions = Sprockets::SassProcessor::Functions
+
+# Processor engine class for the SASS/SCSS compiler. Depends on the `sass` gem.
+#
+# For more information see:
+#
+#   https://github.com/sass/sass
+#   https://github.com/rails/sass-rails
+#
+# source://sprockets//lib/sprockets/sass_processor.rb#15
+class Sprockets::SassProcessor
+  # Public: Initialize template with custom options.
+  #
+  # options - Hash
+  # cache_version - String custom cache version. Used to force a cache
+  #                 change after code changes are made to Sass Functions.
+  #
+  # @return [SassProcessor] a new instance of SassProcessor
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#47
+  def initialize(options = T.unsafe(nil), &block); end
+
+  # Returns the value of attribute cache_key.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#39
+  def cache_key; end
+
+  # source://sprockets//lib/sprockets/sass_processor.rb#59
+  def call(input); end
+
+  private
+
+  # Public: Build the cache store to be used by the Sass engine.
+  #
+  # input - the input hash.
+  # version - the cache version.
+  #
+  # Override this method if you need to use a different cache than the
+  # Sprockets cache.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#105
+  def build_cache_store(input, version); end
+
+  # source://sprockets//lib/sprockets/sass_processor.rb#109
+  def merge_options(options); end
+
+  class << self
+    # source://sprockets//lib/sprockets/sass_processor.rb#35
+    def cache_key; end
+
+    # source://sprockets//lib/sprockets/sass_processor.rb#31
+    def call(input); end
+
+    # Public: Return singleton instance with default options.
+    #
+    # Returns SassProcessor object.
+    #
+    # source://sprockets//lib/sprockets/sass_processor.rb#27
+    def instance; end
+
+    # Internal: Defines default sass syntax to use. Exposed so the ScssProcessor
+    # may override it.
+    #
+    # source://sprockets//lib/sprockets/sass_processor.rb#20
+    def syntax; end
+  end
+end
+
+# Public: Functions injected into Sass context during Sprockets evaluation.
+#
+# This module may be extended to add global functionality to all Sprockets
+# Sass environments. Though, scoping your functions to just your environment
+# is preferred.
+#
+# module Sprockets::SassProcessor::Functions
+#   def asset_path(path, options = {})
+#   end
+# end
+#
+# source://sprockets//lib/sprockets/sass_processor.rb#131
+module Sprockets::SassProcessor::Functions
+  # Public: Generate a data URI for asset path.
+  #
+  # path - Sass::Script::String logical asset path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sassc-rails/2.1.2/lib/sassc/rails/functions.rb#7
+  def asset_data_url(path); end
+
+  # Public: Generate a url for asset path.
+  #
+  # Default implementation is deprecated. Currently defaults to
+  # Context#asset_path.
+  #
+  # Will raise NotImplementedError in the future. Users should provide their
+  # own base implementation.
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#141
+  def asset_path(path, options = T.unsafe(nil)); end
+
+  # Public: Generate a asset url() link.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#157
+  def asset_url(path, options = T.unsafe(nil)); end
+
+  # Public: Generate url for audio path.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#202
+  def audio_path(path); end
+
+  # Public: Generate a audio url() link.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#211
+  def audio_url(path); end
+
+  # Public: Generate url for font path.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#220
+  def font_path(path); end
+
+  # Public: Generate a font url() link.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#229
+  def font_url(path); end
+
+  # Public: Generate url for image path.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#166
+  def image_path(path); end
+
+  # Public: Generate a image url() link.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#175
+  def image_url(path); end
+
+  # Public: Generate url for javascript path.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#238
+  def javascript_path(path); end
+
+  # Public: Generate a javascript url() link.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#247
+  def javascript_url(path); end
+
+  # Public: Generate url for stylesheet path.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#256
+  def stylesheet_path(path); end
+
+  # Public: Generate a stylesheet url() link.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#265
+  def stylesheet_url(path); end
+
+  # Public: Generate url for video path.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#184
+  def video_path(path); end
+
+  # Public: Generate a video url() link.
+  #
+  # path - Sass::Script::String URL path
+  #
+  # Returns a Sass::Script::String.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#193
+  def video_url(path); end
+
+  protected
+
+  # Deprecated: Get the Context instance. Use APIs on
+  # sprockets_environment or sprockets_dependencies directly.
+  #
+  # Returns a Context instance.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#298
+  def sprockets_context; end
+
+  # Public: Mutatable set of dependencies.
+  #
+  # Returns a Set.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#290
+  def sprockets_dependencies; end
+
+  # Public: The Environment.
+  #
+  # Returns Sprockets::Environment.
+  #
+  # source://sprockets//lib/sprockets/sass_processor.rb#283
+  def sprockets_environment; end
+end
 
 # Public: Sass CSS minifier.
 #
@@ -4195,6 +4449,14 @@ module Sprockets::SasscProcessor::Functions
   #
   # source://sprockets//lib/sprockets/sassc_processor.rb#252
   def sprockets_environment; end
+end
+
+# source://sprockets//lib/sprockets/sass_processor.rb#305
+class Sprockets::ScssProcessor < ::Sprockets::SassProcessor
+  class << self
+    # source://sprockets//lib/sprockets/sass_processor.rb#306
+    def syntax; end
+  end
 end
 
 # source://sprockets//lib/sprockets/sassc_processor.rb#292
