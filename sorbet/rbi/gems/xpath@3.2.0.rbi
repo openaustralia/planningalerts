@@ -156,7 +156,7 @@ module XPath::DSL
   # source://xpath//lib/xpath/dsl.rb#54
   def is(expression); end
 
-  # source://capybara/3.39.2/lib/capybara/selector/xpath_extensions.rb#13
+  # source://capybara/3.40.0/lib/capybara/selector/xpath_extensions.rb#13
   def join(*expressions); end
 
   # source://xpath//lib/xpath/dsl.rb#90
@@ -406,7 +406,7 @@ class XPath::Renderer
   # source://xpath//lib/xpath/renderer.rb#75
   def is(one, two); end
 
-  # source://capybara/3.39.2/lib/capybara/selector/xpath_extensions.rb#5
+  # source://capybara/3.40.0/lib/capybara/selector/xpath_extensions.rb#5
   def join(*expressions); end
 
   # source://xpath//lib/xpath/renderer.rb#91

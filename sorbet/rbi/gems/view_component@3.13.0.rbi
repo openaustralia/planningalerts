@@ -847,7 +847,7 @@ class ViewComponent::Config
   # source://view_component//lib/view_component/config.rb#189
   def current=(_arg0); end
 
-  # source://activesupport/7.0.8.4/lib/active_support/core_ext/module/delegation.rb#302
+  # source://activesupport/7.1.3.4/lib/active_support/core_ext/module/delegation.rb#331
   def method_missing(method, *args, **_arg2, &block); end
 
   private
@@ -857,7 +857,7 @@ class ViewComponent::Config
   # source://view_component//lib/view_component/config.rb#199
   def config; end
 
-  # source://activesupport/7.0.8.4/lib/active_support/core_ext/module/delegation.rb#294
+  # source://activesupport/7.1.3.4/lib/active_support/core_ext/module/delegation.rb#323
   def respond_to_missing?(name, include_private = T.unsafe(nil)); end
 
   class << self
@@ -965,7 +965,7 @@ class ViewComponent::Engine < ::Rails::Engine
   def serve_static_preview_assets?(app_config); end
 
   class << self
-    # source://activesupport/7.0.8.4/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
     def __callbacks; end
   end
 end
@@ -1160,13 +1160,13 @@ class ViewComponent::Preview
   include ::ActionView::Helpers::AssetTagHelper
   extend ::ActiveSupport::DescendantsTracker
 
-  # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
   def default_url_options; end
 
-  # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
   def default_url_options=(_arg0); end
 
-  # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
   def default_url_options?; end
 
   # source://view_component//lib/view_component/preview.rb#16
@@ -1179,7 +1179,7 @@ class ViewComponent::Preview
   def render_with_template(template: T.unsafe(nil), locals: T.unsafe(nil)); end
 
   class << self
-    # source://actionpack/7.0.8.4/lib/action_dispatch/routing/route_set.rb#564
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#584
     def _routes; end
 
     # Returns all component preview classes.
@@ -1187,13 +1187,13 @@ class ViewComponent::Preview
     # source://view_component//lib/view_component/preview.rb#37
     def all; end
 
-    # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
     def default_url_options; end
 
-    # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
     def default_url_options=(value); end
 
-    # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
     def default_url_options?; end
 
     # Returns all of the available examples for the component preview.
@@ -1850,14 +1850,14 @@ class ViewComponentsController < ::Rails::ApplicationController
 
   private
 
-  # source://actionview/7.0.8.4/lib/action_view/layouts.rb#328
+  # source://actionview/7.1.3.4/lib/action_view/layouts.rb#330
   def _layout(lookup_context, formats); end
 
   class << self
-    # source://activesupport/7.0.8.4/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
     def __callbacks; end
 
-    # source://actionpack/7.0.8.4/lib/action_controller/metal.rb#210
+    # source://actionpack/7.1.3.4/lib/action_controller/metal.rb#262
     def middleware_stack; end
   end
 end
@@ -1867,17 +1867,17 @@ class ViewComponentsSystemTestController < ::ActionController::Base
 
   private
 
-  # source://actionview/7.0.8.4/lib/action_view/layouts.rb#328
+  # source://actionview/7.1.3.4/lib/action_view/layouts.rb#330
   def _layout(lookup_context, formats); end
 
   def validate_file_path; end
   def validate_test_env; end
 
   class << self
-    # source://activesupport/7.0.8.4/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
     def __callbacks; end
 
-    # source://actionpack/7.0.8.4/lib/action_controller/metal.rb#210
+    # source://actionpack/7.1.3.4/lib/action_controller/metal.rb#262
     def middleware_stack; end
 
     def temp_dir; end

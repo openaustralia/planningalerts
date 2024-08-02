@@ -950,7 +950,7 @@ module Kernel
   private
 
   # source://bootsnap//lib/bootsnap/load_path_cache/core_ext/kernel_require.rb#8
-  def require_without_sk(path); end
+  def zeitwerk_original_require(path); end
 end
 
 module Psych

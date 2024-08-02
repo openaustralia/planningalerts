@@ -8,13 +8,16 @@
 # source://rails_autolink//lib/rails_autolink/helpers.rb#9
 module ActionView
   class << self
-    # source://actionview/7.0.8.4/lib/action_view.rb#90
+    # source://actionview/7.1.3.4/lib/action_view/deprecator.rb#4
+    def deprecator; end
+
+    # source://actionview/7.1.3.4/lib/action_view.rb#93
     def eager_load!; end
 
-    # source://actionview/7.0.8.4/lib/action_view/gem_version.rb#5
+    # source://actionview/7.1.3.4/lib/action_view/gem_version.rb#5
     def gem_version; end
 
-    # source://actionview/7.0.8.4/lib/action_view/version.rb#7
+    # source://actionview/7.1.3.4/lib/action_view/version.rb#7
     def version; end
   end
 end
@@ -34,7 +37,7 @@ module ActionView::Helpers
   mixes_in_class_methods ::ActionView::Helpers::SanitizeHelper::ClassMethods
 
   class << self
-    # source://actionview/7.0.8.4/lib/action_view/helpers.rb#34
+    # source://actionview/7.1.3.4/lib/action_view/helpers.rb#35
     def eager_load!; end
   end
 end
@@ -90,37 +93,37 @@ module ActionView::Helpers::TextHelper
   # source://rails_autolink//lib/rails_autolink/helpers.rb#52
   def auto_link(text, *args, &block); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#58
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#63
   def concat(string); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#382
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#454
   def current_cycle(name = T.unsafe(nil)); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#358
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#430
   def cycle(first_value, *values); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#179
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#235
   def excerpt(text, phrase, options = T.unsafe(nil)); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#136
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#174
   def highlight(text, phrases, options = T.unsafe(nil), &block); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#234
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#290
   def pluralize(count, singular, plural_arg = T.unsafe(nil), plural: T.unsafe(nil), locale: T.unsafe(nil)); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#405
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#477
   def reset_cycle(name = T.unsafe(nil)); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#62
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#67
   def safe_concat(string); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#306
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#376
   def simple_format(text, html_options = T.unsafe(nil), options = T.unsafe(nil)); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#98
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#122
   def truncate(text, options = T.unsafe(nil), &block); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#264
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#320
   def word_wrap(text, line_width: T.unsafe(nil), break_sequence: T.unsafe(nil)); end
 
   private
@@ -150,16 +153,16 @@ module ActionView::Helpers::TextHelper
   # source://rails_autolink//lib/rails_autolink/helpers.rb#151
   def conditional_sanitize(target, condition, sanitize_options = T.unsafe(nil)); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#468
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#540
   def cut_excerpt_part(part_position, part, separator, options); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#450
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#522
   def get_cycle(name); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#455
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#527
   def set_cycle(name, cycle_object); end
 
-  # source://actionview/7.0.8.4/lib/action_view/helpers/text_helper.rb#460
+  # source://actionview/7.1.3.4/lib/action_view/helpers/text_helper.rb#532
   def split_paragraphs(text); end
 end
 

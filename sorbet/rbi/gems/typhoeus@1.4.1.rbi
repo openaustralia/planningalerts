@@ -169,11 +169,8 @@ end
 # source://typhoeus//lib/rack/typhoeus/middleware/params_decoder/helper.rb#1
 module Rack
   class << self
-    # source://rack/2.2.9/lib/rack/version.rb#26
+    # source://rack/3.1.7/lib/rack/version.rb#18
     def release; end
-
-    # source://rack/2.2.9/lib/rack/version.rb#19
-    def version; end
   end
 end
 
@@ -414,7 +411,7 @@ module Typhoeus
   end
 end
 
-# source://typhoeus//lib/typhoeus/cache/redis.rb#2
+# source://typhoeus//lib/typhoeus/cache/dalli.rb#2
 module Typhoeus::Cache; end
 
 # This module provides a simple way to cache HTTP responses using Dalli.
@@ -456,28 +453,6 @@ class Typhoeus::Cache::Rails
   def get(request); end
 
   # source://typhoeus//lib/typhoeus/cache/rails.rb#23
-  def set(request, response); end
-end
-
-# This module provides a simple way to cache HTTP responses in Redis.
-#
-# source://typhoeus//lib/typhoeus/cache/redis.rb#4
-class Typhoeus::Cache::Redis
-  # @example Set Redis as the Typhoeus cache backend
-  #   Typhoeus::Config.cache = Typhoeus::Cache::Redis.new
-  # @option options
-  # @param redis [Redis] A connection to Redis. Defaults to `Redis.new`, which uses the
-  #   `REDIS_URL` environment variable to connect
-  # @param options [Hash] Options
-  # @return [Redis] a new instance of Redis
-  #
-  # source://typhoeus//lib/typhoeus/cache/redis.rb#15
-  def initialize(redis = T.unsafe(nil), options = T.unsafe(nil)); end
-
-  # source://typhoeus//lib/typhoeus/cache/redis.rb#20
-  def get(request); end
-
-  # source://typhoeus//lib/typhoeus/cache/redis.rb#26
   def set(request, response); end
 end
 

@@ -66,6 +66,7 @@ end
 module Process
   extend ::Dalli::PIDCache::CoreExt
   extend ::ConnectionPool::ForkTracker
+  extend ::RedisClient::PIDCache::CoreExt
   extend ::ActiveSupport::ForkTracker::ModernCoreExt
 
   class << self

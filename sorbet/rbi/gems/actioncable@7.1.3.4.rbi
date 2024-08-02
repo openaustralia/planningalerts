@@ -2957,7 +2957,7 @@ class ActionCable::SubscriptionAdapter::Redis::Listener < ::ActionCable::Subscri
   # source://actioncable//lib/action_cable/subscription_adapter/redis.rb#157
   def ensure_listener_running; end
 
-  # source://actioncable//lib/action_cable/subscription_adapter/redis.rb#240
+  # source://actioncable//lib/action_cable/subscription_adapter/redis.rb#246
   def extract_subscribed_client(conn); end
 
   # source://actioncable//lib/action_cable/subscription_adapter/redis.rb#201
@@ -2975,27 +2975,8 @@ class ActionCable::SubscriptionAdapter::Redis::Listener < ::ActionCable::Subscri
   def when_connected(&block); end
 end
 
-# source://actioncable//lib/action_cable/subscription_adapter/redis.rb#210
-ActionCable::SubscriptionAdapter::Redis::Listener::ConnectionError = Redis::BaseConnectionError
-
-# source://actioncable//lib/action_cable/subscription_adapter/redis.rb#212
-class ActionCable::SubscriptionAdapter::Redis::Listener::SubscribedClient
-  # @return [SubscribedClient] a new instance of SubscribedClient
-  #
-  # source://actioncable//lib/action_cable/subscription_adapter/redis.rb#213
-  def initialize(raw_client); end
-
-  # source://actioncable//lib/action_cable/subscription_adapter/redis.rb#217
-  def subscribe(*channel); end
-
-  # source://actioncable//lib/action_cable/subscription_adapter/redis.rb#221
-  def unsubscribe(*channel); end
-
-  private
-
-  # source://actioncable//lib/action_cable/subscription_adapter/redis.rb#226
-  def send_command(*command); end
-end
+# source://actioncable//lib/action_cable/subscription_adapter/redis.rb#244
+ActionCable::SubscriptionAdapter::Redis::Listener::ConnectionError = RedisClient::ConnectionError
 
 # source://actioncable//lib/action_cable/subscription_adapter/subscriber_map.rb#5
 class ActionCable::SubscriptionAdapter::SubscriberMap

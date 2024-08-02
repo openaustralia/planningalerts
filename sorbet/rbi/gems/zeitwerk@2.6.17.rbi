@@ -10,7 +10,7 @@ module Kernel
   private
 
   # source://zeitwerk//lib/zeitwerk/kernel.rb#23
-  def require(path); end
+  def require_without_sk(path); end
 
   class << self
     # source://zeitwerk//lib/zeitwerk/kernel.rb#23

@@ -8,10 +8,13 @@
 # source://jb//lib/jb/railtie.rb#18
 module ActionController
   class << self
-    # source://actionpack/7.0.8.4/lib/action_controller/metal/renderers.rb#7
+    # source://actionpack/7.1.3.4/lib/action_controller/metal/renderers.rb#7
     def add_renderer(key, &block); end
 
-    # source://actionpack/7.0.8.4/lib/action_controller/metal/renderers.rb#12
+    # source://actionpack/7.1.3.4/lib/action_controller/deprecator.rb#4
+    def deprecator; end
+
+    # source://actionpack/7.1.3.4/lib/action_controller/metal/renderers.rb#12
     def remove_renderer(key); end
   end
 end
@@ -26,7 +29,7 @@ module ActionController::ApiRendering
   mixes_in_class_methods ::ActionView::Rendering::ClassMethods
   mixes_in_class_methods ::ActionController::Rendering::ClassMethods
 
-  # source://actionpack/7.0.8.4/lib/action_controller/api/api_rendering.rb#11
+  # source://actionpack/7.1.3.4/lib/action_controller/api/api_rendering.rb#11
   def render_to_body(options = T.unsafe(nil)); end
 end
 

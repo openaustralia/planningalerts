@@ -437,7 +437,7 @@ module Warden::Mixins; end
 
 # source://warden//lib/warden/mixins/common.rb#5
 module Warden::Mixins::Common
-  # source://devise/4.9.2/lib/devise/rails/warden_compat.rb#12
+  # source://devise/4.9.4/lib/devise/rails/warden_compat.rb#12
   def cookies; end
 
   # Convenience method to access the rack request params
@@ -456,7 +456,7 @@ module Warden::Mixins::Common
   # Convenience method to access the rack request.
   # :api: public
   #
-  # source://devise/4.9.2/lib/devise/rails/warden_compat.rb#4
+  # source://devise/4.9.4/lib/devise/rails/warden_compat.rb#4
   def request; end
 
   # Resets the session.  By using this non-hash like sessions can
@@ -464,7 +464,7 @@ module Warden::Mixins::Common
   #
   # @api overwritable
   #
-  # source://devise/4.9.2/lib/devise/rails/warden_compat.rb#8
+  # source://devise/4.9.4/lib/devise/rails/warden_compat.rb#8
   def reset_session!; end
 
   # Convenience method to access the session

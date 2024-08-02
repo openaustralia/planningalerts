@@ -273,7 +273,7 @@ class Sawyer::Relation
   # source://sawyer//lib/sawyer/relation.rb#144
   def head(options = T.unsafe(nil)); end
 
-  # source://octokit/7.0.0/lib/ext/sawyer/relation.rb#6
+  # source://octokit/9.1.0/lib/ext/sawyer/relation.rb#6
   def href(options = T.unsafe(nil)); end
 
   # Returns the value of attribute href_template.

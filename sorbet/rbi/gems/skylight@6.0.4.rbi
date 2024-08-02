@@ -1872,8 +1872,10 @@ HighLine::YELLOW_STYLE = T.let(T.unsafe(nil), HighLine::Style)
 #
 # source://skylight//lib/skylight/probes.rb#161
 module Kernel
+  # @api private
+  #
   # source://skylight//lib/skylight/probes.rb#165
-  def zeitwerk_original_require(name); end
+  def require(name); end
 end
 
 # Used from extconf and to load libskylight
@@ -2623,7 +2625,7 @@ class Skylight::Deprecation < ::ActiveSupport::Deprecation
   def ignored_callstack(path); end
 
   class << self
-    # source://activesupport/7.0.8.4/lib/active_support/deprecation/instance_delegator.rb#21
+    # source://activesupport/7.1.3.4/lib/active_support/deprecation/instance_delegator.rb#34
     def ignored_callstack(*_arg0, **_arg1, &_arg2); end
   end
 end

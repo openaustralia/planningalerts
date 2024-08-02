@@ -305,7 +305,7 @@ class Searchkick::BulkReindexJob < ::ActiveJob::Base
   def perform(class_name:, record_ids: T.unsafe(nil), index_name: T.unsafe(nil), method_name: T.unsafe(nil), batch_id: T.unsafe(nil), min_id: T.unsafe(nil), max_id: T.unsafe(nil)); end
 
   class << self
-    # source://activejob/7.0.8.4/lib/active_job/queue_name.rb#55
+    # source://activejob/7.1.3.4/lib/active_job/queue_name.rb#55
     def queue_name; end
   end
 end
@@ -724,7 +724,7 @@ class Searchkick::ProcessBatchJob < ::ActiveJob::Base
   def perform(class_name:, record_ids:, index_name: T.unsafe(nil)); end
 
   class << self
-    # source://activejob/7.0.8.4/lib/active_job/queue_name.rb#55
+    # source://activejob/7.1.3.4/lib/active_job/queue_name.rb#55
     def queue_name; end
   end
 end
@@ -735,7 +735,7 @@ class Searchkick::ProcessQueueJob < ::ActiveJob::Base
   def perform(class_name:, index_name: T.unsafe(nil), inline: T.unsafe(nil)); end
 
   class << self
-    # source://activejob/7.0.8.4/lib/active_job/queue_name.rb#55
+    # source://activejob/7.1.3.4/lib/active_job/queue_name.rb#55
     def queue_name; end
   end
 end
@@ -1223,7 +1223,7 @@ class Searchkick::ReindexV2Job < ::ActiveJob::Base
   def perform(class_name, id, method_name = T.unsafe(nil), routing: T.unsafe(nil), index_name: T.unsafe(nil)); end
 
   class << self
-    # source://activejob/7.0.8.4/lib/active_job/queue_name.rb#55
+    # source://activejob/7.1.3.4/lib/active_job/queue_name.rb#55
     def queue_name; end
   end
 end
@@ -1286,7 +1286,7 @@ class Searchkick::Relation
   # source://searchkick//lib/searchkick/relation.rb#206
   def loaded?; end
 
-  # source://activesupport/7.0.8.4/lib/active_support/core_ext/module/delegation.rb#302
+  # source://activesupport/7.1.3.4/lib/active_support/core_ext/module/delegation.rb#331
   def method_missing(method, *args, **_arg2, &block); end
 
   # Returns the value of attribute model.

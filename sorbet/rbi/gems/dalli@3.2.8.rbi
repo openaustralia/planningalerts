@@ -2336,17 +2336,15 @@ class Dalli::ValueOverMaxSize < ::Dalli::DalliError; end
 module Process
   extend ::Dalli::PIDCache::CoreExt
   extend ::ConnectionPool::ForkTracker
+  extend ::RedisClient::PIDCache::CoreExt
   extend ::ActiveSupport::ForkTracker::ModernCoreExt
 end
 
 # source://dalli//lib/rack/session/dalli.rb#8
 module Rack
   class << self
-    # source://rack/2.2.9/lib/rack/version.rb#26
+    # source://rack/3.1.7/lib/rack/version.rb#18
     def release; end
-
-    # source://rack/2.2.9/lib/rack/version.rb#19
-    def version; end
   end
 end
 

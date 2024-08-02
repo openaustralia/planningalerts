@@ -184,7 +184,7 @@ end
 class RSpec::Rails::Railtie < ::Rails::Railtie
   private
 
-  # source://rspec-rails//lib/rspec-rails.rb#57
+  # source://rspec-rails//lib/rspec-rails.rb#51
   def config_default_preview_path(options); end
 
   # @return [Boolean]

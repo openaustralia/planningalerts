@@ -888,7 +888,7 @@ class Flipper::UI::Decorators::Feature < ::SimpleDelegator
 
   # Public: The feature being decorated.
   #
-  # source://delegate/0.3.0/delegate.rb#318
+  # source://delegate/0.3.1/delegate.rb#318
   def feature; end
 
   # source://flipper-ui//lib/flipper/ui/decorators/feature.rb#62
@@ -923,7 +923,7 @@ class Flipper::UI::Decorators::Gate < ::SimpleDelegator
 
   # Public: The gate being decorated.
   #
-  # source://delegate/0.3.0/delegate.rb#318
+  # source://delegate/0.3.1/delegate.rb#318
   def gate; end
 
   # Public: The value for the gate from the adapter.

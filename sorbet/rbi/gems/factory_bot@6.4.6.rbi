@@ -75,16 +75,16 @@ module FactoryBot
     def lint(*args); end
 
     # source://factory_bot//lib/factory_bot.rb#83
-    def register_strategy(*_arg0, **_arg1, &_arg2); end
+    def register_strategy(strategy_name, strategy_class, &block); end
 
     # source://factory_bot//lib/factory_bot/reload.rb#2
     def reload; end
 
     # source://factory_bot//lib/factory_bot.rb#83
-    def rewind_sequences(*_arg0, **_arg1, &_arg2); end
+    def rewind_sequences(&block); end
 
     # source://factory_bot//lib/factory_bot.rb#83
-    def strategy_by_name(*_arg0, **_arg1, &_arg2); end
+    def strategy_by_name(name, &block); end
 
     # source://factory_bot//lib/factory_bot.rb#54
     def use_parent_strategy; end

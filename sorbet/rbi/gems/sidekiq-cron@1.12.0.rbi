@@ -10,121 +10,58 @@
 # source://sidekiq-cron//lib/sidekiq/cron/support.rb#3
 module Sidekiq
   class << self
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#106
-    def [](key); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#110
-    def []=(key, val); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#303
-    def average_scheduled_poll_interval=(interval); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#209
-    def client_middleware; end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#60
-    def concurrency=(val); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#151
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#135
     def configure_client; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#141
-    def configure_server; end
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#123
+    def configure_embed(&block); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#250
-    def death_handlers; end
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#97
+    def configure_server(&block); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#84
-    def default_error_handler(ex, ctx); end
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#89
+    def default_configuration; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#237
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#85
     def default_job_options; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#229
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#81
     def default_job_options=(hash); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#221
-    def default_server_middleware; end
-
-    # source://activesupport/7.0.8.4/lib/active_support/deprecation/method_wrappers.rb#63
-    def default_worker_options(*args, **_arg1, &block); end
-
-    # source://activesupport/7.0.8.4/lib/active_support/deprecation/method_wrappers.rb#63
-    def default_worker_options=(*args, **_arg1, &block); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#258
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#57
     def dump_json(object); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#294
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#65
     def ent?; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#314
-    def error_handlers; end
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#102
+    def freeze!; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#118
-    def fetch(*args, &block); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#122
-    def handle_exception(ex, ctx = T.unsafe(nil)); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#254
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#53
     def load_json(string); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#262
-    def log_formatter; end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#270
-    def log_formatter=(log_formatter); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#275
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#93
     def logger; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#279
-    def logger=(logger); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#114
-    def merge!(hash); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#326
-    def on(event, &block); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#96
-    def options; end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#101
-    def options=(opts); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#290
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#61
     def pro?; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#73
-    def queues=(val); end
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#73
+    def redis(&block); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#159
-    def redis; end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#201
-    def redis=(hash); end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#181
-    def redis_info; end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#197
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#69
     def redis_pool; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#155
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#49
     def server?; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#215
-    def server_middleware; end
-
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#332
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#77
     def strict_args!(mode = T.unsafe(nil)); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/transaction_aware_client.rb#33
+    # source://sidekiq/7.3.0/lib/sidekiq/transaction_aware_client.rb#40
     def transactional_push!; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq.rb#55
+    # source://sidekiq/7.3.0/lib/sidekiq.rb#45
     def ❨╯°□°❩╯︵┻━┻; end
   end
 end
@@ -612,6 +549,14 @@ module Sidekiq::Cron::Support
 
     # source://sidekiq-cron//lib/sidekiq/cron/support.rb#36
     def load_yaml(src); end
+  end
+end
+
+# source://sidekiq-cron//lib/sidekiq/cron/web_extension.rb#3
+module Sidekiq::Cron::WebExtension
+  class << self
+    # source://sidekiq-cron//lib/sidekiq/cron/web_extension.rb#4
+    def registered(app); end
   end
 end
 

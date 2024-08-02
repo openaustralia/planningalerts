@@ -735,13 +735,13 @@ class SitemapGenerator::Interpreter
   # source://sitemap_generator//lib/sitemap_generator/interpreter.rb#36
   def add_to_index(*args); end
 
-  # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
   def default_url_options; end
 
-  # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
   def default_url_options=(_arg0); end
 
-  # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
   def default_url_options?; end
 
   # Evaluate the block in the interpreter.  Pass :yield_sitemap => true to
@@ -765,16 +765,16 @@ class SitemapGenerator::Interpreter
   def sitemap; end
 
   class << self
-    # source://actionpack/7.0.8.4/lib/action_dispatch/routing/route_set.rb#564
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#584
     def _routes; end
 
-    # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
     def default_url_options; end
 
-    # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
     def default_url_options=(value); end
 
-    # source://actionpack/7.0.8.4/lib/action_dispatch/routing/url_for.rb#95
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
     def default_url_options?; end
 
     # Run the interpreter on a config file using

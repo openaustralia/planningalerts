@@ -421,45 +421,45 @@ class Faraday::Adapter::Test::Stubs::NotFound < ::StandardError; end
 #
 # source://faraday//lib/faraday/adapter/typhoeus.rb#7
 class Faraday::Adapter::Typhoeus < ::Faraday::Adapter
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#44
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#44
   def initialize(app, adapter_options = T.unsafe(nil)); end
 
   # Needs to define this method in order to support Typhoeus <= 1.3.0
   #
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#70
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#70
   def call(env); end
 
   private
 
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#151
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#151
   def configure_proxy(req, env); end
 
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#169
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#169
   def configure_socket(req, env); end
 
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#134
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#134
   def configure_ssl(req, env); end
 
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#163
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#163
   def configure_timeout(req, env); end
 
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#175
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#175
   def parallel?(env); end
 
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#78
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#78
   def perform_request(env); end
 
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#130
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#130
   def read_body(env); end
 
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#86
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#86
   def request(env); end
 
-  # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#120
+  # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#120
   def typhoeus_request(env); end
 
   class << self
-    # source://typhoeus/1.4.0/lib/typhoeus/adapters/faraday.rb#59
+    # source://typhoeus/1.4.1/lib/typhoeus/adapters/faraday.rb#59
     def setup_parallel_manager(options = T.unsafe(nil)); end
   end
 end

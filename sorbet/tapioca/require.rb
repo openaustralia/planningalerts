@@ -1,4 +1,4 @@
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 require "active_support/core_ext/integer/time"
@@ -13,10 +13,13 @@ require "bundler/setup"
 require "devise/orm/active_record"
 require "graphql/client"
 require "graphql/client/http"
+require "rack/attack"
 require "rails/all"
 require "rails_autolink/helpers"
+require "rake"
 require "rest-client"
 require "rubygems"
+require "sidekiq/cron/web"
 require "sidekiq/scheduled"
 require "sidekiq/web"
 require "sorbet-runtime"

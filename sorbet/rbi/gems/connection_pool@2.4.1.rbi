@@ -271,5 +271,6 @@ ConnectionPool::Wrapper::METHODS = T.let(T.unsafe(nil), Array)
 module Process
   extend ::Dalli::PIDCache::CoreExt
   extend ::ConnectionPool::ForkTracker
+  extend ::RedisClient::PIDCache::CoreExt
   extend ::ActiveSupport::ForkTracker::ModernCoreExt
 end

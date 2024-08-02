@@ -195,6 +195,7 @@ class ActiveJob::Base
   include ::ActiveJob::Logging
   include ::ActiveJob::Timezones
   include ::ActiveJob::Translation
+  include ::Sidekiq::Job::Options
   include ::ActiveJob::TestHelper::TestQueueAdapter
   extend ::ActiveJob::Core::ClassMethods
   extend ::ActiveJob::QueueAdapter::ClassMethods
@@ -207,6 +208,7 @@ class ActiveJob::Base
   extend ::ActiveSupport::DescendantsTracker
   extend ::ActiveJob::Callbacks::ClassMethods
   extend ::ActiveJob::Exceptions::ClassMethods
+  extend ::Sidekiq::Job::Options::ClassMethods
   extend ::ActiveJob::TestHelper::TestQueueAdapter::ClassMethods
 
   # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
@@ -263,22 +265,22 @@ class ActiveJob::Base
   # source://activesupport/7.1.3.4/lib/active_support/rescuable.rb#15
   def rescue_handlers?; end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#137
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#141
   def sidekiq_options_hash; end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#149
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#153
   def sidekiq_options_hash=(_arg0); end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#137
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#141
   def sidekiq_retries_exhausted_block; end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#149
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#153
   def sidekiq_retries_exhausted_block=(_arg0); end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#137
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#141
   def sidekiq_retry_in_block; end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#149
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#153
   def sidekiq_retry_in_block=(_arg0); end
 
   class << self
@@ -396,33 +398,33 @@ class ActiveJob::Base
     # source://activejob//lib/active_job/exceptions.rb#11
     def retry_jitter=(value); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#104
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#108
     def sidekiq_options_hash; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#112
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#116
     def sidekiq_options_hash=(val); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#104
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#108
     def sidekiq_retries_exhausted_block; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#112
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#116
     def sidekiq_retries_exhausted_block=(val); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#104
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#108
     def sidekiq_retry_in_block; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#112
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#116
     def sidekiq_retry_in_block=(val); end
 
     private
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#99
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#103
     def __synchronized_sidekiq_options_hash; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#99
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#103
     def __synchronized_sidekiq_retries_exhausted_block; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#99
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#103
     def __synchronized_sidekiq_retry_in_block; end
   end
 end
@@ -1641,60 +1643,60 @@ end
 
 # source://activejob//lib/active_job/queue_adapters/sidekiq_adapter.rb#66
 class ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper
-  include ::Sidekiq::Worker
-  include ::Sidekiq::Worker::Options
-  extend ::Sidekiq::Worker::Options::ClassMethods
-  extend ::Sidekiq::Worker::ClassMethods
+  include ::Sidekiq::Job
+  include ::Sidekiq::Job::Options
+  extend ::Sidekiq::Job::Options::ClassMethods
+  extend ::Sidekiq::Job::ClassMethods
 
   # source://activejob//lib/active_job/queue_adapters/sidekiq_adapter.rb#69
   def perform(job_data); end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#137
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#141
   def sidekiq_options_hash; end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#149
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#153
   def sidekiq_options_hash=(_arg0); end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#137
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#141
   def sidekiq_retries_exhausted_block; end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#149
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#153
   def sidekiq_retries_exhausted_block=(_arg0); end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#137
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#141
   def sidekiq_retry_in_block; end
 
-  # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#149
+  # source://sidekiq/7.3.0/lib/sidekiq/job.rb#153
   def sidekiq_retry_in_block=(_arg0); end
 
   class << self
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#104
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#108
     def sidekiq_options_hash; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#112
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#116
     def sidekiq_options_hash=(val); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#104
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#108
     def sidekiq_retries_exhausted_block; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#112
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#116
     def sidekiq_retries_exhausted_block=(val); end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#104
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#108
     def sidekiq_retry_in_block; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#112
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#116
     def sidekiq_retry_in_block=(val); end
 
     private
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#99
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#103
     def __synchronized_sidekiq_options_hash; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#99
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#103
     def __synchronized_sidekiq_retries_exhausted_block; end
 
-    # source://sidekiq/6.5.12/lib/sidekiq/worker.rb#99
+    # source://sidekiq/7.3.0/lib/sidekiq/job.rb#103
     def __synchronized_sidekiq_retry_in_block; end
   end
 end

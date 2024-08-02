@@ -14,7 +14,7 @@ module Selectize::Rails; end
 # source://selectize-rails//lib/selectize-rails/engine.rb#3
 class Selectize::Rails::Engine < ::Rails::Engine
   class << self
-    # source://activesupport/7.0.8.4/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
     def __callbacks; end
   end
 end

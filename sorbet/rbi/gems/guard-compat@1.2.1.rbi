@@ -13,45 +13,45 @@ module Guard
   extend ::Guard::Internals::Helpers
 
   class << self
-    # source://guard/2.18.0/lib/guard.rb#87
+    # source://guard/2.18.1/lib/guard.rb#87
     def async_queue_add(changes); end
 
-    # source://guard/2.18.0/lib/guard.rb#73
+    # source://guard/2.18.1/lib/guard.rb#73
     def init(cmdline_options); end
 
-    # source://guard/2.18.0/lib/guard.rb#24
+    # source://guard/2.18.1/lib/guard.rb#24
     def interactor; end
 
-    # source://guard/2.18.0/lib/guard.rb#23
+    # source://guard/2.18.1/lib/guard.rb#23
     def listener; end
 
-    # source://guard/2.18.0/lib/guard.rb#22
+    # source://guard/2.18.1/lib/guard.rb#22
     def queue; end
 
-    # source://guard/2.18.0/lib/guard.rb#44
+    # source://guard/2.18.1/lib/guard.rb#44
     def setup(cmdline_options = T.unsafe(nil)); end
 
-    # source://guard/2.18.0/lib/guard.rb#21
+    # source://guard/2.18.1/lib/guard.rb#21
     def state; end
 
     private
 
-    # source://guard/2.18.0/lib/guard.rb#132
+    # source://guard/2.18.1/lib/guard.rb#132
     def _evaluate(options); end
 
-    # source://guard/2.18.0/lib/guard.rb#152
+    # source://guard/2.18.1/lib/guard.rb#152
     def _guardfile_deprecated_check(modified); end
 
-    # source://guard/2.18.0/lib/guard.rb#113
+    # source://guard/2.18.1/lib/guard.rb#113
     def _listener_callback; end
 
-    # source://guard/2.18.0/lib/guard.rb#128
+    # source://guard/2.18.1/lib/guard.rb#128
     def _pluginless_guardfile?; end
 
-    # source://guard/2.18.0/lib/guard.rb#109
+    # source://guard/2.18.1/lib/guard.rb#109
     def _relative_pathnames(paths); end
 
-    # source://guard/2.18.0/lib/guard.rb#99
+    # source://guard/2.18.1/lib/guard.rb#99
     def _relevant_changes?(changes); end
   end
 end

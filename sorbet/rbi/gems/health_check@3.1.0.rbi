@@ -10,74 +10,86 @@ module ActionDispatch::Routing; end
 
 # source://health_check//lib/health_check/health_check_routes.rb#2
 class ActionDispatch::Routing::Mapper
-  # source://actionpack/7.0.8.4/lib/action_dispatch/routing/mapper.rb#2302
+  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#2313
   def initialize(set); end
 
   # source://health_check//lib/health_check/health_check_routes.rb#9
   def add_health_check_routes(prefix = T.unsafe(nil)); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#363
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#363
   def as(scope); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#290
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#290
   def authenticate(scope = T.unsafe(nil), block = T.unsafe(nil)); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#314
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#314
   def authenticated(scope = T.unsafe(nil), block = T.unsafe(nil)); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#226
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#226
   def devise_for(*resources); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#363
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#363
   def devise_scope(scope); end
 
   # source://health_check//lib/health_check/health_check_routes.rb#4
   def health_check_routes(prefix = T.unsafe(nil)); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#331
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#331
   def unauthenticated(scope = T.unsafe(nil)); end
 
   protected
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#477
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#477
   def constraints_for(method_to_apply, scope = T.unsafe(nil), block = T.unsafe(nil)); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#390
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#390
   def devise_confirmation(mapping, controllers); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#421
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#421
   def devise_omniauth_callback(mapping, controllers); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#385
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#385
   def devise_password(mapping, controllers); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#402
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#402
   def devise_registration(mapping, controllers); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#377
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#377
   def devise_session(mapping, controllers); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#395
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#395
   def devise_unlock(mapping, controllers); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#509
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#509
   def raise_no_devise_method_error!(klass); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#499
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#499
   def raise_no_secret_key; end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#488
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#488
   def set_omniauth_path_prefix!(path_prefix); end
 
-  # source://devise/4.9.2/lib/devise/rails/routes.rb#461
+  # source://devise/4.9.4/lib/devise/rails/routes.rb#461
   def with_devise_exclusive_scope(new_path, new_as, options); end
 
   class << self
-    # source://actionpack/7.0.8.4/lib/action_dispatch/routing/mapper.rb#381
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#16
+    def backtrace_cleaner; end
+
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#16
+    def backtrace_cleaner=(val); end
+
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#392
     def normalize_name(name); end
 
-    # source://actionpack/7.0.8.4/lib/action_dispatch/routing/mapper.rb#364
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#375
     def normalize_path(path); end
+
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#15
+    def route_source_locations; end
+
+    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#15
+    def route_source_locations=(val); end
   end
 end
 
@@ -426,7 +438,7 @@ class HealthCheck::Engine < ::Rails::Engine
   def routes_explicitly_defined=(val); end
 
   class << self
-    # source://activesupport/7.0.8.4/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
     def __callbacks; end
 
     # source://health_check//lib/health_check.rb#7
@@ -462,20 +474,20 @@ class HealthCheck::HealthCheckController < ::ActionController::Base
 
   private
 
-  # source://actionview/7.0.8.4/lib/action_view/layouts.rb#328
+  # source://actionview/7.1.3.4/lib/action_view/layouts.rb#330
   def _layout(lookup_context, formats); end
 
   class << self
-    # source://activesupport/7.0.8.4/lib/active_support/callbacks.rb#68
+    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
     def __callbacks; end
 
-    # source://actionview/7.0.8.4/lib/action_view/layouts.rb#209
+    # source://actionview/7.1.3.4/lib/action_view/layouts.rb#211
     def _layout; end
 
-    # source://actionview/7.0.8.4/lib/action_view/layouts.rb#210
+    # source://actionview/7.1.3.4/lib/action_view/layouts.rb#212
     def _layout_conditions; end
 
-    # source://actionpack/7.0.8.4/lib/action_controller/metal.rb#210
+    # source://actionpack/7.1.3.4/lib/action_controller/metal.rb#262
     def middleware_stack; end
   end
 end

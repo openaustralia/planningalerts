@@ -4570,10 +4570,10 @@ end
 # source://sprockets//lib/sprockets/server.rb#12
 Sprockets::Server::ALLOWED_REQUEST_METHODS = T.let(T.unsafe(nil), Set)
 
-# source://sprockets//lib/sprockets/server.rb#17
+# source://sprockets//lib/sprockets/server.rb#20
 Sprockets::Server::VARY = T.let(T.unsafe(nil), String)
 
-# source://sprockets//lib/sprockets/server.rb#16
+# source://sprockets//lib/sprockets/server.rb#19
 Sprockets::Server::X_CASCADE = T.let(T.unsafe(nil), String)
 
 # The purpose of this class is to generate a source map file

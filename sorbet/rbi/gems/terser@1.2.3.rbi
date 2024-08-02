@@ -185,7 +185,7 @@ class Terser::Compressor
   # source://terser//lib/terser/compressor.rb#30
   def cache_key; end
 
-  # source://terser//lib/terser/compressor.rb#44
+  # source://terser//lib/terser/compressor.rb#33
   def call(input); end
 
   class << self

@@ -5732,6 +5732,8 @@ end
 class RSpec::Core::Formatters::HtmlPrinter
   include ::ERB::Escape
   include ::ERB::Util
+  include ::ActiveSupport::CoreExt::ERBUtil
+  include ::ActiveSupport::CoreExt::ERBUtilPrivate
 
   # @return [HtmlPrinter] a new instance of HtmlPrinter
   #
@@ -6284,6 +6286,9 @@ module RSpec::Core::HashImitatable
 
   # source://rspec-core//lib/rspec/core/metadata.rb#367
   def deep_merge!(*args, &block); end
+
+  # source://rspec-core//lib/rspec/core/metadata.rb#367
+  def deep_merge?(*args, &block); end
 
   # source://rspec-core//lib/rspec/core/metadata.rb#367
   def deep_stringify_keys(*args, &block); end

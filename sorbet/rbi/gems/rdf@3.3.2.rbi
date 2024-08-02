@@ -12575,6 +12575,9 @@ class RDF::Util::Logger::IOWrapper
   def reopen(*args, **_arg1, &block); end
 
   # source://delegate/0.3.1/delegate.rb#347
+  def require(*args, **_arg1, &block); end
+
+  # source://delegate/0.3.1/delegate.rb#347
   def require_dependency(*args, **_arg1, &block); end
 
   # source://delegate/0.3.1/delegate.rb#347
@@ -12725,6 +12728,9 @@ class RDF::Util::Logger::IOWrapper
   def winsize=(*args, **_arg1, &block); end
 
   # source://delegate/0.3.1/delegate.rb#347
+  def with(*args, **_arg1, &block); end
+
+  # source://delegate/0.3.1/delegate.rb#347
   def with_options(*args, **_arg1, &block); end
 
   # source://delegate/0.3.1/delegate.rb#347
@@ -12735,9 +12741,6 @@ class RDF::Util::Logger::IOWrapper
 
   # source://delegate/0.3.1/delegate.rb#347
   def write_nonblock(*args, **_arg1, &block); end
-
-  # source://delegate/0.3.1/delegate.rb#347
-  def zeitwerk_original_require(*args, **_arg1, &block); end
 
   # source://delegate/0.3.1/delegate.rb#347
   def zip(*args, **_arg1, &block); end

@@ -8952,66 +8952,66 @@ RuboCop::Cop::Rails::WhereRange::RESTRICT_ON_SEND = T.let(T.unsafe(nil), Array)
 module RuboCop::Cop::Style; end
 
 class RuboCop::Cop::Style::InverseMethods < ::RuboCop::Cop::Base
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#70
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#70
   def inverse_block?(param0 = T.unsafe(nil)); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#61
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#61
   def inverse_candidate?(param0 = T.unsafe(nil)); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#92
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#92
   def on_block(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#78
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#78
   def on_csend(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#92
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#92
   def on_numblock(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#78
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#78
   def on_send(node); end
 
   private
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#177
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#177
   def camel_case_constant?(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#121
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#121
   def correct_inverse_block(corrector, node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#112
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#112
   def correct_inverse_method(corrector, node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#128
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#128
   def correct_inverse_selector(block, corrector); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#181
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#181
   def dot_range(loc); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#166
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#166
   def end_parentheses(node, method_call); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#150
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#150
   def inverse_blocks; end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#145
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#145
   def inverse_methods; end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#191
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#191
   def message(method, inverse); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#154
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#154
   def negated?(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#162
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#162
   def not_to_receiver(node, method_call); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#172
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#172
   def possible_class_hierarchy_check?(lhs, rhs, method); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#158
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#158
   def relational_comparison_with_safe_navigation?(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/inverse_methods.rb#185
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/inverse_methods.rb#185
   def remove_end_parenthesis(corrector, node, method, method_call); end
 
   class << self
@@ -9021,24 +9021,24 @@ class RuboCop::Cop::Style::InverseMethods < ::RuboCop::Cop::Base
 end
 
 class RuboCop::Cop::Style::MethodCallWithArgsParentheses < ::RuboCop::Cop::Base
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#217
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#217
   def on_csend(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#217
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#217
   def on_send(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#217
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#217
   def on_yield(node); end
 
   private
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#225
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#225
   def args_begin(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#233
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#233
   def args_end(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#237
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/method_call_with_args_parentheses.rb#237
   def args_parenthesized?(node); end
 
   class << self
@@ -9048,84 +9048,84 @@ class RuboCop::Cop::Style::MethodCallWithArgsParentheses < ::RuboCop::Cop::Base
 end
 
 class RuboCop::Cop::Style::RedundantSelf < ::RuboCop::Cop::Base
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#60
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#60
   def initialize(config = T.unsafe(nil), options = T.unsafe(nil)); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#68
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#68
   def on_and_asgn(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#86
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#86
   def on_args(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#120
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#120
   def on_block(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#90
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#90
   def on_blockarg(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#81
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#81
   def on_def(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#81
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#81
   def on_defs(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#126
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#126
   def on_if(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#104
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#104
   def on_in_pattern(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#99
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#99
   def on_lvasgn(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#94
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#94
   def on_masgn(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#120
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#120
   def on_numblock(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#74
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#74
   def on_op_asgn(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#68
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#68
   def on_or_asgn(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#108
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#108
   def on_send(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#126
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#126
   def on_until(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#126
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#126
   def on_while(node); end
 
   private
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#196
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#196
   def add_lhs_to_local_variables_scopes(rhs, lhs); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#204
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#204
   def add_masgn_lhs_variables(rhs, lhs); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#210
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#210
   def add_match_var_scopes(in_pattern_node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#144
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#144
   def add_scope(node, local_variables = T.unsafe(nil)); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#190
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#190
   def allow_self(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#150
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#150
   def allowed_send_node?(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#165
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#165
   def it_method_in_block?(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#181
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#181
   def on_argument(node); end
 
-  # source://rubocop/1.65.0/lib/rubocop/cop/style/redundant_self.rb#173
+  # source://rubocop/1.65.1/lib/rubocop/cop/style/redundant_self.rb#173
   def regular_method_call?(node); end
 
   class << self
