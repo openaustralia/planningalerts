@@ -92,6 +92,9 @@ gem "sorbet-runtime"
 
 # For automatic creation of github issues when scrapers are broken
 gem "octokit"
+# Just including faraday-multipart and faraday-retry to keep octokit quiet
+gem "faraday-multipart"
+gem "faraday-retry"
 
 # For rendering json output
 gem "jb"

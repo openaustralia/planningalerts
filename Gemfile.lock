@@ -250,11 +250,14 @@ GEM
     faraday (2.10.1)
       faraday-net_http (>= 2.0, < 3.2)
       logger
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
     faraday-net_http (3.1.1)
       net-http
     faraday-net_http_persistent (2.1.0)
       faraday (~> 2.5)
       net-http-persistent (~> 4.0)
+    faraday-retry (1.0.3)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
@@ -375,6 +378,7 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
+    multipart-post (2.4.1)
     mutex_m (0.2.0)
     nenv (0.3.0)
     net-http (0.4.1)
@@ -778,7 +782,9 @@ DEPENDENCIES
   erb_lint
   factory_bot
   factory_bot_rails
+  faraday-multipart
   faraday-net_http_persistent
+  faraday-retry
   flipper
   flipper-redis
   flipper-ui
