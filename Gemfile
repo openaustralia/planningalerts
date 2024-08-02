@@ -81,8 +81,6 @@ gem "elasticsearch", "~> 7"
 # with faraday 2 which is needed by the gem. Weird.
 gem "faraday-net_http_persistent"
 
-gem "ruby-progressbar"
-
 # For conditional counter caches (used to count visible comments)
 gem "counter_culture"
 
