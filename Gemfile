@@ -18,7 +18,9 @@ gem "dalli"
 gem "rack-attack"
 
 # Admin interface
-gem "administrate", "~> 0.20.0"
+gem "administrate", "~> 1.0.0.beta"
+
+gem "sprockets-rails"
 
 # Logging in and such things
 gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
