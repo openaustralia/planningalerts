@@ -221,22 +221,22 @@ class Administrate::CustomDashboard
   end
 end
 
-# source://administrate//lib/administrate/engine.rb#19
+# source://administrate//lib/administrate/engine.rb#14
 class Administrate::Engine < ::Rails::Engine
   class << self
     # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
     def __callbacks; end
 
-    # source://administrate//lib/administrate/engine.rb#32
+    # source://administrate//lib/administrate/engine.rb#27
     def add_javascript(script); end
 
-    # source://administrate//lib/administrate/engine.rb#36
+    # source://administrate//lib/administrate/engine.rb#31
     def add_stylesheet(stylesheet); end
 
-    # source://administrate//lib/administrate/engine.rb#44
+    # source://administrate//lib/administrate/engine.rb#39
     def javascripts; end
 
-    # source://administrate//lib/administrate/engine.rb#40
+    # source://administrate//lib/administrate/engine.rb#35
     def stylesheets; end
   end
 end
@@ -1111,58 +1111,58 @@ class Administrate::Search
 
   private
 
-  # source://administrate//lib/administrate/search.rb#69
+  # source://administrate//lib/administrate/search.rb#68
   def apply_filter(filter, filter_param, resources); end
 
   # @return [Boolean]
   #
-  # source://administrate//lib/administrate/search.rb#159
+  # source://administrate//lib/administrate/search.rb#158
   def association_search?(attribute); end
 
-  # source://administrate//lib/administrate/search.rb#128
+  # source://administrate//lib/administrate/search.rb#127
   def attribute_types; end
 
-  # source://administrate//lib/administrate/search.rb#149
+  # source://administrate//lib/administrate/search.rb#148
   def column_to_query(attr); end
 
-  # source://administrate//lib/administrate/search.rb#78
+  # source://administrate//lib/administrate/search.rb#77
   def filter_results(resources); end
 
   # Returns the value of attribute query.
   #
-  # source://administrate//lib/administrate/search.rb#167
+  # source://administrate//lib/administrate/search.rb#166
   def query; end
 
-  # source://administrate//lib/administrate/search.rb#132
+  # source://administrate//lib/administrate/search.rb#131
   def query_table_name(attr); end
 
-  # source://administrate//lib/administrate/search.rb#87
+  # source://administrate//lib/administrate/search.rb#86
   def query_template; end
 
-  # source://administrate//lib/administrate/search.rb#103
+  # source://administrate//lib/administrate/search.rb#102
   def query_values; end
 
   # Returns the value of attribute resolver.
   #
-  # source://administrate//lib/administrate/search.rb#167
+  # source://administrate//lib/administrate/search.rb#166
   def resolver; end
 
-  # source://administrate//lib/administrate/search.rb#110
+  # source://administrate//lib/administrate/search.rb#109
   def search_attributes; end
 
-  # source://administrate//lib/administrate/search.rb#114
+  # source://administrate//lib/administrate/search.rb#113
   def search_results(resources); end
 
-  # source://administrate//lib/administrate/search.rb#97
+  # source://administrate//lib/administrate/search.rb#96
   def searchable_fields(attr); end
 
-  # source://administrate//lib/administrate/search.rb#153
+  # source://administrate//lib/administrate/search.rb#152
   def tables_to_join; end
 
-  # source://administrate//lib/administrate/search.rb#163
+  # source://administrate//lib/administrate/search.rb#162
   def term; end
 
-  # source://administrate//lib/administrate/search.rb#120
+  # source://administrate//lib/administrate/search.rb#119
   def valid_filters; end
 end
 
