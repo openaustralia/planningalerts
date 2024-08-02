@@ -29,8 +29,7 @@ gem "validates_email_format_of"
 gem "validate_url"
 
 # Background queue uses sidekiq
-# TODO: Upgrade to sidekiq 7.0
-gem "sidekiq", "<7"
+gem "sidekiq", "~> 7.0"
 # Run cron jobs alongside sidekiq. Only use this for jobs that need
 # to run once across a cluster. We're still using "regular" cron
 # for jobs that need to run on every machine

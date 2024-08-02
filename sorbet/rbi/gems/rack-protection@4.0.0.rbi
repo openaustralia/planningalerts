@@ -8,18 +8,15 @@
 # source://rack-protection//lib/rack/protection/version.rb#3
 module Rack
   class << self
-    # source://rack/2.2.9/lib/rack/version.rb#26
+    # source://rack/3.1.7/lib/rack/version.rb#18
     def release; end
-
-    # source://rack/2.2.9/lib/rack/version.rb#19
-    def version; end
   end
 end
 
 # source://rack-protection//lib/rack/protection/version.rb#4
 module Rack::Protection
   class << self
-    # source://rack-protection//lib/rack/protection.rb#28
+    # source://rack-protection//lib/rack/protection.rb#26
     def new(app, options = T.unsafe(nil)); end
   end
 end
@@ -67,6 +64,7 @@ end
 # Here is <tt>server.rb</tt>:
 #
 #   require 'rack/protection'
+#   require 'rack/session'
 #
 #   app = Rack::Builder.app do
 #     use Rack::Session::Cookie, secret: 'secret'
@@ -111,71 +109,71 @@ end
 # <tt>:authenticity_param</tt> option:
 #   use Rack::Protection::AuthenticityToken, authenticity_param: 'your_token_param_name'
 #
-# source://rack-protection//lib/rack/protection/authenticity_token.rb#97
+# source://rack-protection//lib/rack/protection/authenticity_token.rb#98
 class Rack::Protection::AuthenticityToken < ::Rack::Protection::Base
   # @return [Boolean]
   #
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#112
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#113
   def accepts?(env); end
 
   # source://rack-protection//lib/rack/protection/base.rb#24
   def default_options; end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#124
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#125
   def mask_authenticity_token(session, path: T.unsafe(nil), method: T.unsafe(nil)); end
 
   private
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#206
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#207
   def compare_with_global_token(token, session); end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#210
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#211
   def compare_with_per_form_token(token, session, request); end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#202
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#203
   def compare_with_real_token(token, session); end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#231
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#232
   def decode_token(token); end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#227
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#228
   def encode_token(token); end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#219
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#220
   def global_token(session); end
 
   # Creates a masked version of the authenticity token that varies
   # on each request. The masking is used to mitigate SSL attacks
   # like BREACH.
   #
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#177
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#178
   def mask_token(token); end
 
   # @return [Boolean]
   #
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#198
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#199
   def masked_token?(token); end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#223
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#224
   def per_form_token(session, path, method); end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#215
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#216
   def real_token(session); end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#141
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#142
   def set_token(session); end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#235
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#236
   def token_hmac(session, identifier); end
 
   # Essentially the inverse of +mask_token+.
   #
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#185
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#186
   def unmask_token(masked_token); end
 
   # @return [Boolean]
   #
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#194
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#195
   def unmasked_token?(token); end
 
   # Checks the client's masked token to see if it matches the
@@ -183,25 +181,25 @@ class Rack::Protection::AuthenticityToken < ::Rack::Protection::Base
   #
   # @return [Boolean]
   #
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#147
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#148
   def valid_token?(env, token); end
 
-  # source://rack-protection//lib/rack/protection/authenticity_token.rb#243
+  # source://rack-protection//lib/rack/protection/authenticity_token.rb#244
   def xor_byte_strings(s1, s2); end
 
   class << self
-    # source://rack-protection//lib/rack/protection/authenticity_token.rb#108
+    # source://rack-protection//lib/rack/protection/authenticity_token.rb#109
     def random_token; end
 
-    # source://rack-protection//lib/rack/protection/authenticity_token.rb#104
+    # source://rack-protection//lib/rack/protection/authenticity_token.rb#105
     def token(session, path: T.unsafe(nil), method: T.unsafe(nil)); end
   end
 end
 
-# source://rack-protection//lib/rack/protection/authenticity_token.rb#136
+# source://rack-protection//lib/rack/protection/authenticity_token.rb#137
 Rack::Protection::AuthenticityToken::GLOBAL_TOKEN_IDENTIFIER = T.let(T.unsafe(nil), String)
 
-# source://rack-protection//lib/rack/protection/authenticity_token.rb#98
+# source://rack-protection//lib/rack/protection/authenticity_token.rb#99
 Rack::Protection::AuthenticityToken::TOKEN_LENGTH = T.let(T.unsafe(nil), Integer)
 
 # source://rack-protection//lib/rack/protection/base.rb#11
@@ -320,7 +318,7 @@ Rack::Protection::Base::DEFAULT_OPTIONS = T.let(T.unsafe(nil), Hash)
 #               https://scotthelme.co.uk/csp-cheat-sheet/
 #               http://www.html5rocks.com/en/tutorials/security/content-security-policy/
 #
-# Sets the 'Content-Security-Policy[-Report-Only]' header.
+# Sets the 'content-security-policy[-report-only]' header.
 #
 # Options: ContentSecurityPolicy configuration is a complex topic with
 #          several levels of support that has evolved over time.
@@ -391,190 +389,6 @@ class Rack::Protection::CookieTossing < ::Rack::Protection::Base
   def session_key; end
 end
 
-# Rack::Protection::EncryptedCookie provides simple cookie based session management.
-# By default, the session is a Ruby Hash stored as base64 encoded marshalled
-# data set to :key (default: rack.session).  The object that encodes the
-# session data is configurable and must respond to +encode+ and +decode+.
-# Both methods must take a string and return a string.
-#
-# When the secret key is set, cookie data is checked for data integrity.
-# The old_secret key is also accepted and allows graceful secret rotation.
-# A legacy_hmac_secret is also accepted and is used to upgrade existing
-# sessions to the new encryption scheme.
-#
-# There is also a legacy_hmac_coder option which can be set if a non-default
-# coder was used for legacy session cookies.
-#
-# Example:
-#
-#     use Rack::Protection::EncryptedCookie,
-#                                :key => 'rack.session',
-#                                :domain => 'foo.com',
-#                                :path => '/',
-#                                :expire_after => 2592000,
-#                                :secret => 'change_me',
-#                                :old_secret => 'old_secret'
-#
-#     All parameters are optional.
-#
-# Example using legacy HMAC options
-#
-#   Rack::Protection:EncryptedCookie.new(application, {
-#     # The secret used for legacy HMAC cookies
-#     legacy_hmac_secret: 'legacy secret',
-#     # legacy_hmac_coder will default to Rack::Protection::EncryptedCookie::Base64::Marshal
-#     legacy_hmac_coder: Rack::Protection::EncryptedCookie::Identity.new,
-#     # legacy_hmac will default to OpenSSL::Digest::SHA1
-#     legacy_hmac: OpenSSL::Digest::SHA256
-#   })
-#
-#
-#   Rack::Protection::EncryptedCookie.new(application, {
-#     :coder => Rack::Protection::EncryptedCookie::Identity.new
-#   })
-#
-#
-#   Rack::Protection::EncryptedCookie.new(application, {
-#     :coder => Class.new {
-#       def encode(str); str.reverse; end
-#       def decode(str); str.reverse; end
-#     }.new
-#   })
-#
-# source://rack-protection//lib/rack/protection/encrypted_cookie.rb#64
-class Rack::Protection::EncryptedCookie < ::Rack::Session::Abstract::Persisted
-  # @return [EncryptedCookie] a new instance of EncryptedCookie
-  #
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#143
-  def initialize(app, options = T.unsafe(nil)); end
-
-  # Returns the value of attribute coder.
-  #
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#141
-  def coder; end
-
-  private
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#252
-  def delete_session(_req, _session_id, options); end
-
-  # @return [Boolean]
-  #
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#257
-  def digest_match?(data, digest); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#200
-  def extract_session_id(request); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#194
-  def find_session(req, _sid); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#263
-  def generate_hmac(data); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#230
-  def persistent_session_id!(data, sid = T.unsafe(nil)); end
-
-  # @return [Boolean]
-  #
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#267
-  def secure?(options); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#204
-  def unpacked_cookie_data(request); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#236
-  def write_session(req, session_id, session, _options); end
-end
-
-# Encode session cookies as Base64
-#
-# source://rack-protection//lib/rack/protection/encrypted_cookie.rb#66
-class Rack::Protection::EncryptedCookie::Base64
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#71
-  def decode(str); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#67
-  def encode(str); end
-end
-
-# N.B. Unlike other encoding methods, the contained objects must be a
-# valid JSON composite type, either a Hash or an Array.
-#
-# source://rack-protection//lib/rack/protection/encrypted_cookie.rb#94
-class Rack::Protection::EncryptedCookie::Base64::JSON < ::Rack::Protection::EncryptedCookie::Base64
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#99
-  def decode(str); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#95
-  def encode(obj); end
-end
-
-# Encode session cookies as Marshaled Base64 data
-#
-# source://rack-protection//lib/rack/protection/encrypted_cookie.rb#76
-class Rack::Protection::EncryptedCookie::Base64::Marshal < ::Rack::Protection::EncryptedCookie::Base64
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#81
-  def decode(str); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#77
-  def encode(str); end
-end
-
-# source://rack-protection//lib/rack/protection/encrypted_cookie.rb#110
-class Rack::Protection::EncryptedCookie::Base64::ZipJSON < ::Rack::Protection::EncryptedCookie::Base64
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#115
-  def decode(str); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#111
-  def encode(obj); end
-end
-
-# Use no encoding for session cookies
-#
-# source://rack-protection//lib/rack/protection/encrypted_cookie.rb#126
-class Rack::Protection::EncryptedCookie::Identity
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#128
-  def decode(str); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#127
-  def encode(str); end
-end
-
-# source://rack-protection//lib/rack/protection/encrypted_cookie.rb#131
-class Rack::Protection::EncryptedCookie::Marshal
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#136
-  def decode(str); end
-
-  # source://rack-protection//lib/rack/protection/encrypted_cookie.rb#132
-  def encode(str); end
-end
-
-# source://rack-protection//lib/rack/protection/encryptor.rb#7
-module Rack::Protection::Encryptor
-  class << self
-    # source://rack-protection//lib/rack/protection/encryptor.rb#15
-    def base64_decode(str); end
-
-    # source://rack-protection//lib/rack/protection/encryptor.rb#11
-    def base64_encode(str); end
-
-    # source://rack-protection//lib/rack/protection/encryptor.rb#38
-    def decrypt_message(data, secret); end
-
-    # @raise [ArgumentError]
-    #
-    # source://rack-protection//lib/rack/protection/encryptor.rb#19
-    def encrypt_message(data, secret, auth_data = T.unsafe(nil)); end
-  end
-end
-
-# source://rack-protection//lib/rack/protection/encryptor.rb#8
-Rack::Protection::Encryptor::CIPHER = T.let(T.unsafe(nil), String)
-
-# source://rack-protection//lib/rack/protection/encryptor.rb#9
-Rack::Protection::Encryptor::DELIMITER = T.let(T.unsafe(nil), String)
-
 # Prevented attack::   XSS
 # Supported browsers:: all
 # More infos::         http://en.wikipedia.org/wiki/Cross-site_scripting
@@ -614,12 +428,11 @@ class Rack::Protection::EscapedParams < ::Rack::Protection::Base
   def handle(hash); end
 
   class << self
-    # source://rack/2.2.9/lib/rack/utils.rb#184
-    def escape_html(string); end
+    def escape_html(_arg0); end
 
     private
 
-    # source://rack/2.2.9/lib/rack/utils.rb#38
+    # source://rack/3.1.7/lib/rack/utils.rb#39
     def escape_url(s); end
   end
 end
