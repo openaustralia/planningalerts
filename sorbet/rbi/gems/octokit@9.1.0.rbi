@@ -11428,12 +11428,12 @@ module Octokit::Response; end
 # In Faraday 2.x, Faraday::Response::Middleware was removed
 #
 # source://octokit//lib/octokit/response/base_middleware.rb#8
-Octokit::Response::BaseMiddleware = Faraday::Response::Middleware
+Octokit::Response::BaseMiddleware = Faraday::Middleware
 
 # Parses RSS and Atom feed responses.
 #
 # source://octokit//lib/octokit/response/feed_parser.rb#8
-class Octokit::Response::FeedParser < ::Faraday::Response::Middleware
+class Octokit::Response::FeedParser < ::Faraday::Middleware
   # source://octokit//lib/octokit/response/feed_parser.rb#9
   def on_complete(env); end
 end
@@ -11442,7 +11442,7 @@ end
 # HTTP status codes returned by the API
 #
 # source://octokit//lib/octokit/response/raise_error.rb#11
-class Octokit::Response::RaiseError < ::Faraday::Response::Middleware
+class Octokit::Response::RaiseError < ::Faraday::Middleware
   # source://octokit//lib/octokit/response/raise_error.rb#12
   def on_complete(response); end
 end
