@@ -28,7 +28,7 @@ VCR.configure do |c|
   # which automatically downloads the webdriver for headless testing
   c.ignore_hosts "github.com"
   c.ignore_request do |request|
-    URI(request.uri).host =~ /objects.githubusercontent.com/
+    URI(request.uri).host =~ /objects\.githubusercontent\.com/
     # false
     # URI(request.uri).port == 7777
   end

@@ -63,7 +63,7 @@ describe "Activate account" do
       expect(current_email.default_part_body.to_s).to include("Thanks for getting onboard!")
 
       # Do these shenanigans to get the first link in this case
-      link = links_in_email(current_email).find { |u| u =~ %r{https://dev.planningalerts.org.au} }
+      link = links_in_email(current_email).find { |u| u =~ %r{https://dev\.planningalerts\.org\.au} }
       visit request_uri(link)
 
       fill_in "Your full name", with: "Matthew"
@@ -125,7 +125,7 @@ describe "Activate account" do
       expect(current_email.default_part_body.to_s).to include("Thanks for getting onboard!")
 
       # Do these shenanigans to get the first link in this case
-      link = links_in_email(current_email).find { |u| u =~ %r{https://dev.planningalerts.org.au} }
+      link = links_in_email(current_email).find { |u| u =~ %r{https://dev\.planningalerts\.org\.au} }
       visit request_uri(link)
 
       fill_in "Your full name", with: "Matthew"

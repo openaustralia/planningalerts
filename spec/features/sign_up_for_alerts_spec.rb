@@ -143,7 +143,7 @@ describe "Sign up for alerts" do
     expect(current_email).to have_subject("PlanningAlerts: Confirmation instructions")
 
     # Do these shenanigans to get the first link in this case
-    link = links_in_email(current_email).find { |u| u =~ %r{https://dev.planningalerts.org.au} }
+    link = links_in_email(current_email).find { |u| u =~ %r{https://dev\.planningalerts\.org\.au} }
     visit request_uri(link)
 
     expect(page).to have_content("Your email address has been successfully confirmed and you are now logged in.")
