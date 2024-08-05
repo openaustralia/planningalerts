@@ -9,3 +9,4 @@ gem:
     - rbi
     - sprockets-rails
     - sprockets
+    - sassc-rails
