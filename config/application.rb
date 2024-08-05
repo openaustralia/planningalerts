@@ -8,6 +8,20 @@ require "rack/attack"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# TODO: Remove this as soon as we can remove sassc-rails
+# Currently administrate depends on it
+class SkippingSassCompressor
+  def compress(string)
+    options = { syntax: :scss, cache: false, read_cache: false, style: :compressed}
+    begin
+      SassC::Engine.new(string, options).render
+    rescue => e
+      puts "Could not compress '#{string[0..65]}'...: #{e.message}, skipping compression"
+      string
+    end
+  end
+end
+
 module PlanningalertsApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -36,6 +50,8 @@ module PlanningalertsApp
     config.action_dispatch.tld_length = 2
 
     config.exceptions_app = routes
+
+    config.assets.css_compressor = SkippingSassCompressor.new
 
     # Application configuration
     # These are things that are nice to have as configurations but unlikely really
