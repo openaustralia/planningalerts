@@ -13,7 +13,10 @@ class ApiKey < ApplicationRecord
 
   sig { params(value: String).returns(T.nilable(ApiKey)) }
   def self.find_valid(value)
-    ApiKey.find_by(value:, disabled: false)
+    a = ApiKey.find_by(value:)
+    return if a&.disabled
+
+    a
   end
 
   # By default we allow up to 1000 API requests per day per API key
