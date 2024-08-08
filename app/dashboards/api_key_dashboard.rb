@@ -21,7 +21,8 @@ class ApiKeyDashboard < Administrate::BaseDashboard
     user: Field::BelongsTo,
     value: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    expires_at: Field::DateTime
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
@@ -43,6 +44,7 @@ class ApiKeyDashboard < Administrate::BaseDashboard
     user
     value
     bulk
+    expires_at
     disabled
     commercial
     daily_limit
@@ -57,6 +59,7 @@ class ApiKeyDashboard < Administrate::BaseDashboard
     bulk
     commercial
     daily_limit
+    expires_at
     disabled
   ].freeze, T::Array[Symbol])
 
