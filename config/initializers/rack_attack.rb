@@ -2,8 +2,7 @@ Rack::Attack.cache.store = ActiveSupport::Cache::RedisCacheStore.new(url: Rails.
 
 Rack::Attack.throttle(
   "limit api requests",
-  # By default we allow up to 1000 API requests per day per API key
-  limit: proc { |request| ApiKey.find_valid(request.params["key"])&.daily_limit || 1000 },
+  limit: proc { |request| ApiKey.daily_limit_with_default(request.params["key"]) },
   period: 1.day
 ) do |request|
   # First check whether this request is going to the API

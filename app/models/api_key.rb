@@ -17,6 +17,15 @@ class ApiKey < ApplicationRecord
     ApiKey.find_by(value:, disabled: false)
   end
 
+  # Returns the daily limit for a given API key value. If no daily limit
+  # is set will return the default daily limit. Also, if an invalid key is given it
+  # will return the default daily limit as well.
+  # By default we allow up to 1000 API requests per day per API key
+  sig { params(value: String).returns(Integer) }
+  def self.daily_limit_with_default(value)
+    ApiKey.find_valid(value)&.daily_limit || 1000
+  end
+
   private
 
   sig { void }
