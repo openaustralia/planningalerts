@@ -95,6 +95,7 @@ en:
         bulk: Give access to the "bulk" API which allows easy downloading of all data incrementally. Only given to select customers.
         commercial: Are they a paying commercial customer?
         daily_limit: Override default daily number of allowed API requests
+        expires_at: Make a key automatically expire at a date and time. If not set the key will never expire.
   admin:
     alerts:
       unsubscribe:
