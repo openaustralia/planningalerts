@@ -14,13 +14,13 @@ class ApiKey < ApplicationRecord
   sig { params(value: String).returns(T.nilable(ApiKey)) }
   def self.find_valid(value)
     a = ApiKey.find_by(value:)
-    return unless a&.valid
+    return unless a&.active?
 
     a
   end
 
   sig { returns(T::Boolean) }
-  def valid
+  def active?
     !disabled
   end
 
