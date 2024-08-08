@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_31_043561) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_08_005105) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -97,7 +97,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_043561) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_api_keys_on_user_id"
-    t.index ["value"], name: "index_api_keys_on_value"
+    t.index ["value"], name: "index_api_keys_on_value", unique: true
   end
 
   create_table "application_redirects", id: :serial, force: :cascade do |t|

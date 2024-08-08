@@ -7,10 +7,9 @@ class ApiKey < ApplicationRecord
   belongs_to :user
   has_many :daily_api_usages, dependent: :destroy
 
-  before_create :set_value
+  validates :value, uniqueness: true
 
-  # TODO: Ensure that value is unique
-  # There should be a validation here and a unique index in the schema
+  before_create :set_value
 
   sig { params(value: String).returns(T.nilable(ApiKey)) }
   def self.find_valid(value)
@@ -33,6 +32,7 @@ class ApiKey < ApplicationRecord
 
   private
 
+  # TODO: Retry if api key value is not unique
   sig { void }
   def set_value
     self.value = SecureRandom.base58(20)
