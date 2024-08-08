@@ -18,4 +18,14 @@ describe ApiKey do
       expect(described_class.find_valid(key.value)).to be_nil
     end
   end
+
+  describe "#active?" do
+    it "is active if the key has not been disabled" do
+      expect(build(:api_key)).to be_active
+    end
+
+    it "is not active if key has been disabled" do
+      expect(build(:api_key, disabled: true)).not_to be_active
+    end
+  end
 end
