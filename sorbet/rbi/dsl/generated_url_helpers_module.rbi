@@ -148,9 +148,6 @@ module GeneratedUrlHelpersModule
   def comment_reports_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def comments_profile_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def comments_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -278,6 +275,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def per_week_authority_comments_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def personal_comments_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def preview_comment_url(*args); end

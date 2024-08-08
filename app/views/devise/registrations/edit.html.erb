@@ -46,7 +46,7 @@
 <% unless resource.comments.visible.empty? %>
   <p class="mt-8 text-xl text-navy">
     Note that the
-    <%= pa_link_to pluralize(resource.comments.visible.count, "comment"), comments_profile_path %>
+    <%= pa_link_to pluralize(resource.comments.visible.count, "comment"), personal_comments_path %>
     you have made (including the name attached to the comment) will not be removed
     as it is part of the public record. However the private information, your email address, will be removed.
   </p>

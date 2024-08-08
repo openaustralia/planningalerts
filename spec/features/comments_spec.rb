@@ -42,7 +42,7 @@ describe "Comments pages" do
     describe "your comments page in profile" do
       describe "no comments yet" do
         before do
-          visit comments_profile_path
+          visit personal_comments_path
         end
 
         it "lets the user know" do
@@ -84,7 +84,7 @@ describe "Comments pages" do
                    text: "This message is not going to go through, is it?",
                    published_at: 5.minutes.ago,
                    user: signed_in_user)
-            visit comments_profile_path
+            visit personal_comments_path
           end
         end
 

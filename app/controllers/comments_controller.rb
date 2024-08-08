@@ -4,9 +4,11 @@
 class CommentsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, only: %i[create preview update destroy publish]
+  before_action :authenticate_user!, only: %i[create preview update destroy publish personal]
   # TODO: Add checks for all other actions on this controller
   after_action :verify_authorized, only: %i[preview update destroy publish]
+
+  layout "profile", only: :personal
 
   sig { void }
   def index
@@ -23,6 +25,13 @@ class CommentsController < ApplicationController
     @description = T.let(description, T.nilable(String))
 
     @comments = T.let(comments_to_display.published.includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
+  end
+
+  sig { void }
+  def personal
+    # We also want to include comments that have been hidden
+    comments = T.must(current_user).comments.published.order(published_at: :desc).page(params[:page])
+    @comments = T.let(comments, T.nilable(ActiveRecord::Relation))
   end
 
   sig { void }
