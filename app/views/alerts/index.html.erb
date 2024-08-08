@@ -12,7 +12,7 @@
     <div class="flex justify-center flex-grow">
       <div class="ml-12 mr-4 text-xl text-navy">
         <p>You have no saved alerts</p>
-        <%= pa_link_to "Create your first one", new_profile_alert_path %>
+        <%= pa_link_to "Create your first one", new_alert_path %>
       </div>
     </div>
     <%= image_tag "illustration/woman-looking-off.svg", class: "mt-6", alt: "" %>
@@ -26,6 +26,6 @@
     <% end %>
   </ul>
   <div class="mt-12 text-xl">
-    <%= pa_link_to "Create new alert", new_profile_alert_path %>
+    <%= pa_link_to "Create new alert", new_alert_path %>
   </div>
 <% end %>

@@ -13,7 +13,7 @@
         It only takes a moment.
       </p>
     <% else %>
-      <%= form_with model: [:profile, alert] do |f| %>
+      <%= form_with model: alert do |f| %>
         <p class="mt-2 mb-8 text-xl text-navy">
           Save your search for applications within <%= meters_in_words(alert.radius_meters) %> of <%= alert.address %>?
         </p>

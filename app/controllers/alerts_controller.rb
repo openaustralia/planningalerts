@@ -45,7 +45,7 @@ class AlertsController < ApplicationController
     alert.geocode_from_address
 
     if alert.save
-      redirect_to profile_alerts_path, notice: "You succesfully added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
+      redirect_to alerts_path, notice: "You succesfully added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
     else
       @alert = T.let(alert, T.nilable(Alert))
       # TODO: Is there a more sensible way of doing this?
@@ -63,7 +63,7 @@ class AlertsController < ApplicationController
     authorize alert
     alert.update!(radius_meters: params_radius_meters.to_i)
 
-    redirect_to profile_alerts_path, notice: "Your alert for <span class=\"font-bold\">#{alert.address}</span> now has a size of #{helpers.meters_in_words(alert.radius_meters.to_f)}"
+    redirect_to alerts_path, notice: "Your alert for <span class=\"font-bold\">#{alert.address}</span> now has a size of #{helpers.meters_in_words(alert.radius_meters.to_f)}"
   end
 
   sig { void }
@@ -72,8 +72,8 @@ class AlertsController < ApplicationController
     authorize alert
     alert.unsubscribe!
 
-    redirect_to profile_alerts_path,
-                notice: "You will no longer receive alerts for <span class=\"font-bold\">#{alert.address}</span>. #{helpers.link_to 'Create again', new_profile_alert_path(address: alert.address), class: 'font-bold underline'}"
+    redirect_to alerts_path,
+                notice: "You will no longer receive alerts for <span class=\"font-bold\">#{alert.address}</span>. #{helpers.link_to 'Create again', new_alert_path(address: alert.address), class: 'font-bold underline'}"
   end
 
   # This is for one click unsubscribes from email alerts

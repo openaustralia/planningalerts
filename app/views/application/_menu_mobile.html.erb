@@ -1,5 +1,5 @@
 <div x-data="{ open: false }">
-  <button x-on:click="open = true; bodyScrolling = false" type="button" class="group flex flex-row-reverse w-full h-16 text-sm rounded-lg md:hidden focus:outline-none">
+  <button x-on:click="open = true; bodyScrolling = false" type="button" class="flex flex-row-reverse w-full h-16 text-sm rounded-lg group md:hidden focus:outline-none">
     <div class="inline-flex flex-row-reverse items-center text-navy group-focus:bg-sun-yellow">
       <%= render "application/svg/hamburger" %>
       <span class="px-2 text-base font-medium">Menu</span>
@@ -28,7 +28,7 @@
               <div class="inline-block mr-2">
                 <%= render "application/svg/user" %>
               </div>
-              <%= link_to current_user.name_with_fallback, profile_alerts_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(profile_alerts_path)) %>
+              <%= link_to current_user.name_with_fallback, alerts_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(alerts_path)) %>
             <% else %>
               <%= link_to "Sign In", new_user_session_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(new_user_session_path)) %>
             <% end %>

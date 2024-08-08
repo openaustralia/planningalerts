@@ -3,7 +3,7 @@
     <%= image_tag "bookmark.svg", alt: "", class: "mt-2 sm:mt-0" %>
     <div class="flex flex-col gap-4 sm:flex-row sm:justify-between grow sm:items-center">
       <p class="text-xl font-bold text-navy">Save this search as an email alert</p>
-      <%= form_with model: [:profile, alert] do |f| %>
+      <%= form_with model: alert do |f| %>
         <%= f.hidden_field :address %>
         <%= f.hidden_field :radius_meters %>
         <%= f.button "Save" %>

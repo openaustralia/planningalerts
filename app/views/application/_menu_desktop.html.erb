@@ -8,7 +8,7 @@
     </ul>
     <ul class="flex">
       <% if current_user %>
-        <%= render NavItemComponent.new(href: profile_alerts_path, selected: current_page?(profile_alerts_path)) do %>
+        <%= render NavItemComponent.new(href: alerts_path, selected: current_page?(alerts_path)) do %>
           <div class="flex space-x-3">
             <div><%= current_user.name_with_fallback %></div>
             <div><%= render "application/svg/user" %></div>

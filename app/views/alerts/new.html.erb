@@ -1,5 +1,5 @@
 <%= render HeadingComponent.new(tag: :h2).with_content("Create new alert") %>
-<%= form_with model: [:profile, @alert], class: "mt-12" do |f| %>
+<%= form_with model: @alert, class: "mt-12" do |f| %>
   <div>
     <%= f.label :address, "Enter a street address" %>
     <%= f.street_address_field :address, class: "mt-2 block w-full" %>

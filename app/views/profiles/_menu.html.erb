@@ -1,6 +1,6 @@
 <ul class="ml-5 text-lg font-bold text-navy list-image-dash">
-  <li><div class="pl-4"><%= pa_link_to_unless_current "Your alerts", profile_alerts_path %></div></li>
-  <li><div class="pl-4"><%= pa_link_to_unless_current "Create new alert", new_profile_alert_path %></div></li>
+  <li><div class="pl-4"><%= pa_link_to_unless_current "Your alerts", alerts_path %></div></li>
+  <li><div class="pl-4"><%= pa_link_to_unless_current "Create new alert", new_alert_path %></div></li>
   <li><div class="pl-4"><%= pa_link_to_unless_current "Your comments", comments_profile_path %></div></li>
   <li><div class="pl-4"><%= pa_link_to_unless_current "Edit account", edit_user_registration_path %></div></li>
   <% if Flipper.enabled?(:api_keys_in_profile) %>

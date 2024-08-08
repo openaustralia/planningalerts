@@ -76,6 +76,12 @@ module GeneratedPathHelpersModule
   def admin_users_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def alert_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def alerts_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def alerts_signup_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -86,6 +92,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def api_keys_paid_index_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def api_keys_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def application_comment_path(*args); end
@@ -181,7 +190,7 @@ module GeneratedPathHelpersModule
   def edit_admin_user_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def edit_profile_alert_path(*args); end
+  def edit_alert_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def edit_user_password_path(*args); end
@@ -226,6 +235,9 @@ module GeneratedPathHelpersModule
   def new_admin_authority_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def new_alert_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_api_keys_non_commercial_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -236,9 +248,6 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_comment_report_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def new_profile_alert_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_path(*args); end
@@ -278,15 +287,6 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def preview_view_components_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def profile_alert_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def profile_alerts_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def profile_api_keys_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def profile_path(*args); end

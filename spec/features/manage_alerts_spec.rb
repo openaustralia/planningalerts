@@ -67,7 +67,7 @@ describe "Manage alerts" do
                    user:,
                    radius_meters: Alert::DEFAULT_RADIUS, lat: 1.0, lng: 1.0)
     sign_in user
-    visit edit_profile_alert_url(alert, host: "dev.planningalerts.org.au")
+    visit edit_alert_url(alert, host: "dev.planningalerts.org.au")
 
     expect(page).to have_content("24 Bruce Rd, Glenbrook")
     expect(page).to have_field("Alert distance", with: 2000)

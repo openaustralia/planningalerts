@@ -87,15 +87,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :profile, only: [] do
-    resources :api_keys, only: :create
-    resources :alerts, except: :show
-    
+  resource :profile, only: [] do    
     get :comments
   end
   # TODO: Move two nested resources above into the scope below
   scope "/profile" do
-    resources :api_keys, only: :index
+    resources :alerts, except: :show
+    resources :api_keys, only: [:create, :index]
   end
   get "/profile", to: redirect("/profile/alerts")
 

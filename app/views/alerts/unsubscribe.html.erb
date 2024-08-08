@@ -15,7 +15,7 @@
       <% end %>
     </p>
     <p class="mt-4">
-      Changed your mind? <%= pa_link_to "Resubscribe", new_profile_alert_path(address: @alert&.address) %>
+      Changed your mind? <%= pa_link_to "Resubscribe", new_alert_path(address: @alert&.address) %>
     </p>
     <p class="mt-4">
       <%= pa_link_to "Go to home", root_path %>

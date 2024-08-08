@@ -76,7 +76,13 @@ module GeneratedUrlHelpersModule
   def admin_users_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def alert_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def alerts_signup_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def api_howto_url(*args); end
@@ -86,6 +92,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def api_keys_paid_index_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def api_keys_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def application_comment_url(*args); end
@@ -181,7 +190,7 @@ module GeneratedUrlHelpersModule
   def edit_admin_user_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def edit_profile_alert_url(*args); end
+  def edit_alert_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def edit_user_password_url(*args); end
@@ -226,6 +235,9 @@ module GeneratedUrlHelpersModule
   def new_admin_authority_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def new_alert_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_api_keys_non_commercial_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -236,9 +248,6 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_comment_report_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def new_profile_alert_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
@@ -278,15 +287,6 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def preview_view_components_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def profile_alert_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def profile_alerts_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def profile_api_keys_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def profile_url(*args); end
