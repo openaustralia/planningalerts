@@ -169,6 +169,7 @@ class ApiController < ApplicationController
       return if @current_api_key
     end
 
+    # TODO: Show different errors for when a key has been disabled and when it has expired
     render_error("not authorised - use a valid api key", :unauthorized)
   end
 
