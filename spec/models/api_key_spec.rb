@@ -27,5 +27,13 @@ describe ApiKey do
     it "is not active if key has been disabled" do
       expect(build(:api_key, disabled: true)).not_to be_active
     end
+
+    it "is active if the key expires in the future" do
+      expect(build(:api_key, expires_at: 1.day.from_now)).to be_active
+    end
+
+    it "is not active if the key has expired" do
+      expect(build(:api_key, expires_at: 1.day.ago)).not_to be_active
+    end
   end
 end

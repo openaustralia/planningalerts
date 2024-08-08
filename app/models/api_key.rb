@@ -21,7 +21,13 @@ class ApiKey < ApplicationRecord
 
   sig { returns(T::Boolean) }
   def active?
-    !disabled
+    !disabled && !expired?
+  end
+
+  sig { returns(T::Boolean) }
+  def expired?
+    e = expires_at
+    !e.nil? && e <= Time.current
   end
 
   # By default we allow up to 1000 API requests per day per API key
