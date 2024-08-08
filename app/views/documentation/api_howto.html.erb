@@ -192,7 +192,7 @@
       Also, please
       <%= pa_link_to "get in touch", documentation_contact_path(reason: "I want API access or commercial use") %>
       if you intend to use the service on a large scale.
-      In order to maintain quality of service for our API users, this service is rate limited by default to approximately 1000 requests per day.
+      In order to maintain quality of service for our API users, this service is rate limited by default to approximately <%= ApiKey.default_daily_limit %> requests per day.
     </p>
     <p class="mt-8">
       We offer a range of paid options, from rate&ndash;limited to unlimited use of this service.
