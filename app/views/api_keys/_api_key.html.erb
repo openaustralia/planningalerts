@@ -1,15 +1,25 @@
 <div class="flex items-baseline gap-2">
   <%# TODO: Do we really need to say "Key:" here? %>
   <div class="text-xl text-navy">Key:</div> 
-  <%= render ClickToCopyComponent.new.with_content(api_key.value) %>
+  <%# If key is not active no need for copying api key easily %>
+  <% if api_key.active? %>
+    <%= render ClickToCopyComponent.new.with_content(api_key.value) %>
+  <% else %>
+    <%= api_key.value %>
+  <% end %>
 </div>
 
 <div class="mt-4 mb-8">
-  <%# TODO: Highlight the expiry in some way? %>
   <% if api_key.expires_at %>
     <p class="text-xl text-navy">
-      Key expires in:
-      <%= time_tag_with_hover(api_key.expires_at, distance_of_time_in_words(Time.current, api_key.expires_at)) %>
+      <% if api_key.expires_at > Time.current %>
+        <%# TODO: Highlight future expiry in some way? %>
+        Key expires in:
+        <%= time_tag_with_hover(api_key.expires_at, distance_of_time_in_words(Time.current, api_key.expires_at)) %>
+      <% else %>
+        Key expired:
+        <%= time_tag_with_hover(api_key.expires_at, time_ago_in_words(api_key.expires_at)) %> ago
+      <% end %>
     </p>
   <% end %>
   <%# <p class="text-xl text-navy">

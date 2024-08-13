@@ -9,8 +9,11 @@
 
     <%# TODO: How should this look if there is more than one active key? %>
     <%# TODO: Add a sensible sort order %>
-    <%= render @api_keys.select(&:active?) %>
-
+    <% if @api_keys.select(&:active?).empty? %>
+      <p class="text-xl text-navy">No active keys</p>
+    <% else %>
+      <%= render @api_keys.select(&:active?) %>
+    <% end %>
     <p class="text-xl text-navy">
       <%# TODO: Link to actual place %>
       Check out the <%= pa_link_to "API Developer Documentation", "#" %>
@@ -26,11 +29,16 @@
   <section class="pt-10 text-xl pb-14 text-navy">
     <%= render HeadingComponent.new(tag: :h3, extra_classes: "mb-4").with_content("Inactive keys") %>
 
-    <p>No inactive keys</p>
+    <% if @api_keys.reject(&:active?).empty? %>
+      <p>No inactive keys</p>
+    <% else %>
+      <%= render @api_keys.reject(&:active?) %>
+    <% end %>
   </section>
 
   <section class="pt-16 text-xl text-navy">
     <%# TODO: Add a real link here %>
+    <%# TODO: Under what circumstances do we say "for continued access"? %>
     <p class="pb-4">
       For continued access explore our ongoing plans <%= pa_link_to "here", "#" %>
     </p>

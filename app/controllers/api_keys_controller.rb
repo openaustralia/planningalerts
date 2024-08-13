@@ -9,6 +9,7 @@ class ApiKeysController < ApplicationController
 
   sig { void }
   def index
+    # TODO: Shouldn't be able to access this unless feature flag is set
     @api_keys = T.let(T.must(current_user).api_keys, T.untyped)
   end
 
