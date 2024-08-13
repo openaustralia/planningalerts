@@ -2,6 +2,17 @@
 
 <%= render HeadingComponent.new(tag: :h2).with_content(yield(:page_title)) %>
 
+<div class="pt-10 text-xl pb-14 text-navy">
+  <p>
+    Planning application data is available programmatically.
+  </p>
+  <p class="pt-4">
+    <%# TODO: Not sure about the use of NGOs here - acronyms not good without explanation but also why not charities or not-for-profits instead? %>
+    Planning Alerts Application Programming Interface (API) serves community groups, businesses, NGOs, and civic-minded individuals
+    by providing access to trusted planning and development application data sourced from planning authorities around Australia.
+  </p>
+</div>
+
 <div class="divide-y divide-light-grey">
   <%# TODO: Only display this section if we have active keys? %>
   <section class="pt-10 pb-14">
