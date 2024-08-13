@@ -21,6 +21,7 @@
     <%# TODO: How should this look if there is more than one active key? %>
     <%# TODO: Add a sensible sort order %>
     <% if @api_keys.select(&:active?).empty? %>
+      <%# TODO: Instead this should allow someone to get a key %>
       <p class="text-xl text-navy">No active keys</p>
     <% else %>
       <%= render @api_keys.select(&:active?) %>
