@@ -7,26 +7,9 @@
   <section class="pt-10 pb-14">
     <%= render HeadingComponent.new(tag: :h3, extra_classes: "mb-4").with_content("Active keys") %>
 
-    <%# TODO: Extract into partial %>
+    <%# TODO: How should this look if there is more than one active key? %>
     <%# TODO: Add a sensible sort order %>
-    <%# render @api_keys.select(&:active?) %>
-    <div class="flex items-baseline gap-2">
-      <div class="text-xl text-navy">Key:</div> 
-      <%= render ClickToCopyComponent.new do %>
-        xxxxxxxxxxxxxxxxxxxx
-      <% end %>
-    </div>
-
-    <div class="mt-4 mb-8">
-      <%# TODO: Don't show this if it doesn't expire? %>
-      <%# TODO: Highlight the expiry in some way? %>
-      <p class="text-xl text-navy">
-        Key expires in: 10 days
-      </p>
-      <p class="text-xl text-navy">
-        Plan: Trial
-      </p>
-    </div>
+    <%= render @api_keys.select(&:active?) %>
 
     <p class="text-xl text-navy">
       <%# TODO: Link to actual place %>

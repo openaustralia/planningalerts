@@ -1,0 +1,17 @@
+<div class="flex items-baseline gap-2">
+  <div class="text-xl text-navy">Key:</div> 
+  <%= render ClickToCopyComponent.new do %>
+    xxxxxxxxxxxxxxxxxxxx
+  <% end %>
+</div>
+
+<div class="mt-4 mb-8">
+  <%# TODO: Don't show this if it doesn't expire? %>
+  <%# TODO: Highlight the expiry in some way? %>
+  <p class="text-xl text-navy">
+    Key expires in: 10 days
+  </p>
+  <p class="text-xl text-navy">
+    Plan: Trial
+  </p>
+</div>
