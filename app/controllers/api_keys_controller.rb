@@ -4,6 +4,14 @@
 class ApiKeysController < ApplicationController
   before_action :authenticate_user!
 
+  layout "profile", only: :index
+  # TODO: Add pundit here
+
+  sig { void }
+  def index
+    @api_keys = T.let(T.must(current_user).api_keys, T.untyped)
+  end
+
   sig { void }
   def create
     user = T.must(current_user)

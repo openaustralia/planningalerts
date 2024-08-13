@@ -1,0 +1,54 @@
+<% content_for :page_title, "API keys" %>
+
+<%= render HeadingComponent.new(tag: :h2).with_content(yield(:page_title)) %>
+
+<div class="divide-y divide-light-grey">
+  <%# TODO: Only display this section if we have active keys? %>
+  <section class="pt-10 pb-14">
+    <%= render HeadingComponent.new(tag: :h3, extra_classes: "mb-4").with_content("Active keys") %>
+
+    <%# TODO: Extract into partial %>
+    <%# render @api_keys.select(&:active?) %>
+    <div class="flex items-baseline gap-2">
+      <div class="text-xl text-navy">Key:</div> 
+      <%= render ClickToCopyComponent.new do %>
+        xxxxxxxxxxxxxxxxxxxx
+      <% end %>
+    </div>
+
+    <div class="mt-4 mb-8">
+      <%# TODO: Don't show this if it doesn't expire? %>
+      <p class="text-xl text-navy">
+        Key expires in: 10 days
+      </p>
+      <p class="text-xl text-navy">
+        Plan: Trial
+      </p>
+    </div>
+
+    <p class="text-xl text-navy">
+      <%# TODO: Link to actual place %>
+      Check out the <%= pa_link_to "API Developer Documentation", "#" %>
+    </p>
+
+    <p class="text-xl text-navy">
+      <%# TODO: Link to actual place %>
+      Remind yourself of our <%= pa_link_to "API code of conduct", "#" %>
+    </p>
+  </section>
+
+  <%# TODO: Only display this section if we have inactive keys? %>
+  <section class="pt-10 text-xl pb-14 text-navy">
+    <%= render HeadingComponent.new(tag: :h3, extra_classes: "mb-4").with_content("Inactive keys") %>
+
+    <p>No inactive keys</p>
+  </section>
+
+  <section class="pt-16 text-xl text-navy">
+    <%# TODO: Add a real link here %>
+    <p class="pb-4">
+      For continued access explore our ongoing plans <%= pa_link_to "here", "#" %>
+    </p>
+    <%= image_tag "illustration/dog.svg", alt: "" %>
+  </section>
+</div>
