@@ -10,9 +10,14 @@
   <% end %>
 </div>
 
-<div class="mt-4 mb-8">
-  <% if api_key.expires_at %>
-    <p class="text-xl text-navy">
+<div class="mt-4 mb-8 text-xl text-navy">
+  <% if api_key.disabled? %>
+    <p>
+      Key is disabled
+      <%# TODO: Add some ability to question this / contact us %>
+    </p>
+  <% elsif api_key.expires_at %>
+    <p>
       <% if api_key.expires_at > Time.current %>
         <%# TODO: Highlight future expiry in some way? %>
         Key expires in:
@@ -23,7 +28,7 @@
       <% end %>
     </p>
   <% end %>
-  <%# <p class="text-xl text-navy">
+  <%# <p>
     Plan: Trial
   </p> %>
 </div>
