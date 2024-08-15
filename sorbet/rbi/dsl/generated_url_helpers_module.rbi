@@ -154,6 +154,9 @@ module GeneratedUrlHelpersModule
   def confirm_admin_comment_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def confirm_api_keys_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def contact_messages_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

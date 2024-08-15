@@ -154,6 +154,9 @@ module GeneratedPathHelpersModule
   def confirm_admin_comment_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def confirm_api_keys_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def contact_messages_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
