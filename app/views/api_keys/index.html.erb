@@ -37,7 +37,7 @@
         </div>
       <% else %>
         <%# If a user already has a key (which is now inactive) don't allow them to create another %>
-        <p class="text-xl text-navy">No active keys</p>
+        <p class="mb-4 text-xl text-navy">No active keys</p>
       <% end %>
     <% else %>
       <%= render @api_keys.select(&:active?) %>
