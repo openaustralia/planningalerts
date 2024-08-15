@@ -89,7 +89,11 @@ Rails.application.routes.draw do
 
   scope "/profile" do
     resources :alerts, except: :show
-    resources :api_keys, only: [:create, :index]
+    resources :api_keys, only: [:create, :index] do
+      collection do
+        get :confirm
+      end
+    end
     get "comments", to: "comments#personal", as: "personal_comments"
   end
   get "/profile", to: redirect("/profile/alerts")

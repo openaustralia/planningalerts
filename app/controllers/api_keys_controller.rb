@@ -4,7 +4,7 @@
 class ApiKeysController < ApplicationController
   before_action :authenticate_user!
 
-  layout "profile", only: :index
+  layout "profile", only: %i[index confirm]
   # TODO: Add pundit here
 
   sig { void }
@@ -25,4 +25,7 @@ class ApiKeysController < ApplicationController
       redirect_to api_howto_url, notice: t(".already_have_key")
     end
   end
+
+  sig { void }
+  def confirm; end
 end
