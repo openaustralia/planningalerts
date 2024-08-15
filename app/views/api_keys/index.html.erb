@@ -30,7 +30,7 @@
               Build, test and explore with live data capped at <%= ApiKey.default_daily_limit %> calls per day.
             </p>
             <div class="mt-8 mb-4">
-              <%= pa_button_to "Create API key", api_keys_path, method: :post %>
+              <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: confirm_api_keys_path).with_content("Create API key") %>
             </div>
           </div>
           <%= image_tag "illustration/key.svg", alt: "", size: "177x116" %>

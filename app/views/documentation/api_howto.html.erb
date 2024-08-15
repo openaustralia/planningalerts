@@ -33,7 +33,11 @@
           You need an API key to try out the examples below and use the API for yourself.
         </p>
         <div class="mt-8 mb-4">
-          <%= pa_button_to "Create API key", api_keys_path, method: :post %>
+          <% if Flipper.enabled?(:api_keys_in_profile) %>
+            <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: confirm_api_keys_path).with_content("Create API key") %>
+          <% else %>
+            <%= pa_button_to "Create API key", api_keys_path, method: :post %>
+          <% end %>
         </div>
       <% end %>
     <% else %>

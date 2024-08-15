@@ -16,13 +16,19 @@ class ApiKeysController < ApplicationController
   sig { void }
   def create
     user = T.must(current_user)
+    redirect_url = if Flipper.enabled?(:api_keys_in_profile)
+                     api_keys_url
+                   else
+                     api_howto_url
+                   end
+
     # For the time being limit users to only creating one API key
     if user.api_keys.empty?
       user.api_keys.create!
-      redirect_to api_howto_url, notice: t(".success")
+      redirect_to redirect_url, notice: t(".success")
     else
       # This is a terrible way of showing an error but it's not likely to happen so I'm not going to worry about that
-      redirect_to api_howto_url, notice: t(".already_have_key")
+      redirect_to redirect_url, notice: t(".already_have_key")
     end
   end
 
