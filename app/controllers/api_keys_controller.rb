@@ -16,7 +16,7 @@ class ApiKeysController < ApplicationController
   sig { void }
   def create
     user = T.must(current_user)
-    redirect_url = if Flipper.enabled?(:api_keys_in_profile)
+    redirect_url = if Flipper.enabled?(:api_keys_in_profile, current_user)
                      api_keys_url
                    else
                      api_howto_url

@@ -2,7 +2,7 @@
   <li><div class="pl-4"><%= pa_link_to_unless_current "Your alerts", alerts_path %></div></li>
   <li><div class="pl-4"><%= pa_link_to_unless_current "Create new alert", new_alert_path %></div></li>
   <li><div class="pl-4"><%= pa_link_to_unless_current "Your comments", personal_comments_path %></div></li>
-  <% if Flipper.enabled?(:api_keys_in_profile) %>
+  <% if Flipper.enabled?(:api_keys_in_profile, current_user) %>
     <li><div class="pl-4"><%= pa_link_to_unless_current "Your API keys", api_keys_path %></div></li>
   <% end %>
   <li><div class="pl-4"><%= pa_link_to_unless_current "Edit account", edit_user_registration_path %></div></li>
