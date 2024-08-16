@@ -22,6 +22,13 @@ Flipper::UI.configure do |config|
     }
   end
 
+  # Give a readable description when we add specific users (instead of "User;1234" for example)
+  config.actor_names_source = ->(actor_ids) {
+    db_ids = actor_ids.select{|id| id.split(';')[0] == "User"}.map{|id| id.split(';')[1] }
+    users = User.where(id: db_ids)
+    users.map{|u| ["User;#{u.id}", u.name_with_fallback]}.to_h
+  }
+
   # Defaults to false. Set to true to show feature descriptions on the list
   # page as well as the view page.
   config.show_feature_description_in_list = true
