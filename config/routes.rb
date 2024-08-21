@@ -195,6 +195,7 @@ Rails.application.routes.draw do
   end
 
   get "api/howto" => "documentation#api_howto"
+  get "api/developer" => "documentation#api_developer"
   get "about" => "documentation#about"
   get "faq" => "documentation#faq"
   get "getinvolved", to: redirect("/get_involved")

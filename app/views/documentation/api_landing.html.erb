@@ -1,0 +1,53 @@
+<%= content_for :page_title, "Get the Data" %>
+
+<%= render HeadingComponent.new(tag: :h1) do %>
+  <%= yield :page_title %>
+<% end %>
+
+<div class="mt-8">
+  <%= render ProseComponent.new do %>
+    <p>
+      Planning application data is available programmatically. 
+    </p>
+    <%= pa_link_to "API Developer Documentation", api_developer_path %>
+  <% end %>
+</div>
+
+<section id="usage" class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
+  <%= render HeadingComponent.new(tag: :h2).with_content("Usage") %>
+  <p class="mt-8">
+    Low volume,
+    <strong>non&ndash;commercial</strong>
+    use of the API service is free. We ask that personal and non&ndash;profit use of this service attribute the OpenAustralia Foundation on your website or application.
+  </p>
+  <p class="mt-8">
+    Standard agreements for commercial use are at
+    <%= pa_link_to "oaf.org.au/standard-agreements/planningalerts-commercial", "https://www.oaf.org.au/standard-agreements/planningalerts-commercial/" %>.
+    Please
+    <%= pa_link_to "contact us", documentation_contact_path(reason: "I want API access or commercial use") %>
+    for
+    <strong>commercial</strong>
+    use. Commercial users may include Real Estate Agencies, Architects, Planners or Builders.
+  </p>
+  <p class="mt-8">
+    Also, please
+    <%= pa_link_to "get in touch", documentation_contact_path(reason: "I want API access or commercial use") %>
+    if you intend to use the service on a large scale.
+    In order to maintain quality of service for our API users, this service is rate limited by default to approximately <%= ApiKey.default_daily_limit %> requests per day.
+  </p>
+  <p class="mt-8">
+    We offer a range of paid options, from rate&ndash;limited to unlimited use of this service.
+  </p>
+</section>
+<section id="be_nice" class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
+  <%= render HeadingComponent.new(tag: :h2).with_content("Be Nice") %>
+  <p class="mt-8">
+    The Planning Alerts service is intended to help people be aware of what's happening in their local neighborhood, and to enable a civil discussion about those changes.
+  </p>
+  <p class="mt-8">
+    Don't use the service (or information obtained from the service) to market goods or services to individuals.
+  </p>
+  <p class="mt-8">
+    Don't use the service (or information obtained from the service) to harass or intimidate a person.
+  </p>
+</section>

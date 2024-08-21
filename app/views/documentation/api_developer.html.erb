@@ -1,0 +1,176 @@
+<%= content_for :page_title, "API developer documentation" %>
+
+<%= render HeadingComponent.new(tag: :h1) do %>
+  <%= yield :page_title %>
+<% end %>
+
+<div class="mt-8">
+  <%= render ProseComponent.new do %>
+    <p>
+      All the API calls listed below return planning application sorted by the date they were scraped from the planning authority website with the most
+      recent listed first.
+    </p>
+    <p>
+      The API can return different formats including <a href="https://www.json.org/">JSON</a>, <a href="https://geojson.org/">GeoJSON</a> and <a href="https://www.ogc.org/standard/georss/">GeoRSS</a>.
+      The examples below return JSON. To get GeoJSON instead simply replace ".json" in the URL with ".geojson". For GeoRSS replace ".json" with ".rss".
+    </p>
+  <% end %>
+</div>
+
+<div class="flex flex-col justify-between gap-8 px-12 py-8 mt-12 md:flex-row bg-light-grey">
+  <div class="text-xl text-navy">
+    <% if current_user %>
+      <% if api_key %>
+        <p class>
+          The API examples below contain your API key:
+          <span class="font-bold break-all"><%= api_key %></span>
+        </p>
+      <% else %>
+        <p>
+          You need an API key to try out the examples below and use the API for yourself.
+        </p>
+        <div class="mt-8 mb-4">
+          <% if Flipper.enabled?(:api_keys_in_profile, current_user) %>
+            <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: confirm_api_keys_path).with_content("Create API key") %>
+          <% else %>
+            <%= pa_button_to "Create API key", api_keys_path, method: :post %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>
+        To use the API you will to
+        <%= pa_link_to "register for an account", new_user_registration_path %>
+        or
+        <%= pa_link_to "sign in", new_user_session_path %>
+        to your existing account. Once you've done that, return to this page
+        and the you will be able to create an API key here.
+      </p>
+    <% end %>
+  </div>
+  <%= image_tag "illustration/key.svg", alt: "", size: "287x189" %>
+</div>
+
+<section class="mt-24">
+  <%= render HeadingComponent.new(tag: :h2).with_content("API calls") %>
+  <section class="max-w-4xl">
+    <section class="mt-16">
+      <%= render HeadingComponent.new(tag: :h3).with_content("Single Location by longitude/latitude") %>
+      <p class="mt-4 text-xl text-navy">
+        Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
+        with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
+      </p>
+      <code class="block my-8 text-xl break-all text-navy">
+        <%= api_example_latlong_url_html(format: "json", key: api_key) %>
+      </code>
+      <% if api_key %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_latlong_url(format: "json", key: api_key)) do %>
+          View example
+        <% end %>
+      <% end %>
+    </section>
+    <section class="mt-16">
+      <%= render HeadingComponent.new(tag: :h3).with_content("Area by longitude/latitude") %>
+      <p class="mt-4 text-xl text-navy">
+        Return applications within a rectangle defined by longitude/latitude.
+      </p>
+      <code class="block my-8 text-xl break-all text-navy">
+        <%= api_example_area_url_html(format: "json", key: api_key) %>
+      </code>
+      <% if api_key %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_area_url(format: "json", key: api_key)) do %>
+          View example
+        <% end %>
+      <% end %>
+    </section>
+    <section class="mt-16">
+      <%= render HeadingComponent.new(tag: :h3).with_content("Planning authority") %>
+      <p class="mt-4 text-xl text-navy">
+        Return applications for a specific planning authority (e.g. a local council) by authority short name. To discover the authority short name
+        to use here, find the planning authority on the
+        <%= pa_link_to "list of authorities", authorities_path %>
+        and follow the link. The url has the authority short name in it.
+      </p>
+      <code class="block my-8 text-xl break-all text-navy">
+        <%= api_example_authority_url_html(format: "json", key: api_key) %>
+      </code>
+      <% if api_key %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_authority_url(format: "json", key: api_key)) do %>
+          View example
+        <% end %>
+      <% end %>
+    </section>
+    <section class="mt-16">
+      <%= render HeadingComponent.new(tag: :h3).with_content("Postcode") %>
+      <p class="mt-4 text-xl text-navy">
+        Return applications for a specific postcode area
+      </p>
+      <code class="block my-8 text-xl break-all text-navy">
+        <%= api_example_postcode_url_html(format: "json", key: api_key) %>
+      </code>
+      <% if api_key %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_postcode_url(format: "json", key: api_key)) do %>
+          View example
+        <% end %>
+      <% end %>
+    </section>
+    <section class="mt-16">
+      <%= render HeadingComponent.new(tag: :h3).with_content("Suburb") %>
+      <p class="mt-4 text-xl text-navy">
+        Return applications in a suburb. Including &ldquo;state&rdquo; and &ldquo;postcode&rdquo; in the search is optional.
+      </p>
+      <code class="block my-8 text-xl break-all text-navy">
+        <%= api_example_suburb_state_and_postcode_url_html(format: "json", key: api_key) %>
+      </code>
+      <% if api_key %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_suburb_state_and_postcode_url(format: "json", key: api_key)) do %>
+          View example
+        <% end %>
+      <% end %>
+    </section>
+  </section>
+  <section class="pt-8 mt-16 border-t border-t-warm-grey">
+    <div class="max-w-4xl">
+      <%# TODO: Using non-standard style %>
+      <%= render HeadingComponent.new(tag: :h2).with_content("Extra query parameters") %>
+      <p class="mt-8 text-xl text-navy">
+        There are several parameters that can be applied to each of the above queries for extra usefulness.
+      </p>
+      <section class="mt-12">
+        <%= render HeadingComponent.new(tag: :h3).with_content("page") %>
+        <p class="mt-4 text-xl text-navy">
+          API calls return a maximum of <%= Application.max_per_page %> results. To retrieve more results simply do another request with page
+          set to 2, 3, etc&hellip; Not setting the page parameter is the same as requesting page 1.
+        </p>
+        <code class="block mt-8 text-xl break-all text-navy">
+          <%= api_example_postcode_url_html(format: "json", key: api_key, postcode: "2780", extra_params: { page: 2 }) %>
+        </code>
+      </section>
+      <section class="mt-12">
+        <%= render HeadingComponent.new(tag: :h3).with_content("count") %>
+        <p class="mt-4 text-xl text-navy">
+          API calls by default return a maximum of <%= Application.max_per_page %> results. To return less than that per page simply set the count parameter to the maximum number you want to return.
+        </p>
+        <code class="block mt-8 text-xl break-all text-navy">
+          <%= api_example_postcode_url_html(format: "json", key: api_key, postcode: "2780", extra_params: { count: 10 }) %>
+        </code>
+      </section>
+    </div>
+  </section>
+  <section class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
+    <%= render HeadingComponent.new(tag: :h2) do %>
+      Warning about client side API queries
+    <% end %>
+    <p class="mt-8">
+      Client-side API queries are supported using
+      <%= pa_link_to "CORS", "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" %>. You might do this, for example,
+      in a Javascript application that runs in the browser making requests directly to the Planning Alerts API. This is fine for testing. However, this should <strong>not be used
+      in production</strong> as you would be effectively making your API key public, which is a very bad. It is your responsibility to keep the API key
+      safe and secure.
+    </p>
+    <p class="mt-8">
+      Instead we recommend either loading the data ahead of time server-side and passing the data to your client or alternatively proxying the client-side requests
+      through your own server where you add the API key.
+    </p>
+  </section>
+</section>
