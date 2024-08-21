@@ -18,7 +18,7 @@ Flipper::UI.configure do |config|
       "full_text_search" => "Allow searching for all applications containing the word 'tree', for example",
       "view_application_versions" => "Can view the update history of an application",
       "request_api_keys" => "Allow a new experimental flow for requesting API keys",
-      "api_keys_in_profile" => "Show and manage API keys inside your user profile"
+      "api_keys_in_profile" => "Show and manage API keys inside your user profile and new API landing page"
     }
   end
 
