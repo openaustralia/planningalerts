@@ -43,6 +43,40 @@
   </div>
 </section>
 
+<section class="pt-8 pb-16 text-xl border-t border-t-light-grey2 text-navy">
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("What's in the API?") %>
+  <div class="flex flex-col items-start justify-between gap-8 sm:flex-row">
+    <div class="max-w-2xl">
+      <p>
+        In our API you can find Australia-wide data, updated daily:
+      </p>
+      <%# TODO: Extract component for bulleted list %>
+      <ul class="pl-6 my-6 list-disc list-outside">
+        <li>Single Location by longitude/latitude</li>
+        <li>Area by longitude/latitude</li>
+        <li>Planning authority</li>
+        <li>Postcode</li>
+        <li>Suburb</li>
+      </ul>
+
+      <%# # TODO: Explain the general shape of the returned data. So far we've only explained how we can search for it. %>
+
+      <%= pa_link_to "View the developer documentation", api_developer_path %>
+
+      <section class="pt-8">
+        <%= render HeadingComponent.new(tag: :h3).with_content("What's not in the API?") %>
+        <p>
+          Our API does not have any personal user information.
+          <%# TODO: This bit isn't about what's in the API - it's about how you're allowed to use it %>
+          We will not supply access to the API for direct marketing purposes to individuals.
+          Please don't ask. 
+        </p>
+      </section>
+    </div>
+    <%= image_tag "illustration/person_big_arms.svg", alt: "Illustration of headshot of three different people", class: "max-w-64" %>
+  </div>
+</section>
+
 <section id="usage" class="pt-8 text-xl border-t text-navy border-t-warm-grey">
   <%= render HeadingComponent.new(tag: :h2).with_content("Usage") %>
   <p class="mt-8">
