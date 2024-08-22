@@ -3,7 +3,13 @@
     <ul class="flex space-x-8">
       <%= render NavItemComponent.new(href: root_path, selected: current_page?(root_path)).with_content("Home") %>
       <%= render NavItemComponent.new(href: address_applications_path, selected: current_page?(address_applications_path)).with_content("Search") %>
-      <%= render NavItemComponent.new(href: api_howto_path, selected: current_page?(api_howto_path)).with_content("Get the Data") %>
+      <%= render NavItemComponent.new(href: api_howto_path, selected: current_page?(api_howto_path)) do %>
+        <% if Flipper.enabled?(:api_keys_in_profile, current_user) %>
+          Planning Alerts API
+        <% else %>
+          Get the Data
+        <% end %>
+      <% end %>
       <%= render NavItemComponent.new(href: faq_path, selected: current_page?(faq_path)).with_content("Help") %>
     </ul>
     <ul class="flex">
