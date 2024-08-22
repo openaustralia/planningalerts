@@ -77,6 +77,44 @@
   </div>
 </section>
 
+<%# TODO: Won't populate this with names until we've checked that we can use them %>
+<section class="pt-8 pb-16 text-xl border-t border-light-grey2 text-navy">
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("What people say") %>
+  <div class="flex flex-col max-w-2xl gap-8">
+    <div>
+      <blockquote>
+        "Totally stable unlike all other data feeds! It's set and forget."
+      </blockquote>
+      <p class="font-bold">Customer</p>
+    </div>
+    <div>
+      <blockquote>
+        "Our customers can see what new developments or new services are proposed around investment properties.
+        We use Planning Alerts (API) as an enticement to activate customers to sign on."
+      </blockquote>
+      <p class="font-bold">Customer</p>
+    </div>
+    <div>
+      <blockquote>
+        "Planning Alerts API works well, no issues at all. If there are I just jump on a call with Kat!"
+      </blockquote>
+      <p class="font-bold">Customer</p>
+    </div>
+    <div>
+      <blockquote>
+        "Having an API speeds the whole process up. We are not dependant on anyone stepping in - ie with flat data you need people"
+      </blockquote>
+      <p class="font-bold">Customer</p>
+    </div>
+    <div>
+      <blockquote>
+        "People want it and find it useful. Everything has been really clear cut with the API."
+      </blockquote>
+      <p class="font-bold">Customer</p>
+    </div>
+  </div>
+</section>
+
 <section id="usage" class="pt-8 text-xl border-t text-navy border-t-warm-grey">
   <%= render HeadingComponent.new(tag: :h2).with_content("Usage") %>
   <p class="mt-8">
