@@ -4,6 +4,10 @@
   <%= yield :page_title %>
 <% end %>
 
+<div class="flex flex-col items-center p-6 mt-12 bg-light-grey">
+  <%= image_tag "illustration/data.svg" %>
+</div>
+
 <div class="mt-8">
   <%= render ProseComponent.new do %>
     <p>
