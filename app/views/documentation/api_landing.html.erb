@@ -45,7 +45,7 @@
 
 <div class="grid justify-center grid-cols-3 gap-4 py-16 text-xl border-t border-t-light-grey text-navy">
   <section class="p-10 my-8 text-center bg-light-grey">
-    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-4") do %>
+    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
       Community Plan
     <% end %>
     <div class="min-h-[27rem]">
@@ -53,8 +53,9 @@
         API data for strictly non-commercial use for public benefit.
       </p>
       <p class="my-8">
-        <span class="block mb-1 text-3xl font-bold font-display">$0</span>
-        / month
+        <span class="text-3xl font-bold font-display">$0</span>
+        AUD
+        <span class="block mt-1">/ month</span>
       </p>
       <%# TODO: Use extracted component %>
       <ul class="pl-6 text-left list-disc list-outside">
@@ -69,7 +70,7 @@
   </section>
 
   <section class="py-10 text-center px-14 bg-light-grey">
-    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-4") do %>
+    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
       Standard Plan
     <% end %>
     <div class="min-h-[27rem]">
@@ -77,8 +78,9 @@
         Set and forget reliable API data, effortlessly integrated into your application.
       </p>
       <p class="my-8">
-        <span class="block mb-1 text-3xl font-bold font-display">$3499</span>
-        + GST / month
+        <span class="text-3xl font-bold font-display">$3499</span>
+        AUD
+        <span class="block mt-1">+ GST / month</span>
       </p>
       <%# TODO: Use extracted component %>
       <ul class="pl-6 text-left list-disc list-outside">
@@ -96,7 +98,7 @@
   </section>
 
   <section class="p-10 my-8 text-center bg-light-grey">
-    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-4") do %>
+    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
       Premium Plan
     <% end %>
     <div class="min-h-[27rem]">
