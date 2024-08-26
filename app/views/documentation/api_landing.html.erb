@@ -34,11 +34,14 @@
 <section class="pt-8 pb-16 mt-12 text-xl border-t text-navy border-t-light-grey2">
   <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Who uses our API?") %>
   <div class="flex flex-col justify-between gap-8 sm:flex-row">
-    <p class="max-w-2xl">
-      Lots of people! Real estate developers and agents, construction companies, urban planners and architects,
-      local government and municipalities, property management firms, community advocacy groups, environmental and heritage organizations,
-      legal firms, conveyancers, utility companies, insurance companies, and tech startups and app developers are interested in this data.
-    </p>
+    <div class="max-w-2xl">
+      <p>Lots of people!</p>
+      <p class="mt-6">
+        Real estate developers and agents, construction companies, urban planners and architects,
+        local government and municipalities, property management firms, community advocacy groups, environmental and heritage organizations,
+        legal firms, conveyancers, utility companies, insurance companies, and tech startups and app developers are interested in this data.
+      </p>
+    </div>
     <%= image_tag "illustration/headshots_three_people.svg", alt: "Illustration of headshot of three different people", class: "max-w-64" %>
   </div>
 </section>
