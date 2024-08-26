@@ -60,36 +60,36 @@
 
 <section class="py-12">
   <%= render HeadingComponent.new(tag: :h2).with_content("What you can do next") %>
-  <p class="mt-8 text-xl text-navy">
+  <p class="mt-8 mb-4 text-xl text-navy">
     If something isn't right with the scraper or the data coming in then you could do one or several of the following:
-    <ul class="pl-8 mt-4 text-xl list-disc text-navy">
-      <li>
-        <%= pa_link_to "Report or view scraper issues", github_issues_url %>
-      </li>
-      <li>
-        <%= pa_link_to "Fork the scraper on Github", github_url(@authority) %>
-        and try to fix it
-      </li>
-      <li>
-        If it's an issue with the council website, then contact
-        <%= @authority.full_name %>
-      </li>
-      <li>
-        Contact us for help
-      </li>
-    </ul>
   </p>
-  <p class="mt-8 text-xl text-navy">
+  <%= render BulletListComponent.new do |c| %>
+    <%= c.with_item do %>
+      <%= pa_link_to "Report or view scraper issues", github_issues_url %>
+    <% end %>
+    <%= c.with_item do %>
+      <%= pa_link_to "Fork the scraper on Github", github_url(@authority) %>
+      and try to fix it
+    <% end %>
+    <%= c.with_item do %>
+      If it's an issue with the council website, then contact
+      <%= @authority.full_name %>
+    <% end %>
+    <%= c.with_item do %>
+      Contact us for help
+    <% end %>
+  <% end %>
+  <p class="mt-8 mb-4 text-xl text-navy">
     If everything is working fine right now but you want to help if something goes wrong:
-    <ul class="pl-8 mt-4 text-xl list-disc text-navy">
-      <li>
-        <%= pa_link_to "Watch the scraper", morph_url(@authority) %>
-        on morph.io, so you will get an email if it errors. Press the "Watch" button in the top right while you're logged in to morph.io.
-      </li>
-      <li>
-        <%= pa_link_to "View any scraper issues", github_issues_url %>.
-        Help fix them or comment on them if they are out of date
-      </li>
-    </ul>
   </p>
+  <%= render BulletListComponent.new do |c| %>
+    <%= c.with_item do %>
+      <%= pa_link_to "Watch the scraper", morph_url(@authority) %>
+      on morph.io, so you will get an email if it errors. Press the "Watch" button in the top right while you're logged in to morph.io.
+    <% end %>
+    <%= c.with_item do %>
+      <%= pa_link_to "View any scraper issues", github_issues_url %>.
+      Help fix them or comment on them if they are out of date
+    <% end %>
+  <% end %>
 </section>

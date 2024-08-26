@@ -10,24 +10,25 @@
     We trust you. Don’t be a dickhead. We’re giving you this and your end of the deal is this:
   </p>
 
-  <%# TODO: Extract component for bullet list %>
-  <ul class="pl-6 mt-8 mb-12 space-y-6 text-xl list-disc list-outside text-navy">
-    <li>
-      Do NOT use this for commercial purposes. That includes any activity happening inside a commercial organisation. It doesn't matter
-      whether something will be free or not. You can, however, use this for evaluation purposes. Beyond that you need to
-      <%# TODO: Extract this special path into a helper %>
-      <%= pa_link_to "contact us to enter into a commercial agreement for access", api_contact_path %>.
-    </li>
-    <li>
-      You have to attribute the OpenAustralia Foundation and Planning Alerts on your website or application.
-    </li>
-    <li>
-      Don't use the service (or information obtained from the service) to market goods or services to individuals
-    </li>
-    <li>
-      Don't use the service (or information obtained from the service) to harass or intimidate a person.
-    </li>
-  </ul>
+  <div class="mt-8 mb-12">
+    <%= render BulletListComponent.new(space: 6) do |c| %>
+      <%= c.with_item do %>
+        Do NOT use this for commercial purposes. That includes any activity happening inside a commercial organisation. It doesn't matter
+        whether something will be free or not. You can, however, use this for evaluation purposes. Beyond that you need to
+        <%# TODO: Extract this special path into a helper %>
+        <%= pa_link_to "contact us to enter into a commercial agreement for access", api_contact_path %>.
+      <% end %>
+      <%= c.with_item do %>
+        You have to attribute the OpenAustralia Foundation and Planning Alerts on your website or application.
+      <% end %>
+      <%= c.with_item do %>
+        Don't use the service (or information obtained from the service) to market goods or services to individuals
+      <% end %>
+      <%= c.with_item do %>
+        Don't use the service (or information obtained from the service) to harass or intimidate a person.
+      <% end %>
+    <% end %>
+  </div>
 
   <%= pa_button_to "I understand", api_keys_path, method: :post %>
 </div>

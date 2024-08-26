@@ -57,11 +57,14 @@
         AUD
         <span class="block mt-1">/ month</span>
       </p>
-      <%# TODO: Use extracted component %>
-      <ul class="pl-6 text-left list-disc list-outside">
-        <%# TODO: Calculate and format this automatically %>
-        <li>Return up to 100,000 applications per day</li>
-      </ul>
+      <div class="text-left">
+        <%= render BulletListComponent.new do |c| %>
+          <%= c.with_item do %>
+            <%# TODO: Calculate and format this automatically %>
+            Return up to 100,000 applications per day
+          <% end %>
+        <% end %>
+      </div>
     </div>
     <p class="my-4">
       <%= pa_link_to "Contact us", api_contact_path, extra_classes: "block" %> to apply
@@ -81,13 +84,20 @@
         AUD
         <span class="block mt-1">+ GST / month</span>
       </p>
-      <%# TODO: Use extracted component %>
-      <ul class="pl-6 text-left list-disc list-outside">
-        <%# TODO: Calculate and format this automatically %>
-        <li>Return up to 500,000 applications per day</li>
-        <li>1 product</li>
-        <li>Priority email support</li>
-      </ul>
+      <div class="text-left">
+        <%= render BulletListComponent.new do |c| %>
+          <%= c.with_item do %>
+            <%# TODO: Calculate and format this automatically %>
+            Return up to 500,000 applications per day
+          <% end %>
+          <%= c.with_item do %>
+            1 product
+          <% end %>
+          <%= c.with_item do %>
+            Priority email support
+          <% end %>
+        <% end %>
+      </div>
     </div>
     <p class="my-4">
       <%= pa_link_to "Contact us", api_contact_path, extra_classes: "block" %>
@@ -106,16 +116,28 @@
       <p class="mt-8 mb-4 text-left">
         Potential add ons can include:
       </p>
-      <%# TODO: Use extracted component %>
-      <ul class="pl-6 text-left list-disc list-outside">
-        <li>Access to bulk data API</li>
-        <li>Multiple products</li>
-        <%# TODO: Calculate and format this automatically %>
-        <li>Return more than 500,000 applications per day</li>
-        <li>Customised integration options</li>
-        <%# TODO: Should we include this? %>
-        <li>Resale of data</li>
-      </ul>
+      <div class="text-left">
+        <%= render BulletListComponent.new do |c| %>
+          <%= c.with_item do %>
+            <%# TODO: Add documentation for bulk data API %>
+            Access to bulk data API
+          <% end %>
+          <%= c.with_item do %>
+            Multiple products
+          <% end %>
+          <%= c.with_item do %>
+            <%# TODO: Calculate and format this automatically %>
+            Return more than 500,000 applications per day
+          <% end %>
+          <%= c.with_item do %>
+            Customised integration options
+          <% end %>
+          <%= c.with_item do %>
+            <%# TODO: Should we include this? %>
+            Resale of data
+          <% end %>
+        <% end %>
+      </div>
     </div>
     <p class="my-4">
       <%= pa_link_to "Contact us", api_contact_path, extra_classes: "block" %>
@@ -131,14 +153,15 @@
       <p>
         In our API you can find Australia-wide data, updated daily:
       </p>
-      <%# TODO: Extract component for bulleted list %>
-      <ul class="pl-6 my-6 list-disc list-outside">
-        <li>Single Location by longitude/latitude</li>
-        <li>Area by longitude/latitude</li>
-        <li>Planning authority</li>
-        <li>Postcode</li>
-        <li>Suburb</li>
-      </ul>
+      <div class="my-6">
+        <%= render BulletListComponent.new do |c| %>
+          <%= c.with_item.with_content("Single Location by longitude/latitude") %>
+          <%= c.with_item.with_content("Area by longitude/latitude") %>
+          <%= c.with_item.with_content("Planning authority") %>
+          <%= c.with_item.with_content("Postcode") %>
+          <%= c.with_item.with_content("Suburb") %>
+        <% end %>
+      </div>
 
       <%# # TODO: Explain the general shape of the returned data. So far we've only explained how we can search for it. %>
 

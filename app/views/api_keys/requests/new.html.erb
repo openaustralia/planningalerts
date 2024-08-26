@@ -12,20 +12,22 @@
   Under certain very specific circumstances we may grant you access to the API for free. You must:
 </p>
 
-<ul class="pl-6 mt-8 text-xl list-disc list-outside text-navy">
-  <li>
-    Not be making money in any way using the API or in a related service - some more words that explain this in detail
-  </li>
-  <li>
-    Not be funded
-  </li>
-  <li>
-    Not unduly restricting access to the end result - should be available to the public
-  </li>
-  <li>
-    You have don't oodles lying around that you could use to pay for API access
-  </li>
-</ul>
+<div class="mt-8">
+  <%= render BulletListComponent.new do |c| %>
+    <%= c.with_item do %>
+      Not be making money in any way using the API or in a related service - some more words that explain this in detail
+    <% end %>
+    <%= c.with_item do %>
+      Not be funded
+    <% end %>
+    <%= c.with_item do %>
+      Not unduly restricting access to the end result - should be available to the public
+    <% end %>
+    <%= c.with_item do %>
+      You have don't oodles lying around that you could use to pay for API access
+    <% end %>
+  <% end %>
+</div>
 
 <%# TODO: Note that almost none of content is yet relevant to our situation. It's mostly a placeholder %>
 <section class="bg-white">

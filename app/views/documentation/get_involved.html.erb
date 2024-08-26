@@ -83,14 +83,26 @@
       </p>
       <p>
         These include:
-        <ul class="list-disc list-inside">
-          <li><%= pa_link_to "Aten Systems", "https://www.atensystems.com/councillink" %></li>
-          <li><%= pa_link_to "Civica", "https://www.civica.com/en-au/container---product-pages/authority-enterprise-suite/" %></li>
-          <li><%= pa_link_to "Internetrix", "https://www.internetrix.com.au/" %></li>
-          <li><%= pa_link_to "ITVision", "https://www.itvision.com.au/our-solutions/synergyonline-product-suite.aspx" %></li>
-          <li><%= pa_link_to "SolOrient", "http://www.solorient.com.au/" %></li>
-          <li><%= pa_link_to "Technology One", "https://www.technologyonecorp.com/products/planningxchange" %></li>
-        </ul>
+        <%= render BulletListComponent.new do |c| %>
+          <%= c.with_item do %>
+            <%= pa_link_to "Aten Systems", "https://www.atensystems.com/councillink" %>
+          <% end %>
+          <%= c.with_item do %>
+            <%= pa_link_to "Civica", "https://www.civica.com/en-au/container---product-pages/authority-enterprise-suite/" %>
+          <% end %>
+          <%= c.with_item do %>
+            <%= pa_link_to "Internetrix", "https://www.internetrix.com.au/" %>
+          <% end %>
+          <%= c.with_item do %>
+            <%= pa_link_to "ITVision", "https://www.itvision.com.au/our-solutions/synergyonline-product-suite.aspx" %>
+          <% end %>
+          <%= c.with_item do %>
+            <%= pa_link_to "SolOrient", "http://www.solorient.com.au/" %>
+          <% end %>
+          <%= c.with_item do %>
+            <%= pa_link_to "Technology One", "https://www.technologyonecorp.com/products/planningxchange" %>
+          <% end %>
+        <% end %>
       </p>
       <p>
         Please
