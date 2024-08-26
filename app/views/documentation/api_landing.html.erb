@@ -43,6 +43,82 @@
   </div>
 </section>
 
+<%# TODO: Make center column bigger %>
+<div class="grid justify-center grid-cols-3 gap-4 py-16 text-xl border-t border-t-light-grey text-navy">
+  <section class="p-10 text-center bg-light-grey">
+    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-4") do %>
+      Community Plan
+    <% end %>
+    <p>
+      API data for strictly non-commercial use for public benefit.
+    </p>
+    <p class="my-8">
+      <span class="block mb-1 text-3xl font-bold font-display">$0</span>
+      / month
+    </p>
+    <%# TODO: Use extracted component %>
+    <ul class="pl-6 text-left list-disc list-outside">
+      <%# TODO: Calculate and format this automatically %>
+      <li>Return up to 100,000 applications per day</li>
+    </ul>
+    <p class="my-4">
+      <%# TODO: Send to correct place %>
+      <%= pa_link_to "Contact us", "#" %> to apply
+    </p>
+  </section>
+
+  <section class="px-12 py-10 text-center bg-light-grey">
+    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-4") do %>
+      Standard Plan
+    <% end %>
+    <p>
+      Set and forget reliable API data, effortlessly integrated into your application.
+    </p>
+    <p class="my-8">
+      <span class="block mb-1 text-3xl font-bold font-display">$3499</span>
+      + GST / month
+    </p>
+    <%# TODO: Use extracted component %>
+    <ul class="pl-6 text-left list-disc list-outside">
+      <%# TODO: Calculate and format this automatically %>
+      <li>Return up to 500,000 applications per day</li>
+      <li>1 product</li>
+      <li>Priority email support</li>
+    </ul>
+    <p class="my-4">
+      <%# TODO: Send to correct place %>
+      <%= pa_link_to "Contact us", "#" %> to sign up
+    </p>
+  </section>
+
+  <section class="p-10 text-center bg-light-grey">
+    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-4") do %>
+      Premium Plan
+    <% end %>
+    <p>
+      <%# TODO: Put some real content here %>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in libero velit. Talk to us for pricing.
+    </p>
+    <p class="mt-8 mb-4 text-left">
+      Potential add ons can include:
+    </p>
+    <%# TODO: Use extracted component %>
+    <ul class="pl-6 text-left list-disc list-outside">
+      <li>Access to bulk data API</li>
+      <li>Multiple products</li>
+      <%# TODO: Calculate and format this automatically %>
+      <li>Return more than 500,000 applications per day</li>
+      <li>Customised integration options</li>
+      <%# TODO: Should we include this? %>
+      <li>Potential for resale of data</li>
+    </ul>
+    <p class="my-4">
+      <%# TODO: Send to correct place %>
+      <%= pa_link_to "Contact us", "#" %> to discuss your needs
+    </p>
+  </section>
+</div>
+
 <section class="pt-8 pb-16 text-xl border-t border-t-light-grey2 text-navy">
   <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("What's in the API?") %>
   <div class="flex flex-col items-start justify-between gap-8 sm:flex-row">
