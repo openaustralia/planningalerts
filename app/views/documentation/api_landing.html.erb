@@ -1,10 +1,15 @@
 <%= content_for :page_title, "Planning Alerts API" %>
 
-<%= render HeadingComponent.new(tag: :h1) do %>
-  <%= yield :page_title %>
-<% end %>
+<div class="flex flex-col items-center">
+  <%# Using non-standard size %>
+  <%= render HeadingComponent.new(tag: :h1, size: "2xl") do %>
+    <%= yield :page_title %>
+  <% end %>
 
-<div class="flex flex-col items-center p-6 mt-12 bg-light-grey">
+  <p class="max-w-2xl mt-6 mb-16 text-3xl font-bold text-center text-navy font-display">
+    Seamlessly integrate planning alerts data into your custom application
+  </p>
+
   <%= image_tag "illustration/data.svg" %>
 </div>
 
