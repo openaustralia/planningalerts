@@ -85,6 +85,9 @@ module GeneratedUrlHelpersModule
   def alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def api_developer_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def api_howto_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

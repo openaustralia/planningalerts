@@ -85,6 +85,9 @@ module GeneratedPathHelpersModule
   def alerts_signup_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def api_developer_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def api_howto_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
