@@ -16,23 +16,18 @@
 <div class="mt-8">
   <%= render ProseComponent.new do %>
     <p>
-      Planning application data is available programmatically.
+      <%# TODO: Is this saying too much of the same thing as the "who uses our API" section below? %>
+      Planning Alerts Application Programming Interface (API) serves community groups, businesses, NGOs, and civic-minded individuals by providing access to trusted planning and development application data.
     </p>
-    <p>
-      Planning Alerts Application Programming Interface (API) serves community groups, businesses, NGOs, and civic-minded individuals by providing access to trusted planning and development application data sourced from planning authorities around Australia.
-    </p>
-    <p>
-      Using the API you can seamlessly integrate Planning Alerts data into your custom application.
-    </p>
-    <p>
-      You can test out the API to see if it works for your needs.
-    </p>
-    <%# TODO: Not sure we should just yet allow someone to jump to the documentation %>
-    <p>
-      Go to the
-      <%= pa_link_to "API Developer Documentation", api_developer_path %>
-      to get started.
-    </p>
+    <ul>
+      <li>Sourced from planning authorities around Australia</li>
+      <li>Easy to use REST API</li>
+      <li>Data updated daily</li>
+      <li>Delivering reliable and trustworthy service for over 14 years</li>
+      <%# TODO: Find a better way to say this! %>
+      <li>Save time and money by not having to develop this stuff yourself</li>
+      <li>As a bonus support a charity doing good work</li>
+    </ul>
   <% end %>
 </div>
 
