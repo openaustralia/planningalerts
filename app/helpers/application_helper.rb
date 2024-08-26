@@ -190,4 +190,10 @@ module ApplicationHelper
       f.button name, options
     end
   end
+
+  # Go to the contact page and pre-fill that you want to talk about API stuff
+  sig { returns(String) }
+  def api_contact_path
+    Rails.application.routes.url_helpers.documentation_contact_path(reason: "I want API access or commercial use")
+  end
 end
