@@ -225,32 +225,6 @@
   </ul>
 </section>
 
-<section id="usage" class="pt-8 text-xl border-t text-navy border-t-warm-grey">
-  <%= render HeadingComponent.new(tag: :h2).with_content("Usage") %>
-  <p class="mt-8">
-    Low volume,
-    <strong>non&ndash;commercial</strong>
-    use of the API service is free. We ask that personal and non&ndash;profit use of this service attribute the OpenAustralia Foundation on your website or application.
-  </p>
-  <p class="mt-8">
-    Standard agreements for commercial use are at
-    <%= pa_link_to "oaf.org.au/standard-agreements/planningalerts-commercial", "https://www.oaf.org.au/standard-agreements/planningalerts-commercial/" %>.
-    Please
-    <%= pa_link_to "contact us", api_contact_path %>
-    for
-    <strong>commercial</strong>
-    use. Commercial users may include Real Estate Agencies, Architects, Planners or Builders.
-  </p>
-  <p class="mt-8">
-    Also, please
-    <%= pa_link_to "get in touch", api_contact_path %>
-    if you intend to use the service on a large scale.
-    In order to maintain quality of service for our API users, this service is rate limited by default to approximately <%= ApiKey.default_daily_limit %> requests per day.
-  </p>
-  <p class="mt-8">
-    We offer a range of paid options, from rate&ndash;limited to unlimited use of this service.
-  </p>
-</section>
 <section id="be_nice" class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
   <%= render HeadingComponent.new(tag: :h2).with_content("Be Nice") %>
   <p class="mt-8">
