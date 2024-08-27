@@ -215,12 +215,30 @@
   </div>
 </section>
 
-<section class="pt-8 pb-16 text-xl border-t border-light-grey2 text-navy">
-  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-12").with_content("Some of our customers") %>
+<section class="pt-12 pb-32 text-xl border-t border-light-grey2 text-navy">
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-16").with_content("Some of our customers") %>
   <ul class="grid items-center grid-cols-1 gap-x-16 gap-y-8 sm:grid-cols-4">
     <li class="max-w-40"><%= image_tag "customers/domain.svg" %></li>
     <li class="max-w-40"><%= image_tag "customers/property-dollar.png" %></li>
     <li class="max-w-40"><%= image_tag "customers/valocity.webp" %></li>
     <li class="max-w-40"><%= image_tag "customers/nurture-cloud.svg" %></li>
   </ul>
+</section>
+
+<section class="pt-16 text-xl border-t text-navy border-light-grey2">
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6") do %>
+    Trustworthy and up to date data
+  <% end %>
+  <div class="flex gap-16">
+    <p>
+      Over 14 years ago we launched Planning Alerts and the Planning Alerts API and have
+      steadily improved and expanded its coverage over the course of time.
+      We started our commercial API offering in...
+
+      lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    </p>
+    <div class="font-bold text-lavender font-display text-9xl shrink-0">
+      14 <span class="relative text-3xl top-3 -left-6">yrs</span>
+    </div>
+  </div>
 </section>
