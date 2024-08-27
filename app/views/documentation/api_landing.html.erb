@@ -149,6 +149,37 @@
   </section>
 </div>
 
+<%# Only show this section if you don't have an API key yet %>
+<% if api_key.nil? %>
+  <section>
+    <div class="flex flex-col items-center p-16 text-xl bg-light-grey text-navy">
+      <%= render HeadingComponent.new(tag: :h2) do %>
+        <%# TODO: Make trial period flexible %>
+        Instant access 14 day trial
+      <% end %>
+      <p class="mt-1 text-3xl font-bold text-center text-navy">
+        Build, test and explore with live API data
+      </p>
+      <%# TODO: Fill out numbers automatically %>
+      <p class="max-w-lg mt-8 text-center">
+        Enjoy up to 500 requests a day (returning up to a total of 50,000 applications per day) for 14 days.
+      </p>
+      <%= image_tag "illustration/key.svg", alt: "", size: "237x155", class: "my-8" %>
+      <%# TODO: Do something different when you're logged in %>
+      <% if current_user %>
+        <%= pa_button_to "Create API key", api_keys_path, method: :post %>
+      <% else %>
+        <p class="max-w-md text-center">
+          To get an instant API key simply
+          <%= pa_link_to "create an account", new_user_registration_path %>
+          or
+          <%= pa_link_to "sign in", new_user_session_path %>.
+        </p>
+      <% end %>
+    </div>
+  </section>
+<% end %>
+
 <section class="pt-8 pb-16 text-xl border-t border-t-light-grey2 text-navy">
   <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("What's in the API?") %>
   <div class="flex flex-col items-start justify-between gap-8 sm:flex-row">
