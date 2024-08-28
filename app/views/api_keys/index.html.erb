@@ -13,56 +13,25 @@
   </p>
 </div>
 
-<div class="divide-y divide-light-grey">
-  <%# TODO: Only display this section if we have active keys? %>
-  <section class="pt-10 pb-14">
-    <%# TODO: Seems a bit weird having an "active keys" heading if there's no inactive keys heading. Hmmm.... %>
-    <%= render HeadingComponent.new(tag: :h3, extra_classes: "mb-4").with_content("Active keys") %>
+<%# TODO: Sort them into a sensible order %>
+<%= render @api_keys %>
 
-    <%# TODO: How should this look if there is more than one active key? %>
-    <%# TODO: Add a sensible sort order %>
-    <% if @api_keys.select(&:active?).empty? %>
-      <% if @api_keys.empty? %>
-        <%= render "create_key_box" %>
-        <%= render "ongoing_access_box" %>
-      <% else %>
-        <%# If a user already has a key (which is now inactive) don't allow them to create another %>
-        <p class="mb-4 text-xl text-navy">No active keys</p>
-      <% end %>
-    <% else %>
-      <%= render @api_keys.select(&:active?) %>
-    <% end %>
-    <p class="text-xl text-navy">
-      <%# TODO: Link to actual place %>
-      Check out the <%= pa_link_to "API Developer Documentation", api_howto_path %>
-    </p>
+<% if @api_keys.empty? %>
+  <%= render "create_key_box" %>
+<% else %>
+  <%# It would be better to show links to the developer documentation very near to the active key %>
+  <p class="text-xl text-navy">
+    Check out the <%= pa_link_to "API Developer Documentation", api_developer_path %>
+  </p>
 
-    <p class="text-xl text-navy">
-      <%# TODO: Link to actual place %>
-      <%# TODO: Note that the be_nice section has been removed %>
-      Remind yourself of our <%= pa_link_to "API code of conduct", api_howto_path(anchor: "be_nice") %>
-    </p>
-  </section>
+  <p class="text-xl text-navy">
+    <%# TODO: Link to actual place %>
+    <%# TODO: Note that the be_nice section has been removed %>
+    Remind yourself of our <%= pa_link_to "API code of conduct", api_howto_path(anchor: "be_nice") %>
+  </p>
+<% end %>
 
-  <% unless @api_keys.reject(&:active?).empty? %>
-    <section class="pt-10 text-xl pb-14 text-navy">
-      <%= render HeadingComponent.new(tag: :h3, extra_classes: "mb-4").with_content("Inactive keys") %>
-      <%= render @api_keys.reject(&:active?) %>
-    </section>
-  <% end %>
-
-  <section class="pt-16 text-xl text-navy">
-    <%# TODO: Add a real link here %>
-    <%# TODO: Under what circumstances do we say "for continued access"? %>
-<%
-=begin
-%>
-    <p class="pb-4">
-      For continued access explore our ongoing plans <%= pa_link_to "here", "#" %>
-    </p>
-<%
-=end
-%>
-    <%= image_tag "illustration/dog.svg", alt: "" %>
-</section>
-</div>
+<%# Don't show the ongoing access box if they have an active license that doesn't expire %>
+<% unless @api_keys.find(&:active?) && @api_keys.find(&:active?).expires_at.nil? %>
+  <%= render "ongoing_access_box" %>
+<% end %>
