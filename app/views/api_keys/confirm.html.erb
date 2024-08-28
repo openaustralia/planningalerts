@@ -6,6 +6,7 @@
 <%# TODO: Extract component for grey box %>
 <div class="p-14 bg-light-grey">
   <%# TODO: Probably don't actually want to use the word dickhead! ;-) %>
+  <%# TODO: Update the wording for all of this about it being a trial, etc.. %>
   <p class="text-2xl font-bold text-navy">
     We trust you. Don’t be a dickhead. We’re giving you this and your end of the deal is this:
   </p>
@@ -30,5 +31,9 @@
     <% end %>
   </div>
 
-  <%= pa_button_to "I understand", api_keys_path, method: :post %>
+  <%= pa_button_to "Agree and continue", api_keys_path, method: :post %>
+
+  <p class="mt-6 text-xl text-navy">
+    <%= pa_link_to "Don't agree, go back", :back %>
+  </p>
 </div>
