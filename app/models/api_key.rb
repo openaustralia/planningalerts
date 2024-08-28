@@ -46,10 +46,9 @@ class ApiKey < ApplicationRecord
     5000
   end
 
-  # TODO: Should this be smaller?
   sig { returns(Integer) }
   def self.default_daily_limit_trial
-    500
+    100
   end
 
   # TODO: Should this be longer (like 28 days)?
