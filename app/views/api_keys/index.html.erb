@@ -25,9 +25,11 @@
       <% if @api_keys.empty? %>
         <div class="flex flex-col justify-between gap-8 px-12 py-8 my-10 md:flex-row bg-light-grey">
           <div class="text-xl text-navy">
-            <%= render HeadingComponent.new(tag: :h4).with_content("Get a key") %>
+            <%= render HeadingComponent.new(tag: :h4).with_content("Get an instant access trial key") %>
             <p class="mt-4">
-              Build, test and explore with live data capped at <%= ApiKey.default_daily_limit %> calls per day.
+              Build, test and explore with live data capped at
+              <%= ApiKey.default_daily_limit_trial %> calls per day for
+              <%= pluralize(ApiKey.default_trial_duration_days, "day") %>.
             </p>
             <div class="mt-8 mb-4">
               <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: confirm_api_keys_path).with_content("Create API key") %>
