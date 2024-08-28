@@ -172,7 +172,7 @@
       </p>
       <%= image_tag "illustration/key.svg", alt: "", size: "237x155", class: "my-8" %>
       <% if current_user %>
-        <%= pa_button_to "Create API key", api_keys_path, method: :post %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: confirm_api_keys_path).with_content("Create API key") %>
       <% else %>
         <p class="max-w-md text-center">
           To get an instant API key simply
