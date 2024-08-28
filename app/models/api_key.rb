@@ -36,6 +36,28 @@ class ApiKey < ApplicationRecord
     1000
   end
 
+  sig { returns(Integer) }
+  def self.default_daily_limit_community
+    1000
+  end
+
+  sig { returns(Integer) }
+  def self.default_daily_limit_commercial
+    5000
+  end
+
+  # TODO: Should this be smaller?
+  sig { returns(Integer) }
+  def self.default_daily_limit_trial
+    500
+  end
+
+  # TODO: Should this be longer (like 28 days)?
+  sig { returns(Integer) }
+  def self.default_trial_duration_days
+    14
+  end
+
   # Returns the daily limit for a given API key value. If no daily limit
   # is set will return the default daily limit. Also, if an invalid key is given it
   # will return the default daily limit as well.

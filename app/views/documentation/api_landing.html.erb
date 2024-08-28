@@ -63,8 +63,9 @@
       <div class="text-left">
         <%= render BulletListComponent.new do |c| %>
           <%= c.with_item do %>
-            <%# TODO: Calculate and format this automatically %>
-            Return up to 100,000 applications per day
+            Return up to
+            <%= number_with_delimiter(ApiKey.default_daily_limit_community * Application.max_per_page) %>
+            applications per day
           <% end %>
         <% end %>
       </div>
@@ -90,8 +91,9 @@
       <div class="text-left">
         <%= render BulletListComponent.new do |c| %>
           <%= c.with_item do %>
-            <%# TODO: Calculate and format this automatically %>
-            Return up to 500,000 applications per day
+            Return up to
+            <%= number_with_delimiter(ApiKey.default_daily_limit_commercial * Application.max_per_page) %>
+            applications per day
           <% end %>
           <%= c.with_item do %>
             1 product
@@ -129,8 +131,9 @@
             Multiple products
           <% end %>
           <%= c.with_item do %>
-            <%# TODO: Calculate and format this automatically %>
-            Return more than 500,000 applications per day
+            Return more than
+            <%= number_with_delimiter(ApiKey.default_daily_limit_commercial * Application.max_per_page) %>
+            applications per day
           <% end %>
           <%= c.with_item do %>
             Customised integration options
@@ -154,18 +157,20 @@
   <section>
     <div class="flex flex-col items-center p-16 text-xl bg-light-grey text-navy">
       <%= render HeadingComponent.new(tag: :h2) do %>
-        <%# TODO: Make trial period flexible %>
-        Instant access 14 day trial
+        Instant access <%= ApiKey.default_trial_duration_days %> day trial
       <% end %>
       <p class="mt-1 text-3xl font-bold text-center text-navy">
         Build, test and explore with live API data
       </p>
-      <%# TODO: Fill out numbers automatically %>
       <p class="max-w-lg mt-8 text-center">
-        Enjoy up to 500 requests a day (returning up to a total of 50,000 applications per day) for 14 days.
+        Enjoy up to
+        <%= ApiKey.default_daily_limit_trial %>
+        requests a day (returning up to a total of
+        <%= number_with_delimiter(ApiKey.default_daily_limit_trial * Application.max_per_page) %>
+        applications per day) for
+        <%= pluralize(ApiKey.default_trial_duration_days, "day") %>.
       </p>
       <%= image_tag "illustration/key.svg", alt: "", size: "237x155", class: "my-8" %>
-      <%# TODO: Do something different when you're logged in %>
       <% if current_user %>
         <%= pa_button_to "Create API key", api_keys_path, method: :post %>
       <% else %>
