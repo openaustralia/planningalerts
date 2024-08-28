@@ -37,6 +37,20 @@
           </div>
           <%= image_tag "illustration/key.svg", alt: "", size: "177x116" %>
         </div>
+
+        <div class="flex flex-col justify-between gap-8 px-12 py-8 my-10 md:flex-row bg-light-grey">
+          <div class="text-xl text-navy">
+            <%= render HeadingComponent.new(tag: :h4) do %>
+              Get ongoing access with a plan
+            <% end %>
+            <p class="my-4">
+              Different plans to choose from depending on your needs and circumstances.
+            </p>
+            <%= pa_link_to "View our plans", api_howto_path(anchor: "plans") %>
+          </div>
+          <%# TODO: Remove heart from illustration as per design %>
+          <%= image_tag "illustration/dog.svg", alt: "", size: "177x116" %>
+        </div>
       <% else %>
         <%# If a user already has a key (which is now inactive) don't allow them to create another %>
         <p class="mb-4 text-xl text-navy">No active keys</p>
