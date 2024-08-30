@@ -24,11 +24,18 @@
     Check out the <%= pa_link_to "API Developer Documentation", api_developer_path %>
   </p>
 
+<%
+=begin
+%>
   <p class="text-xl text-navy">
     <%# TODO: Link to actual place %>
     <%# TODO: Note that the be_nice section has been removed %>
     Remind yourself of our <%= pa_link_to "API code of conduct", api_howto_path(anchor: "be_nice") %>
   </p>
+<%
+=end
+%>
+
 <% end %>
 
 <%# Don't show the ongoing access box if they have an active license that doesn't expire %>
