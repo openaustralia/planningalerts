@@ -68,6 +68,7 @@
               <%= number_with_delimiter(ApiKey.default_daily_limit_community * Application.max_per_page) %>
               applications per day
             <% end %>
+            <%= c.with_item.with_content("Full use of the API") %>
           <% end %>
         </div>
       </div>
