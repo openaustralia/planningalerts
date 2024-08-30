@@ -46,12 +46,12 @@
   </div>
 </section>
 
-<div id="plans" class="grid justify-center grid-cols-3 gap-4 py-16 text-xl border-t border-t-light-grey text-navy">
+<div id="plans" class="grid justify-center grid-cols-1 gap-4 py-16 text-xl border-t md:grid-cols-3 border-t-light-grey text-navy">
   <section class="p-10 my-8 text-center bg-light-grey">
     <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
       Community Plan
     <% end %>
-    <div class="min-h-[27rem]">
+    <div class="pb-4 md:min-h-[27rem]">
       <p>
         API data for strictly non-commercial use for public benefit.
       </p>
@@ -79,7 +79,7 @@
     <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
       Standard Plan
     <% end %>
-    <div class="min-h-[27rem]">
+    <div class="pb-4 md:min-h-[27rem]">
       <p>
         Set and forget reliable API data, effortlessly integrated into your application.
       </p>
@@ -114,7 +114,7 @@
     <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
       Premium Plan
     <% end %>
-    <div class="min-h-[27rem]">
+    <div class="pb-4 md:min-h-[27rem]">
       <p>
         More power and flexibility. Talk to us for pricing.
       </p>
@@ -155,12 +155,14 @@
 <% if api_key.nil? %>
   <section class="pb-16">
     <div class="flex flex-col items-center p-16 text-xl bg-light-grey text-navy">
-      <%= render HeadingComponent.new(tag: :h2) do %>
-        Instant access <%= ApiKey.default_trial_duration_days %> day trial
-      <% end %>
-      <p class="mt-1 text-3xl font-bold text-center text-navy">
-        Build, test and explore with live API data
-      </p>
+      <div class="text-center">
+        <%= render HeadingComponent.new(tag: :h2) do %>
+          Instant access <%= ApiKey.default_trial_duration_days %> day trial
+        <% end %>
+        <p class="mt-1 text-3xl font-bold text-navy">
+          Build, test and explore with live API data
+        </p>
+      </div>
       <p class="max-w-lg mt-8 text-center">
         Enjoy up to
         <%= ApiKey.default_daily_limit_trial %>
@@ -230,14 +232,14 @@
   <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6") do %>
     Trustworthy and up to date data
   <% end %>
-  <div class="flex justify-between gap-16">
+  <div class="flex flex-col justify-between gap-8 sm:gap-16 sm:flex-row-reverse">
+    <div class="font-bold text-lavender font-display text-8xl shrink-0">
+      14 <span class="relative text-2xl top-3 -left-6">yrs</span>
+    </div>
     <p class="max-w-2xl">
       <%# TODO: Add something about complex automations and data integrity checks, etc.. %>
       We've been doing this for more than 14 years with an extremely experienced team.
       Leverage that for your own needs rather than trying to reinvent the wheel.
     </p>
-    <div class="font-bold text-lavender font-display text-8xl shrink-0">
-      14 <span class="relative text-2xl top-3 -left-6">yrs</span>
-    </div>
   </div>
 </section>
