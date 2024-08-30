@@ -8,25 +8,22 @@
   <%# TODO: Probably don't actually want to use the word dickhead! ;-) %>
   <%# TODO: Update the wording for all of this about it being a trial, etc.. %>
   <p class="text-2xl font-bold text-navy">
-    We trust you. Don’t be a dickhead. We’re giving you this and your end of the deal is this:
+    We trust you. Don’t abuse that trust.
   </p>
 
   <div class="mt-8 mb-12">
     <%= render BulletListComponent.new(space: 6) do |c| %>
       <%= c.with_item do %>
-        Do NOT use this for commercial purposes. That includes any activity happening inside a commercial organisation. It doesn't matter
-        whether something will be free or not. You can, however, use this for evaluation purposes. Beyond that you need to
-        <%# TODO: Extract this special path into a helper %>
-        <%= pa_link_to "contact us to enter into a commercial agreement for access", api_contact_path %>.
+        Only use this time-limited API key for evaluation, testing and development purposes
       <% end %>
       <%= c.with_item do %>
-        You have to attribute the OpenAustralia Foundation and Planning Alerts on your website or application.
+        Do NOT use this for bulk collection of data. e.g. Trying to collect every single historical application for an area.
       <% end %>
       <%= c.with_item do %>
-        Don't use the service (or information obtained from the service) to market goods or services to individuals
+        Store and use the resulting data in any way that is not strictly about evaluation, testing or development.
       <% end %>
       <%= c.with_item do %>
-        Don't use the service (or information obtained from the service) to harass or intimidate a person.
+        To use the API in production you will need to <%= pa_link_to "join a plan", api_howto_path(anchor: "plans") %>.
       <% end %>
     <% end %>
   </div>
