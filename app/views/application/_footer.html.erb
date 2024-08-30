@@ -16,7 +16,11 @@
             <%# Repeat the main nav in the footer %>
             <li><%= link_to "Home", root_path, class: "text-white underline hover:opacity-80 focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
             <li><%= link_to "Search", address_applications_path, class: "text-white underline hover:opacity-80 focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
-            <li><%= link_to "Get the Data (API)", api_howto_path, class: "text-white underline hover:opacity-80 focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
+            <% if Flipper.enabled?(:trial_api_keys, current_user) %>
+              <li><%= link_to "API", api_howto_path, class: "text-white underline hover:opacity-80 focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
+            <% else %>
+              <li><%= link_to "Get the Data (API)", api_howto_path, class: "text-white underline hover:opacity-80 focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
+            <% end %>
             <li><%= link_to "Help", faq_path, class: "text-white underline hover:opacity-80 focus:outline-none focus:text-navy focus:bg-sun-yellow" %></li>
           </ul>
           <ul>
