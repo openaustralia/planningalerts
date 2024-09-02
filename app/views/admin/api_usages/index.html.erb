@@ -20,6 +20,7 @@
       <th>Email</th>
       <th>Disabled</th>
       <th>Commercial</th>
+      <th>Community</th>
       <th>Daily Limit</th>
       <th>Average daily requests</th>
     </thead>
@@ -31,6 +32,7 @@
           <td><%= link_to api_key.user.email,        admin_api_key_path(api_key) %></td>
           <td><%= link_to api_key.disabled.to_s,     admin_api_key_path(api_key) %></td>
           <td><%= link_to api_key.commercial.to_s,   admin_api_key_path(api_key) %></td>
+          <td><%= link_to api_key.community.to_s,    admin_api_key_path(api_key) %></td>
           <td><%= link_to api_key.daily_limit.to_s,  admin_api_key_path(api_key) %></td>
           <td><%= requests.round %></td>
         </tr>

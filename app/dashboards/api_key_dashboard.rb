@@ -16,6 +16,7 @@ class ApiKeyDashboard < Administrate::BaseDashboard
     id: Field::Number,
     bulk: YesNoBooleanField,
     commercial: YesNoBooleanField,
+    community: YesNoBooleanField,
     daily_limit: Field::Number,
     disabled: YesNoBooleanField,
     user: Field::BelongsTo,
@@ -35,6 +36,7 @@ class ApiKeyDashboard < Administrate::BaseDashboard
     bulk
     disabled
     commercial
+    community
     daily_limit
   ].freeze, T::Array[Symbol])
 
@@ -47,6 +49,7 @@ class ApiKeyDashboard < Administrate::BaseDashboard
     expires_at
     disabled
     commercial
+    community
     daily_limit
     created_at
     updated_at
@@ -58,6 +61,7 @@ class ApiKeyDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = T.let(%i[
     bulk
     commercial
+    community
     daily_limit
     expires_at
     disabled
