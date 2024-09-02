@@ -582,6 +582,51 @@ class ApiKey
     sig { void }
     def commercial_will_change!; end
 
+    sig { returns(T::Boolean) }
+    def community; end
+
+    sig { params(value: T::Boolean).returns(T::Boolean) }
+    def community=(value); end
+
+    sig { returns(T::Boolean) }
+    def community?; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def community_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def community_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def community_came_from_user?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def community_change; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def community_change_to_be_saved; end
+
+    sig { params(from: T::Boolean, to: T::Boolean).returns(T::Boolean) }
+    def community_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def community_in_database; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def community_previous_change; end
+
+    sig { params(from: T::Boolean, to: T::Boolean).returns(T::Boolean) }
+    def community_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def community_previously_was; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def community_was; end
+
+    sig { void }
+    def community_will_change!; end
+
     sig { returns(::ActiveSupport::TimeWithZone) }
     def created_at; end
 
@@ -869,6 +914,9 @@ class ApiKey
     def restore_commercial!; end
 
     sig { void }
+    def restore_community!; end
+
+    sig { void }
     def restore_created_at!; end
 
     sig { void }
@@ -906,6 +954,12 @@ class ApiKey
 
     sig { returns(T::Boolean) }
     def saved_change_to_commercial?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def saved_change_to_community; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_community?; end
 
     sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
     def saved_change_to_created_at; end
@@ -1101,6 +1155,9 @@ class ApiKey
 
     sig { returns(T::Boolean) }
     def will_save_change_to_commercial?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_community?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_created_at?; end
