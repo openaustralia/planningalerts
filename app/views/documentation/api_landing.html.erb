@@ -49,7 +49,8 @@
 
 <div id="plans" class="flex flex-col items-center gap-4 py-16 text-xl border-t lg:items-stretch lg:grid lg:grid-cols-3 border-t-light-grey text-navy">
   <section class="flex flex-col justify-between max-w-lg p-10 my-8 text-center bg-light-grey">
-    <div>
+    <div class="flex flex-col items-center">
+      <%= image_tag "plans/community.svg", alt: "", class: "mb-8" %>
       <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
         Community Plan
       <% end %>
@@ -80,7 +81,8 @@
   </section>
 
   <section class="flex flex-col justify-between max-w-lg py-10 text-center px-14 bg-light-grey">
-    <div>
+    <div class="flex flex-col items-center">
+      <%= image_tag "plans/standard.svg", alt: "", class: "mb-8" %>
       <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
         Standard Plan
       <% end %>
@@ -117,7 +119,8 @@
   </section>
 
   <section class="flex flex-col justify-between max-w-lg p-10 my-8 text-center bg-light-grey">
-    <div>
+    <div class="flex flex-col items-center">
+      <%= image_tag "plans/premium.svg", alt: "", class: "mb-8" %>
       <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
         Premium Plan
       <% end %>
