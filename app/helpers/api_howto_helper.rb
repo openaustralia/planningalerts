@@ -20,9 +20,14 @@ module ApiHowtoHelper
     safe_join([first, "?", query])
   end
 
+  sig { returns(T.nilable(ApiKey)) }
+  def api_key_object
+    current_user&.api_keys&.first
+  end
+
   sig { returns(T.nilable(String)) }
   def api_key
-    current_user&.api_keys&.first&.value
+    api_key_object&.value
   end
 
   sig do
