@@ -26,6 +26,12 @@ class Application < ApplicationRecord
   scope(:in_past_week, -> { where("first_date_scraped > ?", 7.days.ago) })
   scope(:recent, -> { where(first_date_scraped: 14.days.ago..) })
 
+  sig { returns(T.class_of(ApplicationsPolicy)) }
+  def self.policy_class
+    # By default it would be ApplicationPolicy but this clashes with the name of the policy base class. Ugh.
+    ApplicationsPolicy
+  end
+
   sig { returns(T::Hash[Symbol, T.untyped]) }
   def search_data
     # lat and lon need to be symbols (rather than strings) in search_data
