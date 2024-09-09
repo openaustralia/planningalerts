@@ -14,9 +14,17 @@ class ApiKeyPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def create?
+    true
+  end
+
+  def confirm?
+    true
+  end
+
   class Scope < ApplicationPolicy::Scope
     def resolve
-      user.admin? ? scope.all : scope.none
+      user.admin? ? scope.all : scope.where(user:)
     end
   end
 end

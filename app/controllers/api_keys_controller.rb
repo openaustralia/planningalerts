@@ -4,17 +4,19 @@
 class ApiKeysController < ApplicationController
   before_action :authenticate_user!
 
-  layout "profile", only: %i[index confirm]
-  # TODO: Add pundit here
+  after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
+
+  layout "profile"
 
   sig { void }
   def index
-    # TODO: Shouldn't be able to access this unless feature flag is set
-    @api_keys = T.let(T.must(current_user).api_keys, T.untyped)
+    @api_keys = T.let(policy_scope(T.must(current_user).api_keys), T.untyped)
   end
 
   sig { void }
   def create
+    authorize ApiKey
     user = T.must(current_user)
 
     # For the time being limit users to only creating one API key
@@ -30,5 +32,7 @@ class ApiKeysController < ApplicationController
   end
 
   sig { void }
-  def confirm; end
+  def confirm
+    authorize ApiKey
+  end
 end
