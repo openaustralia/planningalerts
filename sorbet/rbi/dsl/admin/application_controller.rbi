@@ -19,6 +19,16 @@ class Admin::ApplicationController
     include ::Administrate::ApplicationHelper
     include ::Administrate::ApplicationController::HelperMethods
     include ::Admin::ApplicationHelper
+    include ::Pundit::Helper
+
+    sig { params(record: T.untyped).returns(T.untyped) }
+    def policy(record); end
+
+    sig { params(scope: T.untyped).returns(T.untyped) }
+    def pundit_policy_scope(scope); end
+
+    sig { returns(T.untyped) }
+    def pundit_user; end
   end
 
   class HelperProxy < ::ActionView::Base
