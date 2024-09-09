@@ -20,6 +20,16 @@ class AlertPolicy < ApplicationPolicy
   end
 
   sig { returns(T::Boolean) }
+  def index?
+    user.admin?
+  end
+
+  sig { returns(T::Boolean) }
+  def show?
+    user.admin?
+  end
+
+  sig { returns(T::Boolean) }
   def create?
     true
   end
@@ -37,8 +47,12 @@ class AlertPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     sig { returns(ActiveRecord::Relation) }
     def resolve
-      # Use can only see their own active alerts
-      scope.where(user:).active
+      if user.admin?
+        scope.all
+      else
+        # User can only see their own active alerts
+        scope.where(user:).active
+      end
     end
   end
 end
