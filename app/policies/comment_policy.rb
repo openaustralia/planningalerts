@@ -20,6 +20,16 @@ class CommentPolicy < ApplicationPolicy
   end
 
   sig { returns(T::Boolean) }
+  def index?
+    true
+  end
+
+  sig { returns(T::Boolean) }
+  def show?
+    comment.published? || user.admin?
+  end
+
+  sig { returns(T::Boolean) }
   def preview?
     # Can only preview your own comments
     # TODO: Remove temporary powers for admins to view all previews
@@ -29,7 +39,7 @@ class CommentPolicy < ApplicationPolicy
   sig { returns(T::Boolean) }
   def update?
     # Can only edit your own comments that have not yet been published
-    comment.user_id == user.id && !comment.published
+    (comment.user_id == user.id && !comment.published) || user.admin?
   end
 
   sig { returns(T::Boolean) }
@@ -42,5 +52,17 @@ class CommentPolicy < ApplicationPolicy
   def publish?
     # Can only publish your own comments that have not yet been published
     comment.user_id == user.id && !comment.published
+  end
+
+  sig { returns(T::Boolean) }
+  def resend?
+    user.admin?
+  end
+
+  class Scope < ApplicationPolicy::Scope
+    sig { returns(ActiveRecord::Relation) }
+    def resolve
+      user.admin? ? scope.all : scope.published
+    end
   end
 end
