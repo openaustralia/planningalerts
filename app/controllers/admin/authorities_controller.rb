@@ -49,8 +49,9 @@ module Admin
 
     sig { void }
     def import
-      params_id = T.cast(params[:id], String).to_i
-      ImportApplicationsJob.perform_async(params_id)
+      authority = Authority.find(T.cast(params[:id], String))
+      authorize(authority)
+      ImportApplicationsJob.perform_async(authority.id)
       redirect_to({ action: :show }, notice: t(".success"))
     end
   end
