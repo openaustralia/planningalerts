@@ -10,6 +10,7 @@ module Admin
 
     sig { void }
     def create
+      authorize :test_emails
       params_test_email = T.cast(params[:test_email], ActionController::Parameters)
 
       # Ugh. Copied and pasted from email preview in spec/
