@@ -71,7 +71,7 @@ describe "Browsing basic documentation pages" do
     # TODO: Percy snapshot is being done in contact_us_spec.rb - very confusing
   end
 
-  describe "api page in the new design" do
+  describe "api landing page" do
     before do
       sign_in create(:confirmed_user, name: "Jane Ng")
       visit api_howto_path
@@ -86,6 +86,25 @@ describe "Browsing basic documentation pages" do
     # rubocop:disable RSpec/NoExpectationExample
     it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("API")
+    end
+    # rubocop:enable RSpec/NoExpectationExample
+  end
+
+  describe "api developer page" do
+    before do
+      sign_in create(:confirmed_user, name: "Jane Ng")
+      visit api_developer_path
+    end
+
+    describe "accessibility tests", :js do
+      it "passes" do
+        expect(page).to be_axe_clean
+      end
+    end
+
+    # rubocop:disable RSpec/NoExpectationExample
+    it "renders a snapshot for a visual diff", :js do
+      page.percy_snapshot("API developer")
     end
     # rubocop:enable RSpec/NoExpectationExample
   end

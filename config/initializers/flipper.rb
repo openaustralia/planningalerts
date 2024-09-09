@@ -17,8 +17,7 @@ Flipper::UI.configure do |config|
       "maintenance_mode" => "Put a banner across the site and give helpful message to the user if trying to write to the database",
       "full_text_search" => "Allow searching for all applications containing the word 'tree', for example",
       "view_application_versions" => "Can view the update history of an application",
-      "request_api_keys" => "Allow a new experimental flow for requesting API keys",
-      "trial_api_keys" => "New API keys expire, new API landing page and user can show and manage API keys inside their profile"
+      "request_api_keys" => "Allow a new experimental flow for requesting API keys"
     }
   end
 

@@ -6,7 +6,7 @@ describe "Signing up for an API account" do
   include Devise::Test::IntegrationHelpers
 
   it "Successfully signing up", :truncation do
-    visit "/api/howto"
+    visit "/api/developer"
     click_on "register for an account"
 
     fill_in "Your full name", with: "Henare Degan"

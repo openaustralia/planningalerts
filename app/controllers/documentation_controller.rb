@@ -12,18 +12,10 @@ class DocumentationController < ApplicationController
   def faq; end
 
   sig { void }
-  def api_howto
-    # If feature flag is enabled show a new landing page instead
-    # with a link to an extracted "API Developer Documentation" page
-    return unless Flipper.enabled?(:trial_api_keys, current_user)
-
-    render "api_landing"
-  end
+  def api_howto; end
 
   sig { void }
-  def api_developer
-    raise ActiveRecord::RecordNotFound unless Flipper.enabled?(:trial_api_keys, current_user)
-  end
+  def api_developer; end
 
   # rubocop:disable Naming/AccessorMethodName
   sig { void }

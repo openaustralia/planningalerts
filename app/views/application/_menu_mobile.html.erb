@@ -18,11 +18,7 @@
           <li><%= link_to "Search", address_applications_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(address_applications_path)) %></li>
           <li>
             <%= link_to api_howto_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(api_howto_path)) do %>
-              <% if Flipper.enabled?(:trial_api_keys, current_user) %>
-                Planning Alerts API
-              <% else %>
-                Get the Data
-              <% end %>
+              Planning Alerts API
             <% end %>
           </li>
           <li><%= link_to "Help", faq_path, class: class_names("decoration-fuchsia", "decoration-4", "focus:outline-none", "focus:bg-sun-yellow", "underline" => current_page?(faq_path)) %></li>

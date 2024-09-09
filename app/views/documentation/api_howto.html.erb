@@ -1,217 +1,256 @@
-<%= content_for :page_title, "Get the Data" %>
+<%= content_for :page_title, "Planning Alerts API" %>
 
-<%= render HeadingComponent.new(tag: :h1) do %>
-  <%= yield :page_title %>
-<% end %>
+<div class="flex flex-col items-center">
+  <%# Using non-standard size %>
+  <%= render HeadingComponent.new(tag: :h1, size: "2xl") do %>
+    <%= yield :page_title %>
+  <% end %>
 
-<div class="mt-8">
+  <p class="max-w-2xl mt-6 mb-16 text-3xl font-bold text-center text-navy font-display">
+    Seamlessly integrate planning alerts data into your custom application
+  </p>
+
+  <%= image_tag "illustration/data.svg", alt: "Abstract illustration of data moving around" %>
+</div>
+
+<div class="mt-16">
   <%= render ProseComponent.new do %>
     <p>
-      Planning application data is available programmatically. Details of the API are listed below.
+      <%# TODO: Is this saying too much of the same thing as the "who uses our API" section below? %>
+      Planning Alerts Application Programming Interface (API) serves community groups, businesses, NGOs, and civic-minded individuals by providing access to trusted planning and development application data.
     </p>
-    <p>
-      All the API calls listed below return planning application sorted by the date they were scraped from the planning authority website with the most
-      recent listed first.
-    </p>
-    <p>
-      The API can return different formats including <a href="https://www.json.org/">JSON</a>, <a href="https://geojson.org/">GeoJSON</a> and <a href="https://www.ogc.org/standard/georss/">GeoRSS</a>.
-      The examples below return JSON. To get GeoJSON instead simply replace ".json" in the URL with ".geojson". For GeoRSS replace ".json" with ".rss".
-    </p>
+    <ul>
+      <li>Sourced from planning authorities around Australia</li>
+      <li>Easy to use REST API</li>
+      <li>Data updated daily</li>
+      <%# TODO: Find a better way to say this! %>
+      <li>Save considerable time and money by not having to develop this stuff yourself</li>
+      <li>Delivering reliable and trustworthy service for over 14 years</li>
+      <li>As a bonus support a charity doing good work</li>
+    </ul>
   <% end %>
 </div>
 
-<div class="flex flex-col justify-between gap-8 px-12 py-8 mt-12 md:flex-row bg-light-grey">
-  <div class="text-xl text-navy">
-    <% if current_user %>
-      <% if api_key %>
-        <p class>
-          The API examples below contain your API key:
-          <span class="font-bold break-all"><%= api_key %></span>
-        </p>
-      <% else %>
+<section class="pt-12 pb-16 mt-12 text-xl border-t text-navy border-t-light-grey2">
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Who uses our API?") %>
+  <div class="flex flex-col justify-between gap-8 sm:flex-row">
+    <div class="max-w-2xl">
+      <p>Lots of people!</p>
+      <p class="mt-6">
+        Real estate developers and agents, construction companies, urban planners, architects,
+        local government and municipalities, property management firms, community advocacy groups, environmental and heritage organizations,
+        academics,
+        legal firms, conveyancers, utility companies, insurance companies, researchers, tech startups and app developers are interested in this data.
+      </p>
+    </div>
+    <%= image_tag "illustration/headshots_three_people.svg", alt: "Illustration of headshot of three different people", class: "max-w-64" %>
+  </div>
+</section>
+
+<div id="plans" class="flex flex-col items-center gap-4 py-16 text-xl border-t lg:items-stretch lg:grid lg:grid-cols-3 border-t-light-grey text-navy">
+  <section class="flex flex-col justify-between max-w-lg p-10 my-8 text-center bg-light-grey">
+    <div class="flex flex-col items-center">
+      <%= image_tag "plans/community.svg", alt: "", class: "mb-8" %>
+      <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
+        Community Plan
+      <% end %>
+      <div class="pb-4">
         <p>
-          You need an API key to try out the examples below and use the API for yourself.
+          API data for strictly non-commercial use for public benefit.
         </p>
-        <div class="mt-8 mb-4">
-          <% if Flipper.enabled?(:trial_api_keys, current_user) %>
-            <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: confirm_api_keys_path).with_content("Create API key") %>
-          <% else %>
-            <%= pa_button_to "Create API key", api_keys_path, method: :post %>
+        <p class="my-8">
+          <span class="text-3xl font-bold font-display">$0</span>
+          AUD
+          <span class="block mt-1">/ month</span>
+        </p>
+        <div class="text-left">
+          <%= render BulletListComponent.new do |c| %>
+            <%= c.with_item do %>
+              Return up to
+              <%= number_with_delimiter(ApiKey.default_daily_limit_community * Application.max_per_page) %>
+              applications per day
+            <% end %>
+            <%= c.with_item.with_content("Full use of the API") %>
           <% end %>
         </div>
+      </div>
+    </div>
+    <p class="my-4">
+      <%= pa_link_to "Contact us", api_contact_path, extra_classes: "block" %> to apply
+    </p>
+  </section>
+
+  <section class="flex flex-col justify-between max-w-lg py-10 text-center px-14 bg-light-grey">
+    <div class="flex flex-col items-center">
+      <%= image_tag "plans/standard.svg", alt: "", class: "mb-8" %>
+      <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
+        Standard Plan
       <% end %>
-    <% else %>
-      <p>
-        To use the API you will to
-        <%= pa_link_to "register for an account", new_user_registration_path %>
-        or
-        <%= pa_link_to "sign in", new_user_session_path %>
-        to your existing account. Once you've done that, return to this page
-        and the you will be able to create an API key here.
-      </p>
-    <% end %>
-  </div>
-  <%= image_tag "illustration/key.svg", alt: "", size: "287x189" %>
+      <div class="pb-4">
+        <p>
+          Set and forget reliable API service, effortlessly integrated into your application.
+        </p>
+        <p class="my-8">
+          <span class="text-3xl font-bold font-display">$3499</span>
+          AUD
+          <span class="block mt-1">+ GST / month</span>
+        </p>
+        <div class="text-left">
+          <%= render BulletListComponent.new do |c| %>
+            <%= c.with_item do %>
+              Return up to
+              <%= number_with_delimiter(ApiKey.default_daily_limit_commercial * Application.max_per_page) %>
+              applications per day
+            <% end %>
+            <%= c.with_item do %>
+              1 product
+            <% end %>
+            <%= c.with_item do %>
+              Priority email support
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <p class="my-4">
+      <%= pa_link_to "Contact us", api_contact_path, extra_classes: "block" %>
+      to sign up
+    </p>
+  </section>
+
+  <section class="flex flex-col justify-between max-w-lg p-10 my-8 text-center bg-light-grey">
+    <div class="flex flex-col items-center">
+      <%= image_tag "plans/premium.svg", alt: "", class: "mb-8" %>
+      <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-8") do %>
+        Premium Plan
+      <% end %>
+      <div class="pb-4">
+        <p>
+          More power and flexibility. Talk to us for pricing.
+        </p>
+        <p class="mt-8 mb-4 text-left">
+          Potential add ons can include:
+        </p>
+        <div class="text-left">
+          <%= render BulletListComponent.new do |c| %>
+            <%= c.with_item do %>
+              <%# TODO: Add documentation for bulk data API %>
+              Access to bulk data API
+            <% end %>
+            <%= c.with_item do %>
+              Multiple products
+            <% end %>
+            <%= c.with_item do %>
+              Return more than
+              <%= number_with_delimiter(ApiKey.default_daily_limit_commercial * Application.max_per_page) %>
+              applications per day
+            <% end %>
+            <%= c.with_item do %>
+              Search for applications by description
+            <% end %>
+            <%= c.with_item do %>
+              Customised integration options
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <p class="my-4">
+      <%= pa_link_to "Contact us", api_contact_path, extra_classes: "block" %>
+      to discuss your needs
+    </p>
+  </section>
 </div>
 
-<section class="mt-24">
-  <%= render HeadingComponent.new(tag: :h2).with_content("API calls") %>
-  <section class="max-w-4xl">
-    <section class="mt-16">
-      <%= render HeadingComponent.new(tag: :h3).with_content("Single Location by longitude/latitude") %>
-      <p class="mt-4 text-xl text-navy">
-        Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
-        with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
-      </p>
-      <code class="block my-8 text-xl break-all text-navy">
-        <%= api_example_latlong_url_html(format: "json", key: api_key) %>
-      </code>
-      <% if api_key %>
-        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_latlong_url(format: "json", key: api_key)) do %>
-          View example
+<%# Only show this section if you don't have an API key yet %>
+<% if api_key.nil? %>
+  <section class="pb-16">
+    <div class="flex flex-col items-center p-16 text-xl bg-light-grey text-navy">
+      <div class="text-center">
+        <%= render HeadingComponent.new(tag: :h2) do %>
+          Instant access <%= ApiKey.default_trial_duration_days %> day trial
         <% end %>
-      <% end %>
-    </section>
-    <section class="mt-16">
-      <%= render HeadingComponent.new(tag: :h3).with_content("Area by longitude/latitude") %>
-      <p class="mt-4 text-xl text-navy">
-        Return applications within a rectangle defined by longitude/latitude.
-      </p>
-      <code class="block my-8 text-xl break-all text-navy">
-        <%= api_example_area_url_html(format: "json", key: api_key) %>
-      </code>
-      <% if api_key %>
-        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_area_url(format: "json", key: api_key)) do %>
-          View example
-        <% end %>
-      <% end %>
-    </section>
-    <section class="mt-16">
-      <%= render HeadingComponent.new(tag: :h3).with_content("Planning authority") %>
-      <p class="mt-4 text-xl text-navy">
-        Return applications for a specific planning authority (e.g. a local council) by authority short name. To discover the authority short name
-        to use here, find the planning authority on the
-        <%= pa_link_to "list of authorities", authorities_path %>
-        and follow the link. The url has the authority short name in it.
-      </p>
-      <code class="block my-8 text-xl break-all text-navy">
-        <%= api_example_authority_url_html(format: "json", key: api_key) %>
-      </code>
-      <% if api_key %>
-        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_authority_url(format: "json", key: api_key)) do %>
-          View example
-        <% end %>
-      <% end %>
-    </section>
-    <section class="mt-16">
-      <%= render HeadingComponent.new(tag: :h3).with_content("Postcode") %>
-      <p class="mt-4 text-xl text-navy">
-        Return applications for a specific postcode area
-      </p>
-      <code class="block my-8 text-xl break-all text-navy">
-        <%= api_example_postcode_url_html(format: "json", key: api_key) %>
-      </code>
-      <% if api_key %>
-        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_postcode_url(format: "json", key: api_key)) do %>
-          View example
-        <% end %>
-      <% end %>
-    </section>
-    <section class="mt-16">
-      <%= render HeadingComponent.new(tag: :h3).with_content("Suburb") %>
-      <p class="mt-4 text-xl text-navy">
-        Return applications in a suburb. Including &ldquo;state&rdquo; and &ldquo;postcode&rdquo; in the search is optional.
-      </p>
-      <code class="block my-8 text-xl break-all text-navy">
-        <%= api_example_suburb_state_and_postcode_url_html(format: "json", key: api_key) %>
-      </code>
-      <% if api_key %>
-        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_suburb_state_and_postcode_url(format: "json", key: api_key)) do %>
-          View example
-        <% end %>
-      <% end %>
-    </section>
-  </section>
-  <section class="pt-8 mt-16 border-t border-t-warm-grey">
-    <div class="max-w-4xl">
-      <%# TODO: Using non-standard style %>
-      <%= render HeadingComponent.new(tag: :h2).with_content("Extra query parameters") %>
-      <p class="mt-8 text-xl text-navy">
-        There are several parameters that can be applied to each of the above queries for extra usefulness.
-      </p>
-      <section class="mt-12">
-        <%= render HeadingComponent.new(tag: :h3).with_content("page") %>
-        <p class="mt-4 text-xl text-navy">
-          API calls return a maximum of <%= Application.max_per_page %> results. To retrieve more results simply do another request with page
-          set to 2, 3, etc&hellip; Not setting the page parameter is the same as requesting page 1.
+        <p class="mt-1 text-3xl font-bold text-navy">
+          Build, test and explore with live API data
         </p>
-        <code class="block mt-8 text-xl break-all text-navy">
-          <%= api_example_postcode_url_html(format: "json", key: api_key, postcode: "2780", extra_params: { page: 2 }) %>
-        </code>
-      </section>
-      <section class="mt-12">
-        <%= render HeadingComponent.new(tag: :h3).with_content("count") %>
-        <p class="mt-4 text-xl text-navy">
-          API calls by default return a maximum of <%= Application.max_per_page %> results. To return less than that per page simply set the count parameter to the maximum number you want to return.
+      </div>
+      <p class="max-w-lg mt-8 text-center">
+        Enjoy up to
+        <%= ApiKey.default_daily_limit_trial %>
+        requests a day (returning up to a total of
+        <%= number_with_delimiter(ApiKey.default_daily_limit_trial * Application.max_per_page) %>
+        applications per day) for
+        <%= pluralize(ApiKey.default_trial_duration_days, "day") %>.
+      </p>
+      <%= image_tag "illustration/key.svg", alt: "", size: "237x155", class: "my-8" %>
+      <% if current_user %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: confirm_api_keys_path).with_content("Create API key") %>
+      <% else %>
+        <p class="max-w-md text-center">
+          To get an instant API key simply
+          <%= pa_link_to "create an account", new_user_registration_path %>
+          or
+          <%= pa_link_to "sign in", new_user_session_path %>.
         </p>
-        <code class="block mt-8 text-xl break-all text-navy">
-          <%= api_example_postcode_url_html(format: "json", key: api_key, postcode: "2780", extra_params: { count: 10 }) %>
-        </code>
-      </section>
+      <% end %>
     </div>
   </section>
-  <section class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
-    <%= render HeadingComponent.new(tag: :h2) do %>
-      Warning about client side API queries
-    <% end %>
-    <p class="mt-8">
-      Client-side API queries are supported using
-      <%= pa_link_to "CORS", "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" %>. You might do this, for example,
-      in a Javascript application that runs in the browser making requests directly to the Planning Alerts API. This is fine for testing. However, this should <strong>not be used
-      in production</strong> as you would be effectively making your API key public, which is a very bad. It is your responsibility to keep the API key
-      safe and secure.
+<% end %>
+
+<section class="pt-12 pb-16 text-xl border-t border-t-light-grey2 text-navy">
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("What's in the API?") %>
+  <div class="flex flex-col items-start justify-between gap-8 sm:flex-row">
+    <div class="max-w-2xl">
+      <p>
+        In our API you can find Australia-wide data, updated daily:
+      </p>
+      <div class="my-6">
+        <%= render BulletListComponent.new do |c| %>
+          <%= c.with_item.with_content("Single Location by longitude/latitude") %>
+          <%= c.with_item.with_content("Area by longitude/latitude") %>
+          <%= c.with_item.with_content("Planning authority") %>
+          <%= c.with_item.with_content("Postcode") %>
+          <%= c.with_item.with_content("Suburb") %>
+        <% end %>
+      </div>
+
+      <%# # TODO: Explain the general shape of the returned data. So far we've only explained how we can search for it. %>
+
+      <%= pa_link_to "View the developer documentation", api_developer_path %>
+
+      <section class="pt-8">
+        <%= render HeadingComponent.new(tag: :h3).with_content("What's not in the API?") %>
+        <p>
+          For privacy reasons our API does not return personal information including Planning Alerts user comments or names associated with applications.
+        </p>
+      </section>
+    </div>
+    <%= image_tag "illustration/person_big_arms.svg", alt: "Illustration of headshot of three different people", class: "max-w-64" %>
+  </div>
+</section>
+
+<section class="pt-12 pb-32 text-xl border-t border-light-grey2 text-navy">
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-16").with_content("Some of our customers") %>
+  <ul class="grid items-center grid-cols-1 gap-x-16 gap-y-8 sm:grid-cols-4">
+    <li class="max-w-52"><%= image_tag "customers/domain-group.svg", alt: "Domain Group logo" %></li>
+    <li class="max-w-52"><%= image_tag "customers/property-dollar.png", alt: "Property Dollar logo" %></li>
+    <li class="max-w-52"><%= image_tag "customers/valocity.webp", alt: "Valocity logo" %></li>
+    <li class="max-w-52"><%= image_tag "customers/nurture-cloud.svg", alt: "Nurture Cloud logo" %></li>
+  </ul>
+</section>
+
+<section class="pt-16 text-xl border-t text-navy border-light-grey2">
+  <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6") do %>
+    Trustworthy and up to date data
+  <% end %>
+  <div class="flex flex-col justify-between gap-8 sm:gap-16 sm:flex-row-reverse">
+    <div class="font-bold text-lavender font-display text-8xl shrink-0">
+      14 <span class="relative text-2xl top-3 -left-6">yrs</span>
+    </div>
+    <p class="max-w-2xl">
+      <%# TODO: Add something about complex automations and data integrity checks, etc.. %>
+      We've been doing this for more than 14 years with an extremely experienced team.
+      Leverage that for your own needs rather than trying to reinvent the wheel.
     </p>
-    <p class="mt-8">
-      Instead we recommend either loading the data ahead of time server-side and passing the data to your client or alternatively proxying the client-side requests
-      through your own server where you add the API key.
-    </p>
-  </section>
-  <section id="usage" class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
-    <%= render HeadingComponent.new(tag: :h2).with_content("Usage") %>
-    <p class="mt-8">
-      Low volume,
-      <strong>non&ndash;commercial</strong>
-      use of the API service is free. We ask that personal and non&ndash;profit use of this service attribute the OpenAustralia Foundation on your website or application.
-    </p>
-    <p class="mt-8">
-      Standard agreements for commercial use are at
-      <%= pa_link_to "oaf.org.au/standard-agreements/planningalerts-commercial", "https://www.oaf.org.au/standard-agreements/planningalerts-commercial/" %>.
-      Please
-      <%= pa_link_to "contact us", api_contact_path %>
-      for
-      <strong>commercial</strong>
-      use. Commercial users may include Real Estate Agencies, Architects, Planners or Builders.
-    </p>
-    <p class="mt-8">
-      Also, please
-      <%= pa_link_to "get in touch", api_contact_path %>
-      if you intend to use the service on a large scale.
-      In order to maintain quality of service for our API users, this service is rate limited by default to approximately <%= ApiKey.default_daily_limit %> requests per day.
-    </p>
-    <p class="mt-8">
-      We offer a range of paid options, from rate&ndash;limited to unlimited use of this service.
-    </p>
-  </section>
-  <section id="be_nice" class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
-    <%= render HeadingComponent.new(tag: :h2).with_content("Be Nice") %>
-    <p class="mt-8">
-      The Planning Alerts service is intended to help people be aware of what's happening in their local neighborhood, and to enable a civil discussion about those changes.
-    </p>
-    <p class="mt-8">
-      Don't use the service (or information obtained from the service) to market goods or services to individuals.
-    </p>
-    <p class="mt-8">
-      Don't use the service (or information obtained from the service) to harass or intimidate a person.
-    </p>
-  </section>
+  </div>
 </section>
