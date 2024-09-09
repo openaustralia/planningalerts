@@ -8,9 +8,11 @@ class AlertPolicy < ApplicationPolicy
   attr_reader :user
 
   sig { returns(Alert) }
-  attr_reader :alert
+  def alert
+    T.cast(@alert, Alert)
+  end
 
-  sig { params(user: User, alert: Alert).void }
+  sig { params(user: User, alert: T.any(Alert, T.class_of(Alert))).void }
   def initialize(user, alert)
     super
     @user = user

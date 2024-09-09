@@ -11,6 +11,7 @@ module Admin
   class ApplicationController < Administrate::ApplicationController
     extend T::Sig
 
+    include Administrate::Punditize
     before_action :authenticate_admin
 
     sig { void }

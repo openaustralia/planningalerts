@@ -8,9 +8,11 @@ class CommentPolicy < ApplicationPolicy
   attr_reader :user
 
   sig { returns(Comment) }
-  attr_reader :comment
+  def comment
+    T.cast(@comment, Comment)
+  end
 
-  sig { params(user: User, comment: Comment).void }
+  sig { params(user: User, comment: T.any(Comment, T.class_of(Comment))).void }
   def initialize(user, comment)
     super
     @user = user
