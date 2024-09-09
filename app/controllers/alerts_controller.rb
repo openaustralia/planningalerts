@@ -12,7 +12,7 @@ class AlertsController < ApplicationController
 
   sig { void }
   def index
-    @alerts = T.let(policy_scope(Alert), T.nilable(ActiveRecord::Relation))
+    @alerts = T.let(policy_scope(T.must(current_user).alerts.active), T.nilable(ActiveRecord::Relation))
     @alert = Alert.new(radius_meters: Alert::DEFAULT_RADIUS)
   end
 

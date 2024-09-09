@@ -48,6 +48,7 @@ module Admin
 
     sig { void }
     def export_confirmed_emails
+      authorize User, :index?
       send_data User.where.not(confirmed_at: nil).select(:email).distinct.pluck(:email).join("\n"), filename: "emails.txt"
     end
   end

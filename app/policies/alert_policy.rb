@@ -36,7 +36,7 @@ class AlertPolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def update?
-    alert.user_id == user.id && !alert.unsubscribed?
+    (alert.user_id == user.id && !alert.unsubscribed?) || user.admin?
   end
 
   sig { returns(T::Boolean) }
