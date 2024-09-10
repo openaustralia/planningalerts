@@ -25,12 +25,6 @@ class ApplicationController < ActionController::Base
 
   default_form_builder FormBuilders::Tailwind
 
-  sig { void }
-  def authenticate_active_admin_user!
-    authenticate_user!
-    render plain: "Not authorised", status: :forbidden unless T.must(current_user).admin?
-  end
-
   rescue_from ActiveRecord::StatementInvalid, with: :check_for_write_during_maintenance_mode
 
   private
