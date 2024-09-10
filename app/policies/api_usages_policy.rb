@@ -6,6 +6,6 @@ class ApiUsagesPolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def index?
-    user.admin?
+    user.has_role?(:admin)
   end
 end

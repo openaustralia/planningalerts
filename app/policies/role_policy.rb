@@ -6,18 +6,18 @@ class RolePolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def index?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   sig { returns(T::Boolean) }
   def show?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   class Scope < ApplicationPolicy::Scope
     sig { returns(ActiveRecord::Relation) }
     def resolve
-      user.admin? ? scope.all : scope.none
+      user.has_role?(:admin) ? scope.all : scope.none
     end
   end
 end

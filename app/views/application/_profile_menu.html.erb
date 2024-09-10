@@ -8,7 +8,7 @@
   <li><div class="pl-4"><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "#{pa_link_classes(quiet: false)} cursor-pointer" %></div></li>
 </ul>
 
-<% if current_user.admin? %>
+<% if current_user.has_role?(:admin) %>
   <ul class="mt-10 ml-5 text-lg list-image-dash">
     <li><div class="pl-4"><%= pa_link_to_unless_current "Administration panel", admin_root_path %></div></li>
     <li><div class="pl-4"><%= pa_link_to_unless_current "Feature flags", admin_flipper_path %></div></li>

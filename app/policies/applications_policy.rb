@@ -16,7 +16,7 @@ class ApplicationsPolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def destroy?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   class Scope < ApplicationPolicy::Scope

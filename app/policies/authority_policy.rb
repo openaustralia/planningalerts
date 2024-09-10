@@ -18,7 +18,7 @@ class AuthorityPolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def create?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   sig { returns(T::Boolean) }
@@ -29,23 +29,23 @@ class AuthorityPolicy < ApplicationPolicy
   # TODO: Allow everyone to see an active authority
   sig { returns(T::Boolean) }
   def show?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   sig { returns(T::Boolean) }
   def update?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   sig { returns(T::Boolean) }
   def import?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   class Scope < ApplicationPolicy::Scope
     sig { returns(ActiveRecord::Relation) }
     def resolve
-      user.admin? ? scope.all : scope.enabled
+      user.has_role?(:admin) ? scope.all : scope.enabled
     end
   end
 end

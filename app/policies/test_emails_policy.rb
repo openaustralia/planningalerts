@@ -6,11 +6,11 @@ class TestEmailsPolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def index?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   sig { returns(T::Boolean) }
   def create?
-    user.admin?
+    user.has_role?(:admin)
   end
 end

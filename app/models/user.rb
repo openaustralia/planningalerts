@@ -29,12 +29,6 @@ class User < ApplicationRecord
   has_many :reports, dependent: :nullify
   has_many :contact_messages, dependent: :nullify
 
-  # TODO: Inline this
-  sig { returns(T::Boolean) }
-  def admin?
-    has_role?(:admin)
-  end
-
   # rubocop:disable Style/ArgumentsForwarding
   # TODO: Arguments forwarding doesn't seem to be supported by sorbet right now?
   sig { params(notification: T.untyped, args: T.untyped).void }

@@ -36,5 +36,5 @@ end
 # Registers a group named admins - this can be used to easily add a feature for all
 # admins
 Flipper.register(:admins) do |actor, context|
-  actor.respond_to?(:admin?) && actor.admin?
+  actor&.has_role?(:admin)
 end

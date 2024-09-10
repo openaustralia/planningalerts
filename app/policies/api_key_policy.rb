@@ -6,17 +6,17 @@ class ApiKeyPolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def index?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   sig { returns(T::Boolean) }
   def show?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   sig { returns(T::Boolean) }
   def update?
-    user.admin?
+    user.has_role?(:admin)
   end
 
   sig { returns(T::Boolean) }
@@ -32,7 +32,7 @@ class ApiKeyPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     sig { returns(ActiveRecord::Relation) }
     def resolve
-      user.admin? ? scope.all : scope.where(user:)
+      user.has_role?(:admin) ? scope.all : scope.where(user:)
     end
   end
 end

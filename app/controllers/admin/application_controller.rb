@@ -17,7 +17,7 @@ module Admin
     sig { void }
     def authenticate_admin
       authenticate_user!
-      render plain: "Not authorised", status: :forbidden unless T.must(current_user).admin?
+      render plain: "Not authorised", status: :forbidden unless T.must(current_user).has_role?(:admin)
     end
 
     # Override this value to specify the number of elements to display at a time
