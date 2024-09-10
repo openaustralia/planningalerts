@@ -39,7 +39,7 @@ class User < ApplicationRecord
 
   sig { returns(T::Boolean) }
   def can_login_to_admin?
-    has_role?(:admin) || has_role?(:api_editor)
+    has_role?(:admin) || has_role?(:api_editor) || has_role?(:scraper_editor)
   end
 
   # This is currently used when creating users via an alert
