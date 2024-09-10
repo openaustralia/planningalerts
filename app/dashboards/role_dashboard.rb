@@ -3,20 +3,22 @@
 require "administrate/base_dashboard"
 
 class RoleDashboard < Administrate::BaseDashboard
+  extend T::Sig
+
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
   # Each different type represents an Administrate::Field object,
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
-  ATTRIBUTE_TYPES = {
+  ATTRIBUTE_TYPES = T.let({
     id: Field::Number,
     name: Field::String,
     resource: Field::Polymorphic,
     users: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
-  }.freeze
+  }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
   # an array of attributes that will be displayed on the model's index page.
@@ -56,11 +58,12 @@ class RoleDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = {}.freeze
+  COLLECTION_FILTERS = T.let({}.freeze, T::Hash[Symbol, T.untyped])
 
   # Overwrite this method to customize how roles are displayed
   # across all pages of the admin dashboard.
   #
+  sig { params(role: Role).returns(T.nilable(String)) }
   def display_resource(role)
     role.name
   end
