@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     resources :api_usages, only: :index
     resources :background_jobs, only: :index
     resources :test_emails, only: [:index, :create]
+    resources :roles, only: [:index, :show]
 
     root to: "users#index"
   end
