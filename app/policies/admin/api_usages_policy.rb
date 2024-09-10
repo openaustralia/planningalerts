@@ -7,7 +7,7 @@ module Admin
 
     sig { returns(T::Boolean) }
     def index?
-      user.has_role?(:admin)
+      user.has_role?(:admin) || user.has_role?(:api_editor)
     end
   end
 end
