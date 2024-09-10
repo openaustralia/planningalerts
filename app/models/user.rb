@@ -4,6 +4,7 @@
 class User < ApplicationRecord
   extend T::Sig
 
+  rolify
   validate :validate_email_domain
 
   # For sorbet
