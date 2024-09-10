@@ -1,3 +1,5 @@
+# typed: strict
+
 require "administrate/base_dashboard"
 
 class RoleDashboard < Administrate::BaseDashboard
@@ -13,7 +15,7 @@ class RoleDashboard < Administrate::BaseDashboard
     resource: Field::Polymorphic,
     users: Field::HasMany,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -22,18 +24,14 @@ class RoleDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     name
-    resource
     users
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     name
-    resource
     users
     created_at
     updated_at
@@ -63,7 +61,7 @@ class RoleDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how roles are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(role)
-  #   "Role ##{role.id}"
-  # end
+  def display_resource(role)
+    role.name
+  end
 end
