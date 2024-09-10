@@ -64,6 +64,12 @@ module GeneratedPathHelpersModule
   def admin_reports_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def admin_role_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_roles_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def admin_root_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

@@ -347,6 +347,20 @@ class User
 
     sig { params(value: T::Enumerable[::Report]).void }
     def reports=(value); end
+
+    sig { returns(T::Array[T.untyped]) }
+    def role_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def role_ids=(ids); end
+
+    # This method is created by ActiveRecord on the `User` class because it declared `has_and_belongs_to_many :roles`.
+    # 🔗 [Rails guide for `has_and_belongs_to_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-and-belongs-to-many-association)
+    sig { returns(::Role::PrivateCollectionProxy) }
+    def roles; end
+
+    sig { params(value: T::Enumerable[::Role]).void }
+    def roles=(value); end
   end
 
   module GeneratedAssociationRelationMethods

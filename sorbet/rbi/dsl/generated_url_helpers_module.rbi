@@ -64,6 +64,12 @@ module GeneratedUrlHelpersModule
   def admin_reports_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def admin_role_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_roles_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def admin_root_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
