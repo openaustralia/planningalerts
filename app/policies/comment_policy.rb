@@ -26,20 +26,19 @@ class CommentPolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def show?
-    comment.published? || user.has_role?(:admin)
+    comment.published?
   end
 
   sig { returns(T::Boolean) }
   def preview?
     # Can only preview your own comments
-    # TODO: Remove temporary powers for admins to view all previews
-    comment.user_id == user.id || user.has_role?(:admin)
+    comment.user_id == user.id
   end
 
   sig { returns(T::Boolean) }
   def update?
     # Can only edit your own comments that have not yet been published
-    (comment.user_id == user.id && !comment.published) || user.has_role?(:admin)
+    comment.user_id == user.id && !comment.published
   end
 
   sig { returns(T::Boolean) }
@@ -54,15 +53,11 @@ class CommentPolicy < ApplicationPolicy
     comment.user_id == user.id && !comment.published
   end
 
-  sig { returns(T::Boolean) }
-  def resend?
-    user.has_role?(:admin)
-  end
-
   class Scope < ApplicationPolicy::Scope
+    # TODO: Is this for public or your own comments?
     sig { returns(ActiveRecord::Relation) }
     def resolve
-      user.has_role?(:admin) ? scope.all : scope.published
+      scope.published
     end
   end
 end

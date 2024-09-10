@@ -20,23 +20,13 @@ class AlertPolicy < ApplicationPolicy
   end
 
   sig { returns(T::Boolean) }
-  def index?
-    user.has_role?(:admin)
-  end
-
-  sig { returns(T::Boolean) }
-  def show?
-    user.has_role?(:admin)
-  end
-
-  sig { returns(T::Boolean) }
   def create?
     true
   end
 
   sig { returns(T::Boolean) }
   def update?
-    (alert.user_id == user.id && !alert.unsubscribed?) || user.has_role?(:admin)
+    alert.user_id == user.id && !alert.unsubscribed?
   end
 
   sig { returns(T::Boolean) }
@@ -47,12 +37,8 @@ class AlertPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     sig { returns(ActiveRecord::Relation) }
     def resolve
-      if user.has_role?(:admin)
-        scope.all
-      else
-        # User can only see their own active alerts
-        scope.where(user:).active
-      end
+      # User can only see their own active alerts
+      scope.where(user:).active
     end
   end
 end

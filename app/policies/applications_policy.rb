@@ -14,11 +14,6 @@ class ApplicationsPolicy < ApplicationPolicy
     true
   end
 
-  sig { returns(T::Boolean) }
-  def destroy?
-    user.has_role?(:admin)
-  end
-
   class Scope < ApplicationPolicy::Scope
     sig { returns(ActiveRecord::Relation) }
     def resolve
