@@ -26,6 +26,9 @@ Rails.application.routes.draw do
       mount Flipper::UI.app(Flipper) => "flipper", as: :flipper
     end
 
+    # We need to a consistent place accessible by all the roles to make the
+    # root route for the admin interface
+    resources :homes, only: :index
     resources :users, except: [:new, :create] do
       collection do
         get :export_confirmed_emails
@@ -55,7 +58,7 @@ Rails.application.routes.draw do
     resources :test_emails, only: [:index, :create]
     resources :roles, only: [:index, :show]
 
-    root to: "users#index"
+    root to: "homes#index"
   end
 
   constraints subdomain: "api" do
