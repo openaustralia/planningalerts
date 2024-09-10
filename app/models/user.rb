@@ -14,6 +14,7 @@ class User < ApplicationRecord
   include Devise::Models::Validatable
   extend Devise::Models::Validatable::ClassMethods
   extend Rolify
+  include Rolify::Role
 
   # Include default devise modules. Others available are:
   # :token_authenticatable and :timeoutable
@@ -27,6 +28,12 @@ class User < ApplicationRecord
   # Same for reports but they're not public
   has_many :reports, dependent: :nullify
   has_many :contact_messages, dependent: :nullify
+
+  # Override standard method to also check rolify role
+  sig { returns(T::Boolean) }
+  def admin?
+    self[:admin] || has_role?(:admin)
+  end
 
   # rubocop:disable Style/ArgumentsForwarding
   # TODO: Arguments forwarding doesn't seem to be supported by sorbet right now?
