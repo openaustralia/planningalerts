@@ -13,6 +13,7 @@ class User < ApplicationRecord
   include Devise::Models::Recoverable
   include Devise::Models::Validatable
   extend Devise::Models::Validatable::ClassMethods
+  extend Rolify
 
   # Include default devise modules. Others available are:
   # :token_authenticatable and :timeoutable
