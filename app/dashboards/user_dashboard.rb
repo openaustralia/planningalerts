@@ -15,7 +15,6 @@ class UserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = T.let({
     id: Field::Number,
     activated_at: Field::DateTime,
-    admin: YesNoBooleanField,
     alerts: Field::HasMany,
     api_keys: Field::HasMany,
     comments: Field::HasMany,
@@ -56,7 +55,6 @@ class UserDashboard < Administrate::BaseDashboard
     email
     name
     organisation
-    admin
     roles
   ].freeze, T::Array[Symbol])
 
@@ -66,7 +64,6 @@ class UserDashboard < Administrate::BaseDashboard
     email
     name
     organisation
-    admin
     roles
     unconfirmed_email
     alerts
@@ -95,7 +92,6 @@ class UserDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = T.let(%i[
     name
     organisation
-    admin
     roles
   ].freeze, T::Array[Symbol])
 

@@ -29,10 +29,10 @@ class User < ApplicationRecord
   has_many :reports, dependent: :nullify
   has_many :contact_messages, dependent: :nullify
 
-  # Override standard method to also check rolify role
+  # TODO: Inline this
   sig { returns(T::Boolean) }
   def admin?
-    self[:admin] || has_role?(:admin)
+    has_role?(:admin)
   end
 
   # rubocop:disable Style/ArgumentsForwarding

@@ -120,11 +120,6 @@ FactoryBot.define do
     end
     password { "foofoo" }
 
-    factory :admin do
-      admin { true }
-      confirmed_at { 1.day.ago }
-    end
-
     factory :confirmed_user do
       confirmed_at { Time.zone.now }
     end

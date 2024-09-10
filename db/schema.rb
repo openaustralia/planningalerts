@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_10_003300) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_10_032647) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -314,7 +314,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_10_003300) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.datetime "reset_password_sent_at", precision: nil
-    t.boolean "admin", default: false, null: false
     t.string "name"
     t.string "organisation"
     t.string "confirmation_token"

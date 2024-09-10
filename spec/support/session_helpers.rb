@@ -2,7 +2,8 @@
 
 module SessionHelpers
   def sign_in_as_admin
-    admin = create(:admin)
+    admin = create(:confirmed_user)
+    admin.add_role(:admin)
 
     visit admin_root_path
 
