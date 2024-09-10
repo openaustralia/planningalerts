@@ -1,4 +1,5 @@
 # typed: strict
+# frozen_string_literal: true
 
 class RolePolicy < ApplicationPolicy
   extend T::Sig
