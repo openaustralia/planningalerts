@@ -43,7 +43,8 @@ class UserDashboard < Administrate::BaseDashboard
     unconfirmed_email: Field::String,
     unlock_token: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    roles: HasManyRolesField
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
@@ -56,6 +57,7 @@ class UserDashboard < Administrate::BaseDashboard
     name
     organisation
     admin
+    roles
   ].freeze, T::Array[Symbol])
 
   # SHOW_PAGE_ATTRIBUTES
@@ -65,6 +67,7 @@ class UserDashboard < Administrate::BaseDashboard
     name
     organisation
     admin
+    roles
     unconfirmed_email
     alerts
     comments
@@ -93,6 +96,7 @@ class UserDashboard < Administrate::BaseDashboard
     name
     organisation
     admin
+    roles
   ].freeze, T::Array[Symbol])
 
   # COLLECTION_FILTERS
