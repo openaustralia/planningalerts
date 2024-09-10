@@ -37,6 +37,11 @@ class User < ApplicationRecord
   end
   # rubocop:enable Style/ArgumentsForwarding
 
+  sig { returns(T::Boolean) }
+  def can_login_to_admin?
+    has_role?(:admin) || has_role?(:api_editor)
+  end
+
   # This is currently used when creating users via an alert
   # TODO: Remove this as soon as users are purely being created by people registering
   sig { void }

@@ -17,7 +17,7 @@ module Admin
     sig { void }
     def authenticate_admin
       authenticate_user!
-      render plain: "Not authorised", status: :forbidden unless T.must(current_user).has_role?(:admin) || T.must(current_user).has_role?(:api_editor)
+      render plain: "Not authorised", status: :forbidden unless T.must(current_user).can_login_to_admin?
     end
 
     sig { returns(T::Array[Symbol]) }
