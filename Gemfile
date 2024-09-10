@@ -23,6 +23,7 @@ gem "administrate", "~> 0.20.0"
 # Logging in and such things
 gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
 gem "pundit", "~> 2.2"
+gem "rolify"
 
 # Extra validation
 gem "validates_email_format_of"
