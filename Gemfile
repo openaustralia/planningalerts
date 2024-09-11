@@ -149,6 +149,7 @@ gem "rgeo-geojson"
 gem "terser"
 
 # For versioning changes in the admin panel
+gem "administrate-field-paper_trail"
 gem "paper_trail"
 
 group :test do
