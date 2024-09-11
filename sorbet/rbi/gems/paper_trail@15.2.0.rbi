@@ -5,6 +5,15 @@
 # Please instead update this file by running `bin/tapioca gem paper_trail`.
 
 
+class ActiveRecord::Base
+  include ::ActiveModel::Access
+  include ::ActiveModel::ForbiddenAttributesProtection
+  include ::ActiveModel::AttributeAssignment
+  include ::ActiveModel::Serialization
+  include ::PaperTrail::Model
+  extend ::PaperTrail::Model::ClassMethods
+end
+
 # An ActiveRecord extension that tracks changes to your models, for auditing or
 # versioning.
 #
@@ -112,6 +121,125 @@ module PaperTrail
     # source://paper_trail//lib/paper_trail.rb#114
     def version; end
   end
+end
+
+# source://paper_trail//lib/paper_trail/attribute_serializers/attribute_serializer_factory.rb#6
+module PaperTrail::AttributeSerializers; end
+
+# Values returned by some Active Record serializers are
+# not suited for writing JSON to a text column. This factory
+# replaces certain default Active Record serializers
+# with custom PaperTrail ones.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/attribute_serializers/attribute_serializer_factory.rb#13
+module PaperTrail::AttributeSerializers::AttributeSerializerFactory
+  class << self
+    # @api private
+    #
+    # source://paper_trail//lib/paper_trail/attribute_serializers/attribute_serializer_factory.rb#16
+    def for(klass, attr); end
+
+    private
+
+    # @api private
+    # @return [Boolean]
+    #
+    # source://paper_trail//lib/paper_trail/attribute_serializers/attribute_serializer_factory.rb#31
+    def ar_pg_array?(obj); end
+  end
+end
+
+# The `CastAttributeSerializer` (de)serializes model attribute values. For
+# example, the string "1.99" serializes into the integer `1` when assigned
+# to an attribute of type `ActiveRecord::Type::Integer`.
+#
+# source://paper_trail//lib/paper_trail/attribute_serializers/cast_attribute_serializer.rb#11
+class PaperTrail::AttributeSerializers::CastAttributeSerializer
+  # @return [CastAttributeSerializer] a new instance of CastAttributeSerializer
+  #
+  # source://paper_trail//lib/paper_trail/attribute_serializers/cast_attribute_serializer.rb#12
+  def initialize(klass); end
+
+  private
+
+  # Returns a hash mapping attributes to hashes that map strings to
+  # integers. Example:
+  #
+  # ```
+  # { "status" => { "draft"=>0, "published"=>1, "archived"=>2 } }
+  # ```
+  #
+  # ActiveRecord::Enum was added in AR 4.1
+  # http://edgeguides.rubyonrails.org/4_1_release_notes.html#active-record-enums
+  #
+  # source://paper_trail//lib/paper_trail/attribute_serializers/cast_attribute_serializer.rb#27
+  def defined_enums; end
+
+  # source://paper_trail//lib/paper_trail/attribute_serializers/cast_attribute_serializer.rb#31
+  def deserialize(attr, val); end
+
+  # source://paper_trail//lib/paper_trail/attribute_serializers/cast_attribute_serializer.rb#46
+  def serialize(attr, val); end
+end
+
+# Serialize or deserialize the `version.object` column.
+#
+# source://paper_trail//lib/paper_trail/attribute_serializers/object_attribute.rb#8
+class PaperTrail::AttributeSerializers::ObjectAttribute
+  # @return [ObjectAttribute] a new instance of ObjectAttribute
+  #
+  # source://paper_trail//lib/paper_trail/attribute_serializers/object_attribute.rb#9
+  def initialize(model_class); end
+
+  # source://paper_trail//lib/paper_trail/attribute_serializers/object_attribute.rb#23
+  def deserialize(attributes); end
+
+  # source://paper_trail//lib/paper_trail/attribute_serializers/object_attribute.rb#19
+  def serialize(attributes); end
+
+  private
+
+  # Modifies `attributes` in place.
+  # TODO: Return a new hash instead.
+  #
+  # source://paper_trail//lib/paper_trail/attribute_serializers/object_attribute.rb#31
+  def alter(attributes, serialization_method); end
+
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/attribute_serializers/object_attribute.rb#46
+  def object_col_is_json?; end
+end
+
+# Serialize or deserialize the `version.object_changes` column.
+#
+# source://paper_trail//lib/paper_trail/attribute_serializers/object_changes_attribute.rb#8
+class PaperTrail::AttributeSerializers::ObjectChangesAttribute
+  # @return [ObjectChangesAttribute] a new instance of ObjectChangesAttribute
+  #
+  # source://paper_trail//lib/paper_trail/attribute_serializers/object_changes_attribute.rb#9
+  def initialize(item_class); end
+
+  # source://paper_trail//lib/paper_trail/attribute_serializers/object_changes_attribute.rb#23
+  def deserialize(changes); end
+
+  # source://paper_trail//lib/paper_trail/attribute_serializers/object_changes_attribute.rb#19
+  def serialize(changes); end
+
+  private
+
+  # Modifies `changes` in place.
+  # TODO: Return a new hash instead.
+  #
+  # source://paper_trail//lib/paper_trail/attribute_serializers/object_changes_attribute.rb#31
+  def alter(changes, serialization_method); end
+
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/attribute_serializers/object_changes_attribute.rb#49
+  def object_changes_col_is_json?; end
 end
 
 # Utilities for deleting version records.
@@ -297,12 +425,737 @@ PaperTrail::E_TIMESTAMP_FIELD_CONFIG = T.let(T.unsafe(nil), String)
 # source://paper_trail//lib/paper_trail/errors.rb#6
 class PaperTrail::Error < ::StandardError; end
 
+# source://paper_trail//lib/paper_trail/events/base.rb#4
+module PaperTrail::Events; end
+
+# We refer to times in the lifecycle of a record as "events". There are
+# three events:
+#
+# - create
+#   - `after_create` we call `RecordTrail#record_create`
+# - update
+#   - `after_update` we call `RecordTrail#record_update`
+#   - `after_touch` we call `RecordTrail#record_update`
+#   - `RecordTrail#save_with_version` calls `RecordTrail#record_update`
+#   - `RecordTrail#update_columns` is also referred to as an update, though
+#     it uses `RecordTrail#record_update_columns` rather than
+#     `RecordTrail#record_update`
+# - destroy
+#   - `before_destroy` or `after_destroy` we call `RecordTrail#record_destroy`
+#
+# The value inserted into the `event` column of the versions table can also
+# be overridden by the user, with `paper_trail_event`.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/events/base.rb#24
+class PaperTrail::Events::Base
+  # @api private
+  # @return [Base] a new instance of Base
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#39
+  def initialize(record, in_after_callback); end
+
+  # Determines whether it is appropriate to generate a new version
+  # instance. A timestamp-only update (e.g. only `updated_at` changed) is
+  # considered notable unless an ignored attribute was also changed.
+  #
+  # @api private
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#49
+  def changed_notably?; end
+
+  private
+
+  # @api private
+  # @raise [PaperTrail::InvalidOption]
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#61
+  def assert_metadatum_key_is_permitted(key); end
+
+  # Rails 5.1 changed the API of `ActiveRecord::Dirty`. See
+  # https://github.com/paper-trail-gem/paper_trail/pull/899
+  #
+  # @api private
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#71
+  def attribute_changed_in_latest_version?(attr_name); end
+
+  # Rails 5.1 changed the API of `ActiveRecord::Dirty`. See
+  # https://github.com/paper-trail-gem/paper_trail/pull/899
+  #
+  # Event can be any of the three (create, update, destroy).
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#95
+  def attribute_in_previous_version(attr_name, is_touch); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#108
+  def calculated_ignored_array; end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#121
+  def changed_and_not_ignored; end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#127
+  def changed_in_latest_version; end
+
+  # Memoized to reduce memory usage
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#135
+  def changes_in_latest_version; end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#140
+  def evaluate_only; end
+
+  # An attributed is "ignored" if it is listed in the `:ignore` option
+  # and/or the `:skip` option.  Returns true if an ignored attribute has
+  # changed.
+  #
+  # @api private
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#158
+  def ignored_attr_has_changed?; end
+
+  # Rails 5.1 changed the API of `ActiveRecord::Dirty`. See
+  # https://github.com/paper-trail-gem/paper_trail/pull/899
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#167
+  def load_changes_in_latest_version; end
+
+  # PT 10 has a new optional column, `item_subtype`
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#178
+  def merge_item_subtype_into(data); end
+
+  # Updates `data` from `controller_info`.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#197
+  def merge_metadata_from_controller_into(data); end
+
+  # Updates `data` from the model's `meta` option.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#206
+  def merge_metadata_from_model_into(data); end
+
+  # Updates `data` from the model's `meta` option and from `controller_info`.
+  # Metadata is always recorded; that means all three events (create, update,
+  # destroy) and `update_columns`.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#189
+  def merge_metadata_into(data); end
+
+  # The model method can either be an attribute or a non-attribute method.
+  #
+  # If it is an attribute that is changing in an existing object,
+  # be sure to grab the correct version.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#234
+  def metadatum_from_model_method(event, method); end
+
+  # Given a `value` from the model's `meta` option, returns an object to be
+  # persisted. The `value` can be a simple scalar value, but it can also
+  # be a symbol that names a model method, or even a Proc.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#218
+  def model_metadatum(value, event); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#80
+  def nonskipped_attributes_before_change(is_touch); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#245
+  def notable_changes; end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#252
+  def notably_changed; end
+
+  # Returns hash of attributes (with appropriate attributes serialized),
+  # omitting attributes to be skipped.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#265
+  def object_attrs_for_paper_trail(is_touch); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#272
+  def prepare_object_changes(changes); end
+
+  # Returns a boolean indicating whether to store the original object during save.
+  #
+  # @api private
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#312
+  def record_object?; end
+
+  # Returns a boolean indicating whether to store serialized version diffs
+  # in the `object_changes` column of the version record.
+  #
+  # @api private
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#305
+  def record_object_changes?; end
+
+  # Returns an object which can be assigned to the `object` attribute of a
+  # nascent version record. If the `object` column is a postgres `json`
+  # column, then a hash can be used in the assignment, otherwise the column
+  # is a `text` column, and we must perform the serialization here, using
+  # `PaperTrail.serializer`.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#323
+  def recordable_object(is_touch); end
+
+  # Returns an object which can be assigned to the `object_changes`
+  # attribute of a nascent version record. If the `object_changes` column is
+  # a postgres `json` column, then a hash can be used in the assignment,
+  # otherwise the column is a `text` column, and we must perform the
+  # serialization here, using `PaperTrail.serializer`.
+  #
+  # @api private
+  # @param changes HashWithIndifferentAccess
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#285
+  def recordable_object_changes(changes); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/base.rb#332
+  def serialize_object_changes(changes); end
+end
+
+# @api private
+#
+# source://paper_trail//lib/paper_trail/events/base.rb#25
+PaperTrail::Events::Base::E_FORBIDDEN_METADATA_KEY = T.let(T.unsafe(nil), String)
+
+# @api private
+#
+# source://paper_trail//lib/paper_trail/events/base.rb#29
+PaperTrail::Events::Base::FORBIDDEN_METADATA_KEYS = T.let(T.unsafe(nil), Array)
+
+# See docs in `Base`.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/events/create.rb#10
+class PaperTrail::Events::Create < ::PaperTrail::Events::Base
+  # Return attributes of nascent `Version` record.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/create.rb#14
+  def data; end
+end
+
+# See docs in `Base`.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/events/destroy.rb#10
+class PaperTrail::Events::Destroy < ::PaperTrail::Events::Base
+  # Return attributes of nascent `Version` record.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/destroy.rb#14
+  def data; end
+
+  private
+
+  # Rails' implementation (eg. `@record.saved_changes`) returns nothing on
+  # destroy, so we have to build the hash we want.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/destroy.rb#37
+  def changes_in_latest_version; end
+end
+
+# See docs in `Base`.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/events/update.rb#10
+class PaperTrail::Events::Update < ::PaperTrail::Events::Base
+  # - is_touch - [boolean] - Used in the two situations that are touch-like:
+  #   - `after_touch` we call `RecordTrail#record_update`
+  # - force_changes - [Hash] - Only used by `RecordTrail#update_columns`,
+  #   because there dirty-tracking is off, so it has to track its own changes.
+  #
+  # @api private
+  # @return [Update] a new instance of Update
+  #
+  # source://paper_trail//lib/paper_trail/events/update.rb#17
+  def initialize(record, in_after_callback, is_touch, force_changes); end
+
+  # If it is a touch event, and changed are empty, it is assumed to be
+  # implicit `touch` mutation, and will a version is created.
+  #
+  # See https://github.com/rails/rails/commit/dcb825902d79d0f6baba956f7c6ec5767611353e
+  #
+  # @api private
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/events/update.rb#46
+  def changed_notably?; end
+
+  # Return attributes of nascent `Version` record.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/update.rb#26
+  def data; end
+
+  private
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/events/update.rb#57
+  def merge_object_changes_into(data); end
+
+  # `touch` cannot record `object_changes` because rails' `touch` does not
+  # perform dirty-tracking. Specifically, methods from `Dirty`, like
+  # `saved_changes`, return the same values before and after `touch`.
+  #
+  # See https://github.com/rails/rails/issues/33429
+  #
+  # @api private
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/events/update.rb#71
+  def record_object_changes?; end
+end
+
 # An unexpected option, perhaps a typo, was passed to a public API method.
 #
 # @api public
 #
 # source://paper_trail//lib/paper_trail/errors.rb#11
 class PaperTrail::InvalidOption < ::PaperTrail::Error; end
+
+# Extensions to `ActiveRecord::Base`.  See `frameworks/active_record.rb`.
+# It is our goal to have the smallest possible footprint here, because
+# `ActiveRecord::Base` is a very crowded namespace! That is why we introduced
+# `.paper_trail` and `#paper_trail`.
+#
+# source://paper_trail//lib/paper_trail/has_paper_trail.rb#13
+module PaperTrail::Model
+  mixes_in_class_methods ::PaperTrail::Model::ClassMethods
+
+  class << self
+    # @private
+    #
+    # source://paper_trail//lib/paper_trail/has_paper_trail.rb#14
+    def included(base); end
+  end
+end
+
+# source://paper_trail//lib/paper_trail/has_paper_trail.rb#19
+module PaperTrail::Model::ClassMethods
+  # Declare this in your model to track every create, update, and destroy.
+  # Each version of the model is available in the `versions` association.
+  #
+  # Options:
+  #
+  # - :on - The events to track (optional; defaults to all of them). Set
+  #   to an array of `:create`, `:update`, `:destroy` and `:touch` as desired.
+  # - :class_name (deprecated) - The name of a custom Version class that
+  #   includes `PaperTrail::VersionConcern`.
+  # - :ignore - An array of attributes for which a new `Version` will not be
+  #   created if only they change. It can also accept a Hash as an
+  #   argument where the key is the attribute to ignore (a `String` or
+  #   `Symbol`), which will only be ignored if the value is a `Proc` which
+  #   returns truthily.
+  # - :if, :unless - Procs that allow to specify conditions when to save
+  #   versions for an object.
+  # - :only - Inverse of `ignore`. A new `Version` will be created only
+  #   for these attributes if supplied it can also accept a Hash as an
+  #   argument where the key is the attribute to track (a `String` or
+  #   `Symbol`), which will only be counted if the value is a `Proc` which
+  #   returns truthily.
+  # - :skip - Fields to ignore completely.  As with `ignore`, updates to
+  #   these fields will not create a new `Version`.  In addition, these
+  #   fields will not be included in the serialized versions of the object
+  #   whenever a new `Version` is created.
+  # - :meta - A hash of extra data to store. You must add a column to the
+  #   `versions` table for each key. Values are objects or procs (which
+  #   are called with `self`, i.e. the model with the paper trail).  See
+  #   `PaperTrail::Controller.info_for_paper_trail` for how to store data
+  #   from the controller.
+  # - :versions - Either,
+  #   - A String (deprecated) - The name to use for the versions
+  #     association.  Default is `:versions`.
+  #   - A Hash - options passed to `has_many`, plus `name:` and `scope:`.
+  # - :version - The name to use for the method which returns the version
+  #   the instance was reified from. Default is `:version`.
+  # - :synchronize_version_creation_timestamp - By default, paper trail
+  #   sets the `created_at` field for a new Version equal to the `updated_at`
+  #   column of the model being updated. If you instead want `created_at` to
+  #   populate with the current timestamp, set this option to `false`.
+  #
+  # Plugins like the experimental `paper_trail-association_tracking` gem
+  # may accept additional options.
+  #
+  # You can define a default set of options via the configurable
+  # `PaperTrail.config.has_paper_trail_defaults` hash in your applications
+  # initializer. The hash can contain any of the following options and will
+  # provide an overridable default for all models.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/has_paper_trail.rb#70
+  def has_paper_trail(options = T.unsafe(nil)); end
+
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/has_paper_trail.rb#76
+  def paper_trail; end
+end
+
+# Wrap the following methods in a module so we can include them only in the
+# ActiveRecord models that declare `has_paper_trail`.
+#
+# source://paper_trail//lib/paper_trail/has_paper_trail.rb#83
+module PaperTrail::Model::InstanceMethods
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/has_paper_trail.rb#85
+  def paper_trail; end
+end
+
+# Configures an ActiveRecord model, mostly at application boot time, but also
+# sometimes mid-request, with methods like enable/disable.
+#
+# source://paper_trail//lib/paper_trail/model_config.rb#6
+class PaperTrail::ModelConfig
+  # @return [ModelConfig] a new instance of ModelConfig
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#32
+  def initialize(model_class); end
+
+  # Adds a callback that records a version after a "create" event.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#39
+  def on_create; end
+
+  # Adds a callback that records a version before or after a "destroy" event.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#49
+  def on_destroy(recording_order = T.unsafe(nil)); end
+
+  # Adds a callback that records a version after a "touch" event.
+  #
+  # Rails < 6.0 (no longer supported by PT) had a bug where dirty-tracking
+  # did not occur during a `touch`.
+  # (https://github.com/rails/rails/issues/33429) See also:
+  # https://github.com/paper-trail-gem/paper_trail/issues/1121
+  # https://github.com/paper-trail-gem/paper_trail/issues/1161
+  # https://github.com/paper-trail-gem/paper_trail/pull/1285
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#93
+  def on_touch; end
+
+  # Adds a callback that records a version after an "update" event.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#64
+  def on_update; end
+
+  # Set up `@model_class` for PaperTrail. Installs callbacks, associations,
+  # "class attributes", instance methods, and more.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#108
+  def setup(options = T.unsafe(nil)); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#119
+  def version_class; end
+
+  private
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#126
+  def append_option_uniquely(option, value); end
+
+  # Raises an error if the provided class is an `abstract_class`.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#134
+  def assert_concrete_activerecord_class(class_name); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#141
+  def assert_valid_recording_order_for_on_destroy(recording_order); end
+
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#151
+  def cannot_record_after_destroy?; end
+
+  # source://paper_trail//lib/paper_trail/model_config.rb#155
+  def check_version_class_name(options); end
+
+  # source://paper_trail//lib/paper_trail/model_config.rb#172
+  def check_versions_association_name(options); end
+
+  # source://paper_trail//lib/paper_trail/model_config.rb#178
+  def define_has_many_versions(options); end
+
+  # source://paper_trail//lib/paper_trail/model_config.rb#192
+  def ensure_versions_option_is_hash(options); end
+
+  # Process an `ignore`, `skip`, or `only` option.
+  #
+  # source://paper_trail//lib/paper_trail/model_config.rb#211
+  def event_attribute_option(option_name); end
+
+  # source://paper_trail//lib/paper_trail/model_config.rb#218
+  def get_versions_scope(options); end
+
+  # source://paper_trail//lib/paper_trail/model_config.rb#222
+  def setup_associations(options); end
+
+  # source://paper_trail//lib/paper_trail/model_config.rb#237
+  def setup_callbacks_from_options(options_on = T.unsafe(nil)); end
+
+  # source://paper_trail//lib/paper_trail/model_config.rb#243
+  def setup_options(options); end
+end
+
+# source://paper_trail//lib/paper_trail/model_config.rb#26
+PaperTrail::ModelConfig::DPR_CLASS_NAME_OPTION = T.let(T.unsafe(nil), String)
+
+# source://paper_trail//lib/paper_trail/model_config.rb#21
+PaperTrail::ModelConfig::DPR_PASSING_ASSOC_NAME_DIRECTLY_TO_VERSIONS_OPTION = T.let(T.unsafe(nil), String)
+
+# source://paper_trail//lib/paper_trail/model_config.rb#7
+PaperTrail::ModelConfig::E_CANNOT_RECORD_AFTER_DESTROY = T.let(T.unsafe(nil), String)
+
+# source://paper_trail//lib/paper_trail/model_config.rb#12
+PaperTrail::ModelConfig::E_HPT_ABSTRACT_CLASS = T.let(T.unsafe(nil), String)
+
+# source://paper_trail//lib/paper_trail/queries/versions/where_attribute_changes.rb#4
+module PaperTrail::Queries; end
+
+# source://paper_trail//lib/paper_trail/queries/versions/where_attribute_changes.rb#5
+module PaperTrail::Queries::Versions; end
+
+# For public API documentation, see `where_attribute_changes` in
+# `paper_trail/version_concern.rb`.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/queries/versions/where_attribute_changes.rb#9
+class PaperTrail::Queries::Versions::WhereAttributeChanges
+  # - version_model_class - The class that VersionConcern was mixed into.
+  # - attribute - An attribute that changed. See the public API
+  #   documentation for details.
+  #
+  # @api private
+  # @return [WhereAttributeChanges] a new instance of WhereAttributeChanges
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_attribute_changes.rb#14
+  def initialize(version_model_class, attribute); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_attribute_changes.rb#20
+  def execute; end
+
+  private
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_attribute_changes.rb#42
+  def json; end
+end
+
+# For public API documentation, see `where_object` in
+# `paper_trail/version_concern.rb`.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/queries/versions/where_object.rb#9
+class PaperTrail::Queries::Versions::WhereObject
+  # - version_model_class - The class that VersionConcern was mixed into.
+  # - attributes - A `Hash` of attributes and values. See the public API
+  #   documentation for details.
+  #
+  # @api private
+  # @return [WhereObject] a new instance of WhereObject
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object.rb#14
+  def initialize(version_model_class, attributes); end
+
+  # @api private
+  # @raise [Error]
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object.rb#20
+  def execute; end
+
+  private
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object.rb#37
+  def json; end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object.rb#49
+  def jsonb; end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object.rb#54
+  def text; end
+end
+
+# For public API documentation, see `where_object_changes` in
+# `paper_trail/version_concern.rb`.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/queries/versions/where_object_changes.rb#9
+class PaperTrail::Queries::Versions::WhereObjectChanges
+  # - version_model_class - The class that VersionConcern was mixed into.
+  # - attributes - A `Hash` of attributes and values. See the public API
+  #   documentation for details.
+  #
+  # @api private
+  # @return [WhereObjectChanges] a new instance of WhereObjectChanges
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object_changes.rb#14
+  def initialize(version_model_class, attributes); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object_changes.rb#25
+  def execute; end
+
+  private
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object_changes.rb#49
+  def json; end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object_changes.rb#63
+  def jsonb; end
+end
+
+# For public API documentation, see `where_object_changes_from` in
+# `paper_trail/version_concern.rb`.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/queries/versions/where_object_changes_from.rb#9
+class PaperTrail::Queries::Versions::WhereObjectChangesFrom
+  # - version_model_class - The class that VersionConcern was mixed into.
+  # - attributes - A `Hash` of attributes and values. See the public API
+  #   documentation for details.
+  #
+  # @api private
+  # @return [WhereObjectChangesFrom] a new instance of WhereObjectChangesFrom
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object_changes_from.rb#14
+  def initialize(version_model_class, attributes); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object_changes_from.rb#20
+  def execute; end
+
+  private
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object_changes_from.rb#42
+  def json; end
+end
+
+# For public API documentation, see `where_object_changes_to` in
+# `paper_trail/version_concern.rb`.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/queries/versions/where_object_changes_to.rb#9
+class PaperTrail::Queries::Versions::WhereObjectChangesTo
+  # - version_model_class - The class that VersionConcern was mixed into.
+  # - attributes - A `Hash` of attributes and values. See the public API
+  #   documentation for details.
+  #
+  # @api private
+  # @return [WhereObjectChangesTo] a new instance of WhereObjectChangesTo
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object_changes_to.rb#14
+  def initialize(version_model_class, attributes); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object_changes_to.rb#20
+  def execute; end
+
+  private
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/queries/versions/where_object_changes_to.rb#42
+  def json; end
+end
 
 # Represents code to load within Rails framework. See documentation in
 # `railties/lib/rails/railtie.rb`.
@@ -357,6 +1210,314 @@ class PaperTrail::RecordHistory
   #
   # source://paper_trail//lib/paper_trail/record_history.rb#47
   def table; end
+end
+
+# Represents the "paper trail" for a single record.
+#
+# source://paper_trail//lib/paper_trail/record_trail.rb#9
+class PaperTrail::RecordTrail
+  # @return [RecordTrail] a new instance of RecordTrail
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#10
+  def initialize(record); end
+
+  # Invoked after rollbacks to ensure versions records are not created for
+  # changes that never actually took place. Optimization: Use lazy `reset`
+  # instead of eager `reload` because, in many use cases, the association will
+  # not be used.
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#18
+  def clear_rolled_back_versions; end
+
+  # Invoked via`after_update` callback for when a previous version is
+  # reified and then saved.
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#24
+  def clear_version_instance; end
+
+  # Returns true if this instance is the current, live one;
+  # returns false if this instance came from a previous version.
+  #
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#30
+  def live?; end
+
+  # Returns the object (not a Version) as it became next.
+  # NOTE: if self (the item) was not reified from a version, i.e. it is the
+  #  "live" item, we return nil.  Perhaps we should return self instead?
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#37
+  def next_version; end
+
+  # Returns who put `@record` into its current state.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#47
+  def originator; end
+
+  # Returns the object (not a Version) as it was most recently.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#54
+  def previous_version; end
+
+  # source://paper_trail//lib/paper_trail/record_trail.rb#58
+  def record_create; end
+
+  # `recording_order` is "after" or "before". See ModelConfig#on_destroy.
+  #
+  # paper_trail-association_tracking
+  #
+  # @api private
+  # @return - The created version object, so that plugins can use it, e.g.
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#75
+  def record_destroy(recording_order); end
+
+  # paper_trail-association_tracking
+  #
+  # @api private
+  # @param force [boolean] Insert a `Version` even if `@record` has not
+  #   `changed_notably?`.
+  # @param in_after_callback [boolean] True when called from an `after_update`
+  #   or `after_touch` callback.
+  # @param is_touch [boolean] True when called from an `after_touch` callback.
+  # @return - The created version object, so that plugins can use it, e.g.
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#101
+  def record_update(force:, in_after_callback:, is_touch:); end
+
+  # Invoked via callback when a user attempts to persist a reified
+  # `Version`.
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#124
+  def reset_timestamp_attrs_for_update_if_needed; end
+
+  # AR callback.
+  #
+  # @api private
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#133
+  def save_version?; end
+
+  # Save, and create a version record regardless of options such as `:on`,
+  # `:if`, or `:unless`.
+  #
+  # `in_after_callback`: Indicates if this method is being called within an
+  #                      `after` callback. Defaults to `false`.
+  # `options`: Optional arguments passed to `save`.
+  #
+  # This is an "update" event. That is, we record the same data we would in
+  # the case of a normal AR `update`.
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#152
+  def save_with_version(in_after_callback: T.unsafe(nil), **options); end
+
+  # source://paper_trail//lib/paper_trail/record_trail.rb#139
+  def source_version; end
+
+  # Like the `update_column` method from `ActiveRecord::Persistence`, but also
+  # creates a version to record those changes.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#162
+  def update_column(name, value); end
+
+  # Like the `update_columns` method from `ActiveRecord::Persistence`, but also
+  # creates a version to record those changes.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#169
+  def update_columns(attributes); end
+
+  # Returns the object (not a Version) as it was at the given timestamp.
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#183
+  def version_at(timestamp, reify_options = T.unsafe(nil)); end
+
+  # Returns the objects (not Versions) as they were between the given times.
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#192
+  def versions_between(start_time, end_time); end
+
+  private
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#200
+  def assign_and_reset_version_association(version); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#206
+  def build_version_on_create(in_after_callback:); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#218
+  def build_version_on_update(force:, in_after_callback:, is_touch:); end
+
+  # PT-AT extends this method to add its transaction id.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#249
+  def data_for_create; end
+
+  # PT-AT extends this method to add its transaction id.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#256
+  def data_for_destroy; end
+
+  # PT-AT extends this method to add its transaction id.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#263
+  def data_for_update; end
+
+  # PT-AT extends this method to add its transaction id.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#270
+  def data_for_update_columns; end
+
+  # Is PT enabled for this particular record?
+  #
+  # @api private
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#276
+  def enabled?; end
+
+  # source://paper_trail//lib/paper_trail/record_trail.rb#282
+  def log_version_errors(version, action); end
+
+  # paper_trail-association_tracking
+  #
+  # @api private
+  # @return - The created version object, so that plugins can use it, e.g.
+  #
+  # source://paper_trail//lib/paper_trail/record_trail.rb#292
+  def record_update_columns(changes); end
+
+  # source://paper_trail//lib/paper_trail/record_trail.rb#309
+  def version; end
+
+  # source://paper_trail//lib/paper_trail/record_trail.rb#313
+  def versions; end
+end
+
+# Given a version record and some options, builds a new model object.
+#
+# @api private
+#
+# source://paper_trail//lib/paper_trail/reifier.rb#8
+module PaperTrail::Reifier
+  class << self
+    # See `VersionConcern#reify` for documentation.
+    #
+    # @api private
+    #
+    # source://paper_trail//lib/paper_trail/reifier.rb#12
+    def reify(version, options); end
+
+    private
+
+    # Given a hash of `options` for `.reify`, return a new hash with default
+    # values applied.
+    #
+    # @api private
+    #
+    # source://paper_trail//lib/paper_trail/reifier.rb#26
+    def apply_defaults_to(options, version); end
+
+    # Initialize a model object suitable for reifying `version` into. Does
+    # not perform reification, merely instantiates the appropriate model
+    # class and, if specified by `options[:unversioned_attributes]`, sets
+    # unversioned attributes to `nil`.
+    #
+    # Normally a polymorphic belongs_to relationship allows us to get the
+    # object we belong to by calling, in this case, `item`.  However this
+    # returns nil if `item` has been destroyed, and we need to be able to
+    # retrieve destroyed objects.
+    #
+    # In this situation we constantize the `item_type` to get hold of the
+    # class...except when the stored object's attributes include a `type`
+    # key.  If this is the case, the object we belong to is using single
+    # table inheritance (STI) and the `item_type` will be the base class,
+    # not the actual subclass. If `type` is present but empty, the class is
+    # the base class.
+    #
+    # @api private
+    #
+    # source://paper_trail//lib/paper_trail/reifier.rb#54
+    def init_model(attrs, options, version); end
+
+    # @api private
+    #
+    # source://paper_trail//lib/paper_trail/reifier.rb#74
+    def init_model_by_finding_item_id(klass, version); end
+
+    # Look for attributes that exist in `model` and not in this version.
+    # These attributes should be set to nil. Modifies `attrs`.
+    #
+    # @api private
+    #
+    # source://paper_trail//lib/paper_trail/reifier.rb#81
+    def init_unversioned_attrs(attrs, model); end
+
+    # Reify onto `model` an attribute named `k` with value `v` from `version`.
+    #
+    # `ObjectAttribute#deserialize` will return the mapped enum value and in
+    # Rails < 5, the []= uses the integer type caster from the column
+    # definition (in general) and thus will turn a (usually) string to 0
+    # instead of the correct value.
+    #
+    # @api private
+    #
+    # source://paper_trail//lib/paper_trail/reifier.rb#93
+    def reify_attribute(k, v, model, version); end
+
+    # Reify onto `model` all the attributes of `version`.
+    #
+    # @api private
+    #
+    # source://paper_trail//lib/paper_trail/reifier.rb#107
+    def reify_attributes(model, version, attrs); end
+
+    # Given a `version`, return the class to reify. This method supports
+    # Single Table Inheritance (STI) with custom inheritance columns and
+    # custom inheritance column values.
+    #
+    # For example, imagine a `version` whose `item_type` is "Animal". The
+    # `animals` table is an STI table (it has cats and dogs) and it has a
+    # custom inheritance column, `species`. If `attrs["species"]` is "Dog",
+    # this method returns the constant `Dog`. If `attrs["species"]` is blank,
+    # this method returns the constant `Animal`.
+    #
+    # The values contained in the inheritance columns may be non-camelized
+    # strings (e.g. 'dog' instead of 'Dog'). To reify classes in this case
+    # we need to call the parents class `sti_class_for` method to retrieve
+    # the correct record class.
+    #
+    # You can see these particular examples in action in
+    # `spec/models/animal_spec.rb` and `spec/models/plant_spec.rb`
+    #
+    # @api private
+    #
+    # source://paper_trail//lib/paper_trail/reifier.rb#131
+    def version_reification_class(version, attrs); end
+  end
 end
 
 # Manages variables that affect the current HTTP request, such as `whodunnit`.
@@ -565,6 +1726,31 @@ module PaperTrail::Serializers::YAML
   def yaml_column_permitted_classes; end
 end
 
+# source://paper_trail//lib/paper_trail/type_serializers/postgres_array_serializer.rb#4
+module PaperTrail::TypeSerializers; end
+
+# Provides an alternative method of serialization
+# and deserialization of PostgreSQL array columns.
+#
+# source://paper_trail//lib/paper_trail/type_serializers/postgres_array_serializer.rb#7
+class PaperTrail::TypeSerializers::PostgresArraySerializer
+  # @return [PostgresArraySerializer] a new instance of PostgresArraySerializer
+  #
+  # source://paper_trail//lib/paper_trail/type_serializers/postgres_array_serializer.rb#8
+  def initialize(subtype, delimiter); end
+
+  # source://paper_trail//lib/paper_trail/type_serializers/postgres_array_serializer.rb#17
+  def deserialize(array); end
+
+  # source://paper_trail//lib/paper_trail/type_serializers/postgres_array_serializer.rb#13
+  def serialize(array); end
+
+  private
+
+  # source://paper_trail//lib/paper_trail/type_serializers/postgres_array_serializer.rb#28
+  def deserialize_with_ar(array); end
+end
+
 # The application's database column type is not supported.
 #
 # @api public
@@ -615,3 +1801,379 @@ PaperTrail::VERSION::STRING = T.let(T.unsafe(nil), String)
 
 # source://paper_trail//lib/paper_trail/version_number.rb#12
 PaperTrail::VERSION::TINY = T.let(T.unsafe(nil), Integer)
+
+# This is the default ActiveRecord model provided by PaperTrail. Most simple
+# applications will use this model as-is, but it is possible to sub-class,
+# extend, or even do without this model entirely. See documentation section
+# 6.a. Custom Version Classes.
+#
+# The paper_trail-association_tracking gem provides a related model,
+# `VersionAssociation`.
+#
+# source://paper_trail//lib/paper_trail/frameworks/active_record/models/paper_trail/version.rb#13
+class PaperTrail::Version < ::ActiveRecord::Base
+  include ::PaperTrail::Version::GeneratedAttributeMethods
+  include ::PaperTrail::Version::GeneratedAssociationMethods
+  include ::Kaminari::ActiveRecordModelExtension
+  include ::Kaminari::ConfigurationMethods
+  include ::PaperTrail::VersionConcern
+  extend ::Kaminari::ConfigurationMethods::ClassMethods
+  extend ::PaperTrail::VersionConcern::ClassMethods
+
+  # source://activerecord/7.1.3.4/lib/active_record/autosave_association.rb#160
+  def autosave_associated_records_for_item(*args); end
+
+  class << self
+    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+    def __callbacks; end
+
+    # source://activerecord/7.1.3.4/lib/active_record/reflection.rb#11
+    def _reflections; end
+
+    # source://activemodel/7.1.3.4/lib/active_model/validations.rb#71
+    def _validators; end
+
+    # source://activerecord/7.1.3.4/lib/active_record/enum.rb#167
+    def defined_enums; end
+
+    # source://kaminari-activerecord/1.2.2/lib/kaminari/activerecord/active_record_model_extension.rb#15
+    def page(num = T.unsafe(nil)); end
+  end
+end
+
+# source://paper_trail//lib/paper_trail/frameworks/active_record/models/paper_trail/version.rb#0
+module PaperTrail::Version::GeneratedAssociationMethods
+  # source://activerecord/7.1.3.4/lib/active_record/associations/builder/association.rb#103
+  def item; end
+
+  # source://activerecord/7.1.3.4/lib/active_record/associations/builder/association.rb#111
+  def item=(value); end
+
+  # source://activerecord/7.1.3.4/lib/active_record/associations/builder/belongs_to.rb#145
+  def item_changed?; end
+
+  # source://activerecord/7.1.3.4/lib/active_record/associations/builder/belongs_to.rb#149
+  def item_previously_changed?; end
+
+  # source://activerecord/7.1.3.4/lib/active_record/associations/builder/singular_association.rb#19
+  def reload_item; end
+
+  # source://activerecord/7.1.3.4/lib/active_record/associations/builder/singular_association.rb#23
+  def reset_item; end
+end
+
+# source://paper_trail//lib/paper_trail/frameworks/active_record/models/paper_trail/version.rb#0
+module PaperTrail::Version::GeneratedAttributeMethods; end
+
+# Originally, PaperTrail did not provide this module, and all of this
+# functionality was in `PaperTrail::Version`. That model still exists (and is
+# used by most apps) but by moving the functionality to this module, people
+# can include this concern instead of sub-classing the `Version` model.
+#
+# source://paper_trail//lib/paper_trail/version_concern.rb#15
+module PaperTrail::VersionConcern
+  extend ::ActiveSupport::Concern
+
+  mixes_in_class_methods ::PaperTrail::VersionConcern::ClassMethods
+
+  # Returns what changed in this version of the item.
+  # `ActiveModel::Dirty#changes`. returns `nil` if your `versions` table does
+  # not have an `object_changes` text column.
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#280
+  def changeset; end
+
+  # Returns an integer representing the chronological position of the
+  # version among its siblings. The "create" event, for example, has an index
+  # of 0.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#310
+  def index; end
+
+  # source://paper_trail//lib/paper_trail/version_concern.rb#297
+  def next; end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#244
+  def object_deserialized; end
+
+  # Returns who put the item into the state stored in this version.
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#286
+  def paper_trail_originator; end
+
+  # source://paper_trail//lib/paper_trail/version_concern.rb#301
+  def previous; end
+
+  # Restore the item from this version.
+  #
+  # Options:
+  #
+  # - :mark_for_destruction
+  #   - `true` - Mark the has_one/has_many associations that did not exist in
+  #     the reified version for destruction, instead of removing them.
+  #   - `false` - Default. Useful for persisting the reified version.
+  # - :dup
+  #   - `false` - Default.
+  #   - `true` - Always create a new object instance. Useful for
+  #     comparing two versions of the same object.
+  # - :unversioned_attributes
+  #   - `:nil` - Default. Attributes undefined in version record are set to
+  #     nil in reified record.
+  #   - `:preserve` - Attributes undefined in version record are not modified.
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#269
+  def reify(options = T.unsafe(nil)); end
+
+  # Returns who changed the item from the state it had in this version. This
+  # is an alias for `whodunnit`.
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#292
+  def terminator; end
+
+  # Returns who changed the item from the state it had in this version. This
+  # is an alias for `whodunnit`.
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#292
+  def version_author; end
+
+  private
+
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#402
+  def base_class_limit_option?(klass); end
+
+  # Enforces the `version_limit`, if set. Default: no limit.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#368
+  def enforce_version_limit!; end
+
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#398
+  def limit_option?(klass); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#317
+  def load_changeset; end
+
+  # If the `object_changes` column is a Postgres JSON column, then
+  # ActiveRecord will deserialize it for us. Otherwise, it's a string column
+  # and we must deserialize it ourselves.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#351
+  def object_changes_deserialized; end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#379
+  def sibling_versions; end
+
+  # See docs section 2.e. Limiting the Number of Versions Created.
+  # The version limit can be global or per-model.
+  #
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#387
+  def version_limit; end
+end
+
+# source://paper_trail//lib/paper_trail/version_concern.rb#31
+module PaperTrail::VersionConcern::ClassMethods
+  # source://paper_trail//lib/paper_trail/version_concern.rb#52
+  def between(start_time, end_time); end
+
+  # source://paper_trail//lib/paper_trail/version_concern.rb#36
+  def creates; end
+
+  # source://paper_trail//lib/paper_trail/version_concern.rb#44
+  def destroys; end
+
+  # source://paper_trail//lib/paper_trail/version_concern.rb#48
+  def not_creates; end
+
+  # Returns whether the `object_changes` column is using the `json` type
+  # supported by PostgreSQL.
+  #
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#179
+  def object_changes_col_is_json?; end
+
+  # Returns whether the `object` column is using the `json` type supported
+  # by PostgreSQL.
+  #
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#173
+  def object_col_is_json?; end
+
+  # Returns versions before `obj`.
+  #
+  #
+  # @api public
+  # @param obj - a `Version` or a timestamp
+  # @param timestamp_arg - boolean - When true, `obj` is a timestamp.
+  #   Default: false.
+  # @return `ActiveRecord::Relation`
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#191
+  def preceding(obj, timestamp_arg = T.unsafe(nil)); end
+
+  # @return [Boolean]
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#165
+  def primary_key_is_int?; end
+
+  # Returns versions after `obj`.
+  #
+  #
+  # @api public
+  # @param obj - a `Version` or a timestamp
+  # @param timestamp_arg - boolean - When true, `obj` is a timestamp.
+  #   Default: false.
+  # @return `ActiveRecord::Relation`
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#208
+  def subsequent(obj, timestamp_arg = T.unsafe(nil)); end
+
+  # Defaults to using the primary key as the secondary sort order if
+  # possible.
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#61
+  def timestamp_sort_order(direction = T.unsafe(nil)); end
+
+  # source://paper_trail//lib/paper_trail/version_concern.rb#40
+  def updates; end
+
+  # Given an attribute like `"name"`, query the `versions.object_changes`
+  # column for any changes that modified the provided attribute.
+  #
+  # @api public
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#71
+  def where_attribute_changes(attribute); end
+
+  # Given a hash of attributes like `name: 'Joan'`, query the
+  # `versions.objects` column.
+  #
+  # ```
+  # SELECT "versions".*
+  # FROM "versions"
+  # WHERE ("versions"."object" LIKE '%
+  # name: Joan
+  # %')
+  # ```
+  #
+  # This is useful for finding versions where a given attribute had a given
+  # value. Imagine, in the example above, that Joan had changed her name
+  # and we wanted to find the versions before that change.
+  #
+  # Based on the data type of the `object` column, the appropriate SQL
+  # operator is used. For example, a text column will use `like`, and a
+  # jsonb column will use `@>`.
+  #
+  # @api public
+  # @raise [ArgumentError]
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#99
+  def where_object(args = T.unsafe(nil)); end
+
+  # Given a hash of attributes like `name: 'Joan'`, query the
+  # `versions.objects_changes` column.
+  #
+  # ```
+  # SELECT "versions".*
+  # FROM "versions"
+  # WHERE .. ("versions"."object_changes" LIKE '%
+  # name:
+  # - Joan
+  # %' OR "versions"."object_changes" LIKE '%
+  # name:
+  # -%
+  # - Joan
+  # %')
+  # ```
+  #
+  # This is useful for finding versions immediately before and after a given
+  # attribute had a given value. Imagine, in the example above, that someone
+  # changed their name to Joan and we wanted to find the versions
+  # immediately before and after that change.
+  #
+  # Based on the data type of the `object` column, the appropriate SQL
+  # operator is used. For example, a text column will use `like`, and a
+  # jsonb column will use `@>`.
+  #
+  # @api public
+  # @raise [ArgumentError]
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#130
+  def where_object_changes(args = T.unsafe(nil)); end
+
+  # Given a hash of attributes like `name: 'Joan'`, query the
+  # `versions.objects_changes` column for changes where the version changed
+  # from the hash of attributes to other values.
+  #
+  # This is useful for finding versions where the attribute started with a
+  # known value and changed to something else. This is in comparison to
+  # `where_object_changes` which will find both the changes before and
+  # after.
+  #
+  # @api public
+  # @raise [ArgumentError]
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#145
+  def where_object_changes_from(args = T.unsafe(nil)); end
+
+  # Given a hash of attributes like `name: 'Joan'`, query the
+  # `versions.objects_changes` column for changes where the version changed
+  # to the hash of attributes from other values.
+  #
+  # This is useful for finding versions where the attribute started with an
+  # unknown value and changed to a known value. This is in comparison to
+  # `where_object_changes` which will find both the changes before and
+  # after.
+  #
+  # @api public
+  # @raise [ArgumentError]
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#160
+  def where_object_changes_to(args = T.unsafe(nil)); end
+
+  # source://paper_trail//lib/paper_trail/version_concern.rb#32
+  def with_item_keys(item_type, item_id); end
+
+  private
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#220
+  def preceding_by_id(obj); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#225
+  def preceding_by_timestamp(obj); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#232
+  def subsequent_by_id(version); end
+
+  # @api private
+  #
+  # source://paper_trail//lib/paper_trail/version_concern.rb#237
+  def subsequent_by_timestamp(obj); end
+end
+
+# source://paper_trail//lib/paper_trail/version_concern.rb#18
+PaperTrail::VersionConcern::E_YAML_PERMITTED_CLASSES = T.let(T.unsafe(nil), String)
