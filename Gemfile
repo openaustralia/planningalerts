@@ -149,7 +149,11 @@ gem "rgeo-geojson"
 gem "terser"
 
 # For versioning changes in the admin panel
-gem "administrate-field-paper_trail"
+# Using forked version so we can get access to
+# https://github.com/IrvanFza/administrate-field-paper_trail/pull/1/files
+# TODO: Move to upstream once this gets merged
+gem "administrate-field-paper_trail", github: "DaanVanVugt/administrate-field-paper_trail",
+                                      branch: "feature/link-to-whodunnit"
 gem "paper_trail"
 
 group :test do

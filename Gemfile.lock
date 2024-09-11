@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/DaanVanVugt/administrate-field-paper_trail.git
+  revision: d523f0b55e426efa978a08aa3bd2f30ccbd1ebfc
+  branch: feature/link-to-whodunnit
+  specs:
+    administrate-field-paper_trail (0.1.0)
+      administrate (>= 0.2.2)
+      paper_trail (>= 2.7.2)
+      rails (>= 5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -90,10 +100,6 @@ GEM
       kaminari (~> 1.2.2)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
-    administrate-field-paper_trail (0.1.0)
-      administrate (>= 0.2.2)
-      paper_trail (>= 2.7.2)
-      rails (>= 5.0)
     airbrussh (1.5.2)
       sshkit (>= 1.6.1, != 1.7.0)
     ast (2.4.2)
@@ -767,7 +773,7 @@ DEPENDENCIES
   active_record_doctor
   activerecord-postgis-adapter
   administrate (~> 0.20.0)
-  administrate-field-paper_trail
+  administrate-field-paper_trail!
   autoprefixer-rails
   aws-sdk-s3
   axe-core-capybara

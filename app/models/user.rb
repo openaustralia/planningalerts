@@ -65,6 +65,13 @@ class User < ApplicationRecord
     name.presence || email
   end
 
+  # This is for the benefit of
+  # https://github.com/IrvanFza/administrate-field-paper_trail/pull/1/files
+  sig { returns(String) }
+  def to_s
+    name_with_fallback
+  end
+
   sig { void }
   def send_activation_instructions
     Users::ActivationMailer.notify(self, set_reset_password_token).deliver_later!
