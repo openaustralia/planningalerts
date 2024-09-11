@@ -7,7 +7,7 @@ class Authority < ApplicationRecord
   has_many :applications, dependent: :restrict_with_exception
   has_many :comments, through: :applications
   has_one :github_issue, dependent: :destroy
-  has_paper_trail
+  has_paper_trail ignore: %i[last_scraper_run_log boundary]
 
   validate :short_name_encoded_is_unique
 
