@@ -23,7 +23,8 @@ class ApiKeyDashboard < Administrate::BaseDashboard
     value: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    expires_at: Field::DateTime
+    expires_at: Field::DateTime,
+    versions: Field::PaperTrail
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
@@ -53,6 +54,7 @@ class ApiKeyDashboard < Administrate::BaseDashboard
     daily_limit
     created_at
     updated_at
+    versions
   ].freeze, T::Array[Symbol])
 
   # FORM_ATTRIBUTES

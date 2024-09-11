@@ -6,6 +6,7 @@ class ApiKey < ApplicationRecord
 
   belongs_to :user
   has_many :daily_api_usages, dependent: :destroy
+  has_paper_trail
 
   validates :value, uniqueness: true
 
