@@ -148,6 +148,9 @@ gem "rgeo-geojson"
 # For compressing javascript
 gem "terser"
 
+# For versioning changes in the admin panel
+gem "paper_trail"
+
 group :test do
   gem "capybara"
   gem "email_spec"
