@@ -28,7 +28,8 @@ class AuthorityDashboard < Administrate::BaseDashboard
     short_name: Field::String,
     state: Field::String,
     website_url: UrlField,
-    wikidata_id: WikidataField
+    wikidata_id: WikidataField,
+    versions: Field::PaperTrail
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
@@ -48,7 +49,8 @@ class AuthorityDashboard < Administrate::BaseDashboard
     {
       "Name" => %i[full_name short_name],
       "Details" => %i[state email wikidata_id website_url population_2021 asgs_2021],
-      "Scraping" => %i[morph_name scraper_authority_label disabled last_scraper_run_log]
+      "Scraping" => %i[morph_name scraper_authority_label disabled last_scraper_run_log],
+      "History" => %i[versions]
     }.freeze, T::Hash[String, T::Array[Symbol]]
   )
 
