@@ -13,6 +13,7 @@ module Admin
 
     include Administrate::Punditize
     before_action :authenticate_admin
+    before_action :set_paper_trail_whodunnit
 
     sig { void }
     def authenticate_admin
