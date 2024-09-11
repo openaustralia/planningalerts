@@ -7,6 +7,7 @@ class Authority < ApplicationRecord
   has_many :applications, dependent: :restrict_with_exception
   has_many :comments, through: :applications
   has_one :github_issue, dependent: :destroy
+  has_paper_trail
 
   validate :short_name_encoded_is_unique
 
