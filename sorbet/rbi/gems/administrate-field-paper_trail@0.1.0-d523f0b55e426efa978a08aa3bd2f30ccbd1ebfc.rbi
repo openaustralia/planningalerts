@@ -48,8 +48,11 @@ class Administrate::Field::PaperTrail < ::Administrate::Field::Base
   # source://administrate-field-paper_trail//lib/administrate/field/paper_trail.rb#10
   def excluded_attributes; end
 
-  # source://administrate-field-paper_trail//lib/administrate/field/paper_trail.rb#14
+  # source://administrate-field-paper_trail//lib/administrate/field/paper_trail.rb#18
   def humanize_changeset(changeset); end
+
+  # source://administrate-field-paper_trail//lib/administrate/field/paper_trail.rb#14
+  def whodunnit(id); end
 end
 
 # source://administrate-field-paper_trail//lib/administrate/field/paper_trail.rb#7
