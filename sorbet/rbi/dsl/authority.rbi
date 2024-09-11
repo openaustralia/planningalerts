@@ -359,6 +359,20 @@ class Authority
 
     sig { void }
     def reset_github_issue; end
+
+    sig { returns(T::Array[T.untyped]) }
+    def version_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def version_ids=(ids); end
+
+    # This method is created by ActiveRecord on the `Authority` class because it declared `has_many :versions`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
+    sig { returns(::PaperTrail::Version::PrivateCollectionProxy) }
+    def versions; end
+
+    sig { params(value: T::Enumerable[::PaperTrail::Version]).void }
+    def versions=(value); end
   end
 
   module GeneratedAssociationRelationMethods
