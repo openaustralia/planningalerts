@@ -6,7 +6,8 @@
   Information <span class="block mt-1 text-xl font-bold font-display">on <%= @authority.full_name %></span>
 <% end %>
 
-<% if @authority.boundary && Flipper.enabled?(:show_authority_map, current_user) %>
+<%# calling Authority#boundary is slow so putting it after the feature flag check %>
+<% if Flipper.enabled?(:show_authority_map, current_user) && @authority.boundary %>
   <%# TODO: Probably want to precompute the bounding box when the boundary data is loaded instead %>
   <div class="w-full my-8 h-80 bg-google-maps-green"
        x-init="initialiseAuthorityMap($el, <%= bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
