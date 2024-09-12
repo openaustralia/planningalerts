@@ -15,6 +15,8 @@ class Rails::ApplicationController
   module HelperMethods
     include ::ActionText::ContentHelper
     include ::ActionText::TagHelper
+    include ::Split::Helper
+    include ::Split::CombinedExperimentsHelper
     include ::ActionController::Base::HelperMethods
     include ::Admin::ApplicationHelper
     include ::ActionView::Helpers::AssetUrlHelper

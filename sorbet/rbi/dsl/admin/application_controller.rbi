@@ -15,6 +15,8 @@ class Admin::ApplicationController
   module HelperMethods
     include ::ActionText::ContentHelper
     include ::ActionText::TagHelper
+    include ::Split::Helper
+    include ::Split::CombinedExperimentsHelper
     include ::ActionController::Base::HelperMethods
     include ::Administrate::ApplicationHelper
     include ::Administrate::ApplicationController::HelperMethods
