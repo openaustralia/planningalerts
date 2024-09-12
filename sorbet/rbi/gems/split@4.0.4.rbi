@@ -677,6 +677,150 @@ class Split::Configuration
   def value_for(hash, key); end
 end
 
+# source://split//lib/split/dashboard.rb#10
+class Split::Dashboard < ::Sinatra::Base
+  include ::Split::DashboardHelpers
+  include ::Split::DashboardPaginationHelpers
+
+  class << self
+    # source://sinatra/4.0.0/lib/sinatra/base.rb#1362
+    def app_file; end
+
+    # source://sinatra/4.0.0/lib/sinatra/base.rb#1361
+    def app_file=(val); end
+
+    def app_file?; end
+    def method_override; end
+
+    # source://sinatra/4.0.0/lib/sinatra/base.rb#1361
+    def method_override=(val); end
+
+    def method_override?; end
+
+    # source://sinatra/4.0.0/lib/sinatra/base.rb#1362
+    def public_folder; end
+
+    # source://sinatra/4.0.0/lib/sinatra/base.rb#1361
+    def public_folder=(val); end
+
+    def public_folder?; end
+    def static; end
+
+    # source://sinatra/4.0.0/lib/sinatra/base.rb#1361
+    def static=(val); end
+
+    def static?; end
+
+    # source://sinatra/4.0.0/lib/sinatra/base.rb#1362
+    def views; end
+
+    # source://sinatra/4.0.0/lib/sinatra/base.rb#1361
+    def views=(val); end
+
+    def views?; end
+  end
+end
+
+# source://split//lib/split/dashboard/helpers.rb#4
+module Split::DashboardHelpers
+  # source://split//lib/split/dashboard/helpers.rb#29
+  def confidence_level(z_score); end
+
+  # source://split//lib/split/dashboard/helpers.rb#5
+  def h(text); end
+
+  # source://split//lib/split/dashboard/helpers.rb#17
+  def number_to_percentage(number, precision = T.unsafe(nil)); end
+
+  # source://split//lib/split/dashboard/helpers.rb#13
+  def path_prefix; end
+
+  # source://split//lib/split/dashboard/helpers.rb#21
+  def round(number, precision = T.unsafe(nil)); end
+
+  # source://split//lib/split/dashboard/helpers.rb#9
+  def url(*path_parts); end
+end
+
+# source://split//lib/split/dashboard/pagination_helpers.rb#6
+module Split::DashboardPaginationHelpers
+  # source://split//lib/split/dashboard/pagination_helpers.rb#12
+  def page_number; end
+
+  # source://split//lib/split/dashboard/pagination_helpers.rb#16
+  def paginated(collection); end
+
+  # source://split//lib/split/dashboard/pagination_helpers.rb#20
+  def pagination(collection); end
+
+  # source://split//lib/split/dashboard/pagination_helpers.rb#7
+  def pagination_per; end
+
+  private
+
+  # source://split//lib/split/dashboard/pagination_helpers.rb#57
+  def current_page_tag; end
+
+  # source://split//lib/split/dashboard/pagination_helpers.rb#45
+  def ellipsis_tag; end
+
+  # source://split//lib/split/dashboard/pagination_helpers.rb#37
+  def first_page_tag; end
+
+  # source://split//lib/split/dashboard/pagination_helpers.rb#81
+  def last_page_tag(collection); end
+
+  # source://split//lib/split/dashboard/pagination_helpers.rb#65
+  def next_page_tag; end
+
+  # source://split//lib/split/dashboard/pagination_helpers.rb#53
+  def prev_page_tag; end
+
+  # @return [Boolean]
+  #
+  # source://split//lib/split/dashboard/pagination_helpers.rb#41
+  def show_first_ellipsis_tag?; end
+
+  # @return [Boolean]
+  #
+  # source://split//lib/split/dashboard/pagination_helpers.rb#33
+  def show_first_page_tag?; end
+
+  # @return [Boolean]
+  #
+  # source://split//lib/split/dashboard/pagination_helpers.rb#69
+  def show_last_ellipsis_tag?(collection); end
+
+  # @return [Boolean]
+  #
+  # source://split//lib/split/dashboard/pagination_helpers.rb#77
+  def show_last_page_tag?(collection); end
+
+  # @return [Boolean]
+  #
+  # source://split//lib/split/dashboard/pagination_helpers.rb#61
+  def show_next_page_tag?(collection); end
+
+  # @return [Boolean]
+  #
+  # source://split//lib/split/dashboard/pagination_helpers.rb#49
+  def show_prev_page_tag?; end
+
+  # source://split//lib/split/dashboard/pagination_helpers.rb#73
+  def total_pages(collection); end
+end
+
+# source://split//lib/split/dashboard/paginator.rb#4
+class Split::DashboardPaginator
+  # @return [DashboardPaginator] a new instance of DashboardPaginator
+  #
+  # source://split//lib/split/dashboard/paginator.rb#5
+  def initialize(collection, page_number, per); end
+
+  # source://split//lib/split/dashboard/paginator.rb#11
+  def paginate; end
+end
+
 # source://split//lib/split/encapsulated_helper.rb#17
 module Split::EncapsulatedHelper
   # source://split//lib/split/encapsulated_helper.rb#39

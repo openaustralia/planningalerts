@@ -22,8 +22,10 @@ end
 Rails.application.routes.draw do
   namespace :admin do
     # Feature flag admin
+    # TODO: Rename constraint class
     constraints CanAccessFlipperUI do
       mount Flipper::UI.app(Flipper) => "flipper", as: :flipper
+      mount Split::Dashboard, at: "split", as: :split
     end
 
     # We need to a consistent place accessible by all the roles to make the

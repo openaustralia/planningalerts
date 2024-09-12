@@ -157,7 +157,7 @@ gem "administrate-field-paper_trail", github: "DaanVanVugt/administrate-field-pa
 gem "paper_trail"
 
 # A/B testing
-gem "split"
+gem "split", require: "split/dashboard"
 
 group :test do
   gem "capybara"

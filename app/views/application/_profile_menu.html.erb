@@ -13,6 +13,7 @@
     <li><div class="pl-4"><%= pa_link_to_unless_current "Administration panel", admin_root_path %></div></li>
     <% if current_user.has_role?(:admin) %>
       <li><div class="pl-4"><%= pa_link_to_unless_current "Feature flags", admin_flipper_path %></div></li>
+      <li><div class="pl-4"><%= pa_link_to_unless_current "A/B Testing", admin_split_path %></div></li>
     <% end %>
   </ul>
 <% end %>
