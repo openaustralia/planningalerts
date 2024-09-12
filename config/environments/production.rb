@@ -12,6 +12,7 @@ Rails.application.configure do
   config.x.sidekiq_redis_url = Rails.application.credentials[:sidekiq_redis_url]
   config.x.rack_attack_redis_url = Rails.application.credentials[:rack_attack_redis_url]
   config.x.flipper_redis_url = Rails.application.credentials[:flipper_redis_url]
+  config.x.split_redis_url = Rails.application.credentials[:split_redis_url]
 
   ## User settings (END)
 
