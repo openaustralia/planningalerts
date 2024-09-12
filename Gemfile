@@ -156,6 +156,9 @@ gem "administrate-field-paper_trail", github: "DaanVanVugt/administrate-field-pa
                                       branch: "feature/link-to-whodunnit"
 gem "paper_trail"
 
+# A/B testing
+gem "split"
+
 group :test do
   gem "capybara"
   gem "email_spec"

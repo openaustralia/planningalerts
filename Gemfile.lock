@@ -390,6 +390,8 @@ GEM
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     multipart-post (2.4.1)
+    mustermann (3.0.3)
+      ruby2_keywords (~> 0.0.1)
     mutex_m (0.2.0)
     nenv (0.3.0)
     net-http (0.4.1)
@@ -611,6 +613,9 @@ GEM
     rubocop-sorbet (0.8.5)
       rubocop (>= 1)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
+    rubystats (0.4.1)
+      matrix
     rubyzip (2.3.2)
     sanitize (6.1.2)
       crass (~> 1.0.2)
@@ -652,6 +657,12 @@ GEM
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
     simpleidn (0.2.3)
+    sinatra (4.0.0)
+      mustermann (~> 3.0)
+      rack (>= 3.0.0, < 4)
+      rack-protection (= 4.0.0)
+      rack-session (>= 2.0.0, < 3)
+      tilt (~> 2.0)
     sitemap_generator (6.3.0)
       builder (~> 3.0)
     skylight (6.0.4)
@@ -670,6 +681,11 @@ GEM
     sparql-client (3.3.0)
       net-http-persistent (~> 4.0, >= 4.0.2)
       rdf (~> 3.3)
+    split (4.0.4)
+      matrix
+      redis (>= 4.2)
+      rubystats (>= 0.3.0)
+      sinatra (>= 1.2.6)
     spoom (1.4.2)
       erubi (>= 1.10.0)
       prism (>= 0.28.0)
@@ -864,6 +880,7 @@ DEPENDENCIES
   sorbet
   sorbet-runtime
   sparql-client
+  split
   spoom
   sprockets
   tailwindcss-rails (~> 2.0)
