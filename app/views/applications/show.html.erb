@@ -92,7 +92,7 @@
 
 <div class="mt-2">
   <%= render ButtonWithSideTextComponent.new(tag: :a, size: "xl", type: :primary, href: external_application_path(@application), icon: :external) do |c| %>
-    More info
+    View source
     <% c.with_side_text do %>
       on the <%= @application.authority.full_name %> website
     <% end %>
