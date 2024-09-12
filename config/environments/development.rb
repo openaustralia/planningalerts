@@ -12,6 +12,7 @@ Rails.application.configure do
   config.x.sidekiq_redis_url = "redis://redis:6379/0"
   config.x.rack_attack_redis_url = "redis://redis:6379/1"
   config.x.flipper_redis_url = "redis://redis:6379/2"
+  config.x.split_redis_url = "redis://redis:6379/3"
   
   ## User settings (END)
 
