@@ -21,10 +21,10 @@ end
 
 Rails.application.routes.draw do
   namespace :admin do
-    # Feature flag admin
-    # TODO: Rename constraint class
-    constraints CanAccessFlipperUI do
+    constraints HasAdminRole do
+      # Feature flag admin
       mount Flipper::UI.app(Flipper) => "flipper", as: :flipper
+      # A/B testing admin
       mount Split::Dashboard, at: "split", as: :split
     end
 
