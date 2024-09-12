@@ -17,7 +17,6 @@ Rails.application.configure do
   # The value is kind of irrelevant actually
   # TODO: Fix this
   config.x.sidekiq_redis_url = "redis://localhost:6379/0"
-  config.x.split_redis_url = "redis://redis:6379/4"
 
   ## User settings (END)
 

@@ -4,6 +4,9 @@ redis_adapter = Split::Persistence::RedisAdapter.with_config(
     expire_seconds: 2592000)
 
 Split.configure do |config|
+  # Just disable A/B testing during tests so that it doesn't try to talk to redis
+  config.enabled = false if Rails.env.test?
+
   config.redis = Rails.configuration.x.split_redis_url
 
   config.persistence = Split::Persistence::DualAdapter.with_config(
