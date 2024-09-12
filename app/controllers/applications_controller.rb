@@ -6,6 +6,9 @@ class ApplicationsController < ApplicationController
 
   before_action :check_application_redirect, only: :show
 
+  # For sorbet's benefit
+  include Split::Helper
+
   sig { void }
   def index
     authority_id = T.cast(params[:authority_id], T.nilable(String))
@@ -141,6 +144,7 @@ class ApplicationsController < ApplicationController
   def external
     application = Application.find(T.cast(params[:id], String))
     @application = T.let(application, T.nilable(Application))
+    ab_finished("view_source")
   end
 
   private
