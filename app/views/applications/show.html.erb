@@ -34,6 +34,9 @@
   <dd>
     <%= @application.authority.full_name %>
     <% if ab_test("view_source", "button", "link") == "link" %>
+      <div class="inline-block ml-2 size-4 text-fuchsia">
+        <%= render IconComponent.new(name: :external) %>
+      </div>
       <%= pa_link_to "View source", external_application_path(@application), extra_classes: "ml-1" %>
     <% end %>
   </dd>
