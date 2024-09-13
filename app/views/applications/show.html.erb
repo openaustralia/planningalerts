@@ -33,12 +33,10 @@
   <dt class="mt-8 font-bold md:mt-0 font-display">Planning Authority</dt>
   <dd>
     <%= @application.authority.full_name %>
-    <% if ab_test("view_source", "button", "link") == "link" %>
-      <div class="inline-block ml-2 size-4 text-fuchsia">
-        <%= render IconComponent.new(name: :external) %>
-      </div>
-      <%= pa_link_to "View source", external_application_path(@application), extra_classes: "ml-1" %>
-    <% end %>
+    <div class="inline-block ml-2 size-4 text-fuchsia">
+      <%= render IconComponent.new(name: :external) %>
+    </div>
+    <%= pa_link_to "View source", external_application_path(@application), extra_classes: "ml-1" %>
   </dd>
   <dt class="mt-8 font-bold font-display md:mt-0">Reference number</dt>
   <dd>
@@ -97,17 +95,6 @@
     Make a comment now
   <% end %>
 </div>
-
-<% if ab_test("view_source", "button", "link") == "button" %>
-  <div class="mt-2">
-    <%= render ButtonWithSideTextComponent.new(tag: :a, size: "xl", type: :primary, href: external_application_path(@application), icon: :external) do |c| %>
-      View source
-      <% c.with_side_text do %>
-        on the <%= @application.authority.full_name %> website
-      <% end %>
-    <% end %>
-  </div>
-<% end %>
 
 <div class="mt-6 md:mt-2">
   <%= render ShareButtonComponent.new(url: application_url(@application), title: page_title(@application), color: :green) do %>

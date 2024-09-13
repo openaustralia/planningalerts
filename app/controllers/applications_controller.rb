@@ -144,7 +144,6 @@ class ApplicationsController < ApplicationController
   def external
     application = Application.find(T.cast(params[:id], String))
     @application = T.let(application, T.nilable(Application))
-    ab_finished("view_source")
   end
 
   private
