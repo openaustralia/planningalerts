@@ -1,7 +1,7 @@
 <% if @tag == :a %>
   <%= link_to @href, @options do %>
     <div class="flex items-baseline justify-center gap-4">
-      <% if @icon == :trash %>
+      <% if @icon == :trash || @icon == :edit %>
         <div class="size-5"><%= render IconComponent.new(name: @icon) %></div>
       <% elsif @icon %>
         <div><%= render IconComponent.new(name: @icon) %></div>
@@ -12,7 +12,7 @@
 <% elsif @tag == :button %>
   <%= button_tag @options do %>
     <div class="flex items-baseline justify-center gap-4">
-      <% if @icon == :trash %>
+      <% if @icon == :trash || @icon == :edit %>
         <div class="size-5"><%= render IconComponent.new(name: @icon) %></div>
       <% elsif @icon %>
         <div><%= render IconComponent.new(name: @icon) %></div>
