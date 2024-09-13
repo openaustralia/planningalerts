@@ -28,7 +28,7 @@
     <%# Giving this a constant height to avoid any content shifts when button is clicked %>
     <div class="flex items-baseline justify-center h-8 gap-4">
       <div>
-        <div x-show="!copied"><%= render IconComponent.new(name: :share) %></div>
+        <div x-show="!copied" class="size-5"><%= render IconComponent.new(name: :share) %></div>
         <div x-show="copied" class="size-5"><%= render IconComponent.new(name: :tick) %></div>
       </div>
       <div>
