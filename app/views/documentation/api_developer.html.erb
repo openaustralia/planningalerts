@@ -135,15 +135,31 @@
       <code class="block my-8 text-xl break-all text-navy">
         <%= api_example_all_url_html(format: "json", key: api_key) %>
       </code>
-      <p class="mt-4 mb-8 text-xl text-navy">
-        * This API call is only available as an option in the Premium Plan.
-      </p>
       <% if api_key && api_key_object.bulk? %>
         <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_all_url(format: "json", key: api_key)) do %>
           View example
         <% end %>
       <% end %>
     </section>
+    <section class="mt-16">
+      <%= render HeadingComponent.new(tag: :h3) do %>
+        Bulk API - by date scraped<sup>*</sup>
+      <% end %>
+      <p class="mt-4 text-xl text-navy">
+        Returns all applications scraped on a single day. Date is in <%= pa_link_to "ISO 8601", "https://en.wikipedia.org/wiki/ISO_8601" %> format.
+      </p>
+      <code class="block my-8 text-xl break-all text-navy">
+        <%= api_example_date_scraped_url_html(format: "json", key: api_key) %>
+      </code>
+      <% if api_key && api_key_object.bulk? %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_date_scraped_url(format: "json", key: api_key, date_scraped: 7.days.ago.to_date.to_s)) do %>
+          View example
+        <% end %>
+      <% end %>
+    </section>
+    <p class="mt-12 mb-8 text-xl text-navy">
+      * Bulk API calls are available as an option in the <%= pa_link_to "Premium Plan", api_howto_path(anchor: "plans") %>.
+    </p>
   </section>
   <section class="pt-8 mt-16 border-t border-t-warm-grey">
     <div class="max-w-4xl">

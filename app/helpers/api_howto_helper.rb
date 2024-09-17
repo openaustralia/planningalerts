@@ -135,6 +135,24 @@ module ApiHowtoHelper
     )
   end
 
+  sig do
+    params(
+      format: String,
+      key: T.nilable(String),
+      date_scraped: String
+    ).returns(String)
+  end
+  def api_example_date_scraped_url(
+    format:,
+    key:,
+    date_scraped:
+  )
+    applications_url(
+      host: api_host, port: api_port, format:, date_scraped:,
+      key:
+    )
+  end
+
   sig { params(format: String, key: T.nilable(String)).returns(String) }
   def api_example_latlong_url_html(format:, key:)
     t = api_example_latlong_url(format:, key: key || "44", lat: "11", lng: "22", radius: "33")
@@ -191,6 +209,14 @@ module ApiHowtoHelper
   def api_example_all_url_html(format:, key:)
     t = api_example_all_url(format:, key: key || "22", since_id: "11")
     t = t.sub("11", "[since_id]")
+    t = t.sub("22", "[key]") if key.nil?
+    htmlify(t)
+  end
+
+  sig { params(format: String, key: T.nilable(String)).returns(String) }
+  def api_example_date_scraped_url_html(format:, key:)
+    t = api_example_date_scraped_url(format:, key: key || "22", date_scraped: "11")
+    t = t.sub("11", "[date_scraped]")
     t = t.sub("22", "[key]") if key.nil?
     htmlify(t)
   end
