@@ -117,6 +117,24 @@ module ApiHowtoHelper
     )
   end
 
+  sig do
+    params(
+      format: String,
+      key: T.nilable(String),
+      since_id: T.nilable(String)
+    ).returns(String)
+  end
+  def api_example_all_url(
+    format:,
+    key:,
+    since_id: nil
+  )
+    applications_url(
+      host: api_host, port: api_port, format:, since_id:,
+      key:
+    )
+  end
+
   sig { params(format: String, key: T.nilable(String)).returns(String) }
   def api_example_latlong_url_html(format:, key:)
     t = api_example_latlong_url(format:, key: key || "44", lat: "11", lng: "22", radius: "33")
@@ -166,6 +184,14 @@ module ApiHowtoHelper
     t = t.sub("22", "[state]")
     t = t.sub("33", "[postcode]")
     t = t.sub("44", "[key]") if key.nil?
+    htmlify(t)
+  end
+
+  sig { params(format: String, key: T.nilable(String)).returns(String) }
+  def api_example_all_url_html(format:, key:)
+    t = api_example_all_url(format:, key: key || "22", since_id: "11")
+    t = t.sub("11", "[since_id]")
+    t = t.sub("22", "[key]") if key.nil?
     htmlify(t)
   end
 end

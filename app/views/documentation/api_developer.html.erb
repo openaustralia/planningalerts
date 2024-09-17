@@ -124,13 +124,33 @@
         <% end %>
       <% end %>
     </section>
+    <section class="mt-16">
+      <%= render HeadingComponent.new(tag: :h3) do %>
+        Bulk API - all<sup>*</sup>
+      <% end %>
+      <p class="mt-4 text-xl text-navy">
+        Returns all applications ordered by numeric id. Up to <%= Application.max_per_page_all_api %> records are returned
+        in one request. To get subsequent records set the optional parameter since_id to the max_id (the maximum id) of the page you have already retrieved.
+      </p>
+      <code class="block my-8 text-xl break-all text-navy">
+        <%= api_example_all_url_html(format: "json", key: api_key) %>
+      </code>
+      <p class="mt-4 mb-8 text-xl text-navy">
+        * This API call is only available as an option in the Premium Plan.
+      </p>
+      <% if api_key && api_key_object.bulk? %>
+        <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: api_example_all_url(format: "json", key: api_key)) do %>
+          View example
+        <% end %>
+      <% end %>
+    </section>
   </section>
   <section class="pt-8 mt-16 border-t border-t-warm-grey">
     <div class="max-w-4xl">
       <%# TODO: Using non-standard style %>
       <%= render HeadingComponent.new(tag: :h2).with_content("Extra query parameters") %>
       <p class="mt-8 text-xl text-navy">
-        There are several parameters that can be applied to each of the above queries for extra usefulness.
+        There are several parameters that can be applied to each of the above queries (except for bulk API) for extra usefulness.
       </p>
       <section class="mt-12">
         <%= render HeadingComponent.new(tag: :h3).with_content("page") %>
