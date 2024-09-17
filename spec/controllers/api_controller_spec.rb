@@ -16,6 +16,16 @@ describe ApiController do
       it { expect(subject.body).to eq '{"error":"not authorised - use a valid api key"}' }
     end
 
+    shared_examples "not authorised disabled" do
+      it { expect(subject.status).to eq 401 }
+      it { expect(subject.body).to eq '{"error":"not authorised - api key is disabled"}' }
+    end
+
+    shared_examples "not authorised expired" do
+      it { expect(subject.status).to eq 401 }
+      it { expect(subject.body).to eq '{"error":"not authorised - api key has expired"}' }
+    end
+
     context "when no API key is given" do
       subject { get method, params: params.merge(key: nil) }
 
@@ -34,7 +44,16 @@ describe ApiController do
         get method, params: params.merge(key: key.value)
       end
 
-      include_examples "not authorised"
+      include_examples "not authorised disabled"
+    end
+
+    context "when user has an expired api key" do
+      subject do
+        key = create(:api_key, expires_at: 7.days.ago)
+        get method, params: params.merge(key: key.value)
+      end
+
+      include_examples "not authorised expired"
     end
   end
 
