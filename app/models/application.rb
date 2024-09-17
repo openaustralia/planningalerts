@@ -47,6 +47,13 @@ class Application < ApplicationRecord
   # allowed returned applications in a single API request
   max_paginates_per 100
 
+  # The maximum number of results that are returned in a page of
+  # the bulk API all method.
+  sig { returns(Integer) }
+  def self.max_per_page_all_api
+    1000
+  end
+
   sig { returns(String) }
   def description
     Application.normalise_description(attributes["description"])

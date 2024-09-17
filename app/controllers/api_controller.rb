@@ -108,10 +108,8 @@ class ApiController < ApplicationController
     apps = Application.includes(:authority).order(:id)
     apps = apps.where("id > ?", params[:since_id]) if params[:since_id]
 
-    # Max number of records that we'll show
-    limit = 1000
-
-    applications = apps.limit(limit).to_a
+    # Limiting number of records that are returned
+    applications = apps.limit(Application.max_per_page_all_api).to_a
     last = applications.last
     last = Application.order(:id).last if last.nil?
     max_id = last.id if last
