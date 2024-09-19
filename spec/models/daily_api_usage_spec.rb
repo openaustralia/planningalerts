@@ -24,7 +24,7 @@ describe DailyApiUsage do
 
     it "returns the top 2 total number of requests in descending sort order" do
       result = described_class.top_usage_in_date_range(date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)
-      expect(result).to eq({ key3 => 214, key1 => 157 })
+      expect(result).to eq([{ api_key: key3, sum: 214, min: 2, max: 212 }, { api_key: key1, sum: 157, min: 34, max: 123 }])
     end
   end
 
