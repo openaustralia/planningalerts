@@ -205,4 +205,27 @@
       through your own server where you add the API key.
     </p>
   </section>
+  <section class="pt-8 mt-16 text-xl border-t text-navy border-t-warm-grey">
+    <%= render HeadingComponent.new(tag: :h2) do %>
+      Daily quota
+    <% end %>
+    <p class="mt-8">
+      Almost all API keys have a daily usage quota. This is based on the number of API calls made during a 24 hour period starting and ending at midnight
+      <%= pa_link_to "UTC", "https://en.wikipedia.org/wiki/Coordinated_Universal_Time" %>.
+    </p>
+    <p class="mt-8">
+      If you go over the limit the API request will be blocked and
+      <%= render BulletListComponent.new do |c| %>
+        <%= c.with_item do %>
+          The response will return a <%= pa_link_to "429 Too Many Requests", "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429" %> error code.
+        <% end %>
+        <%= c.with_item do %>
+          The body of the response will be the text "Retry later".
+        <% end %>
+        <%= c.with_item do %>
+          The response HTTP header "retry-after" will be set to the number of seconds to wait until the quota is reset.
+        <% end %>
+      <% end %>
+    </p>
+  </section>
 </section>
