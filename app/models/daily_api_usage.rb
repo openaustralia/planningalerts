@@ -20,9 +20,16 @@ class DailyApiUsage < ApplicationRecord
 
   sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Array[{ api_key: ApiKey, sum: Numeric }]) }
   def self.top_usage_in_date_range(date_from:, date_to:, number:)
+    api_keys = top_by_usage_in_date_range(date_from:, date_to:, number:)
+    sums = where(date: date_from..date_to, api_key: api_keys).group(:api_key_id).sum(:count)
+    api_keys.map { |api_key| { api_key:, sum: T.must(sums[api_key.id]) } }
+  end
+
+  sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Enumerable[ApiKey]) }
+  def self.top_by_usage_in_date_range(date_from:, date_to:, number:)
     # For tapioca to not generate complete nonsense for the type here the sum needs to go directly after the group
     count = where(date: date_from..date_to).order("SUM(count) DESC").limit(number).group(:api_key_id).sum(:count)
-    count.map { |id, sum| { api_key: ApiKey.find(id), sum: } }
+    ApiKey.find(count.keys)
   end
 
   sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Array[{ api_key: ApiKey, mean: Float }]) }
