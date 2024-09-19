@@ -22,7 +22,9 @@
       <th>Commercial</th>
       <th>Community</th>
       <th>Daily Limit</th>
-      <th>Average daily requests</th>
+      <th>Average daily</th>
+      <th>Min daily</th>
+      <th>Max daily</th>
     </thead>
     <tbody>
       <% @result.each do |r| %>
@@ -35,6 +37,8 @@
           <td><%= link_to r[:api_key].community.to_s,    admin_api_key_path(r[:api_key]) %></td>
           <td><%= link_to r[:api_key].daily_limit.to_s,  admin_api_key_path(r[:api_key]) %></td>
           <td><%= r[:mean].round %></td>
+          <td><%= r[:min] %></td>
+          <td><%= r[:max] %></td>
         </tr>
       <% end %>
     </tbody>

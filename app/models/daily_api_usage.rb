@@ -18,11 +18,22 @@ class DailyApiUsage < ApplicationRecord
     # rubocop:enable Rails/SkipsModelValidations
   end
 
-  sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Array[{ api_key: ApiKey, sum: Numeric }]) }
+  sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Array[{ api_key: ApiKey, sum: Numeric, min: Numeric, max: Numeric }]) }
   def self.top_usage_in_date_range(date_from:, date_to:, number:)
     api_keys = top_by_usage_in_date_range(date_from:, date_to:, number:)
-    sums = where(date: date_from..date_to, api_key: api_keys).group(:api_key_id).sum(:count)
-    api_keys.map { |api_key| { api_key:, sum: T.must(sums[api_key.id]) } }
+    grouped = where(date: date_from..date_to, api_key: api_keys).group(:api_key_id)
+    sums = grouped.sum(:count)
+    # Note that the "minimum" is only for the days on which there were requests
+    minimums = grouped.minimum(:count)
+    maximums = grouped.maximum(:count)
+    api_keys.map do |api_key|
+      {
+        api_key:,
+        sum: T.must(sums[api_key.id]),
+        min: minimums[api_key.id],
+        max: maximums[api_key.id]
+      }
+    end
   end
 
   sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Enumerable[ApiKey]) }
@@ -36,7 +47,7 @@ class DailyApiUsage < ApplicationRecord
   def self.top_average_usage_in_date_range(date_from:, date_to:, number:)
     n = (date_to - date_from + 1)
     top_usage_in_date_range(date_from:, date_to:, number:).map do |r|
-      { api_key: r[:api_key], mean: r[:sum].to_f / n }
+      { api_key: r[:api_key], mean: r[:sum].to_f / n, min: r[:min], max: r[:max] }
     end
   end
 end
