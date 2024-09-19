@@ -18,17 +18,18 @@ class DailyApiUsage < ApplicationRecord
     # rubocop:enable Rails/SkipsModelValidations
   end
 
-  sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Hash[ApiKey, Numeric]) }
+  sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Array[{ api_key: ApiKey, sum: Numeric }]) }
   def self.top_usage_in_date_range(date_from:, date_to:, number:)
     # For tapioca to not generate complete nonsense for the type here the sum needs to go directly after the group
     count = where(date: date_from..date_to).order("SUM(count) DESC").limit(number).group(:api_key_id).sum(:count)
-    count.transform_keys { |id| ApiKey.find(id) }
+    count.map { |id, sum| { api_key: ApiKey.find(id), sum: } }
   end
 
   sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Array[{ api_key: ApiKey, mean: Float }]) }
   def self.top_average_usage_in_date_range(date_from:, date_to:, number:)
-    r = top_usage_in_date_range(date_from:, date_to:, number:)
-    r = r.transform_values { |v| v.to_f / (date_to - date_from + 1) }
-    r.map { |api_key, mean| { api_key:, mean: } }
+    n = (date_to - date_from + 1)
+    top_usage_in_date_range(date_from:, date_to:, number:).map do |r|
+      { api_key: r[:api_key], mean: r[:sum].to_f / n }
+    end
   end
 end
