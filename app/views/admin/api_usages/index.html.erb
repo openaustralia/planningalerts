@@ -32,7 +32,7 @@
       <% @result.each do |r| %>
         <tr>
           <td><%= link_to r[:api_key].user.name,         admin_api_key_path(r[:api_key]) %></td>
-          <td><%= link_to r[:api_key].user.organisation, admin_api_key_path(r[:api_key]) %></td>
+          <td><%= link_to r[:api_key].user.organisation, admin_api_key_path(r[:api_key]) if r[:api_key].user.organisation.present? %></td>
           <td><%= link_to r[:api_key].user.email,        admin_api_key_path(r[:api_key]) %></td>
           <td><%= link_to r[:api_key].disabled.to_s,     admin_api_key_path(r[:api_key]) %></td>
           <td><%= link_to r[:api_key].commercial.to_s,   admin_api_key_path(r[:api_key]) %></td>
