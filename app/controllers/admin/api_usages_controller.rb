@@ -24,7 +24,7 @@ module Admin
       # we want today and yesterday
       date_from = date_to - (params_period.to_i - 1)
       result = DailyApiUsage.top_average_usage_in_date_range(date_from:, date_to:, number: 50)
-      @result = T.let(result, T.nilable(T::Hash[ApiKey, Float]))
+      @result = T.let(result, T.nilable(T::Array[{ api_key: ApiKey, mean: Float }]))
     end
   end
 end

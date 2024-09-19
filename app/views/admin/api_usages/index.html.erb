@@ -25,16 +25,16 @@
       <th>Average daily requests</th>
     </thead>
     <tbody>
-      <% @result.each do |api_key, requests| %>
+      <% @result.each do |r| %>
         <tr>
-          <td><%= link_to api_key.user.name,         admin_api_key_path(api_key) %></td>
-          <td><%= link_to api_key.user.organisation, admin_api_key_path(api_key) %></td>
-          <td><%= link_to api_key.user.email,        admin_api_key_path(api_key) %></td>
-          <td><%= link_to api_key.disabled.to_s,     admin_api_key_path(api_key) %></td>
-          <td><%= link_to api_key.commercial.to_s,   admin_api_key_path(api_key) %></td>
-          <td><%= link_to api_key.community.to_s,    admin_api_key_path(api_key) %></td>
-          <td><%= link_to api_key.daily_limit.to_s,  admin_api_key_path(api_key) %></td>
-          <td><%= requests.round %></td>
+          <td><%= link_to r[:api_key].user.name,         admin_api_key_path(r[:api_key]) %></td>
+          <td><%= link_to r[:api_key].user.organisation, admin_api_key_path(r[:api_key]) %></td>
+          <td><%= link_to r[:api_key].user.email,        admin_api_key_path(r[:api_key]) %></td>
+          <td><%= link_to r[:api_key].disabled.to_s,     admin_api_key_path(r[:api_key]) %></td>
+          <td><%= link_to r[:api_key].commercial.to_s,   admin_api_key_path(r[:api_key]) %></td>
+          <td><%= link_to r[:api_key].community.to_s,    admin_api_key_path(r[:api_key]) %></td>
+          <td><%= link_to r[:api_key].daily_limit.to_s,  admin_api_key_path(r[:api_key]) %></td>
+          <td><%= r[:mean].round %></td>
         </tr>
       <% end %>
     </tbody>

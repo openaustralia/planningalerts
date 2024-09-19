@@ -25,9 +25,10 @@ class DailyApiUsage < ApplicationRecord
     count.transform_keys { |id| ApiKey.find(id) }
   end
 
-  sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Hash[ApiKey, Float]) }
+  sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Array[{ api_key: ApiKey, mean: Float }]) }
   def self.top_average_usage_in_date_range(date_from:, date_to:, number:)
     r = top_usage_in_date_range(date_from:, date_to:, number:)
-    r.transform_values { |v| v.to_f / (date_to - date_from + 1) }
+    r = r.transform_values { |v| v.to_f / (date_to - date_from + 1) }
+    r.map { |api_key, mean| { api_key:, mean: } }
   end
 end
