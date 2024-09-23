@@ -68,10 +68,13 @@ module ApplicationHelper
   sig { params(meters: T.any(Float, Integer)).returns(String) }
   def meters_in_words(meters)
     if meters < 1000
-      pluralize(significant_figure_remove_trailing_zero(meters.to_f, 2), "metre")
+      value = meters.to_f
+      units = "metre"
     else
-      pluralize(significant_figure_remove_trailing_zero(meters / 1000.0, 2), "kilometre")
+      value = meters / 1000.0
+      units = "kilometre"
     end
+    pluralize(significant_figure_remove_trailing_zero(value, 2), units)
   end
 
   sig { params(value: Float, sig_figs: Integer).returns(T.untyped) }
