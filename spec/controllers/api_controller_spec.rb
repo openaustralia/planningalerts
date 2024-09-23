@@ -359,19 +359,19 @@ describe ApiController do
     it "finds recent applications near the point" do
       get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, radius: 4000 }
       expect(assigns[:applications]).to eq(result)
-      expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
+      expect(assigns[:description]).to eq("Recent applications within 4 km of 1.0,2.0")
     end
 
     it "finds recent applications near the point using the old parameter name" do
       get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, area_size: 4000 }
       expect(assigns[:applications]).to eq(result)
-      expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
+      expect(assigns[:description]).to eq("Recent applications within 4 km of 1.0,2.0")
     end
 
     it "uses a search radius of 2000 when none is specified" do
       get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0 }
       expect(assigns[:applications]).to eq(result)
-      expect(assigns[:description]).to eq("Recent applications within 2 kilometres of 1.0,2.0")
+      expect(assigns[:description]).to eq("Recent applications within 2 km of 1.0,2.0")
     end
 
     it "logs the api call" do

@@ -74,7 +74,7 @@ describe "Manage alerts" do
     select("800")
     click_on("Update distance")
 
-    expect(page).to have_content("Your alert for 24 Bruce Rd, Glenbrook now has a size of 800 metres")
+    expect(page).to have_content("Your alert for 24 Bruce Rd, Glenbrook now has a size of 800 m")
     expect(Alert.active.find_by(address: "24 Bruce Rd, Glenbrook", radius_meters: "800", user: User.find_by(email: "example@example.com"))).not_to be_nil
   end
 end

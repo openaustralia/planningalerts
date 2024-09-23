@@ -69,12 +69,12 @@ module ApplicationHelper
   def meters_in_words(meters)
     if meters < 1000
       value = meters.to_f
-      units = "metre"
+      units = "m"
     else
       value = meters / 1000.0
-      units = "kilometre"
+      units = "km"
     end
-    pluralize(significant_figure_remove_trailing_zero(value, 2), units)
+    "#{significant_figure_remove_trailing_zero(value, 2)} #{units}"
   end
 
   sig { params(value: Float, sig_figs: Integer).returns(T.untyped) }
