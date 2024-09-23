@@ -159,13 +159,15 @@ gem "paper_trail"
 # A/B testing
 gem "split", require: "split/dashboard"
 
+# For some reason this now needs to be available in development (as well as test) for the mailer previews to work
+gem "rspec-rails"
+
 group :test do
   gem "capybara"
   gem "email_spec"
   gem "factory_bot"
   gem "factory_bot_rails"
   gem "rails-controller-testing"
-  gem "rspec-rails"
   gem "selenium-webdriver"
   gem "simplecov", require: false
   gem "timecop"
