@@ -19,17 +19,13 @@
   </section>
 <% end %>
 
-<%# TODO: Remove duplication of heading %>
-<%# TODO: Figure out how to handle no results when extra_options_on_address_search is enabled %>
-<%# TODO: Add filter option for no filtering (e.g. any distance or any time) because the filtering in its current is very confusing in its behaviour %>
-<% if applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user) %>
-  <section class="pt-16">
-    <%= render "no_applications", full_address:, q: %>
-  </section>
-<% elsif applications %>
-  <section class="pt-16" id="results">
-    <%= render HeadingComponent.new(tag: :h2).with_content("Search results") %>
-
+<section class="pt-16" id="results">
+  <%= render HeadingComponent.new(tag: :h2).with_content("Search results") %>
+  <%# TODO: Figure out how to handle no results when extra_options_on_address_search is enabled %>
+  <%# TODO: Add filter option for no filtering (e.g. any distance or any time) because the filtering in its current is very confusing in its behaviour %>
+  <% if applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user) %>
+    <%= render "no_applications_box", full_address: %>
+  <% elsif applications %>
     <div class="mt-6 mb-4">
       <%= render "create_alert_form", alert: %>
     </div>
@@ -68,5 +64,12 @@
     <div class="mt-6">
       <%= render SimplePagerComponent.new(collection: applications) %>
     </div>
+  <% end %>
+</section>
+
+<% if applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user) %>
+  <section class="mt-16 text-xl text-navy">
+    <%= render HeadingComponent.new(tag: :h2).with_content("You can help!") %>
+    <%= render "no_applications_help" %>
   </section>
 <% end %>
