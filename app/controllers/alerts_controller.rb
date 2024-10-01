@@ -4,8 +4,8 @@
 class AlertsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, except: %i[unsubscribe signed_out sign_in]
-  after_action :verify_authorized, except: %i[index unsubscribe signed_out sign_in]
+  before_action :authenticate_user!, except: %i[unsubscribe signed_out sign_in user_session]
+  after_action :verify_authorized, except: %i[index unsubscribe signed_out sign_in user_session]
   after_action :verify_policy_scoped, only: :index
 
   layout "profile", except: %i[unsubscribe signed_out sign_in]
@@ -92,6 +92,16 @@ class AlertsController < ApplicationController
   # TODO: Rename
   def sign_in
     # TODO: Use strong parameters instead
-    @alert = Alert.new(address: params[:alert][:address], radius_meters: params[:alert][:radius_meters])
+    @user = User.new(email: params[:user][:email], password: params[:user][:password])
+    @alert = Alert.new(address: params[:user][:address], radius_meters: params[:user][:radius_meters])
+  end
+
+  # TODO: Rename
+  def user_session
+    @user = warden.authenticate!({ scope: :user, recall: "Alerts#sign_in", locale: I18n.locale })
+    # set_flash_message!(:notice, :signed_in)
+    # sign_in(resource_name, resource)
+    # yield resource if block_given?
+    # respond_with resource, location: after_sign_in_path_for(resource)
   end
 end

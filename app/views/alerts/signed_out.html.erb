@@ -7,8 +7,8 @@
 
 <%# TODO: Add create account flow %>
 
-<%= form_with model: @alert, url: sign_in_alerts_path, method: "get" do |f| %>
-  <%= f.hidden_field :address %>
-  <%= f.hidden_field :radius_meters %>
+<%= form_with model: User, url: sign_in_alerts_path, method: "get" do |f| %>
+  <%= f.hidden_field :address, value: @alert.address %>
+  <%= f.hidden_field :radius_meters, value: @alert.radius_meters %>
   <%= f.button "Sign in" %>
 <% end %>
