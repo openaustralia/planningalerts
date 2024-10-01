@@ -94,7 +94,12 @@ Rails.application.routes.draw do
   end
 
   scope "/profile" do
-    resources :alerts, except: :show
+    resources :alerts, except: :show do
+      collection do
+        # TODO: This needs a better name and path. Maybe it will become clearer later what it should be.
+        get :signed_out
+      end
+    end
     resources :api_keys, only: [:create, :index] do
       collection do
         get :confirm
