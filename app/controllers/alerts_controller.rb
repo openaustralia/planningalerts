@@ -112,7 +112,7 @@ class AlertsController < ApplicationController
     alert.geocode_from_address
 
     if alert.save
-      redirect_to alerts_path, notice: "You succesfully added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
+      redirect_to alerts_path, notice: "You succesfully signed in and added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
     else
       @alert = T.let(alert, T.nilable(Alert))
       render :new
