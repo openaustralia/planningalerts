@@ -4,11 +4,11 @@
 class AlertsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, except: :unsubscribe
-  after_action :verify_authorized, except: %i[index unsubscribe]
+  before_action :authenticate_user!, except: %i[unsubscribe signed_out]
+  after_action :verify_authorized, except: %i[index unsubscribe signed_out]
   after_action :verify_policy_scoped, only: :index
 
-  layout "profile", except: :unsubscribe
+  layout "profile", except: %i[unsubscribe signed_out]
 
   sig { void }
   def index
@@ -81,5 +81,11 @@ class AlertsController < ApplicationController
   def unsubscribe
     @alert = T.let(Alert.find_by(confirm_id: params[:confirm_id]), T.nilable(Alert))
     @alert&.unsubscribe!
+  end
+
+  # TODO: Rename
+  def signed_out
+    # TODO: Use strong parameters instead
+    @alert = Alert.new(address: params[:alert][:address], radius_meters: params[:alert][:radius_meters])
   end
 end

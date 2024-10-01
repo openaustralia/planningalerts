@@ -1,0 +1,14 @@
+<%# TODO: Obviously need to make this look like the designs %>
+<%= render HeadingComponent.new(tag: :h1).with_content("Sign in to save") %>
+
+<p>
+  You'll receive email alerts when new applications match this search
+</p>
+
+<%# TODO: Add create account flow %>
+
+<%= form_with model: @alert, url: sign_in_alerts_path, method: "get" do |f| %>
+  <%= f.hidden_field :address %>
+  <%= f.hidden_field :radius_meters %>
+  <%= f.button "Sign in" %>
+<% end %>

@@ -98,6 +98,8 @@ Rails.application.routes.draw do
       collection do
         # TODO: This needs a better name and path. Maybe it will become clearer later what it should be.
         get :signed_out
+        # TODO: This needs a better name and path as well
+        get :sign_in
       end
     end
     resources :api_keys, only: [:create, :index] do
