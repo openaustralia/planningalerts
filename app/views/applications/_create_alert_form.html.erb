@@ -11,7 +11,7 @@
     </div>
   </div>
 <% else %>
-  <% if ab_test("logged_out_alert_flow_order", "sign_in_create_alert", "create_alert_sign_in") == "create_alert_sign_in" %>
+  <% if ab_test(:logged_out_alert_flow_order, "sign_in_create_alert", "create_alert_sign_in") == "create_alert_sign_in" %>
     <div class="flex items-start gap-6 px-8 py-4 mt-8 sm:pr-4 sm:py-2 sm:items-center bg-light-grey">
       <%= image_tag "bookmark.svg", alt: "", class: "mt-2 sm:mt-0" %>
       <div class="flex flex-col gap-4 sm:flex-row sm:justify-between grow sm:items-center">
