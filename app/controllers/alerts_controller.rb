@@ -48,8 +48,6 @@ class AlertsController < ApplicationController
       redirect_to alerts_path, notice: "You succesfully added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
     else
       @alert = T.let(alert, T.nilable(Alert))
-      # TODO: Is there a more sensible way of doing this?
-      @alerts = T.let(policy_scope(Alert), T.nilable(ActiveRecord::Relation))
       render :new
     end
   end
@@ -117,8 +115,6 @@ class AlertsController < ApplicationController
       redirect_to alerts_path, notice: "You succesfully added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
     else
       @alert = T.let(alert, T.nilable(Alert))
-      # TODO: Is there a more sensible way of doing this?
-      @alerts = T.let(policy_scope(Alert), T.nilable(ActiveRecord::Relation))
       render :new
     end
 
