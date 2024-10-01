@@ -100,6 +100,8 @@ Rails.application.routes.draw do
         get :signed_out
         # TODO: This needs a better name and path as well
         get :sign_in
+        # TODO: Better name needed as well
+        post :user_session
       end
     end
     resources :api_keys, only: [:create, :index] do
