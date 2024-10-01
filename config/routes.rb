@@ -99,7 +99,7 @@ Rails.application.routes.draw do
         # TODO: This needs a better name and path. Maybe it will become clearer later what it should be.
         get :signed_out
         # TODO: This needs a better name and path as well
-        get :sign_in
+        get :sign_in2
         # TODO: Better name needed as well
         post :user_session
       end
