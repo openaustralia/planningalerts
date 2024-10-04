@@ -101,7 +101,8 @@ Rails.application.routes.draw do
       end
     end
     namespace :alerts do
-      resources :sessions, only: [:new, :create]
+      # This also generates a route for alerts/sessions#destroy which we're not using
+      devise_for :users, only: :sessions
     end
     resources :api_keys, only: [:create, :index] do
       collection do
