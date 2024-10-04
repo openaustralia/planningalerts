@@ -4,11 +4,11 @@
 class AlertsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, except: %i[unsubscribe signed_out sign_in2 user_session]
-  after_action :verify_authorized, except: %i[index unsubscribe signed_out sign_in2 user_session]
+  before_action :authenticate_user!, except: %i[unsubscribe signed_out]
+  after_action :verify_authorized, except: %i[index unsubscribe signed_out]
   after_action :verify_policy_scoped, only: :index
 
-  layout "profile", except: %i[unsubscribe signed_out sign_in2]
+  layout "profile", except: %i[unsubscribe signed_out]
 
   sig { void }
   def index
@@ -86,41 +86,5 @@ class AlertsController < ApplicationController
   def signed_out
     # TODO: Use strong parameters instead
     @alert = Alert.new(address: params[:alert][:address], radius_meters: params[:alert][:radius_meters])
-  end
-
-  # TODO: Rename
-  sig { void }
-  def sign_in2
-    # TODO: Use strong parameters instead
-    @user = T.let(User.new(email: params[:user][:email], password: params[:user][:password]), T.nilable(User))
-    @alert = Alert.new(address: params[:user][:address], radius_meters: params[:user][:radius_meters])
-  end
-
-  # TODO: Rename
-  sig { void }
-  def user_session
-    request.env["devise.allow_params_authentication"] = true
-    @user = warden.authenticate!({ scope: :user, recall: "Alerts#sign_in2", locale: I18n.locale })
-    # TODO: Special flash message
-    # set_flash_message!(:notice, :signed_in)
-    sign_in(:user, @user)
-    # yield resource if block_given?
-    alert = Alert.new(
-      user: @user,
-      address: params[:user][:address],
-      radius_meters: params[:user][:radius_meters]
-    )
-    # TODO: Check that we're actually allowed to create an alert
-    # Ensures the address is normalised into a consistent form
-    alert.geocode_from_address
-
-    if alert.save
-      redirect_to alerts_path, notice: "You succesfully signed in and added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
-    else
-      @alert = T.let(alert, T.nilable(Alert))
-      render :new
-    end
-
-    # respond_with resource, location: after_sign_in_path_for(resource)
   end
 end

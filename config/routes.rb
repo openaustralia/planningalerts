@@ -98,10 +98,16 @@ Rails.application.routes.draw do
       collection do
         # TODO: This needs a better name and path. Maybe it will become clearer later what it should be.
         get :signed_out
-        # TODO: This needs a better name and path as well
-        get :sign_in2
-        # TODO: Better name needed as well
-        post :user_session
+      end
+    end
+    namespace :alerts do
+      resources :sessions, only: [] do
+        collection do
+          # TODO: This needs a better name and path as well
+          get :sign_in2
+          # TODO: Better name needed as well
+          post :user_session
+        end          
       end
     end
     resources :api_keys, only: [:create, :index] do
