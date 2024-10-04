@@ -388,6 +388,12 @@ module GeneratedPathHelpersModule
   def sidekiq_web_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def sign_in2_alerts_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def signed_out_alerts_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def thank_you_comment_reports_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -413,6 +419,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_registration_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def user_session_alerts_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_path(*args); end

@@ -388,6 +388,12 @@ module GeneratedUrlHelpersModule
   def sidekiq_web_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def sign_in2_alerts_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def signed_out_alerts_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def thank_you_comment_reports_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -413,6 +419,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def user_session_alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_url(*args); end
