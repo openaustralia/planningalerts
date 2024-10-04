@@ -82,19 +82,22 @@ class AlertsController < ApplicationController
   end
 
   # TODO: Rename
+  sig { void }
   def signed_out
     # TODO: Use strong parameters instead
     @alert = Alert.new(address: params[:alert][:address], radius_meters: params[:alert][:radius_meters])
   end
 
   # TODO: Rename
+  sig { void }
   def sign_in2
     # TODO: Use strong parameters instead
-    @user = User.new(email: params[:user][:email], password: params[:user][:password])
+    @user = T.let(User.new(email: params[:user][:email], password: params[:user][:password]), T.nilable(User))
     @alert = Alert.new(address: params[:user][:address], radius_meters: params[:user][:radius_meters])
   end
 
   # TODO: Rename
+  sig { void }
   def user_session
     request.env["devise.allow_params_authentication"] = true
     @user = warden.authenticate!({ scope: :user, recall: "Alerts#sign_in2", locale: I18n.locale })
