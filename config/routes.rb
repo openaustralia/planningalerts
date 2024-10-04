@@ -101,14 +101,7 @@ Rails.application.routes.draw do
       end
     end
     namespace :alerts do
-      resources :sessions, only: [] do
-        collection do
-          # TODO: This needs a better name and path as well
-          get :sign_in2
-          # TODO: Better name needed as well
-          post :user_session
-        end          
-      end
+      resources :sessions, only: [:new, :create]
     end
     resources :api_keys, only: [:create, :index] do
       collection do

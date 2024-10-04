@@ -5,19 +5,17 @@ module Alerts
   class SessionsController < ApplicationController
     extend T::Sig
 
-    # TODO: Rename
     sig { void }
-    def sign_in2
+    def new
       # TODO: Use strong parameters instead
       @user = T.let(User.new(email: params[:user][:email], password: params[:user][:password]), T.nilable(User))
       @alert = Alert.new(address: params[:user][:address], radius_meters: params[:user][:radius_meters])
     end
 
-    # TODO: Rename
     sig { void }
-    def user_session
+    def create
       request.env["devise.allow_params_authentication"] = true
-      @user = warden.authenticate!({ scope: :user, recall: "Alerts::Sessions#sign_in2", locale: I18n.locale })
+      @user = warden.authenticate!({ scope: :user, recall: "Alerts::Sessions#new", locale: I18n.locale })
       # TODO: Special flash message
       # set_flash_message!(:notice, :signed_in)
       sign_in(:user, @user)
