@@ -6,6 +6,7 @@ module Devise
   end
 
   class SessionsController < DeviseController
+    def new; end
   end
 
   class ConfirmationsController < DeviseController

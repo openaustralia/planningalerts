@@ -7,9 +7,9 @@ module Alerts
 
     sig { void }
     def new
-      # TODO: Use strong parameters instead
-      @user = T.let(User.new(email: params[:user][:email], password: params[:user][:password]), T.nilable(User))
-      @alert = Alert.new(address: params[:user][:address], radius_meters: params[:user][:radius_meters])
+      super do
+        @alert = Alert.new(address: params[:user][:address], radius_meters: params[:user][:radius_meters])
+      end
     end
 
     sig { void }
@@ -36,6 +36,14 @@ module Alerts
       end
 
       # respond_with resource, location: after_sign_in_path_for(resource)
+    end
+
+    protected
+
+    sig { returns(T::Hash[Symbol, String]) }
+    def sign_in_params
+      # TODO: Use strong parameters instead
+      { email: params[:user][:email], password: params[:user][:password] }
     end
   end
 end

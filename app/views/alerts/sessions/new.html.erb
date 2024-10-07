@@ -6,7 +6,7 @@
   Applications within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>
 </p>
 
-<%= form_with model: @user, url: alerts_user_session_path do |f| %>
+<%= form_with model: resource, url: session_path(resource_name) do |f| %>
   <%# TODO: Add error display and styling %>
   <div class="flex flex-col items-center">
     <div class="w-full">
