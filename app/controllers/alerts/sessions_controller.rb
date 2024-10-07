@@ -14,7 +14,7 @@ module Alerts
 
     sig { void }
     def create
-      @user = warden.authenticate!({ scope: :user, recall: "Alerts::Sessions#new", locale: I18n.locale })
+      @user = T.let(warden.authenticate!({ scope: :user, recall: "Alerts::Sessions#new", locale: I18n.locale }), T.nilable(User))
       # TODO: Special flash message
       # set_flash_message!(:notice, :signed_in)
       sign_in(:user, @user)
