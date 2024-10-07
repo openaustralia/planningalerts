@@ -7,6 +7,7 @@ module Devise
 
   class SessionsController < DeviseController
     def new; end
+    def auth_options; end
   end
 
   class ConfirmationsController < DeviseController

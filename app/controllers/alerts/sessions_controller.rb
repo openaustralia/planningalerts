@@ -14,11 +14,9 @@ module Alerts
 
     sig { void }
     def create
-      @user = T.let(warden.authenticate!({ scope: :user, recall: "Alerts::Sessions#new", locale: I18n.locale }), T.nilable(User))
-      # TODO: Special flash message
-      # set_flash_message!(:notice, :signed_in)
+      @user = T.let(warden.authenticate!(auth_options.merge(scope: :user)), T.nilable(User))
       sign_in(:user, @user)
-      # yield resource if block_given?
+
       alert = Alert.new(
         user: @user,
         address: params[:user][:address],
@@ -34,8 +32,6 @@ module Alerts
         @alert = T.let(alert, T.nilable(Alert))
         render "alerts/new", layout: "profile"
       end
-
-      # respond_with resource, location: after_sign_in_path_for(resource)
     end
 
     protected
