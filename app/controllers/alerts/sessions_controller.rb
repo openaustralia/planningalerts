@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Alerts
-  class SessionsController < ApplicationController
+  class SessionsController < Devise::SessionsController
     extend T::Sig
 
     sig { void }
@@ -14,7 +14,6 @@ module Alerts
 
     sig { void }
     def create
-      request.env["devise.allow_params_authentication"] = true
       @user = warden.authenticate!({ scope: :user, recall: "Alerts::Sessions#new", locale: I18n.locale })
       # TODO: Special flash message
       # set_flash_message!(:notice, :signed_in)
