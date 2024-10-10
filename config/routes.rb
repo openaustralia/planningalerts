@@ -101,8 +101,14 @@ Rails.application.routes.draw do
       end
     end
     namespace :alerts do
-      # This also generates a route for alerts/sessions#destroy which we're not using
-      devise_for :users, only: :sessions
+      # This also generates the following routes which we're not using:
+      # alerts/sessions#destroy
+      # alerts/registrations#cancel
+      # alerts/registrations#edit
+      # alerts/registrations#update
+      # alerts/registrations#destroy
+      # TODO: Can we please remove the unused routes?
+      devise_for :users, only: [:sessions, :registrations]
     end
     resources :api_keys, only: [:create, :index] do
       collection do
