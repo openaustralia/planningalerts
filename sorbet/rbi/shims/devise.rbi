@@ -2,6 +2,7 @@
 
 module Devise
   class RegistrationsController < DeviseController
+    def new; end
     def create; end
   end
 

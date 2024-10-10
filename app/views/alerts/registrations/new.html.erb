@@ -1,0 +1,37 @@
+<%# TODO: Obviously this needs to be made to look like the design %>
+
+<%= render HeadingComponent.new(tag: :h1).with_content("Create an account to save this search") %>
+
+<p>
+  Applications within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>
+</p>
+
+<%# TODO: Send this to the correct place %>
+<%= form_with model: resource, url: registration_path(resource_name) do |f| %>
+  <div>
+    <%= f.label :name, "Your full name", class: "block" %>
+    <%= f.text_field :name, class: "mt-1 block w-full", autofocus: true, autocomplete: "name", placeholder: "e.g. Jane Citizen" %>
+    <%= f.error :name, class: "mt-2" %>
+  </div>
+  <div class="mt-5">
+    <%= f.label :email, class: "block" %>
+    <%= f.email_field :email, class: "mt-1 block w-full", autocomplete: "email" %>
+    <%= f.error :email, class: "mt-2" %>
+  </div>
+  <div class="mt-5">
+    <%= f.label :password, "Create a password", class: "block" %>
+    <%= f.password_field :password, class: "mt-1 block w-full", autocomplete: "new-password" %>
+    <%= f.error :password, class: "mt-2" %>
+    <% if @minimum_password_length %>
+      <p class="mt-2 text-xl font-light text-navy"><%= @minimum_password_length %> characters minimum</p>
+    <% end %>
+  </div>
+  <%# TODO: Is there a neater / more sensible way to pass these parameters on? %>
+  <%= f.hidden_field :address, value: @alert.address %>
+  <%= f.hidden_field :radius_meters, value: @alert.radius_meters %>
+
+  <%# TODO: Should this button be centered just like on the sign in page? %>
+  <div class="mt-8">
+    <%= f.button "Create account and save" %>
+  </div>
+<% end %>
