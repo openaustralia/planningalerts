@@ -23,7 +23,7 @@
 				"terminal.integrated.defaultProfile.linux": "fish"
 			},
 			"extensions": [
-				"wingrunr21.vscode-ruby",
+				"shopify.ruby-lsp",
 				"karunamurti.haml",
 				"deibit.devdocs",
 				"manuelpuyol.erb-linter",
