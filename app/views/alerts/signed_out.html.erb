@@ -5,7 +5,12 @@
   You'll receive email alerts when new applications match this search
 </p>
 
-<%# TODO: Add create account flow %>
+<%# TODO: Send this to the correct place %>
+<%= form_with model: User, url: new_user_registration_path, method: "get" do |f| %>
+  <%= f.hidden_field :address, value: @alert.address %>
+  <%= f.hidden_field :radius_meters, value: @alert.radius_meters %>
+  <%= f.button "Create an account" %>
+<% end %>
 
 <%= form_with model: User, url: new_alerts_user_session_path, method: "get" do |f| %>
   <%= f.hidden_field :address, value: @alert.address %>
