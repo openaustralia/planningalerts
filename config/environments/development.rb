@@ -32,6 +32,12 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+   # Send mail via Mailcatcher and raise an error if there is a problem
+   config.action_mailer.raise_delivery_errors = true
+   config.action_mailer.delivery_method = :smtp
+   config.action_mailer.smtp_settings = { address: "mailcatcher", port: 1025 }
+   config.action_mailer.default_url_options = { host: "localhost:3000" }
+ 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
