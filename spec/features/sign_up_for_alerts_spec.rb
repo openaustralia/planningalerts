@@ -222,6 +222,44 @@ describe "Sign up for alerts" do
     expect(page).to have_content("You already have an alert for that address")
   end
 
+  it "when via the homepage not registered in the alternate flow" do
+    use_ab_test logged_out_alert_flow_order: "create_alert_sign_in"
+
+    create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252, lonlat: RGeo::Geographic.spherical_factory(srid: 4326).point(150.624252, -33.772812))
+
+    visit root_path
+    fill_in("Street address", with: "24 Bruce Rd, Glenbrook")
+    within("form") do
+      click_on("Search")
+    end
+
+    expect(page).to have_content("Search results")
+    expect(page).to have_content("Save this search as an email alert")
+    click_on("Save", match: :first)
+
+    expect(page).to have_content("You'll receive email alerts when new applications match this search")
+    click_on("Create an account")
+
+    expect(page).to have_content("Create an account to save this search")
+    expect(page).to have_content("Applications within 2 km of 24 Bruce Rd, Glenbrook")
+
+    fill_in("Email", with: "example@example.com")
+    fill_in("Create a password", with: "mypassword")
+    click_on("Create account and save")
+
+    expect(page).to have_content("Now check your email")
+
+    open_email("example@example.com")
+    expect(current_email).to have_subject("PlanningAlerts: Confirmation instructions")
+    expect(current_email.default_part_body.to_s).to include("Thanks for getting onboard!")
+
+    click_email_link_matching(/confirmation/)
+
+    expect(page).to have_content("Your email address has been successfully confirmed")
+    expect(page).to have_content("you are now logged in")
+    expect(page).to have_content("you added a new alert for 24 Bruce Rd, Glenbrook")
+  end
+
   it "when via the homepage but not yet have an account" do
     create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252, lonlat: RGeo::Geographic.spherical_factory(srid: 4326).point(150.624252, -33.772812))
 
