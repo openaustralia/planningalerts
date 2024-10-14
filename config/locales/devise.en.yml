@@ -4,6 +4,7 @@ en:
   devise:
     confirmations:
       confirmed: "Your email address has been successfully confirmed and you are now logged in."
+      confirmed_with_alert: "Your email address has been successfully confirmed, you are now logged in and you added a new alert for <span class=\"font-bold\">%{address}</span>."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:

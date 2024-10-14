@@ -34,7 +34,12 @@ module Users
     sig { params(_resource_name: Symbol, resource: User).returns(String) }
     def after_confirmation_path_for(_resource_name, resource)
       sign_in(resource)
-      after_sign_in_path_for(resource)
+      if resource.alerts.empty?
+        after_sign_in_path_for(resource)
+      else
+        flash[:notice] = t("devise.confirmations.confirmed_with_alert", address: T.must(resource.alerts.first).address)
+        alerts_path
+      end
     end
   end
 end
