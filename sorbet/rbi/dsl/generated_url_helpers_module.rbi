@@ -97,6 +97,12 @@ module GeneratedUrlHelpersModule
   def alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def alerts_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def alerts_user_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def api_developer_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -151,6 +157,9 @@ module GeneratedUrlHelpersModule
   def boundary_authority_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def cancel_alerts_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def cancel_user_registration_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -176,6 +185,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def cuttlefish_event_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def destroy_alerts_user_session_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def destroy_user_session_url(*args); end
@@ -206,6 +218,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def edit_alert_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def edit_alerts_user_registration_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def edit_user_password_url(*args); end
@@ -251,6 +266,12 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_alert_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_alerts_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_alerts_user_session_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_api_keys_non_commercial_url(*args); end
@@ -388,9 +409,6 @@ module GeneratedUrlHelpersModule
   def sidekiq_web_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def sign_in2_alerts_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def signed_out_alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -419,9 +437,6 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_registration_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def user_session_alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_url(*args); end

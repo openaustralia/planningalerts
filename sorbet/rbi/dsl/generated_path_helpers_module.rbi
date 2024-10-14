@@ -97,6 +97,12 @@ module GeneratedPathHelpersModule
   def alerts_signup_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def alerts_user_registration_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def alerts_user_session_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def api_developer_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -151,6 +157,9 @@ module GeneratedPathHelpersModule
   def boundary_authority_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def cancel_alerts_user_registration_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def cancel_user_registration_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -176,6 +185,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def cuttlefish_event_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def destroy_alerts_user_session_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def destroy_user_session_path(*args); end
@@ -206,6 +218,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def edit_alert_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def edit_alerts_user_registration_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def edit_user_password_path(*args); end
@@ -251,6 +266,12 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_alert_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_alerts_user_registration_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_alerts_user_session_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_api_keys_non_commercial_path(*args); end
@@ -388,9 +409,6 @@ module GeneratedPathHelpersModule
   def sidekiq_web_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def sign_in2_alerts_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def signed_out_alerts_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -419,9 +437,6 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_registration_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def user_session_alerts_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_path(*args); end
