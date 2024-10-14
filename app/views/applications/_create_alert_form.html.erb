@@ -16,9 +16,9 @@
       <%= image_tag "bookmark.svg", alt: "", class: "mt-2 sm:mt-0" %>
       <div class="flex flex-col gap-4 sm:flex-row sm:justify-between grow sm:items-center">
         <p class="text-xl font-bold text-navy">Save this search as an email alert</p>
-        <%= form_with model: alert, url: signed_out_alerts_path, method: "get" do |f| %>
-          <%= f.hidden_field :address %>
-          <%= f.hidden_field :radius_meters %>
+        <%= form_with model: User.new, url: new_alerts_user_registration_path, method: "get" do |f| %>
+          <%= f.hidden_field :address, value: alert.address %>
+          <%= f.hidden_field :radius_meters, value: alert.radius_meters %>
           <%= f.button "Save" %>
         <% end %>
       </div>

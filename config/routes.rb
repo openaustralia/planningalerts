@@ -94,12 +94,7 @@ Rails.application.routes.draw do
   end
 
   scope "/profile" do
-    resources :alerts, except: :show do
-      collection do
-        # TODO: This needs a better name and path. Maybe it will become clearer later what it should be.
-        get :signed_out
-      end
-    end
+    resources :alerts, except: :show
     namespace :alerts do
       # This also generates the following routes which we're not using:
       # alerts/sessions#destroy

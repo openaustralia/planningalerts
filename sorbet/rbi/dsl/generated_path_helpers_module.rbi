@@ -409,9 +409,6 @@ module GeneratedPathHelpersModule
   def sidekiq_web_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def signed_out_alerts_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def thank_you_comment_reports_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

@@ -7,11 +7,11 @@ class AlertsController < ApplicationController
   # For sorbet
   include Split::Helper
 
-  before_action :authenticate_user!, except: %i[unsubscribe signed_out]
-  after_action :verify_authorized, except: %i[index unsubscribe signed_out]
+  before_action :authenticate_user!, except: :unsubscribe
+  after_action :verify_authorized, except: %i[index unsubscribe]
   after_action :verify_policy_scoped, only: :index
 
-  layout "profile", except: %i[unsubscribe signed_out]
+  layout "profile", except: :unsubscribe
 
   sig { void }
   def index
@@ -83,12 +83,5 @@ class AlertsController < ApplicationController
   def unsubscribe
     @alert = T.let(Alert.find_by(confirm_id: params[:confirm_id]), T.nilable(Alert))
     @alert&.unsubscribe!
-  end
-
-  # TODO: Rename
-  sig { void }
-  def signed_out
-    # TODO: Use strong parameters instead
-    @alert = Alert.new(address: params[:alert][:address], radius_meters: params[:alert][:radius_meters])
   end
 end

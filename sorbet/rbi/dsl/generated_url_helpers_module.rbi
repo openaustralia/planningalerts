@@ -409,9 +409,6 @@ module GeneratedUrlHelpersModule
   def sidekiq_web_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def signed_out_alerts_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def thank_you_comment_reports_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

@@ -138,7 +138,7 @@ describe "Sign up for alerts" do
     expect(page).to have_content("Save this search as an email alert")
     click_on("Save", match: :first)
 
-    expect(page).to have_content("You'll receive email alerts when new applications match this search")
+    expect(page).to have_content("Already have an account?")
     click_on("Sign in")
 
     expect(page).to have_content("Sign in to save this search")
@@ -170,7 +170,7 @@ describe "Sign up for alerts" do
     expect(page).to have_content("Save this search as an email alert")
     click_on("Save", match: :first)
 
-    expect(page).to have_content("You'll receive email alerts when new applications match this search")
+    expect(page).to have_content("Already have an account?")
     click_on("Sign in")
 
     expect(page).to have_content("Sign in to save this search")
@@ -209,7 +209,7 @@ describe "Sign up for alerts" do
     expect(page).to have_content("Save this search as an email alert")
     click_on("Save", match: :first)
 
-    expect(page).to have_content("You'll receive email alerts when new applications match this search")
+    expect(page).to have_content("Already have an account?")
     click_on("Sign in")
 
     expect(page).to have_content("Sign in to save this search")
@@ -236,9 +236,6 @@ describe "Sign up for alerts" do
     expect(page).to have_content("Search results")
     expect(page).to have_content("Save this search as an email alert")
     click_on("Save", match: :first)
-
-    expect(page).to have_content("You'll receive email alerts when new applications match this search")
-    click_on("Create an account")
 
     expect(page).to have_content("Create an account to save this search")
     expect(page).to have_content("Applications within 2 km of 24 Bruce Rd, Glenbrook")
@@ -278,9 +275,6 @@ describe "Sign up for alerts" do
     expect(page).to have_content("Search results")
     expect(page).to have_content("Save this search as an email alert")
     click_on("Save", match: :first)
-
-    expect(page).to have_content("You'll receive email alerts when new applications match this search")
-    click_on("Create an account")
 
     expect(page).to have_content("Create an account to save this search")
     expect(page).to have_content("Applications within 2 km of 24 Bruce Rd, Glenbrook")
