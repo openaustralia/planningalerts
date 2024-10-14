@@ -2,27 +2,28 @@
   <%= render HeadingComponent.new(tag: :h1, extra_classes: "mt-20 mb-12 text-center").with_content("Create an account") %>
 
   <%= form_with model: resource, url: registration_path(resource_name) do |f| %>
-    <div>
-      <%= f.label :name, "Your full name", class: "block" %>
-      <%= f.text_field :name, class: "mt-1 block w-full", autofocus: true, autocomplete: "name", placeholder: "e.g. Jane Citizen" %>
-      <%= f.error :name, class: "mt-2" %>
-    </div>
-    <div class="mt-5">
-      <%= f.label :email, class: "block" %>
-      <%= f.email_field :email, class: "mt-1 block w-full", autocomplete: "email" %>
-      <%= f.error :email, class: "mt-2" %>
-    </div>
-    <div class="mt-5">
-      <%= f.label :password, "Create a password", class: "block" %>
-      <%= f.password_field :password, class: "mt-1 block w-full", autocomplete: "new-password" %>
-      <%= f.error :password, class: "mt-2" %>
-      <% if @minimum_password_length %>
-        <p class="mt-2 text-xl font-light text-navy"><%= @minimum_password_length %> characters minimum</p>
-      <% end %>
-    </div>
-    <%# TODO: Should this button be centered just like on the sign in page? %>
-    <div class="mt-8">
-      <%= f.button "Create my account" %>
+    <div class="flex flex-col items-center">
+      <div class="w-full">
+        <%= f.label :name, "Your full name", class: "block" %>
+        <%= f.text_field :name, class: "mt-1 block w-full", autofocus: true, autocomplete: "name", placeholder: "e.g. Jane Citizen" %>
+        <%= f.error :name, class: "mt-2" %>
+      </div>
+      <div class="w-full mt-5">
+        <%= f.label :email, class: "block" %>
+        <%= f.email_field :email, class: "mt-1 block w-full", autocomplete: "email" %>
+        <%= f.error :email, class: "mt-2" %>
+      </div>
+      <div class="w-full mt-5">
+        <%= f.label :password, "Create a password", class: "block" %>
+        <%= f.password_field :password, class: "mt-1 block w-full", autocomplete: "new-password" %>
+        <%= f.error :password, class: "mt-2" %>
+        <% if @minimum_password_length %>
+          <p class="mt-2 text-xl font-light text-navy"><%= @minimum_password_length %> characters minimum</p>
+        <% end %>
+      </div>
+      <div class="mt-8">
+        <%= f.button "Create my account" %>
+      </div>
     </div>
   <% end %>
 
