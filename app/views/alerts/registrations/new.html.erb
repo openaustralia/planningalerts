@@ -35,3 +35,7 @@
     <%= f.button "Create account and save" %>
   </div>
 <% end %>
+
+<p>Already have an account?</p>
+
+<%= pa_link_to "Sign in", new_alerts_user_session_path(user: { address: @alert.address, radius_meters: @alert.radius_meters }) %>
