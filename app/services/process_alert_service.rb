@@ -18,6 +18,15 @@ class ProcessAlertService
 
   sig { returns([Integer, Integer, Integer]) }
   def call
+    # Newly registered users who have not confirmed their email address can potentially
+    # have an alert setup but we don't want to send out emails until they have confirmed
+    # their email address
+    if T.must(alert.user).confirmed_at.nil?
+      # Return number of emails, applications and comments sent
+      # Note that we also intentionally don't want to update last_processed in this case
+      return [0, 0, 0]
+    end
+
     applications = alert.recent_new_applications.to_a
     comments = alert.new_comments
 

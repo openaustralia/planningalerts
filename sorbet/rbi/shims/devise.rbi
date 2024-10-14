@@ -4,6 +4,7 @@ module Devise
   class RegistrationsController < DeviseController
     def new; end
     def create; end
+    def resource; end
   end
 
   class SessionsController < DeviseController
