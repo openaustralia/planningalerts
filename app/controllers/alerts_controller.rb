@@ -4,6 +4,9 @@
 class AlertsController < ApplicationController
   extend T::Sig
 
+  # For sorbet
+  include Split::Helper
+
   before_action :authenticate_user!, except: %i[unsubscribe signed_out]
   after_action :verify_authorized, except: %i[index unsubscribe signed_out]
   after_action :verify_policy_scoped, only: :index
@@ -45,6 +48,7 @@ class AlertsController < ApplicationController
     alert.geocode_from_address
 
     if alert.save
+      ab_finished(:logged_out_alert_flow_order)
       redirect_to alerts_path, notice: "You succesfully added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
     else
       @alert = T.let(alert, T.nilable(Alert))

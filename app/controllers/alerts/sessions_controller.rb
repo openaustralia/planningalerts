@@ -5,6 +5,9 @@ module Alerts
   class SessionsController < Devise::SessionsController
     extend T::Sig
 
+    # To keep sorbet happy
+    include Split::Helper
+
     sig { void }
     def new
       super do
@@ -27,6 +30,7 @@ module Alerts
       alert.geocode_from_address
 
       if alert.save
+        ab_finished(:logged_out_alert_flow_order)
         redirect_to alerts_path, notice: "You succesfully signed in and added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
       else
         @alert = T.let(alert, T.nilable(Alert))

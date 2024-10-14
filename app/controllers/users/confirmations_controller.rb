@@ -7,6 +7,7 @@ module Users
 
     # For sorbet
     include Devise::Controllers::Helpers
+    include Split::Helper
 
     # GET /resource/confirmation/new
     # def new
@@ -37,6 +38,7 @@ module Users
       if resource.alerts.empty?
         after_sign_in_path_for(resource)
       else
+        ab_finished(:logged_out_alert_flow_order)
         flash[:notice] = t("devise.confirmations.confirmed_with_alert", address: T.must(resource.alerts.first).address)
         alerts_path
       end
