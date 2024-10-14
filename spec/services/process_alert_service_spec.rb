@@ -6,7 +6,7 @@ describe ProcessAlertService do
   let(:address) { "24 Bruce Road, Glenbrook" }
 
   context "with an alert with no new comments" do
-    let(:alert) { create(:alert, address:) }
+    let(:alert) { create(:alert, address:, user: create(:confirmed_user)) }
 
     before do
       allow(alert).to receive(:recent_comments).and_return([])
