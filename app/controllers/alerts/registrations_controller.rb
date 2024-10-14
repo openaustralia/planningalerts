@@ -18,16 +18,19 @@ module Alerts
       super do
         # We're attaching the alert to the unconfirmed user now so that we don't have to pass around the alert
         # through the registration process which would involve doing unspeakable horrors to devise.
-        alert = Alert.new(
+        @alert = Alert.new(
           user: resource,
           address: params[:user][:address],
           radius_meters: params[:user][:radius_meters]
         )
-        # TODO: Check that we're actually allowed to create an alert
-        # Ensures the address is normalised into a consistent form
-        alert.geocode_from_address
-        # TODO: Handle error state
-        alert.save!
+
+        if resource.persisted?
+          # TODO: Check that we're actually allowed to create an alert
+          # Ensures the address is normalised into a consistent form
+          @alert.geocode_from_address
+          # TODO: Handle error state
+          @alert.save!
+        end
       end
     end
 
