@@ -1,12 +1,14 @@
-<%# TODO: Obviously this needs to be made to look like the design %>
+<%# TODO: Extract common bits from this view and devise/sessions/new %>
 
 <div class="max-w-lg mx-auto">
-  <%= render HeadingComponent.new(tag: :h1, extra_classes: "mt-20 mb-12 text-center") do %>
+  <%= image_tag "illustration/save-alert.svg", alt: "", class: "w-40 m-auto mt-16" %>
+
+  <%= render HeadingComponent.new(tag: :h1, extra_classes: "mt-10 mb-6 text-center") do %>
     Sign in to save this search
   <% end %>
 
-  <p>
-    Applications within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>
+  <p class="mb-6 text-xl text-center text-navy text-balance">
+    Applications within <%= meters_in_words(@alert.radius_meters) %> of <span class="text-nowrap"><%= @alert.address %></span>
   </p>
 
   <%= form_with model: resource, url: session_path(resource_name) do |f| %>
@@ -19,7 +21,7 @@
       <div class="w-full">
         <%= f.label :password, class: "mb-1 block" %>
         <%= f.password_field :password, class: "block mb-2 w-full", placeholder: "••••••••", autocomplete: "current-password", required: true %>
-        <%# link_to "Forgot your password?", new_password_path(resource_name), class: "text-xl text-navy font-light underline block mb-8" %>
+        <%= link_to "Forgot your password?", new_user_password_path, class: "text-xl text-navy font-light underline block mb-8" %>
       </div>
       <%= f.hidden_field :remember_me, value: true %>
       <%# TODO: Is there a neater / more sensible way to pass these parameters on? %>
