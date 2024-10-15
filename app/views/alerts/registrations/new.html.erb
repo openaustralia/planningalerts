@@ -2,7 +2,11 @@
 <%# TODO: Extract common elements from this view and devise/registrations/new %>
 
 <div class="max-w-lg mx-auto">
-  <%= render HeadingComponent.new(tag: :h1, extra_classes: "mt-20 mb-12 text-center").with_content("Create an account to save this search") %>
+  <%= render HeadingComponent.new(tag: :h1, extra_classes: "mt-20 mb-6 text-center").with_content("Create an account to save this search") %>
+
+  <p class="mb-6 text-xl text-center text-navy text-balance">
+    Applications within <%= meters_in_words(@alert.radius_meters) %> of <span class="text-nowrap"><%= @alert.address %></span>
+  </p>
 
   <%= form_with model: resource, url: registration_path(resource_name) do |f| %>
     <div class="flex flex-col items-center">
