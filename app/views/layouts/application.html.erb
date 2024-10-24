@@ -4,12 +4,7 @@
     <%= render "html_head" %>
   </head>
   <body x-data="{ bodyScrolling: true }" x-bind:class="{ 'overflow-hidden': !bodyScrolling}">
-    <%# TODO: Extract the tag manager into partial %>
-    <%# TODO: Extract GTM config %>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQK6F2JF"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <%= render "google_tag_manager_noscript" %>
     <%= render "header" %>
     <main>
       <%= render ContainerComponent.new do %>
