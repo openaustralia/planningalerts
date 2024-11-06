@@ -22,6 +22,31 @@ class SkippingSassCompressor
   end
 end
 
+# This is for proxying requests to this server to plausible.io for analytics.
+# For some reason didn't work putting this in config/initializers/proxy.rb
+# TODO: Fix this
+class PlausibleProxy < Rack::Proxy
+  def perform_request(env)
+    request = Rack::Request.new(env)
+
+    # use rack proxy for anything hitting plausible analytics endpoints
+    if request.path =~ %r{^/js/script\.} || request.path =~ %r{^/api/event}
+        # most backends required host set properly, but rack-proxy doesn't set this for you automatically
+        # even when a backend host is passed in via the options
+        env["HTTP_HOST"] = "plausible.io"
+
+        # don't send your sites cookies to target service, unless it is a trusted internal service that can parse all your cookies
+        env['HTTP_COOKIE'] = ''
+
+        env['content-length'] = nil
+
+        super(env)
+    else
+      @app.call(env)
+    end
+  end
+end
+
 module PlanningalertsApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -46,6 +71,7 @@ module PlanningalertsApp
     # config.i18n.default_locale = :de
 
     config.middleware.use Rack::Attack
+    config.middleware.use PlausibleProxy
 
     config.action_dispatch.tld_length = 2
 
