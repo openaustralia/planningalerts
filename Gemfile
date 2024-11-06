@@ -162,6 +162,9 @@ gem "split", require: "split/dashboard"
 # For some reason this now needs to be available in development (as well as test) for the mailer previews to work
 gem "rspec-rails"
 
+# For proxying requests to plausible.io analytics
+gem "rack-proxy"
+
 group :test do
   gem "capybara"
   gem "email_spec"

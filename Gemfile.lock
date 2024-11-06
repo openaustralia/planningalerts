@@ -462,6 +462,8 @@ GEM
     rack-protection (4.0.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0, < 4)
+    rack-proxy (0.7.7)
+      rack
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -844,6 +846,7 @@ DEPENDENCIES
   rack-attack
   rack-cors
   rack-mini-profiler
+  rack-proxy
   rails (~> 7.1.0)
   rails-controller-testing
   rails_autolink
