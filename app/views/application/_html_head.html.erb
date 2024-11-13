@@ -15,7 +15,7 @@
 <%= render "google_tag_manager" %>
 <% if Rails.env.production? %>
   <%# plausible.io analytics %>
-  <script defer data-domain="planningalerts.org.au" src="/js/script.outbound-links.js"></script>
+  <script defer data-domain="planningalerts.org.au" src="/js/script.outbound-links.pageview-props.js"></script>
 <% end %>
 
 <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
