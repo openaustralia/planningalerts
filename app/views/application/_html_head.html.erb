@@ -19,7 +19,7 @@
   <script defer data-domain="planningalerts.org.au" src="/js/script.manual.js"></script>
   <script>
     window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
-    plausible('pageview', { u: "https://www.planningalerts.org.au<%= request.route_uri_pattern.gsub("(.:format)", "") %>" });
+    plausible('pageview', { u: "https://www.planningalerts.org.au<%= request.route_uri_pattern.gsub("(.:format)", "") %>" + window.location.search });
   </script>
 <% end %>
 
