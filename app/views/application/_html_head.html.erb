@@ -15,8 +15,7 @@
 <%= render "google_tag_manager" %>
 <% if Rails.env.production? %>
   <%# plausible.io analytics %>
-  <%# TODO: Reinstate outbound link tracking and tracking of whether user is signed in %>
-  <script defer data-domain="planningalerts.org.au" src="/js/script.manual.js"></script>
+  <script defer event-signed_in="<%= user_signed_in?.to_s %>" data-domain="planningalerts.org.au" src="/js/script.manual.outbound-links.pageview-props.js"></script>
   <script>
     window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
     plausible('pageview', { u: "https://www.planningalerts.org.au<%= request.route_uri_pattern.gsub("(.:format)", "") %>" + window.location.search });
