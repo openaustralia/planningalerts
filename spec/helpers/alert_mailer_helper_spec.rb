@@ -55,23 +55,6 @@ describe AlertMailerHelper do
         end
       end
     end
-
-    describe "#new_comment_url_with_tracking" do
-      it {
-        expect(
-          helper.new_comment_url_with_tracking(
-            id: application.id
-          )
-        )
-          .to eq application_url(
-            base_params.merge(
-              id: application.id,
-              utm_campaign: "add-comment",
-              anchor: "add-comment"
-            )
-          )
-      }
-    end
   end
 
   describe "#subject" do

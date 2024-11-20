@@ -43,17 +43,6 @@ module AlertMailerHelper
     )
   end
 
-  sig { params(id: T.nilable(Integer)).returns(String) }
-  def new_comment_url_with_tracking(id: nil)
-    T.unsafe(self).application_url(
-      base_tracking_params.merge(
-        id:,
-        anchor: "add-comment",
-        utm_campaign: "add-comment"
-      )
-    )
-  end
-
   sig do
     params(
       alert: Alert,
