@@ -33,9 +33,13 @@
       <p class="mb-8">
         Thanks, your comment has been sent to <%= comment.comment_recipient_full_name %> and posted below!
       </p>
-      <%= render ShareButtonComponent.new(url: comment_url(comment), title: "My comment on #{page_title(comment.application)}", color: :lavender) do %>
-        Share your comment
-      <% end %>
+      <%# TODO: Make the share button component add the utm tags automatically %>
+      <%= c = "Share your comment"
+          render ShareButtonComponent.new(
+            url: comment_url(comment, utm_source: "share", utm_content: c),
+            title: "My comment on #{page_title(comment.application)}",
+            color: :lavender
+          ).with_content(c) %>
     </div>
   <% end %>
   <%# Make the canvas (which is used to show the confetti) the same size as the alert %>

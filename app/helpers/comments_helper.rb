@@ -64,8 +64,8 @@ module CommentsHelper
     application_path(comment.application, anchor: "comment#{comment.id}")
   end
 
-  sig { params(comment: Comment).returns(String) }
-  def comment_url(comment)
-    application_url(comment.application, anchor: "comment#{comment.id}")
+  sig { params(comment: Comment, params: T::Hash[Symbol, String]).returns(String) }
+  def comment_url(comment, params = {})
+    application_url(comment.application, { anchor: "comment#{comment.id}" }.merge(params))
   end
 end
