@@ -97,9 +97,13 @@
 </div>
 
 <div class="mt-6 md:mt-2">
-  <%= render ShareButtonComponent.new(url: application_url(@application), title: page_title(@application), color: :green) do %>
-    Share this application
-  <% end %>
+  <%# TODO: Make the share button component add the utm tags automatically %>
+  <%= c = "Share this application"
+      render ShareButtonComponent.new(
+        url: application_url(@application, utm_source: "share", utm_content: c),
+        title: page_title(@application),
+        color: :green
+      ).with_content(c) %>
 </div>
 
 <%= render "applications/create_alert_form_bigger", alert: @alert %>
