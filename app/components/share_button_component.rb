@@ -19,4 +19,17 @@ class ShareButtonComponent < ViewComponent::Base
       raise "Unexpected color: #{color}"
     end
   end
+
+  sig { returns(String) }
+  def url_with_tracking
+    append_params(@url, utm_source: "share", utm_content: content.strip)
+  end
+
+  sig { params(url: String, params: T::Hash[String, String]).returns(String) }
+  def append_params(url, params)
+    u = URI.parse(url)
+    e = Rack::Utils.parse_nested_query(u.query).merge(params).to_param
+    u.query = e
+    u.to_s
+  end
 end
