@@ -96,4 +96,13 @@ class ButtonComponent < ViewComponent::Base
       raise "Unexpected size #{@size}"
     end
   end
+
+  sig { params(tag: Symbol, href: T.nilable(String), options: T::Hash[Symbol, T.nilable(String)], block: T.proc.returns(String)).returns(String) }
+  def wrapper_tag(tag, href, options, &block)
+    if tag == :a
+      link_to href, options, &block
+    elsif tag == :button
+      button_tag options, &block
+    end
+  end
 end
