@@ -28,6 +28,4 @@
   <%= render "ongoing_access_box" %>
 <% end %>
 
-<% if @api_keys.empty? %>
-  <%= render "create_key_box" %>
-<% end %>
+<%= render "create_key_box", disabled: !@api_keys.empty? %>
