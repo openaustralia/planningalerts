@@ -32,17 +32,21 @@ class ButtonComponent < ViewComponent::Base
     # TODO: Hover states are not subtle enough IMHO
     case type
     when :primary
-      classes << "text-white bg-green hover:bg-dark-green"
+      classes << "text-white bg-green"
+      classes << "hover:bg-dark-green" unless disabled
     # Special version of a primary button that you should only use when it is on
     # a dark background (such as navy). Its default state is the same as primary but
     # it's interactive states go lighter rather than darker
     when :primary_on_dark_background
-      classes << "text-white bg-green hover:bg-white hover:text-green hover:ring-2 hover:ring-green"
+      classes << "text-white bg-green"
+      classes << "hover:bg-white hover:text-green hover:ring-2 hover:ring-green" unless disabled
     when :secondary
-      classes << "text-white bg-warm-grey hover:bg-dark-warm-grey"
+      classes << "text-white bg-warm-grey"
+      classes << "hover:bg-dark-warm-grey" unless disabled
     # This is not strictly an "inverse" but is good to be used on darker coloured backgrounds
     when :inverse
-      classes << "text-white bg-navy hover:text-navy hover:bg-white hover:ring-2 hover:ring-navy"
+      classes << "text-white bg-navy"
+      classes << "hover:text-navy hover:bg-white hover:ring-2 hover:ring-navy" unless disabled
     else
       raise "Unexpected type #{type}"
     end
