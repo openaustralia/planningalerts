@@ -16,26 +16,15 @@
 <%# TODO: Sort them into a sensible order %>
 <%= render @api_keys %>
 
-<% if @api_keys.empty? %>
-  <%= render "create_key_box" %>
-<% else %>
-  <%# It would be better to show links to the developer documentation very near to the active key %>
+<%# It would be better to show links to the developer documentation very near to the active key %>
+<% unless @api_keys.empty? %>
   <p class="text-xl text-navy">
     Check out the <%= pa_link_to "API Developer Documentation", api_developer_path %>
   </p>
+<% end %>
 
-<%
-=begin
-%>
-  <p class="text-xl text-navy">
-    <%# TODO: Link to actual place %>
-    <%# TODO: Note that the be_nice section has been removed %>
-    Remind yourself of our <%= pa_link_to "API code of conduct", api_howto_path(anchor: "be_nice") %>
-  </p>
-<%
-=end
-%>
-
+<% if @api_keys.empty? %>
+  <%= render "create_key_box" %>
 <% end %>
 
 <%# Don't show the ongoing access box if they have an active license that doesn't expire %>
