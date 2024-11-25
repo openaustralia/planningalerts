@@ -29,6 +29,13 @@ class User < ApplicationRecord
   has_many :reports, dependent: :nullify
   has_many :contact_messages, dependent: :nullify
 
+  # Returns true if the user has at least one key that is permanent
+  # and active
+  sig { returns(T::Boolean) }
+  def active_permanent_api_key?
+    api_keys.any? { |key| key.active? && key.permanent? }
+  end
+
   # rubocop:disable Style/ArgumentsForwarding
   # TODO: Arguments forwarding doesn't seem to be supported by sorbet right now?
   sig { params(notification: T.untyped, args: T.untyped).void }

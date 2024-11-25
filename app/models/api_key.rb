@@ -43,6 +43,11 @@ class ApiKey < ApplicationRecord
   end
 
   sig { returns(T::Boolean) }
+  def permanent?
+    expires_at.nil?
+  end
+
+  sig { returns(T::Boolean) }
   def expired?
     e = expires_at
     !e.nil? && e <= Time.current
