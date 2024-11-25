@@ -5,18 +5,21 @@
 <div class="mb-4 text-xl text-navy">
   <% if api_key.disabled? %>
     <p>
-      Key is disabled
+      Key disabled
       <%# TODO: Add some ability to question this / contact us %>
     </p>
-  <% elsif api_key.expires_at %>
+  <% elsif api_key.expires_at.nil? %>
+    <p>
+      Key does not expire
+    </p>
+  <% else %>
     <p>
       <% if api_key.expires_at > Time.current %>
         <%# TODO: Highlight future expiry in some way? %>
         Expires in:
         <%= time_tag_with_hover(api_key.expires_at, distance_of_time_in_words(Time.current, api_key.expires_at)) %>
       <% else %>
-        Expired:
-        <%= time_tag_with_hover(api_key.expires_at, time_ago_in_words(api_key.expires_at)) %> ago
+        Key expired
       <% end %>
     </p>
   <% end %>
