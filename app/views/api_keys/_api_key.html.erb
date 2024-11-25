@@ -26,14 +26,7 @@
 </div>
 
 <div class="flex items-baseline gap-2 mb-12">
-  <%# If key is not active no need for copying api key easily %>
-  <% if api_key.active? %>
-    <%# TODO: Add a note for the user to remind them not to share this key with anyone %>
-    <%= render ClickToCopyComponent.new.with_content(api_key.value) %>
-  <% else %>
-    <div class="text-xl text-navy">
-      <%= api_key.value %>
-    </div>
-  <% end %>
+  <%# TODO: Add a note for the user to remind them not to share this key with anyone %>
+  <%= render ClickToCopyComponent.new.with_content(api_key.value) %>
 </div>
 
