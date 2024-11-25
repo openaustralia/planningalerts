@@ -54,7 +54,7 @@ class ButtonComponent < ViewComponent::Base
     # All the buttons share the same focus styling
     classes += ["focus:outline-none", "focus:ring-4", "focus:ring-sun-yellow"]
 
-    classes += %w[cursor-not-allowed opacity-40] if disabled && tag == :button
+    classes += %w[cursor-not-allowed opacity-40] if disabled
 
     case tag
     when :a
@@ -73,9 +73,7 @@ class ButtonComponent < ViewComponent::Base
       raise "Unexpected tag: #{tag}"
     end
 
-    raise "Can't use disabled with a link at the moment" if disabled && tag == :a
-
-    options[:disabled] = true if disabled
+    options[:disabled] = true if disabled && tag == :button
 
     options["x-on:click"] = "if (!confirm('#{confirm}')) { $event.preventDefault(); }" if confirm
 
@@ -83,6 +81,7 @@ class ButtonComponent < ViewComponent::Base
     @tag = tag
     @href = href
     @icon = icon
+    @disabled = disabled
   end
 
   sig { returns(String) }
@@ -99,8 +98,10 @@ class ButtonComponent < ViewComponent::Base
 
   sig { params(block: T.proc.returns(String)).returns(String) }
   def wrapper_tag(&block)
-    if @tag == :a
+    if @tag == :a && !@disabled
       link_to @href, @options, &block
+    elsif @tag == :a && @disabled
+      content_tag :span, @options, &block
     elsif @tag == :button
       button_tag @options, &block
     end
