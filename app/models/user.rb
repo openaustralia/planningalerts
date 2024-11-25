@@ -36,6 +36,11 @@ class User < ApplicationRecord
     api_keys.any? { |key| key.active? && key.permanent? }
   end
 
+  sig { returns(T::Boolean) }
+  def active_api_key?
+    api_keys.any?(&:active?)
+  end
+
   # rubocop:disable Style/ArgumentsForwarding
   # TODO: Arguments forwarding doesn't seem to be supported by sorbet right now?
   sig { params(notification: T.untyped, args: T.untyped).void }

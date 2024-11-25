@@ -1,31 +1,54 @@
-<p class="text-xl font-bold text-navy">
-  Plan type: <%= api_key.plan.capitalize %>
-</p>
+<div class="mb-12">
+  <p class="text-xl font-bold text-navy">
+    Plan type: <%= api_key.plan.capitalize %>
+  </p>
 
-<div class="mb-4 text-xl text-navy">
-  <% if api_key.disabled? %>
-    <p>
-      Key disabled
-      <%# TODO: Add some ability to question this / contact us %>
-    </p>
-  <% elsif api_key.expires_at.nil? %>
-    <p>
-      Key does not expire
-    </p>
-  <% else %>
-    <p>
-      <% if api_key.expires_at > Time.current %>
-        <%# TODO: Highlight future expiry in some way? %>
-        Expires in:
-        <%= time_tag_with_hover(api_key.expires_at, distance_of_time_in_words(Time.current, api_key.expires_at)) %>
-      <% else %>
-        Key expired
-      <% end %>
-    </p>
+  <div class="mb-4 text-xl text-navy">
+    <% if api_key.disabled? %>
+      <p>
+        Key disabled
+        <%# TODO: Add some ability to question this / contact us %>
+      </p>
+    <% elsif api_key.expires_at.nil? %>
+      <p>
+        Key does not expire
+      </p>
+    <% else %>
+      <p>
+        <% if api_key.expires_at > Time.current %>
+          <%# TODO: Highlight future expiry in some way? %>
+          Expires in:
+          <%= time_tag_with_hover(api_key.expires_at, distance_of_time_in_words(Time.current, api_key.expires_at)) %>
+        <% else %>
+          Key expired
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+
+  <div class="flex items-baseline gap-2 mb-4">
+    <%# TODO: Add a note for the user to remind them not to share this key with anyone %>
+    <%= render ClickToCopyComponent.new.with_content(api_key.value) %>
+  </div>
+
+  <% if api_key.expired? && !current_user.active_api_key? %>
+    <%# TODO: Extract this into a dismissable box component %>
+    <div x-data="{open: true}" x-show="open" x-transition class="flex items-start gap-5 px-8 mt-8 text-xl text-white rounded-lg bg-lavender">
+      <div class="my-8 grow">
+        <p class="font-bold">Your trial access to our API is up!</p>
+        <p class="mt-2">
+          We hope you've found it useful. If you want support choosing a new plan
+          <%# TODO: Prefill contact form %>
+          <%= link_to "get in touch", documentation_contact_path, class: "hover:opacity-80 focus:outline-none focus:bg-sun-yellow focus:text-navy font-bold underline" %>.
+        </p>
+      </div>
+      <%# TODO: This button doesn't do anything without javascript, so hide it until js is running %>
+      <button x-on:click="open=false; document.cookie='planningalerts_welcome=false;Path=/'"
+              class="p-2 mt-8 hover:opacity-80 focus:outline-none focus:ring-sun-yellow focus:ring-4">
+        <span class="sr-only">Close</span>
+        <%= render IconComponent.new(name: :dismiss) %>
+      </button>
+    </div>
   <% end %>
 </div>
 
-<div class="flex items-baseline gap-2 mb-12">
-  <%# TODO: Add a note for the user to remind them not to share this key with anyone %>
-  <%= render ClickToCopyComponent.new.with_content(api_key.value) %>
-</div>
