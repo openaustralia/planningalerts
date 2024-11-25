@@ -20,6 +20,23 @@ class ApiKey < ApplicationRecord
     a
   end
 
+  sig { returns(Symbol) }
+  def plan
+    # This is a stop-gap measure until we implement a "proper" plan set-up
+    if commercial
+      # In reality this should be split out into "Standard" and "Premium"
+      :commercial
+    elsif community
+      :community
+    elsif expires_at
+      # We're assuming that trial licenses always have an expiry
+      :trial
+    else
+      # This shouldn't happen I think
+      :other
+    end
+  end
+
   sig { returns(T::Boolean) }
   def active?
     !disabled && !expired?
