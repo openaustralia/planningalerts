@@ -23,11 +23,11 @@
   </p>
 <% end %>
 
-<% if @api_keys.empty? %>
-  <%= render "create_key_box" %>
-<% end %>
-
 <%# Don't show the ongoing access box if they have an active license that doesn't expire %>
 <% unless @api_keys.find(&:active?) && @api_keys.find(&:active?).expires_at.nil? %>
   <%= render "ongoing_access_box" %>
+<% end %>
+
+<% if @api_keys.empty? %>
+  <%= render "create_key_box" %>
 <% end %>
