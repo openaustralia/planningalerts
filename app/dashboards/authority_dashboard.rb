@@ -22,7 +22,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     full_name: Field::String,
     github_issue: Field::HasOne,
     last_scraper_run_log: Field::Text,
-    morph_name: Field::String,
+    morph_name: MorphNameField,
     population_2021: Field::Number,
     scraper_authority_label: Field::String,
     short_name: Field::String,
