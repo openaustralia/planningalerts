@@ -50,7 +50,7 @@ module Admin
     sig { void }
     def import
       authority = Authority.find(T.cast(params[:id], String))
-      authorize(authority)
+      authorize(authority, policy_class: Admin::AuthorityPolicy)
       ImportApplicationsJob.perform_async(authority.id)
       redirect_to({ action: :show }, notice: t(".success"))
     end
