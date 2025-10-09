@@ -26,7 +26,7 @@ VCR.configure do |c|
   c.hook_into :webmock
   # Ignore requests to github and s3 for the benefit of the webdrivers gem
   # which automatically downloads the webdriver for headless testing
-  c.ignore_hosts "github.com"
+  c.ignore_hosts "github.com", "release-assets.githubusercontent.com"
   c.ignore_request do |request|
     URI(request.uri).host =~ /objects\.githubusercontent\.com/
     # false
