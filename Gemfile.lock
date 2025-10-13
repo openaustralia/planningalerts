@@ -452,7 +452,7 @@ GEM
       activesupport (>= 3.0.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.7)
+    rack (3.2.3)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
     rack-cors (2.0.2)
@@ -464,7 +464,8 @@ GEM
       rack (>= 3.0.0, < 4)
     rack-proxy (0.7.7)
       rack
-    rack-session (2.0.0)
+    rack-session (2.1.1)
+      base64 (>= 0.1.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
