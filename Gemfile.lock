@@ -207,7 +207,7 @@ GEM
     crass (1.0.6)
     csv (3.3.0)
     dalli (3.2.8)
-    date (3.3.4)
+    date (3.4.1)
     dbf (4.3.2)
       csv
     debug_inspector (1.2.0)
@@ -398,7 +398,7 @@ GEM
       uri
     net-http-persistent (4.0.2)
       connection_pool (~> 2.2)
-    net-imap (0.4.14)
+    net-imap (0.4.20)
       date
       net-protocol
     net-pop (0.1.2)
@@ -729,7 +729,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.4.0)
     timecop (0.9.10)
-    timeout (0.4.1)
+    timeout (0.4.3)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
