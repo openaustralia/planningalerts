@@ -3,8 +3,8 @@ lock "~> 3.19.1"
 
 set :application, "planningalerts"
 set :repo_url, "https://github.com/openaustralia/planningalerts.git"
-
-# Default branch is :master
+# Default branch is :main
+set :branch, "main"
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
