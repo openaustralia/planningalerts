@@ -164,10 +164,10 @@ If all looks good then thank the contributor for helping tens of thousands of pe
 ## Contributing
 
 * Fork the project on GitHub.
-* Make a topic branch from the master branch.
+* Make a topic branch from the main branch.
 * Make your changes and write tests.
 * Commit the changes without making changes to any files that aren't related to your enhancement or fix.
-* Send a pull request against the master branch.
+* Send a pull request against the main branch.
 
 ## Credits
 
