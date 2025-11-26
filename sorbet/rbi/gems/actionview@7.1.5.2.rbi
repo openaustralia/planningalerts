@@ -15,193 +15,193 @@ class ActionController::Base < ::ActionController::Metal
   include ::Devise::Controllers::StoreLocation
   extend ::AbstractController::Helpers::Resolution
 
-  # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+  # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#70
   def __callbacks; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+  # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#70
   def __callbacks?; end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+  # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
   def _helper_methods; end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+  # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
   def _helper_methods=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+  # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
   def _helper_methods?; end
 
   # source://actionview//lib/action_view/layouts.rb#216
   def _layout_conditions(&block); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#963
+  # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#963
   def _process_action_callbacks; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/renderers.rb#31
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/renderers.rb#31
   def _renderers; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/renderers.rb#31
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/renderers.rb#31
   def _renderers=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/renderers.rb#31
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/renderers.rb#31
   def _renderers?; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#951
+  # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#951
   def _run_process_action_callbacks(&block); end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/caching.rb#42
+  # source://actionpack/7.1.5.2/lib/abstract_controller/caching.rb#42
   def _view_cache_dependencies; end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/caching.rb#42
+  # source://actionpack/7.1.5.2/lib/abstract_controller/caching.rb#42
   def _view_cache_dependencies=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/caching.rb#42
+  # source://actionpack/7.1.5.2/lib/abstract_controller/caching.rb#42
   def _view_cache_dependencies?; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/params_wrapper.rb#187
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/params_wrapper.rb#187
   def _wrapper_options; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/params_wrapper.rb#187
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/params_wrapper.rb#187
   def _wrapper_options=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/params_wrapper.rb#187
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/params_wrapper.rb#187
   def _wrapper_options?; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/flash.rb#36
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/flash.rb#36
   def alert; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def allow_forgery_protection; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def allow_forgery_protection=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def asset_host; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def asset_host=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def assets_dir; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def assets_dir=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def csrf_token_storage_strategy; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def csrf_token_storage_strategy=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def default_asset_host_protocol; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def default_asset_host_protocol=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def default_protect_from_forgery; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def default_protect_from_forgery=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def default_static_extension; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def default_static_extension=(value); end
 
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+  # source://actionpack/7.1.5.2/lib/action_dispatch/routing/url_for.rb#97
   def default_url_options; end
 
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+  # source://actionpack/7.1.5.2/lib/action_dispatch/routing/url_for.rb#97
   def default_url_options=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+  # source://actionpack/7.1.5.2/lib/action_dispatch/routing/url_for.rb#97
   def default_url_options?; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def enable_fragment_cache_logging; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def enable_fragment_cache_logging=(value); end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/etag_with_template_digest.rb#29
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/etag_with_template_digest.rb#29
   def etag_with_template_digest; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/etag_with_template_digest.rb#29
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/etag_with_template_digest.rb#29
   def etag_with_template_digest=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/etag_with_template_digest.rb#29
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/etag_with_template_digest.rb#29
   def etag_with_template_digest?; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/conditional_get.rb#13
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/conditional_get.rb#13
   def etaggers; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/conditional_get.rb#13
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/conditional_get.rb#13
   def etaggers=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/conditional_get.rb#13
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/conditional_get.rb#13
   def etaggers?; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/flash.rb#10
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/flash.rb#10
   def flash(*_arg0, **_arg1, &_arg2); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def forgery_protection_origin_check; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def forgery_protection_origin_check=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def forgery_protection_strategy; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def forgery_protection_strategy=(value); end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/caching/fragments.rb#25
+  # source://actionpack/7.1.5.2/lib/abstract_controller/caching/fragments.rb#25
   def fragment_cache_keys; end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/caching/fragments.rb#25
+  # source://actionpack/7.1.5.2/lib/abstract_controller/caching/fragments.rb#25
   def fragment_cache_keys=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/caching/fragments.rb#25
+  # source://actionpack/7.1.5.2/lib/abstract_controller/caching/fragments.rb#25
   def fragment_cache_keys?; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#65
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#65
   def helpers_path; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#65
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#65
   def helpers_path=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#65
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#65
   def helpers_path?; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#66
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#66
   def include_all_helpers; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#66
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#66
   def include_all_helpers=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#66
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#66
   def include_all_helpers?; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def javascripts_dir; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def javascripts_dir=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def log_warning_on_csrf_failure; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def log_warning_on_csrf_failure=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def logger; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def logger=(value); end
 
   # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
@@ -213,52 +213,52 @@ class ActionController::Base < ::ActionController::Metal
   # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
   def mimes_for_respond_to?; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/flash.rb#36
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/flash.rb#36
   def notice; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def per_form_csrf_tokens; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def per_form_csrf_tokens=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def perform_caching; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def perform_caching=(value); end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/callbacks.rb#36
+  # source://actionpack/7.1.5.2/lib/abstract_controller/callbacks.rb#36
   def raise_on_missing_callback_actions; end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/callbacks.rb#36
+  # source://actionpack/7.1.5.2/lib/abstract_controller/callbacks.rb#36
   def raise_on_missing_callback_actions=(val); end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/redirecting.rb#15
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/redirecting.rb#15
   def raise_on_open_redirects; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/redirecting.rb#15
+  # source://actionpack/7.1.5.2/lib/action_controller/metal/redirecting.rb#15
   def raise_on_open_redirects=(val); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def relative_url_root; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def relative_url_root=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def request_forgery_protection_token; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def request_forgery_protection_token=(value); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/rescuable.rb#15
+  # source://activesupport/7.1.5.2/lib/active_support/rescuable.rb#15
   def rescue_handlers; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/rescuable.rb#15
+  # source://activesupport/7.1.5.2/lib/active_support/rescuable.rb#15
   def rescue_handlers=(_arg0); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/rescuable.rb#15
+  # source://activesupport/7.1.5.2/lib/active_support/rescuable.rb#15
   def rescue_handlers?; end
 
   # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
@@ -270,10 +270,10 @@ class ActionController::Base < ::ActionController::Metal
   # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
   def responder?; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
   def stylesheets_dir; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
   def stylesheets_dir=(value); end
 
   private
@@ -281,47 +281,47 @@ class ActionController::Base < ::ActionController::Metal
   # source://actionview//lib/action_view/layouts.rb#330
   def _layout(lookup_context, formats); end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/base.rb#252
+  # source://actionpack/7.1.5.2/lib/action_controller/base.rb#252
   def _protected_ivars; end
 
   class << self
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+    # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#70
     def __callbacks; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+    # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#70
     def __callbacks=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+    # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#70
     def __callbacks?; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/form_builder.rb#33
+    # source://actionpack/7.1.5.2/lib/action_controller/form_builder.rb#33
     def _default_form_builder; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/form_builder.rb#33
+    # source://actionpack/7.1.5.2/lib/action_controller/form_builder.rb#33
     def _default_form_builder=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/form_builder.rb#33
+    # source://actionpack/7.1.5.2/lib/action_controller/form_builder.rb#33
     def _default_form_builder?; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/flash.rb#8
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/flash.rb#8
     def _flash_types; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/flash.rb#8
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/flash.rb#8
     def _flash_types=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/flash.rb#8
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/flash.rb#8
     def _flash_types?; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+    # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
     def _helper_methods; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+    # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
     def _helper_methods=(value); end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+    # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
     def _helper_methods?; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#16
+    # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#16
     def _helpers; end
 
     # source://actionview//lib/action_view/layouts.rb#211
@@ -342,172 +342,172 @@ class ActionController::Base < ::ActionController::Metal
     # source://actionview//lib/action_view/layouts.rb#212
     def _layout_conditions?; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#955
+    # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#955
     def _process_action_callbacks; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#959
+    # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#959
     def _process_action_callbacks=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/renderers.rb#31
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/renderers.rb#31
     def _renderers; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/renderers.rb#31
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/renderers.rb#31
     def _renderers=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/renderers.rb#31
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/renderers.rb#31
     def _renderers?; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/caching.rb#42
+    # source://actionpack/7.1.5.2/lib/abstract_controller/caching.rb#42
     def _view_cache_dependencies; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/caching.rb#42
+    # source://actionpack/7.1.5.2/lib/abstract_controller/caching.rb#42
     def _view_cache_dependencies=(value); end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/caching.rb#42
+    # source://actionpack/7.1.5.2/lib/abstract_controller/caching.rb#42
     def _view_cache_dependencies?; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/params_wrapper.rb#187
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/params_wrapper.rb#187
     def _wrapper_options; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/params_wrapper.rb#187
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/params_wrapper.rb#187
     def _wrapper_options=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/params_wrapper.rb#187
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/params_wrapper.rb#187
     def _wrapper_options?; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def allow_forgery_protection; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def allow_forgery_protection=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def asset_host; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def asset_host=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def assets_dir; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def assets_dir=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def csrf_token_storage_strategy; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def csrf_token_storage_strategy=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def default_asset_host_protocol; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def default_asset_host_protocol=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def default_protect_from_forgery; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def default_protect_from_forgery=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def default_static_extension; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def default_static_extension=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+    # source://actionpack/7.1.5.2/lib/action_dispatch/routing/url_for.rb#97
     def default_url_options; end
 
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+    # source://actionpack/7.1.5.2/lib/action_dispatch/routing/url_for.rb#97
     def default_url_options=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+    # source://actionpack/7.1.5.2/lib/action_dispatch/routing/url_for.rb#97
     def default_url_options?; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def enable_fragment_cache_logging; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def enable_fragment_cache_logging=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/etag_with_template_digest.rb#29
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/etag_with_template_digest.rb#29
     def etag_with_template_digest; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/etag_with_template_digest.rb#29
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/etag_with_template_digest.rb#29
     def etag_with_template_digest=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/etag_with_template_digest.rb#29
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/etag_with_template_digest.rb#29
     def etag_with_template_digest?; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/conditional_get.rb#13
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/conditional_get.rb#13
     def etaggers; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/conditional_get.rb#13
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/conditional_get.rb#13
     def etaggers=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/conditional_get.rb#13
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/conditional_get.rb#13
     def etaggers?; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def forgery_protection_origin_check; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def forgery_protection_origin_check=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def forgery_protection_strategy; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def forgery_protection_strategy=(value); end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/caching/fragments.rb#25
+    # source://actionpack/7.1.5.2/lib/abstract_controller/caching/fragments.rb#25
     def fragment_cache_keys; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/caching/fragments.rb#25
+    # source://actionpack/7.1.5.2/lib/abstract_controller/caching/fragments.rb#25
     def fragment_cache_keys=(value); end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/caching/fragments.rb#25
+    # source://actionpack/7.1.5.2/lib/abstract_controller/caching/fragments.rb#25
     def fragment_cache_keys?; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#65
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#65
     def helpers_path; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#65
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#65
     def helpers_path=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#65
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#65
     def helpers_path?; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#66
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#66
     def include_all_helpers; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#66
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#66
     def include_all_helpers=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/helpers.rb#66
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/helpers.rb#66
     def include_all_helpers?; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def javascripts_dir; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def javascripts_dir=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def log_warning_on_csrf_failure; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def log_warning_on_csrf_failure=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def logger; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def logger=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal.rb#262
+    # source://actionpack/7.1.5.2/lib/action_controller/metal.rb#262
     def middleware_stack; end
 
     # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
@@ -519,49 +519,49 @@ class ActionController::Base < ::ActionController::Metal
     # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
     def mimes_for_respond_to?; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def per_form_csrf_tokens; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def per_form_csrf_tokens=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def perform_caching; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def perform_caching=(value); end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/callbacks.rb#36
+    # source://actionpack/7.1.5.2/lib/abstract_controller/callbacks.rb#36
     def raise_on_missing_callback_actions; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/callbacks.rb#36
+    # source://actionpack/7.1.5.2/lib/abstract_controller/callbacks.rb#36
     def raise_on_missing_callback_actions=(val); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/redirecting.rb#15
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/redirecting.rb#15
     def raise_on_open_redirects; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/redirecting.rb#15
+    # source://actionpack/7.1.5.2/lib/action_controller/metal/redirecting.rb#15
     def raise_on_open_redirects=(val); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def relative_url_root; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def relative_url_root=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def request_forgery_protection_token; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def request_forgery_protection_token=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/rescuable.rb#15
+    # source://activesupport/7.1.5.2/lib/active_support/rescuable.rb#15
     def rescue_handlers; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/rescuable.rb#15
+    # source://activesupport/7.1.5.2/lib/active_support/rescuable.rb#15
     def rescue_handlers=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/rescuable.rb#15
+    # source://activesupport/7.1.5.2/lib/active_support/rescuable.rb#15
     def rescue_handlers?; end
 
     # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
@@ -573,18 +573,18 @@ class ActionController::Base < ::ActionController::Metal
     # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
     def responder?; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#115
     def stylesheets_dir; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # source://activesupport/7.1.5.2/lib/active_support/configurable.rb#116
     def stylesheets_dir=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/base.rb#184
+    # source://actionpack/7.1.5.2/lib/action_controller/base.rb#184
     def without_modules(*modules); end
   end
 end
 
-# :include: actionview/README.rdoc
+# :include: ../README.rdoc
 #
 # source://actionview//lib/action_view/gem_version.rb#3
 module ActionView
@@ -903,10 +903,9 @@ class ActionView::ActionViewError < ::StandardError; end
 #     end
 #   end
 #
-# For more information on Builder please consult the {source
-# code}[https://github.com/jimweirich/builder].
+# For more information on Builder please consult the {source code}[https://github.com/rails/builder].
 #
-# source://actionview//lib/action_view/base.rb#141
+# source://actionview//lib/action_view/base.rb#140
 class ActionView::Base
   include ::ActionView::Context
   include ::ERB::Escape
@@ -953,51 +952,51 @@ class ActionView::Base
   #
   # @return [Base] a new instance of Base
   #
-  # source://actionview//lib/action_view/base.rb#228
+  # source://actionview//lib/action_view/base.rb#227
   def initialize(lookup_context, assigns, controller); end
 
-  # source://actionview//lib/action_view/base.rb#165
+  # source://actionview//lib/action_view/base.rb#164
   def _routes; end
 
-  # source://actionview//lib/action_view/base.rb#165
+  # source://actionview//lib/action_view/base.rb#164
   def _routes=(_arg0); end
 
-  # source://actionview//lib/action_view/base.rb#165
+  # source://actionview//lib/action_view/base.rb#164
   def _routes?; end
 
-  # source://actionview//lib/action_view/base.rb#245
+  # source://actionview//lib/action_view/base.rb#244
   def _run(method, template, locals, buffer, add_to_stack: T.unsafe(nil), has_strict_locals: T.unsafe(nil), &block); end
 
-  # source://actionview//lib/action_view/base.rb#163
+  # source://actionview//lib/action_view/base.rb#162
   def annotate_rendered_view_with_filenames; end
 
-  # source://actionview//lib/action_view/base.rb#163
+  # source://actionview//lib/action_view/base.rb#162
   def annotate_rendered_view_with_filenames=(val); end
 
-  # source://actionview//lib/action_view/base.rb#207
+  # source://actionview//lib/action_view/base.rb#206
   def assign(new_assigns); end
 
-  # source://activesupport/7.1.3.4/lib/active_support/core_ext/module/attr_internal.rb#33
+  # source://activesupport/7.1.5.2/lib/active_support/core_ext/module/attr_internal.rb#33
   def assigns; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/core_ext/module/attr_internal.rb#33
+  # source://activesupport/7.1.5.2/lib/active_support/core_ext/module/attr_internal.rb#33
   def assigns=(_arg0); end
 
-  # source://actionview//lib/action_view/base.rb#160
+  # source://actionview//lib/action_view/base.rb#159
   def automatically_disable_submit_tag; end
 
-  # source://actionview//lib/action_view/base.rb#160
+  # source://actionview//lib/action_view/base.rb#159
   def automatically_disable_submit_tag=(val); end
 
   # @raise [NotImplementedError]
   #
-  # source://actionview//lib/action_view/base.rb#270
+  # source://actionview//lib/action_view/base.rb#269
   def compiled_method_container; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/core_ext/module/attr_internal.rb#33
+  # source://activesupport/7.1.5.2/lib/active_support/core_ext/module/attr_internal.rb#33
   def config; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/core_ext/module/attr_internal.rb#33
+  # source://activesupport/7.1.5.2/lib/active_support/core_ext/module/attr_internal.rb#33
   def config=(_arg0); end
 
   # source://actionview//lib/action_view/helpers/translation_helper.rb#18
@@ -1006,104 +1005,104 @@ class ActionView::Base
   # source://actionview//lib/action_view/helpers/translation_helper.rb#18
   def debug_missing_translation=(val); end
 
-  # source://actionview//lib/action_view/base.rb#157
+  # source://actionview//lib/action_view/base.rb#156
   def default_formats; end
 
-  # source://actionview//lib/action_view/base.rb#157
+  # source://actionview//lib/action_view/base.rb#156
   def default_formats=(val); end
 
-  # source://actionview//lib/action_view/base.rb#145
+  # source://actionview//lib/action_view/base.rb#144
   def field_error_proc; end
 
-  # source://actionview//lib/action_view/base.rb#145
+  # source://actionview//lib/action_view/base.rb#144
   def field_error_proc=(val); end
 
-  # source://actionview//lib/action_view/base.rb#205
+  # source://actionview//lib/action_view/base.rb#204
   def formats(*_arg0, **_arg1, &_arg2); end
 
-  # source://actionview//lib/action_view/base.rb#205
+  # source://actionview//lib/action_view/base.rb#204
   def formats=(arg); end
 
-  # source://actionview//lib/action_view/base.rb#278
+  # source://actionview//lib/action_view/base.rb#277
   def in_rendering_context(options); end
 
-  # source://actionview//lib/action_view/base.rb#205
+  # source://actionview//lib/action_view/base.rb#204
   def locale(*_arg0, **_arg1, &_arg2); end
 
-  # source://actionview//lib/action_view/base.rb#205
+  # source://actionview//lib/action_view/base.rb#204
   def locale=(arg); end
 
-  # source://actionview//lib/action_view/base.rb#166
+  # source://actionview//lib/action_view/base.rb#165
   def logger; end
 
-  # source://actionview//lib/action_view/base.rb#166
+  # source://actionview//lib/action_view/base.rb#165
   def logger=(_arg0); end
 
-  # source://actionview//lib/action_view/base.rb#166
+  # source://actionview//lib/action_view/base.rb#165
   def logger?; end
 
   # Returns the value of attribute lookup_context.
   #
-  # source://actionview//lib/action_view/base.rb#202
+  # source://actionview//lib/action_view/base.rb#201
   def lookup_context; end
 
-  # source://actionview//lib/action_view/base.rb#154
+  # source://actionview//lib/action_view/base.rb#153
   def prefix_partial_path_with_controller_namespace; end
 
-  # source://actionview//lib/action_view/base.rb#154
+  # source://actionview//lib/action_view/base.rb#153
   def prefix_partial_path_with_controller_namespace=(_arg0); end
 
-  # source://actionview//lib/action_view/base.rb#154
+  # source://actionview//lib/action_view/base.rb#153
   def prefix_partial_path_with_controller_namespace?; end
 
-  # source://actionview//lib/action_view/base.rb#149
+  # source://actionview//lib/action_view/base.rb#148
   def streaming_completion_on_exception; end
 
-  # source://actionview//lib/action_view/base.rb#149
+  # source://actionview//lib/action_view/base.rb#148
   def streaming_completion_on_exception=(val); end
 
-  # source://actionview//lib/action_view/base.rb#205
+  # source://actionview//lib/action_view/base.rb#204
   def view_paths(*_arg0, **_arg1, &_arg2); end
 
-  # source://actionview//lib/action_view/base.rb#205
+  # source://actionview//lib/action_view/base.rb#204
   def view_paths=(arg); end
 
   # Returns the value of attribute view_renderer.
   #
-  # source://actionview//lib/action_view/base.rb#202
+  # source://actionview//lib/action_view/base.rb#201
   def view_renderer; end
 
   class << self
-    # source://actionview//lib/action_view/base.rb#165
+    # source://actionview//lib/action_view/base.rb#164
     def _routes; end
 
-    # source://actionview//lib/action_view/base.rb#165
+    # source://actionview//lib/action_view/base.rb#164
     def _routes=(value); end
 
-    # source://actionview//lib/action_view/base.rb#165
+    # source://actionview//lib/action_view/base.rb#164
     def _routes?; end
 
-    # source://actionview//lib/action_view/base.rb#163
+    # source://actionview//lib/action_view/base.rb#162
     def annotate_rendered_view_with_filenames; end
 
-    # source://actionview//lib/action_view/base.rb#163
+    # source://actionview//lib/action_view/base.rb#162
     def annotate_rendered_view_with_filenames=(val); end
 
-    # source://actionview//lib/action_view/base.rb#160
+    # source://actionview//lib/action_view/base.rb#159
     def automatically_disable_submit_tag; end
 
-    # source://actionview//lib/action_view/base.rb#160
+    # source://actionview//lib/action_view/base.rb#159
     def automatically_disable_submit_tag=(val); end
 
-    # source://actionview//lib/action_view/base.rb#171
+    # source://actionview//lib/action_view/base.rb#170
     def cache_template_loading; end
 
-    # source://actionview//lib/action_view/base.rb#175
+    # source://actionview//lib/action_view/base.rb#174
     def cache_template_loading=(value); end
 
     # @return [Boolean]
     #
-    # source://actionview//lib/action_view/base.rb#197
+    # source://actionview//lib/action_view/base.rb#196
     def changed?(other); end
 
     # source://actionview//lib/action_view/helpers/translation_helper.rb#18
@@ -1118,62 +1117,62 @@ class ActionView::Base
     # source://actionview//lib/action_view/helpers/form_helper.rb#2759
     def default_form_builder=(val); end
 
-    # source://actionview//lib/action_view/base.rb#157
+    # source://actionview//lib/action_view/base.rb#156
     def default_formats; end
 
-    # source://actionview//lib/action_view/base.rb#157
+    # source://actionview//lib/action_view/base.rb#156
     def default_formats=(val); end
 
     # :stopdoc:
     #
-    # source://actionview//lib/action_view/base.rb#214
+    # source://actionview//lib/action_view/base.rb#213
     def empty; end
 
-    # source://actionview//lib/action_view/base.rb#169
+    # source://actionview//lib/action_view/base.rb#168
     def erb_trim_mode=(arg); end
 
-    # source://actionview//lib/action_view/base.rb#145
+    # source://actionview//lib/action_view/base.rb#144
     def field_error_proc; end
 
-    # source://actionview//lib/action_view/base.rb#145
+    # source://actionview//lib/action_view/base.rb#144
     def field_error_proc=(val); end
 
-    # source://actionview//lib/action_view/base.rb#166
+    # source://actionview//lib/action_view/base.rb#165
     def logger; end
 
-    # source://actionview//lib/action_view/base.rb#166
+    # source://actionview//lib/action_view/base.rb#165
     def logger=(value); end
 
-    # source://actionview//lib/action_view/base.rb#166
+    # source://actionview//lib/action_view/base.rb#165
     def logger?; end
 
-    # source://actionview//lib/action_view/base.rb#154
+    # source://actionview//lib/action_view/base.rb#153
     def prefix_partial_path_with_controller_namespace; end
 
-    # source://actionview//lib/action_view/base.rb#154
+    # source://actionview//lib/action_view/base.rb#153
     def prefix_partial_path_with_controller_namespace=(value); end
 
-    # source://actionview//lib/action_view/base.rb#154
+    # source://actionview//lib/action_view/base.rb#153
     def prefix_partial_path_with_controller_namespace?; end
 
-    # source://actionview//lib/action_view/base.rb#149
+    # source://actionview//lib/action_view/base.rb#148
     def streaming_completion_on_exception; end
 
-    # source://actionview//lib/action_view/base.rb#149
+    # source://actionview//lib/action_view/base.rb#148
     def streaming_completion_on_exception=(val); end
 
-    # source://actionview//lib/action_view/base.rb#222
+    # source://actionview//lib/action_view/base.rb#221
     def with_context(context, assigns = T.unsafe(nil), controller = T.unsafe(nil)); end
 
-    # source://actionview//lib/action_view/base.rb#183
+    # source://actionview//lib/action_view/base.rb#182
     def with_empty_template_cache; end
 
-    # source://actionview//lib/action_view/base.rb#218
+    # source://actionview//lib/action_view/base.rb#217
     def with_view_paths(view_paths, assigns = T.unsafe(nil), controller = T.unsafe(nil)); end
 
     # @return [Boolean]
     #
-    # source://actionview//lib/action_view/base.rb#179
+    # source://actionview//lib/action_view/base.rb#178
     def xss_safe?; end
   end
 end
@@ -3160,11 +3159,11 @@ module ActionView::Helpers::CacheHelper
   #   render 'comments/comments'
   #   render('comments/comments')
   #
-  #   render "header" translates to render("comments/header")
+  #   render "header"        # translates to render("comments/header")
   #
-  #   render(@topic)         translates to render("topics/topic")
-  #   render(topics)         translates to render("topics/topic")
-  #   render(message.topics) translates to render("topics/topic")
+  #   render(@topic)         # translates to render("topics/topic")
+  #   render(topics)         # translates to render("topics/topic")
+  #   render(message.topics) # translates to render("topics/topic")
   #
   # It's not possible to derive all render calls like that, though.
   # Here are a few examples of things that can't be derived:
@@ -9451,55 +9450,55 @@ module ActionView::Helpers::SanitizeHelper::ClassMethods
   # source://actionview//lib/action_view/helpers/sanitize_helper.rb#165
   def sanitized_allowed_attributes; end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#34
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#34
   def sanitized_allowed_attributes=(attributes); end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#47
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#47
   def sanitized_allowed_css_keywords; end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#48
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#48
   def sanitized_allowed_css_keywords=(_); end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#47
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#47
   def sanitized_allowed_css_properties; end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#48
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#48
   def sanitized_allowed_css_properties=(_); end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#47
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#47
   def sanitized_allowed_protocols; end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#48
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#48
   def sanitized_allowed_protocols=(_); end
 
   # source://actionview//lib/action_view/helpers/sanitize_helper.rb#161
   def sanitized_allowed_tags; end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#24
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#24
   def sanitized_allowed_tags=(tags); end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#47
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#47
   def sanitized_bad_tags; end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#48
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#48
   def sanitized_bad_tags=(_); end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#47
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#47
   def sanitized_protocol_separator; end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#48
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#48
   def sanitized_protocol_separator=(_); end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#47
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#47
   def sanitized_shorthand_css_properties; end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#48
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#48
   def sanitized_shorthand_css_properties=(_); end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#47
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#47
   def sanitized_uri_attributes; end
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#48
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#48
   def sanitized_uri_attributes=(_); end
 
   # source://actionview//lib/action_view/helpers/sanitize_helper.rb#157
@@ -9507,7 +9506,7 @@ module ActionView::Helpers::SanitizeHelper::ClassMethods
 
   private
 
-  # source://rails-html-sanitizer/1.6.0/lib/rails-html-sanitizer.rb#52
+  # source://rails-html-sanitizer/1.6.2/lib/rails-html-sanitizer.rb#52
   def deprecate_option(name); end
 end
 
@@ -11190,7 +11189,7 @@ module ActionView::Helpers::UrlHelper
 
   # @return [Boolean]
   #
-  # source://actionview//lib/action_view/helpers/url_helper.rb#609
+  # source://actionview//lib/action_view/helpers/url_helper.rb#611
   def current_page?(options = T.unsafe(nil), check_parameters: T.unsafe(nil), **options_as_kwargs); end
 
   # Creates an anchor element of the given +name+ using a URL created by the set of +options+.
@@ -11531,7 +11530,7 @@ module ActionView::Helpers::UrlHelper
   #          <strong>Phone me:</strong>
   #        </a>
   #
-  # source://actionview//lib/action_view/helpers/url_helper.rb#743
+  # source://actionview//lib/action_view/helpers/url_helper.rb#745
   def phone_to(phone_number, name = T.unsafe(nil), html_options = T.unsafe(nil), &block); end
 
   # Creates an SMS anchor link tag to the specified +phone_number+. When the
@@ -11575,7 +11574,7 @@ module ActionView::Helpers::UrlHelper
   #          <strong>Text me:</strong>
   #        </a>
   #
-  # source://actionview//lib/action_view/helpers/url_helper.rb#692
+  # source://actionview//lib/action_view/helpers/url_helper.rb#694
   def sms_to(phone_number, name = T.unsafe(nil), html_options = T.unsafe(nil), &block); end
 
   # Basic implementation of url_for to allow use helpers without routes existence
@@ -11591,29 +11590,29 @@ module ActionView::Helpers::UrlHelper
   # source://actionview//lib/action_view/helpers/url_helper.rb#55
   def _filtered_referrer; end
 
-  # source://actionview//lib/action_view/helpers/url_helper.rb#786
+  # source://actionview//lib/action_view/helpers/url_helper.rb#788
   def add_method_to_attributes!(html_options, method); end
 
-  # source://actionview//lib/action_view/helpers/url_helper.rb#757
+  # source://actionview//lib/action_view/helpers/url_helper.rb#759
   def convert_options_to_data_attributes(options, html_options); end
 
   # @return [Boolean]
   #
-  # source://actionview//lib/action_view/helpers/url_helper.rb#780
+  # source://actionview//lib/action_view/helpers/url_helper.rb#782
   def link_to_remote_options?(options); end
 
-  # source://actionview//lib/action_view/helpers/url_helper.rb#797
+  # source://actionview//lib/action_view/helpers/url_helper.rb#799
   def method_for_options(options); end
 
   # @return [Boolean]
   #
-  # source://actionview//lib/action_view/helpers/url_helper.rb#815
+  # source://actionview//lib/action_view/helpers/url_helper.rb#817
   def method_not_get_method?(method); end
 
-  # source://actionview//lib/action_view/helpers/url_helper.rb#834
+  # source://actionview//lib/action_view/helpers/url_helper.rb#836
   def method_tag(method); end
 
-  # source://actionview//lib/action_view/helpers/url_helper.rb#880
+  # source://actionview//lib/action_view/helpers/url_helper.rb#882
   def remove_trailing_slash!(url_string); end
 
   # Returns an array of hashes each containing :name and :value keys
@@ -11633,13 +11632,13 @@ module ActionView::Helpers::UrlHelper
   #   to_form_params({ name: 'Denmark' }, 'country')
   #   # => [{name: 'country[name]', value: 'Denmark'}]
   #
-  # source://actionview//lib/action_view/helpers/url_helper.rb#854
+  # source://actionview//lib/action_view/helpers/url_helper.rb#856
   def to_form_params(attribute, namespace = T.unsafe(nil)); end
 
-  # source://actionview//lib/action_view/helpers/url_helper.rb#820
+  # source://actionview//lib/action_view/helpers/url_helper.rb#822
   def token_tag(token = T.unsafe(nil), form_options: T.unsafe(nil)); end
 
-  # source://actionview//lib/action_view/helpers/url_helper.rb#772
+  # source://actionview//lib/action_view/helpers/url_helper.rb#774
   def url_target(name, options); end
 
   class << self
@@ -11666,7 +11665,10 @@ module ActionView::Helpers::UrlHelper::ClassMethods
   def _url_for_modules; end
 end
 
-# source://actionview//lib/action_view/helpers/url_helper.rb#807
+# source://actionview//lib/action_view/helpers/url_helper.rb#564
+ActionView::Helpers::UrlHelper::RFC2396_PARSER = T.let(T.unsafe(nil), URI::RFC2396_Parser)
+
+# source://actionview//lib/action_view/helpers/url_helper.rb#809
 ActionView::Helpers::UrlHelper::STRINGIFIED_COMMON_METHODS = T.let(T.unsafe(nil), Hash)
 
 # This is a class to fix I18n global state. Whenever you provide I18n.locale during a request,
@@ -12084,7 +12086,7 @@ class ActionView::LogSubscriber < ::ActiveSupport::LogSubscriber
     # source://actionview//lib/action_view/log_subscriber.rb#101
     def attach_to(*_arg0); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/log_subscriber.rb#87
+    # source://activesupport/7.1.5.2/lib/active_support/log_subscriber.rb#88
     def log_levels; end
   end
 end
@@ -12987,7 +12989,7 @@ end
 # source://actionview//lib/action_view/railtie.rb#8
 class ActionView::Railtie < ::Rails::Engine
   class << self
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+    # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#70
     def __callbacks; end
   end
 end
@@ -14163,7 +14165,7 @@ end
 module ActionView::RoutingUrlFor
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#99
+  # source://actionpack/7.1.5.2/lib/action_dispatch/routing/url_for.rb#99
   def default_url_options=(val); end
 
   # Returns the URL for the set of +options+ provided. This takes the
@@ -14265,7 +14267,7 @@ module ActionView::RoutingUrlFor
   def optimize_routes_generation?; end
 
   class << self
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#99
+    # source://actionpack/7.1.5.2/lib/action_dispatch/routing/url_for.rb#99
     def default_url_options=(val); end
   end
 end
@@ -14419,7 +14421,7 @@ class ActionView::Template
   # before passing the source on to the template engine, leaving a
   # blank line in its stead.
   #
-  # source://actionview//lib/action_view/template.rb#297
+  # source://actionview//lib/action_view/template.rb#298
   def encode!; end
 
   # Returns the value of attribute format.
@@ -14437,7 +14439,7 @@ class ActionView::Template
   # source://actionview//lib/action_view/template.rb#181
   def identifier; end
 
-  # source://actionview//lib/action_view/template.rb#276
+  # source://actionview//lib/action_view/template.rb#277
   def inspect; end
 
   # The locals this template has been or will be compiled for, or nil if this
@@ -14450,13 +14452,13 @@ class ActionView::Template
   # to ensure that references to the template object can be marshalled as well. This means forgoing
   # the marshalling of the compiler mutex and instantiating that again on unmarshalling.
   #
-  # source://actionview//lib/action_view/template.rb#363
+  # source://actionview//lib/action_view/template.rb#364
   def marshal_dump; end
 
-  # source://actionview//lib/action_view/template.rb#367
+  # source://actionview//lib/action_view/template.rb#368
   def marshal_load(array); end
 
-  # source://actionview//lib/action_view/template.rb#372
+  # source://actionview//lib/action_view/template.rb#373
   def method_name; end
 
   # Render a template. If the template was not compiled yet, it is done
@@ -14469,10 +14471,10 @@ class ActionView::Template
   # source://actionview//lib/action_view/template.rb#248
   def render(view, locals, buffer = T.unsafe(nil), implicit_locals: T.unsafe(nil), add_to_stack: T.unsafe(nil), &block); end
 
-  # source://actionview//lib/action_view/template.rb#272
+  # source://actionview//lib/action_view/template.rb#273
   def short_identifier; end
 
-  # source://actionview//lib/action_view/template.rb#280
+  # source://actionview//lib/action_view/template.rb#281
   def source; end
 
   # source://actionview//lib/action_view/template.rb#218
@@ -14488,14 +14490,14 @@ class ActionView::Template
   # Strict locals are useful for validating template arguments and for
   # specifying defaults.
   #
-  # source://actionview//lib/action_view/template.rb#342
+  # source://actionview//lib/action_view/template.rb#343
   def strict_locals!; end
 
   # Returns whether a template is using strict locals.
   #
   # @return [Boolean]
   #
-  # source://actionview//lib/action_view/template.rb#356
+  # source://actionview//lib/action_view/template.rb#357
   def strict_locals?; end
 
   # Returns whether the underlying handler supports streaming. If so,
@@ -14512,7 +14514,7 @@ class ActionView::Template
   # source://actionview//lib/action_view/template.rb#228
   def translate_location(backtrace_location, spot); end
 
-  # source://actionview//lib/action_view/template.rb#268
+  # source://actionview//lib/action_view/template.rb#269
   def type; end
 
   # Returns the value of attribute variable.
@@ -14544,44 +14546,44 @@ class ActionView::Template
   # In general, this means that templates will be UTF-8 inside of Rails,
   # regardless of the original source encoding.
   #
-  # source://actionview//lib/action_view/template.rb#472
+  # source://actionview//lib/action_view/template.rb#477
   def compile(mod); end
 
   # Compile a template. This method ensures a template is compiled
   # just once and removes the source after it is compiled.
   #
-  # source://actionview//lib/action_view/template.rb#394
+  # source://actionview//lib/action_view/template.rb#395
   def compile!(view); end
 
   # This method compiles the source of the template. The compilation of templates
   # involves setting strict_locals! if applicable, encoding the template, and setting
   # frozen string literal.
   #
-  # source://actionview//lib/action_view/template.rb#419
+  # source://actionview//lib/action_view/template.rb#420
   def compiled_source; end
 
-  # source://actionview//lib/action_view/template.rb#381
+  # source://actionview//lib/action_view/template.rb#382
   def find_node_by_id(node, node_id); end
 
-  # source://actionview//lib/action_view/template.rb#518
+  # source://actionview//lib/action_view/template.rb#525
   def handle_render_error(view, e); end
 
-  # source://actionview//lib/action_view/template.rb#540
+  # source://actionview//lib/action_view/template.rb#547
   def identifier_method_name; end
 
-  # source://actionview//lib/action_view/template.rb#544
+  # source://actionview//lib/action_view/template.rb#551
   def instrument(action, &block); end
 
-  # source://actionview//lib/action_view/template.rb#552
+  # source://actionview//lib/action_view/template.rb#559
   def instrument_payload; end
 
-  # source://actionview//lib/action_view/template.rb#548
+  # source://actionview//lib/action_view/template.rb#555
   def instrument_render_template(&block); end
 
-  # source://actionview//lib/action_view/template.rb#527
+  # source://actionview//lib/action_view/template.rb#534
   def locals_code; end
 
-  # source://actionview//lib/action_view/template.rb#510
+  # source://actionview//lib/action_view/template.rb#517
   def offset; end
 
   class << self
@@ -14921,7 +14923,7 @@ end
 # source://actionview//lib/action_view/template/inline.rb#8
 ActionView::Template::Inline::Finalizer = T.let(T.unsafe(nil), Proc)
 
-# source://actionview//lib/action_view/template.rb#284
+# source://actionview//lib/action_view/template.rb#285
 ActionView::Template::LEADING_ENCODING_REGEXP = T.let(T.unsafe(nil), Regexp)
 
 # source://actionview//lib/action_view/template.rb#184
@@ -15354,13 +15356,13 @@ class ActionView::TestCase < ::ActiveSupport::TestCase
   extend ::ActiveSupport::Testing::ConstantLookup::ClassMethods
   extend ::ActionView::TestCase::Behavior::ClassMethods
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+  # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
   def _helper_methods; end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+  # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
   def _helper_methods=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+  # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
   def _helper_methods?; end
 
   # source://actionview//lib/action_view/helpers/translation_helper.rb#18
@@ -15370,19 +15372,19 @@ class ActionView::TestCase < ::ActiveSupport::TestCase
   def debug_missing_translation=(val); end
 
   class << self
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+    # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#70
     def __callbacks; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+    # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
     def _helper_methods; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+    # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
     def _helper_methods=(value); end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#12
+    # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#12
     def _helper_methods?; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/helpers.rb#16
+    # source://actionpack/7.1.5.2/lib/abstract_controller/helpers.rb#16
     def _helpers; end
 
     # source://actionview//lib/action_view/test_case.rb#201
@@ -15438,42 +15440,8 @@ module ActionView::TestCase::Behavior
   mixes_in_class_methods ::ActiveSupport::Testing::ConstantLookup::ClassMethods
   mixes_in_class_methods ::ActionView::TestCase::Behavior::ClassMethods
 
-  # source://actionview//lib/action_view/test_case.rb#298
-  def _routes; end
-
-  # source://actionview//lib/action_view/test_case.rb#233
-  def config; end
-
-  # Returns the value of attribute controller.
+  # :method: rendered
   #
-  # source://actionview//lib/action_view/test_case.rb#63
-  def controller; end
-
-  # Sets the attribute controller
-  #
-  # @param value the value to set the attribute controller to.
-  #
-  # source://actionview//lib/action_view/test_case.rb#63
-  def controller=(_arg0); end
-
-  # source://actionview//lib/action_view/test_case.rb#62
-  def lookup_context(*_arg0, **_arg1, &_arg2); end
-
-  # Returns the value of attribute output_buffer.
-  #
-  # source://actionview//lib/action_view/test_case.rb#63
-  def output_buffer; end
-
-  # Sets the attribute output_buffer
-  #
-  # @param value the value to set the attribute output_buffer to.
-  #
-  # source://actionview//lib/action_view/test_case.rb#63
-  def output_buffer=(_arg0); end
-
-  # source://actionview//lib/action_view/test_case.rb#237
-  def render(options = T.unsafe(nil), local_assigns = T.unsafe(nil), &block); end
-
   # Returns the content rendered by the last +render+ call.
   #
   # The returned object behaves like a string but also exposes a number of methods
@@ -15522,8 +15490,53 @@ module ActionView::TestCase::Behavior
   #     assert_pattern { rendered.json => { title: "Hello, world" } }
   #   end
   #
-  # source://actionview//lib/action_view/test_case.rb#294
+  # source://actionview//lib/action_view/test_case.rb#298
+  def _routes; end
+
+  # source://actionview//lib/action_view/test_case.rb#233
+  def config; end
+
+  # Returns the value of attribute controller.
+  #
+  # source://actionview//lib/action_view/test_case.rb#63
+  def controller; end
+
+  # Sets the attribute controller
+  #
+  # @param value the value to set the attribute controller to.
+  #
+  # source://actionview//lib/action_view/test_case.rb#63
+  def controller=(_arg0); end
+
+  # source://actionview//lib/action_view/test_case.rb#62
+  def lookup_context(*_arg0, **_arg1, &_arg2); end
+
+  # Returns the value of attribute output_buffer.
+  #
+  # source://actionview//lib/action_view/test_case.rb#63
+  def output_buffer; end
+
+  # Sets the attribute output_buffer
+  #
+  # @param value the value to set the attribute output_buffer to.
+  #
+  # source://actionview//lib/action_view/test_case.rb#63
+  def output_buffer=(_arg0); end
+
+  # source://actionview//lib/action_view/test_case.rb#237
+  def render(options = T.unsafe(nil), local_assigns = T.unsafe(nil), &block); end
+
+  # Returns the value of attribute rendered.
+  #
+  # source://actionview//lib/action_view/test_case.rb#63
   def rendered; end
+
+  # Sets the attribute rendered
+  #
+  # @param value the value to set the attribute rendered to.
+  #
+  # source://actionview//lib/action_view/test_case.rb#63
+  def rendered=(_arg0); end
 
   # source://actionview//lib/action_view/test_case.rb#243
   def rendered_views; end
@@ -15832,7 +15845,7 @@ class ActionView::TestCase::TestController < ::ActionController::Base
     # source://actionview//lib/action_view/test_case.rb#23
     def controller_path=(_arg0); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal.rb#262
+    # source://actionpack/7.1.5.2/lib/action_controller/metal.rb#262
     def middleware_stack; end
   end
 end
