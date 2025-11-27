@@ -12,13 +12,25 @@ module Tilt
   class << self
     # @see Tilt::Mapping#[]
     #
-    # source://tilt//lib/tilt.rb#71
+    # source://tilt//lib/tilt.rb#75
     def [](file); end
 
     # @return [Tilt::Mapping] the main mapping object
     #
-    # source://tilt//lib/tilt.rb#87
+    # source://tilt//lib/tilt.rb#91
     def default_mapping; end
+
+    # Whether to extract fixed locals from templates by scanning the
+    # template content.
+    #
+    # source://tilt//lib/tilt.rb#95
+    def extract_fixed_locals; end
+
+    # Whether to extract fixed locals from templates by scanning the
+    # template content.
+    #
+    # source://tilt//lib/tilt.rb#95
+    def extract_fixed_locals=(_arg0); end
 
     # Replace the default mapping with a finalized version of the default
     # mapping. This can be done to improve performance after the template
@@ -26,55 +38,55 @@ module Tilt
     # is called, all attempts to modify the default mapping will fail.
     # This also freezes Tilt itself.
     #
-    # source://tilt//lib/tilt.rb#20
+    # source://tilt//lib/tilt.rb#24
     def finalize!; end
 
     # @private
     #
-    # source://tilt//lib/tilt.rb#41
+    # source://tilt//lib/tilt.rb#45
     def lazy_map; end
 
     # @see Tilt::Mapping#new
     #
-    # source://tilt//lib/tilt.rb#66
+    # source://tilt//lib/tilt.rb#70
     def new(file, line = T.unsafe(nil), options = T.unsafe(nil), &block); end
 
     # Alias register as prefer for Tilt 1.x compatibility.
     #
     # @see Tilt::Mapping#register
     #
-    # source://tilt//lib/tilt.rb#46
+    # source://tilt//lib/tilt.rb#50
     def prefer(template_class, *extensions); end
 
     # @see Tilt::Mapping#register
     #
-    # source://tilt//lib/tilt.rb#46
+    # source://tilt//lib/tilt.rb#50
     def register(template_class, *extensions); end
 
     # @see Tilt::Mapping#register_lazy
     #
-    # source://tilt//lib/tilt.rb#51
+    # source://tilt//lib/tilt.rb#55
     def register_lazy(class_name, file, *extensions); end
 
     # @see Tilt::Mapping#register_pipeline
     #
-    # source://tilt//lib/tilt.rb#56
+    # source://tilt//lib/tilt.rb#60
     def register_pipeline(ext, options = T.unsafe(nil)); end
 
     # @return [Boolean]
     # @see Tilt::Mapping#registered?
     #
-    # source://tilt//lib/tilt.rb#61
+    # source://tilt//lib/tilt.rb#65
     def registered?(ext); end
 
     # @see Tilt::Mapping#template_for
     #
-    # source://tilt//lib/tilt.rb#76
+    # source://tilt//lib/tilt.rb#80
     def template_for(file); end
 
     # @see Tilt::Mapping#templates_for
     #
-    # source://tilt//lib/tilt.rb#81
+    # source://tilt//lib/tilt.rb#85
     def templates_for(file); end
   end
 end
@@ -211,16 +223,16 @@ end
 #   key#hash and key#eql? should not change.
 #   If this is too limiting for you, use a different cache implementation.
 #
-# source://tilt//lib/tilt.rb#111
+# source://tilt//lib/tilt.rb#119
 class Tilt::Cache
   # @return [Cache] a new instance of Cache
   #
-  # source://tilt//lib/tilt.rb#112
+  # source://tilt//lib/tilt.rb#120
   def initialize; end
 
   # Clears the cache.
   #
-  # source://tilt//lib/tilt.rb#129
+  # source://tilt//lib/tilt.rb#137
   def clear; end
 
   # Caches a value for key, or returns the previously cached value.
@@ -231,7 +243,7 @@ class Tilt::Cache
   # @yield
   # @yieldreturn the value to cache for key
   #
-  # source://tilt//lib/tilt.rb#122
+  # source://tilt//lib/tilt.rb#130
   def fetch(*key); end
 end
 
@@ -241,6 +253,9 @@ end
 module Tilt::CompiledTemplates; end
 
 # source://tilt//lib/tilt.rb#10
+Tilt::EMPTY_ARRAY = T.let(T.unsafe(nil), Array)
+
+# source://tilt//lib/tilt.rb#13
 Tilt::EMPTY_HASH = T.let(T.unsafe(nil), Hash)
 
 # ERB template implementation. See:
@@ -395,14 +410,14 @@ Tilt::LOCK = T.let(T.unsafe(nil), Thread::Mutex)
 # the exception of the first, since that was the most preferred one.
 #
 #     mapping = Tilt::Mapping.new
-#     mapping.register_lazy('Maruku::Template', 'maruku/template', 'md')
+#     mapping.register_lazy('Kramdown::Template', 'kramdown/template', 'md')
 #     mapping.register_lazy('RDiscount::Template', 'rdiscount/template', 'md')
 #     mapping['index.md']
 #     # => RDiscount::Template
 #
 # In the previous example we say that RDiscount has a *higher priority* than
-# Maruku. Tilt will first try to `require "rdiscount/template"`, falling
-# back to `require "maruku/template"`. If none of these are successful,
+# Kramdown. Tilt will first try to `require "rdiscount/template"`, falling
+# back to `require "kramdown/template"`. If none of these are successful,
 # the first error will be raised.
 #
 # source://tilt//lib/tilt/mapping.rb#125
@@ -613,19 +628,11 @@ end
 
 # RDoc template. See: https://github.com/ruby/rdoc
 #
-# It's suggested that your program run the following at load time when
-# using this templae engine in a threaded environment:
-#
-#   require 'rdoc'
-#   require 'rdoc/markup'
-#   require 'rdoc/markup/to_html'
-#   require 'rdoc/options'
-#
 # source://tilt//lib/tilt/rdoc.rb#0
 class Tilt::RDocTemplate < ::Tilt::StaticTemplate
   private
 
-  # source://tilt//lib/tilt/rdoc.rb#17
+  # source://tilt//lib/tilt/rdoc.rb#9
   def _prepare_output; end
 end
 
@@ -655,13 +662,24 @@ class Tilt::ScssTemplate < ::Tilt::SassTemplate
   def sass_options; end
 end
 
-# source://tilt//lib/tilt/template.rb#416
+# Static templates are templates that return the same output for every render
+#
+# Instead of inheriting from the StaticTemplate class, you will use the .subclass
+# method with a block which processes @data and returns the transformed value.
+#
+# Basic example which transforms the template to uppercase:
+#
+#   UppercaseTemplate = Tilt::StaticTemplate.subclass do
+#     @data.upcase
+#   end
+#
+# source://tilt//lib/tilt/template.rb#568
 class Tilt::StaticTemplate < ::Tilt::Template
   # Static templates never allow script.
   #
   # @return [Boolean]
   #
-  # source://tilt//lib/tilt/template.rb#439
+  # source://tilt//lib/tilt/template.rb#591
   def allows_script?; end
 
   # Raise NotImplementedError, since static templates
@@ -669,28 +687,33 @@ class Tilt::StaticTemplate < ::Tilt::Template
   #
   # @raise [NotImplementedError]
   #
-  # source://tilt//lib/tilt/template.rb#434
+  # source://tilt//lib/tilt/template.rb#586
   def compiled_method(locals_keys, scope_class = T.unsafe(nil)); end
 
   # Static templates always return the prepared output.
   #
-  # source://tilt//lib/tilt/template.rb#428
+  # source://tilt//lib/tilt/template.rb#580
   def render(scope = T.unsafe(nil), locals = T.unsafe(nil)); end
 
   protected
 
-  # source://tilt//lib/tilt/template.rb#445
+  # source://tilt//lib/tilt/template.rb#597
   def prepare; end
 
   private
 
   # Do nothing, since compiled method cache is not used.
   #
-  # source://tilt//lib/tilt/template.rb#452
+  # source://tilt//lib/tilt/template.rb#604
   def set_compiled_method_cache; end
 
+  # Do nothing, since fixed locals are not used.
+  #
+  # source://tilt//lib/tilt/template.rb#608
+  def set_fixed_locals; end
+
   class << self
-    # source://tilt//lib/tilt/template.rb#417
+    # source://tilt//lib/tilt/template.rb#569
     def subclass(mime_type: T.unsafe(nil), &block); end
   end
 end
@@ -731,17 +754,38 @@ class Tilt::Template
   # it should read template data and return as a String. When file is nil,
   # a block is required.
   #
-  # All arguments are optional.
+  # All arguments are optional. The following options are respected and
+  # are used by Tilt::Template itself and not the underlying template
+  # libraries:
+  #
+  # :default_encoding :: Force the encoding of the template to the given
+  #                      encoding.
+  # :skip_compiled_encoding_detection :: Do not scan template code for
+  #                                      an encoding magic comment.
+  # :fixed_locals :: Force a specific method parameter signature, and call
+  #                  the method with a splat of locals, instead of passing
+  #                  the locals hash as a positional argument, and
+  #                  extracting locals from that. Should be a string
+  #                  containing the parameters for the compiled method,
+  #                  surrounded by parentheses.  Can be set to false to
+  #                  disable the scan for embedded fixed locals.
+  # :extract_fixed_locals :: Whether embedded fixed locals should be scanned for
+  #                          and extracted from the template code.
+  # :default_fixed_locals :: Similar to fixed_locals, but lowest priority,
+  #                          only used if :fixed_locals is not provided
+  #                          and no embedded locals are found (or scanned for).
+  # :scope_class :: Force the scope class used for the method.  By default,
+  #                 uses the class of the scope provided to render.
   #
   # @raise [ArgumentError]
   # @return [Template] a new instance of Template
   #
-  # source://tilt//lib/tilt/template.rb#61
+  # source://tilt//lib/tilt/template.rb#82
   def initialize(file = T.unsafe(nil), line = T.unsafe(nil), options = T.unsafe(nil)); end
 
   # The basename of the template file.
   #
-  # source://tilt//lib/tilt/template.rb#106
+  # source://tilt//lib/tilt/template.rb#138
   def basename(suffix = T.unsafe(nil)); end
 
   # The compiled method for the locals keys and scope_class provided.
@@ -749,7 +793,7 @@ class Tilt::Template
   # directly on the scope class, which are much faster to call than
   # Tilt's normal rendering.
   #
-  # source://tilt//lib/tilt/template.rb#147
+  # source://tilt//lib/tilt/template.rb#191
   def compiled_method(locals_keys, scope_class = T.unsafe(nil)); end
 
   # A path ending in .rb that the template code will be written to, then
@@ -760,9 +804,16 @@ class Tilt::Template
   # source://tilt//lib/tilt/template.rb#35
   def compiled_path; end
 
-  # Set the prefix to use for compiled paths.
+  # Set the prefix to use for compiled paths, similar to using the
+  # :compiled_path template option. Note that this only
+  # has affect for future template compilations.  When using the
+  # :scope_class template option, and using fixed_locals, calling
+  # this after the template is created has no effect, since the
+  # template is compiled during initialization in that case. It
+  # is recommended to use the :compiled_path template option
+  # instead of this method in new code.
   #
-  # source://tilt//lib/tilt/template.rb#133
+  # source://tilt//lib/tilt/template.rb#177
   def compiled_path=(path); end
 
   # Template source; loaded from a file or given directly.
@@ -772,13 +823,20 @@ class Tilt::Template
 
   # The filename used in backtraces to describe the template.
   #
-  # source://tilt//lib/tilt/template.rb#118
+  # source://tilt//lib/tilt/template.rb#150
   def eval_file; end
 
   # The name of the file where the template data was loaded from.
   #
   # source://tilt//lib/tilt/template.rb#21
   def file; end
+
+  # Whether the template uses fixed locals.
+  #
+  # @return [Boolean]
+  #
+  # source://tilt//lib/tilt/template.rb#155
+  def fixed_locals?; end
 
   # The line number in #file where template data was loaded from.
   #
@@ -788,12 +846,12 @@ class Tilt::Template
   # An empty Hash that the template engine can populate with various
   # metadata.
   #
-  # source://tilt//lib/tilt/template.rb#124
+  # source://tilt//lib/tilt/template.rb#161
   def metadata; end
 
   # The template file's basename with all extensions chomped off.
   #
-  # source://tilt//lib/tilt/template.rb#111
+  # source://tilt//lib/tilt/template.rb#143
   def name; end
 
   # A Hash of template engine specific options. This is passed directly
@@ -807,7 +865,7 @@ class Tilt::Template
   # block is given, it is typically available within the template via
   # +yield+.
   #
-  # source://tilt//lib/tilt/template.rb#101
+  # source://tilt//lib/tilt/template.rb#133
   def render(scope = T.unsafe(nil), locals = T.unsafe(nil), &block); end
 
   protected
@@ -817,7 +875,7 @@ class Tilt::Template
   # in your template class if you have a better hint of the data's
   # encoding.
   #
-  # source://tilt//lib/tilt/template.rb#169
+  # source://tilt//lib/tilt/template.rb#224
   def default_encoding; end
 
   # Execute the compiled template and return the result string. Template
@@ -827,7 +885,7 @@ class Tilt::Template
   # This method is only used by source generating templates. Subclasses that
   # override render() may not support all features.
   #
-  # source://tilt//lib/tilt/template.rb#192
+  # source://tilt//lib/tilt/template.rb#247
   def evaluate(scope, locals, &block); end
 
   # Generates all template source by combining the preamble, template, and
@@ -840,13 +898,13 @@ class Tilt::Template
   # offset. In most cases, overriding the #precompiled_template method is
   # easier and more appropriate.
   #
-  # source://tilt//lib/tilt/template.rb#224
+  # source://tilt//lib/tilt/template.rb#278
   def precompiled(local_keys); end
 
-  # source://tilt//lib/tilt/template.rb#262
+  # source://tilt//lib/tilt/template.rb#316
   def precompiled_postamble(local_keys); end
 
-  # source://tilt//lib/tilt/template.rb#258
+  # source://tilt//lib/tilt/template.rb#312
   def precompiled_preamble(local_keys); end
 
   # A string containing the (Ruby) source code for the template. The
@@ -858,7 +916,7 @@ class Tilt::Template
   #
   # @raise [NotImplementedError]
   #
-  # source://tilt//lib/tilt/template.rb#254
+  # source://tilt//lib/tilt/template.rb#308
   def precompiled_template(local_keys); end
 
   # Do whatever preparation is necessary to setup the underlying template
@@ -867,55 +925,83 @@ class Tilt::Template
   #
   # Empty by default as some subclasses do not need separate preparation.
   #
-  # source://tilt//lib/tilt/template.rb#180
+  # source://tilt//lib/tilt/template.rb#235
   def prepare; end
 
   # @return [Boolean]
   #
-  # source://tilt//lib/tilt/template.rb#171
+  # source://tilt//lib/tilt/template.rb#226
   def skip_compiled_encoding_detection?; end
 
   private
 
-  # source://tilt//lib/tilt/template.rb#407
+  # :nocov:
+  #
+  # source://tilt//lib/tilt/template.rb#325
+  def _dup_string_if_frozen(string); end
+
+  # source://tilt//lib/tilt/template.rb#549
   def binary(string); end
 
-  # source://tilt//lib/tilt/template.rb#341
+  # source://tilt//lib/tilt/template.rb#442
   def bind_compiled_method(method_source, offset, scope_class); end
 
-  # source://tilt//lib/tilt/template.rb#318
+  # :nocov:
+  #
+  # source://tilt//lib/tilt/template.rb#414
   def compile_template_method(local_keys, scope_class = T.unsafe(nil)); end
 
-  # source://tilt//lib/tilt/template.rb#370
+  # source://tilt//lib/tilt/template.rb#471
   def eval_compiled_method(method_source, offset, scope_class); end
 
-  # source://tilt//lib/tilt/template.rb#388
+  # :nocov:
+  #
+  # source://tilt//lib/tilt/template.rb#390
+  def evaluate_method(method, scope, locals, &block); end
+
+  # source://tilt//lib/tilt/template.rb#528
   def extract_encoding(script, &block); end
 
-  # source://tilt//lib/tilt/template.rb#392
+  # Extract fixed locals from the template code string. Should return nil
+  # if there are no fixed locals specified, or a method argument string
+  # surrounded by parentheses if there are fixed locals.  The method
+  # argument string will be used when defining the template method if given.
+  #
+  # source://tilt//lib/tilt/template.rb#522
+  def extract_fixed_locals; end
+
+  # source://tilt//lib/tilt/template.rb#532
   def extract_magic_comment(script); end
 
   # @return [Boolean]
   #
-  # source://tilt//lib/tilt/template.rb#403
+  # source://tilt//lib/tilt/template.rb#545
   def freeze_string_literals?; end
 
-  # source://tilt//lib/tilt/template.rb#374
+  # source://tilt//lib/tilt/template.rb#475
   def load_compiled_method(path, method_source); end
 
-  # source://tilt//lib/tilt/template.rb#297
+  # source://tilt//lib/tilt/template.rb#368
   def local_extraction(local_keys); end
 
-  # source://tilt//lib/tilt/template.rb#270
+  # :nocov:
+  #
+  # source://tilt//lib/tilt/template.rb#336
   def process_arg(arg); end
 
-  # source://tilt//lib/tilt/template.rb#284
+  # source://tilt//lib/tilt/template.rb#350
   def read_template_file; end
 
-  # source://tilt//lib/tilt/template.rb#293
+  # source://tilt//lib/tilt/template.rb#359
   def set_compiled_method_cache; end
 
-  # source://tilt//lib/tilt/template.rb#382
+  # Set the fixed locals for the template, which may be nil if no fixed locals can
+  # be determined.
+  #
+  # source://tilt//lib/tilt/template.rb#496
+  def set_fixed_locals; end
+
+  # source://tilt//lib/tilt/template.rb#488
   def unbind_compiled_method(method_name); end
 
   class << self
@@ -937,10 +1023,10 @@ class Tilt::Template
   end
 end
 
-# source://tilt//lib/tilt/template.rb#183
+# source://tilt//lib/tilt/template.rb#238
 Tilt::Template::CLASS_METHOD = T.let(T.unsafe(nil), UnboundMethod)
 
-# source://tilt//lib/tilt/template.rb#184
+# source://tilt//lib/tilt/template.rb#239
 Tilt::Template::USE_BIND_CALL = T.let(T.unsafe(nil), TrueClass)
 
 # Current version.
