@@ -1,8 +1,6 @@
 # PlanningAlerts
 
 ![example workflow](https://github.com/openaustralia/planningalerts/actions/workflows/rubyonrails.yml/badge.svg)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/test_coverage)](https://codeclimate.com/github/openaustralia/planningalerts/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability)
 [![View performance data on Skylight](https://badges.skylight.io/status/JANyIYPM9FwR.svg?token=dDtVtXbOqFPrEZjsGnMPoT-Ss9h3UHtYtZZjFLE9KWo)](https://www.skylight.io/app/applications/JANyIYPM9FwR)
 
 Find out and have your say about development applications in your area.
@@ -60,6 +58,14 @@ We're using [Sorbet](https://sorbet.org/) to add type checking to Ruby which oth
 
 ```sh
 docker compose run web bin/srb
+```
+
+To update the rbi files, use these commands:
+```sh
+bin/tapioca gem
+bin/tapioca dsl
+bin/tapioca dsl --environment=test
+
 ```
 
 We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all our rbi files. We **don't** use `bundle exec srb rbi ...`.
@@ -166,10 +172,10 @@ If all looks good then thank the contributor for helping tens of thousands of pe
 ## Contributing
 
 * Fork the project on GitHub.
-* Make a topic branch from the master branch.
+* Make a topic branch from the main branch.
 * Make your changes and write tests.
 * Commit the changes without making changes to any files that aren't related to your enhancement or fix.
-* Send a pull request against the master branch.
+* Send a pull request against the main branch.
 
 ## Credits
 

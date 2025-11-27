@@ -66,7 +66,7 @@ class ApiKey < ApplicationRecord
 
   sig { returns(Integer) }
   def self.default_daily_limit_commercial
-    5000
+    50
   end
 
   sig { returns(Integer) }
