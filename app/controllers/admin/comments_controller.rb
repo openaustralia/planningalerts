@@ -60,7 +60,7 @@ module Admin
     sig { void }
     def resend
       comment = Comment.find(T.cast(params[:id], String))
-      authorize(comment, :resend?, policy_class: Admin::AuthorityPolicy)
+      authorize(comment, :resend?, policy_class: Admin::CommentPolicy)
       comment.send_comment!
       redirect_to({ action: :show }, notice: t(".success"))
     end
