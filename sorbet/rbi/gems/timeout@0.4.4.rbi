@@ -38,7 +38,7 @@ module Timeout
   #
   # @raise [ArgumentError]
   #
-  # source://timeout//lib/timeout.rb#167
+  # source://timeout//lib/timeout.rb#170
   def timeout(sec, klass = T.unsafe(nil), message = T.unsafe(nil), &block); end
 
   class << self
@@ -74,7 +74,7 @@ module Timeout
     #
     # @raise [ArgumentError]
     #
-    # source://timeout//lib/timeout.rb#167
+    # source://timeout//lib/timeout.rb#170
     def timeout(sec, klass = T.unsafe(nil), message = T.unsafe(nil), &block); end
 
     private
@@ -110,7 +110,7 @@ end
 # We keep a private reference so that time mocking libraries won't break
 # Timeout.
 #
-# source://timeout//lib/timeout.rb#136
+# source://timeout//lib/timeout.rb#139
 Timeout::GET_TIME = T.let(T.unsafe(nil), Method)
 
 # source://timeout//lib/timeout.rb#48
