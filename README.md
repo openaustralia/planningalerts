@@ -60,6 +60,14 @@ We're using [Sorbet](https://sorbet.org/) to add type checking to Ruby which oth
 docker compose run web bin/srb
 ```
 
+To update the rbi files, use these commands:
+```sh
+bin/tapioca gem
+bin/tapioca dsl
+bin/tapioca dsl --environment=test
+
+```
+
 We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all our rbi files. We **don't** use `bundle exec srb rbi ...`.
 
 ## Deployment
@@ -164,10 +172,10 @@ If all looks good then thank the contributor for helping tens of thousands of pe
 ## Contributing
 
 * Fork the project on GitHub.
-* Make a topic branch from the master branch.
+* Make a topic branch from the main branch.
 * Make your changes and write tests.
 * Commit the changes without making changes to any files that aren't related to your enhancement or fix.
-* Send a pull request against the master branch.
+* Send a pull request against the main branch.
 
 ## Credits
 
