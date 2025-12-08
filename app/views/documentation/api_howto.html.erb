@@ -99,7 +99,7 @@
           <%= render BulletListComponent.new do |c| %>
             <%= c.with_item do %>
               Return up to
-              <%= number_with_delimiter(ApiKey.default_daily_limit_commercial) * Application.max_per_page %>
+              <%= number_with_delimiter(ApiKey.default_daily_limit_commercial * Application.max_per_page) %>
               applications per day. (<%= number_with_delimiter(ApiKey.default_daily_limit_commercial) %> requests)
             <% end %>
             <%= c.with_item do %>
