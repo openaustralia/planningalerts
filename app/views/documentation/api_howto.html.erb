@@ -67,7 +67,7 @@
           <%= render BulletListComponent.new do |c| %>
             <%= c.with_item do %>
               Return up to
-              <%= number_with_delimiter(ApiKey.default_daily_limit_community) * Application.max_per_page %>
+              <%= number_with_delimiter(ApiKey.default_daily_limit_community * Application.max_per_page) %>
               applications per day. (<%= number_with_delimiter(ApiKey.default_daily_limit_community) %> requests)
             <% end %>
             <%= c.with_item.with_content("Full use of the API") %>
@@ -142,7 +142,7 @@
             <% end %>
             <%= c.with_item do %>
               Return more than
-              <%= number_with_delimiter(ApiKey.default_daily_limit_commercial) * Application.max_per_page %>
+              <%= number_with_delimiter(ApiKey.default_daily_limit_commercial * Application.max_per_page) %>
               applications per day.
             <% end %>
             <%= c.with_item do %>
@@ -178,7 +178,7 @@
         Enjoy up to
         <%= ApiKey.default_daily_limit_trial %>
         requests a day (returning up to a total of
-        <%= number_with_delimiter(ApiKey.default_daily_limit_trial) * Application.max_per_page %>
+        <%= number_with_delimiter(ApiKey.default_daily_limit_trial * Application.max_per_page) %>
         applications per day) for
         <%= pluralize(ApiKey.default_trial_duration_days, "day") %>. (<%= number_with_delimiter(ApiKey.default_trial_duration_days) %> requests)
       </p>
