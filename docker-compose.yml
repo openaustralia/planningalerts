@@ -13,10 +13,18 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - postgres
-      - redis
-      - mailcatcher
-      - elasticsearch
+      # Required for nearly everything
+      postgres:
+        condition: service_healthy
+      # Required for rack stack and flipper initialisation abd caching
+      redis:
+        condition: service_healthy
+      # Required for logging api calls etc
+      elasticsearch:
+        condition: service_healthy
+      # Required for jobs sending email
+      mailcatcher:
+        condition: service_healthy
     command: "bin/dev"
     tty: true
 
@@ -30,9 +38,11 @@ services:
     ports:
       - "2525:25"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     user: root
     command: postfix start-fg
+    
 
   postgres:
     # Same version as used in production
@@ -51,6 +61,13 @@ services:
     environment:
       # The values below need to be the same in config/database.yml
       POSTGRES_PASSWORD: password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres || exit 1"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+      # start_interval: 1s  # TODO: Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
 
   redis:
     # TODO: Try switching to alpine variant for slimmer images
@@ -60,6 +77,13 @@ services:
       - "6379"
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+      # start_interval: 1s  # TODO: Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
 
   mailcatcher:
     build:
@@ -67,6 +91,13 @@ services:
       dockerfile: Dockerfile.mailcatcher
     ports:
       - "1080:1080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:1080 || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+      # start_interval: 1s  # TODO: Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
 
   elasticsearch:
     # Using version 7.17.7 in production. So matching here
@@ -79,6 +110,13 @@ services:
       - "discovery.type=single-node"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+      # start_interval: 1s  # TODO: Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
 
 volumes:
   gem_cache:
