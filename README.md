@@ -24,9 +24,32 @@ git clone https://github.com/openaustralia/planningalerts.git
 cd planningalerts
 ```
 
+### Resetting Your Environment
+
+To force a rebuild from scratch, stopping and removing containers and volumes (including the databases):
+
+```sh
+docker compose down -v --rmi all
+# Check if this volume is "still in use" 
+docker volume rm planningalerts_gem_cache
+```
+
+If you get a `volume is in use` error, remove the container using the given id and then retry, for example:
+
+```sh
+> Error response from daemon: remove planningalerts_gem_cache: volume is in use - [98ba717d944d01976ac9074e6a1119e70d3aebd53f5d5449957324926f0bbb4b]
+
+docker rm 98ba717d944d01976ac9074e6a1119e70d3aebd53f5d5449957324926f0bbb4b
+> 98ba717d944d01976ac9074e6a1119e70d3aebd53f5d5449957324926f0bbb4b
+
+docker volume rm planningalerts_gem_cache
+```
+
 ### Setup The Database
 
 Set up the databases - `docker compose run web bin/rake db:setup`
+
+This will trigger a build if needed. You can manually trigger a build by first running - `docker compose build`
 
 ### Start the application
 
@@ -69,6 +92,16 @@ bin/tapioca dsl --environment=test
 ```
 
 We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all our rbi files. We **don't** use `bundle exec srb rbi ...`.
+
+### Other useful docker commands
+
+* `docker compose ps` - View running containers and their status
+* `docker compose logs [-f] [service]` - View logs for all or a specific service, add `-f` to continue watching (the up command also does this)
+* `docker compose restart web` - Restart the web container (eg when you make a change to the code)
+* `docker compose down` - Stop and remove containers (keeps volumes and images intact for quick restart)
+* `docker compose exec web bash` - Run a shell in the running container
+* `docker compose run web bin/rails console` - Run a once-off command in new container
+* `docker system prune --all` - Remove all stopped containers, orphaned images / networks, build cache etc. (Remove the -v if you want to keep your databases and gem cache)
 
 ## Deployment
 
