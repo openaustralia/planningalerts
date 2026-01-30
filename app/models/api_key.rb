@@ -56,22 +56,22 @@ class ApiKey < ApplicationRecord
   # By default we allow up to 1000 API requests per day per API key
   sig { returns(Integer) }
   def self.default_daily_limit
-    1000
+    1_000
   end
 
   sig { returns(Integer) }
   def self.default_daily_limit_community
-    1000
+    1_000
   end
 
   sig { returns(Integer) }
   def self.default_daily_limit_commercial
-    50
+    5_000
   end
 
   sig { returns(Integer) }
   def self.default_daily_limit_trial
-    100
+    1
   end
 
   # TODO: Should this be longer (like 28 days)?
