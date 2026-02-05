@@ -61,6 +61,19 @@ This will trigger a build if needed. You can manually trigger a build by first r
 * In a separate window - `docker compose run web bin/guard`
 * Press enter to run all the tests
 
+### Setup Development Data
+
+Initially `db/seeds.rb` (called by `db:setup`will have set up:
+
+* user `admin@example.com`
+    * confirm via the email at http://localhost:1080/
+    * Add the admin role using the rails console command `User.first.add_role(:admin)`
+* Authority: Marrickville Council, with
+    * Application to demolish a swimming pool at 28 Grey Street, Emu Plains NSW 2750
+
+Note: external links to morph.io and council site for this example are broken as the external site details have changed
+in the last 5+ years.
+
 ### Emails in development
 
 In development all emails are sent locally to [mailcatcher](https://mailcatcher.me/). The emails can be viewed at <http://localhost:1080>.
@@ -100,7 +113,7 @@ We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all
 * `docker compose restart web` - Restart the web container (eg when you make a change to the code)
 * `docker compose down` - Stop and remove containers (keeps volumes and images intact for quick restart)
 * `docker compose exec web bash` - Run a shell in the running container
-* `docker compose run web bin/rails console` - Run a once-off command in new container
+* `docker compose run --rm web bin/rails console` - Run a once-off command in new container and then clean it up afterwards
 * `docker system prune --all` - Remove all stopped containers, orphaned images / networks, build cache etc. (Remove the -v if you want to keep your databases and gem cache)
 
 ## Deployment
