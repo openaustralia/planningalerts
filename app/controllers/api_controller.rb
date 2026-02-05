@@ -14,8 +14,25 @@ class ApiController < ApplicationController
   # GET requests for JSONP instead of using XHR
   # TODO: Remove this line to re-enable CSRF protection on API actions
   skip_before_action :verify_authenticity_token,
-                     only: %i[authority suburb_postcode point area date_scraped all]
+                     only: %i[authorities authority suburb_postcode point area date_scraped all]
 
+  # Show Authorities list
+  sig { void }
+  def authorities
+    # authority_count = T.let(Authority.active.count, T.nilable(Integer))
+    # percentage_population_covered_by_all_active_authorities = T.let(Authority.percentage_population_covered_by_all_active_authorities.to_i, T.nilable(Integer))
+    # params_order = T.cast(params[:order], T.nilable(String))
+    # order = T.let(params_order, T.nilable(String))
+    authorities = T.let(Authority.enabled, T.untyped)
+    authorities = authorities.order(population_2021: :desc) if params[:order] == "population"
+    authorities = authorities.order(:state, :full_name)
+    # Limit what we're loading to stop the boundary data from getting loaded
+    authorities = authorities.select(:id, :state, :short_name, :full_name, :population_2021, :updated_at, :morph_name, :scraper_authority_label)
+
+    api_render_authorities(authorities, "Authorities")
+  end
+
+  # List applications for an authority
   sig { void }
   def authority
     params_authority_id = T.cast(params[:authority_id], String)
@@ -23,7 +40,7 @@ class ApiController < ApplicationController
     # TODO: Handle the situation where the authority name isn't found
     authority = Authority.find_short_name_encoded!(params_authority_id)
     apps = authority.applications.order(first_date_scraped: :desc)
-    api_render(apps, "Recent applications from #{authority.full_name_and_state}")
+    api_render_apps(apps, "Recent applications from #{authority.full_name_and_state}")
   end
 
   sig { void }
@@ -43,7 +60,7 @@ class ApiController < ApplicationController
       descriptions << params[:postcode]
       apps = apps.where(postcode: params[:postcode])
     end
-    api_render(apps, "Recent applications in #{descriptions.join(', ')}")
+    api_render_apps(apps, "Recent applications in #{descriptions.join(', ')}")
   end
 
   sig { void }
@@ -65,7 +82,7 @@ class ApiController < ApplicationController
     point = RGeo::Geographic.spherical_factory.point(location.lng, location.lat)
     applications = Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius)
     applications = applications.reorder(first_date_scraped: :desc)
-    api_render(
+    api_render_apps(
       applications,
       "Recent applications within #{help.meters_in_words(radius)} of #{location_text}"
     )
@@ -77,7 +94,7 @@ class ApiController < ApplicationController
     lng0 = params[:bottom_left_lng]
     lat1 = params[:top_right_lat]
     lng1 = params[:top_right_lng]
-    api_render(
+    api_render_apps(
       Application.order(first_date_scraped: :desc).where(lat: lat0..lat1, lng: lng0..lng1),
       "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
     )
@@ -94,7 +111,7 @@ class ApiController < ApplicationController
     end
 
     if date
-      api_render(Application.order(date_scraped: :desc).where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
+      api_render_apps(Application.order(date_scraped: :desc).where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       render_error("invalid date_scraped", :bad_request)
     end
@@ -249,8 +266,9 @@ class ApiController < ApplicationController
     end
   end
 
+  # Render Applications matched by API call
   sig { params(apps: T.untyped, description: String).void }
-  def api_render(apps, description)
+  def api_render_apps(apps, description)
     # typed_params = TypedParams[ApiRenderParams].new.extract!(params)
     applications = apps.includes(:authority).page(params[:page]).per(per_page)
     @applications = T.let(applications, T.untyped)
@@ -282,6 +300,26 @@ class ApiController < ApplicationController
       end
       format.geojson do
         render "index"
+      end
+    end
+  end
+
+  # Render Applications matched by API call
+  sig { params(auths: T.untyped, description: String).void }
+  def api_render_authorities(auths, description)
+    # typed_params = TypedParams[ApiRenderParams].new.extract!(params)
+    authorities = auths.page(params[:page]).per(per_page)
+    @authorities = T.let(authorities, T.untyped)
+    @description = T.let(description, T.nilable(String))
+
+    # In Rails 6.0 variants seem to not be able to be a string
+    variants = :v2 if params[:v] == "2"
+
+    respond_to do |format|
+      format.json do
+        # TODO: Document use of v parameter
+        render "authorities", formats: :json,
+                              variants:
       end
     end
   end

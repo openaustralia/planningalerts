@@ -31,34 +31,34 @@ Rails.application.routes.draw do
     # We need to a consistent place accessible by all the roles to make the
     # root route for the admin interface
     resources :homes, only: :index
-    resources :users, except: [:new, :create] do
+    resources :users, except: %i[new create] do
       collection do
         get :export_confirmed_emails
       end
     end
-    resources :alerts, only: [:index, :show] do
+    resources :alerts, only: %i[index show] do
       member do
         post :unsubscribe
       end
     end
-    resources :comments, except: [:destroy, :new, :create] do
+    resources :comments, except: %i[destroy new create] do
       member do
         post :resend
         post :confirm
       end
     end
-    resources :reports, only: [:index, :show, :destroy]
+    resources :reports, only: %i[index show destroy]
     resources :authorities, except: :destroy do
       member do
         post :import
       end
     end
-    resources :applications, only: [:index, :show, :destroy]
-    resources :api_keys, except: [:destroy, :new, :create]
+    resources :applications, only: %i[index show destroy]
+    resources :api_keys, except: %i[destroy new create]
     resources :api_usages, only: :index
     resources :background_jobs, only: :index
-    resources :test_emails, only: [:index, :create]
-    resources :roles, only: [:index, :show]
+    resources :test_emails, only: %i[index create]
+    resources :roles, only: %i[index show]
 
     root to: "homes#index"
   end
@@ -69,26 +69,26 @@ Rails.application.routes.draw do
     end
   end
 
-  require 'sidekiq/web'
+  require "sidekiq/web"
   require "sidekiq/cron/web"
-  authenticate :user, lambda { |u| u.has_role?(:admin) } do
-    mount Sidekiq::Web => '/admin/jobs'
+  authenticate :user, ->(u) { u.has_role?(:admin) } do
+    mount Sidekiq::Web => "/admin/jobs"
   end
 
   devise_for :users, controllers: {
     confirmations: "users/confirmations",
     registrations: "users/registrations"
   }
-  
+
   devise_scope :user do
     # After people fill in the form to register it redirects to this page
     # which asks people to go to their email and confirm their email address
     # TODO: I shouldn't need to prefix the route with users here. Why is this happening? What have I done wrong?
-    get "users/sign_up/check_email",  to: "users/registrations#check_email", as: "check_email_user_registration"
+    get "users/sign_up/check_email", to: "users/registrations#check_email", as: "check_email_user_registration"
   end
 
   namespace :users do
-    resource :activation, only: [:new, :create, :edit, :update] do
+    resource :activation, only: %i[new create edit update] do
       get :check_email
     end
   end
@@ -103,9 +103,9 @@ Rails.application.routes.draw do
       # alerts/registrations#update
       # alerts/registrations#destroy
       # TODO: Can we please remove the unused routes?
-      devise_for :users, only: [:sessions, :registrations]
+      devise_for :users, only: %i[sessions registrations]
     end
-    resources :api_keys, only: [:create, :index] do
+    resources :api_keys, only: %i[create index] do
       collection do
         get :confirm
       end
@@ -123,6 +123,7 @@ Rails.application.routes.draw do
 
   # Route API separately
   scope format: true do
+    get "authorities" => "api#authorities", as: nil
     get "authorities/:authority_id/applications" => "api#authority", as: nil
     get "applications" => "api#suburb_postcode", as: nil,
         constraints: QueryParamsPresentConstraint.new(:postcode)
@@ -151,11 +152,11 @@ Rails.application.routes.draw do
       get :search
       get :trending
     end
-    resources :comments, only: [:create, :update] do
+    resources :comments, only: %i[create update] do
       member do
         # This little hack allows us to put the "clear" button inside the form rather than having a seperate form
         # just for that button
-        patch '' => 'comments#destroy', constraints: QueryParamsPresentConstraint.new(:clear)
+        patch "" => "comments#destroy", constraints: QueryParamsPresentConstraint.new(:clear)
         post :publish
       end
     end
@@ -195,19 +196,19 @@ Rails.application.routes.draw do
 
   resources :contact_messages, only: :create do
     collection do
-      get :thank_you    
+      get :thank_you
     end
   end
 
-  resources :geocode_queries, only: [:index, :show]
+  resources :geocode_queries, only: %i[index show]
 
   get "/atdis/test", to: redirect("/get_involved")
   get "/atdis/specification", to: redirect("https://github.com/openaustralia/atdis/raw/master/docs/ATDIS-1.0.2%20Application%20Tracking%20Data%20Interchange%20Specification%20(v1.0.2).pdf")
 
   namespace :api_keys do
-    resource :non_commercial, only: [:new, :create]
+    resource :non_commercial, only: %i[new create]
     resources :requests, only: [:new]
-    resources :paid, only: [:new, :create]
+    resources :paid, only: %i[new create]
   end
 
   get "api/howto" => "documentation#api_howto"
