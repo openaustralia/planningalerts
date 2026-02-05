@@ -85,24 +85,6 @@ describe ApiController do
       expect(response.parsed_body[0]["authority"]["state"]).to eq("NSW")
       expect(response.parsed_body[1]["authority"]["state"]).to eq("VIC")
     end
-
-    it "orders by population when order=population" do
-      _authority1 = create(:authority,
-                           state: "NSW",
-                           full_name: "Small Council",
-                           population_2021: 10000)
-      _authority2 = create(:authority,
-                           state: "VIC",
-                           full_name: "Large Council",
-                           population_2021: 100000)
-
-      get :authorities, params: { key: key.value, format: "json", order: "population" }
-
-      expect(response).to have_http_status(:ok)
-      # Should be ordered by population descending
-      expect(response.parsed_body[0]["authority"]["population_2021"]).to eq(100000)
-      expect(response.parsed_body[1]["authority"]["population_2021"]).to eq(10000)
-    end
   end
 
   describe "#all" do

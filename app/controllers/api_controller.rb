@@ -19,13 +19,7 @@ class ApiController < ApplicationController
   # Show Authorities list
   sig { void }
   def authorities
-    # authority_count = T.let(Authority.active.count, T.nilable(Integer))
-    # percentage_population_covered_by_all_active_authorities = T.let(Authority.percentage_population_covered_by_all_active_authorities.to_i, T.nilable(Integer))
-    # params_order = T.cast(params[:order], T.nilable(String))
-    # order = T.let(params_order, T.nilable(String))
-    authorities = T.let(Authority.enabled, T.untyped)
-    authorities = authorities.order(population_2021: :desc) if params[:order] == "population"
-    authorities = authorities.order(:state, :full_name)
+    authorities = T.let(Authority.enabled.order(:state, :full_name), T.untyped)
     # Limit what we're loading to stop the boundary data from getting loaded
     authorities = authorities.select(:id, :state, :short_name, :full_name, :population_2021, :updated_at, :morph_name, :scraper_authority_label)
 
