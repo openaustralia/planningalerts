@@ -84,6 +84,23 @@ describe ApiController do
       # Should be ordered by state then name (NSW before VIC)
       expect(response.parsed_body[0]["authority"]["state"]).to eq("NSW")
       expect(response.parsed_body[1]["authority"]["state"]).to eq("VIC")
+
+      # Each authority in the response should include the expected fields
+      response.parsed_body.each do |item|
+        authority = item["authority"]
+        expect(authority).to be_a(Hash)
+        expect(authority.keys).to include(
+          "id",
+          "state",
+          "full_name",
+          "short_name",
+          "slug",
+          "morph_name",
+          "scraper_authority_label",
+          "population_2021",
+          "broken"
+        )
+      end
     end
   end
 
