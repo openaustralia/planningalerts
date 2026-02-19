@@ -63,7 +63,7 @@ This will trigger a build if needed. You can manually trigger a build by first r
 
 ### Setup Development Data
 
-Initially `db/seeds.rb` (called by `db:setup`will have set up:
+Initially `db/seeds.rb` (called by `db:setup` will have set up:
 
 * user `admin@example.com`
     * confirm via the email at http://localhost:1080/
