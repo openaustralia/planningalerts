@@ -298,7 +298,7 @@ class ApiController < ApplicationController
     end
   end
 
-  # Render Applications matched by API call
+  # Render Authorities matched by API call
   sig { params(auths: T.untyped, description: String).void }
   def api_render_authorities(auths, description)
     # typed_params = TypedParams[ApiRenderParams].new.extract!(params)
