@@ -1,0 +1,16 @@
+# typed: strict
+# frozen_string_literal: true
+
+{
+  authority: {
+    id: authority.id,
+    state: authority.state,
+    full_name: authority.full_name,
+    short_name: authority.short_name,
+    slug: authority.short_name_encoded,
+    morph_name: authority.morph_name,
+    scraper_authority_label: authority.scraper_authority_label,
+    population_2021: authority.population_2021,
+    broken: authority.broken?
+  }
+}
