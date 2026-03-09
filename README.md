@@ -209,7 +209,7 @@ Click _Create Authority_. Now scrape some applications so you can see them on th
 
 Visit the new authority page, e.g. <https://www.planningalerts.org.au/authorities/bellingen/>
 
-You should see that some applications have already been collected. If not wait a few seconds and refresh the page. Once you've got some do a quick check on a few by clicking _Brownse all recent applications_ and selecting a few. Make sure the comment form is visible (that means you set an email address).
+You should see that some applications have already been collected. If not wait a few seconds and refresh the page. Once you've got some do a quick check on a few by clicking _Browse all recent applications_ and selecting a few. Make sure the comment form is visible (that means you set an email address).
 
 If all looks good then thank the contributor for helping tens of thousands of people get PlanningAlerts by tweeting about it from @PlanningAlerts. It's always fun to @mention the council too, sometimes we get a RT :grinning:
 
