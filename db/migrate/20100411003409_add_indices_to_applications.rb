@@ -5,7 +5,7 @@ class AddIndicesToApplications < ActiveRecord::Migration[4.2]
     add_index :applications, :date_scraped
     add_index :applications, :suburb
     add_index :applications, :state
-    add_index :applications, :postcode    
+    add_index :applications, :postcode
   end
 
   def self.down

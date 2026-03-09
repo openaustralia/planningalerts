@@ -11,7 +11,7 @@ Rack::Attack.throttle(
   rescue StandardError
     nil
   end
-  
+
   request.params["key"] if path_info && path_info[:controller] == "api"
 end
 
