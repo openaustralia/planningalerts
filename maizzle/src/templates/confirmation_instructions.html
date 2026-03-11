@@ -12,7 +12,7 @@ permalink: ../app/views/devise/mailer/confirmation_instructions.html.erb
     <x-spacer height="16px" />
     <x-button href="<%= confirmation_url(@resource, confirmation_token: @token) %>">
       Create my account
-    </x-button>    
+    </x-button>
     <p>(just confirming you're you)</p>
     <x-spacer height="64px" />
     <img src="<%= attachments['illustration.png'].url %>" height="308">
