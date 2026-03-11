@@ -13,7 +13,7 @@ Rails.application.configure do
   config.x.rack_attack_redis_url = "redis://redis:6379/1"
   config.x.flipper_redis_url = "redis://redis:6379/2"
   config.x.split_redis_url = "redis://redis:6379/3"
-  
+
   ## User settings (END)
 
   # Settings specified here will take precedence over those in config/application.rb.
@@ -37,7 +37,7 @@ Rails.application.configure do
    config.action_mailer.delivery_method = :smtp
    config.action_mailer.smtp_settings = { address: "mailcatcher", port: 1025 }
    config.action_mailer.default_url_options = { host: "localhost:3000" }
- 
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
