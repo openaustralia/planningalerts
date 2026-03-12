@@ -30,7 +30,7 @@ To force a rebuild from scratch, stopping and removing containers and volumes (i
 
 ```sh
 docker compose down -v --rmi all
-# Check if this volume is "still in use" 
+# Check if this volume is "still in use"
 docker volume rm planningalerts_gem_cache
 ```
 
