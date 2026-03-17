@@ -21,7 +21,7 @@ gem "rack-attack"
 gem "administrate", "~> 0.20.0"
 
 # Logging in and such things
-gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
+gem "devise", "~> 5.0" # Pin to a particular major version to get deprecation warnings
 gem "pundit", "~> 2.2"
 gem "rolify"
 
