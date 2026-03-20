@@ -59,6 +59,51 @@ describe ApiController do
 
   let(:key) { create(:api_key) }
 
+  describe "#authorities" do
+    it_behaves_like "an authenticated API" do
+      let(:method) { :authorities }
+      let(:params) { { format: "json" } }
+    end
+
+    it "returns list of enabled authorities ordered by state and name" do
+      _authority1 = create(:authority,
+                           state: "VIC",
+                           full_name: "Melbourne City Council",
+                           population_2021: 50000)
+      _authority2 = create(:authority,
+                           state: "NSW",
+                           full_name: "Sydney City Council",
+                           population_2021: 100000)
+      create(:authority, disabled: true) # Should not appear
+
+      get :authorities, params: { key: key.value, format: "json" }
+
+      expect(response).to have_http_status(:ok)
+      expect(response.parsed_body.count).to eq(2)
+
+      # Should be ordered by state then name (NSW before VIC)
+      expect(response.parsed_body[0]["authority"]["state"]).to eq("NSW")
+      expect(response.parsed_body[1]["authority"]["state"]).to eq("VIC")
+
+      # Each authority in the response should include the expected fields
+      response.parsed_body.each do |item|
+        authority = item["authority"]
+        expect(authority).to be_a(Hash)
+        expect(authority.keys).to include(
+          "id",
+          "state",
+          "full_name",
+          "short_name",
+          "slug",
+          "morph_name",
+          "scraper_authority_label",
+          "population_2021",
+          "broken"
+        )
+      end
+    end
+  end
+
   describe "#all" do
     describe "rss" do
       it "does not support rss" do

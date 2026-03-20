@@ -4,7 +4,7 @@ class AllowNullInApplications < ActiveRecord::Migration[5.2]
     # in the applications table with the real data stored in application
     # versions. Old data in applications will still be kept around until
     # we're happy that everything is working as expected.
-    
+
     change_column_null :applications, :address, true
     change_column_null :applications, :description, true
     change_column_null :applications, :info_url, true
