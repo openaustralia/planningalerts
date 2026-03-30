@@ -119,6 +119,30 @@ namespace :foreman do
   end
 end
 
+namespace :rake do
+  desc "Run rake $TASK task on the remote server"
+  task :invoke do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, (ENV['TASK'] || fail('TASK environment variable is required'))
+        end
+      end
+    end
+  end
+
+  namespace :invoke do
+    desc "Run rake db:seed on the remote server wrapped in maintenance on before and off afterwards"
+    task :with_maintenance do
+      Rake::Task["maintenance:on"].invoke
+      Rake::Task["rake:invoke"].invoke
+    ensure
+      Rake::Task["maintenance:off"].invoke
+    end
+  end
+end
+
+
 before "deploy:finishing", "foreman:restart"
 before "foreman:restart", "foreman:enable"
 before "foreman:enable", "foreman:export"

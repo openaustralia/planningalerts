@@ -218,6 +218,20 @@ If all looks good then thank the contributor for helping tens of thousands of pe
 
 >We've just added @BellingenShire thanks to @LoveMyData. Another 12,886 people can now get PlanningAlerts! e.g. <https://www.planningalerts.org.au/applications/898071>
 
+## Utilities
+
+You can run rake tasks on the server using capistrano, for example:
+```shell
+bundle exec cap production rake:invoke TASK=my:rake_task
+# Or with maintenance on before and off afterwards
+bundle exec cap production rake:invoke:with_maintenance TASK=my:rake_task
+```
+Useful rake tasks:
+* `db:version` - Retrieve the current schema version number
+* `db:stats` - Show table count and size
+
+Or you can run them locally, eg `bundle exec rake db:stats`
+
 ## Contributing
 
 * Fork the project on GitHub.
