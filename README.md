@@ -74,6 +74,10 @@ Initially `db/seeds.rb` (called by `db:setup` will have set up:
 Note: external links to morph.io and council site for this example are broken as the external site details have changed
 in the last 5+ years.
 
+#### Using production data locally
+
+If you want to use production data locally, follwo the instructions in the [doc/using_production_data_locally.md](doc/using_production_data_locally.md) file.
+
 ### Emails in development
 
 In development all emails are sent locally to [mailcatcher](https://mailcatcher.me/). The emails can be viewed at <http://localhost:1080>.
@@ -101,7 +105,6 @@ To update the rbi files, use these commands:
 bin/tapioca gem
 bin/tapioca dsl
 bin/tapioca dsl --environment=test
-
 ```
 
 We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all our rbi files. We **don't** use `bundle exec srb rbi ...`.
