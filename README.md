@@ -54,6 +54,18 @@ export DB_HOST=localhost
 export DB_PORT=15432
 ```
 
+### Alternative web port
+
+You can set up a second web server port so all your user and passwords from various projects are not all mixed together.
+For example, add the following to `docker-compose.override.yml` to use port 30PA (3072):
+```yaml
+services:
+  web:
+    ports:
+      - "3072:3000"
+```
+This adds an extra port mapping, local port 3000 will still be mapped to port 3000 on the container as well.
+
 ### Setup The Database
 
 Set up the databases - `docker compose run web bin/rake db:setup`
@@ -64,6 +76,8 @@ This will trigger a build if needed. You can manually trigger a build by first r
 
 * `docker compose up`
 * Point your browser at <http://localhost:3000>
+
+Append `--build` to rebuild any changes to Dockerfile.
 
 ### Run The Tests
 
