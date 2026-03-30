@@ -43,6 +43,9 @@ RUN apt-get install -y nodejs
 # Install firefox for running some integration tests
 RUN apt-get update; apt-get install -y firefox-esr
 
+# Needed for pg gem and bin/rails dbconsole
+RUN apt-get install -y libpq-dev postgresql-client
+
 # Install the fish shell
 RUN apt-get install -y fish
 
