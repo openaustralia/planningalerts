@@ -14,10 +14,11 @@ namespace :db do
 
     conn = ActiveRecord::Base.connection
 
-    table_stats = conn.exec_query(<<~SQL).rows.to_h { |name, rows, mb| [name, [rows, mb]] }
+    sql = <<~SQL.squish
       SELECT s.relname, s.n_live_tup, pg_total_relation_size(s.relid) / 1024.0 / 1024.0
       FROM pg_stat_user_tables s
     SQL
+    table_stats = conn.exec_query(sql).rows.to_h { |name, rows, mb| [name, [rows, mb]] }
 
     total_mb    = 0.0
     total_count = 0
