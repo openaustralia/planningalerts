@@ -241,6 +241,14 @@ If all looks good then thank the contributor for helping tens of thousands of pe
 
 >We've just added @BellingenShire thanks to @LoveMyData. Another 12,886 people can now get PlanningAlerts! e.g. <https://www.planningalerts.org.au/applications/898071>
 
+## Periodic jobs
+
+We use `sidekiq-cron` gem to run system-wide periodic jobs that are not tied to a specific server.
+As noted in `Gemfile` Use "regular" cron for jobs that need to run on every machine (though none are
+currently defined for the `deploy` user).
+
+See `config/cron.yml` for the list of periodic jobs.
+
 ## Utilities
 
 You can run rake tasks on the server using capistrano, for example:
