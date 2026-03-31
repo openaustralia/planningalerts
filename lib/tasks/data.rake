@@ -44,14 +44,26 @@ namespace :data do
           id,
           event,
           created_at,
-          hashtext((object::jsonb - 'updated_at')::text)         AS obj_ht,
-          md5((object::jsonb - 'updated_at')::text)              AS obj_md5,
-          hashtext(object_changes::text)                         AS chg_ht
+          whodunnit,
+          hashtext((
+            CASE
+              WHEN created_at < NOW() - INTERVAL '6 months'
+              THEN object::jsonb - 'updated_at' - 'last_scraper_run_log'
+              ELSE object::jsonb - 'updated_at'
+            END
+          )::text) AS obj_ht,
+          md5((
+            CASE
+              WHEN created_at < NOW() - INTERVAL '6 months'
+              THEN object::jsonb - 'updated_at' - 'last_scraper_run_log'
+              ELSE object::jsonb - 'updated_at'
+            END
+          )::text) AS obj_md5,
+          hashtext(object_changes::text) AS chg_ht
         FROM versions
         WHERE item_type = 'Authority'
           AND item_id = #{item_id}
-          AND whodunnit IS NULL
-        ORDER by created_at DESC
+        ORDER BY created_at DESC
       SQL
       versions.each do |version|
         # Check for any change, not just monitored attributes
@@ -59,7 +71,8 @@ namespace :data do
            version["event"] != last["event"] ||
            version["obj_ht"] != last["obj_ht"] ||
            version["obj_md5"] != last["obj_md5"] ||
-           version["chg_ht"]
+           last["chg_ht"] ||
+           last["whodunnit"]
           if ENV["EXPLAIN"] && !last.nil?
             reason = []
             reason << "event" if version["event"] != last["event"]
@@ -68,14 +81,15 @@ namespace :data do
             elsif version["obj_md5"] != last["obj_md5"]
               reason << "object MD5"
             end
-            reason << "has_changes" if version["chg_ht"]
+            reason << "has_changes" if last["chg_ht"]
+            reason << "manual change" if last["whodunnit"]
             log.call "Skipping version id #{last['id']} cf #{version['id']} of authority #{item_id} due to #{reason.join(', ')} differences; created_at #{last['created_at']}"
           end
           last = version
           next
         end
 
-        log.call "Id #{last['id']} will be deleted since its contents match #{version['id']}" if ENV["EXPLAIN"]
+        log.call "Id #{last['id']} will be deleted since its contents match #{version['id']}; created_at #{last['created_at']}" if ENV["EXPLAIN"]
         ids_to_delete << last["id"]
         last = version
       end
