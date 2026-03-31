@@ -7,7 +7,7 @@ namespace :data do
   task dedup_versions: :environment do
     log = lambda do |msg|
       if $stdin.tty?
-        $stdout.puts "#{Time.now}: #{msg}"
+        $stdout.puts "#{Time.zone.now}: #{msg}"
         $stdout.flush
       else
         Rails.logger.info msg
@@ -27,7 +27,7 @@ namespace :data do
 
     if ENV["ITEM_IDS"]
       filter = ENV["ITEM_IDS"].split(",").map(&:to_i)
-      item_ids = item_ids & filter
+      item_ids &= filter
       log.call "db:dedup_versions task: filtered down to #{item_ids.size} Authority records in versions table to process"
     end
 
@@ -51,7 +51,7 @@ namespace :data do
         WHERE item_type = 'Authority'
           AND item_id = #{item_id}
           AND whodunnit IS NULL
-        ORDER by created_at DESC 
+        ORDER by created_at DESC
       SQL
       versions.each do |version|
         # Check for any change, not just monitored attributes
@@ -69,15 +69,13 @@ namespace :data do
               reason << "object MD5"
             end
             reason << "has_changes" if version["chg_ht"]
-            log.call "Skipping version id #{last["id"]} cf #{version["id"]} of authority #{item_id} due to #{reason.join(", ")} differences; created_at #{last["created_at"]}"
+            log.call "Skipping version id #{last['id']} cf #{version['id']} of authority #{item_id} due to #{reason.join(', ')} differences; created_at #{last['created_at']}"
           end
           last = version
           next
         end
 
-        if ENV["EXPLAIN"]
-          log.call "Id #{last["id"]} will be deleted since its contents match #{version["id"]}"
-        end
+        log.call "Id #{last['id']} will be deleted since its contents match #{version['id']}" if ENV["EXPLAIN"]
         ids_to_delete << last["id"]
         last = version
       end
@@ -95,7 +93,7 @@ namespace :data do
         batch_size = ENV.fetch("BATCH_SIZE", "200").to_i
         log.call "#{label}: deleting #{ids_to_delete.size} of #{versions.size} versions in batches of #{batch_size}"
 
-        ids_to_delete.each_slice(batch_size).each_with_index do |batch, i|
+        ids_to_delete.each_slice(batch_size).each do |batch|
           conn.transaction do
             conn.execute("DELETE FROM versions WHERE id IN (#{batch.join(',')})")
           end
