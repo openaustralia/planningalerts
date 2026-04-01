@@ -92,7 +92,7 @@ describe "Comments pages" do
           expect(page).to have_content("Sent to Byron Shire Council")
         end
 
-        it "has a comment that has been succesfully received" do
+        it "has a comment that has been successfully received" do
           expect(page).to have_content("Delivered to Byron Shire Council")
         end
 
