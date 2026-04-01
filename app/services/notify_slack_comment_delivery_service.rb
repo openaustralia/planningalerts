@@ -45,7 +45,7 @@ class NotifySlackCommentDeliveryService
     notifier = Slack::Notifier.new(Rails.application.credentials[:slack_webhook_url])
     case status
     when "delivered"
-      notifier.ping "A [comment](#{comment_url}) was succesfully [delivered](#{email_url}) to #{comment.application&.authority&.full_name} #{to}"
+      notifier.ping "A [comment](#{comment_url}) was successfully [delivered](#{email_url}) to #{comment.application&.authority&.full_name} #{to}"
     when "soft_bounce"
       notifier.ping "A [comment](#{comment_url}) soft bounced when [delivered](#{email_url}) to #{comment.application&.authority&.full_name} #{to}. Their email server said \"#{extended_status}\""
     when "hard_bounce"

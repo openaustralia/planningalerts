@@ -49,7 +49,7 @@ class AlertsController < ApplicationController
 
     if alert.save
       ab_finished(:logged_out_alert_flow_order)
-      redirect_to alerts_path, notice: "You succesfully added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
+      redirect_to alerts_path, notice: "You successfully added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
     else
       @alert = T.let(alert, T.nilable(Alert))
       render :new

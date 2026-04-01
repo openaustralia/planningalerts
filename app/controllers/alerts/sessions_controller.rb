@@ -31,7 +31,7 @@ module Alerts
 
       if alert.save
         ab_finished(:logged_out_alert_flow_order)
-        redirect_to alerts_path, notice: "You succesfully signed in and added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
+        redirect_to alerts_path, notice: "You successfully signed in and added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
       else
         @alert = T.let(alert, T.nilable(Alert))
         render "alerts/new", layout: "profile"
