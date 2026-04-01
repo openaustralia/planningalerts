@@ -45,6 +45,15 @@ docker rm 98ba717d944d01976ac9074e6a1119e70d3aebd53f5d5449957324926f0bbb4b
 docker volume rm planningalerts_gem_cache
 ```
 
+### Overriding DB host and port for non docker dev
+
+To use docker for the database, but allow you to run the application locally, for example to simplify single step debugging in IDE's, you can overide the following ENV vars in `.envrc` (for `direnv`) or manually:
+
+```
+export DB_HOST=localhost
+export DB_PORT=15432
+```
+
 ### Setup The Database
 
 Set up the databases - `docker compose run web bin/rake db:setup`
