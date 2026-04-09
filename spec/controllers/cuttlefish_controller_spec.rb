@@ -28,7 +28,7 @@ describe CuttlefishController do
       expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
-    it "accepts a delivery event for an alert email and record a succesful delivery" do
+    it "accepts a delivery event for an alert email and record a successful delivery" do
       alert = create(:alert, id: 123)
       params = {
         key: "abc123",
@@ -121,7 +121,7 @@ describe CuttlefishController do
       expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
-    it "accepts a succesful delivery event for a comment email" do
+    it "accepts a successful delivery event for a comment email" do
       comment = create(:comment, id: 12)
       params = {
         key: "abc123",
