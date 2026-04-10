@@ -52,6 +52,8 @@ The Primary reason for DB growth is the combination of:
 
 ## Database usage
 
+Top 10 largest tables by size:
+
 | table_name               | total_size GB |
 |--------------------------|---------------|
 | versions (to be trimmed) | 36 GB         |
