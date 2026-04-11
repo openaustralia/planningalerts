@@ -133,7 +133,7 @@ describe Application do
       expect(described_class.normalise_description("a description")).to eq("A description")
     end
 
-    it "fixes capitilisation of descriptions all in caps" do
+    it "fixes capitalisation of descriptions all in caps" do
       expect(described_class.normalise_description("DWELLING")).to eq("Dwelling")
     end
 

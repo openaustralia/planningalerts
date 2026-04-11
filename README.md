@@ -47,7 +47,7 @@ docker volume rm planningalerts_gem_cache
 
 ### Overriding DB host and port for non docker dev
 
-To use docker for the database, but allow you to run the application locally, for example to simplify single step debugging in IDE's, you can overide the following ENV vars in `.envrc` (for `direnv`) or manually:
+To use docker for the database, but allow you to run the application locally, for example to simplify single step debugging in IDE's, you can override the following ENV vars in `.envrc` (for `direnv`) or manually:
 
 ```
 export DB_HOST=localhost
@@ -99,7 +99,7 @@ in the last 5+ years.
 
 #### Using production data locally
 
-If you want to use production data locally, follwo the instructions in the [doc/using_production_data_locally.md](doc/using_production_data_locally.md) file.
+If you want to use production data locally, follow the instructions in the [doc/using_production_data_locally.md](doc/using_production_data_locally.md) file.
 
 ### Emails in development
 
@@ -153,7 +153,7 @@ bundle exec cap production deploy
 This command is defined in `config/deploy.rb`.
 
 Sometimes you want to deploy an alternate branch, for instance when deploying to the `test` stage.
-In this case you'll need to set the `branch` variable after recipies are loaded by using the `--set` argument instead of `--set-before`, e.g.
+In this case you'll need to set the `branch` variable after recipes are loaded by using the `--set` argument instead of `--set-before`, e.g.
 
 ```sh
 bundle exec cap staging --set branch=a-branch-i-want-to-test deploy
