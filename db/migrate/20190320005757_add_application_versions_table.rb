@@ -2,7 +2,7 @@ class AddApplicationVersionsTable < ActiveRecord::Migration[5.2]
   def change
     create_table :application_versions do |t|
       # Can't create a foreign key constraints to this table until this table
-      # is created. So, doing it below as seperate steps
+      # is created. So, doing it below as separate steps
       t.references :application, null: false, type: :int
       t.references :previous_version
 
