@@ -56,6 +56,8 @@ jobs:
           bin/tapioca dsl
           bin/tapioca dsl --environment=test
       - name: Commit updated RBI files
+        env:
+          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           if git diff --quiet --exit-code -- sorbet; then
             echo "No Tapioca changes to commit"
@@ -66,4 +68,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add sorbet
           git commit -m "Update Tapioca RBI files"
-          git push origin HEAD:${{ github.event.pull_request.head.ref }}
+          git push origin HEAD:$PR_HEAD_REF
