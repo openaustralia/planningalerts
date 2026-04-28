@@ -43,14 +43,14 @@ jobs:
       DATABASE_URL: "postgis://postgres:postgres@localhost:5432/rails_test"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+        uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: "22"
       - run: npm install --save-dev @percy/cli
       # Add or replace dependency steps here
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.305.0
         with:
           bundler-cache: true
       # Add or replace database setup steps here
@@ -85,9 +85,9 @@ jobs:
       DATABASE_URL: "postgis://postgres:postgres@localhost:5432/rails_test"
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.305.0
         with:
           bundler-cache: true
       - name: Create database
@@ -101,9 +101,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1.305.0
         with:
           bundler-cache: true
       - name: Lint rake task
