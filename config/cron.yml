@@ -16,3 +16,9 @@ sitemap_refresh:
   args:
     # TODO: remove no_ping after we've confirmed that everything is working
     task: sitemap:refresh:no_ping
+sidedup_versions:
+  cron: "every day at 11 pm Australia/Sydney"
+  class: InvokeRakeTaskJob
+  description: "Remove any duplicate versions"
+  args:
+    task: data:dedup_versions

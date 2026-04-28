@@ -111,6 +111,8 @@ class Authority < ApplicationRecord
 
   sig { params(name: String).returns(T.nilable(Integer)) }
   def self.find_id_short_name_encoded(name)
+    # TODO: Inefficiently this does a full table scan for every /authorities/<name>/... or /api/authorities/<name>/... call!
+    # Create a slug column and use DB indexing!
     select(:id, :short_name).to_a.find { |a| a.short_name_encoded == name }&.id
   end
 

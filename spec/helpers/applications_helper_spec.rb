@@ -40,7 +40,7 @@ describe ApplicationsHelper do
         allow(application).to receive(:description).and_return("Build something really really big")
       end
 
-      it "trucates the description" do
+      it "truncates the description" do
         expect(helper.display_description_with_address(application))
           .to eq "“Build something really...” at Foo Road, NSW"
       end
@@ -48,12 +48,12 @@ describe ApplicationsHelper do
 
     context "when the application has a description with special characters" do
       before do
-        allow(application).to receive(:description).and_return("Alertations & additions")
+        allow(application).to receive(:description).and_return("Alterations & additions")
       end
 
       it "does not escape them" do
         expect(helper.display_description_with_address(application))
-          .to eq "“Alertations & additions” at Foo Road, NSW"
+          .to eq "“Alterations & additions” at Foo Road, NSW"
       end
     end
   end

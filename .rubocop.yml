@@ -269,31 +269,34 @@ Sorbet/FalseSigil:
 Sorbet/TrueSigil:
   Enabled: true
   Exclude:
-    - spec/**/*.rb
-    - db/seeds.rb
-    - lib/tasks/*.rake
-    - config.ru
+    - app/views/api/_application.json.jbuilder
     - Capfile
+    - config/*.rb
+    - config.ru
+    - db/seeds.rb
     - Gemfile
     - Guardfile
+    - lib/tasks/*.rake
     - Rakefile
-    - app/views/api/_application.json.jbuilder
+    - spec/**/*.rb
     # TODO: Remove these exclusions as soon as we can
     - app/admin/*.rb
 
 Sorbet/StrictSigil:
   Enabled: true
   Exclude:
-    - spec/**/*.rb
-    - db/seeds.rb
-    - lib/tasks/*.rake
-    - config.ru
+    - app/views/api/_application.json.jbuilder
     - Capfile
+    - config/*.rb
+    - config/*/*.rb
+    - config.ru
+    - db/seeds.rb
+    - experiments/metrics/alert_signup.rb
     - Gemfile
     - Guardfile
+    - lib/tasks/*.rake
     - Rakefile
-    - app/views/api/_application.json.jbuilder
-    - experiments/metrics/alert_signup.rb
+    - spec/**/*.rb
     # TODO: Remove these exclusions as soon as we can
     - app/models/concerns/email_confirmable.rb
     - app/models/feed.rb

@@ -30,7 +30,7 @@ To force a rebuild from scratch, stopping and removing containers and volumes (i
 
 ```sh
 docker compose down -v --rmi all
-# Check if this volume is "still in use" 
+# Check if this volume is "still in use"
 docker volume rm planningalerts_gem_cache
 ```
 
@@ -45,6 +45,27 @@ docker rm 98ba717d944d01976ac9074e6a1119e70d3aebd53f5d5449957324926f0bbb4b
 docker volume rm planningalerts_gem_cache
 ```
 
+### Overriding DB host and port for non docker dev
+
+To use docker for the database, but allow you to run the application locally, for example to simplify single step debugging in IDE's, you can overide the following ENV vars in `.envrc` (for `direnv`) or manually:
+
+```
+export DB_HOST=localhost
+export DB_PORT=15432
+```
+
+### Alternative web port
+
+You can set up a second web server port so all your user and passwords from various projects are not all mixed together.
+For example, add the following to `docker-compose.override.yml` to use port 30PA (3072):
+```yaml
+services:
+  web:
+    ports:
+      - "3072:3000"
+```
+This adds an extra port mapping, local port 3000 will still be mapped to port 3000 on the container as well.
+
 ### Setup The Database
 
 Set up the databases - `docker compose run web bin/rake db:setup`
@@ -56,10 +77,29 @@ This will trigger a build if needed. You can manually trigger a build by first r
 * `docker compose up`
 * Point your browser at <http://localhost:3000>
 
+Append `--build` to rebuild any changes to Dockerfile.
+
 ### Run The Tests
 
 * In a separate window - `docker compose run web bin/guard`
 * Press enter to run all the tests
+
+### Setup Development Data
+
+Initially `db/seeds.rb` (called by `db:setup` will have set up:
+
+* user `admin@example.com`
+    * confirm via the email at http://localhost:1080/
+    * Add the admin role using the rails console command `User.first.add_role(:admin)`
+* Authority: Marrickville Council, with
+    * Application to demolish a swimming pool at 28 Grey Street, Emu Plains NSW 2750
+
+Note: external links to morph.io and council site for this example are broken as the external site details have changed
+in the last 5+ years.
+
+#### Using production data locally
+
+If you want to use production data locally, follwo the instructions in the [doc/using_production_data_locally.md](doc/using_production_data_locally.md) file.
 
 ### Emails in development
 
@@ -88,7 +128,6 @@ To update the rbi files, use these commands:
 bin/tapioca gem
 bin/tapioca dsl
 bin/tapioca dsl --environment=test
-
 ```
 
 We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all our rbi files. We **don't** use `bundle exec srb rbi ...`.
@@ -100,7 +139,7 @@ We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all
 * `docker compose restart web` - Restart the web container (eg when you make a change to the code)
 * `docker compose down` - Stop and remove containers (keeps volumes and images intact for quick restart)
 * `docker compose exec web bash` - Run a shell in the running container
-* `docker compose run web bin/rails console` - Run a once-off command in new container
+* `docker compose run --rm web bin/rails console` - Run a once-off command in new container and then clean it up afterwards
 * `docker system prune --all` - Remove all stopped containers, orphaned images / networks, build cache etc. (Remove the -v if you want to keep your databases and gem cache)
 
 ## Deployment
@@ -196,11 +235,33 @@ Click _Create Authority_. Now scrape some applications so you can see them on th
 
 Visit the new authority page, e.g. <https://www.planningalerts.org.au/authorities/bellingen/>
 
-You should see that some applications have already been collected. If not wait a few seconds and refresh the page. Once you've got some do a quick check on a few by clicking _Brownse all recent applications_ and selecting a few. Make sure the comment form is visible (that means you set an email address).
+You should see that some applications have already been collected. If not wait a few seconds and refresh the page. Once you've got some do a quick check on a few by clicking _Browse all recent applications_ and selecting a few. Make sure the comment form is visible (that means you set an email address).
 
 If all looks good then thank the contributor for helping tens of thousands of people get PlanningAlerts by tweeting about it from @PlanningAlerts. It's always fun to @mention the council too, sometimes we get a RT :grinning:
 
 >We've just added @BellingenShire thanks to @LoveMyData. Another 12,886 people can now get PlanningAlerts! e.g. <https://www.planningalerts.org.au/applications/898071>
+
+## Periodic jobs
+
+We use `sidekiq-cron` gem to run system-wide periodic jobs that are not tied to a specific server.
+As noted in `Gemfile` Use "regular" cron for jobs that need to run on every machine (though none are
+currently defined for the `deploy` user).
+
+See `config/cron.yml` for the list of periodic jobs.
+
+## Utilities
+
+You can run rake tasks on the server using capistrano, for example:
+```shell
+bundle exec cap production rake:invoke TASK=my:rake_task
+# Or with maintenance on before and off afterwards
+bundle exec cap production rake:invoke:with_maintenance TASK=my:rake_task
+```
+Useful rake tasks:
+* `db:version` - Retrieve the current schema version number
+* `db:stats` - Show table count and size
+
+Or you can run them locally, eg `bundle exec rake db:stats`
 
 ## Contributing
 

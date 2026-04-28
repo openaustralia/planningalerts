@@ -33,7 +33,7 @@ describe "Sign up for alerts" do
     fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
     click_on("Create alert")
 
-    expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
+    expect(page).to have_content("You successfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     expect(
       Alert.active.find_by(address: "24 Bruce Rd, Glenbrook NSW 2773",
                            radius_meters: "2000",
@@ -65,7 +65,7 @@ describe "Sign up for alerts" do
 
       click_on("Save")
 
-      expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
+      expect(page).to have_content("You successfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     end
   end
 
@@ -86,7 +86,7 @@ describe "Sign up for alerts" do
 
       click_on("Save", match: :first)
 
-      expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
+      expect(page).to have_content("You successfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     end
   end
 
@@ -116,7 +116,7 @@ describe "Sign up for alerts" do
     expect(page).to have_content("Search results")
     click_on("Save", match: :first)
 
-    expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
+    expect(page).to have_content("You successfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
   end
 
   it "when via the homepage with a pre-existing user but not logged in in the alternate flow" do
@@ -148,7 +148,7 @@ describe "Sign up for alerts" do
     fill_in("Password", with: "mypassword")
     click_on("Sign in")
 
-    expect(page).to have_content("You succesfully signed in and added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
+    expect(page).to have_content("You successfully signed in and added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
   end
 
   it "when via the homepage not logged in and doesn't know the password in the alternate flow" do
@@ -185,7 +185,7 @@ describe "Sign up for alerts" do
     fill_in("Password", with: "mypassword")
     click_on("Sign in")
 
-    expect(page).to have_content("You succesfully signed in and added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
+    expect(page).to have_content("You successfully signed in and added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
   end
 
   it "when via the homepage not logged in and already has an alert in the alternate flow" do
@@ -333,7 +333,7 @@ describe "Sign up for alerts" do
     expect(page).to have_content("Search results")
     click_on("Save", match: :first)
 
-    expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
+    expect(page).to have_content("You successfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
   end
 
   context "when there is already an alert for the address" do
@@ -367,7 +367,7 @@ describe "Sign up for alerts" do
         fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
         click_on("Create alert")
 
-        expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
+        expect(page).to have_content("You successfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
       end
     end
   end
