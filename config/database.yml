@@ -6,21 +6,24 @@ default: &default
 
 development:
   <<: *default
-  host: postgres
+  host: <%= ENV.fetch("DB_HOST") { "postgres" } %>
+  port: <%= ENV.fetch("DB_PORT") { "5432" } %>
   database: pa_development
   username: postgres
   password: password
 
 test:
   <<: *default
-  host: postgres
+  host: <%= ENV.fetch("DB_HOST") { "postgres" } %>
+  port: <%= ENV.fetch("DB_PORT") { "5432" } %>
   database: pa_test
   username: postgres
   password: password
 
 production:
   <<: *default
-  host: "<%= Rails.application.credentials.dig(:database, :postgres, :host) %>"
+  host: "<%= ENV.fetch("DB_HOST") { Rails.application.credentials.dig(:database, :postgres, :host) } %>"
+  port: <%= ENV.fetch("DB_PORT") { "5432" } %>
   database: pa-production
   # For postgres read-only access (during maintenance switch out the two lines below)
   # username: pa-production-readonly

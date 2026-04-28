@@ -45,6 +45,27 @@ docker rm 98ba717d944d01976ac9074e6a1119e70d3aebd53f5d5449957324926f0bbb4b
 docker volume rm planningalerts_gem_cache
 ```
 
+### Overriding DB host and port for non docker dev
+
+To use docker for the database, but allow you to run the application locally, for example to simplify single step debugging in IDE's, you can overide the following ENV vars in `.envrc` (for `direnv`) or manually:
+
+```
+export DB_HOST=localhost
+export DB_PORT=15432
+```
+
+### Alternative web port
+
+You can set up a second web server port so all your user and passwords from various projects are not all mixed together.
+For example, add the following to `docker-compose.override.yml` to use port 30PA (3072):
+```yaml
+services:
+  web:
+    ports:
+      - "3072:3000"
+```
+This adds an extra port mapping, local port 3000 will still be mapped to port 3000 on the container as well.
+
 ### Setup The Database
 
 Set up the databases - `docker compose run web bin/rake db:setup`
@@ -55,6 +76,8 @@ This will trigger a build if needed. You can manually trigger a build by first r
 
 * `docker compose up`
 * Point your browser at <http://localhost:3000>
+
+Append `--build` to rebuild any changes to Dockerfile.
 
 ### Run The Tests
 
@@ -217,6 +240,14 @@ You should see that some applications have already been collected. If not wait a
 If all looks good then thank the contributor for helping tens of thousands of people get PlanningAlerts by tweeting about it from @PlanningAlerts. It's always fun to @mention the council too, sometimes we get a RT :grinning:
 
 >We've just added @BellingenShire thanks to @LoveMyData. Another 12,886 people can now get PlanningAlerts! e.g. <https://www.planningalerts.org.au/applications/898071>
+
+## Periodic jobs
+
+We use `sidekiq-cron` gem to run system-wide periodic jobs that are not tied to a specific server.
+As noted in `Gemfile` Use "regular" cron for jobs that need to run on every machine (though none are
+currently defined for the `deploy` user).
+
+See `config/cron.yml` for the list of periodic jobs.
 
 ## Utilities
 
