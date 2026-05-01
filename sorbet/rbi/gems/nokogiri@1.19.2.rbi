@@ -766,7 +766,7 @@ Nokogiri::CSS::XPathVisitor::WILDCARD_NAMESPACES = T.let(T.unsafe(nil), TrueClas
 #
 # This module is included into those key classes who need to do this.
 #
-# source://nokogiri//lib/nokogiri/class_resolver.rb#19
+# source://nokogiri//lib/nokogiri/class_resolver.rb#17
 module Nokogiri::ClassResolver
   # :call-seq:
   #   related_class(class_name) → Class
@@ -791,13 +791,13 @@ module Nokogiri::ClassResolver
   #   ThisIsATopLevelClass.new.related_class("Document")
   #   # => Nokogiri::HTML4::Document
   #
-  # source://nokogiri//lib/nokogiri/class_resolver.rb#46
+  # source://nokogiri//lib/nokogiri/class_resolver.rb#44
   def related_class(class_name); end
 end
 
 # #related_class restricts matching namespaces to those matching this set.
 #
-# source://nokogiri//lib/nokogiri/class_resolver.rb#21
+# source://nokogiri//lib/nokogiri/class_resolver.rb#19
 Nokogiri::ClassResolver::VALID_NAMESPACES = T.let(T.unsafe(nil), Set)
 
 # source://nokogiri//lib/nokogiri/decorators/slop.rb#4
