@@ -8,31 +8,34 @@
 # source://graphql-client//lib/graphql/client/type_stack.rb#2
 module GraphQL
   class << self
-    # source://graphql/2.3.10/lib/graphql.rb#27
+    # source://graphql/2.6.1/lib/graphql.rb#39
     def default_parser; end
 
-    # source://graphql/2.3.10/lib/graphql.rb#31
+    # source://graphql/2.6.1/lib/graphql.rb#43
     def default_parser=(_arg0); end
 
-    # source://graphql/2.3.10/lib/graphql.rb#37
+    # source://graphql/2.6.1/lib/graphql.rb#14
+    def eager_load!; end
+
+    # source://graphql/2.6.1/lib/graphql.rb#49
     def parse(graphql_string, trace: T.unsafe(nil), filename: T.unsafe(nil), max_tokens: T.unsafe(nil)); end
 
-    # source://graphql/2.3.10/lib/graphql.rb#44
+    # source://graphql/2.6.1/lib/graphql.rb#56
     def parse_file(filename); end
 
-    # source://graphql/2.3.10/lib/graphql.rb#54
+    # source://graphql/2.6.1/lib/graphql.rb#66
     def parse_with_racc(string, filename: T.unsafe(nil), trace: T.unsafe(nil)); end
 
-    # source://graphql/2.3.10/lib/graphql.rb#72
+    # source://graphql/2.6.1/lib/graphql.rb#84
     def reject_numbers_followed_by_names; end
 
-    # source://graphql/2.3.10/lib/graphql.rb#72
+    # source://graphql/2.6.1/lib/graphql.rb#84
     def reject_numbers_followed_by_names=(_arg0); end
 
-    # source://graphql/2.3.10/lib/graphql.rb#50
+    # source://graphql/2.6.1/lib/graphql.rb#62
     def scan(graphql_string); end
 
-    # source://graphql/2.3.10/lib/graphql.rb#59
+    # source://graphql/2.6.1/lib/graphql.rb#71
     def scan_with_ruby(graphql_string); end
   end
 end
@@ -676,7 +679,7 @@ end
 # Assumes GraphQL endpoint follows the express-graphql endpoint conventions.
 #   https://github.com/graphql/express-graphql#http-usage
 #
-# Production applications should consider implementing there own network
+# Production applications should consider implementing their own network
 # adapter. This class exists for trivial stock usage and allows for minimal
 # request header configuration.
 #
@@ -702,7 +705,7 @@ class GraphQL::Client::HTTP
   #
   # Returns a Net::HTTP object
   #
-  # source://graphql-client//lib/graphql/client/http.rb#85
+  # source://graphql-client//lib/graphql/client/http.rb#91
   def connection; end
 
   # Public: Make an HTTP request for GraphQL query.
@@ -716,7 +719,7 @@ class GraphQL::Client::HTTP
   #
   # Returns { "data" => ... , "errors" => ... } Hash.
   #
-  # source://graphql-client//lib/graphql/client/http.rb#58
+  # source://graphql-client//lib/graphql/client/http.rb#63
   def execute(document:, operation_name: T.unsafe(nil), variables: T.unsafe(nil), context: T.unsafe(nil)); end
 
   # Public: Extension point for subclasses to set custom request headers.
@@ -725,6 +728,13 @@ class GraphQL::Client::HTTP
   #
   # source://graphql-client//lib/graphql/client/http.rb#44
   def headers(_context); end
+
+  # Public: full reponse from last request
+  #
+  # Returns Hash.
+  #
+  # source://graphql-client//lib/graphql/client/http.rb#51
+  def last_response; end
 
   # Public: Parsed endpoint URI
   #
@@ -941,8 +951,8 @@ class GraphQL::Client::Response
   #
   # @return [Response] a new instance of Response
   #
-  # source://graphql-client//lib/graphql/client/response.rb#35
-  def initialize(hash, data: T.unsafe(nil), errors: T.unsafe(nil), extensions: T.unsafe(nil)); end
+  # source://graphql-client//lib/graphql/client/response.rb#40
+  def initialize(hash, data: T.unsafe(nil), errors: T.unsafe(nil), extensions: T.unsafe(nil), full_response: T.unsafe(nil)); end
 
   # Public: Wrapped ObjectType of data returned from the server.
   #
@@ -966,6 +976,13 @@ class GraphQL::Client::Response
   #
   # source://graphql-client//lib/graphql/client/response.rb#32
   def extensions; end
+
+  # Public: Complete response hash returned from server.
+  #
+  # Returns Hash
+  #
+  # source://graphql-client//lib/graphql/client/response.rb#37
+  def full_response; end
 
   # Public: Original JSON response hash returned from server.
   #
