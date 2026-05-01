@@ -20,6 +20,9 @@ module Flipper
   def adapter(*args, **_arg1, &block); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
+  def adapter_stack(*args, **_arg1, &block); end
+
+  # source://forwardable/1.3.3/forwardable.rb#231
   def add(*args, **_arg1, &block); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -111,6 +114,12 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def feature(*args, **_arg1, &block); end
 
+  # source://flipper//lib/flipper.rb#115
+  def feature_disabled(name); end
+
+  # source://flipper//lib/flipper.rb#111
+  def feature_enabled(name); end
+
   # source://forwardable/1.3.3/forwardable.rb#231
   def features(*args, **_arg1, &block); end
 
@@ -124,7 +133,7 @@ module Flipper
   #
   # Returns Flipper::Group.
   #
-  # source://flipper//lib/flipper.rb#160
+  # source://flipper//lib/flipper.rb#176
   def group(name); end
 
   # Public: Check if a group exists
@@ -133,29 +142,29 @@ module Flipper
   #
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper.rb#147
+  # source://flipper//lib/flipper.rb#163
   def group_exists?(name); end
 
   # Public: Returns a Set of symbols where each symbol is a registered
   # group name. If you just want the names, this is more efficient than doing
   # `Flipper.groups.map(&:name)`.
   #
-  # source://flipper//lib/flipper.rb#133
+  # source://flipper//lib/flipper.rb#149
   def group_names; end
 
   # Public: Returns a Set of registered Types::Group instances.
   #
-  # source://flipper//lib/flipper.rb#126
+  # source://flipper//lib/flipper.rb#142
   def groups; end
 
   # Internal: Registry of all groups_registry.
   #
-  # source://flipper//lib/flipper.rb#165
+  # source://flipper//lib/flipper.rb#181
   def groups_registry; end
 
   # Internal: Change the groups_registry registry.
   #
-  # source://flipper//lib/flipper.rb#170
+  # source://flipper//lib/flipper.rb#186
   def groups_registry=(registry); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -190,6 +199,9 @@ module Flipper
   # source://flipper//lib/flipper.rb#12
   def new(adapter, options = T.unsafe(nil)); end
 
+  # source://flipper//lib/flipper.rb#103
+  def now; end
+
   # source://flipper//lib/flipper.rb#91
   def number(value); end
 
@@ -223,7 +235,7 @@ module Flipper
   # Returns a Flipper::Group.
   # Raises Flipper::DuplicateGroup if the group is already registered.
   #
-  # source://flipper//lib/flipper.rb#117
+  # source://flipper//lib/flipper.rb#133
   def register(name, &block); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -241,17 +253,20 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def sync_secret(*args, **_arg1, &block); end
 
+  # source://flipper//lib/flipper.rb#107
+  def time(value); end
+
   # Public: Clears the group registry.
   #
   # Returns nothing.
   #
-  # source://flipper//lib/flipper.rb#140
+  # source://flipper//lib/flipper.rb#156
   def unregister_groups; end
 
   class << self
     # @return [Boolean]
     #
-    # source://flipper-ui/1.3.0/lib/flipper/version.rb#10
+    # source://flipper-ui/1.4.1/lib/flipper/version.rb#10
     def deprecated_ruby_version?; end
   end
 end
@@ -293,6 +308,18 @@ end
 module Flipper::Adapter
   mixes_in_class_methods ::Flipper::Adapter::ClassMethods
 
+  # Public: Returns a string representation of the adapter stack for debugging.
+  # Shows the full chain of wrapped adapters.
+  #
+  # Examples:
+  #   "memoizable -> active_support_cache_store -> active_record"
+  #   "memoizable -> failover(primary: redis, secondary: memory)"
+  #
+  # Returns a String.
+  #
+  # source://flipper//lib/flipper/adapter.rb#85
+  def adapter_stack; end
+
   # Public: Default config for a feature's gate values.
   #
   # source://flipper//lib/flipper/adapter.rb#68
@@ -310,7 +337,7 @@ module Flipper::Adapter
   # make this more efficient.
   #
   # source://flipper//lib/flipper/adapter.rb#34
-  def get_all; end
+  def get_all(**kwargs); end
 
   # Public: Get multiple features in one call. Defaults to one get per
   # feature. Feel free to override per adapter to make this more efficient and
@@ -361,7 +388,7 @@ end
 #
 #   adapter = Flipper::AdapterBuilder.new do
 #     use Flipper::Adapters::Strict
-#     use Flipper::Adapters::Memoizer
+#     use Flipper::Adapters::Memoizable
 #     store Flipper::Adapters::Memory
 #   end.to_adapter
 #
@@ -382,33 +409,52 @@ class Flipper::AdapterBuilder
   def use(klass, *args, **kwargs, &block); end
 end
 
-# source://flipper//lib/flipper/adapters/memory.rb#5
+# source://flipper//lib/flipper/adapters/wrapper.rb#2
 module Flipper::Adapters; end
 
-# source://flipper//lib/flipper/adapters/actor_limit.rb#3
+# source://flipper//lib/flipper/adapters/actor_limit.rb#5
 class Flipper::Adapters::ActorLimit < ::Flipper::Adapters::Wrapper
   # @return [ActorLimit] a new instance of ActorLimit
   #
-  # source://flipper//lib/flipper/adapters/actor_limit.rb#8
+  # source://flipper//lib/flipper/adapters/actor_limit.rb#34
   def initialize(adapter, limit = T.unsafe(nil)); end
 
-  # source://flipper//lib/flipper/adapters/actor_limit.rb#13
+  # source://flipper//lib/flipper/adapters/actor_limit.rb#39
   def enable(feature, gate, resource); end
 
   # Returns the value of attribute limit.
   #
-  # source://flipper//lib/flipper/adapters/actor_limit.rb#6
+  # source://flipper//lib/flipper/adapters/actor_limit.rb#8
   def limit; end
 
   private
 
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/adapters/actor_limit.rb#23
+  # source://flipper//lib/flipper/adapters/actor_limit.rb#49
   def over_limit?(feature); end
+
+  class << self
+    # Returns whether sync mode is enabled for the current thread.
+    # When sync mode is enabled, actor limits are not enforced,
+    # allowing sync operations to bring local state in line with
+    # remote state regardless of limits.
+    #
+    # source://flipper//lib/flipper/adapters/actor_limit.rb#15
+    def sync_mode; end
+
+    # source://flipper//lib/flipper/adapters/actor_limit.rb#19
+    def sync_mode=(value); end
+
+    # Executes a block with sync mode enabled. Actor limits will
+    # not be enforced within the block.
+    #
+    # source://flipper//lib/flipper/adapters/actor_limit.rb#25
+    def with_sync_mode; end
+  end
 end
 
-# source://flipper//lib/flipper/adapters/actor_limit.rb#4
+# source://flipper//lib/flipper/adapters/actor_limit.rb#6
 class Flipper::Adapters::ActorLimit::LimitExceeded < ::Flipper::Error; end
 
 # Internal: Adapter that wraps another adapter and instruments all adapter
@@ -465,7 +511,7 @@ class Flipper::Adapters::Instrumented
   def get(feature); end
 
   # source://flipper//lib/flipper/adapters/instrumented.rb#104
-  def get_all; end
+  def get_all(**kwargs); end
 
   # source://flipper//lib/flipper/adapters/instrumented.rb#92
   def get_multi(features); end
@@ -549,7 +595,7 @@ class Flipper::Adapters::Memoizable
   def get(feature); end
 
   # source://flipper//lib/flipper/adapters/memoizable.rb#84
-  def get_all; end
+  def get_all(**kwargs); end
 
   # Public
   #
@@ -646,7 +692,7 @@ class Flipper::Adapters::Memory
   def get(feature); end
 
   # source://flipper//lib/flipper/adapters/memory.rb#57
-  def get_all; end
+  def get_all(**kwargs); end
 
   # source://flipper//lib/flipper/adapters/memory.rb#47
   def get_multi(features); end
@@ -687,13 +733,16 @@ end
 class Flipper::Adapters::Strict < ::Flipper::Adapters::Wrapper
   # @return [Strict] a new instance of Strict
   #
-  # source://flipper//lib/flipper/adapters/strict.rb#13
+  # source://flipper//lib/flipper/adapters/strict.rb#37
   def initialize(adapter, handler = T.unsafe(nil), &block); end
 
-  # source://flipper//lib/flipper/adapters/strict.rb#18
+  # source://flipper//lib/flipper/adapters/strict.rb#42
+  def add(feature); end
+
+  # source://flipper//lib/flipper/adapters/strict.rb#47
   def get(feature); end
 
-  # source://flipper//lib/flipper/adapters/strict.rb#23
+  # source://flipper//lib/flipper/adapters/strict.rb#52
   def get_multi(features); end
 
   # Returns the value of attribute handler.
@@ -703,8 +752,27 @@ class Flipper::Adapters::Strict < ::Flipper::Adapters::Wrapper
 
   private
 
-  # source://flipper//lib/flipper/adapters/strict.rb#30
+  # source://flipper//lib/flipper/adapters/strict.rb#59
   def assert_feature_exists(feature); end
+
+  class << self
+    # Returns whether sync mode is enabled for the current thread.
+    # When sync mode is enabled, strict checks are not enforced,
+    # allowing sync operations to add features and bring local state
+    # in line with remote state.
+    #
+    # source://flipper//lib/flipper/adapters/strict.rb#18
+    def sync_mode; end
+
+    # source://flipper//lib/flipper/adapters/strict.rb#22
+    def sync_mode=(value); end
+
+    # Executes a block with sync mode enabled. Strict checks will
+    # not be enforced within the block.
+    #
+    # source://flipper//lib/flipper/adapters/strict.rb#28
+    def with_sync_mode; end
+  end
 end
 
 # source://flipper//lib/flipper/adapters/strict.rb#7
@@ -774,57 +842,57 @@ class Flipper::Adapters::Sync::FeatureSynchronizer
 
   private
 
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#97
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#101
   def default_config; end
 
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#101
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#105
   def default_gate_values; end
 
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#105
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#109
   def default_gate_values?(gate_values); end
 
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#117
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#121
   def local_boolean_enabled?; end
 
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#109
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#113
   def local_disabled?; end
 
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#121
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#125
   def remote_boolean_enabled?; end
 
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#113
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#117
   def remote_disabled?; end
 
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#61
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#65
   def sync_actors; end
 
   # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#55
   def sync_expression; end
 
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#73
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#77
   def sync_groups; end
 
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#85
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#89
   def sync_percentage_of_actors; end
 
-  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#91
+  # source://flipper//lib/flipper/adapters/sync/feature_synchronizer.rb#95
   def sync_percentage_of_time; end
 end
 
 # Public: Given a local and remote adapter, it can update the local to
 # match the remote doing only the necessary enable/disable operations.
 #
-# source://flipper//lib/flipper/adapters/sync/synchronizer.rb#10
+# source://flipper//lib/flipper/adapters/sync/synchronizer.rb#12
 class Flipper::Adapters::Sync::Synchronizer
   # Public: Initializes a new synchronizer.
   #
@@ -834,20 +902,21 @@ class Flipper::Adapters::Sync::Synchronizer
   # options - The Hash of options.
   #           :instrumenter - The instrumenter used to instrument.
   #           :raise - Should errors be raised (default: true).
+  #           :cache_bust - Should cache busting be used for remote get_all (default: false).
   #
   # @return [Synchronizer] a new instance of Synchronizer
   #
-  # source://flipper//lib/flipper/adapters/sync/synchronizer.rb#19
+  # source://flipper//lib/flipper/adapters/sync/synchronizer.rb#22
   def initialize(local, remote, options = T.unsafe(nil)); end
 
   # Public: Forces a sync.
   #
-  # source://flipper//lib/flipper/adapters/sync/synchronizer.rb#27
+  # source://flipper//lib/flipper/adapters/sync/synchronizer.rb#31
   def call; end
 
   private
 
-  # source://flipper//lib/flipper/adapters/sync/synchronizer.rb#33
+  # source://flipper//lib/flipper/adapters/sync/synchronizer.rb#41
   def sync; end
 end
 
@@ -1002,6 +1071,9 @@ class Flipper::DSL
   #
   # source://flipper//lib/flipper/dsl.rb#8
   def adapter; end
+
+  # source://forwardable/1.3.3/forwardable.rb#231
+  def adapter_stack(*args, **_arg1, &block); end
 
   # Public: Add a feature.
   #
@@ -1287,7 +1359,7 @@ class Flipper::Engine < ::Rails::Engine
   def cloud?; end
 
   class << self
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+    # source://activesupport/7.1.5.2/lib/active_support/callbacks.rb#70
     def __callbacks; end
 
     # source://flipper//lib/flipper/engine.rb#3
@@ -1305,44 +1377,44 @@ end
 # source://flipper//lib/flipper/errors.rb#3
 class Flipper::Error < ::StandardError; end
 
-# source://flipper//lib/flipper/export.rb#4
+# source://flipper//lib/flipper/export.rb#2
 class Flipper::Export
   # @return [Export] a new instance of Export
   #
-  # source://flipper//lib/flipper/export.rb#7
+  # source://flipper//lib/flipper/export.rb#5
   def initialize(contents:, format: T.unsafe(nil), version: T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/export.rb#21
+  # source://flipper//lib/flipper/export.rb#19
   def ==(other); end
 
-  # source://flipper//lib/flipper/export.rb#17
+  # source://flipper//lib/flipper/export.rb#15
   def adapter; end
 
   # Returns the value of attribute contents.
   #
-  # source://flipper//lib/flipper/export.rb#5
+  # source://flipper//lib/flipper/export.rb#3
   def contents; end
 
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/export.rb#21
+  # source://flipper//lib/flipper/export.rb#19
   def eql?(other); end
 
   # @raise [NotImplementedError]
   #
-  # source://flipper//lib/flipper/export.rb#13
+  # source://flipper//lib/flipper/export.rb#11
   def features; end
 
   # Returns the value of attribute format.
   #
-  # source://flipper//lib/flipper/export.rb#5
+  # source://flipper//lib/flipper/export.rb#3
   def format; end
 
   # Returns the value of attribute version.
   #
-  # source://flipper//lib/flipper/export.rb#5
+  # source://flipper//lib/flipper/export.rb#3
   def version; end
 end
 
@@ -1563,13 +1635,13 @@ class Flipper::Expression::Constant
   def value; end
 end
 
-# source://flipper//lib/flipper/expressions/all.rb#4
+# source://flipper//lib/flipper/expressions/all.rb#2
 module Flipper::Expressions; end
 
-# source://flipper//lib/flipper/expressions/all.rb#5
+# source://flipper//lib/flipper/expressions/all.rb#3
 class Flipper::Expressions::All
   class << self
-    # source://flipper//lib/flipper/expressions/all.rb#6
+    # source://flipper//lib/flipper/expressions/all.rb#4
     def call(*args); end
   end
 end
@@ -1603,17 +1675,6 @@ class Flipper::Expressions::Comparable
   end
 end
 
-# source://flipper//lib/flipper/expressions/duration.rb#3
-class Flipper::Expressions::Duration
-  class << self
-    # source://flipper//lib/flipper/expressions/duration.rb#14
-    def call(scalar, unit = T.unsafe(nil)); end
-  end
-end
-
-# source://flipper//lib/flipper/expressions/duration.rb#4
-Flipper::Expressions::Duration::SECONDS_PER = T.let(T.unsafe(nil), Hash)
-
 # source://flipper//lib/flipper/expressions/equal.rb#3
 class Flipper::Expressions::Equal < ::Flipper::Expressions::Comparable
   class << self
@@ -1621,6 +1682,17 @@ class Flipper::Expressions::Equal < ::Flipper::Expressions::Comparable
     def operator; end
   end
 end
+
+# source://flipper//lib/flipper/expressions/feature_enabled.rb#5
+class Flipper::Expressions::FeatureEnabled
+  class << self
+    # source://flipper//lib/flipper/expressions/feature_enabled.rb#8
+    def call(feature_name, context:); end
+  end
+end
+
+# source://flipper//lib/flipper/expressions/feature_enabled.rb#6
+Flipper::Expressions::FeatureEnabled::EVALUATING_KEY = T.let(T.unsafe(nil), Symbol)
 
 # source://flipper//lib/flipper/expressions/greater_than.rb#3
 class Flipper::Expressions::GreaterThan < ::Flipper::Expressions::Comparable
@@ -1721,10 +1793,10 @@ class Flipper::Expressions::String
   end
 end
 
-# source://flipper//lib/flipper/expressions/time.rb#3
+# source://flipper//lib/flipper/expressions/time.rb#5
 class Flipper::Expressions::Time
   class << self
-    # source://flipper//lib/flipper/expressions/time.rb#4
+    # source://flipper//lib/flipper/expressions/time.rb#6
     def call(value); end
   end
 end
@@ -1748,7 +1820,7 @@ class Flipper::Feature
   #
   # Returns Set of String flipper_id's.
   #
-  # source://flipper//lib/flipper/feature.rb#319
+  # source://flipper//lib/flipper/feature.rb#326
   def actors_value; end
 
   # Private: The adapter this feature should use.
@@ -1769,14 +1841,14 @@ class Flipper::Feature
   #
   # Returns result of enable.
   #
-  # source://flipper//lib/flipper/feature.rb#137
+  # source://flipper//lib/flipper/feature.rb#144
   def add_expression(expression_to_add); end
 
   # Public: Get the adapter value for the boolean gate.
   #
   # Returns true or false.
   #
-  # source://flipper//lib/flipper/feature.rb#326
+  # source://flipper//lib/flipper/feature.rb#333
   def boolean_value; end
 
   # Public: Clears all gate values for this feature.
@@ -1791,7 +1863,7 @@ class Flipper::Feature
   #
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/feature.rb#273
+  # source://flipper//lib/flipper/feature.rb#280
   def conditional?; end
 
   # Public: Disable this feature for something.
@@ -1808,7 +1880,7 @@ class Flipper::Feature
   #
   # Returns result of disable.
   #
-  # source://flipper//lib/flipper/feature.rb#212
+  # source://flipper//lib/flipper/feature.rb#219
   def disable_actor(actor); end
 
   # Public: Disables an expression for a feature.
@@ -1817,7 +1889,7 @@ class Flipper::Feature
   #
   # Returns result of disable.
   #
-  # source://flipper//lib/flipper/feature.rb#190
+  # source://flipper//lib/flipper/feature.rb#197
   def disable_expression; end
 
   # Public: Disables a feature for a group.
@@ -1827,7 +1899,7 @@ class Flipper::Feature
   #
   # Returns result of disable.
   #
-  # source://flipper//lib/flipper/feature.rb#222
+  # source://flipper//lib/flipper/feature.rb#229
   def disable_group(group); end
 
   # Public: Disables a feature for a percentage of actors.
@@ -1837,7 +1909,7 @@ class Flipper::Feature
   #
   # Returns result of disable.
   #
-  # source://flipper//lib/flipper/feature.rb#242
+  # source://flipper//lib/flipper/feature.rb#249
   def disable_percentage_of_actors; end
 
   # Public: Disables a feature a percentage of time.
@@ -1847,28 +1919,28 @@ class Flipper::Feature
   #
   # Returns result of disable.
   #
-  # source://flipper//lib/flipper/feature.rb#232
+  # source://flipper//lib/flipper/feature.rb#239
   def disable_percentage_of_time; end
 
   # Public: Get the names of the disabled gates.
   #
   # Returns an Array of gate names.
   #
-  # source://flipper//lib/flipper/feature.rb#369
+  # source://flipper//lib/flipper/feature.rb#376
   def disabled_gate_names; end
 
   # Public: Get the gates that have not been enabled for the feature.
   #
   # Returns an Array of Flipper::Gate instances.
   #
-  # source://flipper//lib/flipper/feature.rb#362
+  # source://flipper//lib/flipper/feature.rb#369
   def disabled_gates; end
 
   # Public: Get groups not enabled for this feature.
   #
   # Returns Set of Flipper::Types::Group instances.
   #
-  # source://flipper//lib/flipper/feature.rb#294
+  # source://flipper//lib/flipper/feature.rb#301
   def disabled_groups; end
 
   # Public: Enable this feature for something.
@@ -1885,7 +1957,7 @@ class Flipper::Feature
   #
   # Returns result of enable.
   #
-  # source://flipper//lib/flipper/feature.rb#151
+  # source://flipper//lib/flipper/feature.rb#158
   def enable_actor(actor); end
 
   # Public: Enables an expression_to_add for a feature.
@@ -1894,7 +1966,7 @@ class Flipper::Feature
   #
   # Returns result of enable.
   #
-  # source://flipper//lib/flipper/feature.rb#128
+  # source://flipper//lib/flipper/feature.rb#135
   def enable_expression(expression); end
 
   # Public: Enables a feature for a group.
@@ -1904,7 +1976,7 @@ class Flipper::Feature
   #
   # Returns result of enable.
   #
-  # source://flipper//lib/flipper/feature.rb#161
+  # source://flipper//lib/flipper/feature.rb#168
   def enable_group(group); end
 
   # Public: Enables a feature for a percentage of actors.
@@ -1914,7 +1986,7 @@ class Flipper::Feature
   #
   # Returns result of enable.
   #
-  # source://flipper//lib/flipper/feature.rb#181
+  # source://flipper//lib/flipper/feature.rb#188
   def enable_percentage_of_actors(percentage); end
 
   # Public: Enables a feature a percentage of time.
@@ -1924,7 +1996,7 @@ class Flipper::Feature
   #
   # Returns result of enable.
   #
-  # source://flipper//lib/flipper/feature.rb#171
+  # source://flipper//lib/flipper/feature.rb#178
   def enable_percentage_of_time(percentage); end
 
   # Public: Check if a feature is enabled for zero or more actors.
@@ -1940,21 +2012,21 @@ class Flipper::Feature
   #
   # Returns an Array of gate names.
   #
-  # source://flipper//lib/flipper/feature.rb#355
+  # source://flipper//lib/flipper/feature.rb#362
   def enabled_gate_names; end
 
   # Public: Get the gates that have been enabled for the feature.
   #
   # Returns an Array of Flipper::Gate instances.
   #
-  # source://flipper//lib/flipper/feature.rb#347
+  # source://flipper//lib/flipper/feature.rb#354
   def enabled_gates; end
 
   # Public: Get groups enabled for this feature.
   #
   # Returns Set of Flipper::Types::Group instances.
   #
-  # source://flipper//lib/flipper/feature.rb#286
+  # source://flipper//lib/flipper/feature.rb#293
   def enabled_groups; end
 
   # Public: Does this feature exist in the adapter.
@@ -1966,21 +2038,21 @@ class Flipper::Feature
   # source://flipper//lib/flipper/feature.rb#81
   def exist?; end
 
-  # source://flipper//lib/flipper/feature.rb#298
+  # source://flipper//lib/flipper/feature.rb#305
   def expression; end
 
   # Public: Get the adapter value for the expression gate.
   #
   # Returns expression.
   #
-  # source://flipper//lib/flipper/feature.rb#312
+  # source://flipper//lib/flipper/feature.rb#319
   def expression_value; end
 
   # Public: Find a gate by name.
   #
   # Returns a Flipper::Gate if found, nil if not.
   #
-  # source://flipper//lib/flipper/feature.rb#415
+  # source://flipper//lib/flipper/feature.rb#422
   def gate(name); end
 
   # Public: Find the gate that protects an actor.
@@ -1990,41 +2062,41 @@ class Flipper::Feature
   # Returns a Flipper::Gate.
   # Raises Flipper::GateNotFound if no gate found for actor
   #
-  # source://flipper//lib/flipper/feature.rb#425
+  # source://flipper//lib/flipper/feature.rb#432
   def gate_for(actor); end
 
   # Public: Returns the raw gate values stored by the adapter.
   #
-  # source://flipper//lib/flipper/feature.rb#278
+  # source://flipper//lib/flipper/feature.rb#285
   def gate_values; end
 
   # Public: Get all the gates used to determine enabled/disabled for the feature.
   #
   # Returns an array of gates
   #
-  # source://flipper//lib/flipper/feature.rb#397
+  # source://flipper//lib/flipper/feature.rb#404
   def gates; end
 
-  # source://flipper//lib/flipper/feature.rb#401
+  # source://flipper//lib/flipper/feature.rb#408
   def gates_hash; end
 
   # Public: Get groups enabled for this feature.
   #
   # Returns Set of Flipper::Types::Group instances.
   #
-  # source://flipper//lib/flipper/feature.rb#286
+  # source://flipper//lib/flipper/feature.rb#293
   def groups; end
 
   # Public: Get the adapter value for the groups gate.
   #
   # Returns Set of String group names.
   #
-  # source://flipper//lib/flipper/feature.rb#305
+  # source://flipper//lib/flipper/feature.rb#312
   def groups_value; end
 
   # Public: Pretty string version for debugging.
   #
-  # source://flipper//lib/flipper/feature.rb#384
+  # source://flipper//lib/flipper/feature.rb#391
   def inspect; end
 
   # Private: What is being used to instrument all the things.
@@ -2046,28 +2118,28 @@ class Flipper::Feature
   #
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/feature.rb#267
+  # source://flipper//lib/flipper/feature.rb#274
   def off?; end
 
   # Public: Is the feature fully enabled.
   #
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/feature.rb#262
+  # source://flipper//lib/flipper/feature.rb#269
   def on?; end
 
   # Public: Get the adapter value for the percentage of actors gate.
   #
   # Returns Integer greater than or equal to 0 and less than or equal to 100.
   #
-  # source://flipper//lib/flipper/feature.rb#333
+  # source://flipper//lib/flipper/feature.rb#340
   def percentage_of_actors_value; end
 
   # Public: Get the adapter value for the percentage of time gate.
   #
   # Returns Integer greater than or equal to 0 and less than or equal to 100.
   #
-  # source://flipper//lib/flipper/feature.rb#340
+  # source://flipper//lib/flipper/feature.rb#347
   def percentage_of_time_value; end
 
   # Public: Removes this feature.
@@ -2084,29 +2156,29 @@ class Flipper::Feature
   #
   # Returns result of enable or nil (if no expression enabled).
   #
-  # source://flipper//lib/flipper/feature.rb#200
+  # source://flipper//lib/flipper/feature.rb#207
   def remove_expression(expression_to_remove); end
 
   # Public: Returns state for feature (:on, :off, or :conditional).
   #
-  # source://flipper//lib/flipper/feature.rb#247
+  # source://flipper//lib/flipper/feature.rb#254
   def state; end
 
   # Public: Identifier to be used in the url (a rails-ism).
   #
-  # source://flipper//lib/flipper/feature.rb#379
+  # source://flipper//lib/flipper/feature.rb#386
   def to_param; end
 
   # Public: Returns the string representation of the feature.
   #
-  # source://flipper//lib/flipper/feature.rb#374
+  # source://flipper//lib/flipper/feature.rb#381
   def to_s; end
 
   private
 
   # Private: Instrument a feature operation.
   #
-  # source://flipper//lib/flipper/feature.rb#432
+  # source://flipper//lib/flipper/feature.rb#439
   def instrument(operation, initial_payload = T.unsafe(nil)); end
 end
 
@@ -2209,7 +2281,7 @@ class Flipper::Gate
   # @return [Boolean]
   #
   # source://flipper//lib/flipper/gate.rb#29
-  def open?(actors, value, options = T.unsafe(nil)); end
+  def open?(context); end
 
   # Internal: Check if a gate is protects an actor. Implemented in subclass.
   #
@@ -2576,26 +2648,26 @@ class Flipper::Instrumentation::LogSubscriber < ::ActiveSupport::LogSubscriber
   # source://flipper//lib/flipper/instrumentation/log_subscriber.rb#17
   def feature_operation(event); end
 
-  # source://flipper//lib/flipper/instrumentation/log_subscriber.rb#71
+  # source://flipper//lib/flipper/instrumentation/log_subscriber.rb#70
   def logger; end
 
   private
 
-  # source://flipper//lib/flipper/instrumentation/log_subscriber.rb#94
+  # source://flipper//lib/flipper/instrumentation/log_subscriber.rb#93
   def color_name(name); end
 
   class << self
-    # source://flipper//lib/flipper/instrumentation/log_subscriber.rb#75
+    # source://flipper//lib/flipper/instrumentation/log_subscriber.rb#74
     def attach; end
 
-    # source://flipper//lib/flipper/instrumentation/log_subscriber.rb#79
+    # source://flipper//lib/flipper/instrumentation/log_subscriber.rb#78
     def detach; end
   end
 end
 
 # Rails 7.1 changed the signature of this function.
 #
-# source://flipper//lib/flipper/instrumentation/log_subscriber.rb#87
+# source://flipper//lib/flipper/instrumentation/log_subscriber.rb#86
 Flipper::Instrumentation::LogSubscriber::COLOR_OPTIONS = T.let(T.unsafe(nil), Hash)
 
 # Private: The namespace for all instrumented events.
@@ -2816,91 +2888,99 @@ module Flipper::Model::ActiveRecord
   def flipper_properties; end
 end
 
-# source://flipper//lib/flipper/poller.rb#7
+# source://flipper//lib/flipper/poller.rb#8
 class Flipper::Poller
   # @return [Poller] a new instance of Poller
   #
-  # source://flipper//lib/flipper/poller.rb#25
+  # source://flipper//lib/flipper/poller.rb#29
   def initialize(options = T.unsafe(nil)); end
 
   # Returns the value of attribute adapter.
   #
-  # source://flipper//lib/flipper/poller.rb#8
+  # source://flipper//lib/flipper/poller.rb#9
   def adapter; end
 
   # Returns the value of attribute interval.
   #
-  # source://flipper//lib/flipper/poller.rb#8
+  # source://flipper//lib/flipper/poller.rb#9
   def interval; end
+
+  # Internal: Sets the interval in seconds for how often to poll.
+  #
+  # source://flipper//lib/flipper/poller.rb#88
+  def interval=(value); end
 
   # Returns the value of attribute last_synced_at.
   #
-  # source://flipper//lib/flipper/poller.rb#8
+  # source://flipper//lib/flipper/poller.rb#9
   def last_synced_at; end
 
   # Returns the value of attribute mutex.
   #
-  # source://flipper//lib/flipper/poller.rb#8
+  # source://flipper//lib/flipper/poller.rb#9
   def mutex; end
 
   # Returns the value of attribute pid.
   #
-  # source://flipper//lib/flipper/poller.rb#8
+  # source://flipper//lib/flipper/poller.rb#9
   def pid; end
 
-  # source://flipper//lib/flipper/poller.rb#59
+  # source://flipper//lib/flipper/poller.rb#62
   def run; end
 
-  # source://flipper//lib/flipper/poller.rb#47
+  # source://flipper//lib/flipper/poller.rb#49
   def start; end
 
-  # source://flipper//lib/flipper/poller.rb#52
+  # source://flipper//lib/flipper/poller.rb#55
   def stop; end
 
-  # source://flipper//lib/flipper/poller.rb#73
+  # source://flipper//lib/flipper/poller.rb#76
   def sync; end
 
   # Returns the value of attribute thread.
   #
-  # source://flipper//lib/flipper/poller.rb#8
+  # source://flipper//lib/flipper/poller.rb#9
   def thread; end
 
   private
 
-  # source://flipper//lib/flipper/poller.rb#90
+  # source://flipper//lib/flipper/poller.rb#141
+  def apply_response_headers; end
+
+  # source://flipper//lib/flipper/poller.rb#111
   def ensure_worker_running; end
 
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/poller.rb#86
+  # source://flipper//lib/flipper/poller.rb#107
   def forked?; end
 
-  # source://flipper//lib/flipper/poller.rb#82
+  # source://flipper//lib/flipper/poller.rb#101
   def jitter; end
 
-  # source://flipper//lib/flipper/poller.rb#113
+  # source://flipper//lib/flipper/poller.rb#135
   def reset; end
 
   # @return [Boolean]
   #
-  # source://flipper//lib/flipper/poller.rb#109
+  # source://flipper//lib/flipper/poller.rb#131
   def thread_alive?; end
 
   class << self
-    # source://flipper//lib/flipper/poller.rb#15
+    # source://flipper//lib/flipper/poller.rb#16
     def get(key, options = T.unsafe(nil)); end
 
-    # source://flipper//lib/flipper/poller.rb#19
+    # source://flipper//lib/flipper/poller.rb#20
     def reset; end
 
     private
 
-    # source://flipper//lib/flipper/poller.rb#10
+    # source://flipper//lib/flipper/poller.rb#11
     def instances; end
   end
 end
 
-# source://flipper//lib/flipper/poller.rb#23
+# source://flipper//lib/flipper/poller.rb#27
 Flipper::Poller::MINIMUM_POLL_INTERVAL = T.let(T.unsafe(nil), Integer)
 
 # Internal: Used to store registry of groups by name.

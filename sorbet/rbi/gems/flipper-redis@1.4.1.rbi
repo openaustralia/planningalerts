@@ -5,7 +5,7 @@
 # Please instead update this file by running `bin/tapioca gem flipper-redis`.
 
 
-# source://flipper-redis//lib/flipper/adapters/redis.rb#5
+# source://flipper-redis//lib/flipper/adapters/redis_shared/methods.rb#1
 module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def [](*args, **_arg1, &block); end
@@ -14,30 +14,33 @@ module Flipper
   def adapter(*args, **_arg1, &block); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
+  def adapter_stack(*args, **_arg1, &block); end
+
+  # source://forwardable/1.3.3/forwardable.rb#231
   def add(*args, **_arg1, &block); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
   def add_expression(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#75
+  # source://flipper/1.4.1/lib/flipper.rb#75
   def all(*args); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#71
+  # source://flipper/1.4.1/lib/flipper.rb#71
   def any(*args); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#95
+  # source://flipper/1.4.1/lib/flipper.rb#95
   def boolean(value); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#28
+  # source://flipper/1.4.1/lib/flipper.rb#28
   def configuration; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#33
+  # source://flipper/1.4.1/lib/flipper.rb#33
   def configuration=(configuration); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#23
+  # source://flipper/1.4.1/lib/flipper.rb#23
   def configure; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#79
+  # source://flipper/1.4.1/lib/flipper.rb#79
   def constant(value); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -91,34 +94,40 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def feature(*args, **_arg1, &block); end
 
+  # source://flipper/1.4.1/lib/flipper.rb#115
+  def feature_disabled(name); end
+
+  # source://flipper/1.4.1/lib/flipper.rb#111
+  def feature_enabled(name); end
+
   # source://forwardable/1.3.3/forwardable.rb#231
   def features(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#160
+  # source://flipper/1.4.1/lib/flipper.rb#176
   def group(name); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#147
+  # source://flipper/1.4.1/lib/flipper.rb#163
   def group_exists?(name); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#133
+  # source://flipper/1.4.1/lib/flipper.rb#149
   def group_names; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#126
+  # source://flipper/1.4.1/lib/flipper.rb#142
   def groups; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#165
+  # source://flipper/1.4.1/lib/flipper.rb#181
   def groups_registry; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#170
+  # source://flipper/1.4.1/lib/flipper.rb#186
   def groups_registry=(registry); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
   def import(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#45
+  # source://flipper/1.4.1/lib/flipper.rb#45
   def instance; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#52
+  # source://flipper/1.4.1/lib/flipper.rb#52
   def instance=(flipper); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -127,10 +136,13 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def memoizing?(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#12
+  # source://flipper/1.4.1/lib/flipper.rb#12
   def new(adapter, options = T.unsafe(nil)); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#91
+  # source://flipper/1.4.1/lib/flipper.rb#103
+  def now; end
+
+  # source://flipper/1.4.1/lib/flipper.rb#91
   def number(value); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -139,16 +151,16 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def preload_all(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#83
+  # source://flipper/1.4.1/lib/flipper.rb#83
   def property(name); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#99
+  # source://flipper/1.4.1/lib/flipper.rb#99
   def random(max); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
   def read_only?(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#117
+  # source://flipper/1.4.1/lib/flipper.rb#133
   def register(name, &block); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -157,7 +169,7 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def remove_expression(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#87
+  # source://flipper/1.4.1/lib/flipper.rb#87
   def string(value); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -166,23 +178,27 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def sync_secret(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#140
+  # source://flipper/1.4.1/lib/flipper.rb#107
+  def time(value); end
+
+  # source://flipper/1.4.1/lib/flipper.rb#156
   def unregister_groups; end
 
   class << self
     # @return [Boolean]
     #
-    # source://flipper-ui/1.3.0/lib/flipper/version.rb#10
+    # source://flipper-ui/1.4.1/lib/flipper/version.rb#10
     def deprecated_ruby_version?; end
   end
 end
 
-# source://flipper-redis//lib/flipper/adapters/redis.rb#6
+# source://flipper-redis//lib/flipper/adapters/redis_shared/methods.rb#2
 module Flipper::Adapters; end
 
-# source://flipper-redis//lib/flipper/adapters/redis.rb#7
+# source://flipper-redis//lib/flipper/adapters/redis.rb#8
 class Flipper::Adapters::Redis
   include ::Flipper::Adapter
+  include ::Flipper::Adapters::RedisShared
   extend ::Flipper::Adapter::ClassMethods
 
   # Public: Initializes a Redis flipper adapter.
@@ -193,17 +209,17 @@ class Flipper::Adapters::Redis
   #
   # @return [Redis] a new instance of Redis
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#25
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#27
   def initialize(client, key_prefix: T.unsafe(nil)); end
 
   # Public: Adds a feature to the set of known features.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#36
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#41
   def add(feature); end
 
   # Public: Clears the gate values for a feature.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#57
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#62
   def clear(feature); end
 
   # Public: Disables a gate for a given thing.
@@ -214,7 +230,7 @@ class Flipper::Adapters::Redis
   #
   # Returns true.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#112
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#117
   def disable(feature, gate, thing); end
 
   # Public: Enables a gate for a given thing.
@@ -225,41 +241,41 @@ class Flipper::Adapters::Redis
   #
   # Returns true.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#86
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#91
   def enable(feature, gate, thing); end
 
   # Public: The set of known features.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#31
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#36
   def features; end
 
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#12
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#14
   def features_key; end
 
   # Public: Gets the values for all gates for a given feature.
   #
   # Returns a Hash of Flipper::Gate#key => value.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#65
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#70
   def get(feature); end
 
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#74
-  def get_all; end
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#79
+  def get_all(**kwargs); end
 
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#70
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#75
   def get_multi(features); end
 
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#16
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#18
   def key_for(feature_name); end
 
   # Returns the value of attribute key_prefix.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#10
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#12
   def key_prefix; end
 
   # Public: Removes a feature from the set of known features.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#46
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#51
   def remove(feature); end
 
   private
@@ -268,40 +284,95 @@ class Flipper::Adapters::Redis
   #
   # Returns a Hash of fields => values.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#152
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#157
   def doc_for(feature, pipeline: T.unsafe(nil)); end
 
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#156
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#165
   def docs_for(features); end
 
   # Private: Returns a set of values given an array of fields and a gate.
   #
   # Returns a Set of the values enabled for the gate.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#194
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#205
   def fields_to_gate_value(fields, gate); end
 
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#145
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#150
   def read_feature_keys; end
 
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#136
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#141
   def read_many_features(features); end
 
   # @return [Boolean]
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#132
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#137
   def redis_sadd_returns_boolean?; end
 
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#164
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#175
   def result_for_feature(feature, doc); end
 
   # Private: Converts gate and thing to hash key.
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#187
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#198
   def to_field(gate, thing); end
 
   # Private
   #
-  # source://flipper-redis//lib/flipper/adapters/redis.rb#202
+  # source://flipper-redis//lib/flipper/adapters/redis.rb#213
   def unsupported_data_type(data_type); end
+end
+
+# source://flipper-redis//lib/flipper/adapters/redis_shared/methods.rb#3
+module Flipper::Adapters::RedisShared
+  private
+
+  # Determines if the Redis client has a safe `with` method that can be used
+  # without conflicts with Rails ActiveSupport's `Object#with`.
+  #
+  # This method checks for:
+  # 1. ConnectionPool instances (which have their own `with` method)
+  # 2. Redis instances with version >= 4.7.0 (which have a proper `with` method)
+  #
+  # The method caches its result to avoid repeated checks.
+  #
+  # @return [Boolean] true if the client has a safe `with` method, false otherwise
+  #
+  # source://flipper-redis//lib/flipper/adapters/redis_shared/methods.rb#46
+  def client_has_correct_with_method?; end
+
+  # @return [Boolean]
+  #
+  # source://flipper-redis//lib/flipper/adapters/redis_shared/methods.rb#54
+  def client_is_connection_pool?; end
+
+  # @return [Boolean]
+  #
+  # source://flipper-redis//lib/flipper/adapters/redis_shared/methods.rb#58
+  def client_is_redis_that_has_with?; end
+
+  # Safely executes a block with a Redis connection, handling compatibility
+  # issues between different Redis client versions and Rails versions.
+  #
+  # This method exists to fix a compatibility issue between Rails 7.1.* and
+  # Redis versions below 4.7.0. The issue occurs because:
+  #
+  # 1. In Redis versions below 4.7.0, the `with` method is not defined on
+  #    the Redis client, so Flipper would fall back to `yield(@client)`
+  # 2. However, Rails 7.1.* introduced `Object#with` via ActiveSupport,
+  #    which shadows the Redis client's `with` method
+  # 3. Rails 7.1.*'s `Object#with` doesn't pass `self` to the block parameter
+  #    (this was fixed in Rails 7.2.0), causing the block parameter to be `nil`
+  #
+  # This method ensures that:
+  # - For Redis >= 4.7.0: Uses the Redis client's native `with` method
+  # - For ConnectionPool: Uses the ConnectionPool's `with` method
+  # - For Redis < 4.7.0: Falls back to `yield(@client)` to avoid the Rails
+  #   ActiveSupport `Object#with` method
+  #
+  # @see https://github.com/redis/redis-rb/blob/master/CHANGELOG.md#470
+  # @see https://github.com/rails/rails/pull/46681
+  # @see https://github.com/rails/rails/pull/50470
+  #
+  # source://flipper-redis//lib/flipper/adapters/redis_shared/methods.rb#28
+  def with_connection(&block); end
 end
