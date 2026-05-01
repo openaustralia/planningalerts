@@ -26,38 +26,36 @@ module FactoryBot
     # source://factory_bot//lib/factory_bot/aliases.rb#11
     def aliases_for(attribute); end
 
-    # source://factory_bot//lib/factory_bot.rb#57
+    # source://factory_bot//lib/factory_bot.rb#54
     def automatically_define_enum_traits; end
 
-    # source://factory_bot//lib/factory_bot.rb#57
+    # source://factory_bot//lib/factory_bot.rb#54
     def automatically_define_enum_traits=(val); end
 
     # Set the starting value for ids when using the build_stubbed strategy
     #
-    # Arguments:
-    # * starting_id +Integer+
-    #   The new starting id value.
+    # @param starting_id [Integer] The new starting id value.
     #
-    # source://factory_bot//lib/factory_bot.rb#78
+    # source://factory_bot//lib/factory_bot.rb#76
     def build_stubbed_starting_id=(starting_id); end
 
     # An Array of strings specifying locations that should be searched for
     # factory definitions. By default, factory_bot will attempt to require
-    # "factories", "test/factories" and "spec/factories". Only the first
-    # existing file will be loaded.
+    # "factories.rb", "factories/**/*.rb", "test/factories.rb",
+    # "test/factories/**.rb", "spec/factories.rb", and "spec/factories/**.rb".
     #
     # source://factory_bot//lib/factory_bot/find_definitions.rb#7
     def definition_file_paths; end
 
     # An Array of strings specifying locations that should be searched for
     # factory definitions. By default, factory_bot will attempt to require
-    # "factories", "test/factories" and "spec/factories". Only the first
-    # existing file will be loaded.
+    # "factories.rb", "factories/**/*.rb", "test/factories.rb",
+    # "test/factories/**.rb", "spec/factories.rb", and "spec/factories/**.rb".
     #
     # source://factory_bot//lib/factory_bot/find_definitions.rb#7
     def definition_file_paths=(_arg0); end
 
-    # source://factory_bot//lib/factory_bot.rb#83
+    # source://factory_bot//lib/factory_bot.rb#107
     def factories(*_arg0, **_arg1, &_arg2); end
 
     # source://factory_bot//lib/factory_bot/find_definitions.rb#12
@@ -74,22 +72,56 @@ module FactoryBot
     # source://factory_bot//lib/factory_bot.rb#67
     def lint(*args); end
 
-    # source://factory_bot//lib/factory_bot.rb#83
+    # source://factory_bot//lib/factory_bot.rb#107
     def register_strategy(strategy_name, strategy_class, &block); end
 
     # source://factory_bot//lib/factory_bot/reload.rb#2
     def reload; end
 
-    # source://factory_bot//lib/factory_bot.rb#83
+    # Rewind an individual global or inline sequence.
+    #
+    # @example Rewinding a sequence by its URI parts
+    #   rewind_sequence(:factory_name, :trait_name, :sequence_name)
+    # @example Rewinding a sequence by its URI string
+    #   rewind_sequence("factory_name/trait_name/sequence_name")
+    # @param uri_parts [Array<Symbol>, String] The components of the sequence URI.
+    #
+    # source://factory_bot//lib/factory_bot.rb#107
+    def rewind_sequence(*_arg0, **_arg1, &_arg2); end
+
+    # source://factory_bot//lib/factory_bot.rb#107
     def rewind_sequences(&block); end
 
-    # source://factory_bot//lib/factory_bot.rb#83
+    # source://factory_bot//lib/factory_bot.rb#57
+    def sequence_setting_timeout; end
+
+    # source://factory_bot//lib/factory_bot.rb#57
+    def sequence_setting_timeout=(val); end
+
+    # Set the sequence to a specific value, providing the new value is within
+    # the sequence set.
+    #
+    # @example
+    #   set_sequence(:factory_name, :trait_name, :sequence_name, 450)
+    # @example
+    #   set_sequence([:factory_name, :trait_name, :sequence_name], 450)
+    # @example
+    #   set_sequence("factory_name/trait_name/sequence_name", 450)
+    # @param uri_parts [Array<Symbol>, String] The components of the sequence URI.
+    # @param value [Object] The new value for the sequence. This must be a value that is
+    #   within the sequence definition. For example, you cannot set
+    #   a String sequence to an Integer value.
+    #
+    # source://factory_bot//lib/factory_bot.rb#107
+    def set_sequence(*_arg0, **_arg1, &_arg2); end
+
+    # source://factory_bot//lib/factory_bot.rb#107
     def strategy_by_name(name, &block); end
 
-    # source://factory_bot//lib/factory_bot.rb#54
+    # source://factory_bot//lib/factory_bot.rb#51
     def use_parent_strategy; end
 
-    # source://factory_bot//lib/factory_bot.rb#54
+    # source://factory_bot//lib/factory_bot.rb#51
     def use_parent_strategy=(val); end
   end
 end
@@ -206,97 +238,147 @@ class FactoryBot::AttributeAssigner
   # source://factory_bot//lib/factory_bot/attribute_assigner.rb#4
   def initialize(evaluator, build_class, &instance_builder); end
 
+  # constructs a Hash-based factory product
+  #
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#22
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#24
   def hash; end
 
+  # constructs an object-based factory product
+  #
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#12
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#13
   def object; end
 
   private
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#98
-  def alias_names_to_ignore; end
-
-  # @api private
-  #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#86
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#93
   def association_names; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#70
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#101
+  def attribute_names; end
+
+  # Builds a list of attribute names which are slated to be interrupted by an override.
+  #
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#110
+  def attribute_names_overriden_by_alias; end
+
+  # Builds a list of attributes names that should be assigned to the factory product
+  #
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#75
   def attribute_names_to_assign; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#66
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#70
   def attributes_to_set_on_hash; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#62
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#66
   def attributes_to_set_on_instance; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#50
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#54
   def build_class_instance; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#54
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#58
   def build_hash; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#39
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#43
   def decorated_evaluator; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#58
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#62
   def get(attribute_name); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#94
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#105
   def hash_instance_methods_to_respond_to; end
 
+  # Is the attribute an ignorable alias of the override?
+  # An attribute is ignorable when it is an alias of the override AND it is
+  # either interrupting an assocciation OR is not the name of another attribute
+  #
   # @api private
+  # @note An "alias" is currently an overloaded term for two distinct cases:
+  #   (1) attributes which are aliases and reference the same value
+  #   (2) a logical grouping of a foreign key and an associated object
   # @return [Boolean]
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#106
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#128
   def ignorable_alias?(attribute, override); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#82
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#89
   def ignored_attribute_names; end
 
+  # Track evaluation of methods on the evaluator to prevent the duplicate
+  # assignment of attributes accessed and via `initialize_with` syntax
+  #
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#32
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#36
   def method_tracking_evaluator; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#46
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#50
   def methods_invoked_on_evaluator; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#78
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#85
   def non_ignored_attribute_names; end
+
+  # Does this override interrupt an association?
+  # When true, this indicates the aliased attribute is related to a declared association and the
+  # override does not match the attribute name.
+  #
+  # @api private
+  # @note Association overrides should take precedence over a declared foreign key attribute.
+  # @note An override may interrupt an association by providing the associated object or
+  #   by providing the foreign key.
+  # @param aliased_attribute [FactoryBot::Attribute]
+  # @param override [Symbol] name of an override which is an alias to the attribute name
+  # @return [Boolean]
+  #
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#152
+  def override_interrupts_association?(aliased_attribute, override); end
+
+  # Does this override match the name of any declared attribute?
+  #
+  # @api private
+  # @note Checking against the names of all attributes, resolves any issues with having both
+  #   <attribute> and <attribute>_id in the same factory. This also takes into account ignored
+  #   attributes that should not be assigned (aka transient attributes)
+  # @param override [Symbol] the name of an override
+  # @return [Boolean]
+  #
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#164
+  def override_matches_declared_attribute?(override); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#90
+  # source://factory_bot//lib/factory_bot/attribute_assigner.rb#97
   def override_names; end
 end
 
@@ -419,15 +501,31 @@ class FactoryBot::CallbacksObserver
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/callbacks_observer.rb#9
+  # source://factory_bot//lib/factory_bot/callbacks_observer.rb#10
   def update(name, result_instance); end
 
   private
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/callbacks_observer.rb#17
+  # source://factory_bot//lib/factory_bot/callbacks_observer.rb#21
   def callbacks_by_name(name); end
+
+  # @api private
+  # @return [Boolean]
+  #
+  # source://factory_bot//lib/factory_bot/callbacks_observer.rb#25
+  def completed?(instance, callback); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/callbacks_observer.rb#35
+  def completion_key_for(instance, callback); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/callbacks_observer.rb#30
+  def record_completion!(instance, callback); end
 end
 
 # @api private
@@ -762,51 +860,51 @@ class FactoryBot::Definition
   # @return [Definition] a new instance of Definition
   #
   # source://factory_bot//lib/factory_bot/definition.rb#7
-  def initialize(name, base_traits = T.unsafe(nil)); end
+  def initialize(name, base_traits = T.unsafe(nil), **opts); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#86
+  # source://factory_bot//lib/factory_bot/definition.rb#87
   def add_callback(callback); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#110
+  # source://factory_bot//lib/factory_bot/definition.rb#115
   def after(*names, &block); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#82
+  # source://factory_bot//lib/factory_bot/definition.rb#83
   def append_traits(new_traits); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#24
+  # source://factory_bot//lib/factory_bot/definition.rb#25
   def attributes; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#106
+  # source://factory_bot//lib/factory_bot/definition.rb#111
   def before(*names, &block); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#114
+  # source://factory_bot//lib/factory_bot/definition.rb#119
   def callback(*names, &block); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#45
+  # source://factory_bot//lib/factory_bot/definition.rb#46
   def callbacks; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#49
+  # source://factory_bot//lib/factory_bot/definition.rb#50
   def compile(klass = T.unsafe(nil)); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#41
+  # source://factory_bot//lib/factory_bot/definition.rb#42
   def constructor; end
 
   # @api private
@@ -814,17 +912,17 @@ class FactoryBot::Definition
   # source://factory_bot//lib/factory_bot/definition.rb#4
   def declarations; end
 
-  # source://factory_bot//lib/factory_bot/definition.rb#22
+  # source://factory_bot//lib/factory_bot/definition.rb#23
   def declare_attribute(*_arg0, **_arg1, &_arg2); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#102
+  # source://factory_bot//lib/factory_bot/definition.rb#107
   def define_constructor(&block); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#94
+  # source://factory_bot//lib/factory_bot/definition.rb#95
   def define_trait(trait); end
 
   # @api private
@@ -834,7 +932,12 @@ class FactoryBot::Definition
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#78
+  # source://factory_bot//lib/factory_bot/definition.rb#99
+  def defined_traits_names; end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/definition.rb#79
   def inherit_traits(new_traits); end
 
   # @api private
@@ -854,12 +957,12 @@ class FactoryBot::Definition
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#73
+  # source://factory_bot//lib/factory_bot/definition.rb#74
   def overridable; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#98
+  # source://factory_bot//lib/factory_bot/definition.rb#103
   def register_enum(enum); end
 
   # @api private
@@ -869,65 +972,70 @@ class FactoryBot::Definition
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#90
+  # source://factory_bot//lib/factory_bot/definition.rb#91
   def skip_create; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#33
+  # source://factory_bot//lib/factory_bot/definition.rb#34
   def to_create(&block); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/definition.rb#4
+  def uri_manager; end
 
   private
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#151
+  # source://factory_bot//lib/factory_bot/definition.rb#156
   def additional_traits; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#171
+  # source://factory_bot//lib/factory_bot/definition.rb#176
   def aggregate_from_traits_and_self(method_name, &block); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#196
+  # source://factory_bot//lib/factory_bot/definition.rb#201
   def automatically_register_defined_enums(klass); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#200
+  # source://factory_bot//lib/factory_bot/definition.rb#205
   def automatically_register_defined_enums?(klass); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#122
+  # source://factory_bot//lib/factory_bot/definition.rb#127
   def base_traits; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#131
+  # source://factory_bot//lib/factory_bot/definition.rb#136
   def error_with_definition_name(error); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#181
+  # source://factory_bot//lib/factory_bot/definition.rb#186
   def expand_enum_traits(klass); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#164
+  # source://factory_bot//lib/factory_bot/definition.rb#169
   def initialize_copy(source); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#155
+  # source://factory_bot//lib/factory_bot/definition.rb#160
   def trait_by_name(name); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/definition.rb#159
+  # source://factory_bot//lib/factory_bot/definition.rb#164
   def trait_for(name); end
 end
 
@@ -1007,7 +1115,7 @@ class FactoryBot::DefinitionProxy
   #    name of the factory. For example, a "user" association will by
   #    default use the "user" factory.
   #
-  # source://factory_bot//lib/factory_bot/definition_proxy.rb#151
+  # source://factory_bot//lib/factory_bot/definition_proxy.rb#155
   def association(name, *options); end
 
   # source://factory_bot//lib/factory_bot/definition_proxy.rb#22
@@ -1021,10 +1129,10 @@ class FactoryBot::DefinitionProxy
   # source://factory_bot//lib/factory_bot/definition_proxy.rb#24
   def child_factories; end
 
-  # source://factory_bot//lib/factory_bot/definition_proxy.rb#171
+  # source://factory_bot//lib/factory_bot/definition_proxy.rb#175
   def factory(name, options = T.unsafe(nil), &block); end
 
-  # source://factory_bot//lib/factory_bot/definition_proxy.rb#237
+  # source://factory_bot//lib/factory_bot/definition_proxy.rb#241
   def initialize_with(&block); end
 
   # Calls add_attribute using the missing method name as the name of the
@@ -1083,20 +1191,20 @@ class FactoryBot::DefinitionProxy
   # Except that no globally available sequence will be defined.
   #
   # source://factory_bot//lib/factory_bot/definition_proxy.rb#122
-  def sequence(name, *_arg1, **_arg2, &_arg3); end
+  def sequence(name, *args, &block); end
 
   # @raise [FactoryBot::MethodDefinitionError]
   #
   # source://factory_bot//lib/factory_bot/definition_proxy.rb#32
   def singleton_method_added(name); end
 
-  # source://factory_bot//lib/factory_bot/definition_proxy.rb#167
+  # source://factory_bot//lib/factory_bot/definition_proxy.rb#171
   def skip_create; end
 
-  # source://factory_bot//lib/factory_bot/definition_proxy.rb#163
+  # source://factory_bot//lib/factory_bot/definition_proxy.rb#167
   def to_create(&block); end
 
-  # source://factory_bot//lib/factory_bot/definition_proxy.rb#175
+  # source://factory_bot//lib/factory_bot/definition_proxy.rb#179
   def trait(name, &block); end
 
   # Creates traits for enumerable values.
@@ -1154,7 +1262,7 @@ class FactoryBot::DefinitionProxy
   #     attempt to get the values by calling the pluralized `attribute_name`
   #     class method.
   #
-  # source://factory_bot//lib/factory_bot/definition_proxy.rb#233
+  # source://factory_bot//lib/factory_bot/definition_proxy.rb#237
   def traits_for_enum(attribute_name, values = T.unsafe(nil)); end
 
   # source://factory_bot//lib/factory_bot/definition_proxy.rb#52
@@ -1162,19 +1270,25 @@ class FactoryBot::DefinitionProxy
 
   private
 
-  # source://factory_bot//lib/factory_bot/definition_proxy.rb#243
+  # source://factory_bot//lib/factory_bot/definition_proxy.rb#247
   def __declare_attribute__(name, block); end
+
+  # If the inline sequence has already been registered by a parent,
+  # return that one, otherwise register and return the given sequence
+  #
+  # source://factory_bot//lib/factory_bot/definition_proxy.rb#264
+  def __fetch_or_register_sequence(sequence); end
 
   # @return [Boolean]
   #
-  # source://factory_bot//lib/factory_bot/definition_proxy.rb#252
+  # source://factory_bot//lib/factory_bot/definition_proxy.rb#256
   def __valid_association_options?(options); end
 end
 
 # source://factory_bot//lib/factory_bot/definition_proxy.rb#3
 FactoryBot::DefinitionProxy::UNPROXIED_METHODS = T.let(T.unsafe(nil), Array)
 
-# source://factory_bot//lib/factory_bot.rb#52
+# source://factory_bot//lib/factory_bot.rb#49
 FactoryBot::Deprecation = T.let(T.unsafe(nil), ActiveSupport::Deprecation)
 
 # Raised when a factory is defined with the same name as a previously-defined factory.
@@ -1232,51 +1346,51 @@ end
 
 # @api private
 #
-# source://factory_bot//lib/factory_bot/evaluator.rb#6
+# source://factory_bot//lib/factory_bot/evaluator.rb#5
 class FactoryBot::Evaluator
   # @api private
   # @return [Evaluator] a new instance of Evaluator
   #
-  # source://factory_bot//lib/factory_bot/evaluator.rb#13
+  # source://factory_bot//lib/factory_bot/evaluator.rb#12
   def initialize(build_strategy, overrides = T.unsafe(nil)); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/evaluator.rb#50
+  # source://factory_bot//lib/factory_bot/evaluator.rb#49
   def __override_names__; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/evaluator.rb#24
+  # source://factory_bot//lib/factory_bot/evaluator.rb#23
   def association(factory_name, *traits_and_overrides); end
 
-  # source://factory_bot//lib/factory_bot/evaluator.rb#7
+  # source://factory_bot//lib/factory_bot/evaluator.rb#6
   def attribute_lists; end
 
-  # source://factory_bot//lib/factory_bot/evaluator.rb#7
+  # source://factory_bot//lib/factory_bot/evaluator.rb#6
   def attribute_lists=(_arg0); end
 
-  # source://factory_bot//lib/factory_bot/evaluator.rb#7
+  # source://factory_bot//lib/factory_bot/evaluator.rb#6
   def attribute_lists?; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/evaluator.rb#54
-  def increment_sequence(sequence); end
+  # source://factory_bot//lib/factory_bot/evaluator.rb#53
+  def increment_sequence(sequence, scope: T.unsafe(nil)); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/evaluator.rb#36
+  # source://factory_bot//lib/factory_bot/evaluator.rb#35
   def instance; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/evaluator.rb#36
+  # source://factory_bot//lib/factory_bot/evaluator.rb#35
   def instance=(_arg0); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/evaluator.rb#38
+  # source://factory_bot//lib/factory_bot/evaluator.rb#37
   def method_missing(method_name, *_arg1, **_arg2, &_arg3); end
 
   private
@@ -1284,27 +1398,27 @@ class FactoryBot::Evaluator
   # @api private
   # @return [Boolean]
   #
-  # source://factory_bot//lib/factory_bot/evaluator.rb#46
+  # source://factory_bot//lib/factory_bot/evaluator.rb#45
   def respond_to_missing?(method_name, _include_private = T.unsafe(nil)); end
 
   class << self
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/evaluator.rb#58
+    # source://factory_bot//lib/factory_bot/evaluator.rb#64
     def attribute_list; end
 
-    # source://factory_bot//lib/factory_bot/evaluator.rb#7
+    # source://factory_bot//lib/factory_bot/evaluator.rb#6
     def attribute_lists; end
 
-    # source://factory_bot//lib/factory_bot/evaluator.rb#7
+    # source://factory_bot//lib/factory_bot/evaluator.rb#6
     def attribute_lists=(value); end
 
-    # source://factory_bot//lib/factory_bot/evaluator.rb#7
+    # source://factory_bot//lib/factory_bot/evaluator.rb#6
     def attribute_lists?; end
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/evaluator.rb#66
+    # source://factory_bot//lib/factory_bot/evaluator.rb#72
     def define_attribute(name, &block); end
   end
 end
@@ -1335,38 +1449,41 @@ class FactoryBot::Factory
   # source://factory_bot//lib/factory_bot/factory.rb#9
   def initialize(name, options = T.unsafe(nil)); end
 
-  # source://factory_bot//lib/factory_bot/factory.rb#19
+  # source://factory_bot//lib/factory_bot/factory.rb#20
   def add_callback(*_arg0, **_arg1, &_arg2); end
 
-  # source://factory_bot//lib/factory_bot/factory.rb#19
+  # source://factory_bot//lib/factory_bot/factory.rb#20
   def append_traits(*_arg0, **_arg1, &_arg2); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#50
+  # source://factory_bot//lib/factory_bot/factory.rb#58
   def associations; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#22
+  # source://factory_bot//lib/factory_bot/factory.rb#24
   def build_class; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#83
+  # source://factory_bot//lib/factory_bot/factory.rb#91
   def compile; end
 
-  # source://factory_bot//lib/factory_bot/factory.rb#19
+  # source://factory_bot//lib/factory_bot/factory.rb#20
   def constructor(*_arg0, **_arg1, &_arg2); end
 
-  # source://factory_bot//lib/factory_bot/factory.rb#19
+  # source://factory_bot//lib/factory_bot/factory.rb#20
   def declare_attribute(*_arg0, **_arg1, &_arg2); end
 
-  # source://factory_bot//lib/factory_bot/factory.rb#19
+  # source://factory_bot//lib/factory_bot/factory.rb#20
   def define_trait(*_arg0, **_arg1, &_arg2); end
 
-  # source://factory_bot//lib/factory_bot/factory.rb#19
+  # source://factory_bot//lib/factory_bot/factory.rb#20
   def defined_traits(*_arg0, **_arg1, &_arg2); end
+
+  # source://factory_bot//lib/factory_bot/factory.rb#20
+  def defined_traits_names(*_arg0, **_arg1, &_arg2); end
 
   # @api private
   #
@@ -1375,10 +1492,10 @@ class FactoryBot::Factory
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#46
+  # source://factory_bot//lib/factory_bot/factory.rb#54
   def human_names; end
 
-  # source://factory_bot//lib/factory_bot/factory.rb#19
+  # source://factory_bot//lib/factory_bot/factory.rb#20
   def inherit_traits(*_arg0, **_arg1, &_arg2); end
 
   # @api private
@@ -1414,84 +1531,89 @@ class FactoryBot::Factory
   #
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#79
+  # source://factory_bot//lib/factory_bot/factory.rb#87
   def names; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#30
+  # source://factory_bot//lib/factory_bot/factory.rb#34
   def run(build_strategy, overrides, &block); end
 
-  # source://factory_bot//lib/factory_bot/factory.rb#19
+  # source://factory_bot//lib/factory_bot/factory.rb#20
   def to_create(*_arg0, **_arg1, &_arg2); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#93
+  # source://factory_bot//lib/factory_bot/factory.rb#101
   def with_traits(traits); end
 
   protected
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#109
+  # source://factory_bot//lib/factory_bot/factory.rb#117
   def attributes; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#124
+  # source://factory_bot//lib/factory_bot/factory.rb#132
   def build_hierarchy; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#128
+  # source://factory_bot//lib/factory_bot/factory.rb#136
   def callbacks; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#101
+  # source://factory_bot//lib/factory_bot/factory.rb#109
   def class_name; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#136
+  # source://factory_bot//lib/factory_bot/factory.rb#144
   def compiled_constructor; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#132
+  # source://factory_bot//lib/factory_bot/factory.rb#140
   def compiled_to_create; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#105
+  # source://factory_bot//lib/factory_bot/factory.rb#113
   def evaluator_class; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#116
+  # source://factory_bot//lib/factory_bot/factory.rb#124
   def hierarchy_class; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#120
+  # source://factory_bot//lib/factory_bot/factory.rb#128
   def hierarchy_instance; end
 
   private
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#142
+  # source://factory_bot//lib/factory_bot/factory.rb#150
   def assert_valid_options(options); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#154
+  # source://factory_bot//lib/factory_bot/factory.rb#162
+  def inherit_parent_traits; end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/factory.rb#169
   def initialize_copy(source); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/factory.rb#146
+  # source://factory_bot//lib/factory_bot/factory.rb#154
   def parent; end
 end
 
@@ -1533,7 +1655,7 @@ module FactoryBot::Internal
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#69
+    # source://factory_bot//lib/factory_bot/internal.rb#86
     def factory_by_name(name); end
 
     # source://factory_bot//lib/factory_bot/internal.rb#5
@@ -1544,12 +1666,12 @@ module FactoryBot::Internal
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#82
+    # source://factory_bot//lib/factory_bot/internal.rb#99
     def register_default_strategies; end
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#62
+    # source://factory_bot//lib/factory_bot/internal.rb#79
     def register_factory(factory); end
 
     # @api private
@@ -1559,17 +1681,17 @@ module FactoryBot::Internal
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#46
+    # source://factory_bot//lib/factory_bot/internal.rb#47
     def register_sequence(sequence); end
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#73
+    # source://factory_bot//lib/factory_bot/internal.rb#90
     def register_strategy(strategy_name, strategy_class); end
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#35
+    # source://factory_bot//lib/factory_bot/internal.rb#36
     def register_trait(trait); end
 
     # @api private
@@ -1579,21 +1701,31 @@ module FactoryBot::Internal
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#31
+    # source://factory_bot//lib/factory_bot/internal.rb#32
     def rewind_inline_sequences; end
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#57
+    # source://factory_bot//lib/factory_bot/internal.rb#63
+    def rewind_sequence(*uri_parts); end
+
+    # @api private
+    #
+    # source://factory_bot//lib/factory_bot/internal.rb#58
     def rewind_sequences; end
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#53
+    # source://factory_bot//lib/factory_bot/internal.rb#54
     def sequence_by_name(name); end
 
     # source://factory_bot//lib/factory_bot/internal.rb#5
     def sequences(*_arg0, **_arg1, &_arg2); end
+
+    # @api private
+    #
+    # source://factory_bot//lib/factory_bot/internal.rb#72
+    def set_sequence(*uri_parts, value); end
 
     # source://factory_bot//lib/factory_bot/internal.rb#5
     def skip_create(*_arg0, **_arg1, &_arg2); end
@@ -1603,7 +1735,7 @@ module FactoryBot::Internal
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#78
+    # source://factory_bot//lib/factory_bot/internal.rb#95
     def strategy_by_name(name); end
 
     # source://factory_bot//lib/factory_bot/internal.rb#5
@@ -1611,11 +1743,28 @@ module FactoryBot::Internal
 
     # @api private
     #
-    # source://factory_bot//lib/factory_bot/internal.rb#42
+    # source://factory_bot//lib/factory_bot/internal.rb#43
     def trait_by_name(name, klass); end
 
     # source://factory_bot//lib/factory_bot/internal.rb#5
     def traits(*_arg0, **_arg1, &_arg2); end
+
+    private
+
+    # @api private
+    #
+    # source://factory_bot//lib/factory_bot/internal.rb#109
+    def build_uri(*_arg0, **_arg1, &_arg2); end
+
+    # @api private
+    #
+    # source://factory_bot//lib/factory_bot/internal.rb#113
+    def fail_argument_count(received, expected); end
+
+    # @api private
+    #
+    # source://factory_bot//lib/factory_bot/internal.rb#118
+    def fail_unregistered_sequence(uri); end
   end
 end
 
@@ -1659,6 +1808,9 @@ class FactoryBot::Linter
   #
   # source://factory_bot//lib/factory_bot/linter.rb#19
   def factory_strategy; end
+
+  # source://factory_bot//lib/factory_bot/linter.rb#110
+  def in_transaction; end
 
   # Returns the value of attribute invalid_factories.
   #
@@ -1829,71 +1981,191 @@ end
 #
 # @api private
 #
-# source://factory_bot//lib/factory_bot/sequence.rb#5
+# source://factory_bot//lib/factory_bot/sequence.rb#7
 class FactoryBot::Sequence
   # @api private
   # @return [Sequence] a new instance of Sequence
   #
-  # source://factory_bot//lib/factory_bot/sequence.rb#8
+  # source://factory_bot//lib/factory_bot/sequence.rb#24
   def initialize(name, *args, &proc); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/sequence.rb#6
+  # source://factory_bot//lib/factory_bot/sequence.rb#8
+  def aliases; end
+
+  # @api private
+  # @return [Boolean]
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#61
+  def for_factory?(test_factory_name); end
+
+  # @api private
+  # @return [Boolean]
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#53
+  def has_name?(test_name); end
+
+  # @api private
+  # @return [Boolean]
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#57
+  def has_uri?(uri); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#8
   def name; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/sequence.rb#33
+  # source://factory_bot//lib/factory_bot/sequence.rb#49
   def names; end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/sequence.rb#21
-  def next(scope = T.unsafe(nil)); end
-
-  # @api private
-  #
   # source://factory_bot//lib/factory_bot/sequence.rb#37
-  def rewind; end
-
-  private
-
-  # @api private
-  #
-  # source://factory_bot//lib/factory_bot/sequence.rb#47
-  def increment_value; end
-
-  # @api private
-  #
-  # source://factory_bot//lib/factory_bot/sequence.rb#43
-  def value; end
-end
-
-# @api private
-#
-# source://factory_bot//lib/factory_bot/sequence.rb#51
-class FactoryBot::Sequence::EnumeratorAdapter
-  # @api private
-  # @return [EnumeratorAdapter] a new instance of EnumeratorAdapter
-  #
-  # source://factory_bot//lib/factory_bot/sequence.rb#52
-  def initialize(value); end
-
-  # @api private
-  #
-  # source://factory_bot//lib/factory_bot/sequence.rb#61
-  def next; end
-
-  # @api private
-  #
-  # source://factory_bot//lib/factory_bot/sequence.rb#57
-  def peek; end
+  def next(scope = T.unsafe(nil)); end
 
   # @api private
   #
   # source://factory_bot//lib/factory_bot/sequence.rb#65
   def rewind; end
+
+  # If it's an Integer based sequence, set the new value directly,
+  # else rewind and seek from the beginning until a match is found.
+  #
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#73
+  def set_value(new_value); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#8
+  def uri_manager; end
+
+  protected
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#85
+  def proc; end
+
+  private
+
+  # @api private
+  # @return [Boolean]
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#97
+  def can_set_value_by_index?; end
+
+  # @api private
+  # @return [Boolean]
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#142
+  def can_set_value_directly?(value); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#148
+  def fail_value_not_found(value); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#93
+  def increment_value; end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#134
+  def reset_original_value(original_value); end
+
+  # Rewind index and seek until the value is found or the max attempts
+  # have been tried. If not found, the sequence is rewound to its original value
+  #
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#114
+  def seek_value(value); end
+
+  # Set to the given value, or fail if not found
+  #
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#104
+  def set_value_by_index(value); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#89
+  def value; end
+
+  class << self
+    # @api private
+    #
+    # source://factory_bot//lib/factory_bot/sequence.rb#10
+    def find(*uri_parts); end
+
+    # @api private
+    #
+    # source://factory_bot//lib/factory_bot/sequence.rb#18
+    def find_by_uri(uri); end
+  end
+end
+
+# @api private
+#
+# source://factory_bot//lib/factory_bot/sequence.rb#152
+class FactoryBot::Sequence::EnumeratorAdapter
+  # @api private
+  # @return [EnumeratorAdapter] a new instance of EnumeratorAdapter
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#153
+  def initialize(initial_value); end
+
+  # @api private
+  # @return [Boolean]
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#177
+  def integer_value?; end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#161
+  def next; end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#157
+  def peek; end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#165
+  def rewind; end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#169
+  def set_value(new_value); end
+
+  private
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#183
+  def first_value; end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#191
+  def initial_value; end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/sequence.rb#187
+  def value; end
 end
 
 # Raised when attempting to register a sequence from a dynamic attribute block
@@ -1902,7 +2174,12 @@ end
 class FactoryBot::SequenceAbuseError < ::RuntimeError; end
 
 # source://factory_bot//lib/factory_bot/strategy/build.rb#2
-module FactoryBot::Strategy; end
+module FactoryBot::Strategy
+  class << self
+    # source://factory_bot//lib/factory_bot/strategy.rb#9
+    def lookup_strategy(name_or_object); end
+  end
+end
 
 # source://factory_bot//lib/factory_bot/strategy/attributes_for.rb#3
 class FactoryBot::Strategy::AttributesFor
@@ -1924,7 +2201,7 @@ class FactoryBot::Strategy::Build
   # source://factory_bot//lib/factory_bot/strategy/build.rb#8
   def result(evaluation); end
 
-  # source://factory_bot//lib/factory_bot/strategy/build.rb#14
+  # source://factory_bot//lib/factory_bot/strategy/build.rb#16
   def to_sym; end
 end
 
@@ -1936,7 +2213,7 @@ class FactoryBot::Strategy::Create
   # source://factory_bot//lib/factory_bot/strategy/create.rb#8
   def result(evaluation); end
 
-  # source://factory_bot//lib/factory_bot/strategy/create.rb#17
+  # source://factory_bot//lib/factory_bot/strategy/create.rb#19
   def to_sym; end
 end
 
@@ -1975,12 +2252,12 @@ class FactoryBot::Strategy::Stub
 
   # @return [Boolean]
   #
-  # source://factory_bot//lib/factory_bot/strategy/stub.rb#114
+  # source://factory_bot//lib/factory_bot/strategy/stub.rb#116
   def missing_created_at?(result_instance); end
 
   # @return [Boolean]
   #
-  # source://factory_bot//lib/factory_bot/strategy/stub.rb#120
+  # source://factory_bot//lib/factory_bot/strategy/stub.rb#122
   def missing_updated_at?(result_instance); end
 
   # source://factory_bot//lib/factory_bot/strategy/stub.rb#50
@@ -2005,35 +2282,6 @@ end
 
 # source://factory_bot//lib/factory_bot/strategy/stub.rb#6
 FactoryBot::Strategy::Stub::DISABLED_PERSISTENCE_METHODS = T.let(T.unsafe(nil), Array)
-
-# @api private
-#
-# source://factory_bot//lib/factory_bot/strategy_calculator.rb#3
-class FactoryBot::StrategyCalculator
-  # @api private
-  # @return [StrategyCalculator] a new instance of StrategyCalculator
-  #
-  # source://factory_bot//lib/factory_bot/strategy_calculator.rb#4
-  def initialize(name_or_object); end
-
-  # @api private
-  #
-  # source://factory_bot//lib/factory_bot/strategy_calculator.rb#8
-  def strategy; end
-
-  private
-
-  # @api private
-  # @return [Boolean]
-  #
-  # source://factory_bot//lib/factory_bot/strategy_calculator.rb#18
-  def strategy_is_object?; end
-
-  # @api private
-  #
-  # source://factory_bot//lib/factory_bot/strategy_calculator.rb#22
-  def strategy_name_to_object; end
-end
 
 # @api private
 #
@@ -2260,31 +2508,41 @@ module FactoryBot::Syntax::Methods
   # source://factory_bot//lib/factory_bot/strategy_syntax_method_registrar.rb#50
   def create_pair(name, *traits_and_overrides, &block); end
 
-  # Generates and returns the next value in a sequence.
+  # Generates and returns the next value in a global or factory sequence.
   #
   # Arguments:
-  #   name: (Symbol)
-  #     The name of the sequence that a value should be generated for.
+  #   context: (Array of Symbols)
+  #     The definition context of the sequence, with the sequence name
+  #     as the final entry
+  #   scope: (object)(optional)
+  #     The object the sequence should be evaluated within
   #
   # Returns:
   #   The next value in the sequence. (Object)
   #
-  # source://factory_bot//lib/factory_bot/syntax/methods.rb#113
-  def generate(name); end
+  # Example:
+  #   generate(:my_factory, :my_trair, :my_sequence)
+  #
+  # source://factory_bot//lib/factory_bot/syntax/methods.rb#120
+  def generate(*uri_parts, scope: T.unsafe(nil)); end
 
-  # Generates and returns the list of values in a sequence.
+  # Generates and returns the list of values in a global or factory sequence.
   #
   # Arguments:
-  #   name: (Symbol)
-  #     The name of the sequence that a value should be generated for.
-  #   count: (Fixnum)
-  #     Count of values
+  #   uri_parts: (Array of Symbols)
+  #     The definition context of the sequence, with the sequence name
+  #     as the final entry
+  #   scope: (object)(optional)
+  #     The object the sequence should be evaluated within
   #
   # Returns:
   #   The next value in the sequence. (Object)
   #
-  # source://factory_bot//lib/factory_bot/syntax/methods.rb#127
-  def generate_list(name, count); end
+  # Example:
+  #   generate_list(:my_factory, :my_trair, :my_sequence, 5)
+  #
+  # source://factory_bot//lib/factory_bot/syntax/methods.rb#144
+  def generate_list(*uri_parts, count, scope: T.unsafe(nil)); end
 
   # source://factory_bot//lib/factory_bot/strategy_syntax_method_registrar.rb#27
   def null(name, *traits_and_overrides, &block); end
@@ -2294,6 +2552,19 @@ module FactoryBot::Syntax::Methods
 
   # source://factory_bot//lib/factory_bot/strategy_syntax_method_registrar.rb#50
   def null_pair(name, *traits_and_overrides, &block); end
+
+  private
+
+  # Increments the given sequence and returns the value.
+  #
+  # Arguments:
+  #   sequence:
+  #     The sequence instance
+  #   scope: (object)(optional)
+  #     The object the sequence should be evaluated within
+  #
+  # source://factory_bot//lib/factory_bot/syntax/methods.rb#169
+  def increment_sequence(sequence, scope: T.unsafe(nil)); end
 end
 
 # @api private
@@ -2310,30 +2581,35 @@ class FactoryBot::Trait
   # @api private
   # @return [Trait] a new instance of Trait
   #
-  # source://factory_bot//lib/factory_bot/trait.rb#6
-  def initialize(name, &block); end
+  # source://factory_bot//lib/factory_bot/trait.rb#9
+  def initialize(name, **options, &block); end
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/trait.rb#24
+  # source://factory_bot//lib/factory_bot/trait.rb#30
   def ==(other); end
 
-  # source://factory_bot//lib/factory_bot/trait.rb#17
+  # source://factory_bot//lib/factory_bot/trait.rb#6
   def add_callback(*_arg0, **_arg1, &_arg2); end
 
-  # source://factory_bot//lib/factory_bot/trait.rb#17
+  # source://factory_bot//lib/factory_bot/trait.rb#6
   def attributes(*_arg0, **_arg1, &_arg2); end
 
-  # source://factory_bot//lib/factory_bot/trait.rb#17
+  # source://factory_bot//lib/factory_bot/trait.rb#6
   def callbacks(*_arg0, **_arg1, &_arg2); end
 
-  # source://factory_bot//lib/factory_bot/trait.rb#17
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/trait.rb#22
+  def clone; end
+
+  # source://factory_bot//lib/factory_bot/trait.rb#6
   def constructor(*_arg0, **_arg1, &_arg2); end
 
-  # source://factory_bot//lib/factory_bot/trait.rb#17
+  # source://factory_bot//lib/factory_bot/trait.rb#6
   def declare_attribute(*_arg0, **_arg1, &_arg2); end
 
-  # source://factory_bot//lib/factory_bot/trait.rb#17
+  # source://factory_bot//lib/factory_bot/trait.rb#6
   def define_trait(*_arg0, **_arg1, &_arg2); end
 
   # @api private
@@ -2341,10 +2617,10 @@ class FactoryBot::Trait
   # source://factory_bot//lib/factory_bot/trait.rb#4
   def definition; end
 
-  # source://factory_bot//lib/factory_bot/trait.rb#17
+  # source://factory_bot//lib/factory_bot/trait.rb#6
   def klass(*_arg0, **_arg1, &_arg2); end
 
-  # source://factory_bot//lib/factory_bot/trait.rb#17
+  # source://factory_bot//lib/factory_bot/trait.rb#6
   def klass=(arg); end
 
   # @api private
@@ -2354,17 +2630,22 @@ class FactoryBot::Trait
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/trait.rb#20
+  # source://factory_bot//lib/factory_bot/trait.rb#26
   def names; end
 
-  # source://factory_bot//lib/factory_bot/trait.rb#17
+  # source://factory_bot//lib/factory_bot/trait.rb#6
   def to_create(*_arg0, **_arg1, &_arg2); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/trait.rb#4
+  def uid; end
 
   protected
 
   # @api private
   #
-  # source://factory_bot//lib/factory_bot/trait.rb#31
+  # source://factory_bot//lib/factory_bot/trait.rb#37
   def block; end
 end
 
@@ -2372,6 +2653,88 @@ end
 #
 # source://factory_bot//lib/factory_bot/errors.rb#6
 class FactoryBot::TraitDefinitionError < ::RuntimeError; end
+
+# @api private
+#
+# source://factory_bot//lib/factory_bot/uri_manager.rb#3
+class FactoryBot::UriManager
+  # Configures the new UriManager
+  #
+  # Arguments:
+  #   endpoints: (Array of Strings or Symbols)
+  #     the objects endpoints.
+  #
+  #   paths: (Array of Strings or Symbols)
+  #     the parent URIs to prepend to each endpoint
+  #
+  # @api private
+  # @return [UriManager] a new instance of UriManager
+  #
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#35
+  def initialize(*endpoints, paths: T.unsafe(nil)); end
+
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#6
+  def any?(*_arg0, **_arg1, &_arg2); end
+
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#7
+  def build_uri(*_arg0, **_arg1, &_arg2); end
+
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#6
+  def each?(*_arg0, **_arg1, &_arg2); end
+
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#6
+  def empty?(*_arg0, **_arg1, &_arg2); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#4
+  def endpoints; end
+
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#6
+  def first(*_arg0, **_arg1, &_arg2); end
+
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#6
+  def include?(*_arg0, **_arg1, &_arg2); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#4
+  def paths; end
+
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#6
+  def size(*_arg0, **_arg1, &_arg2); end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#47
+  def to_a; end
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#4
+  def uri_list; end
+
+  private
+
+  # @api private
+  #
+  # source://factory_bot//lib/factory_bot/uri_manager.rb#53
+  def build_uri_list; end
+
+  class << self
+    # Concatenate the parts, sripping leading/following slashes
+    # and returning a Symbolized String or nil.
+    #
+    # Example:
+    #   build_uri(:my_factory, :my_trait, :my_sequence)
+    #   #=> :"myfactory/my_trait/my_sequence"
+    #
+    # @api private
+    #
+    # source://factory_bot//lib/factory_bot/uri_manager.rb#16
+    def build_uri(*parts); end
+  end
+end
 
 # source://factory_bot//lib/factory_bot/version.rb#2
 FactoryBot::VERSION = T.let(T.unsafe(nil), String)
