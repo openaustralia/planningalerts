@@ -14,30 +14,33 @@ module Flipper
   def adapter(*args, **_arg1, &block); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
+  def adapter_stack(*args, **_arg1, &block); end
+
+  # source://forwardable/1.3.3/forwardable.rb#231
   def add(*args, **_arg1, &block); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
   def add_expression(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#75
+  # source://flipper/1.4.1/lib/flipper.rb#75
   def all(*args); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#71
+  # source://flipper/1.4.1/lib/flipper.rb#71
   def any(*args); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#95
+  # source://flipper/1.4.1/lib/flipper.rb#95
   def boolean(value); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#28
+  # source://flipper/1.4.1/lib/flipper.rb#28
   def configuration; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#33
+  # source://flipper/1.4.1/lib/flipper.rb#33
   def configuration=(configuration); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#23
+  # source://flipper/1.4.1/lib/flipper.rb#23
   def configure; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#79
+  # source://flipper/1.4.1/lib/flipper.rb#79
   def constant(value); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -91,34 +94,40 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def feature(*args, **_arg1, &block); end
 
+  # source://flipper/1.4.1/lib/flipper.rb#115
+  def feature_disabled(name); end
+
+  # source://flipper/1.4.1/lib/flipper.rb#111
+  def feature_enabled(name); end
+
   # source://forwardable/1.3.3/forwardable.rb#231
   def features(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#160
+  # source://flipper/1.4.1/lib/flipper.rb#176
   def group(name); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#147
+  # source://flipper/1.4.1/lib/flipper.rb#163
   def group_exists?(name); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#133
+  # source://flipper/1.4.1/lib/flipper.rb#149
   def group_names; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#126
+  # source://flipper/1.4.1/lib/flipper.rb#142
   def groups; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#165
+  # source://flipper/1.4.1/lib/flipper.rb#181
   def groups_registry; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#170
+  # source://flipper/1.4.1/lib/flipper.rb#186
   def groups_registry=(registry); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
   def import(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#45
+  # source://flipper/1.4.1/lib/flipper.rb#45
   def instance; end
 
-  # source://flipper/1.3.0/lib/flipper.rb#52
+  # source://flipper/1.4.1/lib/flipper.rb#52
   def instance=(flipper); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -127,10 +136,13 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def memoizing?(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#12
+  # source://flipper/1.4.1/lib/flipper.rb#12
   def new(adapter, options = T.unsafe(nil)); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#91
+  # source://flipper/1.4.1/lib/flipper.rb#103
+  def now; end
+
+  # source://flipper/1.4.1/lib/flipper.rb#91
   def number(value); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -139,16 +151,16 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def preload_all(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#83
+  # source://flipper/1.4.1/lib/flipper.rb#83
   def property(name); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#99
+  # source://flipper/1.4.1/lib/flipper.rb#99
   def random(max); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
   def read_only?(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#117
+  # source://flipper/1.4.1/lib/flipper.rb#133
   def register(name, &block); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -157,7 +169,7 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def remove_expression(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#87
+  # source://flipper/1.4.1/lib/flipper.rb#87
   def string(value); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
@@ -166,7 +178,10 @@ module Flipper
   # source://forwardable/1.3.3/forwardable.rb#231
   def sync_secret(*args, **_arg1, &block); end
 
-  # source://flipper/1.3.0/lib/flipper.rb#140
+  # source://flipper/1.4.1/lib/flipper.rb#107
+  def time(value); end
+
+  # source://flipper/1.4.1/lib/flipper.rb#156
   def unregister_groups; end
 
   class << self
@@ -197,14 +212,14 @@ module Flipper::UI
     # source://flipper-ui//lib/flipper/ui.rb#21
     def app(flipper = T.unsafe(nil), options = T.unsafe(nil)); end
 
-    # source://flipper-ui//lib/flipper/ui.rb#44
+    # source://flipper-ui//lib/flipper/ui.rb#58
     def configuration; end
 
     # Public: yields configuration instance for customizing UI text
     #
     # @yield [configuration]
     #
-    # source://flipper-ui//lib/flipper/ui.rb#40
+    # source://flipper-ui//lib/flipper/ui.rb#54
     def configure; end
 
     # source://flipper-ui//lib/flipper/ui.rb#17
@@ -212,31 +227,31 @@ module Flipper::UI
   end
 end
 
-# source://flipper-ui//lib/flipper/ui/action.rb#10
+# source://flipper-ui//lib/flipper/ui/action.rb#18
 class Flipper::UI::Action
   extend ::Forwardable
 
   # @return [Action] a new instance of Action
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#91
+  # source://flipper-ui//lib/flipper/ui/action.rb#99
   def initialize(flipper, request); end
 
-  # source://flipper-ui//lib/flipper/ui/action.rb#282
+  # source://flipper-ui//lib/flipper/ui/action.rb#290
   def asset_hash(src); end
 
-  # source://flipper-ui//lib/flipper/ui/action.rb#270
+  # source://flipper-ui//lib/flipper/ui/action.rb#278
   def bootstrap_css; end
 
-  # source://flipper-ui//lib/flipper/ui/action.rb#274
+  # source://flipper-ui//lib/flipper/ui/action.rb#282
   def bootstrap_js; end
 
-  # source://flipper-ui//lib/flipper/ui/action.rb#247
+  # source://flipper-ui//lib/flipper/ui/action.rb#255
   def csrf_input_tag; end
 
   # Public: The instance of the Flipper::DSL the middleware was
   # initialized with.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#83
+  # source://flipper-ui//lib/flipper/ui/action.rb#91
   def flipper; end
 
   # Public: Call this with a response to immediately stop the current action
@@ -244,7 +259,7 @@ class Flipper::UI::Action
   #
   # response - The response you would like to return.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#129
+  # source://flipper-ui//lib/flipper/ui/action.rb#137
   def halt(response); end
 
   # Public: Set a header.
@@ -252,7 +267,7 @@ class Flipper::UI::Action
   # name - The String name of the header.
   # value - The value of the header.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#182
+  # source://flipper-ui//lib/flipper/ui/action.rb#190
   def header(name, value); end
 
   # Public: Dumps an object as json and returns rack response with that as
@@ -262,53 +277,53 @@ class Flipper::UI::Action
   #
   # Returns a response.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#151
+  # source://flipper-ui//lib/flipper/ui/action.rb#159
   def json_response(object); end
 
   # source://forwardable/1.3.3/forwardable.rb#231
   def params(*args, **_arg1, &block); end
 
-  # source://flipper-ui//lib/flipper/ui/action.rb#278
+  # source://flipper-ui//lib/flipper/ui/action.rb#286
   def popper_js; end
 
   # Private
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#238
+  # source://flipper-ui//lib/flipper/ui/action.rb#246
   def public_path; end
 
   # @return [Boolean]
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#262
+  # source://flipper-ui//lib/flipper/ui/action.rb#270
   def read_only?; end
 
   # Public: Redirect to a new location.
   #
   # location - The String location to set the Location header to.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#165
+  # source://flipper-ui//lib/flipper/ui/action.rb#173
   def redirect_to(location); end
 
   # Internal: Method to call when the UI is in read only mode and you want
   # to inform people of that fact.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#257
+  # source://flipper-ui//lib/flipper/ui/action.rb#265
   def render_read_only; end
 
   # Public: The Rack::Request to provide a response for.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#86
+  # source://flipper-ui//lib/flipper/ui/action.rb#94
   def request; end
 
   # Private: Returns the request method converted to an action method.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#243
+  # source://flipper-ui//lib/flipper/ui/action.rb#251
   def request_method_name; end
 
   # Public: Runs the request method for the provided request.
   #
   # Returns whatever the request method returns in the action.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#101
+  # source://flipper-ui//lib/flipper/ui/action.rb#109
   def run; end
 
   # Public: Runs another action from within the request method of a
@@ -323,19 +338,19 @@ class Flipper::UI::Action
   #
   # Returns result of other action.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#121
+  # source://flipper-ui//lib/flipper/ui/action.rb#129
   def run_other_action(action_class); end
 
   # Internal: The path the app is mounted at.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#218
+  # source://flipper-ui//lib/flipper/ui/action.rb#226
   def script_name; end
 
   # Public: Set the status code for the response.
   #
   # code - The Integer code you would like the response to return.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#174
+  # source://flipper-ui//lib/flipper/ui/action.rb#182
   def status(code); end
 
   # Internal: Generate urls relative to the app's script name.
@@ -344,17 +359,17 @@ class Flipper::UI::Action
   #   url_for("/thing")              # => "http://localhost:9292/thing"
   #   url_for("https://example.com") # => "https://example.com"
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#228
+  # source://flipper-ui//lib/flipper/ui/action.rb#236
   def url_for(*parts); end
 
   # @return [Boolean]
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#251
+  # source://flipper-ui//lib/flipper/ui/action.rb#259
   def valid_request_method?; end
 
   # Private
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#210
+  # source://flipper-ui//lib/flipper/ui/action.rb#218
   def view(name); end
 
   # Public: Compiles a view and returns rack response with that as the body.
@@ -363,33 +378,33 @@ class Flipper::UI::Action
   #
   # Returns a response.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#138
+  # source://flipper-ui//lib/flipper/ui/action.rb#146
   def view_response(name); end
 
   # Private
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#200
+  # source://flipper-ui//lib/flipper/ui/action.rb#208
   def view_with_layout(&block); end
 
   # Private
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#205
+  # source://flipper-ui//lib/flipper/ui/action.rb#213
   def view_without_layout(name); end
 
   # Private
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#233
+  # source://flipper-ui//lib/flipper/ui/action.rb#241
   def views_path; end
 
   # @return [Boolean]
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#266
+  # source://flipper-ui//lib/flipper/ui/action.rb#274
   def write_allowed?; end
 
   class << self
     # Private: The path to the public folder.
     #
-    # source://flipper-ui//lib/flipper/ui/action.rb#77
+    # source://flipper-ui//lib/flipper/ui/action.rb#85
     def public_path; end
 
     # Public: Call this in subclasses so the action knows its route.
@@ -398,19 +413,19 @@ class Flipper::UI::Action
     #
     # Returns nothing.
     #
-    # source://flipper-ui//lib/flipper/ui/action.rb#47
+    # source://flipper-ui//lib/flipper/ui/action.rb#55
     def route(regex); end
 
     # Internal: Does this action's route match the path.
     #
     # @return [Boolean]
     #
-    # source://flipper-ui//lib/flipper/ui/action.rb#52
+    # source://flipper-ui//lib/flipper/ui/action.rb#60
     def route_match?(path); end
 
     # Internal: The regex that matches which routes this action will work for.
     #
-    # source://flipper-ui//lib/flipper/ui/action.rb#57
+    # source://flipper-ui//lib/flipper/ui/action.rb#65
     def route_regex; end
 
     # Internal: Initializes and runs an action for a given request.
@@ -420,54 +435,54 @@ class Flipper::UI::Action
     #
     # Returns result of Action#run.
     #
-    # source://flipper-ui//lib/flipper/ui/action.rb#67
+    # source://flipper-ui//lib/flipper/ui/action.rb#75
     def run(flipper, request); end
 
     # Private: The path to the views folder.
     #
-    # source://flipper-ui//lib/flipper/ui/action.rb#72
+    # source://flipper-ui//lib/flipper/ui/action.rb#80
     def views_path; end
   end
 end
 
-# source://flipper-ui//lib/flipper/ui/action.rb#186
+# source://flipper-ui//lib/flipper/ui/action.rb#194
 class Flipper::UI::Action::Breadcrumb
   # @return [Breadcrumb] a new instance of Breadcrumb
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#189
+  # source://flipper-ui//lib/flipper/ui/action.rb#197
   def initialize(text, href = T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#194
+  # source://flipper-ui//lib/flipper/ui/action.rb#202
   def active?; end
 
   # Returns the value of attribute href.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#187
+  # source://flipper-ui//lib/flipper/ui/action.rb#195
   def href; end
 
   # Returns the value of attribute text.
   #
-  # source://flipper-ui//lib/flipper/ui/action.rb#187
+  # source://flipper-ui//lib/flipper/ui/action.rb#195
   def text; end
 end
 
-# source://flipper-ui//lib/flipper/ui/action.rb#31
+# source://flipper-ui//lib/flipper/ui/action.rb#39
 Flipper::UI::Action::CONTENT_SECURITY_POLICY = T.let(T.unsafe(nil), String)
 
-# source://flipper-ui//lib/flipper/ui/action.rb#11
+# source://flipper-ui//lib/flipper/ui/action.rb#19
 module Flipper::UI::Action::FeatureNameFromRoute
   private
 
-  # source://flipper-ui//lib/flipper/ui/action.rb#12
+  # source://flipper-ui//lib/flipper/ui/action.rb#20
   def feature_name; end
 end
 
-# source://flipper-ui//lib/flipper/ui/action.rb#30
+# source://flipper-ui//lib/flipper/ui/action.rb#38
 Flipper::UI::Action::SOURCES = T.let(T.unsafe(nil), Hash)
 
-# source://flipper-ui//lib/flipper/ui/action.rb#23
+# source://flipper-ui//lib/flipper/ui/action.rb#31
 Flipper::UI::Action::VALID_REQUEST_METHOD_NAMES = T.let(T.unsafe(nil), Set)
 
 # Internal: Used to detect the action that should be used in the middleware.
@@ -511,6 +526,12 @@ class Flipper::UI::Actions::BooleanGate < ::Flipper::UI::Action
   include ::Flipper::UI::Action::FeatureNameFromRoute
 
   # source://flipper-ui//lib/flipper/ui/actions/boolean_gate.rb#12
+  def post; end
+end
+
+# source://flipper-ui//lib/flipper/ui/actions/cloud_migrate.rb#7
+class Flipper::UI::Actions::CloudMigrate < ::Flipper::UI::Action
+  # source://flipper-ui//lib/flipper/ui/actions/cloud_migrate.rb#10
   def post; end
 end
 
@@ -595,7 +616,7 @@ end
 class Flipper::UI::Configuration
   # @return [Configuration] a new instance of Configuration
   #
-  # source://flipper-ui//lib/flipper/ui/configuration.rb#94
+  # source://flipper-ui//lib/flipper/ui/configuration.rb#109
   def initialize; end
 
   # Public: If you set this, Flipper::UI will fetch actor names
@@ -670,14 +691,10 @@ class Flipper::UI::Configuration
 
   # Returns the value of attribute banner_class.
   #
-  # source://flipper-ui//lib/flipper/ui/configuration.rb#8
+  # source://flipper-ui//lib/flipper/ui/configuration.rb#9
   def banner_class; end
 
-  # Sets the attribute banner_class
-  #
-  # @param value the value to set the attribute banner_class to.
-  #
-  # source://flipper-ui//lib/flipper/ui/configuration.rb#124
+  # source://flipper-ui//lib/flipper/ui/configuration.rb#148
   def banner_class=(value); end
 
   # Returns the value of attribute banner_text.
@@ -746,6 +763,39 @@ class Flipper::UI::Configuration
   #
   # source://flipper-ui//lib/flipper/ui/configuration.rb#56
   def descriptions_source=(_arg0); end
+
+  # Public: Set to disable the Fully Enable button in the UI, preventing
+  # users from fully enabling features via the web interface. Set to true
+  # for a default message, or a string for a custom message. Defaults to nil.
+  #
+  # Note: This only affects the UI. If flipper-api is mounted, full enable
+  # is still possible via the API.
+  #
+  # Examples:
+  #
+  #   config.disable_fully_enable = true
+  #   config.disable_fully_enable = "Use deploy pipeline instead."
+  #
+  # source://flipper-ui//lib/flipper/ui/configuration.rb#92
+  def disable_fully_enable; end
+
+  # Public: Set to disable the Fully Enable button in the UI, preventing
+  # users from fully enabling features via the web interface. Set to true
+  # for a default message, or a string for a custom message. Defaults to nil.
+  #
+  # Note: This only affects the UI. If flipper-api is mounted, full enable
+  # is still possible via the API.
+  #
+  # Examples:
+  #
+  #   config.disable_fully_enable = true
+  #   config.disable_fully_enable = "Use deploy pipeline instead."
+  #
+  # source://flipper-ui//lib/flipper/ui/configuration.rb#92
+  def disable_fully_enable=(_arg0); end
+
+  # source://flipper-ui//lib/flipper/ui/configuration.rb#140
+  def disable_fully_enable_message; end
 
   # Public: Is feature creation allowed from the UI? Defaults to true. If
   # set to false, users of the UI cannot create features. All feature
@@ -831,22 +881,25 @@ class Flipper::UI::Configuration
 
   # @return [Boolean]
   #
-  # source://flipper-ui//lib/flipper/ui/configuration.rb#120
+  # source://flipper-ui//lib/flipper/ui/configuration.rb#136
   def show_feature_description_in_list?; end
 
   # @return [Boolean]
   #
-  # source://flipper-ui//lib/flipper/ui/configuration.rb#116
+  # source://flipper-ui//lib/flipper/ui/configuration.rb#132
   def using_descriptions?; end
 end
 
-# source://flipper-ui//lib/flipper/ui/configuration.rb#92
+# source://flipper-ui//lib/flipper/ui/configuration.rb#106
 Flipper::UI::Configuration::DEFAULT_ACTOR_NAMES_SOURCE = T.let(T.unsafe(nil), Proc)
 
-# source://flipper-ui//lib/flipper/ui/configuration.rb#91
+# source://flipper-ui//lib/flipper/ui/configuration.rb#105
 Flipper::UI::Configuration::DEFAULT_DESCRIPTIONS_SOURCE = T.let(T.unsafe(nil), Proc)
 
-# source://flipper-ui//lib/flipper/ui/configuration.rb#80
+# source://flipper-ui//lib/flipper/ui/configuration.rb#107
+Flipper::UI::Configuration::DEFAULT_DISABLE_FULLY_ENABLE_MESSAGE = T.let(T.unsafe(nil), String)
+
+# source://flipper-ui//lib/flipper/ui/configuration.rb#94
 Flipper::UI::Configuration::VALID_BANNER_CLASS_VALUES = T.let(T.unsafe(nil), Array)
 
 # source://flipper-ui//lib/flipper/ui/decorators/gate.rb#5
@@ -944,10 +997,10 @@ class Flipper::UI::Middleware
   # source://flipper-ui//lib/flipper/ui/middleware.rb#12
   def initialize(app, options = T.unsafe(nil)); end
 
-  # source://flipper-ui//lib/flipper/ui/middleware.rb#39
+  # source://flipper-ui//lib/flipper/ui/middleware.rb#40
   def call(env); end
 
-  # source://flipper-ui//lib/flipper/ui/middleware.rb#43
+  # source://flipper-ui//lib/flipper/ui/middleware.rb#44
   def call!(env); end
 end
 
@@ -989,36 +1042,49 @@ end
 # source://flipper-ui//lib/flipper/ui/error.rb#8
 class Flipper::UI::RequestMethodNotSupported < ::Flipper::UI::Error; end
 
-# source://flipper-ui//lib/flipper/ui/util.rb#3
+# Sanitize config for descriptions in list view. Removes anchor tags to
+# avoid nested links (the feature row is wrapped in an <a> tag).
+# See: https://github.com/flippercloud/flipper/issues/939
+#
+# source://flipper-ui//lib/flipper/ui/action.rb#13
+Flipper::UI::SANITIZE_LIST = T.let(T.unsafe(nil), Hash)
+
+# source://flipper-ui//lib/flipper/ui/util.rb#5
 module Flipper::UI::Util
   class << self
     # @return [Boolean]
     #
-    # source://flipper-ui//lib/flipper/ui/util.rb#7
+    # source://flipper-ui//lib/flipper/ui/util.rb#17
     def blank?(str); end
 
-    # source://flipper-ui//lib/flipper/ui/util.rb#27
+    # source://flipper-ui//lib/flipper/ui/util.rb#9
+    def escape(str); end
+
+    # source://flipper-ui//lib/flipper/ui/util.rb#37
     def pluralize(count, singular, plural); end
 
     # @return [Boolean]
     #
-    # source://flipper-ui//lib/flipper/ui/util.rb#11
+    # source://flipper-ui//lib/flipper/ui/util.rb#21
     def present?(str); end
 
-    # source://flipper-ui//lib/flipper/ui/util.rb#15
+    # source://flipper-ui//lib/flipper/ui/util.rb#25
     def titleize(str); end
 
-    # source://flipper-ui//lib/flipper/ui/util.rb#35
+    # source://flipper-ui//lib/flipper/ui/util.rb#45
     def to_sentence(array, options = T.unsafe(nil)); end
 
-    # source://flipper-ui//lib/flipper/ui/util.rb#19
+    # source://flipper-ui//lib/flipper/ui/util.rb#29
     def truncate(str, length: T.unsafe(nil)); end
+
+    # source://flipper-ui//lib/flipper/ui/util.rb#13
+    def unescape(str); end
   end
 end
 
 # Private: 0x3000: fullwidth whitespace
 #
-# source://flipper-ui//lib/flipper/ui/util.rb#5
+# source://flipper-ui//lib/flipper/ui/util.rb#7
 Flipper::UI::Util::NON_WHITESPACE_REGEXP = T.let(T.unsafe(nil), Regexp)
 
 # source://flipper-ui//lib/flipper/version.rb#2
