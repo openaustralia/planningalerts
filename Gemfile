@@ -14,6 +14,9 @@ gem "activerecord-postgis-adapter"
 # API
 gem "dalli"
 
+# secondary dependency, but needed for security patch
+gem "webrick", ">= 1.8.2"
+
 # For throttling API requests
 gem "rack-attack"
 
