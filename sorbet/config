@@ -6,11 +6,16 @@ spec/
 db/
 --ignore
 vendor/
-# net-imap refactored Atom and RawData to inherit from CommandData in 0.4.x,
-# conflicting with Sorbet's built-in payload which still has them inheriting Object.
+# net-imap refactoring is conflicting with Sorbet's built-in payload, so sorbet suggested:
 
-# Ignoring: sorbet/rbi/gems/net-imap@0.4.24.rbi:2928: Parent of class Net::IMAP::Atom redefined from Object to Net::IMAP::CommandData https://srb.help/5012
+# Ignoring: sorbet/rbi/gems/net-imap@0.6.4.rbi:599: Parent of class Net::IMAP::Atom redefined from Object to Net::IMAP::CommandData https://srb.help/5012
 --suppress-payload-superclass-redefinition-for=Net::IMAP::Atom
 
-# Ignoring: sorbet/rbi/gems/net-imap@0.4.24.rbi:5050: Parent of class Net::IMAP::RawData redefined from Object to Net::IMAP::CommandData https://srb.help/5012
+# Ignoring: sorbet/rbi/gems/net-imap@0.6.4.rbi:3248: Parent of class Net::IMAP::RawData redefined from Object to Net::IMAP::CommandData https://srb.help/5012
 --suppress-payload-superclass-redefinition-for=Net::IMAP::RawData
+
+# Ignoring: sorbet/rbi/gems/net-imap@0.6.4.rbi:2850: Parent of class Net::IMAP::Literal redefined from Object to Data https://srb.help/5012
+--suppress-payload-superclass-redefinition-for=Net::IMAP::Literal
+
+# Ignoring: sorbet/rbi/gems/net-imap@0.6.4.rbi:3225: Parent of class Net::IMAP::QuotedString redefined from Object to Net::IMAP::CommandData https://srb.help/5012
+--suppress-payload-superclass-redefinition-for=Net::IMAP::QuotedString
