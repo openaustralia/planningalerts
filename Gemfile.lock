@@ -108,24 +108,27 @@ GEM
     ast (2.4.2)
     autoprefixer-rails (10.4.19.0)
       execjs (~> 2)
-    aws-eventstream (1.3.0)
-    aws-partitions (1.961.0)
-    aws-sdk-core (3.201.3)
+    aws-eventstream (1.4.0)
+    aws-partitions (1.1243.0)
+    aws-sdk-core (3.246.0)
       aws-eventstream (~> 1, >= 1.3.0)
-      aws-partitions (~> 1, >= 1.651.0)
-      aws-sigv4 (~> 1.8)
+      aws-partitions (~> 1, >= 1.992.0)
+      aws-sigv4 (~> 1.9)
+      base64
+      bigdecimal
       jmespath (~> 1, >= 1.6.1)
+      logger
     aws-sdk-ec2 (1.467.0)
       aws-sdk-core (~> 3, >= 3.201.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-kms (1.88.0)
-      aws-sdk-core (~> 3, >= 3.201.0)
+    aws-sdk-kms (1.124.0)
+      aws-sdk-core (~> 3, >= 3.244.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.157.0)
-      aws-sdk-core (~> 3, >= 3.201.0)
+    aws-sdk-s3 (1.208.0)
+      aws-sdk-core (~> 3, >= 3.234.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
-    aws-sigv4 (1.9.1)
+    aws-sigv4 (1.12.1)
       aws-eventstream (~> 1, >= 1.0.2)
     axe-core-api (4.9.1)
       dumb_delegator
@@ -211,7 +214,7 @@ GEM
     crass (1.0.6)
     csv (3.3.0)
     dalli (3.2.8)
-    date (3.4.1)
+    date (3.5.1)
     dbf (4.3.2)
       csv
     debug_inspector (1.2.0)
@@ -264,8 +267,8 @@ GEM
     faraday (2.10.1)
       faraday-net_http (>= 2.0, < 3.2)
       logger
-    faraday-multipart (1.0.4)
-      multipart-post (~> 2)
+    faraday-multipart (1.2.0)
+      multipart-post (~> 2.0)
     faraday-net_http (3.1.1)
       net-http
     faraday-net_http_persistent (2.1.0)
@@ -404,7 +407,7 @@ GEM
       uri
     net-http-persistent (4.0.2)
       connection_pool (~> 2.2)
-    net-imap (0.4.20)
+    net-imap (0.4.24)
       date
       net-protocol
     net-pop (0.1.2)
@@ -417,7 +420,7 @@ GEM
       net-ssh (>= 5.0.0, < 8.0.0)
     net-smtp (0.5.0)
       net-protocol
-    net-ssh (7.2.3)
+    net-ssh (7.3.0)
     netrc (0.11.0)
     nio4r (2.7.3)
     nokogiri (1.18.10-aarch64-linux-gnu)
@@ -739,13 +742,13 @@ GEM
     thread_safe (0.3.6)
     tilt (2.6.1)
     timecop (0.9.10)
-    timeout (0.4.4)
+    timeout (0.6.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.5.0)
-    uri (0.13.2)
+    uri (0.13.3)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
@@ -795,6 +798,7 @@ GEM
 PLATFORMS
   aarch64-linux
   arm64-darwin-23
+  arm64-darwin-25
   x86_64-linux
 
 DEPENDENCIES
