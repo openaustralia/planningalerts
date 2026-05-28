@@ -8,28 +8,28 @@
 # source://aws-eventstream//lib/aws-eventstream/decoder.rb#7
 module Aws
   class << self
-    # source://aws-sdk-core/3.201.3/lib/aws-sdk-core.rb#138
+    # source://aws-sdk-core/3.246.0/lib/aws-sdk-core.rb#94
     def config; end
 
-    # source://aws-sdk-core/3.201.3/lib/aws-sdk-core.rb#141
+    # source://aws-sdk-core/3.246.0/lib/aws-sdk-core.rb#97
     def config=(config); end
 
-    # source://aws-sdk-core/3.201.3/lib/aws-sdk-core.rb#200
+    # source://aws-sdk-core/3.246.0/lib/aws-sdk-core.rb#156
     def eager_autoload!(*args); end
 
-    # source://aws-sdk-core/3.201.3/lib/aws-sdk-core.rb#193
+    # source://aws-sdk-core/3.246.0/lib/aws-sdk-core.rb#149
     def empty_connection_pools!; end
 
-    # source://aws-sdk-core/3.201.3/lib/aws-sdk-core.rb#150
+    # source://aws-sdk-core/3.246.0/lib/aws-sdk-core.rb#106
     def partition(partition_name); end
 
-    # source://aws-sdk-core/3.201.3/lib/aws-sdk-core.rb#155
+    # source://aws-sdk-core/3.246.0/lib/aws-sdk-core.rb#111
     def partitions; end
 
-    # source://aws-sdk-core/3.201.3/lib/aws-sdk-core.rb#131
+    # source://aws-sdk-core/3.246.0/lib/aws-sdk-core.rb#87
     def shared_config; end
 
-    # source://aws-sdk-core/3.201.3/lib/aws-sdk-core.rb#170
+    # source://aws-sdk-core/3.246.0/lib/aws-sdk-core.rb#126
     def use_bundled_cert!; end
   end
 end
@@ -248,7 +248,7 @@ end
 # source://aws-eventstream//lib/aws-eventstream/encoder.rb#45
 Aws::EventStream::Encoder::MAX_HEADERS_LENGTH = T.let(T.unsafe(nil), Integer)
 
-# Maximum payload length allowed (after encode) 16mb
+# Maximum payload length allowed (after encode) 24mb
 #
 # source://aws-eventstream//lib/aws-eventstream/encoder.rb#48
 Aws::EventStream::Encoder::MAX_PAYLOAD_LENGTH = T.let(T.unsafe(nil), Integer)
