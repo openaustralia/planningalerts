@@ -142,6 +142,23 @@ We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all
 * `docker compose run --rm web bin/rails console` - Run a once-off command in new container and then clean it up afterwards
 * `docker system prune --all` - Remove all stopped containers, orphaned images / networks, build cache etc. (Remove the -v if you want to keep your databases and gem cache)
 
+#### If things go wrong with gem updates
+
+If things go wrong, force a rebuild from scratch (preserving DB volumes):
+```shell
+docker compose down
+docker system prune --all
+docker volume rm planningalerts_gem_cache
+docker compose up --build
+```
+Then rebuild sorbet again in another terminal window:
+```shell
+docker compose run web bin/srb
+docker compose run web bin/tapioca gem
+docker compose run web bin/tapioca dsl
+docker compose run web bin/tapioca dsl --environment=test
+```
+
 ## Deployment
 
 The code is deployed using Capistrano. To deploy to production run:

@@ -2,6 +2,9 @@
 
 source "https://rubygems.org"
 
+# Gems that have been bundled with ruby but must now be explicitly listed to be available
+gem "net-imap"
+
 gem "bootsnap", require: false
 gem "rails", "~> 7.1.0"
 gem "rake"
