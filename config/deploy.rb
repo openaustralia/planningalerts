@@ -74,6 +74,8 @@ set :aws_ec2_contact_point, :public_dns
 # Tagging options
 set :tagging3_format, ':stage_:release'
 
+set :foreman_timeout, 300
+
 desc "upload memcache.yml configuration"
 task :upload_memcache_config do
   # Each host is also running memcached. So...
@@ -88,7 +90,12 @@ namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
   task :export do
     on roles(:app) do
-      execute "cd #{current_path} && sudo bundle exec foreman export systemd /etc/systemd/system -e .env.production -u deploy -a #{fetch(:application)}-#{fetch(:stage)} -f Procfile.production -l #{shared_path}/log --root #{current_path}"
+      execute "cd #{current_path} && " \
+        "sudo bundle exec " \
+        "foreman export systemd /etc/systemd/system -e .env.production -u deploy " \
+        "-a #{fetch(:application)}-#{fetch(:stage)} -f Procfile.production " \
+        "--timeout #{fetch(:foreman_timeout)} --template #{current_path}/config/foreman " \
+        "-l #{shared_path}/log --root #{current_path}"
     end
   end
 
