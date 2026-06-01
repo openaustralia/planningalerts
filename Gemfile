@@ -220,6 +220,7 @@ group :development do
   gem "capistrano-bundler", require: false
   gem "capistrano-rails", require: false
   gem "capistrano-rvm", require: false
+  gem "capistrano-tagging3", "~> 2.0", require: false
 
   # Help with code quality
   gem "brakeman"

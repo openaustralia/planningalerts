@@ -16,6 +16,7 @@ require "capistrano/rails/migrations"
 require "capistrano/honeybadger"
 require "capistrano/aws"
 require "capistrano/puma"
+require "capistrano/tagging3"
 install_plugin Capistrano::Puma
 install_plugin Capistrano::Puma::Systemd
 
