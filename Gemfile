@@ -2,6 +2,9 @@
 
 source "https://rubygems.org"
 
+# Gems that have been bundled with ruby but must now be explicitly listed to be available
+gem "net-imap"
+
 gem "bootsnap", require: false
 gem "rails", "~> 7.1.0"
 gem "rake"
@@ -217,6 +220,7 @@ group :development do
   gem "capistrano-bundler", require: false
   gem "capistrano-rails", require: false
   gem "capistrano-rvm", require: false
+  gem "capistrano-tagging3", "~> 2.0", require: false
 
   # Help with code quality
   gem "brakeman"

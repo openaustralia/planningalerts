@@ -71,6 +71,9 @@ set :aws_ec2_default_filters, (proc {
 # be used inside the network to contact the memcache servers
 set :aws_ec2_contact_point, :public_dns
 
+# Tagging options
+set :tagging3_format, ':stage_:release'
+
 desc "upload memcache.yml configuration"
 task :upload_memcache_config do
   # Each host is also running memcached. So...

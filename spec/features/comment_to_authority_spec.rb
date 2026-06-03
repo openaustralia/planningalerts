@@ -125,7 +125,7 @@ describe "Give feedback" do
         end
         # rubocop:enable RSpec/NoExpectationExample
 
-        it "is not immediately publically visible in the comments section" do
+        it "is not immediately publicly visible in the comments section" do
           visit(application_path(application))
           within("#comments") do
             expect(page).to have_no_content("I think this is a really good ideas")

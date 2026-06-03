@@ -154,7 +154,7 @@ Rails.application.routes.draw do
     end
     resources :comments, only: %i[create update] do
       member do
-        # This little hack allows us to put the "clear" button inside the form rather than having a seperate form
+        # This little hack allows us to put the "clear" button inside the form rather than having a separate form
         # just for that button
         patch "" => "comments#destroy", constraints: QueryParamsPresentConstraint.new(:clear)
         post :publish

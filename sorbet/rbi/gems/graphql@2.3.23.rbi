@@ -3118,16 +3118,16 @@ class GraphQL::Language::Lexer
   # This produces a unique integer for bytes 2 and 3 of each keyword string
   # See https://tenderlovemaking.com/2023/09/02/fast-tokenizers-with-stringscanner.html
   #
-  # source://graphql//lib/graphql/language/lexer.rb#242
+  # source://graphql//lib/graphql/language/lexer.rb#249
   def _hash(key); end
 
   # source://graphql//lib/graphql/language/lexer.rb#24
   def advance; end
 
-  # source://graphql//lib/graphql/language/lexer.rb#161
+  # source://graphql//lib/graphql/language/lexer.rb#172
   def column_number; end
 
-  # source://graphql//lib/graphql/language/lexer.rb#105
+  # source://graphql//lib/graphql/language/lexer.rb#116
   def debug_token_value(token_name); end
 
   # @return [Boolean]
@@ -3135,7 +3135,7 @@ class GraphQL::Language::Lexer
   # source://graphql//lib/graphql/language/lexer.rb#18
   def eos?; end
 
-  # source://graphql//lib/graphql/language/lexer.rb#157
+  # source://graphql//lib/graphql/language/lexer.rb#168
   def line_number; end
 
   # Returns the value of attribute pos.
@@ -3145,13 +3145,13 @@ class GraphQL::Language::Lexer
 
   # @raise [GraphQL::ParseError]
   #
-  # source://graphql//lib/graphql/language/lexer.rb#165
+  # source://graphql//lib/graphql/language/lexer.rb#176
   def raise_parse_error(message, line = T.unsafe(nil), col = T.unsafe(nil)); end
 
-  # source://graphql//lib/graphql/language/lexer.rb#134
+  # source://graphql//lib/graphql/language/lexer.rb#145
   def string_value; end
 
-  # source://graphql//lib/graphql/language/lexer.rb#99
+  # source://graphql//lib/graphql/language/lexer.rb#110
   def token_value; end
 
   # Returns the value of attribute tokens_count.
@@ -3163,173 +3163,176 @@ class GraphQL::Language::Lexer
     # Replace any escaped unicode or whitespace with the _actual_ characters
     # To avoid allocating more strings, this modifies the string passed into it
     #
-    # source://graphql//lib/graphql/language/lexer.rb#321
+    # source://graphql//lib/graphql/language/lexer.rb#328
     def replace_escaped_characters_in_place(raw_string); end
 
     # This is not used during parsing because the parser
     # doesn't actually need tokens.
     #
-    # source://graphql//lib/graphql/language/lexer.rb#348
+    # source://graphql//lib/graphql/language/lexer.rb#355
     def tokenize(string); end
   end
 end
 
-# source://graphql//lib/graphql/language/lexer.rb#275
+# source://graphql//lib/graphql/language/lexer.rb#282
 GraphQL::Language::Lexer::BLOCK_QUOTE = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#279
+# source://graphql//lib/graphql/language/lexer.rb#286
 GraphQL::Language::Lexer::BLOCK_STRING_REGEXP = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#295
+# source://graphql//lib/graphql/language/lexer.rb#302
 module GraphQL::Language::Lexer::ByteFor; end
 
-# source://graphql//lib/graphql/language/lexer.rb#299
+# source://graphql//lib/graphql/language/lexer.rb#306
 GraphQL::Language::Lexer::ByteFor::ELLIPSIS = T.let(T.unsafe(nil), Integer)
 
 # identifier, *not* a keyword
 #
-# source://graphql//lib/graphql/language/lexer.rb#300
+# source://graphql//lib/graphql/language/lexer.rb#307
 GraphQL::Language::Lexer::ByteFor::IDENTIFIER = T.let(T.unsafe(nil), Integer)
 
 # identifier or keyword
 #
-# source://graphql//lib/graphql/language/lexer.rb#297
+# source://graphql//lib/graphql/language/lexer.rb#304
 GraphQL::Language::Lexer::ByteFor::NAME = T.let(T.unsafe(nil), Integer)
 
 # int or float
 #
-# source://graphql//lib/graphql/language/lexer.rb#296
+# source://graphql//lib/graphql/language/lexer.rb#303
 GraphQL::Language::Lexer::ByteFor::NUMBER = T.let(T.unsafe(nil), Integer)
 
-# source://graphql//lib/graphql/language/lexer.rb#301
+# source://graphql//lib/graphql/language/lexer.rb#308
 GraphQL::Language::Lexer::ByteFor::PUNCTUATION = T.let(T.unsafe(nil), Integer)
 
-# source://graphql//lib/graphql/language/lexer.rb#298
+# source://graphql//lib/graphql/language/lexer.rb#305
 GraphQL::Language::Lexer::ByteFor::STRING = T.let(T.unsafe(nil), Integer)
 
-# source://graphql//lib/graphql/language/lexer.rb#132
+# source://graphql//lib/graphql/language/lexer.rb#181
+GraphQL::Language::Lexer::COMMENT_REGEXP = T.let(T.unsafe(nil), Regexp)
+
+# source://graphql//lib/graphql/language/lexer.rb#143
 GraphQL::Language::Lexer::ESCAPED = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#276
+# source://graphql//lib/graphql/language/lexer.rb#283
 GraphQL::Language::Lexer::ESCAPED_QUOTE = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#119
+# source://graphql//lib/graphql/language/lexer.rb#130
 GraphQL::Language::Lexer::ESCAPES = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#120
+# source://graphql//lib/graphql/language/lexer.rb#131
 GraphQL::Language::Lexer::ESCAPES_REPLACE = T.let(T.unsafe(nil), Hash)
 
 # Use this array to check, for a given byte that will start a token,
 # what kind of token might it start?
 #
-# source://graphql//lib/graphql/language/lexer.rb#293
+# source://graphql//lib/graphql/language/lexer.rb#300
 GraphQL::Language::Lexer::FIRST_BYTES = T.let(T.unsafe(nil), Array)
 
-# source://graphql//lib/graphql/language/lexer.rb#177
+# source://graphql//lib/graphql/language/lexer.rb#184
 GraphQL::Language::Lexer::FLOAT_DECIMAL_REGEXP = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#178
+# source://graphql//lib/graphql/language/lexer.rb#185
 GraphQL::Language::Lexer::FLOAT_EXP_REGEXP = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#271
+# source://graphql//lib/graphql/language/lexer.rb#278
 GraphQL::Language::Lexer::FOUR_DIGIT_UNICODE = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#175
+# source://graphql//lib/graphql/language/lexer.rb#182
 GraphQL::Language::Lexer::IDENTIFIER_REGEXP = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#169
+# source://graphql//lib/graphql/language/lexer.rb#180
 GraphQL::Language::Lexer::IGNORE_REGEXP = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#176
+# source://graphql//lib/graphql/language/lexer.rb#183
 GraphQL::Language::Lexer::INT_REGEXP = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#182
+# source://graphql//lib/graphql/language/lexer.rb#189
 GraphQL::Language::Lexer::KEYWORDS = T.let(T.unsafe(nil), Array)
 
-# source://graphql//lib/graphql/language/lexer.rb#205
+# source://graphql//lib/graphql/language/lexer.rb#212
 GraphQL::Language::Lexer::KEYWORD_BY_TWO_BYTES = T.let(T.unsafe(nil), Array)
 
-# source://graphql//lib/graphql/language/lexer.rb#204
+# source://graphql//lib/graphql/language/lexer.rb#211
 GraphQL::Language::Lexer::KEYWORD_REGEXP = T.let(T.unsafe(nil), Regexp)
 
 # TODO: FLOAT_EXP_REGEXP should not be allowed to follow INT_REGEXP, integers are not allowed to have exponent parts.
 #
-# source://graphql//lib/graphql/language/lexer.rb#180
+# source://graphql//lib/graphql/language/lexer.rb#187
 GraphQL::Language::Lexer::NUMERIC_REGEXP = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#272
+# source://graphql//lib/graphql/language/lexer.rb#279
 GraphQL::Language::Lexer::N_DIGIT_UNICODE = T.let(T.unsafe(nil), Regexp)
 
 # A sparse array mapping the bytes for each punctuation
 # to a symbol name for that punctuation
 #
-# source://graphql//lib/graphql/language/lexer.rb#264
+# source://graphql//lib/graphql/language/lexer.rb#271
 GraphQL::Language::Lexer::PUNCTUATION_NAME_FOR_BYTE = T.let(T.unsafe(nil), Array)
 
-# source://graphql//lib/graphql/language/lexer.rb#246
+# source://graphql//lib/graphql/language/lexer.rb#253
 module GraphQL::Language::Lexer::Punctuation; end
 
-# source://graphql//lib/graphql/language/lexer.rb#259
+# source://graphql//lib/graphql/language/lexer.rb#266
 GraphQL::Language::Lexer::Punctuation::AMP = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#257
+# source://graphql//lib/graphql/language/lexer.rb#264
 GraphQL::Language::Lexer::Punctuation::BANG = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#253
+# source://graphql//lib/graphql/language/lexer.rb#260
 GraphQL::Language::Lexer::Punctuation::COLON = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#255
+# source://graphql//lib/graphql/language/lexer.rb#262
 GraphQL::Language::Lexer::Punctuation::DIR_SIGN = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#256
+# source://graphql//lib/graphql/language/lexer.rb#263
 GraphQL::Language::Lexer::Punctuation::EQUALS = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#251
+# source://graphql//lib/graphql/language/lexer.rb#258
 GraphQL::Language::Lexer::Punctuation::LBRACKET = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#247
+# source://graphql//lib/graphql/language/lexer.rb#254
 GraphQL::Language::Lexer::Punctuation::LCURLY = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#249
+# source://graphql//lib/graphql/language/lexer.rb#256
 GraphQL::Language::Lexer::Punctuation::LPAREN = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#258
+# source://graphql//lib/graphql/language/lexer.rb#265
 GraphQL::Language::Lexer::Punctuation::PIPE = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#252
+# source://graphql//lib/graphql/language/lexer.rb#259
 GraphQL::Language::Lexer::Punctuation::RBRACKET = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#248
+# source://graphql//lib/graphql/language/lexer.rb#255
 GraphQL::Language::Lexer::Punctuation::RCURLY = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#250
+# source://graphql//lib/graphql/language/lexer.rb#257
 GraphQL::Language::Lexer::Punctuation::RPAREN = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#254
+# source://graphql//lib/graphql/language/lexer.rb#261
 GraphQL::Language::Lexer::Punctuation::VAR_SIGN = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#269
+# source://graphql//lib/graphql/language/lexer.rb#276
 GraphQL::Language::Lexer::QUOTE = T.let(T.unsafe(nil), String)
 
-# source://graphql//lib/graphql/language/lexer.rb#278
+# source://graphql//lib/graphql/language/lexer.rb#285
 GraphQL::Language::Lexer::QUOTED_STRING_REGEXP = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#277
+# source://graphql//lib/graphql/language/lexer.rb#284
 GraphQL::Language::Lexer::STRING_CHAR = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#274
+# source://graphql//lib/graphql/language/lexer.rb#281
 GraphQL::Language::Lexer::STRING_ESCAPE = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#270
+# source://graphql//lib/graphql/language/lexer.rb#277
 GraphQL::Language::Lexer::UNICODE_DIGIT = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#273
+# source://graphql//lib/graphql/language/lexer.rb#280
 GraphQL::Language::Lexer::UNICODE_ESCAPE = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#130
+# source://graphql//lib/graphql/language/lexer.rb#141
 GraphQL::Language::Lexer::UTF_8 = T.let(T.unsafe(nil), Regexp)
 
-# source://graphql//lib/graphql/language/lexer.rb#131
+# source://graphql//lib/graphql/language/lexer.rb#142
 GraphQL::Language::Lexer::VALID_STRING = T.let(T.unsafe(nil), Regexp)
 
 # source://graphql//lib/graphql/language/nodes.rb#4
