@@ -26,10 +26,9 @@ Restart=on-failure
 <%="StandardOutput=append:#{fetch(:puma_access_log)}" if fetch(:puma_access_log) %>
 <%="StandardError=append:#{fetch(:puma_error_log)}" if fetch(:puma_error_log) %>
 SyslogIdentifier=<%= fetch(:puma_service_unit_name) %>
-# Puma master + 3 workers start at ~260 MB each, capped at 500 MB per worker
-# Total limit = 3 workers x 500 MB + 30 MB master = 1,530 MB
-# Consistent with Sidekiq's 2x fresh-start ratio
-MemoryMax=1500M
+# Puma master + 3 workers start at ~260 MB each, capped at 550 MB per worker
+# Total limit = 3 workers x 550 MB + 30 MB master = 1,680 MB
+MemoryMax=1680M
 TimeoutStopSec=300
 [Install]
 WantedBy=<%=(fetch(:puma_systemctl_user) == :system) ? "multi-user.target" : "default.target"%>
