@@ -10,3 +10,4 @@ gem:
     - sprockets-rails
     - sprockets
     - sassc-rails
+    - capistrano-tagging3
