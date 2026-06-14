@@ -47,7 +47,6 @@ class Rails::Conductor::BaseController
     include ::CommentsHelper
     include ::SignupHelper
     include ::StaticHelper
-    include ::PreviewHelper
     include ::DeviseHelper
   end
 
