@@ -12,7 +12,7 @@ class ButtonComponent < ViewComponent::Base
   end
   def initialize(tag:, size:, type:, href: nil, icon: nil, open_in_new_tab: false, name: nil, disabled: false,
                  confirm: nil)
-    super
+    super()
 
     classes = %w[font-semibold]
 

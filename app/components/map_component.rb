@@ -6,7 +6,7 @@ class MapComponent < ViewComponent::Base
 
   sig { params(lat: Float, lng: Float, address: String, zoom: Integer).void }
   def initialize(lat:, lng:, address:, zoom:)
-    super
+    super()
     @lat = lat
     @lng = lng
     @address = address

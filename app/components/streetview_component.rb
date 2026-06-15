@@ -6,7 +6,7 @@ class StreetviewComponent < ViewComponent::Base
 
   sig { params(lat: Float, lng: Float, address: String).void }
   def initialize(lat:, lng:, address:)
-    super
+    super()
 
     @lat = lat
     @lng = lng

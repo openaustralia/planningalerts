@@ -6,7 +6,7 @@ class SpeechBubbleComponent < ViewComponent::Base
 
   sig { params(size: String, alignment: Symbol).void }
   def initialize(size:, alignment:)
-    super
+    super()
 
     # Doing it this way so that tailwind doesn't compile the classes out
     case size

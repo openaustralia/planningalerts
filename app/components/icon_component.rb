@@ -6,7 +6,7 @@ class IconComponent < ViewComponent::Base
 
   sig { params(name: Symbol).void }
   def initialize(name:)
-    super
+    super()
     @name = name
   end
 end
