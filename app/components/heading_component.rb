@@ -15,7 +15,7 @@ class HeadingComponent < ViewComponent::Base
   # TODO: Perhaps we should allow the size override to work by saying we want an h1 heading but with the styling of an h2?
   sig { params(tag: Symbol, size: T.nilable(String), color: T.nilable(String), font: T.nilable(String), weight: T.nilable(String), extra_classes: String).void }
   def initialize(tag:, size: nil, color: nil, font: nil, weight: nil, extra_classes: "")
-    super
+    super()
 
     default_size = DEFAULT_SIZES[tag]
     raise "Unexpected tag #{tag}" if default_size.nil?

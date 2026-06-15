@@ -47,7 +47,6 @@ class ApplicationController
     include ::CommentsHelper
     include ::SignupHelper
     include ::StaticHelper
-    include ::PreviewHelper
     include ::DeviseHelper
     include ::Pundit::Helper
 

@@ -125,9 +125,9 @@ docker compose run web bin/srb
 
 To update the rbi files, use these commands:
 ```sh
-bin/tapioca gem
-bin/tapioca dsl
-bin/tapioca dsl --environment=test
+docker compose run web bin/tapioca gem
+docker compose run web bin/tapioca dsl
+docker compose run web bin/tapioca dsl --environment=test
 ```
 
 We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all our rbi files. We **don't** use `bundle exec srb rbi ...`.

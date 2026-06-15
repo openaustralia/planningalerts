@@ -44,7 +44,6 @@ class DeviseController
     include ::CommentsHelper
     include ::SignupHelper
     include ::StaticHelper
-    include ::PreviewHelper
     include ::DeviseHelper
     include ::Pundit::Helper
     include ::ApplicationController::HelperMethods

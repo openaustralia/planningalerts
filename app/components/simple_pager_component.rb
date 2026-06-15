@@ -7,7 +7,7 @@ class SimplePagerComponent < ViewComponent::Base
 
   sig { params(collection: T.untyped).void }
   def initialize(collection:)
-    super
+    super()
     @collection = collection
   end
 
@@ -17,7 +17,7 @@ class SimplePagerComponent < ViewComponent::Base
 
     sig { params(collection: T.untyped).void }
     def initialize(collection:)
-      super
+      super()
       @collection = collection
     end
   end
@@ -28,7 +28,7 @@ class SimplePagerComponent < ViewComponent::Base
 
     sig { params(collection: T.untyped).void }
     def initialize(collection:)
-      super
+      super()
       @collection = collection
     end
   end

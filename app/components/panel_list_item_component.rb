@@ -11,7 +11,7 @@ class PanelListItemComponent < ViewComponent::Base
 
   sig { params(url: String).void }
   def initialize(url:)
-    super
+    super()
     @link_block = T.let(LinkBlockComponent.new(url:), LinkBlockComponent)
   end
 end

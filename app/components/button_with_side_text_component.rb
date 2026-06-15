@@ -8,7 +8,7 @@ class ButtonWithSideTextComponent < ViewComponent::Base
   # options are just passed through to ButtonComponent
   sig { params(options: T.untyped).void }
   def initialize(**options)
-    super
+    super()
     @button = T.let(ButtonComponent.new(**T.unsafe(options)), ButtonComponent)
   end
 end

@@ -47,7 +47,6 @@ class ViewComponentsSystemTestController
     include ::CommentsHelper
     include ::SignupHelper
     include ::StaticHelper
-    include ::PreviewHelper
     include ::DeviseHelper
   end
 

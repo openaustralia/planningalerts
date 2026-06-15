@@ -1,5 +1,5 @@
-<% if path_to_prev_page(@collection) %>
+<% if helpers.path_to_prev_page(@collection) %>
   <div class="text-xl">
-    <%= pa_link_to "&lsaquo; Previous page".html_safe, path_to_prev_page(@collection) %>
+    <%= pa_link_to "&lsaquo; Previous page".html_safe, helpers.path_to_prev_page(@collection) %>
   </div>
 <% end %>

@@ -6,7 +6,7 @@ class ShareButtonComponent < ViewComponent::Base
 
   sig { params(url: String, title: String, color: Symbol).void }
   def initialize(url:, title:, color:)
-    super
+    super()
     @url = url
     @title = title
     case color

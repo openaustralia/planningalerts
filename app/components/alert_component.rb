@@ -6,7 +6,7 @@ class AlertComponent < ViewComponent::Base
 
   sig { params(type: T.anything).void }
   def initialize(type:)
-    super
+    super()
 
     case type
     when :success
