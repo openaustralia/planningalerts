@@ -6,7 +6,7 @@ class NavItemComponent < ViewComponent::Base
 
   sig { params(href: String, selected: T::Boolean).void }
   def initialize(href:, selected: false)
-    super
+    super()
     @href = href
     @selected = selected
   end

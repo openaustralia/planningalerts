@@ -9,7 +9,7 @@ class CentreBlockWithImageComponent < ViewComponent::Base
 
   sig { params(extra_classes: String).void }
   def initialize(extra_classes: "")
-    super
+    super()
 
     @extra_classes = extra_classes
   end

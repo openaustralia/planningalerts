@@ -6,7 +6,7 @@ class LinkBlockComponent < ViewComponent::Base
 
   sig { params(url: String).void }
   def initialize(url:)
-    super
+    super()
     @url = url
   end
 

@@ -8,7 +8,7 @@ class BulletListComponent < ViewComponent::Base
 
   sig { params(space: T.nilable(Integer)).void }
   def initialize(space: nil)
-    super
+    super()
 
     space_css = if space == 6
                   "space-y-6"

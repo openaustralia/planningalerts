@@ -7,7 +7,7 @@ class SelectLinksComponent < ViewComponent::Base
 
   sig { params(label: String, id: String, container: T::Array[T::Array[String]], value: String).void }
   def initialize(label:, id:, container:, value:)
-    super
+    super()
     @label = label
     @id = id
     @container = container
