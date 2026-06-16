@@ -87,8 +87,12 @@ Rails.application.configure do
   # Set to :debug to see everything in the log
   config.log_level = :warn
 
-  # Use a different cache store in production.
-  config.cache_store = [:mem_cache_store] + YAML.load_file("config/memcache.yml")["servers"]
+  # Use memcached for cache store in production, whilst still allowing credentials:edit of production on a dev system
+  config.cache_store = [:mem_cache_store] + if File.size?("config/memcache.yml")
+                                              YAML.load_file("config/memcache.yml")["servers"]
+                                            else
+                                              ['127.0.0.1']
+                                            end
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
