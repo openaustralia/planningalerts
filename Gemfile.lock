@@ -167,6 +167,9 @@ GEM
     brakeman (6.1.2)
       racc
     builder (3.3.0)
+    bundler-audit (0.9.3)
+      bundler (>= 1.2.0)
+      thor (~> 1.0)
     capistrano (3.19.1)
       airbrussh (>= 1.0.0)
       i18n
@@ -641,6 +644,8 @@ GEM
       rubocop (>= 1)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
+    ruby_audit (3.1.0)
+      bundler-audit (~> 0.9.0)
     rubystats (0.4.1)
       matrix
     rubyzip (2.3.2)
@@ -830,6 +835,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   brakeman
+  bundler-audit
   capistrano
   capistrano-aws
   capistrano-bundler
@@ -902,6 +908,7 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-rspec_rails
   rubocop-sorbet
+  ruby_audit
   rubyzip
   sanitize
   searchkick

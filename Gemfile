@@ -236,6 +236,10 @@ group :development do
 
   # To help identify database issues
   gem "active_record_doctor"
+
+  # Local audit of Gemfile and ruby version
+  gem 'bundler-audit', require: false
+  gem 'ruby_audit', require: false
 end
 
 group :production do

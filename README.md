@@ -280,6 +280,15 @@ Useful rake tasks:
 
 Or you can run them locally, eg `bundle exec rake db:stats`
 
+## Security
+
+As well as GitHub's [Dependabot](https://dependabot.com/) you can use the following commmands locally to check for security vulnerabilities:
+```shell
+bundle exec bundle-audit
+bundle exec brakeman
+bundle exec ruby_audit
+```
+
 ## Contributing
 
 * Fork the project on GitHub.
