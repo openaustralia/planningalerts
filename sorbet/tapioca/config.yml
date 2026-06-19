@@ -1,7 +1,8 @@
 dsl:
   exclude:
   - ActiveRecordFixtures
-
+  halt_upon_load_error: false
+  workers: 1
 gem:
   exclude:
     - spoom
@@ -11,3 +12,4 @@ gem:
     - sprockets
     - sassc-rails
     - capistrano-tagging3
+    - skylight

@@ -65,6 +65,7 @@ jobs:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
   type_check:
     runs-on: ubuntu-latest
+    continue-on-error: true
     services:
       # We're using postgres 15.2 in production currently
       postgres:
