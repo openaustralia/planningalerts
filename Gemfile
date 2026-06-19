@@ -196,7 +196,8 @@ group :development do
   # For static type checking
   gem "sorbet"
   gem "spoom"
-  gem "tapioca"
+  # TODO: Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
+  gem "tapioca", "~> 0.15.1"
 
   # For guard and associated bits
   gem "growl"

@@ -447,7 +447,7 @@ GEM
     paper_trail (15.2.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
-    parallel (1.25.1)
+    parallel (1.28.0)
     parser (3.3.4.0)
       ast (~> 2.4.1)
       racc
@@ -691,15 +691,15 @@ GEM
       activesupport (>= 5.2.0)
     slack-notifier (2.4.0)
     smart_properties (1.17.0)
-    sorbet (0.5.11504)
-      sorbet-static (= 0.5.11504)
-    sorbet-runtime (0.5.11504)
-    sorbet-static (0.5.11504-aarch64-linux)
-    sorbet-static (0.5.11504-universal-darwin)
-    sorbet-static (0.5.11504-x86_64-linux)
-    sorbet-static-and-runtime (0.5.11504)
-      sorbet (= 0.5.11504)
-      sorbet-runtime (= 0.5.11504)
+    sorbet (0.6.13308)
+      sorbet-static (= 0.6.13308)
+    sorbet-runtime (0.6.13308)
+    sorbet-static (0.6.13308-aarch64-linux)
+    sorbet-static (0.6.13308-universal-darwin)
+    sorbet-static (0.6.13308-x86_64-linux)
+    sorbet-static-and-runtime (0.6.13308)
+      sorbet (= 0.6.13308)
+      sorbet-runtime (= 0.6.13308)
     sparql-client (3.3.0)
       net-http-persistent (~> 4.0, >= 4.0.2)
       rdf (~> 3.3)
@@ -708,7 +708,7 @@ GEM
       redis (>= 4.2)
       rubystats (>= 0.3.0)
       sinatra (>= 1.2.6)
-    spoom (1.4.2)
+    spoom (1.5.1)
       erubi (>= 1.10.0)
       prism (>= 0.28.0)
       sorbet-static-and-runtime (>= 0.5.10187)
@@ -745,7 +745,7 @@ GEM
       unicode-display_width (>= 1.1.1, < 3)
     terser (1.2.3)
       execjs (>= 0.3.0, < 3)
-    thor (1.4.0)
+    thor (1.5.0)
     thread_safe (0.3.6)
     tilt (2.6.1)
     timecop (0.9.10)
@@ -797,11 +797,11 @@ GEM
       thor
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    yard (0.9.36)
+    yard (0.9.44)
     yard-sorbet (0.9.0)
       sorbet-runtime
       yard
-    zeitwerk (2.6.17)
+    zeitwerk (2.8.2)
 
 PLATFORMS
   aarch64-linux
@@ -911,7 +911,7 @@ DEPENDENCIES
   spoom
   sprockets
   tailwindcss-rails (~> 2.0)
-  tapioca
+  tapioca (~> 0.15.1)
   terser
   timecop
   uglifier
