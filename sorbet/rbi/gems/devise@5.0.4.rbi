@@ -5,41 +5,38 @@
 # Please instead update this file by running `bin/tapioca gem devise`.
 
 
-# source://devise//lib/devise/rails/routes.rb#28
+class ActionController::API < ::ActionController::Metal
+  include ::ActionDispatch::Routing::PolymorphicRoutes
+  include ::ActionController::Head
+  include ::ActiveSupport::Deprecation::DeprecatedConstantAccessor
+  include ::Devise::Controllers::SignInOut
+  include ::Devise::Controllers::StoreLocation
+  include ::Devise::Controllers::Helpers
+  include ::Devise::Controllers::UrlHelpers
+  extend ::AbstractController::Helpers::Resolution
+  extend ::Devise::Controllers::Helpers::ClassMethods
+end
+
+class ActionController::Base < ::ActionController::Metal
+  include ::ActiveSupport::Deprecation::DeprecatedConstantAccessor
+  include ::ActionDispatch::Routing::PolymorphicRoutes
+  include ::ActionController::Head
+  include ::AbstractController::Caching::ConfigMethods
+  include ::ActionController::BasicImplicitRender
+  include ::Devise::Controllers::SignInOut
+  include ::Devise::Controllers::StoreLocation
+  include ::Devise::Controllers::Helpers
+  include ::Devise::Controllers::UrlHelpers
+  extend ::AbstractController::Helpers::Resolution
+  extend ::Devise::Controllers::Helpers::ClassMethods
+end
+
+# pkg:gem/devise#lib/devise/rails/routes.rb:28
 module ActionDispatch::Routing; end
 
-# source://devise//lib/devise/rails/routes.rb#35
+# pkg:gem/devise#lib/devise/rails/routes.rb:35
 class ActionDispatch::Routing::Mapper
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#2313
-  def initialize(set); end
-
-  # source://health_check/3.1.0/lib/health_check/health_check_routes.rb#9
-  def add_health_check_routes(prefix = T.unsafe(nil)); end
-
-  # Sets the devise scope to be used in the controller. If you have custom routes,
-  # you are required to call this method (also aliased as :as) in order to specify
-  # to which controller it is targeted.
-  #
-  #   as :user do
-  #     get "sign_in", to: "devise/sessions#new"
-  #   end
-  #
-  # Notice you cannot have two scopes mapping to the same URL. And remember, if
-  # you try to access a devise controller without specifying a scope, it will
-  # raise ActionNotFound error.
-  #
-  # Also be aware of that 'devise_scope' and 'as' use the singular form of the
-  # noun where other devise route commands expect the plural form. This would be a
-  # good and working example.
-  #
-  #  devise_scope :user do
-  #    get "/some/route" => "some_devise_controller"
-  #  end
-  #  devise_for :users
-  #
-  # Notice and be aware of the differences above between :user and :users
-  #
-  # source://devise//lib/devise/rails/routes.rb#363
+  # pkg:gem/devise#lib/devise/rails/routes.rb:372
   def as(scope); end
 
   # Allow you to add authentication request from the router.
@@ -58,7 +55,7 @@ class ActionDispatch::Routing::Mapper
   #     root to: "admin/dashboard#show", as: :user_root
   #   end
   #
-  # source://devise//lib/devise/rails/routes.rb#290
+  # pkg:gem/devise#lib/devise/rails/routes.rb:289
   def authenticate(scope = T.unsafe(nil), block = T.unsafe(nil)); end
 
   # Allow you to route based on whether a scope is authenticated. You
@@ -79,7 +76,7 @@ class ActionDispatch::Routing::Mapper
   #
   #   root to: 'landing#show'
   #
-  # source://devise//lib/devise/rails/routes.rb#314
+  # pkg:gem/devise#lib/devise/rails/routes.rb:313
   def authenticated(scope = T.unsafe(nil), block = T.unsafe(nil)); end
 
   # Includes devise_for method for routes. This method is responsible to
@@ -272,7 +269,7 @@ class ActionDispatch::Routing::Mapper
   #       post "deactivate", to: "registrations#deactivate", as: "deactivate_registration"
   #     end
   #
-  # source://devise//lib/devise/rails/routes.rb#226
+  # pkg:gem/devise#lib/devise/rails/routes.rb:226
   def devise_for(*resources); end
 
   # Sets the devise scope to be used in the controller. If you have custom routes,
@@ -298,11 +295,8 @@ class ActionDispatch::Routing::Mapper
   #
   # Notice and be aware of the differences above between :user and :users
   #
-  # source://devise//lib/devise/rails/routes.rb#363
+  # pkg:gem/devise#lib/devise/rails/routes.rb:362
   def devise_scope(scope); end
-
-  # source://health_check/3.1.0/lib/health_check/health_check_routes.rb#4
-  def health_check_routes(prefix = T.unsafe(nil)); end
 
   # Allow you to route based on whether a scope is *not* authenticated.
   # You can optionally specify which scope.
@@ -315,570 +309,374 @@ class ActionDispatch::Routing::Mapper
   #
   #   root to: 'dashboard#show'
   #
-  # source://devise//lib/devise/rails/routes.rb#331
+  # pkg:gem/devise#lib/devise/rails/routes.rb:330
   def unauthenticated(scope = T.unsafe(nil)); end
 
   protected
 
-  # source://devise//lib/devise/rails/routes.rb#477
+  # pkg:gem/devise#lib/devise/rails/routes.rb:476
   def constraints_for(method_to_apply, scope = T.unsafe(nil), block = T.unsafe(nil)); end
 
-  # source://devise//lib/devise/rails/routes.rb#390
+  # pkg:gem/devise#lib/devise/rails/routes.rb:389
   def devise_confirmation(mapping, controllers); end
 
-  # source://devise//lib/devise/rails/routes.rb#421
+  # pkg:gem/devise#lib/devise/rails/routes.rb:420
   def devise_omniauth_callback(mapping, controllers); end
 
-  # source://devise//lib/devise/rails/routes.rb#385
+  # pkg:gem/devise#lib/devise/rails/routes.rb:384
   def devise_password(mapping, controllers); end
 
-  # source://devise//lib/devise/rails/routes.rb#402
+  # pkg:gem/devise#lib/devise/rails/routes.rb:401
   def devise_registration(mapping, controllers); end
 
-  # source://devise//lib/devise/rails/routes.rb#377
+  # pkg:gem/devise#lib/devise/rails/routes.rb:376
   def devise_session(mapping, controllers); end
 
-  # source://devise//lib/devise/rails/routes.rb#395
+  # pkg:gem/devise#lib/devise/rails/routes.rb:394
   def devise_unlock(mapping, controllers); end
 
-  # source://devise//lib/devise/rails/routes.rb#509
+  # pkg:gem/devise#lib/devise/rails/routes.rb:508
   def raise_no_devise_method_error!(klass); end
 
-  # source://devise//lib/devise/rails/routes.rb#499
+  # pkg:gem/devise#lib/devise/rails/routes.rb:498
   def raise_no_secret_key; end
 
-  # source://devise//lib/devise/rails/routes.rb#488
+  # pkg:gem/devise#lib/devise/rails/routes.rb:487
   def set_omniauth_path_prefix!(path_prefix); end
 
-  # source://devise//lib/devise/rails/routes.rb#461
+  # pkg:gem/devise#lib/devise/rails/routes.rb:460
   def with_devise_exclusive_scope(new_path, new_as, options); end
-
-  class << self
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#16
-    def backtrace_cleaner; end
-
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#16
-    def backtrace_cleaner=(val); end
-
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#392
-    def normalize_name(name); end
-
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#375
-    def normalize_path(path); end
-
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#15
-    def route_source_locations; end
-
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/mapper.rb#15
-    def route_source_locations=(val); end
-  end
 end
 
-# source://devise//lib/devise/rails/routes.rb#29
+# pkg:gem/devise#lib/devise/rails/routes.rb:29
 class ActionDispatch::Routing::RouteSet
   include ::Devise::RouteSet
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#366
-  def initialize(config = T.unsafe(nil)); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#649
-  def add_polymorphic_mapping(klass, options, &block); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#618
-  def add_route(mapping, name); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#653
-  def add_url_helper(name, options, &block); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#396
-  def api_only?; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#435
-  def append(&block); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#879
-  def call(env); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#459
-  def clear!; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#409
-  def default_env; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def default_scope; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def default_scope=(_arg0); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#338
-  def default_url_options; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#338
-  def default_url_options=(_arg0); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#481
-  def define_mounted_helper(name, script_namer = T.unsafe(nil)); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#337
-  def disable_clear_and_finalize; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#337
-  def disable_clear_and_finalize=(_arg0); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#428
-  def draw(&block); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#338
-  def draw_paths; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#338
-  def draw_paths=(_arg0); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#386
-  def eager_load!; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#614
-  def empty?; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#339
-  def env_key; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#794
-  def extra_keys(options, recall = T.unsafe(nil)); end
-
-  # source://devise//lib/devise/rails/routes.rb#8
-  def finalize!; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#822
-  def find_script_name(options); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def formatter; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def formatter=(_arg0); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#798
-  def generate_extras(options, recall = T.unsafe(nil)); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#508
-  def generate_url_helpers(supports_path); end
-
-  def inspect; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#477
-  def mounted_helpers; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def named_routes; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def named_routes=(_arg0); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#818
-  def optimize_routes_generation?; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#826
-  def path_for(options, route_name = T.unsafe(nil), reserved = T.unsafe(nil)); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#339
-  def polymorphic_mappings; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#439
-  def prepend(&block); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#885
-  def recognize_path(path, environment = T.unsafe(nil)); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#900
-  def recognize_path_with_request(req, path, extras, raise_on_missing: T.unsafe(nil)); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#392
-  def relative_url_root; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#400
-  def request_class; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#337
-  def resources_path_names; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#337
-  def resources_path_names=(_arg0); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def router; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def router=(_arg0); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def routes; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def set; end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#336
-  def set=(_arg0); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#831
-  def url_for(options, route_name = T.unsafe(nil), url_strategy = T.unsafe(nil), method_name = T.unsafe(nil), reserved = T.unsafe(nil)); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#500
-  def url_helpers(supports_path = T.unsafe(nil)); end
-
-  private
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#443
-  def eval_block(block); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#809
-  def generate(route_name, options, recall = T.unsafe(nil), method_name = T.unsafe(nil)); end
-
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#404
-  def make_request(env); end
-
-  class << self
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#343
-    def default_resources_path_names; end
-
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#347
-    def new_with_config(config); end
-  end
 end
 
-# source://devise//lib/devise.rb#11
+# pkg:gem/devise#lib/devise.rb:11
 module Devise
-  # source://devise//lib/devise.rb#138
+  # pkg:gem/devise#lib/devise.rb:136
   def allow_unconfirmed_access_for; end
 
-  # source://devise//lib/devise.rb#138
+  # pkg:gem/devise#lib/devise.rb:136
   def allow_unconfirmed_access_for=(val); end
 
-  # source://devise//lib/devise.rb#83
+  # pkg:gem/devise#lib/devise.rb:81
   def authentication_keys; end
 
-  # source://devise//lib/devise.rb#83
+  # pkg:gem/devise#lib/devise.rb:81
   def authentication_keys=(val); end
 
-  # source://devise//lib/devise.rb#91
+  # pkg:gem/devise#lib/devise.rb:89
   def case_insensitive_keys; end
 
-  # source://devise//lib/devise.rb#91
+  # pkg:gem/devise#lib/devise.rb:89
   def case_insensitive_keys=(val); end
 
-  # source://devise//lib/devise.rb#265
+  # pkg:gem/devise#lib/devise.rb:263
   def clean_up_csrf_token_on_authentication; end
 
-  # source://devise//lib/devise.rb#265
+  # pkg:gem/devise#lib/devise.rb:263
   def clean_up_csrf_token_on_authentication=(val); end
 
-  # source://devise//lib/devise.rb#142
+  # pkg:gem/devise#lib/devise.rb:140
   def confirm_within; end
 
-  # source://devise//lib/devise.rb#142
+  # pkg:gem/devise#lib/devise.rb:140
   def confirm_within=(val); end
 
-  # source://devise//lib/devise.rb#146
+  # pkg:gem/devise#lib/devise.rb:144
   def confirmation_keys; end
 
-  # source://devise//lib/devise.rb#146
+  # pkg:gem/devise#lib/devise.rb:144
   def confirmation_keys=(val); end
 
-  # source://devise//lib/devise.rb#209
+  # pkg:gem/devise#lib/devise.rb:207
   def default_scope; end
 
-  # source://devise//lib/devise.rb#209
+  # pkg:gem/devise#lib/devise.rb:207
   def default_scope=(val); end
 
-  # source://devise//lib/devise.rb#117
+  # pkg:gem/devise#lib/devise.rb:115
   def email_regexp; end
 
-  # source://devise//lib/devise.rb#117
+  # pkg:gem/devise#lib/devise.rb:115
   def email_regexp=(val); end
 
-  # source://devise//lib/devise.rb#133
+  # pkg:gem/devise#lib/devise.rb:131
   def expire_all_remember_me_on_sign_out; end
 
-  # source://devise//lib/devise.rb#133
+  # pkg:gem/devise#lib/devise.rb:131
   def expire_all_remember_me_on_sign_out=(val); end
 
-  # source://devise//lib/devise.rb#129
+  # pkg:gem/devise#lib/devise.rb:127
   def extend_remember_period; end
 
-  # source://devise//lib/devise.rb#129
+  # pkg:gem/devise#lib/devise.rb:127
   def extend_remember_period=(val); end
 
-  # source://devise//lib/devise.rb#286
+  # pkg:gem/devise#lib/devise.rb:290
   def helpers; end
 
-  # source://devise//lib/devise.rb#99
+  # pkg:gem/devise#lib/devise.rb:97
   def http_authenticatable; end
 
-  # source://devise//lib/devise.rb#99
+  # pkg:gem/devise#lib/devise.rb:97
   def http_authenticatable=(val); end
 
-  # source://devise//lib/devise.rb#103
+  # pkg:gem/devise#lib/devise.rb:101
   def http_authenticatable_on_xhr; end
 
-  # source://devise//lib/devise.rb#103
+  # pkg:gem/devise#lib/devise.rb:101
   def http_authenticatable_on_xhr=(val); end
 
-  # source://devise//lib/devise.rb#79
+  # pkg:gem/devise#lib/devise.rb:77
   def http_authentication_key; end
 
-  # source://devise//lib/devise.rb#79
+  # pkg:gem/devise#lib/devise.rb:77
   def http_authentication_key=(val); end
 
-  # source://devise//lib/devise.rb#111
+  # pkg:gem/devise#lib/devise.rb:109
   def http_authentication_realm; end
 
-  # source://devise//lib/devise.rb#111
+  # pkg:gem/devise#lib/devise.rb:109
   def http_authentication_realm=(val); end
 
-  # source://devise//lib/devise.rb#300
+  # pkg:gem/devise#lib/devise.rb:304
   def last_attempt_warning; end
 
-  # source://devise//lib/devise.rb#300
+  # pkg:gem/devise#lib/devise.rb:304
   def last_attempt_warning=(val); end
 
-  # source://devise//lib/devise.rb#176
+  # pkg:gem/devise#lib/devise.rb:174
   def lock_strategy; end
 
-  # source://devise//lib/devise.rb#176
+  # pkg:gem/devise#lib/devise.rb:174
   def lock_strategy=(val); end
 
-  # source://devise//lib/devise.rb#213
+  # pkg:gem/devise#lib/devise.rb:211
   def mailer_sender; end
 
-  # source://devise//lib/devise.rb#213
+  # pkg:gem/devise#lib/devise.rb:211
   def mailer_sender=(val); end
 
-  # source://devise//lib/devise.rb#278
-  def mappings; end
-
-  # source://devise//lib/devise.rb#189
+  # pkg:gem/devise#lib/devise.rb:187
   def maximum_attempts; end
 
-  # source://devise//lib/devise.rb#189
+  # pkg:gem/devise#lib/devise.rb:187
   def maximum_attempts=(val); end
 
-  # source://devise//lib/devise.rb#221
+  # pkg:gem/devise#lib/devise.rb:219
   def navigational_formats; end
 
-  # source://devise//lib/devise.rb#221
+  # pkg:gem/devise#lib/devise.rb:219
   def navigational_formats=(val); end
 
-  # source://devise//lib/devise.rb#282
+  # pkg:gem/devise#lib/devise.rb:286
   def omniauth_configs; end
 
-  # source://devise//lib/devise.rb#261
+  # pkg:gem/devise#lib/devise.rb:259
   def omniauth_path_prefix; end
 
-  # source://devise//lib/devise.rb#261
+  # pkg:gem/devise#lib/devise.rb:259
   def omniauth_path_prefix=(val); end
 
-  # source://devise//lib/devise.rb#107
+  # pkg:gem/devise#lib/devise.rb:105
   def params_authenticatable; end
 
-  # source://devise//lib/devise.rb#107
+  # pkg:gem/devise#lib/devise.rb:105
   def params_authenticatable=(val); end
 
-  # source://devise//lib/devise.rb#296
+  # pkg:gem/devise#lib/devise.rb:300
   def paranoid; end
 
-  # source://devise//lib/devise.rb#296
+  # pkg:gem/devise#lib/devise.rb:300
   def paranoid=(val); end
 
-  # source://devise//lib/devise.rb#244
+  # pkg:gem/devise#lib/devise.rb:242
   def parent_controller; end
 
-  # source://devise//lib/devise.rb#244
+  # pkg:gem/devise#lib/devise.rb:242
   def parent_controller=(val); end
 
-  # source://devise//lib/devise.rb#250
+  # pkg:gem/devise#lib/devise.rb:248
   def parent_mailer; end
 
-  # source://devise//lib/devise.rb#250
+  # pkg:gem/devise#lib/devise.rb:248
   def parent_mailer=(val); end
 
-  # source://devise//lib/devise.rb#121
+  # pkg:gem/devise#lib/devise.rb:119
   def password_length; end
 
-  # source://devise//lib/devise.rb#121
+  # pkg:gem/devise#lib/devise.rb:119
   def password_length=(val); end
 
-  # source://devise//lib/devise.rb#158
+  # pkg:gem/devise#lib/devise.rb:156
   def pepper; end
 
-  # source://devise//lib/devise.rb#158
+  # pkg:gem/devise#lib/devise.rb:156
   def pepper=(val); end
 
-  # source://devise//lib/devise.rb#150
+  # pkg:gem/devise#lib/devise.rb:148
   def reconfirmable; end
 
-  # source://devise//lib/devise.rb#150
+  # pkg:gem/devise#lib/devise.rb:148
   def reconfirmable=(val); end
 
-  # source://devise//lib/devise.rb#272
+  # pkg:gem/devise#lib/devise.rb:270
   def reload_routes; end
 
-  # source://devise//lib/devise.rb#272
+  # pkg:gem/devise#lib/devise.rb:270
   def reload_routes=(val); end
 
-  # source://devise//lib/devise.rb#125
+  # pkg:gem/devise#lib/devise.rb:123
   def remember_for; end
 
-  # source://devise//lib/devise.rb#125
+  # pkg:gem/devise#lib/devise.rb:123
   def remember_for=(val); end
 
-  # source://devise//lib/devise.rb#71
+  # pkg:gem/devise#lib/devise.rb:69
   def rememberable_options; end
 
-  # source://devise//lib/devise.rb#71
+  # pkg:gem/devise#lib/devise.rb:69
   def rememberable_options=(val); end
 
-  # source://devise//lib/devise.rb#87
+  # pkg:gem/devise#lib/devise.rb:85
   def request_keys; end
 
-  # source://devise//lib/devise.rb#87
+  # pkg:gem/devise#lib/devise.rb:85
   def request_keys=(val); end
 
-  # source://devise//lib/devise.rb#197
+  # pkg:gem/devise#lib/devise.rb:195
   def reset_password_keys; end
 
-  # source://devise//lib/devise.rb#197
+  # pkg:gem/devise#lib/devise.rb:195
   def reset_password_keys=(val); end
 
-  # source://devise//lib/devise.rb#201
+  # pkg:gem/devise#lib/devise.rb:199
   def reset_password_within; end
 
-  # source://devise//lib/devise.rb#201
+  # pkg:gem/devise#lib/devise.rb:199
   def reset_password_within=(val); end
 
-  # source://devise//lib/devise.rb#230
+  # pkg:gem/devise#lib/devise.rb:228
   def responder; end
 
-  # source://devise//lib/devise.rb#230
+  # pkg:gem/devise#lib/devise.rb:228
   def responder=(val); end
 
-  # source://devise//lib/devise.rb#256
+  # pkg:gem/devise#lib/devise.rb:254
   def router_name; end
 
-  # source://devise//lib/devise.rb#256
+  # pkg:gem/devise#lib/devise.rb:254
   def router_name=(val); end
 
-  # source://devise//lib/devise.rb#171
+  # pkg:gem/devise#lib/devise.rb:169
   def scoped_views; end
 
-  # source://devise//lib/devise.rb#171
+  # pkg:gem/devise#lib/devise.rb:169
   def scoped_views=(val); end
 
-  # source://devise//lib/devise.rb#67
+  # pkg:gem/devise#lib/devise.rb:65
   def secret_key; end
 
-  # source://devise//lib/devise.rb#67
+  # pkg:gem/devise#lib/devise.rb:65
   def secret_key=(val); end
 
-  # source://devise//lib/devise.rb#162
+  # pkg:gem/devise#lib/devise.rb:160
   def send_email_changed_notification; end
 
-  # source://devise//lib/devise.rb#162
+  # pkg:gem/devise#lib/devise.rb:160
   def send_email_changed_notification=(val); end
 
-  # source://devise//lib/devise.rb#166
+  # pkg:gem/devise#lib/devise.rb:164
   def send_password_change_notification; end
 
-  # source://devise//lib/devise.rb#166
+  # pkg:gem/devise#lib/devise.rb:164
   def send_password_change_notification=(val); end
 
-  # source://devise//lib/devise.rb#308
+  # pkg:gem/devise#lib/devise.rb:312
   def sign_in_after_change_password; end
 
-  # source://devise//lib/devise.rb#308
+  # pkg:gem/devise#lib/devise.rb:312
   def sign_in_after_change_password=(val); end
 
-  # source://devise//lib/devise.rb#205
+  # pkg:gem/devise#lib/devise.rb:203
   def sign_in_after_reset_password; end
 
-  # source://devise//lib/devise.rb#205
+  # pkg:gem/devise#lib/devise.rb:203
   def sign_in_after_reset_password=(val); end
 
-  # source://devise//lib/devise.rb#234
+  # pkg:gem/devise#lib/devise.rb:232
   def sign_out_all_scopes; end
 
-  # source://devise//lib/devise.rb#234
+  # pkg:gem/devise#lib/devise.rb:232
   def sign_out_all_scopes=(val); end
 
-  # source://devise//lib/devise.rb#238
+  # pkg:gem/devise#lib/devise.rb:236
   def sign_out_via; end
 
-  # source://devise//lib/devise.rb#238
+  # pkg:gem/devise#lib/devise.rb:236
   def sign_out_via=(val); end
 
-  # source://devise//lib/devise.rb#217
+  # pkg:gem/devise#lib/devise.rb:215
   def skip_session_storage; end
 
-  # source://devise//lib/devise.rb#217
+  # pkg:gem/devise#lib/devise.rb:215
   def skip_session_storage=(val); end
 
-  # source://devise//lib/devise.rb#75
+  # pkg:gem/devise#lib/devise.rb:73
   def stretches; end
 
-  # source://devise//lib/devise.rb#75
+  # pkg:gem/devise#lib/devise.rb:73
   def stretches=(val); end
 
-  # source://devise//lib/devise.rb#95
+  # pkg:gem/devise#lib/devise.rb:93
   def strip_whitespace_keys; end
 
-  # source://devise//lib/devise.rb#95
+  # pkg:gem/devise#lib/devise.rb:93
   def strip_whitespace_keys=(val); end
 
-  # source://devise//lib/devise.rb#154
+  # pkg:gem/devise#lib/devise.rb:152
   def timeout_in; end
 
-  # source://devise//lib/devise.rb#154
+  # pkg:gem/devise#lib/devise.rb:152
   def timeout_in=(val); end
 
-  # source://devise//lib/devise.rb#304
+  # pkg:gem/devise#lib/devise.rb:308
   def token_generator; end
 
-  # source://devise//lib/devise.rb#304
+  # pkg:gem/devise#lib/devise.rb:308
   def token_generator=(val); end
 
-  # source://devise//lib/devise.rb#193
+  # pkg:gem/devise#lib/devise.rb:191
   def unlock_in; end
 
-  # source://devise//lib/devise.rb#193
+  # pkg:gem/devise#lib/devise.rb:191
   def unlock_in=(val); end
 
-  # source://devise//lib/devise.rb#180
+  # pkg:gem/devise#lib/devise.rb:178
   def unlock_keys; end
 
-  # source://devise//lib/devise.rb#180
+  # pkg:gem/devise#lib/devise.rb:178
   def unlock_keys=(val); end
 
-  # source://devise//lib/devise.rb#185
+  # pkg:gem/devise#lib/devise.rb:183
   def unlock_strategy; end
 
-  # source://devise//lib/devise.rb#185
+  # pkg:gem/devise#lib/devise.rb:183
   def unlock_strategy=(val); end
 
-  # source://devise//lib/devise.rb#291
+  # pkg:gem/devise#lib/devise.rb:295
   def warden_config; end
 
-  # source://devise//lib/devise.rb#291
+  # pkg:gem/devise#lib/devise.rb:295
   def warden_config=(val); end
 
   class << self
-    # @return [Boolean]
-    #
-    # source://devise//lib/devise.rb#528
-    def activerecord51?; end
-
     # Small method that adds a mapping to Devise.
     #
-    # source://devise//lib/devise.rb#360
+    # pkg:gem/devise#lib/devise.rb:364
     def add_mapping(resource, options); end
 
     # Register available devise modules. For the standard modules that Devise provides, this method is
@@ -906,387 +704,384 @@ module Devise
     #   Devise.add_module(:party_module, model: 'party_module/model')
     #   Devise.add_module(:party_module, insert_at: 0)
     #
-    # source://devise//lib/devise.rb#393
+    # pkg:gem/devise#lib/devise.rb:397
     def add_module(module_name, options = T.unsafe(nil)); end
 
-    # source://devise//lib/devise.rb#138
+    # pkg:gem/devise#lib/devise.rb:136
     def allow_unconfirmed_access_for; end
 
-    # source://devise//lib/devise.rb#138
+    # pkg:gem/devise#lib/devise.rb:136
     def allow_unconfirmed_access_for=(val); end
 
-    # source://devise//lib/devise.rb#83
+    # pkg:gem/devise#lib/devise.rb:81
     def authentication_keys; end
 
-    # source://devise//lib/devise.rb#83
+    # pkg:gem/devise#lib/devise.rb:81
     def authentication_keys=(val); end
 
-    # source://devise//lib/devise.rb#340
+    # pkg:gem/devise#lib/devise.rb:344
     def available_router_name; end
 
-    # source://devise//lib/devise.rb#91
+    # pkg:gem/devise#lib/devise.rb:89
     def case_insensitive_keys; end
 
-    # source://devise//lib/devise.rb#91
+    # pkg:gem/devise#lib/devise.rb:89
     def case_insensitive_keys=(val); end
 
-    # source://devise//lib/devise.rb#265
+    # pkg:gem/devise#lib/devise.rb:263
     def clean_up_csrf_token_on_authentication; end
 
-    # source://devise//lib/devise.rb#265
+    # pkg:gem/devise#lib/devise.rb:263
     def clean_up_csrf_token_on_authentication=(val); end
 
     # A method used internally to complete the setup of warden manager after routes are loaded.
     # See lib/devise/rails/routes.rb - ActionDispatch::Routing::RouteSet#finalize_with_devise!
     #
-    # source://devise//lib/devise.rb#482
+    # pkg:gem/devise#lib/devise.rb:486
     def configure_warden!; end
 
-    # source://devise//lib/devise.rb#142
+    # pkg:gem/devise#lib/devise.rb:140
     def confirm_within; end
 
-    # source://devise//lib/devise.rb#142
+    # pkg:gem/devise#lib/devise.rb:140
     def confirm_within=(val); end
 
-    # source://devise//lib/devise.rb#146
+    # pkg:gem/devise#lib/devise.rb:144
     def confirmation_keys; end
 
-    # source://devise//lib/devise.rb#146
+    # pkg:gem/devise#lib/devise.rb:144
     def confirmation_keys=(val); end
 
-    # source://devise//lib/devise.rb#209
+    # pkg:gem/devise#lib/devise.rb:207
     def default_scope; end
 
-    # source://devise//lib/devise.rb#209
+    # pkg:gem/devise#lib/devise.rb:207
     def default_scope=(val); end
 
-    # source://devise//lib/devise.rb#524
+    # pkg:gem/devise#lib/devise.rb:524
     def deprecator; end
 
-    # source://devise//lib/devise.rb#117
+    # pkg:gem/devise#lib/devise.rb:115
     def email_regexp; end
 
-    # source://devise//lib/devise.rb#117
+    # pkg:gem/devise#lib/devise.rb:115
     def email_regexp=(val); end
 
-    # source://devise//lib/devise.rb#133
+    # pkg:gem/devise#lib/devise.rb:131
     def expire_all_remember_me_on_sign_out; end
 
-    # source://devise//lib/devise.rb#133
+    # pkg:gem/devise#lib/devise.rb:131
     def expire_all_remember_me_on_sign_out=(val); end
 
-    # source://devise//lib/devise.rb#129
+    # pkg:gem/devise#lib/devise.rb:127
     def extend_remember_period; end
 
-    # source://devise//lib/devise.rb#129
+    # pkg:gem/devise#lib/devise.rb:127
     def extend_remember_period=(val); end
 
     # Generate a friendly string randomly to be used as token.
     # By default, length is 20 characters.
     #
-    # source://devise//lib/devise.rb#507
+    # pkg:gem/devise#lib/devise.rb:511
     def friendly_token(length = T.unsafe(nil)); end
 
-    # source://devise//lib/devise.rb#286
+    # pkg:gem/devise#lib/devise.rb:290
     def helpers; end
 
-    # source://devise//lib/devise.rb#99
+    # pkg:gem/devise#lib/devise.rb:97
     def http_authenticatable; end
 
-    # source://devise//lib/devise.rb#99
+    # pkg:gem/devise#lib/devise.rb:97
     def http_authenticatable=(val); end
 
-    # source://devise//lib/devise.rb#103
+    # pkg:gem/devise#lib/devise.rb:101
     def http_authenticatable_on_xhr; end
 
-    # source://devise//lib/devise.rb#103
+    # pkg:gem/devise#lib/devise.rb:101
     def http_authenticatable_on_xhr=(val); end
 
-    # source://devise//lib/devise.rb#79
+    # pkg:gem/devise#lib/devise.rb:77
     def http_authentication_key; end
 
-    # source://devise//lib/devise.rb#79
+    # pkg:gem/devise#lib/devise.rb:77
     def http_authentication_key=(val); end
 
-    # source://devise//lib/devise.rb#111
+    # pkg:gem/devise#lib/devise.rb:109
     def http_authentication_realm; end
 
-    # source://devise//lib/devise.rb#111
+    # pkg:gem/devise#lib/devise.rb:109
     def http_authentication_realm=(val); end
 
     # Include helpers in the given scope to AC and AV.
     #
-    # source://devise//lib/devise.rb#463
+    # pkg:gem/devise#lib/devise.rb:467
     def include_helpers(scope); end
 
-    # source://devise//lib/devise.rb#300
+    # pkg:gem/devise#lib/devise.rb:304
     def last_attempt_warning; end
 
-    # source://devise//lib/devise.rb#300
+    # pkg:gem/devise#lib/devise.rb:304
     def last_attempt_warning=(val); end
 
-    # source://devise//lib/devise.rb#176
+    # pkg:gem/devise#lib/devise.rb:174
     def lock_strategy; end
 
-    # source://devise//lib/devise.rb#176
+    # pkg:gem/devise#lib/devise.rb:174
     def lock_strategy=(val); end
 
     # Get the mailer class from the mailer reference object.
     #
-    # source://devise//lib/devise.rb#349
+    # pkg:gem/devise#lib/devise.rb:353
     def mailer; end
 
     # Set the mailer reference object to access the mailer.
     #
-    # source://devise//lib/devise.rb#354
+    # pkg:gem/devise#lib/devise.rb:358
     def mailer=(class_name); end
 
-    # source://devise//lib/devise.rb#213
+    # pkg:gem/devise#lib/devise.rb:211
     def mailer_sender; end
 
-    # source://devise//lib/devise.rb#213
+    # pkg:gem/devise#lib/devise.rb:211
     def mailer_sender=(val); end
 
-    # source://devise//lib/devise.rb#278
+    # pkg:gem/devise#lib/devise.rb:277
     def mappings; end
 
-    # source://devise//lib/devise.rb#189
+    # pkg:gem/devise#lib/devise.rb:187
     def maximum_attempts; end
 
-    # source://devise//lib/devise.rb#189
+    # pkg:gem/devise#lib/devise.rb:187
     def maximum_attempts=(val); end
 
-    # source://devise//lib/devise.rb#221
+    # pkg:gem/devise#lib/devise.rb:219
     def navigational_formats; end
 
-    # source://devise//lib/devise.rb#221
+    # pkg:gem/devise#lib/devise.rb:219
     def navigational_formats=(val); end
 
     # Specify an OmniAuth provider.
     #
     #   config.omniauth :github, APP_ID, APP_SECRET
     #
-    # source://devise//lib/devise.rb#457
+    # pkg:gem/devise#lib/devise.rb:461
     def omniauth(provider, *args); end
 
-    # source://devise//lib/devise.rb#282
+    # pkg:gem/devise#lib/devise.rb:286
     def omniauth_configs; end
 
-    # source://devise//lib/devise.rb#261
+    # pkg:gem/devise#lib/devise.rb:259
     def omniauth_path_prefix; end
 
-    # source://devise//lib/devise.rb#261
+    # pkg:gem/devise#lib/devise.rb:259
     def omniauth_path_prefix=(val); end
 
-    # source://devise//lib/devise.rb#344
+    # pkg:gem/devise#lib/devise.rb:348
     def omniauth_providers; end
 
-    # source://devise//lib/devise.rb#107
+    # pkg:gem/devise#lib/devise.rb:105
     def params_authenticatable; end
 
-    # source://devise//lib/devise.rb#107
+    # pkg:gem/devise#lib/devise.rb:105
     def params_authenticatable=(val); end
 
-    # source://devise//lib/devise.rb#296
+    # pkg:gem/devise#lib/devise.rb:300
     def paranoid; end
 
-    # source://devise//lib/devise.rb#296
+    # pkg:gem/devise#lib/devise.rb:300
     def paranoid=(val); end
 
-    # source://devise//lib/devise.rb#244
+    # pkg:gem/devise#lib/devise.rb:242
     def parent_controller; end
 
-    # source://devise//lib/devise.rb#244
+    # pkg:gem/devise#lib/devise.rb:242
     def parent_controller=(val); end
 
-    # source://devise//lib/devise.rb#250
+    # pkg:gem/devise#lib/devise.rb:248
     def parent_mailer; end
 
-    # source://devise//lib/devise.rb#250
+    # pkg:gem/devise#lib/devise.rb:248
     def parent_mailer=(val); end
 
-    # source://devise//lib/devise.rb#121
+    # pkg:gem/devise#lib/devise.rb:119
     def password_length; end
 
-    # source://devise//lib/devise.rb#121
+    # pkg:gem/devise#lib/devise.rb:119
     def password_length=(val); end
 
-    # source://devise//lib/devise.rb#158
+    # pkg:gem/devise#lib/devise.rb:156
     def pepper; end
 
-    # source://devise//lib/devise.rb#158
+    # pkg:gem/devise#lib/devise.rb:156
     def pepper=(val); end
 
-    # source://devise//lib/devise.rb#150
+    # pkg:gem/devise#lib/devise.rb:148
     def reconfirmable; end
 
-    # source://devise//lib/devise.rb#150
+    # pkg:gem/devise#lib/devise.rb:148
     def reconfirmable=(val); end
 
-    # source://devise//lib/devise.rb#332
+    # pkg:gem/devise#lib/devise.rb:336
     def ref(arg); end
 
     # Regenerates url helpers considering Devise.mapping
     #
-    # source://devise//lib/devise.rb#475
+    # pkg:gem/devise#lib/devise.rb:479
     def regenerate_helpers!; end
 
-    # source://devise//lib/devise.rb#272
+    # pkg:gem/devise#lib/devise.rb:270
     def reload_routes; end
 
-    # source://devise//lib/devise.rb#272
+    # pkg:gem/devise#lib/devise.rb:270
     def reload_routes=(val); end
 
-    # source://devise//lib/devise.rb#125
+    # pkg:gem/devise#lib/devise.rb:123
     def remember_for; end
 
-    # source://devise//lib/devise.rb#125
+    # pkg:gem/devise#lib/devise.rb:123
     def remember_for=(val); end
 
-    # source://devise//lib/devise.rb#71
+    # pkg:gem/devise#lib/devise.rb:69
     def rememberable_options; end
 
-    # source://devise//lib/devise.rb#71
+    # pkg:gem/devise#lib/devise.rb:69
     def rememberable_options=(val); end
 
-    # source://devise//lib/devise.rb#87
+    # pkg:gem/devise#lib/devise.rb:85
     def request_keys; end
 
-    # source://devise//lib/devise.rb#87
+    # pkg:gem/devise#lib/devise.rb:85
     def request_keys=(val); end
 
-    # source://devise//lib/devise.rb#197
+    # pkg:gem/devise#lib/devise.rb:195
     def reset_password_keys; end
 
-    # source://devise//lib/devise.rb#197
+    # pkg:gem/devise#lib/devise.rb:195
     def reset_password_keys=(val); end
 
-    # source://devise//lib/devise.rb#201
+    # pkg:gem/devise#lib/devise.rb:199
     def reset_password_within; end
 
-    # source://devise//lib/devise.rb#201
+    # pkg:gem/devise#lib/devise.rb:199
     def reset_password_within=(val); end
 
-    # source://devise//lib/devise.rb#230
+    # pkg:gem/devise#lib/devise.rb:228
     def responder; end
 
-    # source://devise//lib/devise.rb#230
+    # pkg:gem/devise#lib/devise.rb:228
     def responder=(val); end
 
-    # source://devise//lib/devise.rb#256
+    # pkg:gem/devise#lib/devise.rb:254
     def router_name; end
 
-    # source://devise//lib/devise.rb#256
+    # pkg:gem/devise#lib/devise.rb:254
     def router_name=(val); end
 
-    # source://devise//lib/devise.rb#171
+    # pkg:gem/devise#lib/devise.rb:169
     def scoped_views; end
 
-    # source://devise//lib/devise.rb#171
+    # pkg:gem/devise#lib/devise.rb:169
     def scoped_views=(val); end
 
-    # source://devise//lib/devise.rb#67
+    # pkg:gem/devise#lib/devise.rb:65
     def secret_key; end
 
-    # source://devise//lib/devise.rb#67
+    # pkg:gem/devise#lib/devise.rb:65
     def secret_key=(val); end
 
     # constant-time comparison algorithm to prevent timing attacks
     #
-    # source://devise//lib/devise.rb#515
+    # pkg:gem/devise#lib/devise.rb:519
     def secure_compare(a, b); end
 
-    # source://devise//lib/devise.rb#162
+    # pkg:gem/devise#lib/devise.rb:160
     def send_email_changed_notification; end
 
-    # source://devise//lib/devise.rb#162
+    # pkg:gem/devise#lib/devise.rb:160
     def send_email_changed_notification=(val); end
 
-    # source://devise//lib/devise.rb#166
+    # pkg:gem/devise#lib/devise.rb:164
     def send_password_change_notification; end
 
-    # source://devise//lib/devise.rb#166
+    # pkg:gem/devise#lib/devise.rb:164
     def send_password_change_notification=(val); end
 
     # Default way to set up Devise. Run rails generate devise_install to create
     # a fresh initializer with all configuration values.
     #
-    # @yield [_self]
-    # @yieldparam _self [Devise] the object that the method was called on
-    #
-    # source://devise//lib/devise.rb#313
+    # pkg:gem/devise#lib/devise.rb:317
     def setup; end
 
-    # source://devise//lib/devise.rb#308
+    # pkg:gem/devise#lib/devise.rb:312
     def sign_in_after_change_password; end
 
-    # source://devise//lib/devise.rb#308
+    # pkg:gem/devise#lib/devise.rb:312
     def sign_in_after_change_password=(val); end
 
-    # source://devise//lib/devise.rb#205
+    # pkg:gem/devise#lib/devise.rb:203
     def sign_in_after_reset_password; end
 
-    # source://devise//lib/devise.rb#205
+    # pkg:gem/devise#lib/devise.rb:203
     def sign_in_after_reset_password=(val); end
 
-    # source://devise//lib/devise.rb#234
+    # pkg:gem/devise#lib/devise.rb:232
     def sign_out_all_scopes; end
 
-    # source://devise//lib/devise.rb#234
+    # pkg:gem/devise#lib/devise.rb:232
     def sign_out_all_scopes=(val); end
 
-    # source://devise//lib/devise.rb#238
+    # pkg:gem/devise#lib/devise.rb:236
     def sign_out_via; end
 
-    # source://devise//lib/devise.rb#238
+    # pkg:gem/devise#lib/devise.rb:236
     def sign_out_via=(val); end
 
-    # source://devise//lib/devise.rb#217
+    # pkg:gem/devise#lib/devise.rb:215
     def skip_session_storage; end
 
-    # source://devise//lib/devise.rb#217
+    # pkg:gem/devise#lib/devise.rb:215
     def skip_session_storage=(val); end
 
-    # source://devise//lib/devise.rb#75
+    # pkg:gem/devise#lib/devise.rb:73
     def stretches; end
 
-    # source://devise//lib/devise.rb#75
+    # pkg:gem/devise#lib/devise.rb:73
     def stretches=(val); end
 
-    # source://devise//lib/devise.rb#95
+    # pkg:gem/devise#lib/devise.rb:93
     def strip_whitespace_keys; end
 
-    # source://devise//lib/devise.rb#95
+    # pkg:gem/devise#lib/devise.rb:93
     def strip_whitespace_keys=(val); end
 
-    # source://devise//lib/devise.rb#154
+    # pkg:gem/devise#lib/devise.rb:152
     def timeout_in; end
 
-    # source://devise//lib/devise.rb#154
+    # pkg:gem/devise#lib/devise.rb:152
     def timeout_in=(val); end
 
-    # source://devise//lib/devise.rb#304
+    # pkg:gem/devise#lib/devise.rb:308
     def token_generator; end
 
-    # source://devise//lib/devise.rb#304
+    # pkg:gem/devise#lib/devise.rb:308
     def token_generator=(val); end
 
-    # source://devise//lib/devise.rb#193
+    # pkg:gem/devise#lib/devise.rb:191
     def unlock_in; end
 
-    # source://devise//lib/devise.rb#193
+    # pkg:gem/devise#lib/devise.rb:191
     def unlock_in=(val); end
 
-    # source://devise//lib/devise.rb#180
+    # pkg:gem/devise#lib/devise.rb:178
     def unlock_keys; end
 
-    # source://devise//lib/devise.rb#180
+    # pkg:gem/devise#lib/devise.rb:178
     def unlock_keys=(val); end
 
-    # source://devise//lib/devise.rb#185
+    # pkg:gem/devise#lib/devise.rb:183
     def unlock_strategy; end
 
-    # source://devise//lib/devise.rb#185
+    # pkg:gem/devise#lib/devise.rb:183
     def unlock_strategy=(val); end
 
     # Sets warden configuration using a block that will be invoked on warden
@@ -1295,19 +1090,19 @@ module Devise
     #  Devise.setup do |config|
     #    config.allow_unconfirmed_access_for = 2.days
     #
-    #    config.warden do |manager|
+    #    config.warden do |warden_config|
     #      # Configure warden to use other strategies, like oauth.
-    #      manager.oauth(:twitter)
+    #      warden_config.oauth(:twitter)
     #    end
     #  end
     #
-    # source://devise//lib/devise.rb#449
+    # pkg:gem/devise#lib/devise.rb:453
     def warden(&block); end
 
-    # source://devise//lib/devise.rb#291
+    # pkg:gem/devise#lib/devise.rb:295
     def warden_config; end
 
-    # source://devise//lib/devise.rb#291
+    # pkg:gem/devise#lib/devise.rb:295
     def warden_config=(val); end
   end
 end
@@ -1315,18 +1110,18 @@ end
 # Constants which holds devise configuration for extensions. Those should
 # not be modified by the "end user" (this is why they are constants).
 #
-# source://devise//lib/devise.rb#54
+# pkg:gem/devise#lib/devise.rb:52
 Devise::ALL = T.let(T.unsafe(nil), Array)
 
-# source://devise//lib/devise.rb#55
+# pkg:gem/devise#lib/devise.rb:53
 Devise::CONTROLLERS = T.let(T.unsafe(nil), Hash)
 
-# source://devise//lib/devise.rb#24
+# pkg:gem/devise#lib/devise.rb:22
 module Devise::Controllers; end
 
 # Those helpers are convenience methods added to ApplicationController.
 #
-# source://devise//lib/devise/controllers/helpers.rb#6
+# pkg:gem/devise#lib/devise/controllers/helpers.rb:6
 module Devise::Controllers::Helpers
   include ::Devise::Controllers::SignInOut
   include ::Devise::Controllers::StoreLocation
@@ -1361,7 +1156,7 @@ module Devise::Controllers::Helpers
   #       end
   #   end
   #
-  # source://devise//lib/devise/controllers/helpers.rb#217
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:217
   def after_sign_in_path_for(resource_or_scope); end
 
   # Method used by sessions controller to sign out a user. You can overwrite
@@ -1371,12 +1166,12 @@ module Devise::Controllers::Helpers
   #
   # By default it is the root_path.
   #
-  # source://devise//lib/devise/controllers/helpers.rb#227
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:227
   def after_sign_out_path_for(resource_or_scope); end
 
   # Tell warden that params authentication is allowed for that specific page.
   #
-  # source://devise//lib/devise/controllers/helpers.rb#165
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:165
   def allow_params_authentication!; end
 
   # Return true if it's a devise_controller. false to all controllers unless
@@ -1385,67 +1180,61 @@ module Devise::Controllers::Helpers
   #
   #   before_action :my_filter, unless: :devise_controller?
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/controllers/helpers.rb#153
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:153
   def devise_controller?; end
 
   # Set up a param sanitizer to filter parameters using strong_parameters. See
   # lib/devise/parameter_sanitizer.rb for more info. Override this
   # method in your application controller to use your own parameter sanitizer.
   #
-  # source://devise//lib/devise/controllers/helpers.rb#160
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:160
   def devise_parameter_sanitizer; end
 
   # Overwrite Rails' handle unverified request to sign out all scopes,
   # clear run strategies and remove cached variables.
   #
-  # source://devise//lib/devise/controllers/helpers.rb#256
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:256
   def handle_unverified_request; end
 
   # Check if flash messages should be emitted. Default is to do it on
   # navigational formats
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/controllers/helpers.rb#272
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:272
   def is_flashing_format?; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/controllers/helpers.rb#266
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:266
   def is_navigational_format?; end
 
-  # source://devise//lib/devise/controllers/helpers.rb#262
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:262
   def request_format; end
 
   # Sign in a user and tries to redirect first to the stored location and
   # then to the url specified by after_sign_in_path_for. It accepts the same
   # parameters as the sign_in method.
   #
-  # source://devise//lib/devise/controllers/helpers.rb#237
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:237
   def sign_in_and_redirect(resource_or_scope, *args); end
 
   # Sign out a user and tries to redirect to the url specified by
   # after_sign_out_path_for.
   #
-  # source://devise//lib/devise/controllers/helpers.rb#247
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:247
   def sign_out_and_redirect(resource_or_scope); end
 
   # The scope root url to be used when they're signed in. By default, it first
   # tries to find a resource_root_path, otherwise it uses the root_path.
   #
-  # source://devise//lib/devise/controllers/helpers.rb#171
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:171
   def signed_in_root_path(resource_or_scope); end
 
   # The main accessor for the warden proxy instance
   #
-  # source://devise//lib/devise/controllers/helpers.rb#144
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:144
   def warden; end
 
   private
 
-  # source://devise//lib/devise/controllers/helpers.rb#278
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:278
   def expire_data_after_sign_out!; end
 
   class << self
@@ -1473,12 +1262,12 @@ module Devise::Controllers::Helpers
     #     before_action :authenticate_user!  # Tell devise to use :user map
     #     before_action :authenticate_admin! # Tell devise to use :admin map
     #
-    # source://devise//lib/devise/controllers/helpers.rb#113
+    # pkg:gem/devise#lib/devise/controllers/helpers.rb:113
     def define_helpers(mapping); end
   end
 end
 
-# source://devise//lib/devise/controllers/helpers.rb#17
+# pkg:gem/devise#lib/devise/controllers/helpers.rb:17
 module Devise::Controllers::Helpers::ClassMethods
   # Define authentication filters and accessor helpers for a group of mappings.
   # These methods are useful when you are working with multiple mappings that
@@ -1501,10 +1290,10 @@ module Devise::Controllers::Helpers::ClassMethods
   #     before_action ->{ authenticate_blogger! :admin }  # Redirects to the admin login page
   #     current_blogger :user                             # Preferably returns a User if one is signed in
   #
-  # source://devise//lib/devise/controllers/helpers.rb#39
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:39
   def devise_group(group_name, opts = T.unsafe(nil)); end
 
-  # source://devise//lib/devise/controllers/helpers.rb#83
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:83
   def log_process_action(payload); end
 end
 
@@ -1512,38 +1301,36 @@ end
 # to provide remember me behavior. Useful when signing in is done
 # through a callback, like in OmniAuth.
 #
-# source://devise//lib/devise/controllers/rememberable.rb#8
+# pkg:gem/devise#lib/devise/controllers/rememberable.rb:8
 module Devise::Controllers::Rememberable
   # Forgets the given resource by deleting a cookie
   #
-  # source://devise//lib/devise/controllers/rememberable.rb#30
+  # pkg:gem/devise#lib/devise/controllers/rememberable.rb:30
   def forget_me(resource); end
 
   # Remembers the given resource by setting up a cookie
   #
-  # source://devise//lib/devise/controllers/rememberable.rb#22
+  # pkg:gem/devise#lib/devise/controllers/rememberable.rb:22
   def remember_me(resource); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/controllers/rememberable.rb#14
+  # pkg:gem/devise#lib/devise/controllers/rememberable.rb:14
   def remember_me_is_active?(resource); end
 
   protected
 
-  # source://devise//lib/devise/controllers/rememberable.rb#38
+  # pkg:gem/devise#lib/devise/controllers/rememberable.rb:38
   def forget_cookie_values(resource); end
 
-  # source://devise//lib/devise/controllers/rememberable.rb#42
+  # pkg:gem/devise#lib/devise/controllers/rememberable.rb:42
   def remember_cookie_values(resource); end
 
-  # source://devise//lib/devise/controllers/rememberable.rb#51
+  # pkg:gem/devise#lib/devise/controllers/rememberable.rb:51
   def remember_key(resource, scope); end
 
   class << self
     # Return default cookie values retrieved from session options.
     #
-    # source://devise//lib/devise/controllers/rememberable.rb#10
+    # pkg:gem/devise#lib/devise/controllers/rememberable.rb:10
     def cookie_values; end
   end
 end
@@ -1551,43 +1338,41 @@ end
 # Custom Responder to configure default statuses that only apply to Devise,
 # and allow to integrate more easily with Hotwire/Turbo.
 #
-# source://devise//lib/devise/controllers/responder.rb#7
+# pkg:gem/devise#lib/devise/controllers/responder.rb:7
 class Devise::Controllers::Responder < ::ActionController::Responder
   class << self
     # TODO: remove this support for older Rails versions, which aren't supported by Turbo
     # and/or responders. It won't allow configuring a custom response, but it allows Devise
     # to use these methods and defaults across the implementation more easily.
     #
-    # source://responders/3.1.1/lib/action_controller/responder.rb#123
+    # pkg:gem/devise#lib/devise/controllers/responder.rb:9
     def error_status; end
 
-    # source://responders/3.1.1/lib/action_controller/responder.rb#124
+    # pkg:gem/devise#lib/devise/controllers/responder.rb:10
     def redirect_status; end
   end
 end
 
-# source://devise//lib/devise/controllers/scoped_views.rb#5
+# pkg:gem/devise#lib/devise/controllers/scoped_views.rb:5
 module Devise::Controllers::ScopedViews
   extend ::ActiveSupport::Concern
 
   mixes_in_class_methods ::Devise::Controllers::ScopedViews::ClassMethods
 end
 
-# source://devise//lib/devise/controllers/scoped_views.rb#8
+# pkg:gem/devise#lib/devise/controllers/scoped_views.rb:8
 module Devise::Controllers::ScopedViews::ClassMethods
-  # source://devise//lib/devise/controllers/scoped_views.rb#13
+  # pkg:gem/devise#lib/devise/controllers/scoped_views.rb:13
   def scoped_views=(value); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/controllers/scoped_views.rb#9
+  # pkg:gem/devise#lib/devise/controllers/scoped_views.rb:9
   def scoped_views?; end
 end
 
 # Provide sign in and sign out functionality.
 # Included by default in all controllers.
 #
-# source://devise//lib/devise/controllers/sign_in_out.rb#7
+# pkg:gem/devise#lib/devise/controllers/sign_in_out.rb:7
 module Devise::Controllers::SignInOut
   # Sign in a user bypassing the warden callbacks and stores the user
   # straight in session. This option is useful in cases the user is already
@@ -1598,7 +1383,7 @@ module Devise::Controllers::SignInOut
   #   bypass_sign_in @user, scope: :user
   #   bypass_sign_in @user
   #
-  # source://devise//lib/devise/controllers/sign_in_out.rb#65
+  # pkg:gem/devise#lib/devise/controllers/sign_in_out.rb:56
   def bypass_sign_in(resource, scope: T.unsafe(nil)); end
 
   # Sign in a user that already was authenticated. This helper is useful for logging
@@ -1615,7 +1400,7 @@ module Devise::Controllers::SignInOut
   #   sign_in @user, event: :authentication     # sign_in(resource, options)
   #   sign_in @user, store: false               # sign_in(resource, options)
   #
-  # source://devise//lib/devise/controllers/sign_in_out.rb#33
+  # pkg:gem/devise#lib/devise/controllers/sign_in_out.rb:33
   def sign_in(resource_or_scope, *args); end
 
   # Sign out a given user or scope. This helper is useful for signing out a user
@@ -1627,14 +1412,14 @@ module Devise::Controllers::SignInOut
   #   sign_out :user     # sign_out(scope)
   #   sign_out @user     # sign_out(resource)
   #
-  # source://devise//lib/devise/controllers/sign_in_out.rb#80
+  # pkg:gem/devise#lib/devise/controllers/sign_in_out.rb:71
   def sign_out(resource_or_scope = T.unsafe(nil)); end
 
   # Sign out all active users or scopes. This helper is useful for signing out all roles
   # in one click. This signs out ALL scopes in warden. Returns true if there was at least one logout
   # and false if there was no user logged in on all scopes.
   #
-  # source://devise//lib/devise/controllers/sign_in_out.rb#95
+  # pkg:gem/devise#lib/devise/controllers/sign_in_out.rb:86
   def sign_out_all_scopes(lock = T.unsafe(nil)); end
 
   # Return true if the given scope is signed in session. If no scope given, return
@@ -1643,17 +1428,15 @@ module Devise::Controllers::SignInOut
   # if a scope has already previously been authenticated without running
   # authentication hooks, you can directly call `warden.authenticated?(scope: scope)`
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/controllers/sign_in_out.rb#13
+  # pkg:gem/devise#lib/devise/controllers/sign_in_out.rb:13
   def signed_in?(scope = T.unsafe(nil)); end
 
   private
 
-  # source://devise//lib/devise/controllers/sign_in_out.rb#108
+  # pkg:gem/devise#lib/devise/controllers/sign_in_out.rb:99
   def expire_data_after_sign_in!; end
 
-  # source://devise//lib/devise/controllers/sign_in_out.rb#108
+  # pkg:gem/devise#lib/devise/controllers/sign_in_out.rb:103
   def expire_data_after_sign_out!; end
 end
 
@@ -1661,7 +1444,7 @@ end
 # Used to redirect back to a desired path after sign in.
 # Included by default in all controllers.
 #
-# source://devise//lib/devise/controllers/store_location.rb#10
+# pkg:gem/devise#lib/devise/controllers/store_location.rb:10
 module Devise::Controllers::StoreLocation
   # Stores the provided location to redirect the user after signing in.
   # Useful in combination with the `stored_location_for` helper.
@@ -1671,7 +1454,7 @@ module Devise::Controllers::StoreLocation
   #   store_location_for(:user, dashboard_path)
   #   redirect_to user_facebook_omniauth_authorize_path
   #
-  # source://devise//lib/devise/controllers/store_location.rb#36
+  # pkg:gem/devise#lib/devise/controllers/store_location.rb:36
   def store_location_for(resource_or_scope, location); end
 
   # Returns and delete (if it's navigational format) the url stored in the session for
@@ -1681,24 +1464,24 @@ module Devise::Controllers::StoreLocation
   #
   #   redirect_to stored_location_for(:user) || root_path
   #
-  # source://devise//lib/devise/controllers/store_location.rb#18
+  # pkg:gem/devise#lib/devise/controllers/store_location.rb:18
   def stored_location_for(resource_or_scope); end
 
   private
 
-  # source://devise//lib/devise/controllers/store_location.rb#71
+  # pkg:gem/devise#lib/devise/controllers/store_location.rb:71
   def add_fragment_back_to_path(uri, path); end
 
-  # source://devise//lib/devise/controllers/store_location.rb#56
+  # pkg:gem/devise#lib/devise/controllers/store_location.rb:56
   def extract_path_from_location(location); end
 
-  # source://devise//lib/devise/controllers/store_location.rb#45
+  # pkg:gem/devise#lib/devise/controllers/store_location.rb:45
   def parse_uri(location); end
 
-  # source://devise//lib/devise/controllers/store_location.rb#67
+  # pkg:gem/devise#lib/devise/controllers/store_location.rb:67
   def remove_domain_from_uri(uri); end
 
-  # source://devise//lib/devise/controllers/store_location.rb#51
+  # pkg:gem/devise#lib/devise/controllers/store_location.rb:51
   def stored_location_key_for(resource_or_scope); end
 end
 
@@ -1727,145 +1510,137 @@ end
 #     include Rails.application.routes.url_helpers
 #     include Rails.application.routes.mounted_helpers
 #
-# source://devise//lib/devise/controllers/url_helpers.rb#30
+# pkg:gem/devise#lib/devise/controllers/url_helpers.rb:30
 module Devise::Controllers::UrlHelpers
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def cancel_registration_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def cancel_registration_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def confirmation_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def confirmation_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def destroy_session_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def destroy_session_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def edit_password_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def edit_password_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def edit_registration_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def edit_registration_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def new_confirmation_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def new_confirmation_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def new_password_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def new_password_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def new_registration_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def new_registration_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def new_session_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def new_session_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def new_unlock_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def new_unlock_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def password_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def password_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def registration_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def registration_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def session_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def session_url(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def unlock_path(resource_or_scope, *args); end
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#49
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:49
   def unlock_url(resource_or_scope, *args); end
 
   private
 
-  # source://devise//lib/devise/controllers/url_helpers.rb#64
+  # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:64
   def _devise_route_context; end
 
   class << self
-    # source://devise//lib/devise/controllers/url_helpers.rb#37
+    # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:37
     def generate_helpers!(routes = T.unsafe(nil)); end
 
-    # source://devise//lib/devise/controllers/url_helpers.rb#31
+    # pkg:gem/devise#lib/devise/controllers/url_helpers.rb:31
     def remove_helpers!; end
   end
 end
 
 # Checks the scope in the given environment and returns the associated failure app.
 #
-# source://devise//lib/devise/delegator.rb#5
+# pkg:gem/devise#lib/devise/delegator.rb:5
 class Devise::Delegator
-  # source://devise//lib/devise/delegator.rb#6
+  # pkg:gem/devise#lib/devise/delegator.rb:6
   def call(env); end
 
-  # source://devise//lib/devise/delegator.rb#10
+  # pkg:gem/devise#lib/devise/delegator.rb:10
   def failure_app(env); end
 end
 
-# source://devise//lib/devise/rails/deprecated_constant_accessor.rb#7
-Devise::DeprecatedConstantAccessor = ActiveSupport::Deprecation::DeprecatedConstantAccessor
-
-# source://devise//lib/devise/encryptor.rb#6
+# pkg:gem/devise#lib/devise/encryptor.rb:6
 module Devise::Encryptor
   class << self
-    # source://devise//lib/devise/encryptor.rb#14
+    # pkg:gem/devise#lib/devise/encryptor.rb:14
     def compare(klass, hashed_password, password); end
 
-    # source://devise//lib/devise/encryptor.rb#7
+    # pkg:gem/devise#lib/devise/encryptor.rb:7
     def digest(klass, password); end
   end
 end
 
-# source://devise//lib/devise/rails.rb#7
-class Devise::Engine < ::Rails::Engine
-  class << self
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
-    def __callbacks; end
-  end
-end
+# pkg:gem/devise#lib/devise/rails.rb:7
+class Devise::Engine < ::Rails::Engine; end
 
 # Failure application that will be called every time :warden is thrown from
 # any strategy or hook. It is responsible for redirecting the user to the sign
 # in page based on current scope and mapping. If no scope is given, it
 # redirects to the default_url.
 #
-# source://devise//lib/devise/failure_app.rb#10
+# pkg:gem/devise#lib/devise/failure_app.rb:10
 class Devise::FailureApp < ::ActionController::Metal
   include ::ActionDispatch::Routing::PolymorphicRoutes
   include ::ActionDispatch::Routing::UrlFor
@@ -1882,63 +1657,63 @@ class Devise::FailureApp < ::ActionController::Metal
   extend ::ActiveSupport::Callbacks::ClassMethods
   extend ::AbstractController::Callbacks::ClassMethods
 
-  # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+  # pkg:gem/devise#lib/devise/failure_app.rb:21
   def __callbacks; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+  # pkg:gem/devise#lib/devise/failure_app.rb:21
   def __callbacks?; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#963
+  # pkg:gem/devise#lib/devise/failure_app.rb:21
   def _process_action_callbacks; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#951
+  # pkg:gem/devise#lib/devise/failure_app.rb:21
   def _run_process_action_callbacks(&block); end
 
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+  # pkg:gem/devise#lib/devise/failure_app.rb:11
   def default_url_options; end
 
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+  # pkg:gem/devise#lib/devise/failure_app.rb:11
   def default_url_options=(_arg0); end
 
-  # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+  # pkg:gem/devise#lib/devise/failure_app.rb:11
   def default_url_options?; end
 
-  # source://devise//lib/devise/failure_app.rb#19
+  # pkg:gem/devise#lib/devise/failure_app.rb:19
   def flash(*_arg0, **_arg1, &_arg2); end
 
-  # source://devise//lib/devise/failure_app.rb#52
+  # pkg:gem/devise#lib/devise/failure_app.rb:52
   def http_auth; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+  # pkg:gem/devise#lib/devise/failure_app.rb:12
   def logger; end
 
-  # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+  # pkg:gem/devise#lib/devise/failure_app.rb:12
   def logger=(value); end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/callbacks.rb#36
+  # pkg:gem/devise#lib/devise/failure_app.rb:21
   def raise_on_missing_callback_actions; end
 
-  # source://actionpack/7.1.3.4/lib/abstract_controller/callbacks.rb#36
+  # pkg:gem/devise#lib/devise/failure_app.rb:21
   def raise_on_missing_callback_actions=(val); end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/redirecting.rb#15
+  # pkg:gem/devise#lib/devise/failure_app.rb:12
   def raise_on_open_redirects; end
 
-  # source://actionpack/7.1.3.4/lib/action_controller/metal/redirecting.rb#15
+  # pkg:gem/devise#lib/devise/failure_app.rb:12
   def raise_on_open_redirects=(val); end
 
-  # source://devise//lib/devise/failure_app.rb#59
+  # pkg:gem/devise#lib/devise/failure_app.rb:59
   def recall; end
 
-  # source://devise//lib/devise/failure_app.rb#86
+  # pkg:gem/devise#lib/devise/failure_app.rb:86
   def redirect; end
 
-  # source://devise//lib/devise/failure_app.rb#42
+  # pkg:gem/devise#lib/devise/failure_app.rb:42
   def respond; end
 
   protected
 
-  # source://devise//lib/devise/failure_app.rb#247
+  # pkg:gem/devise#lib/devise/failure_app.rb:247
   def attempted_path; end
 
   # Choose whether we should respond in an HTTP authentication fashion,
@@ -1950,76 +1725,64 @@ class Devise::FailureApp < ::ActionController::Metal
   # is the same as your public API and uses a format like JSON (so you
   # cannot mark JSON as a navigational format).
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/failure_app.rb#194
+  # pkg:gem/devise#lib/devise/failure_app.rb:194
   def http_auth?; end
 
-  # source://devise//lib/devise/failure_app.rb#208
+  # pkg:gem/devise#lib/devise/failure_app.rb:208
   def http_auth_body; end
 
   # It doesn't make sense to send authenticate headers in AJAX requests
   # or if the user disabled them.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/failure_app.rb#204
+  # pkg:gem/devise#lib/devise/failure_app.rb:204
   def http_auth_header?; end
 
-  # source://devise//lib/devise/failure_app.rb#124
+  # pkg:gem/devise#lib/devise/failure_app.rb:131
   def i18n_locale; end
 
-  # source://devise//lib/devise/failure_app.rb#105
+  # pkg:gem/devise#lib/devise/failure_app.rb:105
   def i18n_message(default = T.unsafe(nil)); end
 
-  # source://devise//lib/devise/failure_app.rb#101
+  # pkg:gem/devise#lib/devise/failure_app.rb:101
   def i18n_options(options); end
 
   # Check if flash messages should be emitted. Default is to do it on
   # navigational formats
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/failure_app.rb#265
+  # pkg:gem/devise#lib/devise/failure_app.rb:265
   def is_flashing_format?; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/failure_app.rb#259
+  # pkg:gem/devise#lib/devise/failure_app.rb:259
   def is_navigational_format?; end
 
-  # source://devise//lib/devise/failure_app.rb#220
+  # pkg:gem/devise#lib/devise/failure_app.rb:220
   def recall_app(app); end
 
-  # source://devise//lib/devise/failure_app.rb#128
+  # pkg:gem/devise#lib/devise/failure_app.rb:135
   def redirect_url; end
 
-  # source://devise//lib/devise/failure_app.rb#273
+  # pkg:gem/devise#lib/devise/failure_app.rb:273
   def relative_url_root; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/failure_app.rb#281
+  # pkg:gem/devise#lib/devise/failure_app.rb:281
   def relative_url_root?; end
 
-  # source://devise//lib/devise/failure_app.rb#269
+  # pkg:gem/devise#lib/devise/failure_app.rb:269
   def request_format; end
 
-  # source://devise//lib/devise/failure_app.rb#144
+  # pkg:gem/devise#lib/devise/failure_app.rb:151
   def route(scope); end
 
-  # source://devise//lib/devise/failure_app.rb#239
+  # pkg:gem/devise#lib/devise/failure_app.rb:239
   def scope; end
 
-  # source://devise//lib/devise/failure_app.rb#243
+  # pkg:gem/devise#lib/devise/failure_app.rb:243
   def scope_class; end
 
-  # source://devise//lib/devise/failure_app.rb#148
+  # pkg:gem/devise#lib/devise/failure_app.rb:155
   def scope_url; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/failure_app.rb#182
+  # pkg:gem/devise#lib/devise/failure_app.rb:182
   def skip_format?; end
 
   # Stores requested URI to redirect the user after signing in. We can't use
@@ -2027,127 +1790,113 @@ class Devise::FailureApp < ::ActionController::Metal
   # authenticated yet, but we still need to store the URI based on scope, so
   # different scopes would never use the same URI to redirect.
   #
-  # source://devise//lib/devise/failure_app.rb#255
+  # pkg:gem/devise#lib/devise/failure_app.rb:255
   def store_location!; end
 
-  # source://devise//lib/devise/failure_app.rb#227
+  # pkg:gem/devise#lib/devise/failure_app.rb:227
   def warden; end
 
-  # source://devise//lib/devise/failure_app.rb#235
+  # pkg:gem/devise#lib/devise/failure_app.rb:235
   def warden_message; end
 
-  # source://devise//lib/devise/failure_app.rb#231
+  # pkg:gem/devise#lib/devise/failure_app.rb:231
   def warden_options; end
 
-  private
-
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/failure_app.rb#293
-  def rails_51_and_up?; end
-
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/failure_app.rb#289
-  def root_path_defined?(context); end
-
   class << self
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+    # pkg:gem/devise#lib/devise/failure_app.rb:21
     def __callbacks; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+    # pkg:gem/devise#lib/devise/failure_app.rb:21
     def __callbacks=(value); end
 
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#70
+    # pkg:gem/devise#lib/devise/failure_app.rb:21
     def __callbacks?; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#955
+    # pkg:gem/devise#lib/devise/failure_app.rb:21
     def _process_action_callbacks; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/callbacks.rb#959
+    # pkg:gem/devise#lib/devise/failure_app.rb:21
     def _process_action_callbacks=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/route_set.rb#584
+    # pkg:gem/devise#lib/devise/failure_app.rb:14
     def _routes; end
 
-    # source://devise//lib/devise/failure_app.rb#26
+    # pkg:gem/devise#lib/devise/failure_app.rb:26
     def call(env); end
 
     # Try retrieving the URL options from the parent controller (usually
     # ApplicationController). Instance methods are not supported at the moment,
     # so only the class-level attribute is used.
     #
-    # source://devise//lib/devise/failure_app.rb#34
+    # pkg:gem/devise#lib/devise/failure_app.rb:11
     def default_url_options(*args); end
 
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+    # Try retrieving the URL options from the parent controller (usually
+    # ApplicationController). Instance methods are not supported at the moment,
+    # so only the class-level attribute is used.
+    #
+    # pkg:gem/devise#lib/devise/failure_app.rb:11
     def default_url_options=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_dispatch/routing/url_for.rb#97
+    # pkg:gem/devise#lib/devise/failure_app.rb:11
     def default_url_options?; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#115
+    # pkg:gem/devise#lib/devise/failure_app.rb:12
     def logger; end
 
-    # source://activesupport/7.1.3.4/lib/active_support/configurable.rb#116
+    # pkg:gem/devise#lib/devise/failure_app.rb:12
     def logger=(value); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal.rb#262
+    # pkg:gem/devise#lib/devise/failure_app.rb:10
     def middleware_stack; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/callbacks.rb#36
+    # pkg:gem/devise#lib/devise/failure_app.rb:21
     def raise_on_missing_callback_actions; end
 
-    # source://actionpack/7.1.3.4/lib/abstract_controller/callbacks.rb#36
+    # pkg:gem/devise#lib/devise/failure_app.rb:21
     def raise_on_missing_callback_actions=(val); end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/redirecting.rb#15
+    # pkg:gem/devise#lib/devise/failure_app.rb:12
     def raise_on_open_redirects; end
 
-    # source://actionpack/7.1.3.4/lib/action_controller/metal/redirecting.rb#15
+    # pkg:gem/devise#lib/devise/failure_app.rb:12
     def raise_on_open_redirects=(val); end
   end
 end
 
-# source://devise//lib/devise.rb#317
+# pkg:gem/devise#lib/devise.rb:321
 class Devise::Getter
-  # @return [Getter] a new instance of Getter
-  #
-  # source://devise//lib/devise.rb#318
+  # pkg:gem/devise#lib/devise.rb:322
   def initialize(name); end
 
-  # source://devise//lib/devise.rb#322
+  # pkg:gem/devise#lib/devise.rb:326
   def get; end
 end
 
-# source://devise//lib/devise.rb#34
+# pkg:gem/devise#lib/devise.rb:32
 module Devise::Hooks; end
 
 # A small warden proxy so we can remember, forget and
 # sign out users from hooks.
 #
-# source://devise//lib/devise/hooks/proxy.rb#7
+# pkg:gem/devise#lib/devise/hooks/proxy.rb:7
 class Devise::Hooks::Proxy
   include ::Devise::Controllers::Rememberable
   include ::Devise::Controllers::SignInOut
 
-  # @return [Proxy] a new instance of Proxy
-  #
-  # source://devise//lib/devise/hooks/proxy.rb#14
+  # pkg:gem/devise#lib/devise/hooks/proxy.rb:14
   def initialize(warden); end
 
-  # source://devise//lib/devise/hooks/proxy.rb#12
+  # pkg:gem/devise#lib/devise/hooks/proxy.rb:12
   def cookies(*_arg0, **_arg1, &_arg2); end
 
-  # source://devise//lib/devise/hooks/proxy.rb#12
+  # pkg:gem/devise#lib/devise/hooks/proxy.rb:12
   def request(*_arg0, **_arg1, &_arg2); end
 
-  # source://devise//lib/devise/hooks/proxy.rb#18
+  # pkg:gem/devise#lib/devise/hooks/proxy.rb:18
   def session; end
 
-  # Returns the value of attribute warden.
-  #
-  # source://devise//lib/devise/hooks/proxy.rb#11
+  # pkg:gem/devise#lib/devise/hooks/proxy.rb:11
   def warden; end
 end
 
@@ -2164,14 +1913,13 @@ class Devise::Mailer < ::ActionMailer::Base
 
   private
 
-  # source://actionview/7.1.3.4/lib/action_view/layouts.rb#330
   def _layout(lookup_context, formats); end
 end
 
-# source://devise//lib/devise.rb#38
+# pkg:gem/devise#lib/devise.rb:36
 module Devise::Mailers; end
 
-# source://devise//lib/devise/mailers/helpers.rb#5
+# pkg:gem/devise#lib/devise/mailers/helpers.rb:5
 module Devise::Mailers::Helpers
   extend ::ActiveSupport::Concern
   include ::Devise::Controllers::ScopedViews
@@ -2182,35 +1930,25 @@ module Devise::Mailers::Helpers
 
   # Configure default email options
   #
-  # source://devise//lib/devise/mailers/helpers.rb#17
+  # pkg:gem/devise#lib/devise/mailers/helpers.rb:17
   def devise_mail(record, action, opts = T.unsafe(nil), &block); end
 
-  # source://devise//lib/devise/mailers/helpers.rb#27
+  # pkg:gem/devise#lib/devise/mailers/helpers.rb:27
   def devise_mapping; end
 
-  # source://devise//lib/devise/mailers/helpers.rb#31
+  # pkg:gem/devise#lib/devise/mailers/helpers.rb:31
   def headers_for(action, opts); end
 
-  # source://devise//lib/devise/mailers/helpers.rb#22
+  # pkg:gem/devise#lib/devise/mailers/helpers.rb:22
   def initialize_from_record(record); end
 
-  # source://devise//lib/devise/mailers/helpers.rb#49
-  def mailer_from(mapping); end
+  # pkg:gem/devise#lib/devise/mailers/helpers.rb:50
+  def mailer_sender(mapping); end
 
-  # source://devise//lib/devise/mailers/helpers.rb#45
-  def mailer_reply_to(mapping); end
-
-  # source://devise//lib/devise/mailers/helpers.rb#53
-  def mailer_sender(mapping, sender = T.unsafe(nil)); end
-
-  # Returns the value of attribute resource.
-  #
-  # source://devise//lib/devise/mailers/helpers.rb#14
+  # pkg:gem/devise#lib/devise/mailers/helpers.rb:14
   def resource; end
 
-  # Returns the value of attribute scope_name.
-  #
-  # source://devise//lib/devise/mailers/helpers.rb#14
+  # pkg:gem/devise#lib/devise/mailers/helpers.rb:14
   def scope_name; end
 
   # Set up a subject doing an I18n lookup. At first, it attempts to set a subject
@@ -2230,10 +1968,10 @@ module Devise::Mailers::Helpers
   #         confirmation_instructions:
   #           subject: '...'
   #
-  # source://devise//lib/devise/mailers/helpers.rb#87
+  # pkg:gem/devise#lib/devise/mailers/helpers.rb:81
   def subject_for(key); end
 
-  # source://devise//lib/devise/mailers/helpers.rb#64
+  # pkg:gem/devise#lib/devise/mailers/helpers.rb:58
   def template_paths; end
 end
 
@@ -2259,130 +1997,126 @@ end
 #   mapping.modules  #=> [:authenticatable]
 #   # is the modules included in the class
 #
-# source://devise//lib/devise/mapping.rb#26
+# pkg:gem/devise#lib/devise/mapping.rb:26
 class Devise::Mapping
-  # @return [Mapping] a new instance of Mapping
-  #
-  # source://devise//lib/devise/mapping.rb#54
+  # pkg:gem/devise#lib/devise/mapping.rb:54
   def initialize(name, options); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/mapping.rb#98
+  # pkg:gem/devise#lib/devise/mapping.rb:98
   def authenticatable?; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def class_name; end
 
-  # source://devise//lib/devise/mapping.rb#115
+  # pkg:gem/devise#lib/devise/modules.rb:24
   def confirmable?; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def controllers; end
 
-  # source://devise//lib/devise/mapping.rb#115
+  # pkg:gem/devise#lib/devise/modules.rb:9
   def database_authenticatable?; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def failure_app; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def format; end
 
-  # source://devise//lib/devise/mapping.rb#102
+  # pkg:gem/devise#lib/devise/mapping.rb:102
   def fullpath; end
 
-  # source://devise//lib/devise/mapping.rb#115
+  # pkg:gem/devise#lib/devise/modules.rb:25
   def lockable?; end
 
   # Return modules for the mapping.
   #
-  # source://devise//lib/devise/mapping.rb#77
+  # pkg:gem/devise#lib/devise/mapping.rb:77
   def modules; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:31
   def name; end
 
-  # source://devise//lib/devise/mapping.rb#90
+  # pkg:gem/devise#lib/devise/mapping.rb:90
   def no_input_strategies; end
 
-  # source://devise//lib/devise/mapping.rb#115
+  # pkg:gem/devise#lib/devise/modules.rb:14
   def omniauthable?; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def path; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def path_names; end
 
-  # source://devise//lib/devise/mapping.rb#115
+  # pkg:gem/devise#lib/devise/modules.rb:18
   def recoverable?; end
 
-  # source://devise//lib/devise/mapping.rb#115
+  # pkg:gem/devise#lib/devise/modules.rb:19
   def registerable?; end
 
-  # source://devise//lib/devise/mapping.rb#115
+  # pkg:gem/devise#lib/devise/modules.rb:10
   def rememberable?; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def router_name; end
 
-  # source://devise//lib/devise/mapping.rb#94
+  # pkg:gem/devise#lib/devise/mapping.rb:94
   def routes; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def scoped_path; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def sign_out_via; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def singular; end
 
-  # source://devise//lib/devise/mapping.rb#86
+  # pkg:gem/devise#lib/devise/mapping.rb:86
   def strategies; end
 
-  # source://devise//lib/devise/mapping.rb#115
+  # pkg:gem/devise#lib/devise/modules.rb:26
   def timeoutable?; end
 
   # Gives the class the mapping points to.
   #
-  # source://devise//lib/devise/mapping.rb#82
+  # pkg:gem/devise#lib/devise/mapping.rb:82
   def to; end
 
-  # source://devise//lib/devise/mapping.rb#115
+  # pkg:gem/devise#lib/devise/modules.rb:29
   def trackable?; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def used_helpers; end
 
-  # source://devise//lib/devise/mapping.rb#27
+  # pkg:gem/devise#lib/devise/mapping.rb:27
   def used_routes; end
 
-  # source://devise//lib/devise/mapping.rb#115
+  # pkg:gem/devise#lib/devise/modules.rb:20
   def validatable?; end
 
   private
 
-  # source://devise//lib/devise/mapping.rb#144
+  # pkg:gem/devise#lib/devise/mapping.rb:144
   def default_constraints(options); end
 
-  # source://devise//lib/devise/mapping.rb#131
+  # pkg:gem/devise#lib/devise/mapping.rb:131
   def default_controllers(options); end
 
-  # source://devise//lib/devise/mapping.rb#149
+  # pkg:gem/devise#lib/devise/mapping.rb:149
   def default_defaults(options); end
 
-  # source://devise//lib/devise/mapping.rb#123
+  # pkg:gem/devise#lib/devise/mapping.rb:123
   def default_failure_app(options); end
 
-  # source://devise//lib/devise/mapping.rb#138
+  # pkg:gem/devise#lib/devise/mapping.rb:138
   def default_path_names(options); end
 
-  # source://devise//lib/devise/mapping.rb#166
+  # pkg:gem/devise#lib/devise/mapping.rb:166
   def default_used_helpers(options); end
 
-  # source://devise//lib/devise/mapping.rb#154
+  # pkg:gem/devise#lib/devise/mapping.rb:154
   def default_used_route(options); end
 
   class << self
@@ -2393,29 +2127,27 @@ class Devise::Mapping
     #     self.modules.include?(:confirmable)
     #   end
     #
-    # source://devise//lib/devise/mapping.rb#113
+    # pkg:gem/devise#lib/devise/mapping.rb:113
     def add_module(m); end
 
-    # source://devise//lib/devise/mapping.rb#49
+    # pkg:gem/devise#lib/devise/mapping.rb:49
     def find_by_path!(path, path_type = T.unsafe(nil)); end
 
-    # Receives an object and find a scope for it. If a scope cannot be found,
+    # Receives an object and finds a scope for it. If a scope cannot be found,
     # raises an error. If a symbol is given, it's considered to be the scope.
     #
-    # source://devise//lib/devise/mapping.rb#35
+    # pkg:gem/devise#lib/devise/mapping.rb:35
     def find_scope!(obj); end
   end
 end
 
-# source://devise//lib/devise/controllers/helpers.rb#285
+# pkg:gem/devise#lib/devise/controllers/helpers.rb:285
 class Devise::MissingWarden < ::StandardError
-  # @return [MissingWarden] a new instance of MissingWarden
-  #
-  # source://devise//lib/devise/controllers/helpers.rb#286
+  # pkg:gem/devise#lib/devise/controllers/helpers.rb:286
   def initialize; end
 end
 
-# source://devise//lib/devise/models.rb#4
+# pkg:gem/devise#lib/devise/models.rb:4
 module Devise::Models
   # Include the chosen devise modules in your model:
   #
@@ -2425,17 +2157,17 @@ module Devise::Models
   # with specific values for this model. Please check your Devise initializer
   # for a complete description on those values.
   #
-  # source://devise//lib/devise/models.rb#79
+  # pkg:gem/devise#lib/devise/models.rb:79
   def devise(*modules); end
 
   # The hook which is called inside devise.
   # So your ORM can include devise compatibility stuff.
   #
-  # source://devise//lib/devise/models.rb#116
+  # pkg:gem/devise#lib/devise/models.rb:116
   def devise_modules_hook!; end
 
   class << self
-    # source://devise//lib/devise/models.rb#54
+    # pkg:gem/devise#lib/devise/models.rb:54
     def check_fields!(klass); end
 
     # Creates configuration values for Devise and for the given module.
@@ -2454,7 +2186,7 @@ module Devise::Models
     # To add the class methods you need to have a module ClassMethods defined
     # inside the given class.
     #
-    # source://devise//lib/devise/models.rb#31
+    # pkg:gem/devise#lib/devise/models.rb:31
     def config(mod, *accessors); end
   end
 end
@@ -2506,30 +2238,27 @@ end
 #     special_condition_is_valid? ? super : :special_condition_is_not_valid
 #   end
 #
-# source://devise//lib/devise/models/authenticatable.rb#56
+# pkg:gem/devise#lib/devise/models/authenticatable.rb:55
 module Devise::Models::Authenticatable
-  include ::ActiveSupport::Deprecation::DeprecatedConstantAccessor
   extend ::ActiveSupport::Concern
   include GeneratedInstanceMethods
 
   mixes_in_class_methods GeneratedClassMethods
   mixes_in_class_methods ::Devise::Models::Authenticatable::ClassMethods
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/authenticatable.rb#93
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:89
   def active_for_authentication?; end
 
-  # source://devise//lib/devise/models/authenticatable.rb#101
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:97
   def authenticatable_salt; end
 
-  # source://devise//lib/devise/models/authenticatable.rb#97
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:93
   def inactive_message; end
 
   # Redefine inspect using serializable_hash, to ensure we don't accidentally
   # leak passwords into exceptions.
   #
-  # source://devise//lib/devise/models/authenticatable.rb#124
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:120
   def inspect; end
 
   # Redefine serializable_hash in models for more secure defaults.
@@ -2538,10 +2267,10 @@ module Devise::Models::Authenticatable
   # and passing a new list of attributes you want to exempt. All attributes
   # given to :except will simply add names to exempt to Devise internal list.
   #
-  # source://devise//lib/devise/models/authenticatable.rb#109
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:105
   def serializable_hash(options = T.unsafe(nil)); end
 
-  # source://devise//lib/devise/models/authenticatable.rb#89
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:85
   def unauthenticated_message; end
 
   # Check if the current object is valid for authentication. This method and
@@ -2551,20 +2280,18 @@ module Devise::Models::Authenticatable
   # However, you should not overwrite this method, you should overwrite active_for_authentication?
   # and inactive_message instead.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/authenticatable.rb#85
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:81
   def valid_for_authentication?; end
 
   protected
 
-  # source://devise//lib/devise/models/authenticatable.rb#218
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:206
   def apply_to_attribute_or_variable(attr, method); end
 
-  # source://devise//lib/devise/models/authenticatable.rb#133
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:129
   def devise_mailer; end
 
-  # source://devise//lib/devise/models/authenticatable.rb#210
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:198
   def downcase_keys; end
 
   # This is an internal method called every time Devise needs
@@ -2620,24 +2347,21 @@ module Devise::Models::Authenticatable
   #         # Deliver later with Active Job's `deliver_later`
   #         if message.respond_to?(:deliver_later)
   #           message.deliver_later
-  #         # Remove once we move to Rails 4.2+ only, as `deliver` is deprecated.
-  #         elsif message.respond_to?(:deliver_now)
-  #           message.deliver_now
   #         else
-  #           message.deliver
+  #           message.deliver_now
   #         end
   #       end
   #
   #     end
   #
-  # source://devise//lib/devise/models/authenticatable.rb#200
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:193
   def send_devise_notification(notification, *args); end
 
-  # source://devise//lib/devise/models/authenticatable.rb#214
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:202
   def strip_whitespace; end
 
   class << self
-    # source://devise//lib/devise/models/authenticatable.rb#75
+    # pkg:gem/devise#lib/devise/models/authenticatable.rb:71
     def required_fields(klass); end
   end
 
@@ -2653,21 +2377,21 @@ module Devise::Models::Authenticatable
   end
 end
 
-# source://devise//lib/devise/models/authenticatable.rb#232
+# pkg:gem/devise#lib/devise/models/authenticatable.rb:220
 module Devise::Models::Authenticatable::ClassMethods
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def authentication_keys; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def authentication_keys=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def case_insensitive_keys; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def case_insensitive_keys=(value); end
 
-  # source://devise//lib/devise/models/authenticatable.rb#279
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:267
   def find_first_by_auth_conditions(tainted_conditions, opts = T.unsafe(nil)); end
 
   # Find first record based on conditions given (ie by the sign in form).
@@ -2690,86 +2414,82 @@ module Devise::Models::Authenticatable::ClassMethods
   # an e-mail for password reset. In such cases, find_for_authentication
   # is not called.
   #
-  # source://devise//lib/devise/models/authenticatable.rb#275
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:263
   def find_for_authentication(tainted_conditions); end
 
   # Find or initialize a record setting an error if it can't be found.
   #
-  # source://devise//lib/devise/models/authenticatable.rb#284
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:272
   def find_or_initialize_with_error_by(attribute, value, error = T.unsafe(nil)); end
 
   # Find or initialize a record with group of attributes based on a list of required attributes.
   #
-  # source://devise//lib/devise/models/authenticatable.rb#289
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:277
   def find_or_initialize_with_errors(required_attributes, attributes, error = T.unsafe(nil)); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def http_authenticatable; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def http_authenticatable=(value); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/authenticatable.rb#251
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:239
   def http_authenticatable?(strategy); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def http_authentication_key; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def http_authentication_key=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def params_authenticatable; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def params_authenticatable=(value); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/authenticatable.rb#246
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:234
   def params_authenticatable?(strategy); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def request_keys; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def request_keys=(value); end
 
-  # source://devise//lib/devise/models/authenticatable.rb#241
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:229
   def serialize_from_session(key, salt); end
 
-  # source://devise//lib/devise/models/authenticatable.rb#237
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:225
   def serialize_into_session(record); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def skip_session_storage; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def skip_session_storage=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def strip_whitespace_keys; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
   def strip_whitespace_keys=(value); end
 
   protected
 
-  # source://devise//lib/devise/models/authenticatable.rb#308
+  # pkg:gem/devise#lib/devise/models/authenticatable.rb:296
   def devise_parameter_filter; end
 
   class << self
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
     def available_configs; end
 
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/authenticatable.rb:221
     def available_configs=(_arg0); end
   end
 end
 
-# source://devise//lib/devise/models/authenticatable.rb#59
+# pkg:gem/devise#lib/devise/models/authenticatable.rb:58
 Devise::Models::Authenticatable::UNSAFE_ATTRIBUTES_FOR_SERIALIZATION = T.let(T.unsafe(nil), Array)
 
 # Confirmable is responsible to verify if an account is already confirmed to
@@ -2812,13 +2532,13 @@ Devise::Models::Authenticatable::UNSAFE_ATTRIBUTES_FOR_SERIALIZATION = T.let(T.u
 #   User.find(1).confirmed?    # true/false
 #   User.find(1).send_confirmation_instructions # manually send instructions
 #
-# source://devise//lib/devise/models/confirmable.rb#45
+# pkg:gem/devise#lib/devise/models/confirmable.rb:45
 module Devise::Models::Confirmable
   extend ::ActiveSupport::Concern
 
   mixes_in_class_methods ::Devise::Models::Confirmable::ClassMethods
 
-  # source://devise//lib/devise/models/confirmable.rb#61
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:61
   def initialize(*args, &block); end
 
   # Overwrites active_for_authentication? for confirmation
@@ -2826,65 +2546,59 @@ module Devise::Models::Confirmable
   # is already confirmed, it should never be blocked. Otherwise we need to
   # calculate if the confirm time has not expired for this user.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/confirmable.rb#144
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:144
   def active_for_authentication?; end
 
   # Confirm a user by setting it's confirmed_at to actual time. If the user
   # is already confirmed, add an error to email field. If the user is invalid
   # add errors
   #
-  # source://devise//lib/devise/models/confirmable.rb#79
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:79
   def confirm(args = T.unsafe(nil)); end
 
   # Verifies whether a user is confirmed or not
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/confirmable.rb#106
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:106
   def confirmed?; end
 
   # The message to be shown if the account is inactive.
   #
-  # source://devise//lib/devise/models/confirmable.rb#149
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:149
   def inactive_message; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/confirmable.rb#110
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:110
   def pending_reconfirmation?; end
 
   # Resend confirmation token.
   # Regenerates the token if the period is expired.
   #
-  # source://devise//lib/devise/models/confirmable.rb#134
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:134
   def resend_confirmation_instructions; end
 
   # Send confirmation instructions by email
   #
-  # source://devise//lib/devise/models/confirmable.rb#115
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:115
   def send_confirmation_instructions; end
 
-  # source://devise//lib/devise/models/confirmable.rb#124
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:124
   def send_reconfirmation_instructions; end
 
   # If you don't want confirmation to be sent on create, neither a code
   # to be generated, call skip_confirmation!
   #
-  # source://devise//lib/devise/models/confirmable.rb#155
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:155
   def skip_confirmation!; end
 
   # Skips sending the confirmation/reconfirmation notification email after_create/after_update. Unlike
   # #skip_confirmation!, record still requires confirmation.
   #
-  # source://devise//lib/devise/models/confirmable.rb#161
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:161
   def skip_confirmation_notification!; end
 
   # If you don't want reconfirmation to be sent, neither a code
   # to be generated, call skip_reconfirmation!
   #
-  # source://devise//lib/devise/models/confirmable.rb#167
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:167
   def skip_reconfirmation!; end
 
   protected
@@ -2899,7 +2613,7 @@ module Devise::Models::Confirmable
   #     self.update_attribute(:invite_code, nil)
   #   end
   #
-  # source://devise//lib/devise/models/confirmable.rb#308
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:310
   def after_confirmation; end
 
   # Checks if the user confirmation happens before the token becomes invalid
@@ -2914,9 +2628,7 @@ module Devise::Models::Confirmable
   #   # confirm_within = nil
   #   confirmation_period_expired?  # will always return false
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/confirmable.rb#232
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:232
   def confirmation_period_expired?; end
 
   # Checks if the confirmation for the user is within the limit time.
@@ -2941,83 +2653,71 @@ module Devise::Models::Confirmable
   #   # allow_unconfirmed_access_for = nil
   #   confirmation_period_valid?   # will always return true
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/confirmable.rb#213
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:213
   def confirmation_period_valid?; end
 
   # Callback to overwrite if confirmation is required or not.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/confirmable.rb#187
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:187
   def confirmation_required?; end
 
   # Generates a new random token for confirmation, and stores
   # the time this token is being generated in confirmation_sent_at
   #
-  # source://devise//lib/devise/models/confirmable.rb#248
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:248
   def generate_confirmation_token; end
 
-  # source://devise//lib/devise/models/confirmable.rb#257
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:257
   def generate_confirmation_token!; end
 
   # Checks whether the record requires any confirmation.
   #
-  # source://devise//lib/devise/models/confirmable.rb#237
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:237
   def pending_any_confirmation; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/confirmable.rb#270
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:272
   def postpone_email_change?; end
 
-  # source://devise//lib/devise/models/confirmable.rb#262
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:261
   def postpone_email_change_until_confirmation_and_regenerate_confirmation_token; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/confirmable.rb#280
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:282
   def reconfirmation_required?; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/confirmable.rb#284
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:286
   def send_confirmation_notification?; end
 
   # With reconfirmable, notify the original email when the user first
   # requests the email change, instead of when the change is confirmed.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/confirmable.rb#290
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:292
   def send_email_changed_notification?; end
 
   # A callback method used to deliver confirmation
   # instructions on creation. This can be overridden
   # in models to map to a nice sign up e-mail.
   #
-  # source://devise//lib/devise/models/confirmable.rb#182
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:182
   def send_on_create_confirmation_instructions; end
 
   # To not require reconfirmation after creating with #save called in a
   # callback call skip_create_confirmation!
   #
-  # source://devise//lib/devise/models/confirmable.rb#175
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:175
   def skip_reconfirmation_in_callback!; end
 
   class << self
-    # source://devise//lib/devise/models/confirmable.rb#70
+    # pkg:gem/devise#lib/devise/models/confirmable.rb:70
     def required_fields(klass); end
   end
 end
 
-# source://devise//lib/devise/models/confirmable.rb#311
+# pkg:gem/devise#lib/devise/models/confirmable.rb:313
 module Devise::Models::Confirmable::ClassMethods
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:367
   def allow_unconfirmed_access_for; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:367
   def allow_unconfirmed_access_for=(value); end
 
   # Find a user by its confirmation token and try to confirm it.
@@ -3025,30 +2725,30 @@ module Devise::Models::Confirmable::ClassMethods
   # If the user is already confirmed, create an error for the user
   # Options must have the confirmation_token
   #
-  # source://devise//lib/devise/models/confirmable.rb#329
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:331
   def confirm_by_token(confirmation_token); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:367
   def confirm_within; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:367
   def confirm_within=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:367
   def confirmation_keys; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:367
   def confirmation_keys=(value); end
 
   # Find a record for confirmation by unconfirmed email field
   #
-  # source://devise//lib/devise/models/confirmable.rb#357
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:359
   def find_by_unconfirmed_email_with_errors(attributes = T.unsafe(nil)); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:367
   def reconfirmable; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:367
   def reconfirmable=(value); end
 
   # Attempt to find a user by its email. If a record is found, send new
@@ -3056,14 +2756,14 @@ module Devise::Models::Confirmable::ClassMethods
   # field. If no user is found, returns a new user with an email not found error.
   # Options must contain the user email
   #
-  # source://devise//lib/devise/models/confirmable.rb#316
+  # pkg:gem/devise#lib/devise/models/confirmable.rb:318
   def send_confirmation_instructions(attributes = T.unsafe(nil)); end
 
   class << self
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/confirmable.rb:367
     def available_configs; end
 
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/confirmable.rb:367
     def available_configs=(_arg0); end
   end
 end
@@ -3092,13 +2792,13 @@ end
 #
 #    User.find(1).valid_password?('password123')         # returns true/false
 #
-# source://devise//lib/devise/models/database_authenticatable.rb#31
+# pkg:gem/devise#lib/devise/models/database_authenticatable.rb:31
 module Devise::Models::DatabaseAuthenticatable
   extend ::ActiveSupport::Concern
 
   mixes_in_class_methods ::Devise::Models::DatabaseAuthenticatable::ClassMethods
 
-  # source://devise//lib/devise/models/database_authenticatable.rb#42
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:42
   def initialize(*args, &block); end
 
   # A callback initiated after successfully authenticating. This can be
@@ -3111,51 +2811,51 @@ module Devise::Models::DatabaseAuthenticatable
   #     self.update_attribute(:invite_code, nil)
   #   end
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#172
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:154
   def after_database_authentication; end
 
   # A reliable way to expose the salt regardless of the implementation.
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#176
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:158
   def authenticatable_salt; end
 
   # Set password and password confirmation to nil
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#76
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:76
   def clean_up_passwords; end
 
   # Destroy record when :current_password matches, otherwise returns
   # error on :current_password. It also automatically rejects
   # :current_password if it is blank.
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#150
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:132
   def destroy_with_password(current_password); end
 
   # Generates a hashed password based on the given value.
   # For legacy reasons, we use `encrypted_password` to store
   # the hashed password.
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#65
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:65
   def password=(new_password); end
 
   # Send notification to user when email changes.
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#181
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:163
   def send_email_changed_notification; end
 
   # Send notification to user when password changes.
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#186
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:168
   def send_password_change_notification; end
 
   # Skips sending the email changed notification after_update
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#49
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:49
   def skip_email_changed_notification!; end
 
   # Skips sending the password change notification after_update
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#54
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:54
   def skip_password_change_notification!; end
 
   # Update record attributes when :current_password matches, otherwise
@@ -3166,8 +2866,8 @@ module Devise::Models::DatabaseAuthenticatable
   # their password). In case the password field is rejected, the confirmation
   # is also rejected as long as it is also blank.
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#87
-  def update_with_password(params, *options); end
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:87
+  def update_with_password(params); end
 
   # Updates record attributes without asking for the current password.
   # Never allows a change to the current password. If you are using this
@@ -3176,19 +2876,17 @@ module Devise::Models::DatabaseAuthenticatable
   #
   # Example:
   #
-  #   def update_without_password(params, *options)
+  #   def update_without_password(params)
   #     params.delete(:email)
   #     super(params)
   #   end
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#129
-  def update_without_password(params, *options); end
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:120
+  def update_without_password(params); end
 
   # Verifies whether a password (ie from sign in) is the user password.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/database_authenticatable.rb#71
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:71
   def valid_password?(password); end
 
   protected
@@ -3199,64 +2897,60 @@ module Devise::Models::DatabaseAuthenticatable
   # See https://github.com/heartcombo/devise-encryptable for examples
   # of other hashing engines.
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#197
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:179
   def password_digest(password); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/database_authenticatable.rb#201
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:183
   def send_email_changed_notification?; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/database_authenticatable.rb#205
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:187
   def send_password_change_notification?; end
 
   class << self
-    # source://devise//lib/devise/models/database_authenticatable.rb#58
+    # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:58
     def required_fields(klass); end
   end
 end
 
-# source://devise//lib/devise/models/database_authenticatable.rb#209
+# pkg:gem/devise#lib/devise/models/database_authenticatable.rb:191
 module Devise::Models::DatabaseAuthenticatable::ClassMethods
   # We assume this method already gets the sanitized values from the
   # DatabaseAuthenticatable strategy. If you are using this method on
   # your own, be sure to sanitize the conditions hash to only include
   # the proper fields.
   #
-  # source://devise//lib/devise/models/database_authenticatable.rb#216
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:198
   def find_for_database_authentication(conditions); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:192
   def pepper; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:192
   def pepper=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:192
   def send_email_changed_notification; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:192
   def send_email_changed_notification=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:192
   def send_password_change_notification; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:192
   def send_password_change_notification=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:192
   def stretches; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:192
   def stretches=(value); end
 
   class << self
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:192
     def available_configs; end
 
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/database_authenticatable.rb:192
     def available_configs=(_arg0); end
   end
 end
@@ -3278,7 +2972,7 @@ end
 #   * +unlock_in+: the time you want to unlock the user after lock happens. Only available when unlock_strategy is :time or :both.
 #   * +unlock_keys+: the keys you want to use when locking and unlocking an account
 #
-# source://devise//lib/devise/models/lockable.rb#24
+# pkg:gem/devise#lib/devise/models/lockable.rb:24
 module Devise::Models::Lockable
   extend ::ActiveSupport::Concern
 
@@ -3286,26 +2980,22 @@ module Devise::Models::Lockable
 
   # Verifies whether a user is locked or not.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/lockable.rb#69
+  # pkg:gem/devise#lib/devise/models/lockable.rb:69
   def access_locked?; end
 
-  # Overwrites active_for_authentication? from Devise::Models::Activatable for locking purposes
+  # Overwrites active_for_authentication? from Devise::Models::Authenticatable for locking purposes
   # by verifying whether a user is active to sign in or not based on locked?
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/lockable.rb#89
+  # pkg:gem/devise#lib/devise/models/lockable.rb:89
   def active_for_authentication?; end
 
   # Overwrites invalid_message from Devise::Models::Authenticatable to define
   # the correct reason for blocking the sign in.
   #
-  # source://devise//lib/devise/models/lockable.rb#95
+  # pkg:gem/devise#lib/devise/models/lockable.rb:95
   def inactive_message; end
 
-  # source://devise//lib/devise/models/lockable.rb#122
+  # pkg:gem/devise#lib/devise/models/lockable.rb:122
   def increment_failed_attempts; end
 
   # Lock a user setting its locked_at to actual time.
@@ -3313,103 +3003,93 @@ module Devise::Models::Lockable
   #   when you lock access, you could pass the next hash
   #   `{ send_instructions: false } as option`.
   #
-  # source://devise//lib/devise/models/lockable.rb#42
+  # pkg:gem/devise#lib/devise/models/lockable.rb:42
   def lock_access!(opts = T.unsafe(nil)); end
 
-  # source://devise//lib/devise/models/lockable.rb#27
+  # pkg:gem/devise#lib/devise/models/lockable.rb:27
   def lock_strategy_enabled?(*_arg0, **_arg1, &_arg2); end
 
   # Resend the unlock instructions if the user is locked.
   #
-  # source://devise//lib/devise/models/lockable.rb#83
+  # pkg:gem/devise#lib/devise/models/lockable.rb:83
   def resend_unlock_instructions; end
 
   # Resets failed attempts counter to 0.
   #
-  # source://devise//lib/devise/models/lockable.rb#61
+  # pkg:gem/devise#lib/devise/models/lockable.rb:61
   def reset_failed_attempts!; end
 
   # Send unlock instructions by email
   #
-  # source://devise//lib/devise/models/lockable.rb#74
+  # pkg:gem/devise#lib/devise/models/lockable.rb:74
   def send_unlock_instructions; end
 
-  # source://devise//lib/devise/models/lockable.rb#127
+  # pkg:gem/devise#lib/devise/models/lockable.rb:127
   def unauthenticated_message; end
 
   # Unlock a user by cleaning locked_at and failed_attempts.
   #
-  # source://devise//lib/devise/models/lockable.rb#53
+  # pkg:gem/devise#lib/devise/models/lockable.rb:53
   def unlock_access!; end
 
-  # source://devise//lib/devise/models/lockable.rb#27
+  # pkg:gem/devise#lib/devise/models/lockable.rb:27
   def unlock_strategy_enabled?(*_arg0, **_arg1, &_arg2); end
 
   # Overwrites valid_for_authentication? from Devise::Models::Authenticatable
   # for verifying whether a user is allowed to sign in or not. If the user
   # is locked, it should never be allowed.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/lockable.rb#102
+  # pkg:gem/devise#lib/devise/models/lockable.rb:102
   def valid_for_authentication?; end
 
   protected
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/lockable.rb#143
+  # pkg:gem/devise#lib/devise/models/lockable.rb:143
   def attempts_exceeded?; end
 
   # Checks whether the record is locked or not, yielding to the block
   # if it's locked, otherwise adds an error to email.
   #
-  # source://devise//lib/devise/models/lockable.rb#162
+  # pkg:gem/devise#lib/devise/models/lockable.rb:162
   def if_access_locked; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/lockable.rb#147
+  # pkg:gem/devise#lib/devise/models/lockable.rb:147
   def last_attempt?; end
 
   # Tells if the lock is expired if :time unlock strategy is active
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/lockable.rb#152
+  # pkg:gem/devise#lib/devise/models/lockable.rb:152
   def lock_expired?; end
 
   class << self
-    # source://devise//lib/devise/models/lockable.rb#29
+    # pkg:gem/devise#lib/devise/models/lockable.rb:29
     def required_fields(klass); end
   end
 end
 
-# source://devise//lib/devise/models/lockable.rb#171
+# pkg:gem/devise#lib/devise/models/lockable.rb:171
 module Devise::Models::Lockable::ClassMethods
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def last_attempt_warning; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def last_attempt_warning=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def lock_strategy; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def lock_strategy=(value); end
 
   # Is the lock enabled for the given lock strategy?
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/lockable.rb#206
+  # pkg:gem/devise#lib/devise/models/lockable.rb:206
   def lock_strategy_enabled?(strategy); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def maximum_attempts; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def maximum_attempts=(value); end
 
   # Attempt to find a user by its unlock keys. If a record is found, send new
@@ -3417,7 +3097,7 @@ module Devise::Models::Lockable::ClassMethods
   # with an email not found error.
   # Options must contain the user's unlock keys
   #
-  # source://devise//lib/devise/models/lockable.rb#179
+  # pkg:gem/devise#lib/devise/models/lockable.rb:179
   def send_unlock_instructions(attributes = T.unsafe(nil)); end
 
   # Find a user by its unlock token and try to unlock it.
@@ -3425,56 +3105,52 @@ module Devise::Models::Lockable::ClassMethods
   # If the user is not locked, creates an error for the user
   # Options must have the unlock_token
   #
-  # source://devise//lib/devise/models/lockable.rb#189
+  # pkg:gem/devise#lib/devise/models/lockable.rb:189
   def unlock_access_by_token(unlock_token); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def unlock_in; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def unlock_in=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def unlock_keys; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def unlock_keys=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def unlock_strategy; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/lockable.rb:210
   def unlock_strategy=(value); end
 
   # Is the unlock enabled for the given unlock strategy?
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/lockable.rb#200
+  # pkg:gem/devise#lib/devise/models/lockable.rb:200
   def unlock_strategy_enabled?(strategy); end
 
   class << self
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/lockable.rb:210
     def available_configs; end
 
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/lockable.rb:210
     def available_configs=(_arg0); end
   end
 end
 
 # List of strategies that are enabled/supported if :both is used.
 #
-# source://devise//lib/devise/models/lockable.rb#173
+# pkg:gem/devise#lib/devise/models/lockable.rb:173
 Devise::Models::Lockable::ClassMethods::BOTH_STRATEGIES = T.let(T.unsafe(nil), Array)
 
-# source://devise//lib/devise/models.rb#5
+# pkg:gem/devise#lib/devise/models.rb:5
 class Devise::Models::MissingAttribute < ::StandardError
-  # @return [MissingAttribute] a new instance of MissingAttribute
-  #
-  # source://devise//lib/devise/models.rb#6
+  # pkg:gem/devise#lib/devise/models.rb:6
   def initialize(attributes); end
 
-  # source://devise//lib/devise/models.rb#10
+  # pkg:gem/devise#lib/devise/models.rb:10
   def message; end
 end
 
@@ -3496,7 +3172,7 @@ end
 #   # creates a new token and send it with instructions about how to reset the password
 #   User.find(1).send_reset_password_instructions
 #
-# source://devise//lib/devise/models/recoverable.rb#24
+# pkg:gem/devise#lib/devise/models/recoverable.rb:24
 module Devise::Models::Recoverable
   extend ::ActiveSupport::Concern
 
@@ -3505,7 +3181,7 @@ module Devise::Models::Recoverable
   # Update password saving the record and clearing token. Returns true if
   # the passwords are valid and the record was saved, false otherwise.
   #
-  # source://devise//lib/devise/models/recoverable.rb#37
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:37
   def reset_password(new_password, new_password_confirmation); end
 
   # Checks if the reset password token sent is within the limit time.
@@ -3528,42 +3204,38 @@ module Devise::Models::Recoverable
   #   # reset_password_within = 0.days
   #   reset_password_period_valid?   # will always return false
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/recoverable.rb#77
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:77
   def reset_password_period_valid?; end
 
   # Resets reset password token and send reset password instructions by email.
   # Returns the token sent in the e-mail.
   #
-  # source://devise//lib/devise/models/recoverable.rb#50
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:50
   def send_reset_password_instructions; end
 
   protected
 
   # Removes reset_password token
   #
-  # source://devise//lib/devise/models/recoverable.rb#84
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:84
   def clear_reset_password_token; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/recoverable.rb#102
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:102
   def clear_reset_password_token?; end
 
-  # source://devise//lib/devise/models/recoverable.rb#98
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:98
   def send_reset_password_instructions_notification(token); end
 
-  # source://devise//lib/devise/models/recoverable.rb#89
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:89
   def set_reset_password_token; end
 
   class << self
-    # source://devise//lib/devise/models/recoverable.rb#27
+    # pkg:gem/devise#lib/devise/models/recoverable.rb:27
     def required_fields(klass); end
   end
 end
 
-# source://devise//lib/devise/models/recoverable.rb#111
+# pkg:gem/devise#lib/devise/models/recoverable.rb:111
 module Devise::Models::Recoverable::ClassMethods
   # Attempt to find a user by its reset_password_token to reset its
   # password. If a user is found and token is still valid, reset its password and automatically
@@ -3571,19 +3243,19 @@ module Devise::Models::Recoverable::ClassMethods
   # containing an error in reset_password_token attribute.
   # Attributes must contain reset_password_token, password and confirmation
   #
-  # source://devise//lib/devise/models/recoverable.rb#134
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:134
   def reset_password_by_token(attributes = T.unsafe(nil)); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:152
   def reset_password_keys; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:152
   def reset_password_keys=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:152
   def reset_password_within; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:152
   def reset_password_within=(value); end
 
   # Attempt to find a user by its email. If a record is found, send new
@@ -3591,26 +3263,26 @@ module Devise::Models::Recoverable::ClassMethods
   # with an email not found error.
   # Attributes must contain the user's email
   #
-  # source://devise//lib/devise/models/recoverable.rb#123
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:123
   def send_reset_password_instructions(attributes = T.unsafe(nil)); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:152
   def sign_in_after_reset_password; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:152
   def sign_in_after_reset_password=(value); end
 
   # Attempt to find a user by password reset token. If a user is found, return it
   # If a user is not found, return nil
   #
-  # source://devise//lib/devise/models/recoverable.rb#114
+  # pkg:gem/devise#lib/devise/models/recoverable.rb:114
   def with_reset_password_token(token); end
 
   class << self
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/recoverable.rb:152
     def available_configs; end
 
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/recoverable.rb:152
     def available_configs=(_arg0); end
   end
 end
@@ -3618,19 +3290,19 @@ end
 # Registerable is responsible for everything related to registering a new
 # resource (ie user sign up).
 #
-# source://devise//lib/devise/models/registerable.rb#7
+# pkg:gem/devise#lib/devise/models/registerable.rb:7
 module Devise::Models::Registerable
   extend ::ActiveSupport::Concern
 
   mixes_in_class_methods ::Devise::Models::Registerable::ClassMethods
 
   class << self
-    # source://devise//lib/devise/models/registerable.rb#10
+    # pkg:gem/devise#lib/devise/models/registerable.rb:10
     def required_fields(klass); end
   end
 end
 
-# source://devise//lib/devise/models/registerable.rb#14
+# pkg:gem/devise#lib/devise/models/registerable.rb:14
 module Devise::Models::Registerable::ClassMethods
   # A convenience method that receives both parameters and session to
   # initialize a user. This can be used by OAuth, for example, to send
@@ -3639,20 +3311,20 @@ module Devise::Models::Registerable::ClassMethods
   # By default discards all information sent by the session by calling
   # new with params.
   #
-  # source://devise//lib/devise/models/registerable.rb#21
+  # pkg:gem/devise#lib/devise/models/registerable.rb:21
   def new_with_session(params, session); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/registerable.rb:25
   def sign_in_after_change_password; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/registerable.rb:25
   def sign_in_after_change_password=(value); end
 
   class << self
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/registerable.rb:25
     def available_configs; end
 
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/registerable.rb:25
     def available_configs=(_arg0); end
   end
 end
@@ -3690,7 +3362,7 @@ end
 #   # lookup the user based on the incoming cookie information
 #   User.serialize_from_cookie(cookie_string)
 #
-# source://devise//lib/devise/models/rememberable.rb#41
+# pkg:gem/devise#lib/devise/models/rememberable.rb:41
 module Devise::Models::Rememberable
   extend ::ActiveSupport::Concern
 
@@ -3706,104 +3378,96 @@ module Devise::Models::Rememberable
   #     self.update_attribute(:invite_code, nil)
   #   end
   #
-  # source://devise//lib/devise/models/rememberable.rb#100
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:100
   def after_remembered; end
 
-  # source://devise//lib/devise/models/rememberable.rb#69
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:69
   def extend_remember_period; end
 
   # If the record is persisted, remove the remember token (but only if
   # it exists), and save the record without validations.
   #
-  # source://devise//lib/devise/models/rememberable.rb#58
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:58
   def forget_me!; end
 
-  # source://devise//lib/devise/models/rememberable.rb#65
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:65
   def remember_expires_at; end
 
-  # Returns the value of attribute remember_me.
-  #
-  # source://devise//lib/devise/models/rememberable.rb#44
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:44
   def remember_me; end
 
-  # source://devise//lib/devise/models/rememberable.rb#50
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:50
   def remember_me!; end
 
-  # Sets the attribute remember_me
-  #
-  # @param value the value to set the attribute remember_me to.
-  #
-  # source://devise//lib/devise/models/rememberable.rb#44
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:44
   def remember_me=(_arg0); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/rememberable.rb#103
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:103
   def remember_me?(token, generated_at); end
 
-  # source://devise//lib/devise/models/rememberable.rb#86
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:86
   def rememberable_options; end
 
-  # source://devise//lib/devise/models/rememberable.rb#73
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:73
   def rememberable_value; end
 
   private
 
-  # source://devise//lib/devise/models/rememberable.rb#124
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:124
   def time_from_json(value); end
 
   class << self
-    # source://devise//lib/devise/models/rememberable.rb#46
+    # pkg:gem/devise#lib/devise/models/rememberable.rb:46
     def required_fields(klass); end
   end
 end
 
-# source://devise//lib/devise/models/rememberable.rb#132
+# pkg:gem/devise#lib/devise/models/rememberable.rb:132
 module Devise::Models::Rememberable::ClassMethods
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:154
   def expire_all_remember_me_on_sign_out; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:154
   def expire_all_remember_me_on_sign_out=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:154
   def extend_remember_period; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:154
   def extend_remember_period=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:154
   def remember_for; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:154
   def remember_for=(value); end
 
   # Generate a token checking if one does not already exist in the database.
   #
-  # source://devise//lib/devise/models/rememberable.rb#147
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:147
   def remember_token; end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:154
   def rememberable_options; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:154
   def rememberable_options=(value); end
 
   # Recreate the user based on the stored cookie
   #
-  # source://devise//lib/devise/models/rememberable.rb#139
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:139
   def serialize_from_cookie(*args); end
 
   # Create the cookie key using the record id and remember_token
   #
-  # source://devise//lib/devise/models/rememberable.rb#134
+  # pkg:gem/devise#lib/devise/models/rememberable.rb:134
   def serialize_into_cookie(record); end
 
   class << self
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/rememberable.rb:154
     def available_configs; end
 
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/rememberable.rb:154
     def available_configs=(_arg0); end
   end
 end
@@ -3823,7 +3487,7 @@ end
 #
 #   user.timedout?(30.minutes.ago)
 #
-# source://devise//lib/devise/models/timeoutable.rb#22
+# pkg:gem/devise#lib/devise/models/timeoutable.rb:22
 module Devise::Models::Timeoutable
   extend ::ActiveSupport::Concern
 
@@ -3831,33 +3495,31 @@ module Devise::Models::Timeoutable
 
   # Checks whether the user session has expired based on configured time.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/timeoutable.rb#30
+  # pkg:gem/devise#lib/devise/models/timeoutable.rb:30
   def timedout?(last_access); end
 
-  # source://devise//lib/devise/models/timeoutable.rb#34
+  # pkg:gem/devise#lib/devise/models/timeoutable.rb:34
   def timeout_in; end
 
   class << self
-    # source://devise//lib/devise/models/timeoutable.rb#25
+    # pkg:gem/devise#lib/devise/models/timeoutable.rb:25
     def required_fields(klass); end
   end
 end
 
-# source://devise//lib/devise/models/timeoutable.rb#40
+# pkg:gem/devise#lib/devise/models/timeoutable.rb:40
 module Devise::Models::Timeoutable::ClassMethods
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/timeoutable.rb:41
   def timeout_in; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/timeoutable.rb:41
   def timeout_in=(value); end
 
   class << self
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/timeoutable.rb:41
     def available_configs; end
 
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/timeoutable.rb:41
     def available_configs=(_arg0); end
   end
 end
@@ -3870,21 +3532,21 @@ end
 # * current_sign_in_ip - The remote ip updated when the user sign in
 # * last_sign_in_ip    - Holds the remote ip of the previous sign in
 #
-# source://devise//lib/devise/models/trackable.rb#15
+# pkg:gem/devise#lib/devise/models/trackable.rb:15
 module Devise::Models::Trackable
-  # source://devise//lib/devise/models/trackable.rb#20
+  # pkg:gem/devise#lib/devise/models/trackable.rb:20
   def update_tracked_fields(request); end
 
-  # source://devise//lib/devise/models/trackable.rb#33
+  # pkg:gem/devise#lib/devise/models/trackable.rb:33
   def update_tracked_fields!(request); end
 
   protected
 
-  # source://devise//lib/devise/models/trackable.rb#45
+  # pkg:gem/devise#lib/devise/models/trackable.rb:45
   def extract_ip_from(request); end
 
   class << self
-    # source://devise//lib/devise/models/trackable.rb#16
+    # pkg:gem/devise#lib/devise/models/trackable.rb:16
     def required_fields(klass); end
   end
 end
@@ -3901,174 +3563,148 @@ end
 #   * +email_regexp+: the regular expression used to validate e-mails;
 #   * +password_length+: a range expressing password length. Defaults to 6..128.
 #
-# source://devise//lib/devise/models/validatable.rb#17
+# Since +password_length+ is applied in a proc within `validates_length_of` it can be overridden
+# at runtime.
+#
+# pkg:gem/devise#lib/devise/models/validatable.rb:19
 module Devise::Models::Validatable
   protected
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/validatable.rb#59
+  # pkg:gem/devise#lib/devise/models/validatable.rb:61
   def email_required?; end
 
   # Checks whether a password is needed or not. For validations only.
   # Passwords are always required if it's a new record, or if the password
   # or confirmation are being set somewhere.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/models/validatable.rb#55
+  # pkg:gem/devise#lib/devise/models/validatable.rb:57
   def password_required?; end
 
   class << self
-    # source://devise//lib/devise/models/validatable.rb#41
+    # pkg:gem/devise#lib/devise/models/validatable.rb:43
     def assert_validations_api!(base); end
 
-    # @private
-    #
-    # source://devise//lib/devise/models/validatable.rb#26
+    # pkg:gem/devise#lib/devise/models/validatable.rb:28
     def included(base); end
 
-    # source://devise//lib/devise/models/validatable.rb#22
+    # pkg:gem/devise#lib/devise/models/validatable.rb:24
     def required_fields(klass); end
   end
 end
 
-# source://devise//lib/devise/models/validatable.rb#63
+# pkg:gem/devise#lib/devise/models/validatable.rb:65
 module Devise::Models::Validatable::ClassMethods
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/validatable.rb:66
   def email_regexp; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/validatable.rb:66
   def email_regexp=(value); end
 
-  # source://devise//lib/devise/models.rb#37
+  # pkg:gem/devise#lib/devise/models/validatable.rb:66
   def password_length; end
 
-  # source://devise//lib/devise/models.rb#47
+  # pkg:gem/devise#lib/devise/models/validatable.rb:66
   def password_length=(value); end
 
   class << self
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/validatable.rb:66
     def available_configs; end
 
-    # source://devise//lib/devise/models.rb#32
+    # pkg:gem/devise#lib/devise/models/validatable.rb:66
     def available_configs=(_arg0); end
   end
 end
 
 # All validations used by this module.
 #
-# source://devise//lib/devise/models/validatable.rb#19
+# pkg:gem/devise#lib/devise/models/validatable.rb:21
 Devise::Models::Validatable::VALIDATIONS = T.let(T.unsafe(nil), Array)
 
 # Strategies that do not require user input.
 #
-# source://devise//lib/devise.rb#61
+# pkg:gem/devise#lib/devise.rb:59
 Devise::NO_INPUT = T.let(T.unsafe(nil), Array)
 
-# source://devise//lib/devise/orm.rb#2
+# pkg:gem/devise#lib/devise/orm.rb:4
 module Devise::Orm
-  include ::Devise::Orm::DirtyTrackingOldMethods
+  include ::Devise::Orm::DirtyTrackingMongoidMethods
 
   class << self
-    # @return [Boolean]
-    #
-    # source://devise//lib/devise/orm.rb#3
+    # pkg:gem/devise#lib/devise/orm.rb:5
     def active_record?(model); end
 
-    # @return [Boolean]
-    #
-    # source://devise//lib/devise/orm.rb#7
-    def active_record_51?(model); end
-
-    # @private
-    #
-    # source://devise//lib/devise/orm.rb#11
+    # pkg:gem/devise#lib/devise/orm.rb:9
     def included(model); end
   end
 end
 
-# source://devise//lib/devise/orm.rb#19
-module Devise::Orm::DirtyTrackingNewMethods
-  # source://devise//lib/devise/orm.rb#20
+# pkg:gem/devise#lib/devise/orm.rb:17
+module Devise::Orm::DirtyTrackingActiveRecordMethods
+  # pkg:gem/devise#lib/devise/orm.rb:18
   def devise_email_before_last_save; end
 
-  # source://devise//lib/devise/orm.rb#24
+  # pkg:gem/devise#lib/devise/orm.rb:22
   def devise_email_in_database; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/orm.rb#40
+  # pkg:gem/devise#lib/devise/orm.rb:42
   def devise_respond_to_and_will_save_change_to_attribute?(attribute); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/orm.rb#28
+  # pkg:gem/devise#lib/devise/orm.rb:26
   def devise_saved_change_to_email?; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/orm.rb#32
+  # pkg:gem/devise#lib/devise/orm.rb:30
   def devise_saved_change_to_encrypted_password?; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/orm.rb#36
+  # pkg:gem/devise#lib/devise/orm.rb:38
+  def devise_unconfirmed_email_will_change!; end
+
+  # pkg:gem/devise#lib/devise/orm.rb:34
   def devise_will_save_change_to_email?; end
 end
 
-# source://devise//lib/devise/orm.rb#45
-module Devise::Orm::DirtyTrackingOldMethods
-  # source://devise//lib/devise/orm.rb#46
+# pkg:gem/devise#lib/devise/orm.rb:47
+module Devise::Orm::DirtyTrackingMongoidMethods
+  # pkg:gem/devise#lib/devise/orm.rb:48
   def devise_email_before_last_save; end
 
-  # source://devise//lib/devise/orm.rb#50
+  # pkg:gem/devise#lib/devise/orm.rb:52
   def devise_email_in_database; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/orm.rb#66
+  # pkg:gem/devise#lib/devise/orm.rb:75
   def devise_respond_to_and_will_save_change_to_attribute?(attribute); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/orm.rb#54
+  # pkg:gem/devise#lib/devise/orm.rb:56
   def devise_saved_change_to_email?; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/orm.rb#58
+  # pkg:gem/devise#lib/devise/orm.rb:60
   def devise_saved_change_to_encrypted_password?; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/orm.rb#62
+  # pkg:gem/devise#lib/devise/orm.rb:68
+  def devise_unconfirmed_email_will_change!; end
+
+  # pkg:gem/devise#lib/devise/orm.rb:64
   def devise_will_save_change_to_email?; end
 end
 
-# source://devise//lib/devise/parameter_filter.rb#4
+# pkg:gem/devise#lib/devise/parameter_filter.rb:4
 class Devise::ParameterFilter
-  # @return [ParameterFilter] a new instance of ParameterFilter
-  #
-  # source://devise//lib/devise/parameter_filter.rb#5
+  # pkg:gem/devise#lib/devise/parameter_filter.rb:5
   def initialize(case_insensitive_keys, strip_whitespace_keys); end
 
-  # source://devise//lib/devise/parameter_filter.rb#10
+  # pkg:gem/devise#lib/devise/parameter_filter.rb:10
   def filter(conditions); end
 
-  # source://devise//lib/devise/parameter_filter.rb#19
+  # pkg:gem/devise#lib/devise/parameter_filter.rb:19
   def filtered_hash_by_method_for_given_keys(conditions, method, condition_keys); end
 
   # Force keys to be string to avoid injection on mongoid related database.
   #
-  # source://devise//lib/devise/parameter_filter.rb#31
+  # pkg:gem/devise#lib/devise/parameter_filter.rb:31
   def stringify_params(conditions); end
 
   private
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/parameter_filter.rb#40
+  # pkg:gem/devise#lib/devise/parameter_filter.rb:40
   def param_requires_string_conversion?(value); end
 end
 
@@ -4106,11 +3742,9 @@ end
 #      end
 #    end
 #
-# source://devise//lib/devise/parameter_sanitizer.rb#37
+# pkg:gem/devise#lib/devise/parameter_sanitizer.rb:37
 class Devise::ParameterSanitizer
-  # @return [ParameterSanitizer] a new instance of ParameterSanitizer
-  #
-  # source://devise//lib/devise/parameter_sanitizer.rb#44
+  # pkg:gem/devise#lib/devise/parameter_sanitizer.rb:44
   def initialize(resource_class, resource_name, params); end
 
   # Add or remove new parameters to the permitted list of an +action+.
@@ -4142,7 +3776,7 @@ class Devise::ParameterSanitizer
   #
   # Returns nothing.
   #
-  # source://devise//lib/devise/parameter_sanitizer.rb#110
+  # pkg:gem/devise#lib/devise/parameter_sanitizer.rb:110
   def permit(action, keys: T.unsafe(nil), except: T.unsafe(nil), &block); end
 
   # Sanitize the parameters for a specific +action+.
@@ -4161,7 +3795,7 @@ class Devise::ParameterSanitizer
   # Returns an +ActiveSupport::HashWithIndifferentAccess+ with the permitted
   # attributes.
   #
-  # source://devise//lib/devise/parameter_sanitizer.rb#70
+  # pkg:gem/devise#lib/devise/parameter_sanitizer.rb:70
   def sanitize(action); end
 
   private
@@ -4171,127 +3805,81 @@ class Devise::ParameterSanitizer
   #
   # Returns an +ActiveSupport::HashWithIndifferentAccess+.
   #
-  # source://devise//lib/devise/parameter_sanitizer.rb#132
+  # pkg:gem/devise#lib/devise/parameter_sanitizer.rb:132
   def cast_to_hash(params); end
 
-  # source://devise//lib/devise/parameter_sanitizer.rb#137
+  # pkg:gem/devise#lib/devise/parameter_sanitizer.rb:136
   def default_params; end
 
-  # source://devise//lib/devise/parameter_sanitizer.rb#149
+  # pkg:gem/devise#lib/devise/parameter_sanitizer.rb:148
   def empty_params; end
 
-  # source://devise//lib/devise/parameter_sanitizer.rb#157
+  # pkg:gem/devise#lib/devise/parameter_sanitizer.rb:156
   def extract_auth_keys(klass); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/parameter_sanitizer.rb#145
+  # pkg:gem/devise#lib/devise/parameter_sanitizer.rb:144
   def hashable_resource_params?; end
 
-  # source://devise//lib/devise/parameter_sanitizer.rb#153
+  # pkg:gem/devise#lib/devise/parameter_sanitizer.rb:152
   def permit_keys(parameters, keys); end
 
-  # @raise [NotImplementedError]
-  #
-  # source://devise//lib/devise/parameter_sanitizer.rb#163
+  # pkg:gem/devise#lib/devise/parameter_sanitizer.rb:162
   def unknown_action!(action); end
 end
 
-# source://devise//lib/devise/parameter_sanitizer.rb#38
+# pkg:gem/devise#lib/devise/parameter_sanitizer.rb:38
 Devise::ParameterSanitizer::DEFAULT_PERMITTED_ATTRIBUTES = T.let(T.unsafe(nil), Hash)
 
-# source://devise//lib/devise.rb#56
+# pkg:gem/devise#lib/devise.rb:54
 Devise::ROUTES = T.let(T.unsafe(nil), Hash)
 
-# source://devise//lib/devise/rails/routes.rb#7
+# pkg:gem/devise#lib/devise/rails/routes.rb:7
 module Devise::RouteSet
-  # source://devise//lib/devise/rails/routes.rb#8
+  # pkg:gem/devise#lib/devise/rails/routes.rb:8
   def finalize!; end
 end
 
-# source://devise//lib/devise.rb#57
+# pkg:gem/devise#lib/devise.rb:55
 Devise::STRATEGIES = T.let(T.unsafe(nil), Hash)
 
-# source://devise//lib/devise/secret_key_finder.rb#4
-class Devise::SecretKeyFinder
-  # @return [SecretKeyFinder] a new instance of SecretKeyFinder
-  #
-  # source://devise//lib/devise/secret_key_finder.rb#5
-  def initialize(application); end
-
-  # source://devise//lib/devise/secret_key_finder.rb#9
-  def find; end
-
-  private
-
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/secret_key_finder.rb#23
-  def key_exists?(object); end
-end
-
-# source://devise//lib/devise.rb#42
+# pkg:gem/devise#lib/devise.rb:40
 module Devise::Strategies; end
 
 # This strategy should be used as basis for authentication strategies. It retrieves
 # parameters both from params or from http authorization headers. See database_authenticatable
 # for an example.
 #
-# source://devise//lib/devise/strategies/authenticatable.rb#10
+# pkg:gem/devise#lib/devise/strategies/authenticatable.rb:10
 class Devise::Strategies::Authenticatable < ::Devise::Strategies::Base
-  # Returns the value of attribute authentication_hash.
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#11
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:11
   def authentication_hash; end
 
-  # Sets the attribute authentication_hash
-  #
-  # @param value the value to set the attribute authentication_hash to.
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#11
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:11
   def authentication_hash=(_arg0); end
 
-  # Returns the value of attribute authentication_type.
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#11
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:11
   def authentication_type; end
 
-  # Sets the attribute authentication_type
-  #
-  # @param value the value to set the attribute authentication_type to.
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#11
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:11
   def authentication_type=(_arg0); end
 
   # Override and set to false for things like OmniAuth that technically
   # run through Authentication (user_set) very often, which would normally
   # reset CSRF data in the session
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#24
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:24
   def clean_up_csrf?; end
 
-  # Returns the value of attribute password.
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#11
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:11
   def password; end
 
-  # Sets the attribute password
-  #
-  # @param value the value to set the attribute password to.
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#11
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:11
   def password=(_arg0); end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#13
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:13
   def store?; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#17
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:17
   def valid?; end
 
   private
@@ -4299,63 +3887,57 @@ class Devise::Strategies::Authenticatable < ::Devise::Strategies::Base
   # Holds the authenticatable name for this class. Devise::Strategies::DatabaseAuthenticatable
   # becomes simply :database.
   #
-  # source://devise//lib/devise/strategies/authenticatable.rb#171
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:171
   def authenticatable_name; end
 
-  # source://devise//lib/devise/strategies/authenticatable.rb#136
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:136
   def authentication_keys; end
 
   # Helper to decode credentials from HTTP.
   #
-  # source://devise//lib/devise/strategies/authenticatable.rb#122
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:122
   def decode_credentials; end
 
   # Extract a hash with attributes:values from the http params.
   #
-  # source://devise//lib/devise/strategies/authenticatable.rb#98
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:98
   def http_auth_hash; end
 
   # Check if the model accepts this strategy as http authenticatable.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#83
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:83
   def http_authenticatable?; end
 
-  # source://devise//lib/devise/strategies/authenticatable.rb#140
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:140
   def http_authentication_key; end
 
   # Extract the appropriate subhash for authentication from params.
   #
-  # source://devise//lib/devise/strategies/authenticatable.rb#93
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:93
   def params_auth_hash; end
 
   # Check if the model accepts this strategy as params authenticatable.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#88
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:88
   def params_authenticatable?; end
 
-  # source://devise//lib/devise/strategies/authenticatable.rb#157
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:157
   def parse_authentication_key_values(hash, keys); end
 
   # Get values from params and set in the resource.
   #
-  # source://devise//lib/devise/strategies/authenticatable.rb#51
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:51
   def remember_me(resource); end
 
   # Should this resource be marked to be remembered?
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#56
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:56
   def remember_me?; end
 
-  # source://devise//lib/devise/strategies/authenticatable.rb#147
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:147
   def request_keys; end
 
-  # source://devise//lib/devise/strategies/authenticatable.rb#151
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:151
   def request_values; end
 
   # Check if this is a valid strategy for http authentication by:
@@ -4364,9 +3946,7 @@ class Devise::Strategies::Authenticatable < ::Devise::Strategies::Base
   #   * If any of the authorization headers were sent;
   #   * If all authentication keys are present;
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#66
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:66
   def valid_for_http_auth?; end
 
   # Check if this is a valid strategy for params authentication by:
@@ -4376,23 +3956,17 @@ class Devise::Strategies::Authenticatable < ::Devise::Strategies::Base
   #   * If the params[scope] returns a hash with credentials;
   #   * If all authentication keys are present;
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#77
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:77
   def valid_for_params_auth?; end
 
   # If the request is valid, finally check if params_auth_hash returns a hash.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#109
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:109
   def valid_params?; end
 
   # By default, a request is valid if the controller set the proper env variable.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#104
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:104
   def valid_params_request?; end
 
   # Note: unlike `Model.valid_password?`, this method does not actually
@@ -4400,9 +3974,7 @@ class Devise::Strategies::Authenticatable < ::Devise::Strategies::Base
   # the database. It only checks if the password is *present*. Do not rely
   # on this method for validating that a given password is correct.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/authenticatable.rb#117
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:117
   def valid_password?; end
 
   # Receives a resource and check if it is valid by calling valid_for_authentication?
@@ -4413,37 +3985,35 @@ class Devise::Strategies::Authenticatable < ::Devise::Strategies::Base
   # In case the resource can't be validated, it will fail with the given
   # unauthenticated_message.
   #
-  # source://devise//lib/devise/strategies/authenticatable.rb#37
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:37
   def validate(resource, &block); end
 
   # Sets the authentication hash and the password from params_auth_hash or http_auth_hash.
   #
-  # source://devise//lib/devise/strategies/authenticatable.rb#128
+  # pkg:gem/devise#lib/devise/strategies/authenticatable.rb:128
   def with_authentication_hash(auth_type, auth_values); end
 end
 
 # Base strategy for Devise. Responsible for verifying correct scope and mapping.
 #
-# source://devise//lib/devise/strategies/base.rb#6
+# pkg:gem/devise#lib/devise/strategies/base.rb:6
 class Devise::Strategies::Base < ::Warden::Strategies::Base
   # Checks if a valid scope was given for devise and find mapping based on this scope.
   #
-  # source://devise//lib/devise/strategies/base.rb#13
+  # pkg:gem/devise#lib/devise/strategies/base.rb:13
   def mapping; end
 
   # Whenever CSRF cannot be verified, we turn off any kind of storage
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/base.rb#8
+  # pkg:gem/devise#lib/devise/strategies/base.rb:8
   def store?; end
 end
 
 # Default strategy for signing in a user, based on their email and password in the database.
 #
-# source://devise//lib/devise/strategies/database_authenticatable.rb#8
+# pkg:gem/devise#lib/devise/strategies/database_authenticatable.rb:8
 class Devise::Strategies::DatabaseAuthenticatable < ::Devise::Strategies::Authenticatable
-  # source://devise//lib/devise/strategies/database_authenticatable.rb#9
+  # pkg:gem/devise#lib/devise/strategies/database_authenticatable.rb:9
   def authenticate!; end
 end
 
@@ -4452,13 +4022,13 @@ end
 # recreate the user from this cookie if it exists. Must be called *before*
 # authenticatable.
 #
-# source://devise//lib/devise/strategies/rememberable.rb#11
+# pkg:gem/devise#lib/devise/strategies/rememberable.rb:11
 class Devise::Strategies::Rememberable < ::Devise::Strategies::Authenticatable
   # To authenticate a user we deserialize the cookie and attempt finding
   # the record in the database. If the attempt fails, we pass to another
   # strategy handle the authentication.
   #
-  # source://devise//lib/devise/strategies/rememberable.rb#21
+  # pkg:gem/devise#lib/devise/strategies/rememberable.rb:21
   def authenticate!; end
 
   # No need to clean up the CSRF when using rememberable.
@@ -4467,40 +4037,32 @@ class Devise::Strategies::Rememberable < ::Devise::Strategies::Authenticatable
   # we would render a page on first access with all csrf
   # tokens expired.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/rememberable.rb#41
+  # pkg:gem/devise#lib/devise/strategies/rememberable.rb:41
   def clean_up_csrf?; end
 
   # A valid strategy for rememberable needs a remember token in the cookies.
   #
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/rememberable.rb#13
+  # pkg:gem/devise#lib/devise/strategies/rememberable.rb:13
   def valid?; end
 
   private
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/rememberable.rb#47
+  # pkg:gem/devise#lib/devise/strategies/rememberable.rb:47
   def extend_remember_me?(resource); end
 
-  # source://devise//lib/devise/strategies/rememberable.rb#59
+  # pkg:gem/devise#lib/devise/strategies/rememberable.rb:59
   def remember_cookie; end
 
-  # source://devise//lib/devise/strategies/rememberable.rb#55
+  # pkg:gem/devise#lib/devise/strategies/rememberable.rb:55
   def remember_key; end
 
-  # @return [Boolean]
-  #
-  # source://devise//lib/devise/strategies/rememberable.rb#51
+  # pkg:gem/devise#lib/devise/strategies/rememberable.rb:51
   def remember_me?; end
 end
 
 # True values used to check params
 #
-# source://devise//lib/devise.rb#64
+# pkg:gem/devise#lib/devise.rb:62
 Devise::TRUE_VALUES = T.let(T.unsafe(nil), Array)
 
 # Devise::Test::IntegrationHelpers is a helper module for facilitating
@@ -4520,7 +4082,7 @@ Devise::TRUE_VALUES = T.let(T.unsafe(nil), Array)
 #    end
 #  end
 #
-# source://devise//lib/devise.rb#47
+# pkg:gem/devise#lib/devise.rb:45
 module Devise::Test; end
 
 # `Devise::Test::ControllerHelpers` provides a facility to test controllers
@@ -4545,18 +4107,18 @@ module Devise::Test; end
 # using `Devise::Test::ControllerHelpers` since it is a stub of the actual
 # behavior. Such callbacks should be tested in your integration suite instead.
 #
-# source://devise//lib/devise/test/controller_helpers.rb#26
+# pkg:gem/devise#lib/devise/test/controller_helpers.rb:26
 module Devise::Test::ControllerHelpers
   extend ::ActiveSupport::Concern
 
   # Override process to consider warden.
   #
-  # source://devise//lib/devise/test/controller_helpers.rb#34
+  # pkg:gem/devise#lib/devise/test/controller_helpers.rb:34
   def process(*_arg0, **_arg1); end
 
   # We need to set up the environment variables and the response in the controller.
   #
-  # source://devise//lib/devise/test/controller_helpers.rb#43
+  # pkg:gem/devise#lib/devise/test/controller_helpers.rb:43
   def setup_controller_for_warden; end
 
   # sign_in a given resource by storing its keys in the session.
@@ -4570,8 +4132,8 @@ module Devise::Test::ControllerHelpers
   # sign_in users(:alice)
   # sign_in users(:alice), scope: :admin
   #
-  # source://devise//lib/devise/test/controller_helpers.rb#67
-  def sign_in(resource, deprecated = T.unsafe(nil), scope: T.unsafe(nil)); end
+  # pkg:gem/devise#lib/devise/test/controller_helpers.rb:67
+  def sign_in(resource, scope: T.unsafe(nil)); end
 
   # Sign out a given resource or scope by calling logout on Warden.
   # This method bypass any warden logout callback.
@@ -4581,12 +4143,12 @@ module Devise::Test::ControllerHelpers
   #   sign_out :user     # sign_out(scope)
   #   sign_out @user     # sign_out(resource)
   #
-  # source://devise//lib/devise/test/controller_helpers.rb#92
+  # pkg:gem/devise#lib/devise/test/controller_helpers.rb:82
   def sign_out(resource_or_scope); end
 
   # Quick access to Warden::Proxy.
   #
-  # source://devise//lib/devise/test/controller_helpers.rb#48
+  # pkg:gem/devise#lib/devise/test/controller_helpers.rb:48
   def warden; end
 
   protected
@@ -4594,14 +4156,14 @@ module Devise::Test::ControllerHelpers
   # Catch warden continuations and handle like the middleware would.
   # Returns nil when interrupted, otherwise the normal result of the block.
   #
-  # source://devise//lib/devise/test/controller_helpers.rb#103
+  # pkg:gem/devise#lib/devise/test/controller_helpers.rb:93
   def _catch_warden(&block); end
 
-  # source://devise//lib/devise/test/controller_helpers.rb#126
+  # pkg:gem/devise#lib/devise/test/controller_helpers.rb:116
   def _process_unauthenticated(env, options = T.unsafe(nil)); end
 end
 
-# source://devise//lib/devise/test/integration_helpers.rb#21
+# pkg:gem/devise#lib/devise/test/integration_helpers.rb:21
 module Devise::Test::IntegrationHelpers
   include ::Warden::Test::Helpers
 
@@ -4612,105 +4174,74 @@ module Devise::Test::IntegrationHelpers
   # * +scope+    - An optional +Symbol+ with the scope where the resource
   #                should be signed in with.
   #
-  # source://devise//lib/devise/test/integration_helpers.rb#37
+  # pkg:gem/devise#lib/devise/test/integration_helpers.rb:37
   def sign_in(resource, scope: T.unsafe(nil)); end
 
   # Signs out a specific scope from the session.
   #
   # * +resource_or_scope+ - The resource or scope that should be signed out.
   #
-  # source://devise//lib/devise/test/integration_helpers.rb#46
+  # pkg:gem/devise#lib/devise/test/integration_helpers.rb:46
   def sign_out(resource_or_scope); end
 
   protected
 
-  # source://devise//lib/devise/test/integration_helpers.rb#54
+  # pkg:gem/devise#lib/devise/test/integration_helpers.rb:54
   def setup_integration_for_devise; end
 
-  # source://devise//lib/devise/test/integration_helpers.rb#58
+  # pkg:gem/devise#lib/devise/test/integration_helpers.rb:58
   def teardown_integration_for_devise; end
 
   class << self
-    # @private
-    #
-    # source://devise//lib/devise/test/integration_helpers.rb#22
+    # pkg:gem/devise#lib/devise/test/integration_helpers.rb:22
     def included(base); end
   end
 end
 
-# source://devise//lib/devise/test_helpers.rb#4
-module Devise::TestHelpers
-  class << self
-    # @private
-    #
-    # source://devise//lib/devise/test_helpers.rb#5
-    def included(base); end
-  end
-end
-
-# source://devise//lib/devise/time_inflector.rb#6
+# pkg:gem/devise#lib/devise/time_inflector.rb:6
 class Devise::TimeInflector
   include ::ActionView::Helpers::DateHelper
 
   class << self
-    # Returns the value of attribute instance.
-    #
-    # source://devise//lib/devise/time_inflector.rb#10
+    # pkg:gem/devise#lib/devise/time_inflector.rb:10
     def instance; end
 
-    # source://devise//lib/devise/time_inflector.rb#11
+    # pkg:gem/devise#lib/devise/time_inflector.rb:11
     def time_ago_in_words(*_arg0, **_arg1, &_arg2); end
   end
 end
 
-# source://devise//lib/devise/token_generator.rb#6
+# pkg:gem/devise#lib/devise/token_generator.rb:6
 class Devise::TokenGenerator
-  # @return [TokenGenerator] a new instance of TokenGenerator
-  #
-  # source://devise//lib/devise/token_generator.rb#7
+  # pkg:gem/devise#lib/devise/token_generator.rb:7
   def initialize(key_generator, digest = T.unsafe(nil)); end
 
-  # source://devise//lib/devise/token_generator.rb#12
+  # pkg:gem/devise#lib/devise/token_generator.rb:12
   def digest(klass, column, value); end
 
-  # source://devise//lib/devise/token_generator.rb#16
+  # pkg:gem/devise#lib/devise/token_generator.rb:16
   def generate(klass, column); end
 
   private
 
-  # source://devise//lib/devise/token_generator.rb#28
+  # pkg:gem/devise#lib/devise/token_generator.rb:28
   def key_for(column); end
 end
 
-# source://devise//lib/devise.rb#58
+# pkg:gem/devise#lib/devise.rb:56
 Devise::URL_HELPERS = T.let(T.unsafe(nil), Hash)
 
-module DeviseHelper
-  def devise_error_messages!; end
-end
-
+module DeviseHelper; end
 module Warden::Mixins; end
 
-# source://devise//lib/devise/rails/warden_compat.rb#3
+# pkg:gem/devise#lib/devise/rails/warden_compat.rb:3
 module Warden::Mixins::Common
-  # source://devise//lib/devise/rails/warden_compat.rb#12
+  # pkg:gem/devise#lib/devise/rails/warden_compat.rb:12
   def cookies; end
 
-  # source://warden/1.2.9/lib/warden/mixins/common.rb#32
-  def params; end
-
-  # source://warden/1.2.9/lib/warden/mixins/common.rb#9
-  def raw_session; end
-
-  # source://devise//lib/devise/rails/warden_compat.rb#4
+  # pkg:gem/devise#lib/devise/rails/warden_compat.rb:4
   def request; end
 
-  # source://devise//lib/devise/rails/warden_compat.rb#8
+  # pkg:gem/devise#lib/devise/rails/warden_compat.rb:8
   def reset_session!; end
-
-  # source://warden/1.2.9/lib/warden/mixins/common.rb#9
-  def session; end
-
-  # source://warden/1.2.9/lib/warden/mixins/common.rb#25
-  def warden_cookies; end
 end

@@ -10,10 +10,10 @@ class QueueUpProcessAlertsJob
     sig { returns(String) }
     def perform_async; end
 
-    sig { params(interval: T.any(DateTime, Time)).returns(String) }
+    sig { params(interval: T.any(DateTime, Time, ActiveSupport::TimeWithZone)).returns(String) }
     def perform_at(interval); end
 
-    sig { params(interval: Numeric).returns(String) }
+    sig { params(interval: T.any(Numeric, ActiveSupport::Duration)).returns(String) }
     def perform_in(interval); end
   end
 end

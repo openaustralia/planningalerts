@@ -10,10 +10,10 @@ class ProcessAlertJob
     sig { params(id: ::Integer).returns(String) }
     def perform_async(id); end
 
-    sig { params(interval: T.any(DateTime, Time), id: ::Integer).returns(String) }
+    sig { params(interval: T.any(DateTime, Time, ActiveSupport::TimeWithZone), id: ::Integer).returns(String) }
     def perform_at(interval, id); end
 
-    sig { params(interval: Numeric, id: ::Integer).returns(String) }
+    sig { params(interval: T.any(Numeric, ActiveSupport::Duration), id: ::Integer).returns(String) }
     def perform_in(interval, id); end
   end
 end

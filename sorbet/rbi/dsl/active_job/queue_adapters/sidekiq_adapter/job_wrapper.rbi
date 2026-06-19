@@ -10,10 +10,10 @@ class ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper
     sig { params(job_data: T.untyped).returns(String) }
     def perform_async(job_data); end
 
-    sig { params(interval: T.any(DateTime, Time), job_data: T.untyped).returns(String) }
+    sig { params(interval: T.any(DateTime, Time, ActiveSupport::TimeWithZone), job_data: T.untyped).returns(String) }
     def perform_at(interval, job_data); end
 
-    sig { params(interval: Numeric, job_data: T.untyped).returns(String) }
+    sig { params(interval: T.any(Numeric, ActiveSupport::Duration), job_data: T.untyped).returns(String) }
     def perform_in(interval, job_data); end
   end
 end

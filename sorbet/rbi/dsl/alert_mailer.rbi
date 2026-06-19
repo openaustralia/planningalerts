@@ -7,13 +7,7 @@
 
 class AlertMailer
   class << self
-    sig do
-      params(
-        alert: ::Alert,
-        applications: T::Array[::Application],
-        comments: T::Array[::Comment]
-      ).returns(::ActionMailer::MessageDelivery)
-    end
-    def alert(alert:, applications: T.unsafe(nil), comments: T.unsafe(nil)); end
+    sig { params(args: T.untyped, _arg1: T.untyped, blk: T.untyped).returns(::ActionMailer::MessageDelivery) }
+    def alert(*args, **_arg1, &blk); end
   end
 end

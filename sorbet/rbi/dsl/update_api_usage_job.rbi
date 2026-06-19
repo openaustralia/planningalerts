@@ -10,10 +10,22 @@ class UpdateApiUsageJob
     sig { params(api_key_id: ::Integer, date_as_string: ::String).returns(String) }
     def perform_async(api_key_id, date_as_string); end
 
-    sig { params(interval: T.any(DateTime, Time), api_key_id: ::Integer, date_as_string: ::String).returns(String) }
+    sig do
+      params(
+        interval: T.any(DateTime, Time, ActiveSupport::TimeWithZone),
+        api_key_id: ::Integer,
+        date_as_string: ::String
+      ).returns(String)
+    end
     def perform_at(interval, api_key_id, date_as_string); end
 
-    sig { params(interval: Numeric, api_key_id: ::Integer, date_as_string: ::String).returns(String) }
+    sig do
+      params(
+        interval: T.any(Numeric, ActiveSupport::Duration),
+        api_key_id: ::Integer,
+        date_as_string: ::String
+      ).returns(String)
+    end
     def perform_in(interval, api_key_id, date_as_string); end
   end
 end

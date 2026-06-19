@@ -21,7 +21,7 @@ class LogApiCallJob
 
     sig do
       params(
-        interval: T.any(DateTime, Time),
+        interval: T.any(DateTime, Time, ActiveSupport::TimeWithZone),
         api_key: ::String,
         ip_address: ::String,
         query: ::String,
@@ -34,7 +34,7 @@ class LogApiCallJob
 
     sig do
       params(
-        interval: Numeric,
+        interval: T.any(Numeric, ActiveSupport::Duration),
         api_key: ::String,
         ip_address: ::String,
         query: ::String,

@@ -16,6 +16,16 @@ class User::HABTM_Roles
   sig { returns(NilClass) }
   def to_ary; end
 
+  class << self
+    sig do
+      params(
+        attributes: T.untyped,
+        block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
+      ).returns(::User::HABTM_Roles)
+    end
+    def new(attributes = nil, &block); end
+  end
+
   module CommonRelationMethods
     sig { params(block: T.nilable(T.proc.params(record: ::User::HABTM_Roles).returns(T.untyped))).returns(T::Boolean) }
     def any?(&block); end
@@ -23,6 +33,13 @@ class User::HABTM_Roles
     sig { params(column_name: T.any(String, Symbol)).returns(T.any(Integer, Float, BigDecimal)) }
     def average(column_name); end
 
+    sig { params(block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)).returns(::User::HABTM_Roles) }
+    sig do
+      params(
+        attributes: T::Array[T.untyped],
+        block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
     sig do
       params(
         attributes: T.untyped,
@@ -38,6 +55,13 @@ class User::HABTM_Roles
     sig { params(column_name: NilClass, block: T.proc.params(object: ::User::HABTM_Roles).void).returns(Integer) }
     def count(column_name = nil, &block); end
 
+    sig { params(block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)).returns(::User::HABTM_Roles) }
+    sig do
+      params(
+        attributes: T::Array[T.untyped],
+        block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
     sig do
       params(
         attributes: T.untyped,
@@ -46,6 +70,13 @@ class User::HABTM_Roles
     end
     def create(attributes = nil, &block); end
 
+    sig { params(block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)).returns(::User::HABTM_Roles) }
+    sig do
+      params(
+        attributes: T::Array[T.untyped],
+        block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
     sig do
       params(
         attributes: T.untyped,
@@ -56,6 +87,12 @@ class User::HABTM_Roles
 
     sig do
       params(
+        attributes: T::Array[T.untyped],
+        block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
+    sig do
+      params(
         attributes: T.untyped,
         block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
       ).returns(::User::HABTM_Roles)
@@ -64,14 +101,32 @@ class User::HABTM_Roles
 
     sig do
       params(
+        attributes: T::Array[T.untyped],
+        block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
+    sig do
+      params(
         attributes: T.untyped,
         block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
       ).returns(::User::HABTM_Roles)
     end
     def create_or_find_by!(attributes, &block); end
 
+    sig { returns(Integer) }
+    def delete_all; end
+
+    sig { params(args: T.untyped).returns(Integer) }
+    def delete_by(*args); end
+
     sig { returns(T::Array[::User::HABTM_Roles]) }
     def destroy_all; end
+
+    sig { returns(T::Array[::User::HABTM_Roles]) }
+    def destroy_all; end
+
+    sig { params(args: T.untyped).returns(T::Array[::User::HABTM_Roles]) }
+    def destroy_by(*args); end
 
     sig { params(conditions: T.untyped).returns(T::Boolean) }
     def exists?(conditions = :none); end
@@ -112,7 +167,7 @@ class User::HABTM_Roles
         finish: T.untyped,
         batch_size: Integer,
         error_on_ignore: T.untyped,
-        order: Symbol,
+        order: T.any(Symbol, T::Array[Symbol]),
         block: T.proc.params(object: ::User::HABTM_Roles).void
       ).void
     end
@@ -122,7 +177,7 @@ class User::HABTM_Roles
         finish: T.untyped,
         batch_size: Integer,
         error_on_ignore: T.untyped,
-        order: Symbol
+        order: T.any(Symbol, T::Array[Symbol])
       ).returns(T::Enumerator[::User::HABTM_Roles])
     end
     def find_each(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, order: :asc, &block); end
@@ -133,7 +188,7 @@ class User::HABTM_Roles
         finish: T.untyped,
         batch_size: Integer,
         error_on_ignore: T.untyped,
-        order: Symbol,
+        order: T.any(Symbol, T::Array[Symbol]),
         block: T.proc.params(object: T::Array[::User::HABTM_Roles]).void
       ).void
     end
@@ -143,11 +198,17 @@ class User::HABTM_Roles
         finish: T.untyped,
         batch_size: Integer,
         error_on_ignore: T.untyped,
-        order: Symbol
-      ).returns(T::Enumerator[T::Enumerator[::User::HABTM_Roles]])
+        order: T.any(Symbol, T::Array[Symbol])
+      ).returns(T::Enumerator[T::Array[::User::HABTM_Roles]])
     end
     def find_in_batches(start: nil, finish: nil, batch_size: 1000, error_on_ignore: nil, order: :asc, &block); end
 
+    sig do
+      params(
+        attributes: T::Array[T.untyped],
+        block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
     sig do
       params(
         attributes: T.untyped,
@@ -158,12 +219,24 @@ class User::HABTM_Roles
 
     sig do
       params(
+        attributes: T::Array[T.untyped],
+        block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
+    sig do
+      params(
         attributes: T.untyped,
         block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
       ).returns(::User::HABTM_Roles)
     end
     def find_or_create_by!(attributes, &block); end
 
+    sig do
+      params(
+        attributes: T::Array[T.untyped],
+        block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
     sig do
       params(
         attributes: T.untyped,
@@ -181,7 +254,7 @@ class User::HABTM_Roles
     sig { params(arg: T.untyped, args: T.untyped).returns(::User::HABTM_Roles) }
     def find_sole_by(arg, *args); end
 
-    sig { params(limit: NilClass).returns(T.nilable(::User::HABTM_Roles)) }
+    sig { returns(T.nilable(::User::HABTM_Roles)) }
     sig { params(limit: Integer).returns(T::Array[::User::HABTM_Roles]) }
     def first(limit = nil); end
 
@@ -200,7 +273,7 @@ class User::HABTM_Roles
     sig { returns(::User::HABTM_Roles) }
     def fourth!; end
 
-    sig { returns(Array) }
+    sig { returns(T::Array[T.untyped]) }
     def ids; end
 
     sig do
@@ -210,7 +283,7 @@ class User::HABTM_Roles
         finish: T.untyped,
         load: T.untyped,
         error_on_ignore: T.untyped,
-        order: Symbol,
+        order: T.any(Symbol, T::Array[Symbol]),
         use_ranges: T.untyped,
         block: T.proc.params(object: PrivateRelation).void
       ).void
@@ -222,7 +295,7 @@ class User::HABTM_Roles
         finish: T.untyped,
         load: T.untyped,
         error_on_ignore: T.untyped,
-        order: Symbol,
+        order: T.any(Symbol, T::Array[Symbol]),
         use_ranges: T.untyped
       ).returns(::ActiveRecord::Batches::BatchEnumerator)
     end
@@ -231,7 +304,7 @@ class User::HABTM_Roles
     sig { params(record: T.untyped).returns(T::Boolean) }
     def include?(record); end
 
-    sig { params(limit: NilClass).returns(T.nilable(::User::HABTM_Roles)) }
+    sig { returns(T.nilable(::User::HABTM_Roles)) }
     sig { params(limit: Integer).returns(T::Array[::User::HABTM_Roles]) }
     def last(limit = nil); end
 
@@ -250,6 +323,13 @@ class User::HABTM_Roles
     sig { params(column_name: T.any(String, Symbol)).returns(T.untyped) }
     def minimum(column_name); end
 
+    sig { params(block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)).returns(::User::HABTM_Roles) }
+    sig do
+      params(
+        attributes: T::Array[T.untyped],
+        block: T.nilable(T.proc.params(object: ::User::HABTM_Roles).void)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
     sig do
       params(
         attributes: T.untyped,
@@ -295,7 +375,7 @@ class User::HABTM_Roles
     end
     def sum(initial_value_or_column = nil, &block); end
 
-    sig { params(limit: NilClass).returns(T.nilable(::User::HABTM_Roles)) }
+    sig { returns(T.nilable(::User::HABTM_Roles)) }
     sig { params(limit: Integer).returns(T::Array[::User::HABTM_Roles]) }
     def take(limit = nil); end
 
@@ -340,6 +420,12 @@ class User::HABTM_Roles
     sig { params(value: T.nilable(::User)).void }
     def left_side=(value); end
 
+    sig { returns(T::Boolean) }
+    def left_side_changed?; end
+
+    sig { returns(T::Boolean) }
+    def left_side_previously_changed?; end
+
     sig { returns(T.nilable(::User)) }
     def reload_left_side; end
 
@@ -357,6 +443,12 @@ class User::HABTM_Roles
 
     sig { params(value: T.nilable(::Role)).void }
     def role=(value); end
+
+    sig { returns(T::Boolean) }
+    def role_changed?; end
+
+    sig { returns(T::Boolean) }
+    def role_previously_changed?; end
   end
 
   module GeneratedAssociationRelationMethods
@@ -404,40 +496,6 @@ class User::HABTM_Roles
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def includes(*args, &blk); end
-
-    sig do
-      params(
-        attributes: Hash,
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass)),
-        unique_by: T.nilable(T.any(T::Array[Symbol], Symbol))
-      ).returns(ActiveRecord::Result)
-    end
-    def insert(attributes, returning: nil, unique_by: nil); end
-
-    sig do
-      params(
-        attributes: Hash,
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass))
-      ).returns(ActiveRecord::Result)
-    end
-    def insert!(attributes, returning: nil); end
-
-    sig do
-      params(
-        attributes: T::Array[Hash],
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass)),
-        unique_by: T.nilable(T.any(T::Array[Symbol], Symbol))
-      ).returns(ActiveRecord::Result)
-    end
-    def insert_all(attributes, returning: nil, unique_by: nil); end
-
-    sig do
-      params(
-        attributes: T::Array[Hash],
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass))
-      ).returns(ActiveRecord::Result)
-    end
-    def insert_all!(attributes, returning: nil); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def invert_where(*args, &blk); end
@@ -508,7 +566,12 @@ class User::HABTM_Roles
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def rewhere(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    sig { params(args: T.untyped).returns(PrivateAssociationRelation) }
+    sig do
+      params(
+        blk: T.proc.params(record: ::User::HABTM_Roles).returns(BasicObject)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
     def select(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -523,26 +586,13 @@ class User::HABTM_Roles
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def unscope(*args, &blk); end
 
-    sig do
-      params(
-        attributes: Hash,
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass)),
-        unique_by: T.nilable(T.any(T::Array[Symbol], Symbol))
-      ).returns(ActiveRecord::Result)
-    end
-    def upsert(attributes, returning: nil, unique_by: nil); end
+    sig { returns(PrivateAssociationRelation) }
+    sig { type_parameters(:U).params(block: T.proc.returns(T.type_parameter(:U))).returns(T.type_parameter(:U)) }
+    def unscoped(&block); end
 
-    sig do
-      params(
-        attributes: T::Array[Hash],
-        returning: T.nilable(T.any(T::Array[Symbol], FalseClass)),
-        unique_by: T.nilable(T.any(T::Array[Symbol], Symbol))
-      ).returns(ActiveRecord::Result)
-    end
-    def upsert_all(attributes, returning: nil, unique_by: nil); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelationWhereChain) }
-    def where(*args, &blk); end
+    sig { returns(PrivateAssociationRelationWhereChain) }
+    sig { params(args: T.untyped).returns(PrivateAssociationRelation) }
+    def where(*args); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def with(*args, &blk); end
@@ -630,7 +680,7 @@ class User::HABTM_Roles
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def role_id_change_to_be_saved; end
 
-    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def role_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
@@ -639,7 +689,7 @@ class User::HABTM_Roles
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def role_id_previous_change; end
 
-    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def role_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
@@ -654,20 +704,20 @@ class User::HABTM_Roles
     sig { returns(T.nilable([T.untyped, T.untyped])) }
     def saved_change_to_id; end
 
-    sig { returns(T::Boolean) }
-    def saved_change_to_id?; end
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def saved_change_to_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_role_id; end
 
-    sig { returns(T::Boolean) }
-    def saved_change_to_role_id?; end
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def saved_change_to_role_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_user_id; end
 
-    sig { returns(T::Boolean) }
-    def saved_change_to_user_id?; end
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def saved_change_to_user_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def user_id; end
@@ -693,7 +743,7 @@ class User::HABTM_Roles
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def user_id_change_to_be_saved; end
 
-    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def user_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
@@ -702,7 +752,7 @@ class User::HABTM_Roles
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def user_id_previous_change; end
 
-    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
     def user_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
@@ -714,14 +764,14 @@ class User::HABTM_Roles
     sig { void }
     def user_id_will_change!; end
 
-    sig { returns(T::Boolean) }
-    def will_save_change_to_id?; end
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def will_save_change_to_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
-    sig { returns(T::Boolean) }
-    def will_save_change_to_role_id?; end
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def will_save_change_to_role_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
-    sig { returns(T::Boolean) }
-    def will_save_change_to_user_id?; end
+    sig { params(from: T.untyped, to: T.untyped).returns(T::Boolean) }
+    def will_save_change_to_user_id?(from: T.unsafe(nil), to: T.unsafe(nil)); end
   end
 
   module GeneratedRelationMethods
@@ -839,7 +889,12 @@ class User::HABTM_Roles
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def rewhere(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    sig { params(args: T.untyped).returns(PrivateRelation) }
+    sig do
+      params(
+        blk: T.proc.params(record: ::User::HABTM_Roles).returns(BasicObject)
+      ).returns(T::Array[::User::HABTM_Roles])
+    end
     def select(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
@@ -854,8 +909,13 @@ class User::HABTM_Roles
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def unscope(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelationWhereChain) }
-    def where(*args, &blk); end
+    sig { returns(PrivateRelation) }
+    sig { type_parameters(:U).params(block: T.proc.returns(T.type_parameter(:U))).returns(T.type_parameter(:U)) }
+    def unscoped(&block); end
+
+    sig { returns(PrivateRelationWhereChain) }
+    sig { params(args: T.untyped).returns(PrivateRelation) }
+    def where(*args); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def with(*args, &blk); end
@@ -903,6 +963,9 @@ class User::HABTM_Roles
     sig { params(column_name: T.any(String, Symbol)).returns(T::Hash[T.untyped, T.untyped]) }
     def minimum(column_name); end
 
+    sig { returns(T::Hash[T.untyped, Integer]) }
+    def size; end
+
     sig do
       params(
         column_name: T.nilable(T.any(String, Symbol)),
@@ -912,7 +975,7 @@ class User::HABTM_Roles
     def sum(column_name = nil, &block); end
   end
 
-  class PrivateAssociationRelationWhereChain < PrivateAssociationRelation
+  class PrivateAssociationRelationWhereChain
     Elem = type_member { { fixed: ::User::HABTM_Roles } }
 
     sig { params(args: T.untyped).returns(PrivateAssociationRelation) }
@@ -1045,6 +1108,9 @@ class User::HABTM_Roles
     sig { params(column_name: T.any(String, Symbol)).returns(T::Hash[T.untyped, T.untyped]) }
     def minimum(column_name); end
 
+    sig { returns(T::Hash[T.untyped, Integer]) }
+    def size; end
+
     sig do
       params(
         column_name: T.nilable(T.any(String, Symbol)),
@@ -1054,7 +1120,7 @@ class User::HABTM_Roles
     def sum(column_name = nil, &block); end
   end
 
-  class PrivateRelationWhereChain < PrivateRelation
+  class PrivateRelationWhereChain
     Elem = type_member { { fixed: ::User::HABTM_Roles } }
 
     sig { params(args: T.untyped).returns(PrivateRelation) }

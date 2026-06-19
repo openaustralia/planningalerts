@@ -10,10 +10,10 @@ class InvokeRakeTaskJob
     sig { params(args: T.untyped).returns(String) }
     def perform_async(args); end
 
-    sig { params(interval: T.any(DateTime, Time), args: T.untyped).returns(String) }
+    sig { params(interval: T.any(DateTime, Time, ActiveSupport::TimeWithZone), args: T.untyped).returns(String) }
     def perform_at(interval, args); end
 
-    sig { params(interval: Numeric, args: T.untyped).returns(String) }
+    sig { params(interval: T.any(Numeric, ActiveSupport::Duration), args: T.untyped).returns(String) }
     def perform_in(interval, args); end
   end
 end

@@ -10,10 +10,15 @@ class ImportApplicationsJob
     sig { params(authority_id: ::Integer).returns(String) }
     def perform_async(authority_id); end
 
-    sig { params(interval: T.any(DateTime, Time), authority_id: ::Integer).returns(String) }
+    sig do
+      params(
+        interval: T.any(DateTime, Time, ActiveSupport::TimeWithZone),
+        authority_id: ::Integer
+      ).returns(String)
+    end
     def perform_at(interval, authority_id); end
 
-    sig { params(interval: Numeric, authority_id: ::Integer).returns(String) }
+    sig { params(interval: T.any(Numeric, ActiveSupport::Duration), authority_id: ::Integer).returns(String) }
     def perform_in(interval, authority_id); end
   end
 end
