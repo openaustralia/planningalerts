@@ -754,7 +754,7 @@ GEM
     validates_email_format_of (1.8.2)
       i18n (>= 0.8.0)
       simpleidn
-    vcr (6.2.0)
+    vcr (6.4.0)
     view_component (4.9.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
