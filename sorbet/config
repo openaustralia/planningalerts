@@ -20,4 +20,7 @@ vendor/
 # Ignoring: sorbet/rbi/gems/net-imap@0.6.4.rbi:3225: Parent of class Net::IMAP::QuotedString redefined from Object to Net::IMAP::CommandData https://srb.help/5012
 --suppress-payload-superclass-redefinition-for=Net::IMAP::QuotedString
 
+# Ignoring Parent of class RDoc::Markup::Heading redefined from RDoc::Markup::Element to Struct
+--suppress-payload-superclass-redefinition-for=RDoc::Markup::Heading
+
 --suppress-payload-superclass-redefinition-for=Net::IMAP::CommandData
