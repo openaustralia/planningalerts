@@ -119,9 +119,6 @@ gem "flipper"
 gem "flipper-redis"
 gem "flipper-ui"
 
-# Testing this out for application performance monitoring
-gem "skylight"
-
 # For making more reusable and testable components
 gem "view_component"
 
@@ -249,4 +246,7 @@ group :production do
   # Javascript runtime (required for precompiling assets in production)
   gem "mini_racer"
   gem "uglifier"
+
+  # Testing this out for application performance monitoring (NOT in dev as it crashes tapioca)
+  gem "skylight"
 end
