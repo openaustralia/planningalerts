@@ -9,6 +9,14 @@ gem "bootsnap", require: false
 gem "rails", "~> 7.1.0"
 gem "rake"
 
+# TODO: Remove this pin once tapioca's incompatibility with zeitwerk >= 2.7
+# is fixed upstream (or we drop tapioca/sorbet entirely)
+# tapioca 0.15.1 crashes on zeitwerk >= 2.7 (Zeitwerk::Registry.loaders no
+# longer responds to flat_map). tapioca 0.16-0.19 work with zeitwerk 2.8.2
+# but hit a separate require-hooks double-load bug instead. 0.15.1 +
+# zeitwerk ~2.6 is the only combination that's fully clean.
+gem "zeitwerk", "~> 2.6.0"
+
 gem "pg"
 
 # Supports postgis so we can magically do spatial queries
@@ -92,7 +100,8 @@ gem "counter_culture"
 gem "rack-cors"
 
 # For type checking
-gem "sorbet-runtime"
+# TODO: Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
+gem "sorbet-runtime", "< 0.6"
 
 # For automatic creation of github issues when scrapers are broken
 gem "octokit"
@@ -194,9 +203,11 @@ group :development do
   gem "rack-mini-profiler"
 
   # For static type checking
-  gem "sorbet"
+  # TODO: Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
+  gem "sorbet", "< 6.0"
   gem "spoom"
-  gem "tapioca"
+  # TODO: Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
+  gem "tapioca", "~> 0.15.1"
 
   # For guard and associated bits
   gem "growl"
