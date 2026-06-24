@@ -1,1 +1,1 @@
-worker: rvm . do bundle exec sidekiq -q default -q mailers -q searchkick -e production
+worker: rvm . do bundle exec sidekiq -c 3 -q default -q mailers -q searchkick -e production
