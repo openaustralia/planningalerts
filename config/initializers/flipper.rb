@@ -8,7 +8,6 @@ Flipper::UI.configure do |config|
   config.descriptions_source = lambda do |_keys|
     # This should be a complete list of all features being currently used in the codebase
     {
-      "disable_streetview_in_emails" => "Disables Google streetview in email. Do this to save money",
       "disable_streetview_in_app" => "Disable Google streetview in the main application. Do this to save money",
       "extra_options_on_address_search" => "Add extra options to filter by time/space when searching address",
       "show_authority_map" => "Show boundary of authority on a map",
