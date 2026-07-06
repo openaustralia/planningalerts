@@ -292,7 +292,10 @@ Or you can run them locally, eg `bundle exec rake db:stats`
 
     bundle exec rubocop
 
-## To manually check for security updates
+## To check for security updates
+
+Either check [Dependabot alerts](https://github.com/openaustralia/planningalerts/security/dependabot) 
+for the main branch, taking note of when the last check was run, **or** run manually on current branch:
 
     bundle exec ruby-audit
     bundle exec bundle-audit
