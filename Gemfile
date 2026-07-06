@@ -235,6 +235,7 @@ group :development do
 
   # Help with code quality
   gem "brakeman"
+  gem "bundle-audit", require: false
   gem "erb_lint", require: false
   gem "rubocop", require: false
   gem "rubocop-capybara", require: false
@@ -244,6 +245,7 @@ group :development do
   gem "rubocop-rspec", require: false
   gem "rubocop-rspec_rails", require: false
   gem "rubocop-sorbet", require: false
+  gem "ruby_audit", require: false
 
   # To help identify database issues
   gem "active_record_doctor"
