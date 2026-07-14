@@ -288,6 +288,18 @@ Or you can run them locally, eg `bundle exec rake db:stats`
 * Commit the changes without making changes to any files that aren't related to your enhancement or fix.
 * Send a pull request against the main branch.
 
+## To run style and coding checks
+
+    bundle exec rubocop
+
+## To check for security updates
+
+Either check [Dependabot alerts](https://github.com/openaustralia/planningalerts/security/dependabot) 
+for the main branch, taking note of when the last check was run, **or** run manually on current branch:
+
+    bundle exec ruby-audit
+    bundle exec bundle-audit
+
 ## Credits
 
 Our awesome contributors can be found on the [PlanningAlerts site](https://www.planningalerts.org.au/about).
