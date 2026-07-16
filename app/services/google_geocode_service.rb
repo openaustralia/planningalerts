@@ -63,8 +63,8 @@ class GoogleGeocodeService
       postcode = component(result, "postal_code")
 
       GeocodedLocation.new(
-        lat: result["geometry"]["location"]["lat"],
-        lng: result["geometry"]["location"]["lng"],
+        lat: result["geometry"]["location"]["lat"]&.to_f,
+        lng: result["geometry"]["location"]["lng"]&.to_f,
         suburb: (suburb["long_name"] if suburb),
         state: (state["short_name"] if state),
         postcode: (postcode["long_name"] if postcode),

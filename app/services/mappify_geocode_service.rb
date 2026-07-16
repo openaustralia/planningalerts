@@ -32,8 +32,8 @@ class MappifyGeocodeService
 
     all = data["result"].map do |a|
       GeocodedLocation.new(
-        lat: a["location"]["lat"],
-        lng: a["location"]["lon"],
+        lat: a["location"]["lat"]&.to_f,
+        lng: a["location"]["lon"]&.to_f,
         suburb: a["suburb"].titleize,
         state: a["state"],
         postcode: a["postCode"],
