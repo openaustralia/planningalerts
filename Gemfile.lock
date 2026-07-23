@@ -213,7 +213,7 @@ GEM
     crack (1.0.0)
       bigdecimal
       rexml
-    crass (1.0.6)
+    crass (1.0.7)
     cronex (0.15.0)
       tzinfo
       unicode (>= 0.4.4.5)
@@ -378,7 +378,7 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
-    loofah (2.25.1)
+    loofah (2.25.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     lumberjack (1.2.10)
@@ -426,10 +426,6 @@ GEM
     net-ssh (7.3.0)
     netrc (0.11.0)
     nio4r (2.7.5)
-    nokogiri (1.19.2-aarch64-linux-gnu)
-      racc (~> 1.4)
-    nokogiri (1.19.2-arm64-darwin)
-      racc (~> 1.4)
     nokogiri (1.19.3-x86_64-linux-gnu)
       racc (~> 1.4)
     notiffany (0.1.3)
