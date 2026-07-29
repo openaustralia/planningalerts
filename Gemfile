@@ -271,4 +271,3 @@ gem "webrick", ">= 1.8.2" # fix CVE-2025-6442 (required by rackup)
 # Fix WARN: Unresolved or ambiguous specs during Gem::Specification.reset
 gem "erb", "~> 6.0"
 gem "psych", "~> 5.1"
-
