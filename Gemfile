@@ -248,8 +248,8 @@ group :development do
   gem "active_record_doctor"
 
   # Local audit of Gemfile and ruby version
-  gem 'bundler-audit', require: false
-  gem 'ruby_audit', require: false
+  gem "bundler-audit", require: false
+  gem "ruby_audit", require: false
 end
 
 group :production do
@@ -269,5 +269,6 @@ gem "rails-html-sanitizer", ">= 1.7.1" # fix GHSA-cj75-f6xr-r4g7 (required by ac
 gem "webrick", ">= 1.8.2" # fix CVE-2025-6442 (required by rackup)
 
 # Fix WARN: Unresolved or ambiguous specs during Gem::Specification.reset
-gem "psych", "~> 5.1"
 gem "erb", "~> 6.0"
+gem "psych", "~> 5.1"
+
