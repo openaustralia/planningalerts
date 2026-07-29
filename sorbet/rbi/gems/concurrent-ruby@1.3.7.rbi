@@ -2327,6 +2327,18 @@ module Concurrent::AtomicNumericCompareAndSetWrapper
   #
   # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/numeric_cas_wrapper.rb#10
   def compare_and_set(old_value, new_value); end
+
+  # Atomically sets the value to the given updated value if
+  # the current value == the expected value.
+  #
+  # that the actual value was not equal to the expected value.
+  #
+  # @param old_value [Object] the expected value
+  # @param new_value [Object] the new value
+  # @return [Boolean] `true` if successful. A `false` return indicates
+  #
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/numeric_cas_wrapper.rb#10
+  def compare_and_swap(old_value, new_value); end
 end
 
 # An object reference that may be updated atomically. All read and write
@@ -2368,16 +2380,16 @@ end
 # @see http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicReference.html
 # @see http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/package-summary.html
 #
-# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/atomic_reference.rb#126
+# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/atomic_reference.rb#133
 class Concurrent::AtomicReference < ::Concurrent::MutexAtomicReference
   # @return [String] Short string representation.
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/atomic_reference.rb#129
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/atomic_reference.rb#136
   def inspect; end
 
   # @return [String] Short string representation.
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/atomic_reference.rb#129
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/atomic_reference.rb#136
   def to_s; end
 end
 
@@ -5890,8 +5902,61 @@ class Concurrent::MutexAtomicReference
   # @param value [Object] The initial value.
   # @return [MutexAtomicReference] a new instance of MutexAtomicReference
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#16
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#15
   def initialize(value = T.unsafe(nil)); end
+
+  # Gets the current value.
+  #
+  # @return [Object] the current value
+  #
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#22
+  def get; end
+
+  # Atomically sets to the given value and returns the old value.
+  #
+  # @param new_value [Object] the new value
+  # @return [Object] the old value
+  #
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#34
+  def get_and_set(new_value); end
+
+  # Sets to the given value.
+  #
+  # @param new_value [Object] the new value
+  # @return [Object] the new value
+  #
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#28
+  def set(new_value); end
+
+  # Atomically sets to the given value and returns the old value.
+  #
+  # @param new_value [Object] the new value
+  # @return [Object] the old value
+  #
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#34
+  def swap(new_value); end
+
+  # Gets the current value.
+  #
+  # @return [Object] the current value
+  #
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#22
+  def value; end
+
+  # Sets to the given value.
+  #
+  # @param new_value [Object] the new value
+  # @return [Object] the new value
+  #
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#28
+  def value=(new_value); end
+
+  protected
+
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#58
+  def synchronize; end
+
+  private
 
   # Atomically sets the value to the given updated value if
   # the current value == the expected value.
@@ -5902,62 +5967,8 @@ class Concurrent::MutexAtomicReference
   # @param new_value [Object] the new value
   # @return [Boolean] `true` if successful. A `false` return indicates
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#45
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#44
   def _compare_and_set(old_value, new_value); end
-
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/numeric_cas_wrapper.rb#10
-  def compare_and_swap(old_value, new_value); end
-
-  # Gets the current value.
-  #
-  # @return [Object] the current value
-  #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#23
-  def get; end
-
-  # Atomically sets to the given value and returns the old value.
-  #
-  # @param new_value [Object] the new value
-  # @return [Object] the old value
-  #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#35
-  def get_and_set(new_value); end
-
-  # Sets to the given value.
-  #
-  # @param new_value [Object] the new value
-  # @return [Object] the new value
-  #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#29
-  def set(new_value); end
-
-  # Atomically sets to the given value and returns the old value.
-  #
-  # @param new_value [Object] the new value
-  # @return [Object] the old value
-  #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#35
-  def swap(new_value); end
-
-  # Gets the current value.
-  #
-  # @return [Object] the current value
-  #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#23
-  def value; end
-
-  # Sets to the given value.
-  #
-  # @param new_value [Object] the new value
-  # @return [Object] the new value
-  #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#29
-  def value=(new_value); end
-
-  protected
-
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic_reference/mutex_atomic.rb#59
-  def synchronize; end
 end
 
 # A synchronization object that allows one thread to wait on multiple other threads.
@@ -8444,7 +8455,7 @@ end
 #   This will lead to deadlock
 # @see http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/locks/ReentrantReadWriteLock.html java.util.concurrent.ReentrantReadWriteLock
 #
-# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#31
+# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#32
 class Concurrent::ReadWriteLock < ::Concurrent::Synchronization::Object
   extend ::Concurrent::Synchronization::SafeInitialization
 
@@ -8452,7 +8463,7 @@ class Concurrent::ReadWriteLock < ::Concurrent::Synchronization::Object
   #
   # @return [ReadWriteLock] a new instance of ReadWriteLock
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#59
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#60
   def initialize; end
 
   # Acquire a read lock. If a write lock has been acquired will block until
@@ -8462,7 +8473,7 @@ class Concurrent::ReadWriteLock < ::Concurrent::Synchronization::Object
   #   is exceeded.
   # @return [Boolean] true if the lock is successfully acquired
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#111
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#113
   def acquire_read_lock; end
 
   # Acquire a write lock. Will block and wait for all active readers and writers.
@@ -8471,28 +8482,31 @@ class Concurrent::ReadWriteLock < ::Concurrent::Synchronization::Object
   #   is exceeded.
   # @return [Boolean] true if the lock is successfully acquired
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#160
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#166
   def acquire_write_lock; end
 
   # Queries whether any threads are waiting to acquire the read or write lock.
   #
   # @return [Boolean] true if any threads are waiting for a lock else false
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#214
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#227
   def has_waiters?; end
 
   # Release a previously acquired read lock.
   #
+  # @raise [Concurrent::IllegalOperationError] if no read lock is currently held.
   # @return [Boolean] true if the lock is successfully released
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#140
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#144
   def release_read_lock; end
 
   # Release a previously acquired write lock.
   #
+  # @raise [Concurrent::IllegalOperationError] if the write lock is not held
+  #   by the current thread.
   # @return [Boolean] true if the lock is successfully released
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#196
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#206
   def release_write_lock; end
 
   # Execute a block operation within a read lock.
@@ -8503,7 +8517,7 @@ class Concurrent::ReadWriteLock < ::Concurrent::Synchronization::Object
   # @return [Object] the result of the block operation.
   # @yield the task to be performed within the lock.
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#75
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#77
   def with_read_lock; end
 
   # Execute a block operation within a write lock.
@@ -8514,60 +8528,60 @@ class Concurrent::ReadWriteLock < ::Concurrent::Synchronization::Object
   # @return [Object] the result of the block operation.
   # @yield the task to be performed within the lock.
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#94
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#96
   def with_write_lock; end
 
   # Queries if the write lock is held by any thread.
   #
   # @return [Boolean] true if the write lock is held else false`
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#207
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#220
   def write_locked?; end
 
   private
 
   # @return [Boolean]
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#246
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#259
   def max_readers?(c = T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#251
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#264
   def max_writers?(c = T.unsafe(nil)); end
 
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#221
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#234
   def running_readers(c = T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#226
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#239
   def running_readers?(c = T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#231
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#244
   def running_writer?(c = T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#241
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#254
   def waiting_writer?(c = T.unsafe(nil)); end
 
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#236
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#249
   def waiting_writers(c = T.unsafe(nil)); end
 end
 
-# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#40
+# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#41
 Concurrent::ReadWriteLock::MAX_READERS = T.let(T.unsafe(nil), Integer)
 
-# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#43
+# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#44
 Concurrent::ReadWriteLock::MAX_WRITERS = T.let(T.unsafe(nil), Integer)
 
-# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#37
+# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#38
 Concurrent::ReadWriteLock::RUNNING_WRITER = T.let(T.unsafe(nil), Integer)
 
-# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#34
+# source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/read_write_lock.rb#35
 Concurrent::ReadWriteLock::WAITING_WRITER = T.let(T.unsafe(nil), Integer)
 
 # Re-entrant read-write lock implementation
@@ -8626,7 +8640,7 @@ class Concurrent::ReentrantReadWriteLock < ::Concurrent::Synchronization::Object
   # until it is released.
   #
   # @raise [Concurrent::ResourceLimitError] if the maximum number of readers
-  #   is exceeded.
+  #   or per-thread reentrant acquires is exceeded.
   # @return [Boolean] true if the lock is successfully acquired
   #
   # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#162
@@ -8638,29 +8652,31 @@ class Concurrent::ReentrantReadWriteLock < ::Concurrent::Synchronization::Object
   #   is exceeded.
   # @return [Boolean] true if the lock is successfully acquired
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#257
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#264
   def acquire_write_lock; end
 
   # Release a previously acquired read lock.
   #
   # @return [Boolean] true if the lock is successfully released
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#236
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#243
   def release_read_lock; end
 
   # Release a previously acquired write lock.
   #
   # @return [Boolean] true if the lock is successfully released
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#329
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#336
   def release_write_lock; end
 
   # Try to acquire a read lock and return true if we succeed. If it cannot be
   # acquired immediately, return false.
   #
+  # @raise [Concurrent::ResourceLimitError] if the maximum number of per-thread
+  #   reentrant acquires is exceeded.
   # @return [Boolean] true if the lock is successfully acquired
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#215
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#220
   def try_read_lock; end
 
   # Try to acquire a write lock and return true if we succeed. If it cannot be
@@ -8668,7 +8684,7 @@ class Concurrent::ReentrantReadWriteLock < ::Concurrent::Synchronization::Object
   #
   # @return [Boolean] true if the lock is successfully acquired
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#310
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#317
   def try_write_lock; end
 
   # Execute a block operation within a read lock.
@@ -8697,33 +8713,33 @@ class Concurrent::ReentrantReadWriteLock < ::Concurrent::Synchronization::Object
 
   # @return [Boolean]
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#370
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#377
   def max_readers?(c = T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#375
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#382
   def max_writers?(c = T.unsafe(nil)); end
 
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#345
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#352
   def running_readers(c = T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#350
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#357
   def running_readers?(c = T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#355
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#362
   def running_writer?(c = T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#365
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#372
   def waiting_or_running_writer?(c = T.unsafe(nil)); end
 
-  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#360
+  # source://concurrent-ruby//lib/concurrent-ruby/concurrent/atomic/reentrant_read_write_lock.rb#367
   def waiting_writers(c = T.unsafe(nil)); end
 end
 
