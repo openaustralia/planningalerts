@@ -1,5 +1,12 @@
-# Based on capistrano3-puma-6.0.0.beta.1/lib/capistrano/templates/puma.service.erb
+# Based on capistrano3-puma-8.0.0/lib/capistrano/templates/puma.service.erb
 # This file tells systemd how to run Puma as a 24/7 long-running daemon.
+#
+# Customize this file based on your bundler location, app directory, etc.
+# Customize and copy this into /usr/lib/systemd/system (CentOS) or /lib/systemd/system (Ubuntu).
+# Then run:
+#   - systemctl enable <%= fetch(:puma_service_unit_name) %>
+#   - systemctl {start,stop,restart} <%= fetch(:puma_service_unit_name) %>
+#
 #
 # Use `journalctl -u <%= fetch(:puma_service_unit_name) %> -rn 100` to view the last 100 lines of log output.
 #
@@ -7,12 +14,19 @@
 Description=Puma HTTP Server for <%= "#{fetch(:application)} (#{fetch(:stage)})" %>
 <%= "Requires=#{fetch(:puma_service_unit_name)}.socket" if fetch(:puma_enable_socket_service) %>
 After=syslog.target network.target
+
 [Service]
 Type=<%= service_unit_type %>
-WatchdogSec=10
+<% if fetch(:puma_systemd_watchdog_sec) && fetch(:puma_systemd_watchdog_sec) > 0 %>
+WatchdogSec=<%= fetch(:puma_systemd_watchdog_sec) %>
+<% end %>
 <%="User=#{puma_user(@role)}" if fetch(:puma_systemctl_user) == :system %>
 WorkingDirectory=<%= current_path %>
+<% if fetch(:puma_use_login_shell) %>
+ExecStart=/bin/bash -lc '<%= expanded_bundle_command %> exec puma -e <%= fetch(:puma_env) %>'
+<% else %>
 ExecStart=<%= expanded_bundle_command %> exec puma -e <%= fetch(:puma_env) %>
+<% end %>
 ExecReload=/bin/kill -USR1 $MAINPID
 <%- Array(fetch(:puma_service_unit_env_files)).each do |file| %>
 <%="EnvironmentFile=#{file}" -%>
@@ -20,15 +34,28 @@ ExecReload=/bin/kill -USR1 $MAINPID
 <% Array(fetch(:puma_service_unit_env_vars)).each do |environment_variable| %>
 <%="Environment=\"#{environment_variable}\"" -%>
 <% end -%>
+
 # if we crash, restart
 RestartSec=1
 Restart=on-failure
-<%="StandardOutput=append:#{fetch(:puma_access_log)}" if fetch(:puma_access_log) %>
-<%="StandardError=append:#{fetch(:puma_error_log)}" if fetch(:puma_error_log) %>
+
+<%- puma_access_log = fetch(:puma_access_log) -%>
+<%- if puma_access_log == "journal" %>
+StandardOutput=journal
+<%- else -%>
+<%="StandardOutput=append:#{puma_access_log}" if puma_access_log %>
+<%- end -%>
+<%- puma_error_log = fetch(:puma_error_log) -%>
+<%- if puma_error_log == "journal" %>
+StandardError=journal
+<%- else -%>
+<%="StandardError=append:#{puma_error_log}" if puma_error_log %>
+<%- end -%>
+
 SyslogIdentifier=<%= fetch(:puma_service_unit_name) %>
-# Puma master + 3 workers start at ~260 MB each, capped at 550 MB per worker
-# Total limit = 3 workers x 550 MB + 30 MB master = 1,680 MB
-MemoryMax=1680M
-TimeoutStopSec=300
+<% Array(fetch(:puma_service_unit_props)).each do |unit_property| %>
+<%="#{unit_property}" -%>
+<% end -%>
+
 [Install]
 WantedBy=<%=(fetch(:puma_systemctl_user) == :system) ? "multi-user.target" : "default.target"%>
