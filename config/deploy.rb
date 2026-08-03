@@ -169,6 +169,6 @@ before "foreman:restart", "foreman:enable"
 before "foreman:enable", "foreman:export"
 before "deploy:check:linked_files", "upload_memcache_config"
 
-#
-before "deploy:finishing", "puma:install"
-after "puma:install", "puma:check_lingering"
+before "deploy:publishing", "puma:install"
+before "deploy:check", "puma:check_lingering"
+
