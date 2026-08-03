@@ -47,8 +47,8 @@ set :rails_env, "production"
 set :puma_phased_restart, true
 
 # Control puma serviced config
-set :puma_service_unit_type, "notify"
-set :puma_systemd_watchdog_sec, 10
+# set :puma_service_unit_type, "notify"
+# set :puma_systemd_watchdog_sec, 10
 set :puma_access_log, "/srv/www/production/shared/log/puma.log"
 set :puma_error_log, "/srv/www/production/shared/log/puma.log"
 # Puma master + 3 workers start at ~260 MB each, capped at 550 MB per worker
