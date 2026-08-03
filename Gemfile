@@ -49,7 +49,7 @@ gem "sidekiq-cron"
 
 # For accessing external urls
 # TODO: Just pick one and use it for everything
-gem "httparty"
+gem "httparty", ">= 0.24.0" # fix CVE-2025-68696
 gem "rest-client"
 
 # Pagination
@@ -79,7 +79,7 @@ gem "recaptcha", require: "recaptcha/rails"
 gem "searchkick"
 
 # Used to parse different external application feeds
-gem "nokogiri"
+gem "nokogiri", ">= 1.19.4" # fix GHSA-5prr-v3j2-97mh (no CVE assigned)
 
 # Speed up json parsing
 # TODO: Double check where this is being used
@@ -183,11 +183,10 @@ group :test do
   gem "factory_bot"
   gem "factory_bot_rails"
   gem "rails-controller-testing"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", ">= 4.14.0" # fix CVE-2023-5590 and provides Selenium Manager which repalces unmaintained webdrivers gem
   gem "simplecov", require: false
   gem "timecop"
   gem "vcr"
-  gem "webdrivers"
   gem "webmock"
   # FIXME: stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"
@@ -249,6 +248,10 @@ group :development do
 
   # To help identify database issues
   gem "active_record_doctor"
+
+  # Local audit of Gemfile and ruby version
+  gem "bundler-audit", require: false
+  gem "ruby_audit", require: false
 end
 
 group :production do
@@ -259,3 +262,14 @@ group :production do
   gem "mini_racer"
   gem "uglifier"
 end
+
+# Not direct dependencies, but bundler-audit flags them;
+# pinning here forces recent enough versions
+gem "bcrypt", ">= 3.1.22" # fix CVE-2026-33306 (required by devise)
+gem "msgpack", ">= 1.8.2" # fix CVE-2026-54522 (required by bootsnap)
+gem "rails-html-sanitizer", ">= 1.7.1" # fix GHSA-cj75-f6xr-r4g7 (required by actionview)
+gem "webrick", ">= 1.8.2" # fix CVE-2025-6442 (required by rackup)
+
+# Fix WARN: Unresolved or ambiguous specs during Gem::Specification.reset
+gem "erb", "~> 6.0"
+gem "psych", "~> 5.1"

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "simplecov"
-require "webdrivers/geckodriver"
 
 SimpleCov.start("rails") do
   add_filter "app/admin"
@@ -24,8 +23,9 @@ Capybara.javascript_driver = :selenium_headless
 VCR.configure do |c|
   c.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   c.hook_into :webmock
-  # Ignore requests to github and s3 for the benefit of the webdrivers gem
-  # which automatically downloads the webdriver for headless testing
+  # Ignore requests to github and s3 for the benefit of Selenium Manager
+  # (bundled with selenium-webdriver >= 4.6), which automatically downloads
+  # the driver binary for headless testing
   c.ignore_hosts "github.com", "release-assets.githubusercontent.com"
   c.ignore_request do |request|
     URI(request.uri).host =~ /objects\.githubusercontent\.com/

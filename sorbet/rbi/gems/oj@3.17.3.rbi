@@ -55,7 +55,7 @@ module Oj
     #
     # @param mimic_paths [Array] additional paths to add to the Ruby loaded features.
     #
-    # source://oj//lib/oj/mimic.rb#84
+    # source://oj//lib/oj/mimic.rb#80
     def mimic_loaded(mimic_paths = T.unsafe(nil)); end
 
     def object_load(*_arg0); end
@@ -150,7 +150,7 @@ class Oj::CStack; end
 # differences. These are the options that setup the custom mode to be like
 # the compat mode.
 #
-# source://oj//lib/oj/mimic.rb#16
+# source://oj//lib/oj/mimic.rb#12
 Oj::CUSTOM_MIMIC_JSON_OPTIONS = T.let(T.unsafe(nil), Hash)
 
 class Oj::Cache; end
@@ -230,14 +230,14 @@ class Oj::LoadError < ::Oj::Error; end
 # but in mimic we use a C struct to store defaults. This class creates a view
 # onto that struct.
 #
-# source://oj//lib/oj/mimic.rb#61
+# source://oj//lib/oj/mimic.rb#57
 class Oj::MimicDumpOption < ::Hash
   # @return [MimicDumpOption] a new instance of MimicDumpOption
   #
-  # source://oj//lib/oj/mimic.rb#62
+  # source://oj//lib/oj/mimic.rb#58
   def initialize; end
 
-  # source://oj//lib/oj/mimic.rb#72
+  # source://oj//lib/oj/mimic.rb#68
   def []=(key, value); end
 end
 
@@ -262,17 +262,25 @@ class Oj::Parser
   private
 
   def new(*_arg0); end
+  def safe(*_arg0); end
   def saj; end
   def usual; end
   def validate; end
 
   class << self
     def new(*_arg0); end
+    def safe(*_arg0); end
     def saj; end
     def usual; end
     def validate; end
   end
 end
+
+class Oj::Parser::ArraySizeError < ::Oj::Parser::ValidationError; end
+class Oj::Parser::DepthError < ::Oj::Parser::ValidationError; end
+class Oj::Parser::HashSizeError < ::Oj::Parser::ValidationError; end
+class Oj::Parser::TotalElementsError < ::Oj::Parser::ValidationError; end
+class Oj::Parser::ValidationError < ::RuntimeError; end
 
 module Oj::Rails
   private
@@ -551,7 +559,7 @@ class Oj::StreamWriter
 end
 
 class Oj::StringWriter
-  def as_json; end
+  def as_json(*_arg0); end
   def pop; end
   def pop_all; end
   def push_array(*_arg0); end
@@ -579,18 +587,18 @@ Oj::VERSION = T.let(T.unsafe(nil), String)
 
 # More monkey patches.
 #
-# source://oj//lib/oj/mimic.rb#286
+# source://oj//lib/oj/mimic.rb#282
 class String
   include ::Comparable
 
-  # source://oj//lib/oj/mimic.rb#293
+  # source://oj//lib/oj/mimic.rb#289
   def to_json_raw(*_arg0); end
 
-  # source://oj//lib/oj/mimic.rb#287
+  # source://oj//lib/oj/mimic.rb#283
   def to_json_raw_object; end
 
   class << self
-    # source://oj//lib/oj/mimic.rb#296
+    # source://oj//lib/oj/mimic.rb#292
     def json_create(obj); end
   end
 end
