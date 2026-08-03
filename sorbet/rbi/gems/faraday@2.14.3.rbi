@@ -5,7 +5,16 @@
 # Please instead update this file by running `bin/tapioca gem faraday`.
 
 
-# conn.get '/'
+# This is the main namespace for Faraday.
+#
+# It provides methods to create {Connection} objects, and HTTP-related
+# methods to use directly.
+#
+# @example Helpful class methods for easy usage
+#   Faraday.get "http://faraday.com"
+# @example Helpful class method `.new` to create {Connection} objects.
+#   conn = Faraday.new "http://faraday.com"
+#   conn.get '/'
 #
 # source://faraday//lib/faraday/version.rb#3
 module Faraday
@@ -287,17 +296,17 @@ Faraday::Adapter::TIMEOUT_KEYS = T.let(T.unsafe(nil), Hash)
 class Faraday::Adapter::Test < ::Faraday::Adapter
   # @return [Test] a new instance of Test
   #
-  # source://faraday//lib/faraday/adapter/test.rb#258
+  # source://faraday//lib/faraday/adapter/test.rb#266
   def initialize(app, stubs = T.unsafe(nil), &block); end
 
   # @param env [Faraday::Env]
   #
-  # source://faraday//lib/faraday/adapter/test.rb#269
+  # source://faraday//lib/faraday/adapter/test.rb#277
   def call(env); end
 
   # @yield [stubs]
   #
-  # source://faraday//lib/faraday/adapter/test.rb#264
+  # source://faraday//lib/faraday/adapter/test.rb#272
   def configure; end
 
   # Returns the value of attribute stubs.
@@ -315,7 +324,7 @@ end
 
 # Stub request
 #
-# source://faraday//lib/faraday/adapter/test.rb#187
+# source://faraday//lib/faraday/adapter/test.rb#195
 class Faraday::Adapter::Test::Stub < ::Struct
   # Returns the value of attribute block
   #
@@ -341,7 +350,7 @@ class Faraday::Adapter::Test::Stub < ::Struct
 
   # @return [Boolean]
   #
-  # source://faraday//lib/faraday/adapter/test.rb#242
+  # source://faraday//lib/faraday/adapter/test.rb#250
   def body_match?(request_body); end
 
   # Returns the value of attribute headers
@@ -357,7 +366,7 @@ class Faraday::Adapter::Test::Stub < ::Struct
 
   # @return [Boolean]
   #
-  # source://faraday//lib/faraday/adapter/test.rb#227
+  # source://faraday//lib/faraday/adapter/test.rb#235
   def headers_match?(request_headers); end
 
   # Returns the value of attribute host
@@ -374,13 +383,13 @@ class Faraday::Adapter::Test::Stub < ::Struct
   # @param env [Faraday::Env]
   # @return [Boolean]
   #
-  # source://faraday//lib/faraday/adapter/test.rb#189
+  # source://faraday//lib/faraday/adapter/test.rb#197
   def matches?(env); end
 
   # @param env [Faraday::Env]
   # @return [Boolean]
   #
-  # source://faraday//lib/faraday/adapter/test.rb#214
+  # source://faraday//lib/faraday/adapter/test.rb#222
   def params_match?(env); end
 
   # Returns the value of attribute path
@@ -396,7 +405,7 @@ class Faraday::Adapter::Test::Stub < ::Struct
 
   # @return [Boolean]
   #
-  # source://faraday//lib/faraday/adapter/test.rb#205
+  # source://faraday//lib/faraday/adapter/test.rb#213
   def path_match?(request_path, meta); end
 
   # Returns the value of attribute query
@@ -421,7 +430,7 @@ class Faraday::Adapter::Test::Stub < ::Struct
   # @return [Object] the newly set value
   def strict_mode=(_); end
 
-  # source://faraday//lib/faraday/adapter/test.rb#253
+  # source://faraday//lib/faraday/adapter/test.rb#261
   def to_s; end
 
   class << self
@@ -443,6 +452,11 @@ class Faraday::Adapter::Test::Stubs
   #
   # source://faraday//lib/faraday/adapter/test.rb#70
   def initialize(strict_mode: T.unsafe(nil)); end
+
+  # Removes all stubs, including the ones that have already been consumed.
+  #
+  # source://faraday//lib/faraday/adapter/test.rb#131
+  def clear; end
 
   # source://faraday//lib/faraday/adapter/test.rb#122
   def delete(path, headers = T.unsafe(nil), &block); end
@@ -478,12 +492,12 @@ class Faraday::Adapter::Test::Stubs
   # Set strict_mode. If the value is true, this adapter tries to find matched requests strictly,
   # which means that all of a path, parameters, and headers must be the same as an actual request.
   #
-  # source://faraday//lib/faraday/adapter/test.rb#147
+  # source://faraday//lib/faraday/adapter/test.rb#155
   def strict_mode=(value); end
 
   # Raises an error if any of the stubbed calls have not been made.
   #
-  # source://faraday//lib/faraday/adapter/test.rb#131
+  # source://faraday//lib/faraday/adapter/test.rb#139
   def verify_stubbed_calls; end
 
   protected
@@ -492,10 +506,10 @@ class Faraday::Adapter::Test::Stubs
   # @param env [Faraday::Env]
   # @return [Boolean]
   #
-  # source://faraday//lib/faraday/adapter/test.rb#177
+  # source://faraday//lib/faraday/adapter/test.rb#185
   def matches?(stack, env); end
 
-  # source://faraday//lib/faraday/adapter/test.rb#158
+  # source://faraday//lib/faraday/adapter/test.rb#166
   def new_stub(request_method, path, headers = T.unsafe(nil), body = T.unsafe(nil), &block); end
 end
 
@@ -927,7 +941,7 @@ module Faraday::DecodeMethods
 
   protected
 
-  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#144
+  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#146
   def add_to_context(is_array, context, value, subkey); end
 
   # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#107
@@ -936,17 +950,22 @@ module Faraday::DecodeMethods
   # Internal: convert a nested hash with purely numeric keys into an array.
   # FIXME: this is not compatible with Rack::Utils.parse_nested_query
   #
-  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#151
+  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#159
   def dehash(hash, depth); end
 
-  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#139
+  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#141
   def match_context(context, subkey); end
 
-  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#129
+  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#131
   def new_context(subkey, is_array, context); end
 
-  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#119
+  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#121
   def prepare_context(context, subkey, is_array, last_subkey); end
+
+  # @raise [Faraday::Error]
+  #
+  # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#150
+  def validate_params_depth!(depth); end
 end
 
 # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#105
@@ -1524,7 +1543,7 @@ end
 # so you can send objects such as Arrays or Hashes as parameters
 # for your requests.
 #
-# source://faraday//lib/faraday/encoders/nested_params_encoder.rb#168
+# source://faraday//lib/faraday/encoders/nested_params_encoder.rb#176
 module Faraday::NestedParamsEncoder
   extend ::Faraday::EncodeMethods
   extend ::Faraday::DecodeMethods
@@ -1532,29 +1551,41 @@ module Faraday::NestedParamsEncoder
   class << self
     # Returns the value of attribute array_indices.
     #
-    # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#170
+    # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#178
     def array_indices; end
 
     # Sets the attribute array_indices
     #
     # @param value the value to set the attribute array_indices to.
     #
-    # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#170
+    # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#178
     def array_indices=(_arg0); end
 
     # source://forwardable/1.3.3/forwardable.rb#231
     def escape(*args, **_arg1, &block); end
 
+    # Returns the value of attribute param_depth_limit.
+    #
+    # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#178
+    def param_depth_limit; end
+
+    # Sets the attribute param_depth_limit
+    #
+    # @param value the value to set the attribute param_depth_limit to.
+    #
+    # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#178
+    def param_depth_limit=(_arg0); end
+
     # Returns the value of attribute sort_params.
     #
-    # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#170
+    # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#178
     def sort_params; end
 
     # Sets the attribute sort_params
     #
     # @param value the value to set the attribute sort_params to.
     #
-    # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#170
+    # source://faraday//lib/faraday/encoders/nested_params_encoder.rb#178
     def sort_params=(_arg0); end
 
     # source://forwardable/1.3.3/forwardable.rb#231
@@ -2228,7 +2259,7 @@ class Faraday::Request::Json < ::Faraday::Middleware
   # source://faraday//lib/faraday/request/json.rb#26
   def encode(data); end
 
-  # @yield []
+  # @yield [env[:body]]
   #
   # source://faraday//lib/faraday/request/json.rb#36
   def match_content_type(env); end
