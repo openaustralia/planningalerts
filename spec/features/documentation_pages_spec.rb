@@ -83,6 +83,12 @@ describe "Browsing basic documentation pages" do
       end
     end
 
+    it "describes the trial limits without a contradictory request count" do
+      # The view breaks this sentence across several lines, so normalise whitespace
+      expect(page).to have_content("Enjoy up to 10 requests a day", normalize_ws: true)
+      expect(page).to have_no_content("(14 requests)", normalize_ws: true)
+    end
+
     # rubocop:disable RSpec/NoExpectationExample
     it "renders a snapshot for a visual diff", :js do
       page.percy_snapshot("API")
