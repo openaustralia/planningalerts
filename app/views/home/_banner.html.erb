@@ -1,8 +1,14 @@
 <div class="flex flex-col items-center mb-6 sm:mb-12 lg:flex-row lg:gap-7">
-  <%# This is using a different style than the standard Heading component %>
-  <%= render HeadingComponent.new(tag: :h1, size: "3xl", extra_classes: "sm:text-4xl leading-tight leading-snug sm:leading-snug") do %>
-    Find out for free what is being built and knocked down in your area, anywhere in Australia.
-  <% end %>
+  <div>
+    <%# This is using a different style than the standard Heading component %>
+    <%= render HeadingComponent.new(tag: :h1, size: "3xl", extra_classes: "sm:text-4xl leading-tight leading-snug sm:leading-snug") do %>
+      What is being built and knocked down in your area?<br>
+      Find out here, for free.
+    <% end %>
+    <p class="mt-4 text-xl text-navy">
+      A searchable collection of Australian local government planning applications.
+    </p>
+  </div>
   <div class="mt-9 lg:mt-0 justify-self-end shrink-0">
     <%= image_tag "illustration/banner.svg", alt: "", size: "465x340" %>
   </div>

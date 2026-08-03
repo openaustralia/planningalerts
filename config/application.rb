@@ -84,8 +84,8 @@ module PlanningalertsApp
     # in practise to change much
 
     config.planningalerts_meta_description =
-      "A free service which searches Australian planning authority websites " \
-      "and emails you details of applications near you"
+      "A searchable collection of Australian local government planning applications. " \
+      "Find out for free what is being built and knocked down in your area."
 
     # Values used in the API examples
     config.planningalerts_api_example_address = "24 Bruce Road Glenbrook, NSW 2773"

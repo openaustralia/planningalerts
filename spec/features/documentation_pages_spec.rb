@@ -10,7 +10,7 @@ describe "Browsing basic documentation pages" do
   describe "about page" do
     it "has an about page" do
       visit about_path
-      expect(page).to have_content "The aim of this to enable shared scrutiny of what is being built"
+      expect(page).to have_content "This service enables shared scrutiny of what is being built"
     end
 
     describe "in the new design" do
