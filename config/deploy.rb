@@ -53,7 +53,8 @@ set :puma_access_log, "/srv/www/production/shared/log/puma.log"
 set :puma_error_log, "/srv/www/production/shared/log/puma.log"
 # Puma master + 3 workers start at ~260 MB each, capped at 550 MB per worker
 # Total limit = 3 workers x 550 MB + 30 MB master = 1,680 MB
-set :puma_service_unit_props, %w[MemoryMax=1500M TimeoutStopSec=300]
+# In practice memory is expected to peak at 72%, just under the 75% warning level
+set :puma_service_unit_props, %w[MemoryMax=1680M TimeoutStopSec=300]
 set :puma_enable_lingering, false
 set :puma_systemctl_user, "deploy"
 
