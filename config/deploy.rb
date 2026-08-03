@@ -56,7 +56,7 @@ set :puma_error_log, "/srv/www/production/shared/log/puma.log"
 # In practice memory is expected to peak at 72%, just under the 75% warning level
 set :puma_service_unit_props, %w[MemoryMax=1680M TimeoutStopSec=300]
 set :puma_enable_lingering, false
-set :puma_systemctl_user, "deploy"
+set :puma_systemctl_user, :user
 
 set :aws_ec2_regions, ['ap-southeast-2']
 # We don't want to use the stage tag to filter because we have both production and staging on the same machine
