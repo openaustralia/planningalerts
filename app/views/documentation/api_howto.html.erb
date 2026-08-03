@@ -25,7 +25,7 @@
       <li>Data updated daily</li>
       <%# TODO: Find a better way to say this! %>
       <li>Save considerable time and money by not having to develop this stuff yourself</li>
-      <li>Delivering reliable and trustworthy service for over 14 years</li>
+      <li>Delivering reliable and trustworthy service for over <%= years_collecting_data %> years</li>
       <li>As a bonus support a charity doing good work</li>
     </ul>
   <% end %>
@@ -246,11 +246,11 @@
   <% end %>
   <div class="flex flex-col justify-between gap-8 sm:gap-16 sm:flex-row-reverse">
     <div class="font-bold text-lavender font-display text-8xl shrink-0">
-      14 <span class="relative text-2xl top-3 -left-6">yrs</span>
+      <%= years_collecting_data %> <span class="relative text-2xl top-3 -left-6">yrs</span>
     </div>
     <p class="max-w-2xl">
       <%# TODO: Add something about complex automations and data integrity checks, etc.. %>
-      We've been doing this for more than 14 years with an extremely experienced team.
+      We've been doing this for more than <%= years_collecting_data %> years with an extremely experienced team.
       Leverage that for your own needs rather than trying to reinvent the wheel.
     </p>
   </div>

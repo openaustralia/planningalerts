@@ -132,6 +132,17 @@ module ApplicationHelper
     end
   end
 
+  # How many complete years we've been collecting planning data, counted from the
+  # first application we scraped. Rounded down so the claim is always true.
+  sig { returns(Integer) }
+  def years_collecting_data
+    start = Rails.configuration.planningalerts_first_application_scraped_on
+    today = Time.zone.today
+    years = today.year - start.year
+    years -= 1 if today < start.advance(years:)
+    years
+  end
+
   sig { returns(T::Array[T::Hash[Symbol, String]]) }
   def contributors
     JSON.parse(File.read("CONTRIBUTORS.json"), symbolize_names: true)

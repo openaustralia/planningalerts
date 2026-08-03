@@ -88,6 +88,17 @@ describe "Browsing basic documentation pages" do
       page.percy_snapshot("API")
     end
     # rubocop:enable RSpec/NoExpectationExample
+
+    describe "how long we've been collecting data" do
+      around do |example|
+        Timecop.freeze(Date.new(2026, 8, 3)) { example.run }
+      end
+
+      it "is worked out from the date of the first application we scraped" do
+        expect(page).to have_content("Delivering reliable and trustworthy service for over 16 years")
+        expect(page).to have_content("We've been doing this for more than 16 years")
+      end
+    end
   end
 
   describe "api developer page" do
