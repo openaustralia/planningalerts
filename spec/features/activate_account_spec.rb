@@ -99,7 +99,7 @@ describe "Activate account" do
       fill_in "Email", with: "matthew@oaf.org.au"
       click_on "Send me an email"
 
-      expect(page).to have_content "We don't know recognise that email address"
+      expect(page).to have_content "We don't recognise that email address"
     end
   end
 

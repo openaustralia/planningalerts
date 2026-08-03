@@ -54,7 +54,7 @@
       <%= render HeadingComponent.new(tag: :h3).with_content("Single Location by longitude/latitude") %>
       <p class="mt-4 text-xl text-navy">
         Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
-        with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
+        with the longitude/latitude at its centre. Suggested sizes are 400, 800 or 4000 metres.
       </p>
       <code class="block my-8 text-xl break-all text-navy">
         <%= api_example_latlong_url_html(format: "json", key: api_key) %>
