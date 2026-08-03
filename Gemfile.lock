@@ -147,6 +147,8 @@ GEM
     base64 (0.3.0)
     bcp47_spec (0.2.1)
     bcrypt (3.1.22)
+    bcrypt_pbkdf (1.1.2)
+    bcrypt_pbkdf (1.1.2-arm64-darwin)
     benchmark (0.5.0)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
@@ -820,6 +822,7 @@ DEPENDENCIES
   axe-core-capybara
   axe-core-rspec
   bcrypt (>= 3.1.22)
+  bcrypt_pbkdf (~> 1.1)
   better_errors
   binding_of_caller
   bootsnap
