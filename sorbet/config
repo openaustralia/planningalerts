@@ -6,6 +6,10 @@ spec/
 db/
 --ignore
 vendor/
+# Agent worktrees nest a full checkout inside the repo, which would otherwise
+# make Sorbet see every RBI file twice
+--ignore
+.claude/
 # net-imap refactoring is conflicting with Sorbet's built-in payload, so sorbet suggested:
 
 # Ignoring: sorbet/rbi/gems/net-imap@0.6.4.rbi:599: Parent of class Net::IMAP::Atom redefined from Object to Net::IMAP::CommandData https://srb.help/5012
