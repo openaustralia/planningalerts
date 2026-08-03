@@ -223,6 +223,7 @@ group :development do
   gem "binding_of_caller"
 
   # For deployment
+  gem "bcrypt_pbkdf", "~> 1.1"
   gem "capistrano", require: false
   # For puma 6 support we're using the "beta" version
   gem "capistrano3-puma", ">= 6.0.0.beta.1", require: false
@@ -231,6 +232,7 @@ group :development do
   gem "capistrano-rails", require: false
   gem "capistrano-rvm", require: false
   gem "capistrano-tagging3", "~> 2.0", require: false
+  gem "ed25519", "~> 1.3"
 
   # Help with code quality
   gem "brakeman"
