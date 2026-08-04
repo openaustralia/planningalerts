@@ -19,14 +19,16 @@ class SyncGithubIssueForAuthorityService
     extend T::Sig
     sig { params(_context: T.untyped).returns(T::Hash[Symbol, String]) }
     def headers(_context)
-      { Authorization: "bearer #{Rails.application.credentials[:github_personal_access_token]}" }
+      # Minted per request rather than up front, so that merely loading this class
+      # doesn't try to talk to Github
+      { Authorization: "bearer #{GithubAppTokenService.call}" }
     end
   end, GraphQL::Client::HTTP)
 
   # TODO: Put the schema file in a sensible place
   # We're using a hardcoded version of the downloaded github graphQL schema during testing
-  # so that we're not having to download anything from github and we're not having to set a
-  # personal access token up for test either
+  # so that we're not having to download anything from github and we're not having to set
+  # github credentials up for test either
   SCHEMA_PATH = T.let(Rails.env.test? ? "spec/fixtures/github_graphql_schema.json" : "schema.json", String)
   SCHEMA = T.let(if File.exist?(SCHEMA_PATH)
                    GraphQL::Client.load_schema(SCHEMA_PATH)
@@ -125,7 +127,7 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(logger: Logger, authority: Authority).void }
   def call(logger:, authority:)
-    client = Octokit::Client.new(access_token: Rails.application.credentials[:github_personal_access_token])
+    client = Octokit::Client.new(access_token: GithubAppTokenService.call)
 
     issue = authority.github_issue
     latest_date = authority.date_last_new_application_scraped
