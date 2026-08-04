@@ -40,6 +40,46 @@ describe SyncGithubIssueForAuthorityService do
       expect(Octokit::Client).to have_received(:new).with(access_token: "ghs_installationtoken")
     end
 
+    # Broken, but with a date to report, so an issue gets created and attached
+    context "when an authority is broken" do
+      let(:graphql_errors) { instance_double(GraphQL::Client::Errors, any?: false, messages: {}) }
+      let(:graphql_data) { instance_double(GraphQL::Client::Response) }
+
+      before do
+        create(:geocoded_application, authority:, date_scraped: 3.weeks.ago)
+
+        allow(octokit).to receive(:create_issue).and_return(
+          Sawyer::Resource.new(Sawyer::Agent.new("https://api.github.com"), { number: 7, node_id: "I_node" })
+        )
+        allow(described_class::CLIENT).to receive(:query).and_return(graphql_data)
+        allow(graphql_data).to receive(:errors).and_return(graphql_errors)
+      end
+
+      context "when github reports a graphql error" do
+        let(:graphql_errors) do
+          instance_double(GraphQL::Client::Errors, any?: true, messages: { "data" => ["Bad credentials"] })
+        end
+
+        it "raises rather than leaving the issue on the project with blank fields" do
+          expect { described_class.call(logger:, authority:) }
+            .to raise_error(/Github GraphQL request failed: Bad credentials/)
+        end
+      end
+
+      context "when github returns no project, which is what a missing permission looks like" do
+        before do
+          # graphql-client builds the data object from a dynamically generated class,
+          # so there's no real constant to verify a double against
+          allow(graphql_data).to receive(:data).and_return(Struct.new(:organization).new(nil))
+        end
+
+        it "says which project it couldn't find" do
+          expect { described_class.call(logger:, authority:) }
+            .to raise_error(/Can't find project 4 in the planningalerts-scrapers organisation/)
+        end
+      end
+    end
+
     context "when a broken authority starts working again and its issue is still open" do
       before do
         create(:geocoded_application, authority:)

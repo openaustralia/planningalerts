@@ -151,13 +151,15 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(issue_id: String, authority: Authority, latest_date: Time).void }
   def attach_issue_to_project(issue_id:, authority:, latest_date:)
-    result = CLIENT.query(SHOW_PROJECT_QUERY, variables: { login: ORG, number: PROJECT_NUMBER })
-    project = result.data.organization.project_v2
+    data = query!(SHOW_PROJECT_QUERY, { login: ORG, number: PROJECT_NUMBER })
+    project = data.organization&.project_v2
+    # Reading an organisation project needs the App to have organisation Projects
+    # permission. Without it github returns no errors, just a null project.
+    raise "Can't find project #{PROJECT_NUMBER} in the #{ORG} organisation" if project.nil?
 
     # Now add the issue to the project
-    result = CLIENT.query(ADD_ISSUE_TO_PROJECT_MUTATION, variables: { input: { projectId: project.id, contentId: issue_id } })
-    item = result.data.add_project_v2_item_by_id.item
-    # TODO: Check for errors
+    data = query!(ADD_ISSUE_TO_PROJECT_MUTATION, { input: { projectId: project.id, contentId: issue_id } })
+    item = data.add_project_v2_item_by_id.item
 
     if project.authority_field.nil? || project.latest_date_field.nil? || project.scraper_field.nil? || project.state_field.nil? ||
        project.population_field.nil? || project.website_field.nil? || project.authority_admin_field.nil?
@@ -190,8 +192,18 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, type: Symbol, value: T.nilable(T.any(String, Integer))).void }
   def update_field(project:, item:, field:, type:, value:)
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { type => value } } })
-    # TODO: Check for errors
+    query!(UPDATE_FIELD_VALUE_MUTATION, { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { type => value } } })
+  end
+
+  # Runs a query and raises if github reported any errors. Without this the field
+  # updates fail silently, because nothing looks at what they return, and the issue
+  # ends up on the project with most of its fields blank and nothing in the logs.
+  sig { params(definition: GraphQL::Client::OperationDefinition, variables: T::Hash[Symbol, T.untyped]).returns(T.untyped) }
+  def query!(definition, variables)
+    response = CLIENT.query(definition, variables:)
+    raise "Github GraphQL request failed: #{response.errors.messages.values.flatten.join('; ')}" if response.errors.any?
+
+    response.data
   end
 
   sig { params(authority: Authority).returns(String) }
