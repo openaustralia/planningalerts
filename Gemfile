@@ -108,6 +108,8 @@ gem "octokit"
 # Just including faraday-multipart and faraday-retry to keep octokit quiet
 gem "faraday-multipart"
 gem "faraday-retry"
+# For authenticating to github as a GitHub App. Octokit doesn't generate the JWTs itself
+gem "jwt"
 
 # For rendering json output
 gem "jb"
