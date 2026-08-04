@@ -14,8 +14,17 @@ class GithubAppTokenService
   extend T::Sig
 
   class InstallationToken < T::Struct
+    extend T::Sig
+
     const :token, String
     const :expires_at, Time
+
+    # T::Struct's generated inspect prints every attribute, which would put a live
+    # credential into any log line or exception that happens to include this struct
+    sig { returns(String) }
+    def inspect
+      "#<#{self.class.name} token=[FILTERED] expires_at=#{expires_at.inspect}>"
+    end
   end
 
   # Get a new token when there's less than this left on the one we're holding
@@ -34,7 +43,7 @@ class GithubAppTokenService
     cached_token = @cached_token
     return cached_token.token if cached_token && Time.zone.now < cached_token.expires_at - EXPIRY_MARGIN
 
-    minted = new.call
+    minted = new.mint
     @cached_token = minted
     minted.token
   end
@@ -42,7 +51,7 @@ class GithubAppTokenService
   # Mints a brand new installation access token. Callers should generally go through
   # .call so they get the cached one.
   sig { returns(InstallationToken) }
-  def call
+  def mint
     response = Octokit::Client.new(bearer_token: jwt).create_app_installation_access_token(installation_id)
     InstallationToken.new(token: response.token, expires_at: response.expires_at)
   end
@@ -62,16 +71,26 @@ class GithubAppTokenService
 
   sig { returns(Integer) }
   def app_id
-    Rails.application.credentials.dig(:github_app, :id)
+    credential(:id)
   end
 
   sig { returns(Integer) }
   def installation_id
-    Rails.application.credentials.dig(:github_app, :installation_id)
+    credential(:installation_id)
   end
 
   sig { returns(String) }
   def private_key
-    Rails.application.credentials.dig(:github_app, :private_key)
+    credential(:private_key)
+  end
+
+  # Fails with something an operator can act on. Without this a missing credential
+  # surfaces as a Sorbet return type error, and because the only caller of the github
+  # sync isn't rescued, every import job would then fail and be retried.
+  sig { params(name: Symbol).returns(T.untyped) }
+  def credential(name)
+    Rails.application.credentials.dig(:github_app, name) ||
+      raise("github_app.#{name} is not set in the #{Rails.env} Rails credentials. " \
+            "Add it with: bin/rails credentials:edit --environment #{Rails.env}")
   end
 end

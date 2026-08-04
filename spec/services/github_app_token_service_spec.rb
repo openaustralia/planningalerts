@@ -78,5 +78,25 @@ describe GithubAppTokenService do
         expect(app_client).to have_received(:create_app_installation_access_token).twice
       end
     end
+
+    context "when a credential is missing" do
+      before do
+        allow(Rails.application.credentials).to receive(:dig).with(:github_app, :private_key).and_return(nil)
+      end
+
+      it "says which credential and how to set it" do
+        expect { described_class.call }
+          .to raise_error(/github_app\.private_key is not set in the test Rails credentials/)
+      end
+    end
+  end
+
+  describe GithubAppTokenService::InstallationToken do
+    it "keeps the token out of inspect output so that it can't leak into a log" do
+      token = described_class.new(token: "ghs_secret", expires_at: 1.hour.from_now)
+
+      expect(token.inspect).not_to include "ghs_secret"
+      expect(token.inspect).to include "[FILTERED]"
+    end
   end
 end
