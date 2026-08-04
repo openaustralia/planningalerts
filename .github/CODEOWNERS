@@ -1,4 +1,8 @@
-# This file is used to define code owners for this repository.
-# See https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+# Code owners for this repository.
+#
+# @openaustralia/team-planningalerts has maintain access here, so GitHub can
+# actually require its review. @openaustralia/code-reviewers used to be listed
+# alongside it, but that team holds access to no repository at all, so GitHub
+# silently skipped it.
 
-* @openaustralia/code-reviewers @openaustralia/team-planningalerts
+* @openaustralia/team-planningalerts
