@@ -87,6 +87,10 @@ module PlanningalertsApp
       "A free service which searches Australian planning authority websites " \
       "and emails you details of applications near you"
 
+    # The first planning application we ever scraped. Used to say how long we've
+    # been collecting data.
+    config.planningalerts_first_application_scraped_on = Date.new(2009, 12, 13)
+
     # Values used in the API examples
     config.planningalerts_api_example_address = "24 Bruce Road Glenbrook, NSW 2773"
     config.planningalerts_api_example_size = 4000

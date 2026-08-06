@@ -52,4 +52,17 @@ describe ApplicationHelper do
       expect(helper.significant_figure(-2.34, 2)).to eq(-2.3)
     end
   end
+
+  describe "#years_collecting_data" do
+    it "counts complete years since the first application was scraped" do
+      Timecop.freeze(Date.new(2026, 8, 3)) do
+        expect(helper.years_collecting_data).to eq(16)
+      end
+    end
+
+    it "doesn't count the current year until the anniversary" do
+      Timecop.freeze(Date.new(2025, 12, 12)) { expect(helper.years_collecting_data).to eq(15) }
+      Timecop.freeze(Date.new(2025, 12, 13)) { expect(helper.years_collecting_data).to eq(16) }
+    end
+  end
 end
