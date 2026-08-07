@@ -19,14 +19,16 @@ class SyncGithubIssueForAuthorityService
     extend T::Sig
     sig { params(_context: T.untyped).returns(T::Hash[Symbol, String]) }
     def headers(_context)
-      { Authorization: "bearer #{Rails.application.credentials[:github_personal_access_token]}" }
+      # Minted per request rather than up front, so that merely loading this class
+      # doesn't try to talk to Github
+      { Authorization: "bearer #{GithubAppTokenService.call}" }
     end
   end, GraphQL::Client::HTTP)
 
   # TODO: Put the schema file in a sensible place
   # We're using a hardcoded version of the downloaded github graphQL schema during testing
-  # so that we're not having to download anything from github and we're not having to set a
-  # personal access token up for test either
+  # so that we're not having to download anything from github and we're not having to set
+  # github credentials up for test either
   SCHEMA_PATH = T.let(Rails.env.test? ? "spec/fixtures/github_graphql_schema.json" : "schema.json", String)
   SCHEMA = T.let(if File.exist?(SCHEMA_PATH)
                    GraphQL::Client.load_schema(SCHEMA_PATH)
@@ -125,7 +127,7 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(logger: Logger, authority: Authority).void }
   def call(logger:, authority:)
-    client = Octokit::Client.new(access_token: Rails.application.credentials[:github_personal_access_token])
+    client = Octokit::Client.new(access_token: GithubAppTokenService.call)
 
     issue = authority.github_issue
     latest_date = authority.date_last_new_application_scraped
@@ -149,13 +151,15 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(issue_id: String, authority: Authority, latest_date: Time).void }
   def attach_issue_to_project(issue_id:, authority:, latest_date:)
-    result = CLIENT.query(SHOW_PROJECT_QUERY, variables: { login: ORG, number: PROJECT_NUMBER })
-    project = result.data.organization.project_v2
+    data = query!(SHOW_PROJECT_QUERY, { login: ORG, number: PROJECT_NUMBER })
+    project = data.organization&.project_v2
+    # Reading an organisation project needs the App to have organisation Projects
+    # permission. Without it github returns no errors, just a null project.
+    raise "Can't find project #{PROJECT_NUMBER} in the #{ORG} organisation" if project.nil?
 
     # Now add the issue to the project
-    result = CLIENT.query(ADD_ISSUE_TO_PROJECT_MUTATION, variables: { input: { projectId: project.id, contentId: issue_id } })
-    item = result.data.add_project_v2_item_by_id.item
-    # TODO: Check for errors
+    data = query!(ADD_ISSUE_TO_PROJECT_MUTATION, { input: { projectId: project.id, contentId: issue_id } })
+    item = data.add_project_v2_item_by_id.item
 
     if project.authority_field.nil? || project.latest_date_field.nil? || project.scraper_field.nil? || project.state_field.nil? ||
        project.population_field.nil? || project.website_field.nil? || project.authority_admin_field.nil?
@@ -188,8 +192,18 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, type: Symbol, value: T.nilable(T.any(String, Integer))).void }
   def update_field(project:, item:, field:, type:, value:)
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { type => value } } })
-    # TODO: Check for errors
+    query!(UPDATE_FIELD_VALUE_MUTATION, { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { type => value } } })
+  end
+
+  # Runs a query and raises if github reported any errors. Without this the field
+  # updates fail silently, because nothing looks at what they return, and the issue
+  # ends up on the project with most of its fields blank and nothing in the logs.
+  sig { params(definition: GraphQL::Client::OperationDefinition, variables: T::Hash[Symbol, T.untyped]).returns(T.untyped) }
+  def query!(definition, variables)
+    response = CLIENT.query(definition, variables:)
+    raise "Github GraphQL request failed: #{response.errors.messages.values.flatten.join('; ')}" if response.errors.any?
+
+    response.data
   end
 
   sig { params(authority: Authority).returns(String) }
