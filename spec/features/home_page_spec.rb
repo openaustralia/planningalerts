@@ -7,6 +7,11 @@ describe "Home page" do
   # See https://github.com/heartcombo/devise#controller-tests
   include Devise::Test::IntegrationHelpers
 
+  it "shows what the service is" do
+    visit root_path
+    expect(page).to have_content "What is being built and knocked down in your area?"
+  end
+
   describe "accessibility tests", :js do
     before do
       sign_in create(:confirmed_user, name: "Jane Ng")
