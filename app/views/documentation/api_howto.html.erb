@@ -180,7 +180,7 @@
         requests a day (returning up to a total of
         <%= number_with_delimiter(ApiKey.default_daily_limit_trial * Application.max_per_page) %>
         applications per day) for
-        <%= pluralize(ApiKey.default_trial_duration_days, "day") %>. (<%= number_with_delimiter(ApiKey.default_trial_duration_days) %> requests)
+        <%= pluralize(ApiKey.default_trial_duration_days, "day") %>.
       </p>
       <%= image_tag "illustration/key.svg", alt: "", size: "237x155", class: "my-8" %>
       <% if current_user %>
