@@ -5,9 +5,9 @@
     window.sentryOnLoad = function () {
       Sentry.init({
         <% if sentry_release %>
-          release: "<%= sentry_release %>",
+          release: "<%= j(sentry_release) %>",
         <% end %>
-        environment: "<%= ENV.fetch("SENTRY_ENVIRONMENT", Rails.env) %>",
+        environment: "<%= j(ENV.fetch("SENTRY_ENVIRONMENT", Rails.env)) %>",
         replaysSessionSampleRate: 0.1,
         replaysOnErrorSampleRate: 1.0,
         sendDefaultPii: false
