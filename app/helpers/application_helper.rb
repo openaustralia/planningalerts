@@ -210,4 +210,13 @@ module ApplicationHelper
   def api_contact_path
     Rails.application.routes.url_helpers.documentation_contact_path(reason: "I want API access or commercial use")
   end
+
+  # The full git SHA of the currently deployed code, from the REVISION file
+  # that Capistrano writes. Needs to match the release used by the backend
+  # Sentry SDK so frontend and backend errors are tied to the same release.
+  sig { returns(T.nilable(String)) }
+  def sentry_release
+    revision_file = Rails.root.join("REVISION")
+    File.read(revision_file).strip if File.exist?(revision_file)
+  end
 end
