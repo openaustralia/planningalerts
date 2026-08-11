@@ -31,15 +31,22 @@ namespace :sentry do
       release = fetch(:current_revision)
       environment = fetch(:stage).to_s
 
-      execute :"sentry-cli", "releases", "new", release
-      # Associating commits requires the GitHub integration to be installed in
-      # Sentry. If it isn't yet, warn but still finalize and record the deploy.
-      unless test("sentry-cli releases set-commits --auto #{release}")
-        warn "WARNING: sentry-cli could not associate commits with release #{release} " \
-             "(is the GitHub integration installed in Sentry?). Continuing without commit data."
+      begin
+        execute :"sentry-cli", "releases", "new", release
+        # Associating commits requires the GitHub integration to be installed in
+        # Sentry. If it isn't yet, warn but still finalize and record the deploy.
+        unless test("sentry-cli releases set-commits --auto #{release}")
+          warn "WARNING: sentry-cli could not associate commits with release #{release} " \
+               "(is the GitHub integration installed in Sentry?). Continuing without commit data."
+        end
+        execute :"sentry-cli", "releases", "finalize", release
+        execute :"sentry-cli", "deploys", "new", "--release", release, "-e", environment
+      rescue StandardError => e
+        # Recording the release in Sentry is best-effort; the deploy itself
+        # has already succeeded, so don't let a sentry-cli failure fail it.
+        warn "WARNING: recording release #{release} in Sentry failed (#{e.message}). " \
+             "The deploy itself has still succeeded."
       end
-      execute :"sentry-cli", "releases", "finalize", release
-      execute :"sentry-cli", "deploys", "new", "--release", release, "-e", environment
     end
   end
 end
