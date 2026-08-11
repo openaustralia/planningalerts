@@ -182,6 +182,20 @@ View more available Capistrano commands with:
 bundle exec cap --tasks
 ```
 
+### Sentry release tracking
+
+Deploys automatically record a release and deploy in Sentry (org `oaf-org-au`, project `planning-alerts`) so issues can be tied to the deploy that introduced them. This runs via a Capistrano hook using `sentry-cli` on your machine (part of [#2049](https://github.com/openaustralia/planningalerts/issues/2049)).
+
+One-time setup per deployer machine:
+
+1. Install sentry-cli: `brew install getsentry/tools/sentry-cli` on macOS, or `curl -sL https://sentry.io/get-cli/ | sh` on Linux
+2. Authenticate: run `sentry-cli login` — it opens Sentry to create a personal User Auth Token (needs the `project:releases` and `org:read` scopes) and stores it in `~/.sentryclirc`
+3. Verify: `sentry-cli info` should show you are authenticated against the `oaf-org-au` org
+
+The repo's committed `.sentryclirc` supplies org/project defaults; your token stays in `~/.sentryclirc` and must never be committed.
+
+If sentry-cli is missing or unauthenticated the deploy still succeeds — the hook prints a warning and skips recording the release, so set it up before your next production deploy.
+
 ## Upgrading Ruby in production
 
 Upgrading Ruby in production is an unbelievably painful process right now. I'm sorry. Let's make it simpler
