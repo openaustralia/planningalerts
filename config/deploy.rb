@@ -76,18 +76,35 @@ set :aws_ec2_default_filters, (proc {
       name: "tag:#{fetch(:aws_ec2_application_tag)}",
       values: [fetch(:application)]
     },
-    # Uncomment the following lines (and set the value) if you want to only deploy to blue or green
-    # The default is to deploy to both blue AND green
-    # {
-    #   name: "tag:BlueGreen",
-    #   values: ["blue"]
-    # },
     {
       name: 'instance-state-name',
       values: ['running']
     }
   ]
 })
+
+# Blue/green: exactly one colour is meant to be "live" at a time - provision and deploy to
+# the standby colour, then swap, never update the live colour in place.
+def live_aws_instances
+  instances = aws_ec2.instances.values
+
+  available_colours = instances.filter_map { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") }.uniq.reject(&:empty?)
+  colour = ENV["BLUE_GREEN"]
+  if colour
+    instances = instances.select { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") == colour }
+  end
+  colours = instances.filter_map { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") }.uniq.reject(&:empty?)
+  raise "ERROR: BLUE_GREEN must be #{available_colours.join(' or ')}" if colours.size != 1
+  instances
+end
+
+def register_aws_instances(options = {})
+  live_aws_instances.each do |instance|
+    ip = Capistrano::Aws::EC2.contact_point(instance)
+    roles = Capistrano::Aws::EC2.parse_tag(instance, fetch(:aws_ec2_roles_tag)).split(",").map(&:strip)
+    server ip, options.merge(roles: roles, aws_instance_id: instance.id)
+  end
+end
 
 # Tagging options
 set :tagging3_format, ':stage_:release'
