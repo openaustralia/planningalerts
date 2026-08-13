@@ -1,0 +1,18 @@
+<% if Rails.env.production? %>
+  <%# Sentry error monitoring and session replay via the loader script, which lazy-loads the full SDK %>
+  <%# sentryOnLoad must be defined before the loader script so the loader can find and invoke it %>
+  <script>
+    window.sentryOnLoad = function () {
+      Sentry.init({
+        <% if sentry_release %>
+          release: "<%= j(sentry_release) %>",
+        <% end %>
+        environment: "<%= j(ENV.fetch("SENTRY_ENVIRONMENT", Rails.env)) %>",
+        replaysSessionSampleRate: 0.1,
+        replaysOnErrorSampleRate: 1.0,
+        sendDefaultPii: false
+      });
+    };
+  </script>
+  <%= javascript_include_tag "https://js.sentry-cdn.com/d56690508e2b07f38f9b78ae4228f42f.min.js", crossorigin: "anonymous" %>
+<% end %>
