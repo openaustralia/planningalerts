@@ -6,7 +6,7 @@
 namespace :puma do
   desc "Check lingering is already set"
   task :check_lingering do
-    on roles(fetch(:puma_role)) do |host|
+    on roles(:app) do |host|
       linger_status = capture("loginctl show-user #{host.user} 2>/dev/null | grep Linger || true")
 
       if linger_status.include?("Linger=yes")
