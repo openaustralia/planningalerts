@@ -29,19 +29,20 @@ class ProcessAlertService
 
     applications = alert.recent_new_applications.to_a
     comments = alert.new_comments
+    send_email = !applications.empty? || !comments.empty?
 
-    if !applications.empty? || !comments.empty?
-      # offloading the actual sending of the email to another background job
-      # since this depends on an external service which might be down.
-      # Saves us from running the whole job again if it fails
-      AlertMailer.alert(alert:, applications:, comments:).deliver_later
-      alert.last_sent = Time.zone.now
-      no_emails = 1
-    else
-      no_emails = 0
-    end
+    alert.last_sent = Time.zone.now if send_email
     alert.last_processed = Time.zone.now
     alert.save!
+
+    # offloading the actual sending of the email to another background job
+    # since this depends on an external service which might be down.
+    # Saves us from running the whole job again if it fails.
+    # We do this after saving so that a save that fails can't leave us having
+    # sent an email without recording it, which would send it again next time.
+    AlertMailer.alert(alert:, applications:, comments:).deliver_later if send_email
+
+    no_emails = send_email ? 1 : 0
 
     # Update the tallies on each application.
     applications.each do |application|
