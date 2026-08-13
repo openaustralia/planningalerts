@@ -139,6 +139,35 @@ describe "GoogleGeocodeService" do
     end
   end
 
+  context "when google returns an empty response body" do
+    let(:address) { "24 Bruce Road, Glenbrook, NSW 2773" }
+
+    let(:result) do
+      GoogleGeocodeService.call(address:, key:)
+    end
+
+    before do
+      response = instance_double(HTTParty::Response, parsed_response: nil)
+      allow(HTTParty).to receive(:get).and_return(response)
+    end
+
+    it "errors with a message for the user" do
+      expect(result.error).to eq(
+        "Sorry, there was a problem processing your search. Please try again"
+      )
+    end
+
+    it "reports the empty response to Sentry" do
+      allow(Sentry).to receive(:capture_exception)
+      result
+      expect(Sentry).to have_received(:capture_exception).with(
+        an_instance_of(GoogleGeocodeService::GoogleGeocodeError)
+          .and(having_attributes(message: "Google geocoding error: EMPTY_RESPONSE")),
+        extra: { status: "EMPTY_RESPONSE", error_message: nil }
+      )
+    end
+  end
+
   context "with valid address that google only gets partial match on" do
     let(:address) { "11 Explorers Way Westdale NSW 2340" }
 

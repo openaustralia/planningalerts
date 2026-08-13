@@ -98,14 +98,16 @@ class GoogleGeocodeService
     params = { address:, key:, region: "au", sensor: false }
     response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
     parsed_response = response.parsed_response
-    status = parsed_response["status"]
+    # parsed_response can be nil if the response body is empty or unparseable
+    # (e.g. during rate limiting or an upstream outage)
+    status = parsed_response.nil? ? "EMPTY_RESPONSE" : parsed_response["status"]
     return parsed_response if %w[OK ZERO_RESULTS].include?(status)
 
     # Report the status and error message so that a quota or credentials
     # problem can be told apart from a one-off upstream error
     Sentry.capture_exception(
       GoogleGeocodeError.new("Google geocoding error: #{status}"),
-      extra: { status:, error_message: parsed_response["error_message"] }
+      extra: { status:, error_message: parsed_response&.[]("error_message") }
     )
     nil
   end
