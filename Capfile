@@ -17,6 +17,8 @@ require "capistrano/honeybadger"
 require "capistrano/aws"
 require "capistrano/puma"
 require "capistrano/tagging3"
+require "net/ssh/proxy/command"
+
 install_plugin Capistrano::Puma
 install_plugin Capistrano::Puma::Systemd
 
