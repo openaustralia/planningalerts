@@ -23,7 +23,7 @@ class Alert < ApplicationRecord
   # We want to make sure that a certain user can't have multiple alerts for the same address.
   # We also need to allow there to be multiple unsubscribed alerts with the
   # same address to allow people to do multiple rounds of subscribing and unsubscribing.
-  validates :address, uniqueness: { scope: %i[user_id unsubscribed] }, unless: :unsubscribed?
+  validates :address, uniqueness: { scope: :user_id }, unless: :unsubscribed?
   validates :address, presence: true
 
   before_validation :geocode_from_address, unless: :geocoded?
