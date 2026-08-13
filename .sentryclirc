@@ -1,0 +1,5 @@
+# Non-secret defaults for sentry-cli. Auth tokens live in each deployer's
+# ~/.sentryclirc — see README "Sentry release tracking". Never commit tokens here.
+[defaults]
+org = oaf-org-au
+project = planning-alerts

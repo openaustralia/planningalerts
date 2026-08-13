@@ -256,6 +256,14 @@ group :development do
   gem "ruby_audit", require: false
 end
 
+# Error tracking, tracing and profiling with Sentry. We're running this
+# alongside Honeybadger during the transition. See issue #2049
+gem "sentry-rails"
+gem "sentry-ruby"
+gem "sentry-sidekiq"
+# Profiler used by Sentry profiling (requires Ruby 3.2+)
+gem "vernier"
+
 group :production do
   # Reporting exceptions
   gem "honeybadger"

@@ -658,6 +658,16 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
+    sentry-rails (6.7.0)
+      railties (>= 5.2.0)
+      sentry-ruby (~> 6.7.0)
+    sentry-ruby (6.7.0)
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      logger
+    sentry-sidekiq (6.7.0)
+      sentry-ruby (~> 6.7.0)
+      sidekiq (>= 5.0)
     shellany (0.0.1)
     sidekiq (7.3.0)
       concurrent-ruby (< 2)
@@ -759,6 +769,7 @@ GEM
       i18n (>= 0.8.0)
       simpleidn
     vcr (6.4.0)
+    vernier (1.10.1)
     view_component (4.12.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
@@ -895,6 +906,9 @@ DEPENDENCIES
   sanitize
   searchkick
   selenium-webdriver (>= 4.14.0)
+  sentry-rails
+  sentry-ruby
+  sentry-sidekiq
   sidekiq (~> 7.0)
   sidekiq-cron
   simplecov
@@ -915,6 +929,7 @@ DEPENDENCIES
   validate_url
   validates_email_format_of
   vcr
+  vernier
   view_component
   webmock
   webrick (>= 1.8.2)
