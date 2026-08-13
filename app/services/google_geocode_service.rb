@@ -4,6 +4,10 @@
 class GoogleGeocodeService
   extend T::Sig
 
+  # Raised (well, reported to Sentry) when the Google Geocoding API returns a
+  # status we don't handle, e.g. OVER_QUERY_LIMIT or REQUEST_DENIED
+  class GoogleGeocodeError < StandardError; end
+
   sig { params(address: String, key: String).returns(GeocoderResults) }
   def self.call(address:, key:)
     new(address:, key:).call
@@ -21,8 +25,13 @@ class GoogleGeocodeService
 
     parsed_response = call_google_api(address)
 
-    # TODO: Raise a proper error class here
-    raise "Google geocoding error" if parsed_response.nil?
+    # nil means the api returned an unexpected status (e.g. a quota or
+    # credentials problem) which has already been reported to Sentry
+    if parsed_response.nil?
+      return error(
+        "Sorry, there was a problem processing your search. Please try again"
+      )
+    end
 
     if parsed_response["status"] != "OK"
       return error(
@@ -88,7 +97,17 @@ class GoogleGeocodeService
   def call_google_api_no_caching(address)
     params = { address:, key:, region: "au", sensor: false }
     response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
-    response.parsed_response if %w[OK ZERO_RESULTS].include?(response.parsed_response["status"])
+    parsed_response = response.parsed_response
+    status = parsed_response["status"]
+    return parsed_response if %w[OK ZERO_RESULTS].include?(status)
+
+    # Report the status and error message so that a quota or credentials
+    # problem can be told apart from a one-off upstream error
+    Sentry.capture_exception(
+      GoogleGeocodeError.new("Google geocoding error: #{status}"),
+      extra: { status:, error_message: parsed_response["error_message"] }
+    )
+    nil
   end
 
   # This caches the returned value for 24 hours but only if it's valid (non nil)
