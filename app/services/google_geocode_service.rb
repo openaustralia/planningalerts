@@ -29,7 +29,7 @@ class GoogleGeocodeService
     # credentials problem) which has already been reported to Sentry
     if parsed_response.nil?
       return error(
-        "Sorry, there was a problem processing your search. Please try again"
+        "Sorry, there was a problem processing your search. Please try again later"
       )
     end
 
