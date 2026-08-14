@@ -338,8 +338,12 @@ Nothing checks these for you, so keep them consistent by hand:
 - Maizzle sources, their compiled `.erb` output, and the `exclude` list in
   `.erb-lint.yml`.
 - The Postgres password in `docker-compose.yml` and `config/database.yml`.
-- `.ruby-version` and the Ruby installed by the `oaf/infrastructure` Ansible
-  repository, which is a separate repository you probably cannot see from here.
+- `.ruby-version` and the Ruby actually installed on the servers, which is
+  managed from the separate `oaf/infrastructure` Ansible repository you probably
+  cannot see from here. Treat the mechanism described in `README.md` as history
+  rather than instructions, since that runbook predates the current blue/green
+  deploy; confirm how Ruby versions reach the servers today before relying on
+  it.
 
 ## Conventions specific to this org
 
