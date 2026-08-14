@@ -33,14 +33,21 @@ class ProcessAlertService
 
     alert.last_sent = Time.zone.now if send_email
     alert.last_processed = Time.zone.now
-    alert.save!
 
-    # offloading the actual sending of the email to another background job
+    # Offloading the actual sending of the email to another background job
     # since this depends on an external service which might be down.
     # Saves us from running the whole job again if it fails.
-    # We do this after saving so that a save that fails can't leave us having
+    # We enqueue after saving so that a save that fails can't leave us having
     # sent an email without recording it, which would send it again next time.
-    AlertMailer.alert(alert:, applications:, comments:).deliver_later if send_email
+    # Doing both inside a transaction means that if enqueueing fails the
+    # last_sent update is rolled back, so a retry of this job re-processes the
+    # same applications rather than silently skipping them.
+    # requires_new is only needed so the rollback also happens when we're
+    # already inside a transaction (e.g. in tests).
+    Alert.transaction(requires_new: true) do
+      alert.save!
+      AlertMailer.alert(alert:, applications:, comments:).deliver_later if send_email
+    end
 
     no_emails = send_email ? 1 : 0
 
