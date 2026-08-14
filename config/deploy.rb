@@ -46,6 +46,18 @@ set :rails_env, "production"
 # Note that phased restarts will NOT upgrade puma. So disable this if upgrading puma
 set :puma_phased_restart, true
 
+# Control puma serviced config
+# set :puma_service_unit_type, "notify"
+# set :puma_systemd_watchdog_sec, 10
+set :puma_access_log, "/srv/www/production/shared/log/puma.log"
+set :puma_error_log, "/srv/www/production/shared/log/puma.log"
+# Puma master + 3 workers start at ~260 MB each, capped at 550 MB per worker
+# Total limit = 3 workers x 550 MB + 30 MB master = 1,680 MB
+# In practice memory is expected to peak at 72%, just under the 75% warning level
+set :puma_service_unit_props, %w[MemoryMax=1680M TimeoutStopSec=300]
+set :puma_enable_lingering, false
+set :puma_systemctl_user, :user
+
 set :aws_ec2_regions, ['ap-southeast-2']
 # We don't want to use the stage tag to filter because we have both production and staging on the same machine
 set :aws_ec2_default_filters, (proc {
@@ -152,8 +164,11 @@ namespace :rake do
   end
 end
 
-
 before "deploy:finishing", "foreman:restart"
 before "foreman:restart", "foreman:enable"
 before "foreman:enable", "foreman:export"
 before "deploy:check:linked_files", "upload_memcache_config"
+
+before "deploy:publishing", "puma:install"
+before "deploy:check", "puma:check_lingering"
+

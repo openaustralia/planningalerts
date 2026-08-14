@@ -229,7 +229,7 @@ group :development do
   gem "capistrano", require: false
   # For puma 6 support we're using the "beta" version
   gem "capistrano3-puma", ">= 6.0.0.beta.1", require: false
-  gem "capistrano-aws"
+  gem "capistrano-aws", require: false
   gem "capistrano-bundler", require: false
   gem "capistrano-rails", require: false
   gem "capistrano-rvm", require: false
