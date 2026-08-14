@@ -124,7 +124,7 @@ describe "GoogleGeocodeService" do
 
     it "errors with a message for the user" do
       expect(result.error).to eq(
-        "Sorry, there was a problem processing your search. Please try again"
+        "Sorry, there was a problem processing your search. Please try again later"
       )
     end
 
@@ -153,7 +153,7 @@ describe "GoogleGeocodeService" do
 
     it "errors with a message for the user" do
       expect(result.error).to eq(
-        "Sorry, there was a problem processing your search. Please try again"
+        "Sorry, there was a problem processing your search. Please try again later"
       )
     end
 
