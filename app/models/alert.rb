@@ -23,7 +23,11 @@ class Alert < ApplicationRecord
   # We want to make sure that a certain user can't have multiple alerts for the same address.
   # We also need to allow there to be multiple unsubscribed alerts with the
   # same address to allow people to do multiple rounds of subscribing and unsubscribing.
-  validates :address, uniqueness: { scope: %i[user_id unsubscribed] }, unless: :unsubscribed?
+  # The partial unique index on the alerts table is what actually guarantees this. This
+  # validation is here to give a friendly error message when someone signs up again, so it
+  # only needs to run on create. Running it on every save meant that updating something
+  # unrelated, like a delivery timestamp, failed whenever a duplicate already existed.
+  validates :address, uniqueness: { scope: %i[user_id unsubscribed] }, unless: :unsubscribed?, on: :create
   validates :address, presence: true
 
   before_validation :geocode_from_address, unless: :geocoded?
@@ -61,6 +65,17 @@ class Alert < ApplicationRecord
   sig { returns(T::Boolean) }
   def geocoded?
     location.present?
+  end
+
+  # Saves the alert, turning a duplicate rejected by the database into the same
+  # friendly error the uniqueness validation gives. Needed because two requests
+  # creating the same alert at the same moment can both get past the validation.
+  sig { returns(T::Boolean) }
+  def save_unless_duplicate
+    save
+  rescue ActiveRecord::RecordNotUnique
+    errors.add(:address, :taken)
+    false
   end
 
   sig { void }

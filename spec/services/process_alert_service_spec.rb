@@ -53,6 +53,37 @@ describe ProcessAlertService do
         expect((alert.last_processed - Time.zone.now).abs).to be < 1
       end
 
+      context "when saving the alert fails" do
+        before do
+          allow(alert).to receive(:save!).and_raise(ActiveRecord::RecordInvalid.new(alert))
+        end
+
+        it "does not send an email, so it isn't sent again on the next run" do
+          Sidekiq::Testing.inline! do
+            expect { described_class.call(alert:) }.to raise_error(ActiveRecord::RecordInvalid)
+            expect(ActionMailer::Base.deliveries).to be_empty
+          end
+        end
+      end
+
+      context "when enqueueing the email fails" do
+        before do
+          mail = instance_double(ActionMailer::MessageDelivery)
+          allow(AlertMailer).to receive(:alert).and_return(mail)
+          allow(mail).to receive(:deliver_later).and_raise(RuntimeError, "Redis is down")
+        end
+
+        it "does not record the alert as sent, so the applications are included when the job is retried" do
+          expect { described_class.call(alert:) }.to raise_error(RuntimeError, "Redis is down")
+          expect(alert.reload.last_sent).to be_nil
+        end
+
+        it "does not record the alert as processed" do
+          expect { described_class.call(alert:) }.to raise_error(RuntimeError, "Redis is down")
+          expect(alert.reload.last_processed).to be_nil
+        end
+      end
+
       context "with application that was not properly geocoded" do
         let(:application) do
           create(:geocoded_application, lat: 1.0, lng: 2.0, address: "An address that can't be geocoded")

@@ -47,7 +47,7 @@ class AlertsController < ApplicationController
     # Ensures the address is normalised into a consistent form
     alert.geocode_from_address
 
-    if alert.save
+    if alert.save_unless_duplicate
       ab_finished(:logged_out_alert_flow_order)
       redirect_to alerts_path, notice: "You successfully added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
     else
