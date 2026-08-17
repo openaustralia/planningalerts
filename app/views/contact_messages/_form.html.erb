@@ -38,7 +38,6 @@
   <% if current_user.nil? && Rails.application.credentials[:recaptcha] %>
     <div class="mt-8">
       <%= recaptcha_tags %>
-      <%# TODO: Make sure recaptcha errors are shown here %>
       <%= f.error :base, class: "mt-2" %>
       <%= f.hint class: "mt-2" do %>
         Or <%= pa_link_to "sign in", new_user_session_path %> to remove this annoying reCaptcha
