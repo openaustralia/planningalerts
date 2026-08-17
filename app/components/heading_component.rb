@@ -12,7 +12,7 @@ class HeadingComponent < ViewComponent::Base
   VALID_COLOR_CLASSES = T.let(%w[text-navy text-white].freeze, T::Array[String])
   VALID_FONT_CLASSES = T.let(%w[font-display font-sans].freeze, T::Array[String])
 
-  # TODO: Perhaps we should allow the size override to work by saying we want an h1 heading but with the styling of an h2?
+  # TODO: #2159 Perhaps we should allow the size override to work by saying we want an h1 heading but with the styling of an h2?
   sig { params(tag: Symbol, size: T.nilable(String), color: T.nilable(String), font: T.nilable(String), weight: T.nilable(String), extra_classes: String).void }
   def initialize(tag:, size: nil, color: nil, font: nil, weight: nil, extra_classes: "")
     super()
@@ -36,7 +36,7 @@ class HeadingComponent < ViewComponent::Base
 
     c = ["text-#{size}", "font-#{weight}", "text-#{color}", "font-#{font}"]
 
-    # TODO: Not sure whether we should be setting max width on all headings
+    # TODO: #2158 Not sure whether we should be setting max width on all headings
     c << "max-w-4xl" if tag == :h1
 
     # These extra classes can't override the default styling because they're at the end

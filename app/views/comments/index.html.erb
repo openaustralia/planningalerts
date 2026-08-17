@@ -1,4 +1,4 @@
-<%# TODO: This whole page has not had any design applied to it yet %>
+<%# TODO: #2157 This whole page has not had any design applied to it yet %>
 
 <% content_for :page_title, @description %>
 <%= render HeadingComponent.new(tag: :h1).with_content(@description) %>
@@ -9,5 +9,5 @@
   <% end %>
 </div>
 
-<%# TODO: Speed up controller by using without_count after removing old theme %>
+<%# TODO: #2164 Speed up controller by using without_count after removing old theme %>
 <%= render SimplePagerComponent.new(collection: @comments) %>

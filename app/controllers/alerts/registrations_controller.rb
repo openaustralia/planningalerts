@@ -25,10 +25,10 @@ module Alerts
         )
 
         if resource.persisted?
-          # TODO: Check that we're actually allowed to create an alert
+          # TODO: #2163 Check that we're actually allowed to create an alert
           # Ensures the address is normalised into a consistent form
           @alert.geocode_from_address
-          # TODO: Handle error state
+          # TODO: #2162 Handle error state
           @alert.save!
         end
       end
@@ -37,7 +37,7 @@ module Alerts
     protected
 
     # This is duplicated from users/registrations_controller
-    # TODO: Get rid of duplication
+    # TODO: #2159 Get rid of duplication
     sig { params(_resource: User).returns(String) }
     def after_inactive_sign_up_path_for(_resource)
       helpers.check_email_user_registration_path
@@ -45,7 +45,7 @@ module Alerts
 
     sig { returns(T::Hash[Symbol, String]) }
     def sign_up_params
-      # TODO: Use strong parameters instead
+      # TODO: #2163 Use strong parameters instead
       { name: params[:user][:name], email: params[:user][:email], password: params[:user][:password] }
     end
   end

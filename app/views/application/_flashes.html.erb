@@ -16,7 +16,7 @@
   </div>
 <% end %>
 
-<%# TODO: I think we're just using this to show an error on the comment form. Seems weird. Let's fix this. %>
+<%# TODO: #2162 I think we're just using this to show an error on the comment form. Seems weird. Let's fix this. %>
 <% if flash[:error] %>
   <div class="mt-8">
     <%= render AlertComponent.new(type: :warning) do %>

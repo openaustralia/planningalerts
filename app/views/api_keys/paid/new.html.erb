@@ -4,7 +4,7 @@
   You're signing up to the ... plan
 </p>
 
-<%# TODO: This is too much detail up front. The key bit is that you will be invoiced rather than charging a credit card. %>
+<%# TODO: #1885 This is too much detail up front. The key bit is that you will be invoiced rather than charging a credit card. %>
 <p class="mt-8 text-xl text-navy">
   Once you agree to the contract below, we will review your details and activate
   your API key. You will then be invoiced for the period in advance from when you sign up to the
@@ -21,9 +21,9 @@
 </p>
 
 <section class="mt-8">
-  <%# TODO: Add errors on all fields in the form %>
+  <%# TODO: #2162 Add errors on all fields in the form %>
   <%= form_with do |f| %>
-    <%# TODO: How to style fieldset and legend? %>
+    <%# TODO: #2158 How to style fieldset and legend? %>
     <fieldset>
       <legend class="text-xl font-bold text-navy">Company</legend>
       <div class="mt-8">
@@ -96,7 +96,7 @@
     </div>
     <div class="mt-16">
       <%= f.label :agree_contract, "I agree to the contract", class: "block mb-3" %>
-      <%# TODO: Style the check box with the tailwind form builder %>
+      <%# TODO: #2158 Style the check box with the tailwind form builder %>
       <%= f.check_box :agree_contract %>
     </div>
     <div class="mt-12">

@@ -1,9 +1,9 @@
 <%= render QuotedBlockComponent.new do %>
   <% if comment.visible? %>
-    <%# TODO: Use blockquote for the body of the comment? %>
+    <%# TODO: #2158 Use blockquote for the body of the comment? %>
     <%= render "comments/comment_text", comment: %>
 
-    <%# TODO: Smaller line height? %>
+    <%# TODO: #2158 Smaller line height? %>
     <div class="mt-6 text-lg font-bold text-navy">
       <%= comment.name %>
     </div>

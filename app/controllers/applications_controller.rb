@@ -103,11 +103,11 @@ class ApplicationsController < ApplicationController
 
     params_q = T.cast(params[:q], T.nilable(String))
 
-    # TODO: Fix this hacky ugliness
+    # TODO: #2161 Fix this hacky ugliness
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
     @q = params_q
-    # TODO: Get actual visual design for how we want highlighted words to appear in search results
+    # TODO: #2157 Get actual visual design for how we want highlighted words to appear in search results
     tag = "<strong>"
     @applications = Application.search(@q, fields: [:description], order: { first_date_scraped: :desc }, highlight: { tag: }, page: params[:page], per_page:) if @q
     @description = @q ? "Search: #{@q}" : "Search"

@@ -6,14 +6,14 @@ require "factory_bot_rails"
 
 class LoginAndAccountPreview < ActionMailer::Preview
   # It shows a different email address in the "to" and the body of the email.
-  # TODO: Figure out what's going on and fix it
+  # TODO: #2166 Figure out what's going on and fix it
   def confirmation_instructions
     user = FactoryBot.build_stubbed(:user, name: "Matthew")
     DeviseMailer.confirmation_instructions(user, "faketoken")
   end
 
   # It shows a different email address in the "to" and the body of the email.
-  # TODO: Figure out what's going on and fix it
+  # TODO: #2166 Figure out what's going on and fix it
   def reset_password_instructions
     user = FactoryBot.build_stubbed(:user, name: "Matthew")
     DeviseMailer.reset_password_instructions(user, "faketoken")

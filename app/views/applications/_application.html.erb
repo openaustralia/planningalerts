@@ -3,7 +3,7 @@
     <%= render HeadingComponent.new(tag: :h2, size: "xl", font: "sans") do %>
       <%= c.linkify(application.address) %>
     <% end %>
-    <%# TODO: Make it the right width at different numbers %>
+    <%# TODO: #2158 Make it the right width at different numbers %>
     <% if application.visible_comments_count.positive? %>
       <div class="pb-1 text-lg font-bold text-lavender">
         <%= render SpeechBubbleComponent.new(size: "lg", alignment: :left) do %>

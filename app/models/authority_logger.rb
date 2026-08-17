@@ -18,7 +18,7 @@ class AuthorityLogger < Logger
     # Using block form of Logger#add because sorbet thinks the block is required (which it isn't)
     # By always using the block form we end up with output like "message: nil" which is ugly
     # and confusing.
-    # TODO: Don't use block form as soon as possible
+    # TODO: #2167 Don't use block form as soon as possible
     @other_logger.add(severity, nil, progname) { message }
     # Put a maximum limit on how long the log can get
     e = "#{Authority.find(@authority_id).last_scraper_run_log || ''}#{progname || ''}\n"

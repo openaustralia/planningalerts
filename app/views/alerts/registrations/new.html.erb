@@ -1,4 +1,4 @@
-<%# TODO: Extract common elements from this view and devise/registrations/new %>
+<%# TODO: #2159 Extract common elements from this view and devise/registrations/new %>
 
 <%= pa_link_to "< Back to search results", :back, extra_classes: "text-xl" %>
 
@@ -31,7 +31,7 @@
           <p class="mt-2 text-xl font-light text-navy"><%= @minimum_password_length %> characters minimum</p>
         <% end %>
       </div>
-      <%# TODO: Is there a neater / more sensible way to pass these parameters on? %>
+      <%# TODO: #2163 Is there a neater / more sensible way to pass these parameters on? %>
       <%= f.hidden_field :address, value: @alert.address %>
       <%= f.hidden_field :radius_meters, value: @alert.radius_meters %>
       <div class="mt-8">

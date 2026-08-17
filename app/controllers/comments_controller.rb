@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   extend T::Sig
 
   before_action :authenticate_user!, only: %i[create preview update destroy publish personal]
-  # TODO: Add checks for all other actions on this controller
+  # TODO: #2163 Add checks for all other actions on this controller
   after_action :verify_authorized, only: %i[preview update destroy publish]
 
   layout "profile", only: :personal
@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
       return
     end
 
-    # TODO: This seems to have a lot repeated from Application#show
+    # TODO: #2159 This seems to have a lot repeated from Application#show
     flash.now[:error] = t(".not_filled_out")
 
     # HACK: Required for new email alert signup form

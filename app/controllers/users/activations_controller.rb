@@ -13,7 +13,7 @@ module Users
 
     sig { void }
     def edit
-      # TODO: Handle case where @user is nil here - probably want to 404 or something like that?
+      # TODO: #2162 Handle case where @user is nil here - probably want to 404 or something like that?
       @user = User.new(reset_password_token: params[:token])
       @minimum_password_length = T.let(User.password_length.min, T.nilable(Integer))
     end
@@ -41,7 +41,7 @@ module Users
 
       @user = User.reset_password_by_token(params_user)
       if @user.errors.empty?
-        # TODO: Do this better
+        # TODO: #2163 Do this better
         @user.update!(name: params_user[:name], activated_at: Time.current)
         # In case the user is not yet confirmed we've effectively confirmed their email address
         # so we can safely confirm their user record here

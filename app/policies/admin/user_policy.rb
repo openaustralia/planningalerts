@@ -5,7 +5,7 @@ module Admin
   class UserPolicy < ApplicationPolicy
     extend T::Sig
 
-    # TODO: Extract this into a DefaultAdminPolicy
+    # TODO: #2159 Extract this into a DefaultAdminPolicy
     sig { returns(T::Boolean) }
     def index?
       user.has_role?(:admin) || user.has_role?(:api_editor)
