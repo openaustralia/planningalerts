@@ -101,6 +101,39 @@ describe ApplicationsController do
     end
   end
 
+  describe "#external" do
+    context "when the application is hidden" do
+      let!(:application) { create(:geocoded_application, :hidden, id: 1) }
+
+      it "returns 403 forbidden and renders the hidden page for anonymous users" do
+        get :external, params: { id: application.id }
+
+        expect(response).to have_http_status(:forbidden)
+        expect(response).to render_template("hidden")
+      end
+
+      it "returns 403 forbidden for signed in users that are not admins" do
+        sign_in create(:confirmed_user)
+
+        get :external, params: { id: application.id }
+
+        expect(response).to have_http_status(:forbidden)
+        expect(response).to render_template("hidden")
+      end
+
+      it "returns 200 and renders the normal page for admins" do
+        admin = create(:confirmed_user)
+        admin.add_role(:admin)
+        sign_in admin
+
+        get :external, params: { id: application.id }
+
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template("external")
+      end
+    end
+  end
+
   describe "#address" do
     before { allow(GoogleGeocodeService).to receive(:call).and_return(GeocoderResults.new([], nil)) }
 
