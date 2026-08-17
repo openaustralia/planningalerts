@@ -24,7 +24,6 @@ class ProcessAlertAndRecordStatsService
     return if no_emails.zero?
 
     # Update statistics
-    # TODO: Figure out the impact on caching updating this so regularly now
     Stat.increment_emails_sent(no_emails)
     Stat.increment_applications_sent(no_applications)
     # TODO: Rename EmailBatch as we're not using batches anymore
