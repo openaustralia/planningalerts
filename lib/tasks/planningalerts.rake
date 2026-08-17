@@ -72,6 +72,63 @@ namespace :planningalerts do
     end
   end
 
+  # Dry run by default. Pass "execute" as the third argument to actually
+  # delete and "delete_comments" as the fourth argument to also delete any
+  # comments on matching applications (otherwise applications with comments
+  # are skipped). For example:
+  #   rake planningalerts:bulk_delete_applications[123,PA1]                          # dry run
+  #   rake planningalerts:bulk_delete_applications[123,PA1,execute]                  # delete
+  #   rake planningalerts:bulk_delete_applications[123,PA1,execute,delete_comments]  # delete incl. comments
+  desc "Bulk delete applications for an authority matching a council_reference prefix (dry run by default)"
+  task :bulk_delete_applications, %i[authority_id prefix mode option] => :environment do |_task, args|
+    authority = Authority.find(args.authority_id)
+    prefix = args.prefix.to_s
+    raise "prefix can't be blank" if prefix.blank?
+    raise "Unknown mode: #{args.mode}. Did you mean execute?" unless args.mode.nil? || args.mode == "execute"
+    raise "Unknown option: #{args.option}. Did you mean delete_comments?" unless args.option.nil? || args.option == "delete_comments"
+
+    dry_run = args.mode != "execute"
+    delete_comments = args.option == "delete_comments"
+
+    result = BulkDeleteApplicationsService.call(
+      authority:,
+      council_reference_prefix: prefix,
+      dry_run:,
+      delete_comments:
+    )
+
+    puts "#{'DRY RUN - nothing was changed - ' if dry_run}#{authority.full_name} - " \
+         "applications with council_reference starting with #{prefix.inspect}"
+    puts
+
+    describe = ->(item) { "  #{item.council_reference} (id #{item.id}) - #{item.address}" }
+
+    puts "#{dry_run ? 'Would delete' : 'Deleted'} #{result.deleted.count} application(s):"
+    result.deleted.each do |item|
+      puts describe.call(item) + (item.comments_count.positive? ? " - including #{item.comments_count} comment(s)" : "")
+    end
+
+    if result.skipped_comments.any?
+      puts
+      puts "Skipped #{result.skipped_comments.count} application(s) because they have comments " \
+           "(pass delete_comments to delete them too):"
+      result.skipped_comments.each { |item| puts describe.call(item) + " - #{item.comments_count} comment(s)" }
+    end
+
+    if result.skipped_redirect_target.any?
+      puts
+      puts "Skipped #{result.skipped_redirect_target.count} application(s) because they are the target " \
+           "of an application redirect. These need to be handled manually:"
+      result.skipped_redirect_target.each { |item| puts describe.call(item) }
+    end
+
+    if dry_run
+      puts
+      puts "This was a dry run. To actually delete run the task again with execute, e.g."
+      puts "  rake planningalerts:bulk_delete_applications[#{authority.id},#{prefix},execute]"
+    end
+  end
+
   namespace :emergency do
     desc "Regenerates all the counter caches in case they got out of synch"
     task fixup_counter_caches: :environment do
