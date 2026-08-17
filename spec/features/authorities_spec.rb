@@ -36,7 +36,6 @@ describe "Authorities" do
       sign_in create(:confirmed_user, name: "Jane Ng")
       authority = create(:authority, full_name: "Byron Shire Council", morph_name: "planningalerts-scrapers/byron")
       # We need it to have at least one application so it's not "broken"
-      # TODO: I suspect we'll need to lock down the date of the application so that percy snapshots are consistent
       create(:geocoded_application, authority:, council_reference: "1", date_scraped: Date.new(2020, 1, 1))
       create(:geocoded_application, authority:, council_reference: "2", date_scraped: Date.new(2020, 1, 8))
       create(:geocoded_application, authority:, council_reference: "3", date_scraped: Date.new(2020, 1, 15))
@@ -83,7 +82,6 @@ describe "Authorities" do
       sign_in create(:confirmed_user, name: "Jane Ng")
       authority = create(:authority, full_name: "Byron Shire Council", morph_name: "planningalerts-scrapers/byron")
       # We need it to have at least one application so it's not "broken"
-      # TODO: I suspect we'll need to lock down the date of the application so that percy snapshots are consistent
       create(:geocoded_application, authority:, council_reference: "1", date_scraped: Date.new(2020, 1, 1))
       create(:geocoded_application, authority:, council_reference: "2", date_scraped: Date.new(2020, 1, 8))
       create(:geocoded_application, authority:, council_reference: "3", date_scraped: Date.new(2020, 1, 15))
