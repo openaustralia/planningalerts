@@ -398,6 +398,19 @@ describe Alert do
         end
       end
     end
+
+    context "with a hidden application nearby" do
+      let(:radius_meters) { 2000 }
+      let(:last_sent) { nil }
+
+      before do
+        app1.update!(hidden: true)
+      end
+
+      it "does not include the hidden application" do
+        expect(alert.recent_new_applications).to contain_exactly(app2)
+      end
+    end
   end
 
   describe "#new_comments" do
@@ -496,6 +509,15 @@ describe Alert do
     context "when there is a hidden comment near by" do
       it "does not return the application it belongs to" do
         create(:published_comment, hidden: true, application: near_application)
+
+        expect(alert.applications_with_new_comments).to eq []
+      end
+    end
+
+    context "when there is a new comment near by on a hidden application" do
+      it "does not return the application it belongs to" do
+        create(:published_comment, application: near_application)
+        near_application.update!(hidden: true)
 
         expect(alert.applications_with_new_comments).to eq []
       end

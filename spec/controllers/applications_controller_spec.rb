@@ -21,6 +21,18 @@ describe ApplicationsController do
         expect { get :index, params: { authority_id: "this_authority_does_not_exist" } }.to raise_error ActiveRecord::RecordNotFound
       end
     end
+
+    describe "hidden applications" do
+      it "does not include hidden applications" do
+        application = create(:geocoded_application)
+        hidden_application = create(:geocoded_application, :hidden)
+
+        get :index
+
+        expect(assigns[:applications]).to include(application)
+        expect(assigns[:applications]).not_to include(hidden_application)
+      end
+    end
   end
 
   describe "#show" do
@@ -56,6 +68,37 @@ describe ApplicationsController do
         expect(response).to redirect_to(id: redirect.redirect_application_id)
       end
     end
+
+    context "when the application is hidden" do
+      let!(:application) { create(:geocoded_application, :hidden, id: 1) }
+
+      it "returns 403 forbidden and renders the hidden page for anonymous users" do
+        get :show, params: { id: application.id }
+
+        expect(response).to have_http_status(:forbidden)
+        expect(response).to render_template("hidden")
+      end
+
+      it "returns 403 forbidden for signed in users that are not admins" do
+        sign_in create(:confirmed_user)
+
+        get :show, params: { id: application.id }
+
+        expect(response).to have_http_status(:forbidden)
+        expect(response).to render_template("hidden")
+      end
+
+      it "returns 200 and renders the normal page for admins" do
+        admin = create(:confirmed_user)
+        admin.add_role(:admin)
+        sign_in admin
+
+        get :show, params: { id: application.id }
+
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template("show")
+      end
+    end
   end
 
   describe "#address" do
@@ -69,6 +112,25 @@ describe ApplicationsController do
     it "sets the radius to the default when not supplied" do
       get :address, params: { q: "24 Bruce Road Glenbrook" }
       expect(assigns[:radius]).to eq 2000.0
+    end
+
+    context "with applications near the searched address" do
+      let(:geo_factory) { RGeo::Geographic.spherical_factory(srid: 4326) }
+      let!(:application) do
+        create(:geocoded_application, lat: -33.772607, lng: 150.624245, lonlat: geo_factory.point(150.624245, -33.772607))
+      end
+      let!(:hidden_application) do
+        create(:geocoded_application, :hidden, lat: -33.772607, lng: 150.624245, lonlat: geo_factory.point(150.624245, -33.772607))
+      end
+
+      before { mock_geocoder_valid_address_response }
+
+      it "does not include hidden applications" do
+        get :address, params: { q: "24 Bruce Road Glenbrook" }
+
+        expect(assigns[:applications]).to include(application)
+        expect(assigns[:applications]).not_to include(hidden_application)
+      end
     end
   end
 end

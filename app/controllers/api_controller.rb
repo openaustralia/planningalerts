@@ -33,13 +33,13 @@ class ApiController < ApplicationController
 
     # TODO: Handle the situation where the authority name isn't found
     authority = Authority.find_short_name_encoded!(params_authority_id)
-    apps = authority.applications.order(first_date_scraped: :desc)
+    apps = authority.applications.visible.order(first_date_scraped: :desc)
     api_render_apps(apps, "Recent applications from #{authority.full_name_and_state}")
   end
 
   sig { void }
   def suburb_postcode
-    apps = Application.order(first_date_scraped: :desc)
+    apps = Application.visible.order(first_date_scraped: :desc)
     descriptions = []
     if params[:suburb]
       descriptions << params[:suburb]
@@ -74,7 +74,7 @@ class ApiController < ApplicationController
     location = Location.new(lat: params_lat.to_f, lng: params_lng.to_f)
     location_text = location.to_s
     point = RGeo::Geographic.spherical_factory.point(location.lng, location.lat)
-    applications = Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius)
+    applications = Application.visible.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius)
     applications = applications.reorder(first_date_scraped: :desc)
     api_render_apps(
       applications,
@@ -89,7 +89,7 @@ class ApiController < ApplicationController
     lat1 = params[:top_right_lat]
     lng1 = params[:top_right_lng]
     api_render_apps(
-      Application.order(first_date_scraped: :desc).where(lat: lat0..lat1, lng: lng0..lng1),
+      Application.visible.order(first_date_scraped: :desc).where(lat: lat0..lat1, lng: lng0..lng1),
       "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
     )
   end
@@ -105,7 +105,7 @@ class ApiController < ApplicationController
     end
 
     if date
-      api_render_apps(Application.order(date_scraped: :desc).where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
+      api_render_apps(Application.visible.order(date_scraped: :desc).where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       render_error("invalid date_scraped", :bad_request)
     end
@@ -116,13 +116,13 @@ class ApiController < ApplicationController
   sig { void }
   def all
     # TODO: Check that params page and v aren't being used
-    apps = Application.includes(:authority).order(:id)
+    apps = Application.visible.includes(:authority).order(:id)
     apps = apps.where("id > ?", params[:since_id]) if params[:since_id]
 
     # Limiting number of records that are returned
     applications = apps.limit(Application.max_per_page_all_api).to_a
     last = applications.last
-    last = Application.order(:id).last if last.nil?
+    last = Application.visible.order(:id).last if last.nil?
     max_id = last.id if last
 
     respond_to do |format|

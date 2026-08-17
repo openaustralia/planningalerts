@@ -18,10 +18,10 @@ class ApplicationsController < ApplicationController
       # TODO: Handle the situation where the authority name isn't found
       authority = Authority.find_short_name_encoded!(authority_id)
       description << " from #{authority.full_name_and_state}"
-      apps = authority.applications
+      apps = authority.applications.visible
     else
       description << " across Australia"
-      apps = Application
+      apps = Application.visible
     end
     apps = apps.order("first_date_scraped DESC").where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
 
@@ -84,7 +84,8 @@ class ApplicationsController < ApplicationController
       @alert = Alert.new(address: @q, user: User.new, radius_meters: Alert::DEFAULT_RADIUS)
       @other_addresses = T.must(result.rest).map(&:full_address)
       point = RGeo::Geographic.spherical_factory.point(top.lng, top.lat)
-      @applications = Application.select("*", "ST_Distance(lonlat, '#{point}')/1000 AS distance")
+      @applications = Application.visible
+                                 .select("*", "ST_Distance(lonlat, '#{point}')/1000 AS distance")
                                  .where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius)
                                  .order(:distance)
 
@@ -117,6 +118,9 @@ class ApplicationsController < ApplicationController
   def show
     application = Application.find(T.cast(params[:id], String))
     @application = T.let(application, T.nilable(Application))
+    render_hidden_page_if_necessary(application)
+    return if performed?
+
     @comments = T.let(application.comments.published.order(:published_at), T.untyped)
     # If this user has already written a comment that hasn't been published
     # then prepopulate the form so that they can edit their comment before it's finally sent
@@ -144,9 +148,20 @@ class ApplicationsController < ApplicationController
   def external
     application = Application.find(T.cast(params[:id], String))
     @application = T.let(application, T.nilable(Application))
+    render_hidden_page_if_necessary(application)
   end
 
   private
+
+  # If the application is hidden and the current user isn't an admin, renders
+  # a page explaining why the application can't be shown
+  sig { params(application: Application).void }
+  def render_hidden_page_if_necessary(application)
+    return unless application.hidden?
+    return if current_user&.has_role?(:admin)
+
+    render "hidden", status: :forbidden
+  end
 
   sig { void }
   def check_application_redirect

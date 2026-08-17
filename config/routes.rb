@@ -53,7 +53,7 @@ Rails.application.routes.draw do
         post :import
       end
     end
-    resources :applications, only: %i[index show destroy]
+    resources :applications, only: %i[index show edit update destroy]
     resources :api_keys, except: %i[destroy new create]
     resources :api_usages, only: :index
     resources :background_jobs, only: :index

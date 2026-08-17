@@ -25,6 +25,8 @@ class ApplicationDashboard < Administrate::BaseDashboard
     first_date_scraped: Field::DateTime,
     date_scraped: Field::DateTime,
     description: Field::Text,
+    hidden: YesNoBooleanField,
+    hidden_reason: Field::Text,
     info_url: Field::String.with_options(searchable: false),
     lat: Field::Number.with_options(decimals: 2),
     lng: Field::Number.with_options(decimals: 2),
@@ -68,21 +70,19 @@ class ApplicationDashboard < Administrate::BaseDashboard
     on_notice_from
     on_notice_to
     no_alerted
+    hidden
+    hidden_reason
     comments
   ].freeze, T::Array[Symbol])
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = T.let(%i[
-    authority
-    comments
-    versions
-    current_version
-    council_reference
-    no_alerted
-    visible_comments_count
-  ].freeze, T::Array[Symbol])
+  FORM_ATTRIBUTES = T.let(
+    {
+      "Moderate application" => %i[hidden hidden_reason]
+    }.freeze, T::Hash[String, T::Array[Symbol]]
+  )
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
@@ -94,7 +94,10 @@ class ApplicationDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = T.let({}.freeze, T::Hash[Symbol, T.untyped])
+  COLLECTION_FILTERS = T.let({
+    visible: ->(resources) { resources.visible },
+    hidden: ->(resources) { resources.where(hidden: true) }
+  }.freeze, T::Hash[Symbol, T.untyped])
 
   # Overwrite this method to customize how applications are displayed
   # across all pages of the admin dashboard.
