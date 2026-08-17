@@ -51,6 +51,8 @@ en:
               taken_activation: "You already have an account with that email address. Please activate your account."
               already_activated: "Account with that email address has already been activated"
               not_found: "We don't recognise that email address. Is there another one you might have used?"
+  pundit:
+    not_authorized: "You are not allowed to do that"
   errors:
     messages:
       not_a_date: "is not a date"
