@@ -9,7 +9,7 @@
 </section>
 
 <section class="mt-8">
-  <%# TODO: Add errors on all fields in the form %>
+  <%# TODO: #2162 Add errors on all fields in the form %>
   <%= form_with do |f| %>
     <div>
       <%= f.label :organisation, "Organisation", class: "block mb-3" %>
@@ -23,9 +23,9 @@
     </div>
     <div class="mt-8">
       <%= f.label :open_source, "Is the software that uses the API released under an open source license?", class: "block mb-3" %>
-      <%# TODO: Do we want to use the word select here? %>
+      <%# TODO: #2168 Do we want to use the word select here? %>
       <%= f.select :open_source, %w[Yes No], { prompt: "Please select" }, class: "block", required: true %>
-      <%# TODO: Add link to definition of open source licenses %>
+      <%# TODO: #2168 Add link to definition of open source licenses %>
     </div>
     <div class="mt-8">
       <%= f.label :repo_url, "Repository URL", class: "block mb-3" %>

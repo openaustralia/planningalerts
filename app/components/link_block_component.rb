@@ -15,7 +15,7 @@ class LinkBlockComponent < ViewComponent::Base
   # can put this anywhere inside a link block
   sig { params(text: String).returns(String) }
   def linkify(text)
-    # TODO: Remove duplication between this and the link styles defined in pa_link_to
+    # TODO: #2159 Remove duplication between this and the link styles defined in pa_link_to
     content_tag(:span, text, class: "font-bold underline text-fuchsia group-hover:text-fuchsia-darker")
   end
 end

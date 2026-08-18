@@ -1,4 +1,4 @@
-<%# TODO: Can we factor out common elements between this partial and _comment.html.erb? %>
+<%# TODO: #2159 Can we factor out common elements between this partial and _comment.html.erb? %>
 <%= render PanelListItemComponent.new(url: comment_path(comment)) do |c| %>
   <div class="my-4">
     <%= render QuotedBlockComponent.new do %>
@@ -7,10 +7,10 @@
         <div class="font-bold line-clamp-2"><%= comment.application.description %></div>
       </div>
       <% if comment.visible? %>
-        <%# TODO: Use blockquote for the body of the comment? %>
+        <%# TODO: #2158 Use blockquote for the body of the comment? %>
         <%= render "comments/comment_text", comment: %>
 
-        <%# TODO: Smaller line height? %>
+        <%# TODO: #2158 Smaller line height? %>
         <div class="mt-6 text-lg font-bold text-navy">
           <%= comment.name %>
         </div>

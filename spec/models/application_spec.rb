@@ -219,4 +219,41 @@ describe Application do
       expect(create(:geocoded_application).search_data).not_to have_key(:lonlat)
     end
   end
+
+  describe ".visible" do
+    it "does not include hidden applications" do
+      application = create(:application)
+      hidden_application = create(:application, :hidden)
+
+      expect(described_class.visible).to include(application)
+      expect(described_class.visible).not_to include(hidden_application)
+    end
+  end
+
+  describe "#should_index?" do
+    it "indexes a normal application" do
+      expect(build(:application_with_no_version).should_index?).to be true
+    end
+
+    it "does not index a hidden application" do
+      expect(build(:application_with_no_version, :hidden).should_index?).to be false
+    end
+  end
+
+  describe ".trending" do
+    it "does not include hidden applications" do
+      hidden_application = create(:application, :hidden)
+
+      expect(described_class.trending).not_to include(hidden_application)
+    end
+  end
+
+  describe "#find_all_nearest_or_recent" do
+    it "does not include hidden applications nearby" do
+      application = create(:geocoded_application)
+      hidden_application = create(:geocoded_application, :hidden)
+
+      expect(application.find_all_nearest_or_recent).not_to include(hidden_application)
+    end
+  end
 end

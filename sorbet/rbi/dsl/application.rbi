@@ -567,6 +567,9 @@ class Application
     end
     def upsert_all(attributes, returning: nil, unique_by: nil); end
 
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def visible(*args, &blk); end
+
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelationWhereChain) }
     def where(*args, &blk); end
 
@@ -982,6 +985,96 @@ class Application
 
     sig { void }
     def first_date_scraped_will_change!; end
+
+    sig { returns(T::Boolean) }
+    def hidden; end
+
+    sig { params(value: T::Boolean).returns(T::Boolean) }
+    def hidden=(value); end
+
+    sig { returns(T::Boolean) }
+    def hidden?; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def hidden_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def hidden_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def hidden_came_from_user?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def hidden_change; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def hidden_change_to_be_saved; end
+
+    sig { params(from: T::Boolean, to: T::Boolean).returns(T::Boolean) }
+    def hidden_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def hidden_in_database; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def hidden_previous_change; end
+
+    sig { params(from: T::Boolean, to: T::Boolean).returns(T::Boolean) }
+    def hidden_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def hidden_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def hidden_reason; end
+
+    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
+    def hidden_reason=(value); end
+
+    sig { returns(T::Boolean) }
+    def hidden_reason?; end
+
+    sig { returns(T.nilable(::String)) }
+    def hidden_reason_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def hidden_reason_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def hidden_reason_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def hidden_reason_change; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def hidden_reason_change_to_be_saved; end
+
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def hidden_reason_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def hidden_reason_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def hidden_reason_previous_change; end
+
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def hidden_reason_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def hidden_reason_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def hidden_reason_was; end
+
+    sig { void }
+    def hidden_reason_will_change!; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def hidden_was; end
+
+    sig { void }
+    def hidden_will_change!; end
 
     sig { returns(::Integer) }
     def id; end
@@ -1461,6 +1554,12 @@ class Application
     def restore_first_date_scraped!; end
 
     sig { void }
+    def restore_hidden!; end
+
+    sig { void }
+    def restore_hidden_reason!; end
+
+    sig { void }
     def restore_id!; end
 
     sig { void }
@@ -1552,6 +1651,18 @@ class Application
 
     sig { returns(T::Boolean) }
     def saved_change_to_first_date_scraped?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def saved_change_to_hidden; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_hidden?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def saved_change_to_hidden_reason; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_hidden_reason?; end
 
     sig { returns(T.nilable([::Integer, ::Integer])) }
     def saved_change_to_id; end
@@ -1794,6 +1905,12 @@ class Application
     def will_save_change_to_first_date_scraped?; end
 
     sig { returns(T::Boolean) }
+    def will_save_change_to_hidden?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_hidden_reason?; end
+
+    sig { returns(T::Boolean) }
     def will_save_change_to_id?; end
 
     sig { returns(T::Boolean) }
@@ -1965,6 +2082,9 @@ class Application
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def unscope(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def visible(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelationWhereChain) }
     def where(*args, &blk); end

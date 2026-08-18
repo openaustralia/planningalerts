@@ -25,7 +25,7 @@ class SyncGithubIssueForAuthorityService
     end
   end, GraphQL::Client::HTTP)
 
-  # TODO: Put the schema file in a sensible place
+  # TODO: #2164 Put the schema file in a sensible place
   # We're using a hardcoded version of the downloaded github graphQL schema during testing
   # so that we're not having to download anything from github and we're not having to set
   # github credentials up for test either

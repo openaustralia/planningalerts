@@ -54,7 +54,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   class Scope < ApplicationPolicy::Scope
-    # TODO: Is this for public or your own comments?
+    # TODO: #2163 Is this for public or your own comments?
     sig { returns(ActiveRecord::Relation) }
     def resolve
       scope.published

@@ -6,20 +6,20 @@
   Review and publish
 <% end %>
 
-<%# TODO: Make sure that there is consistency on formatting of h1, h2, h3, etc. across the site %>
-<%# TODO: Using non-standard font %>
+<%# TODO: #2158 Make sure that there is consistency on formatting of h1, h2, h3, etc. across the site %>
+<%# TODO: #2158 Using non-standard font %>
 <%= render HeadingComponent.new(tag: :h2, font: "sans", extra_classes: "mt-14").with_content("Your comment") %>
 <p class="mb-10 text-xl text-navy">
   Does this look right? This is what other people will see on Planning Alerts when you publish.
 </p>
 
-<%# TODO: Can we use the comments partial here so that we can make sure it has consistent formatting? %>
+<%# TODO: #2159 Can we use the comments partial here so that we can make sure it has consistent formatting? %>
 <%= render QuotedBlockComponent.new do %>
   <%= render ProseComponent.new do %>
     <%= comment_as_html(@comment.text) %>
   <% end %>
 
-  <%# TODO: Smaller line height? %>
+  <%# TODO: #2158 Smaller line height? %>
   <div class="mt-8 text-xl font-bold text-navy">
     <%= @comment.name %>
   </div>
@@ -42,7 +42,7 @@
 <% end %>
 
 <section class="pt-12 mt-12 border-t border-dashed border-cool-blue-gray">
-  <%# TODO: Using non-standard font %>
+  <%# TODO: #2158 Using non-standard font %>
   <%= render HeadingComponent.new(tag: :h2, font: "sans") do %>
     Preview of email to be sent to <%= @comment.comment_recipient_full_name %>
   <% end %>
@@ -51,7 +51,7 @@
     Nobody but you and <%= @comment.comment_recipient_full_name %> will see this email.
   </p>
 
-  <%# TODO: Don't use random gray colour #ccc here %>
+  <%# TODO: #2158 Don't use random gray colour #ccc here %>
   <div class="p-8 mt-8 text-xl sm:py-16 sm:px-20 text-navy bg-random-gray">
     <p>To: <%= @comment.application.comment_email_with_fallback %></p>
     <p>Subject: <%= t("comment_mailer.notify_authority.subject", council_reference: @comment.application.council_reference) %></p>

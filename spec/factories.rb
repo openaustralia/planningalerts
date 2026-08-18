@@ -20,6 +20,11 @@ FactoryBot.define do
     description { "pretty" }
     info_url { "http://foo.com" }
 
+    trait :hidden do
+      hidden { true }
+      hidden_reason { "Contains personal information" }
+    end
+
     factory :application do
       date_received { nil }
       on_notice_from { nil }

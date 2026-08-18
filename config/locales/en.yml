@@ -65,6 +65,16 @@ en:
       success: "API key created"
       already_have_key: "You already have an API key"
   applications:
+    hidden:
+      page_title: "Application hidden"
+      heading: "This application has been hidden"
+      default_reason: "It has been removed from public view."
+      record_kept: "The application record has not been deleted - it is just no longer shown publicly on Planning Alerts. If you have a question about this,"
+      contact_us: "please contact us"
+      go_home: "Go to our home page"
+    show:
+      hidden_admin_banner: "This application is hidden from the public. Reason: %{reason}"
+      hidden_admin_banner_edit: "Change or unhide"
     search:
       full_text_search_not_enabled: "You do not have access to full text search. It is currently only available to some users. Contact us if you would like access"
   comments:
@@ -87,6 +97,9 @@ en:
         subject: "PlanningAlerts: Activate your account"
   administrate:
     field_hints:
+      application:
+        hidden: Hide this application from all public pages, search results, the API and email alerts. It is not deleted and can be unhidden at any time.
+        hidden_reason: Published word-for-word on the public page for this application - anyone who visits can read it. Leave blank to show the default explanation ("It has been removed from public view.").
       authority:
         email: Where comments on applications are to be sent
         wikidata_id: The unique identifier on wikidata.org for this authority. Used to download boundary data.

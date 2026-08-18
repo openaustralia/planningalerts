@@ -1,0 +1,27 @@
+<% content_for :page_title, t(".page_title") %>
+
+<%= render CentreBlockWithImageComponent.new do |c| %>
+  <% c.with_heading do %>
+    <%= t(".heading") %>
+  <% end %>
+
+  <% c.with_image do %>
+    <%# TODO: Replace with a purpose-drawn hidden.svg - see the illustration brief attached to https://github.com/openaustralia/planningalerts/issues/2140 %>
+    <%= image_tag "illustration/no_results.svg", alt: "" %>
+  <% end %>
+
+  <div class="text-xl text-navy">
+    <p>
+      <%= @application.hidden_reason.presence || t(".default_reason") %>
+    </p>
+
+    <p class="mt-8">
+      <%= t(".record_kept") %>
+      <%= pa_link_to t(".contact_us"), documentation_contact_path %>.
+    </p>
+
+    <p class="mt-8">
+      <%= pa_link_to t(".go_home"), root_url %>
+    </p>
+  </div>
+<% end %>

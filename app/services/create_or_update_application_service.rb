@@ -38,7 +38,7 @@ class CreateOrUpdateApplicationService
         application.date_scraped = attributes[:date_scraped] if attributes.key?(:date_scraped)
         application.save!
         create_version(application, attributes)
-        # TODO: Get rid this hack
+        # TODO: #2166 Get rid this hack
         application.reindex unless Rails.env.test?
       end
       application

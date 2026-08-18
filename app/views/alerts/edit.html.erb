@@ -35,7 +35,7 @@
   <% end %>
 </div>
 
-<%# TODO: #1768 Show an error of some sort if the last delivery was not successful %>
+<%# TODO: #2162 #1768 Show an error of some sort if the last delivery was not successful %>
 <%= pa_button_to "Delete this alert", @alert,
                  method: :delete, type: :secondary, icon: :trash, form_class: "mt-8",
                  confirm: "Are you sure you want to unsubscribe from email alerts for #{@alert.address}?" %>
