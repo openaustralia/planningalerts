@@ -15,7 +15,6 @@ class ApplicationsController < ApplicationController
 
     description = +"Most recent applications"
     if authority_id
-      # TODO: Handle the situation where the authority name isn't found
       authority = Authority.find_short_name_encoded!(authority_id)
       description << " from #{authority.full_name_and_state}"
       apps = authority.applications

@@ -12,7 +12,6 @@ module Alerts
       end
     end
 
-    # TODO: Make link in email point to the right place
     sig { void }
     def create
       super do
