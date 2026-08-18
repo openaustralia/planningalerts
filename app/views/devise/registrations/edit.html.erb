@@ -1,7 +1,7 @@
 <%= render HeadingComponent.new(tag: :h2, extra_classes: "pb-10").with_content("Edit your account") %>
 
 <%= form_with model: resource, url: registration_path(resource_name), method: :put, class: "border-b border-light-grey pb-8" do |f| %>
-  <%# TODO: What actually goes here and is it needed on other devise forms? %>
+  <%# TODO: #2163 What actually goes here and is it needed on other devise forms? %>
   <%= render "devise/shared/error_messages", resource: %>
 
   <div>
@@ -15,7 +15,7 @@
     <%= f.email_field :email, required: true, autocomplete: "email", class: "block w-full" %>
     <%= f.error :email, class: "mt-2" %>
     <% if resource.pending_reconfirmation? %>
-      <%# TODO: How do we style this? %>
+      <%# TODO: #2158 How do we style this? %>
       <%= f.hint "Currently waiting confirmation for: #{resource.unconfirmed_email}", class: "mt-2" %>
     <% end %>
   </div>

@@ -33,7 +33,7 @@
 
 <%= render HeadingComponent.new(tag: :h1, extra_classes: "mb-10").with_content(@application.address) %>
 
-<%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
+<%# TODO: #2166 Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
 
 <dl class="mt-8 sm:mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-xl md:gap-y-4">
@@ -61,7 +61,7 @@
   </dd>
 </dl>
 
-<%# TODO: The icons next to the labels are not all the same size / proportion %>
+<%# TODO: #2158 The icons next to the labels are not all the same size / proportion %>
 <dl class="text-xl text-navy grid md:grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-10 sm:mt-14">
   <dt class="font-bold md:py-1">
     <div class="flex gap-4">
@@ -99,7 +99,7 @@
 </dl>
 
 <div class="mt-6 sm:mt-12">
-  <%# TODO: This button currently has much larger left and right padding than the design %>
+  <%# TODO: #2158 This button currently has much larger left and right padding than the design %>
   <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: "#add-comment", icon: :edit) do %>
     Make a comment now
   <% end %>
@@ -148,13 +148,13 @@
 
 <section class="flex gap-6 mt-14" id="add-comment">
   <%# Hide the big quotation mark on small displays so we don't end up with a weird large left margin %>
-  <%# TODO: Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
+  <%# TODO: #2158 Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
   <div class="hidden mt-24 sm:block text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
     <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
 
     <% if !@application.authority.email.present? %>
-      <%# TODO: Need a proper design for this section %>
+      <%# TODO: #2157 Need a proper design for this section %>
       <%= render "comments/no_authority_email_explanation", application: @application %>
     <% elsif current_user.nil? %>
       <div class="px-4 py-3 bg-light-grey">

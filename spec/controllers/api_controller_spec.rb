@@ -165,7 +165,7 @@ describe ApiController do
   end
 
   describe "#suburb_postcode" do
-    # TODO: Make errors work with rss format
+    # TODO: #2161 Make errors work with rss format
     it_behaves_like "an authenticated API" do
       let(:method) { :suburb_postcode }
       let(:params) { { format: "js", postcode: "2780" } }

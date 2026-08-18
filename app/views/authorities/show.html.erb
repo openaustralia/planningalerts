@@ -8,7 +8,7 @@
 
 <%# calling Authority#boundary is slow so putting it after the feature flag check %>
 <% if Flipper.enabled?(:show_authority_map, current_user) && @authority.boundary %>
-  <%# TODO: Probably want to precompute the bounding box when the boundary data is loaded instead %>
+  <%# TODO: #2164 Probably want to precompute the bounding box when the boundary data is loaded instead %>
   <div class="w-full my-8 h-80 bg-google-maps-green"
        x-init="initialiseAuthorityMap($el, <%= bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
                                                { json: boundary_authority_url(format: :json), sw: { lng: bb.min_x, lat: bb.min_y }, ne: { lng: bb.max_x, lat: bb.max_y } }.to_json %>)">
@@ -23,7 +23,7 @@
   <div class="divide-y divide-light-grey2">
     <% unless @authority.applications.empty? %>
       <section class="py-12">
-        <%# TODO: This title isn't right because the section has comments in it too %>
+        <%# TODO: #2158 This title isn't right because the section has comments in it too %>
         <%= render HeadingComponent.new(tag: :h2) do %>
           Browse applications from <%= @authority.full_name %>
         <% end %>
@@ -48,7 +48,7 @@
         <p class="mt-8 text-xl text-navy">No applications have yet been collected.</p>
       <% else %>
         <% if @authority.broken? %>
-          <%# TODO: We need a proper design for this warning message %>
+          <%# TODO: #2157 We need a proper design for this warning message %>
           <p class="mt-8 text-xl text-navy">
             It looks like something might be wrong.
             The last new application was received <%= time_ago_in_words(@authority.date_last_new_application_scraped) %> ago.
@@ -135,7 +135,7 @@
     </section>
   </div>
 <% else %>
-  <%# TODO: Need a proper design for this section explaining why this authority isn't covered yet %>
+  <%# TODO: #2157 Need a proper design for this section explaining why this authority isn't covered yet %>
   <div class="flex flex-col items-start gap-16 p-16 mt-12 md:flex-row bg-light-grey">
     <%= image_tag "illustration/no_results.svg", alt: "" %>
     <div>

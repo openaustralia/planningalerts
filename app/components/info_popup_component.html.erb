@@ -45,15 +45,15 @@
       }
     });
   ">
-  <%# TODO: Is info icon too small? How can we make the click area larger? %>
-  <%# TODO: Remove duplication between here and pa_link_classes view helper %>
+  <%# TODO: #2158 Is info icon too small? How can we make the click area larger? %>
+  <%# TODO: #2159 Remove duplication between here and pa_link_classes view helper %>
   <button x-ref="button" x-on:click.prevent="open=!open" class="text-base font-bold text-white rounded-full size-6 bg-fuchsia hover:bg-fuchsia-darker focus:outline-none focus:ring-sun-yellow focus:ring-4">
     <span class="sr-only">Info</span>
     i
   </button>
-  <%# TODO: Choose a more sensible default width %>
-  <%# TODO: Drop shadow doesn't currently match what was designed %>
-  <%# TODO: Make something work when javascript is disabled. For example see https://stackoverflow.com/a/19199858 %>
+  <%# TODO: #2158 Choose a more sensible default width %>
+  <%# TODO: #2158 Drop shadow doesn't currently match what was designed %>
+  <%# TODO: #2160 Make something work when javascript is disabled. For example see https://stackoverflow.com/a/19199858 %>
   <div x-ref="popover" role="tooltip" class="w-[500px] max-w-[100vw] absolute z-10" x-show="open" x-on:click.outside="open=false" x-transition>
     <div x-ref="arrow" class="absolute w-6 h-6 rotate-45 bg-navy"></div>
     <div class="px-8 py-6 text-white shadow-md bg-navy">

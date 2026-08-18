@@ -12,7 +12,7 @@ class ApiController < ApplicationController
 
   # This is disabled because at least one commercial user of the API is doing
   # GET requests for JSONP instead of using XHR
-  # TODO: Remove this line to re-enable CSRF protection on API actions
+  # TODO: #2161 Remove this line to re-enable CSRF protection on API actions
   skip_before_action :verify_authenticity_token,
                      only: %i[authorities authority suburb_postcode point area date_scraped all]
 
@@ -31,7 +31,7 @@ class ApiController < ApplicationController
   def authority
     params_authority_id = T.cast(params[:authority_id], String)
 
-    # TODO: Handle the situation where the authority name isn't found
+    # TODO: #2162 Handle the situation where the authority name isn't found
     authority = Authority.find_short_name_encoded!(params_authority_id)
     apps = authority.applications.visible.order(first_date_scraped: :desc)
     api_render_apps(apps, "Recent applications from #{authority.full_name_and_state}")
@@ -49,7 +49,7 @@ class ApiController < ApplicationController
       descriptions << params[:state]
       apps = apps.where(state: params[:state])
     end
-    # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
+    # TODO: #2162 Check that it's a valid postcode (i.e. numerical and four digits)
     if params[:postcode]
       descriptions << params[:postcode]
       apps = apps.where(postcode: params[:postcode])
@@ -115,7 +115,7 @@ class ApiController < ApplicationController
   # other API calls because the paging is done differently (via scrape time rather than page number)
   sig { void }
   def all
-    # TODO: Check that params page and v aren't being used
+    # TODO: #2161 Check that params page and v aren't being used
     apps = Application.visible.includes(:authority).order(:id)
     apps = apps.where("id > ?", params[:since_id]) if params[:since_id]
 
@@ -133,7 +133,7 @@ class ApiController < ApplicationController
       end
       # Use of the js extension is deprecated. See
       # https://github.com/openaustralia/planningalerts/issues/679
-      # TODO: Remove when it's no longer used
+      # TODO: #2161 Remove when it's no longer used
       format.js do
         @applications = applications
         @max_id = T.let(max_id, T.nilable(Integer))
@@ -178,7 +178,7 @@ class ApiController < ApplicationController
       return if @current_api_key
     end
 
-    # TODO: Refactor this
+    # TODO: #2161 Refactor this
     key = ApiKey.find_by(value: params_key)
 
     reason = if key.nil?
@@ -222,7 +222,7 @@ class ApiController < ApplicationController
     # This is doing everything in UTC which means that the "daily" period does *not* start at midnight Australian time which is somewhat
     # confusing. It's not hugely important in the grand scheme of things as the daily usage is more used to see the order of magnitude
     # of usage. The detailed usage of users is capped via the rack middleware which is going to be accurate.
-    # TODO: Switch over to using an Australian time zone
+    # TODO: #2161 Switch over to using an Australian time zone
     UpdateApiUsageJob.perform_async(T.must(@current_api_key).id, Time.zone.today.to_s)
   end
 
@@ -234,7 +234,7 @@ class ApiController < ApplicationController
       end
       # Use of the js extension is deprecated. See
       # https://github.com/openaustralia/planningalerts/issues/679
-      # TODO: Remove when it's no longer used
+      # TODO: #2161 Remove when it's no longer used
       format.js do
         render json: { error: error_text }, status:, content_type: Mime[:json]
       end
@@ -272,22 +272,22 @@ class ApiController < ApplicationController
     variants = :v2 if params[:v] == "2"
 
     respond_to do |format|
-      # TODO: Move the template over to using an xml builder
+      # TODO: #2161 Move the template over to using an xml builder
       format.rss do
         render "index", format: :rss,
                         layout: false,
                         content_type: Mime[:xml]
       end
       format.json do
-        # TODO: Document use of v parameter
+        # TODO: #2161 Document use of v parameter
         render "index", formats: :json,
                         variants:
       end
       # Use of the js extension is deprecated. See
       # https://github.com/openaustralia/planningalerts/issues/679
-      # TODO: Remove when it's no longer used
+      # TODO: #2161 Remove when it's no longer used
       format.js do
-        # TODO: Document use of v parameter
+        # TODO: #2161 Document use of v parameter
         render "index", formats: :json,
                         content_type: Mime[:json],
                         variants:
@@ -311,7 +311,7 @@ class ApiController < ApplicationController
 
     respond_to do |format|
       format.json do
-        # TODO: Document use of v parameter
+        # TODO: #2161 Document use of v parameter
         render "authorities", formats: :json,
                               variants:
       end

@@ -51,7 +51,7 @@ namespace :planningalerts do
     # "What is the difference between GDA94 and WGS84?"
     # Difference between GDA94 and WGS84 is going to be of the order of a metre
     # or so so we can probably just ignore the difference for the time being
-    # TODO: Properly support the conversion
+    # TODO: #2164 Properly support the conversion
 
     # We're just loading the GDA94 as if it's WGS84 (srid 4326)
     factory = RGeo::Geographic.spherical_factory(srid: 4326)

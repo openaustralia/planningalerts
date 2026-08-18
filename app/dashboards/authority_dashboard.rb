@@ -86,7 +86,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
   COLLECTION_FILTERS = T.let({
     active: ->(resources) { resources.active },
     disabled: ->(resources) { resources.where(disabled: true) },
-    # TODO: This is only needed temporarily while we're filling out the data. Get rid of it when we can.
+    # TODO: #2168 This is only needed temporarily while we're filling out the data. Get rid of it when we can.
     empty_wikidata: ->(resources) { resources.active.where(wikidata_id: nil) }
   }.freeze, T::Hash[Symbol, T.untyped])
 

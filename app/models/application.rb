@@ -72,7 +72,7 @@ class Application < ApplicationRecord
     Application.normalise_address(attributes["address"])
   end
 
-  # TODO: factor out common location accessor between Application and Alert
+  # TODO: #2164 factor out common location accessor between Application and Alert
   sig { returns(T.nilable(Location)) }
   def location
     Location.build(lat:, lng:)
@@ -159,7 +159,7 @@ class Application < ApplicationRecord
     )
     top = r.top
     if top
-      # TODO: Can we get the factory from the database info instead?
+      # TODO: #2164 Can we get the factory from the database info instead?
       factory = RGeo::Geographic.spherical_factory(srid: 4326)
       {
         lat: top.lat,

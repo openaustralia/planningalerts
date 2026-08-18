@@ -15,7 +15,7 @@ Rails.application.configure do
   config.x.elasticsearch_url = "http://localhost:9200"
   # Needs to be set in test for sidekiq initialiser to work
   # The value is kind of irrelevant actually
-  # TODO: Fix this
+  # TODO: #2167 Fix this
   config.x.sidekiq_redis_url = "redis://localhost:6379/0"
 
   ## User settings (END)

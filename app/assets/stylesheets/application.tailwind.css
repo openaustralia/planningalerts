@@ -22,7 +22,7 @@
   @apply !font-medium;
 }
 
-/* TODO: Get rid of this ugly mess for styling the charts on the authority detail page as soon as we can */
+/* TODO: #2158 Get rid of this ugly mess for styling the charts on the authority detail page as soon as we can */
 .chart text {
   @apply fill-navy;
   font-size: .875em;

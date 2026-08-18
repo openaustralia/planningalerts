@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   # rubocop:disable Style/ArgumentsForwarding
-  # TODO: Arguments forwarding doesn't seem to be supported by sorbet right now?
+  # TODO: #2167 Arguments forwarding doesn't seem to be supported by sorbet right now?
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
@@ -55,7 +55,7 @@ class User < ApplicationRecord
   end
 
   # This is currently used when creating users via an alert
-  # TODO: Remove this as soon as users are purely being created by people registering
+  # TODO: #2163 Remove this as soon as users are purely being created by people registering
   sig { void }
   def temporarily_allow_empty_password!
     @temporarily_allow_empty_password = T.let(true, T.nilable(T::Boolean))

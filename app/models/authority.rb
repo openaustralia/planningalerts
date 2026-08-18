@@ -69,7 +69,7 @@ class Authority < ApplicationRecord
     h.sort
   end
 
-  # TODO: More strict type checking on contents of array
+  # TODO: #2164 More strict type checking on contents of array
   sig { returns(T::Array[[Date, Integer]]) }
   def comments_per_week
     # Sunday is the beginning of the week to match new_applications_per_week
@@ -111,13 +111,13 @@ class Authority < ApplicationRecord
 
   sig { params(name: String).returns(T.nilable(Integer)) }
   def self.find_id_short_name_encoded(name)
-    # TODO: Inefficiently this does a full table scan for every /authorities/<name>/... or /api/authorities/<name>/... call!
+    # TODO: #2164 Inefficiently this does a full table scan for every /authorities/<name>/... or /api/authorities/<name>/... call!
     # Create a slug column and use DB indexing!
     select(:id, :short_name).to_a.find { |a| a.short_name_encoded == name }&.id
   end
 
-  # TODO: Replace this with using friendly_id gem
-  # TODO: Also loads the whole boundary into memory. Do we want this?
+  # TODO: #2164 Replace this with using friendly_id gem
+  # TODO: #2019 Also loads the whole boundary into memory. Do we want this?
   sig { params(name: String).returns(T.nilable(Authority)) }
   def self.find_short_name_encoded(name)
     id = find_id_short_name_encoded(name)

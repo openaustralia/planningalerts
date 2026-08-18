@@ -1,6 +1,6 @@
 <% content_for :page_title, @description %>
 
-<%# TODO: This page needs a proper design %>
+<%# TODO: #2157 This page needs a proper design %>
 
 <%= form_with url: search_applications_path, method: :get, class: "my-24" do |f| %>
   <%= f.text_field :q, value: @q, class: "block w-full", size: 50, autofocus: @applications.nil?, placeholder: "Tree work" %>
@@ -12,9 +12,9 @@
 <% if @applications %>
   <% if @applications.any? %>
     <%= render SimplePagerComponent.new(collection: @applications) %>
-    <%# TODO: Extract list of applications as a component? %>
+    <%# TODO: #2159 Extract list of applications as a component? %>
     <ul class="mt-12 divide-y divide-light-grey2 border-y border-light-grey2">
-      <%# TODO: Make highlighting of search terms work %>
+      <%# TODO: #2168 Make highlighting of search terms work %>
       <% @applications.each do |application| %>
         <li><%= render application %></li>
       <% end %>
