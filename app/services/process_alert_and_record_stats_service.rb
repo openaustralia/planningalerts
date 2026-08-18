@@ -26,6 +26,9 @@ class ProcessAlertAndRecordStatsService
     # Update statistics
     Stat.increment_emails_sent(no_emails)
     Stat.increment_applications_sent(no_applications)
+    Sentry.metrics.count("alerts.emails_sent", value: no_emails)
+    Sentry.metrics.count("alerts.applications_sent", value: no_applications)
+    Sentry.metrics.count("alerts.comments_sent", value: no_comments)
     # TODO: #2164 Rename EmailBatch as we're not using batches anymore
     EmailBatch.create!(
       no_emails:,
