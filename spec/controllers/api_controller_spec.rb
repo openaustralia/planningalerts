@@ -175,6 +175,19 @@ describe ApiController do
           "max_id" => 20
         )
       end
+
+      it "returns max_id 0 rather than null when there is no since_id and nothing is visible" do
+        key.update(bulk: true)
+        create(:geocoded_application, :hidden, id: 10, date_scraped: Time.utc(2001, 1, 1))
+
+        get :all, params: { key: key.value, format: "js" }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to include(
+          "application_count" => 0,
+          "max_id" => 0
+        )
+      end
     end
   end
 

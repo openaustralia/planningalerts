@@ -124,7 +124,10 @@ class ApiController < ApplicationController
     # When there's nothing new to return we leave the cursor where the client
     # left it. Falling back to the last visible application would move the
     # cursor backwards whenever the most recent applications are hidden.
-    max_id = applications.last&.id || params[:since_id]&.to_i
+    # If there's no cursor at all (initial request with nothing visible)
+    # return 0, which is equivalent to no since_id, so that clients always
+    # get an integer they can feed back.
+    max_id = applications.last&.id || params[:since_id]&.to_i || 0
 
     respond_to do |format|
       format.json do
