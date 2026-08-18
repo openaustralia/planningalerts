@@ -51,14 +51,14 @@ namespace :sentry do
       release = fetch(:current_revision)
       environment = fetch(:stage).to_s
 
-      # v3 reads org and project from the committed .sentryclirc. v4 ignores
-      # that file, so read the values here and pass them on the command line,
-      # which keeps .sentryclirc the single source of truth for both.
-      sentryclirc = File.read(File.expand_path("../../../.sentryclirc", __dir__))
-      org = sentryclirc[/^\s*org\s*=\s*(\S+)/, 1]
-      project = sentryclirc[/^\s*project\s*=\s*(\S+)/, 1]
-
       begin
+        # v3 reads org and project from the committed .sentryclirc. v4 ignores
+        # that file, so read the values here and pass them on the command line,
+        # which keeps .sentryclirc the single source of truth for both.
+        sentryclirc = File.read(File.expand_path("../../../.sentryclirc", __dir__))
+        org = sentryclirc[/^\s*org\s*=\s*(\S+)/, 1]
+        project = sentryclirc[/^\s*project\s*=\s*(\S+)/, 1]
+
         # Associating commits requires the GitHub integration to be installed in
         # Sentry. If it isn't yet, warn but still finalize and record the deploy.
         commit_warning = "WARNING: #{cli} could not associate commits with release #{release} " \
