@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
   default_form_builder FormBuilders::Tailwind
 
   rescue_from ActiveRecord::StatementInvalid, with: :check_for_write_during_maintenance_mode
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
 
@@ -37,6 +38,11 @@ class ApplicationController < ActionController::Base
   def set_sentry_user
     user = current_user
     Sentry.set_user(id: user.id) if user
+  end
+
+  sig { params(_error: Pundit::NotAuthorizedError).void }
+  def user_not_authorized(_error)
+    redirect_back fallback_location: root_path, alert: t("pundit.not_authorized")
   end
 
   sig { params(error: StandardError).void }
