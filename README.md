@@ -192,11 +192,15 @@ One-time setup per deployer machine (v4, recommended):
 
 1. Install the CLI: `brew install getsentry/tools/sentry` on macOS, or `curl https://cli.sentry.dev/install -fsS | bash` on Linux
 2. Authenticate: run `sentry auth login` — it opens Sentry in a browser to authenticate (the token needs the `project:releases` and `org:read` scopes)
-3. Verify: `sentry info` should show you are authenticated against the `oaf-org-au` org
+3. Verify: `sentry auth status` should report access to the OpenAustralia Foundation (`oaf-org-au`) org
 
 If you still have v3 (`sentry-cli`), it keeps working: authenticate with `sentry-cli login` and verify with `sentry-cli info`.
 
-The repo's committed `.sentryclirc` supplies org/project defaults; your token stays in `~/.sentryclirc` and must never be committed.
+Don't verify v4 with `sentry info`. It exits non-zero whenever no default org/project is set, even when your token is fine, so it isn't a usable check for whether the hook will run ([#2183](https://github.com/openaustralia/planningalerts/issues/2183)).
+
+The repo's committed `.sentryclirc` holds the org and project. v3 reads that file directly. v4 ignores it, so the deploy hook reads the values out of it and passes them on the command line, which keeps the one committed file authoritative for both. If you want v4 to pick the file up for your own ad hoc commands, run `sentry cli import`.
+
+Credentials are separate from that file and must never be committed. v3 reads your token from `~/.sentryclirc`; v4 stores its own credentials when you run `sentry auth login`.
 
 If the Sentry CLI is missing or unauthenticated the deploy still succeeds — the hook prints a warning and skips recording the release, so set it up before your next production deploy.
 
