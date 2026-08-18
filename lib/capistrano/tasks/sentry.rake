@@ -16,11 +16,17 @@ namespace :sentry do
       # preferring v4 (https://cli.sentry.dev/migrating-from-v3/). A candidate
       # only counts if it exists AND is authenticated.
       #
+      # The two CLIs report authentication differently. v4 has `auth status`;
+      # v3 has no such command and reports it through `info`. Don't reach for
+      # `sentry info` on v4: it exits non-zero whenever no default org/project
+      # is configured, even when the token is fine, which made every deploy
+      # skip the release (#2183).
+      #
       # SSHKit's local backend execs commands directly rather than through a
       # shell, so a missing binary raises Errno::ENOENT instead of making
       # `test` return false. Treat it the same as an unauthenticated CLI.
       cli = %w[sentry sentry-cli].find do |candidate|
-        test("#{candidate} info")
+        test(candidate == "sentry" ? "sentry auth status" : "sentry-cli info")
       rescue Errno::ENOENT
         false
       end
@@ -46,17 +52,26 @@ namespace :sentry do
       environment = fetch(:stage).to_s
 
       begin
+        # v3 reads org and project from the committed .sentryclirc. v4 ignores
+        # that file, so read the values here and pass them on the command line,
+        # which keeps .sentryclirc the single source of truth for both.
+        sentryclirc = File.read(File.expand_path("../../../.sentryclirc", __dir__))
+        org = sentryclirc[/^\s*org\s*=\s*(\S+)/, 1]
+        project = sentryclirc[/^\s*project\s*=\s*(\S+)/, 1]
+
         # Associating commits requires the GitHub integration to be installed in
         # Sentry. If it isn't yet, warn but still finalize and record the deploy.
         commit_warning = "WARNING: #{cli} could not associate commits with release #{release} " \
                          "(is the GitHub integration installed in Sentry?). Continuing without commit data."
         if cli == "sentry"
-          # v4 renamed command groups to singular and made the deploy
-          # environment a positional argument.
-          execute :sentry, "release", "new", release
-          warn commit_warning unless test("sentry release set-commits --auto #{release}")
-          execute :sentry, "release", "finalize", release
-          execute :sentry, "release", "deploy", release, environment
+          # v4 renamed command groups to singular, takes the release as an
+          # <org>/<version> positional, and made the deploy environment a
+          # positional argument.
+          versioned = "#{org}/#{release}"
+          execute :sentry, "release", "create", "--project", project, versioned
+          warn commit_warning unless test("sentry release set-commits --auto #{versioned}")
+          execute :sentry, "release", "finalize", versioned
+          execute :sentry, "release", "deploy", versioned, environment
         else
           execute :"sentry-cli", "releases", "new", release
           warn commit_warning unless test("sentry-cli releases set-commits --auto #{release}")

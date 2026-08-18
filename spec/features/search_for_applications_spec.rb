@@ -101,6 +101,9 @@ describe "Searching for development application near an address" do
       visit address_applications_path
 
       fill_in "Street address", with: "Bruce Road, USA"
+      # Dismiss any autocomplete dropdown before clicking, to avoid the button
+      # being obscured by the Google Places suggestions table in JS specs
+      find_field("Street address").send_keys(:escape) if Capybara.current_driver != Capybara.default_driver
       within("form") do
         click_on "Search"
       end
@@ -127,6 +130,9 @@ describe "Searching for development application near an address" do
       visit address_applications_path
 
       fill_in "Street address", with: "24 Bruce Road, Glenbrook"
+      # Dismiss any autocomplete dropdown before clicking, to avoid the button
+      # being obscured by the Google Places suggestions table in JS specs
+      find_field("Street address").send_keys(:escape) if Capybara.current_driver != Capybara.default_driver
       within("form") do
         click_on "Search"
       end
