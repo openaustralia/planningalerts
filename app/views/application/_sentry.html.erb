@@ -1,5 +1,5 @@
 <% if Rails.env.production? %>
-  <%# Sentry error monitoring and session replay via the loader script, which lazy-loads the full SDK %>
+  <%# Sentry error monitoring, tracing and session replay via the loader script, which lazy-loads the full SDK %>
   <%# sentryOnLoad must be defined before the loader script so the loader can find and invoke it %>
   <script>
     window.sentryOnLoad = function () {
@@ -8,9 +8,10 @@
           release: "<%= j(sentry_release) %>",
         <% end %>
         environment: "<%= j(ENV.fetch("SENTRY_ENVIRONMENT", Rails.env)) %>",
+        tracesSampleRate: 0.05,
         replaysSessionSampleRate: 0.1,
         replaysOnErrorSampleRate: 1.0,
-        sendDefaultPii: false
+        sendDefaultPii: true
       });
     };
   </script>

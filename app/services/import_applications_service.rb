@@ -94,6 +94,8 @@ class ImportApplicationsService
     end
 
     logger.info "#{count} #{'application'.pluralize(count)} found for #{authority.full_name_and_state} with date from #{start_date}"
+    Sentry.metrics.count("applications.imported", value: count, attributes: { authority: authority.short_name })
+    Sentry.metrics.count("applications.import_errors", value: error_count, attributes: { authority: authority.short_name })
     return if error_count.zero?
 
     logger.info "#{error_count} #{'application'.pluralize(error_count)} errored for #{authority.full_name_and_state} with date from #{start_date}"

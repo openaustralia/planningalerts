@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
   # This stores the location on every request so that we can always redirect back after logging in
   # See https://github.com/heartcombo/devise/wiki/How-To:-%5BRedirect-back-to-current-page-after-sign-in,-sign-out,-sign-up,-update%5D
   before_action :store_user_location!, if: :storable_location?
+  before_action :set_sentry_user
 
   default_form_builder FormBuilders::Tailwind
 
@@ -29,6 +30,15 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
+
+  # Attach the signed-in person to Sentry events by id only, never email
+  # (Australian Privacy Principles). Look the id up in the admin backend if
+  # you need to contact someone about an error.
+  sig { void }
+  def set_sentry_user
+    user = current_user
+    Sentry.set_user(id: user.id) if user
+  end
 
   sig { params(_error: Pundit::NotAuthorizedError).void }
   def user_not_authorized(_error)
