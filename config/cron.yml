@@ -18,7 +18,5 @@ sitemap_refresh:
     task: sitemap:refresh:no_ping
 sidedup_versions:
   cron: "every day at 11 pm Australia/Sydney"
-  class: InvokeRakeTaskJob
+  class: "DedupVersionsJob"
   description: "Remove any duplicate versions"
-  args:
-    task: data:dedup_versions
