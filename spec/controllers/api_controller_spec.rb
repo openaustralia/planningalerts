@@ -161,6 +161,20 @@ describe ApiController do
           }]
         )
       end
+
+      it "does not move the cursor backwards when all the applications after since_id are hidden" do
+        key.update(bulk: true)
+        create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1))
+        create(:geocoded_application, :hidden, id: 20, date_scraped: Time.utc(2001, 1, 2))
+
+        get :all, params: { key: key.value, since_id: 20, format: "js" }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to include(
+          "application_count" => 0,
+          "max_id" => 20
+        )
+      end
     end
   end
 

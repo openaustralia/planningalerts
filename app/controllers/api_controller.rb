@@ -121,9 +121,10 @@ class ApiController < ApplicationController
 
     # Limiting number of records that are returned
     applications = apps.limit(Application.max_per_page_all_api).to_a
-    last = applications.last
-    last = Application.visible.order(:id).last if last.nil?
-    max_id = last.id if last
+    # When there's nothing new to return we leave the cursor where the client
+    # left it. Falling back to the last visible application would move the
+    # cursor backwards whenever the most recent applications are hidden.
+    max_id = applications.last&.id || params[:since_id]&.to_i
 
     respond_to do |format|
       format.json do
