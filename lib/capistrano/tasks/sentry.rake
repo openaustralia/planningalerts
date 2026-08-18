@@ -5,26 +5,31 @@
 # issues can be tied to the deploy that introduced them.
 #
 # Runs locally on the deployer's machine (not the servers) because that's
-# where sentry-cli and the full git history live. Org/project defaults come
-# from the committed .sentryclirc; the auth token comes from each deployer's
-# ~/.sentryclirc — see README "Sentry release tracking".
+# where the Sentry CLI and the full git history live. Org/project defaults
+# come from the committed .sentryclirc; the auth token comes from each
+# deployer's ~/.sentryclirc — see README "Sentry release tracking".
 namespace :sentry do
   desc "Record the release and deploy in Sentry"
   task :release do
     run_locally do
+      # CLI v4 renamed the binary from sentry-cli to sentry, so support both,
+      # preferring v4 (https://cli.sentry.dev/migrating-from-v3/). A candidate
+      # only counts if it exists AND is authenticated.
+      #
       # SSHKit's local backend execs commands directly rather than through a
       # shell, so a missing binary raises Errno::ENOENT instead of making
       # `test` return false. Treat it the same as an unauthenticated CLI.
-      sentry_cli_usable = begin
-        test("sentry-cli info")
+      cli = %w[sentry sentry-cli].find do |candidate|
+        test("#{candidate} info")
       rescue Errno::ENOENT
         false
       end
 
-      unless sentry_cli_usable
+      if cli.nil?
         warn <<~WARNING
           ********************************************************************
-          WARNING: sentry-cli is not installed or not authenticated.
+          WARNING: the Sentry CLI (sentry or sentry-cli) is not installed or
+          not authenticated.
 
           This deploy was NOT recorded as a release in Sentry, so issues
           won't be linked to it. The deploy itself has still succeeded.
@@ -41,18 +46,26 @@ namespace :sentry do
       environment = fetch(:stage).to_s
 
       begin
-        execute :"sentry-cli", "releases", "new", release
         # Associating commits requires the GitHub integration to be installed in
         # Sentry. If it isn't yet, warn but still finalize and record the deploy.
-        unless test("sentry-cli releases set-commits --auto #{release}")
-          warn "WARNING: sentry-cli could not associate commits with release #{release} " \
-               "(is the GitHub integration installed in Sentry?). Continuing without commit data."
+        commit_warning = "WARNING: #{cli} could not associate commits with release #{release} " \
+                         "(is the GitHub integration installed in Sentry?). Continuing without commit data."
+        if cli == "sentry"
+          # v4 renamed command groups to singular and made the deploy
+          # environment a positional argument.
+          execute :sentry, "release", "new", release
+          warn commit_warning unless test("sentry release set-commits --auto #{release}")
+          execute :sentry, "release", "finalize", release
+          execute :sentry, "release", "deploy", release, environment
+        else
+          execute :"sentry-cli", "releases", "new", release
+          warn commit_warning unless test("sentry-cli releases set-commits --auto #{release}")
+          execute :"sentry-cli", "releases", "finalize", release
+          execute :"sentry-cli", "deploys", "new", "--release", release, "-e", environment
         end
-        execute :"sentry-cli", "releases", "finalize", release
-        execute :"sentry-cli", "deploys", "new", "--release", release, "-e", environment
       rescue StandardError => e
         # Recording the release in Sentry is best-effort; the deploy itself
-        # has already succeeded, so don't let a sentry-cli failure fail it.
+        # has already succeeded, so don't let a Sentry CLI failure fail it.
         warn "WARNING: recording release #{release} in Sentry failed (#{e.message}). " \
              "The deploy itself has still succeeded."
       end

@@ -184,17 +184,21 @@ bundle exec cap --tasks
 
 ### Sentry release tracking
 
-Deploys automatically record a release and deploy in Sentry (org `oaf-org-au`, project `planning-alerts`) so issues can be tied to the deploy that introduced them. This runs via a Capistrano hook using `sentry-cli` on your machine (part of [#2049](https://github.com/openaustralia/planningalerts/issues/2049)).
+Deploys automatically record a release and deploy in Sentry (org `oaf-org-au`, project `planning-alerts`) so issues can be tied to the deploy that introduced them. This runs via a Capistrano hook using the Sentry CLI on your machine (part of [#2049](https://github.com/openaustralia/planningalerts/issues/2049)).
 
-One-time setup per deployer machine:
+The hook supports both CLI v4 (binary `sentry`) and the legacy v3 (binary `sentry-cli`), preferring v4 when both are installed. See the [v4 migration guide](https://cli.sentry.dev/migrating-from-v3/).
 
-1. Install sentry-cli: `brew install getsentry/tools/sentry-cli` on macOS, or `curl -sL https://sentry.io/get-cli/ | sh` on Linux
-2. Authenticate: run `sentry-cli login` — it opens Sentry to create a personal User Auth Token (needs the `project:releases` and `org:read` scopes) and stores it in `~/.sentryclirc`
-3. Verify: `sentry-cli info` should show you are authenticated against the `oaf-org-au` org
+One-time setup per deployer machine (v4, recommended):
+
+1. Install the CLI: `brew install getsentry/tools/sentry` on macOS, or `curl https://cli.sentry.dev/install -fsS | bash` on Linux
+2. Authenticate: run `sentry auth login` — it opens Sentry in a browser to authenticate (the token needs the `project:releases` and `org:read` scopes)
+3. Verify: `sentry info` should show you are authenticated against the `oaf-org-au` org
+
+If you still have v3 (`sentry-cli`), it keeps working: authenticate with `sentry-cli login` and verify with `sentry-cli info`.
 
 The repo's committed `.sentryclirc` supplies org/project defaults; your token stays in `~/.sentryclirc` and must never be committed.
 
-If sentry-cli is missing or unauthenticated the deploy still succeeds — the hook prints a warning and skips recording the release, so set it up before your next production deploy.
+If the Sentry CLI is missing or unauthenticated the deploy still succeeds — the hook prints a warning and skips recording the release, so set it up before your next production deploy.
 
 ## Upgrading Ruby in production
 
