@@ -1,5 +1,5 @@
 # typed: true
-# TODO: Store this in a more sensibly named/namespaced variable
+# TODO: #2167 Store this in a more sensibly named/namespaced variable
 
 ENV["ELASTICSEARCH_URL"] = Rails.configuration.x.elasticsearch_url
 # TODO: With the line above can I get rid of the stuff below?

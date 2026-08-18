@@ -21,22 +21,22 @@ module ApplicationHelper
     end
   end
 
-  # TODO: Generalise to support all the variants
+  # TODO: #2159 Generalise to support all the variants
   sig { params(body: T.untyped, url: T.untyped, extra_classes: T.nilable(String), title: T.nilable(String), quiet: T::Boolean).returns(String) }
   def pa_link_to(body, url, extra_classes: nil, title: nil, quiet: false)
     # These extra classes can't override the default styling because they're at the end
     link_to(body, url, class: "#{pa_link_classes(quiet:)} #{extra_classes}", title:)
   end
 
-  # TODO: Generalise to support all the variants
+  # TODO: #2159 Generalise to support all the variants
   sig { params(body: T.untyped, url: T.untyped, extra_classes: T.nilable(String), title: T.nilable(String), quiet: T::Boolean).returns(String) }
   def pa_link_to_unless_current(body, url, extra_classes: nil, title: nil, quiet: false)
     # These extra classes can't override the default styling because they're at the end
     link_to_unless_current(body, url, class: "#{pa_link_classes(quiet:)} #{extra_classes}", title:)
   end
 
-  # TODO: Generalise to support all the variants
-  # TODO: The signature is not consistent with pa_link_to. This is currently used by kamanari pager.
+  # TODO: #2159 Generalise to support all the variants
+  # TODO: #2159 The signature is not consistent with pa_link_to. This is currently used by kamanari pager.
   sig { params(condition: T::Boolean, body: T.untyped, url: T.untyped, html_options: T::Hash[Symbol, T.untyped], quiet: T::Boolean).returns(String) }
   def pa_link_to_unless(condition, body, url, html_options = {}, quiet: false)
     # These extra classes can't override the default styling because they're at the end

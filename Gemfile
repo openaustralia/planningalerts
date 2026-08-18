@@ -9,7 +9,7 @@ gem "bootsnap", require: false
 gem "rails", "~> 7.1.0"
 gem "rake"
 
-# TODO: Remove this pin once tapioca's incompatibility with zeitwerk >= 2.7
+# TODO: #2167 Remove this pin once tapioca's incompatibility with zeitwerk >= 2.7
 # is fixed upstream (or we drop tapioca/sorbet entirely)
 # tapioca 0.15.1 crashes on zeitwerk >= 2.7 (Zeitwerk::Registry.loaders no
 # longer responds to flat_map). tapioca 0.16-0.19 work with zeitwerk 2.8.2
@@ -48,7 +48,7 @@ gem "sidekiq", "~> 7.0"
 gem "sidekiq-cron"
 
 # For accessing external urls
-# TODO: Just pick one and use it for everything
+# TODO: #2167 Just pick one and use it for everything
 gem "httparty", ">= 0.24.0" # fix CVE-2025-68696
 gem "rest-client"
 
@@ -82,12 +82,12 @@ gem "searchkick"
 gem "nokogiri", ">= 1.19.4" # fix GHSA-5prr-v3j2-97mh (no CVE assigned)
 
 # Speed up json parsing
-# TODO: Double check where this is being used
+# TODO: #2167 Double check where this is being used
 gem "oj"
 
 # For logging API calls to elasticsearch
 # We can't upgrade elasticsearch gem until we've upgraded the server
-# TODO: Fix this
+# TODO: #2167 Fix this
 gem "elasticsearch", "~> 7"
 # Elasticsearch doesn't seem to include this dependency even though it's necessary
 # with faraday 2 which is needed by the gem. Weird.
@@ -100,7 +100,7 @@ gem "counter_culture"
 gem "rack-cors"
 
 # For type checking
-# TODO: Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
+# TODO: #2167 Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
 gem "sorbet-runtime", "< 0.6"
 
 # For automatic creation of github issues when scrapers are broken
@@ -165,7 +165,7 @@ gem "terser"
 # For versioning changes in the admin panel
 # Using forked version so we can get access to
 # https://github.com/IrvanFza/administrate-field-paper_trail/pull/1/files
-# TODO: Move to upstream once this gets merged
+# TODO: #2167 Move to upstream once this gets merged
 gem "administrate-field-paper_trail", github: "DaanVanVugt/administrate-field-paper_trail",
                                       branch: "feature/link-to-whodunnit"
 gem "paper_trail"
@@ -190,7 +190,7 @@ group :test do
   gem "timecop"
   gem "vcr"
   gem "webmock"
-  # FIXME: stop using `mock_model` and remove this
+  # FIXME: #2166 stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"
   # For automated accessibility testing
   gem "axe-core-capybara"
@@ -204,10 +204,10 @@ group :development do
   gem "rack-mini-profiler"
 
   # For static type checking
-  # TODO: Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
+  # TODO: #2167 Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
   gem "sorbet", "< 6.0"
   gem "spoom"
-  # TODO: Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
+  # TODO: #2167 Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
   gem "tapioca", "~> 0.15.1"
 
   # For guard and associated bits

@@ -21,7 +21,7 @@ class AuthoritiesController < ApplicationController
   def show
     params_id = T.cast(params[:id], String)
 
-    # TODO: Use something like the friendly_id gem instead
+    # TODO: #2164 Use something like the friendly_id gem instead
     @authority = T.let(Authority.find_short_name_encoded!(params_id), T.nilable(Authority))
   end
 
@@ -36,7 +36,7 @@ class AuthoritiesController < ApplicationController
   def boundary
     params_id = T.cast(params[:id], String)
 
-    # TODO: Use something like the friendly_id gem instead
+    # TODO: #2164 Use something like the friendly_id gem instead
     authority = T.let(Authority.find_short_name_encoded!(params_id), Authority)
 
     respond_to do |format|

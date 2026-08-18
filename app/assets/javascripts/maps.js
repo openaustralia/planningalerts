@@ -106,7 +106,7 @@ async function initialiseGeocodingMap(map_div) {
 
   var map = new Map(map_div, { zoom: 13, center: googleLatLng });
 
-  // TODO: Generalise to any number of geocoder results
+  // TODO: #2164 Generalise to any number of geocoder results
 
   var googleInfowindow = new InfoWindow({
     content: g.html

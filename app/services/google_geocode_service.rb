@@ -21,7 +21,7 @@ class GoogleGeocodeService
 
     parsed_response = call_google_api(address)
 
-    # TODO: Raise a proper error class here
+    # TODO: #2146 Raise a proper error class here
     raise "Google geocoding error" if parsed_response.nil?
 
     if parsed_response["status"] != "OK"

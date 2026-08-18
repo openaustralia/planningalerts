@@ -13,7 +13,7 @@ class ShareButtonComponent < ViewComponent::Base
     when :green
       @text_class = T.let("text-green hover:text-dark-green focus:outline-none focus:bg-sun-yellow", String)
     when :lavender
-      # TODO: Add hover state
+      # TODO: #2158 Add hover state
       @text_class = "text-lavender focus:outline-none focus:bg-sun-yellow"
     else
       raise "Unexpected color: #{color}"

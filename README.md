@@ -201,7 +201,7 @@ If sentry-cli is missing or unauthenticated the deploy still succeeds — the ho
 Upgrading Ruby in production is an unbelievably painful process right now. I'm sorry. Let's make it simpler
 but in the meantime:
 
-TODO: This section is now out of date as we now have a blue/green deploy setup that allows us to build a new
+TODO: #2167 This section is now out of date as we now have a blue/green deploy setup that allows us to build a new
       image with a new ruby version and deploy it side by side with the old version and switch over between them
 
 Note for new deploy on new servers: Make sure you run "bundle exec cap production puma:install" first. Otherwise the "puma:reload"

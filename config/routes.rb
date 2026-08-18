@@ -83,7 +83,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     # After people fill in the form to register it redirects to this page
     # which asks people to go to their email and confirm their email address
-    # TODO: I shouldn't need to prefix the route with users here. Why is this happening? What have I done wrong?
+    # TODO: #2163 I shouldn't need to prefix the route with users here. Why is this happening? What have I done wrong?
     get "users/sign_up/check_email", to: "users/registrations#check_email", as: "check_email_user_registration"
   end
 
@@ -102,7 +102,7 @@ Rails.application.routes.draw do
       # alerts/registrations#edit
       # alerts/registrations#update
       # alerts/registrations#destroy
-      # TODO: Can we please remove the unused routes?
+      # TODO: #2163 Can we please remove the unused routes?
       devise_for :users, only: %i[sessions registrations]
     end
     resources :api_keys, only: %i[create index] do
@@ -219,7 +219,7 @@ Rails.application.routes.draw do
   get "get_involved" => "documentation#get_involved"
   get "how_to_write_a_scraper" => "documentation#how_to_write_a_scraper"
   get "how_to_lobby_your_local_council" => "documentation#how_to_lobby_your_local_council"
-  # TODO: I'm guessing we'll want to rename other help related urls above to something a bit more like this one?
+  # TODO: #2168 I'm guessing we'll want to rename other help related urls above to something a bit more like this one?
   namespace :documentation, path: "/help" do
     get :contact
   end

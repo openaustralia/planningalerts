@@ -3,8 +3,8 @@
 <%= render HeadingComponent.new(tag: :h1, extra_classes: "sr-only").with_content("Search") %>
 <%= render "address_search_form", q:, error: nil, autofocus: false %>
 
-<%# TODO: Need a proper design for this section %>
-<%# TODO: When this section shows up it's not actually clear what the current search is for %>
+<%# TODO: #2157 Need a proper design for this section %>
+<%# TODO: #2157 When this section shows up it's not actually clear what the current search is for %>
 <% unless other_addresses.empty? %>
   <section class="pt-16">
     <%= render HeadingComponent.new(tag: :h2).with_content("Or did you want?") %>
@@ -21,8 +21,8 @@
 
 <section class="pt-16" id="results">
   <%= render HeadingComponent.new(tag: :h2).with_content("Search results") %>
-  <%# TODO: Figure out how to handle no results when extra_options_on_address_search is enabled %>
-  <%# TODO: Add filter option for no filtering (e.g. any distance or any time) because the filtering in its current is very confusing in its behaviour %>
+  <%# TODO: #2162 Figure out how to handle no results when extra_options_on_address_search is enabled %>
+  <%# TODO: #2168 Add filter option for no filtering (e.g. any distance or any time) because the filtering in its current is very confusing in its behaviour %>
   <% if applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user) %>
     <%= render "no_applications_box", full_address: %>
   <% elsif applications %>

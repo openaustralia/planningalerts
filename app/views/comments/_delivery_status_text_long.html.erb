@@ -10,7 +10,7 @@
     <%= pa_link_to "contact us", documentation_contact_path %> to figure out what's going on.
   </p>
 <% elsif comment.last_delivered_successfully %>
-  <%# TODO: Use more sensible time zone %>
+  <%# TODO: #2158 Use more sensible time zone %>
   This comment was successfully delivered to the email server of
   <%= comment.comment_recipient_full_name %>
   on
