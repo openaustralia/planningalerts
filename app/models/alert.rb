@@ -40,7 +40,7 @@ class Alert < ApplicationRecord
 
   # lat and lng are only populated on save (where they are stored as not null).
   # so they start off being nil. We're just overriding the type signature here.
-  # TODO: Move geocoding to a service so that these never have to be nil
+  # TODO: #2164 Move geocoding to a service so that these never have to be nil
   sig { returns(T.nilable(Float)) }
   def lat
     self[:lat]
@@ -57,7 +57,7 @@ class Alert < ApplicationRecord
 
     self.lat = loc.lat
     self.lng = loc.lng
-    # TODO: Can we get the factory from the database info instead?
+    # TODO: #2164 Can we get the factory from the database info instead?
     factory = RGeo::Geographic.spherical_factory(srid: 4326)
     self.lonlat = factory.point(loc.lng, loc.lat)
   end
@@ -104,7 +104,7 @@ class Alert < ApplicationRecord
   sig { returns(T.untyped) }
   def recent_new_applications
     point = RGeo::Geographic.spherical_factory.point(lng, lat)
-    result = Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
+    result = Application.visible.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
     result.where("first_date_scraped > ?", cutoff_time)
           .reorder("first_date_scraped DESC")
   end
@@ -113,7 +113,7 @@ class Alert < ApplicationRecord
   sig { returns(T.untyped) }
   def applications_with_new_comments
     point = RGeo::Geographic.spherical_factory.point(lng, lat)
-    result = Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
+    result = Application.visible.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
     result.reorder(first_date_scraped: :desc)
           .joins(:comments)
           .where("comments.published_at > ?", cutoff_time)
@@ -176,7 +176,7 @@ class Alert < ApplicationRecord
 
   sig { void }
   def set_confirm_info
-    # TODO: Should check that this is unique across all objects and if not try again
+    # TODO: #2162 Should check that this is unique across all objects and if not try again
     self.confirm_id = Digest::MD5.hexdigest(Kernel.rand.to_s + Time.zone.now.to_s)[0...20]
   end
 end

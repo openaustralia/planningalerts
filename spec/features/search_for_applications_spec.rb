@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "Searching for development application near an address" do
-  # TODO: Include this in spec/spec_helper.rb instead
+  # TODO: #2166 Include this in spec/spec_helper.rb instead
   # See https://github.com/heartcombo/devise#controller-tests
   include Devise::Test::IntegrationHelpers
 
@@ -149,7 +149,6 @@ describe "Searching for development application near an address" do
     before do
       sign_in user
       Flipper.enable :full_text_search
-      # TODO: Would it be better to only enable the feature temporarily?
       visit search_applications_path
     end
 

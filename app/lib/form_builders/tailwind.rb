@@ -52,8 +52,8 @@ module FormBuilders
       end
     end
 
-    # TODO: Use better types for choices
-    # TODO: Do we want to show a red cross on error conditions like the text fields?
+    # TODO: #2164 Use better types for choices
+    # TODO: #2158 Do we want to show a red cross on error conditions like the text fields?
     sig { params(method: Symbol, choices: T.untyped, options: T::Hash[Symbol, String], html_options: T::Hash[Symbol, String]).returns(String) }
     def select(method, choices = nil, options = {}, html_options = {})
       super(method, choices, options, html_options.merge(class: "#{select_style(method)} #{html_options[:class]}"))
@@ -139,7 +139,7 @@ module FormBuilders
       style << (error?(method) ? "border-error-red" : "border-light-grey2")
     end
 
-    # TODO: How do we keep this styling consistent with the styles of the share component?
+    # TODO: #2158 How do we keep this styling consistent with the styles of the share component?
     # "No files selected" gets truncated on narrow screens. It would be better if it wrapped to the next line instead.
     # However, that would probably require hiding the actual file attachment button and making a new one that triggers
     # the same action that and then probably have to wrap some javascript around it to make it update the text correctly.

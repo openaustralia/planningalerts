@@ -14,7 +14,7 @@
   <div class="flex flex-col">
     <div class="hidden py-8 sm:block bg-yellow bg-header-pattern xl:bg-center">
       <%= render ContainerComponent.new do %>
-        <%# TODO: With focus do we want to swap colors around instead? %>
+        <%# TODO: #2168 With focus do we want to swap colors around instead? %>
         <%= link_to root_path, class: "inline-block focus:outline-none focus:ring-4 focus:ring-sun-yellow" do %>
           <%= image_tag "logo.svg", size: "408x96", alt: "Planning Alerts. Email alerts of planning applications near you" %>
         <% end %>

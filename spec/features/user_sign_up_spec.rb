@@ -22,7 +22,7 @@ describe "Signing up for an API account" do
     expect(current_email).to have_subject("PlanningAlerts: Confirmation instructions")
     expect(current_email.default_part_body.to_s).to include("Thanks for getting onboard!")
     expect(current_email.from).to eq(["no-reply@planningalerts.org.au"])
-    # TODO: This should be changed to "Planning Alerts"
+    # TODO: #2158 This should be changed to "Planning Alerts"
     expect(current_email[:from].display_names).to eq(["PlanningAlerts"])
   end
 
@@ -87,7 +87,7 @@ describe "Signing up for an API account" do
 
       it "tells the user what to do" do
         open_email("matthew@oaf.org.au")
-        # TODO: The subject line should be changed to "Planning Alerts" in /app/config/locales/devise.en.yml
+        # TODO: #2158 The subject line should be changed to "Planning Alerts" in /app/config/locales/devise.en.yml
         # Do this after we've completely moved over to the new theme
         expect(current_email).to have_subject("PlanningAlerts: Reset password instructions")
         expect(current_email.default_part_body.to_s).to include("Thanks for confirming you are you")

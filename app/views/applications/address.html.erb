@@ -1,4 +1,4 @@
-<%# TODO: It would be more sensible to render different views from the controller (or use routing) rather than doing it here %>
+<%# TODO: #2164 It would be more sensible to render different views from the controller (or use routing) rather than doing it here %>
 <% if @q.nil? || @error %>
   <%= render "address_search", q: @q, error: @error %>
 <% else %>

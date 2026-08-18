@@ -1,5 +1,5 @@
 We found this application on the planning authority's website on
-<%# TODO: Do we want to use ordinal numbers in the date as per the design? %>
+<%# TODO: #2158 Do we want to use ordinal numbers in the date as per the design? %>
 <%= time_tag application.first_date_scraped, application.first_date_scraped.to_date.to_fs(:long) %>,
 <%= time_ago_in_words(application.first_date_scraped) %>
 ago.

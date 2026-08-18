@@ -3,7 +3,7 @@
     Sign in to Planning&nbsp;Alerts
   <% end %>
   <%= form_with model: resource, url: session_path(resource_name) do |f| %>
-    <%# TODO: Add error display and styling %>
+    <%# TODO: #2163 Add error display and styling %>
     <div class="flex flex-col items-center">
       <div class="w-full">
         <%= f.label :email, "Your email", class: "mb-1 block" %>

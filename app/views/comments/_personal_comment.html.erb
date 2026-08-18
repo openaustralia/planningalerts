@@ -1,15 +1,15 @@
 <% if comment.hidden %>
   <p class="py-3 text-xl mb-9 text-navy bg-light-grey px-7">
     This comment is hidden from public view.
-    <%# TODO: Where should this link go to? %>
+    <%# TODO: #2170 Where should this link go to? %>
     <%= pa_link_to "Why?", "#" %>
   </p>
 <% end %>
 
-<%# TODO: Fixup spacing with multiple comments %>
-<%# TODO: Factor out what's common between this partial and comments/_comment %>
-<%# TODO: Add hover state for link block %>
-<%# TODO: Do we want to follow the right arrow pattern used elsewhere? %>
+<%# TODO: #2158 Fixup spacing with multiple comments %>
+<%# TODO: #2159 Factor out what's common between this partial and comments/_comment %>
+<%# TODO: #2158 Add hover state for link block %>
+<%# TODO: #2158 Do we want to follow the right arrow pattern used elsewhere? %>
 <p class="text-xl text-navy">
   In response to <%= comment.application.authority.full_name %>,
   application reference <%= comment.application.council_reference %> for
@@ -20,7 +20,7 @@
   <%= render QuotedBlockComponent.new do %>
     <%= render LinkBlockComponent.new(url: comment_path(comment)) do %>
       <%= render "comments/comment_text", comment: %>
-      <%# TODO: This space between the text and the date looks too big to me %>
+      <%# TODO: #2158 This space between the text and the date looks too big to me %>
       <div class="mt-12">
         <%= render "comments/comment_date", comment: %>
       </div>

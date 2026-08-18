@@ -74,7 +74,7 @@ class ApiKey < ApplicationRecord
     10
   end
 
-  # TODO: Should this be longer (like 28 days)?
+  # TODO: #2161 Should this be longer (like 28 days)?
   sig { returns(Integer) }
   def self.default_trial_duration_days
     14
@@ -90,7 +90,7 @@ class ApiKey < ApplicationRecord
 
   private
 
-  # TODO: Retry if api key value is not unique
+  # TODO: #2162 Retry if api key value is not unique
   sig { void }
   def set_value
     self.value = SecureRandom.base58(20)

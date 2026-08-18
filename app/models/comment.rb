@@ -24,7 +24,7 @@ class Comment < ApplicationRecord
   delegate :email, to: :user
   delegate :comment_recipient_full_name, to: :application
 
-  # TODO: Rename the counter to published_comments_count
+  # TODO: #2164 Rename the counter to published_comments_count
   counter_culture :application,
                   column_name: proc { |comment| comment.published? ? "visible_comments_count" : nil },
                   column_names: {

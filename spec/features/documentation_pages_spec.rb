@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "Browsing basic documentation pages" do
-  # TODO: Include this in spec/spec_helper.rb instead
+  # TODO: #2166 Include this in spec/spec_helper.rb instead
   # See https://github.com/heartcombo/devise#controller-tests
   include Devise::Test::IntegrationHelpers
 
@@ -68,7 +68,7 @@ describe "Browsing basic documentation pages" do
       end
     end
 
-    # TODO: Percy snapshot is being done in contact_us_spec.rb - very confusing
+    # TODO: #2166 Percy snapshot is being done in contact_us_spec.rb - very confusing
   end
 
   describe "api landing page" do

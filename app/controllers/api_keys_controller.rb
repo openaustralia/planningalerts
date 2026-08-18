@@ -22,7 +22,7 @@ class ApiKeysController < ApplicationController
     # For the time being limit users to only creating one API key
     if user.api_keys.empty?
       # Create a trial key which automatically expires and has a low daily limit
-      # TODO: Extract this
+      # TODO: #2159 Extract this
       user.api_keys.create!(daily_limit: ApiKey.default_daily_limit_trial, expires_at: ApiKey.default_trial_duration_days.days.from_now)
       redirect_to api_keys_url, notice: t(".success")
     else

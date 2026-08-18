@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-# TODO: use sidekiq-unique-jobs to ensure that we can't have more than one ImportApplicationsJob running at a time
+# TODO: #2167 use sidekiq-unique-jobs to ensure that we can't have more than one ImportApplicationsJob running at a time
 class ImportApplicationsJob
   extend T::Sig
   include Sidekiq::Job

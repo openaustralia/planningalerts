@@ -67,10 +67,10 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
-      # start_interval: 1s  # TODO: Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
+      # start_interval: 1s  # TODO: #2167 Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
 
   redis:
-    # TODO: Try switching to alpine variant for slimmer images
+    # TODO: #2167 Try switching to alpine variant for slimmer images
     # We're also using redis 6.2 in production
     image: redis:6.2
     ports:
@@ -83,7 +83,7 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-      # start_interval: 1s  # TODO: Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
+      # start_interval: 1s  # TODO: #2167 Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
 
   mailcatcher:
     build:
@@ -97,11 +97,11 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
-      # start_interval: 1s  # TODO: Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
+      # start_interval: 1s  # TODO: #2167 Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
 
   elasticsearch:
     # Using version 7.17.7 in production. So matching here
-    # TODO: Upgrade when we can
+    # TODO: #2167 Upgrade when we can
     image: elasticsearch:7.17.7
     ports:
       - "9200"
@@ -116,7 +116,7 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
-      # start_interval: 1s  # TODO: Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
+      # start_interval: 1s  # TODO: #2167 Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
 
 volumes:
   gem_cache:

@@ -19,7 +19,7 @@ SitemapGenerator::Sitemap.create do
   add faq_path, changefreq: "monthly"
   add get_involved_path, changefreq: "monthly"
 
-  ::Application.select(:id, :date_scraped).find_each do |application|
+  ::Application.visible.select(:id, :date_scraped).find_each do |application|
     add application_path(application), changefreq: "monthly", lastmod: application.date_scraped
   end
 end
