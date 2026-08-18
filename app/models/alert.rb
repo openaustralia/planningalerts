@@ -104,7 +104,7 @@ class Alert < ApplicationRecord
   sig { returns(T.untyped) }
   def recent_new_applications
     point = RGeo::Geographic.spherical_factory.point(lng, lat)
-    result = Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
+    result = Application.visible.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
     result.where("first_date_scraped > ?", cutoff_time)
           .reorder("first_date_scraped DESC")
   end
@@ -113,7 +113,7 @@ class Alert < ApplicationRecord
   sig { returns(T.untyped) }
   def applications_with_new_comments
     point = RGeo::Geographic.spherical_factory.point(lng, lat)
-    result = Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
+    result = Application.visible.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
     result.reorder(first_date_scraped: :desc)
           .joins(:comments)
           .where("comments.published_at > ?", cutoff_time)

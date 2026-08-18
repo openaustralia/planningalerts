@@ -23,7 +23,7 @@
     <div class="space-y-8">
       <ul class="space-y-8">
         <%# TODO: #2168 Probably want some ordering that shows applications from different places %>
-        <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
+        <% Application.visible.order(first_date_scraped: :desc).limit(3).each do |application| %>
           <li class="flex items-start gap-6">
             <%= image_tag "clock.svg", class: "mt-1", alt: "" %>
             <%= render LinkBlockComponent.new(url: application_path(application)) do |c| %>

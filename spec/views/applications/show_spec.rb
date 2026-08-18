@@ -23,7 +23,8 @@ describe "applications/show" do
       on_notice_from: nil,
       on_notice_to: nil,
       find_all_nearest_or_recent: [],
-      comments: []
+      comments: [],
+      hidden?: false
     )
   end
 

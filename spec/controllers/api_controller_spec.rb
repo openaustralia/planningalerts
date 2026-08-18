@@ -161,6 +161,33 @@ describe ApiController do
           }]
         )
       end
+
+      it "does not move the cursor backwards when all the applications after since_id are hidden" do
+        key.update(bulk: true)
+        create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1))
+        create(:geocoded_application, :hidden, id: 20, date_scraped: Time.utc(2001, 1, 2))
+
+        get :all, params: { key: key.value, since_id: 20, format: "js" }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to include(
+          "application_count" => 0,
+          "max_id" => 20
+        )
+      end
+
+      it "returns max_id 0 rather than null when there is no since_id and nothing is visible" do
+        key.update(bulk: true)
+        create(:geocoded_application, :hidden, id: 10, date_scraped: Time.utc(2001, 1, 1))
+
+        get :all, params: { key: key.value, format: "js" }
+
+        expect(response).to have_http_status(:ok)
+        expect(response.parsed_body).to include(
+          "application_count" => 0,
+          "max_id" => 0
+        )
+      end
     end
   end
 
@@ -182,7 +209,9 @@ describe ApiController do
       scope2 = Application.none
       scope3 = Application.none
       scope4 = Application.none
-      allow(Application).to receive(:order).and_return(scope1)
+      visible_scope = Application.none
+      allow(Application).to receive(:visible).and_return(visible_scope)
+      allow(visible_scope).to receive(:order).and_return(scope1)
       allow(scope1).to receive(:where).with(postcode: "2780").and_return(scope2)
       allow(scope2).to receive(:includes).and_return(scope3)
       allow(scope3).to receive(:page).with(nil).and_return(scope4)
@@ -201,7 +230,9 @@ describe ApiController do
       scope3 = Application.none
       scope4 = Application.none
       allow(result).to receive(:total_pages).and_return(5)
-      allow(Application).to receive(:order).and_return(scope1)
+      visible_scope = Application.none
+      allow(Application).to receive(:visible).and_return(visible_scope)
+      allow(visible_scope).to receive(:order).and_return(scope1)
       allow(scope1).to receive(:where).and_return(scope2)
       allow(scope2).to receive(:includes).and_return(scope3)
       allow(scope3).to receive(:page).and_return(scope4)
@@ -239,7 +270,9 @@ describe ApiController do
       scope3 = Application.none
       scope4 = Application.none
       allow(result).to receive(:total_pages).and_return(5)
-      allow(Application).to receive(:order).and_return(scope1)
+      visible_scope = Application.none
+      allow(Application).to receive(:visible).and_return(visible_scope)
+      allow(visible_scope).to receive(:order).and_return(scope1)
       allow(scope1).to receive(:where).and_return(scope2)
       allow(scope2).to receive(:includes).and_return(scope3)
       allow(scope3).to receive(:page).and_return(scope4)
@@ -279,7 +312,9 @@ describe ApiController do
       scope3 = Application.none
       scope4 = Application.none
       allow(result).to receive(:total_pages).and_return(5)
-      allow(Application).to receive(:order).and_return(scope1)
+      visible_scope = Application.none
+      allow(Application).to receive(:visible).and_return(visible_scope)
+      allow(visible_scope).to receive(:order).and_return(scope1)
       allow(scope1).to receive(:where).and_return(scope2)
       allow(scope2).to receive(:includes).and_return(scope3)
       allow(scope3).to receive(:page).and_return(scope4)
@@ -319,7 +354,9 @@ describe ApiController do
       scope2 = Application.none
       scope3 = Application.none
       scope4 = Application.none
-      allow(Application).to receive(:order).and_return(scope1)
+      visible_scope = Application.none
+      allow(Application).to receive(:visible).and_return(visible_scope)
+      allow(visible_scope).to receive(:order).and_return(scope1)
       allow(scope1).to receive(:where).with(suburb: "Katoomba").and_return(scope2)
       allow(scope2).to receive(:includes).and_return(scope3)
       allow(scope3).to receive(:page).with(nil).and_return(scope4)
@@ -337,7 +374,9 @@ describe ApiController do
         scope3 = Application.none
         scope4 = Application.none
         scope5 = Application.none
-        allow(Application).to receive(:order).and_return(scope1)
+        visible_scope = Application.none
+        allow(Application).to receive(:visible).and_return(visible_scope)
+        allow(visible_scope).to receive(:order).and_return(scope1)
         allow(scope1).to receive(:where).with(suburb: "Katoomba").and_return(scope2)
         allow(scope2).to receive(:where).with(state: "NSW").and_return(scope3)
         allow(scope3).to receive(:includes).and_return(scope4)
@@ -358,7 +397,9 @@ describe ApiController do
         scope4 = Application.none
         scope5 = Application.none
         scope6 = Application.none
-        allow(Application).to receive(:order).and_return(scope1)
+        visible_scope = Application.none
+        allow(Application).to receive(:visible).and_return(visible_scope)
+        allow(visible_scope).to receive(:order).and_return(scope1)
         allow(scope1).to receive(:where).with(suburb: "Katoomba").and_return(scope2)
         allow(scope2).to receive(:where).with(state: "NSW").and_return(scope3)
         allow(scope3).to receive(:where).with(postcode: "2780").and_return(scope4)
@@ -383,7 +424,9 @@ describe ApiController do
       scope3 = Application.none
       scope4 = Application.none
 
-      allow(Application).to receive(:where).and_return(scope1)
+      visible_scope = Application.none
+      allow(Application).to receive(:visible).and_return(visible_scope)
+      allow(visible_scope).to receive(:where).and_return(scope1)
       allow(scope1).to receive(:reorder).and_return(scope2)
       allow(scope2).to receive(:includes).and_return(scope3)
       allow(scope3).to receive(:page).and_return(scope4)
@@ -462,7 +505,9 @@ describe ApiController do
       scope2 = Application.none
       scope3 = Application.none
       scope4 = Application.none
-      allow(Application).to receive(:order).and_return(scope1)
+      visible_scope = Application.none
+      allow(Application).to receive(:visible).and_return(visible_scope)
+      allow(visible_scope).to receive(:order).and_return(scope1)
       allow(scope1).to receive(:where).with(lat: "1.0".."3.0", lng: "2.0".."4.0").and_return(scope2)
       allow(scope2).to receive(:includes).and_return(scope3)
       allow(scope3).to receive(:page).with(nil).and_return(scope4)
@@ -539,6 +584,61 @@ describe ApiController do
 
         it { expect(page).not_to be_successful }
         it { expect(page.body).to eq '{"error":"invalid date_scraped"}' }
+      end
+    end
+  end
+
+  describe "hidden applications" do
+    let(:authority) { create(:authority, full_name: "Acme Local Planning Authority", short_name: "acme") }
+    let!(:visible_application) do
+      create(:geocoded_application, id: 1, authority:, council_reference: "V1", date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
+    end
+    let!(:hidden_application) do
+      create(:geocoded_application, :hidden, id: 2, authority:, council_reference: "H1", date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
+    end
+
+    def returned_ids
+      response.parsed_body.map { |a| a["application"]["id"] }
+    end
+
+    it "is not included in the authority endpoint" do
+      get :authority, params: { key: key.value, format: "js", authority_id: "acme" }
+      expect(returned_ids).to eq [visible_application.id]
+      expect(returned_ids).not_to include(hidden_application.id)
+    end
+
+    it "is not included in the suburb_postcode endpoint" do
+      get :suburb_postcode, params: { key: key.value, format: "js", suburb: "Sydney" }
+      expect(returned_ids).to eq [visible_application.id]
+      expect(returned_ids).not_to include(hidden_application.id)
+    end
+
+    it "is not included in the point endpoint" do
+      get :point, params: { key: key.value, format: "js", lat: 1.0, lng: 2.0, radius: 1000 }
+      expect(returned_ids).to eq [visible_application.id]
+      expect(returned_ids).not_to include(hidden_application.id)
+    end
+
+    it "is not included in the area endpoint" do
+      get :area, params: { key: key.value, format: "js", bottom_left_lat: 0.0, bottom_left_lng: 1.0, top_right_lat: 2.0, top_right_lng: 3.0 }
+      expect(returned_ids).to eq [visible_application.id]
+      expect(returned_ids).not_to include(hidden_application.id)
+    end
+
+    context "with a bulk api key" do
+      let(:key) { create(:api_key, bulk: true) }
+
+      it "is not included in the date_scraped endpoint" do
+        get :date_scraped, params: { key: key.value, format: "js", date_scraped: "2015-05-06" }
+        expect(returned_ids).to eq [visible_application.id]
+        expect(returned_ids).not_to include(hidden_application.id)
+      end
+
+      it "is not included in the all endpoint" do
+        get :all, params: { key: key.value, format: "js" }
+        expect(response.parsed_body["application_count"]).to eq 1
+        expect(response.parsed_body["applications"].map { |a| a["application"]["id"] }).to eq [visible_application.id]
+        expect(response.parsed_body["applications"].map { |a| a["application"]["id"] }).not_to include(hidden_application.id)
       end
     end
   end

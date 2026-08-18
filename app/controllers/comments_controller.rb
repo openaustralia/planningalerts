@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     end
     @description = T.let(description, T.nilable(String))
 
-    @comments = T.let(comments_to_display.published.includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
+    @comments = T.let(comments_to_display.published.joins(:application).merge(Application.visible).includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
   end
 
   sig { void }
@@ -38,6 +38,11 @@ class CommentsController < ApplicationController
   def create
     application = Application.find(T.cast(params[:application_id], String))
     @application = T.let(application, T.nilable(Application))
+
+    if application.hidden? && !current_user&.has_role?(:admin)
+      render "applications/hidden", status: :forbidden
+      return
+    end
 
     params_comment = T.cast(params[:comment], ActionController::Parameters)
 

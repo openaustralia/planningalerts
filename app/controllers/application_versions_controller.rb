@@ -8,7 +8,11 @@ class ApplicationVersionsController < ApplicationController
 
   sig { void }
   def index
-    @application = T.let(Application.find(T.cast(params[:application_id], String)), T.nilable(Application))
+    application = Application.find(T.cast(params[:application_id], String))
+    @application = T.let(application, T.nilable(Application))
+    return unless application.hidden? && !current_user&.has_role?(:admin)
+
+    render "applications/hidden", status: :forbidden
   end
 
   private

@@ -22,6 +22,15 @@
   <%= image_tag "illustration/bottom-of-page-man.svg", alt: "" %>
 <% end %>
 
+<% if @application.hidden? %>
+  <div class="mb-8">
+    <%= render AlertComponent.new(type: :warning) do %>
+      <%= t("applications.show.hidden_admin_banner", reason: @application.hidden_reason.presence || t("applications.hidden.default_reason")) %>
+      <%= link_to t("applications.show.hidden_admin_banner_edit"), edit_admin_application_path(@application), class: "underline" %>
+    <% end %>
+  </div>
+<% end %>
+
 <%= render HeadingComponent.new(tag: :h1, extra_classes: "mb-10").with_content(@application.address) %>
 
 <%# TODO: #2166 Weird that the line below fails a test if it's just "map" rather than "applications/map" %>

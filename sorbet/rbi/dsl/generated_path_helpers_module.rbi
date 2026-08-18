@@ -208,6 +208,9 @@ module GeneratedPathHelpersModule
   def edit_admin_api_key_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_admin_application_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def edit_admin_authority_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

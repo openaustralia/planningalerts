@@ -208,6 +208,9 @@ module GeneratedUrlHelpersModule
   def edit_admin_api_key_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_admin_application_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def edit_admin_authority_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

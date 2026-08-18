@@ -25,6 +25,7 @@ class Application < ApplicationRecord
 
   scope(:in_past_week, -> { where("first_date_scraped > ?", 7.days.ago) })
   scope(:recent, -> { where(first_date_scraped: 14.days.ago..) })
+  scope(:visible, -> { where(hidden: false) })
 
   sig { returns(T.class_of(ApplicationsPolicy)) }
   def self.policy_class
@@ -41,6 +42,13 @@ class Application < ApplicationRecord
     # We're capturing the geodata anyway via the "location" key
     r.delete(:lonlat)
     r
+  end
+
+  # Hidden applications are removed from the elasticsearch index so that they
+  # don't show up in full text search results
+  sig { returns(T::Boolean) }
+  def should_index?
+    !hidden
   end
 
   # For the benefit of kaminari. Also sets the maximum number of
@@ -102,7 +110,8 @@ class Application < ApplicationRecord
   def find_all_nearest_or_recent
     if location
       point = RGeo::Geographic.spherical_factory.point(lng, lat)
-      Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, Application.nearby_and_recent_max_distance_km * 1000)
+      Application.visible
+                 .where("ST_DWithin(lonlat, ?, ?)", point.to_s, Application.nearby_and_recent_max_distance_km * 1000)
                  .where.not(id:)
                  .where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     else
@@ -112,7 +121,7 @@ class Application < ApplicationRecord
 
   sig { returns(ActiveRecord::Relation) }
   def self.trending
-    where("first_date_scraped > ?", 6.months.ago).order(visible_comments_count: :desc)
+    visible.where("first_date_scraped > ?", 6.months.ago).order(visible_comments_count: :desc)
   end
 
   sig { params(description: String).returns(String) }
