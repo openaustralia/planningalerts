@@ -26,8 +26,14 @@ class ApplicationController < ActionController::Base
   default_form_builder FormBuilders::Tailwind
 
   rescue_from ActiveRecord::StatementInvalid, with: :check_for_write_during_maintenance_mode
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
+
+  sig { params(_error: Pundit::NotAuthorizedError).void }
+  def user_not_authorized(_error)
+    redirect_back fallback_location: root_path, alert: t("pundit.not_authorized")
+  end
 
   sig { params(error: StandardError).void }
   def check_for_write_during_maintenance_mode(error)
