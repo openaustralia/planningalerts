@@ -12,7 +12,16 @@ namespace :sentry do
   desc "Record the release and deploy in Sentry"
   task :release do
     run_locally do
-      unless test("sentry-cli info")
+      # SSHKit's local backend execs commands directly rather than through a
+      # shell, so a missing binary raises Errno::ENOENT instead of making
+      # `test` return false. Treat it the same as an unauthenticated CLI.
+      sentry_cli_usable = begin
+        test("sentry-cli info")
+      rescue Errno::ENOENT
+        false
+      end
+
+      unless sentry_cli_usable
         warn <<~WARNING
           ********************************************************************
           WARNING: sentry-cli is not installed or not authenticated.
