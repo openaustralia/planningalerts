@@ -35,8 +35,6 @@ describe ApplicationsController do
 
       allow(application).to receive_messages(location: nil, find_all_nearest_or_recent: [])
 
-      # TODO: Can this line be removed? It seems to be a duplicate of
-      # expectation on final line.
       allow(Application).to receive(:find).with("1").and_return(application)
 
       get :show, params: { id: 1 }

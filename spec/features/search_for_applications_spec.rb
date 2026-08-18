@@ -149,7 +149,6 @@ describe "Searching for development application near an address" do
     before do
       sign_in user
       Flipper.enable :full_text_search
-      # TODO: Would it be better to only enable the feature temporarily?
       visit search_applications_path
     end
 
