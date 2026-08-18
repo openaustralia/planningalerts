@@ -8,7 +8,7 @@ require "rack/attack"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# TODO: Remove this as soon as we can remove sassc-rails
+# TODO: #2167 Remove this as soon as we can remove sassc-rails
 # Currently administrate depends on it
 class SkippingSassCompressor
   def compress(string)
@@ -24,7 +24,7 @@ end
 
 # This is for proxying requests to this server to plausible.io for analytics.
 # For some reason didn't work putting this in config/initializers/proxy.rb
-# TODO: Fix this
+# TODO: #2167 Fix this
 class PlausibleProxy < Rack::Proxy
   def perform_request(env)
     request = Rack::Request.new(env)
@@ -40,7 +40,14 @@ class PlausibleProxy < Rack::Proxy
 
         env['content-length'] = nil
 
-        super(env)
+        begin
+          super
+        rescue Timeout::Error, SystemCallError, SocketError, OpenSSL::SSL::SSLError, EOFError => e
+          # Analytics are best-effort. If plausible.io is slow or unreachable we
+          # don't want to raise an error (and return a 500 to the user)
+          Rails.logger.warn("PlausibleProxy: #{e.class}: #{e.message}")
+          [502, {}, []]
+        end
     else
       @app.call(env)
     end

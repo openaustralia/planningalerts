@@ -29,7 +29,7 @@ class ButtonComponent < ViewComponent::Base
 
     classes << text_size_class
 
-    # TODO: Hover states are not subtle enough IMHO
+    # TODO: #2158 Hover states are not subtle enough IMHO
     case type
     when :primary
       classes << "text-white bg-green"

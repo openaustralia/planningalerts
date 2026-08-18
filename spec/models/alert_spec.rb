@@ -154,6 +154,11 @@ describe Alert do
         create(:unsubscribed_alert, user:, address:)
         expect(build(:unsubscribed_alert, user:, address:)).to be_valid
       end
+
+      it "is rejected by the database even when the validation is skipped" do
+        duplicate = build(:alert, user:, address:)
+        expect { duplicate.save(validate: false) }.to raise_error(ActiveRecord::RecordNotUnique)
+      end
     end
 
     context "when there is already an unsubscribed alert for 1234 Marine Parade" do
@@ -168,6 +173,29 @@ describe Alert do
       it "is valid for another unsubscribed alert at the same address for the same user" do
         expect(build(:unsubscribed_alert, user:, address:)).to be_valid
       end
+
+      it "is allowed by the database, so people can subscribe and unsubscribe more than once" do
+        duplicate = build(:unsubscribed_alert, user:, address:)
+        expect { duplicate.save(validate: false) }.not_to raise_error
+      end
+    end
+  end
+
+  describe "#save_unless_duplicate" do
+    let(:user) { create(:user) }
+
+    it "saves the alert" do
+      alert = build(:alert, user:, address:)
+      expect(alert.save_unless_duplicate).to be true
+      expect(alert).to be_persisted
+    end
+
+    it "gives the same error as the validation when the database rejects a duplicate" do
+      alert = build(:alert, user:, address:)
+      allow(alert).to receive(:save).and_raise(ActiveRecord::RecordNotUnique)
+
+      expect(alert.save_unless_duplicate).to be false
+      expect(alert.errors[:address]).to eq(["You already have an alert for that address"])
     end
   end
 
@@ -370,6 +398,19 @@ describe Alert do
         end
       end
     end
+
+    context "with a hidden application nearby" do
+      let(:radius_meters) { 2000 }
+      let(:last_sent) { nil }
+
+      before do
+        app1.update!(hidden: true)
+      end
+
+      it "does not include the hidden application" do
+        expect(alert.recent_new_applications).to contain_exactly(app2)
+      end
+    end
   end
 
   describe "#new_comments" do
@@ -468,6 +509,15 @@ describe Alert do
     context "when there is a hidden comment near by" do
       it "does not return the application it belongs to" do
         create(:published_comment, hidden: true, application: near_application)
+
+        expect(alert.applications_with_new_comments).to eq []
+      end
+    end
+
+    context "when there is a new comment near by on a hidden application" do
+      it "does not return the application it belongs to" do
+        create(:published_comment, application: near_application)
+        near_application.update!(hidden: true)
 
         expect(alert.applications_with_new_comments).to eq []
       end

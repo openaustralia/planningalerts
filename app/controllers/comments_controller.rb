@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   extend T::Sig
 
   before_action :authenticate_user!, only: %i[create preview update destroy publish personal]
-  # TODO: Add checks for all other actions on this controller
+  # TODO: #2163 Add checks for all other actions on this controller
   after_action :verify_authorized, only: %i[preview update destroy publish]
 
   layout "profile", only: :personal
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     end
     @description = T.let(description, T.nilable(String))
 
-    @comments = T.let(comments_to_display.published.includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
+    @comments = T.let(comments_to_display.published.joins(:application).merge(Application.visible).includes(application: :authority).order("published_at DESC").page(params[:page]), T.untyped)
   end
 
   sig { void }
@@ -38,6 +38,11 @@ class CommentsController < ApplicationController
   def create
     application = Application.find(T.cast(params[:application_id], String))
     @application = T.let(application, T.nilable(Application))
+
+    if application.hidden? && !current_user&.has_role?(:admin)
+      render "applications/hidden", status: :forbidden
+      return
+    end
 
     params_comment = T.cast(params[:comment], ActionController::Parameters)
 
@@ -56,7 +61,7 @@ class CommentsController < ApplicationController
       return
     end
 
-    # TODO: This seems to have a lot repeated from Application#show
+    # TODO: #2159 This seems to have a lot repeated from Application#show
     flash.now[:error] = t(".not_filled_out")
 
     # HACK: Required for new email alert signup form

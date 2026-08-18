@@ -25,11 +25,11 @@ module Alerts
         address: params[:user][:address],
         radius_meters: params[:user][:radius_meters]
       )
-      # TODO: Check that we're actually allowed to create an alert
+      # TODO: #2163 Check that we're actually allowed to create an alert
       # Ensures the address is normalised into a consistent form
       alert.geocode_from_address
 
-      if alert.save
+      if alert.save_unless_duplicate
         ab_finished(:logged_out_alert_flow_order)
         redirect_to alerts_path, notice: "You successfully signed in and added a new alert for <span class=\"font-bold\">#{alert.address}</span>"
       else
@@ -42,7 +42,7 @@ module Alerts
 
     sig { returns(T::Hash[Symbol, String]) }
     def sign_in_params
-      # TODO: Use strong parameters instead
+      # TODO: #2163 Use strong parameters instead
       { email: params[:user][:email], password: params[:user][:password] }
     end
   end

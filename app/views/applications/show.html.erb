@@ -22,9 +22,18 @@
   <%= image_tag "illustration/bottom-of-page-man.svg", alt: "" %>
 <% end %>
 
+<% if @application.hidden? %>
+  <div class="mb-8">
+    <%= render AlertComponent.new(type: :warning) do %>
+      <%= t("applications.show.hidden_admin_banner", reason: @application.hidden_reason.presence || t("applications.hidden.default_reason")) %>
+      <%= link_to t("applications.show.hidden_admin_banner_edit"), edit_admin_application_path(@application), class: "underline" %>
+    <% end %>
+  </div>
+<% end %>
+
 <%= render HeadingComponent.new(tag: :h1, extra_classes: "mb-10").with_content(@application.address) %>
 
-<%# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
+<%# TODO: #2166 Weird that the line below fails a test if it's just "map" rather than "applications/map" %>
 <%= render "applications/map", application: @application %>
 
 <dl class="mt-8 sm:mt-16 grid md:grid-cols-[18rem_1fr] text-navy text-xl md:gap-y-4">
@@ -52,7 +61,7 @@
   </dd>
 </dl>
 
-<%# TODO: The icons next to the labels are not all the same size / proportion %>
+<%# TODO: #2158 The icons next to the labels are not all the same size / proportion %>
 <dl class="text-xl text-navy grid md:grid-cols-[18rem_1fr] border-light-grey2 border-y py-4 mt-10 sm:mt-14">
   <dt class="font-bold md:py-1">
     <div class="flex gap-4">
@@ -71,13 +80,10 @@
         <div>Notified</div>
       </div>
     </dt>
-    <%# TODO: The link in notified text should go to the new alert sign up page %>
-    <%# TODO: Should we have the link at all now? %>
     <dd class="ml-10 md:py-1 md:border-t border-light-grey2 md:ml-0">
       <%= render "applications/notified_text", application: @application %>
     </dd>
   <% end %>
-  <%# TODO: What to do if there are 0 comments? %>
   <dt class="pt-6 font-bold md:py-1 md:pt-1">
     <div class="flex gap-4">
       <%= image_tag "comments.svg", width: 24, alt: "" %>
@@ -90,7 +96,7 @@
 </dl>
 
 <div class="mt-6 sm:mt-12">
-  <%# TODO: This button currently has much larger left and right padding than the design %>
+  <%# TODO: #2158 This button currently has much larger left and right padding than the design %>
   <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: "#add-comment", icon: :edit) do %>
     Make a comment now
   <% end %>
@@ -139,13 +145,13 @@
 
 <section class="flex gap-6 mt-14" id="add-comment">
   <%# Hide the big quotation mark on small displays so we don't end up with a weird large left margin %>
-  <%# TODO: Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
+  <%# TODO: #2158 Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
   <div class="hidden mt-24 sm:block text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
     <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
 
     <% if !@application.authority.email.present? %>
-      <%# TODO: Need a proper design for this section %>
+      <%# TODO: #2157 Need a proper design for this section %>
       <%= render "comments/no_authority_email_explanation", application: @application %>
     <% elsif current_user.nil? %>
       <div class="px-4 py-3 bg-light-grey">

@@ -1,4 +1,4 @@
-<%# TODO: This page needs a proper design %>
+<%# TODO: #2157 This page needs a proper design %>
 
 <div class="max-w-lg mx-auto">
   <%= render HeadingComponent.new(tag: :h1, extra_classes: "my-12 text-center") do %>
@@ -11,13 +11,13 @@
       <%= f.email_field :email, class: "mt-1 block w-full", autocomplete: "email", autofocus: true %>
       <%= f.error :email, class: "mt-2" %>
     </div>
-    <%# TODO: Should this button be centered just like on the sign in page? %>
+    <%# TODO: #2158 Should this button be centered just like on the sign in page? %>
     <div class="flex justify-center mt-8">
       <%= f.button "Send me an email" %>
     </div>
   <% end %>
 
-  <%# TODO: The words in this paragraph are fairly incomprehensible. Fix this. %>
+  <%# TODO: #2168 The words in this paragraph are fairly incomprehensible. Fix this. %>
   <p class="mt-16 text-xl text-center text-navy">
     Note that you only need to activate your account if you've had an alert or made any
     comments on Planning Alerts using the same email address

@@ -28,7 +28,7 @@ permalink: ../app/views/alert_mailer/alert.html.erb
                application_map="<%= google_static_map_url(lat: comment.application.lat, lng: comment.application.lng, size: '150x150', key: :email) %>"
                application_description="<%= comment.application.description %>" />
   <% end %>
-  <!-- TODO: Style divider correctly -->
+  <!-- TODO: #2165 Style divider correctly -->
   <x-divider />
   <x-box-button url="<%= edit_alert_url(@alert) %>"
                 icon="<%= attachments['pencil.png'].url %>">

@@ -23,7 +23,11 @@ class Alert < ApplicationRecord
   # We want to make sure that a certain user can't have multiple alerts for the same address.
   # We also need to allow there to be multiple unsubscribed alerts with the
   # same address to allow people to do multiple rounds of subscribing and unsubscribing.
-  validates :address, uniqueness: { scope: %i[user_id unsubscribed] }, unless: :unsubscribed?
+  # The partial unique index on the alerts table is what actually guarantees this. This
+  # validation is here to give a friendly error message when someone signs up again, so it
+  # only needs to run on create. Running it on every save meant that updating something
+  # unrelated, like a delivery timestamp, failed whenever a duplicate already existed.
+  validates :address, uniqueness: { scope: %i[user_id unsubscribed] }, unless: :unsubscribed?, on: :create
   validates :address, presence: true
 
   before_validation :geocode_from_address, unless: :geocoded?
@@ -36,7 +40,7 @@ class Alert < ApplicationRecord
 
   # lat and lng are only populated on save (where they are stored as not null).
   # so they start off being nil. We're just overriding the type signature here.
-  # TODO: Move geocoding to a service so that these never have to be nil
+  # TODO: #2164 Move geocoding to a service so that these never have to be nil
   sig { returns(T.nilable(Float)) }
   def lat
     self[:lat]
@@ -53,7 +57,7 @@ class Alert < ApplicationRecord
 
     self.lat = loc.lat
     self.lng = loc.lng
-    # TODO: Can we get the factory from the database info instead?
+    # TODO: #2164 Can we get the factory from the database info instead?
     factory = RGeo::Geographic.spherical_factory(srid: 4326)
     self.lonlat = factory.point(loc.lng, loc.lat)
   end
@@ -61,6 +65,17 @@ class Alert < ApplicationRecord
   sig { returns(T::Boolean) }
   def geocoded?
     location.present?
+  end
+
+  # Saves the alert, turning a duplicate rejected by the database into the same
+  # friendly error the uniqueness validation gives. Needed because two requests
+  # creating the same alert at the same moment can both get past the validation.
+  sig { returns(T::Boolean) }
+  def save_unless_duplicate
+    save
+  rescue ActiveRecord::RecordNotUnique
+    errors.add(:address, :taken)
+    false
   end
 
   sig { void }
@@ -89,7 +104,7 @@ class Alert < ApplicationRecord
   sig { returns(T.untyped) }
   def recent_new_applications
     point = RGeo::Geographic.spherical_factory.point(lng, lat)
-    result = Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
+    result = Application.visible.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
     result.where("first_date_scraped > ?", cutoff_time)
           .reorder("first_date_scraped DESC")
   end
@@ -98,7 +113,7 @@ class Alert < ApplicationRecord
   sig { returns(T.untyped) }
   def applications_with_new_comments
     point = RGeo::Geographic.spherical_factory.point(lng, lat)
-    result = Application.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
+    result = Application.visible.where("ST_DWithin(lonlat, ?, ?)", point.to_s, radius_meters)
     result.reorder(first_date_scraped: :desc)
           .joins(:comments)
           .where("comments.published_at > ?", cutoff_time)
@@ -161,7 +176,7 @@ class Alert < ApplicationRecord
 
   sig { void }
   def set_confirm_info
-    # TODO: Should check that this is unique across all objects and if not try again
+    # TODO: #2162 Should check that this is unique across all objects and if not try again
     self.confirm_id = Digest::MD5.hexdigest(Kernel.rand.to_s + Time.zone.now.to_s)[0...20]
   end
 end

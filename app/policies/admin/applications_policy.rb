@@ -16,6 +16,16 @@ module Admin
     end
 
     sig { returns(T::Boolean) }
+    def edit?
+      user.has_role?(:admin)
+    end
+
+    sig { returns(T::Boolean) }
+    def update?
+      user.has_role?(:admin)
+    end
+
+    sig { returns(T::Boolean) }
     def destroy?
       user.has_role?(:admin)
     end

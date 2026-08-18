@@ -16,14 +16,14 @@
 <div class="mt-16">
   <%= render ProseComponent.new do %>
     <p>
-      <%# TODO: Is this saying too much of the same thing as the "who uses our API" section below? %>
+      <%# TODO: #2168 Is this saying too much of the same thing as the "who uses our API" section below? %>
       Planning Alerts Application Programming Interface (API) serves community groups, businesses, NGOs, and civic-minded individuals by providing access to trusted planning and development application data.
     </p>
     <ul>
       <li>Sourced from planning authorities around Australia</li>
       <li>Easy to use REST API</li>
       <li>Data updated daily</li>
-      <%# TODO: Find a better way to say this! %>
+      <%# TODO: #2168 Find a better way to say this! %>
       <li>Save considerable time and money by not having to develop this stuff yourself</li>
       <li>Delivering reliable and trustworthy service for over <%= years_collecting_data %> years</li>
       <li>As a bonus support a charity doing good work</li>
@@ -134,7 +134,6 @@
         <div class="text-left">
           <%= render BulletListComponent.new do |c| %>
             <%= c.with_item do %>
-              <%# TODO: Add documentation for bulk data API %>
               Access to bulk data API
             <% end %>
             <%= c.with_item do %>
@@ -214,7 +213,7 @@
         <% end %>
       </div>
 
-      <%# # TODO: Explain the general shape of the returned data. So far we've only explained how we can search for it. %>
+      <%# # TODO: #2161 Explain the general shape of the returned data. So far we've only explained how we can search for it. %>
 
       <%= pa_link_to "View the developer documentation", api_developer_path %>
 
@@ -249,7 +248,7 @@
       <%= years_collecting_data %> <span class="relative text-2xl top-3 -left-6">yrs</span>
     </div>
     <p class="max-w-2xl">
-      <%# TODO: Add something about complex automations and data integrity checks, etc.. %>
+      <%# TODO: #2168 Add something about complex automations and data integrity checks, etc.. %>
       We've been doing this for more than <%= years_collecting_data %> years with an extremely experienced team.
       Leverage that for your own needs rather than trying to reinvent the wheel.
     </p>

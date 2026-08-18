@@ -1,6 +1,6 @@
 <% content_for :page_title, @description %>
 
-<%# TODO: Update this description %>
+<%# TODO: #2158 Update this description %>
 <%= render HeadingComponent.new(tag: :h1) do %>
   <%= @description %>
 <% end %>
@@ -9,5 +9,5 @@
   <%= render partial: "application", collection: @applications %>
 </div>
 
-<%# TODO: Speed up controller by using without_count after removing old theme %>
+<%# TODO: #2164 Speed up controller by using without_count after removing old theme %>
 <%= render SimplePagerComponent.new(collection: @applications) %>

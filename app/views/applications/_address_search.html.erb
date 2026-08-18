@@ -22,12 +22,12 @@
     </div>
     <div class="space-y-8">
       <ul class="space-y-8">
-        <%# TODO: Probably want some ordering that shows applications from different places %>
-        <% Application.order(first_date_scraped: :desc).limit(3).each do |application| %>
+        <%# TODO: #2168 Probably want some ordering that shows applications from different places %>
+        <% Application.visible.order(first_date_scraped: :desc).limit(3).each do |application| %>
           <li class="flex items-start gap-6">
             <%= image_tag "clock.svg", class: "mt-1", alt: "" %>
             <%= render LinkBlockComponent.new(url: application_path(application)) do |c| %>
-              <%# TODO: Extract this piece below as a partial %>
+              <%# TODO: #2159 Extract this piece below as a partial %>
               <div class="text-xl text-navy">
                 <div><%= c.linkify application.address %></div>
                 <div class="line-clamp-2"><%= application.description %></div>
@@ -37,7 +37,7 @@
           </li>
         <% end %>
       </ul>
-      <%# TODO: Don't hack the spacing to make it line up %>
+      <%# TODO: #2158 Don't hack the spacing to make it line up %>
       <%= pa_link_to "View more latest applications", applications_path, extra_classes: "text-xl inline-block pl-14" %>
     </div>
   </div>
@@ -67,8 +67,8 @@
   </section>
 
   <section class="pt-6 pb-12 text-xl border-t sm:pt-12 text-navy border-light-grey2">
-    <%# TODO: Better heading? %>
-    <%# TODO: Do we want to include something like pb-2 for all headings in the component? %>
+    <%# TODO: #2158 Better heading? %>
+    <%# TODO: #2168 Do we want to include something like pb-2 for all headings in the component? %>
     <%= render HeadingComponent.new(tag: :h2, extra_classes: "pb-2").with_content("Planning Data") %>
     <div class="flex flex-col items-start justify-between gap-8 md:flex-row">
       <div class="max-w-2xl">

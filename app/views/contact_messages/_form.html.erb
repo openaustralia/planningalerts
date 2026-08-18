@@ -16,9 +16,9 @@
   <% end %>
   <div>
     <%= f.label :reason, "I'm getting in touch because", class: "block mb-3" %>
-    <%# TODO: Make sure that we can't choose "Please select" %>
-    <%# TODO: The grey border here does not match the design but matches other form elements %>
-    <%# TODO: Use prompt option to make this a little nicer %>
+    <%# TODO: #2162 Make sure that we can't choose "Please select" %>
+    <%# TODO: #2158 The grey border here does not match the design but matches other form elements %>
+    <%# TODO: #2158 Use prompt option to make this a little nicer %>
     <%= f.select :reason, [["Please select", ""]] + ContactMessage::REASONS_LONG, {}, class: "block w-full sm:w-auto" %>
     <%= f.error :reason, class: "mt-2" %>
   </div>
@@ -29,8 +29,8 @@
   </div>
   <div class="mt-8">
     <%= f.label :attachments, "Attach files or screenshots", class: "block mb-3" %>
-    <%# TODO: Can we change the text on the button? %>
-    <%# TODO: Not sure the direct_upload_url works here. I think it might depend on UJS. Need to check. %>
+    <%# TODO: #2158 Can we change the text on the button? %>
+    <%# TODO: #2169 Not sure the direct_upload_url works here. I think it might depend on UJS. Need to check. %>
     <%= f.file_field :attachments,
                      multiple: true,
                      data: { direct_upload_url: rails_direct_uploads_url } %>
@@ -38,7 +38,6 @@
   <% if current_user.nil? && Rails.application.credentials[:recaptcha] %>
     <div class="mt-8">
       <%= recaptcha_tags %>
-      <%# TODO: Make sure recaptcha errors are shown here %>
       <%= f.error :base, class: "mt-2" %>
       <%= f.hint class: "mt-2" do %>
         Or <%= pa_link_to "sign in", new_user_session_path %> to remove this annoying reCaptcha

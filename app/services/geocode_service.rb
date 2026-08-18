@@ -63,7 +63,7 @@ class GeocodeService
     )
   end
 
-  # TODO: Type of attributes?
+  # TODO: #2164 Type of attributes?
   sig { params(result: GeocoderResults).returns(T.untyped) }
   def params_for_result(result)
     result.top&.attributes || {}
