@@ -366,3 +366,24 @@ Nothing checks these for you, so keep them consistent by hand:
   it is a deliberate content decision, not a tidy-up.
 - Do not invent variations on the names of OAF's other services. They are Right
   to Know, They Vote for You, OpenAustralia.org.au and morph.io.
+
+## Agent skills
+
+Configuration the installed engineering skills read before they act. Edit the
+files under `docs/agents/` directly rather than re-running the setup skill.
+
+### Issue tracker
+
+Issues live in GitHub Issues on `openaustralia/planningalerts`, worked through
+the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five canonical triage roles use their own names as label strings. See
+`docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: `CONTEXT.md` and `docs/adr/` at the repository root. Neither
+exists yet, and that is fine. They are created lazily when a term or a decision
+actually gets resolved, not upfront. See `docs/agents/domain.md`.
