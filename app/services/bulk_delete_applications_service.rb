@@ -60,15 +60,21 @@ class BulkDeleteApplicationsService
     skipped_comments = T.let([], T::Array[Item])
     skipped_redirect_target = T.let([], T::Array[Item])
 
+    # Fetch these up-front to avoid running two queries per application
+    comment_counts = Comment.where(application_id: matching_applications.select(:id))
+                            .group(:application_id).count
+    redirect_target_ids = ApplicationRedirect.where(redirect_application_id: matching_applications.select(:id))
+                                             .pluck(:redirect_application_id).to_set
+
     matching_applications.find_each do |application|
       item = Item.new(
         id: application.id,
         council_reference: application.council_reference,
         address: application.address,
-        comments_count: application.comments.count
+        comments_count: comment_counts.fetch(application.id, 0)
       )
 
-      if ApplicationRedirect.exists?(redirect_application_id: application.id)
+      if redirect_target_ids.include?(application.id)
         # Deleting these would violate a foreign key constraint on
         # application_redirects so they need to be handled manually
         skipped_redirect_target << item
@@ -108,7 +114,9 @@ class BulkDeleteApplicationsService
   sig { params(application: Application).void }
   def delete(application)
     Application.transaction do
-      application.comments.destroy_all if delete_comments
+      # Destroy in batches rather than destroy_all so we don't load every
+      # comment into memory at once, while still running callbacks
+      application.comments.find_each(&:destroy!) if delete_comments
       application.destroy!
     end
   end
