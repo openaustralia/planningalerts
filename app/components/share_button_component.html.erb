@@ -1,11 +1,14 @@
 <%# TODO: #2158 This button needs a hover and active state %>
 <%# This is the only place that this button style is used. So, we'll just hardcode it for the time being  %>
 <%# TODO: #2158 Alignment of text and icons is not consistent when clicking button %>
+<%# Stay hidden where the button could never work: it needs the Web Share API %>
+<%# or the clipboard API, and some contexts (e.g. non-secure ones) have neither. See #2186. %>
 <div
   class="invisible"
-  x-bind:class="{'invisible': false}"
+  x-bind:class="{'invisible': !(navigator.canShare || navigator.clipboard)}"
   x-data="{
     copied: false,
+    failed: false,
     shareData: {url: '<%= j(url_with_tracking) %>', title: '<%= j(@title) %>'}
   }">
   <button class="inline-block px-10 py-3 text-xl font-semibold border-2 sm:py-4"
@@ -20,19 +23,25 @@
               console.log('Web share error', err);
             }
           } else {
-            navigator.clipboard.writeText('<%= url_with_tracking %>');
-            copied = true;
-            setTimeout(() => { copied = false }, 2000);
+            try {
+              await navigator.clipboard.writeText(shareData.url);
+              copied = true;
+              setTimeout(() => { copied = false }, 2000);
+            } catch {
+              failed = true;
+              setTimeout(() => { failed = false }, 2000);
+            }
           }">
     <%# Giving this a constant height to avoid any content shifts when button is clicked %>
     <div class="flex items-baseline justify-center h-8 gap-4">
       <div>
-        <div x-show="!copied" class="size-5"><%= render IconComponent.new(name: :share) %></div>
+        <div x-show="!copied && !failed" class="size-5"><%= render IconComponent.new(name: :share) %></div>
         <div x-show="copied" class="size-5"><%= render IconComponent.new(name: :tick) %></div>
       </div>
       <div>
-        <div x-show="!copied"><%= content %></div>
+        <div x-show="!copied && !failed"><%= content %></div>
         <div x-show="copied">Link copied</div>
+        <div x-show="failed">Couldn't copy link</div>
       </div>
     </div>
   </button>
