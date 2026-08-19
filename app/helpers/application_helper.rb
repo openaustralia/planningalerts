@@ -211,6 +211,24 @@ module ApplicationHelper
     Rails.application.routes.url_helpers.documentation_contact_path(reason: "I want API access or commercial use")
   end
 
+  # Crawlers and link previewers run our JavaScript, so they trip over Google
+  # Maps loading errors that we can do nothing about, and they vastly outnumber
+  # real people: Baiduspider alone was 90% of the frontend errors on the first
+  # day of browser monitoring. Don't load the Sentry browser SDK for them.
+  CRAWLER_USER_AGENT = T.let(
+    /bot\b|crawler|spider|facebookexternalhit|slurp|archiver|inspectiontool/i,
+    Regexp
+  )
+
+  # Deliberately narrow: facebookexternalhit is the crawler, while the Facebook
+  # in-app browser is a real person and its errors are worth seeing.
+  sig { params(user_agent: T.nilable(String)).returns(T::Boolean) }
+  def crawler?(user_agent)
+    return false if user_agent.blank?
+
+    CRAWLER_USER_AGENT.match?(user_agent)
+  end
+
   # The full git SHA of the currently deployed code, from the REVISION file
   # that Capistrano writes. Needs to match the release used by the backend
   # Sentry SDK so frontend and backend errors are tied to the same release.

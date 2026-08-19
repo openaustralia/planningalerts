@@ -65,4 +65,27 @@ describe ApplicationHelper do
       Timecop.freeze(Date.new(2025, 12, 13)) { expect(helper.years_collecting_data).to eq(16) }
     end
   end
+
+  describe "#crawler?" do
+    it "spots the crawlers that dominated our first day of browser monitoring" do
+      expect(helper.crawler?("Mozilla/5.0 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)")).to be true
+      expect(helper.crawler?("Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)")).to be true
+      expect(helper.crawler?("Mozilla/5.0 (compatible; Bytespider; spider-feedback@bytedance.com)")).to be true
+      expect(helper.crawler?("Sogou web spider/4.0")).to be true
+      expect(helper.crawler?("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)")).to be true
+      expect(helper.crawler?("facebookexternalhit/1.1")).to be true
+    end
+
+    it "treats real people as real people, including in-app browsers" do
+      expect(helper.crawler?("Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1")).to be false
+      expect(helper.crawler?("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36")).to be false
+      # The Facebook in-app browser, as opposed to facebookexternalhit
+      expect(helper.crawler?("Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36 [FBAN/FB4A;FBAV/470.0.0.30.109;]")).to be false
+    end
+
+    it "assumes a request with no user agent is a person" do
+      expect(helper.crawler?(nil)).to be false
+      expect(helper.crawler?("")).to be false
+    end
+  end
 end
