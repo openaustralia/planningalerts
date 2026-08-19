@@ -1,6 +1,10 @@
 <%# To use this component create a parent div with the required height and width otherwise
 nothing will be shown %>
 <%= tag.div class: "w-full h-full",
-            "x-init" => "initialisePano($el, #{{ lat: @lat, lng: @lng, address: @address }.to_json})" do %>
+            "x-data" => "{ mapFailed: false }",
+            "x-init" => "initialisePano($el, #{{ lat: @lat, lng: @lng, address: @address }.to_json}).catch(() => mapFailed = true)" do %>
+  <div x-show="mapFailed" x-cloak class="flex h-full w-full items-center justify-center bg-light-grey p-8 text-center text-xl text-navy">
+    <p>We couldn't load the streetview. <%= helpers.pa_link_to "View the streetview on Google Maps", google_maps_url %></p>
+  </div>
   <noscript><%= content %></noscript>
 <% end %>
