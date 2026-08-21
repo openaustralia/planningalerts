@@ -1,15 +1,27 @@
-<div class="flex items-baseline" x-data="{ copied: false }">
+<div class="flex items-baseline" x-data="{ copied: false, failed: false }">
   <div class="px-8 py-2 text-xl select-all text-navy bg-light-grey" x-ref="value"><%= content %></div>
   <%# We only want the button to appear once javascript (and alpine) are going %>
   <%# Using invisible here so that we avoid content reflow when javascript is running %>
+  <%# The clipboard API is unavailable in some contexts (e.g. non-secure ones). %>
+  <%# Keep the button hidden there because it could never work. The value above %>
+  <%# is still selectable so people can copy it by hand. See #2186. %>
   <button class="flex items-baseline invisible gap-2 px-4 py-2 text-xl font-semibold text-white w-28 bg-warm-grey"
-          x-on:click="
-            navigator.clipboard.writeText($refs.value.innerText);
-            copied = true;
-            setTimeout(() => { copied = false }, 750)"
-          x-bind:disabled="copied"
-          x-bind:class="{ 'invisible': false }">
-    <%= image_tag "copy-to-clipboard.svg", "x-show": "!copied" %>
-    <div x-text="copied ? 'Copied' : 'Copy' ">Copy</div>
+          x-on:click="if (navigator.clipboard) {
+            try {
+              await navigator.clipboard.writeText($refs.value.innerText);
+              copied = true;
+              setTimeout(() => { copied = false }, 750);
+            } catch {
+              failed = true;
+              setTimeout(() => { failed = false }, 2000);
+            }
+          } else {
+            failed = true;
+            setTimeout(() => { failed = false }, 2000);
+          }"
+          x-bind:disabled="copied || failed"
+          x-bind:class="{ 'invisible': !navigator.clipboard }">
+    <%= image_tag "copy-to-clipboard.svg", "x-show": "!copied && !failed" %>
+    <div x-text="copied ? 'Copied' : (failed ? 'Failed' : 'Copy')">Copy</div>
   </button>
 </div>
