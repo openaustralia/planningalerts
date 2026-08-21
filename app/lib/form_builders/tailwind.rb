@@ -81,8 +81,13 @@ module FormBuilders
       options = {
         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
         "x-data" => "{ async initAutocomplete() {
-                         const { Autocomplete } = await google.maps.importLibrary('places');
-                         new Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']})}
+                         try {
+                           const { Autocomplete } = await google.maps.importLibrary('places');
+                           new Autocomplete($el, {componentRestrictions: {country: 'au'}, types: ['address']})
+                         } catch {
+                           // If autocomplete can't load (e.g. a content blocker is
+                           // blocking maps.googleapis.com) the plain text field still works
+                         }}
                      }",
         "x-init" => "initAutocomplete()"
       }.merge(options)

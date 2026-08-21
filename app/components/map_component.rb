@@ -12,4 +12,11 @@ class MapComponent < ViewComponent::Base
     @address = address
     @zoom = zoom
   end
+
+  # Used as a fallback when the map javascript can't be loaded, for example
+  # because a content blocker is blocking maps.googleapis.com
+  sig { returns(String) }
+  def google_maps_url
+    "https://www.google.com/maps/search/?api=1&query=#{CGI.escape("#{@lat},#{@lng}")}"
+  end
 end

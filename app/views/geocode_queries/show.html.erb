@@ -28,5 +28,5 @@
           lng: @geocode_query.result("mappify").lng,
           html: render("geocode_results/result", result: @geocode_query.result("mappify"))
         }
-      }, "x-init" => "initialiseGeocodingMap($el)" %>
+      }, "x-init" => "initialiseGeocodingMap($el).catch(() => {})" %>
 </div>
