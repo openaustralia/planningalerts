@@ -1,5 +1,66 @@
 # frozen_string_literal: true
 
+# Shared reporting for the planningalerts:bulk_*_applications tasks
+def print_bulk_moderation_report(result, authority:, prefix:, rerun_command:)
+  dry_run = result.dry_run
+  delete = result.mode == BulkModerateApplicationsService::Mode::Delete
+  verb = case result.mode
+         when BulkModerateApplicationsService::Mode::Delete then "delete"
+         when BulkModerateApplicationsService::Mode::Hide then "hide"
+         when BulkModerateApplicationsService::Mode::Unhide then "unhide"
+         end
+  past = { "delete" => "Deleted", "hide" => "Hid", "unhide" => "Unhid" }.fetch(verb)
+
+  describe = ->(item) { "  #{item.council_reference} (id #{item.id}) - #{item.address}" }
+  comments = lambda do |item|
+    if item.comments_count.zero?
+      ""
+    elsif delete
+      " - including #{item.comments_count} comment(s)"
+    else
+      " - has #{item.comments_count} comment(s)"
+    end
+  end
+
+  puts "#{'DRY RUN - nothing was changed - ' if dry_run}#{authority.full_name} - " \
+       "applications with council_reference starting with #{prefix.inspect}"
+  puts
+
+  puts "#{dry_run ? "Would #{verb}" : past} #{result.changed.count} application(s):"
+  result.changed.each { |item| puts describe.call(item) + comments.call(item) }
+
+  if result.skipped_comments.any?
+    puts
+    puts "Skipped #{result.skipped_comments.count} application(s) because they have comments " \
+         "(pass delete_comments to delete them too):"
+    result.skipped_comments.each { |item| puts describe.call(item) + " - #{item.comments_count} comment(s)" }
+  end
+
+  if result.skipped_redirect_target.any?
+    puts
+    puts "Skipped #{result.skipped_redirect_target.count} application(s) because they are the target " \
+         "of an application redirect. These need to be handled manually:"
+    result.skipped_redirect_target.each { |item| puts describe.call(item) }
+  end
+
+  if result.skipped_unchanged.any?
+    puts
+    reason = if result.mode == BulkModerateApplicationsService::Mode::Hide
+               "they are already hidden (their existing hidden reason is kept)"
+             else
+               "they are not hidden"
+             end
+    puts "Skipped #{result.skipped_unchanged.count} application(s) because #{reason}:"
+    result.skipped_unchanged.each { |item| puts describe.call(item) }
+  end
+
+  return unless dry_run
+
+  puts
+  puts "This was a dry run. To actually #{verb} run the task again with execute, e.g."
+  puts "  #{rerun_command}"
+end
+
 namespace :planningalerts do
   # Updates:
   # * state
@@ -90,43 +151,89 @@ namespace :planningalerts do
     dry_run = args.mode != "execute"
     delete_comments = args.option == "delete_comments"
 
-    result = BulkDeleteApplicationsService.call(
+    result = BulkModerateApplicationsService.call(
       authority:,
       council_reference_prefix: prefix,
+      mode: BulkModerateApplicationsService::Mode::Delete,
       dry_run:,
       delete_comments:
     )
 
-    puts "#{'DRY RUN - nothing was changed - ' if dry_run}#{authority.full_name} - " \
-         "applications with council_reference starting with #{prefix.inspect}"
-    puts
+    print_bulk_moderation_report(
+      result,
+      authority:,
+      prefix:,
+      rerun_command: "rake planningalerts:bulk_delete_applications[#{authority.id},#{prefix},execute]"
+    )
+  end
 
-    describe = ->(item) { "  #{item.council_reference} (id #{item.id}) - #{item.address}" }
+  # Dry run by default. Pass "execute" as the third argument to actually hide.
+  # The hidden reason is required and is passed via the REASON environment
+  # variable so it can contain spaces and commas. It is published word-for-word
+  # on the public page for each hidden application. Unlike deleting, hiding is
+  # safe for applications with comments and applications that are the target of
+  # an application redirect, so nothing is skipped except applications that are
+  # already hidden (their existing hidden reason is kept). For example:
+  #   REASON="Duplicate record" rake planningalerts:bulk_hide_applications[123,PA1]          # dry run
+  #   REASON="Duplicate record" rake planningalerts:bulk_hide_applications[123,PA1,execute]  # hide
+  desc "Bulk hide applications for an authority matching a council_reference prefix (dry run by default)"
+  task :bulk_hide_applications, %i[authority_id prefix mode] => :environment do |_task, args|
+    authority = Authority.find(args.authority_id)
+    prefix = args.prefix.to_s
+    reason = ENV.fetch("REASON", nil)
+    raise "prefix can't be blank" if prefix.blank?
+    raise "Unknown mode: #{args.mode}. Did you mean execute?" unless args.mode.nil? || args.mode == "execute"
 
-    puts "#{dry_run ? 'Would delete' : 'Deleted'} #{result.deleted.count} application(s):"
-    result.deleted.each do |item|
-      puts describe.call(item) + (item.comments_count.positive? ? " - including #{item.comments_count} comment(s)" : "")
+    if reason.blank?
+      raise "REASON can't be blank. It is published word-for-word on the public page for each " \
+            "hidden application, e.g. REASON=\"Duplicate record\" rake planningalerts:bulk_hide_applications[...]"
     end
 
-    if result.skipped_comments.any?
-      puts
-      puts "Skipped #{result.skipped_comments.count} application(s) because they have comments " \
-           "(pass delete_comments to delete them too):"
-      result.skipped_comments.each { |item| puts describe.call(item) + " - #{item.comments_count} comment(s)" }
-    end
+    dry_run = args.mode != "execute"
 
-    if result.skipped_redirect_target.any?
-      puts
-      puts "Skipped #{result.skipped_redirect_target.count} application(s) because they are the target " \
-           "of an application redirect. These need to be handled manually:"
-      result.skipped_redirect_target.each { |item| puts describe.call(item) }
-    end
+    result = BulkModerateApplicationsService.call(
+      authority:,
+      council_reference_prefix: prefix,
+      mode: BulkModerateApplicationsService::Mode::Hide,
+      dry_run:,
+      hidden_reason: reason
+    )
 
-    if dry_run
-      puts
-      puts "This was a dry run. To actually delete run the task again with execute, e.g."
-      puts "  rake planningalerts:bulk_delete_applications[#{authority.id},#{prefix},execute]"
-    end
+    print_bulk_moderation_report(
+      result,
+      authority:,
+      prefix:,
+      rerun_command: "REASON=#{reason.inspect} rake planningalerts:bulk_hide_applications[#{authority.id},#{prefix},execute]"
+    )
+  end
+
+  # Dry run by default. Pass "execute" as the third argument to actually
+  # unhide. Unhiding also clears the hidden reason on each application.
+  # Applications that are not hidden are skipped. For example:
+  #   rake planningalerts:bulk_unhide_applications[123,PA1]          # dry run
+  #   rake planningalerts:bulk_unhide_applications[123,PA1,execute]  # unhide
+  desc "Bulk unhide applications for an authority matching a council_reference prefix (dry run by default)"
+  task :bulk_unhide_applications, %i[authority_id prefix mode] => :environment do |_task, args|
+    authority = Authority.find(args.authority_id)
+    prefix = args.prefix.to_s
+    raise "prefix can't be blank" if prefix.blank?
+    raise "Unknown mode: #{args.mode}. Did you mean execute?" unless args.mode.nil? || args.mode == "execute"
+
+    dry_run = args.mode != "execute"
+
+    result = BulkModerateApplicationsService.call(
+      authority:,
+      council_reference_prefix: prefix,
+      mode: BulkModerateApplicationsService::Mode::Unhide,
+      dry_run:
+    )
+
+    print_bulk_moderation_report(
+      result,
+      authority:,
+      prefix:,
+      rerun_command: "rake planningalerts:bulk_unhide_applications[#{authority.id},#{prefix},execute]"
+    )
   end
 
   namespace :emergency do
