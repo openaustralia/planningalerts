@@ -10,8 +10,8 @@
 <% if Flipper.enabled?(:show_authority_map, current_user) && @authority.boundary %>
   <%# TODO: #2164 Probably want to precompute the bounding box when the boundary data is loaded instead %>
   <div class="w-full my-8 h-80 bg-google-maps-green"
-       x-init="initialiseAuthorityMap($el, <%= bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
-                                               { json: boundary_authority_url(format: :json), sw: { lng: bb.min_x, lat: bb.min_y }, ne: { lng: bb.max_x, lat: bb.max_y } }.to_json %>).catch(() => {})">
+       x-init="runWithFallback(() => initialiseAuthorityMap($el, <%= bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
+                                                                     { json: boundary_authority_url(format: :json), sw: { lng: bb.min_x, lat: bb.min_y }, ne: { lng: bb.max_x, lat: bb.max_y } }.to_json %>), () => {})">
   </div>
 <% end %>
 
@@ -92,10 +92,12 @@
         <% end %>
         <div class="h-40 sm:h-52">
           <div class="chart bg-fuchsia"
-               x-init="barGraph(
-                         $el,
-                         '<%= per_week_authority_applications_url(@authority.short_name_encoded, format: :json) %>',
-                         'new applications scraped')">
+               x-init="runWithFallback(
+                         () => barGraph(
+                           $el,
+                           '<%= per_week_authority_applications_url(@authority.short_name_encoded, format: :json) %>',
+                           'new applications scraped'),
+                         () => {})">
           </div>
         </div>
       </section>
@@ -106,10 +108,12 @@
         <% end %>
         <div class="h-40 sm:h-52">
           <div class="chart bg-fuchsia"
-               x-init="barGraph(
-                         $el,
-                         '<%= per_week_authority_comments_url(@authority.short_name_encoded, format: :json) %>',
-                         'comments posted')">
+               x-init="runWithFallback(
+                         () => barGraph(
+                           $el,
+                           '<%= per_week_authority_comments_url(@authority.short_name_encoded, format: :json) %>',
+                           'comments posted'),
+                         () => {})">
           </div>
         </div>
       </section>

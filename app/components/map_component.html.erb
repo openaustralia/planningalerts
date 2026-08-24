@@ -1,6 +1,6 @@
 <%= tag.div class: "bg-google-maps-green w-full h-full",
             "x-data" => "{ mapFailed: false }",
-            "x-init" => "initialiseBasicMapWithMarker($el, #{{ lat: @lat, lng: @lng, address: @address, zoom: @zoom }.to_json}).catch(() => mapFailed = true)" do %>
+            "x-init" => "runWithFallback(() => initialiseBasicMapWithMarker($el, #{{ lat: @lat, lng: @lng, address: @address, zoom: @zoom }.to_json}), () => mapFailed = true)" do %>
   <div x-show="mapFailed" x-cloak class="flex h-full w-full items-center justify-center p-8 text-center text-xl text-navy">
     <p>We couldn't load the map. <%= helpers.pa_link_to "View this location on Google Maps", google_maps_url %></p>
   </div>

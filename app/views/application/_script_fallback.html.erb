@@ -1,0 +1,49 @@
+<%# runWithFallback is deliberately inline and unbundled, unlike everything else
+we write. It exists to handle scripts that failed to arrive, so it cannot live
+in one of them: application.js, Alpine, d3, floating-ui and tsparticles are all
+things it guards against, and a guard is no use when it goes missing alongside
+the thing it guards. An inline script always runs. See #2193. %>
+<script>
+  (function () {
+    var reported = false;
+
+    // Report only the first failure on a page, since a page with a map and a
+    // streetview would otherwise report the same missing script twice.
+    function report(error) {
+      if (reported) { return; }
+      reported = true;
+      // The Sentry loader is only included in production, and only for people
+      // rather than crawlers, so it is normally absent in development and test.
+      // The loader guarantees captureMessage is safe to call before the full
+      // SDK has finished loading.
+      if (!window.Sentry) { return; }
+
+      Sentry.captureMessage("Script missing when Alpine ran an expression: " + error.message, {
+        level: "warning",
+        tags: { missing_script: error.message }
+      });
+    }
+
+    // Run an Alpine expression that depends on a script we don't control the
+    // delivery of, and fall back when it can't run. Pass the call as a thunk so
+    // that a missing function throws in here, where it can be caught, instead of
+    // throwing while Alpine evaluates the expression, where it can't.
+    //
+    // Both failures reach onFailure, but only one is reported. A throw means a
+    // script we expected is absent, which is ours to fix. A rejected promise
+    // means the script loaded and then failed at runtime, which in practice is
+    // maps.googleapis.com behind a content blocker (#2185): we can't fix it, and
+    // reporting it would drown out the failures we can.
+    //
+    // Always returns a promise, so callers can await the result whether or not
+    // the fallback ran.
+    window.runWithFallback = function (run, onFailure) {
+      try {
+        return Promise.resolve(run()).catch(function () { return onFailure(); });
+      } catch (error) {
+        report(error);
+        return Promise.resolve(onFailure());
+      }
+    };
+  })();
+</script>

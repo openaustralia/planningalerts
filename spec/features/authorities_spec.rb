@@ -44,6 +44,14 @@ describe "Authorities" do
       end
     end
 
+    # The graphs need bar_graph.js and d3 from cdnjs, either of which can fail
+    # to arrive. Calling barGraph through runWithFallback means that leaves the
+    # rest of the page working instead of throwing a ReferenceError out of the
+    # Alpine expression. See #2193.
+    it "leaves the page working when the graph javascript is missing" do
+      expect(page).to have_css("[x-init*='() => barGraph(']", count: 2)
+    end
+
     describe "accessibility test", :js do
       it "passes" do
         expect(page).to be_axe_clean
