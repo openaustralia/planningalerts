@@ -22,11 +22,11 @@ class AuthorityMapComponent < ViewComponent::Base
   # TODO: #2164 Probably want to precompute the bounding box when the boundary data is loaded instead
   sig { returns(String) }
   def map_params_json
-    bb = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
+    bounding_box = RGeo::Cartesian::BoundingBox.create_from_geometry(@authority.boundary)
     {
       json: helpers.boundary_authority_url(@authority.short_name_encoded, format: :json),
-      sw: { lng: bb.min_x, lat: bb.min_y },
-      ne: { lng: bb.max_x, lat: bb.max_y }
+      sw: { lng: bounding_box.min_x, lat: bounding_box.min_y },
+      ne: { lng: bounding_box.max_x, lat: bounding_box.max_y }
     }.to_json
   end
 end
