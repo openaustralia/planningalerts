@@ -1,10 +1,15 @@
+<%# floating-ui comes from a CDN, so window.FloatingUIDOM is missing whenever that
+request fails, and both uses below threw a TypeError. Note the throw happens on
+click rather than at init, so guarding the x-init alone would not catch it.
+Unpositioned, the popover appears wherever it falls in the layout, which is worse
+than intended but better than a button that does nothing at all. See #2193. %>
 <div
   class="relative inline-block"
   x-data="{
     open: false,
     cleanup: null,
     updatePosition() {
-      window.FloatingUIDOM.computePosition($refs.button, $refs.popover, {
+      runWithFallback(() => window.FloatingUIDOM.computePosition($refs.button, $refs.popover, {
         placement: 'bottom',
         middleware: [
           window.FloatingUIDOM.flip(),
@@ -31,11 +36,11 @@
             [staticSide]: '-12px',
           });
         }
-      });
+      }), () => {});
     }
   }"
   x-init="
-    $watch('open', (open) => {
+    $watch('open', (open) => runWithFallback(() => {
       if (open) {
         cleanup = window.FloatingUIDOM.autoUpdate($refs.button, $refs.popover, updatePosition);
       } else {
@@ -43,7 +48,7 @@
           cleanup();
         }
       }
-    });
+    }, () => {}));
   ">
   <%# TODO: #2158 Is info icon too small? How can we make the click area larger? %>
   <%# TODO: #2159 Remove duplication between here and pa_link_classes view helper %>

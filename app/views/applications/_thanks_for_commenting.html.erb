@@ -1,4 +1,9 @@
-<div class="relative" x-init="
+<%# The confetti comes from a CDN, so window.confetti is missing whenever that
+request fails, and the whole expression used to throw a TypeError. There is
+nothing to fall back to here, and nobody misses confetti they never knew was
+coming, so the fallback does nothing. Note that a throw inside an async thunk
+arrives as a rejection, which runWithFallback deliberately doesn't report. See #2193. %>
+<div class="relative" x-init="runWithFallback(async () => {
   const canvas = $refs.canvas;
   canvas.confetti = canvas.confetti || (await window.confetti.create(canvas));
   canvas.confetti({
@@ -27,7 +32,7 @@
       requestAnimationFrame(frame);
     }
   })();
-  ">
+}, () => {})">
   <%= render AlertComponent.new(type: :congratulations) do %>
     <div class="mb-4 ml-4 text-3xl">
       <p class="mb-8">
