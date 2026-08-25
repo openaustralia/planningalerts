@@ -80,7 +80,7 @@ class PostalController < ApplicationController
     else
       # Unreachable while the regex above only matches these two prefixes.
       # Kept so that adding a prefix without a branch fails loudly.
-      raise "Unexpected tag prefix"
+      raise ArgumentError, "Unexpected tag prefix #{match[1]}"
     end
 
     head :ok
