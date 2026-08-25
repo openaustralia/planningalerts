@@ -4,6 +4,13 @@ require "spec_helper"
 
 describe PostalController do
   let(:private_key) { OpenSSL::PKey::RSA.new(2048) }
+  let(:alert_id) { 123 }
+  let(:comment_id) { 456 }
+  let(:message_id) { 12_345 }
+  let(:alert_tag) { "alert-#{alert_id}" }
+  let(:comment_tag) { "comment-#{comment_id}" }
+  let(:recipient_email) { "eliza@example.org" }
+  let(:message_url) { "https://postal.oaf.org.au/org/oaf/servers/planningalerts-comments/messages/#{message_id}" }
 
   before do
     allow(Rails.application.credentials).to receive(:dig).with(:postal, :webhook_public_key).and_return(private_key.public_key.to_pem)
@@ -32,11 +39,11 @@ describe PostalController do
         sent_with_ssl: true,
         timestamp: 1_598_494_217.5, # 2020-08-27T02:10:17.5Z
         message: {
-          id: 12_345,
+          id: message_id,
           token: "abcdef123456",
           direction: "outgoing",
           message_id: "ABC@DEF.foo.com",
-          to: "joy@smart-unlimited.com",
+          to: recipient_email,
           from: "no-reply@planningalerts.org.au",
           subject: "This is a test email from Postal",
           timestamp: 1_598_494_210.0,
@@ -54,11 +61,11 @@ describe PostalController do
       uuid: "0f6f76ec-2e33-4f65-b48b-79688dbd0e02",
       payload: {
         original_message: {
-          id: 12_345,
+          id: message_id,
           token: "abcdef123456",
           direction: "outgoing",
           message_id: "ABC@DEF.foo.com",
-          to: "joy@smart-unlimited.com",
+          to: recipient_email,
           from: "no-reply@planningalerts.org.au",
           subject: "This is a test email from Postal",
           timestamp: 1_598_494_210.0,
@@ -71,7 +78,7 @@ describe PostalController do
           direction: "incoming",
           message_id: "GHI@JKL.foo.com",
           to: "psrp@postal.oaf.org.au",
-          from: "postmaster@smart-unlimited.com",
+          from: "postmaster@example.org",
           subject: "Mail delivery failed",
           timestamp: 1_598_494_299.0,
           spam_status: "NotSpam",
@@ -82,18 +89,18 @@ describe PostalController do
   end
 
   it "rejects a request with no signature" do
-    post_event(status_event_body(event: "MessageSent", tag: "alert-123"), signature: nil)
+    post_event(status_event_body(event: "MessageSent", tag: alert_tag), signature: nil)
     expect(response).to have_http_status(:forbidden)
   end
 
   it "rejects a request with an invalid signature" do
-    post_event(status_event_body(event: "MessageSent", tag: "alert-123"), signature: sign("something else entirely"))
+    post_event(status_event_body(event: "MessageSent", tag: alert_tag), signature: sign("something else entirely"))
     expect(response).to have_http_status(:forbidden)
   end
 
   it "rejects a request when no public key is configured" do
     allow(Rails.application.credentials).to receive(:dig).with(:postal, :webhook_public_key).and_return(nil)
-    post_event(status_event_body(event: "MessageSent", tag: "alert-123"))
+    post_event(status_event_body(event: "MessageSent", tag: alert_tag))
     expect(response).to have_http_status(:forbidden)
   end
 
@@ -110,8 +117,8 @@ describe PostalController do
   end
 
   it "records a successful delivery of an alert email" do
-    alert = create(:alert, id: 123)
-    post_event(status_event_body(event: "MessageSent", tag: "alert-123"))
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageSent", tag: alert_tag))
     expect(response).to have_http_status(:ok)
     alert.reload
     expect(alert.last_delivered_at).to eq Time.zone.at(1_598_494_217.5)
@@ -121,8 +128,8 @@ describe PostalController do
   end
 
   it "records a successful delivery of a comment email" do
-    comment = create(:comment, id: 456)
-    post_event(status_event_body(event: "MessageSent", tag: "comment-456"))
+    comment = create(:comment, id: comment_id)
+    post_event(status_event_body(event: "MessageSent", tag: comment_tag))
     expect(response).to have_http_status(:ok)
     comment.reload
     expect(comment.last_delivered_at).to eq Time.zone.at(1_598_494_217.5)
@@ -131,8 +138,8 @@ describe PostalController do
   end
 
   it "records a failed delivery of an alert email and unsubscribes the alert" do
-    alert = create(:alert, id: 123)
-    post_event(status_event_body(event: "MessageDeliveryFailed", tag: "alert-123", status: "HardFail"))
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail"))
     expect(response).to have_http_status(:ok)
     alert.reload
     expect(alert.last_delivered_at).to eq Time.zone.at(1_598_494_217.5)
@@ -142,8 +149,8 @@ describe PostalController do
   end
 
   it "records a bounce of an alert email and unsubscribes the alert" do
-    alert = create(:alert, id: 123)
-    post_event(bounce_event_body(tag: "alert-123"))
+    alert = create(:alert, id: alert_id)
+    post_event(bounce_event_body(tag: alert_tag))
     expect(response).to have_http_status(:ok)
     alert.reload
     expect(alert.last_delivered_at).to eq Time.zone.at(1_598_494_300.5)
@@ -153,8 +160,8 @@ describe PostalController do
   end
 
   it "records a held alert email without unsubscribing the alert" do
-    alert = create(:alert, id: 123)
-    post_event(status_event_body(event: "MessageHeld", tag: "alert-123", status: "Held"))
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageHeld", tag: alert_tag, status: "Held"))
     expect(response).to have_http_status(:ok)
     alert.reload
     expect(alert.last_delivered_at).to eq Time.zone.at(1_598_494_217.5)
@@ -163,57 +170,57 @@ describe PostalController do
   end
 
   it "records a failed delivery of a comment email and notifies slack" do
-    comment = create(:comment, id: 456)
-    post_event(status_event_body(event: "MessageDeliveryFailed", tag: "comment-456", status: "HardFail"))
+    comment = create(:comment, id: comment_id)
+    post_event(status_event_body(event: "MessageDeliveryFailed", tag: comment_tag, status: "HardFail"))
     expect(response).to have_http_status(:ok)
     comment.reload
     expect(comment.last_delivered_at).to eq Time.zone.at(1_598_494_217.5)
     expect(comment.last_delivered_successfully).to be false
     expect(NotifySlackCommentDeliveryService).to have_received(:call).with(
       comment:,
-      to: "joy@smart-unlimited.com",
+      to: recipient_email,
       status: "hard_bounce",
       extended_status: "Some details 250 OK",
-      email_id: 12_345,
-      email_url: "https://postal.oaf.org.au/org/oaf/servers/planningalerts-comments/messages/12345"
+      email_id: message_id,
+      email_url: message_url
     )
   end
 
   it "records a bounce of a comment email and notifies slack" do
-    comment = create(:comment, id: 456)
-    post_event(bounce_event_body(tag: "comment-456"))
+    comment = create(:comment, id: comment_id)
+    post_event(bounce_event_body(tag: comment_tag))
     expect(response).to have_http_status(:ok)
     comment.reload
     expect(comment.last_delivered_successfully).to be false
     expect(NotifySlackCommentDeliveryService).to have_received(:call).with(
       comment:,
-      to: "joy@smart-unlimited.com",
+      to: recipient_email,
       status: "hard_bounce",
       extended_status: "",
-      email_id: 12_345,
-      email_url: "https://postal.oaf.org.au/org/oaf/servers/planningalerts-comments/messages/12345"
+      email_id: message_id,
+      email_url: message_url
     )
   end
 
   it "records a held comment email and notifies slack" do
-    comment = create(:comment, id: 456)
-    post_event(status_event_body(event: "MessageHeld", tag: "comment-456", status: "Held", details: "Message held", output: "held output"))
+    comment = create(:comment, id: comment_id)
+    post_event(status_event_body(event: "MessageHeld", tag: comment_tag, status: "Held", details: "Message held", output: "held output"))
     expect(response).to have_http_status(:ok)
     comment.reload
     expect(comment.last_delivered_successfully).to be false
     expect(NotifySlackCommentDeliveryService).to have_received(:call).with(
       comment:,
-      to: "joy@smart-unlimited.com",
+      to: recipient_email,
       status: "held",
       extended_status: "Message held held output",
-      email_id: 12_345,
-      email_url: "https://postal.oaf.org.au/org/oaf/servers/planningalerts-comments/messages/12345"
+      email_id: message_id,
+      email_url: message_url
     )
   end
 
   it "accepts a delayed delivery event and does nothing" do
-    alert = create(:alert, id: 123)
-    post_event(status_event_body(event: "MessageDelayed", tag: "alert-123", status: "SoftFail"))
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageDelayed", tag: alert_tag, status: "SoftFail"))
     expect(response).to have_http_status(:ok)
     alert.reload
     expect(alert.last_delivered_at).to be_nil
