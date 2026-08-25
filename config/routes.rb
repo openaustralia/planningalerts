@@ -238,4 +238,5 @@ Rails.application.routes.draw do
   get "/500", to: "documentation#error_500"
 
   post "/cuttlefish/event", to: "cuttlefish#event"
+  post "/postal/event", to: "postal#event"
 end

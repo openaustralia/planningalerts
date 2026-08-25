@@ -14,7 +14,10 @@ class CommentMailer < ApplicationMailer
     # of what's in the deny list
     headers(
       "X-Cuttlefish-Ignore-Deny-List" => "true",
-      "X-Cuttlefish-Metadata-comment-id" => comment.id.to_s
+      "X-Cuttlefish-Metadata-comment-id" => comment.id.to_s,
+      # The tag round-trips through Postal and comes back to us in the
+      # delivery event webhooks so we can match the event to the comment
+      "X-Postal-Tag" => "comment-#{comment.id}"
     )
 
     mail(

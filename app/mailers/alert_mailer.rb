@@ -26,6 +26,9 @@ class AlertMailer < ApplicationMailer
       # It's not sent on in the outgoing email
       "X-Cuttlefish-Metadata-alert-id" => alert.id.to_s,
       "X-Cuttlefish-Metadata-user-id" => T.must(alert.user).id.to_s,
+      # The tag round-trips through Postal and comes back to us in the
+      # delivery event webhooks so we can match the event to the alert
+      "X-Postal-Tag" => "alert-#{alert.id}",
       # Disable css inlining because we're already
       # doing it with maizzle and the inlining on cuttlefish strips out media queries for
       # responsive designs and some more modern css features

@@ -58,6 +58,10 @@ describe AlertMailer do
       expect(email.header["List-Unsubscribe"].to_s).to eq("<https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe>")
       expect(email.header["List-Unsubscribe-Post"].to_s).to eq("List-Unsubscribe=One-Click")
     end
+
+    it "has the postal tag header" do
+      expect(email.header["X-Postal-Tag"].to_s).to eq("alert-1")
+    end
   end
 
   describe "when sending a planning alert with two new comments" do

@@ -322,6 +322,9 @@ module GeneratedPathHelpersModule
   def personal_comments_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def postal_event_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def preview_comment_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

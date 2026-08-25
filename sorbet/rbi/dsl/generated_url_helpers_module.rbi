@@ -322,6 +322,9 @@ module GeneratedUrlHelpersModule
   def personal_comments_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def postal_event_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def preview_comment_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
