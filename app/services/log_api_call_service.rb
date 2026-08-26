@@ -15,7 +15,7 @@ class LogApiCallService
     ).void
   end
   def self.call(key:, ip_address:, query:, params:, user_agent:, time:)
-    ElasticSearchClient.index(
+    T.must(ElasticSearchClient).index(
       index: LogApiCallService.elasticsearch_index(time),
       body: {
         ip_address:,
