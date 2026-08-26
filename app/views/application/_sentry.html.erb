@@ -16,6 +16,12 @@
         // link scanners rather than by our own code. We cannot fix any of these
         // and they drown out real problems. Anything our own JavaScript causes
         // belongs in a fix, not in this list.
+        //
+        // Google Maps noise is filtered here by message, deliberately not by a
+        // denyUrls entry for maps.googleapis.com, which would also hide errors
+        // caused by our own misuse of the Maps API. Don't be tempted to add
+        // WebKit's generic "Load failed" either: it is the message for any
+        // failed fetch, including our own boundary GeoJSON requests.
         ignoreErrors: [
           // Microsoft Outlook and Office scanning links in our alert emails
           "Object Not Found Matching Id",
@@ -26,7 +32,15 @@
           // Accessibility and screen reader extensions reading their own state
           "isHighContrast",
           // iOS in-app browsers and extensions expecting their native bridge
-          "window.webkit.messageHandlers"
+          "window.webkit.messageHandlers",
+          // Chunk failures inside Google Maps' own loader ("onion", "map",
+          // "util" and friends): the main script arrived but a content blocker
+          // or flaky connection cut off an internal module. Our importLibrary
+          // calls already catch these and show people a fallback (#2185)
+          /^Could not load "\w+"\.$/,
+          // Google Maps Street View calling HTMLDialogElement.close() on
+          // browsers without <dialog> support (#2185)
+          "this.dj.close is not a function"
         ],
         denyUrls: [
           /^chrome-extension:\/\//i,
