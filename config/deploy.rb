@@ -89,7 +89,7 @@ def live_aws_instances
   instances = aws_ec2.instances.values
 
   available_colours = instances.filter_map { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") }.uniq.reject(&:empty?)
-  colour = ENV["BLUE_GREEN"]
+  colour = ENV.fetch("BLUE_GREEN", nil)
   if colour
     instances = instances.select { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") == colour }
   end
