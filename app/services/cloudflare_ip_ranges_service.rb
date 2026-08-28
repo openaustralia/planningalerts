@@ -45,7 +45,10 @@ class CloudflareIpRangesService
     end
   end
 
-  # Returns nil if the response wasn't a usable CIDR list
+  # Returns nil if the response wasn't a usable CIDR list. Network-level failures (timeouts, DNS,
+  # a dropped or reset connection, a bad TLS handshake) are rescued here too, alongside the
+  # non-200/too-short checks above, so a Cloudflare outage degrades to "can't check" rather than
+  # an unhandled 500 out of the controller. Programming errors are deliberately left unrescued.
   sig { params(url: String).returns(T.nilable(T::Array[String])) }
   def fetch_cidr_list(url)
     response = HTTParty.get(url)
@@ -53,5 +56,8 @@ class CloudflareIpRangesService
 
     cidrs = response.body.lines.map(&:strip).reject(&:empty?)
     cidrs if cidrs.size >= MIN_EXPECTED_ENTRIES_PER_RANGE
+  rescue Timeout::Error, SocketError, SystemCallError, OpenSSL::SSL::SSLError, EOFError, Net::ProtocolError,
+         Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError
+    nil
   end
 end

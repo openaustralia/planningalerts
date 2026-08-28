@@ -69,6 +69,23 @@ describe CloudflareIpRangesService do
           expect(described_class.call).to be_nil
         end
       end
+
+      context "when fetching a range fails at the network level" do
+        [
+          Net::OpenTimeout.new,
+          SocketError.new,
+          Errno::ECONNRESET.new,
+          OpenSSL::SSL::SSLError.new,
+          EOFError.new,
+          Net::HTTPBadResponse.new
+        ].each do |error|
+          it "returns nil rather than let a #{error.class} escape" do
+            allow(HTTParty).to receive(:get).with("https://www.cloudflare.com/ips-v4").and_raise(error)
+
+            expect(described_class.call).to be_nil
+          end
+        end
+      end
     end
   end
 end
