@@ -13,7 +13,14 @@ class WhatismyipController < ApplicationController
   sig { void }
   def index
     ip = request.remote_ip
-    ip += " FAIL" if cloudflare_ip?(ip)
+    cloudflare_ranges = CloudflareIpRangesService.call
+    ip += if cloudflare_ranges.nil?
+            " UNABLE TO CHECK"
+          elsif cloudflare_ip?(ip, cloudflare_ranges)
+            " FAIL"
+          else
+            ""
+          end
     render plain: ip
   end
 
@@ -24,9 +31,9 @@ class WhatismyipController < ApplicationController
     head :not_found unless Flipper.enabled?(:provide_whatismyip)
   end
 
-  sig { params(ip: String).returns(T::Boolean) }
-  def cloudflare_ip?(ip)
-    CloudflareIpRangesService.call.any? { |range| range.include?(IPAddr.new(ip)) }
+  sig { params(ip: String, cloudflare_ranges: T::Array[IPAddr]).returns(T::Boolean) }
+  def cloudflare_ip?(ip, cloudflare_ranges)
+    cloudflare_ranges.any? { |range| range.include?(IPAddr.new(ip)) }
   rescue IPAddr::Error
     false
   end

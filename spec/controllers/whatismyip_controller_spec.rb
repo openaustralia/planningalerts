@@ -32,6 +32,18 @@ describe WhatismyipController do
         get :index
         expect(response.body).to eq "173.245.48.1 FAIL"
       end
+
+      context "when Cloudflare's ranges can't be determined right now" do
+        before do
+          allow(CloudflareIpRangesService).to receive(:call).and_return(nil)
+        end
+
+        it "appends UNABLE TO CHECK rather than risk reporting a false pass" do
+          request.remote_addr = "173.245.48.1"
+          get :index
+          expect(response.body).to eq "173.245.48.1 UNABLE TO CHECK"
+        end
+      end
     end
   end
 end
