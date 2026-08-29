@@ -204,6 +204,16 @@ Credentials are separate from that file and must never be committed. v3 reads yo
 
 If the Sentry CLI is missing or unauthenticated the deploy still succeeds — the hook prints a warning and skips recording the release, so set it up before your next production deploy.
 
+### whatismyip trust-boundary check
+
+`GET /whatismyip` reports the IP Rails sees for the request, to aid checking Cloudflare/ALB proxying with a one-line curl rather than a real sign-in or a log dig. It returns the IP, or the IP plus ` FAIL` if that IP falls within Cloudflare's own published ranges, a sign the trust boundary isn't rewriting it to the real visitor IP. If Cloudflare's published ranges can't be fetched or look implausibly short, it returns the IP plus ` UNABLE TO CHECK` rather than risk reporting a false pass.
+
+Off by default; turn it on for a server with the `provide_whatismyip` Flipper feature flag.
+
+```sh
+curl https://www.planningalerts.org.au/whatismyip
+```
+
 ## Upgrading Ruby in production
 
 Upgrading Ruby in production is an unbelievably painful process right now. I'm sorry. Let's make it simpler

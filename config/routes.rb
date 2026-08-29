@@ -239,4 +239,7 @@ Rails.application.routes.draw do
 
   post "/cuttlefish/event", to: "cuttlefish#event"
   post "/postal/event", to: "postal#event"
+
+  # See app/controllers/whatismyip_controller.rb. 404s unless the provide_whatismyip feature flag is on.
+  get "/whatismyip", to: "whatismyip#index"
 end

@@ -449,4 +449,7 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def users_activation_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def whatismyip_url(*args); end
 end

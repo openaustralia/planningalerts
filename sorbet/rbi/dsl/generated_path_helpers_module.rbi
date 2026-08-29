@@ -449,4 +449,7 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def users_activation_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def whatismyip_path(*args); end
 end

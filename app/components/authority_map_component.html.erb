@@ -1,0 +1,7 @@
+<%= tag.div class: "w-full my-8 h-80 bg-google-maps-green",
+            "x-data" => "{ mapFailed: false }",
+            "x-init" => "initialiseAuthorityMap($el, #{map_params_json}).catch(() => mapFailed = true)" do %>
+  <div x-show="mapFailed" x-cloak class="flex h-full w-full items-center justify-center p-8 text-center text-xl text-navy">
+    <p>We couldn't load the map. <%= helpers.pa_link_to "View this area on Google Maps", google_maps_url %></p>
+  </div>
+<% end %>
