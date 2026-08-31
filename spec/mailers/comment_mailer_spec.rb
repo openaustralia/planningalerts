@@ -43,6 +43,10 @@ describe CommentMailer do
         expect(notifier.subject).to eq("Comment on application X/001")
       end
 
+      it "has the postal tag header" do
+        expect(notifier.header["X-Postal-Tag"].to_s).to eq("comment-#{comment.id}")
+      end
+
       it "has specific information in the body of the email" do
         expect(notifier.text_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/comment_mailer/email1.txt").read)
       end
