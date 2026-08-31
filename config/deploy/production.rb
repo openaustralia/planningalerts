@@ -1,5 +1,5 @@
 # typed: false
 
-aws_ec2_register(user: "deploy")
+register_aws_instances(user: "deploy")
 
 set :deploy_to, "/srv/www/production"

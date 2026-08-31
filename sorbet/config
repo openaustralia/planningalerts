@@ -6,6 +6,8 @@ spec/
 db/
 --ignore
 vendor/
+--ignore
+config/
 # Agent worktrees nest a full checkout inside the repo, which would otherwise
 # make Sorbet see every RBI file twice
 --ignore

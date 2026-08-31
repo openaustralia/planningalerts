@@ -58,20 +58,24 @@ set :puma_service_unit_props, %w[MemoryMax=1680M TimeoutStopSec=300]
 set :puma_enable_lingering, false
 set :puma_systemctl_user, :user
 
+# Use the ID as that is what ssm needs.
+set :aws_ec2_contact_point, :id
+
+set :ssh_options, {
+  proxy: Net::SSH::Proxy::Command.new(
+    "aws ssm start-session --profile oaf --target %h " \
+      "--document-name AWS-StartSSHSession --parameters portNumber=%p"
+  ),
+}.compact
+
 set :aws_ec2_regions, ['ap-southeast-2']
 # We don't want to use the stage tag to filter because we have both production and staging on the same machine
 set :aws_ec2_default_filters, (proc {
   [
     {
       name: "tag:#{fetch(:aws_ec2_application_tag)}",
-      values: [fetch(:aws_ec2_application)]
+      values: [fetch(:application)]
     },
-    # Uncomment the following lines (and set the value) if you want to only deploy to blue or green
-    # The default is to deploy to both blue AND green
-    # {
-    #   name: "tag:BlueGreen",
-    #   values: ["blue"]
-    # },
     {
       name: 'instance-state-name',
       values: ['running']
@@ -79,9 +83,28 @@ set :aws_ec2_default_filters, (proc {
   ]
 })
 
-# Doing this so that when we get the host names in upload_memcache_config they can also
-# be used inside the network to contact the memcache servers
-set :aws_ec2_contact_point, :public_dns
+# Blue/green: exactly one colour is meant to be "live" at a time - provision and deploy to
+# the standby colour, then swap, never update the live colour in place.
+def live_aws_instances
+  instances = aws_ec2.instances.values
+
+  available_colours = instances.filter_map { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") }.uniq.reject(&:empty?)
+  colour = ENV.fetch("BLUE_GREEN", nil)
+  if colour
+    instances = instances.select { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") == colour }
+  end
+  colours = instances.filter_map { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") }.uniq.reject(&:empty?)
+  raise "ERROR: BLUE_GREEN must be #{available_colours.join(' or ')}" if colours.size != 1
+  instances
+end
+
+def register_aws_instances(options = {})
+  live_aws_instances.each do |instance|
+    ip = Capistrano::Aws::EC2.contact_point(instance)
+    roles = Capistrano::Aws::EC2.parse_tag(instance, fetch(:aws_ec2_roles_tag)).split(",").map(&:strip)
+    server ip, options.merge(roles: roles, aws_instance_id: instance.id)
+  end
+end
 
 # Tagging options
 set :tagging3_format, ':stage_:release'
@@ -90,8 +113,10 @@ set :foreman_timeout, 300
 
 desc "upload memcache.yml configuration"
 task :upload_memcache_config do
-  # Each host is also running memcached. So...
-  servers = roles(:app).map(&:hostname)
+  # Memcache is reached over the private network directly, not via the SSM-proxied :id
+  # contact point used for SSH - so look up each host's private IP rather than its hostname.
+  instances = aws_ec2.instances
+  servers = roles(:app).map { |host| instances[host.properties.fetch(:aws_instance_id)].private_ip_address }
   memcache_config = { "servers" => servers }.to_yaml
   on roles(:app) do
     upload! StringIO.new(memcache_config), "#{shared_path}/config/memcache.yml"
