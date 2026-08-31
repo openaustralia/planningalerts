@@ -9,6 +9,12 @@ module Users
     include Devise::Controllers::Helpers
     include Split::Helper
 
+    # create is Devise's, which is the whole point of subclassing: we only want
+    # to put a check in front of it.
+    # rubocop:disable Rails/LexicallyScopedActionFilter
+    before_action :check_altcha, only: :create
+    # rubocop:enable Rails/LexicallyScopedActionFilter
+
     # GET /resource/confirmation/new
     # def new
     #   super
@@ -25,6 +31,15 @@ module Users
     # end
 
     protected
+
+    sig { void }
+    def check_altcha
+      return if altcha_ok?(form: :resend_confirmation)
+
+      self.resource = resource_class.new(email: params.dig(:user, :email))
+      resource.errors.add(:base, t("altcha.failed"))
+      render :new, status: :unprocessable_entity
+    end
 
     # The path used after resending confirmation instructions.
     # def after_resending_confirmation_instructions_path_for(resource_name)

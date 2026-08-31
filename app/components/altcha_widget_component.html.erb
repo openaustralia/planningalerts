@@ -1,0 +1,23 @@
+<div class="my-8">
+  <%# Vendored rather than loaded from a CDN, unlike the other third-party
+  scripts in _html_head.html.erb. Those all degrade to something cosmetic, but
+  a missing ALTCHA widget stops somebody signing up or asking us for help. It
+  is included here rather than in the head so that it only loads on the pages
+  that have a widget. See doc/altcha.md. %>
+  <%= javascript_include_tag "altcha", defer: true %>
+
+  <altcha-widget challenge="<%= altcha_challenge_path %>"
+                 name="<%= AltchaWidgetComponent::FIELD_NAME %>"
+                 auto="onload"
+                 hidelogo
+                 hidefooter></altcha-widget>
+
+  <noscript>
+    <p class="mt-4 text-xl text-navy">
+      This check needs JavaScript to confirm you're a person. If you can't turn
+      JavaScript on, please
+      <%= helpers.pa_link_to "get in touch", helpers.documentation_contact_path %>
+      and we'll help you another way.
+    </p>
+  </noscript>
+</div>

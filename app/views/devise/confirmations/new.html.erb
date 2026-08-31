@@ -11,6 +11,8 @@
       <%= f.email_field :email, class: "mt-1 block w-full", autocomplete: "email", autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
       <%= f.error :email, class: "mt-2" %>
     </div>
+    <%= render AltchaWidgetComponent.new %>
+    <%= f.error :base, class: "mt-2" %>
     <div class="flex justify-center mt-8">
       <%= f.button "Resend confirmation instructions" %>
     </div>
