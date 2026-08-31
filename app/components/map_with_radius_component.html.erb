@@ -1,6 +1,6 @@
 <%= tag.div class: "h-full w-full bg-google-maps-green",
             "x-data" => "{ circle: null, mapFailed: false }",
-            "x-init" => "circle = await initialiseAlertMap($el, { lat: #{j(@lat)}, lng: #{j(@lng)}, address: '#{j(@address)}', zoom: #{j(@zoom)}, radius_meters: #{j(@radius_meters)}}).catch(() => { mapFailed = true; return null }); $watch('#{j(@radius_meters)}', value => circle && circle.setRadius(value))" do %>
+            "x-init" => "circle = await runWithFallback(() => initialiseAlertMap($el, { lat: #{j(@lat)}, lng: #{j(@lng)}, address: '#{j(@address)}', zoom: #{j(@zoom)}, radius_meters: #{j(@radius_meters)}}), () => { mapFailed = true; return null }); $watch('#{j(@radius_meters)}', value => circle && circle.setRadius(value))" do %>
   <div x-show="mapFailed" x-cloak class="flex h-full w-full items-center justify-center p-8 text-center text-xl text-navy">
     <p>We couldn't load the map. <%= helpers.pa_link_to "View this location on Google Maps", google_maps_url %></p>
   </div>

@@ -23,4 +23,14 @@ RSpec.describe MapWithRadiusComponent, type: :component do
   it "only updates the circle radius when the map has loaded" do
     expect(page).to have_css("div[x-init*='circle && circle.setRadius(value)']")
   end
+
+  # See the equivalent example in map_component_spec.rb, and #2193. Here the
+  # fallback also has to leave circle falsy, so the radius watcher above stays
+  # safe when there is no map to draw a circle on.
+  it "reaches the fallback when the map javascript is missing altogether" do
+    x_init = page.find("[x-data]")["x-init"]
+
+    expect(x_init).to start_with("circle = await runWithFallback(() => initialiseAlertMap(")
+    expect(x_init).to include("), () => { mapFailed = true; return null });")
+  end
 end

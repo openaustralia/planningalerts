@@ -35,4 +35,14 @@ RSpec.describe AuthorityMapComponent, type: :component do
   it "keeps the fallback hidden unless the map fails to load" do
     expect(page).to have_css("[x-cloak][x-show='mapFailed']")
   end
+
+  # Passing the call as a thunk means a missing initialiseAuthorityMap throws
+  # inside runWithFallback, where the fallback can catch it, rather than while
+  # Alpine evaluates the expression, where it couldn't. See #2193.
+  it "reaches the fallback when the map javascript is missing altogether" do
+    x_init = page.find("[x-data]")["x-init"]
+
+    expect(x_init).to start_with("runWithFallback(() => initialiseAuthorityMap(")
+    expect(x_init).to end_with(", () => mapFailed = true)")
+  end
 end
