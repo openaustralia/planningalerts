@@ -33,6 +33,24 @@ describe AlertsController do
     end
   end
 
+  describe "#create" do
+    let(:user) { create(:confirmed_user) }
+
+    before do
+      mock_geocoder_valid_address_response
+      sign_in user
+      # RFC 5737 TEST-NET-3, so a documentation address, and public enough to survive
+      # Rack::Request#ip's private range filtering
+      request.remote_addr = "203.0.113.5"
+    end
+
+    it "records the IP the alert was created from" do
+      post :create, params: { alert: { address: "24 Bruce Rd, Glenbrook", radius_meters: "2000" } }
+
+      expect(Alert.last&.signup_ip).to eq "203.0.113.5"
+    end
+  end
+
   describe "#unsubscribe" do
     it "marks the alert as unsubscribed" do
       alert = create(:alert)

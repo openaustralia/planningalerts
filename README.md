@@ -214,6 +214,12 @@ Off by default; turn it on for a server with the `provide_whatismyip` Flipper fe
 curl https://www.planningalerts.org.au/whatismyip
 ```
 
+### Signup IP addresses
+
+We record the IP address of the request that creates an alert or an account, in `alerts.signup_ip` and `users.signup_ip`, so we can spot several signups coming from the same place when we're looking at spam or abuse. They show on the alert and user pages in the admin backend, and the admin search box matches on them. `ExpireSignupIpsJob` clears anything older than 90 days, daily. See [doc/data_retention_policy.md](doc/data_retention_policy.md).
+
+This is only worth anything if `request.remote_ip` is the real visitor address rather than a proxy's, which is what the whatismyip check above is for.
+
 ## Upgrading Ruby in production
 
 Upgrading Ruby in production is an unbelievably painful process right now. I'm sorry. Let's make it simpler
