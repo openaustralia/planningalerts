@@ -6,7 +6,8 @@ growth.
 A related issue is the excessive memory usage causing some authority admin pages to crash from excessive large version
 lists.
 
-No privacy act concerns are (currently) dealt with in this doc.
+Apart from the signup IP addresses described under "Personal information" below, no privacy act concerns are
+(currently) dealt with in this doc.
 
 Related issues:
 
@@ -66,6 +67,26 @@ Top 10 largest tables by size:
 | users                    | 109 MB        |
 | geocode_queries          | 77 MB         |
 | authorities              | 24 MB         |
+
+## Personal information
+
+### Signup IP addresses
+
+`alerts.signup_ip` and `users.signup_ip` hold the IP address of the request that created the alert or the account. We
+collect them for one reason: so we can spot several signups coming from the same place when we're looking at spam or
+abuse. That was the blocker in
+[Check if spam accounts being created (and stop them) #1682](https://github.com/openaustralia/planningalerts/issues/1682).
+
+* Retention is 90 days, set in `ExpireSignupIpsJob::RETENTION_PERIOD`. The job runs daily from `config/cron.yml` and
+  sets the column back to NULL for anything older.
+* Database backups still hold the value for as long as we keep the backups. Expiry applies to the live database only.
+* Staff can see it in the admin backend on the alert and user pages, and the admin search box matches on it.
+* Treat it as a signal for clustering, not as evidence. It is the IP we saw, and this app does not set
+  `config.action_dispatch.trusted_proxies`. `GET /whatismyip` (see README) is how you confirm the address Rails sees is
+  the real visitor rather than a proxy.
+* Not covered by this: `users.current_sign_in_ip` and `users.last_sign_in_ip`, which Devise `:trackable` writes on every
+  sign-in and which we keep indefinitely, and the IP addresses `LogApiCallJob` sends to Elasticsearch. Both predate this
+  work and neither has a retention rule. That inconsistency is worth fixing separately.
 
 ## Suggestions for future work
 

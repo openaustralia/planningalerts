@@ -20,3 +20,7 @@ sidedup_versions:
   cron: "every day at 11 pm Australia/Sydney"
   class: "DedupVersionsJob"
   description: "Remove any duplicate versions"
+expire_signup_ips:
+  cron: "every day at 4 am Australia/Sydney"
+  class: "ExpireSignupIpsJob"
+  description: "Clear the IP addresses recorded at signup once they're older than 90 days"

@@ -41,7 +41,8 @@ class AlertsController < ApplicationController
     alert = Alert.new(
       user: current_user,
       address:,
-      radius_meters: params_radius_meters.to_i
+      radius_meters: params_radius_meters.to_i,
+      signup_ip: request.remote_ip
     )
     authorize alert
     # Ensures the address is normalised into a consistent form

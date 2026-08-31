@@ -21,6 +21,7 @@ class AlertDashboard < Administrate::BaseDashboard
     lat: Field::Number.with_options(decimals: 2),
     lng: Field::Number.with_options(decimals: 2),
     radius_meters: Field::Number,
+    signup_ip: Field::String,
     unsubscribed: YesNoBooleanField,
     unsubscribed_at: Field::DateTime,
     unsubscribed_by: Field::String,
@@ -37,6 +38,7 @@ class AlertDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = T.let(%i[
     user
     address
+    signup_ip
     unsubscribed
   ].freeze, T::Array[Symbol])
 
@@ -50,6 +52,7 @@ class AlertDashboard < Administrate::BaseDashboard
     lat
     lng
     confirm_id
+    signup_ip
     radius_meters
     created_at
     updated_at

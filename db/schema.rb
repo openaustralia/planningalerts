@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_08_17_100506) do
+ActiveRecord::Schema[7.1].define(version: 2026_08_31_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -83,6 +83,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_17_100506) do
     t.string "unsubscribed_by"
     t.integer "user_id", null: false
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.string "signup_ip", comment: "IP the alert was created from. Nulled out by ExpireSignupIpsJob after 90 days"
     t.index ["lonlat"], name: "index_alerts_on_lonlat", using: :gist
     t.index ["user_id", "address"], name: "index_alerts_on_user_id_and_address_active", unique: true, where: "(unsubscribed = false)"
     t.index ["user_id"], name: "fk_rails_d4053234e7"
@@ -330,6 +331,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_17_100506) do
     t.datetime "locked_at"
     t.datetime "activated_at"
     t.boolean "tailwind_theme", default: false, null: false
+    t.string "signup_ip", comment: "IP the account was created from. Nulled out by ExpireSignupIpsJob after 90 days"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

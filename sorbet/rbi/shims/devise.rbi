@@ -10,6 +10,9 @@ module Devise
 
     sig { returns(T.untyped) }
     def resource; end
+
+    sig { params(hash: T::Hash[Symbol, T.untyped]).returns(T.untyped) }
+    def build_resource(hash = T.unsafe(nil)); end
   end
 
   class SessionsController < DeviseController
