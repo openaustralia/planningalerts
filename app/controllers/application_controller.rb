@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
 
   include Pundit::Authorization
 
+  helper_method :altcha_required?, :altcha_enforced?
+
   helper :all # include all helpers, all the time
   protect_from_forgery with: :exception # See ActionController::RequestForgeryProtection for details
 
@@ -30,6 +32,98 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   private
+
+  # ALTCHA, the proof-of-work check on our public forms. See doc/altcha.md.
+  #
+  # Two flags drive this, both described in config/initializers/flipper.rb:
+  #
+  #   altcha         show the widget and check the answer
+  #   altcha_enforce turn a failed check into a rejection
+  #
+  # With altcha on and altcha_enforce off we are in monitor mode: the widget is
+  # shown, the answer is checked, the outcome is counted, and the form goes
+  # through either way. That is how we find out what enforcing would cost before
+  # anybody is turned away.
+  #
+  # These live here rather than in a concern because Sorbet's requires_ancestor
+  # is still experimental and off in sorbet/config, so a module couldn't see
+  # current_user, session or params.
+
+  # The Flipper actor for the person in front of us.
+  #
+  # Signed out, this is a Visitor keyed on a value we keep in the session, which
+  # gives a percentage gate something stable to hash. The session is written
+  # rather than read from session.id, because a cookie session has no id until
+  # something is stored in it, and because Devise rotates the session on sign
+  # in.
+  #
+  # This writes to the session even when the flag is off, since Flipper needs an
+  # actor before it can answer. That costs nothing: every page with one of these
+  # forms already sets a session cookie for the CSRF token.
+  sig { returns(T.any(User, Visitor)) }
+  def altcha_actor
+    user = current_user
+    return user if user
+
+    session[:altcha_id] ||= SecureRandom.uuid
+    Visitor.new(T.cast(session[:altcha_id], String))
+  end
+
+  # Should this form show a check and have the answer looked at?
+  sig { returns(T::Boolean) }
+  def altcha_required?
+    Flipper.enabled?(:altcha, altcha_actor)
+  end
+
+  # Would a failed check actually reject the submission?
+  sig { returns(T::Boolean) }
+  def altcha_enforced?
+    altcha_required? && Flipper.enabled?(:altcha_enforce, altcha_actor)
+  end
+
+  # True when the request may go ahead. Always records the outcome. Only ever
+  # returns false when altcha_enforce is on.
+  sig { params(form: Symbol).returns(T::Boolean) }
+  def altcha_ok?(form:)
+    return true unless altcha_required?
+
+    # Anything but a string is somebody poking at us, not a browser: params
+    # can be an array or a hash if the query string says so.
+    payload = params[:altcha]
+    result = VerifyAltchaSolutionService.call(payload: payload.is_a?(String) ? payload : nil)
+    report_altcha_result(form:, result:)
+    result.verified || !Flipper.enabled?(:altcha_enforce, altcha_actor)
+  end
+
+  sig { params(form: Symbol, result: VerifyAltchaSolutionService::Result).void }
+  def report_altcha_result(form:, result:)
+    outcome = result.failure&.serialize || "verified"
+    Sentry.metrics.count(
+      "altcha.checks",
+      value: 1,
+      attributes: { form: form.to_s, outcome:, enforcing: altcha_enforced?.to_s }
+    )
+
+    # Only the surprising failures are worth an event. Missing is the ordinary
+    # case in monitor mode, mostly meaning JavaScript did not run, and one
+    # message per submission would swallow the Sentry quota to say what the
+    # counter above already says.
+    return unless notable_altcha_failure?(result.failure)
+
+    Sentry.capture_message(
+      "ALTCHA check failed: #{outcome}",
+      level: :warning,
+      tags: { altcha_form: form.to_s, altcha_outcome: outcome }
+    )
+  end
+
+  sig { params(failure: T.nilable(VerifyAltchaSolutionService::Failure)).returns(T::Boolean) }
+  def notable_altcha_failure?(failure)
+    [
+      VerifyAltchaSolutionService::Failure::InvalidSignature,
+      VerifyAltchaSolutionService::Failure::Replayed
+    ].include?(failure)
+  end
 
   # Attach the signed-in person to Sentry events by id only, never email
   # (Australian Privacy Principles). Look the id up in the admin backend if

@@ -35,7 +35,14 @@
                      multiple: true,
                      data: { direct_upload_url: rails_direct_uploads_url } %>
   </div>
-  <% if current_user.nil? && Rails.application.credentials[:recaptcha] %>
+  <%# ALTCHA and reCAPTCHA are alternatives here, never both at once. See the
+  comment on ContactMessagesController#human? for why. %>
+  <% if current_user.nil? && altcha_enforced? %>
+    <div class="mt-8">
+      <%= render AltchaWidgetComponent.new %>
+      <%= f.error :base, class: "mt-2" %>
+    </div>
+  <% elsif current_user.nil? && Rails.application.credentials[:recaptcha] %>
     <div class="mt-8">
       <%= recaptcha_tags %>
       <%= f.error :base, class: "mt-2" %>

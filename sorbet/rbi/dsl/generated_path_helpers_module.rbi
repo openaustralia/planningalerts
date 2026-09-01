@@ -103,6 +103,9 @@ module GeneratedPathHelpersModule
   def alerts_user_session_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def altcha_challenge_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def api_developer_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

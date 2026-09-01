@@ -105,6 +105,8 @@ GEM
       selectize-rails (~> 0.6)
     airbrussh (1.5.2)
       sshkit (>= 1.6.1, != 1.7.0)
+    altcha (2.0.1)
+      base64
     ast (2.4.2)
     autoprefixer-rails (10.4.19.0)
       execjs (~> 2)
@@ -812,6 +814,7 @@ DEPENDENCIES
   activerecord-postgis-adapter
   administrate (~> 0.20.0)
   administrate-field-paper_trail!
+  altcha
   autoprefixer-rails
   aws-sdk-s3
   axe-core-capybara

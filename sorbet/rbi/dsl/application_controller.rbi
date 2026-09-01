@@ -50,6 +50,12 @@ class ApplicationController
     include ::DeviseHelper
     include ::Pundit::Helper
 
+    sig { returns(T::Boolean) }
+    def altcha_enforced?; end
+
+    sig { returns(T::Boolean) }
+    def altcha_required?; end
+
     sig { params(record: T.untyped).returns(T.untyped) }
     def policy(record); end
 
