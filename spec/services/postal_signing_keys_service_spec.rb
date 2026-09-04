@@ -101,5 +101,22 @@ describe PostalSigningKeysService do
       Timecop.travel(16.minutes.from_now) { described_class.call }
       expect(HTTParty).to have_received(:get).twice
     end
+
+    it "serves the stale copy to a request arriving while a refresh is in flight" do
+      stub_jwks(body: jwks_json(signing_key.public_key))
+      described_class.call
+      Timecop.travel(15.minutes.from_now + 1.second) do
+        # Re-stub the fetch so that mid-refresh, like a concurrent request would, we ask again
+        pems_during_refresh = :unset
+        allow(HTTParty).to receive(:get) do
+          pems_during_refresh = pems
+          instance_double(HTTParty::Response, code: 200, body: jwks_json(signing_key.public_key))
+        end
+        described_class.call
+        expect(pems_during_refresh).to eq [signing_key.public_key.to_pem]
+      end
+      # Once to warm the cache and once for the refresh; the mid-refresh request fetched nothing
+      expect(HTTParty).to have_received(:get).twice
+    end
   end
 end

@@ -23,6 +23,11 @@ class PostalSigningKeysService
   # webhook on an endpoint anyone can post to, and postal's later retries land after it expires.
   CACHE_TTL = T.let(15.minutes, ActiveSupport::Duration)
 
+  # When the cached copy expires, the first request bumps its expiry by this much and refreshes,
+  # while requests arriving during the refresh keep getting the stale copy instead of a fetch
+  # each. A refresh takes at most HTTP_TIMEOUT, so this only needs to cover that with slack.
+  RACE_CONDITION_TTL = T.let(5.seconds, ActiveSupport::Duration)
+
   sig { returns(T.nilable(T::Array[OpenSSL::PKey::RSA])) }
   def self.call
     new.call
@@ -37,7 +42,7 @@ class PostalSigningKeysService
 
   sig { returns(T.nilable(T::Array[String])) }
   def cached_pems
-    Rails.cache.fetch(CACHE_KEY, expires_in: CACHE_TTL) { pems }
+    Rails.cache.fetch(CACHE_KEY, expires_in: CACHE_TTL, race_condition_ttl: RACE_CONDITION_TTL) { pems }
   end
 
   # PEM strings rather than key objects, because these get cached and the production cache is
