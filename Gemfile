@@ -258,9 +258,15 @@ end
 
 # Error tracking, tracing and profiling with Sentry. We're running this
 # alongside Honeybadger during the transition. See issue #2049
-gem "sentry-rails"
-gem "sentry-ruby"
-gem "sentry-sidekiq"
+#
+# Pinned to the 6.x line: 7.0.0 removed `enable_logs`, which
+# config/initializers/sentry.rb sets, and changed the PII and metrics
+# defaults. Deploys install from Gemfile.lock in deployment mode so they
+# can't drift, but without a constraint the next `bundle update` takes the
+# new major.
+gem "sentry-rails", "~> 6.7"
+gem "sentry-ruby", "~> 6.7"
+gem "sentry-sidekiq", "~> 6.7"
 # Profiler used by Sentry profiling (requires Ruby 3.2+)
 gem "vernier"
 

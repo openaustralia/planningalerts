@@ -906,9 +906,9 @@ DEPENDENCIES
   sanitize
   searchkick
   selenium-webdriver (>= 4.14.0)
-  sentry-rails
-  sentry-ruby
-  sentry-sidekiq
+  sentry-rails (~> 6.7)
+  sentry-ruby (~> 6.7)
+  sentry-sidekiq (~> 6.7)
   sidekiq (~> 7.0)
   sidekiq-cron
   simplecov
