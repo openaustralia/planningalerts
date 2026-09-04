@@ -14,6 +14,9 @@ Rails.application.configure do
   config.x.flipper_redis_url = "redis://redis:6379/2"
   config.x.split_redis_url = "redis://redis:6379/3"
 
+  # Where postal publishes the public key it signs delivery webhooks with
+  config.x.postal_jwks_url = "https://postal.oaf.org.au/.well-known/jwks.json"
+
   ## User settings (END)
 
   # Settings specified here will take precedence over those in config/application.rb.

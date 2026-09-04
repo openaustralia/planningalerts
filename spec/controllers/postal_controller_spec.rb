@@ -13,16 +13,16 @@ describe PostalController do
   let(:message_url) { "https://postal.oaf.org.au/org/oaf/servers/planningalerts-comments/messages/#{message_id}" }
 
   before do
-    allow(Rails.application.credentials).to receive(:dig).with(:postal, :webhook_public_key).and_return(private_key.public_key.to_pem)
+    stub_jwks(body: jwks_json(private_key.public_key))
     allow(NotifySlackCommentDeliveryService).to receive(:call)
   end
 
   def sign(body)
-    Base64.strict_encode64(private_key.sign(OpenSSL::Digest.new("SHA1"), body))
+    Base64.strict_encode64(private_key.sign(OpenSSL::Digest.new("SHA256"), body))
   end
 
   def post_event(body, signature: sign(body))
-    request.headers["X-Postal-Signature"] = signature unless signature.nil?
+    request.headers["X-Postal-Signature-256"] = signature unless signature.nil?
     post :event, body:, format: :json
   end
 
@@ -88,9 +88,20 @@ describe PostalController do
     }.to_json
   end
 
+  it "accepts a webhook signed by the key postal publishes" do
+    create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageSent", tag: alert_tag))
+    expect(response).to have_http_status(:ok)
+  end
+
   it "rejects a request with no signature" do
     post_event(status_event_body(event: "MessageSent", tag: alert_tag), signature: nil)
     expect(response).to have_http_status(:forbidden)
+  end
+
+  it "doesn't go looking for the signing keys when there's no signature" do
+    post_event(status_event_body(event: "MessageSent", tag: alert_tag), signature: nil)
+    expect(HTTParty).not_to have_received(:get)
   end
 
   it "rejects a request with an invalid signature" do
@@ -98,9 +109,24 @@ describe PostalController do
     expect(response).to have_http_status(:forbidden)
   end
 
-  it "rejects a request when no public key is configured" do
-    allow(Rails.application.credentials).to receive(:dig).with(:postal, :webhook_public_key).and_return(nil)
+  it "accepts a webhook signed by any of the keys postal publishes" do
+    create(:alert, id: alert_id)
+    stub_jwks(body: jwks_json(OpenSSL::PKey::RSA.new(2048).public_key, private_key.public_key))
     post_event(status_event_body(event: "MessageSent", tag: alert_tag))
+    expect(response).to have_http_status(:ok)
+  end
+
+  it "asks postal to retry when the signing keys can't be fetched" do
+    allow(HTTParty).to receive(:get).and_raise(Net::OpenTimeout)
+    post_event(status_event_body(event: "MessageSent", tag: alert_tag))
+    expect(response).to have_http_status(:service_unavailable)
+  end
+
+  it "rejects a body signed by a key postal isn't publishing" do
+    impostor_key = OpenSSL::PKey::RSA.new(2048)
+    body = status_event_body(event: "MessageSent", tag: alert_tag)
+    signature = Base64.strict_encode64(impostor_key.sign(OpenSSL::Digest.new("SHA256"), body))
+    post_event(body, signature:)
     expect(response).to have_http_status(:forbidden)
   end
 

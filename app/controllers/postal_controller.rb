@@ -13,8 +13,9 @@ class PostalController < ApplicationController
   def event
     # Verify the signature against the raw body before trusting anything in it
     raw_post = request.raw_post
-    unless valid_signature?(raw_post)
-      head :forbidden
+    failure_status = signature_failure_status(raw_post)
+    if failure_status
+      head failure_status
       return
     end
 
@@ -88,22 +89,32 @@ class PostalController < ApplicationController
 
   private
 
-  # Postal signs each webhook request with the server's signing key. The
-  # X-Postal-Signature header contains a Base64 encoded RSA-SHA1 signature
-  # of the raw JSON request body and we hold the matching public key in the
-  # Rails credentials. See https://docs.postalserver.io/developer/webhooks
-  # The header name and digest are per the postal v3 docs and are kept in
-  # this one method so they're trivially adjustable during integration
-  # testing.
-  sig { params(raw_post: String).returns(T::Boolean) }
-  def valid_signature?(raw_post)
-    public_key_pem = T.cast(Rails.application.credentials.dig(:postal, :webhook_public_key), T.nilable(String))
-    return false if public_key_pem.nil?
+  # The X-Postal-Signature-256 header holds a Base64 encoded RSA-SHA256 signature of the raw
+  # JSON request body, made with postal's installation wide signing key. We check it against
+  # every signing key postal is currently publishing, so a rotation on the postal server needs
+  # no change here. Postal also sends X-Postal-Signature, an RSA-SHA1 signature of the same body
+  # that its own source marks as being for legacy use, and X-Postal-Signature-KID naming the
+  # key it used. We ignore both.
+  # See https://docs.postalserver.io/developer/webhooks
+  #
+  # Returns nil when the request is properly signed, otherwise the status to respond with. A
+  # signature that doesn't check out gets 403 and the event is gone for good. Not being able to
+  # reach the published keys is a different thing: we can't tell whether the request is genuine,
+  # so 503 asks postal to retry, which it does over about 36 minutes, rather than silently
+  # dropping a real delivery event.
+  sig { params(raw_post: String).returns(T.nilable(Symbol)) }
+  def signature_failure_status(raw_post)
+    signature = T.cast(request.headers["X-Postal-Signature-256"], T.nilable(String))
+    # Checked before the keys are fetched, so an unsigned request costs us no outbound request
+    return :forbidden if signature.nil?
 
-    signature = T.cast(request.headers["X-Postal-Signature"], T.nilable(String))
-    return false if signature.nil?
+    keys = PostalSigningKeysService.call
+    return :service_unavailable if keys.nil?
 
-    public_key = OpenSSL::PKey::RSA.new(public_key_pem)
-    public_key.verify(OpenSSL::Digest.new("SHA1"), Base64.decode64(signature), raw_post)
+    digest = OpenSSL::Digest.new("SHA256")
+    decoded_signature = Base64.decode64(signature)
+    return nil if keys.any? { |key| key.verify(digest, decoded_signature, raw_post) }
+
+    :forbidden
   end
 end
