@@ -4,4 +4,3 @@
 server "192.168.56.11", roles: %i[app web db]
 
 set :deploy_to, "/srv/www/production"
-set :honeybadger_env, "development"

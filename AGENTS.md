@@ -218,10 +218,10 @@ Two independent switching systems coexist and are easy to confuse. `flipper`
 (Redis-backed, with `flipper-ui` mounted) is for feature flags. `split` is for
 A/B tests. Pick deliberately.
 
-Error reporting currently runs Sentry and Honeybadger side by side during a
-transition tracked in [#2049](https://github.com/openaustralia/planningalerts/issues/2049).
-Adding reporting means thinking about which one, not reaching for whichever you
-find first.
+Error reporting is Sentry, following the canonical configuration in the
+infrastructure repo's `docs/monitoring.md` (the Honeybadger transition in
+[#2049](https://github.com/openaustralia/planningalerts/issues/2049) is
+complete and the gem is gone).
 
 ### Front end
 
