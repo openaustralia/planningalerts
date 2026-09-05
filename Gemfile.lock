@@ -329,7 +329,6 @@ GEM
     hashie (5.0.0)
     health_check (3.1.0)
       railties (>= 5.0)
-    honeybadger (5.15.4)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.6)
@@ -658,15 +657,15 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
-    sentry-rails (6.7.0)
+    sentry-rails (7.0.0)
       railties (>= 5.2.0)
-      sentry-ruby (~> 6.7.0)
-    sentry-ruby (6.7.0)
+      sentry-ruby (~> 7.0.0)
+    sentry-ruby (7.0.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
       logger
-    sentry-sidekiq (6.7.0)
-      sentry-ruby (~> 6.7.0)
+    sentry-sidekiq (7.0.0)
+      sentry-ruby (~> 7.0.0)
       sidekiq (>= 5.0)
     shellany (0.0.1)
     sidekiq (7.3.0)
@@ -856,7 +855,6 @@ DEPENDENCIES
   guard-rspec
   guard-rubocop
   health_check
-  honeybadger
   httparty (>= 0.24.0)
   jb
   jwt

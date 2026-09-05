@@ -218,10 +218,10 @@ Two independent switching systems coexist and are easy to confuse. `flipper`
 (Redis-backed, with `flipper-ui` mounted) is for feature flags. `split` is for
 A/B tests. Pick deliberately.
 
-Error reporting currently runs Sentry and Honeybadger side by side during a
-transition tracked in [#2049](https://github.com/openaustralia/planningalerts/issues/2049).
-Adding reporting means thinking about which one, not reaching for whichever you
-find first.
+Error reporting is Sentry, following the canonical configuration in the
+infrastructure repo's `docs/monitoring.md` (the Honeybadger transition in
+[#2049](https://github.com/openaustralia/planningalerts/issues/2049) is
+complete and the gem is gone).
 
 ### Front end
 
@@ -318,11 +318,12 @@ bundle exec cap staging --set branch=my-branch deploy
 ```
 
 Deploys record a release in Sentry through a Capistrano hook that shells out to
-`sentry-cli` on your machine. The committed `.sentryclirc` holds only the org and
-project defaults; **the token belongs in `~/.sentryclirc` and must never be
-committed.** A missing or unauthenticated `sentry-cli` prints a warning and
-skips the release rather than failing the deploy, so a quiet deploy is not proof
-it worked.
+the Sentry CLI on your machine (`sentry`, or the legacy `sentry-cli`). The
+committed `.sentryclirc` holds only non-secret defaults; **credentials come
+from `sentry auth` (v4) or `~/.sentryclirc` (v3) and must never be
+committed.** A missing or unauthenticated CLI prints a warning and skips the
+release rather than failing the deploy, so a quiet deploy is not proof it
+worked.
 
 The Ruby upgrade runbook in `README.md` is explicitly marked out of date; it
 predates the current blue/green setup. Treat it as history.

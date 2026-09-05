@@ -1,15 +1,25 @@
-<% if Rails.env.production? && !crawler?(request.user_agent) %>
+<%# The canonical OAF Sentry browser partial (see the infrastructure repo's
+    docs/monitoring.md; change it there first, then update every copy).
+    Renders only when the server SDK has a DSN - the same off switch as the
+    backend - and never for crawlers, whose errors we can't act on. %>
+<% if (dsn = Sentry.initialized? && Sentry.configuration&.dsn) && !crawler?(request.user_agent) %>
+  <%# Meta tags the browser SDK reads on pageload to continue the backend trace,
+      stitching the browser transaction to the Rails transaction that rendered it.
+      SDK-generated markup with no user input, so raw output is safe here. %>
+  <%== Sentry.get_trace_propagation_meta %>
   <%# Sentry error monitoring, tracing and session replay via the loader script, which lazy-loads the full SDK %>
   <%# sentryOnLoad must be defined before the loader script so the loader can find and invoke it %>
   <script>
     window.sentryOnLoad = function () {
       Sentry.init({
-        <% if sentry_release %>
-          release: "<%= j(sentry_release) %>",
+        <% if Sentry.configuration.release %>
+          release: "<%= j(Sentry.configuration.release) %>",
         <% end %>
-        environment: "<%= j(ENV.fetch("SENTRY_ENVIRONMENT", Rails.env)) %>",
-        tracesSampleRate: 0.05,
-        replaysSessionSampleRate: 0.1,
+        environment: "<%= j(Sentry.configuration.environment) %>",
+        tracesSampleRate: 0.1,
+        // Only record session replays when an error occurs, with default
+        // privacy masking (maskAllText/blockAllMedia) left enabled
+        replaysSessionSampleRate: 0,
         replaysOnErrorSampleRate: 1.0,
         sendDefaultPii: true,
         // Errors thrown by browser extensions, in-app webview bridges and email
@@ -33,6 +43,8 @@
           "isHighContrast",
           // iOS in-app browsers and extensions expecting their native bridge
           "window.webkit.messageHandlers",
+          // In-app browsers' autofill bridge (e.g. Facebook/Instagram on iOS)
+          "_AutofillCallbackHandler",
           // Chunk failures inside Google Maps' own loader ("onion", "map",
           // "util" and friends): the main script arrived but a content blocker
           // or flaky connection cut off an internal module. Our importLibrary
@@ -48,7 +60,16 @@
           /^safari-(web-)?extension:\/\//i
         ]
       });
+      <% if user_signed_in? %>
+        <%# Tie browser events to the same user as server events - id only, no
+            email or name, matching the backend's set_sentry_user %>
+        Sentry.setUser({ id: "<%= j(current_user.id.to_s) %>" });
+      <% end %>
     };
   </script>
-  <%= javascript_include_tag "https://js-de.sentry-cdn.com/d56690508e2b07f38f9b78ae4228f42f.min.js", crossorigin: "anonymous" %>
+  <%# The loader script key is the public key from the DSN. The host is
+      region-specific and our org is in Sentry's EU region: the US host
+      (js.sentry-cdn.com) answers 200 with a no-op stub, which would leave
+      every browser signal silently inert. %>
+  <%= javascript_include_tag "https://js-de.sentry-cdn.com/#{dsn.public_key}.min.js", crossorigin: "anonymous" %>
 <% end %>
