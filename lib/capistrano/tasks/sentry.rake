@@ -91,55 +91,53 @@ namespace :sentry do
         false
       end
 
-      if created
-        begin
-          # Associate the exact deployed commit server-side via Sentry's
-          # GitHub integration - Sentry works out the commit range from the
-          # previous release. (--auto would use the local checkout's HEAD,
-          # which isn't necessarily the deployed revision.)
-          if cli == "sentry"
-            execute :sentry, "release", "set-commits", versioned, "--commit", "#{repo}@#{release}"
-          else
-            execute :"sentry-cli", "releases", "set-commits", release, "--commit", "#{repo}@#{release}"
-          end
-        rescue StandardError => e
-          warn "Sentry: set-commits via the GitHub integration failed, trying local git history: #{e.message}"
-          begin
-            local_revision = capture(:git, "rev-parse", "HEAD").strip
-            if local_revision == release
-              if cli == "sentry"
-                execute :sentry, "release", "set-commits", versioned, "--local"
-              else
-                execute :"sentry-cli", "releases", "set-commits", release, "--local"
-              end
-            else
-              warn "Sentry: local checkout is at #{local_revision}, not deployed release #{release}; skipping local commit association"
-            end
-          rescue StandardError => e
-            warn "Sentry: associating commits failed, continuing deploy: #{e.message}"
-          end
-        end
+      next unless created
 
+      begin
+        # Associate the exact deployed commit server-side via Sentry's
+        # GitHub integration - Sentry works out the commit range from the
+        # previous release. (--auto would use the local checkout's HEAD,
+        # which isn't necessarily the deployed revision.)
+        if cli == "sentry"
+          execute :sentry, "release", "set-commits", versioned, "--commit", "#{repo}@#{release}"
+        else
+          execute :"sentry-cli", "releases", "set-commits", release, "--commit", "#{repo}@#{release}"
+        end
+      rescue StandardError => e
+        warn "Sentry: set-commits via the GitHub integration failed, trying local git history: #{e.message}"
         begin
-          if cli == "sentry"
-            execute :sentry, "release", "finalize", versioned
+          local_revision = capture(:git, "rev-parse", "HEAD").strip
+          if local_revision != release
+            warn "Sentry: local checkout is at #{local_revision}, not deployed release #{release}; skipping local commit association"
+          elsif cli == "sentry"
+            execute :sentry, "release", "set-commits", versioned, "--local"
           else
-            execute :"sentry-cli", "releases", "finalize", release
+            execute :"sentry-cli", "releases", "set-commits", release, "--local"
           end
         rescue StandardError => e
-          warn "Sentry: finalizing release failed, continuing deploy: #{e.message}"
+          warn "Sentry: associating commits failed, continuing deploy: #{e.message}"
         end
+      end
 
-        begin
-          if cli == "sentry"
-            # v4: "deploys new" is gone; the environment is a positional.
-            execute :sentry, "release", "deploy", versioned, environment
-          else
-            execute :"sentry-cli", "deploys", "new", "--release", release, "-e", environment
-          end
-        rescue StandardError => e
-          warn "Sentry: recording deploy failed, continuing deploy: #{e.message}"
+      begin
+        if cli == "sentry"
+          execute :sentry, "release", "finalize", versioned
+        else
+          execute :"sentry-cli", "releases", "finalize", release
         end
+      rescue StandardError => e
+        warn "Sentry: finalizing release failed, continuing deploy: #{e.message}"
+      end
+
+      begin
+        if cli == "sentry"
+          # v4: "deploys new" is gone; the environment is a positional.
+          execute :sentry, "release", "deploy", versioned, environment
+        else
+          execute :"sentry-cli", "deploys", "new", "--release", release, "-e", environment
+        end
+      rescue StandardError => e
+        warn "Sentry: recording deploy failed, continuing deploy: #{e.message}"
       end
     end
   end
