@@ -105,10 +105,15 @@ namespace :sentry do
         rescue StandardError => e
           warn "Sentry: set-commits via the GitHub integration failed, trying local git history: #{e.message}"
           begin
-            if cli == "sentry"
-              execute :sentry, "release", "set-commits", versioned, "--local"
+            local_revision = capture(:git, "rev-parse", "HEAD").strip
+            if local_revision == release
+              if cli == "sentry"
+                execute :sentry, "release", "set-commits", versioned, "--local"
+              else
+                execute :"sentry-cli", "releases", "set-commits", release, "--local"
+              end
             else
-              execute :"sentry-cli", "releases", "set-commits", release, "--local"
+              warn "Sentry: local checkout is at #{local_revision}, not deployed release #{release}; skipping local commit association"
             end
           rescue StandardError => e
             warn "Sentry: associating commits failed, continuing deploy: #{e.message}"
