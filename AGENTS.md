@@ -318,11 +318,12 @@ bundle exec cap staging --set branch=my-branch deploy
 ```
 
 Deploys record a release in Sentry through a Capistrano hook that shells out to
-`sentry-cli` on your machine. The committed `.sentryclirc` holds only the org and
-project defaults; **the token belongs in `~/.sentryclirc` and must never be
-committed.** A missing or unauthenticated `sentry-cli` prints a warning and
-skips the release rather than failing the deploy, so a quiet deploy is not proof
-it worked.
+the Sentry CLI on your machine (`sentry`, or the legacy `sentry-cli`). The
+committed `.sentryclirc` holds only non-secret defaults; **credentials come
+from `sentry auth` (v4) or `~/.sentryclirc` (v3) and must never be
+committed.** A missing or unauthenticated CLI prints a warning and skips the
+release rather than failing the deploy, so a quiet deploy is not proof it
+worked.
 
 The Ruby upgrade runbook in `README.md` is explicitly marked out of date; it
 predates the current blue/green setup. Treat it as history.

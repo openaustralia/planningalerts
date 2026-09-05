@@ -4,10 +4,14 @@
 # Records a release and deploy in Sentry after each successful deploy so
 # issues can be tied to the deploy that introduced them.
 #
+# This is the canonical OAF release-tracking task, carried verbatim by each
+# collection's repo. The convention lives in the infrastructure repo's
+# docs/monitoring.md; change it there first, then update every copy.
+#
 # Runs locally on the deployer's machine (not the servers) because that's
 # where the Sentry CLI and the full git history live. Org/project defaults
-# come from the committed .sentryclirc; the auth token comes from each
-# deployer's ~/.sentryclirc — see README "Sentry release tracking".
+# come from the committed .sentryclirc; credentials come from each deployer's
+# `sentry auth` login (CLI v4) or ~/.sentryclirc (v3).
 namespace :sentry do
   desc "Record the release and deploy in Sentry"
   task :release do
@@ -20,7 +24,7 @@ namespace :sentry do
       # v3 has no such command and reports it through `info`. Don't reach for
       # `sentry info` on v4: it exits non-zero whenever no default org/project
       # is configured, even when the token is fine, which made every deploy
-      # skip the release (#2183).
+      # skip the release (openaustralia/planningalerts#2183).
       #
       # SSHKit's local backend execs commands directly rather than through a
       # shell, so a missing binary raises Errno::ENOENT instead of making
@@ -40,49 +44,97 @@ namespace :sentry do
           This deploy was NOT recorded as a release in Sentry, so issues
           won't be linked to it. The deploy itself has still succeeded.
 
-          To fix this for future deploys, see the "Sentry release tracking"
-          section of the README.
+          To fix this for future deploys, see "Monitoring" in the
+          infrastructure repo (docs/monitoring.md).
           ********************************************************************
         WARNING
         next
       end
 
-      # Matches the release auto-detected by the Ruby SDK from the REVISION file
+      # Matches the release auto-detected by the Ruby SDK from the REVISION
+      # file that Capistrano writes. The Sentry environment is always the
+      # stage name (docs/monitoring.md).
       release = fetch(:current_revision)
       environment = fetch(:stage).to_s
 
-      begin
-        # v3 reads org and project from the committed .sentryclirc. v4 ignores
-        # that file, so read the values here and pass them on the command line,
-        # which keeps .sentryclirc the single source of truth for both.
-        sentryclirc = File.read(File.expand_path("../../../.sentryclirc", __dir__))
-        org = sentryclirc[/^\s*org\s*=\s*(\S+)/, 1]
-        project = sentryclirc[/^\s*project\s*=\s*(\S+)/, 1]
+      # v3 reads org and project from the committed .sentryclirc. v4 ignores
+      # that file, so read the values here and pass them on the command line,
+      # which keeps .sentryclirc the single source of truth for both.
+      sentryclirc = File.read(File.expand_path("../../../.sentryclirc", __dir__))
+      org = sentryclirc[/^\s*org\s*=\s*(\S+)/, 1]
+      project = sentryclirc[/^\s*project\s*=\s*(\S+)/, 1]
 
-        # Associating commits requires the GitHub integration to be installed in
-        # Sentry. If it isn't yet, warn but still finalize and record the deploy.
-        commit_warning = "WARNING: #{cli} could not associate commits with release #{release} " \
-                         "(is the GitHub integration installed in Sentry?). Continuing without commit data."
+      # The repository as Sentry's GitHub integration knows it, for
+      # associating the exact deployed commit. Set :sentry_release_repo in
+      # deploy.rb when the deployed code lives in a different repository to
+      # the one being deployed from (Right to Know deploys
+      # openaustralia/alaveteli).
+      repo = fetch(:sentry_release_repo,
+                   fetch(:repo_url).to_s[%r{github\.com[:/](.+?)(?:\.git)?\z}, 1])
+
+      # v4 addresses a release as an "org/version" positional and scopes it
+      # with --project; v3 reads both from .sentryclirc.
+      versioned = "#{org}/#{release}"
+
+      # Every step after the release exists is best-effort: the deploy itself
+      # has already succeeded, so warn and continue rather than failing it on
+      # a Sentry hiccup.
+      created = begin
         if cli == "sentry"
-          # v4 renamed command groups to singular, takes the release as an
-          # <org>/<version> positional, and made the deploy environment a
-          # positional argument.
-          versioned = "#{org}/#{release}"
           execute :sentry, "release", "create", "--project", project, versioned
-          warn commit_warning unless test("sentry release set-commits --auto #{versioned}")
-          execute :sentry, "release", "finalize", versioned
-          execute :sentry, "release", "deploy", versioned, environment
         else
           execute :"sentry-cli", "releases", "new", release
-          warn commit_warning unless test("sentry-cli releases set-commits --auto #{release}")
-          execute :"sentry-cli", "releases", "finalize", release
-          execute :"sentry-cli", "deploys", "new", "--release", release, "-e", environment
         end
+        true
       rescue StandardError => e
-        # Recording the release in Sentry is best-effort; the deploy itself
-        # has already succeeded, so don't let a Sentry CLI failure fail it.
-        warn "WARNING: recording release #{release} in Sentry failed (#{e.message}). " \
-             "The deploy itself has still succeeded."
+        warn "Sentry: creating release #{release} failed, continuing deploy: #{e.message}"
+        false
+      end
+
+      if created
+        begin
+          # Associate the exact deployed commit server-side via Sentry's
+          # GitHub integration - Sentry works out the commit range from the
+          # previous release. (--auto would use the local checkout's HEAD,
+          # which isn't necessarily the deployed revision.)
+          if cli == "sentry"
+            execute :sentry, "release", "set-commits", versioned, "--commit", "#{repo}@#{release}"
+          else
+            execute :"sentry-cli", "releases", "set-commits", release, "--commit", "#{repo}@#{release}"
+          end
+        rescue StandardError => e
+          warn "Sentry: set-commits via the GitHub integration failed, trying local git history: #{e.message}"
+          begin
+            if cli == "sentry"
+              execute :sentry, "release", "set-commits", versioned, "--local"
+            else
+              execute :"sentry-cli", "releases", "set-commits", release, "--local"
+            end
+          rescue StandardError => e
+            warn "Sentry: associating commits failed, continuing deploy: #{e.message}"
+          end
+        end
+
+        begin
+          if cli == "sentry"
+            execute :sentry, "release", "finalize", versioned
+          else
+            execute :"sentry-cli", "releases", "finalize", release
+          end
+        rescue StandardError => e
+          warn "Sentry: finalizing release failed, continuing deploy: #{e.message}"
+        end
+
+        begin
+          if cli == "sentry"
+            # v4: "deploys new" is gone; the environment is a positional.
+            execute :sentry, "release", "deploy", versioned, environment
+          else
+            execute :"sentry-cli", "deploys", "new", "--release", release, "-e", environment
+          end
+        rescue StandardError => e
+          warn "Sentry: recording deploy failed, continuing deploy: #{e.message}"
+        end
       end
     end
   end

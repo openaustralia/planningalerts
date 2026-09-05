@@ -1,5 +1,8 @@
-# Non-secret defaults for sentry-cli. Auth tokens live in each deployer's
-# ~/.sentryclirc — see README "Sentry release tracking". Never commit tokens here.
+# Non-secret defaults for the Sentry CLI. Credentials come from each
+# deployer's `sentry auth` login (v4) or ~/.sentryclirc (v3) - see
+# "Monitoring" in the infrastructure repo (docs/monitoring.md). Never commit
+# tokens here. The url matters: this org lives in Sentry's EU region.
 [defaults]
+url = https://de.sentry.io
 org = oaf-org-au
 project = planning-alerts
