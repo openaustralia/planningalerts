@@ -48,9 +48,10 @@ Sentry.init do |config|
   # Relative to traces_sample_rate - profile 1 in 10 sampled transactions
   config.profiles_sample_rate = 0.1
   # sidekiq_cron auto-creates cron monitors from the jobs in config/cron.yml.
-  # logger forwards Rails/Sidekiq logs to Sentry
+  # logger additionally forwards non-Rails stdlib logging (e.g. Sidekiq's) -
+  # Rails logs already arrive via sentry-rails' structured logging, on by
+  # default since 7.0
   config.enabled_patches += %i[sidekiq_cron logger]
-  config.enable_logs = true
   # The auto-created cron monitors inherit these: how late a check-in can be
   # before Sentry counts it missed, and how long a job may run before it
   # counts as failed. Generous because the queue-up jobs spread work over
