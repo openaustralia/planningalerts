@@ -126,7 +126,7 @@ namespace :sentry do
           execute :"sentry-cli", "releases", "finalize", release
         end
       rescue StandardError => e
-        warn "Sentry: finalizing release failed, continuing deploy: #{e.message}"
+        warn "Sentry: finalising release failed, continuing deploy: #{e.message}"
       end
 
       begin
