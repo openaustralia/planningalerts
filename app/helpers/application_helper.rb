@@ -228,13 +228,4 @@ module ApplicationHelper
 
     CRAWLER_USER_AGENT.match?(user_agent)
   end
-
-  # The full git SHA of the currently deployed code, from the REVISION file
-  # that Capistrano writes. Needs to match the release used by the backend
-  # Sentry SDK so frontend and backend errors are tied to the same release.
-  sig { returns(T.nilable(String)) }
-  def sentry_release
-    revision_file = Rails.root.join("REVISION")
-    File.read(revision_file).strip if File.exist?(revision_file)
-  end
 end
