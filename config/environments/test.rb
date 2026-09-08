@@ -18,6 +18,10 @@ Rails.application.configure do
   # TODO: #2167 Fix this
   config.x.sidekiq_redis_url = "redis://localhost:6379/0"
 
+  # A reserved domain (RFC 2606), so a spec that forgets to stub the fetch can't reach the
+  # real postal server
+  config.x.postal_jwks_url = "https://postal.example.com/.well-known/jwks.json"
+
   ## User settings (END)
 
   # Settings specified here will take precedence over those in config/application.rb.

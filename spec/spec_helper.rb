@@ -93,6 +93,7 @@ RSpec.configure do |config|
   config.include SessionHelpers, type: :feature
   config.include MockLocationHelpers
   config.include AutocompleteHelpers
+  config.include PostalJwksHelpers
 
   # Disable searchkick during testing so that we don't need to run
   # elasticsearch locally which is a pain
