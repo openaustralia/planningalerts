@@ -74,6 +74,8 @@ gem "foreman"
 
 # Figure out who is likely to be human
 gem "recaptcha", require: "recaptcha/rails"
+# Self-hosted proof-of-work alternative to a captcha. See doc/altcha.md
+gem "altcha"
 
 # Site search
 gem "searchkick"

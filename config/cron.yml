@@ -20,3 +20,7 @@ sidedup_versions:
   cron: "every day at 11 pm Australia/Sydney"
   class: "DedupVersionsJob"
   description: "Remove any duplicate versions"
+delete_expired_altcha_solutions:
+  cron: "every day at 4 am Australia/Sydney"
+  class: "DeleteExpiredAltchaSolutionsJob"
+  description: "Remove ALTCHA solutions whose challenge has expired"

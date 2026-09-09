@@ -30,4 +30,13 @@ Rack::Attack.throttle("activation", limit: 10, period: 1.hour) do |req|
   req.ip if req.path.start_with?("/users/activation/new")
 end
 
+# Issuing an ALTCHA challenge is cheap, but there is no reason for one person to
+# need many of them. 60 a minute leaves room for a page with more than one form
+# plus retries. Note this can't be spec'd: spec/spec_helper.rb sets
+# Rack::Attack.enabled = false because specs sign in often enough to trip the
+# throttles above.
+Rack::Attack.throttle("altcha challenges/ip", limit: 60, period: 1.minute) do |req|
+  req.ip if req.path == "/altcha/challenge"
+end
+
 Rack::Attack.throttled_response_retry_after_header = true
