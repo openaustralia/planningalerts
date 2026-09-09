@@ -23,7 +23,7 @@ describe "ALTCHA on the sign up form" do
     expect(page).to have_field("altcha", type: :hidden, with: /.+/, wait: 30)
   end
 
-  it "lets somebody sign up once the browser has solved the challenge", :truncation do
+  it "lets somebody sign up once the browser has solved the challenge", :js, :truncation do
     wait_for_altcha
 
     fill_in "Your full name", with: "Jane Citizen"
