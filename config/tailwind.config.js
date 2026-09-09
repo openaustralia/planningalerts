@@ -16,8 +16,7 @@ module.exports = {
         display: ['Merriweather', ...defaultTheme.fontFamily.serif]
       },
       backgroundImage: {
-        'header-pattern': "url('header-pattern.svg')",
-        'oaf-logo': "url('oaf-logo-white')"
+        'header-pattern': "url('header-pattern.svg')"
       },
       listStyleImage: {
         dash: "url('dash.svg')"
