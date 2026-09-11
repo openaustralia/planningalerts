@@ -17,7 +17,7 @@ the data live in the `planningalerts-scrapers` organisation and run on
 So when data looks wrong, the cause is often a scraper rather than anything
 here.
 
-Rails 7.1 on Ruby 3.3.4, PostgreSQL with PostGIS, Elasticsearch via Searchkick,
+Rails 7.1 on Ruby 3.3.12, PostgreSQL with PostGIS, Elasticsearch via Searchkick,
 Redis, and Sidekiq. Note that `config/application.rb` runs
 `config.load_defaults 7.0`, not 7.1, so Rails 7.1 framework defaults are opt-in
 through `config/initializers/new_framework_defaults_7_1.rb`.
