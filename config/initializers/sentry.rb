@@ -21,9 +21,11 @@ scrub_value = lambda do |value|
 end
 
 scrub_breadcrumbs = lambda do |event, _hint|
-  event.breadcrumbs&.buffer&.each do |crumb|
-    crumb.message = scrub_value.call(crumb.message) if crumb&.message
-    crumb.data = scrub_value.call(crumb.data) if crumb&.data
+  # BreadcrumbBuffer#buffer is the raw, nil-padded ring array; #each iterates
+  # the compacted members instead, so it never yields a nil crumb.
+  event.breadcrumbs&.each do |crumb|
+    crumb.message = scrub_value.call(crumb.message) if crumb.message
+    crumb.data = scrub_value.call(crumb.data) if crumb.data
   end
   event
 end
