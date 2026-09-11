@@ -22,8 +22,8 @@ end
 
 scrub_breadcrumbs = lambda do |event, _hint|
   event.breadcrumbs&.buffer&.each do |crumb|
-    crumb.message = scrub_value.call(crumb.message) if crumb.message
-    crumb.data = scrub_value.call(crumb.data) if crumb.data
+    crumb.message = scrub_value.call(crumb.message) if crumb&.message
+    crumb.data = scrub_value.call(crumb.data) if crumb&.data
   end
   event
 end
