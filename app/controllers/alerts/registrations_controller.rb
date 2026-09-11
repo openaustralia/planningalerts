@@ -5,6 +5,8 @@ module Alerts
   class RegistrationsController < Devise::RegistrationsController
     extend T::Sig
 
+    before_action :check_altcha, only: :create
+
     sig { void }
     def new
       super do
@@ -34,6 +36,22 @@ module Alerts
     end
 
     protected
+
+    # The alert form carries the address and radius through as hidden fields, so
+    # both the resource and the alert have to be rebuilt for the form to render
+    # again with what was typed still in it.
+    sig { void }
+    def check_altcha
+      return if altcha_ok?(form: :sign_up)
+
+      self.resource = resource_class.new(sign_up_params)
+      resource.errors.add(:base, t("altcha.failed"))
+      @alert = T.let(
+        Alert.new(address: params[:user][:address], radius_meters: params[:user][:radius_meters]),
+        T.nilable(Alert)
+      )
+      render :new, status: :unprocessable_entity
+    end
 
     # This is duplicated from users/registrations_controller
     # TODO: #2159 Get rid of duplication
