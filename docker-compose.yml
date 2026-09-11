@@ -12,6 +12,10 @@ services:
       - gem_cache:/usr/local/bundle/gems
     ports:
       - "3000:3000"
+    environment:
+      # Passed through from the host shell if set, e.g. `THROTTLE_DIVISOR=5 docker compose up`
+      # (see "Testing throttle limits" in README.md). Left unset in the container if unset here.
+      - THROTTLE_DIVISOR
     depends_on:
       # Required for nearly everything
       postgres:
