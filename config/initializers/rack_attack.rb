@@ -56,7 +56,7 @@ Rack::Attack.throttle("pages/ip", limit: divide_limit.call(40), period: 20.secon
   rescue StandardError
     nil
   end
-  next if path_info && path_info[:controller] == "api"
+  next if path_info && path_info[:controller] == "api" && req.params["key"]
 
   req.ip
 end
