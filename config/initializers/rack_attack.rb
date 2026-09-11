@@ -1,4 +1,4 @@
-# divide_limit divides by THROTTLE_DIVISOR if set, returning a minimum of 1 
+# divide_limit divides by THROTTLE_DIVISOR if set, returning a minimum of 1
 # otherwise returns limit unchanged.
 throttle_divisor = [1, ENV.fetch("THROTTLE_DIVISOR", "1").to_i].max
 divide_limit = ->(limit) { [1, limit.div(throttle_divisor)].max }
