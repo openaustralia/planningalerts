@@ -5,19 +5,27 @@ divide_limit = ->(limit) { [1, limit.div(throttle_divisor)].max }
 
 Rack::Attack.cache.store = ActiveSupport::Cache::RedisCacheStore.new(url: Rails.configuration.x.rack_attack_redis_url)
 
+Rack::Attack.blocklist("populate_route_cache") do |req|
+  # Cache the controller being used when the key param required for api access is present
+  if req.params.key?("key")
+    req.env["api_throttle.key_controller"] ||= begin
+      Rails.application.routes.recognize_path(req.url, method: req.request_method)[:controller]
+    rescue StandardError
+      nil
+    end
+  end
+
+  false # Crucial: Always return false so this block never actually blocks traffic
+end
+
 Rack::Attack.throttle(
   "limit api requests",
   limit: proc { |request| divide_limit.call(ApiKey.daily_limit_with_default(request.params["key"])) },
   period: 1.day
 ) do |request|
-  # First check whether this request is going to the API
-  path_info = begin
-    Rails.application.routes.recognize_path request.url
-  rescue StandardError
-    nil
-  end
+  key_controller = request.env["api_throttle.key_controller"]
 
-  request.params["key"] if path_info && path_info[:controller] == "api"
+  request.params["key"] if key_controller == "api"
 end
 
 # Slow down credential stuffing (from data breaches) by throttling
@@ -50,15 +58,9 @@ Rack::Attack.throttle("pages/ip", limit: divide_limit.call(40), period: 20.secon
   next if req.path.start_with?("/assets/") ||
           req.path == "/health_check"
 
+  key_controller = req.env["api_throttle.key_controller"]
   # Exclude what is matched for the api controller throttle above
-  path_info = begin
-    Rails.application.routes.recognize_path(req.url)
-  rescue StandardError
-    nil
-  end
-  next if path_info && path_info[:controller] == "api" && req.params["key"]
-
-  req.ip
+  req.ip if key_controller != "api"
 end
 
 # Serve a branded page for the pages/ip limit (for real visitors behind a busy
