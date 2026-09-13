@@ -119,7 +119,7 @@ jobs:
           node-version: "22"
       - name: Install maizzle dependencies
         working-directory: maizzle
-        run: npm ci
+        run: npm ci --ignore-scripts
       - name: Build email templates
         working-directory: maizzle
         run: npm run build

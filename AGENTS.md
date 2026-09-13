@@ -95,7 +95,7 @@ fails if that changes anything, since Sorbet/RuboCop/RSpec never touch
 `maizzle/` (see "Emails are generated, not hand-written" below). Run it with:
 
 ```sh
-cd maizzle && npm ci && npm run build && test -z "$(git -C .. status --porcelain)"
+cd maizzle && npm ci --ignore-scripts && npm run build && test -z "$(git -C .. status --porcelain)"
 ```
 
 `bin/rake ci:all` looks like the obvious shortcut and is not. Its description
