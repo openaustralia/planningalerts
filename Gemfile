@@ -32,7 +32,7 @@ gem "rack-attack"
 gem "administrate", "~> 0.20.0"
 
 # Logging in and such things
-gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
+gem "devise", "~> 5.0" # Pin to a particular major version to get deprecation warnings
 gem "pundit", "~> 2.2"
 gem "rolify"
 
@@ -46,6 +46,11 @@ gem "sidekiq", "~> 7.0"
 # to run once across a cluster. We're still using "regular" cron
 # for jobs that need to run on every machine
 gem "sidekiq-cron"
+
+# TODO: Remove once ActiveSupport::Cache::RedisCacheStore supports connection_pool
+# 3.x's keyword-args-only API. Pinned because devise 5.0.4 transitively pulls in
+# connection_pool 3.0.2, which breaks Rails boot via config/initializers/rack_attack.rb.
+gem "connection_pool", "< 3"
 
 # For accessing external urls
 # TODO: #2167 Just pick one and use it for everything

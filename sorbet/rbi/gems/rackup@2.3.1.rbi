@@ -61,25 +61,6 @@ module Rackup::Handler
   end
 end
 
-# source://rackup//lib/rackup/handler/cgi.rb#8
-class Rackup::Handler::CGI
-  include ::Rack
-
-  class << self
-    # source://rackup//lib/rackup/handler/cgi.rb#11
-    def run(app, **options); end
-
-    # source://rackup//lib/rackup/handler/cgi.rb#51
-    def send_body(body); end
-
-    # source://rackup//lib/rackup/handler/cgi.rb#40
-    def send_headers(status, headers); end
-
-    # source://rackup//lib/rackup/handler/cgi.rb#16
-    def serve(app); end
-  end
-end
-
 # source://rackup//lib/rackup/handler.rb#59
 Rackup::Handler::RACKUP_HANDLER = T.let(T.unsafe(nil), String)
 
@@ -93,46 +74,60 @@ Rackup::Handler::SERVER_NAMES = T.let(T.unsafe(nil), Array)
 class Rackup::Handler::WEBrick < ::WEBrick::HTTPServlet::AbstractServlet
   # @return [WEBrick] a new instance of WEBrick
   #
-  # source://rackup//lib/rackup/handler/webrick.rb#54
+  # source://rackup//lib/rackup/handler/webrick.rb#66
   def initialize(server, app); end
 
-  # source://rackup//lib/rackup/handler/webrick.rb#91
+  # source://rackup//lib/rackup/handler/webrick.rb#103
   def service(req, res); end
 
   class << self
     # @yield [@server]
     #
-    # source://rackup//lib/rackup/handler/webrick.rb#19
+    # source://rackup//lib/rackup/handler/webrick.rb#32
     def run(app, **options); end
 
-    # source://rackup//lib/rackup/handler/webrick.rb#47
+    # source://rackup//lib/rackup/handler/webrick.rb#59
     def shutdown; end
 
-    # source://rackup//lib/rackup/handler/webrick.rb#37
+    # source://rackup//lib/rackup/handler/webrick.rb#49
     def valid_options; end
   end
 end
 
 # This handles mapping the WEBrick request to a Rack input stream.
 #
-# source://rackup//lib/rackup/handler/webrick.rb#60
+# source://rackup//lib/rackup/handler/webrick.rb#72
 class Rackup::Handler::WEBrick::Input
   include ::Rackup::Stream::Reader
 
   # @return [Input] a new instance of Input
   #
-  # source://rackup//lib/rackup/handler/webrick.rb#63
+  # source://rackup//lib/rackup/handler/webrick.rb#75
   def initialize(request); end
 
-  # source://rackup//lib/rackup/handler/webrick.rb#78
+  # source://rackup//lib/rackup/handler/webrick.rb#90
   def close; end
 
   private
 
   # Read one chunk from the request body.
   #
-  # source://rackup//lib/rackup/handler/webrick.rb#86
+  # source://rackup//lib/rackup/handler/webrick.rb#98
   def read_next; end
+end
+
+# A WEBrick HTTPServer subclass that invokes the Rack app directly,
+# bypassing the mount table and default OPTIONS * handling.
+#
+# source://rackup//lib/rackup/handler/webrick.rb#21
+class Rackup::Handler::WEBrick::Server < ::WEBrick::HTTPServer
+  # @return [Server] a new instance of Server
+  #
+  # source://rackup//lib/rackup/handler/webrick.rb#22
+  def initialize(app, config); end
+
+  # source://rackup//lib/rackup/handler/webrick.rb#27
+  def service(req, res); end
 end
 
 # source://rackup//lib/rackup/server.rb#22
@@ -268,14 +263,14 @@ class Rackup::Server
     # This method can be used to very easily launch a CGI application, for
     # example:
     #
-    #  Rack::Server.start(
+    #  Rackup::Server.start(
     #    :app => lambda do |e|
     #      [200, {'content-type' => 'text/html'}, ['hello world']]
     #    end,
     #    :server => 'cgi'
     #  )
     #
-    # Further options available here are documented on Rack::Server#initialize
+    # Further options available here are documented on Rackup::Server#initialize
     #
     # source://rackup//lib/rackup/server.rb#181
     def start(options = T.unsafe(nil)); end
