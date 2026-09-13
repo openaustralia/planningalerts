@@ -124,4 +124,12 @@ jobs:
         working-directory: maizzle
         run: npm run build
       - name: Check compiled templates are committed and up to date
-        run: git diff --exit-code
+        run: |
+          # git diff alone misses new, not-yet-committed template output,
+          # since untracked files never show up in a diff.
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Maizzle build produced changes that aren't committed:"
+            git status --porcelain
+            git diff
+            exit 1
+          fi

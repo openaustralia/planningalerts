@@ -81,10 +81,4 @@ tmp/local_secret.txt
 # rspec reports
 /.rspec_status
 
-# Maizzle (email templates) npm project - built output goes straight into
-# app/views/**/*.erb via each template's permalink, not these directories
-maizzle/node_modules
-maizzle/build_local
-maizzle/build_production
-
 
