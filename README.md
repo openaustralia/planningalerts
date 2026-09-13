@@ -66,6 +66,23 @@ services:
 ```
 This adds an extra port mapping, local port 3000 will still be mapped to port 3000 on the container as well.
 
+### Developing or testing on multiple worktrees in parallel
+
+If you're checking out more than one branch at once (for example with `git worktree add`, to review several open PRs side by side), each worktree's `docker compose` stack needs its own set of host ports, or the second one will fail to start with a "port is already allocated" error.
+
+The four ports that are fixed by default (`web`, `postfix`, `postgres`, `mailcatcher`) are overridable via environment variables, each defaulting to the same port as today so a single checkout needs no changes. To run a worktree alongside another, add a `.env` file (Compose loads this automatically from the project directory - it's unrelated to the app's own `.env.development`/`.env.production`) picking different numbers, from the defaults in `docker-compoise.yml` and the `.env` in other worktrees, for example:
+
+```
+WEB_PORT=3001
+POSTFIX_PORT=2526
+POSTGRES_PORT=15433
+MAILCATCHER_PORT=1081
+```
+
+Before picking numbers, check they're not already in use by something else on your machine (`lsof -i :3001` or `ss -ltn`, depending on your OS). Nothing else needs isolating by hand: Compose already scopes named volumes, containers and the network per project, and the project name defaults to the worktree's directory name, so gems, the database, Elasticsearch, and Redis (which already publish on ephemeral host ports) won't cross-contaminate between worktrees.
+
+Make sure you have 2GB of free memory per worktree, more if you are running the chrome based tests.
+
 ### Setup The Database
 
 Set up the databases - `docker compose run web bin/rake db:setup`
