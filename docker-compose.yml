@@ -11,7 +11,10 @@ services:
       - .:/app
       - gem_cache:/usr/local/bundle/gems
     ports:
-      - "3000:3000"
+      # Overridable so multiple worktrees can each run their own stack at
+      # once - see "Developing or testing on multiple worktrees in
+      # parallel" in README.md.
+      - "${WEB_PORT:-3000}:3000"
     environment:
       # Passed through from the host shell if set, e.g. `THROTTLE_DIVISOR=5 docker compose up`
       # (see "Testing throttle limits" in README.md). Left unset in the container if unset here.
@@ -40,7 +43,7 @@ services:
       - .:/app
       - gem_cache:/usr/local/bundle/gems
     ports:
-      - "2525:25"
+      - "${POSTFIX_PORT:-2525}:25"
     depends_on:
       postgres:
         condition: service_healthy
@@ -59,7 +62,7 @@ services:
       # if you want to poke around.
       # Note that we're forwarding this to port 15432 on the host machine so
       # that it doesn't conflict with any postgres server you might have running there.
-      - 15432:5432
+      - "${POSTGRES_PORT:-15432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
@@ -94,7 +97,7 @@ services:
       context: .
       dockerfile: Dockerfile.mailcatcher
     ports:
-      - "1080:1080"
+      - "${MAILCATCHER_PORT:-1080}:1080"
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:1080 || exit 1"]
       interval: 5s
