@@ -180,7 +180,7 @@ describe "Sign up for alerts" do
     fill_in("Password", with: "thispasswordiswrong")
     click_on("Sign in")
 
-    expect(page).to have_content("Invalid Email or password")
+    expect(page).to have_content("Invalid email or password")
 
     fill_in("Password", with: "mypassword")
     click_on("Sign in")

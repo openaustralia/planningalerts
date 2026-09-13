@@ -203,7 +203,7 @@ GEM
     coderay (1.1.3)
     colorize (1.1.0)
     concurrent-ruby (1.3.8)
-    connection_pool (3.0.2)
+    connection_pool (2.5.5)
     counter_culture (3.7.0)
       activerecord (>= 4.2)
       activesupport (>= 4.2)
@@ -839,6 +839,7 @@ DEPENDENCIES
   capistrano-tagging3 (~> 2.0)
   capistrano3-puma (>= 6.0.0.beta.1)
   capybara
+  connection_pool (< 3)
   counter_culture
   dalli
   devise (~> 5.0)

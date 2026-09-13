@@ -47,6 +47,11 @@ gem "sidekiq", "~> 7.0"
 # for jobs that need to run on every machine
 gem "sidekiq-cron"
 
+# TODO: Remove once ActiveSupport::Cache::RedisCacheStore supports connection_pool
+# 3.x's keyword-args-only API. Pinned because devise 5.0.4 transitively pulls in
+# connection_pool 3.0.2, which breaks Rails boot via config/initializers/rack_attack.rb.
+gem "connection_pool", "< 3"
+
 # For accessing external urls
 # TODO: #2167 Just pick one and use it for everything
 gem "httparty", ">= 0.24.0" # fix CVE-2025-68696
