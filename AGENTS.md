@@ -81,13 +81,21 @@ change one.
 
 ## Commands
 
-CI (`.github/workflows/rubyonrails.yml`) has exactly three gates. Run these
-three, and nothing less, before taking a pull request out of draft:
+CI (`.github/workflows/rubyonrails.yml`) has four gates. Run these, and
+nothing less, before taking a pull request out of draft:
 
 ```sh
 docker compose run web bin/rake            # the RSpec suite
 docker compose run web bin/rake ci:type    # Sorbet, plus tapioca --verify checks
 docker compose run web bin/rake ci:lint    # RuboCop, erb_lint, Brakeman -w2
+```
+
+The fourth gate isn't Ruby at all: it rebuilds the Maizzle email templates and
+fails if that changes anything, since Sorbet/RuboCop/RSpec never touch
+`maizzle/` (see "Emails are generated, not hand-written" below). Run it with:
+
+```sh
+cd maizzle && npm ci --ignore-scripts && npm run build && test -z "$(git -C .. status --porcelain)"
 ```
 
 `bin/rake ci:all` looks like the obvious shortcut and is not. Its description
