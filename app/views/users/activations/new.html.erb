@@ -11,6 +11,8 @@
       <%= f.email_field :email, class: "mt-1 block w-full", autocomplete: "email", autofocus: true %>
       <%= f.error :email, class: "mt-2" %>
     </div>
+    <%= render AltchaWidgetComponent.new %>
+    <%= f.error :base, class: "mt-2" %>
     <%# TODO: #2158 Should this button be centered just like on the sign in page? %>
     <div class="flex justify-center mt-8">
       <%= f.button "Send me an email" %>

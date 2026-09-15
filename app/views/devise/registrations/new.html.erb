@@ -21,6 +21,10 @@
           <p class="mt-2 text-xl font-light text-navy"><%= @minimum_password_length %> characters minimum</p>
         <% end %>
       </div>
+      <div class="w-full">
+        <%= render AltchaWidgetComponent.new %>
+        <%= f.error :base, class: "mt-2" %>
+      </div>
       <div class="mt-8">
         <%= f.button "Create my account" %>
       </div>

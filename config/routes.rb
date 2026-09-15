@@ -77,6 +77,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     confirmations: "users/confirmations",
+    passwords: "users/passwords",
     registrations: "users/registrations"
   }
 
@@ -242,4 +243,7 @@ Rails.application.routes.draw do
 
   # See app/controllers/whatismyip_controller.rb. 404s unless the provide_whatismyip feature flag is on.
   get "/whatismyip", to: "whatismyip#index"
+
+  # Issues a proof-of-work challenge for the ALTCHA widget. See doc/altcha.md.
+  get "/altcha/challenge", to: "altcha_challenges#show", as: :altcha_challenge
 end

@@ -5,6 +5,8 @@ module Alerts
   class RegistrationsController < Devise::RegistrationsController
     extend T::Sig
 
+    before_action :check_altcha, only: :create
+
     sig { void }
     def new
       super do
@@ -44,6 +46,22 @@ module Alerts
     sig { params(hash: T::Hash[Symbol, T.untyped]).returns(T.untyped) }
     def build_resource(hash = {})
       super.tap { |user| user.signup_ip = request.remote_ip }
+    end
+
+    # The alert form carries the address and radius through as hidden fields, so
+    # both the resource and the alert have to be rebuilt for the form to render
+    # again with what was typed still in it.
+    sig { void }
+    def check_altcha
+      return if altcha_ok?(form: :sign_up)
+
+      self.resource = resource_class.new(sign_up_params)
+      resource.errors.add(:base, t("altcha.failed"))
+      @alert = T.let(
+        Alert.new(address: params[:user][:address], radius_meters: params[:user][:radius_meters]),
+        T.nilable(Alert)
+      )
+      render :new, status: :unprocessable_entity
     end
 
     # This is duplicated from users/registrations_controller

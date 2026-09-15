@@ -115,6 +115,16 @@ npm run dev production
 Then point your browser at <http://localhost:3000/rails/mailers/>. As you edit the templates in `maizzle/src/templates`, the templates will
 get automatically compiled to the erb template in the main rails app tree and will also refresh the browser.
 
+### Testing throttle limits
+
+Rack::Attack's per-IP request limits (`config/initializers/rack_attack.rb`) are normally too high to trip by hand. Set `THROTTLE_DIVISOR` to divide every limit by that number, so a handful of requests is enough to see a `429`:
+
+```sh
+THROTTLE_DIVISOR=5 docker compose up
+```
+
+Defaults to `1` (no change), so ordinary development work isn't affected unless you opt in.
+
 ### Type checking
 
 We're using [Sorbet](https://sorbet.org/) to add type checking to Ruby which otherwise is a dynamic language. To run the type checker:

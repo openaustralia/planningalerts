@@ -11,6 +11,15 @@ module Devise
     sig { returns(T.untyped) }
     def resource; end
 
+    sig { params(resource: T.untyped).returns(T.untyped) }
+    def resource=(resource); end
+
+    sig { returns(T.untyped) }
+    def resource_class; end
+
+    sig { returns(T.untyped) }
+    def sign_up_params; end
+
     sig { params(hash: T::Hash[Symbol, T.untyped]).returns(T.untyped) }
     def build_resource(hash = T.unsafe(nil)); end
   end
@@ -24,6 +33,25 @@ module Devise
   end
 
   class ConfirmationsController < DeviseController
+    sig { returns(T.untyped) }
+    def resource; end
+
+    sig { params(resource: T.untyped).returns(T.untyped) }
+    def resource=(resource); end
+
+    sig { returns(T.untyped) }
+    def resource_class; end
+  end
+
+  class PasswordsController < DeviseController
+    sig { returns(T.untyped) }
+    def resource; end
+
+    sig { params(resource: T.untyped).returns(T.untyped) }
+    def resource=(resource); end
+
+    sig { returns(T.untyped) }
+    def resource_class; end
   end
 end
 
