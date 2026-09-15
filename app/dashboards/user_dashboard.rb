@@ -39,6 +39,7 @@ class UserDashboard < Administrate::BaseDashboard
     reset_password_sent_at: Field::DateTime,
     reset_password_token: Field::String,
     sign_in_count: Field::Number,
+    signup_ip: Field::String,
     unconfirmed_email: Field::String,
     unlock_token: Field::String,
     created_at: Field::DateTime,
@@ -80,6 +81,7 @@ class UserDashboard < Administrate::BaseDashboard
     remember_created_at
     current_sign_in_ip
     last_sign_in_ip
+    signup_ip
     sign_in_count
     activated_at
     from_alert_or_comment
