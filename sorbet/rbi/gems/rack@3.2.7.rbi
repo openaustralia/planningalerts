@@ -2953,13 +2953,13 @@ class Rack::Request
   # source://rack//lib/rack/request.rb#76
   def update_param(k, v); end
 
-  # source://yard/0.9.36/lib/yard/server/rack_adapter.rb#94
+  # source://yard/0.9.44/lib/yard/server/rack_adapter.rb#94
   def version_supplied; end
 
-  # source://yard/0.9.36/lib/yard/server/rack_adapter.rb#94
+  # source://yard/0.9.44/lib/yard/server/rack_adapter.rb#94
   def version_supplied=(_arg0); end
 
-  # source://yard/0.9.36/lib/yard/server/rack_adapter.rb#96
+  # source://yard/0.9.44/lib/yard/server/rack_adapter.rb#96
   def xhr?; end
 
   class << self
@@ -5007,7 +5007,7 @@ module Rack::Utils
 end
 
 # source://rack//lib/rack/utils.rb#149
-Rack::Utils::ALLOWED_FORWARED_PARAMS = T.let(T.unsafe(nil), Hash)
+Rack::Utils::ALLOWED_FORWARDED_PARAMS = T.let(T.unsafe(nil), Hash)
 
 # source://rack//lib/rack/utils.rb#25
 Rack::Utils::COMMON_SEP = T.let(T.unsafe(nil), Hash)

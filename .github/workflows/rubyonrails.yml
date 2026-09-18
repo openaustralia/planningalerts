@@ -108,3 +108,28 @@ jobs:
           bundler-cache: true
       - name: Lint rake task
         run: bin/rake ci:lint
+
+  maizzle_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: Install maizzle dependencies
+        working-directory: maizzle
+        run: npm ci --ignore-scripts
+      - name: Build email templates
+        working-directory: maizzle
+        run: npm run build
+      - name: Check compiled templates are committed and up to date
+        run: |
+          # git diff alone misses new, not-yet-committed template output,
+          # since untracked files never show up in a diff.
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Maizzle build produced changes that aren't committed:"
+            git status --porcelain
+            git diff
+            exit 1
+          fi

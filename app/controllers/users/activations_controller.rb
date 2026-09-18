@@ -23,7 +23,10 @@ module Users
       params_user = T.cast(params[:user], ActionController::Parameters)
 
       @user = User.find_or_initialize_by(email: params_user[:email])
-      if !@user.persisted?
+      if !altcha_ok?(form: :account_activation)
+        @user.errors.add(:base, t("altcha.failed"))
+        render "new"
+      elsif !@user.persisted?
         @user.errors.add(:email, :not_found)
         render "new"
       elsif !@user.requires_activation?

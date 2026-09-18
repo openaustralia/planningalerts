@@ -29,4 +29,9 @@ config/
 # Ignoring Parent of class RDoc::Markup::Heading redefined from RDoc::Markup::Element to Struct
 --suppress-payload-superclass-redefinition-for=RDoc::Markup::Heading
 
+# rdoc 7.2.0 (transitive bump from devise 5.0.4, PR #2050) trips the same known
+# Sorbet/RDoc payload conflict on two more classes.
+--suppress-payload-superclass-redefinition-for=RDoc::Markup::BlankLine
+--suppress-payload-superclass-redefinition-for=RDoc::Markup::HardBreak
+
 --suppress-payload-superclass-redefinition-for=Net::IMAP::CommandData

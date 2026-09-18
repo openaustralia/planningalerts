@@ -30,6 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  altcha:
+    failed: "We couldn't check that you're a person. Please reload the page and try again."
   activerecord:
     errors:
       write_during_maintenance_mode: "PlanningAlerts is currently in read-only maintenance mode. Please try again later."

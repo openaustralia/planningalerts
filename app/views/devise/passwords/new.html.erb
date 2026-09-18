@@ -11,6 +11,10 @@
         <%= f.email_field :email, class: "mt-1 block w-full", autofocus: true, autocomplete: "email" %>
         <%= f.error :email, class: "mt-2" %>
       </div>
+      <div class="w-full">
+        <%= render AltchaWidgetComponent.new %>
+        <%= f.error :base, class: "mt-2" %>
+      </div>
       <div class="mt-8">
         <%= f.button "Send me an email" %>
       </div>

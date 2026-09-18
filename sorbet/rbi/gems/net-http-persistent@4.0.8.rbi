@@ -41,9 +41,8 @@
 #   # perform the POST, the URI is always required
 #   response http.request post_uri, post
 #
-# Note that for GET, HEAD and other requests that do not have a body you want
-# to use URI#request_uri not URI#path.  The request_uri contains the query
-# params which are sent in the body for other requests.
+# ⚠ Note that for GET, HEAD and other requests that do not have a body,
+# it uses URI#request_uri as default to send query params
 #
 # == TLS/SSL
 #
@@ -59,6 +58,7 @@
 # #ca_path            :: Directory with certificate-authorities
 # #cert_store         :: An SSL certificate store
 # #ciphers            :: List of SSl ciphers allowed
+# #extra_chain_cert   :: Extra certificates to be added to the certificate chain
 # #private_key        :: The client's SSL private key
 # #reuse_ssl_sessions :: Reuse a previously opened SSL session for a new
 #                        connection
@@ -67,6 +67,8 @@
 # #verify_callback    :: For server certificate verification
 # #verify_depth       :: Depth of certificate verification
 # #verify_mode        :: How connections should be verified
+# #verify_hostname    :: Use hostname verification for server certificate
+#                        during the handshake
 #
 # == Proxies
 #
@@ -140,7 +142,7 @@
 # Ruby will automatically garbage collect and shutdown your HTTP connections
 # when the thread terminates.
 #
-# source://net-http-persistent//lib/net/http/persistent.rb#149
+# source://net-http-persistent//lib/net/http/persistent.rb#152
 class Net::HTTP::Persistent
   # Creates a new Net::HTTP::Persistent.
   #
@@ -164,79 +166,79 @@ class Net::HTTP::Persistent
   #
   # @return [Persistent] a new instance of Persistent
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#478
+  # source://net-http-persistent//lib/net/http/persistent.rb#508
   def initialize(name: T.unsafe(nil), proxy: T.unsafe(nil), pool_size: T.unsafe(nil)); end
 
   # An SSL certificate authority.  Setting this will set verify_mode to
   # VERIFY_PEER.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#254
+  # source://net-http-persistent//lib/net/http/persistent.rb#257
   def ca_file; end
 
   # Sets the SSL certificate authority file.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#543
+  # source://net-http-persistent//lib/net/http/persistent.rb#575
   def ca_file=(file); end
 
   # A directory of SSL certificates to be used as certificate authorities.
   # Setting this will set verify_mode to VERIFY_PEER.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#260
+  # source://net-http-persistent//lib/net/http/persistent.rb#263
   def ca_path; end
 
   # Sets the SSL certificate authority path.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#552
+  # source://net-http-persistent//lib/net/http/persistent.rb#584
   def ca_path=(path); end
 
   # This client's OpenSSL::X509::Certificate
   #
   # For Net::HTTP parity
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#243
+  # source://net-http-persistent//lib/net/http/persistent.rb#246
   def cert; end
 
   # Sets this client's OpenSSL::X509::Certificate
   # For Net::HTTP parity
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#531
+  # source://net-http-persistent//lib/net/http/persistent.rb#563
   def cert=(certificate); end
 
   # An SSL certificate store.  Setting this will override the default
   # certificate store.  See verify_mode for more information.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#266
+  # source://net-http-persistent//lib/net/http/persistent.rb#269
   def cert_store; end
 
   # Overrides the default SSL certificate store used for verifying
   # connections.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#562
+  # source://net-http-persistent//lib/net/http/persistent.rb#594
   def cert_store=(store); end
 
   # This client's OpenSSL::X509::Certificate
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#243
+  # source://net-http-persistent//lib/net/http/persistent.rb#246
   def certificate; end
 
   # Sets this client's OpenSSL::X509::Certificate
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#531
+  # source://net-http-persistent//lib/net/http/persistent.rb#563
   def certificate=(certificate); end
 
   # The ciphers allowed for SSL connections
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#271
+  # source://net-http-persistent//lib/net/http/persistent.rb#274
   def ciphers; end
 
   # The ciphers allowed for SSL connections
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#571
+  # source://net-http-persistent//lib/net/http/persistent.rb#603
   def ciphers=(ciphers); end
 
   # Creates a new connection for +uri+
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#580
+  # source://net-http-persistent//lib/net/http/persistent.rb#627
   def connection_for(uri); end
 
   # Sends debug_output to this IO via Net::HTTP#set_debug_output.
@@ -244,7 +246,7 @@ class Net::HTTP::Persistent
   # Never use this method in production code, it causes a serious security
   # hole.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#279
+  # source://net-http-persistent//lib/net/http/persistent.rb#287
   def debug_output; end
 
   # Sends debug_output to this IO via Net::HTTP#set_debug_output.
@@ -252,12 +254,12 @@ class Net::HTTP::Persistent
   # Never use this method in production code, it causes a serious security
   # hole.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#279
+  # source://net-http-persistent//lib/net/http/persistent.rb#287
   def debug_output=(_arg0); end
 
   # CGI::escape wrapper
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#631
+  # source://net-http-persistent//lib/net/http/persistent.rb#691
   def escape(str); end
 
   # Returns true if the connection should be reset due to an idle timeout, or
@@ -265,46 +267,69 @@ class Net::HTTP::Persistent
   #
   # @return [Boolean]
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#647
+  # source://net-http-persistent//lib/net/http/persistent.rb#707
   def expired?(connection); end
+
+  # Extra certificates to be added to the certificate chain
+  #
+  # source://net-http-persistent//lib/net/http/persistent.rb#279
+  def extra_chain_cert; end
+
+  # Extra certificates to be added to the certificate chain.
+  # It is only supported starting from Net::HTTP version 0.1.1
+  #
+  # source://net-http-persistent//lib/net/http/persistent.rb#613
+  def extra_chain_cert=(extra_chain_cert); end
 
   # Finishes the Net::HTTP +connection+
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#676
+  # source://net-http-persistent//lib/net/http/persistent.rb#736
   def finish(connection); end
 
   # Current connection generation
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#284
+  # source://net-http-persistent//lib/net/http/persistent.rb#292
   def generation; end
 
   # Headers that are added to every request using Net::HTTP#add_field
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#289
+  # source://net-http-persistent//lib/net/http/persistent.rb#297
   def headers; end
 
   # Returns the HTTP protocol version for +uri+
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#687
+  # source://net-http-persistent//lib/net/http/persistent.rb#747
   def http_version(uri); end
 
   # Maps host:port to an HTTP version.  This allows us to enable version
   # specific features.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#295
+  # source://net-http-persistent//lib/net/http/persistent.rb#303
   def http_versions; end
 
   # Maximum time an unused connection can remain idle before being
   # automatically closed.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#301
+  # source://net-http-persistent//lib/net/http/persistent.rb#309
   def idle_timeout; end
 
   # Maximum time an unused connection can remain idle before being
   # automatically closed.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#301
+  # source://net-http-persistent//lib/net/http/persistent.rb#309
   def idle_timeout=(_arg0); end
+
+  # Sets whether to ignore end-of-file when reading a response body
+  #  with Content-Length headers.
+  #
+  # source://net-http-persistent//lib/net/http/persistent.rb#485
+  def ignore_eof; end
+
+  # Sets whether to ignore end-of-file when reading a response body
+  #  with Content-Length headers.
+  #
+  # source://net-http-persistent//lib/net/http/persistent.rb#485
+  def ignore_eof=(_arg0); end
 
   # The value sent in the Keep-Alive header.  Defaults to 30.  Not needed for
   # HTTP/1.1 servers.
@@ -314,7 +339,7 @@ class Net::HTTP::Persistent
   # This method may be removed in a future version as RFC 2616 does not
   # require this header.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#325
+  # source://net-http-persistent//lib/net/http/persistent.rb#333
   def keep_alive; end
 
   # The value sent in the Keep-Alive header.  Defaults to 30.  Not needed for
@@ -325,39 +350,39 @@ class Net::HTTP::Persistent
   # This method may be removed in a future version as RFC 2616 does not
   # require this header.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#325
+  # source://net-http-persistent//lib/net/http/persistent.rb#333
   def keep_alive=(_arg0); end
 
   # This client's SSL private key
   #
   # For Net::HTTP parity
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#345
+  # source://net-http-persistent//lib/net/http/persistent.rb#353
   def key; end
 
   # Sets this client's SSL private key
   # For Net::HTTP parity
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#735
+  # source://net-http-persistent//lib/net/http/persistent.rb#795
   def key=(key); end
 
   # Maximum number of requests on a connection before it is considered expired
   # and automatically closed.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#307
+  # source://net-http-persistent//lib/net/http/persistent.rb#315
   def max_requests; end
 
   # Maximum number of requests on a connection before it is considered expired
   # and automatically closed.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#307
+  # source://net-http-persistent//lib/net/http/persistent.rb#315
   def max_requests=(_arg0); end
 
   # Number of retries to perform if a request fails.
   #
   # See also #max_retries=, Net::HTTP#max_retries=.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#314
+  # source://net-http-persistent//lib/net/http/persistent.rb#322
   def max_retries; end
 
   # Set the maximum number of retries for a request.
@@ -368,7 +393,7 @@ class Net::HTTP::Persistent
   #
   # @raise [ArgumentError]
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#705
+  # source://net-http-persistent//lib/net/http/persistent.rb#765
   def max_retries=(retries); end
 
   # Maximum SSL version to use, e.g. :TLS1_2
@@ -376,12 +401,12 @@ class Net::HTTP::Persistent
   # By default, the version will be negotiated automatically between client
   # and server.  Ruby 2.5 and newer only.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#429
+  # source://net-http-persistent//lib/net/http/persistent.rb#437
   def max_version; end
 
   # maximum SSL version to use
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#1055
+  # source://net-http-persistent//lib/net/http/persistent.rb#1133
   def max_version=(max_version); end
 
   # Minimum SSL version to use, e.g. :TLS1_1
@@ -389,42 +414,42 @@ class Net::HTTP::Persistent
   # By default, the version will be negotiated automatically between client
   # and server.  Ruby 2.5 and newer only.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#421
+  # source://net-http-persistent//lib/net/http/persistent.rb#429
   def min_version; end
 
   # Minimum SSL version to use
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#1046
+  # source://net-http-persistent//lib/net/http/persistent.rb#1124
   def min_version=(min_version); end
 
   # The name for this collection of persistent connections.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#330
+  # source://net-http-persistent//lib/net/http/persistent.rb#338
   def name; end
 
   # List of host suffixes which will not be proxied
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#360
+  # source://net-http-persistent//lib/net/http/persistent.rb#368
   def no_proxy; end
 
   # Adds "http://" to the String +uri+ if it is missing.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#694
+  # source://net-http-persistent//lib/net/http/persistent.rb#754
   def normalize_uri(uri); end
 
   # Seconds to wait until a connection is opened.  See Net::HTTP#open_timeout
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#335
+  # source://net-http-persistent//lib/net/http/persistent.rb#343
   def open_timeout; end
 
   # Seconds to wait until a connection is opened.  See Net::HTTP#open_timeout
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#335
+  # source://net-http-persistent//lib/net/http/persistent.rb#343
   def open_timeout=(_arg0); end
 
   # Headers that are added to every request using Net::HTTP#[]=
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#340
+  # source://net-http-persistent//lib/net/http/persistent.rb#348
   def override_headers; end
 
   # Pipelines +requests+ to the HTTP server at +uri+ yielding responses if a
@@ -437,22 +462,22 @@ class Net::HTTP::Persistent
   # Only if <tt>net-http-pipeline</tt> was required before
   # <tt>net-http-persistent</tt> #pipeline will be present.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#726
+  # source://net-http-persistent//lib/net/http/persistent.rb#786
   def pipeline(uri, requests, &block); end
 
   # Test-only accessor for the connection pool
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#365
+  # source://net-http-persistent//lib/net/http/persistent.rb#373
   def pool; end
 
   # This client's SSL private key
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#345
+  # source://net-http-persistent//lib/net/http/persistent.rb#353
   def private_key; end
 
   # Sets this client's SSL private key
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#735
+  # source://net-http-persistent//lib/net/http/persistent.rb#795
   def private_key=(key); end
 
   # Sets the proxy server.  The +proxy+ may be the URI of the proxy server,
@@ -468,14 +493,14 @@ class Net::HTTP::Persistent
   # hostname suffixes, optionally with +:port+ appended, for example
   # <tt>example.com,some.host:8080</tt>.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#758
+  # source://net-http-persistent//lib/net/http/persistent.rb#818
   def proxy=(proxy); end
 
   # Returns true when proxy should by bypassed for host.
   #
   # @return [Boolean]
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#832
+  # source://net-http-persistent//lib/net/http/persistent.rb#892
   def proxy_bypass?(host, port); end
 
   # Creates a URI for an HTTP proxy server from ENV variables.
@@ -495,34 +520,43 @@ class Net::HTTP::Persistent
   # For Windows users, lowercase ENV variables are preferred over uppercase ENV
   # variables.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#805
+  # source://net-http-persistent//lib/net/http/persistent.rb#865
   def proxy_from_env; end
 
   # The URL through which requests will be proxied
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#355
+  # source://net-http-persistent//lib/net/http/persistent.rb#363
   def proxy_uri; end
 
   # Seconds to wait until reading one block.  See Net::HTTP#read_timeout
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#370
+  # source://net-http-persistent//lib/net/http/persistent.rb#378
   def read_timeout; end
 
   # Seconds to wait until reading one block.  See Net::HTTP#read_timeout
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#370
+  # source://net-http-persistent//lib/net/http/persistent.rb#378
   def read_timeout=(_arg0); end
 
   # Forces reconnection of all HTTP connections, including TLS/SSL
   # connections.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#848
+  # source://net-http-persistent//lib/net/http/persistent.rb#908
   def reconnect; end
 
   # Forces reconnection of only TLS/SSL connections.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#855
+  # source://net-http-persistent//lib/net/http/persistent.rb#915
   def reconnect_ssl; end
+
+  # Discard all existing connections. Subsequent checkouts will create
+  # new connections as needed.
+  #
+  # If any thread is still using a connection it may cause an error!  Call
+  # #reload when you are completely done making requests!
+  #
+  # source://net-http-persistent//lib/net/http/persistent.rb#1029
+  def reload; end
 
   # Makes a request on +uri+.  If +req+ is nil a Net::HTTP::Get is performed
   # against +uri+.
@@ -532,7 +566,7 @@ class Net::HTTP::Persistent
   #
   # +req+ must be a Net::HTTPGenericRequest subclass (see Net::HTTP for a list).
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#887
+  # source://net-http-persistent//lib/net/http/persistent.rb#947
   def request(uri, req = T.unsafe(nil), &block); end
 
   # Creates a GET request if +req_or_uri+ is a URI and adds headers to the
@@ -540,12 +574,12 @@ class Net::HTTP::Persistent
   #
   # Returns the request.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#926
+  # source://net-http-persistent//lib/net/http/persistent.rb#986
   def request_setup(req_or_uri); end
 
   # Finishes then restarts the Net::HTTP +connection+
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#862
+  # source://net-http-persistent//lib/net/http/persistent.rb#922
   def reset(connection); end
 
   # By default SSL sessions are reused to avoid extra SSL handshakes.  Set
@@ -554,7 +588,7 @@ class Net::HTTP::Persistent
   #
   #   SSL_connect [...] read finished A: unexpected message (OpenSSL::SSL::SSLError)
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#384
+  # source://net-http-persistent//lib/net/http/persistent.rb#392
   def reuse_ssl_sessions; end
 
   # By default SSL sessions are reused to avoid extra SSL handshakes.  Set
@@ -563,17 +597,18 @@ class Net::HTTP::Persistent
   #
   #   SSL_connect [...] read finished A: unexpected message (OpenSSL::SSL::SSLError)
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#384
+  # source://net-http-persistent//lib/net/http/persistent.rb#392
   def reuse_ssl_sessions=(_arg0); end
 
-  # Shuts down all connections
+  # Shuts down all connections. Attempting to checkout a connection after
+  # shutdown will raise an error.
   #
   # *NOTE*: Calling shutdown for can be dangerous!
   #
   # If any thread is still using a connection it may cause an error!  Call
   # #shutdown when you are completely done making requests!
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#957
+  # source://net-http-persistent//lib/net/http/persistent.rb#1018
   def shutdown; end
 
   # An array of options for Socket#setsockopt.
@@ -584,27 +619,27 @@ class Net::HTTP::Persistent
   #
   #   http.socket_options << [Socket::SOL_SOCKET, Socket::SO_KEEPALIVE, 1]
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#395
+  # source://net-http-persistent//lib/net/http/persistent.rb#403
   def socket_options; end
 
   # Enables SSL on +connection+
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#964
+  # source://net-http-persistent//lib/net/http/persistent.rb#1036
   def ssl(connection); end
 
   # Current SSL connection generation
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#400
+  # source://net-http-persistent//lib/net/http/persistent.rb#408
   def ssl_generation; end
 
   # SSL session lifetime
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#405
+  # source://net-http-persistent//lib/net/http/persistent.rb#413
   def ssl_timeout; end
 
   # SSL session lifetime
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#1028
+  # source://net-http-persistent//lib/net/http/persistent.rb#1106
   def ssl_timeout=(ssl_timeout); end
 
   # SSL version to use.
@@ -612,48 +647,68 @@ class Net::HTTP::Persistent
   # By default, the version will be negotiated automatically between client
   # and server.  Ruby 1.9 and newer only. Deprecated since Ruby 2.5.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#413
+  # source://net-http-persistent//lib/net/http/persistent.rb#421
   def ssl_version; end
 
   # SSL version to use
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#1037
+  # source://net-http-persistent//lib/net/http/persistent.rb#1115
   def ssl_version=(ssl_version); end
 
   # Starts the Net::HTTP +connection+
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#658
+  # source://net-http-persistent//lib/net/http/persistent.rb#718
   def start(http); end
 
   # Where this instance's last-use times live in the thread local variables
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#434
+  # source://net-http-persistent//lib/net/http/persistent.rb#442
   def timeout_key; end
 
   # CGI::unescape wrapper
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#638
+  # source://net-http-persistent//lib/net/http/persistent.rb#698
   def unescape(str); end
 
   # SSL verification callback.  Used when ca_file or ca_path is set.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#439
+  # source://net-http-persistent//lib/net/http/persistent.rb#447
   def verify_callback; end
 
   # SSL verification callback.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#1086
+  # source://net-http-persistent//lib/net/http/persistent.rb#1173
   def verify_callback=(callback); end
 
   # Sets the depth of SSL certificate verification
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#444
+  # source://net-http-persistent//lib/net/http/persistent.rb#452
   def verify_depth; end
 
   # Sets the depth of SSL certificate verification
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#1064
+  # source://net-http-persistent//lib/net/http/persistent.rb#1142
   def verify_depth=(verify_depth); end
+
+  # HTTPS verify_hostname.
+  #
+  # If a client sets this to true and enables SNI with SSLSocket#hostname=,
+  # the hostname verification on the server certificate is performed
+  # automatically during the handshake using
+  # OpenSSL::SSL.verify_certificate_identity().
+  #
+  # You can set +verify_hostname+ as true to use hostname verification
+  # during the handshake.
+  #
+  # NOTE: This works with Ruby > 3.0.
+  #
+  # source://net-http-persistent//lib/net/http/persistent.rb#478
+  def verify_hostname; end
+
+  # Sets the HTTPS verify_hostname.
+  #
+  # source://net-http-persistent//lib/net/http/persistent.rb#1164
+  def verify_hostname=(verify_hostname); end
 
   # HTTPS verify mode.  Defaults to OpenSSL::SSL::VERIFY_PEER which verifies
   # the server certificate.
@@ -663,7 +718,7 @@ class Net::HTTP::Persistent
   #
   # You can use +verify_mode+ to override any default values.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#455
+  # source://net-http-persistent//lib/net/http/persistent.rb#463
   def verify_mode; end
 
   # Sets the HTTPS verify mode.  Defaults to OpenSSL::SSL::VERIFY_PEER.
@@ -672,17 +727,17 @@ class Net::HTTP::Persistent
   # Securely transfer the correct certificate and update the default
   # certificate store or set the ca file instead.
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#1077
+  # source://net-http-persistent//lib/net/http/persistent.rb#1155
   def verify_mode=(verify_mode); end
 
   # Seconds to wait until writing one block.  See Net::HTTP#write_timeout
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#375
+  # source://net-http-persistent//lib/net/http/persistent.rb#383
   def write_timeout; end
 
   # Seconds to wait until writing one block.  See Net::HTTP#write_timeout
   #
-  # source://net-http-persistent//lib/net/http/persistent.rb#375
+  # source://net-http-persistent//lib/net/http/persistent.rb#383
   def write_timeout=(_arg0); end
 
   class << self
@@ -698,7 +753,7 @@ class Net::HTTP::Persistent
     #
     # NOTE:  This may not work on ruby > 1.9.
     #
-    # source://net-http-persistent//lib/net/http/persistent.rb#204
+    # source://net-http-persistent//lib/net/http/persistent.rb#207
     def detect_idle_timeout(uri, max = T.unsafe(nil)); end
   end
 end
@@ -768,24 +823,24 @@ class Net::HTTP::Persistent::Connection
   def ssl_generation=(_arg0); end
 end
 
-# source://net-http-persistent//lib/net/http/persistent.rb#171
+# source://net-http-persistent//lib/net/http/persistent.rb#174
 Net::HTTP::Persistent::DEFAULT_POOL_SIZE = T.let(T.unsafe(nil), Integer)
 
 # The beginning of Time
 #
-# source://net-http-persistent//lib/net/http/persistent.rb#154
+# source://net-http-persistent//lib/net/http/persistent.rb#157
 Net::HTTP::Persistent::EPOCH = T.let(T.unsafe(nil), Time)
 
 # Error class for errors raised by Net::HTTP::Persistent.  Various
 # SystemCallErrors are re-raised with a human-readable message under this
 # class.
 #
-# source://net-http-persistent//lib/net/http/persistent.rb#189
+# source://net-http-persistent//lib/net/http/persistent.rb#192
 class Net::HTTP::Persistent::Error < ::StandardError; end
 
 # Is OpenSSL available?  This test works with autoload
 #
-# source://net-http-persistent//lib/net/http/persistent.rb#159
+# source://net-http-persistent//lib/net/http/persistent.rb#162
 Net::HTTP::Persistent::HAVE_OPENSSL = T.let(T.unsafe(nil), String)
 
 # source://net-http-persistent//lib/net/http/persistent/pool.rb#1
@@ -815,37 +870,37 @@ end
 class Net::HTTP::Persistent::TimedStackMulti < ::ConnectionPool::TimedStack
   # @return [TimedStackMulti] a new instance of TimedStackMulti
   #
-  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#13
+  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#18
   def initialize(size = T.unsafe(nil), &block); end
 
   # @return [Boolean]
   #
-  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#22
+  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#31
   def empty?; end
 
-  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#26
+  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#35
   def length; end
 
   private
 
   # @return [Boolean]
   #
-  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#32
+  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#41
   def connection_stored?(options = T.unsafe(nil)); end
 
-  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#36
+  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#45
   def fetch_connection(options = T.unsafe(nil)); end
 
-  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#44
+  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#53
   def lru_update(connection_args); end
 
-  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#49
+  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#58
   def shutdown_connections; end
 
-  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#55
+  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#64
   def store_connection(obj, options = T.unsafe(nil)); end
 
-  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#60
+  # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#69
   def try_create(options = T.unsafe(nil)); end
 
   class << self
@@ -854,12 +909,17 @@ class Net::HTTP::Persistent::TimedStackMulti < ::ConnectionPool::TimedStack
     # Using a class method to limit the bindings referenced by the hash's
     # default_proc
     #
-    # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#9
+    # source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#14
     def hash_of_arrays; end
   end
 end
 
+# Detects if ConnectionPool 3.0+ is being used (needed for TimedStack subclass compatibility)
+#
+# source://net-http-persistent//lib/net/http/persistent/timed_stack_multi.rb#6
+Net::HTTP::Persistent::TimedStackMulti::CP_USES_KEYWORD_ARGS = T.let(T.unsafe(nil), FalseClass)
+
 # The version of Net::HTTP::Persistent you are using
 #
-# source://net-http-persistent//lib/net/http/persistent.rb#182
+# source://net-http-persistent//lib/net/http/persistent.rb#185
 Net::HTTP::Persistent::VERSION = T.let(T.unsafe(nil), String)

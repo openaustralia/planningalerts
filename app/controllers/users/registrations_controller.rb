@@ -11,6 +11,8 @@ module Users
 
     layout "profile", only: %i[edit update]
 
+    before_action :check_altcha, only: :create
+
     # before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
 
@@ -36,6 +38,17 @@ module Users
 
     sig { void }
     def check_email; end
+
+    # Rebuilds just enough of the resource for the sign up form to render again
+    # with what was typed still in it.
+    sig { void }
+    def check_altcha
+      return if altcha_ok?(form: :sign_up)
+
+      self.resource = resource_class.new(sign_up_params)
+      resource.errors.add(:base, t("altcha.failed"))
+      render :new, status: :unprocessable_entity
+    end
 
     # GET /resource/edit
     # def edit

@@ -81,13 +81,21 @@ change one.
 
 ## Commands
 
-CI (`.github/workflows/rubyonrails.yml`) has exactly three gates. Run these
-three, and nothing less, before taking a pull request out of draft:
+CI (`.github/workflows/rubyonrails.yml`) has four gates. Run these, and
+nothing less, before taking a pull request out of draft:
 
 ```sh
 docker compose run web bin/rake            # the RSpec suite
 docker compose run web bin/rake ci:type    # Sorbet, plus tapioca --verify checks
 docker compose run web bin/rake ci:lint    # RuboCop, erb_lint, Brakeman -w2
+```
+
+The fourth gate isn't Ruby at all: it rebuilds the Maizzle email templates and
+fails if that changes anything, since Sorbet/RuboCop/RSpec never touch
+`maizzle/` (see "Emails are generated, not hand-written" below). Run it with:
+
+```sh
+cd maizzle && npm ci --ignore-scripts && npm run build && test -z "$(git -C .. status --porcelain)"
 ```
 
 `bin/rake ci:all` looks like the obvious shortcut and is not. Its description
@@ -218,10 +226,10 @@ Two independent switching systems coexist and are easy to confuse. `flipper`
 (Redis-backed, with `flipper-ui` mounted) is for feature flags. `split` is for
 A/B tests. Pick deliberately.
 
-Error reporting currently runs Sentry and Honeybadger side by side during a
-transition tracked in [#2049](https://github.com/openaustralia/planningalerts/issues/2049).
-Adding reporting means thinking about which one, not reaching for whichever you
-find first.
+Error reporting is Sentry, following the canonical configuration in the
+infrastructure repo's `docs/monitoring.md` (the Honeybadger transition in
+[#2049](https://github.com/openaustralia/planningalerts/issues/2049) is
+complete and the gem is gone).
 
 ### Front end
 
@@ -318,11 +326,12 @@ bundle exec cap staging --set branch=my-branch deploy
 ```
 
 Deploys record a release in Sentry through a Capistrano hook that shells out to
-`sentry-cli` on your machine. The committed `.sentryclirc` holds only the org and
-project defaults; **the token belongs in `~/.sentryclirc` and must never be
-committed.** A missing or unauthenticated `sentry-cli` prints a warning and
-skips the release rather than failing the deploy, so a quiet deploy is not proof
-it worked.
+the Sentry CLI on your machine (`sentry`, or the legacy `sentry-cli`). The
+committed `.sentryclirc` holds only non-secret defaults; **credentials come
+from `sentry auth` (v4) or `~/.sentryclirc` (v3) and must never be
+committed.** A missing or unauthenticated CLI prints a warning and skips the
+release rather than failing the deploy, so a quiet deploy is not proof it
+worked.
 
 The Ruby upgrade runbook in `README.md` is explicitly marked out of date; it
 predates the current blue/green setup. Treat it as history.

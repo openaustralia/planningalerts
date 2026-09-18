@@ -103,6 +103,9 @@ module GeneratedUrlHelpersModule
   def alerts_user_session_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def altcha_challenge_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def api_developer_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
