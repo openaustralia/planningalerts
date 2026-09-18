@@ -23,7 +23,8 @@ module Alerts
       alert = Alert.new(
         user: @user,
         address: params[:user][:address],
-        radius_meters: params[:user][:radius_meters]
+        radius_meters: params[:user][:radius_meters],
+        signup_ip: request.remote_ip
       )
       # TODO: #2163 Check that we're actually allowed to create an alert
       # Ensures the address is normalised into a consistent form

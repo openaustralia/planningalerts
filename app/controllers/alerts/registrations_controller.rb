@@ -22,7 +22,8 @@ module Alerts
         @alert = Alert.new(
           user: resource,
           address: params[:user][:address],
-          radius_meters: params[:user][:radius_meters]
+          radius_meters: params[:user][:radius_meters],
+          signup_ip: request.remote_ip
         )
 
         if resource.persisted?
@@ -36,6 +37,16 @@ module Alerts
     end
 
     protected
+
+    # Devise calls build_resource before it saves, so this gets the IP in on the initial
+    # insert rather than needing a second write. The create block above runs after the
+    # save, so it is the wrong hook for this. ExpireSignupIpsJob nulls it out later.
+    # This is duplicated from users/registrations_controller
+    # TODO: #2159 Get rid of duplication
+    sig { params(hash: T::Hash[Symbol, T.untyped]).returns(T.untyped) }
+    def build_resource(hash = {})
+      super.tap { |user| user.signup_ip = request.remote_ip }
+    end
 
     # The alert form carries the address and radius through as hidden fields, so
     # both the resource and the alert have to be rebuilt for the form to render
