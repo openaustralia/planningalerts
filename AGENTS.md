@@ -100,7 +100,7 @@ Remember to check ports are not in use by something else on your machine (`lsof 
 Background details:
 - Compose loads `.env` from the project directory for port substitution.
 - The repository is bind-mounted at `/app`, so dotenv and foreman inside the container load it as well, which is how `WEB_PORT` reaches the mailer links in `config/environments/development.rb` and the API example URLs from `api_port` in `app/helpers/applications_helper.rb`.
-- Use `.env` only for these port settings and leave app config in `.env.development`/`.env.production`.
+- Use `.env` for these port settings, and for local secrets that must not be committed: `.env` is gitignored while `.env.development` is checked in. Ordinary, shareable app config goes in `.env.development`/`.env.production`.
 - Nothing else needs isolating by hand: Compose already scopes named volumes, containers and the network per project, and the project name defaults to the worktree's directory name, so gems, the database, Elasticsearch, and Redis (which already publish on ephemeral host ports) won't cross-contaminate between worktrees.
 
 ## Commands

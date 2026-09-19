@@ -66,6 +66,13 @@ module PlanningalertsApp
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
 
+    # Rack middleware is instantiated once, when the middleware stack is built,
+    # and the stack is never reloaded. Autoloading it through the "once"
+    # autoloader rather than the reloadable one keeps the stack from holding a
+    # stale class after a reload in development, and makes the constant
+    # resolvable from config/initializers/idle_basic_auth.rb.
+    config.autoload_once_paths << "#{root}/app/middleware"
+
     config.active_job.queue_adapter = :sidekiq
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
