@@ -8,7 +8,7 @@
 /docker-compose.override.yml
 
 # Per-worktree port overrides for running multiple worktrees in parallel
-# (see "Developing or testing on multiple worktrees in parallel" in README.md)
+# (see "Developing or testing on multiple worktrees in parallel" in AGENTS.md)
 /.env
 
 # Ignore bundler config.

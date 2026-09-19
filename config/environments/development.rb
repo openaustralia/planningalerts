@@ -39,7 +39,7 @@ Rails.application.configure do
    config.action_mailer.raise_delivery_errors = true
    config.action_mailer.delivery_method = :smtp
    config.action_mailer.smtp_settings = { address: "mailcatcher", port: 1025 }
-   config.action_mailer.default_url_options = { host: "localhost:3000" }
+   config.action_mailer.default_url_options = { host: "localhost:#{ENV.fetch('WEB_PORT', '3000')}" }
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
@@ -79,7 +79,7 @@ Rails.application.configure do
 
   # This is necessary to make links work in mailer previews
   config.action_mailer.default_url_options = {
-    host: "localhost:3000"
+    host: "localhost:#{ENV.fetch('WEB_PORT', '3000')}"
   }
 
   # Highlight code that triggered database queries in logs.

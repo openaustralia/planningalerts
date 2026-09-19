@@ -13,7 +13,7 @@ services:
     ports:
       # Overridable so multiple worktrees can each run their own stack at
       # once - see "Developing or testing on multiple worktrees in
-      # parallel" in README.md.
+      # parallel" in AGENTS.md.
       - "${WEB_PORT:-3000}:3000"
     environment:
       # Passed through from the host shell if set, e.g. `THROTTLE_DIVISOR=5 docker compose up`

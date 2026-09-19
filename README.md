@@ -47,41 +47,30 @@ docker volume rm planningalerts_gem_cache
 
 ### Overriding DB host and port for non docker dev
 
-To use docker for the database, but allow you to run the application locally, for example to simplify single step debugging in IDE's, you can override the following ENV vars in `.envrc` (for `direnv`) or manually:
+When running the application locally on the host whilst using docker for the database, for example to simplify single step debugging in IDEs, set the following ENV vars (manually or in `.envrc` for `direnv`):
 
 ```
 export DB_HOST=localhost
 export DB_PORT=15432
 ```
 
+If you have set `POSTGRES_PORT` in `.env` to change the host port mapping for postgres, use the same value for `DB_PORT`.
+
 ### Alternative web port
 
-You can set up a second web server port so all your user and passwords from various projects are not all mixed together.
-For example, add the following to `docker-compose.override.yml` to use port 30PA (3072):
-```yaml
-services:
-  web:
-    ports:
-      - "3072:3000"
+You can run the web server on a different host port so logins for various projects are not all mixed together.
+For example, set `WEB_PORT` in `.env` under the project root to use port 3072 (30PA) for manual testing.
+
 ```
-This adds an extra port mapping, local port 3000 will still be mapped to port 3000 on the container as well.
+WEB_PORT=3072
+```
+
+Then point your browser at <http://localhost:3072>. Mailer links and the API example URLs follow `WEB_PORT`, so they point at the port you are browsing on.
+If you previously added a `ports` block to `docker-compose.override.yml` for this, you can remove it.
 
 ### Developing or testing on multiple worktrees in parallel
 
-If you're checking out more than one branch at once (for example with `git worktree add`, to review several open PRs side by side), each worktree's `docker compose` stack needs its own set of host ports, or the second one will fail to start with a "port is already allocated" error.
-
-The four ports that are fixed by default (`web`, `postfix`, `postgres`, `mailcatcher`) are overridable via environment variables, each defaulting to the same port as today so a single checkout needs no changes. To run a worktree alongside another, add a `.env` file (Compose loads this automatically from the project directory - it's unrelated to the app's own `.env.development`/`.env.production`) picking different numbers, from the defaults in `docker-compoise.yml` and the `.env` in other worktrees, for example:
-
-```
-WEB_PORT=3001
-POSTFIX_PORT=2526
-POSTGRES_PORT=15433
-MAILCATCHER_PORT=1081
-```
-
-Before picking numbers, check they're not already in use by something else on your machine (`lsof -i :3001` or `ss -ltn`, depending on your OS). Nothing else needs isolating by hand: Compose already scopes named volumes, containers and the network per project, and the project name defaults to the worktree's directory name, so gems, the database, Elasticsearch, and Redis (which already publish on ephemeral host ports) won't cross-contaminate between worktrees.
-
-Make sure you have 2GB of free memory per worktree, more if you are running the chrome based tests.
+See the section in AGENTS.md when using multiple worktrees to avoid port collisions.
 
 ### Setup The Database
 
