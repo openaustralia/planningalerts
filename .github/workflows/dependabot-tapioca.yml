@@ -3,14 +3,9 @@
 # ci:type reliably fails on gem-bump PRs with a stale-RBI error unrelated to any
 # real incompatibility (see openaustralia/planningalerts#2082 and PR #2139).
 #
-# This is a second attempt. The first (#2043) was reverted in #2048 because its
-# auto-push used the default GITHUB_TOKEN, and GitHub does not let commits pushed
-# with that token re-trigger other `pull_request` workflows - so `test`, `type_check`
-# and `lint` in rubyonrails.yml silently never ran again against the final commit.
-# This version fixes that by pushing with a token GitHub treats as a real user push,
-# and it only ever pushes once the regenerated RBI has been verified to type check
-# cleanly. If it doesn't, the job fails and the branch is left untouched - a human
-# has to run tapioca locally and look at it, the same as any other real Sorbet error.
+# The actual job lives in openaustralia/pavlovabot, shared across openaustralia
+# repos - see that repo's README for the full design and how the App/secrets are
+# set up. This file is just the caller.
 name: Dependabot Tapioca
 
 on:
@@ -29,80 +24,7 @@ jobs:
       github.actor == 'dependabot[bot]' &&
       startsWith(github.head_ref, 'dependabot/bundler/') &&
       github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgis/postgis:15-3.3
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "postgis://postgres:postgres@localhost:5432/rails_test"
-    permissions:
-      contents: write
-    concurrency:
-      group: dependabot-tapioca-${{ github.event.pull_request.number }}
-      cancel-in-progress: true
-    steps:
-      - name: Checkout Dependabot branch
-        uses: actions/checkout@v7.0.1
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          # Needs a repo secret holding a PAT or GitHub App installation token scoped
-          # to this repo with contents:write. The default GITHUB_TOKEN will not do -
-          # see the comment at the top of this file.
-          token: ${{ secrets.DEPENDABOT_TAPIOCA_TOKEN }}
-
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1.321.0
-        with:
-          bundler-cache: true
-
-      - name: Create database
-        run: bin/rails db:create
-
-      - name: Set up database schema
-        run: bin/rails db:schema:load
-
-      - name: Regenerate Tapioca RBI files
-        run: |
-          bin/tapioca gem
-          bin/tapioca dsl
-          bin/tapioca dsl --environment=test
-
-      - name: Type check the regenerated RBIs
-        run: bin/srb
-
-      - name: Explain how to fix a real type error
-        if: failure()
-        run: |
-          echo "::error::Regenerating the RBI surfaced a real Sorbet error, not just a stale file. Nothing has been pushed to this branch."
-          echo ""
-          echo "To reproduce and fix locally:"
-          echo "  docker compose run web bin/tapioca gem"
-          echo "  docker compose run web bin/tapioca dsl"
-          echo "  docker compose run web bin/rake ci:type"
-          echo ""
-          echo "See AGENTS.md, 'Sorbet is not optional here', for the full workflow."
-
-      - name: Commit and push regenerated RBI files
-        env:
-          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
-        run: |
-          if git diff --quiet --exit-code -- sorbet; then
-            echo "No Tapioca changes to commit"
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add sorbet
-          git commit -m "Update Tapioca RBI files"
-          git push origin HEAD:$PR_HEAD_REF
+    uses: openaustralia/pavlovabot/.github/workflows/dependabot-tapioca.yml@main
+    secrets:
+      app-id: ${{ secrets.PAVLOVABOT_APP_ID }}
+      private-key: ${{ secrets.PAVLOVABOT_PRIVATE_KEY }}
