@@ -207,6 +207,6 @@ module ApplicationsHelper
 
   sig { returns(T.nilable(Integer)) }
   def api_port
-    Rails.env.development? ? 3000 : nil
+    Rails.env.development? ? ENV.fetch("WEB_PORT", "3000").to_i : nil
   end
 end
