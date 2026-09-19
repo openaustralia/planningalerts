@@ -236,6 +236,10 @@ We record the IP address of the request that creates an alert or an account, in 
 
 This is only worth anything if `request.remote_ip` is the real visitor address rather than a proxy's, which is what the whatismyip check above is for.
 
+### Password-protecting the idle environment
+
+`www-idle.planningalerts.org.au` (the idle environment) uses HTTP basic auth so bots and casual visitors can't reach it. Further details including how to test included in `app/middleware/idle_basic_auth.rb`.
+
 ## Upgrading Ruby in production
 
 Upgrading Ruby in production is an unbelievably painful process right now. I'm sorry. Let's make it simpler
