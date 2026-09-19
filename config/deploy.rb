@@ -3,8 +3,11 @@ lock "~> 3.19.1"
 
 set :application, "planningalerts"
 set :repo_url, "https://github.com/openaustralia/planningalerts.git"
+
 # Default branch is :main
-set :branch, "main"
+set :branch, ENV.fetch('PRODUCTION_BRANCH', 'main')
+puts '=' * 75, "NOTICE: deploying #{ENV['PRODUCTION_BRANCH']} NOT main branch!", '=' * 75 if ENV['PRODUCTION_BRANCH']
+
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
