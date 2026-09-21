@@ -79,6 +79,30 @@ Service versions in `docker-compose.yml` deliberately match production:
 PostGIS 15-3.3, Redis 6.2, Elasticsearch 7.17.7. Keep them matched when you
 change one.
 
+### Developing or testing on multiple worktrees in parallel
+
+If you're running docker from multiple project directories at the same time, you will need to
+
+1. Have at least 2GB of free memory per worktree, more if you are running the chrome based tests.
+2. Override the default mapping to host ports so docker doesn't fail with "port is already allocated" errors.
+
+Add a `.env` file with unused host ports that differ from the defaults in `docker-compose.yml` and from the `.env` in other worktrees, for example:
+
+```
+WEB_PORT=3001
+POSTFIX_PORT=2526
+POSTGRES_PORT=15433
+MAILCATCHER_PORT=1081
+```
+
+Remember to check ports are not in use by something else on your machine (`lsof -i :3001` or `ss -ltn`, depending on your OS).
+
+Background details:
+- Compose loads `.env` from the project directory for port substitution.
+- The repository is bind-mounted at `/app`, so dotenv and foreman inside the container load it as well, which is how `WEB_PORT` reaches the mailer links in `config/environments/development.rb` and the API example URLs from `api_port` in `app/helpers/applications_helper.rb`.
+- Use `.env` only for these port settings and leave app config in `.env.development`/`.env.production`.
+- Nothing else needs isolating by hand: Compose already scopes named volumes, containers and the network per project, and the project name defaults to the worktree's directory name, so gems, the database, Elasticsearch, and Redis (which already publish on ephemeral host ports) won't cross-contaminate between worktrees.
+
 ## Commands
 
 CI (`.github/workflows/rubyonrails.yml`) has four gates. Run these, and

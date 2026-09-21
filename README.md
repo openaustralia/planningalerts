@@ -47,24 +47,30 @@ docker volume rm planningalerts_gem_cache
 
 ### Overriding DB host and port for non docker dev
 
-To use docker for the database, but allow you to run the application locally, for example to simplify single step debugging in IDE's, you can override the following ENV vars in `.envrc` (for `direnv`) or manually:
+When running the application locally on the host whilst using docker for the database, for example to simplify single step debugging in IDEs, set the following ENV vars (manually or in `.envrc` for `direnv`):
 
 ```
 export DB_HOST=localhost
 export DB_PORT=15432
 ```
 
+If you have set `POSTGRES_PORT` in `.env` to change the host port mapping for postgres, use the same value for `DB_PORT`.
+
 ### Alternative web port
 
-You can set up a second web server port so all your user and passwords from various projects are not all mixed together.
-For example, add the following to `docker-compose.override.yml` to use port 30PA (3072):
-```yaml
-services:
-  web:
-    ports:
-      - "3072:3000"
+You can run the web server on a different host port so logins for various projects are not all mixed together.
+For example, set `WEB_PORT` in `.env` under the project root to use port 3072 (30PA) for manual testing.
+
 ```
-This adds an extra port mapping, local port 3000 will still be mapped to port 3000 on the container as well.
+WEB_PORT=3072
+```
+
+Then point your browser at <http://localhost:3072>. Mailer links and the API example URLs follow `WEB_PORT`, so they point at the port you are browsing on.
+If you previously added a `ports` block to `docker-compose.override.yml` for this, you can remove it.
+
+### Developing or testing on multiple worktrees in parallel
+
+See the section in AGENTS.md when using multiple worktrees to avoid port collisions.
 
 ### Setup The Database
 
