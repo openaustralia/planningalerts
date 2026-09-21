@@ -275,6 +275,8 @@ group :production do
   # Javascript runtime (required for precompiling assets in production)
   gem "mini_racer"
   gem "uglifier"
+  # TODO: Move to cloudflare-rails 7.x once we are on Rails 7.2+
+  gem "cloudflare-rails", "~> 6.2.0"
 end
 
 # Not direct dependencies, but bundler-audit flags them;
