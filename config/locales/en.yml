@@ -128,3 +128,6 @@ en:
     site_settings:
       update:
         success: "Site settings updated"
+    test_emails:
+      create:
+        success: "Test email sent to %{email}"
