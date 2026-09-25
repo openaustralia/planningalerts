@@ -51,7 +51,7 @@ module Admin
     sig { void }
     def unsubscribe
       alert = Alert.find(T.cast(params[:id], String))
-      authorize(alert, :update?)
+      authorize(alert, :update?, policy_class: Admin::AlertPolicy)
       alert.unsubscribe!
       redirect_to({ action: :show }, notice: t(".success"))
     end

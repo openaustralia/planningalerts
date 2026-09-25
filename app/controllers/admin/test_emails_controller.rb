@@ -10,15 +10,16 @@ module Admin
 
     sig { void }
     def create
-      authorize :test_emails
+      authorize :test_emails, policy_class: Admin::TestEmailsPolicy
       params_test_email = T.cast(params[:test_email], ActionController::Parameters)
+      email = T.cast(params_test_email[:email], String)
 
       # Ugh. Copied and pasted from email preview in spec/
       alert = Alert.new(
         lat: -33.902723,
         lng: 151.163362,
         radius_meters: 200,
-        user: User.new(email: params_test_email[:email], password: "foo"),
+        user: User.new(email:, password: "foo"),
         address: "89 Bridge Rd, Richmond VIC 3121",
         confirm_id: "1234",
         id: 1
@@ -68,6 +69,7 @@ module Admin
       )
 
       AlertMailer.alert(alert:, applications: [application1, application2], comments: [comment]).deliver_now!
+      redirect_to admin_test_emails_path, notice: t(".success", email:)
     end
   end
 end
