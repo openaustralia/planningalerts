@@ -289,6 +289,45 @@ To work on them, run `cd maizzle && npm run dev production` and preview at
 <http://localhost:3000/rails/mailers/>. All development mail goes to mailcatcher
 at <http://localhost:1080>.
 
+### How email leaves the app
+
+Production mail is submitted over SMTP to OAF's [Postal](https://gitlab.com/openaustralia/infrastructure/-/blob/main/docs/POSTAL.md)
+server, `postal.oaf.org.au:2525`, with STARTTLS and certificate verification.
+PlanningAlerts has **two** Postal mail servers, and the split matters:
+
+- `planningalerts` carries alerts and every other transactional email. This is
+  OAF's highest-volume mail and produces a steady stream of hard bounces.
+- `planningalerts-comments` carries only `CommentMailer#notify_authority`, the
+  comments forwarded to councils. Postal's suppression list is per mail
+  server, so keeping council addresses off the server that alert bounces land
+  on means a council can never be silently suppressed by alert traffic
+  ([infrastructure ADR 0003](https://gitlab.com/openaustralia/infrastructure/-/blob/main/docs/adr/0003-planningalerts-gets-two-postal-mail-servers.md)).
+
+`CommentMailer` selects its server with `delivery_method_options: { mail_server:
+:planningalerts_comments }`; everything else takes the default. The credentials
+live under `postal.smtp.planningalerts.*` and
+`postal.smtp.planningalerts_comments.*` in the production credentials.
+
+The cutover from Cuttlefish is in progress
+([#2234](https://github.com/openaustralia/planningalerts/issues/2234)). Which
+system an email goes to is decided per delivery by the `postal_smtp` Flipper
+flag in `app/lib/postal_or_cuttlefish_smtp.rb`, registered as the production
+delivery method in `config/environments/production.rb`. Off means Cuttlefish.
+There is no actor at send time, so only the boolean and `percentage_of_time`
+gates apply. The flag, the delivery class, the `cuttlefish.*` credentials and
+`/cuttlefish/event` all go in
+[#2236](https://github.com/openaustralia/planningalerts/issues/2236); the
+`X-Cuttlefish-*` headers go in
+[#2235](https://github.com/openaustralia/planningalerts/issues/2235) once the
+flag has been at 100% long enough that nobody would flip it back.
+
+Delivery events come back as webhooks. Postal signs each `POST /postal/event`
+with a key published at its JWKS URL (`config.x.postal_jwks_url`), and
+`PostalController` verifies that before recording `last_delivered_at`,
+unsubscribing alerts on `MessageDeliveryFailed`/`MessageBounced`, and posting to
+Slack when a comment to a council fails or is held. Mailers tag outgoing mail
+with `X-Postal-Tag: alert-<id>` or `comment-<id>` so events map back to records.
+
 ## The test harness makes some decisions for you
 
 `spec/spec_helper.rb` configures several things globally that change how specs

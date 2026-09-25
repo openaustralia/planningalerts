@@ -113,15 +113,52 @@ Rails.application.configure do
 
   config.asset_host = "https://#{Rails.configuration.x.host}"
 
-  # Send mails to the locally running instance of Cuttlefish
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: Rails.application.credentials.dig(:cuttlefish, :server),
-    port: 2525,
-    user_name: Rails.application.credentials.dig(:cuttlefish, :user_name),
-    password: Rails.application.credentials.dig(:cuttlefish, :password),
-    authentication: :plain
-  }
+  # Outbound mail is moving from Cuttlefish to Postal (#2234). Which one an email
+  # goes to is decided at delivery time by the postal_smtp Flipper flag, see
+  # app/lib/postal_or_cuttlefish_smtp.rb. Registered here in after_initialize
+  # because app constants can't be autoloaded while the initializers run.
+  #
+  # Postal: https://gitlab.com/openaustralia/infrastructure/-/blob/main/docs/POSTAL.md
+  # Port 2525 because EC2 blocks outbound port 25. The server does STARTTLS with
+  # a Let's Encrypt certificate, so STARTTLS is required and the certificate is
+  # verified. Don't work around a certificate problem with
+  # openssl_verify_mode: "none"; fix the certificate.
+  #
+  # PlanningAlerts has two Postal mail servers so that alert bounces can never
+  # land a council address on the suppression list (infrastructure ADR 0003):
+  # planningalerts for alerts and everything else, planningalerts-comments for
+  # CommentMailer#notify_authority only.
+  config.action_mailer.delivery_method = :postal_or_cuttlefish
+  config.after_initialize do
+    postal_smtp = lambda do |mail_server|
+      {
+        address: "postal.oaf.org.au",
+        port: 2525,
+        user_name: Rails.application.credentials.dig(:postal, :smtp, mail_server, :user_name),
+        password: Rails.application.credentials.dig(:postal, :smtp, mail_server, :password),
+        authentication: :plain,
+        enable_starttls: true,
+        openssl_verify_mode: "peer"
+      }
+    end
+
+    ActionMailer::Base.add_delivery_method(
+      :postal_or_cuttlefish,
+      PostalOrCuttlefishSmtp,
+      # The cuttlefish keys stay until #2236 retires cuttlefish
+      cuttlefish: {
+        address: Rails.application.credentials.dig(:cuttlefish, :server),
+        port: 2525,
+        user_name: Rails.application.credentials.dig(:cuttlefish, :user_name),
+        password: Rails.application.credentials.dig(:cuttlefish, :password),
+        authentication: :plain
+      },
+      postal: {
+        planningalerts: postal_smtp.call(:planningalerts),
+        planningalerts_comments: postal_smtp.call(:planningalerts_comments)
+      }
+    )
+  end
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).

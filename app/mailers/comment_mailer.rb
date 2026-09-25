@@ -28,7 +28,12 @@ class CommentMailer < ApplicationMailer
       # but DMARC now effectively makes this way of doing things unworkable.
       reply_to: "#{comment.name} <#{comment.email}>",
       to: T.must(comment.application).comment_email_with_fallback,
-      subject: default_i18n_subject(council_reference: T.must(comment.application).council_reference)
+      subject: default_i18n_subject(council_reference: T.must(comment.application).council_reference),
+      # Comments to councils go out through their own Postal mail server so that
+      # alert bounces can never land a council address on the suppression list
+      # (infrastructure ADR 0003). PostalOrCuttlefishSmtp reads this; the
+      # development and test delivery methods ignore it.
+      delivery_method_options: { mail_server: :planningalerts_comments }
     )
   end
 end
