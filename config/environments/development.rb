@@ -113,6 +113,9 @@ Rails.application.configure do
   # This is to allow local access for Matthew (for previewing on mobile etc)
   config.hosts << "orpington.local"
 
+  # Hostnames with the same subdomains as production, like api.pa.org.localhost
+  config.hosts << ".pa.org.localhost"
+
   # For actionmailbox
   config.hosts << "web"
   config.action_mailbox.ingress = :relay
