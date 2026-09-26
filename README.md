@@ -87,8 +87,9 @@ Append `--build` to rebuild any changes to Dockerfile.
 
 ### Accessing the API in development
 
-The `api` and `api-idle` hostnames only serve the API, as in production, and return a 404 for everything else. Use
-these hostnames to get the same subdomains as production:
+The `api` and `api-idle` hostnames only serve the API, as in production, and return a 404 for everything else.
+Other hostnames, including `localhost`, return a 404 for API paths. Use these hostnames to get the same subdomains as
+production:
 
 | Development | Production |
 | --- | --- |
@@ -97,8 +98,7 @@ these hostnames to get the same subdomains as production:
 | <http://www.pa.org.localhost:3000> or <http://localhost:3000> | `www.planningalerts.org.au` |
 
 For example, `curl http://api.pa.org.localhost:3000/authorities.json?key=your-api-key`. The examples on
-<http://localhost:3000/api/developer> already use the development API hostname. For now the API also answers on the
-website hostnames.
+<http://localhost:3000/api/developer> already use the development API hostname.
 
 Chrome, Firefox and curl send `*.localhost` names to your own machine. If something else can't find them (Safari,
 for example), add them to `/etc/hosts`:

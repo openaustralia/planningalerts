@@ -49,7 +49,7 @@ describe "API hostnames" do
     end
   end
 
-  %w[www.planningalerts.org.au planningalerts.org.au localhost].each do |host|
+  %w[www.planningalerts.org.au planningalerts.org.au www.pa.org.localhost localhost].each do |host|
     describe "on #{host}" do
       before { host! host }
 
@@ -59,9 +59,13 @@ describe "API hostnames" do
         expect(response.media_type).to eq "text/html"
       end
 
-      it "serves the API" do
-        get "/authorities.json", params: { key: key.value }
-        expect(response).to have_http_status(:ok)
+      ["/applications.js", "/authorities.json", "/authorities/foo/applications.rss",
+       "/applications.rss?postcode=2000", "/applications.geojson?lat=-33.8&lng=151.2"].each do |path|
+        it "does not serve the API at #{path}" do
+          get path, params: { key: key.value }
+          expect(response).to have_http_status(:not_found)
+          expect(response.body).to eq "Not found - use https://api.planningalerts.org.au\n"
+        end
       end
     end
   end

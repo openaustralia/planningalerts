@@ -5,37 +5,37 @@ require "spec_helper"
 describe "routing" do
   describe "api routing" do
     it do
-      expect(get: "authorities/foo/applications.js")
+      expect(get: "http://api.planningalerts.org.au/authorities/foo/applications.js")
         .to route_to(controller: "api", action: "authority", authority_id: "foo", format: "js")
     end
 
     it do
-      expect(get: "applications.js?postcode=2780")
+      expect(get: "http://api.planningalerts.org.au/applications.js?postcode=2780")
         .to route_to(controller: "api", action: "suburb_postcode", format: "js", postcode: "2780")
     end
 
     it do
-      expect(get: "applications.js?suburb=Katoomba")
+      expect(get: "http://api.planningalerts.org.au/applications.js?suburb=Katoomba")
         .to route_to(controller: "api", action: "suburb_postcode", format: "js", suburb: "Katoomba")
     end
 
     it do
-      expect(get: "applications.js?address=Foobar+Street")
+      expect(get: "http://api.planningalerts.org.au/applications.js?address=Foobar+Street")
         .to route_to(controller: "api", action: "point", format: "js", address: "Foobar Street")
     end
 
     it do
-      expect(get: "applications.js?lat=1&lng=2")
+      expect(get: "http://api.planningalerts.org.au/applications.js?lat=1&lng=2")
         .to route_to(controller: "api", action: "point", format: "js", lat: "1", lng: "2")
     end
 
     it do
-      expect(get: "applications.js?bottom_left_lat=1&bottom_left_lng=2&top_right_lat=3&top_right_lng=4")
+      expect(get: "http://api.planningalerts.org.au/applications.js?bottom_left_lat=1&bottom_left_lng=2&top_right_lat=3&top_right_lng=4")
         .to route_to(controller: "api", action: "area", format: "js", bottom_left_lat: "1", bottom_left_lng: "2", top_right_lat: "3", top_right_lng: "4")
     end
 
     it do
-      expect(get: "applications.js")
+      expect(get: "http://api.planningalerts.org.au/applications.js")
         .to route_to(controller: "api", action: "all", format: "js")
     end
   end
