@@ -202,7 +202,7 @@ module ApplicationsHelper
 
   sig { returns(String) }
   def api_host
-    Rails.env.development? ? "localhost" : "api.planningalerts.org.au"
+    Rails.env.development? ? "api.pa.org.localhost" : "api.planningalerts.org.au"
   end
 
   sig { returns(T.nilable(Integer)) }

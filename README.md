@@ -85,6 +85,28 @@ This will trigger a build if needed. You can manually trigger a build by first r
 
 Append `--build` to rebuild any changes to Dockerfile.
 
+### Accessing the API in development
+
+The `api` and `api-idle` hostnames only serve the API, as in production, and return a 404 for everything else. Use
+these hostnames to get the same subdomains as production:
+
+| Development | Production |
+| --- | --- |
+| <http://api.pa.org.localhost:3000> | `api.planningalerts.org.au` |
+| <http://api-idle.pa.org.localhost:3000> | `api-idle.planningalerts.org.au` |
+| <http://www.pa.org.localhost:3000> or <http://localhost:3000> | `www.planningalerts.org.au` |
+
+For example, `curl http://api.pa.org.localhost:3000/authorities.json?key=your-api-key`. The examples on
+<http://localhost:3000/api/developer> already use the development API hostname. For now the API also answers on the
+website hostnames.
+
+Chrome, Firefox and curl send `*.localhost` names to your own machine. If something else can't find them (Safari,
+for example), add them to `/etc/hosts`:
+
+```
+127.0.0.1 api.pa.org.localhost api-idle.pa.org.localhost www.pa.org.localhost
+```
+
 ### Run The Tests
 
 * In a separate window - `docker compose run web bin/guard`
