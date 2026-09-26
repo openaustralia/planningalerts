@@ -1,9 +1,14 @@
 # typed: false
 # frozen_string_literal: true
 
-class FormatConstraint
+# Hostnames that only serve the API. Error pages still render for failed
+# API calls, since config.exceptions_app routes them back through here.
+class ApiHostConstraint
+  SUBDOMAINS = %w[api api-idle].freeze
+
   def matches?(request)
-    request.format.html?
+    SUBDOMAINS.include?(request.subdomain) &&
+      !request.get_header("action_dispatch.exception")
   end
 end
 
@@ -20,6 +25,36 @@ class QueryParamsPresentConstraint
 end
 
 Rails.application.routes.draw do
+  # Load balancer health checks use the server's own address as the host
+  health_check_routes
+
+  # Route API separately, first so API hostnames can 404 everything after it
+  scope format: true do
+    get "authorities" => "api#authorities", as: nil
+    get "authorities/:authority_id/applications" => "api#authority", as: nil
+    get "applications" => "api#suburb_postcode", as: nil,
+        constraints: QueryParamsPresentConstraint.new(:postcode)
+    get "applications" => "api#suburb_postcode", as: nil,
+        constraints: QueryParamsPresentConstraint.new(:suburb)
+    get "applications" => "api#point", as: nil,
+        constraints: QueryParamsPresentConstraint.new(:address)
+    get "applications" => "api#point", as: nil,
+        constraints: QueryParamsPresentConstraint.new(:lat, :lng)
+    get "applications" => "api#area", as: nil,
+        constraints: QueryParamsPresentConstraint.new(
+          :bottom_left_lat, :bottom_left_lng,
+          :top_right_lat, :top_right_lng
+        )
+    get "applications" => "api#date_scraped", as: nil,
+        constraints: QueryParamsPresentConstraint.new(:date_scraped)
+    get "applications" => "api#all", as: nil
+  end
+
+  constraints ApiHostConstraint.new do
+    match "(*path)", to: proc { [404, { "content-type" => "text/plain" }, ["Not found\n"]] },
+                     via: :all, format: false
+  end
+
   namespace :admin do
     constraints HasAdminRole do
       # Feature flag admin
@@ -61,12 +96,6 @@ Rails.application.routes.draw do
     resources :roles, only: %i[index show]
 
     root to: "homes#index"
-  end
-
-  constraints subdomain: "api" do
-    constraints FormatConstraint.new do
-      get "(*path)" => redirect { |p, r| "http://www.#{r.domain(2)}/#{p[:path]}" }
-    end
   end
 
   require "sidekiq/web"
@@ -121,28 +150,6 @@ Rails.application.routes.draw do
     end
   end
   get "/alerts/signup", to: redirect("/profile/alerts/new")
-
-  # Route API separately
-  scope format: true do
-    get "authorities" => "api#authorities", as: nil
-    get "authorities/:authority_id/applications" => "api#authority", as: nil
-    get "applications" => "api#suburb_postcode", as: nil,
-        constraints: QueryParamsPresentConstraint.new(:postcode)
-    get "applications" => "api#suburb_postcode", as: nil,
-        constraints: QueryParamsPresentConstraint.new(:suburb)
-    get "applications" => "api#point", as: nil,
-        constraints: QueryParamsPresentConstraint.new(:address)
-    get "applications" => "api#point", as: nil,
-        constraints: QueryParamsPresentConstraint.new(:lat, :lng)
-    get "applications" => "api#area", as: nil,
-        constraints: QueryParamsPresentConstraint.new(
-          :bottom_left_lat, :bottom_left_lng,
-          :top_right_lat, :top_right_lng
-        )
-    get "applications" => "api#date_scraped", as: nil,
-        constraints: QueryParamsPresentConstraint.new(:date_scraped)
-    get "applications" => "api#all", as: nil
-  end
 
   resources :applications, only: %i[index show] do
     member do

@@ -124,7 +124,8 @@ describe "IdleBasicAuth" do
     it "leaves api-idle alone" do
       get "https://api-idle.planningalerts.org.au/donate"
 
-      expect(response).to have_http_status(:moved_permanently)
+      # Reaches the routes, which only serve the API on this host
+      expect(response).to have_http_status(:not_found)
     end
 
     # The ALB health check sends the target's IP and port as the Host header,
