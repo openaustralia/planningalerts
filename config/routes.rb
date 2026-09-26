@@ -50,15 +50,15 @@ Rails.application.routes.draw do
     get "applications" => "api#all", as: nil
   end
 
+  not_found = proc { [404, { "content-type" => "text/plain" }, ["Not found\n"]] }
+
   constraints ApiHostConstraint.new do
-    match "(*path)", to: proc { [404, { "content-type" => "text/plain" }, ["Not found\n"]] },
-                     via: :all, format: false
+    match "(*path)", to: not_found, via: :all, format: false
   end
 
   # Elsewhere API paths are not found, rather than falling through to web pages
   scope format: true do
-    get "authorities", "authorities/:authority_id/applications", "applications", as: nil,
-        to: proc { [404, { "content-type" => "text/plain" }, ["Not found - use https://api.planningalerts.org.au\n"]] }
+    get "authorities", "authorities/:authority_id/applications", "applications", to: not_found, as: nil
   end
 
   namespace :admin do

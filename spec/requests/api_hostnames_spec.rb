@@ -64,7 +64,7 @@ describe "API hostnames" do
         it "does not serve the API at #{path}" do
           get path, params: { key: key.value }
           expect(response).to have_http_status(:not_found)
-          expect(response.body).to eq "Not found - use https://api.planningalerts.org.au\n"
+          expect(response.body).to eq "Not found\n"
         end
       end
     end
