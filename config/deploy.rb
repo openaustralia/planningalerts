@@ -1,6 +1,9 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.19.1"
 
+require "json"
+require "open3"
+
 set :application, "planningalerts"
 set :repo_url, "https://github.com/openaustralia/planningalerts.git"
 
@@ -86,18 +89,54 @@ set :aws_ec2_default_filters, (proc {
   ]
 })
 
-# Blue/green: exactly one colour is meant to be "live" at a time - provision and deploy to
-# the standby colour, then swap, never update the live colour in place.
+# Blue/green: two environments, blue and green, only one taking traffic at a time.
+# Terms follow the infrastructure repo's CONTEXT.md. To change hosts:
+# 1. assemble and provision the idle environment with the infrastructure repo,
+# 2. deploy this app to it (BLUE_GREEN=idle),
+# 3. cut over to it with the infrastructure repo, making it active.
+# App-only changes can be deployed straight to the active environment (BLUE_GREEN=active).
+# BLUE_GREEN is blue or green, or active/idle for whichever environment the load
+# balancer currently sends that hostname's traffic to.
+BLUE_GREEN_HOSTNAMES = { "active" => "www.planningalerts.org.au", "idle" => "www-idle.planningalerts.org.au" }.freeze
+
+def aws_cli(*args)
+  output, status = Open3.capture2("aws", "--profile", "oaf", "--region", "ap-southeast-2", "--output", "json", *args)
+  raise "ERROR: aws #{args.first(2).join(' ')} failed" unless status.success?
+
+  JSON.parse(output)
+end
+
+def colour_serving(hostname)
+  load_balancer = aws_cli("elbv2", "describe-load-balancers", "--names", "main")["LoadBalancers"].first
+  listener = aws_cli("elbv2", "describe-listeners", "--load-balancer-arn", load_balancer["LoadBalancerArn"])["Listeners"]
+             .find { |l| l["Port"] == 443 }
+  forward = aws_cli("elbv2", "describe-rules", "--listener-arn", listener["ListenerArn"])["Rules"]
+            .select { |r| r["Conditions"].any? { |c| c["Field"] == "host-header" && c["Values"].include?(hostname) } }
+            .flat_map { |r| r["Actions"] }.find { |a| a["Type"] == "forward" }
+  raise "ERROR: no load balancer rule forwards #{hostname}" unless forward
+
+  # Unrecognised target group names are dropped, so they fail the one-environment check below
+  colours = forward.dig("ForwardConfig", "TargetGroups").select { |g| g["Weight"].to_i.positive? }
+                   .filter_map { |g| g["TargetGroupArn"][%r{targetgroup/planningalerts-production-(\w+)/}, 1] }
+  raise "ERROR: #{hostname} is not served by exactly one known environment (#{colours.join(', ')})" if colours.size != 1
+
+  puts "#{hostname} is served by #{colours.first}"
+  colours.first
+end
+
 def live_aws_instances
   instances = aws_ec2.instances.values
 
   available_colours = instances.filter_map { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") }.uniq.reject(&:empty?)
   colour = ENV.fetch("BLUE_GREEN", nil)
+  colour = colour_serving(BLUE_GREEN_HOSTNAMES[colour]) if BLUE_GREEN_HOSTNAMES.key?(colour)
   if colour
     instances = instances.select { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") == colour }
   end
   colours = instances.filter_map { |i| Capistrano::Aws::EC2.parse_tag(i, "BlueGreen") }.uniq.reject(&:empty?)
-  raise "ERROR: BLUE_GREEN must be #{available_colours.join(' or ')}" if colours.size != 1
+  raise "ERROR: BLUE_GREEN must be #{(available_colours + BLUE_GREEN_HOSTNAMES.keys).join(', ')}" if colours.size != 1
+
+  set :blue_green, colours.first
   instances
 end
 
@@ -109,8 +148,8 @@ def register_aws_instances(options = {})
   end
 end
 
-# Tagging options
-set :tagging3_format, ':stage_:release'
+# Tagging options: name the environment deployed to, as production_ was also used for idle deploys
+set :tagging3_format, -> { fetch(:blue_green) ? ":stage_:blue_green_:release" : ":stage_:release" }
 
 set :foreman_timeout, 300
 
