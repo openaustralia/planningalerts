@@ -9,6 +9,8 @@ describe "API hostnames" do
 
   %w[api.planningalerts.org.au api-idle.planningalerts.org.au api.pa.org.localhost].each do |host|
     describe "on #{host}" do
+      let(:website) { host.sub("api", "www") }
+
       before { host! host }
 
       it "serves the API" do
@@ -29,7 +31,19 @@ describe "API hostnames" do
         expect(response).to have_http_status(:unauthorized)
       end
 
-      %w[/ /faq /applications /applications/1 /admin /profile/alerts /users/sign_in].each do |path|
+      it "redirects the home page to the website" do
+        get "/"
+        expect(response).to redirect_to "http://#{website}/"
+        expect(response).to have_http_status(:moved_permanently)
+      end
+
+      it "redirects application pages to the website, keeping the query string" do
+        get "/applications/123", params: { utm_source: "feed", utm_medium: "rss" }
+        expect(response).to redirect_to "http://#{website}/applications/123?utm_source=feed&utm_medium=rss"
+        expect(response).to have_http_status(:moved_permanently)
+      end
+
+      %w[/faq /applications /applications/123/versions /applications/address /admin /profile/alerts /users/sign_in].each do |path|
         it "returns a plain 404 for #{path}" do
           get path
           expect(response).to have_http_status(:not_found)
