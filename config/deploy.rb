@@ -115,10 +115,10 @@ def colour_serving(hostname)
             .flat_map { |r| r["Actions"] }.find { |a| a["Type"] == "forward" }
   raise "ERROR: no load balancer rule forwards #{hostname}" unless forward
 
-  # Unrecognised target group names are dropped, so they fail the one-colour check below
+  # Unrecognised target group names are dropped, so they fail the one-environment check below
   colours = forward.dig("ForwardConfig", "TargetGroups").select { |g| g["Weight"].to_i.positive? }
                    .filter_map { |g| g["TargetGroupArn"][%r{targetgroup/planningalerts-production-(\w+)/}, 1] }
-  raise "ERROR: #{hostname} is not served by exactly one known colour (#{colours.join(', ')})" if colours.size != 1
+  raise "ERROR: #{hostname} is not served by exactly one known environment (#{colours.join(', ')})" if colours.size != 1
 
   puts "#{hostname} is served by #{colours.first}"
   colours.first
@@ -148,7 +148,7 @@ def register_aws_instances(options = {})
   end
 end
 
-# Tagging options: name the colour deployed to, as production_ was also used for idle deploys
+# Tagging options: name the environment deployed to, as production_ was also used for idle deploys
 set :tagging3_format, -> { fetch(:blue_green) ? ":stage_:blue_green_:release" : ":stage_:release" }
 
 set :foreman_timeout, 300
