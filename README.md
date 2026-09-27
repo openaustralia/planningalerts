@@ -185,15 +185,15 @@ bundle exec cap production deploy
 
 This command is defined in `config/deploy.rb`.
 
-Production is blue/green: one colour of servers is live behind `www.`, the other idle behind `www-idle.`. Pick the
-colour with `BLUE_GREEN`, either `blue` or `green`, or `active` or `idle` to use whichever colour the load balancer
-currently sends that traffic to:
+Production is blue/green: of the two environments, the active one takes traffic for `www.` and the idle one for
+`www-idle.`. Pick the environment with `BLUE_GREEN`, either `blue` or `green`, or `active` or `idle` to use whichever
+one the load balancer currently sends that traffic to:
 
 ```sh
 BLUE_GREEN=idle bundle exec cap production deploy
 ```
 
-Each deploy is tagged in git with the stage and colour, for example `production_green_20260927010203`.
+Each deploy is tagged in git with the stage and environment, for example `production_green_20260927010203`.
 
 Sometimes you want to deploy an alternate branch, for instance when deploying to the `test` stage.
 In this case you'll need to set the `branch` variable after recipes are loaded by using the `--set` argument instead of `--set-before`, e.g.
