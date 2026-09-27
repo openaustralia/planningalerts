@@ -89,10 +89,14 @@ set :aws_ec2_default_filters, (proc {
   ]
 })
 
-# Blue/green: exactly one colour is meant to be "live" at a time - provision and deploy to
-# the standby colour, then swap, never update the live colour in place.
-# BLUE_GREEN is a colour, or active/idle for whichever colour the load balancer
-# currently sends that hostname's traffic to.
+# Blue/green: two environments, blue and green, only one taking traffic at a time.
+# Terms follow the infrastructure repo's CONTEXT.md. To change hosts:
+# 1. assemble and provision the idle environment with the infrastructure repo,
+# 2. deploy this app to it (BLUE_GREEN=idle),
+# 3. cut over to it with the infrastructure repo, making it active.
+# App-only changes can be deployed straight to the active environment (BLUE_GREEN=active).
+# BLUE_GREEN is blue or green, or active/idle for whichever environment the load
+# balancer currently sends that hostname's traffic to.
 BLUE_GREEN_HOSTNAMES = { "active" => "www.planningalerts.org.au", "idle" => "www-idle.planningalerts.org.au" }.freeze
 
 def aws_cli(*args)
@@ -111,9 +115,10 @@ def colour_serving(hostname)
             .flat_map { |r| r["Actions"] }.find { |a| a["Type"] == "forward" }
   raise "ERROR: no load balancer rule forwards #{hostname}" unless forward
 
-  colours = forward.dig("ForwardConfig", "TargetGroups").select { |g| g["Weight"].positive? }
-                   .map { |g| g["TargetGroupArn"][%r{targetgroup/planningalerts-production-(\w+)/}, 1] }
-  raise "ERROR: #{hostname} is served by #{colours.join(' and ')}, not one colour" if colours.size != 1
+  # Unrecognised target group names are dropped, so they fail the one-colour check below
+  colours = forward.dig("ForwardConfig", "TargetGroups").select { |g| g["Weight"].to_i.positive? }
+                   .filter_map { |g| g["TargetGroupArn"][%r{targetgroup/planningalerts-production-(\w+)/}, 1] }
+  raise "ERROR: #{hostname} is not served by exactly one known colour (#{colours.join(', ')})" if colours.size != 1
 
   puts "#{hostname} is served by #{colours.first}"
   colours.first
