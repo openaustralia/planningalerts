@@ -98,7 +98,7 @@ these hostnames to get the same subdomains as production:
 
 For example, `curl http://api.pa.org.localhost:3000/authorities.json?key=your-api-key`. The examples on
 <http://localhost:3000/api/developer> already use the development API hostname. For now the API also answers on the
-website hostnames.
+website hostnames. If you've set `WEB_PORT` in `.env`, use that port instead of 3000.
 
 Chrome, Firefox and curl send `*.localhost` names to your own machine. If something else can't find them (Safari,
 for example), add them to `/etc/hosts`:
