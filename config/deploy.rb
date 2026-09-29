@@ -110,15 +110,16 @@ def colour_serving(hostname)
   load_balancer = aws_cli("elbv2", "describe-load-balancers", "--names", "main")["LoadBalancers"].first
   listener = aws_cli("elbv2", "describe-listeners", "--load-balancer-arn", load_balancer["LoadBalancerArn"])["Listeners"]
              .find { |l| l["Port"] == 443 }
+  # Host-header-only rules, so a path-specific rule (like /sitemaps/*) isn't mistaken for the catch-all
   forward = aws_cli("elbv2", "describe-rules", "--listener-arn", listener["ListenerArn"])["Rules"]
-            .select { |r| r["Conditions"].any? { |c| c["Field"] == "host-header" && c["Values"].include?(hostname) } }
+            .select { |r| r["Conditions"].all? { |c| c["Field"] == "host-header" } && r["Conditions"].any? { |c| c["Values"].include?(hostname) } }
             .flat_map { |r| r["Actions"] }.find { |a| a["Type"] == "forward" }
   raise "ERROR: no load balancer rule forwards #{hostname}" unless forward
 
-  # Unrecognised target group names are dropped, so they fail the one-environment check below
-  colours = forward.dig("ForwardConfig", "TargetGroups").select { |g| g["Weight"].to_i.positive? }
-                   .filter_map { |g| g["TargetGroupArn"][%r{targetgroup/planningalerts-production-(\w+)/}, 1] }
-  raise "ERROR: #{hostname} is not served by exactly one known environment (#{colours.join(', ')})" if colours.size != 1
+  names = forward.dig("ForwardConfig", "TargetGroups").select { |g| g["Weight"].to_i.positive? }
+                 .map { |g| g["TargetGroupArn"][%r{targetgroup/([^/]+)/}, 1] }
+  colours = names.map { |n| n.to_s[/\Aplanningalerts-production-(\w+)\z/, 1] }
+  raise "ERROR: #{hostname} is not served by exactly one known environment (#{names.join(', ')})" unless colours.size == 1 && colours.first
 
   puts "#{hostname} is served by #{colours.first}"
   colours.first
