@@ -52,11 +52,10 @@ Rails.application.routes.draw do
 
   constraints ApiHostConstraint.new do
     # RSS feeds fetched from the API hostnames used to link to these pages
-    # there. Send them to the matching website hostname, e.g. api-idle to
-    # www-idle, or the canonical one if that doesn't change the hostname, so
-    # it can never redirect to itself.
+    # there. Send them to the matching website hostname, or the canonical one
+    # if that doesn't change the hostname, so it can never redirect to itself.
     to_website = redirect do |_params, request|
-      website_host = request.host.sub(/\Aapi/, "www")
+      website_host = WebsiteHost.for(request.host)
       website_host = Rails.configuration.x.host if website_host == request.host
       request.url.sub(request.host, website_host)
     end

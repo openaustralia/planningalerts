@@ -22,8 +22,8 @@ describe "API hostnames" do
       it "links RSS items to the website, not the API hostname" do
         application = create(:application, postcode: "2000")
         get "/applications.rss", params: { postcode: "2000", key: key.value }
-        expect(response.body).to include "<link>http://localhost/</link>"
-        expect(response.body).to include "http://localhost/applications/#{application.id}?"
+        expect(response.body).to include "<link>http://#{website}/</link>"
+        expect(response.body).to include "http://#{website}/applications/#{application.id}?"
       end
 
       it "leaves rejecting a missing key to the API" do
