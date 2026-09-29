@@ -73,6 +73,21 @@ describe "API hostnames" do
         expect(response.media_type).to eq "text/html"
       end
 
+      # The API routes come first but need a format, so these web pages
+      # sharing their paths must still reach the website
+      it "serves the applications page" do
+        get "/applications"
+        expect(response).to have_http_status(:ok)
+        expect(response.media_type).to eq "text/html"
+      end
+
+      it "serves an authority's applications page" do
+        authority = create(:authority)
+        get "/authorities/#{authority.short_name_encoded}/applications"
+        expect(response).to have_http_status(:ok)
+        expect(response.media_type).to eq "text/html"
+      end
+
       it "serves the API" do
         get "/authorities.json", params: { key: key.value }
         expect(response).to have_http_status(:ok)
