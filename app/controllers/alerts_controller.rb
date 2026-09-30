@@ -10,6 +10,9 @@ class AlertsController < ApplicationController
   before_action :authenticate_user!, except: :unsubscribe
   after_action :verify_authorized, except: %i[index unsubscribe]
   after_action :verify_policy_scoped, only: :index
+  # Mail clients POST one-click unsubscribes without a form token. The
+  # confirm_id in the URL is the secret that authorises it.
+  skip_forgery_protection only: :unsubscribe
 
   layout "profile", except: :unsubscribe
 
