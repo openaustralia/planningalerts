@@ -62,6 +62,10 @@ describe AlertMailer do
     it "has the postal tag header" do
       expect(email.header["X-Postal-Tag"].to_s).to eq("alert-1")
     end
+
+    it "is delivered through the default mail server, not the one for comments to councils" do
+      expect(email.delivery_method.settings).not_to have_key(:mail_server)
+    end
   end
 
   describe "when sending a planning alert with two new comments" do

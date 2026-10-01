@@ -47,6 +47,10 @@ describe CommentMailer do
         expect(notifier.header["X-Postal-Tag"].to_s).to eq("comment-#{comment.id}")
       end
 
+      it "is delivered through the planningalerts-comments mail server" do
+        expect(notifier.delivery_method.settings[:mail_server]).to eq(:planningalerts_comments)
+      end
+
       it "has specific information in the body of the email" do
         expect(notifier.text_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/comment_mailer/email1.txt").read)
       end

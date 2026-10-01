@@ -30,7 +30,13 @@ Flipper::UI.configure do |config|
                           "monitor only: the widget is shown, the answer is checked, the outcome is " \
                           "counted in Sentry, and the form goes through anyway. Leave it off until the " \
                           "Sentry numbers say what enforcing would cost, since enforcing turns away " \
-                          "everyone without JavaScript"
+                          "everyone without JavaScript",
+      "postal_smtp" => "Send outbound email through Postal (postal.oaf.org.au, two mail servers) " \
+                       "instead of Cuttlefish. Off, or not registered, means Cuttlefish. There is no " \
+                       "actor at send time, so only the boolean and percentage_of_time gates do " \
+                       "anything; percentage_of_time is fine here, unlike on a form, because each " \
+                       "email is an independent event, so it can be used for a staged rollout. " \
+                       "Transitional: removed when Cuttlefish is retired (#2236)"
     }
   end
 
