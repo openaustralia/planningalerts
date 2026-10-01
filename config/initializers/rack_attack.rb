@@ -55,8 +55,11 @@ end
 # 1,000 rpm (/applications/N) per t3.medium instance maxes out our CPU (95%).
 # 40 requests per 20 seconds is roughly 12% of max and should be long enough for natural clumping
 Rack::Attack.throttle("pages/ip", limit: divide_limit.call(40), period: 20.seconds) do |req|
+  # Mail servers send delivery updates in bursts from one address. The
+  # endpoints only accept requests with the webhook key or signature.
   next if req.path.start_with?("/assets/") ||
-          req.path == "/health_check"
+          req.path == "/health_check" ||
+          (req.post? && ["/cuttlefish/event", "/postal/event"].include?(req.path))
 
   key_controller = req.env["api_throttle.key_controller"]
   # Exclude what is matched for the api controller throttle above
