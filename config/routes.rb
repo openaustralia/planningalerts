@@ -157,7 +157,8 @@ Rails.application.routes.draw do
 
   resources :alerts, only: [], param: :confirm_id do
     member do
-      get :unsubscribe
+      # POST is the one-click unsubscribe from the List-Unsubscribe-Post email header (RFC 8058)
+      match :unsubscribe, to: "alerts#unsubscribe", via: %i[get post]
     end
   end
   get "/alerts/signup", to: redirect("/profile/alerts/new")
