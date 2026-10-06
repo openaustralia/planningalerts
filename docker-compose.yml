@@ -23,7 +23,7 @@ services:
       # Required for nearly everything
       postgres:
         condition: service_healthy
-      # Required for rack stack and flipper initialisation abd caching
+      # Required for rack stack and flipper initialisation and caching
       redis:
         condition: service_healthy
       # Required for logging api calls etc

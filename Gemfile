@@ -192,7 +192,7 @@ group :test do
   gem "factory_bot"
   gem "factory_bot_rails"
   gem "rails-controller-testing"
-  gem "selenium-webdriver", ">= 4.14.0" # fix CVE-2023-5590 and provides Selenium Manager which repalces unmaintained webdrivers gem
+  gem "selenium-webdriver", ">= 4.14.0" # fix CVE-2023-5590 and provides Selenium Manager which replaces unmaintained webdrivers gem
   gem "simplecov", require: false
   gem "timecop"
   gem "vcr"
