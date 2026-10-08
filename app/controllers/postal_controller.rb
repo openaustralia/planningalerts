@@ -9,6 +9,11 @@ class PostalController < ApplicationController
 
   STATUS_EVENTS = T.let(%w[MessageSent MessageDeliveryFailed MessageHeld MessageBounced].freeze, T::Array[String])
 
+  # The receiving server's reply starts with a 5.7.x enhanced status code when it has refused
+  # us for a policy or reputation reason, such as Microsoft blocking our sending IP address.
+  # That says nothing about whether the recipient's address works.
+  SENDER_SIDE_REFUSAL = T.let(/\A\d{3}[ -]5\.7\.\d+/, Regexp)
+
   sig { void }
   def event
     # Verify the signature against the raw body before trusting anything in it
@@ -56,9 +61,10 @@ class PostalController < ApplicationController
         last_delivered_successfully: success
       )
       # Postal only sends these events for permanent failures so we can
-      # unsubscribe straight away without needing to inspect a DSN code.
+      # unsubscribe straight away, unless the receiving server refused us for
+      # reasons that aren't about the recipient.
       # Held messages are deliberately not treated as bounces.
-      alert.unsubscribe_by_bounce! if %w[MessageDeliveryFailed MessageBounced].include?(event)
+      alert.unsubscribe_by_bounce! if unsubscribe_after?(event, payload)
     when "comment"
       comment = Comment.find(id)
       comment.update!(
@@ -88,6 +94,14 @@ class PostalController < ApplicationController
   end
 
   private
+
+  sig { params(event: String, payload: T::Hash[String, T.untyped]).returns(T::Boolean) }
+  def unsubscribe_after?(event, payload)
+    return true if event == "MessageBounced"
+    return false unless event == "MessageDeliveryFailed"
+
+    !SENDER_SIDE_REFUSAL.match?(T.cast(payload["output"], T.nilable(String)).to_s)
+  end
 
   # The X-Postal-Signature-256 header holds a Base64 encoded RSA-SHA256 signature of the raw
   # JSON request body, made with postal's installation wide signing key. We check it against

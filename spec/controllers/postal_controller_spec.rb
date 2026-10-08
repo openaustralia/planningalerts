@@ -174,6 +174,41 @@ describe PostalController do
     expect(alert.unsubscribed_by).to eq "bounce"
   end
 
+  it "unsubscribes the alert when the recipient's address doesn't exist" do
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail",
+                                 output: "550 5.1.1 The email account that you tried to reach does not exist."))
+    expect(alert.reload.unsubscribed).to be true
+  end
+
+  it "records a failed delivery refused for the sender's reputation without unsubscribing the alert" do
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail",
+                                 output: "550 5.7.1 Unfortunately, messages from [192.0.2.1] weren't sent. " \
+                                         "Please contact your Internet service provider since part of their " \
+                                         "network is on our block list (S3140)."))
+    expect(response).to have_http_status(:ok)
+    alert.reload
+    expect(alert.last_delivered_at).to eq Time.zone.at(1_598_494_217.5)
+    expect(alert.last_delivered_successfully).to be false
+    expect(alert.unsubscribed).to be false
+    expect(alert.unsubscribed_by).to be_nil
+  end
+
+  it "recognises a multi-line 5.7.x refusal without unsubscribing the alert" do
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail",
+                                 output: "550-5.7.25 [192.0.2.1] The IP address sending this message " \
+                                         "does not have a PTR record."))
+    expect(alert.reload.unsubscribed).to be false
+  end
+
+  it "unsubscribes the alert when the failure has no reply from the receiving server" do
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail", output: nil))
+    expect(alert.reload.unsubscribed).to be true
+  end
+
   it "records a bounce of an alert email and unsubscribes the alert" do
     alert = create(:alert, id: alert_id)
     post_event(bounce_event_body(tag: alert_tag))
