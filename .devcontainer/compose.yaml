@@ -1,6 +1,10 @@
+# The development stack, shared by `make`, plain `docker compose` (via ../compose.yaml) and the dev container.
+# See "Docker development environment" in AGENTS.md.
 services:
   web:
-    build: .
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
     # Sorbet doesn't currently build for Linux ARM64 (see https://github.com/sorbet/sorbet/issues/4119)
     # So, we're forced to build the container as linux/amd64 always and lean on Rosetta
     # on Apple silicon for running this.
@@ -8,7 +12,7 @@ services:
     # is switched on in Docker Desktop.
     platform: linux/amd64
     volumes:
-      - .:/app
+      - ..:/app
       - gem_cache:/usr/local/bundle/gems
     ports:
       # Overridable so multiple worktrees can each run their own stack at
@@ -16,9 +20,10 @@ services:
       # parallel" in AGENTS.md.
       - "${WEB_PORT:-3000}:3000"
     environment:
+      START_LIMIT: &start_limit ${START_LIMIT:-5m} # how long startup may take before it counts as failed; see "If the app won't start" in the README
       # Passed through from the host shell if set, e.g. `THROTTLE_DIVISOR=5 docker compose up`
       # (see "Testing throttle limits" in README.md). Left unset in the container if unset here.
-      - THROTTLE_DIVISOR
+      THROTTLE_DIVISOR:
     depends_on:
       # Required for nearly everything
       postgres:
@@ -32,15 +37,22 @@ services:
       # Required for jobs sending email
       mailcatcher:
         condition: service_healthy
-    command: "bin/dev"
+    # bin/setup installs gems and prepares the database, so a fresh checkout comes up working.
+    command: sh -c "bin/setup && bin/dev"
     tty: true
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs -o /dev/null http://localhost:3000/ || exit 1"]
+      interval: 5s
+      start_period: *start_limit
 
   postfix:
-    build: .
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
     # Same as "web" service above because of sorbet we need to build as amd64
     platform: linux/amd64
     volumes:
-      - .:/app
+      - ..:/app
       - gem_cache:/usr/local/bundle/gems
     ports:
       - "${POSTFIX_PORT:-2525}:25"
@@ -52,8 +64,9 @@ services:
     
 
   postgres:
-    # Same version as used in production
-    image: postgis/postgis:15-3.3
+    # Production (RDS) runs PostgreSQL 15.17 with the PostGIS 3.4.3 library; this image has 3.4.3 on PostgreSQL 15.8, the
+    # closest published match.
+    image: postgis/postgis:15-3.4
     # There isn't yet a linux/arm64 build of postgis on docker
     # See https://github.com/postgis/docker-postgis/issues/216
     platform: linux/amd64
@@ -79,7 +92,7 @@ services:
   redis:
     # TODO: #2167 Try switching to alpine variant for slimmer images
     # We're also using redis 6.2 in production
-    image: redis:6.2
+    image: redis:6.2.6 # production's ElastiCache version
     ports:
       - "6379"
     volumes:
@@ -94,8 +107,8 @@ services:
 
   mailcatcher:
     build:
-      context: .
-      dockerfile: Dockerfile.mailcatcher
+      context: ..
+      dockerfile: .devcontainer/Dockerfile.mailcatcher
     ports:
       - "${MAILCATCHER_PORT:-1080}:1080"
     healthcheck:
