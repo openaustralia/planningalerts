@@ -54,15 +54,31 @@ than erroring, which is what [#2135](https://github.com/openaustralia/planningal
 fixed by removing a second team that held access to nothing. Do not add teams
 there speculatively, and check the team really has access.
 
-## Getting a working environment
+## Docker development environment
 
-Everything runs through Docker Compose. There is no supported way to run the app
-against a local database and Redis without it.
+One stack, defined in `.devcontainer/compose.yaml`, serves every way of working: `make`, plain `docker compose`
+(through the root `compose.yaml`), and the dev container in VS Code, RubyMine, Codespaces or
+`devcontainer up --workspace-folder .`. They all share the same containers and data.
 
-```sh
-docker compose run web bin/rake db:setup   # first time, also triggers a build
-docker compose up                          # then http://localhost:3000
 ```
+make up           # everything, including the app at http://localhost:3000, once it's ready
+make services-up  # everything except `web`, for running Rails on the host
+make status       # each container's health and host ports
+make logs         # follow the logs (SERVICE=<name> for one container)
+make shell        # a shell in the app container, or a fresh one if it has stopped
+make down         # stop and remove the containers, keeping the data
+make clean        # also remove built images and dependencies, so the next start rebuilds; keeps the data
+make clobber      # also remove the data, and prune unused Docker images and cache machine-wide
+```
+
+`make up` and `make services-up` return once every service passes its healthcheck. Run `make` for the full list.
+A start that takes longer than `START_LIMIT` (in `.devcontainer/compose.yaml`) counts as failed, and stops loudly on purpose;
+see "If the app won't start" in the README.
+
+Everything normally runs in Docker; running Rails on the host against `make services-up` is mainly for single-step
+debugging in an IDE (see the README). The `web` container runs `bin/setup`, which installs gems and prepares the
+database, before `bin/dev` starts Rails, Tailwind and Sidekiq. Plain `docker compose run web ...` commands work as
+before. Each worktree needs at least 2GB of free memory, more for the browser-based tests.
 
 `db/seeds.rb` creates `admin@example.com` (confirm it via the mailcatcher
 inbox at <http://localhost:1080>) and one authority with one application. The
@@ -75,341 +91,42 @@ and neither does the PostGIS image. On Apple Silicon you must switch on "Use
 Rosetta for x86/amd64 emulation on Apple Silicon" in Docker Desktop or the
 containers will not start. Do not "helpfully" remove those `platform` keys.
 
-Service versions in `docker-compose.yml` deliberately match production:
-PostGIS 15-3.3, Redis 6.2, Elasticsearch 7.17.7. Keep them matched when you
+Service versions in `.devcontainer/compose.yaml` deliberately match production:
+PostGIS 15-3.4, Redis 6.2.6, Elasticsearch 7.17.7. Keep them matched when you
 change one.
 
-### Developing or testing on multiple worktrees in parallel
+### Port clashes
 
-If you're running docker from multiple project directories at the same time, you will need to
+| Variable           | Default | Publishes                                                                   |
+|--------------------|---------|-----------------------------------------------------------------------------|
+| `WEB_PORT`         | 3000    | the app. Mailer links and the API example URLs follow it                    |
+| `POSTGRES_PORT`    | 15432   | PostGIS. Rails on the host needs `DB_HOST=localhost` and `DB_PORT` to match |
+| `POSTFIX_PORT`     | 2525    | postfix, for testing incoming email                                         |
+| `MAILCATCHER_PORT` | 1080    | the mailcatcher inbox                                                       |
 
-1. Have at least 2GB of free memory per worktree, more if you are running the chrome based tests.
-2. Override the default mapping to host ports so docker doesn't fail with "port is already allocated" errors.
+Put overrides in `.env` at the repo root, which is gitignored, with different values in each worktree. Compose reads
+it however you start the stack. Containers and data are named `planningalerts` (`name:` in `compose.yaml`), so a second checkout of
+this repo, such as a worktree, shares them unless its `.env` also sets its own `COMPOSE_PROJECT_NAME`. For
+host-side commands to see the same values, put `dotenv` in a gitignored `.envrc` if you use direnv, or
+run `set -a; . ./.env; set +a`. Services you rarely need from the host get a random port, which `make status` shows.
+To see what holds a port, use `ss -ltnp | grep 3306` (Linux) or `lsof -iTCP:3306 -sTCP:LISTEN` (macOS); a database
+server installed on the host is the usual culprit.
 
-Add a `.env` file with unused host ports that differ from the defaults in `docker-compose.yml` and from the `.env` in other worktrees, for example:
-
-```
-WEB_PORT=3001
-POSTFIX_PORT=2526
-POSTGRES_PORT=15433
-MAILCATCHER_PORT=1081
-```
-
-Remember to check ports are not in use by something else on your machine (`lsof -i :3001` or `ss -ltn`, depending on your OS).
-
-Background details:
-- Compose loads `.env` from the project directory for port substitution.
-- The repository is bind-mounted at `/app`, so dotenv and foreman inside the container load it as well, which is how `WEB_PORT` reaches the mailer links in `config/environments/development.rb` and the API example URLs from `api_port` in `app/helpers/applications_helper.rb`.
-- Use `.env` for these port settings, and for local secrets that must not be committed: `.env` is gitignored while `.env.development` is checked in. Ordinary, shareable app config goes in `.env.development`/`.env.production`.
-- Nothing else needs isolating by hand: Compose already scopes named volumes, containers and the network per project, and the project name defaults to the worktree's directory name, so gems, the database, Elasticsearch, and Redis (which already publish on ephemeral host ports) won't cross-contaminate between worktrees.
-
-## Commands
-
-CI (`.github/workflows/rubyonrails.yml`) has four gates. Run these, and
-nothing less, before taking a pull request out of draft:
-
-```sh
-docker compose run web bin/rake            # the RSpec suite
-docker compose run web bin/rake ci:type    # Sorbet, plus tapioca --verify checks
-docker compose run web bin/rake ci:lint    # RuboCop, erb_lint, Brakeman -w2
-```
-
-The fourth gate isn't Ruby at all: it rebuilds the Maizzle email templates and
-fails if that changes anything, since Sorbet/RuboCop/RSpec never touch
-`maizzle/` (see "Emails are generated, not hand-written" below). Run it with:
-
-```sh
-cd maizzle && npm ci --ignore-scripts && npm run build && test -z "$(git -C .. status --porcelain)"
-```
-
-`bin/rake ci:all` looks like the obvious shortcut and is not. Its description
-says "Run everything that gets run on CI", but inside `namespace :ci` there is
-no `ci:test` task, so the `test` prerequisite falls through to Rails' top-level
-minitest task. This repository has no `test/` directory, so that step silently
-does nothing and `ci:all` never runs a single spec. Its prerequisites resolve to
-`["test", "ci:type", "ci:lint"]`, which you can confirm with
-`Rake::Task["ci:all"].prerequisite_tasks`.
-
-To run a subset of specs, go through `bin/rspec`:
-
-```sh
-docker compose run web bin/rake tailwindcss:build          # required first, see below
-docker compose run web bin/rspec spec/models/alert_spec.rb
-docker compose run web bin/rspec spec/models/alert_spec.rb:42
-docker compose run web bin/rspec spec/features             # slow, browser-driven
-```
-
-**`bin/rspec` needs `bin/rake tailwindcss:build` first, or nearly every spec
-fails on a missing asset.** The shared head partial
-`app/views/application/_html_head.html.erb` calls
-`stylesheet_link_tag "tailwind"`, and `app/assets/builds/tailwind.css` is
-generated, gitignored, and absent from a fresh checkout. Rake builds it for you
-through a chain that is easy to miss: `default` depends on `spec`, `spec`
-depends on `spec:prepare`, rspec-rails' `spec:prepare` invokes `test:prepare`,
-and `tailwindcss-rails` enhances `test:prepare` with `tailwindcss:build`.
-Invoking `bin/rspec` directly skips that whole chain. This is why CI passes on
-`bin/rake` while a bare `bin/rspec` fails.
-
-`docker compose run web bin/guard` gives you a watcher that reruns affected
-specs and RuboCop on save.
-
-## Sorbet is not optional here
-
-**All 158 `.rb` files in `app/` and `lib/` carry `# typed: strict`.** There are
-no exceptions, so a new file without a sigil and full signatures will fail
-`bin/rake ci:type`. In practice that means every new class gets
-`# typed: strict`, `# frozen_string_literal: true`, `extend T::Sig`, and a
-`sig` on every method, with instance variables wrapped in `T.let` at
-assignment. `app/components/button_component.rb` is a representative example.
-`sorbet/config` excludes `spec/`, `db/` and `vendor/`, so specs are untyped.
-
-RBI files are managed with Shopify's tapioca. **Never use
-`bundle exec srb rbi`.**
-
-```sh
-docker compose run web bin/srb                              # type check
-docker compose run web bin/tapioca gem                      # gem RBIs
-docker compose run web bin/tapioca dsl
-docker compose run web bin/tapioca dsl --environment=test    # what CI verifies
-```
-
-`ci:type` runs `--verify` variants of all three plus `check-shims`, so
-out-of-date RBIs fail CI even when the code type checks.
-
-`sorbet/config` also ignores `.claude/`, because agent worktrees nest a full
-checkout inside the repository and Sorbet would otherwise load every RBI twice.
-If you set up worktrees somewhere else, expect duplicate-definition errors and
-add that path too.
-
-### The version pins are one interlocking constraint
-
-The `Gemfile` pins `zeitwerk ~> 2.6.0`, `tapioca ~> 0.15.1`, `sorbet < 6.0` and
-`sorbet-runtime < 0.6`, each with a `TODO` about removing it. Treat them as a
-single unit rather than four independent pins. tapioca 0.15.1 crashes on
-zeitwerk >= 2.7, and tapioca 0.16 to 0.19 work with zeitwerk 2.8 but hit a
-require-hooks double-load bug that breaks `bin/tapioca dsl` instead. The
-combination in the `Gemfile` is the only fully clean one. Bumping any one of
-them alone will break RBI generation, so do not let a routine dependency update
-touch them without running `bin/rake ci:type` and reading the comments above
-each pin.
-
-The `elasticsearch` gem is pinned to `~> 7` for a different reason: it cannot
-move ahead of the 7.17 server running in production.
-
-## Architecture
-
-Two data pipelines carry most of the value, and both are Sidekiq jobs fanned out
-over 24 hours rather than run in one burst. `QueueUpJobsOverTimeService` does the
-spreading, so a job that "runs daily" per `config/cron.yml` is really thousands
-of jobs trickling through the day.
-
-**Importing applications.** `QueueUpImportApplicationsJob` enqueues one
-`ImportApplicationsJob` per *active* authority. `ImportApplicationsService`
-queries the morph.io API for that authority's scraper output, and
-`CreateOrUpdateApplicationService` writes the results.
-
-**Sending alerts.** `QueueUpProcessAlertsJob` enqueues a `ProcessAlertJob` for
-every active alert, shuffled so one authority's alerts do not all land together.
-`ProcessAlertService` gathers both nearby applications and new comments for the
-alert's geocoded point and sends a single `AlertMailer.alert`;
-`ProcessAlertAndRecordStatsService` wraps it to record stats.
-
-Periodic jobs are declared in `config/cron.yml` and run by `sidekiq-cron`, which
-means once per cluster. Use ordinary cron only for work that must run on every
-machine, and note that `config.time_zone` is `"UTC"` while every cron entry is
-written in `Australia/Sydney`.
-
-### Domain shapes worth knowing before you edit a model
-
-- **`Application` and `ApplicationVersion`.** An `Application` is the stable
-  record; its mutable detail lives in versions, ordered newest first, with
-  exactly one flagged `current: true` and exposed as `current_version`. Reach
-  for `current_version` rather than assuming fields sit on `Application`.
-- **`Application#description` and `#address` are overridden readers.** Both
-  call a normalising class method on `attributes[...]`, so the database value
-  and the value you read back differ. Do not bypass them with
-  `read_attribute`.
-- **Spatial queries use PostGIS directly.** `Alert` reaches for
-  `ST_DWithin(lonlat, ?, ?)` in raw SQL against the `lonlat` column, while
-  Searchkick indexes a separate `location` hash built from `lat`/`lng`.
-  `Application#search_data` explicitly deletes `:lonlat` because Elasticsearch
-  cannot index the encoded geometry.
-- **`Application.policy_class` returns `ApplicationsPolicy`, plural.** Pundit
-  would infer `ApplicationPolicy`, which is already the name of the base policy
-  class. Authorisation is Pundit for the app and `rolify` for roles.
-- **`Alert` geocodes itself in a `before_validation` hook** through
-  `GoogleGeocodeService`, using a credential from
-  `Rails.application.credentials`. Creating an `Alert` in a spec without a
-  stubbed geocoder will try to reach the network.
-
-Service objects follow one convention consistently: a `self.call(...)` class
-method that constructs the object and calls a private-ish instance `call`. Match
-it in new services rather than inventing a variant.
-
-Two independent switching systems coexist and are easy to confuse. `flipper`
-(Redis-backed, with `flipper-ui` mounted) is for feature flags. `split` is for
-A/B tests. Pick deliberately.
-
-Error reporting is Sentry, following the canonical configuration in the
-infrastructure repo's `docs/monitoring.md` (the Honeybadger transition in
-[#2049](https://github.com/openaustralia/planningalerts/issues/2049) is
-complete and the gem is gone).
-
-### Front end
-
-Views are ERB with Tailwind, and reusable markup goes in `app/components` as
-ViewComponents. Two constraints on those:
-
-- **ViewComponent is 4.12, so `initialize` must call `super()` with explicit
-  empty parens.** A bare `super` forwards the component's keyword arguments to
-  `ViewComponent::Base#initialize` and raises `ArgumentError`.
-- Colours and sizes are validated by `case` statements that `raise` on anything
-  unexpected, rather than by silently falling back. Adding a variant means
-  adding a branch.
-
-`doc/visual-design.md` holds the design intent and an inventory of every
-user-facing page. `doc/principles.md` holds the product principles, and "do
-less" at the top of that list is meant literally.
-
-### Emails are generated, not hand-written
-
-Email templates are authored in Maizzle under `maizzle/src/templates` and
-compiled into the Rails tree. **Editing the compiled `.erb` is wasted work,
-because the next `npm run dev` overwrites it.** The generated files are listed
-in the `exclude` block of `.erb-lint.yml`, which is the reliable way to tell
-which ones they are:
-
-- `app/views/alert_mailer/alert.html.erb`
-- `app/views/devise/mailer/confirmation_instructions.html.erb`
-- `app/views/devise/mailer/reset_password_instructions.html.erb`
-- `app/views/devise/mailer/unlock_instructions.html.erb`
-- `app/views/users/activation_mailer/notify.html.erb`
-
-To work on them, run `cd maizzle && npm run dev production` and preview at
-<http://localhost:3000/rails/mailers/>. All development mail goes to mailcatcher
-at <http://localhost:1080>.
-
-### How email leaves the app
-
-Production mail is submitted over SMTP to OAF's [Postal](https://gitlab.com/openaustralia/infrastructure/-/blob/main/docs/POSTAL.md)
-server, `postal.oaf.org.au:2525`, with STARTTLS and certificate verification.
-PlanningAlerts has **two** Postal mail servers, and the split matters:
-
-- `planningalerts` carries alerts and every other transactional email. This is
-  OAF's highest-volume mail and produces a steady stream of hard bounces.
-- `planningalerts-comments` carries only `CommentMailer#notify_authority`, the
-  comments forwarded to councils. Postal's suppression list is per mail
-  server, so keeping council addresses off the server that alert bounces land
-  on means a council can never be silently suppressed by alert traffic
-  ([infrastructure ADR 0003](https://gitlab.com/openaustralia/infrastructure/-/blob/main/docs/adr/0003-planningalerts-gets-two-postal-mail-servers.md)).
-
-`CommentMailer` selects its server with `delivery_method_options: { mail_server:
-:planningalerts_comments }`; everything else takes the default. The credentials
-live under `postal.smtp.planningalerts.*` and
-`postal.smtp.planningalerts_comments.*` in the production credentials.
-
-The cutover from Cuttlefish is in progress
-([#2234](https://github.com/openaustralia/planningalerts/issues/2234)). Which
-system an email goes to is decided per delivery by the `postal_smtp` Flipper
-flag in `app/lib/postal_or_cuttlefish_smtp.rb`, registered as the production
-delivery method in `config/environments/production.rb`. Off means Cuttlefish.
-There is no actor at send time, so only the boolean and `percentage_of_time`
-gates apply. The flag, the delivery class, the `cuttlefish.*` credentials and
-`/cuttlefish/event` all go in
-[#2236](https://github.com/openaustralia/planningalerts/issues/2236); the
-`X-Cuttlefish-*` headers go in
-[#2235](https://github.com/openaustralia/planningalerts/issues/2235) once the
-flag has been at 100% long enough that nobody would flip it back.
-
-Delivery events come back as webhooks. Postal signs each `POST /postal/event`
-with a key published at its JWKS URL (`config.x.postal_jwks_url`), and
-`PostalController` verifies that before recording `last_delivered_at`,
-unsubscribing alerts on `MessageDeliveryFailed`/`MessageBounced`, and posting to
-Slack when a comment to a council fails or is held. Mailers tag outgoing mail
-with `X-Postal-Tag: alert-<id>` or `comment-<id>` so events map back to records.
-
-## The test harness makes some decisions for you
-
-`spec/spec_helper.rb` configures several things globally that change how specs
-behave, and each one has bitten someone:
-
-- **`Sidekiq::Testing.inline!`** means enqueuing a job runs it immediately.
-  Specs that expect asynchrony will not see it.
-- **`Searchkick.disable_callbacks`** avoids needing Elasticsearch locally, so
-  nothing is indexed. Search behaviour cannot be asserted through the normal
-  path.
-- **`Rack::Attack.enabled = false`**, because specs log in often enough to trip
-  throttling. Rate limiting cannot be tested as configured.
-- **VCR records with `record: :new_episodes`.** A spec that makes an
-  unmatched request appends to the cassette in
-  `spec/fixtures/vcr_cassettes` and passes. Check `git diff` on cassettes
-  before committing, because a silently grown cassette usually means a real
-  request escaped.
-- **Flipper uses a pstore adapter** at `tmp/flipper.pstore`, deleted before
-  every example, chosen over the in-memory adapter so flags survive into
-  Capybara `js: true` specs.
-- `ActionMailer::Base.deliveries` is cleared before every example as a
-  workaround for feature specs not clearing it properly.
-
-Feature specs run headless Selenium and additionally assert accessibility with
-axe (`axe-core-rspec`) and take Percy visual snapshots. Percy needs
-`PERCY_TOKEN`, which CI supplies; locally the snapshot calls are inert. Factories
-are FactoryBot, all declared in a single `spec/factories.rb`.
-
-## Linting quirks
-
-RuboCop is the authority on style; do not apply personal preferences over it.
-Some settings in `.rubocop.yml` exist for reasons worth knowing:
-
-- **`Naming/BlockForwarding: explicit`** is deliberately enabled because Ruby's
-  anonymous block forwarding is not compatible with Sorbet. Write `&block`.
-- Double-quoted strings are enforced, including in multi-line strings.
-- `Layout/LineLength` and the whole `Metrics/*` family are disabled, with
-  `TODO`s about re-enabling. Long methods are not a lint failure, which is not
-  the same as being encouraged.
-- `bin/*`, `config/*`, `db/migrate/*`, `vendor/**/*` and `maizzle/**/*` are
-  excluded entirely, so `config/application.rb` is `# typed: false` and
-  unformatted on purpose.
-
-`bin/erblint --lint-all` covers ERB and excludes the Maizzle-generated files
-above plus the overridden administrate templates under
-`app/views/admin/application/`, which are kept close to upstream deliberately.
-
-Brakeman runs as `-q -w2` with agreed exceptions recorded in
-`config/brakeman.ignore`. Add to that file with `brakeman -I` rather than
-lowering the warning level.
-
-## Deployment
-
-Capistrano, from `main`, to two EC2 web servers:
-
-```sh
-bundle exec cap production deploy
-bundle exec cap staging --set branch=my-branch deploy
-```
-
-Deploys record a release in Sentry through a Capistrano hook that shells out to
-the Sentry CLI on your machine (`sentry`, or the legacy `sentry-cli`). The
-committed `.sentryclirc` holds only non-secret defaults; **credentials come
-from `sentry auth` (v4) or `~/.sentryclirc` (v3) and must never be
-committed.** A missing or unauthenticated CLI prints a warning and skips the
-release rather than failing the deploy, so a quiet deploy is not proof it
-worked.
-
-The Ruby upgrade runbook in `README.md` is explicitly marked out of date; it
-predates the current blue/green setup. Treat it as history.
+The repository is bind-mounted at `/app`, so dotenv and foreman inside the container load `.env` as well. That's how
+`WEB_PORT` reaches `config/environments/development.rb` and `api_port` in `app/helpers/applications_helper.rb`.
+`.env` is also the place for local secrets; shareable app config goes in the committed `.env.development`.
 
 ## Things that reference each other
 
 Nothing checks these for you, so keep them consistent by hand:
 
-- Service versions appear in both `docker-compose.yml` and
+- Service versions appear in both `.devcontainer/compose.yaml` and
   `.github/workflows/rubyonrails.yml`, and both claim to match production.
   Changing one means changing the other.
 - The four Sorbet-related pins in the `Gemfile` described above.
 - Maizzle sources, their compiled `.erb` output, and the `exclude` list in
   `.erb-lint.yml`.
-- The Postgres password in `docker-compose.yml` and `config/database.yml`.
+- The Postgres password in `.devcontainer/compose.yaml` and `config/database.yml`.
 - `.ruby-version` and the Ruby actually installed on the servers, which is
   managed from the separate `oaf/infrastructure` Ansible repository you probably
   cannot see from here. Treat the mechanism described in `README.md` as history
