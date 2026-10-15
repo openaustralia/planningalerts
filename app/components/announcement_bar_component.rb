@@ -6,10 +6,9 @@
 class AnnouncementBarComponent < ViewComponent::Base
   extend T::Sig
 
+  # Runs before render?, and keeps the query out of the constructor
   sig { void }
-  def initialize
-    super
-
+  def before_render
     @announcement = T.let(load_announcement, T.nilable(Announcement))
   end
 
