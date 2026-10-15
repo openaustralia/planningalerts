@@ -93,4 +93,32 @@ describe "Announcement bar" do
       expect(response.body[dismissal_key_pattern, 1]).not_to eq original
     end
   end
+
+  describe "layouts" do
+    include Devise::Test::IntegrationHelpers
+
+    before { create(:announcement, body: "Layout check notice") }
+
+    it "shows on an ordinary page, which uses the main layout" do
+      get about_path
+      expect(response.body).to include("Layout check notice")
+    end
+
+    # The profile layout renders the main layout inside itself, so the bar comes with it
+    it "shows on the profile pages, which use the profile layout" do
+      sign_in create(:confirmed_user)
+      get alerts_path
+      expect(response.body).to include("Your account")
+      expect(response.body).to include("Layout check notice")
+    end
+
+    it "does not appear in API responses" do
+      # Disable the logging of the API call to elasticsearch, as the API specs do
+      allow(LogApiCallService).to receive(:call).and_return(nil)
+      get "/authorities.json", params: { key: create(:api_key).value }
+      expect(response).to have_http_status(:ok)
+      expect(response.body).not_to include("Layout check notice")
+      expect(response.media_type).to eq "application/json"
+    end
+  end
 end
