@@ -70,6 +70,27 @@ describe Announcement do
     end
   end
 
+  describe ".current ordering by start" do
+    it "prefers the announcement that started most recently" do
+      create(:announcement, body: "Open-ended, made a week ago", created_at: 7.days.ago)
+      scheduled = create(:announcement, body: "Scheduled, started yesterday", created_at: 20.days.ago, starts_at: 1.day.ago)
+      expect(described_class.current).to eq scheduled
+    end
+
+    it "counts an announcement with no start from when it was created" do
+      create(:announcement, body: "Started two days ago", starts_at: 2.days.ago, created_at: 30.days.ago)
+      created_later = create(:announcement, body: "No start, made yesterday", created_at: 1.day.ago)
+      expect(described_class.current).to eq created_later
+    end
+
+    it "does not let a later edit or republish promote an older announcement" do
+      older = create(:announcement, body: "Older", starts_at: 3.days.ago)
+      create(:announcement, body: "Newer", starts_at: 1.day.ago)
+      older.update!(body: "Older, reworded")
+      expect(described_class.current.body).to eq "Newer"
+    end
+  end
+
   describe "history" do
     it "records each change, so staff can see who changed a public message and when", :versioning do
       announcement = create(:announcement, body: "First wording")
