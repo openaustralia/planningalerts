@@ -31,7 +31,7 @@ screen, and without JavaScript the bar shows and has no close button. %>
         var el = focusable[i];
         if (bar.contains(el) || !(bar.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING)) { continue; }
         // Skip anything that cannot take focus, such as hidden inputs, disabled buttons and controls in collapsed panels
-        if (el.disabled || el.type === "hidden" || el.offsetParent === null) { continue; }
+        if (el.disabled || el.type === "hidden" || el.getClientRects().length === 0) { continue; }
         el.focus();
         if (document.activeElement === el) { return; }
       }

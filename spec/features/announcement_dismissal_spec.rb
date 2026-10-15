@@ -75,4 +75,15 @@ describe "Dismissing the announcement bar", :js do
     focus = page.evaluate_script("document.activeElement.tagName + ':' + (document.activeElement.disabled ? 'disabled' : 'ok')")
     expect(focus).to eq("A:ok")
   end
+
+  it "moves keyboard focus to a pinned link that sits after the bar" do
+    visit about_path
+    page.execute_script(<<~JS)
+      var bar = document.getElementById("site-announcement");
+      bar.insertAdjacentHTML("afterend", '<a href="#pinned" id="pinned-link" style="position: fixed; bottom: 0; left: 0;">Pinned</a>');
+    JS
+    find(".site-announcement-close").send_keys(:enter)
+    expect(page).to have_no_css(".site-announcement")
+    expect(page.evaluate_script("document.activeElement.id")).to eq("pinned-link")
+  end
 end
