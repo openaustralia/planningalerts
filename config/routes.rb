@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     resources :background_jobs, only: :index
     resources :test_emails, only: %i[index create]
     resources :roles, only: %i[index show]
+    resources :announcements
 
     root to: "homes#index"
   end
