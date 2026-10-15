@@ -25,6 +25,12 @@ module GeneratedUrlHelpersModule
   def admin_alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def admin_announcement_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_announcements_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def admin_api_key_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -208,6 +214,9 @@ module GeneratedUrlHelpersModule
   def donations_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_admin_announcement_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def edit_admin_api_key_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -266,6 +275,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def import_admin_authority_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_admin_announcement_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_admin_authority_url(*args); end
