@@ -1,0 +1,7 @@
+<div class="field-unit__label">
+  <%= f.label field.attribute, "#{field.attribute.to_s.humanize} (UTC)" %>
+</div>
+<div class="field-unit__field">
+  <%= f.datetime_local_field field.attribute, step: 1 %>
+  <div class="field-unit__hint"><%= UtcDateTimeField.time_zone_hint %></div>
+</div>

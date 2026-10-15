@@ -11,6 +11,8 @@ describe "Admin announcements" do
     sign_in user
   end
 
+  include ActiveSupport::Testing::TimeHelpers
+
   it "sends a logged-out visitor to log in" do
     get admin_announcements_path
     expect(response).to redirect_to(new_user_session_path)
@@ -36,6 +38,28 @@ describe "Admin announcements" do
 
   context "when signed in as an admin" do
     before { sign_in_with_role(:admin) }
+
+    describe "the new announcement form" do
+      before { travel_to(Time.utc(2026, 10, 15, 2, 30)) }
+
+      it "starts the announcement now by default" do
+        get new_admin_announcement_path
+        expect(response.body).to include('value="2026-10-15T02:30:00"')
+      end
+
+      it "says the times are in UTC and how far Sydney is from it" do
+        get new_admin_announcement_path
+        expect(response.body).to include("Starts at (UTC)")
+        expect(response.body).to include("Ends at (UTC)")
+        expect(response.body).to include("Sydney is currently 11 hours ahead of UTC")
+      end
+    end
+
+    it "labels the times as UTC when showing an announcement" do
+      announcement = create(:announcement, starts_at: Time.utc(2026, 10, 15, 2, 30))
+      get admin_announcement_path(announcement)
+      expect(response.body).to include("15 October 2026, 2:30 am UTC")
+    end
 
     it "lists announcements" do
       create(:announcement, body: "Listed notice")

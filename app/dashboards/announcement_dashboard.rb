@@ -10,8 +10,8 @@ class AnnouncementDashboard < Administrate::BaseDashboard
     id: Field::Number,
     body: Field::Text,
     published: YesNoBooleanField,
-    starts_at: Field::DateTime,
-    ends_at: Field::DateTime,
+    starts_at: UtcDateTimeField,
+    ends_at: UtcDateTimeField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     versions: Field::PaperTrail
