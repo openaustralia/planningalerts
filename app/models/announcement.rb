@@ -24,6 +24,13 @@ class Announcement < ApplicationRecord
     live.order(Arel.sql("COALESCE(starts_at, created_at) DESC"), id: :desc).first
   end
 
+  # Remembered in a cookie when someone dismisses the bar. It changes when the announcement is edited, so an edited
+  # announcement shows again to people who dismissed the old text.
+  sig { returns(String) }
+  def dismissal_key
+    "#{id}-#{updated_at.strftime('%s%6N')}"
+  end
+
   private
 
   sig { void }
