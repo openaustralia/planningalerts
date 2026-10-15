@@ -20,6 +20,8 @@ permissions:
 
 jobs:
   update_tapioca:
+    permissions:
+      contents: write
     if: >
       github.actor == 'dependabot[bot]' &&
       startsWith(github.head_ref, 'dependabot/bundler/') &&
