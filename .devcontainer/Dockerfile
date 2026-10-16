@@ -1,4 +1,19 @@
-FROM ruby:3.3.4
+# Matches production: Ubuntu 22.04 (jammy) with Ruby 3.3.4, which production runs through RVM. buildpack-deps is
+# the base the official Ruby images use, so it brings the same development libraries for building gems.
+FROM buildpack-deps:jammy
+
+ARG RUBY_VERSION=3.3.4
+RUN git clone --depth 1 https://github.com/rbenv/ruby-build.git /tmp/ruby-build \
+    && /tmp/ruby-build/bin/ruby-build "$RUBY_VERSION" /usr/local \
+    && rm -rf /tmp/ruby-build
+
+# Gems live in /usr/local/bundle, as in the official Ruby images, which is where compose.yaml's gem_cache volume goes
+# UTF-8 like production; the official Ruby images set this, buildpack-deps doesn't
+ENV LANG=C.UTF-8
+ENV GEM_HOME=/usr/local/bundle BUNDLE_APP_CONFIG=/usr/local/bundle BUNDLE_SILENCE_ROOT_WARNING=1
+ENV PATH=/usr/local/bundle/bin:$PATH
+RUN mkdir -p /usr/local/bundle && chmod 1777 /usr/local/bundle
+
 WORKDIR /app
 
 # Run everything as a non-root "deploy" user
@@ -40,8 +55,11 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesourc
 RUN apt-get update
 RUN apt-get install -y nodejs
 
-# Install firefox for running some integration tests
-RUN apt-get update; apt-get install -y firefox-esr
+# Install firefox for running some integration tests. Ubuntu's own firefox package only installs a snap, which
+# doesn't work in Docker, so take the real package from the Mozilla team's PPA.
+RUN apt-get install -y software-properties-common \
+    && add-apt-repository -y ppa:mozillateam/ppa \
+    && apt-get update && apt-get install -y firefox-esr
 
 # Needed for pg gem and bin/rails dbconsole
 RUN apt-get install -y libpq-dev postgresql-client
@@ -55,7 +73,7 @@ COPY --chown=deploy:deploy Gemfile /app/Gemfile
 COPY --chown=deploy:deploy Gemfile.lock /app/Gemfile.lock
 RUN bundle install
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./.devcontainer/entrypoint.sh"]
 
 CMD ["bin/rails", "server", "-p", "3000", "-b", "0.0.0.0"]
 
