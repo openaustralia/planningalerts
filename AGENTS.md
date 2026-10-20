@@ -438,3 +438,17 @@ Nothing checks these for you, so keep them consistent by hand:
   it is a deliberate content decision, not a tidy-up.
 - Do not invent variations on the names of OAF's other services. They are Right
   to Know, They Vote for You, OpenAustralia.org.au and morph.io.
+
+## Agent skills
+
+### Issue tracker
+
+Issues are tracked in GitHub Issues for `openaustralia/planningalerts` (via `gh`). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five-label vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `GLOSSARY.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
