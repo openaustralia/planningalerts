@@ -25,6 +25,12 @@ module GeneratedPathHelpersModule
   def admin_alerts_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def admin_announcement_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_announcements_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def admin_api_key_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -208,6 +214,9 @@ module GeneratedPathHelpersModule
   def donations_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_admin_announcement_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def edit_admin_api_key_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -266,6 +275,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def import_admin_authority_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_admin_announcement_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_admin_authority_path(*args); end

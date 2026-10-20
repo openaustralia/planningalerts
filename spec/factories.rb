@@ -134,6 +134,11 @@ FactoryBot.define do
     user
   end
 
+  factory :announcement do
+    body { "The site will be briefly offline for maintenance." }
+    published { true }
+  end
+
   factory :alert do
     user
     sequence(:address) { |s| "#{s} Illawarra Road Marrickville 2204" }

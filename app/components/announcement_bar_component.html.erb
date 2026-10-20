@@ -1,0 +1,40 @@
+<div id="site-announcement" class="site-announcement mt-8 text-xl text-white rounded-lg bg-lavender" role="region" aria-label="Announcement" data-dismissal-key="<%= @announcement&.dismissal_key %>">
+  <div class="flex items-start gap-5 px-6 py-4">
+    <div class="grow [&_a]:underline [&_p]:m-0"><%= sanitize @announcement&.body, tags: %w[a strong em b i br p], attributes: %w[href] %></div>
+    <button type="button" hidden class="site-announcement-close self-start p-2 hover:opacity-80 focus:outline-none focus:ring-sun-yellow focus:ring-4">
+      <span class="sr-only">Dismiss announcement</span>
+      <%= render IconComponent.new(name: :dismiss) %>
+    </button>
+  </div>
+</div>
+<%# Inline and unbundled, like runWithFallback, so it runs straight after the bar. A dismissed bar then never flashes on
+screen, and without JavaScript the bar shows and has no close button. %>
+<script>
+  (function () {
+    var bar = document.getElementById("site-announcement");
+    var key = bar.getAttribute("data-dismissal-key");
+    var cookie = "pa_announcement";
+    if (document.cookie.split("; ").indexOf(cookie + "=" + key) !== -1) {
+      bar.setAttribute("hidden", "");
+      return;
+    }
+    var button = bar.querySelector(".site-announcement-close");
+    button.removeAttribute("hidden");
+    button.addEventListener("click", function (event) {
+      var secure = location.protocol === "https:" ? "; Secure" : "";
+      document.cookie = cookie + "=" + key + "; Max-Age=86400; Path=/; SameSite=Lax" + secure;
+      bar.setAttribute("hidden", "");
+      // A keyboard click comes with detail 0. The focused button has just gone, so carry on from the next link after the bar
+      if (event.detail !== 0) { return; }
+      var focusable = document.querySelectorAll("main a[href], main button, main input, main select, main textarea");
+      for (var i = 0; i < focusable.length; i++) {
+        var el = focusable[i];
+        if (bar.contains(el) || !(bar.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING)) { continue; }
+        // Skip anything that cannot take focus, such as hidden inputs, disabled buttons and controls in collapsed panels
+        if (el.disabled || el.type === "hidden" || el.getClientRects().length === 0) { continue; }
+        el.focus();
+        if (document.activeElement === el) { return; }
+      }
+    });
+  })();
+</script>
