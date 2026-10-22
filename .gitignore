@@ -5,7 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore docker compose overrides
-/docker-compose.override.yml
+/compose.override.yaml
 
 # Per-worktree port overrides for running multiple worktrees in parallel
 # (see "Developing or testing on multiple worktrees in parallel" in AGENTS.md)

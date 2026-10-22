@@ -1,5 +1,5 @@
 # The development stack, shared by `make`, plain `docker compose` (via ../compose.yaml) and the dev container.
-# See "Docker development environment" in AGENTS.md.
+# See "Getting a working environment" in AGENTS.md.
 services:
   web:
     build:
@@ -38,7 +38,7 @@ services:
       mailcatcher:
         condition: service_healthy
     # bin/setup installs gems and prepares the database, so a fresh checkout comes up working.
-    command: sh -c "bin/setup && bin/dev"
+    command: sh -c "bin/setup --keep-logs && exec bin/dev"
     tty: true
     healthcheck:
       test: ["CMD-SHELL", "curl -fs -o /dev/null http://localhost:3000/ || exit 1"]

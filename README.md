@@ -41,17 +41,18 @@ To run Rails on the host instead, for example for single-step debugging in an ID
 ### Ports and multiple worktrees
 
 To move a port, for example `WEB_PORT=3072` (30PA) so logins for different projects don't mix, or to run more than
-one worktree at once, see [Port clashes](AGENTS.md#port-clashes) in AGENTS.md.
+one worktree at once, see [Developing or testing on multiple worktrees in parallel](AGENTS.md#developing-or-testing-on-multiple-worktrees-in-parallel) in AGENTS.md.
 
 ### If the app won't start
 
 Startup fails loudly on purpose, so a broken setup gets noticed instead of hiding behind a container that looks fine.
-If setup fails, or takes longer than `START_LIMIT` (5 minutes here, set in `.devcontainer/compose.yaml`), the `web`
-container stops, `make up` reports the failure, and the dev container shows an error instead of opening.
+If setup fails, the `web` container stops. If it takes longer than `START_LIMIT` (5 minutes here, set in
+`.devcontainer/compose.yaml`), the container is marked unhealthy. Either way `make up` reports the failure, and the dev
+container shows an error instead of opening.
 
 To fix it:
 
-1. `make status` shows which container stopped, and `make logs SERVICE=web` shows why.
+1. `make status` shows which container stopped or is unhealthy, and `make logs SERVICE=web` shows why.
 2. `make shell` opens a shell in a fresh `web` container even when it has stopped, so you can rerun the setup by hand
    and fix the problem.
 3. `make up`, or reopen the dev container, to start again.

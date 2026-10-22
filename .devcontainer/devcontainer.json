@@ -1,5 +1,5 @@
 // Dev container for VS Code, RubyMine, Codespaces and the devcontainer CLI. It opens the `web` container of the
-// same stack `make up` starts. See "Docker development environment" in AGENTS.md.
+// same stack `make up` starts. See "Getting a working environment" in AGENTS.md.
 {
   "name": "PlanningAlerts",
   "dockerComposeFile": "../compose.yaml",
