@@ -1,4 +1,4 @@
-.PHONY: help up services-up down clean clobber status logs shell test lint typecheck
+.PHONY: help up services-up down clean clobber status logs shell test lint typecheck console
 
 # Runs a command in the web container, or in a fresh one if it has stopped
 in_web = if [ -n "$$(docker compose ps -q --status running web)" ]; then docker compose exec web $(1); else docker compose run --rm web $(1); fi
@@ -38,9 +38,11 @@ logs: ## Follow the logs of every container (or SERVICE=web for one)
 shell: ## Open a shell in the web container, or in a fresh one if it has stopped (e.g. after a failed start)
 	@$(call in_web,fish)
 # The same checks as CI; see "Commands" in AGENTS.md
-test: ## Run the RSpec suite as CI does
-	@$(call in_web,bin/rake)
-lint: ## Run RuboCop, erb_lint and Brakeman as CI does
-	@$(call in_web,bin/rake ci:lint)
+test: ## Run the specs as CI does, after resetting the test database (ARGS=spec/models/alert_spec.rb:42 to narrow)
+	@$(call in_web,bash -c 'bin/rails db:test:prepare tailwindcss:build && bin/rspec $(ARGS)')
+lint: ## Run RuboCop, erb_lint and Brakeman as CI does (ARGS=<paths> for RuboCop on just those)
+	@$(call in_web,$(if $(ARGS),bin/rubocop $(ARGS),bin/rake ci:lint))
 typecheck: ## Run Sorbet and the tapioca checks as CI does
 	@$(call in_web,bin/rake ci:type)
+console: ## Open a Rails console in the web container
+	@$(call in_web,bin/rails console)
