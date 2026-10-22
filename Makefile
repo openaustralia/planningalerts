@@ -1,4 +1,7 @@
-.PHONY: help up services-up down clean clobber status logs shell
+.PHONY: help up services-up down clean clobber status logs shell test lint typecheck
+
+# Runs a command in the web container, or in a fresh one if it has stopped
+in_web = if [ -n "$$(docker compose ps -q --status running web)" ]; then docker compose exec web $(1); else docker compose run --rm web $(1); fi
 
 help: ## Show this help (the default target)
 	@grep -hE '^[a-zA-Z0-9_.-]+:.*## ' $(MAKEFILE_LIST) | \
@@ -33,4 +36,11 @@ status: ## Show each container's health and the host ports it's published on
 logs: ## Follow the logs of every container (or SERVICE=web for one)
 	docker compose logs -f $(SERVICE)
 shell: ## Open a shell in the web container, or in a fresh one if it has stopped (e.g. after a failed start)
-	@if [ -n "$$(docker compose ps -q --status running web)" ]; then docker compose exec web fish; else docker compose run --rm web fish; fi
+	@$(call in_web,fish)
+# The same checks as CI; see "Commands" in AGENTS.md
+test: ## Run the RSpec suite as CI does
+	@$(call in_web,bin/rake)
+lint: ## Run RuboCop, erb_lint and Brakeman as CI does
+	@$(call in_web,bin/rake ci:lint)
+typecheck: ## Run Sorbet and the tapioca checks as CI does
+	@$(call in_web,bin/rake ci:type)

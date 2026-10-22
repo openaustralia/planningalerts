@@ -66,6 +66,7 @@ make services-up  # everything except `web`, for running Rails on the host
 make status       # each container's health and host ports
 make logs         # follow the logs (SERVICE=<name> for one container)
 make shell        # a shell in the app container, or a fresh one if it has stopped
+make test         # the RSpec suite, as CI runs it (also make lint, make typecheck)
 make down         # stop and remove the containers, keeping the data
 make clean        # also remove built images and dependencies, so the next start rebuilds; keeps the data
 make clobber      # also remove the data, and prune unused Docker images and cache machine-wide
@@ -129,9 +130,9 @@ CI (`.github/workflows/rubyonrails.yml`) has four gates. Run these, and
 nothing less, before taking a pull request out of draft:
 
 ```sh
-docker compose run web bin/rake            # the RSpec suite
-docker compose run web bin/rake ci:type    # Sorbet, plus tapioca --verify checks
-docker compose run web bin/rake ci:lint    # RuboCop, erb_lint, Brakeman -w2
+make test         # bin/rake, the RSpec suite
+make typecheck    # bin/rake ci:type, Sorbet plus tapioca --verify checks
+make lint         # bin/rake ci:lint, RuboCop, erb_lint, Brakeman -w2
 ```
 
 The fourth gate isn't Ruby at all: it rebuilds the Maizzle email templates and
