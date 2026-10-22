@@ -4,7 +4,7 @@ help: ## Show this help (the default target)
 	@grep -hE '^[a-zA-Z0-9_.-]+:.*## ' $(MAKEFILE_LIST) | \
 	  awk 'BEGIN {FS = ":.*## "}; {printf "  %-12s %s\n", $$1, $$2}'
 
-# The stack is defined in .devcontainer/compose.yaml (see "Docker development environment" in AGENTS.md).
+# The stack is defined in .devcontainer/compose.yaml (see "Getting a working environment" in AGENTS.md).
 # --wait returns once every service passes its healthcheck, so the next command can use them straight away.
 up: ## Start everything, including the app at http://localhost:3000, once it's ready
 	docker compose up --build --wait -d

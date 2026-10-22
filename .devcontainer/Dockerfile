@@ -3,13 +3,15 @@
 FROM buildpack-deps:jammy
 
 ARG RUBY_VERSION=3.3.4
-RUN git clone --depth 1 https://github.com/rbenv/ruby-build.git /tmp/ruby-build \
-    && /tmp/ruby-build/bin/ruby-build "$RUBY_VERSION" /usr/local \
+# A fixed ruby-build release, so every build gets the same toolchain
+ARG RUBY_BUILD_VERSION=v20261013
+RUN git clone --depth 1 --branch "$RUBY_BUILD_VERSION" https://github.com/rbenv/ruby-build.git /tmp/ruby-build \
+    && RUBY_CONFIGURE_OPTS=--disable-install-doc /tmp/ruby-build/bin/ruby-build "$RUBY_VERSION" /usr/local \
     && rm -rf /tmp/ruby-build
 
-# Gems live in /usr/local/bundle, as in the official Ruby images, which is where compose.yaml's gem_cache volume goes
 # UTF-8 like production; the official Ruby images set this, buildpack-deps doesn't
 ENV LANG=C.UTF-8
+# Gems live in /usr/local/bundle, as in the official Ruby images, which is where compose.yaml's gem_cache volume goes
 ENV GEM_HOME=/usr/local/bundle BUNDLE_APP_CONFIG=/usr/local/bundle BUNDLE_SILENCE_ROOT_WARNING=1
 ENV PATH=/usr/local/bundle/bin:$PATH
 RUN mkdir -p /usr/local/bundle && chmod 1777 /usr/local/bundle
