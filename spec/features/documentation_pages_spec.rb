@@ -37,6 +37,19 @@ describe "Browsing basic documentation pages" do
         expect(page).to have_content "You are using version abc123 of Planning Alerts"
       end
     end
+
+    # Such as in a git worktree inside Docker, where git can't reach the main checkout
+    describe "when the version isn't known" do
+      before do
+        stub_const "APP_VERSION", ""
+        visit about_path
+      end
+
+      it "says so instead of linking to an empty commit" do
+        expect(page).to have_content "You are using version unknown of Planning Alerts"
+        expect(page).to have_no_link href: "https://github.com/openaustralia/planningalerts/commit/"
+      end
+    end
   end
 
   describe "help page in the new design" do
