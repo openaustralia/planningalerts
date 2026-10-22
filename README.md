@@ -83,6 +83,8 @@ for example), add them to `/etc/hosts`:
 
 ### Run The Tests
 
+`make test`, `make lint` and `make typecheck` run the same checks as CI. To rerun the affected tests as you work:
+
 * In a separate window - `docker compose run web bin/guard`
 * Press enter to run all the tests
 
