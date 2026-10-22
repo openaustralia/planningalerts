@@ -36,7 +36,8 @@ Docker images and build cache for every project on the machine, which is worth d
 changing dependencies.
 
 To run Rails on the host instead, for example for single-step debugging in an IDE, start everything except `web` with
-`make services-up` and set `DB_HOST=localhost` and `DB_PORT=15432` (or your `POSTGRES_PORT`).
+`make services-up` and set `DB_HOST=localhost` and `DB_PORT=15432` (or your `POSTGRES_PORT`). This doesn't fully work
+yet, as Rails can't reach Redis or Elasticsearch from the host; see #2293.
 
 ### Ports and multiple worktrees
 
@@ -83,7 +84,8 @@ for example), add them to `/etc/hosts`:
 
 ### Run The Tests
 
-`make test`, `make lint` and `make typecheck` run the same checks as CI. To rerun the affected tests as you work:
+`make test`, `make lint` and `make typecheck` run the same checks as CI. `make test ARGS=spec/models/alert_spec.rb`
+runs just one file. To rerun the affected tests as you work:
 
 * In a separate window - `docker compose run web bin/guard`
 * Press enter to run all the tests

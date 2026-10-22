@@ -66,7 +66,9 @@ make services-up  # everything except `web`, for running Rails on the host
 make status       # each container's health and host ports
 make logs         # follow the logs (SERVICE=<name> for one container)
 make shell        # a shell in the app container, or a fresh one if it has stopped
-make test         # the RSpec suite, as CI runs it (also make lint, make typecheck)
+make test         # the specs, as CI runs them (ARGS=spec/models/alert_spec.rb:42 to narrow)
+make lint         # RuboCop, erb_lint and Brakeman, as CI runs them (also make typecheck)
+make console      # a Rails console
 make down         # stop and remove the containers, keeping the data
 make clean        # also remove built images and dependencies, so the next start rebuilds; keeps the data
 make clobber      # also remove the data, and prune unused Docker images and cache machine-wide
@@ -77,7 +79,8 @@ A start that takes longer than `START_LIMIT` (in `.devcontainer/compose.yaml`) c
 see "If the app won't start" in the README.
 
 Everything normally runs in Docker; running Rails on the host against `make services-up` is mainly for single-step
-debugging in an IDE (see the README). The `web` container runs `bin/setup`, which installs gems and prepares the
+debugging in an IDE (see the README), though it can't reach Redis or Elasticsearch yet
+([#2293](https://github.com/openaustralia/planningalerts/issues/2293)). The `web` container runs `bin/setup`, which installs gems and prepares the
 database, before `bin/dev` starts Rails, Tailwind and Sidekiq. Plain `docker compose run web ...` commands work as
 before.
 
@@ -130,10 +133,13 @@ CI (`.github/workflows/rubyonrails.yml`) has four gates. Run these, and
 nothing less, before taking a pull request out of draft:
 
 ```sh
-make test         # bin/rake, the RSpec suite
+make test         # the RSpec suite, after resetting the test database and building Tailwind
 make typecheck    # bin/rake ci:type, Sorbet plus tapioca --verify checks
 make lint         # bin/rake ci:lint, RuboCop, erb_lint, Brakeman -w2
 ```
+
+`make test ARGS=spec/models/alert_spec.rb:42` narrows the specs, and `make lint ARGS=<paths>` runs only RuboCop on
+those paths.
 
 The fourth gate isn't Ruby at all: it rebuilds the Maizzle email templates and
 fails if that changes anything, since Sorbet/RuboCop/RSpec never touch
@@ -151,7 +157,7 @@ does nothing and `ci:all` never runs a single spec. Its prerequisites resolve to
 `["test", "ci:type", "ci:lint"]`, which you can confirm with
 `Rake::Task["ci:all"].prerequisite_tasks`.
 
-To run a subset of specs, go through `bin/rspec`:
+Without make, run a subset of specs through `bin/rspec`:
 
 ```sh
 docker compose run web bin/rake tailwindcss:build          # required first, see below
