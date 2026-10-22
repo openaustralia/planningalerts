@@ -7,7 +7,7 @@
   "workspaceFolder": "/app",
   "shutdownAction": "stopCompose",
   // Waits for the app to finish starting, so the first command you run works. Gives up after START_LIMIT (compose.yaml).
-  "postStartCommand": ["sh", ".devcontainer/wait-for-app.sh", "web", "bin/setup and Rails", "curl", "-fs", "-o", "/dev/null", "http://localhost:3000/"],
+  "postStartCommand": ["sh", ".devcontainer/wait-for-app.sh", "web", "bin/setup and Rails", "curl", "-fs", "-o", "/dev/null", "http://localhost:3000/health_check"],
   "customizations": {
     "vscode": {
       "settings": {

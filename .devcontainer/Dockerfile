@@ -11,7 +11,7 @@ RUN git clone --depth 1 --branch "$RUBY_BUILD_VERSION" https://github.com/rbenv/
 
 # UTF-8 like production; the official Ruby images set this, buildpack-deps doesn't
 ENV LANG=C.UTF-8
-# Gems live in /usr/local/bundle, as in the official Ruby images, which is where compose.yaml's gem_cache volume goes
+# Gems live in /usr/local/bundle, as in the official Ruby images, which is where compose.yaml's bundle volume goes
 ENV GEM_HOME=/usr/local/bundle BUNDLE_APP_CONFIG=/usr/local/bundle BUNDLE_SILENCE_ROOT_WARNING=1
 ENV PATH=/usr/local/bundle/bin:$PATH
 RUN mkdir -p /usr/local/bundle && chmod 1777 /usr/local/bundle

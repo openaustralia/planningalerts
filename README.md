@@ -31,9 +31,9 @@ make up       # builds, sets up the database on first run, then http://localhost
 make          # lists the other targets: status, logs, shell, down, clobber
 ```
 
-`make clean` forces a rebuild but keeps the databases. `make clobber` also deletes the databases and prunes unused
-Docker images and build cache for every project on the machine, which is worth doing after switching branches or
-changing dependencies.
+`make clean` forces a rebuild but keeps the databases, which is worth doing after switching branches or changing
+dependencies. `make clobber` also deletes the databases and prunes unused Docker images and build cache for every
+project on the machine.
 
 To run Rails on the host instead, for example for single-step debugging in an IDE, start everything except `web` with
 `make services-up` and set `DB_HOST=localhost` and `DB_PORT=15432` (or your `POSTGRES_PORT`). This doesn't fully work
@@ -162,10 +162,8 @@ We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all
 
 If things go wrong, force a rebuild from scratch (preserving DB volumes):
 ```shell
-docker compose down
-docker system prune --all
-docker volume rm planningalerts_gem_cache
-docker compose up --build
+make clean
+make up
 ```
 Then rebuild sorbet again in another terminal window:
 ```shell

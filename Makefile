@@ -22,7 +22,7 @@ clean: ## Remove containers, built images (VS Code's too), gems, logs and tmp, k
 	p=$$(docker compose config | sed -n 's/^name: //p'); \
 	vsc=$$(docker ps -a --filter "label=com.docker.compose.project=$$p" --format '{{.Image}}' | grep '^vsc-' | sort -u); \
 	docker compose down --remove-orphans --rmi local && \
-	docker volume rm --force "$${p}_gem_cache" && \
+	docker volume rm --force "$${p}_bundle" && \
 	{ [ -z "$$vsc" ] || docker rmi --force $$vsc; }
 	git clean -fdX -- log tmp coverage # gitignored files only, so tracked placeholders stay
 # Reaches past this checkout, for after switching branches or changing dependencies. Other projects lose only
@@ -39,7 +39,8 @@ shell: ## Open a shell in the web container, or in a fresh one if it has stopped
 	@$(call in_web,fish)
 # The same checks as CI; see "Commands" in AGENTS.md
 test: ## Run the specs as CI does, after resetting the test database (ARGS=spec/models/alert_spec.rb:42 to narrow)
-	@$(call in_web,bash -c 'bin/rails db:test:prepare tailwindcss:build && bin/rspec $(ARGS)')
+	@$(call in_web,bin/rails db:test:prepare tailwindcss:build)
+	@$(call in_web,bin/rspec $(ARGS))
 lint: ## Run RuboCop, erb_lint and Brakeman as CI does (ARGS=<paths> for RuboCop on just those)
 	@$(call in_web,$(if $(ARGS),bin/rubocop $(ARGS),bin/rake ci:lint))
 typecheck: ## Run Sorbet and the tapioca checks as CI does

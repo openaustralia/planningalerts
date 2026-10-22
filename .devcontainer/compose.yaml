@@ -13,7 +13,8 @@ services:
     platform: linux/amd64
     volumes:
       - ..:/app
-      - gem_cache:/usr/local/bundle/gems
+      # All of it, not just gems/, so gems bin/setup adds keep their specifications when the container is recreated
+      - bundle:/usr/local/bundle
     ports:
       # Overridable so multiple worktrees can each run their own stack at
       # once - see "Developing or testing on multiple worktrees in
@@ -41,7 +42,7 @@ services:
     command: sh -c "bin/setup --keep-logs && exec bin/dev"
     tty: true
     healthcheck:
-      test: ["CMD-SHELL", "curl -fs -o /dev/null http://localhost:3000/ || exit 1"]
+      test: ["CMD-SHELL", "curl -fs -o /dev/null http://localhost:3000/health_check || exit 1"]
       interval: 5s
       start_period: *start_limit
 
@@ -53,7 +54,7 @@ services:
     platform: linux/amd64
     volumes:
       - ..:/app
-      - gem_cache:/usr/local/bundle/gems
+      - bundle:/usr/local/bundle
     ports:
       - "${POSTFIX_PORT:-2525}:25"
     depends_on:
@@ -139,7 +140,7 @@ services:
       # start_interval: 1s  # TODO: #2167 Uncomment after 2028 when Docker Compose 2.21+ should be widespread (introduced Dec 2023)
 
 volumes:
-  gem_cache:
+  bundle: # replaces gem_cache, whose gems were built for the old Debian-based image
   database_data:
   postgres_data:
   redis_data:
