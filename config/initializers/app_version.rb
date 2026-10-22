@@ -5,6 +5,7 @@ unless defined?(APP_VERSION)
   APP_VERSION = if Rails.env.production? && File.size?(revision_path)
                   File.read(revision_path)[0..6]
                 else
-                  `git describe --always`
+                  # Blank where git can't find the repository, such as a worktree inside Docker
+                  `git describe --always 2>/dev/null`.strip
                 end
 end
