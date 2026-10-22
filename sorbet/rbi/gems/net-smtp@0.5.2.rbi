@@ -120,7 +120,7 @@
 # The +LOGIN+ and +CRAM-MD5+ mechanisms are still available for backwards
 # compatibility, but are deprecated and should be avoided.
 #
-# source://net-smtp//lib/net/smtp.rb#194
+# source://net-smtp//lib/net/smtp.rb#190
 class Net::SMTP < ::Net::Protocol
   # Creates a new Net::SMTP object.
   #
@@ -149,12 +149,12 @@ class Net::SMTP < ::Net::Protocol
   #
   # @return [SMTP] a new instance of SMTP
   #
-  # source://net-smtp//lib/net/smtp.rb#248
+  # source://net-smtp//lib/net/smtp.rb#244
   def initialize(address, port = T.unsafe(nil), tls: T.unsafe(nil), starttls: T.unsafe(nil), tls_verify: T.unsafe(nil), tls_hostname: T.unsafe(nil), ssl_context_params: T.unsafe(nil)); end
 
   # The address of the SMTP server to connect to.
   #
-  # source://net-smtp//lib/net/smtp.rb#414
+  # source://net-smtp//lib/net/smtp.rb#410
   def address; end
 
   # Returns whether the server advertises support for the authentication type.
@@ -162,7 +162,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#329
+  # source://net-smtp//lib/net/smtp.rb#325
   def auth_capable?(type); end
 
   # Authenticates with the server, using the "AUTH" command.
@@ -173,25 +173,25 @@ class Net::SMTP < ::Net::Protocol
   # Different authenticators may interpret the +user+ and +secret+
   # arguments differently.
   #
-  # source://net-smtp//lib/net/smtp.rb#872
+  # source://net-smtp//lib/net/smtp.rb#869
   def authenticate(user, secret, authtype = T.unsafe(nil)); end
 
   # The server capabilities by EHLO response
   #
-  # source://net-smtp//lib/net/smtp.rb#307
+  # source://net-smtp//lib/net/smtp.rb#303
   def capabilities; end
 
   # true if the EHLO response contains +key+.
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#301
+  # source://net-smtp//lib/net/smtp.rb#297
   def capable?(key); end
 
   # Returns supported authentication methods on this server.
   # You cannot get valid value before opening SMTP session.
   #
-  # source://net-smtp//lib/net/smtp.rb#337
+  # source://net-smtp//lib/net/smtp.rb#333
   def capable_auth_types; end
 
   # true if server advertises AUTH CRAM-MD5.
@@ -199,7 +199,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#323
+  # source://net-smtp//lib/net/smtp.rb#319
   def capable_cram_md5_auth?; end
 
   # true if server advertises AUTH LOGIN.
@@ -207,7 +207,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#317
+  # source://net-smtp//lib/net/smtp.rb#313
   def capable_login_auth?; end
 
   # true if server advertises AUTH PLAIN.
@@ -215,7 +215,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#311
+  # source://net-smtp//lib/net/smtp.rb#307
   def capable_plain_auth?; end
 
   # true if server advertises STARTTLS.
@@ -223,7 +223,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#296
+  # source://net-smtp//lib/net/smtp.rb#292
   def capable_starttls?; end
 
   # This method sends a message.
@@ -249,7 +249,7 @@ class Net::SMTP < ::Net::Protocol
   #     f.puts "Check vm.c:58879."
   #   }
   #
-  # source://net-smtp//lib/net/smtp.rb#958
+  # source://net-smtp//lib/net/smtp.rb#955
   def data(msgstr = T.unsafe(nil), &block); end
 
   # WARNING: This method causes serious security holes.
@@ -265,28 +265,28 @@ class Net::SMTP < ::Net::Protocol
   #     ....
   #   end
   #
-  # source://net-smtp//lib/net/smtp.rb#450
+  # source://net-smtp//lib/net/smtp.rb#446
   def debug_output=(arg); end
 
   # Disables SMTP/TLS for this object.  Must be called before the
   # connection is established to have any effect.
   #
-  # source://net-smtp//lib/net/smtp.rb#364
+  # source://net-smtp//lib/net/smtp.rb#360
   def disable_ssl; end
 
   # Disables SMTP/TLS (STARTTLS) for this object.  Must be called
   # before the connection is established to have any effect.
   #
-  # source://net-smtp//lib/net/smtp.rb#408
+  # source://net-smtp//lib/net/smtp.rb#404
   def disable_starttls; end
 
   # Disables SMTP/TLS for this object.  Must be called before the
   # connection is established to have any effect.
   #
-  # source://net-smtp//lib/net/smtp.rb#364
+  # source://net-smtp//lib/net/smtp.rb#360
   def disable_tls; end
 
-  # source://net-smtp//lib/net/smtp.rb#907
+  # source://net-smtp//lib/net/smtp.rb#904
   def ehlo(domain); end
 
   # Enables SMTP/TLS (SMTPS: \SMTP over direct TLS connection) for
@@ -295,7 +295,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [ArgumentError]
   #
-  # source://net-smtp//lib/net/smtp.rb#353
+  # source://net-smtp//lib/net/smtp.rb#349
   def enable_ssl(context = T.unsafe(nil)); end
 
   # Enables SMTP/TLS (STARTTLS) for this object.
@@ -303,7 +303,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [ArgumentError]
   #
-  # source://net-smtp//lib/net/smtp.rb#390
+  # source://net-smtp//lib/net/smtp.rb#386
   def enable_starttls(context = T.unsafe(nil)); end
 
   # Enables SMTP/TLS (STARTTLS) for this object if server accepts.
@@ -311,7 +311,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [ArgumentError]
   #
-  # source://net-smtp//lib/net/smtp.rb#399
+  # source://net-smtp//lib/net/smtp.rb#395
   def enable_starttls_auto(context = T.unsafe(nil)); end
 
   # Enables SMTP/TLS (SMTPS: \SMTP over direct TLS connection) for
@@ -320,7 +320,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [ArgumentError]
   #
-  # source://net-smtp//lib/net/smtp.rb#353
+  # source://net-smtp//lib/net/smtp.rb#349
   def enable_tls(context = T.unsafe(nil)); end
 
   # Set whether to use ESMTP or not.  This should be done before
@@ -329,7 +329,7 @@ class Net::SMTP < ::Net::Protocol
   # object will automatically switch to plain SMTP mode and
   # retry (but not vice versa).
   #
-  # source://net-smtp//lib/net/smtp.rb#289
+  # source://net-smtp//lib/net/smtp.rb#285
   def esmtp; end
 
   # Set whether to use ESMTP or not.  This should be done before
@@ -338,7 +338,7 @@ class Net::SMTP < ::Net::Protocol
   # object will automatically switch to plain SMTP mode and
   # retry (but not vice versa).
   #
-  # source://net-smtp//lib/net/smtp.rb#289
+  # source://net-smtp//lib/net/smtp.rb#285
   def esmtp=(_arg0); end
 
   # Set whether to use ESMTP or not.  This should be done before
@@ -348,7 +348,7 @@ class Net::SMTP < ::Net::Protocol
   # retry (but not vice versa).
   # +true+ if the SMTP object uses ESMTP (which it does by default).
   #
-  # source://net-smtp//lib/net/smtp.rb#289
+  # source://net-smtp//lib/net/smtp.rb#285
   def esmtp?; end
 
   # Finishes the SMTP session and closes TCP connection.
@@ -356,23 +356,23 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [IOError]
   #
-  # source://net-smtp//lib/net/smtp.rb#655
+  # source://net-smtp//lib/net/smtp.rb#651
   def finish; end
 
-  # source://net-smtp//lib/net/smtp.rb#989
+  # source://net-smtp//lib/net/smtp.rb#986
   def get_response(reqline); end
 
-  # source://net-smtp//lib/net/smtp.rb#903
+  # source://net-smtp//lib/net/smtp.rb#900
   def helo(domain); end
 
   # Provide human-readable stringification of class state.
   #
-  # source://net-smtp//lib/net/smtp.rb#278
+  # source://net-smtp//lib/net/smtp.rb#274
   def inspect; end
 
   # +from_addr+ is +String+ or +Net::SMTP::Address+
   #
-  # source://net-smtp//lib/net/smtp.rb#912
+  # source://net-smtp//lib/net/smtp.rb#909
   def mailfrom(from_addr); end
 
   # Opens a message writer stream and gives it to the block.
@@ -420,52 +420,52 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [IOError]
   #
-  # source://net-smtp//lib/net/smtp.rb#849
+  # source://net-smtp//lib/net/smtp.rb#846
   def open_message_stream(from_addr, *to_addrs, &block); end
 
   # Seconds to wait while attempting to open a connection.
   # If the connection cannot be opened within this time, a
   # Net::OpenTimeout is raised. The default value is 30 seconds.
   #
-  # source://net-smtp//lib/net/smtp.rb#422
+  # source://net-smtp//lib/net/smtp.rb#418
   def open_timeout; end
 
   # Seconds to wait while attempting to open a connection.
   # If the connection cannot be opened within this time, a
   # Net::OpenTimeout is raised. The default value is 30 seconds.
   #
-  # source://net-smtp//lib/net/smtp.rb#422
+  # source://net-smtp//lib/net/smtp.rb#418
   def open_timeout=(_arg0); end
 
   # The port number of the SMTP server to connect to.
   #
-  # source://net-smtp//lib/net/smtp.rb#417
+  # source://net-smtp//lib/net/smtp.rb#413
   def port; end
 
-  # source://net-smtp//lib/net/smtp.rb#985
+  # source://net-smtp//lib/net/smtp.rb#982
   def quit; end
 
   # +to_addr+ is +String+ or +Net::SMTP::Address+
   #
-  # source://net-smtp//lib/net/smtp.rb#930
+  # source://net-smtp//lib/net/smtp.rb#927
   def rcptto(to_addr); end
 
   # @raise [ArgumentError]
   #
-  # source://net-smtp//lib/net/smtp.rb#921
+  # source://net-smtp//lib/net/smtp.rb#918
   def rcptto_list(to_addrs); end
 
   # Seconds to wait while reading one block (by one read(2) call).
   # If the read(2) call does not complete within this time, a
   # Net::ReadTimeout is raised. The default value is 60 seconds.
   #
-  # source://net-smtp//lib/net/smtp.rb#427
+  # source://net-smtp//lib/net/smtp.rb#423
   def read_timeout; end
 
   # Set the number of seconds to wait until timing-out a read(2)
   # call.
   #
-  # source://net-smtp//lib/net/smtp.rb#431
+  # source://net-smtp//lib/net/smtp.rb#427
   def read_timeout=(sec); end
 
   # Opens a message writer stream and gives it to the block.
@@ -514,12 +514,12 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [IOError]
   #
-  # source://net-smtp//lib/net/smtp.rb#849
+  # source://net-smtp//lib/net/smtp.rb#846
   def ready(from_addr, *to_addrs, &block); end
 
   # Aborts the current mail transaction
   #
-  # source://net-smtp//lib/net/smtp.rb#895
+  # source://net-smtp//lib/net/smtp.rb#892
   def rset; end
 
   # Sends +msgstr+ as a message.  Single CR ("\r") and LF ("\n") found
@@ -559,7 +559,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [IOError]
   #
-  # source://net-smtp//lib/net/smtp.rb#794
+  # source://net-smtp//lib/net/smtp.rb#791
   def send_mail(msgstr, from_addr, *to_addrs); end
 
   # Sends +msgstr+ as a message.  Single CR ("\r") and LF ("\n") found
@@ -599,7 +599,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [IOError]
   #
-  # source://net-smtp//lib/net/smtp.rb#794
+  # source://net-smtp//lib/net/smtp.rb#791
   def send_message(msgstr, from_addr, *to_addrs); end
 
   # Sends +msgstr+ as a message.  Single CR ("\r") and LF ("\n") found
@@ -640,7 +640,7 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [IOError]
   #
-  # source://net-smtp//lib/net/smtp.rb#794
+  # source://net-smtp//lib/net/smtp.rb#791
   def sendmail(msgstr, from_addr, *to_addrs); end
 
   # WARNING: This method causes serious security holes.
@@ -656,24 +656,24 @@ class Net::SMTP < ::Net::Protocol
   #     ....
   #   end
   #
-  # source://net-smtp//lib/net/smtp.rb#450
+  # source://net-smtp//lib/net/smtp.rb#446
   def set_debug_output(arg); end
 
   # true if this object uses SMTP/TLS (SMTPS).
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#344
+  # source://net-smtp//lib/net/smtp.rb#340
   def ssl?; end
 
   # Hash for additional SSLContext parameters.
   #
-  # source://net-smtp//lib/net/smtp.rb#275
+  # source://net-smtp//lib/net/smtp.rb#271
   def ssl_context_params; end
 
   # Hash for additional SSLContext parameters.
   #
-  # source://net-smtp//lib/net/smtp.rb#275
+  # source://net-smtp//lib/net/smtp.rb#271
   def ssl_context_params=(_arg0); end
 
   # :call-seq:
@@ -742,17 +742,17 @@ class Net::SMTP < ::Net::Protocol
   #
   # @raise [ArgumentError]
   #
-  # source://net-smtp//lib/net/smtp.rb#622
+  # source://net-smtp//lib/net/smtp.rb#618
   def start(*args, helo: T.unsafe(nil), user: T.unsafe(nil), secret: T.unsafe(nil), password: T.unsafe(nil), authtype: T.unsafe(nil)); end
 
   # +true+ if the \SMTP session has been started.
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#553
+  # source://net-smtp//lib/net/smtp.rb#549
   def started?; end
 
-  # source://net-smtp//lib/net/smtp.rb#899
+  # source://net-smtp//lib/net/smtp.rb#896
   def starttls; end
 
   # Returns truth value if this object uses STARTTLS.
@@ -761,215 +761,127 @@ class Net::SMTP < ::Net::Protocol
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#374
+  # source://net-smtp//lib/net/smtp.rb#370
   def starttls?; end
 
   # true if this object uses STARTTLS.
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#379
+  # source://net-smtp//lib/net/smtp.rb#375
   def starttls_always?; end
 
   # true if this object uses STARTTLS when server advertises STARTTLS.
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#384
+  # source://net-smtp//lib/net/smtp.rb#380
   def starttls_auto?; end
 
   # true if this object uses SMTP/TLS (SMTPS).
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#344
+  # source://net-smtp//lib/net/smtp.rb#340
   def tls?; end
 
   # The hostname for verifying hostname in the server certificatate.
   #
-  # source://net-smtp//lib/net/smtp.rb#272
+  # source://net-smtp//lib/net/smtp.rb#268
   def tls_hostname; end
 
   # The hostname for verifying hostname in the server certificatate.
   #
-  # source://net-smtp//lib/net/smtp.rb#272
+  # source://net-smtp//lib/net/smtp.rb#268
   def tls_hostname=(_arg0); end
 
   # If +true+, verify th server's certificate.
   #
-  # source://net-smtp//lib/net/smtp.rb#269
+  # source://net-smtp//lib/net/smtp.rb#265
   def tls_verify; end
 
   # If +true+, verify th server's certificate.
   #
-  # source://net-smtp//lib/net/smtp.rb#269
+  # source://net-smtp//lib/net/smtp.rb#265
   def tls_verify=(_arg0); end
 
   private
 
-  # source://net-smtp//lib/net/smtp.rb#748
+  # source://net-smtp//lib/net/smtp.rb#745
   def any_require_smtputf8(addresses); end
 
-  # source://net-smtp//lib/net/smtp.rb#880
+  # source://net-smtp//lib/net/smtp.rb#877
   def check_auth_args(type, *args, **kwargs); end
 
-  # source://net-smtp//lib/net/smtp.rb#1040
+  # source://net-smtp//lib/net/smtp.rb#1037
   def check_continue(res); end
 
-  # source://net-smtp//lib/net/smtp.rb#1034
+  # source://net-smtp//lib/net/smtp.rb#1031
   def check_response(res); end
 
-  # source://net-smtp//lib/net/smtp.rb#1024
+  # source://net-smtp//lib/net/smtp.rb#1021
   def critical; end
 
-  # source://net-smtp//lib/net/smtp.rb#731
+  # source://net-smtp//lib/net/smtp.rb#728
   def do_finish; end
 
-  # source://net-smtp//lib/net/smtp.rb#719
+  # source://net-smtp//lib/net/smtp.rb#716
   def do_helo(helo_domain); end
 
-  # source://net-smtp//lib/net/smtp.rb#666
+  # source://net-smtp//lib/net/smtp.rb#662
   def do_start(helo_domain, user, secret, authtype); end
 
-  # source://net-smtp//lib/net/smtp.rb#1004
+  # source://net-smtp//lib/net/smtp.rb#1001
   def getok(reqline); end
 
-  # source://net-smtp//lib/net/smtp.rb#1125
+  # source://net-smtp//lib/net/smtp.rb#1122
   def logging(msg); end
 
-  # source://net-smtp//lib/net/smtp.rb#714
+  # source://net-smtp//lib/net/smtp.rb#711
   def new_internet_message_io(s); end
 
-  # source://net-smtp//lib/net/smtp.rb#1014
+  # source://net-smtp//lib/net/smtp.rb#1011
   def recv_response; end
 
-  # source://net-smtp//lib/net/smtp.rb#740
+  # source://net-smtp//lib/net/smtp.rb#737
   def requires_smtputf8(address); end
 
-  # source://net-smtp//lib/net/smtp.rb#697
+  # source://net-smtp//lib/net/smtp.rb#694
   def ssl_socket(socket, context); end
 
-  # source://net-smtp//lib/net/smtp.rb#662
+  # source://net-smtp//lib/net/smtp.rb#658
   def tcp_socket(address, port); end
 
-  # source://net-smtp//lib/net/smtp.rb#701
+  # source://net-smtp//lib/net/smtp.rb#698
   def tlsconnect(s, context); end
 
-  # source://net-smtp//lib/net/smtp.rb#997
+  # source://net-smtp//lib/net/smtp.rb#994
   def validate_line(line); end
 
   class << self
-    # The default SMTP port number, 25.
-    #
-    # source://net-smtp//lib/net/smtp.rb#198
+    # source://net-smtp//lib/net/smtp.rb#194
     def default_port; end
 
-    # source://net-smtp//lib/net/smtp.rb#216
+    # source://net-smtp//lib/net/smtp.rb#212
     def default_ssl_context(ssl_context_params = T.unsafe(nil)); end
 
-    # The default SMTPS port number, 465.
-    #
-    # source://net-smtp//lib/net/smtp.rb#208
+    # source://net-smtp//lib/net/smtp.rb#204
     def default_ssl_port; end
 
-    # The default mail submission port number, 587.
-    #
-    # source://net-smtp//lib/net/smtp.rb#203
+    # source://net-smtp//lib/net/smtp.rb#199
     def default_submission_port; end
 
-    # The default SMTPS port number, 465.
-    #
-    # source://net-smtp//lib/net/smtp.rb#208
+    # source://net-smtp//lib/net/smtp.rb#204
     def default_tls_port; end
 
-    # :call-seq:
-    #  start(address, port = nil, helo: 'localhost', user: nil, secret: nil, authtype: nil, tls: false, starttls: :auto, tls_verify: true, tls_hostname: nil, ssl_context_params: nil) { |smtp| ... }
-    #  start(address, port = nil, helo = 'localhost', user = nil, secret = nil, authtype = nil) { |smtp| ... }
-    #
-    # Creates a new Net::SMTP object and connects to the server.
-    #
-    # This method is equivalent to:
-    #
-    #   Net::SMTP.new(address, port, tls_verify: flag, tls_hostname: hostname, ssl_context_params: nil)
-    #     .start(helo: helo_domain, user: account, secret: password, authtype: authtype)
-    #
-    # See also: Net::SMTP.new, #start
-    #
-    # === Example
-    #
-    #     Net::SMTP.start('your.smtp.server') do |smtp|
-    #       smtp.send_message msgstr, 'from@example.com', ['dest@example.com']
-    #     end
-    #
-    # === Block Usage
-    #
-    # If called with a block, the newly-opened Net::SMTP object is yielded
-    # to the block, and automatically closed when the block finishes.  If called
-    # without a block, the newly-opened Net::SMTP object is returned to
-    # the caller, and it is the caller's responsibility to close it when
-    # finished.
-    #
-    # === Parameters
-    #
-    # +address+ is the hostname or ip address of your smtp server.
-    #
-    # +port+ is the port to connect to; it defaults to port 25.
-    #
-    # +helo+ is the _HELO_ _domain_ provided by the client to the
-    # server (see overview comments); it defaults to 'localhost'.
-    #
-    # If +tls+ is true, enable TLS. The default is false.
-    # If +starttls+ is :always, enable STARTTLS, if +:auto+, use STARTTLS when the server supports it,
-    # if false, disable STARTTLS.
-    #
-    # If +tls_verify+ is true, verify the server's certificate. The default is true.
-    # If the hostname in the server certificate is different from +address+,
-    # it can be specified with +tls_hostname+.
-    #
-    # Additional SSLContext[https://ruby.github.io/openssl/OpenSSL/SSL/SSLContext.html]
-    # params can be added to the +ssl_context_params+ hash argument and are
-    # passed to {OpenSSL::SSL::SSLContext#set_params}[https://ruby.github.io/openssl/OpenSSL/SSL/SSLContext.html#method-i-set_params].
-    #
-    # <tt>tls_verify: true</tt> is equivalent to <tt>ssl_context_params: {
-    # verify_mode: OpenSSL::SSL::VERIFY_PEER }</tt>.
-    #
-    # The remaining arguments are used for \SMTP authentication, if required or
-    # desired.
-    #
-    # +authtype+ is the SASL authentication mechanism.
-    #
-    # +user+ is the authentication or authorization identity.
-    #
-    # +secret+ or +password+ is your password or other authentication token.
-    #
-    # These will be sent to #authenticate as positional arguments-the exact
-    # semantics are dependent on the +authtype+.
-    #
-    # See the discussion of Net::SMTP@SMTP+Authentication in the overview notes.
-    #
-    # === Errors
-    #
-    # This method may raise:
-    #
-    # * Net::SMTPAuthenticationError
-    # * Net::SMTPServerBusy
-    # * Net::SMTPSyntaxError
-    # * Net::SMTPFatalError
-    # * Net::SMTPUnknownError
-    # * Net::OpenTimeout
-    # * Net::ReadTimeout
-    # * IOError
-    #
-    # @raise [ArgumentError]
-    #
-    # source://net-smtp//lib/net/smtp.rb#539
+    # source://net-smtp//lib/net/smtp.rb#535
     def start(address, port = T.unsafe(nil), *args, helo: T.unsafe(nil), user: T.unsafe(nil), secret: T.unsafe(nil), password: T.unsafe(nil), authtype: T.unsafe(nil), tls: T.unsafe(nil), starttls: T.unsafe(nil), tls_verify: T.unsafe(nil), tls_hostname: T.unsafe(nil), ssl_context_params: T.unsafe(nil), &block); end
   end
 end
 
 # Address with parametres for MAIL or RCPT command
 #
-# source://net-smtp//lib/net/smtp.rb#1130
+# source://net-smtp//lib/net/smtp.rb#1127
 class Net::SMTP::Address
   # :call-seq:
   #  initialize(address, parameter, ...)
@@ -979,20 +891,20 @@ class Net::SMTP::Address
   #
   # @return [Address] a new instance of Address
   #
-  # source://net-smtp//lib/net/smtp.rb#1141
+  # source://net-smtp//lib/net/smtp.rb#1138
   def initialize(address, *args, **kw_args); end
 
   # mail address [String]
   #
-  # source://net-smtp//lib/net/smtp.rb#1132
+  # source://net-smtp//lib/net/smtp.rb#1129
   def address; end
 
   # parameters [Array<String>]
   #
-  # source://net-smtp//lib/net/smtp.rb#1134
+  # source://net-smtp//lib/net/smtp.rb#1131
   def parameters; end
 
-  # source://net-smtp//lib/net/smtp.rb#1152
+  # source://net-smtp//lib/net/smtp.rb#1149
   def to_s; end
 end
 
@@ -1097,14 +1009,14 @@ end
 # created by the user. For more information on SMTP responses, view
 # {Section 4.2 of RFC 5321}[http://tools.ietf.org/html/rfc5321#section-4.2]
 #
-# source://net-smtp//lib/net/smtp.rb#1050
+# source://net-smtp//lib/net/smtp.rb#1047
 class Net::SMTP::Response
   # Creates a new instance of the Response class and sets the status and
   # string attributes
   #
   # @return [Response] a new instance of Response
   #
-  # source://net-smtp//lib/net/smtp.rb#1059
+  # source://net-smtp//lib/net/smtp.rb#1056
   def initialize(status, string); end
 
   # Returns a hash of the human readable reply text in the response if it
@@ -1112,7 +1024,7 @@ class Net::SMTP::Response
   # hash is the first word the value of the hash is an array with each word
   # thereafter being a value in the array
   #
-  # source://net-smtp//lib/net/smtp.rb#1102
+  # source://net-smtp//lib/net/smtp.rb#1099
   def capabilities; end
 
   # Determines whether the response received was a Positive Intermediate
@@ -1120,39 +1032,39 @@ class Net::SMTP::Response
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#1083
+  # source://net-smtp//lib/net/smtp.rb#1080
   def continue?; end
 
   # Creates a CRAM-MD5 challenge. You can view more information on CRAM-MD5
   # on Wikipedia: https://en.wikipedia.org/wiki/CRAM-MD5
   #
-  # source://net-smtp//lib/net/smtp.rb#1094
+  # source://net-smtp//lib/net/smtp.rb#1091
   def cram_md5_challenge; end
 
   # Determines whether there was an error and raises the appropriate error
   # based on the reply code of the response
   #
-  # source://net-smtp//lib/net/smtp.rb#1114
+  # source://net-smtp//lib/net/smtp.rb#1111
   def exception_class; end
 
   # The first line of the human readable reply text
   #
-  # source://net-smtp//lib/net/smtp.rb#1088
+  # source://net-smtp//lib/net/smtp.rb#1085
   def message; end
 
   # The three digit reply code of the SMTP response
   #
-  # source://net-smtp//lib/net/smtp.rb#1065
+  # source://net-smtp//lib/net/smtp.rb#1062
   def status; end
 
   # Takes the first digit of the reply code to determine the status type
   #
-  # source://net-smtp//lib/net/smtp.rb#1071
+  # source://net-smtp//lib/net/smtp.rb#1068
   def status_type_char; end
 
   # The human readable reply text of the SMTP response
   #
-  # source://net-smtp//lib/net/smtp.rb#1068
+  # source://net-smtp//lib/net/smtp.rb#1065
   def string; end
 
   # Determines whether the response received was a Positive Completion
@@ -1160,22 +1072,22 @@ class Net::SMTP::Response
   #
   # @return [Boolean]
   #
-  # source://net-smtp//lib/net/smtp.rb#1077
+  # source://net-smtp//lib/net/smtp.rb#1074
   def success?; end
 
   class << self
     # Parses the received response and separates the reply code and the human
     # readable reply text
     #
-    # source://net-smtp//lib/net/smtp.rb#1053
+    # source://net-smtp//lib/net/smtp.rb#1050
     def parse(str); end
   end
 end
 
-# source://net-smtp//lib/net/smtp.rb#195
+# source://net-smtp//lib/net/smtp.rb#191
 Net::SMTP::VERSION = T.let(T.unsafe(nil), String)
 
-# source://net-smtp//lib/net/smtp.rb#49
+# source://net-smtp//lib/net/smtp.rb#45
 class Net::SMTPAuthenticationError < ::Net::ProtoAuthError
   include ::Net::SMTPError
 end
@@ -1187,9 +1099,6 @@ module Net::SMTPError
   # source://net-smtp//lib/net/smtp.rb#33
   def initialize(response, message: T.unsafe(nil)); end
 
-  # source://net-smtp//lib/net/smtp.rb#43
-  def message; end
-
   # This *class* is a module for backward compatibility.
   # In later release, this module becomes a class.
   #
@@ -1197,32 +1106,32 @@ module Net::SMTPError
   def response; end
 end
 
-# source://net-smtp//lib/net/smtp.rb#64
+# source://net-smtp//lib/net/smtp.rb#60
 class Net::SMTPFatalError < ::Net::ProtoFatalError
   include ::Net::SMTPError
 end
 
-# source://net-smtp//lib/net/smtp.rb#54
+# source://net-smtp//lib/net/smtp.rb#50
 class Net::SMTPServerBusy < ::Net::ProtoServerError
   include ::Net::SMTPError
 end
 
 # class SMTP
 #
-# source://net-smtp//lib/net/smtp.rb#1158
+# source://net-smtp//lib/net/smtp.rb#1155
 Net::SMTPSession = Net::SMTP
 
-# source://net-smtp//lib/net/smtp.rb#59
+# source://net-smtp//lib/net/smtp.rb#55
 class Net::SMTPSyntaxError < ::Net::ProtoSyntaxError
   include ::Net::SMTPError
 end
 
-# source://net-smtp//lib/net/smtp.rb#69
+# source://net-smtp//lib/net/smtp.rb#65
 class Net::SMTPUnknownError < ::Net::ProtoUnknownError
   include ::Net::SMTPError
 end
 
-# source://net-smtp//lib/net/smtp.rb#74
+# source://net-smtp//lib/net/smtp.rb#70
 class Net::SMTPUnsupportedCommand < ::Net::ProtocolError
   include ::Net::SMTPError
 end
