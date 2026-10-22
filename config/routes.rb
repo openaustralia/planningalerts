@@ -28,8 +28,8 @@ Rails.application.routes.draw do
   # Load balancer health checks use the server's own address as the host
   health_check_routes
 
-  # Route API separately, first so API hostnames can 404 everything after it
-  scope format: true do
+  # Route API separately, only on API hostnames, and first so they can 404 everything after it
+  scope format: true, constraints: { subdomain: ApiHostConstraint::SUBDOMAINS } do
     get "authorities" => "api#authorities", as: nil
     get "authorities/:authority_id/applications" => "api#authority", as: nil
     get "applications" => "api#suburb_postcode", as: nil,
@@ -50,6 +50,8 @@ Rails.application.routes.draw do
     get "applications" => "api#all", as: nil
   end
 
+  not_found = proc { [404, { "content-type" => "text/plain" }, ["Not found\n"]] }
+
   constraints ApiHostConstraint.new do
     # RSS feeds fetched from the API hostnames used to link to these pages
     # there. Send them to the matching website hostname, or the canonical one
@@ -62,8 +64,12 @@ Rails.application.routes.draw do
     get "/", to: to_website
     get "applications/:id", to: to_website, constraints: { id: /\d+/ }
 
-    match "(*path)", to: proc { [404, { "content-type" => "text/plain" }, ["Not found\n"]] },
-                     via: :all, format: false
+    match "(*path)", to: not_found, via: :all, format: false
+  end
+
+  # Elsewhere API paths are not found, rather than falling through to web pages
+  scope format: true do
+    get "authorities", "authorities/:authority_id/applications", "applications", to: not_found, as: nil
   end
 
   namespace :admin do

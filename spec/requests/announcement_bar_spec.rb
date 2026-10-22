@@ -115,6 +115,7 @@ describe "Announcement bar" do
     it "does not appear in API responses" do
       # Disable the logging of the API call to elasticsearch, as the API specs do
       allow(LogApiCallService).to receive(:call).and_return(nil)
+      host! "api.planningalerts.org.au"
       get "/authorities.json", params: { key: create(:api_key).value }
       expect(response).to have_http_status(:ok)
       expect(response.body).not_to include("Layout check notice")
