@@ -85,7 +85,8 @@ module PlanningalertsApp
     # config.i18n.default_locale = :de
 
     config.middleware.use Rack::Attack
-    config.middleware.use PlausibleProxy
+    # rack-proxy refuses (502) to forward without a fixed backend
+    config.middleware.use PlausibleProxy, backend: "https://plausible.io"
 
     config.action_dispatch.tld_length = 2
 
