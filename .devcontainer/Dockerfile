@@ -57,9 +57,9 @@ RUN apt-get install -y nodejs
 
 # Install firefox for running some integration tests. Ubuntu's own firefox package only installs a snap, which
 # doesn't work in Docker, so take the real package from the Mozilla team's PPA.
-RUN apt-get install -y software-properties-common \
+RUN apt-get install -y --no-install-recommends software-properties-common \
     && add-apt-repository -y ppa:mozillateam/ppa \
-    && apt-get update && apt-get install -y firefox-esr
+    && apt-get update && apt-get install -y --no-install-recommends firefox-esr
 
 # Needed for pg gem and bin/rails dbconsole
 RUN apt-get install -y libpq-dev postgresql-client
