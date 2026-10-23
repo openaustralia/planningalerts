@@ -63,6 +63,7 @@ One stack, defined in `.devcontainer/compose.yaml`, serves every way of working:
 ```
 make up           # everything, including the app at http://localhost:3000, once it's ready
 make services-up  # everything except `web`, for running Rails on the host
+make setup        # services-up, then Ruby (with mise or rbenv), gems and the database, for Rails on the host
 make status       # each container's health and host ports
 make logs         # follow the logs (SERVICE=<name> for one container)
 make shell        # a shell in the app container, or a fresh one if it has stopped
@@ -78,7 +79,7 @@ make clobber      # also remove the data, and prune unused Docker images and cac
 A start that takes longer than `START_LIMIT` (in `.devcontainer/compose.yaml`) counts as failed, and stops loudly on purpose;
 see "If the app won't start" in the README.
 
-Everything normally runs in Docker; running Rails on the host against `make services-up` is mainly for single-step
+Everything normally runs in Docker; running Rails on the host after `make setup` is mainly for single-step
 debugging in an IDE (see the README), though it can't reach Redis or Elasticsearch yet
 ([#2293](https://github.com/openaustralia/planningalerts/issues/2293)). The `web` container runs `bin/setup`, which installs gems and prepares the
 database, before `bin/dev` starts Rails, Tailwind and Sidekiq. Plain `docker compose run web ...` commands work as
