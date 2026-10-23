@@ -56,13 +56,34 @@ there speculatively, and check the team really has access.
 
 ## Getting a working environment
 
-Everything runs through Docker Compose. There is no supported way to run the app
-against a local database and Redis without it.
+One stack, defined in `.devcontainer/compose.yaml`, serves every way of working: `make`, plain `docker compose`
+(through the root `compose.yaml`), and the dev container in VS Code, RubyMine, Codespaces or
+`devcontainer up --workspace-folder .`. They all share the same containers and data.
 
-```sh
-docker compose run web bin/rake db:setup   # first time, also triggers a build
-docker compose up                          # then http://localhost:3000
 ```
+make up           # everything, including the app at http://localhost:3000, once it's ready
+make services-up  # everything except `web`, for running Rails on the host
+make setup        # services-up, then Ruby (with mise or rbenv), gems and the database, for Rails on the host
+make status       # each container's health and host ports
+make logs         # follow the logs (SERVICE=<name> for one container)
+make shell        # a shell in the app container, or a fresh one if it has stopped
+make test         # the specs, as CI runs them (ARGS=spec/models/alert_spec.rb:42 to narrow)
+make lint         # RuboCop, erb_lint and Brakeman, as CI runs them (also make typecheck)
+make console      # a Rails console
+make down         # stop and remove the containers, keeping the data
+make clean        # also remove built images and dependencies, so the next start rebuilds; keeps the data
+make clobber      # also remove the data, and prune unused Docker images and cache machine-wide
+```
+
+`make up` and `make services-up` return once every service passes its healthcheck. Run `make` for the full list.
+A start that takes longer than `START_LIMIT` (in `.devcontainer/compose.yaml`) counts as failed, and stops loudly on purpose;
+see "If the app won't start" in the README.
+
+Everything normally runs in Docker; running Rails on the host after `make setup` is mainly for single-step
+debugging in an IDE (see the README), though it can't reach Redis or Elasticsearch yet
+([#2293](https://github.com/openaustralia/planningalerts/issues/2293)). The `web` container runs `bin/setup`, which installs gems and prepares the
+database, before `bin/dev` starts Rails, Tailwind and Sidekiq. Plain `docker compose run web ...` commands work as
+before.
 
 `db/seeds.rb` creates `admin@example.com` (confirm it via the mailcatcher
 inbox at <http://localhost:1080>) and one authority with one application. The
@@ -75,8 +96,8 @@ and neither does the PostGIS image. On Apple Silicon you must switch on "Use
 Rosetta for x86/amd64 emulation on Apple Silicon" in Docker Desktop or the
 containers will not start. Do not "helpfully" remove those `platform` keys.
 
-Service versions in `docker-compose.yml` deliberately match production:
-PostGIS 15-3.3, Redis 6.2, Elasticsearch 7.17.7. Keep them matched when you
+Service versions in `.devcontainer/compose.yaml` deliberately match production:
+PostGIS 15-3.4, Redis 6.2.6, Elasticsearch 7.17.7. Keep them matched when you
 change one.
 
 ### Developing or testing on multiple worktrees in parallel
@@ -84,11 +105,13 @@ change one.
 If you're running docker from multiple project directories at the same time, you will need to
 
 1. Have at least 2GB of free memory per worktree, more if you are running the chrome based tests.
-2. Override the default mapping to host ports so docker doesn't fail with "port is already allocated" errors.
+2. Give each worktree its own project name, or they share one set of containers and data.
+3. Override the default mapping to host ports so docker doesn't fail with "port is already allocated" errors.
 
-Add a `.env` file with unused host ports that differ from the defaults in `docker-compose.yml` and from the `.env` in other worktrees, for example:
+Add a `.env` file with a project name and unused host ports that differ from the defaults in `.devcontainer/compose.yaml` and from the `.env` in other worktrees, for example:
 
 ```
+COMPOSE_PROJECT_NAME=planningalerts-my-feature
 WEB_PORT=3001
 POSTFIX_PORT=2526
 POSTGRES_PORT=15433
@@ -98,10 +121,12 @@ MAILCATCHER_PORT=1081
 Remember to check ports are not in use by something else on your machine (`lsof -i :3001` or `ss -ltn`, depending on your OS).
 
 Background details:
-- Compose loads `.env` from the project directory for port substitution.
+- Compose loads `.env` from the project directory for port substitution, however you start the stack. For host-side
+  commands to see the same values, put `dotenv` in a gitignored `.envrc` if you use direnv, or run
+  `set -a; . ./.env; set +a`. Rails on the host also needs `DB_HOST=localhost` and `DB_PORT` set to `POSTGRES_PORT`.
 - The repository is bind-mounted at `/app`, so dotenv and foreman inside the container load it as well, which is how `WEB_PORT` reaches the mailer links in `config/environments/development.rb` and the API example URLs from `api_port` in `app/helpers/applications_helper.rb`.
 - Use `.env` for these port settings, and for local secrets that must not be committed: `.env` is gitignored while `.env.development` is checked in. Ordinary, shareable app config goes in `.env.development`/`.env.production`.
-- Nothing else needs isolating by hand: Compose already scopes named volumes, containers and the network per project, and the project name defaults to the worktree's directory name, so gems, the database, Elasticsearch, and Redis (which already publish on ephemeral host ports) won't cross-contaminate between worktrees.
+- The project name is fixed as `planningalerts` (`name:` in `compose.yaml`) so `make` and the dev container share one stack, which is why each worktree must set its own. Compose scopes named volumes, containers and the network per project, so with that set, gems, the database, Elasticsearch, and Redis (which publish on random host ports, shown by `make status`) won't cross-contaminate between worktrees.
 
 ## Commands
 
@@ -109,10 +134,13 @@ CI (`.github/workflows/rubyonrails.yml`) has four gates. Run these, and
 nothing less, before taking a pull request out of draft:
 
 ```sh
-docker compose run web bin/rake            # the RSpec suite
-docker compose run web bin/rake ci:type    # Sorbet, plus tapioca --verify checks
-docker compose run web bin/rake ci:lint    # RuboCop, erb_lint, Brakeman -w2
+make test         # the RSpec suite, after resetting the test database and building Tailwind
+make typecheck    # bin/rake ci:type, Sorbet plus tapioca --verify checks
+make lint         # bin/rake ci:lint, RuboCop, erb_lint, Brakeman -w2
 ```
+
+`make test ARGS=spec/models/alert_spec.rb:42` narrows the specs, and `make lint ARGS=<paths>` runs only RuboCop on
+those paths.
 
 The fourth gate isn't Ruby at all: it rebuilds the Maizzle email templates and
 fails if that changes anything, since Sorbet/RuboCop/RSpec never touch
@@ -130,7 +158,7 @@ does nothing and `ci:all` never runs a single spec. Its prerequisites resolve to
 `["test", "ci:type", "ci:lint"]`, which you can confirm with
 `Rake::Task["ci:all"].prerequisite_tasks`.
 
-To run a subset of specs, go through `bin/rspec`:
+Without make, run a subset of specs through `bin/rspec`:
 
 ```sh
 docker compose run web bin/rake tailwindcss:build          # required first, see below
@@ -403,13 +431,13 @@ predates the current blue/green setup. Treat it as history.
 
 Nothing checks these for you, so keep them consistent by hand:
 
-- Service versions appear in both `docker-compose.yml` and
+- Service versions appear in both `.devcontainer/compose.yaml` and
   `.github/workflows/rubyonrails.yml`, and both claim to match production.
   Changing one means changing the other.
 - The four Sorbet-related pins in the `Gemfile` described above.
 - Maizzle sources, their compiled `.erb` output, and the `exclude` list in
   `.erb-lint.yml`.
-- The Postgres password in `docker-compose.yml` and `config/database.yml`.
+- The Postgres password in `.devcontainer/compose.yaml` and `config/database.yml`.
 - `.ruby-version` and the Ruby actually installed on the servers, which is
   managed from the separate `oaf/infrastructure` Ansible repository you probably
   cannot see from here. Treat the mechanism described in `README.md` as history

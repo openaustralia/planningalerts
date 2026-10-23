@@ -24,66 +24,43 @@ git clone https://github.com/openaustralia/planningalerts.git
 cd planningalerts
 ```
 
-### Resetting Your Environment
-
-To force a rebuild from scratch, stopping and removing containers and volumes (including the databases):
-
-```sh
-docker compose down -v --rmi all
-# Check if this volume is "still in use"
-docker volume rm planningalerts_gem_cache
-```
-
-If you get a `volume is in use` error, remove the container using the given id and then retry, for example:
-
-```sh
-> Error response from daemon: remove planningalerts_gem_cache: volume is in use - [98ba717d944d01976ac9074e6a1119e70d3aebd53f5d5449957324926f0bbb4b]
-
-docker rm 98ba717d944d01976ac9074e6a1119e70d3aebd53f5d5449957324926f0bbb4b
-> 98ba717d944d01976ac9074e6a1119e70d3aebd53f5d5449957324926f0bbb4b
-
-docker volume rm planningalerts_gem_cache
-```
-
-### Overriding DB host and port for non docker dev
-
-When running the application locally on the host whilst using docker for the database, for example to simplify single step debugging in IDEs, set the following ENV vars (manually or in `.envrc` for `direnv`):
-
-```
-export DB_HOST=localhost
-export DB_PORT=15432
-```
-
-If you have set `POSTGRES_PORT` in `.env` to change the host port mapping for postgres, use the same value for `DB_PORT`.
-
-### Alternative web port
-
-You can run the web server on a different host port so logins for various projects are not all mixed together.
-For example, set `WEB_PORT` in `.env` under the project root to use port 3072 (30PA) for manual testing.
-
-```
-WEB_PORT=3072
-```
-
-Then point your browser at <http://localhost:3072>. Mailer links and the API example URLs follow `WEB_PORT`, so they point at the port you are browsing on.
-If you previously added a `ports` block to `docker-compose.override.yml` for this, you can remove it.
-
-### Developing or testing on multiple worktrees in parallel
-
-See the section in AGENTS.md when using multiple worktrees to avoid port collisions.
-
-### Setup The Database
-
-Set up the databases - `docker compose run web bin/rake db:setup`
-
-This will trigger a build if needed. You can manually trigger a build by first running - `docker compose build`
-
 ### Start the application
 
-* `docker compose up`
-* Point your browser at <http://localhost:3000>
+```sh
+make up       # builds, sets up the database on first run, then http://localhost:3000
+make          # lists the other targets: status, logs, shell, down, clobber
+```
 
-Append `--build` to rebuild any changes to Dockerfile.
+`make clean` forces a rebuild but keeps the databases, which is worth doing after switching branches or changing
+dependencies. `make clobber` also deletes the databases and prunes unused Docker images and build cache for every
+project on the machine.
+
+To run Rails on the host instead, for example for single-step debugging in an IDE, install
+[mise](https://mise.jdx.dev) (preferred) or rbenv, then run `make setup`. It starts everything except `web`, installs
+the Ruby in `.ruby-version` and the gems, and prepares the database. Then set `DB_HOST=localhost` and `DB_PORT=15432`
+(or your `POSTGRES_PORT`). This doesn't fully work yet, as Rails can't reach Redis or Elasticsearch from the host; see
+#2293.
+
+### Ports and multiple worktrees
+
+To move a port, for example `WEB_PORT=3072` (30PA) so logins for different projects don't mix, or to run more than
+one worktree at once, see [Developing or testing on multiple worktrees in parallel](AGENTS.md#developing-or-testing-on-multiple-worktrees-in-parallel) in AGENTS.md.
+
+### If the app won't start
+
+Startup fails loudly on purpose, so a broken setup gets noticed instead of hiding behind a container that looks fine.
+If setup fails, the `web` container stops. If it takes longer than `START_LIMIT` (5 minutes here, set in
+`.devcontainer/compose.yaml`), the container is marked unhealthy. Either way `make up` reports the failure, and the dev
+container shows an error instead of opening.
+
+To fix it:
+
+1. `make status` shows which container stopped or is unhealthy, and `make logs SERVICE=web` shows why.
+2. `make shell` opens a shell in a fresh `web` container even when it has stopped, so you can rerun the setup by hand
+   and fix the problem.
+3. `make up`, or reopen the dev container, to start again.
+
+On a slow machine, a longer limit can go in `.env`, for example `START_LIMIT=20m`.
 
 ### Accessing the API in development
 
@@ -110,12 +87,15 @@ for example), add them to `/etc/hosts`:
 
 ### Run The Tests
 
+`make test`, `make lint` and `make typecheck` run the same checks as CI. `make test ARGS=spec/models/alert_spec.rb`
+runs just one file. To rerun the affected tests as you work:
+
 * In a separate window - `docker compose run web bin/guard`
 * Press enter to run all the tests
 
 ### Setup Development Data
 
-Initially `db/seeds.rb` (called by `db:setup` will have set up:
+Initially `db/seeds.rb` (run by `bin/setup` on the first `make up`) will have set up:
 
 * user `admin@example.com`
     * confirm via the email at http://localhost:1080/
@@ -185,10 +165,8 @@ We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all
 
 If things go wrong, force a rebuild from scratch (preserving DB volumes):
 ```shell
-docker compose down
-docker system prune --all
-docker volume rm planningalerts_gem_cache
-docker compose up --build
+make clean
+make up
 ```
 Then rebuild sorbet again in another terminal window:
 ```shell
