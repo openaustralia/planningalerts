@@ -35,9 +35,11 @@ make          # lists the other targets: status, logs, shell, down, clobber
 dependencies. `make clobber` also deletes the databases and prunes unused Docker images and build cache for every
 project on the machine.
 
-To run Rails on the host instead, for example for single-step debugging in an IDE, start everything except `web` with
-`make services-up` and set `DB_HOST=localhost` and `DB_PORT=15432` (or your `POSTGRES_PORT`). This doesn't fully work
-yet, as Rails can't reach Redis or Elasticsearch from the host; see #2293.
+To run Rails on the host instead, for example for single-step debugging in an IDE, install
+[mise](https://mise.jdx.dev) (preferred) or rbenv, then run `make setup`. It starts everything except `web`, installs
+the Ruby in `.ruby-version` and the gems, and prepares the database. Then set `DB_HOST=localhost` and `DB_PORT=15432`
+(or your `POSTGRES_PORT`). This doesn't fully work yet, as Rails can't reach Redis or Elasticsearch from the host; see
+#2293.
 
 ### Ports and multiple worktrees
 

@@ -1,4 +1,4 @@
-.PHONY: help up services-up down clean clobber status logs shell test lint typecheck console
+.PHONY: help setup up services-up down clean clobber status logs shell test lint typecheck console
 
 # Runs a command in the web container, or in a fresh one if it has stopped
 in_web = if [ -n "$$(docker compose ps -q --status running web)" ]; then docker compose exec web $(1); else docker compose run --rm web $(1); fi
@@ -6,6 +6,16 @@ in_web = if [ -n "$$(docker compose ps -q --status running web)" ]; then docker 
 help: ## Show this help (the default target)
 	@grep -hE '^[a-zA-Z0-9_.-]+:.*## ' $(MAKEFILE_LIST) | \
 	  awk 'BEGIN {FS = ":.*## "}; {printf "  %-12s %s\n", $$1, $$2}'
+
+# For running Rails on the host. mise is preferred, rbenv works too; both read .ruby-version (mise via mise.toml).
+# bin/setup can't install Ruby itself, as it needs Ruby to run. It reaches PostGIS on the port compose published.
+# GCC 12 and later reject the pinned prism gem's C, so that warning is kept a warning (see #2293).
+setup: services-up ## Install Ruby (with mise or rbenv) and gems, and prepare the database, to run Rails on the host
+	@export DB_HOST=localhost DB_PORT=$$(docker compose port postgres 5432 | sed 's/.*://'); \
+	if cc -v 2>&1 | grep -q '^gcc version'; then export CFLAGS="$${CFLAGS:-} -Wno-error=dangling-pointer"; fi; \
+	if command -v mise >/dev/null; then mise trust && mise install && mise exec -- bin/setup; \
+	elif command -v rbenv >/dev/null; then rbenv install --skip-existing && rbenv exec ruby bin/setup; \
+	else echo "Install mise (https://mise.jdx.dev) or rbenv first" >&2; exit 1; fi
 
 # The stack is defined in .devcontainer/compose.yaml (see "Getting a working environment" in AGENTS.md).
 # --wait returns once every service passes its healthcheck, so the next command can use them straight away.
