@@ -82,6 +82,13 @@ en:
   comments:
     create:
       not_filled_out: Some of the comment wasn't filled out completely. See below.
+    disabled:
+      page_title: "Commenting turned off"
+      heading: "Commenting is turned off for your account"
+      go_home: "Go to our home page"
+    disabled_explanation:
+      body: "Commenting has been turned off for your account, so you can't add new comments. Your existing comments have not been changed. If you have a question about this,"
+      contact_us: "please contact us"
   comment_mailer:
     notify_authority:
       subject: "Comment on application %{council_reference}"
@@ -99,6 +106,9 @@ en:
         subject: "PlanningAlerts: Activate your account"
   administrate:
     field_hints:
+      user:
+        comments_disabled: Stop this person from adding new comments, including publishing drafts they have already started. Their existing comments are not changed (hide those separately) and they still receive alert emails. They are not notified automatically.
+        comments_disabled_reason: For staff only. Never shown to the person.
       application:
         hidden: Hide this application from all public pages, search results, the API and email alerts. It is not deleted and can be unhidden at any time.
         hidden_reason: Published word-for-word on the public page for this application - anyone who visits can read it. Leave blank to show the default explanation ("It has been removed from public view.").

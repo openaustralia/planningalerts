@@ -164,6 +164,8 @@
           <% end %>
         </div>
       </div>
+    <% elsif current_user.comments_disabled %>
+      <%= render "comments/disabled_explanation" %>
     <% else %>
       <%= render "comments/form", application: @application, comment: @comment %>
     <% end %>

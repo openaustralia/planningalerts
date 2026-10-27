@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
   extend T::Sig
 
   before_action :authenticate_user!, only: %i[create preview update destroy publish personal]
+  before_action :refuse_if_comments_disabled, only: %i[create publish]
   # TODO: #2163 Add checks for all other actions on this controller
   after_action :verify_authorized, only: %i[preview update destroy publish]
 
@@ -118,6 +119,13 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  sig { void }
+  def refuse_if_comments_disabled
+    return unless current_user&.comments_disabled
+
+    render "comments/disabled", status: :forbidden
+  end
 
   sig { returns(ActionController::Parameters) }
   def comment_params

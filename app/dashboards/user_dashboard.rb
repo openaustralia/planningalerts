@@ -18,6 +18,8 @@ class UserDashboard < Administrate::BaseDashboard
     alerts: Field::HasMany,
     api_keys: Field::HasMany,
     comments: Field::HasMany,
+    comments_disabled: YesNoBooleanField,
+    comments_disabled_reason: Field::Text,
     confirmation_sent_at: Field::DateTime,
     confirmation_token: Field::String,
     confirmed_at: Field::DateTime,
@@ -86,16 +88,19 @@ class UserDashboard < Administrate::BaseDashboard
     activated_at
     from_alert_or_comment
     locked_at
+    comments_disabled
+    comments_disabled_reason
   ].freeze, T::Array[Symbol])
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = T.let(%i[
-    name
-    organisation
-    roles
-  ].freeze, T::Array[Symbol])
+  FORM_ATTRIBUTES = T.let(
+    {
+      "Details" => %i[name organisation roles],
+      "Moderate commenting" => %i[comments_disabled comments_disabled_reason]
+    }.freeze, T::Hash[String, T::Array[Symbol]]
+  )
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
