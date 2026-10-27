@@ -44,6 +44,11 @@ class CommentsController < ApplicationController
       return
     end
 
+    if application.comments_disabled?
+      render_comments_disabled(application)
+      return
+    end
+
     params_comment = T.cast(params[:comment], ActionController::Parameters)
 
     comment = Comment.new(
@@ -75,6 +80,9 @@ class CommentsController < ApplicationController
   def update
     comment = Comment.find(T.cast(params[:id], String))
     authorize(comment)
+    application = T.must(comment.application)
+    return render_comments_disabled(application) if application.comments_disabled?
+
     comment.update!(comment_params)
     redirect_to preview_comment_path(comment)
   end
@@ -109,6 +117,9 @@ class CommentsController < ApplicationController
   def publish
     comment = Comment.find(T.cast(params[:id], String))
     authorize(comment)
+    application = T.must(comment.application)
+    return render_comments_disabled(application) if application.comments_disabled?
+
     comment.update!(published: true, published_at: Time.current)
 
     comment.send_comment!
@@ -118,6 +129,12 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  sig { params(application: Application).void }
+  def render_comments_disabled(application)
+    @application = T.let(application, T.nilable(Application))
+    render "comments/disabled", status: :forbidden
+  end
 
   sig { returns(ActionController::Parameters) }
   def comment_params

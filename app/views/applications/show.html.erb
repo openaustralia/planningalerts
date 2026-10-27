@@ -150,7 +150,9 @@
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
     <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
 
-    <% if !@application.authority.email.present? %>
+    <% if @application.comments_disabled? %>
+      <p class="mt-6 text-xl text-navy"><%= t("comments.disabled_message") %></p>
+    <% elsif !@application.authority.email.present? %>
       <%# TODO: #2157 Need a proper design for this section %>
       <%= render "comments/no_authority_email_explanation", application: @application %>
     <% elsif current_user.nil? %>

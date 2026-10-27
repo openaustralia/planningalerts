@@ -25,6 +25,11 @@ FactoryBot.define do
       hidden_reason { "Contains personal information" }
     end
 
+    trait :comments_disabled do
+      comments_disabled { true }
+      comments_disabled_reason { "Dispute is no longer productive" }
+    end
+
     factory :application do
       date_received { nil }
       on_notice_from { nil }

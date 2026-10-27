@@ -761,6 +761,96 @@ class Application
     sig { void }
     def comment_email_will_change!; end
 
+    sig { returns(T::Boolean) }
+    def comments_disabled; end
+
+    sig { params(value: T::Boolean).returns(T::Boolean) }
+    def comments_disabled=(value); end
+
+    sig { returns(T::Boolean) }
+    def comments_disabled?; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def comments_disabled_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def comments_disabled_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def comments_disabled_came_from_user?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def comments_disabled_change; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def comments_disabled_change_to_be_saved; end
+
+    sig { params(from: T::Boolean, to: T::Boolean).returns(T::Boolean) }
+    def comments_disabled_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def comments_disabled_in_database; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def comments_disabled_previous_change; end
+
+    sig { params(from: T::Boolean, to: T::Boolean).returns(T::Boolean) }
+    def comments_disabled_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def comments_disabled_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def comments_disabled_reason; end
+
+    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
+    def comments_disabled_reason=(value); end
+
+    sig { returns(T::Boolean) }
+    def comments_disabled_reason?; end
+
+    sig { returns(T.nilable(::String)) }
+    def comments_disabled_reason_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def comments_disabled_reason_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def comments_disabled_reason_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def comments_disabled_reason_change; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def comments_disabled_reason_change_to_be_saved; end
+
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def comments_disabled_reason_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def comments_disabled_reason_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def comments_disabled_reason_previous_change; end
+
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def comments_disabled_reason_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def comments_disabled_reason_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def comments_disabled_reason_was; end
+
+    sig { void }
+    def comments_disabled_reason_will_change!; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def comments_disabled_was; end
+
+    sig { void }
+    def comments_disabled_will_change!; end
+
     sig { returns(::String) }
     def council_reference; end
 
@@ -1539,6 +1629,12 @@ class Application
     def restore_comment_email!; end
 
     sig { void }
+    def restore_comments_disabled!; end
+
+    sig { void }
+    def restore_comments_disabled_reason!; end
+
+    sig { void }
     def restore_council_reference!; end
 
     sig { void }
@@ -1621,6 +1717,18 @@ class Application
 
     sig { returns(T::Boolean) }
     def saved_change_to_comment_email?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def saved_change_to_comments_disabled; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_comments_disabled?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def saved_change_to_comments_disabled_reason; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_comments_disabled_reason?; end
 
     sig { returns(T.nilable([::String, ::String])) }
     def saved_change_to_council_reference; end
@@ -1888,6 +1996,12 @@ class Application
 
     sig { returns(T::Boolean) }
     def will_save_change_to_comment_email?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_comments_disabled?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_comments_disabled_reason?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_council_reference?; end

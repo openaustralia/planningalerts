@@ -18,6 +18,8 @@ class ApplicationDashboard < Administrate::BaseDashboard
     authority: Field::BelongsTo,
     comments: Field::HasMany,
     comment_authority: Field::Text,
+    comments_disabled: YesNoBooleanField,
+    comments_disabled_reason: Field::Text,
     comment_email: Field::Text,
     council_reference: Field::String,
     current_version: Field::HasOne,
@@ -72,6 +74,8 @@ class ApplicationDashboard < Administrate::BaseDashboard
     no_alerted
     hidden
     hidden_reason
+    comments_disabled
+    comments_disabled_reason
     comments
   ].freeze, T::Array[Symbol])
 
@@ -80,7 +84,8 @@ class ApplicationDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = T.let(
     {
-      "Moderate application" => %i[hidden hidden_reason]
+      "Moderate application" => %i[hidden hidden_reason],
+      "Moderate comments" => %i[comments_disabled comments_disabled_reason]
     }.freeze, T::Hash[String, T::Array[Symbol]]
   )
 
@@ -96,7 +101,8 @@ class ApplicationDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = T.let({
     visible: ->(resources) { resources.visible },
-    hidden: ->(resources) { resources.where(hidden: true) }
+    hidden: ->(resources) { resources.where(hidden: true) },
+    comments_disabled: ->(resources) { resources.where(comments_disabled: true) }
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # Overwrite this method to customize how applications are displayed

@@ -56,4 +56,54 @@ describe CommentsController do
       )
     end
   end
+
+  describe "when comments are disabled on the application" do
+    let(:application) { create(:geocoded_application, :comments_disabled) }
+    let(:user) { create(:confirmed_user) }
+    let(:comment_params) { { name: "Jane Ng", text: "Hello", address: "1 Foo St" } }
+
+    before do
+      sign_in user
+    end
+
+    describe "#create" do
+      it "rejects the comment and saves nothing" do
+        expect do
+          post :create, params: { application_id: application.id, comment: comment_params }
+        end.not_to change(Comment, :count)
+
+        expect(response).to have_http_status(:forbidden)
+      end
+
+      it "rejects an admin too" do
+        user.add_role(:admin)
+
+        expect do
+          post :create, params: { application_id: application.id, comment: comment_params }
+        end.not_to change(Comment, :count)
+
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+
+    describe "with an existing draft" do
+      let!(:draft) { create(:comment, application:, user:) }
+
+      it "does not update it" do
+        patch :update, params: { application_id: application.id, id: draft.id, comment: { text: "Changed" } }
+
+        expect(response).to have_http_status(:forbidden)
+        expect(draft.reload.text).to eq "a comment"
+      end
+
+      it "does not publish or send it" do
+        expect do
+          post :publish, params: { application_id: application.id, id: draft.id }
+        end.not_to(change { ActionMailer::Base.deliveries.count })
+
+        expect(response).to have_http_status(:forbidden)
+        expect(draft.reload).not_to be_published
+      end
+    end
+  end
 end

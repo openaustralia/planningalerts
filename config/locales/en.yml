@@ -80,6 +80,11 @@ en:
     search:
       full_text_search_not_enabled: "You do not have access to full text search. It is currently only available to some users. Contact us if you would like access"
   comments:
+    disabled_message: "Comments are closed on this application. Existing comments are still shown below."
+    disabled:
+      page_title: "Comments closed"
+      heading: "Comments are closed on this application"
+      back_to_application: "Back to the application"
     create:
       not_filled_out: Some of the comment wasn't filled out completely. See below.
   comment_mailer:
@@ -101,6 +106,8 @@ en:
     field_hints:
       application:
         hidden: Hide this application from all public pages, search results, the API and email alerts. It is not deleted and can be unhidden at any time.
+        comments_disabled: Stop new comments on this application. The application and its existing comments stay visible. Comments people have written but not yet published cannot be published while this is on. Applies to everyone, admins included. Can be turned off at any time.
+        comments_disabled_reason: Staff-only note about why comments are turned off. Never shown to the public, who see one fixed message.
         hidden_reason: Published word-for-word on the public page for this application - anyone who visits can read it. Leave blank to show the default explanation ("It has been removed from public view.").
       authority:
         email: Where comments on applications are to be sent

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_10_15_100000) do
+ActiveRecord::Schema[7.1].define(version: 2026_10_27_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -184,6 +184,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_10_15_100000) do
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.boolean "hidden", default: false, null: false
     t.text "hidden_reason"
+    t.boolean "comments_disabled", default: false, null: false
+    t.text "comments_disabled_reason"
     t.index ["authority_id", "council_reference"], name: "index_applications_on_authority_id_and_council_reference", unique: true
     t.index ["authority_id", "date_scraped"], name: "index_applications_on_authority_id_and_date_scraped"
     t.index ["authority_id", "first_date_scraped"], name: "index_applications_on_authority_id_and_first_date_scraped"
