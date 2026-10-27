@@ -29,7 +29,9 @@ jobs:
           --health-timeout 5s
           --health-retries 5
       redis:
-        image: redis
+        # Match production (ElastiCache in the infrastructure repo's
+        # terraform/planningalerts/databases.tf) and docker-compose.yml
+        image: redis:6.2
         ports:
           - 6379:6379
         # Set health checks to wait until redis has started
@@ -58,6 +60,11 @@ jobs:
         run: bin/rails db:create
       - name: Set up database schema
         run: bin/rails db:schema:load
+      - name: Check a Sidekiq worker boots and runs a job
+        run: |
+          rm -f /tmp/sidekiq-actually-ran
+          timeout 60 bin/sidekiq -q smoke -r ./spec/sidekiq_smoke.rb
+          test -f /tmp/sidekiq-actually-ran
       # Add or replace test runners here
       - name: Run tests
         run: npx percy exec -- bin/rake
