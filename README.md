@@ -35,11 +35,17 @@ make          # lists the other targets: status, logs, shell, down, clobber
 dependencies. `make clobber` also deletes the databases and prunes unused Docker images and build cache for every
 project on the machine.
 
+Without make, `docker compose up --build` does the same as `make up`, and VS Code and other dev container tools open
+the same stack.
+
+If you've used Docker here before, `docker volume rm planningalerts_gem_cache` frees the space the old gem volume
+used, and any `ports` block you added to `docker-compose.override.yml` can go, as `.env` now sets the ports.
+
 To run Rails on the host instead, for example for single-step debugging in an IDE, install
 [mise](https://mise.jdx.dev) (preferred) or rbenv, then run `make setup`. It starts everything except `web`, installs
 the Ruby in `.ruby-version` and the gems, and prepares the database. Then set `DB_HOST=localhost` and `DB_PORT=15432`
-(or your `POSTGRES_PORT`). This doesn't fully work yet, as Rails can't reach Redis or Elasticsearch from the host; see
-#2293.
+(or your `POSTGRES_PORT`), by hand or in a `.envrc` for direnv. This doesn't fully work yet, as Rails can't reach
+Redis or Elasticsearch from the host; see [#2293](https://github.com/openaustralia/planningalerts/issues/2293).
 
 ### Ports and multiple worktrees
 

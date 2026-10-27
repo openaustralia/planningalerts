@@ -6,6 +6,7 @@
 
 # Ignore docker compose overrides
 /compose.override.yaml
+/docker-compose.override.yml
 
 # Per-worktree port overrides for running multiple worktrees in parallel
 # (see "Developing or testing on multiple worktrees in parallel" in AGENTS.md)
