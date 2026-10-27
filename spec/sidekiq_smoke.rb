@@ -17,5 +17,7 @@ class SidekiqSmokeJob
 end
 
 Sidekiq.configure_server do |config|
+  # Show which queues are polled, which the initializer's WARN level hides
+  config.logger.level = Logger::INFO
   config.on(:startup) { SidekiqSmokeJob.set(queue: "smoke").perform_async }
 end
