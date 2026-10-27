@@ -45,6 +45,12 @@ describe "Browsing basic documentation pages" do
         visit about_path
       end
 
+      describe "accessibility test", :js do
+        it "passes" do
+          expect(page).to be_axe_clean
+        end
+      end
+
       it "says so instead of linking to an empty commit" do
         expect(page).to have_content "You are using version unknown of Planning Alerts"
         expect(page).to have_no_link href: "https://github.com/openaustralia/planningalerts/commit/"
