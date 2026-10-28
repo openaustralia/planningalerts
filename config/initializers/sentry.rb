@@ -6,8 +6,8 @@
 # docs/monitoring.md; change it there first, then update every copy.
 
 # Matches most email addresses. Used to scrub personal information from
-# breadcrumbs (e.g. log lines that mention a person's email address) in line
-# with the Australian Privacy Principles.
+# breadcrumbs and Sentry Logs (e.g. log lines that mention a person's email
+# address) in line with the Australian Privacy Principles.
 email_pattern = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/
 
 scrub_value = T.let(nil, T.untyped)
@@ -30,6 +30,12 @@ scrub_breadcrumbs = lambda do |event, _hint|
   event
 end
 
+scrub_log = lambda do |log|
+  log.body = scrub_value.call(log.body)
+  log.attributes = scrub_value.call(log.attributes)
+  log
+end
+
 Sentry.init do |config|
   # With no DSN the SDK is disabled - that is the off switch, so environments
   # that shouldn't report (local development and test) simply carry no DSN.
@@ -38,21 +44,38 @@ Sentry.init do |config|
   # SENTRY_ENVIRONMENT (.env.production on the servers).
   config.environment = ENV.fetch("SENTRY_ENVIRONMENT", Rails.env)
   config.breadcrumbs_logger = %i[active_support_logger http_logger]
-  # Include IP addresses, request headers and request parameters for
-  # debugging context. Sensitive fields are removed by Rails'
+  # Include user info, cookies, request headers, query parameters and bodies
+  # for debugging context. Sensitive fields are removed by Rails'
   # filter_parameters (see filter_parameter_logging.rb) and the breadcrumb
-  # scrubbing above.
-  config.send_default_pii = true
+  # and log scrubbing above.
+  config.data_collection.tap do |data|
+    data.user_info = true
+    data.cookies = true
+    data.http_headers.request = true
+    data.http_headers.response = true
+    data.url_query_params = true
+    data.http_bodies = %i[incoming_request outgoing_request incoming_response outgoing_response]
+    data.database_query_data = true
+    data.queues = true
+    data.graphql.document = true
+    data.graphql.variables = true
+    data.stack_frame_variables = false
+    data.frame_context_lines = 3
+  end
   config.before_send = scrub_breadcrumbs
   config.before_send_transaction = scrub_breadcrumbs
+  config.before_send_log = scrub_log
   config.traces_sample_rate = 0.1
   config.profiler_class = Sentry::Vernier::Profiler
   # Relative to traces_sample_rate - profile 1 in 10 sampled transactions
   config.profiles_sample_rate = 0.1
+  # Rails logs arrive via sentry-rails' structured logging. It is on by
+  # default in 7.0 but off in 7.1, so set it explicitly. The logger patch
+  # additionally forwards stdlib logging (Sidekiq's, and Rails.logger),
+  # limited to warnings and above so request lines don't flood Sentry.
+  config.rails.structured_logging.enabled = true
+  config.std_lib_logger_filter = ->(_logger, _message, level) { %i[warn error fatal].include?(level) }
   # sidekiq_cron auto-creates cron monitors from the jobs in config/cron.yml.
-  # logger additionally forwards non-Rails stdlib logging (e.g. Sidekiq's) -
-  # Rails logs already arrive via sentry-rails' structured logging, on by
-  # default since 7.0
   config.enabled_patches += %i[sidekiq_cron logger]
   # The auto-created cron monitors inherit these: how late a check-in can be
   # before Sentry counts it missed, and how long a job may run before it
