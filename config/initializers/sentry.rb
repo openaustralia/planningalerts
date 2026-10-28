@@ -6,8 +6,8 @@
 # docs/monitoring.md; change it there first, then update every copy.
 
 # Matches most email addresses. Used to scrub personal information from
-# breadcrumbs (e.g. log lines that mention a person's email address) in line
-# with the Australian Privacy Principles.
+# breadcrumbs and Sentry Logs (e.g. log lines that mention a person's email
+# address) in line with the Australian Privacy Principles.
 email_pattern = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/
 
 scrub_value = T.let(nil, T.untyped)
