@@ -30,7 +30,7 @@ jobs:
           --health-retries 5
       redis:
         # Match production (ElastiCache in the infrastructure repo's
-        # terraform/planningalerts/databases.tf) and docker-compose.yml
+        # terraform/planningalerts/databases.tf) and .devcontainer/compose.yaml
         image: redis:6.2.6
         ports:
           - 6379:6379
