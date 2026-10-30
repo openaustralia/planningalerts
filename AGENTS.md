@@ -130,7 +130,7 @@ Background details:
 
 ## Commands
 
-CI (`.github/workflows/rubyonrails.yml`) has four gates. Run these, and
+CI (`.github/workflows/rubyonrails.yml`) has five gates. Run these, and
 nothing less, before taking a pull request out of draft:
 
 ```sh
@@ -148,6 +148,14 @@ fails if that changes anything, since Sorbet/RuboCop/RSpec never touch
 
 ```sh
 cd maizzle && npm ci --ignore-scripts && npm run build && test -z "$(git -C .. status --porcelain)"
+```
+
+The fifth starts a real Sidekiq worker against the production Redis version
+and checks it runs a job, which the specs never do because they run jobs
+inline. A worker that never picks up the job fails at the 60 second timeout:
+
+```sh
+docker compose run web sh -c 'rm -f /tmp/sidekiq-actually-ran && timeout 60 bin/sidekiq -q smoke -r ./spec/sidekiq_smoke.rb && test -f /tmp/sidekiq-actually-ran'
 ```
 
 `bin/rake ci:all` looks like the obvious shortcut and is not. Its description
