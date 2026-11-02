@@ -66,7 +66,7 @@ describe "Comments disabled on an application" do
     expect(response).to have_http_status(:ok)
     expect(response.body).to include("Commenting is turned off for this application")
     expect(response.body).not_to include("Edit comment")
-    expect(response.body).not_to include(publish_application_comment_path(draft))
+    expect(response.body).not_to include(publish_application_comment_path(application, draft))
   end
 
   it "never shows the staff reason" do
