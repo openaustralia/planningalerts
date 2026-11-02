@@ -110,6 +110,9 @@ Rails.application.configure do
   # Allow access from github codespaces preview
   config.hosts << /.*\.preview\.app\.github\.dev/
 
+  # Allow access through ngrok tunnels
+  config.hosts << ".ngrok-free.dev"
+
   # This is to allow local access for Matthew (for previewing on mobile etc)
   config.hosts << "orpington.local"
 
