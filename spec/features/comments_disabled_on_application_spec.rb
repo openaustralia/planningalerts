@@ -22,6 +22,8 @@ describe "Comments disabled on an application" do
     visit application_path(application)
 
     expect(page).to have_content("Commenting is turned off for this application")
+    expect(page).to have_content("Existing comments have not been changed")
+    expect(page).to have_link("please contact us", href: documentation_contact_path)
     expect(page).to have_no_content("Add your own comment")
     expect(page).to have_no_field("Your comment")
   end
