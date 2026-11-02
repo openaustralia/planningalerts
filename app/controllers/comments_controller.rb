@@ -124,7 +124,8 @@ class CommentsController < ApplicationController
 
   sig { params(error: Pundit::NotAuthorizedError).void }
   def comment_not_authorized(error)
-    if current_user&.comments_disabled?
+    policy = error.policy
+    if policy.is_a?(CommentPolicy) && policy.refused_only_because_commenting_disabled?(error.query)
       render "comments/disabled", status: :forbidden
     else
       user_not_authorized(error)

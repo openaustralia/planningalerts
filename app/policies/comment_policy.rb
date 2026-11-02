@@ -45,7 +45,7 @@ class CommentPolicy < ApplicationPolicy
     own_unpublished? && may_comment?
   end
 
-  # Still allowed when commenting is disabled, so people can clear out a draft
+  # Not affected by disabled commenting: deleting a draft that can't be sent does no harm
   sig { returns(T::Boolean) }
   def destroy?
     own_unpublished?
@@ -54,6 +54,18 @@ class CommentPolicy < ApplicationPolicy
   sig { returns(T::Boolean) }
   def publish?
     own_unpublished? && may_comment?
+  end
+
+  # So the refusal can explain itself, rather than give the wrong reason
+  sig { params(query: T.any(String, Symbol)).returns(T::Boolean) }
+  def refused_only_because_commenting_disabled?(query)
+    return false unless user.comments_disabled?
+
+    case query.to_sym
+    when :create? then true
+    when :update?, :publish? then own_unpublished?
+    else false
+    end
   end
 
   class Scope < ApplicationPolicy::Scope

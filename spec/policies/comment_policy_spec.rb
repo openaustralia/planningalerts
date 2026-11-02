@@ -29,6 +29,18 @@ RSpec.describe CommentPolicy, type: :policy do
     end
   end
 
+  describe "#refused_only_because_commenting_disabled?" do
+    def refused?(user, comment, query)
+      described_class.new(user, comment).refused_only_because_commenting_disabled?(query)
+    end
+
+    it { expect(refused?(disabled_user, build_stubbed(:comment), :create?)).to be true }
+    it { expect(refused?(disabled_user, disabled_users_draft, "publish?")).to be true }
+    it { expect(refused?(disabled_user, someone_elses_draft, :publish?)).to be false }
+    it { expect(refused?(disabled_user, someone_elses_draft, :preview?)).to be false }
+    it { expect(refused?(user, build_stubbed(:comment), :create?)).to be false }
+  end
+
   context "when looking at or clearing a draft" do
     # Still allowed after commenting is disabled
     %i[preview? destroy?].each do |action|

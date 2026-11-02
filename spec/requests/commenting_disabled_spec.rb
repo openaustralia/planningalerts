@@ -34,6 +34,14 @@ describe "Commenting disabled for a person" do
     expect(draft.reload).not_to be_published
   end
 
+  it "gives the usual refusal when the reason is something else" do
+    someone_elses = create(:comment, application:)
+
+    get preview_comment_path(someone_elses)
+
+    expect(response).to have_http_status(:redirect)
+  end
+
   it "still lets them delete a draft" do
     patch application_comment_path(application, draft, clear: 1)
 
