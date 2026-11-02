@@ -59,6 +59,11 @@
       </div>
     </div>
   </dd>
+  <% if current_user&.has_role?(:admin) %>
+    <%# The label is for screen readers; visually the link sits under the labels, like the "Admin" link on comments %>
+    <dt class="sr-only">Admin</dt>
+    <dd class="mt-8 font-bold font-display md:mt-0"><%= pa_link_to "Admin", admin_application_path(@application) %></dd>
+  <% end %>
 </dl>
 
 <%# TODO: #2158 The icons next to the labels are not all the same size / proportion %>
