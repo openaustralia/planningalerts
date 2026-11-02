@@ -52,7 +52,7 @@ jobs:
       - run: npm install --save-dev @percy/cli
       # Add or replace dependency steps here
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1.331.0
+        uses: ruby/setup-ruby@v1.335.0
         with:
           bundler-cache: true
       # Add or replace database setup steps here
@@ -89,7 +89,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7.0.1
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1.331.0
+        uses: ruby/setup-ruby@v1.335.0
         with:
           bundler-cache: true
       - name: Create database
@@ -132,7 +132,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7.0.1
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1.331.0
+        uses: ruby/setup-ruby@v1.335.0
         with:
           bundler-cache: true
       - name: Create database
@@ -151,7 +151,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7.0.1
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1.331.0
+        uses: ruby/setup-ruby@v1.335.0
         with:
           bundler-cache: true
       - name: Lint rake task
