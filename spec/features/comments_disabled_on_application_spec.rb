@@ -28,13 +28,13 @@ describe "Comments disabled on an application" do
     expect(page).to have_no_field("Your comment")
   end
 
-  it "shows the application's message, not the person's own restriction, when both apply" do
+  it "shows the person's own restriction, not the application's message, when both apply" do
     sign_in(create(:confirmed_user, comments_disabled: true))
 
     visit application_path(application)
 
-    expect(page).to have_content("Commenting is turned off for this application")
-    expect(page).to have_no_content("Commenting is turned off for your account")
+    expect(page).to have_content("Commenting is turned off for your account")
+    expect(page).to have_no_content("Commenting is turned off for this application")
   end
 
   it "keeps existing comments visible" do

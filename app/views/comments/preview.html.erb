@@ -26,7 +26,7 @@
   <p class="text-xl font-bold text-navy">(Your address is automatically hidden when published on our website)</p>
 
   <% if @comment.application.comments_disabled? %>
-    <p class="mt-12 text-xl font-bold text-navy"><%= t("comments.disabled_on_application.heading") %></p>
+    <p class="mt-12 text-xl font-bold text-navy"><%= current_user&.comments_disabled? ? t("comments.disabled.heading") : t("comments.disabled_on_application.heading") %></p>
   <% else %>
     <div class="mt-12">
       <%= render ButtonComponent.new(tag: :a, size: "xl", type: :secondary, href: application_path(@comment.application, anchor: "add-comment"), icon: :edit).with_content("Edit comment") %>

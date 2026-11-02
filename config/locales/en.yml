@@ -87,9 +87,7 @@ en:
       heading: "Commenting is turned off for your account"
       go_home: "Go to our home page"
     disabled_on_application:
-      page_title: "Commenting turned off"
       heading: "Commenting is turned off for this application"
-      back_to_application: "Back to the application"
     disabled_explanation:
       body: "You can't add new comments. Your existing comments have not been changed. If you have a question about this,"
       contact_us: "please contact us"

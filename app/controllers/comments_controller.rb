@@ -5,8 +5,7 @@ class CommentsController < ApplicationController
   extend T::Sig
 
   before_action :authenticate_user!, only: %i[create preview update destroy publish personal]
-  # Explain the refusal; CommentPolicy enforces it either way. The application check comes first because it applies to everyone
-  before_action :require_comments_open, only: %i[create update publish]
+  # Explain the refusal; CommentPolicy enforces it either way
   before_action :require_commenting_enabled, only: %i[create update publish]
   # TODO: #2163 Add checks for all other actions on this controller
   after_action :verify_authorized, only: %i[create preview update destroy publish]
@@ -122,22 +121,6 @@ class CommentsController < ApplicationController
   end
 
   private
-
-  sig { void }
-  def require_comments_open
-    # Use the comment's own application when there is one, as CommentPolicy does, rather than trusting the URL.
-    # Only explain for the person's own comment; anyone else's gets the usual refusal, so nothing about it leaks
-    comment_id = T.cast(params[:id], T.nilable(String))
-    if comment_id
-      comment = Comment.find(comment_id)
-      return unless comment.user_id == current_user&.id
-
-      application = T.must(comment.application)
-    else
-      application = Application.find(T.cast(params[:application_id], String))
-    end
-    render "comments/disabled_on_application", status: :forbidden, locals: { application: } if application.comments_disabled?
-  end
 
   sig { void }
   def require_commenting_enabled
