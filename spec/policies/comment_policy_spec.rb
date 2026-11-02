@@ -29,6 +29,26 @@ RSpec.describe CommentPolicy, type: :policy do
     end
   end
 
+  context "when commenting is disabled on the application" do
+    let(:disabled_application) { build_stubbed(:application, :comments_disabled) }
+    let(:admin) { build_stubbed(:user).tap { |u| allow(u).to receive(:has_role?).and_return(true) } }
+    let(:draft_on_disabled) { build_stubbed(:comment, user:, application: disabled_application, published: false) }
+
+    # Includes drafts started before commenting was disabled, so nothing more is sent to the authority
+    %i[create? update? publish?].each do |action|
+      permissions action do
+        it { is_expected.not_to permit(user, draft_on_disabled) }
+        it { is_expected.not_to permit(admin, build_stubbed(:comment, user: admin, application: disabled_application, published: false)) }
+      end
+    end
+
+    %i[preview? destroy?].each do |action|
+      permissions action do
+        it { is_expected.to permit(user, draft_on_disabled) }
+      end
+    end
+  end
+
   context "when looking at or clearing a draft" do
     # Still allowed after commenting is disabled
     %i[preview? destroy?].each do |action|

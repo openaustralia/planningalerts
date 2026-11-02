@@ -150,7 +150,9 @@
   <%# TODO: #2158 Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
   <div class="hidden mt-24 sm:block text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
-    <% if !may_comment_on?(@application) %>
+    <% if @application.comments_disabled? %>
+      <%= render HeadingComponent.new(tag: :h2).with_content(t("comments.disabled_on_application.heading")) %>
+    <% elsif !may_comment_on?(@application) %>
       <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content(t("comments.disabled.heading")) %>
       <%= render "comments/disabled_explanation" %>
     <% elsif !@application.authority.email.present? %>

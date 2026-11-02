@@ -25,20 +25,24 @@
   </div>
   <p class="text-xl font-bold text-navy">(Your address is automatically hidden when published on our website)</p>
 
-  <div class="mt-12">
-    <%= render ButtonComponent.new(tag: :a, size: "xl", type: :secondary, href: application_path(@comment.application, anchor: "add-comment"), icon: :edit).with_content("Edit comment") %>
-  </div>
+  <% if @comment.application.comments_disabled? %>
+    <p class="mt-12 text-xl font-bold text-navy"><%= t("comments.disabled_on_application.heading") %></p>
+  <% else %>
+    <div class="mt-12">
+      <%= render ButtonComponent.new(tag: :a, size: "xl", type: :secondary, href: application_path(@comment.application, anchor: "add-comment"), icon: :edit).with_content("Edit comment") %>
+    </div>
 
-  <div class="mt-4">
-    <%= form_with(url: publish_application_comment_path(@comment)) do %>
-      <%= render ButtonWithSideTextComponent.new(tag: :button, size: "xl", type: :primary) do |c| %>
-        Publish
-        <% c.with_side_text do %>
-          and send to <%= @comment.comment_recipient_full_name %>
+    <div class="mt-4">
+      <%= form_with(url: publish_application_comment_path(@comment.application, @comment)) do %>
+        <%= render ButtonWithSideTextComponent.new(tag: :button, size: "xl", type: :primary) do |c| %>
+          Publish
+          <% c.with_side_text do %>
+            and send to <%= @comment.comment_recipient_full_name %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>
 
 <section class="pt-12 mt-12 border-t border-dashed border-cool-blue-gray">
