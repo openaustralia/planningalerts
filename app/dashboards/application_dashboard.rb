@@ -19,6 +19,8 @@ class ApplicationDashboard < Administrate::BaseDashboard
     comments: Field::HasMany,
     comment_authority: Field::Text,
     comment_email: Field::Text,
+    comments_disabled: YesNoBooleanField,
+    comments_disabled_reason: Field::Text,
     council_reference: Field::String,
     current_version: Field::HasOne,
     date_received: Field::Date,
@@ -72,6 +74,8 @@ class ApplicationDashboard < Administrate::BaseDashboard
     no_alerted
     hidden
     hidden_reason
+    comments_disabled
+    comments_disabled_reason
     comments
   ].freeze, T::Array[Symbol])
 
@@ -80,7 +84,7 @@ class ApplicationDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = T.let(
     {
-      "Moderate application" => %i[hidden hidden_reason]
+      "Moderate application" => %i[hidden hidden_reason comments_disabled comments_disabled_reason]
     }.freeze, T::Hash[String, T::Array[Symbol]]
   )
 

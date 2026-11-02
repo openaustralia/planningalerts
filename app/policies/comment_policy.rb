@@ -37,12 +37,12 @@ class CommentPolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def create?
-    may_comment?
+    may_comment? && comments_open?
   end
 
   sig { returns(T::Boolean) }
   def update?
-    own_unpublished? && may_comment?
+    own_unpublished? && may_comment? && comments_open?
   end
 
   # Not affected by disabled commenting: deleting a draft that can't be sent does no harm
@@ -53,7 +53,7 @@ class CommentPolicy < ApplicationPolicy
 
   sig { returns(T::Boolean) }
   def publish?
-    own_unpublished? && may_comment?
+    own_unpublished? && may_comment? && comments_open?
   end
 
   class Scope < ApplicationPolicy::Scope
@@ -74,5 +74,10 @@ class CommentPolicy < ApplicationPolicy
   sig { returns(T::Boolean) }
   def may_comment?
     !user.comments_disabled?
+  end
+
+  sig { returns(T::Boolean) }
+  def comments_open?
+    !comment.application&.comments_disabled?
   end
 end
