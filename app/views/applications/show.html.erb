@@ -91,16 +91,18 @@
     </div>
   </dt>
   <dd class="ml-10 md:py-1 md:border-t border-light-grey2 md:ml-0">
-    <%= render "applications/comments_text", comments: @comments %>
+    <%= render "applications/comments_text", comments: @comments, application: @application %>
   </dd>
 </dl>
 
-<div class="mt-6 sm:mt-12">
-  <%# TODO: #2158 This button currently has much larger left and right padding than the design %>
-  <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: "#add-comment", icon: :edit) do %>
-    Make a comment now
-  <% end %>
-</div>
+<% if may_comment_on?(@application) %>
+  <div class="mt-6 sm:mt-12">
+    <%# TODO: #2158 This button currently has much larger left and right padding than the design %>
+    <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: "#add-comment", icon: :edit) do %>
+      Make a comment now
+    <% end %>
+  </div>
+<% end %>
 
 <div class="mt-6 md:mt-2">
   <%= render ShareButtonComponent.new(url: application_url(@application), title: page_title(@application), color: :green) do %>
@@ -127,7 +129,7 @@
     <%= @comments.empty? ? "will be" : "were" %>
     sent to <strong><%= @application.comment_recipient_full_name %></strong>.
     <%# No need for shortcut link if there are no comments because that section is directly underneath %>
-    <% unless @comments.empty? %>
+    <% if may_comment_on?(@application) && @comments.any? %>
       <%= pa_link_to "Add your own comment", "#add-comment" %>.
     <% end %>
   </p>
@@ -148,12 +150,15 @@
   <%# TODO: #2158 Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
   <div class="hidden mt-24 sm:block text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
-    <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
-
-    <% if !@application.authority.email.present? %>
+    <% if !may_comment_on?(@application) %>
+      <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content(t("comments.disabled.heading")) %>
+      <%= render "comments/disabled_explanation" %>
+    <% elsif !@application.authority.email.present? %>
+      <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
       <%# TODO: #2157 Need a proper design for this section %>
       <%= render "comments/no_authority_email_explanation", application: @application %>
     <% elsif current_user.nil? %>
+      <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
       <div class="px-4 py-3 bg-light-grey">
         <div class="flex flex-col justify-center gap-4 py-12 sm:flex-row">
           <%= render ButtonComponent.new(tag: :a, size: "xl", type: :primary, href: new_user_registration_path) do %>
@@ -165,6 +170,7 @@
         </div>
       </div>
     <% else %>
+      <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
       <%= render "comments/form", application: @application, comment: @comment %>
     <% end %>
   </div>
