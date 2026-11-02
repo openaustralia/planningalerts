@@ -110,8 +110,11 @@ Rails.application.configure do
   # Allow access from github codespaces preview
   config.hosts << /.*\.preview\.app\.github\.dev/
 
-  # Allow access through ngrok tunnels
-  config.hosts << ".ngrok-free.dev"
+  # Extra hosts for this machine only, such as a tunnel. Set DEV_EXTRA_HOSTS in .env, never commit it.
+  # See "Sharing your development server" in README.md for what this exposes
+  config.hosts.concat(ENV.fetch("DEV_EXTRA_HOSTS", "").split(",").map(&:strip).reject(&:empty?))
+  # Whole hostnames that serve the API rather than the website, such as a tunnel's (see config/routes.rb)
+  config.x.dev_api_hosts = ENV.fetch("DEV_API_HOSTS", "").split(",").map(&:strip).reject(&:empty?)
 
   # This is to allow local access for Matthew (for previewing on mobile etc)
   config.hosts << "orpington.local"
