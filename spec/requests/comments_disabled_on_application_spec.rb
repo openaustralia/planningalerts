@@ -42,6 +42,15 @@ describe "Comments disabled on an application" do
     expect(response.body).to include("Commenting is turned off for this application")
   end
 
+  it "gives the usual refusal for someone else's draft, so it doesn't reveal which application the draft is on" do
+    someone_elses = create(:comment, application:)
+
+    post publish_application_comment_path(application, someone_elses)
+
+    expect(response).to have_http_status(:redirect)
+    expect(someone_elses.reload).not_to be_published
+  end
+
   it "explains commenting is turned off for the application, rather than the person's own restriction, when both apply" do
     user.update!(comments_disabled: true)
 
