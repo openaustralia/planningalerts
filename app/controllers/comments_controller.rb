@@ -125,13 +125,17 @@ class CommentsController < ApplicationController
 
   sig { void }
   def require_comments_open
-    # Use the comment's own application when there is one, as CommentPolicy does, rather than trusting the URL
+    # Use the comment's own application when there is one, as CommentPolicy does, rather than trusting the URL.
+    # Only explain for the person's own comment; anyone else's gets the usual refusal, so nothing about it leaks
     comment_id = T.cast(params[:id], T.nilable(String))
-    application = if comment_id
-                    T.must(Comment.find(comment_id).application)
-                  else
-                    Application.find(T.cast(params[:application_id], String))
-                  end
+    if comment_id
+      comment = Comment.find(comment_id)
+      return unless comment.user_id == current_user&.id
+
+      application = T.must(comment.application)
+    else
+      application = Application.find(T.cast(params[:application_id], String))
+    end
     render "comments/disabled_on_application", status: :forbidden, locals: { application: } if application.comments_disabled?
   end
 
