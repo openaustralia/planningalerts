@@ -6,7 +6,9 @@ class CommentsController < ApplicationController
 
   before_action :authenticate_user!, only: %i[create preview update destroy publish personal]
   # TODO: #2163 Add checks for all other actions on this controller
-  after_action :verify_authorized, only: %i[preview update destroy publish]
+  after_action :verify_authorized, only: %i[create preview update destroy publish]
+
+  rescue_from Pundit::NotAuthorizedError, with: :comment_not_authorized
 
   layout "profile", only: :personal
 
@@ -39,11 +41,6 @@ class CommentsController < ApplicationController
     application = Application.find(T.cast(params[:application_id], String))
     @application = T.let(application, T.nilable(Application))
 
-    if application.hidden? && !current_user&.has_role?(:admin)
-      render "applications/hidden", status: :forbidden
-      return
-    end
-
     params_comment = T.cast(params[:comment], ActionController::Parameters)
 
     comment = Comment.new(
@@ -55,6 +52,12 @@ class CommentsController < ApplicationController
     )
     comment.published = false
     @comment = T.let(comment, T.nilable(Comment))
+    authorize(comment)
+
+    if application.hidden? && !current_user&.has_role?(:admin)
+      render "applications/hidden", status: :forbidden
+      return
+    end
 
     if comment.save
       redirect_to preview_comment_path(comment)
@@ -118,6 +121,15 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  sig { params(error: Pundit::NotAuthorizedError).void }
+  def comment_not_authorized(error)
+    if current_user&.comments_disabled?
+      render "comments/disabled", status: :forbidden
+    else
+      user_not_authorized(error)
+    end
+  end
 
   sig { returns(ActionController::Parameters) }
   def comment_params

@@ -36,21 +36,24 @@ class CommentPolicy < ApplicationPolicy
   end
 
   sig { returns(T::Boolean) }
-  def update?
-    # Can only edit your own comments that have not yet been published
-    comment.user_id == user.id && !comment.published
+  def create?
+    may_comment?
   end
 
   sig { returns(T::Boolean) }
+  def update?
+    own_unpublished? && may_comment?
+  end
+
+  # Still allowed when commenting is disabled, so people can clear out a draft
+  sig { returns(T::Boolean) }
   def destroy?
-    # Can only destroy your own comments that have not yet been published
-    comment.user_id == user.id && !comment.published
+    own_unpublished?
   end
 
   sig { returns(T::Boolean) }
   def publish?
-    # Can only publish your own comments that have not yet been published
-    comment.user_id == user.id && !comment.published
+    own_unpublished? && may_comment?
   end
 
   class Scope < ApplicationPolicy::Scope
@@ -59,5 +62,17 @@ class CommentPolicy < ApplicationPolicy
     def resolve
       scope.published
     end
+  end
+
+  private
+
+  sig { returns(T::Boolean) }
+  def own_unpublished?
+    comment.user_id == user.id && !comment.published
+  end
+
+  sig { returns(T::Boolean) }
+  def may_comment?
+    !user.comments_disabled?
   end
 end

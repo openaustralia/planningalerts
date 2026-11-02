@@ -1,5 +1,9 @@
 <% if comments.count == 0 %>
-  <%= pa_link_to "Be the first to comment", "#add-comment" %>
+  <% if may_comment_on?(application) %>
+    <%= pa_link_to "Be the first to comment", "#add-comment" %>
+  <% else %>
+    No comments yet
+  <% end %>
 <% else %>
   <%= pa_link_to pluralize(comments.count, "comment"), "#comments" %>
   made here on Planning Alerts
