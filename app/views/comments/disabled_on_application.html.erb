@@ -9,7 +9,11 @@
     <%= image_tag "illustration/no_results.svg", alt: "" %>
   <% end %>
 
-  <p class="text-xl text-navy">
-    <%= pa_link_to t(".back_to_application"), application_path(application) %>
-  </p>
+  <div class="text-xl text-navy">
+    <%= render "comments/disabled_on_application_explanation" %>
+
+    <p class="mt-8">
+      <%= pa_link_to t(".back_to_application"), application_path(application) %>
+    </p>
+  </div>
 <% end %>

@@ -18,6 +18,7 @@ describe "Comments disabled on an application" do
 
     expect(response).to have_http_status(:forbidden)
     expect(response.body).to include("Commenting is turned off for this application")
+    expect(response.body).to include("Existing comments have not been changed")
   end
 
   it "refuses to update a draft made before comments were disabled" do

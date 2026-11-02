@@ -156,7 +156,8 @@
   <div class="hidden mt-24 sm:block text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
     <% if @application.comments_disabled? %>
-      <%= render HeadingComponent.new(tag: :h2).with_content(t("comments.disabled_on_application.heading")) %>
+      <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content(t("comments.disabled_on_application.heading")) %>
+      <%= render "comments/disabled_on_application_explanation" %>
     <% elsif !may_comment_on?(@application) %>
       <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content(t("comments.disabled.heading")) %>
       <%= render "comments/disabled_explanation" %>
