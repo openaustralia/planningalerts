@@ -258,10 +258,10 @@ class RedisClient::CircuitBreaker
 
   private
 
-  # source://redis-client//lib/redis_client/circuit_breaker.rb#80
+  # source://redis-client//lib/redis_client/circuit_breaker.rb#82
   def record_error; end
 
-  # source://redis-client//lib/redis_client/circuit_breaker.rb#95
+  # source://redis-client//lib/redis_client/circuit_breaker.rb#97
   def record_success; end
 
   # source://redis-client//lib/redis_client/circuit_breaker.rb#65
@@ -581,13 +581,13 @@ module RedisClient::ConnectionMixin
   # source://redis-client//lib/redis_client/connection_mixin.rb#6
   def config; end
 
-  # source://redis-client//lib/redis_client/connection_mixin.rb#102
+  # source://redis-client//lib/redis_client/connection_mixin.rb#103
   def connection_error(message); end
 
-  # source://redis-client//lib/redis_client/connection_mixin.rb#87
+  # source://redis-client//lib/redis_client/connection_mixin.rb#88
   def connection_timeout(timeout); end
 
-  # source://redis-client//lib/redis_client/connection_mixin.rb#96
+  # source://redis-client//lib/redis_client/connection_mixin.rb#97
   def protocol_error(message); end
 
   # source://redis-client//lib/redis_client/connection_mixin.rb#15
@@ -1003,149 +1003,131 @@ end
 module RedisClient::RESP3
   private
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#36
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#21
   def dump(command, buffer = T.unsafe(nil)); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#57
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#42
   def dump_any(object, buffer); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#68
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#53
   def dump_array(array, buffer); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#84
-  def dump_hash(hash, buffer); end
-
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#93
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#61
   def dump_numeric(numeric, buffer); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#76
-  def dump_set(set, buffer); end
-
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#97
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#65
   def dump_string(string, buffer); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#103
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#71
   def dump_symbol(symbol, buffer); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#49
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#34
   def load(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#53
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#38
   def new_buffer; end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#112
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#80
   def parse(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#166
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#136
   def parse_array(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#218
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#184
   def parse_blob(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#155
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#125
   def parse_boolean(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#200
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#166
   def parse_double(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#151
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#121
   def parse_error(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#196
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#162
   def parse_integer(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#174
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#144
   def parse_map(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#213
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#179
   def parse_null(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#182
-  def parse_push(io); end
-
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#186
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#152
   def parse_sequence(io, size); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#170
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#140
   def parse_set(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#145
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#115
   def parse_string(io); end
 
-  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#227
+  # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#193
   def parse_verbatim_string(io); end
 
   class << self
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#36
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#21
     def dump(command, buffer = T.unsafe(nil)); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#57
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#42
     def dump_any(object, buffer); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#68
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#53
     def dump_array(array, buffer); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#84
-    def dump_hash(hash, buffer); end
-
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#93
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#61
     def dump_numeric(numeric, buffer); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#76
-    def dump_set(set, buffer); end
-
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#97
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#65
     def dump_string(string, buffer); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#103
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#71
     def dump_symbol(symbol, buffer); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#49
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#34
     def load(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#53
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#38
     def new_buffer; end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#112
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#80
     def parse(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#166
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#136
     def parse_array(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#218
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#184
     def parse_blob(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#155
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#125
     def parse_boolean(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#200
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#166
     def parse_double(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#151
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#121
     def parse_error(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#196
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#162
     def parse_integer(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#174
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#144
     def parse_map(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#213
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#179
     def parse_null(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#182
-    def parse_push(io); end
-
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#186
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#152
     def parse_sequence(io, size); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#170
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#140
     def parse_set(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#145
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#115
     def parse_string(io); end
 
-    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#227
+    # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#193
     def parse_verbatim_string(io); end
   end
 end
@@ -1162,11 +1144,8 @@ RedisClient::RESP3::EOL_SIZE = T.let(T.unsafe(nil), Integer)
 # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#7
 class RedisClient::RESP3::Error < ::RedisClient::Error; end
 
-# source://redis-client//lib/redis_client/ruby_connection/resp3.rb#34
-RedisClient::RESP3::INTEGER_RANGE = T.let(T.unsafe(nil), Range)
-
 # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#19
-RedisClient::RESP3::PARSER_TYPES = T.let(T.unsafe(nil), Hash)
+RedisClient::RESP3::INTEGER_RANGE = T.let(T.unsafe(nil), Range)
 
 # source://redis-client//lib/redis_client/ruby_connection/resp3.rb#9
 class RedisClient::RESP3::SyntaxError < ::RedisClient::RESP3::Error; end
@@ -1208,43 +1187,43 @@ class RedisClient::RubyConnection
 
   # @return [RubyConnection] a new instance of RubyConnection
   #
-  # source://redis-client//lib/redis_client/ruby_connection.rb#43
+  # source://redis-client//lib/redis_client/ruby_connection.rb#37
   def initialize(config, connect_timeout:, read_timeout:, write_timeout:); end
 
-  # source://redis-client//lib/redis_client/ruby_connection.rb#55
+  # source://redis-client//lib/redis_client/ruby_connection.rb#49
   def close; end
 
   # @return [Boolean]
   #
-  # source://redis-client//lib/redis_client/ruby_connection.rb#51
+  # source://redis-client//lib/redis_client/ruby_connection.rb#45
   def connected?; end
 
-  # source://redis-client//lib/redis_client/ruby_connection.rb#107
+  # source://redis-client//lib/redis_client/ruby_connection.rb#101
   def measure_round_trip_delay; end
 
-  # source://redis-client//lib/redis_client/ruby_connection.rb#95
+  # source://redis-client//lib/redis_client/ruby_connection.rb#89
   def read(timeout = T.unsafe(nil)); end
 
-  # source://redis-client//lib/redis_client/ruby_connection.rb#60
+  # source://redis-client//lib/redis_client/ruby_connection.rb#54
   def read_timeout=(timeout); end
 
-  # source://redis-client//lib/redis_client/ruby_connection.rb#70
+  # source://redis-client//lib/redis_client/ruby_connection.rb#64
   def write(command); end
 
-  # source://redis-client//lib/redis_client/ruby_connection.rb#83
+  # source://redis-client//lib/redis_client/ruby_connection.rb#77
   def write_multi(commands); end
 
-  # source://redis-client//lib/redis_client/ruby_connection.rb#65
+  # source://redis-client//lib/redis_client/ruby_connection.rb#59
   def write_timeout=(timeout); end
 
   private
 
-  # source://redis-client//lib/redis_client/ruby_connection.rb#115
+  # source://redis-client//lib/redis_client/ruby_connection.rb#109
   def connect; end
 
   # unknown
   #
-  # source://redis-client//lib/redis_client/ruby_connection.rb#172
+  # source://redis-client//lib/redis_client/ruby_connection.rb#167
   def enable_socket_keep_alive(socket); end
 
   class << self
@@ -1341,18 +1320,18 @@ RedisClient::RubyConnection::BufferedIO::EOL_SIZE = T.let(T.unsafe(nil), Integer
 
 # Same as hiredis defaults
 #
-# source://redis-client//lib/redis_client/ruby_connection.rb#164
+# source://redis-client//lib/redis_client/ruby_connection.rb#159
 RedisClient::RubyConnection::KEEP_ALIVE_INTERVAL = T.let(T.unsafe(nil), Integer)
 
-# source://redis-client//lib/redis_client/ruby_connection.rb#166
+# source://redis-client//lib/redis_client/ruby_connection.rb#161
 RedisClient::RubyConnection::KEEP_ALIVE_PROBES = T.let(T.unsafe(nil), Integer)
 
 # Longer than hiredis defaults
 #
-# source://redis-client//lib/redis_client/ruby_connection.rb#165
+# source://redis-client//lib/redis_client/ruby_connection.rb#160
 RedisClient::RubyConnection::KEEP_ALIVE_TTL = T.let(T.unsafe(nil), Integer)
 
-# source://redis-client//lib/redis_client/ruby_connection.rb#41
+# source://redis-client//lib/redis_client/ruby_connection.rb#35
 RedisClient::RubyConnection::SUPPORTS_RESOLV_TIMEOUT = T.let(T.unsafe(nil), TrueClass)
 
 # source://redis-client//lib/redis_client/sentinel_config.rb#4
