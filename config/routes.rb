@@ -6,9 +6,21 @@
 class ApiHostConstraint
   SUBDOMAINS = %w[api api-idle].freeze
 
+  # Also any whole hostname in config.x.dev_api_hosts, which only
+  # development sets, so a tunnel's hostname can serve the API
+  def self.api_host?(host)
+    subdomain = ActionDispatch::Http::URL.extract_subdomain(host, ActionDispatch::Http::URL.tld_length)
+    SUBDOMAINS.include?(subdomain) || Array(Rails.configuration.x.dev_api_hosts).include?(host)
+  end
+
+  # For `constraints: { host: ApiHostConstraint }`, which compares with ===. Unlike
+  # a constraint object, that still applies to routes with constraints of their own
+  def self.===(host)
+    api_host?(host)
+  end
+
   def matches?(request)
-    SUBDOMAINS.include?(request.subdomain) &&
-      !request.get_header("action_dispatch.exception")
+    self.class.api_host?(request.host) && !request.get_header("action_dispatch.exception")
   end
 end
 
@@ -29,7 +41,7 @@ Rails.application.routes.draw do
   health_check_routes
 
   # Route API separately, only on API hostnames, and first so they can 404 everything after it
-  scope format: true, constraints: { subdomain: ApiHostConstraint::SUBDOMAINS } do
+  scope format: true, constraints: { host: ApiHostConstraint } do
     get "authorities" => "api#authorities", as: nil
     get "authorities/:authority_id/applications" => "api#authority", as: nil
     get "applications" => "api#suburb_postcode", as: nil,

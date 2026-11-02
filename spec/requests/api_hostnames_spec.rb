@@ -99,6 +99,35 @@ describe "API hostnames" do
     end
   end
 
+  # Set from DEV_API_HOSTS in development, so a tunnel's hostname can serve the API
+  describe "on a hostname listed as an extra API host" do
+    around do |example|
+      Rails.configuration.x.dev_api_hosts = ["ian-api.ngrok-free.dev"]
+      example.run
+    ensure
+      Rails.configuration.x.dev_api_hosts = nil
+    end
+
+    it "serves the API" do
+      host! "ian-api.ngrok-free.dev"
+      get "/authorities.json", params: { key: key.value }
+      expect(response).to have_http_status(:ok)
+      expect(response.media_type).to eq "application/json"
+    end
+
+    it "returns a plain 404 for website pages" do
+      host! "ian-api.ngrok-free.dev"
+      get "/faq"
+      expect(response.body).to eq "Not found\n"
+    end
+
+    it "still serves the website on other hostnames" do
+      host! "www.pa.org.localhost"
+      get "/authorities.json", params: { key: key.value }
+      expect(response.body).to eq "Not found\n"
+    end
+  end
+
   # The load balancer's health checks address each server by its IP address
   %w[api.planningalerts.org.au www.planningalerts.org.au 10.0.0.1].each do |hostname|
     it "answers health checks on #{hostname}" do

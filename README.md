@@ -91,6 +91,29 @@ for example), add them to `/etc/hosts`:
 127.0.0.1 api.pa.org.localhost api-idle.pa.org.localhost www.pa.org.localhost
 ```
 
+### Sharing your development server
+
+To open your development server from a phone or another machine, through a tunnel such as
+[ngrok](https://ngrok.com/), list its hostname in `DEV_EXTRA_HOSTS` in `.env`, then restart with `make down && make up`.
+A leading dot allows every subdomain, which suits tunnels that change name each time, and commas separate several:
+
+```
+DEV_EXTRA_HOSTS=.ngrok-free.dev
+```
+
+Without it, Rails shows a "Blocked hosts" page. Anyone who finds the tunnel's address can reach your server, so before
+you share it remember that they can sign in with the seeded `admin@example.com` login, see full error pages, and see
+any production data you have loaded. Stop the tunnel when you're done.
+
+To serve the API through a tunnel, give it a second hostname and list that in `DEV_API_HOSTS` too. It then behaves
+like the [API hostnames](#accessing-the-api-in-development), serving the API and nothing else:
+
+```
+DEV_API_HOSTS=yourname-api.ngrok-free.dev
+```
+
+Over a tunnel, links in emails still point at `localhost`.
+
 ### Run The Tests
 
 `make test`, `make lint` and `make typecheck` run the same checks as CI. `make test ARGS=spec/models/alert_spec.rb`
