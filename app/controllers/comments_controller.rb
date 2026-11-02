@@ -5,10 +5,10 @@ class CommentsController < ApplicationController
   extend T::Sig
 
   before_action :authenticate_user!, only: %i[create preview update destroy publish personal]
+  # Explains the refusal; CommentPolicy enforces it either way
+  before_action :require_commenting_enabled, only: %i[create update publish]
   # TODO: #2163 Add checks for all other actions on this controller
   after_action :verify_authorized, only: %i[create preview update destroy publish]
-
-  rescue_from Pundit::NotAuthorizedError, with: :comment_not_authorized
 
   layout "profile", only: :personal
 
@@ -122,14 +122,9 @@ class CommentsController < ApplicationController
 
   private
 
-  sig { params(error: Pundit::NotAuthorizedError).void }
-  def comment_not_authorized(error)
-    policy = error.policy
-    if policy.is_a?(CommentPolicy) && policy.refused_only_because_commenting_disabled?(error.query)
-      render "comments/disabled", status: :forbidden
-    else
-      user_not_authorized(error)
-    end
+  sig { void }
+  def require_commenting_enabled
+    render "comments/disabled", status: :forbidden if current_user&.comments_disabled?
   end
 
   sig { returns(ActionController::Parameters) }

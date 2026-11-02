@@ -13,8 +13,7 @@ module ApplicationsHelper
   # Signed-out people are invited to sign in, so they count as able to comment
   sig { params(application: Application).returns(T::Boolean) }
   def may_comment_on?(application)
-    user = current_user
-    user.nil? || CommentPolicy.new(user, Comment.new(application:)).create?
+    current_user.nil? || policy(Comment.new(application:)).create?
   end
 
   sig { params(application: Application).returns(String) }

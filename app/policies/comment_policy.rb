@@ -56,18 +56,6 @@ class CommentPolicy < ApplicationPolicy
     own_unpublished? && may_comment?
   end
 
-  # So the refusal can explain itself, rather than give the wrong reason
-  sig { params(query: T.any(String, Symbol)).returns(T::Boolean) }
-  def refused_only_because_commenting_disabled?(query)
-    return false unless user.comments_disabled?
-
-    case query.to_sym
-    when :create? then true
-    when :update?, :publish? then own_unpublished?
-    else false
-    end
-  end
-
   class Scope < ApplicationPolicy::Scope
     # TODO: #2163 Is this for public or your own comments?
     sig { returns(ActiveRecord::Relation) }
