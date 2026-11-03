@@ -13,7 +13,7 @@ help: ## Show this help (the default target)
 # Then it checks the Sentry CLI that deploys use to record releases: sentry, or sentry-cli (v3) as a fallback
 # (lib/capistrano/tasks/sentry.rake). It's installed once per machine, not per project, so it isn't in mise.toml.
 # Logging in fails inside this repo, where .sentryclirc's EU url sends it to the wrong host, so it's done from ~.
-setup: services-up ## Install Ruby (with mise or rbenv) and gems, and prepare the database, to run Rails on the host
+setup: services-up ## Install Ruby (with mise or rbenv), gems and the database to run Rails on the host, and check the Sentry CLI for deploys
 	@export DB_HOST=localhost DB_PORT=$$(docker compose port postgres 5432 | sed 's/.*://'); \
 	if cc -v 2>&1 | grep -q '^gcc version'; then export CFLAGS="$${CFLAGS:-} -Wno-error=dangling-pointer"; fi; \
 	if command -v mise >/dev/null; then mise trust && mise install && mise exec -- bin/setup; \
@@ -24,10 +24,9 @@ setup: services-up ## Install Ruby (with mise or rbenv) and gems, and prepare th
 	  echo "WARNING: the Sentry CLI (sentry-cli) is not logged in, so deploys won't be recorded in Sentry." >&2; \
 	  echo "Log in once, from outside this repo: cd ~ && sentry-cli login" >&2; \
 	elif ! command -v sentry >/dev/null; then \
-	  echo "WARNING: the Sentry CLI (sentry) is not installed, so deploys won't be recorded in Sentry." >&2; \
-	  echo "Install it once for every project with:" >&2; \
-	  echo '  mise use -g "github:getsentry/toolkit[version_prefix=cli@,bin=sentry]@latest"' >&2; \
-	  echo "or without mise, as described under \"Monitoring\" in the infrastructure repo's docs/monitoring.md." >&2; \
+	  echo "WARNING: the Sentry CLI (sentry-cli) is not installed, so deploys won't be recorded in Sentry." >&2; \
+	  echo "Install it from https://docs.sentry.io/cli/installation/" >&2; \
+	  echo "then log in once, from outside this repo: cd ~ && sentry-cli login" >&2; \
 	else \
 	  echo "WARNING: the Sentry CLI is not logged in, so deploys won't be recorded in Sentry." >&2; \
 	  echo "Log in once, from outside this repo: cd ~ && sentry auth" >&2; \

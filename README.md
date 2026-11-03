@@ -219,21 +219,19 @@ bundle exec cap --tasks
 
 Deploys automatically record a release and deploy in Sentry (org `oaf-org-au`, project `planning-alerts`) so issues can be tied to the deploy that introduced them. This runs via a Capistrano hook using the Sentry CLI on your machine (part of [#2049](https://github.com/openaustralia/planningalerts/issues/2049)).
 
-The hook supports both CLI v4 (binary `sentry`) and the legacy v3 (binary `sentry-cli`), preferring v4 when both are installed. See the [v4 migration guide](https://cli.sentry.dev/migrating-from-v3/).
+The hook supports the v3 CLI (binary `sentry-cli`) and the newer v4 (binary `sentry`), preferring v4 when both are installed and logged in. `make setup` warns if neither is ready.
 
-One-time setup per deployer machine (v4, recommended):
+One-time setup per deployer machine, with v3, which is known to work end to end:
 
-1. Install the CLI: `brew install getsentry/tools/sentry` on macOS, or `curl https://cli.sentry.dev/install -fsS | bash` on Linux
-2. Authenticate: run `sentry auth login` — it opens Sentry in a browser to authenticate (the token needs the `project:releases` and `org:read` scopes)
-3. Verify: `sentry auth status` should report access to the OpenAustralia Foundation (`oaf-org-au`) org
+1. Install it from <https://docs.sentry.io/cli/installation/>
+2. Log in from outside this repo: `cd ~ && sentry-cli login`. Inside the repo, the `url` in `.sentryclirc` sends the login to the wrong place ([infrastructure#880](https://gitlab.com/openaustralia/infrastructure/-/work_items/880)).
+3. Verify: `sentry-cli info` should show the `oaf-org-au` organisation. It also warns that it's using `https://sentry.io` rather than the url in `.sentryclirc`, which is expected.
 
-If you still have v3 (`sentry-cli`), it keeps working: authenticate with `sentry-cli login` and verify with `sentry-cli info`.
+v4 has the same login problem, so log in with `cd ~ && sentry auth`, and check with `sentry auth status` rather than `sentry info`, which exits non-zero even when your login is fine ([#2183](https://github.com/openaustralia/planningalerts/issues/2183)). With a v4 browser login, creating the release has been refused with 403 Forbidden, which is still being looked into in infrastructure#880.
 
-Don't verify v4 with `sentry info`. It exits non-zero whenever no default org/project is set, even when your token is fine, so it isn't a usable check for whether the hook will run ([#2183](https://github.com/openaustralia/planningalerts/issues/2183)).
+The repo's committed `.sentryclirc` holds the org and project. Both CLIs read it, and the deploy hook also reads the values out of it and passes them on the command line, so the one committed file stays authoritative.
 
-The repo's committed `.sentryclirc` holds the org and project. v3 reads that file directly. v4 ignores it, so the deploy hook reads the values out of it and passes them on the command line, which keeps the one committed file authoritative for both. If you want v4 to pick the file up for your own ad hoc commands, run `sentry cli import`.
-
-Credentials are separate from that file and must never be committed. v3 reads your token from `~/.sentryclirc`; v4 stores its own credentials when you run `sentry auth login`.
+Credentials are separate from that file and must never be committed. v3 keeps your token in `~/.sentryclirc` in your home directory; v4 keeps its login in `~/.config/sentry/cli.db`.
 
 If the Sentry CLI is missing or unauthenticated the deploy still succeeds — the hook prints a warning and skips recording the release, so set it up before your next production deploy.
 
