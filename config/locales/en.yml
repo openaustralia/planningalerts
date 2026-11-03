@@ -86,8 +86,13 @@ en:
       page_title: "Commenting turned off"
       heading: "Commenting is turned off for your account"
       go_home: "Go to our home page"
+    disabled_on_application:
+      heading: "Commenting is turned off for this application"
     disabled_explanation:
       body: "You can't add new comments. Your existing comments have not been changed. If you have a question about this,"
+      contact_us: "please contact us"
+    disabled_on_application_explanation:
+      body: "No one can add new comments on this application. Existing comments have not been changed. If you have a question about this,"
       contact_us: "please contact us"
   comment_mailer:
     notify_authority:
@@ -110,6 +115,8 @@ en:
         comments_disabled: Stop this person from adding new comments, including publishing drafts they have already started. Their existing comments are not changed (hide those separately) and they still receive alert emails. They are not notified automatically.
         comments_disabled_reason: For staff only. Never shown to the person.
       application:
+        comments_disabled: Stop new comments on this application, for everyone including admins. The application and its existing comments stay visible, and people see "Commenting is turned off for this application". Drafts already started can't be published, so nothing more is sent to the authority. Can be turned back on at any time.
+        comments_disabled_reason: For staff only. Never shown to the public, unlike the hidden reason.
         hidden: Hide this application from all public pages, search results, the API and email alerts. It is not deleted and can be unhidden at any time.
         hidden_reason: Published word-for-word on the public page for this application - anyone who visits can read it. Leave blank to show the default explanation ("It has been removed from public view.").
       authority:

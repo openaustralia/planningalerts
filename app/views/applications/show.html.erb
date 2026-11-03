@@ -59,6 +59,11 @@
       </div>
     </div>
   </dd>
+  <% if current_user&.has_role?(:admin) %>
+    <%# The label is for screen readers; visually the link sits under the labels, like the "Admin" link on comments %>
+    <dt class="sr-only">Admin</dt>
+    <dd class="mt-8 font-bold font-display md:mt-0"><%= pa_link_to "Admin", admin_application_path(@application) %></dd>
+  <% end %>
 </dl>
 
 <%# TODO: #2158 The icons next to the labels are not all the same size / proportion %>
@@ -150,9 +155,12 @@
   <%# TODO: #2158 Maybe instead of heading the quotation mark we move it just above the text area on narrow screens? Then it's more consistent with others %>
   <div class="hidden mt-24 sm:block text-navy text-7xl">”</div>
   <div class="pt-10 border-t border-dashed border-warm-grey grow">
-    <% if !may_comment_on?(@application) %>
+    <% if current_user&.comments_disabled? %>
       <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content(t("comments.disabled.heading")) %>
       <%= render "comments/disabled_explanation" %>
+    <% elsif @application.comments_disabled? %>
+      <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content(t("comments.disabled_on_application.heading")) %>
+      <%= render "comments/disabled_on_application_explanation" %>
     <% elsif !@application.authority.email.present? %>
       <%= render HeadingComponent.new(tag: :h2, extra_classes: "mb-6").with_content("Add your own comment") %>
       <%# TODO: #2157 Need a proper design for this section %>

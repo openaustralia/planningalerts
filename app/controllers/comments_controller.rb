@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   extend T::Sig
 
   before_action :authenticate_user!, only: %i[create preview update destroy publish personal]
-  # Explains the refusal; CommentPolicy enforces it either way
+  # Explain the refusal; CommentPolicy enforces it either way
   before_action :require_commenting_enabled, only: %i[create update publish]
   # TODO: #2163 Add checks for all other actions on this controller
   after_action :verify_authorized, only: %i[create preview update destroy publish]

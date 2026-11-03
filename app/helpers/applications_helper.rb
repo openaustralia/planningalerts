@@ -10,9 +10,11 @@ module ApplicationsHelper
   include ActionView::Helpers::AssetTagHelper
   include ApplicationHelper
 
-  # Signed-out people are invited to sign in, so they count as able to comment
+  # Signed-out people are invited to sign in, so they count as able to comment, unless commenting is disabled on the application
   sig { params(application: Application).returns(T::Boolean) }
   def may_comment_on?(application)
+    return false if application.comments_disabled?
+
     current_user.nil? || policy(Comment.new(application:)).create?
   end
 
