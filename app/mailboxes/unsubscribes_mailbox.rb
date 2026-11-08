@@ -22,7 +22,7 @@ class UnsubscribesMailbox < ApplicationMailbox
   def confirm_id
     mail.recipients.each do |recipient|
       match = ADDRESS.match(recipient.to_s)
-      return match[1] if match
+      return T.must(match[1]).downcase if match
     end
     nil
   end
