@@ -6,7 +6,63 @@
 
 
 # source://unicode-display_width//lib/unicode/display_width/constants.rb#3
-module Unicode; end
+module Unicode
+  private
+
+  def abbr_categories(_arg0); end
+  def capitalize(_arg0); end
+  def categories(_arg0); end
+  def compose(_arg0); end
+  def decompose(_arg0); end
+  def decompose_compat(_arg0); end
+  def decompose_safe(_arg0); end
+  def downcase(_arg0); end
+  def nfc(_arg0); end
+  def nfc_safe(_arg0); end
+  def nfd(_arg0); end
+  def nfd_safe(_arg0); end
+  def nfkc(_arg0); end
+  def nfkd(_arg0); end
+  def normalize_C(_arg0); end
+  def normalize_C_safe(_arg0); end
+  def normalize_D(_arg0); end
+  def normalize_D_safe(_arg0); end
+  def normalize_KC(_arg0); end
+  def normalize_KD(_arg0); end
+  def strcmp(_arg0, _arg1); end
+  def strcmp_compat(_arg0, _arg1); end
+  def text_elements(_arg0); end
+  def upcase(_arg0); end
+  def width(*_arg0); end
+
+  class << self
+    def abbr_categories(_arg0); end
+    def capitalize(_arg0); end
+    def categories(_arg0); end
+    def compose(_arg0); end
+    def decompose(_arg0); end
+    def decompose_compat(_arg0); end
+    def decompose_safe(_arg0); end
+    def downcase(_arg0); end
+    def nfc(_arg0); end
+    def nfc_safe(_arg0); end
+    def nfd(_arg0); end
+    def nfd_safe(_arg0); end
+    def nfkc(_arg0); end
+    def nfkd(_arg0); end
+    def normalize_C(_arg0); end
+    def normalize_C_safe(_arg0); end
+    def normalize_D(_arg0); end
+    def normalize_D_safe(_arg0); end
+    def normalize_KC(_arg0); end
+    def normalize_KD(_arg0); end
+    def strcmp(_arg0, _arg1); end
+    def strcmp_compat(_arg0, _arg1); end
+    def text_elements(_arg0); end
+    def upcase(_arg0); end
+    def width(*_arg0); end
+  end
+end
 
 # source://unicode-display_width//lib/unicode/display_width/constants.rb#4
 class Unicode::DisplayWidth
