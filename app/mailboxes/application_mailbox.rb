@@ -3,4 +3,5 @@
 
 class ApplicationMailbox < ActionMailbox::Base
   routing(/^no-reply@/ => :no_replies)
+  routing(UnsubscribesMailbox::ADDRESS => :unsubscribes)
 end
