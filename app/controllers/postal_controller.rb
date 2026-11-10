@@ -14,6 +14,11 @@ class PostalController < ApplicationController
   # That says nothing about whether the recipient's address works.
   SENDER_SIDE_REFUSAL = T.let(/\A\d{3}[ -]5\.7\.\d+/, Regexp)
 
+  # Postal reports a hard fail with no output from the receiving server when it runs out of
+  # retries after a run of temporary failures, such as a provider throttling our sending IP
+  # address. That says nothing about whether the recipient's address works.
+  RETRIES_EXHAUSTED = T.let(/\AMaximum number of delivery attempts/, Regexp)
+
   sig { void }
   def event
     # Verify the signature against the raw body before trusting anything in it
@@ -61,8 +66,9 @@ class PostalController < ApplicationController
         last_delivered_successfully: success
       )
       # Postal only sends these events for permanent failures so we can
-      # unsubscribe straight away, unless the receiving server refused us for
-      # reasons that aren't about the recipient.
+      # unsubscribe straight away, unless the failure isn't about the recipient:
+      # the receiving server refused us for sender side reasons, or Postal gave
+      # up retrying after temporary failures.
       # Held messages are deliberately not treated as bounces.
       alert.unsubscribe_by_bounce! if unsubscribe_after?(event, payload)
     when "comment"
@@ -99,6 +105,7 @@ class PostalController < ApplicationController
   def unsubscribe_after?(event, payload)
     return true if event == "MessageBounced"
     return false unless event == "MessageDeliveryFailed"
+    return false if RETRIES_EXHAUSTED.match?(T.cast(payload["details"], T.nilable(String)).to_s)
 
     !SENDER_SIDE_REFUSAL.match?(T.cast(payload["output"], T.nilable(String)).to_s)
   end

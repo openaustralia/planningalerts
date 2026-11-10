@@ -203,6 +203,20 @@ describe PostalController do
     expect(alert.reload.unsubscribed).to be false
   end
 
+  it "records a failure after postal ran out of retries without unsubscribing the alert" do
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail", output: nil,
+                                 details: "Maximum number of delivery attempts (18) has been reached. " \
+                                          "Added eliza@example.org to suppression list because delivery " \
+                                          "has failed repeatedly."))
+    expect(response).to have_http_status(:ok)
+    alert.reload
+    expect(alert.last_delivered_at).to eq Time.zone.at(1_598_494_217.5)
+    expect(alert.last_delivered_successfully).to be false
+    expect(alert.unsubscribed).to be false
+    expect(alert.unsubscribed_by).to be_nil
+  end
+
   it "unsubscribes the alert when the failure has no reply from the receiving server" do
     alert = create(:alert, id: alert_id)
     post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail", output: nil))
