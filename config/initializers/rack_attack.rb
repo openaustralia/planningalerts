@@ -56,10 +56,10 @@ end
 # 40 requests per 20 seconds is roughly 12% of max and should be long enough for natural clumping
 Rack::Attack.throttle("pages/ip", limit: divide_limit.call(40), period: 20.seconds) do |req|
   # Mail servers send delivery updates in bursts from one address. The
-  # endpoints only accept requests with the webhook key or signature.
+  # endpoint only accepts requests with a valid Postal signature.
   next if req.path.start_with?("/assets/") ||
           req.path == "/health_check" ||
-          (req.post? && ["/cuttlefish/event", "/postal/event"].include?(req.path))
+          (req.post? && req.path == "/postal/event")
 
   key_controller = req.env["api_throttle.key_controller"]
   # Exclude what is matched for the api controller throttle above

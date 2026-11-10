@@ -350,9 +350,10 @@ system an email goes to is decided per delivery by the `postal_smtp` Flipper
 flag in `app/lib/postal_or_cuttlefish_smtp.rb`, registered as the production
 delivery method in `config/environments/production.rb`. Off means Cuttlefish.
 There is no actor at send time, so only the boolean and `percentage_of_time`
-gates apply. The flag, the delivery class, the `cuttlefish.*` credentials and
-`/cuttlefish/event` all go in
-[#2236](https://github.com/openaustralia/planningalerts/issues/2236); the
+gates apply. The flag, the delivery class and the `cuttlefish.*` credentials (apart from `webhook_key`, now unused) go
+when Cuttlefish is finally retired
+([#2236](https://github.com/openaustralia/planningalerts/issues/2236)); the
+`/cuttlefish/event` webhook and `CuttlefishController` are already gone. The
 `X-Cuttlefish-*` headers go in
 [#2235](https://github.com/openaustralia/planningalerts/issues/2235) once the
 flag has been at 100% long enough that nobody would flip it back.
