@@ -217,6 +217,17 @@ describe PostalController do
     expect(alert.unsubscribed_by).to be_nil
   end
 
+  it "records a failure after postal removed the raw message without unsubscribing the alert" do
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail", output: nil,
+                                 details: "Raw message has been removed. Cannot send message."))
+    expect(response).to have_http_status(:ok)
+    alert.reload
+    expect(alert.last_delivered_successfully).to be false
+    expect(alert.unsubscribed).to be false
+    expect(alert.unsubscribed_by).to be_nil
+  end
+
   it "still unsubscribes the alert when the retry phrase isn't at the start of the details" do
     alert = create(:alert, id: alert_id)
     post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail",
