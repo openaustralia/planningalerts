@@ -217,6 +217,21 @@ describe PostalController do
     expect(alert.unsubscribed_by).to be_nil
   end
 
+  it "still unsubscribes the alert when the retry phrase isn't at the start of the details" do
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail",
+                                 output: "550 5.1.1 The email account that you tried to reach does not exist.",
+                                 details: "Rejected. Maximum number of delivery attempts (18) has been reached."))
+    expect(alert.reload.unsubscribed).to be true
+  end
+
+  it "uses the receiving server's reply when postal gives no details" do
+    alert = create(:alert, id: alert_id)
+    post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail", details: nil,
+                                 output: "550 5.1.1 The email account that you tried to reach does not exist."))
+    expect(alert.reload.unsubscribed).to be true
+  end
+
   it "unsubscribes the alert when the failure has no reply from the receiving server" do
     alert = create(:alert, id: alert_id)
     post_event(status_event_body(event: "MessageDeliveryFailed", tag: alert_tag, status: "HardFail", output: nil))
