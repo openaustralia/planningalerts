@@ -356,7 +356,9 @@ gates apply. The flag, the delivery class, the `cuttlefish.*` credentials and
 `X-Cuttlefish-*` headers are already gone
 ([#2235](https://github.com/openaustralia/planningalerts/issues/2235)). If the
 flag is turned back off, Cuttlefish will inline CSS again (stripping media
-queries) and comments to councils lose the deny-list bypass.
+queries), comments to councils lose the deny-list bypass, and its webhooks
+carry no alert or comment ids, so `CuttlefishController#event` silently skips
+delivery timestamps, bounce unsubscribes and Slack failure alerts.
 
 Delivery events come back as webhooks. Postal signs each `POST /postal/event`
 with a key published at its JWKS URL (`config.x.postal_jwks_url`), and
