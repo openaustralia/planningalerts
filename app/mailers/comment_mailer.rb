@@ -10,11 +10,11 @@ class CommentMailer < ApplicationMailer
   def notify_authority(comment)
     @comment = T.let(comment, T.nilable(Comment))
 
-    # Tell Cuttlefish to always try to send this email irrespective
-    # of what's in the deny list
+    # Postal has no per-message way to ignore its suppression list. Instead,
+    # comments to councils go out through their own mail server (see
+    # delivery_method_options below), so alert bounces can never suppress them
+    # (infrastructure ADR 0003).
     headers(
-      "X-Cuttlefish-Ignore-Deny-List" => "true",
-      "X-Cuttlefish-Metadata-comment-id" => comment.id.to_s,
       # The tag round-trips through Postal and comes back to us in the
       # delivery event webhooks so we can match the event to the comment
       "X-Postal-Tag" => "comment-#{comment.id}"
