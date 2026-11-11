@@ -61,6 +61,10 @@ set :puma_error_log, "/srv/www/production/shared/log/puma.log"
 # Hitting it makes puma swap, then get killed, rather than restart gracefully.
 # The daily phased restart set up in the infrastructure repo keeps memory down.
 set :puma_service_unit_props, %w[MemoryMax=1680M TimeoutStopSec=300]
+# jemalloc slows Ruby's memory growth. Phased restarts keep the old master, so a change here
+# only takes effect after a full `systemctl --user restart planningalerts_puma_production`.
+# Keep in step with config/foreman/systemd/process.service.erb
+set :puma_service_unit_env_vars, %w[LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2]
 set :puma_enable_lingering, false
 set :puma_systemctl_user, :user
 

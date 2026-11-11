@@ -8,6 +8,8 @@ User=<%= user %>
 WorkingDirectory=<%= engine.root %>
 Environment=PORT=<%= port %>
 Environment=PS=<%= process_name %>
+# jemalloc slows Ruby's memory growth. Keep in step with puma_service_unit_env_vars in config/deploy.rb
+Environment=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 <% engine.env.each_pair do |var,env| -%>
 Environment="<%= var %>=<%= env %>"
 <% end -%>
