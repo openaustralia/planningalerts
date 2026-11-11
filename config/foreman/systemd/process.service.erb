@@ -20,5 +20,6 @@ StandardError=syslog
 SyslogIdentifier=%n
 KillMode=mixed
 TimeoutStopSec=<%= engine.options[:timeout] %>
-# Limit memory usage to 700MB - it normally starts around 250M and slowly climbs from there
+# Last-resort ceiling: sidekiq starts around 300 MB and slowly climbs. Hitting it
+# makes sidekiq swap, then get killed, rather than restart gracefully.
 MemoryMax=700M

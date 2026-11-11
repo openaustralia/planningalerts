@@ -57,9 +57,9 @@ set :puma_phased_restart, true
 # set :puma_systemd_watchdog_sec, 10
 set :puma_access_log, "/srv/www/production/shared/log/puma.log"
 set :puma_error_log, "/srv/www/production/shared/log/puma.log"
-# Puma master + 3 workers start at ~260 MB each, capped at 550 MB per worker
-# Total limit = 3 workers x 550 MB + 30 MB master = 1,680 MB
-# In practice memory is expected to peak at 72%, just under the 75% warning level
+# Last-resort ceiling for the master and 3 workers together (~550 MB per worker).
+# Hitting it makes puma swap, then get killed, rather than restart gracefully.
+# The daily phased restart set up in the infrastructure repo keeps memory down.
 set :puma_service_unit_props, %w[MemoryMax=1680M TimeoutStopSec=300]
 set :puma_enable_lingering, false
 set :puma_systemctl_user, :user
@@ -174,7 +174,7 @@ namespace :foreman do
         "sudo bundle exec " \
         "foreman export systemd /etc/systemd/system -e .env.production -u deploy " \
         "-a #{fetch(:application)}-#{fetch(:stage)} -f Procfile.production " \
-        "--timeout #{fetch(:foreman_timeout)} --template #{current_path}/config/foreman " \
+        "--timeout #{fetch(:foreman_timeout)} --template #{current_path}/config/foreman/systemd " \
         "-l #{shared_path}/log --root #{current_path}"
     end
   end
