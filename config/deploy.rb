@@ -57,7 +57,7 @@ set :puma_phased_restart, true
 # set :puma_systemd_watchdog_sec, 10
 set :puma_access_log, "/srv/www/production/shared/log/puma.log"
 set :puma_error_log, "/srv/www/production/shared/log/puma.log"
-# Last-resort ceiling for the master and 3 workers together (~550 MB per worker).
+# Last-resort ceiling for the master and 3 workers: 3 x 550 MB + 30 MB = 1,680 MB.
 # Hitting it makes puma swap, then get killed, rather than restart gracefully.
 # The daily phased restart set up in the infrastructure repo keeps memory down.
 set :puma_service_unit_props, %w[MemoryMax=1680M TimeoutStopSec=300]

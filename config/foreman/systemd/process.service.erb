@@ -20,6 +20,7 @@ StandardError=syslog
 SyslogIdentifier=%n
 KillMode=mixed
 TimeoutStopSec=<%= engine.options[:timeout] %>
-# Last-resort ceiling: sidekiq starts around 300 MB and slowly climbs. Hitting it
-# makes sidekiq swap, then get killed, rather than restart gracefully.
+# Last-resort ceiling: sidekiq starts around 300 MB and slowly climbs, and the daily
+# restart in the infrastructure repo keeps it well below this. Hitting it makes sidekiq
+# swap, then get killed, which loses any jobs it is running.
 MemoryMax=700M
