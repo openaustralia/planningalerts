@@ -69,9 +69,9 @@ RUN apt-get install -y libpq-dev postgresql-client
 # Install the fish shell
 RUN apt-get install -y fish
 
-# Use jemalloc as in production: Ruby's memory grows far less over time than with the default allocator.
+# Use jemalloc as in production, to slow the growth of Ruby's memory over time.
 # See https://github.com/openaustralia/planningalerts/issues/2333
-RUN apt-get install -y libjemalloc2
+RUN apt-get update && apt-get install -y --no-install-recommends libjemalloc2
 ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 USER deploy
