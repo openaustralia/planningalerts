@@ -19,7 +19,7 @@ class DeviseMailer
     sig { params(record: ::User, token: ::String, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
     def reset_password_instructions(record, token, opts = T.unsafe(nil)); end
 
-    sig { params(record: ::User, token: ::String, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
+    sig { params(record: T.untyped, token: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
     def unlock_instructions(record, token, opts = T.unsafe(nil)); end
   end
 end

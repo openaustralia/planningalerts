@@ -352,10 +352,13 @@ delivery method in `config/environments/production.rb`. Off means Cuttlefish.
 There is no actor at send time, so only the boolean and `percentage_of_time`
 gates apply. The flag, the delivery class, the `cuttlefish.*` credentials and
 `/cuttlefish/event` all go in
-[#2236](https://github.com/openaustralia/planningalerts/issues/2236); the
-`X-Cuttlefish-*` headers go in
-[#2235](https://github.com/openaustralia/planningalerts/issues/2235) once the
-flag has been at 100% long enough that nobody would flip it back.
+[#2236](https://github.com/openaustralia/planningalerts/issues/2236). The
+`X-Cuttlefish-*` headers are already gone
+([#2235](https://github.com/openaustralia/planningalerts/issues/2235)). If the
+flag is turned back off, Cuttlefish will inline CSS again (stripping media
+queries), comments to councils lose the deny-list bypass, and its webhooks
+carry no alert or comment ids, so `CuttlefishController#event` silently skips
+delivery timestamps, bounce unsubscribes and Slack failure alerts.
 
 Delivery events come back as webhooks. Postal signs each `POST /postal/event`
 with a key published at its JWKS URL (`config.x.postal_jwks_url`), and
