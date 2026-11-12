@@ -193,9 +193,6 @@ module GeneratedPathHelpersModule
   def contact_messages_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def cuttlefish_event_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def destroy_alerts_user_session_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
