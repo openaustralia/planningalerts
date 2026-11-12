@@ -14,7 +14,7 @@ describe "pages/ip throttle" do
     expect(counted_as("GET", "/faq")).to eq "192.0.2.1"
   end
 
-  %w[/cuttlefish/event /postal/event].each do |path|
+  %w[/postal/event].each do |path|
     it "doesn't count mail server delivery updates to #{path}" do
       expect(counted_as("POST", path)).to be_nil
     end

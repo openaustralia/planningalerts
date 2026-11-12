@@ -264,7 +264,6 @@ Rails.application.routes.draw do
   get "/404", to: "documentation#error_404"
   get "/500", to: "documentation#error_500"
 
-  post "/cuttlefish/event", to: "cuttlefish#event"
   post "/postal/event", to: "postal#event"
 
   # See app/controllers/whatismyip_controller.rb. 404s unless the provide_whatismyip feature flag is on.
