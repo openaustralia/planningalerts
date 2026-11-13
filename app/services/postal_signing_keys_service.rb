@@ -9,6 +9,8 @@
 class PostalSigningKeysService
   extend T::Sig
 
+  class FetchError < StandardError; end
+
   # Postal gives up on a webhook after 5 seconds, and this runs inline in that request, so a
   # slower fetch than this is no use to us. HTTParty has no timeout at all by default.
   HTTP_TIMEOUT = 2
@@ -48,25 +50,40 @@ class PostalSigningKeysService
   # PEM strings rather than key objects, because these get cached and the production cache is
   # memcached, so whatever we store has to survive a round trip through Marshal.
   #
-  # Returns nil if the keys can't be determined. Network level failures (timeouts, DNS, a dropped
-  # or reset connection) are rescued here alongside a malformed body, so postal's web interface
-  # being unreachable or broken degrades to "we can't check this signature" rather than an
-  # unhandled 500 out of the controller. OpenSSL::OpenSSLError covers both a failed TLS handshake
-  # and unusable key material. Programming errors are deliberately left unrescued.
+  # Returns nil if the keys can't be determined, and reports that to Sentry. Network level
+  # failures (timeouts, DNS, a dropped or reset connection) are rescued here alongside a malformed
+  # body, so postal's web interface being unreachable or broken degrades to "we can't check this
+  # signature" rather than an unhandled 500 out of the controller. OpenSSL::OpenSSLError covers
+  # both a failed TLS handshake and unusable key material. Programming errors are deliberately
+  # left unrescued.
+  #
+  # The controller answers 503 so postal retries, which makes an outage otherwise invisible: after
+  # about 36 minutes postal gives up and the events are lost. The cache means this is reported at
+  # most once per CACHE_TTL, not once per inbound webhook. The message is fixed and the reason goes
+  # in extra, so one outage groups as one Sentry issue.
   sig { returns(T.nilable(T::Array[String])) }
   def pems
     response = HTTParty.get(jwks_url, timeout: HTTP_TIMEOUT)
-    return nil unless response.code == 200
+    return report_failure("HTTP status #{response.code}") unless response.code == 200
 
     parsed = JSON.parse(response.body)
-    return nil unless parsed.is_a?(Hash)
+    return report_failure("body is not a JSON object") unless parsed.is_a?(Hash)
 
     jwks = parsed["keys"]
-    return nil unless jwks.is_a?(Array)
+    return report_failure("body has no keys list") unless jwks.is_a?(Array)
 
-    jwks.filter_map { |jwk| signing_key_pem(jwk) }.presence
+    jwks.filter_map { |jwk| signing_key_pem(jwk) }.presence || report_failure("no usable RSA signing key")
   rescue Timeout::Error, SocketError, SystemCallError, EOFError, Net::ProtocolError, Net::HTTPBadResponse,
-         Net::HTTPHeaderSyntaxError, JSON::ParserError, JWT::DecodeError, OpenSSL::OpenSSLError
+         Net::HTTPHeaderSyntaxError, JSON::ParserError, JWT::DecodeError, OpenSSL::OpenSSLError => e
+    report_failure("#{e.class}: #{e.message}")
+  end
+
+  sig { params(reason: String).returns(NilClass) }
+  def report_failure(reason)
+    Sentry.capture_exception(
+      FetchError.new("Could not fetch Postal's webhook signing keys, so bounce processing is paused"),
+      extra: { jwks_url:, reason: }
+    )
     nil
   end
 

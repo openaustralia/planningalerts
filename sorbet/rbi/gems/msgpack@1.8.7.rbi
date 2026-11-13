@@ -110,16 +110,16 @@ end
 
 # source://msgpack//lib/msgpack/factory.rb#2
 class MessagePack::Factory
-  # source://msgpack//lib/msgpack/factory.rb#113
+  # source://msgpack//lib/msgpack/factory.rb#117
   def dump(v, *rest); end
 
-  # source://msgpack//lib/msgpack/factory.rb#99
+  # source://msgpack//lib/msgpack/factory.rb#103
   def load(src, param = T.unsafe(nil)); end
 
-  # source://msgpack//lib/msgpack/factory.rb#113
+  # source://msgpack//lib/msgpack/factory.rb#117
   def pack(v, *rest); end
 
-  # source://msgpack//lib/msgpack/factory.rb#120
+  # source://msgpack//lib/msgpack/factory.rb#124
   def pool(size = T.unsafe(nil), **options); end
 
   # see ext for other methods
@@ -131,46 +131,46 @@ class MessagePack::Factory
 
   # [ {type: id, class: Class(or nil), packer: arg, unpacker: arg}, ... ]
   #
-  # source://msgpack//lib/msgpack/factory.rb#41
+  # source://msgpack//lib/msgpack/factory.rb#45
   def registered_types(selector = T.unsafe(nil)); end
 
   # @return [Boolean]
   #
-  # source://msgpack//lib/msgpack/factory.rb#86
+  # source://msgpack//lib/msgpack/factory.rb#90
   def type_registered?(klass_or_type, selector = T.unsafe(nil)); end
 
-  # source://msgpack//lib/msgpack/factory.rb#99
+  # source://msgpack//lib/msgpack/factory.rb#103
   def unpack(src, param = T.unsafe(nil)); end
 end
 
-# source://msgpack//lib/msgpack/factory.rb#128
+# source://msgpack//lib/msgpack/factory.rb#132
 class MessagePack::Factory::Pool
   # @return [Pool] a new instance of Pool
   #
-  # source://msgpack//lib/msgpack/factory.rb#181
+  # source://msgpack//lib/msgpack/factory.rb#185
   def initialize(factory, size, options = T.unsafe(nil)); end
 
-  # source://msgpack//lib/msgpack/factory.rb#195
+  # source://msgpack//lib/msgpack/factory.rb#199
   def dump(object); end
 
-  # source://msgpack//lib/msgpack/factory.rb#188
+  # source://msgpack//lib/msgpack/factory.rb#192
   def load(data); end
 
-  # source://msgpack//lib/msgpack/factory.rb#206
+  # source://msgpack//lib/msgpack/factory.rb#210
   def packer(&block); end
 
-  # source://msgpack//lib/msgpack/factory.rb#202
+  # source://msgpack//lib/msgpack/factory.rb#206
   def unpacker(&block); end
 end
 
-# source://msgpack//lib/msgpack/factory.rb#130
+# source://msgpack//lib/msgpack/factory.rb#134
 class MessagePack::Factory::Pool::MemberPool
   # @return [MemberPool] a new instance of MemberPool
   #
-  # source://msgpack//lib/msgpack/factory.rb#131
+  # source://msgpack//lib/msgpack/factory.rb#135
   def initialize(size, &block); end
 
-  # source://msgpack//lib/msgpack/factory.rb#137
+  # source://msgpack//lib/msgpack/factory.rb#141
   def with; end
 end
 

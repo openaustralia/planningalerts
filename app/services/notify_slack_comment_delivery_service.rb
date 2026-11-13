@@ -14,7 +14,7 @@ class NotifySlackCommentDeliveryService
       email_url: String
     ).void
   end
-  def self.call(comment:, to:, status:, extended_status:, email_id:, email_url: "https://cuttlefish.oaf.org.au/emails/#{email_id}")
+  def self.call(comment:, to:, status:, extended_status:, email_id:, email_url:)
     new(
       comment:,
       to:,
@@ -35,7 +35,7 @@ class NotifySlackCommentDeliveryService
       email_url: String
     ).void
   end
-  def initialize(comment:, to:, status:, extended_status:, email_id:, email_url: "https://cuttlefish.oaf.org.au/emails/#{email_id}")
+  def initialize(comment:, to:, status:, extended_status:, email_id:, email_url:)
     @comment = comment
     @to = to
     @status = status

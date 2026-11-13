@@ -9,6 +9,8 @@ describe PostalSigningKeysService do
     described_class.call&.map(&:to_pem)
   end
 
+  before { allow(Sentry).to receive(:capture_exception) }
+
   it "returns the key postal publishes" do
     stub_jwks(body: jwks_json(signing_key.public_key))
     expect(pems).to eq [signing_key.public_key.to_pem]
@@ -72,6 +74,39 @@ describe PostalSigningKeysService do
     end
   end
 
+  describe "reporting failures" do
+    it "reports to Sentry, saying bounce processing is paused, on a non-200" do
+      stub_jwks(body: "", code: 502)
+      pems
+      expect(Sentry).to have_received(:capture_exception).with(
+        an_instance_of(PostalSigningKeysService::FetchError)
+          .and(having_attributes(message: /bounce processing is paused/)),
+        extra: { jwks_url: Rails.configuration.x.postal_jwks_url, reason: "HTTP status 502" }
+      )
+    end
+
+    it "reports a network failure" do
+      allow(HTTParty).to receive(:get).and_raise(Net::OpenTimeout)
+      pems
+      expect(Sentry).to have_received(:capture_exception).with(
+        an_instance_of(PostalSigningKeysService::FetchError),
+        extra: hash_including(reason: /Net::OpenTimeout/)
+      )
+    end
+
+    it "reports a body with no usable signing key" do
+      stub_jwks(body: { "keys" => [jwk(signing_key.public_key, use: "enc")] }.to_json)
+      pems
+      expect(Sentry).to have_received(:capture_exception).once
+    end
+
+    it "doesn't report on success" do
+      stub_jwks(body: jwks_json(signing_key.public_key))
+      pems
+      expect(Sentry).not_to have_received(:capture_exception)
+    end
+  end
+
   # Bounding these fetches is the whole point: /postal/event is unauthenticated, so without a
   # cached copy anyone could turn each request they send into an outbound request of ours.
   # config.cache_store is :null_store in test, so these examples need a real one.
@@ -93,6 +128,12 @@ describe PostalSigningKeysService do
       allow(HTTParty).to receive(:get).and_raise(Net::OpenTimeout)
       2.times { described_class.call }
       expect(HTTParty).to have_received(:get).once
+    end
+
+    it "reports a failed fetch once, not on every request while it is cached" do
+      stub_jwks(body: "", code: 502)
+      2.times { described_class.call }
+      expect(Sentry).to have_received(:capture_exception).once
     end
 
     it "fetches again once the cached copy has expired" do

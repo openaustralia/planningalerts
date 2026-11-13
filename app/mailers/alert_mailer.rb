@@ -21,7 +21,7 @@ class AlertMailer < ApplicationMailer
     headers(
       # The unsubscribe URL needs to accept a post
       "List-Unsubscribe-Post" => "List-Unsubscribe=One-Click",
-      "List-Unsubscribe" => "<#{unsubscribe_alert_url(confirm_id: alert.confirm_id)}>",
+      "List-Unsubscribe" => list_unsubscribe_header(alert),
       # This special header sets arbitrary metadata on the email in Cuttlefish
       # It's not sent on in the outgoing email
       "X-Cuttlefish-Metadata-alert-id" => alert.id.to_s,
@@ -47,5 +47,15 @@ class AlertMailer < ApplicationMailer
         locals: { applications:, comments:, alert: }
       ).strip
     )
+  end
+
+  private
+
+  sig { params(alert: Alert).returns(String) }
+  def list_unsubscribe_header(alert)
+    options = ["<#{unsubscribe_alert_url(confirm_id: alert.confirm_id)}>"]
+    # RFC 2369 recommends a mailto: alongside the URL, for mail clients that can't make the HTTP request
+    options << "<mailto:unsubscribe+#{alert.confirm_id}@planningalerts.org.au>" if Flipper.enabled?(:mailto_list_unsubscribe)
+    options.join(", ")
   end
 end

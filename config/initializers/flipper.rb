@@ -31,6 +31,11 @@ Flipper::UI.configure do |config|
                           "counted in Sentry, and the form goes through anyway. Leave it off until the " \
                           "Sentry numbers say what enforcing would cost, since enforcing turns away " \
                           "everyone without JavaScript",
+      "mailto_list_unsubscribe" => "Add a mailto: address to the List-Unsubscribe header on alert emails, " \
+                                   "next to the one-click URL (#2272). Turn on only once Google Workspace " \
+                                   "relays unsubscribe+...@planningalerts.org.au to incoming.email, as it " \
+                                   "does for no-reply@. There is no actor at send time, so only the boolean " \
+                                   "and percentage_of_time gates do anything",
       "postal_smtp" => "Send outbound email through Postal (postal.oaf.org.au, two mail servers) " \
                        "instead of Cuttlefish. Off, or not registered, means Cuttlefish. There is no " \
                        "actor at send time, so only the boolean and percentage_of_time gates do " \
