@@ -8,6 +8,9 @@ User=<%= user %>
 WorkingDirectory=<%= engine.root %>
 Environment=PORT=<%= port %>
 Environment=PS=<%= process_name %>
+# Memory allocator settings (jemalloc), written by the infrastructure repo only on hosts that
+# use them; the "-" lets it be missing. Keep in step with puma_service_unit_env_files in config/deploy.rb
+EnvironmentFile=-/etc/planningalerts/malloc.env
 <% engine.env.each_pair do |var,env| -%>
 Environment="<%= var %>=<%= env %>"
 <% end -%>
@@ -20,5 +23,7 @@ StandardError=syslog
 SyslogIdentifier=%n
 KillMode=mixed
 TimeoutStopSec=<%= engine.options[:timeout] %>
-# Limit memory usage to 700MB - it normally starts around 250M and slowly climbs from there
+# Last-resort ceiling: sidekiq starts around 300 MB and slowly climbs, and the daily
+# restart in the infrastructure repo keeps it well below this. Hitting it makes sidekiq
+# swap, then get killed, which loses any jobs it is running.
 MemoryMax=700M
