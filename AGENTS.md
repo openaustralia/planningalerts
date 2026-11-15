@@ -407,6 +407,10 @@ Some settings in `.rubocop.yml` exist for reasons worth knowing:
 - `bin/*`, `config/*`, `db/migrate/*`, `vendor/**/*` and `maizzle/**/*` are
   excluded entirely, so `config/application.rb` is `# typed: false` and
   unformatted on purpose.
+- **`NewCops: enable`** switches on new cops as soon as RuboCop or a plugin adds
+  them, so an upgrade can fail lint. Fix the offences as part of that upgrade.
+  Only suggest disabling a cop for a legitimate reason, never just to make
+  lint pass.
 
 `bin/erb_lint --lint-all` covers ERB and excludes the Maizzle-generated files
 above plus the overridden administrate templates under
