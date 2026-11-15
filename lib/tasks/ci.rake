@@ -19,7 +19,7 @@ namespace :ci do
     # Rubocop
     sh "bin/rubocop --parallel"
     # Lint erb
-    sh "bin/erblint --lint-all"
+    sh "bin/erb_lint --lint-all"
     # Security audit application code
     sh "bin/brakeman -q -w2"
   end

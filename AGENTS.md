@@ -312,7 +312,7 @@ less" at the top of that list is meant literally.
 Email templates are authored in Maizzle under `maizzle/src/templates` and
 compiled into the Rails tree. **Editing the compiled `.erb` is wasted work,
 because the next `npm run dev` overwrites it.** The generated files are listed
-in the `exclude` block of `.erb-lint.yml`, which is the reliable way to tell
+in the `exclude` block of `.erb_lint.yml`, which is the reliable way to tell
 which ones they are:
 
 - `app/views/alert_mailer/alert.html.erb`
@@ -408,7 +408,7 @@ Some settings in `.rubocop.yml` exist for reasons worth knowing:
   excluded entirely, so `config/application.rb` is `# typed: false` and
   unformatted on purpose.
 
-`bin/erblint --lint-all` covers ERB and excludes the Maizzle-generated files
+`bin/erb_lint --lint-all` covers ERB and excludes the Maizzle-generated files
 above plus the overridden administrate templates under
 `app/views/admin/application/`, which are kept close to upstream deliberately.
 
@@ -445,7 +445,7 @@ Nothing checks these for you, so keep them consistent by hand:
   Changing one means changing the other.
 - The four Sorbet-related pins in the `Gemfile` described above.
 - Maizzle sources, their compiled `.erb` output, and the `exclude` list in
-  `.erb-lint.yml`.
+  `.erb_lint.yml`.
 - The Postgres password in `.devcontainer/compose.yaml` and `config/database.yml`.
 - `.ruby-version` and the Ruby actually installed on the servers, which is
   managed from the separate `oaf/infrastructure` Ansible repository you probably
