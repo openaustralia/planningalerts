@@ -254,7 +254,7 @@ GEM
       launchy (>= 2.1, < 4.0)
       mail (~> 2.7)
     erb (6.0.6)
-    erb_lint (0.6.0)
+    erb_lint (0.9.0)
       activesupport
       better_html (>= 2.0.1)
       parser (>= 2.7.1.4)
