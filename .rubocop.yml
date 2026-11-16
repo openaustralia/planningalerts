@@ -8,6 +8,7 @@ require:
   - rubocop-sorbet
 
 AllCops:
+  NewCops: enable
   Exclude:
       - 'db/migrate/*'
       - 'db/schema.rb'
