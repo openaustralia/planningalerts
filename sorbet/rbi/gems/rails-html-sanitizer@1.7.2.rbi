@@ -242,7 +242,7 @@ end
 # source://rails-html-sanitizer//lib/rails/html/sanitizer/version.rb#4
 module Rails::HTML; end
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#198
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#199
 module Rails::HTML4; end
 
 # == Rails::HTML4::FullSanitizer
@@ -253,7 +253,7 @@ module Rails::HTML4; end
 #   full_sanitizer.sanitize("<b>Bold</b> no more!  <a href='more.html'>See more here</a>...")
 #   # => "Bold no more!  See more here..."
 #
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#229
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#230
 class Rails::HTML4::FullSanitizer < ::Rails::HTML::Sanitizer
   include ::Rails::HTML::Concern::ComposedSanitize
   include ::Rails::HTML::Concern::Parser::HTML4
@@ -269,7 +269,7 @@ end
 #   link_sanitizer.sanitize('<a href="example.com">Only the link text will be kept.</a>')
 #   # => "Only the link text will be kept."
 #
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#244
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#245
 class Rails::HTML4::LinkSanitizer < ::Rails::HTML::Sanitizer
   include ::Rails::HTML::Concern::ComposedSanitize
   include ::Rails::HTML::Concern::Parser::HTML4
@@ -328,7 +328,7 @@ end
 #   # the sanitizer can also sanitize CSS
 #   safe_list_sanitizer.sanitize_css('background-color: #000;')
 #
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#302
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#303
 class Rails::HTML4::SafeListSanitizer < ::Rails::HTML::Sanitizer
   include ::Rails::HTML::Concern::ComposedSanitize
   include ::Rails::HTML::Concern::Parser::HTML4
@@ -350,27 +350,27 @@ class Rails::HTML4::SafeListSanitizer < ::Rails::HTML::Sanitizer
   end
 end
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#199
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#200
 module Rails::HTML4::Sanitizer
   extend ::Rails::HTML4::Sanitizer::VendorMethods
 end
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#200
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#201
 module Rails::HTML4::Sanitizer::VendorMethods
-  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#201
+  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#202
   def full_sanitizer; end
 
-  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#205
+  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#206
   def link_sanitizer; end
 
-  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#209
+  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#210
   def safe_list_sanitizer; end
 
-  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#213
+  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#214
   def white_list_sanitizer; end
 end
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#310
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#311
 module Rails::HTML5; end
 
 # == Rails::HTML5::FullSanitizer
@@ -381,7 +381,7 @@ module Rails::HTML5; end
 #   full_sanitizer.sanitize("<b>Bold</b> no more!  <a href='more.html'>See more here</a>...")
 #   # => "Bold no more!  See more here..."
 #
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#339
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#340
 class Rails::HTML5::FullSanitizer < ::Rails::HTML::Sanitizer
   include ::Rails::HTML::Concern::ComposedSanitize
   include ::Rails::HTML::Concern::Parser::HTML5
@@ -397,7 +397,7 @@ end
 #   link_sanitizer.sanitize('<a href="example.com">Only the link text will be kept.</a>')
 #   # => "Only the link text will be kept."
 #
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#354
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#355
 class Rails::HTML5::LinkSanitizer < ::Rails::HTML::Sanitizer
   include ::Rails::HTML::Concern::ComposedSanitize
   include ::Rails::HTML::Concern::Parser::HTML5
@@ -456,7 +456,7 @@ end
 #   # the sanitizer can also sanitize CSS
 #   safe_list_sanitizer.sanitize_css('background-color: #000;')
 #
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#412
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#413
 class Rails::HTML5::SafeListSanitizer < ::Rails::HTML::Sanitizer
   include ::Rails::HTML::Concern::ComposedSanitize
   include ::Rails::HTML::Concern::Parser::HTML5
@@ -478,19 +478,19 @@ class Rails::HTML5::SafeListSanitizer < ::Rails::HTML::Sanitizer
   end
 end
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#311
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#312
 class Rails::HTML5::Sanitizer
   class << self
-    # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#313
+    # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#314
     def full_sanitizer; end
 
-    # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#317
+    # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#318
     def link_sanitizer; end
 
-    # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#321
+    # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#322
     def safe_list_sanitizer; end
 
-    # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#325
+    # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#326
     def white_list_sanitizer; end
   end
 end
@@ -542,7 +542,7 @@ module Rails::HTML::Concern::Scrubber::SafeList
   # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#156
   def initialize(prune: T.unsafe(nil)); end
 
-  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#173
+  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#174
   def sanitize_css(style_string); end
 
   # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#160
@@ -550,10 +550,10 @@ module Rails::HTML::Concern::Scrubber::SafeList
 
   private
 
-  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#182
+  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#183
   def allowed_attributes(options); end
 
-  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#178
+  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#179
   def allowed_tags(options); end
 
   class << self
@@ -574,19 +574,19 @@ Rails::HTML::Concern::Scrubber::SafeList::DEFAULT_ALLOWED_ATTRIBUTES = T.let(T.u
 # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#83
 Rails::HTML::Concern::Scrubber::SafeList::DEFAULT_ALLOWED_TAGS = T.let(T.unsafe(nil), Set)
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#188
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#189
 module Rails::HTML::Concern::Serializer; end
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#189
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#190
 module Rails::HTML::Concern::Serializer::UTF8Encode
-  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#190
+  # source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#191
   def serialize(fragment); end
 end
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#422
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#423
 Rails::HTML::FullSanitizer = Rails::HTML4::FullSanitizer
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#423
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#424
 Rails::HTML::LinkSanitizer = Rails::HTML4::LinkSanitizer
 
 # === Rails::HTML::PermitScrubber
@@ -703,7 +703,7 @@ class Rails::HTML::PermitScrubber < ::Loofah::Scrubber
   def validate!(var, name); end
 end
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#424
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#425
 Rails::HTML::SafeListSanitizer = Rails::HTML4::SafeListSanitizer
 
 # source://rails-html-sanitizer//lib/rails/html/sanitizer/version.rb#5
@@ -753,16 +753,16 @@ Rails::HTML::Sanitizer::VERSION = T.let(T.unsafe(nil), String)
 # +attributes=+
 # If set, attributes included will be removed.
 #
-# source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#195
+# source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#183
 class Rails::HTML::TargetScrubber < ::Rails::HTML::PermitScrubber
   # @return [Boolean]
   #
-  # source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#196
+  # source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#184
   def allowed_node?(node); end
 
   # @return [Boolean]
   #
-  # source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#200
+  # source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#188
   def scrub_attribute?(name); end
 end
 
@@ -772,18 +772,18 @@ end
 #
 # Unallowed elements will be stripped, i.e. element is removed but its subtree kept.
 #
-# source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#210
+# source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#198
 class Rails::HTML::TextOnlyScrubber < ::Loofah::Scrubber
   # @return [TextOnlyScrubber] a new instance of TextOnlyScrubber
   #
-  # source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#211
+  # source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#199
   def initialize; end
 
-  # source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#215
+  # source://rails-html-sanitizer//lib/rails/html/scrubbers.rb#203
   def scrub(node); end
 end
 
-# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#425
+# source://rails-html-sanitizer//lib/rails/html/sanitizer.rb#426
 Rails::HTML::WhiteListSanitizer = Rails::HTML4::SafeListSanitizer
 
 # source://rails-html-sanitizer//lib/rails-html-sanitizer.rb#11
