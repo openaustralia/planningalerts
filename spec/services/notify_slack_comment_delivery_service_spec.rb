@@ -74,12 +74,4 @@ describe NotifySlackCommentDeliveryService do
       expect(messages).to be_empty
     end
   end
-
-  context "when email_url is not passed" do
-    # The default goes away in #2236 along with the Cuttlefish code. Delete this context then.
-    it "links to the email in Cuttlefish" do
-      described_class.call(comment:, to:, status: "hard_bounce", extended_status:, email_id:)
-      expect(messages.first).to include("https://cuttlefish.oaf.org.au/emails/42")
-    end
-  end
 end
