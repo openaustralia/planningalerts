@@ -13,6 +13,8 @@ describe PostalOrCuttlefishSmtp do
   let(:smtp) { instance_double(Mail::SMTP, deliver!: nil) }
 
   before do
+    # Build Mail's default delivery method before stubbing, or Mail keeps the double for the whole run
+    Mail.delivery_method
     allow(Mail::SMTP).to receive(:new).and_return(smtp)
   end
 
