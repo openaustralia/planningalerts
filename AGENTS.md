@@ -350,13 +350,16 @@ system an email goes to is decided per delivery by the `postal_smtp` Flipper
 flag in `app/lib/postal_or_cuttlefish_smtp.rb`, registered as the production
 delivery method in `config/environments/production.rb`. Off means Cuttlefish.
 There is no actor at send time, so only the boolean and `percentage_of_time`
-gates apply. The flag, the delivery class and the `cuttlefish.*` credentials (apart from `webhook_key`, now unused) go
-when Cuttlefish is finally retired
-([#2236](https://github.com/openaustralia/planningalerts/issues/2236)); the
-`/cuttlefish/event` webhook and `CuttlefishController` are already gone. The
-`X-Cuttlefish-*` headers go in
-[#2235](https://github.com/openaustralia/planningalerts/issues/2235) once the
-flag has been at 100% long enough that nobody would flip it back.
+gates apply. The flag, the delivery class and the `cuttlefish.*` credentials
+(apart from `webhook_key`, now unused) go in
+[#2346](https://github.com/openaustralia/planningalerts/issues/2346). The
+`/cuttlefish/event` webhook, `CuttlefishController`
+([#2236](https://github.com/openaustralia/planningalerts/issues/2236)) and the
+`X-Cuttlefish-*` headers
+([#2235](https://github.com/openaustralia/planningalerts/issues/2235)) are
+already gone. If the flag is turned back off, Cuttlefish will inline CSS again
+(stripping media queries), comments to councils lose the deny-list bypass, and
+nothing records delivery events for that mail.
 
 Delivery events come back as webhooks. Postal signs each `POST /postal/event`
 with a key published at its JWKS URL (`config.x.postal_jwks_url`), and

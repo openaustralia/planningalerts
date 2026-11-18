@@ -10,13 +10,6 @@ module Users
       @user = T.let(user, T.nilable(User))
       @token = T.let(token, T.nilable(String))
 
-      headers(
-        # Disable css inlining because we're already
-        # doing it with maizzle and the inlining on cuttlefish strips out media queries for
-        # responsive designs and some more modern css features
-        "X-Cuttlefish-Disable-Css-Inlining" => "true"
-      )
-
       attachments.inline["illustration.png"] = Rails.root.join("app/assets/images/illustration/confirmation.png").read
 
       mail(to: user.email)
