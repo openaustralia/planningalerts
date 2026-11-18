@@ -8,14 +8,14 @@
 # source://rack-test//lib/rack/test/cookie_jar.rb#6
 module Rack
   class << self
-    # source://rack/3.2.4/lib/rack/version.rb#14
+    # source://rack/3.2.8/lib/rack/version.rb#14
     def release; end
   end
 end
 
 # For backwards compatibility with 1.1.0 and below
 #
-# source://rack-test//lib/rack/test.rb#381
+# source://rack-test//lib/rack/test.rb#406
 Rack::MockSession = Rack::Test::Session
 
 # source://rack-test//lib/rack/test/cookie_jar.rb#7
@@ -25,7 +25,7 @@ module Rack::Test
     #
     # @return [Boolean]
     #
-    # source://rack-test//lib/rack/test.rb#375
+    # source://rack-test//lib/rack/test.rb#400
     def encoding_aware_strings?; end
   end
 end
@@ -102,7 +102,7 @@ class Rack::Test::Cookie
   # source://rack-test//lib/rack/test/cookie_jar.rb#21
   def raw; end
 
-  # Wether the given cookie can replace the current cookie in the cookie jar.
+  # Whether the given cookie can replace the current cookie in the cookie jar.
   #
   # @return [Boolean]
   #
@@ -546,7 +546,7 @@ class Rack::Test::Session
   # cookie jar to the state they were prior to block execution upon
   # exiting the block.
   #
-  # source://rack-test//lib/rack/test.rb#240
+  # source://rack-test//lib/rack/test.rb#255
   def restore_state; end
 
   # Set a cookie in the current cookie jar.
@@ -558,27 +558,37 @@ class Rack::Test::Session
 
   # Append a string version of the query params to the array of query params.
   #
-  # source://rack-test//lib/rack/test.rb#340
+  # source://rack-test//lib/rack/test.rb#355
   def append_query_params(query_array, query_params); end
 
   # close() gets called automatically in newer Rack versions.
   #
-  # source://rack-test//lib/rack/test.rb#266
+  # source://rack-test//lib/rack/test.rb#281
   def close_body(body); end
+
+  # Convert the given params hash into a request body string.
+  #
+  # source://rack-test//lib/rack/test.rb#394
+  def convert_input_hash_to_string(value, prefix = T.unsafe(nil)); end
+
+  # Return the default content type to use when none is given.
+  #
+  # source://rack-test//lib/rack/test.rb#389
+  def default_input_content_type; end
 
   # Update environment to use based on given URI.
   #
-  # source://rack-test//lib/rack/test.rb#293
+  # source://rack-test//lib/rack/test.rb#308
   def env_for(uri, env); end
 
   # Return the multipart content type to use based on the environment.
   #
-  # source://rack-test//lib/rack/test.rb#346
+  # source://rack-test//lib/rack/test.rb#361
   def multipart_content_type(env); end
 
   # Normalize URI based on given URI/path and environment.
   #
-  # source://rack-test//lib/rack/test.rb#271
+  # source://rack-test//lib/rack/test.rb#286
   def parse_uri(path, env); end
 
   # Submit the request with the given URI and rack environment to
@@ -586,7 +596,7 @@ class Rack::Test::Session
   #
   # @yield [@last_response]
   #
-  # source://rack-test//lib/rack/test.rb#357
+  # source://rack-test//lib/rack/test.rb#372
   def process_request(uri, env); end
 
   class << self
@@ -595,7 +605,7 @@ class Rack::Test::Session
   end
 end
 
-# source://rack-test//lib/rack/test.rb#279
+# source://rack-test//lib/rack/test.rb#294
 Rack::Test::Session::DEFAULT_ENV = T.let(T.unsafe(nil), Hash)
 
 # Wraps a Tempfile with a content type. Including one or more UploadedFile's
@@ -624,7 +634,7 @@ class Rack::Test::UploadedFile
   # after to make sure all data in tempfile is appended to the
   # buffer.
   #
-  # source://rack-test//lib/rack/test/uploaded_file.rb#60
+  # source://rack-test//lib/rack/test/uploaded_file.rb#61
   def append_to(buffer); end
 
   # The content type of the "uploaded" file
@@ -667,19 +677,19 @@ class Rack::Test::UploadedFile
   # Create a tempfile and copy the content from the given path into the tempfile, optionally renaming if
   # original_filename has been set.
   #
-  # source://rack-test//lib/rack/test/uploaded_file.rb#86
+  # source://rack-test//lib/rack/test/uploaded_file.rb#88
   def initialize_from_file_path(path); end
 
   # Use the StringIO as the tempfile.
   #
   # @raise [ArgumentError]
   #
-  # source://rack-test//lib/rack/test/uploaded_file.rb#78
+  # source://rack-test//lib/rack/test/uploaded_file.rb#80
   def initialize_from_stringio(stringio); end
 
   # @return [Boolean]
   #
-  # source://rack-test//lib/rack/test/uploaded_file.rb#71
+  # source://rack-test//lib/rack/test/uploaded_file.rb#73
   def respond_to_missing?(method_name, include_private = T.unsafe(nil)); end
 end
 
@@ -693,41 +703,55 @@ module Rack::Test::Utils
   #
   # @raise [ArgumentError]
   #
-  # source://rack-test//lib/rack/test/utils.rb#34
+  # source://rack-test//lib/rack/test/utils.rb#41
   def build_multipart(params, _first = T.unsafe(nil), multipart = T.unsafe(nil)); end
 
   # Build a query string for the given value and prefix. The value
   # can be an array or hash of parameters.
   #
-  # source://rack-test//lib/rack/test/utils.rb#11
+  # source://rack-test//lib/rack/test/utils.rb#16
   def build_nested_query(value, prefix = T.unsafe(nil)); end
 
   private
 
   # Append each multipart parameter value to the buffer.
   #
-  # source://rack-test//lib/rack/test/utils.rb#100
+  # source://rack-test//lib/rack/test/utils.rb#101
   def _build_parts(buffer, parameters); end
 
   # Append the multipart fragment for a parameter that is a file upload to the buffer.
   #
-  # source://rack-test//lib/rack/test/utils.rb#133
+  # source://rack-test//lib/rack/test/utils.rb#138
   def build_file_part(buffer, parameter_name, uploaded_file); end
 
   # Build the multipart content for uploading.
   #
-  # source://rack-test//lib/rack/test/utils.rb#94
+  # source://rack-test//lib/rack/test/utils.rb#95
   def build_parts(buffer, parameters); end
 
   # Append the multipart fragment for a parameter that isn't a file upload to the buffer.
   #
-  # source://rack-test//lib/rack/test/utils.rb#121
+  # source://rack-test//lib/rack/test/utils.rb#126
   def build_primitive_part(buffer, parameter_name, value); end
 
   # Return a flattened hash of parameter values based on the given params.
   #
-  # source://rack-test//lib/rack/test/utils.rb#62
+  # source://rack-test//lib/rack/test/utils.rb#69
   def normalize_multipart_params(params, first = T.unsafe(nil)); end
+
+  class << self
+    # Returns the value of attribute override_build_nested_query.
+    #
+    # source://rack-test//lib/rack/test/utils.rb#10
+    def override_build_nested_query; end
+
+    # Sets the attribute override_build_nested_query
+    #
+    # @param value the value to set the attribute override_build_nested_query to.
+    #
+    # source://rack-test//lib/rack/test/utils.rb#10
+    def override_build_nested_query=(_arg0); end
+  end
 end
 
 # source://rack-test//lib/rack/test/version.rb#3

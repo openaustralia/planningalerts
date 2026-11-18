@@ -46,6 +46,16 @@ class FactoryBotRails::FactoryValidator
   def validate_compiled_factory; end
 end
 
+# source://factory_bot_rails//lib/factory_bot_rails/file_fixture_support.rb#2
+module FactoryBotRails::FileFixtureSupport
+  class << self
+    # @private
+    #
+    # source://factory_bot_rails//lib/factory_bot_rails/file_fixture_support.rb#3
+    def included(klass); end
+  end
+end
+
 # source://factory_bot_rails//lib/factory_bot_rails/generator.rb#6
 class FactoryBotRails::Generator
   # @return [Generator] a new instance of Generator
@@ -123,11 +133,11 @@ class FactoryBotRails::Generators::RSpecGenerator
   def fixture_replacement_setting; end
 end
 
-# source://factory_bot_rails//lib/factory_bot_rails/railtie.rb#10
+# source://factory_bot_rails//lib/factory_bot_rails/railtie.rb#11
 class FactoryBotRails::Railtie < ::Rails::Railtie
   private
 
-  # source://factory_bot_rails//lib/factory_bot_rails/railtie.rb#31
+  # source://factory_bot_rails//lib/factory_bot_rails/railtie.rb#49
   def definition_file_paths; end
 end
 
