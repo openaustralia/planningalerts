@@ -1,10 +1,28 @@
 # frozen_string_literal: true
 
-# Fails a full spec run when a GET route has no page check
-# (have_site_layout, have_no_broken_internal_links or have_no_missing_assets)
-# run against it, unless it is listed in EXCEPTIONS with a reason. Also fails
-# when an exception is out of date, so the list stays honest.
+# Fails a full spec run when:
+# - a GET route has no page check (have_site_layout,
+#   have_no_broken_internal_links or have_no_missing_assets) run against it,
+#   unless it is listed in EXCEPTIONS with a reason
+# - a routed controller action is never requested by any passing example,
+#   whatever its verb or format, unless it is listed in ACTION_EXCEPTIONS
+# Also fails when an exception is out of date, so the lists stay honest.
 module RouteCoverage
+  # Keys are "controller#action" as Rails routes them
+  ACTION_EXCEPTIONS = {
+    "admin/comments#confirm" => "routed, but the controller has no confirm action",
+    "alerts/registrations#cancel" => "unused Devise route (#2163)",
+    "alerts/registrations#destroy" => "unused Devise route (#2163)",
+    "alerts/registrations#edit" => "unused Devise route (#2163)",
+    "alerts/registrations#update" => "unused Devise route (#2163)",
+    "alerts/sessions#destroy" => "unused Devise route (#2163)",
+    "users/registrations#cancel" => "unused Devise route (#2163)",
+    "api_keys/non_commercials#new" => "pending until #2352",
+    "api_keys/paid#new" => "pending until #2352",
+    "api_keys/non_commercials#create" => "routed, but no create action exists (#2352)",
+    "api_keys/paid#create" => "routed, but no create action exists (#2352)"
+  }.freeze
+
   # Keys are "VERB path" as Rails declares them (see `bin/rails routes`)
   EXCEPTIONS = {
     "GET|POST /health_check(/:checks)(.:format)" => "load balancer health check, plain text",
@@ -30,15 +48,42 @@ module RouteCoverage
 
   @visited = Set.new
   @this_example = Set.new
+  @requested = Set.new
+  @this_example_actions = Set.new
+  # Feature specs with JavaScript serve requests from another thread
+  @lock = Mutex.new
 
   class << self
-    attr_reader :visited
+    attr_reader :visited, :requested
 
-    # Only count pages from examples that passed, so a failing or pending
-    # example doesn't count as covering its page
+    # Only count pages and actions from examples that passed, so a failing or
+    # pending example doesn't count as covering them
     def finish_example(example)
-      @visited.merge(@this_example) unless example.exception || example.pending?
-      @this_example = Set.new
+      @lock.synchronize do
+        unless example.exception || example.pending?
+          @visited.merge(@this_example)
+          @requested.merge(@this_example_actions)
+        end
+        @this_example = Set.new
+        @this_example_actions = Set.new
+      end
+    end
+
+    def record_action(controller_class_name, action)
+      @lock.synchronize do
+        @this_example_actions << "#{controller_class_name.underscore.delete_suffix('_controller')}##{action}"
+      end
+    end
+
+    # "controller#action" for every route that leads to one of our
+    # controllers, apart from Rails' own and redirects
+    def routed_actions
+      Rails.application.routes.routes.filter_map do |route|
+        controller, action = route.defaults.values_at(:controller, :action)
+        next if controller.nil? || action.nil? || framework?(route) || redirect?(route)
+
+        "#{controller}##{action}"
+      end.uniq
     end
 
     def key(route)
@@ -96,6 +141,16 @@ module RouteCoverage
         ["Routes with no page check (add one, or an exception in spec/support/route_coverage.rb):", untested],
         ["Exceptions that now have a page check, so remove them:", now_tested],
         ["Exceptions that no longer match a route:", unknown]
+      ].reject { |_heading, keys| keys.empty? } + action_problems
+    end
+
+    def action_problems
+      expected = routed_actions
+      [
+        ["Controller actions no spec requests (add one, or an action exception):",
+         expected - requested.to_a - ACTION_EXCEPTIONS.keys],
+        ["Action exceptions that are now requested, so remove them:", ACTION_EXCEPTIONS.keys & requested.to_a],
+        ["Action exceptions that no longer match a route:", ACTION_EXCEPTIONS.keys - expected]
       ].reject { |_heading, keys| keys.empty? }
     end
 
@@ -107,6 +162,10 @@ module RouteCoverage
         config.filter_manager.inclusions.empty?
     end
   end
+end
+
+ActiveSupport::Notifications.subscribe("process_action.action_controller") do |*, payload|
+  RouteCoverage.record_action(payload[:controller], payload[:action])
 end
 
 RSpec.configure do |config|
