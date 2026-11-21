@@ -55,15 +55,20 @@ module PageMatchers
   end
 
   def self.routable?(method, path)
+    !route_for(method, path).nil?
+  end
+
+  # The first route that handles this request, as the router would pick it
+  def self.route_for(method, path)
     env = Rack::MockRequest.env_for("http://www.example.com#{path}", method: method.upcase)
     env["warden"] = AdminWarden.new
     request = ActionDispatch::Request.new(env)
     Rails.application.routes.router.recognize(request) do |route, _params|
       # Routes inside a `constraints` block (like the API hostname catch-all)
       # are only real matches when the constraint passes too
-      return true if route.app.matches?(request)
+      return route if route.app.matches?(request)
     end
-    false
+    nil
   end
 
   # Local URLs of the stylesheets, scripts, icons and images the page loads
@@ -121,6 +126,7 @@ end
 
 RSpec::Matchers.define :have_site_layout do
   match do |actual|
+    RouteCoverage.record(actual)
     node = PageMatchers.capybara_node(actual)
     # The page's own content may have no links, but the nav bar and footer always do
     @missing = {
@@ -138,6 +144,7 @@ end
 # assets means something is wrong with the page or this check
 RSpec::Matchers.define :have_no_missing_assets do
   match do |actual|
+    RouteCoverage.record(actual)
     assets = PageMatchers.local_assets(actual)
     @missing = assets.reject { |_url, path| PageMatchers.asset_exists?(path) }.keys
     @none_found = assets.empty?
@@ -157,6 +164,7 @@ end
 # links means something is wrong with the page or this check
 RSpec::Matchers.define :have_no_broken_internal_links do
   match do |actual|
+    RouteCoverage.record(actual)
     links = PageMatchers.internal_links(actual)
     @broken = links.reject { |method, _href, path| PageMatchers.routable?(method, path) }
                    .map { |method, href, _path| "#{method.upcase} #{href}" }.uniq

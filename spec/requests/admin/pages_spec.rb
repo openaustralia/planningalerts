@@ -188,6 +188,15 @@ describe "Admin pages" do
     end
   end
 
+  it "edits an announcement" do
+    announcement = create(:announcement, body: "Planning Alerts will be offline on Sunday")
+
+    get edit_admin_announcement_path(announcement)
+
+    expect_working_admin_page
+    expect(response.body).to include("Planning Alerts will be offline on Sunday")
+  end
+
   it "lists the top API users" do
     DailyApiUsage.create!(api_key:, date: Time.zone.today, count: 42)
 
