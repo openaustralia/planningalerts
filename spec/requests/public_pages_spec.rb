@@ -128,6 +128,24 @@ describe "Public pages" do
         expect(response.body).to include("Your API keys", "Plan type:", api_key.value)
       end
 
+      it "shows when a trial key expires" do
+        create(:api_key, user:, expires_at: 14.days.from_now)
+
+        get api_keys_path
+
+        expect_working_page
+        expect(response.body).to match(%r{Expires in:\s*<time datetime="[^"]+" title="[^"]+">14 days</time>})
+      end
+
+      it "says when the trial is over" do
+        create(:api_key, user:, expires_at: 1.day.ago)
+
+        get api_keys_path
+
+        expect_working_page
+        expect(response.body).to include("Key expired", "Your trial access to our API is up!")
+      end
+
       it "confirms creating a key" do
         get confirm_api_keys_path
 
