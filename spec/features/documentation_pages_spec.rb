@@ -11,6 +11,9 @@ describe "Browsing basic documentation pages" do
     it "has an about page" do
       visit about_path
       expect(page).to have_content "This service enables shared scrutiny of what is being built"
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
     end
 
     describe "in the new design" do
@@ -66,6 +69,9 @@ describe "Browsing basic documentation pages" do
 
     it "has a help page" do
       expect(page).to have_content "Help"
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
     end
 
     describe "accessibility tests", :js do
