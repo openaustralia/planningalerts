@@ -109,12 +109,13 @@ module PageMatchers
     asset_urls(capybara_node(actual)).index_with { |url| internal_path(url, base) }.compact
   end
 
-  def self.broken_links(actual)
+  # [method, href, path] for links and forms on this site, skipping external ones
+  def self.internal_links(actual)
     base = base_url(actual)
     links(capybara_node(actual)).filter_map do |method, href|
       path = internal_path(href, base)
-      "#{method.upcase} #{href}" if path && !routable?(method, path)
-    end.uniq
+      [method, href, path] if path
+    end
   end
 end
 
@@ -150,13 +151,22 @@ RSpec::Matchers.define :have_no_missing_assets do
   end
 end
 
+# Every page has a nav bar and footer with links, so a page with no internal
+# links means something is wrong with the page or this check
 RSpec::Matchers.define :have_no_broken_internal_links do
   match do |actual|
-    @broken = PageMatchers.broken_links(actual)
-    @broken.empty?
+    links = PageMatchers.internal_links(actual)
+    @broken = links.reject { |method, _href, path| PageMatchers.routable?(method, path) }
+                   .map { |method, href, _path| "#{method.upcase} #{href}" }.uniq
+    @none_found = links.empty?
+    !@none_found && @broken.empty?
   end
 
   failure_message do
-    "expected no links without a matching route, but found:\n  #{@broken.join("\n  ")}"
+    if @none_found
+      "expected the page to have at least one internal link or form, but found none"
+    else
+      "expected no links without a matching route, but found:\n  #{@broken.join("\n  ")}"
+    end
   end
 end

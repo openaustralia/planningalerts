@@ -8,7 +8,7 @@ describe PageMatchers, type: :request do
   def page_with(main)
     html = <<~HTML
       <html><head><link rel="stylesheet" href="/assets/tailwind.css"></head><body>
-        <header><nav aria-label="Main"></nav></header>
+        <header><nav aria-label="Main"><a href="/">Home</a></nav></header>
         <main>#{main}</main>
         <footer class="oaf-footer"></footer>
       </body></html>
@@ -116,6 +116,11 @@ describe PageMatchers, type: :request do
 
     it "fails on the wrong method given through data-turbo-method" do
       expect(page_with('<a href="/about" data-turbo-method="delete">x</a>')).not_to have_no_broken_internal_links
+    end
+
+    it "fails on a page with no internal links, so it can't pass by checking nothing" do
+      html = "<html><body><a href=\"https://example.org/\">x</a></body></html>"
+      expect(Struct.new(:body).new(html)).not_to have_no_broken_internal_links
     end
 
     it "names the broken link" do
