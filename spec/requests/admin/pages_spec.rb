@@ -86,6 +86,18 @@ describe "Admin pages" do
       expect(response.body).to include("Edit Exampleton City Council")
     end
 
+    it "queues an import of its applications" do
+      Sidekiq::Testing.fake! do
+        ImportApplicationsJob.clear
+
+        post import_admin_authority_path(authority)
+
+        expect(ImportApplicationsJob.jobs.pluck("args")).to eq [[authority.id]]
+        expect(response).to redirect_to(admin_authority_path(authority))
+        expect(flash[:notice]).to eq "Queued for importing!"
+      end
+    end
+
     it "has a form for a new one" do
       get new_admin_authority_path
 
