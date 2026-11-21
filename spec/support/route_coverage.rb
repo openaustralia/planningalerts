@@ -19,7 +19,6 @@ module RouteCoverage
     "GET /users/cancel(.:format)" => "unused Devise route (#2163)",
     "GET /profile/alerts/users/cancel(.:format)" => "unused Devise route (#2163)",
     "GET /profile/alerts/users/edit(.:format)" => "unused Devise route (#2163)",
-    "GET / applications#address" => "unreachable: the earlier GET / to home#index always matches first",
     "GET /authorities/:id/boundary(.:format)" => "JSON only",
     "GET /authorities/:authority_id/applications/per_week(.:format)" => "JSON only",
     "GET /authorities/:authority_id/comments/per_week(.:format)" => "JSON only",
@@ -46,13 +45,6 @@ module RouteCoverage
       "#{route.verb.presence || 'ANY'} #{route.path.spec}"
     end
 
-    # Root is declared twice, so tell the two apart by controller#action
-    def exception_key(route)
-      return "#{key(route)} #{route.defaults.values_at(:controller, :action).join('#')}" if route.path.spec.to_s == "/"
-
-      key(route)
-    end
-
     # Note the route of a request spec's response or a feature spec's page.
     # Hand-built HTML, as in the matchers' own spec, has no route.
     def record(actual)
@@ -64,7 +56,7 @@ module RouteCoverage
       return unless path
 
       route = PageMatchers.route_for(method, path)
-      @this_example << exception_key(route) if route
+      @this_example << key(route) if route
     end
 
     # Routes a page check should cover: everything reachable by GET apart
@@ -96,7 +88,7 @@ module RouteCoverage
     end
 
     def problems
-      expected = page_routes.map { |route| exception_key(route) }.uniq
+      expected = page_routes.map { |route| key(route) }.uniq
       untested = expected - visited.to_a - EXCEPTIONS.keys
       now_tested = EXCEPTIONS.keys & visited.to_a
       unknown = EXCEPTIONS.keys - expected
