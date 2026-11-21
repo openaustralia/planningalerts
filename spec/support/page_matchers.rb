@@ -122,9 +122,11 @@ end
 RSpec::Matchers.define :have_site_layout do
   match do |actual|
     node = PageMatchers.capybara_node(actual)
+    # The page's own content may have no links, but the nav bar and footer always do
     @missing = {
-      "main navigation (html body header nav[aria-label='Main'])" => "html body header nav[aria-label='Main']",
-      "OAF footer (html body footer.oaf-footer)" => "html body footer.oaf-footer"
+      "main navigation with links (html body header nav[aria-label='Main'] a[href])" =>
+        "html body header nav[aria-label='Main'] a[href]",
+      "OAF footer with links (html body footer.oaf-footer a[href])" => "html body footer.oaf-footer a[href]"
     }.reject { |_name, css| node.has_css?(css, visible: :all) }.keys
     @missing.empty?
   end

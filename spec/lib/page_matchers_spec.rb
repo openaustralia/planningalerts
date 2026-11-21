@@ -10,7 +10,7 @@ describe PageMatchers, type: :request do
       <html><head><link rel="stylesheet" href="/assets/tailwind.css"></head><body>
         <header><nav aria-label="Main"><a href="/">Home</a></nav></header>
         <main>#{main}</main>
-        <footer class="oaf-footer"></footer>
+        <footer class="oaf-footer"><a href="https://www.oaf.org.au/">OAF</a></footer>
       </body></html>
     HTML
     Struct.new(:body).new(html)
@@ -22,9 +22,23 @@ describe PageMatchers, type: :request do
       expect(response).to have_site_layout
     end
 
+    it "passes a page whose own content has no links" do
+      expect(page_with("<p>No links here</p>")).to have_site_layout
+    end
+
     it "fails without the main navigation and OAF footer" do
       expect(Struct.new(:body).new("<html><body><header></header></body></html>"))
         .not_to have_site_layout
+    end
+
+    it "fails when the nav bar and footer have no links" do
+      html = <<~HTML
+        <html><body>
+          <header><nav aria-label="Main"></nav></header>
+          <footer class="oaf-footer"></footer>
+        </body></html>
+      HTML
+      expect(Struct.new(:body).new(html)).not_to have_site_layout
     end
   end
 
