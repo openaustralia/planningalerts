@@ -14,6 +14,9 @@ describe "Comments disabled on an application" do
     expect(page).to have_no_link("Sign in", href: new_user_session_path, exact: true)
     expect(page).to have_no_link("Make a comment now")
     expect(page).to have_no_link("Be the first to comment")
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
   end
 
   it "replaces the comment form for a signed in person" do

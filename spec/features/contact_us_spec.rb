@@ -16,6 +16,9 @@ describe "Contact us" do
       click_on "Send message"
 
       expect(page).to have_content("Thank you for getting in touch")
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
       expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
       open_email("contact@planningalerts.org.au")
       expect(current_email).to have_subject("Contact form: The address or map location is wrong")

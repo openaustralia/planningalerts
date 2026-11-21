@@ -10,6 +10,9 @@ describe "Home page" do
   it "shows what the service is" do
     visit root_path
     expect(page).to have_content "What is being built and knocked down in your area?"
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
   end
 
   describe "accessibility tests", :js do

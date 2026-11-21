@@ -30,6 +30,9 @@ describe "Comments pages" do
 
       it "passes accessibility tests", :js do
         expect(page).to be_axe_clean
+        expect(page).to have_site_layout
+        expect(page).to have_no_broken_internal_links
+        expect(page).to have_no_missing_assets
       end
 
       # rubocop:disable RSpec/NoExpectationExample
@@ -47,6 +50,9 @@ describe "Comments pages" do
 
         it "lets the user know" do
           expect(page).to have_content("You haven't made any comments yet")
+          expect(page).to have_site_layout
+          expect(page).to have_no_broken_internal_links
+          expect(page).to have_no_missing_assets
         end
 
         it "passes accessibility tests", :js do

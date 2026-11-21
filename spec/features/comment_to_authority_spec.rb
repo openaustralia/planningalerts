@@ -15,6 +15,9 @@ describe "Give feedback" do
     visit(application_path(application))
 
     expect(page).to have_content("To comment on this application you will need to go to the original source")
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
   end
 
   describe "an authority without a feedback email in the new design" do
@@ -111,6 +114,9 @@ describe "Give feedback" do
         it "takes you to a preview page" do
           expect(page).to have_content("Does this look right?")
           expect(page).to have_content("I think this is a really good ideas")
+          expect(page).to have_site_layout
+          expect(page).to have_no_broken_internal_links
+          expect(page).to have_no_missing_assets
         end
 
         describe "accessibility tests", :js do
@@ -203,6 +209,9 @@ describe "Give feedback" do
 
     expect(page).to have_content("A moderator will review the comment")
     expect(page).to have_content("Thank you for noticing!")
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
 
     expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
     open_email("contact@planningalerts.org.au")

@@ -17,6 +17,8 @@ describe "Admin disables commenting for a person" do
     expect(page).to have_content("User was successfully updated")
     expect(page).to have_content("Comments disabled\nyes")
     expect(page).to have_content("Impersonating another person")
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
 
     visit edit_admin_user_path(person)
 

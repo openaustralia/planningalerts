@@ -35,6 +35,8 @@ describe "Admin sends a test email" do
 
       follow_redirect!
       expect(response.body).to include("Test email sent to #{recipient}")
+      expect(response).to have_no_broken_internal_links
+      expect(response).to have_no_missing_assets
     end
   end
 

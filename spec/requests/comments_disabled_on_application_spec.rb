@@ -58,6 +58,9 @@ describe "Comments disabled on an application" do
     expect(response.body).to include("Commenting is turned off for this application")
     expect(response.body).not_to include("Edit comment")
     expect(response.body).not_to include(publish_application_comment_path(application, draft))
+    expect(response).to have_site_layout
+    expect(response).to have_no_broken_internal_links
+    expect(response).to have_no_missing_assets
   end
 
   it "shows the person's own restriction on a draft's preview when both apply" do
@@ -74,5 +77,8 @@ describe "Comments disabled on an application" do
     get application_path(application)
 
     expect(response.body).not_to include(application.comments_disabled_reason)
+    expect(response).to have_site_layout
+    expect(response).to have_no_broken_internal_links
+    expect(response).to have_no_missing_assets
   end
 end

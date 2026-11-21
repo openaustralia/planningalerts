@@ -24,6 +24,8 @@ describe "Hiding an application" do
       expect(page).to have_content("Application was successfully updated")
       expect(page).to have_content("Hidden\nyes")
       expect(page).to have_content(hidden_reason)
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
     end
   end
 

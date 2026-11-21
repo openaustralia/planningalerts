@@ -17,6 +17,9 @@ describe "Copy and share buttons" do
       click_on "Copy"
 
       expect(page).to have_content("Copied")
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
     end
 
     it "tells the person when copying fails", :js do
@@ -47,6 +50,9 @@ describe "Copy and share buttons" do
       click_on "Share this application"
 
       expect(page).to have_content("Link copied")
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
     end
 
     it "tells the person when copying the link fails", :js do

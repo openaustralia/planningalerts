@@ -55,6 +55,9 @@ describe "Activate account" do
       click_on "Send me an email"
 
       expect(page).to have_content "Now check your email"
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
 
       expect(unread_emails_for("matthew@oaf.org.au").size).to eq 1
       open_email("matthew@oaf.org.au")
@@ -72,6 +75,9 @@ describe "Activate account" do
 
       expect(page).to have_content "Your account is now activated. You are now signed in"
       expect(page).to have_content "Matthew"
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
 
       user = User.find_by(email: "matthew@oaf.org.au")
       expect(user.name).to eq "Matthew"

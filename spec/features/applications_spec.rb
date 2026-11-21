@@ -26,6 +26,9 @@ describe "Applications pages" do
 
       it "passes accessibility tests", :js do
         expect(page).to be_axe_clean
+        expect(page).to have_site_layout
+        expect(page).to have_no_broken_internal_links
+        expect(page).to have_no_missing_assets
       end
 
       # rubocop:disable RSpec/NoExpectationExample
