@@ -103,12 +103,10 @@ module PageMatchers
     [name, without_fingerprint].uniq.any? { |logical| Rails.application.assets.find_asset(logical) }
   end
 
-  def self.missing_assets(actual)
+  # { url => path } for assets served by this site, skipping CDN files
+  def self.local_assets(actual)
     base = base_url(actual)
-    asset_urls(capybara_node(actual)).filter_map do |url|
-      path = internal_path(url, base)
-      url if path && !asset_exists?(path)
-    end.uniq
+    asset_urls(capybara_node(actual)).index_with { |url| internal_path(url, base) }.compact
   end
 
   def self.broken_links(actual)
@@ -133,14 +131,22 @@ RSpec::Matchers.define :have_site_layout do
   failure_message { "expected page to have #{@missing.join(' and ')}" }
 end
 
+# Every real page loads our stylesheet and scripts, so a page with no local
+# assets means something is wrong with the page or this check
 RSpec::Matchers.define :have_no_missing_assets do
   match do |actual|
-    @missing = PageMatchers.missing_assets(actual)
-    @missing.empty?
+    assets = PageMatchers.local_assets(actual)
+    @missing = assets.reject { |_url, path| PageMatchers.asset_exists?(path) }.keys
+    @none_found = assets.empty?
+    !@none_found && @missing.empty?
   end
 
   failure_message do
-    "expected every local asset to exist, but these are missing:\n  #{@missing.join("\n  ")}"
+    if @none_found
+      "expected the page to load at least one local stylesheet, script or image, but found none"
+    else
+      "expected every local asset to exist, but these are missing:\n  #{@missing.join("\n  ")}"
+    end
   end
 end
 

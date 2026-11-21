@@ -7,7 +7,7 @@ require "spec_helper"
 describe PageMatchers, type: :request do
   def page_with(main)
     html = <<~HTML
-      <html><body>
+      <html><head><link rel="stylesheet" href="/assets/tailwind.css"></head><body>
         <header><nav aria-label="Main"></nav></header>
         <main>#{main}</main>
         <footer class="oaf-footer"></footer>
@@ -61,6 +61,11 @@ describe PageMatchers, type: :request do
 
     it "doesn't count files outside public/" do
       expect(page_with('<img src="/../Gemfile">')).not_to have_no_missing_assets
+    end
+
+    it "fails on a page with no local assets, so it can't pass by checking nothing" do
+      html = "<html><body><script src=\"https://cdn.example.org/x.js\"></script></body></html>"
+      expect(Struct.new(:body).new(html)).not_to have_no_missing_assets
     end
 
     it "names the missing asset" do
