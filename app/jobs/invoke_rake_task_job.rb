@@ -2,7 +2,8 @@
 # frozen_string_literal: true
 
 require "rake"
-Rails.application.load_tasks
+# Loading the tasks twice would give every task its actions twice
+Rails.application.load_tasks if Rake::Task.tasks.empty?
 
 # Fromhttps://github.com/sidekiq-cron/sidekiq-cron/issues/133#issuecomment-819909671
 class InvokeRakeTaskJob
