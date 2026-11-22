@@ -24,6 +24,9 @@ describe "ALTCHA on the contact form" do
       get documentation_contact_path
 
       expect(response.body).not_to include("altcha-widget")
+      expect(response).to have_site_layout
+      expect(response).to have_no_broken_internal_links
+      expect(response).to have_no_missing_assets
     end
 
     it "still accepts a message, since there are no reCAPTCHA credentials in test" do

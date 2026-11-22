@@ -12,6 +12,8 @@ describe "Admin disables comments on an application" do
     click_on "Admin", exact: true
 
     expect(page).to have_current_path(admin_application_path(application))
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
   end
 
   it "doesn't show the admin link to other people" do
@@ -32,6 +34,8 @@ describe "Admin disables comments on an application" do
     expect(page).to have_content("Application was successfully updated")
     expect(page).to have_content("Comments disabled\nyes")
     expect(page).to have_content("Heated dispute between neighbours")
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
 
     visit edit_admin_application_path(application)
 

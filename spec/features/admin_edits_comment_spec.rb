@@ -22,10 +22,15 @@ describe "Admin edits comment" do
     click_on "Update Comment"
 
     expect(page).to have_content("Comment was successfully updated")
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
 
     visit application_path(Comment.find(1).application)
 
     expect(page).to have_content "Foo"
     expect(page).to have_content "3 days ago"
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
   end
 end

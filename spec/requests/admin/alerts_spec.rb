@@ -32,6 +32,8 @@ describe "Admin unsubscribes an alert" do
 
       follow_redirect!
       expect(response.body).to include("Alert unsubscribed")
+      expect(response).to have_no_broken_internal_links
+      expect(response).to have_no_missing_assets
     end
   end
 

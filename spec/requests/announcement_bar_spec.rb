@@ -9,6 +9,9 @@ describe "Announcement bar" do
     create(:announcement, body: "We are updating the planning data tonight.")
     get about_path
     expect(response.body).to include("We are updating the planning data tonight.")
+    expect(response).to have_site_layout
+    expect(response).to have_no_broken_internal_links
+    expect(response).to have_no_missing_assets
   end
 
   it "shows nothing when no announcement is live" do
@@ -110,6 +113,9 @@ describe "Announcement bar" do
       get alerts_path
       expect(response.body).to include("Your account")
       expect(response.body).to include("Layout check notice")
+      expect(response).to have_site_layout
+      expect(response).to have_no_broken_internal_links
+      expect(response).to have_no_missing_assets
     end
 
     it "does not appear in API responses" do

@@ -15,6 +15,9 @@ describe "Signing up for an API account" do
     click_on "Create my account"
 
     expect(page).to have_content "You will shortly receive an email from PlanningAlerts.org.au"
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
     expect(User.find_by(email: "henare@oaf.org.au").name).to eq "Henare Degan"
 
     expect(unread_emails_for("henare@oaf.org.au").size).to eq(1)
@@ -45,6 +48,9 @@ describe "Signing up for an API account" do
 
     it "shows the page" do
       expect(page).to have_content("Resend confirmation instructions")
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
     end
 
     # rubocop:disable RSpec/NoExpectationExample
@@ -63,6 +69,9 @@ describe "Signing up for an API account" do
 
     it "tells you what to do" do
       expect(page).to have_content("Let's get you to create a new password")
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
     end
 
     # rubocop:disable RSpec/NoExpectationExample
@@ -101,6 +110,9 @@ describe "Signing up for an API account" do
 
         it "tells the user what to do" do
           expect(page).to have_content("Create password")
+          expect(page).to have_site_layout
+          expect(page).to have_no_broken_internal_links
+          expect(page).to have_no_missing_assets
         end
 
         # rubocop:disable RSpec/NoExpectationExample

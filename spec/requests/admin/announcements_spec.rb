@@ -45,6 +45,8 @@ describe "Admin announcements" do
       it "starts the announcement now by default" do
         get new_admin_announcement_path
         expect(response.body).to include('value="2026-10-15T02:30:00"')
+        expect(response).to have_no_broken_internal_links
+        expect(response).to have_no_missing_assets
       end
 
       it "says the times are in UTC and how far Sydney is from it" do
@@ -59,6 +61,8 @@ describe "Admin announcements" do
       announcement = create(:announcement, starts_at: Time.utc(2026, 10, 15, 2, 30))
       get admin_announcement_path(announcement)
       expect(response.body).to include("15 October 2026, 2:30 am UTC")
+      expect(response).to have_no_broken_internal_links
+      expect(response).to have_no_missing_assets
     end
 
     it "lists announcements" do
@@ -66,6 +70,8 @@ describe "Admin announcements" do
       get admin_announcements_path
       expect(response).to have_http_status(:ok)
       expect(response.body).to include("Listed notice")
+      expect(response).to have_no_broken_internal_links
+      expect(response).to have_no_missing_assets
     end
 
     it "creates an announcement" do

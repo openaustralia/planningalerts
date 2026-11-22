@@ -39,6 +39,9 @@ describe "Searching for development application near an address" do
       expect(page).to have_content "24 Bruce Road"
       expect(page).to have_content "A lovely house"
     end
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
   end
 
   it "returns results in the new design" do
@@ -78,6 +81,9 @@ describe "Searching for development application near an address" do
 
     it "passes" do
       expect(page).to be_axe_clean
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
     end
 
     # rubocop:disable RSpec/NoExpectationExample

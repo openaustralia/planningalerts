@@ -15,6 +15,9 @@ describe "Coverage" do
     describe "accessibility test", :js do
       it "passes" do
         expect(page).to be_axe_clean
+        expect(page).to have_site_layout
+        expect(page).to have_no_broken_internal_links
+        expect(page).to have_no_missing_assets
       end
     end
 

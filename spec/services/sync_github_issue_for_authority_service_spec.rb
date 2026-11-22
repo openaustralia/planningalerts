@@ -66,6 +66,47 @@ describe SyncGithubIssueForAuthorityService do
         end
       end
 
+      context "when github finds the project" do
+        let(:field) { Struct.new(:id) }
+        let(:project) do
+          Struct.new(:id, :authority_field, :latest_date_field, :scraper_field, :state_field,
+                     :population_field, :website_field, :authority_admin_field)
+                .new("P_project", *%w[F_authority F_date F_scraper F_state F_population F_website F_admin].map { |id| field.new(id) })
+        end
+
+        before do
+          authority.update!(full_name: "Exampleton City Council", state: "NSW", population_2021: 12_345,
+                            website_url: "https://www.exampleton.nsw.gov.au/", morph_name: "planningalerts-scrapers/exampleton")
+          # graphql-client builds the data object from a dynamically generated class,
+          # so there's no real constant to verify a double against. One object
+          # answers all three queries: find the project, add the issue, set a field.
+          data = Struct.new(:organization, :add_project_v2_item_by_id)
+                       .new(Struct.new(:project_v2).new(project), Struct.new(:item).new(Struct.new(:id).new("I_item")))
+          allow(graphql_data).to receive(:data).and_return(data)
+        end
+
+        it "creates an issue and fills in its project fields" do
+          described_class.call(logger:, authority:)
+
+          expect(authority.reload.github_issue.github_number).to eq 7
+          {
+            "F_authority" => { text: "Exampleton City Council" },
+            "F_state" => { text: "NSW" },
+            "F_population" => { number: 12_345 },
+            "F_website" => { text: "https://www.exampleton.nsw.gov.au/" }
+          }.each do |field_id, value|
+            expect(described_class::CLIENT).to have_received(:query).with(
+              described_class::UPDATE_FIELD_VALUE_MUTATION,
+              variables: { input: { projectId: "P_project", itemId: "I_item", fieldId: field_id, value: } }
+            )
+          end
+          expect(described_class::CLIENT).to have_received(:query).with(
+            described_class::UPDATE_FIELD_VALUE_MUTATION,
+            variables: { input: hash_including(fieldId: "F_date", value: { date: a_string_matching(/\A\d{4}-\d\d-\d\d/) }) }
+          )
+        end
+      end
+
       context "when github returns no project, which is what a missing permission looks like" do
         before do
           # graphql-client builds the data object from a dynamically generated class,

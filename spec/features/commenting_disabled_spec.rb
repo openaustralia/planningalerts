@@ -19,6 +19,9 @@ describe "Commenting disabled for a person" do
     expect(page).to have_link("please contact us", href: documentation_contact_path)
     expect(page).to have_no_content("Add your own comment")
     expect(page).to have_no_field("Your comment")
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
   end
 
   it "doesn't invite them to comment when there are no comments" do

@@ -251,15 +251,13 @@ Rails.application.routes.draw do
     get :contact
   end
 
-  get "/" => "home#index"
+  root to: "home#index"
 
   ## Use the donations form on OAF for now.
   get "donations/new", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
   get "donations/create", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
   get "donations", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
   get "donate", to: redirect("https://www.oaf.org.au/donate/planningalerts/"), as: nil
-
-  root to: "applications#address"
 
   get "/404", to: "documentation#error_404"
   get "/500", to: "documentation#error_500"

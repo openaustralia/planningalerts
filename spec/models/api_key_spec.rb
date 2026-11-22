@@ -3,6 +3,25 @@
 require "spec_helper"
 
 describe ApiKey do
+  # The API's daily rate limit in config/initializers/rack_attack.rb
+  describe ".daily_limit_with_default" do
+    it "uses the key's own limit" do
+      key = create(:api_key, daily_limit: 5000)
+
+      expect(described_class.daily_limit_with_default(key.value)).to eq 5000
+    end
+
+    it "falls back to the default when the key has no limit of its own" do
+      key = create(:api_key, daily_limit: nil)
+
+      expect(described_class.daily_limit_with_default(key.value)).to eq described_class.default_daily_limit
+    end
+
+    it "falls back to the default for an unknown key" do
+      expect(described_class.daily_limit_with_default("not-a-real-key")).to eq described_class.default_daily_limit
+    end
+  end
+
   describe ".find_valid" do
     it "returns nil for a non-existing key" do
       expect(described_class.find_valid("abc")).to be_nil

@@ -15,6 +15,8 @@ describe "Admin views the IP an alert was signed up from" do
     visit admin_alerts_path
 
     expect(page).to have_content ip_address
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
   end
 
   it "shows it on the alert page" do
@@ -24,5 +26,7 @@ describe "Admin views the IP an alert was signed up from" do
     visit admin_alert_path(alert)
 
     expect(page).to have_content ip_address
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
   end
 end

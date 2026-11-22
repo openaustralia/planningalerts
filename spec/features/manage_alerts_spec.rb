@@ -18,6 +18,9 @@ describe "Manage alerts" do
 
     expect(page).to have_content("You will no longer receive alerts")
     expect(page).to have_content("24 Bruce Rd, Glenbrook")
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
     expect(Alert.active.find_by(address: "24 Bruce Rd, Glenbrook",
                                 user: User.find_by(email: "example@example.com"))).to be_nil
   end
@@ -71,6 +74,9 @@ describe "Manage alerts" do
 
     expect(page).to have_content("24 Bruce Rd, Glenbrook")
     expect(page).to have_field("Alert distance", with: 2000)
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
     select("800")
     click_on("Update distance")
 

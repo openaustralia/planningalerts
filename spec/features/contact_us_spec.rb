@@ -16,6 +16,9 @@ describe "Contact us" do
       click_on "Send message"
 
       expect(page).to have_content("Thank you for getting in touch")
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
       expect(unread_emails_for("contact@planningalerts.org.au").size).to eq(1)
       open_email("contact@planningalerts.org.au")
       expect(current_email).to have_subject("Contact form: The address or map location is wrong")
@@ -26,6 +29,13 @@ describe "Contact us" do
       urls = Nokogiri::HTML(current_email.default_part_body).css("a").pluck("href")
       expect(urls.count).to eq 1
       visit urls.first
+      expect(page).to have_content("This is an attachment you might attach to a contact message")
+
+      # Links in emails already sent were signed in the old (Marshal) format.
+      # They must keep working after the message serialiser changes.
+      blob = ContactMessage.last.attachments.first.blob
+      old_format = ActiveSupport::MessageVerifier.new(Rails.application.key_generator.generate_key("ActiveStorage"), serializer: Marshal)
+      visit rails_service_blob_path(old_format.generate(blob.id, purpose: :blob_id), blob.filename, disposition: "attachment")
       expect(page).to have_content("This is an attachment you might attach to a contact message")
     end
   end

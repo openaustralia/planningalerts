@@ -19,5 +19,7 @@ describe "Admin hides comment" do
 
     expect(page).to have_content("Comment was successfully updated")
     expect(page).to have_content("Hidden\nyes")
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
   end
 end

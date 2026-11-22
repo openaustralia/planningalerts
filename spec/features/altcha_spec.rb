@@ -32,6 +32,9 @@ describe "ALTCHA on the sign up form" do
     click_on "Create my account"
 
     expect(page).to have_content "You will shortly receive an email from PlanningAlerts.org.au"
+    expect(page).to have_site_layout
+    expect(page).to have_no_broken_internal_links
+    expect(page).to have_no_missing_assets
     expect(User.find_by(email: "jane@example.com")).to be_present
   end
 

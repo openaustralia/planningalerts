@@ -50,6 +50,9 @@ describe "Authorities" do
     # Alpine expression. See #2193.
     it "leaves the page working when the graph javascript is missing" do
       expect(page).to have_css("[x-init*='() => barGraph(']", count: 2)
+      expect(page).to have_site_layout
+      expect(page).to have_no_broken_internal_links
+      expect(page).to have_no_missing_assets
     end
 
     describe "accessibility test", :js do

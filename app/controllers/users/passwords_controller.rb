@@ -24,7 +24,7 @@ module Users
 
       self.resource = resource_class.new(email: params.dig(:user, :email))
       resource.errors.add(:base, t("altcha.failed"))
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 end

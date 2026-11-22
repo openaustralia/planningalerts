@@ -58,6 +58,20 @@ describe CommentMailer do
       it "formats paragraphs correctly in the html version of the email" do
         expect(notifier.html_part.body.to_s).to eq Rails.root.join("spec/mailers/regression/comment_mailer/email1.html").read
       end
+
+      # Tests that a sanitiser change in a Rails upgrade doesn't alter the comment
+      context "with a link, paragraphs and markup in the comment" do
+        before { comment.update!(text: CommentExamples::WITH_MARKUP) }
+
+        it "keeps the link, paragraphs and safe formatting, and drops the rest" do
+          expect(CommentExamples.rendered(notifier.html_part.body.to_s)).to eq <<~HTML.chomp
+            <p>See the plans at <a href="https://example.org/plans" rel="nofollow">https://example.org/plans</a> &amp; the <b>council's</b> report.
+            <br>It's a second line.</p>
+
+            <p>A new paragraph alert(1)</p> with a div  and 5 &lt; 6.<p></p>
+          HTML
+        end
+      end
     end
   end
 end
