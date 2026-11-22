@@ -6,9 +6,6 @@ describe InvokeRakeTaskJob do
   let(:received) { [] }
 
   before do
-    # Load the job, and with it the real tasks, before adding ours. Otherwise
-    # the task list wouldn't be empty and the real tasks would never load.
-    described_class
     received = self.received
     Rake::Task.define_task("spec:invoke_rake_task_job", [:value]) { |_task, args| received << args[:value] }
   end
