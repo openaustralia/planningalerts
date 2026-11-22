@@ -31,6 +31,14 @@ describe "Public actions" do
       expect(alert.reload.unsubscribed).to be true
       expect(response).to redirect_to(alerts_path)
       expect(flash[:notice]).to include("12 Example Street, Exampleton NSW 2000")
+
+      # The flash is HTML put through Rails' sanitiser. Pinned so a sanitiser
+      # change in a Rails upgrade can't break its link unnoticed.
+      follow_redirect!
+      expect(response.body[%r{You will no longer receive.*?</a>}m]).to eq(
+        'You will no longer receive alerts for <span class="font-bold">12 Example Street, Exampleton NSW 2000</span>. ' \
+        '<a class="font-bold underline" href="/profile/alerts/new?address=12+Example+Street%2C+Exampleton+NSW+2000">Create again</a>'
+      )
     end
 
     it "creates a trial API key" do
@@ -41,10 +49,26 @@ describe "Public actions" do
     end
 
     it "updates the account" do
-      patch user_registration_path, params: { user: { name: "Alex New-Name", current_password: "old-password" } }
+      patch user_registration_path, params: {
+        user: { name: "Alex New-Name", email: "alex@example.com", current_password: "old-password" }
+      }
 
       expect(user.reload.name).to eq "Alex New-Name"
       expect(response).to have_http_status(:redirect)
+      # Kept out of logs and error reports (Australian Privacy Principles)
+      expect(request.filtered_parameters["user"]).to include(
+        "name" => "Alex New-Name", "email" => "[FILTERED]", "current_password" => "[FILTERED]"
+      )
+    end
+
+    it "creates an alert, keeping the address out of logs" do
+      mock_geocoder_valid_address_response
+
+      post alerts_path, params: { alert: { address: "24 Bruce Road, Glenbrook", radius_meters: "2000" } }
+
+      expect(user.alerts.count).to eq 1
+      # The address a person watches is effectively their home address
+      expect(request.filtered_parameters["alert"]).to include("address" => "[FILTERED]", "radius_meters" => "2000")
     end
 
     it "closes the account" do

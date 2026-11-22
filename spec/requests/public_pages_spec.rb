@@ -9,6 +9,13 @@ describe "Public pages" do
 
   def expect_working_page(status: :ok)
     expect(response).to have_http_status(status)
+    # Rails' default security headers, which framework default upgrades can change
+    expect(response.headers).to include(
+      "X-Frame-Options" => "SAMEORIGIN",
+      "X-Content-Type-Options" => "nosniff",
+      "X-Permitted-Cross-Domain-Policies" => "none",
+      "Referrer-Policy" => "strict-origin-when-cross-origin"
+    )
     expect(response).to have_site_layout
     expect(response).to have_no_broken_internal_links
     expect(response).to have_no_missing_assets

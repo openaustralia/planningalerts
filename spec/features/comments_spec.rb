@@ -42,6 +42,28 @@ describe "Comments pages" do
       # rubocop:enable RSpec/NoExpectationExample
     end
 
+    # Comment text goes through simple_format and auto_link, which use Rails'
+    # HTML sanitiser, then the Sanitize gem. Pinned so a sanitiser change in a
+    # Rails upgrade can't alter how comments look unnoticed.
+    describe "a comment with a link, paragraphs and markup" do
+      let(:application) { create(:geocoded_application) }
+
+      before do
+        create(:published_comment, application:, name: "Andrew Citizen", text: CommentExamples::WITH_MARKUP)
+        visit application_path(application)
+      end
+
+      it "keeps the link, paragraphs and safe formatting, and drops the rest" do
+        # Today the script's text stays (escaped) and the div splits the paragraph
+        expect(CommentExamples.rendered(page.html)).to eq <<~HTML.chomp
+          <p>See the plans at <a href="https://example.org/plans" rel="nofollow">https://example.org/plans</a> &amp; the <b>council's</b> report.
+          <br>It's a second line.</p>
+
+          <p>A new paragraph alert(1)</p> with a div  and 5 &lt; 6.<p></p>
+        HTML
+      end
+    end
+
     describe "your comments page in profile" do
       describe "no comments yet" do
         before do

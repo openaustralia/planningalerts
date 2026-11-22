@@ -47,6 +47,23 @@ describe AlertMailer do
     allow(alert).to receive(:confirm_id).and_return("abcdef")
   end
 
+  # The alert email removes links from comments, since each comment is already
+  # a link. Pinned so a sanitiser change in a Rails upgrade can't alter it unnoticed.
+  describe "when a new comment has a link, paragraphs and markup" do
+    let(:comment) { create(:comment, name: "Andrew Citizen", application: a3, text: CommentExamples::WITH_MARKUP) }
+    let(:email) { described_class.alert(alert:, comments: [comment]) }
+
+    it "keeps the paragraphs and safe formatting, without links" do
+      # Each paragraph is its own link to the comment. Today the text after the
+      # div is lost, because only <p> elements are kept.
+      links = email.html_part.body.to_s.scan(%r{#comment#{comment.id}"[^>]*>\s*(.*?)\s*</a>}m).flatten
+      expect(links.grep(/See the plans|A new paragraph/)).to eq [
+        "See the plans at https://example.org/plans &amp; the <b>council's</b> report.\n<br>It's a second line.",
+        "A new paragraph alert(1)"
+      ]
+    end
+  end
+
   describe "when sending a planning alert with one new comment" do
     let(:email) { described_class.alert(alert:, comments: [c1]) }
 

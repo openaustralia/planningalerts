@@ -30,6 +30,13 @@ describe "Contact us" do
       expect(urls.count).to eq 1
       visit urls.first
       expect(page).to have_content("This is an attachment you might attach to a contact message")
+
+      # Links in emails already sent were signed in the old (Marshal) format.
+      # They must keep working after the message serialiser changes.
+      blob = ContactMessage.last.attachments.first.blob
+      old_format = ActiveSupport::MessageVerifier.new(Rails.application.key_generator.generate_key("ActiveStorage"), serializer: Marshal)
+      visit rails_service_blob_path(old_format.generate(blob.id, purpose: :blob_id), blob.filename, disposition: "attachment")
+      expect(page).to have_content("This is an attachment you might attach to a contact message")
     end
   end
 

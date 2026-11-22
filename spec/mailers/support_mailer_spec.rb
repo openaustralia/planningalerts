@@ -57,4 +57,20 @@ describe SupportMailer do
   it "doesn’t include the commenters email as this could lead to data leak" do
     expect(notifier.text_part.body.to_s).to have_no_content("rude@foo.com")
   end
+
+  # Contact details are formatted like comments. Pinned so a sanitiser change
+  # in a Rails upgrade can't alter them unnoticed.
+  describe "#contact_message with a link, paragraphs and markup" do
+    let(:contact_message) { create(:contact_message, details: CommentExamples::WITH_MARKUP) }
+
+    it "keeps the link, paragraphs and safe formatting, and drops the rest" do
+      email = described_class.contact_message(contact_message)
+      expect(CommentExamples.rendered(email.body.to_s)).to eq <<~HTML.chomp
+        <p>See the plans at <a href="https://example.org/plans" rel="nofollow">https://example.org/plans</a> &amp; the <b>council's</b> report.
+        <br>It's a second line.</p>
+
+        <p>A new paragraph alert(1)</p> with a div  and 5 &lt; 6.<p></p>
+      HTML
+    end
+  end
 end
