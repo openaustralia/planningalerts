@@ -65,7 +65,7 @@ describe "ALTCHA protection" do
       it "shows the form again rather than a bare error page" do
         post user_registration_path, params: sign_up_params
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include("Please reload the page and try again")
       end
 
@@ -87,7 +87,7 @@ describe "ALTCHA protection" do
         params = sign_up_params.merge(altcha: %w[not a string])
 
         expect { post user_registration_path, params: }.not_to change(User, :count)
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "rejects an answer that has already been used" do
@@ -149,7 +149,7 @@ describe "ALTCHA protection" do
       enforce!
       post(user_password_path, params:)
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(response.body).to include("Please reload the page and try again")
     end
 
@@ -170,7 +170,7 @@ describe "ALTCHA protection" do
       enforce!
       post(user_confirmation_path, params:)
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
       expect(response.body).to include("Please reload the page and try again")
     end
   end

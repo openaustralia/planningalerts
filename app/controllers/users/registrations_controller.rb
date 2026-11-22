@@ -47,7 +47,7 @@ module Users
 
       self.resource = resource_class.new(sign_up_params)
       resource.errors.add(:base, t("altcha.failed"))
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
 
     # GET /resource/edit

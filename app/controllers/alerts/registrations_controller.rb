@@ -61,7 +61,7 @@ module Alerts
         Alert.new(address: params[:user][:address], radius_meters: params[:user][:radius_meters]),
         T.nilable(Alert)
       )
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
 
     # This is duplicated from users/registrations_controller
