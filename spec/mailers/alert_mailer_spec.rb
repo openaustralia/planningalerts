@@ -48,7 +48,7 @@ describe AlertMailer do
   end
 
   # The alert email removes links from comments, since each comment is already
-  # a link. Pinned so a sanitiser change in a Rails upgrade can't alter it unnoticed.
+  # a link. This tests that a sanitiser change in a Rails upgrade doesn't alter it.
   describe "when a new comment has a link, paragraphs and markup" do
     let(:comment) { create(:comment, name: "Andrew Citizen", application: a3, text: CommentExamples::WITH_MARKUP) }
     let(:email) { described_class.alert(alert:, comments: [comment]) }

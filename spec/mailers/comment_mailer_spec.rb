@@ -59,7 +59,7 @@ describe CommentMailer do
         expect(notifier.html_part.body.to_s).to eq Rails.root.join("spec/mailers/regression/comment_mailer/email1.html").read
       end
 
-      # Pinned so a sanitiser change in a Rails upgrade can't alter it unnoticed
+      # Tests that a sanitiser change in a Rails upgrade doesn't alter the comment
       context "with a link, paragraphs and markup in the comment" do
         before { comment.update!(text: CommentExamples::WITH_MARKUP) }
 

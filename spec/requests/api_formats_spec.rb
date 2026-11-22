@@ -153,7 +153,7 @@ describe "API formats" do
     end
 
     # The body is plain text but labelled as RSS (#2161 tracks making RSS
-    # errors work properly). Pinned so the upgrade can't change it unnoticed.
+    # errors work properly). Tested so the upgrade can't change it unnoticed.
     it "answers .rss with a plain text error for a bad key" do
       get "/applications.rss", params: { key: "not-a-real-key", postcode: "2000" }
 

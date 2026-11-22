@@ -43,8 +43,8 @@ describe "Comments pages" do
     end
 
     # Comment text goes through simple_format and auto_link, which use Rails'
-    # HTML sanitiser, then the Sanitize gem. Pinned so a sanitiser change in a
-    # Rails upgrade can't alter how comments look unnoticed.
+    # HTML sanitiser, then the Sanitize gem. This tests that a sanitiser change
+    # in a Rails upgrade doesn't alter how comments look.
     describe "a comment with a link, paragraphs and markup" do
       let(:application) { create(:geocoded_application) }
 

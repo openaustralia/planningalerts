@@ -32,8 +32,8 @@ describe "Public actions" do
       expect(response).to redirect_to(alerts_path)
       expect(flash[:notice]).to include("12 Example Street, Exampleton NSW 2000")
 
-      # The flash is HTML put through Rails' sanitiser. Pinned so a sanitiser
-      # change in a Rails upgrade can't break its link unnoticed.
+      # The flash is HTML put through Rails' sanitiser. This tests that a
+      # sanitiser change in a Rails upgrade doesn't break its link.
       follow_redirect!
       expect(response.body[%r{You will no longer receive.*?</a>}m]).to eq(
         'You will no longer receive alerts for <span class="font-bold">12 Example Street, Exampleton NSW 2000</span>. ' \

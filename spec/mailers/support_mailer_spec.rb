@@ -58,8 +58,8 @@ describe SupportMailer do
     expect(notifier.text_part.body.to_s).to have_no_content("rude@foo.com")
   end
 
-  # Contact details are formatted like comments. Pinned so a sanitiser change
-  # in a Rails upgrade can't alter them unnoticed.
+  # Contact details are formatted like comments. This tests that a sanitiser
+  # change in a Rails upgrade doesn't alter them.
   describe "#contact_message with a link, paragraphs and markup" do
     let(:contact_message) { create(:contact_message, details: CommentExamples::WITH_MARKUP) }
 
