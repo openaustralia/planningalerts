@@ -32,6 +32,8 @@ describe "Public pages" do
       expect_working_page
       expect(response.body).to include("Top 20 most commented", "Journalist?")
       expect(response.body).to include("12 Example Street", "Build a granny flat")
+      # The count is kept by the counter_culture gem when a comment is published
+      expect(Nokogiri::HTML5(response.body).text.squish).to include("1 comment")
     end
   end
 

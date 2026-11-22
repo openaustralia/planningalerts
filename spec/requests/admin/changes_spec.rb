@@ -7,7 +7,7 @@ describe "Admin changes" do
   # TODO: #2166 Include this in spec/spec_helper.rb instead
   include Devise::Test::IntegrationHelpers
 
-  let(:admin) { create(:confirmed_user).tap { |user| user.add_role(:admin) } }
+  let(:admin) { create(:confirmed_user, name: "Avery Admin").tap { |user| user.add_role(:admin) } }
 
   before { sign_in admin }
 
@@ -18,6 +18,14 @@ describe "Admin changes" do
 
     expect(api_key.reload.daily_limit).to eq 5000
     expect(response).to redirect_to(admin_api_key_path(api_key))
+
+    # paper_trail records who made the change, and our administrate-field-paper_trail
+    # fork links to them in the key's history
+    follow_redirect!
+    history = Nokogiri::HTML5(response.body).at("table[aria-describedby='Record Changes']")
+    update_row = history.css("tbody tr").find { |row| row.at("td").text == "update" }
+    expect(update_row.at("a[href='#{admin_user_path(admin)}']").text).to eq "Avery Admin"
+    expect(update_row.text).to include("5000")
   end
 
   it "deletes an application" do
