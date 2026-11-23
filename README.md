@@ -111,8 +111,13 @@ It then behaves like the [API hostnames](#accessing-the-api-in-development), ser
 ```
 DEV_API_HOSTS=yourname-api.ngrok-free.dev
 ```
+and then run the ngrok command, for example:
+```
+ngrok http --url yourname-api.ngrok-free.dev 3072
+```
 
 Over a tunnel, links in emails still point at `localhost`.
+
 
 ### Run The Tests
 
