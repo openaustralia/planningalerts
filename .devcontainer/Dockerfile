@@ -2,7 +2,7 @@
 # the base the official Ruby images use, so it brings the same development libraries for building gems.
 FROM buildpack-deps:jammy
 
-ARG RUBY_VERSION=3.3.4
+ARG RUBY_VERSION=3.3.14
 # A fixed ruby-build release, so every build gets the same toolchain
 ARG RUBY_BUILD_VERSION=v20261013
 RUN git clone --depth 1 --branch "$RUBY_BUILD_VERSION" https://github.com/rbenv/ruby-build.git /tmp/ruby-build \
