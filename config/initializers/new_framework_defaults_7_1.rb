@@ -163,9 +163,11 @@ Rails.application.config.active_support.raise_on_invalid_cache_expiration_time =
 # `config.load_defaults 7.1` does not set this value for environments other than
 # development and test.
 #++
-if Rails.env.local?
-  Rails.application.config.log_file_size = 100 * 1024 * 1024
-end
+# Enabled in config/application.rb instead: Rails builds its default logger
+# before this file runs, so setting it here has no effect.
+# if Rails.env.local?
+#   Rails.application.config.log_file_size = 100 * 1024 * 1024
+# end
 
 ###
 # Enable raising on assignment to attr_readonly attributes. The previous

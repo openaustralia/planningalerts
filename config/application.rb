@@ -59,6 +59,12 @@ module PlanningalertsApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    # FIXME: Remove this when load_defaults moves to 7.1, which sets it. It must
+    # be set here: Rails builds its default logger before config/initializers runs.
+    if Rails.env.local?
+      config.log_file_size = 100 * 1024 * 1024
+    end
+
     config.active_support.cache_format_version = 7.0
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
