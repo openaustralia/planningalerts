@@ -460,6 +460,12 @@ Nothing checks these for you, so keep them consistent by hand:
 - Maizzle sources, their compiled `.erb` output, and the `exclude` list in
   `.erb_lint.yml`.
 - The Postgres password in `.devcontainer/compose.yaml` and `config/database.yml`.
+- The Ruby version. `.ruby-version` is the source: the `Gemfile` reads it with `ruby file: ".ruby-version"`, so
+  Bundler refuses any other Ruby and records it in `Gemfile.lock`, and mise and CI read it too. Two other places
+  keep their own copy: `ARG RUBY_VERSION` in `.devcontainer/Dockerfile` (a mismatch fails `bundle install` in the
+  image build), and the version named near the top of this file. The Dockerfile's `RUBY_BUILD_VERSION` must be a
+  ruby-build release new enough to have a recipe for that Ruby, or the build fails with "definition not found", so
+  move it forward when you move Ruby.
 - `.ruby-version` and the Ruby actually installed on the servers, which is
   managed from the separate `oaf/infrastructure` Ansible repository you probably
   cannot see from here. Treat the mechanism described in `README.md` as history

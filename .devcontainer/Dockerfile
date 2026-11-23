@@ -77,6 +77,7 @@ ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 USER deploy
 
+COPY --chown=deploy:deploy .ruby-version /app/.ruby-version
 COPY --chown=deploy:deploy Gemfile /app/Gemfile
 COPY --chown=deploy:deploy Gemfile.lock /app/Gemfile.lock
 RUN bundle install
