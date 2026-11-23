@@ -108,6 +108,11 @@ RSpec.configure do |config|
     # See https://github.com/flippercloud/flipper/issues/261#issuecomment-427138651
     FileUtils.rm "tmp/flipper.pstore", force: true
   end
+
+  # Remove stubs made with WebMock's stub_request after each example, as
+  # webmock/rspec would, so they can't leak into later specs. VCR's hooks are
+  # global stubs, which this keeps.
+  config.after { WebMock.reset! }
 end
 
 # For testing use a pstore adapter
