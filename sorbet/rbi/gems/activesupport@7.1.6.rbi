@@ -12702,43 +12702,43 @@ class ActiveSupport::TestCase < ::Minitest::Test
   # source://activesupport//lib/active_support/callbacks.rb#963
   def _teardown_callbacks; end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#726
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#729
   def assert_no_match(matcher, obj, msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#655
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#658
   def assert_not_empty(obj, msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#666
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#669
   def assert_not_equal(exp, act, msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#678
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#681
   def assert_not_in_delta(exp, act, delta = T.unsafe(nil), msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#690
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#693
   def assert_not_in_epsilon(exp, act, epsilon = T.unsafe(nil), msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#697
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#700
   def assert_not_includes(collection, obj, msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#708
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#711
   def assert_not_instance_of(cls, obj, msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#718
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#721
   def assert_not_kind_of(cls, obj, msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#736
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#739
   def assert_not_nil(obj, msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#771
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#771
   def assert_not_operator(o1, op, o2 = T.unsafe(nil), msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#794
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#794
   def assert_not_predicate(o1, op, msg = T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#803
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#803
   def assert_not_respond_to(obj, meth, msg = T.unsafe(nil), include_all: T.unsafe(nil)); end
 
-  # source://minitest/5.26.2/lib/minitest/assertions.rb#812
+  # source://minitest/5.27.0/lib/minitest/assertions.rb#812
   def assert_not_same(exp, act, msg = T.unsafe(nil)); end
 
   # source://activesupport//lib/active_support/testing/file_fixtures.rb#20
@@ -12750,7 +12750,7 @@ class ActiveSupport::TestCase < ::Minitest::Test
   # source://activesupport//lib/active_support/test_case.rb#298
   def inspect; end
 
-  # source://minitest/5.26.2/lib/minitest.rb#391
+  # source://minitest/5.27.0/lib/minitest.rb#390
   def method_name; end
 
   class << self
@@ -14981,7 +14981,7 @@ ActiveSupport::VERSION::MAJOR = T.let(T.unsafe(nil), Integer)
 ActiveSupport::VERSION::MINOR = T.let(T.unsafe(nil), Integer)
 
 # source://activesupport//lib/active_support/gem_version.rb#13
-ActiveSupport::VERSION::PRE = T.let(T.unsafe(nil), String)
+ActiveSupport::VERSION::PRE = T.let(T.unsafe(nil), T.untyped)
 
 # source://activesupport//lib/active_support/gem_version.rb#15
 ActiveSupport::VERSION::STRING = T.let(T.unsafe(nil), String)
@@ -18016,46 +18016,46 @@ HashWithIndifferentAccess = ActiveSupport::HashWithIndifferentAccess
 # source://activesupport//lib/active_support/i18n_railtie.rb#8
 module I18n
   class << self
-    # source://i18n/1.14.7/lib/i18n/backend/cache.rb#64
+    # source://i18n/1.15.2/lib/i18n/backend/cache.rb#64
     def cache_key_digest; end
 
-    # source://i18n/1.14.7/lib/i18n/backend/cache.rb#68
+    # source://i18n/1.15.2/lib/i18n/backend/cache.rb#68
     def cache_key_digest=(key_digest); end
 
-    # source://i18n/1.14.7/lib/i18n/backend/cache.rb#56
+    # source://i18n/1.15.2/lib/i18n/backend/cache.rb#56
     def cache_namespace; end
 
-    # source://i18n/1.14.7/lib/i18n/backend/cache.rb#60
+    # source://i18n/1.15.2/lib/i18n/backend/cache.rb#60
     def cache_namespace=(namespace); end
 
-    # source://i18n/1.14.7/lib/i18n/backend/cache.rb#48
+    # source://i18n/1.15.2/lib/i18n/backend/cache.rb#48
     def cache_store; end
 
-    # source://i18n/1.14.7/lib/i18n/backend/cache.rb#52
+    # source://i18n/1.15.2/lib/i18n/backend/cache.rb#52
     def cache_store=(store); end
 
-    # source://i18n/1.14.7/lib/i18n/backend/fallbacks.rb#17
+    # source://i18n/1.15.2/lib/i18n/backend/fallbacks.rb#17
     def fallbacks; end
 
-    # source://i18n/1.14.7/lib/i18n/backend/fallbacks.rb#23
+    # source://i18n/1.15.2/lib/i18n/backend/fallbacks.rb#27
     def fallbacks=(fallbacks); end
 
-    # source://i18n/1.14.7/lib/i18n/interpolate/ruby.rb#23
+    # source://i18n/1.15.2/lib/i18n/interpolate/ruby.rb#23
     def interpolate(string, values); end
 
-    # source://i18n/1.14.7/lib/i18n/interpolate/ruby.rb#29
+    # source://i18n/1.15.2/lib/i18n/interpolate/ruby.rb#29
     def interpolate_hash(string, values); end
 
-    # source://i18n/1.14.7/lib/i18n.rb#38
+    # source://i18n/1.15.2/lib/i18n.rb#38
     def new_double_nested_cache; end
 
-    # source://i18n/1.14.7/lib/i18n/backend/cache.rb#72
+    # source://i18n/1.15.2/lib/i18n/backend/cache.rb#72
     def perform_caching?; end
 
-    # source://i18n/1.14.7/lib/i18n.rb#46
+    # source://i18n/1.15.2/lib/i18n.rb#46
     def reserve_key(key); end
 
-    # source://i18n/1.14.7/lib/i18n.rb#51
+    # source://i18n/1.15.2/lib/i18n.rb#51
     def reserved_keys_pattern; end
   end
 end
@@ -18173,11 +18173,18 @@ IO::Buffer::PAGE_SIZE = T.let(T.unsafe(nil), Integer)
 IO::Buffer::PRIVATE = T.let(T.unsafe(nil), Integer)
 IO::Buffer::READONLY = T.let(T.unsafe(nil), Integer)
 IO::Buffer::SHARED = T.let(T.unsafe(nil), Integer)
+module IO::Console; end
 
-class IO::ConsoleMode
+class IO::Console::Mode
+  def echo; end
   def echo=(_arg0); end
+  def echo?; end
+  def min; end
+  def min=(_arg0); end
   def raw(*_arg0); end
   def raw!(*_arg0); end
+  def time; end
+  def time=(_arg0); end
 
   private
 
@@ -18204,7 +18211,6 @@ IO::EWOULDBLOCKWaitReadable = IO::EAGAINWaitReadable
 IO::EWOULDBLOCKWaitWritable = IO::EAGAINWaitWritable
 IO::PRIORITY = T.let(T.unsafe(nil), Integer)
 IO::READABLE = T.let(T.unsafe(nil), Integer)
-class IO::TimeoutError < ::IOError; end
 IO::WRITABLE = T.let(T.unsafe(nil), Integer)
 
 # source://activesupport//lib/active_support/core_ext/object/json.rb#237
@@ -18282,6 +18288,8 @@ class Integer < ::Numeric
   # source://activesupport//lib/active_support/core_ext/integer/time.rb#18
   def years; end
 end
+
+Integer::GMP_VERSION = T.let(T.unsafe(nil), String)
 
 # source://activesupport//lib/active_support/core_ext/kernel/reporting.rb#3
 module Kernel
@@ -21570,8 +21578,6 @@ end
 
 # source://activesupport//lib/active_support/core_ext/object/json.rb#224
 class URI::Generic
-  include ::URI::RFC2396_REGEXP
-
   # source://activesupport//lib/active_support/core_ext/object/json.rb#225
   def as_json(options = T.unsafe(nil)); end
 end

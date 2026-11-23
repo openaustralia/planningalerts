@@ -2,9 +2,10 @@
 # the base the official Ruby images use, so it brings the same development libraries for building gems.
 FROM buildpack-deps:jammy
 
-ARG RUBY_VERSION=3.3.4
-# A fixed ruby-build release, so every build gets the same toolchain
-ARG RUBY_BUILD_VERSION=v20261013
+ARG RUBY_VERSION=3.3.14
+# A fixed ruby-build release, so every build gets the same toolchain. It must be new enough to have a
+# recipe for RUBY_VERSION (3.3.14 first appears in v20261119), so move it forward when you move Ruby.
+ARG RUBY_BUILD_VERSION=v20261119
 RUN git clone --depth 1 --branch "$RUBY_BUILD_VERSION" https://github.com/rbenv/ruby-build.git /tmp/ruby-build \
     && RUBY_CONFIGURE_OPTS=--disable-install-doc /tmp/ruby-build/bin/ruby-build "$RUBY_VERSION" /usr/local \
     && rm -rf /tmp/ruby-build
@@ -76,6 +77,7 @@ ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
 
 USER deploy
 
+COPY --chown=deploy:deploy .ruby-version /app/.ruby-version
 COPY --chown=deploy:deploy Gemfile /app/Gemfile
 COPY --chown=deploy:deploy Gemfile.lock /app/Gemfile.lock
 RUN bundle install

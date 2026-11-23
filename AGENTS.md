@@ -17,7 +17,7 @@ the data live in the `planningalerts-scrapers` organisation and run on
 So when data looks wrong, the cause is often a scraper rather than anything
 here.
 
-Rails 7.1 on Ruby 3.3.4, PostgreSQL with PostGIS, Elasticsearch via Searchkick,
+Rails 7.1 on Ruby 3.3.14, PostgreSQL with PostGIS, Elasticsearch via Searchkick,
 Redis, and Sidekiq. Note that `config/application.rb` runs
 `config.load_defaults 7.0`, not 7.1, so Rails 7.1 framework defaults are opt-in
 through `config/initializers/new_framework_defaults_7_1.rb`.
@@ -84,6 +84,12 @@ debugging in an IDE (see the README), though it can't reach Redis or Elasticsear
 ([#2293](https://github.com/openaustralia/planningalerts/issues/2293)). The `web` container runs `bin/setup`, which installs gems and prepares the
 database, before `bin/dev` starts Rails, Tailwind and Sidekiq. Plain `docker compose run web ...` commands work as
 before.
+
+On a host with GCC 15 or newer (for example Ubuntu 26.04), `bundle install` fails building `prism` 0.30.0 with
+`-Werror=dangling-pointer`. `mise.toml` sets `CFLAGS=-Wno-error` for mise users; without mise, run
+`CFLAGS=-Wno-error bundle install`. The Docker image (Ubuntu 22.04) and CI (Ubuntu 24.04) install fine. `prism` can't move
+while the tapioca pin (see "The version pins are one interlocking constraint") holds it below 1.0, so this goes away
+with [#2167](https://github.com/openaustralia/planningalerts/issues/2167).
 
 `db/seeds.rb` creates `admin@example.com` (confirm it via the mailcatcher
 inbox at <http://localhost:1080>) and one authority with one application. The
@@ -454,6 +460,12 @@ Nothing checks these for you, so keep them consistent by hand:
 - Maizzle sources, their compiled `.erb` output, and the `exclude` list in
   `.erb_lint.yml`.
 - The Postgres password in `.devcontainer/compose.yaml` and `config/database.yml`.
+- The Ruby version. `.ruby-version` is the source: the `Gemfile` reads it with `ruby file: ".ruby-version"`, so
+  Bundler refuses any other Ruby and records it in `Gemfile.lock`, and mise and CI read it too. Two other places
+  keep their own copy: `ARG RUBY_VERSION` in `.devcontainer/Dockerfile` (a mismatch fails `bundle install` in the
+  image build), and the version named near the top of this file. The Dockerfile's `RUBY_BUILD_VERSION` must be a
+  ruby-build release new enough to have a recipe for that Ruby, or the build fails with "definition not found", so
+  move it forward when you move Ruby.
 - `.ruby-version` and the Ruby actually installed on the servers, which is
   managed from the separate `oaf/infrastructure` Ansible repository you probably
   cannot see from here. Treat the mechanism described in `README.md` as history

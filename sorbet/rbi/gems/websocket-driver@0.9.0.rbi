@@ -31,19 +31,19 @@ class WebSocket::Driver
   # source://websocket-driver//lib/websocket/driver.rb#72
   def initialize(socket, options = T.unsafe(nil)); end
 
-  # source://websocket-driver//lib/websocket/driver.rb#92
+  # source://websocket-driver//lib/websocket/driver.rb#95
   def add_extension(extension); end
 
-  # source://websocket-driver//lib/websocket/driver.rb#125
+  # source://websocket-driver//lib/websocket/driver.rb#128
   def binary(message); end
 
-  # source://websocket-driver//lib/websocket/driver.rb#137
+  # source://websocket-driver//lib/websocket/driver.rb#140
   def close(reason = T.unsafe(nil), code = T.unsafe(nil)); end
 
-  # source://websocket-driver//lib/websocket/driver.rb#129
+  # source://websocket-driver//lib/websocket/driver.rb#132
   def ping(*args); end
 
-  # source://websocket-driver//lib/websocket/driver.rb#133
+  # source://websocket-driver//lib/websocket/driver.rb#136
   def pong(*args); end
 
   # Returns the value of attribute protocol.
@@ -56,54 +56,54 @@ class WebSocket::Driver
   # source://websocket-driver//lib/websocket/driver.rb#70
   def ready_state; end
 
-  # source://websocket-driver//lib/websocket/driver.rb#96
+  # source://websocket-driver//lib/websocket/driver.rb#99
   def set_header(name, value); end
 
-  # source://websocket-driver//lib/websocket/driver.rb#102
+  # source://websocket-driver//lib/websocket/driver.rb#105
   def start; end
 
-  # source://websocket-driver//lib/websocket/driver.rb#87
+  # source://websocket-driver//lib/websocket/driver.rb#90
   def state; end
 
-  # source://websocket-driver//lib/websocket/driver.rb#120
+  # source://websocket-driver//lib/websocket/driver.rb#123
   def text(message); end
 
   private
 
-  # source://websocket-driver//lib/websocket/driver.rb#158
+  # source://websocket-driver//lib/websocket/driver.rb#161
   def fail(type, message); end
 
-  # source://websocket-driver//lib/websocket/driver.rb#146
+  # source://websocket-driver//lib/websocket/driver.rb#149
   def fail_handshake(error); end
 
-  # source://websocket-driver//lib/websocket/driver.rb#164
+  # source://websocket-driver//lib/websocket/driver.rb#167
   def open; end
 
-  # source://websocket-driver//lib/websocket/driver.rb#171
+  # source://websocket-driver//lib/websocket/driver.rb#174
   def queue(message); end
 
   class << self
-    # source://websocket-driver//lib/websocket/driver.rb#176
+    # source://websocket-driver//lib/websocket/driver.rb#179
     def client(socket, options = T.unsafe(nil)); end
 
-    # source://websocket-driver//lib/websocket/driver.rb#200
+    # source://websocket-driver//lib/websocket/driver.rb#203
     def encode(data, encoding = T.unsafe(nil)); end
 
-    # source://websocket-driver//lib/websocket/driver.rb#216
+    # source://websocket-driver//lib/websocket/driver.rb#219
     def host_header(uri); end
 
-    # source://websocket-driver//lib/websocket/driver.rb#184
+    # source://websocket-driver//lib/websocket/driver.rb#187
     def rack(socket, options = T.unsafe(nil)); end
 
-    # source://websocket-driver//lib/websocket/driver.rb#180
+    # source://websocket-driver//lib/websocket/driver.rb#183
     def server(socket, options = T.unsafe(nil)); end
 
-    # source://websocket-driver//lib/websocket/driver.rb#224
+    # source://websocket-driver//lib/websocket/driver.rb#227
     def validate_options(options, valid_keys); end
 
     # @return [Boolean]
     #
-    # source://websocket-driver//lib/websocket/driver.rb#238
+    # source://websocket-driver//lib/websocket/driver.rb#231
     def websocket?(env); end
   end
 end
@@ -214,7 +214,7 @@ class WebSocket::Driver::Draft75 < ::WebSocket::Driver
   # source://websocket-driver//lib/websocket/driver/draft75.rb#21
   def close(reason = T.unsafe(nil), code = T.unsafe(nil)); end
 
-  # source://websocket-driver//lib/websocket/driver/draft75.rb#74
+  # source://websocket-driver//lib/websocket/driver/draft75.rb#77
   def frame(buffer, type = T.unsafe(nil), error_type = T.unsafe(nil)); end
 
   # source://websocket-driver//lib/websocket/driver/draft75.rb#28
@@ -225,10 +225,10 @@ class WebSocket::Driver::Draft75 < ::WebSocket::Driver
 
   private
 
-  # source://websocket-driver//lib/websocket/driver/draft75.rb#83
+  # source://websocket-driver//lib/websocket/driver/draft75.rb#86
   def handshake_response; end
 
-  # source://websocket-driver//lib/websocket/driver/draft75.rb#89
+  # source://websocket-driver//lib/websocket/driver/draft75.rb#92
   def parse_leading_byte(octet); end
 end
 
@@ -250,25 +250,22 @@ class WebSocket::Driver::Draft76 < ::WebSocket::Driver::Draft75
 
   private
 
+  # source://websocket-driver//lib/websocket/driver/draft76.rb#78
+  def get_key_value(key); end
+
   # @raise [ProtocolError]
   #
   # source://websocket-driver//lib/websocket/driver/draft76.rb#41
   def handshake_response; end
 
-  # source://websocket-driver//lib/websocket/driver/draft76.rb#66
+  # source://websocket-driver//lib/websocket/driver/draft76.rb#56
   def handshake_signature; end
 
-  # source://websocket-driver//lib/websocket/driver/draft76.rb#88
-  def number_from_key(key); end
-
-  # source://websocket-driver//lib/websocket/driver/draft76.rb#81
+  # source://websocket-driver//lib/websocket/driver/draft76.rb#71
   def parse_leading_byte(octet); end
 
-  # source://websocket-driver//lib/websocket/driver/draft76.rb#73
+  # source://websocket-driver//lib/websocket/driver/draft76.rb#63
   def send_handshake_body; end
-
-  # source://websocket-driver//lib/websocket/driver/draft76.rb#93
-  def spaces_in_key(key); end
 end
 
 # source://websocket-driver//lib/websocket/driver/draft76.rb#5
@@ -363,13 +360,13 @@ class WebSocket::Driver::Hybi < ::WebSocket::Driver
 
   private
 
-  # source://websocket-driver//lib/websocket/driver/hybi.rb#338
+  # source://websocket-driver//lib/websocket/driver/hybi.rb#339
   def check_frame_length; end
 
-  # source://websocket-driver//lib/websocket/driver/hybi.rb#349
+  # source://websocket-driver//lib/websocket/driver/hybi.rb#350
   def emit_frame(buffer); end
 
-  # source://websocket-driver//lib/websocket/driver/hybi.rb#397
+  # source://websocket-driver//lib/websocket/driver/hybi.rb#398
   def emit_message; end
 
   # source://websocket-driver//lib/websocket/driver/hybi.rb#272
@@ -378,13 +375,13 @@ class WebSocket::Driver::Hybi < ::WebSocket::Driver
   # source://websocket-driver//lib/websocket/driver/hybi.rb#234
   def handshake_response; end
 
-  # source://websocket-driver//lib/websocket/driver/hybi.rb#327
+  # source://websocket-driver//lib/websocket/driver/hybi.rb#328
   def parse_extended_length(buffer); end
 
-  # source://websocket-driver//lib/websocket/driver/hybi.rb#310
+  # source://websocket-driver//lib/websocket/driver/hybi.rb#311
   def parse_length(octet); end
 
-  # source://websocket-driver//lib/websocket/driver/hybi.rb#277
+  # source://websocket-driver//lib/websocket/driver/hybi.rb#278
   def parse_opcode(octet); end
 
   # source://websocket-driver//lib/websocket/driver/hybi.rb#198

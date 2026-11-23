@@ -2,3 +2,9 @@
 # mise asks you to trust this file once per checkout, which `make setup` does.
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
+
+# prism 0.30.0 (held below 1.0 by the tapioca pin, #2167) fails to build with GCC 15,
+# which turns a harmless warning into an error. Plain -Wno-error is used because older
+# GCC rejects -Wno-error=dangling-pointer. Remove this when the tapioca pin goes.
+[env]
+CFLAGS = "-Wno-error"
