@@ -2,6 +2,8 @@
 
 source "https://rubygems.org"
 
+ruby file: ".ruby-version"
+
 # Gems that have been bundled with ruby but must now be explicitly listed to be available
 gem "net-imap"
 
