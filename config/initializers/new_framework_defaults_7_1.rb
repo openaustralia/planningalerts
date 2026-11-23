@@ -144,7 +144,8 @@ Rails.application.config.active_support.raise_on_invalid_cache_expiration_time =
 # servers, first deploy without changing the serializer, then set the serializer
 # in a subsequent deploy.
 #++
-# Rails.application.config.active_support.message_serializer = :json_allow_marshal
+# Set in config/initializers/message_serializer.rb instead, because it has to stay
+# after this file is deleted: we keep reading old Marshal messages for 120 days.
 
 ###
 # Enable a performance optimization that serializes message data and metadata
@@ -157,7 +158,7 @@ Rails.application.config.active_support.raise_on_invalid_cache_expiration_time =
 # leave this optimization off on the first deploy, then enable it on a
 # subsequent deploy.
 #++
-# Rails.application.config.active_support.use_message_serializer_for_metadata = true
+Rails.application.config.active_support.use_message_serializer_for_metadata = true
 
 ###
 # Set the maximum size for Rails log files.
