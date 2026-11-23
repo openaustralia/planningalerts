@@ -3,8 +3,9 @@
 FROM buildpack-deps:jammy
 
 ARG RUBY_VERSION=3.3.14
-# A fixed ruby-build release, so every build gets the same toolchain
-ARG RUBY_BUILD_VERSION=v20261013
+# A fixed ruby-build release, so every build gets the same toolchain. It must be new enough to have a
+# recipe for RUBY_VERSION (3.3.14 first appears in v20261119), so move it forward when you move Ruby.
+ARG RUBY_BUILD_VERSION=v20261119
 RUN git clone --depth 1 --branch "$RUBY_BUILD_VERSION" https://github.com/rbenv/ruby-build.git /tmp/ruby-build \
     && RUBY_CONFIGURE_OPTS=--disable-install-doc /tmp/ruby-build/bin/ruby-build "$RUBY_VERSION" /usr/local \
     && rm -rf /tmp/ruby-build
