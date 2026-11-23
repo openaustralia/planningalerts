@@ -85,6 +85,12 @@ debugging in an IDE (see the README), though it can't reach Redis or Elasticsear
 database, before `bin/dev` starts Rails, Tailwind and Sidekiq. Plain `docker compose run web ...` commands work as
 before.
 
+On a host with GCC 15 or newer (for example Ubuntu 26.04), `bundle install` fails building `prism` 0.30.0 with
+`-Werror=dangling-pointer`. `mise.toml` sets `CFLAGS=-Wno-error` for mise users; without mise, run
+`CFLAGS=-Wno-error bundle install`. The Docker image (Ubuntu 22.04) and CI (Ubuntu 24.04) install fine. `prism` can't move
+while the tapioca pin (see "The version pins are one interlocking constraint") holds it below 1.0, so this goes away
+with [#2167](https://github.com/openaustralia/planningalerts/issues/2167).
+
 `db/seeds.rb` creates `admin@example.com` (confirm it via the mailcatcher
 inbox at <http://localhost:1080>) and one authority with one application. The
 admin role is not seeded; add it in a console with

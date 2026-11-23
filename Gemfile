@@ -215,6 +215,9 @@ group :development do
   gem "sorbet", "< 6.0"
   gem "spoom"
   # TODO: #2167 Remove this pin once tapioca's require-hooks double-load bug is fixed upstream (`bin/tapioca dsl` fails with double sig load).
+  # This pin also holds prism at 0.30.0 (rbi requires prism < 1.0), which fails to build with
+  # GCC 15 (for example Ubuntu 26.04). mise.toml sets CFLAGS to work around it; without mise
+  # run `CFLAGS=-Wno-error bundle install`. Fixed upstream in prism 1.x.
   gem "tapioca", "~> 0.15.1"
 
   # For guard and associated bits
