@@ -105,8 +105,8 @@ Without it, Rails shows a "Blocked hosts" page. Anyone who finds the tunnel's ad
 you share it remember that they can sign in with the seeded `admin@example.com` login, see full error pages, and see
 any production data you have loaded. Stop the tunnel when you're done.
 
-To serve the API through a tunnel, give it a second hostname and list that in `DEV_API_HOSTS` too. It then behaves
-like the [API hostnames](#accessing-the-api-in-development), serving the API and nothing else:
+To serve the API through a tunnel, give it a second hostname and list that in `DEV_API_HOSTS`, which also allows it.
+It then behaves like the [API hostnames](#accessing-the-api-in-development), serving the API and nothing else:
 
 ```
 DEV_API_HOSTS=yourname-api.ngrok-free.dev

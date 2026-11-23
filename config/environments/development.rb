@@ -113,8 +113,10 @@ Rails.application.configure do
   # Extra hosts for this machine only, such as a tunnel. Set DEV_EXTRA_HOSTS in .env, never commit it.
   # See "Sharing your development server" in README.md for what this exposes
   config.hosts.concat(ENV.fetch("DEV_EXTRA_HOSTS", "").split(",").map(&:strip).reject(&:empty?))
-  # Whole hostnames that serve the API rather than the website, such as a tunnel's (see config/routes.rb)
+  # Whole hostnames that serve the API rather than the website, such as a tunnel's (see config/routes.rb).
+  # These are allowed as hosts too
   config.x.dev_api_hosts = ENV.fetch("DEV_API_HOSTS", "").split(",").map(&:strip).reject(&:empty?)
+  config.hosts.concat(config.x.dev_api_hosts)
 
   # This is to allow local access for Matthew (for previewing on mobile etc)
   config.hosts << "orpington.local"

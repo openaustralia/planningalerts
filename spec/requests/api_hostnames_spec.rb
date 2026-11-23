@@ -121,7 +121,7 @@ describe "API hostnames" do
       expect(response.body).to eq "Not found\n"
     end
 
-    it "still serves the website on other hostnames" do
+    it "doesn't serve the API on other hostnames" do
       host! "www.pa.org.localhost"
       get "/authorities.json", params: { key: key.value }
       expect(response.body).to eq "Not found\n"
