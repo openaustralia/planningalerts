@@ -43,6 +43,18 @@ describe "Announcement bar" do
     expect(response.body).not_to include("<script>alert(1)</script>")
   end
 
+  # A browser shows the content of a textarea as plain text. If the cleaner reads
+  # the markup differently from a browser it can turn that text into live
+  # formatting, which is how markup gets past cleaners. The cleaner must read it
+  # as a browser does, so people see the text the author wrote.
+  it "shows text a browser treats as plain text as plain text" do
+    create(:announcement, body: "Down <textarea><b>tonight</b></textarea> for maintenance")
+    get about_path
+    bar = Nokogiri::HTML5(response.body).at_css("#site-announcement")
+    expect(bar.css("b")).to be_empty
+    expect(bar.text).to include("Down <b>tonight</b> for maintenance")
+  end
+
   it "removes images and headings, which do not belong in a one-line bar" do
     create(:announcement, body: %(<h1>Big</h1><img src="https://example.org/pixel.png">Notice text))
     get about_path
