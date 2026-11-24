@@ -44,6 +44,9 @@ module Devise
   end
 
   class PasswordsController < DeviseController
+    sig { params(blk: T.nilable(T.proc.params(resource: T.untyped).void)).void }
+    def update(&blk); end
+
     sig { returns(T.untyped) }
     def resource; end
 

@@ -97,6 +97,71 @@ describe "Public actions" do
     expect(response).to have_http_status(:redirect)
   end
 
+  describe "completing a password reset" do
+    def reset_password(user, password: "new-password", token: user.send_reset_password_instructions)
+      put user_password_path, params: {
+        user: { reset_password_token: token, password:, password_confirmation: password }
+      }
+    end
+
+    it "confirms an account that was never confirmed" do
+      unconfirmed = create(:user, email: "sam@example.com")
+
+      reset_password(unconfirmed)
+
+      expect(unconfirmed.reload).to be_confirmed
+      expect(controller.current_user).to eq unconfirmed
+    end
+
+    it "does not touch an account that is already confirmed" do
+      confirmed_at = user.reload.confirmed_at
+
+      reset_password(user)
+
+      expect(user.reload.confirmed_at).to eq confirmed_at
+    end
+
+    it "does not confirm a pending email change" do
+      unconfirmed = create(:user, email: "sam@example.com")
+      unconfirmed.update_columns(unconfirmed_email: "sam.new@example.com") # rubocop:disable Rails/SkipsModelValidations
+
+      reset_password(unconfirmed)
+
+      unconfirmed.reload
+      expect(unconfirmed).not_to be_confirmed
+      expect(unconfirmed.email).to eq "sam@example.com"
+      expect(unconfirmed.unconfirmed_email).to eq "sam.new@example.com"
+    end
+
+    it "leaves a confirmed account's pending email change untouched" do
+      user.update!(email: "alex.new@example.com")
+      confirmed_at = user.reload.confirmed_at
+
+      reset_password(user)
+
+      user.reload
+      expect(user.confirmed_at).to eq confirmed_at
+      expect(user.email).to eq "alex@example.com"
+      expect(user.unconfirmed_email).to eq "alex.new@example.com"
+    end
+
+    it "leaves the account unconfirmed when the token is not valid" do
+      unconfirmed = create(:user, email: "sam@example.com")
+
+      reset_password(unconfirmed, token: "not-a-real-token")
+
+      expect(unconfirmed.reload).not_to be_confirmed
+    end
+
+    it "leaves the account unconfirmed when the new password is not valid" do
+      unconfirmed = create(:user, email: "sam@example.com")
+
+      reset_password(unconfirmed, password: "short")
+
+      expect(unconfirmed.reload).not_to be_confirmed
+    end
+  end
+
   describe "a locked account" do
     before { user.lock_access!(send_instructions: false) }
 

@@ -60,6 +60,29 @@ describe "Signing up for an API account" do
     # rubocop:enable RSpec/NoExpectationExample
   end
 
+  describe "resetting the password of an account that was never confirmed" do
+    before do
+      user = build(:user, email: "matthew@oaf.org.au", password: "old password")
+      user.skip_confirmation_notification!
+      user.save!
+    end
+
+    it "confirms the account and signs the person in" do
+      visit new_user_password_path
+      fill_in "Email", with: "matthew@oaf.org.au"
+      click_on "Send me an email"
+
+      open_email("matthew@oaf.org.au")
+      click_email_link_matching(/reset_password_token/)
+      fill_in "New password", with: "my new password"
+      click_on "Create password"
+
+      expect(page).to have_content "Your password has been changed successfully. You are now signed in."
+      expect(page).to have_no_link "Sign In"
+      expect(User.find_by(email: "matthew@oaf.org.au")).to be_confirmed
+    end
+  end
+
   describe "reset your password in the new design" do
     before do
       create(:confirmed_user, email: "matthew@oaf.org.au")
