@@ -18,6 +18,8 @@
 #
 # To set this configuration, add the following line to `config/application.rb` (NOT this file):
 #   config.add_autoload_paths_to_load_path = false
+#
+# Switched on in config/application.rb, as the instructions above say.
 
 ###
 # Remove the default X-Download-Options headers since it is used only by Internet Explorer.
@@ -59,6 +61,8 @@ Rails.application.config.action_controller.allow_deprecated_parameters_hash_equa
 #
 # 3. If you don't currently have data encrypted with Active Record encryption, you can disable this setting to
 # configure the default behavior starting 7.1+:
+#
+# We have no encrypted columns, so this is scenario 3 and the two options above stay commented out.
 #++
 Rails.application.config.active_record.encryption.support_sha1_for_non_deterministic_encryption = false
 
@@ -113,6 +117,9 @@ Rails.application.config.active_support.raise_on_invalid_cache_expiration_time =
 # Specify whether Query Logs will format tags using the SQLCommenter format
 # (https://open-telemetry.github.io/opentelemetry-sqlcommenter/), or using the legacy format.
 # Options are `:legacy` and `:sqlcommenter`.
+#
+# Not applicable: we do not enable query log tags (`query_log_tags_enabled`), so there is
+# nothing to format. This stays commented out.
 #++
 # Rails.application.config.active_record.query_log_tags_format = :sqlcommenter
 
@@ -249,6 +256,10 @@ Rails.application.config.active_record.generate_secure_token_on = :initialize
 # When you're ready to change format, add this to `config/application.rb` (NOT
 # this file):
 #   config.active_support.cache_format_version = 7.1
+#
+# Not switched on yet: config/application.rb sets it to 7.0 on purpose. Switch it on in a
+# later deploy, once everything is running Rails 7.1 and we will not roll back. It must
+# stay explicit there after `load_defaults 7.1`, which would otherwise change it.
 
 
 ###
@@ -271,6 +282,9 @@ Rails.application.config.action_view.sanitizer_vendor = Rails::HTML::Sanitizer.b
 # sanitizers if they are supported, else fall back to HTML4 sanitizers.
 #
 # In previous versions of Rails, Action Text always used `Rails::HTML4::Sanitizer` as its vendor.
+#
+# Not applicable: Action Text is loaded by `rails/all` but nothing uses it, so changing this
+# would have no effect. This stays commented out.
 #++
 # Rails.application.config.action_text.sanitizer_vendor = Rails::HTML::Sanitizer.best_supported_vendor
 
