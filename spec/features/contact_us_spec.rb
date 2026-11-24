@@ -31,9 +31,13 @@ describe "Contact us" do
       visit urls.first
       expect(page).to have_content("This is an attachment you might attach to a contact message")
 
+      # New links are signed in the JSON format, so a reader that accepts only JSON can open them.
+      blob = ContactMessage.last.attachments.first.blob
+      json_only = ActiveSupport::MessageVerifier.new(Rails.application.key_generator.generate_key("ActiveStorage"), serializer: :json)
+      expect(json_only.verified(URI(urls.first).path.split("/")[-2], purpose: :blob_id)).to eq blob.id
+
       # Links in emails already sent were signed in the old (Marshal) format.
       # They must keep working after the message serialiser changes.
-      blob = ContactMessage.last.attachments.first.blob
       old_format = ActiveSupport::MessageVerifier.new(Rails.application.key_generator.generate_key("ActiveStorage"), serializer: Marshal)
       visit rails_service_blob_path(old_format.generate(blob.id, purpose: :blob_id), blob.filename, disposition: "attachment")
       expect(page).to have_content("This is an attachment you might attach to a contact message")

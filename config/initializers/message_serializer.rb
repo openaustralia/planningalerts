@@ -8,7 +8,8 @@
 # The only signed links we know of are the Active Storage attachment links in
 # support emails to staff, and emails sent before this change carry Marshal ones.
 # Keep reading both formats for at least 120 days after this reached production,
-# then change this to `:json` (the Rails 7.2 default) or delete this file.
+# then set this to `:json` explicitly. Deleting the file is not enough: the default
+# would go back to Marshal (`load_defaults 7.0`), or still read it (`load_defaults 7.1`).
 # Marshal is only read after the signature checks out, so the risk is limited to
 # a leaked `secret_key_base`.
 # See https://github.com/openaustralia/oaf-internal/issues/372
