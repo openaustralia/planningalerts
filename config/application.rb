@@ -59,11 +59,6 @@ module PlanningalertsApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
-    # Keep the old cache entry format, which load_defaults 7.1 would change. Move
-    # to 7.1 in a later deploy, once everything runs Rails 7.1 and we will not
-    # roll back, because Rails 7.0 apps cannot read the new format.
-    config.active_support.cache_format_version = 7.0
-
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
