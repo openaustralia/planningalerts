@@ -3,8 +3,8 @@
 require "spec_helper"
 
 # The Rails 7.1 settings we run with. `config.load_defaults 7.1` in
-# config/application.rb sets them, apart from the cache format and message
-# serialiser, which we set ourselves. This spec was written before the switch to
+# config/application.rb sets them, apart from the message serialiser, which we
+# set ourselves. This spec was written before the switch to
 # load_defaults 7.1 and passed both before and after it, so the switch changed
 # none of these. It fails if a setting is lost, such as by lowering load_defaults.
 #
@@ -59,10 +59,8 @@ describe PlanningalertsApp::Application do
     expect(ActionView::Helpers::SanitizeHelper.sanitizer_vendor).to eq Rails::HTML5::Sanitizer
   end
 
-  # Deliberately left at the old format until everything runs Rails 7.1 and we
-  # will not roll back. config/application.rb sets it after load_defaults.
-  it "keeps the cache entry format at 7.0" do
-    expect(ActiveSupport::Cache.format_version).to eq 7.0
+  it "writes cache entries in the 7.1 format" do
+    expect(ActiveSupport::Cache.format_version).to eq 7.1
   end
 
   it "precompiles filter_parameters" do
