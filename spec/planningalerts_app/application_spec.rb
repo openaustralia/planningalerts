@@ -2,11 +2,11 @@
 
 require "spec_helper"
 
-# The Rails 7.1 settings we run with. They are switched on one by one in
-# config/initializers/new_framework_defaults_7_1.rb, then by
-# `config.load_defaults 7.1` once that file is deleted. Either way the app must
-# end up with these values, so this spec passes before and after that change.
-# It fails if the file is deleted without moving to `load_defaults 7.1`.
+# The Rails 7.1 settings we run with. `config.load_defaults 7.1` in
+# config/application.rb sets them, apart from the cache format and message
+# serialiser, which we set ourselves. This spec was written before the switch to
+# load_defaults 7.1 and passed both before and after it, so the switch changed
+# none of these. It fails if a setting is lost, such as by lowering load_defaults.
 #
 # The page, email and request specs check what the settings do. This checks the
 # settings themselves are in place. A missing setting counts as a failure, even

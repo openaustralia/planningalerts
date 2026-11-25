@@ -105,8 +105,8 @@ Rails.application.configure do
 
   # Disable default security headers in development (well mainly X-Frame-Options
   # I think) to allow this page to be opened in the embedded VSCode simple browser
-  # config/initializers/new_framework_defaults_7_1.rb doesn't set default_headers
-  # for development, so this stays in effect.
+  # load_defaults sets the default headers before this file runs, so this
+  # replaces them.
   config.action_dispatch.default_headers = {}
 
   # Allow access from github codespaces preview

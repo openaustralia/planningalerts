@@ -19,8 +19,10 @@ here.
 
 Rails 7.1 on Ruby 3.3.14, PostgreSQL with PostGIS, Elasticsearch via Searchkick,
 Redis, and Sidekiq. Note that `config/application.rb` runs
-`config.load_defaults 7.0`, not 7.1, so Rails 7.1 framework defaults are opt-in
-through `config/initializers/new_framework_defaults_7_1.rb`.
+`config.load_defaults 7.1`, but keeps the cache entry format at 7.0
+(`config.active_support.cache_format_version`) until everything runs Rails 7.1
+and we will not roll back. `config/initializers/message_serializer.rb` keeps
+reading old Marshal-signed messages for now.
 
 ## Contributing, branches and commits
 
