@@ -57,14 +57,11 @@ end
 module PlanningalertsApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.1
 
-    # FIXME: Remove this when load_defaults moves to 7.1, which sets it. It must
-    # be set here: Rails builds its default logger before config/initializers runs.
-    if Rails.env.local?
-      config.log_file_size = 100 * 1024 * 1024
-    end
-
+    # Keep the old cache entry format, which load_defaults 7.1 would change. Move
+    # to 7.1 in a later deploy, once everything runs Rails 7.1 and we will not
+    # roll back, because Rails 7.0 apps cannot read the new format.
     config.active_support.cache_format_version = 7.0
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
@@ -142,10 +139,5 @@ module PlanningalertsApp
     # config.eager_load_paths << Rails.root.join("extras")
 
     # config.skylight.probes << "active_job"
-
-    # No longer add autoloaded paths into `$LOAD_PATH`. This means that you won't be able
-    # to manually require files that are managed by the autoloader, which you shouldn't do anyway.
-    config.add_autoload_paths_to_load_path = false
-
   end
 end
