@@ -8,7 +8,7 @@ ruby file: ".ruby-version"
 gem "net-imap"
 
 gem "bootsnap", require: false
-gem "rails", "~> 7.2.4"
+gem "rails", "~> 8.0.5"
 gem "rake"
 
 # TODO: #2167 Remove this pin once tapioca's incompatibility with zeitwerk >= 2.7
@@ -22,7 +22,7 @@ gem "zeitwerk", "~> 2.6.0"
 gem "pg"
 
 # Supports postgis so we can magically do spatial queries
-gem "activerecord-postgis-adapter"
+gem "activerecord-postgis-adapter", "~> 11.0.0" # 11.1+ needs Rails 8.1
 
 # API
 gem "dalli"
@@ -31,7 +31,7 @@ gem "dalli"
 gem "rack-attack"
 
 # Admin interface
-gem "administrate", "~> 0.20.0"
+gem "administrate", "~> 1.0.0"
 
 # Logging in and such things
 gem "devise", "~> 5.0" # Pin to a particular major version to get deprecation warnings
