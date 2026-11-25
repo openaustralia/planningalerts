@@ -1,0 +1,90 @@
+# frozen_string_literal: true
+
+require "spec_helper"
+
+# The Rails 7.1 settings we run with. They are switched on one by one in
+# config/initializers/new_framework_defaults_7_1.rb, then by
+# `config.load_defaults 7.1` once that file is deleted. Either way the app must
+# end up with these values, so this spec passes before and after that change.
+# It fails if the file is deleted without moving to `load_defaults 7.1`.
+#
+# The page, email and request specs check what the settings do. This checks the
+# settings themselves are in place. A missing setting counts as a failure, even
+# where its default would give the same value.
+describe PlanningalertsApp::Application do
+  let(:config) { Rails.application.config }
+
+  {
+    action_controller: {
+      allow_deprecated_parameters_hash_equality: false
+    },
+    active_job: {
+      use_big_decimal_serializer: true
+    },
+    active_record: {
+      allow_deprecated_singular_associations_name: false,
+      before_committed_on_all_records: true,
+      belongs_to_required_validates_foreign_key: false,
+      commit_transaction_on_non_local_return: true,
+      default_column_serializer: nil,
+      generate_secure_token_on: :initialize,
+      marshalling_format_version: 7.1,
+      raise_on_assign_to_attr_readonly: true,
+      run_after_transaction_callbacks_in_order_defined: true,
+      run_commit_callbacks_on_first_saved_instances_in_transaction: false
+    },
+    action_dispatch: {
+      debug_exception_log_level: :error
+    },
+    active_support: {
+      message_serializer: :json_allow_marshal,
+      raise_on_invalid_cache_expiration_time: true,
+      use_message_serializer_for_metadata: true
+    }
+  }.each do |framework, settings|
+    settings.each do |name, value|
+      it "sets #{framework}.#{name} to #{value.inspect}" do
+        expect(config.public_send(framework).fetch(name)).to eq value
+      end
+    end
+  end
+
+  it "sets encryption.support_sha1_for_non_deterministic_encryption to false" do
+    expect(config.active_record.encryption.fetch(:support_sha1_for_non_deterministic_encryption)).to be false
+  end
+
+  # Rails reads these two at boot and removes them from the config, so they are
+  # checked where Rails keeps them.
+  it "cleans HTML in views with the HTML5 sanitiser" do
+    expect(ActionView::Helpers::SanitizeHelper.sanitizer_vendor).to eq Rails::HTML5::Sanitizer
+  end
+
+  # Deliberately left at the old format until everything runs Rails 7.1 and we
+  # will not roll back. config/application.rb sets it after load_defaults.
+  it "keeps the cache entry format at 7.0" do
+    expect(ActiveSupport::Cache.format_version).to eq 7.0
+  end
+
+  it "precompiles filter_parameters" do
+    expect(config.precompile_filter_parameters).to be true
+  end
+
+  it "does not add autoloaded paths to the load path" do
+    expect(config.add_autoload_paths_to_load_path).to be false
+  end
+
+  it "parses HTML as HTML5 in test helpers" do
+    expect(config.dom_testing_default_html_version).to eq :html5
+  end
+
+  it "sends Rails' default security headers" do
+    expect(config.action_dispatch.default_headers.keys).to contain_exactly(
+      "X-Frame-Options", "X-XSS-Protection", "X-Content-Type-Options",
+      "X-Permitted-Cross-Domain-Policies", "Referrer-Policy"
+    )
+  end
+
+  it "limits the size of the log file" do
+    expect(config.log_file_size).to eq 100 * 1024 * 1024
+  end
+end

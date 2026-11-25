@@ -64,6 +64,36 @@ describe "Comments pages" do
       end
     end
 
+    # Web addresses people paste often have several query parameters. Under the
+    # HTML5 sanitiser, a name that starts like a legacy HTML entity (&reg, &sect)
+    # is decoded even without its semicolon, which corrupts the link.
+    describe "a comment with web addresses that have query parameters" do
+      let(:application) { create(:geocoded_application) }
+
+      def visit_comment_with(text)
+        create(:published_comment, application:, name: "Andrew Citizen", text:)
+        visit application_path(application)
+      end
+
+      it "links a web address with several query parameters unchanged" do
+        visit_comment_with "Details: https://example.org/plans?id=1&view=full&page=2 thanks"
+
+        link = page.find_link(href: %r{\Ahttps://example\.org/plans})
+        expect(link[:href]).to eq "https://example.org/plans?id=1&view=full&page=2"
+        expect(link.text).to eq "https://example.org/plans?id=1&view=full&page=2"
+      end
+
+      it "links a web address whose parameters start like HTML entities unchanged" do
+        pending "HTML5 sanitiser decodes &region and &section to special characters"
+
+        visit_comment_with "Details: https://example.org/plans?id=1&region=2&section=3&timestamp=4 thanks"
+
+        link = page.find_link(href: %r{\Ahttps://example\.org/plans})
+        expect(link[:href]).to eq "https://example.org/plans?id=1&region=2&section=3&timestamp=4"
+        expect(link.text).to eq "https://example.org/plans?id=1&region=2&section=3&timestamp=4"
+      end
+    end
+
     describe "your comments page in profile" do
       describe "no comments yet" do
         before do
