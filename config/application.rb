@@ -57,7 +57,7 @@ end
 module PlanningalertsApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 7.2
 
     ## User settings (START)
 
@@ -77,6 +77,11 @@ module PlanningalertsApp
     # longer roll anything back. This line runs after load_defaults, so it wins.
     # TODO: #2381 Check the other enqueue sites, then keep or narrow this.
     config.active_job.enqueue_after_transaction_commit = :never
+
+    # YJIT stays off, as it was under load_defaults 7.1, until we decide on Rails 8.1
+    # (TODO: #2380). load_defaults 7.2 turns it on.
+    # It does nothing on a Ruby built without YJIT, such as our dev container's.
+    config.yjit = false
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
