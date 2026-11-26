@@ -61,7 +61,7 @@ clobber: clean-data ## Also remove all stopped containers, unused images and bui
 status: ## Show each container's health, the host ports it's published on, and where to browse
 	@docker compose ps -a --format 'table {{.Service}}\t{{.Status}}\t{{.Ports}}'
 	@echo; port() { docker compose port $$1 $$2 2>/dev/null | sed 's/.*://'; }; \
-	p=$$(port web 3000); [ -z "$$p" ] || echo "Web:         http://www.pa.org.localhost:$$p/ (user: admin@example.com, password: password, from db/seeds.rb)"; \
+	p=$$(port web 3000); [ -z "$$p" ] || echo "Web:         http://www.pa.org.localhost:$$p/ (users: admin@example.com and jane@example.com, password: password, from db/seeds.rb)"; \
 	p=$$(port mailcatcher 1080); [ -z "$$p" ] || echo "Mailcatcher: http://mailcatcher.localhost:$$p/"
 logs: ## Follow the logs of every container (or SERVICE=web for one)
 	docker compose logs -f $(SERVICE)
