@@ -28,7 +28,7 @@ db/*.sqlite3
 db/*.sqlite3-journal
 
 # Ignore all logfiles and most tempfiles.
-log/*.log
+log/*.log*
 tmp/cache
 tmp/pids
 tmp/sass-cache

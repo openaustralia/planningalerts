@@ -96,7 +96,8 @@ describe "API formats" do
     let(:key) { create(:api_key, bulk: true) }
 
     it "finds applications by date scraped as .json" do
-      get "/applications.json", params: { key: key.value, date_scraped: Time.zone.today.to_s }
+      # The factory scrapes it 10 minutes ago, which is yesterday just after midnight
+      get "/applications.json", params: { key: key.value, date_scraped: application.date_scraped.to_date.to_s }
 
       expect(response).to have_http_status(:ok)
       expect(json.first["application"]).to include("council_reference" => "DA-2026/123")

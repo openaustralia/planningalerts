@@ -32,8 +32,9 @@ make          # lists the other targets: status, logs, shell, down, clobber
 ```
 
 `make clean` forces a rebuild but keeps the databases, which is worth doing after switching branches or changing
-dependencies. `make clobber` also deletes the databases and prunes unused Docker images and build cache for every
-project on the machine.
+dependencies. `make clean-data` also deletes this checkout's databases (and Elasticsearch and Redis data) and leaves
+other projects alone, which is what to run when you've finished with a worktree. `make clobber` does that and then
+prunes unused Docker images and build cache for every project on the machine.
 
 Without make, `docker compose up --build` does the same as `make up`, and VS Code and other dev container tools open
 the same stack.
@@ -182,6 +183,8 @@ docker compose run web bin/tapioca gem
 docker compose run web bin/tapioca dsl
 docker compose run web bin/tapioca dsl --environment=test
 ```
+
+Or run `make generate-rbi`, which runs all three in the order that works (the last with `CI=true`, as CI does).
 
 We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all our rbi files. We **don't** use `bundle exec srb rbi ...`.
 

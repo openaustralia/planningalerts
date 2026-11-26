@@ -1,4 +1,4 @@
-.PHONY: help setup up services-up down clean clobber status logs shell test lint typecheck console
+.PHONY: help setup up services-up down clean clean-data clobber status logs shell test lint typecheck generate-rbi clobber-rbi clean-rbi console
 
 # Runs a command in the web container, or in a fresh one if it has stopped
 in_web = if [ -n "$$(docker compose ps -q --status running web)" ]; then docker compose exec web $(1); else docker compose run --rm web $(1); fi
@@ -50,10 +50,12 @@ clean: ## Remove containers, built images (VS Code's too), gems, logs and tmp, k
 	docker volume rm --force "$${p}_bundle" && \
 	{ [ -z "$$vsc" ] || docker rmi --force $$vsc; }
 	git clean -fdX -- log tmp coverage # gitignored files only, so tracked placeholders stay
+# For a checkout you're finished with, or whose databases you want to start again. Touches only this project.
+clean-data: clean ## Also remove this checkout's data (databases, Elasticsearch, Redis), leaving other projects alone
+	docker compose down --volumes
 # Reaches past this checkout, for after switching branches or changing dependencies. Other projects lose only
 # download and build time, as volumes (where their databases live) are never pruned.
-clobber: clean ## Also remove the data, then all stopped containers, unused images and build cache machine-wide
-	docker compose down --volumes
+clobber: clean-data ## Also remove all stopped containers, unused images and build cache machine-wide
 	@echo "Pruning stopped containers, unused images and build cache from ALL projects (volumes are kept)"
 	docker system prune --all --force
 status: ## Show each container's health, the host ports it's published on, and where to browse
@@ -71,7 +73,24 @@ test: ## Run the specs as CI does, after resetting the test database (ARGS=spec/
 	@$(call in_web,bin/rspec $(ARGS))
 lint: ## Run RuboCop, erb_lint and Brakeman as CI does (ARGS=<paths> for RuboCop on just those)
 	@$(call in_web,$(if $(ARGS),bin/rubocop $(ARGS),bin/rake ci:lint))
-typecheck: ## Run Sorbet and the tapioca checks as CI does
-	@$(call in_web,bin/rake ci:type)
+typecheck: ## Run Sorbet and the tapioca checks as CI does (with CI=true, so Rails eager loads as it does there)
+	@$(call in_web,env CI=true bin/rake ci:type)
+# CI=true makes config/environments/test.rb eager load, so the test run sees classes a normal run does not.
+# `env` carries it through both `docker compose exec` and `run`. Tapioca loads the app and checks its migrations, so
+# the databases are prepared first, as `make test` does for the test one (a fresh worktree has none).
+generate-rbi: ## Regenerate every Sorbet RBI in the one order that works: gems, then DSL, then DSL as CI runs it
+	@$(call in_web,bin/rails db:prepare)
+	@$(call in_web,bin/tapioca gem)
+	@$(call in_web,bin/tapioca dsl)
+	@$(call in_web,env CI=true bin/tapioca dsl --environment=test)
+clobber-rbi: ## Delete every generated RBI (sorbet/rbi/gems and dsl), keeping the hand-written shims and todo.rbi, to force regeneration
+	@rm -rf sorbet/rbi/gems sorbet/rbi/dsl
+clean-rbi: ## Delete only the gem RBIs (sorbet/rbi/gems) for versions not in Gemfile.lock (PREVIEW=1 to only list them)
+	@test -r Gemfile.lock || { echo "Gemfile.lock not found" >&2; exit 1; }
+	@for f in sorbet/rbi/gems/*.rbi; do \
+	  [ -e "$$f" ] || continue; \
+	  b=$$(basename "$$f" .rbi); n=$${b%%@*}; v=$${b#*@}; v=$${v%%-*}; \
+	  grep -Eq "^    $$n \($$v[-)]" Gemfile.lock || $(if $(PREVIEW),echo,rm -v) "$$f"; \
+	done
 console: ## Open a Rails console in the web container
 	@$(call in_web,bin/rails console)

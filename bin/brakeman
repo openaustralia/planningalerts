@@ -26,4 +26,7 @@ end
 require "rubygems"
 require "bundler/setup"
 
+# Rails 7.2's binstub adds ARGV.unshift("--ensure-latest"), which fails whenever
+# a newer Brakeman is released. We want lint to depend on our code and the
+# locked version, not on the day's releases, so we update Brakeman with bundle.
 load Gem.bin_path("brakeman", "brakeman")

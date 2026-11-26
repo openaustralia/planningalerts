@@ -59,10 +59,7 @@ module PlanningalertsApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
-    # Please, add to the `ignore` list any other `lib` subdirectories that do
-    # not contain `.rb` files, or that should not be reloaded or eager loaded.
-    # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w(assets tasks))
+    ## User settings (START)
 
     # Rack middleware is instantiated once, when the middleware stack is built,
     # and the stack is never reloaded. Autoloading it through the "once"
@@ -98,7 +95,7 @@ module PlanningalertsApp
 
     config.planningalerts_meta_description =
       "A searchable collection of Australian local government planning applications. " \
-      "Find out for free what is being built and knocked down in your area."
+        "Find out for free what is being built and knocked down in your area."
 
     # The first planning application we ever scraped. Used to say how long we've
     # been collecting data.
@@ -125,6 +122,16 @@ module PlanningalertsApp
     # This was causing exceptions to be thrown on some API calls. Disabling it as it seems not to be needed
     config.action_dispatch.ip_spoofing_check = false
 
+    # config.skylight.probes << "active_job"
+
+    ## User settings (END)
+    ## =============================================
+
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[assets tasks])
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -132,7 +139,5 @@ module PlanningalertsApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
-    # config.skylight.probes << "active_job"
   end
 end

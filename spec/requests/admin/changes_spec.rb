@@ -11,6 +11,10 @@ describe "Admin changes" do
 
   before { sign_in admin }
 
+  # Rails 7.2 keeps the app's Sidekiq adapter in tests, so ask for the test
+  # adapter that have_enqueued_mail needs
+  def queue_adapter_for_test = ActiveJob::QueueAdapters::TestAdapter.new
+
   it "updates an API key's daily limit" do
     api_key = create(:api_key)
 
@@ -60,7 +64,6 @@ describe "Admin changes" do
     application = create(:geocoded_application, authority: create(:contactable_authority))
     comment = create(:published_comment, application:)
 
-    # On Rails 7.1 request specs put deliver_later on the test queue (see #2313)
     expect { post resend_admin_comment_path(comment) }
       .to have_enqueued_mail(CommentMailer, :notify_authority).with(comment)
     expect(response).to redirect_to(admin_comment_path(comment))

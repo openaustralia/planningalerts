@@ -72,7 +72,8 @@ make lint         # RuboCop, erb_lint and Brakeman, as CI runs them (also make t
 make console      # a Rails console
 make down         # stop and remove the containers, keeping the data
 make clean        # also remove built images and dependencies, so the next start rebuilds; keeps the data
-make clobber      # also remove the data, and prune unused Docker images and cache machine-wide
+make clean-data   # also remove this checkout's data, for a worktree you're finished with; other projects are untouched
+make clobber      # also prune unused Docker images and cache machine-wide
 ```
 
 `make up` and `make services-up` return once every service passes its healthcheck. Run `make` for the full list.
@@ -141,7 +142,7 @@ nothing less, before taking a pull request out of draft:
 
 ```sh
 make test         # the RSpec suite, after resetting the test database and building Tailwind
-make typecheck    # bin/rake ci:type, Sorbet plus tapioca --verify checks
+make typecheck    # bin/rake ci:type with CI=true, Sorbet plus tapioca --verify checks
 make lint         # bin/rake ci:lint, RuboCop, erb_lint, Brakeman -w2
 ```
 
@@ -215,8 +216,19 @@ docker compose run web bin/tapioca dsl
 docker compose run web bin/tapioca dsl --environment=test    # what CI verifies
 ```
 
+`make generate-rbi` runs all three tapioca commands in that order, setting `CI=true` for the last as CI does.
+
 `ci:type` runs `--verify` variants of all three plus `check-shims`, so
 out-of-date RBIs fail CI even when the code type checks.
+
+CI sets `CI=true`, and `config/environments/test.rb` then eager loads, so Rails
+loads more classes than a normal local run. `make typecheck` sets `CI=true` for
+the same reason, so use it rather than a bare `bin/rake ci:type`.
+
+Two targets tidy the generated RBIs, and neither touches the hand-written `sorbet/rbi/shims/` or
+`sorbet/rbi/todo.rbi`. `make clean-rbi` deletes only the gem RBIs for versions no longer in `Gemfile.lock`, because
+tapioca leaves those behind (`PREVIEW=1` lists them without deleting). `make clobber-rbi` deletes every generated RBI
+in `sorbet/rbi/gems/` and `sorbet/rbi/dsl/`, so the next tapioca run rebuilds them all.
 
 `sorbet/config` also ignores `.claude/`, because agent worktrees nest a full
 checkout inside the repository and Sorbet would otherwise load every RBI twice.
