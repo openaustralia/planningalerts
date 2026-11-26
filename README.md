@@ -134,12 +134,15 @@ Initially `db/seeds.rb` (run by `bin/setup` on the first `make up`) will have se
 
 * user `admin@example.com`
     * confirm via the email at http://localhost:1080/
-    * Add the admin role using the rails console command `User.first.add_role(:admin)`
+    * Add the admin role using the rails console command `User.find_by(email: "admin@example.com").add_role(:admin)`
+* user `jane@example.com`, a normal person (confirm via the same email inbox)
+* Authority: Logan City Council, with
+    * Application for a shed at 1 Pitt Court, Crestmead QLD 4132
 * Authority: Marrickville Council, with
     * Application to demolish a swimming pool at 28 Grey Street, Emu Plains NSW 2750
 
-Note: external links to morph.io and council site for this example are broken as the external site details have changed
-in the last 5+ years.
+Note: external links to morph.io and the council site for the Marrickville example are broken as the external site details
+have changed in the last 5+ years. The Logan scraper still works, so use that authority for manual checks.
 
 #### Using production data locally
 
