@@ -58,7 +58,7 @@ Start at the Home page, as reported by `make status`, and reach every page by cl
 
 Check each page loads without an error and looks right, especially pages that have changed recently.
 
-The seed data gives you two authorities, each with one application: Logan City Council (1 Pitt Court, Crestmead) and
+The seed data gives you two authorities, each with one application: Logan City Council (69 Fedrick Street, Boronia Heights) and
 Marrickville Council (28 Grey Street, Emu Plains). Use Logan: its scraper still works, and Marrickville's no longer does,
 so its external links are broken.
 
@@ -67,7 +67,7 @@ Navigate to the following:
 * Home > Search: the address search (see Maps below).
 * Footer > Coverage > Logan City Council: the authority page. From there follow 
   * "recent applications",
-    * select 1 Pitt Court Crestmead: the application. It
+    * select 69 Fedrick Street, Boronia Heights: the application. It
       shows the details, the map (see Maps below) and the comment form. Its version history is linked from the application
       page. 
       * Add a comment 
@@ -176,7 +176,7 @@ recorded responses and do not need the keys. Getting the keys for local
 development is being sorted out in openaustralia/oaf-internal#374.
 
 With keys, check the application page shows a map and a street view, and that searching for
-`1 Pitt Court Crestmead QLD 4132` finds the seeded Logan application (or `28 Grey Street, Emu Plains NSW 2750` for
+`69 Fedrick Street, Boronia Heights QLD 4124` finds the seeded Logan application (or `28 Grey Street, Emu Plains NSW 2750` for
 Marrickville).
 
 

@@ -137,7 +137,7 @@ Initially `db/seeds.rb` (run by `bin/setup` on the first `make up`) will have se
     * Add the admin role using the rails console command `User.find_by(email: "admin@example.com").add_role(:admin)`
 * user `jane@example.com`, a normal person (confirm via the same email inbox)
 * Authority: Logan City Council, with
-    * Application for a shed at 1 Pitt Court, Crestmead QLD 4132
+    * Application for a building format plan (1 into 2 lots) at 69 Fedrick Street, Boronia Heights QLD 4124
 * Authority: Marrickville Council, with
     * Application to demolish a swimming pool at 28 Grey Street, Emu Plains NSW 2750
 
