@@ -40,6 +40,33 @@ describe SyncGithubIssueForAuthorityService do
       expect(Octokit::Client).to have_received(:new).with(access_token: "ghs_installationtoken")
     end
 
+    context "when in development without github credentials" do
+      let(:log) { StringIO.new }
+      let(:logger) { Logger.new(log) }
+
+      before do
+        allow(Rails.env).to receive(:development?).and_return(true)
+        allow(GithubAppTokenService).to receive(:configured?).and_return(false)
+        create(:geocoded_application, authority:, date_scraped: 3.weeks.ago)
+      end
+
+      it "skips, and warns what it would have done" do
+        described_class.call(logger:, authority:)
+
+        expect(Octokit::Client).not_to have_received(:new)
+        expect(log.string).to match(/WARN.*Skipping the GitHub issue sync for #{authority.full_name}.*create a GitHub issue for this broken authority/)
+      end
+
+      it "says it would have labelled an existing issue when the authority is working again" do
+        authority.create_github_issue!(github_repo: "example/repo", github_number: 3)
+        create(:geocoded_application, authority:, council_reference: "NEW/1", date_scraped: 1.day.ago)
+
+        described_class.call(logger:, authority:)
+
+        expect(log.string).to match(/label the existing GitHub issue "probably fixed"/)
+      end
+    end
+
     # Broken, but with a date to report, so an issue gets created and attached
     context "when an authority is broken" do
       let(:graphql_errors) { instance_double(GraphQL::Client::Errors, any?: false, messages: {}) }
