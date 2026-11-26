@@ -1,4 +1,4 @@
-.PHONY: help setup up services-up down clean clean-data clobber status logs shell test lint typecheck clobber-rbi clean-rbi console
+.PHONY: help setup up services-up down clean clean-data clobber status logs shell test lint typecheck generate-rbi clobber-rbi clean-rbi console
 
 # Runs a command in the web container, or in a fresh one if it has stopped
 in_web = if [ -n "$$(docker compose ps -q --status running web)" ]; then docker compose exec web $(1); else docker compose run --rm web $(1); fi
@@ -75,6 +75,14 @@ lint: ## Run RuboCop, erb_lint and Brakeman as CI does (ARGS=<paths> for RuboCop
 	@$(call in_web,$(if $(ARGS),bin/rubocop $(ARGS),bin/rake ci:lint))
 typecheck: ## Run Sorbet and the tapioca checks as CI does
 	@$(call in_web,bin/rake ci:type)
+# CI=true makes config/environments/test.rb eager load, so the test run sees classes a normal run does not.
+# `env` carries it through both `docker compose exec` and `run`. Tapioca loads the app and checks its migrations, so
+# the databases are prepared first, as `make test` does for the test one (a fresh worktree has none).
+generate-rbi: ## Regenerate every Sorbet RBI in the one order that works: gems, then DSL, then DSL as CI runs it
+	@$(call in_web,bin/rails db:prepare)
+	@$(call in_web,bin/tapioca gem)
+	@$(call in_web,bin/tapioca dsl)
+	@$(call in_web,env CI=true bin/tapioca dsl --environment=test)
 clobber-rbi: ## Delete every generated RBI (sorbet/rbi/gems and dsl), keeping the hand-written shims and todo.rbi, to force regeneration
 	@rm -rf sorbet/rbi/gems sorbet/rbi/dsl
 clean-rbi: ## Delete only the gem RBIs (sorbet/rbi/gems) for versions not in Gemfile.lock (PREVIEW=1 to only list them)

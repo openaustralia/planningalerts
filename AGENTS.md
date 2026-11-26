@@ -216,6 +216,8 @@ docker compose run web bin/tapioca dsl
 docker compose run web bin/tapioca dsl --environment=test    # what CI verifies
 ```
 
+`make generate-rbi` runs all three tapioca commands in that order, setting `CI=true` for the last as CI does.
+
 `ci:type` runs `--verify` variants of all three plus `check-shims`, so
 out-of-date RBIs fail CI even when the code type checks.
 

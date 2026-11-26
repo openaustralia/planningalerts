@@ -184,6 +184,8 @@ docker compose run web bin/tapioca dsl
 docker compose run web bin/tapioca dsl --environment=test
 ```
 
+Or run `make generate-rbi`, which runs all three in the order that works (the last with `CI=true`, as CI does).
+
 We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all our rbi files. We **don't** use `bundle exec srb rbi ...`.
 
 ### Other useful docker commands
