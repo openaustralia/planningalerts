@@ -6,21 +6,21 @@
 
 
 class Rack::CommonLogger
-  # source://rack/3.2.4/lib/rack/common_logger.rb#29
+  # source://rack/3.2.9/lib/rack/common_logger.rb#29
   def initialize(app, logger = T.unsafe(nil)); end
 
   # source://sinatra//lib/sinatra/base.rb#267
   def call(env); end
 
-  # source://rack/3.2.4/lib/rack/common_logger.rb#41
+  # source://rack/3.2.9/lib/rack/common_logger.rb#41
   def call_without_check(env); end
 
   private
 
-  # source://rack/3.2.4/lib/rack/common_logger.rb#84
+  # source://rack/3.2.9/lib/rack/common_logger.rb#84
   def extract_content_length(headers); end
 
-  # source://rack/3.2.4/lib/rack/common_logger.rb#52
+  # source://rack/3.2.9/lib/rack/common_logger.rb#52
   def log(env, status, response_headers, began_at); end
 end
 
@@ -29,22 +29,22 @@ module Sinatra
   class << self
     # Include the helper modules provided in Sinatra's request context.
     #
-    # source://sinatra//lib/sinatra/base.rb#2162
+    # source://sinatra//lib/sinatra/base.rb#2165
     def helpers(*extensions, &block); end
 
     # Create a new Sinatra application; the block is evaluated in the class scope.
     #
-    # source://sinatra//lib/sinatra/base.rb#2150
+    # source://sinatra//lib/sinatra/base.rb#2153
     def new(base = T.unsafe(nil), &block); end
 
     # Extend the top-level DSL with the modules provided.
     #
-    # source://sinatra//lib/sinatra/base.rb#2157
+    # source://sinatra//lib/sinatra/base.rb#2160
     def register(*extensions, &block); end
 
     # Use the middleware for classic applications.
     #
-    # source://sinatra//lib/sinatra/base.rb#2167
+    # source://sinatra//lib/sinatra/base.rb#2170
     def use(*args, &block); end
   end
 end
@@ -57,37 +57,37 @@ end
 # top-level. Subclassing Sinatra::Base is highly recommended for
 # modular applications.
 #
-# source://sinatra//lib/sinatra/base.rb#2084
+# source://sinatra//lib/sinatra/base.rb#2085
 class Sinatra::Application < ::Sinatra::Base
   class << self
     def app_file; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def app_file=(val); end
 
     def app_file?; end
 
-    # source://sinatra//lib/sinatra/base.rb#2085
+    # source://sinatra//lib/sinatra/base.rb#2086
     def logging; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def logging=(val); end
 
     def logging?; end
     def method_override; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def method_override=(val); end
 
     def method_override?; end
 
-    # source://sinatra//lib/sinatra/base.rb#2090
+    # source://sinatra//lib/sinatra/base.rb#2091
     def register(*extensions, &block); end
 
-    # source://sinatra//lib/sinatra/base.rb#2087
+    # source://sinatra//lib/sinatra/base.rb#2088
     def run; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def run=(val); end
 
     def run?; end
@@ -102,7 +102,7 @@ end
 
 # Base class for all Sinatra applications and middleware.
 #
-# source://sinatra//lib/sinatra/base.rb#973
+# source://sinatra//lib/sinatra/base.rb#971
 class Sinatra::Base
   include ::Rack::Utils
   include ::Sinatra::Helpers
@@ -112,124 +112,124 @@ class Sinatra::Base
   # @yield [_self]
   # @yieldparam _self [Sinatra::Base] the object that the method was called on
   #
-  # source://sinatra//lib/sinatra/base.rb#983
+  # source://sinatra//lib/sinatra/base.rb#981
   def initialize(app = T.unsafe(nil), **_kwargs); end
 
   # Returns the value of attribute app.
   #
-  # source://sinatra//lib/sinatra/base.rb#980
+  # source://sinatra//lib/sinatra/base.rb#978
   def app; end
 
   # Sets the attribute app
   #
   # @param value the value to set the attribute app to.
   #
-  # source://sinatra//lib/sinatra/base.rb#980
+  # source://sinatra//lib/sinatra/base.rb#978
   def app=(_arg0); end
 
   # Rack call interface.
   #
-  # source://sinatra//lib/sinatra/base.rb#992
+  # source://sinatra//lib/sinatra/base.rb#990
   def call(env); end
 
-  # source://sinatra//lib/sinatra/base.rb#996
+  # source://sinatra//lib/sinatra/base.rb#994
   def call!(env); end
 
   # Returns the value of attribute env.
   #
-  # source://sinatra//lib/sinatra/base.rb#980
+  # source://sinatra//lib/sinatra/base.rb#978
   def env; end
 
   # Sets the attribute env
   #
   # @param value the value to set the attribute env to.
   #
-  # source://sinatra//lib/sinatra/base.rb#980
+  # source://sinatra//lib/sinatra/base.rb#978
   def env=(_arg0); end
 
   # Forward the request to the downstream app -- middleware only.
   #
-  # source://sinatra//lib/sinatra/base.rb#1043
+  # source://sinatra//lib/sinatra/base.rb#1041
   def forward; end
 
   # Exit the current block, halts any further processing
   # of the request, and returns the specified response.
   #
-  # source://sinatra//lib/sinatra/base.rb#1030
+  # source://sinatra//lib/sinatra/base.rb#1028
   def halt(*response); end
 
   # Returns the value of attribute params.
   #
-  # source://sinatra//lib/sinatra/base.rb#980
+  # source://sinatra//lib/sinatra/base.rb#978
   def params; end
 
   # Sets the attribute params
   #
   # @param value the value to set the attribute params to.
   #
-  # source://sinatra//lib/sinatra/base.rb#980
+  # source://sinatra//lib/sinatra/base.rb#978
   def params=(_arg0); end
 
   # Pass control to the next matching route.
   # If there are no more matching routes, Sinatra will
   # return a 404 response.
   #
-  # source://sinatra//lib/sinatra/base.rb#1038
+  # source://sinatra//lib/sinatra/base.rb#1036
   def pass(&block); end
 
   # Returns the value of attribute request.
   #
-  # source://sinatra//lib/sinatra/base.rb#980
+  # source://sinatra//lib/sinatra/base.rb#978
   def request; end
 
   # Sets the attribute request
   #
   # @param value the value to set the attribute request to.
   #
-  # source://sinatra//lib/sinatra/base.rb#980
+  # source://sinatra//lib/sinatra/base.rb#978
   def request=(_arg0); end
 
   # Returns the value of attribute response.
   #
-  # source://sinatra//lib/sinatra/base.rb#980
+  # source://sinatra//lib/sinatra/base.rb#978
   def response; end
 
   # Sets the attribute response
   #
   # @param value the value to set the attribute response to.
   #
-  # source://sinatra//lib/sinatra/base.rb#980
+  # source://sinatra//lib/sinatra/base.rb#978
   def response=(_arg0); end
 
   # Access settings defined with Base.set.
   #
-  # source://sinatra//lib/sinatra/base.rb#1024
+  # source://sinatra//lib/sinatra/base.rb#1022
   def settings; end
 
   # Returns the value of attribute template_cache.
   #
-  # source://sinatra//lib/sinatra/base.rb#981
+  # source://sinatra//lib/sinatra/base.rb#979
   def template_cache; end
 
   private
 
   # Dispatch a request with error handling.
   #
-  # source://sinatra//lib/sinatra/base.rb#1182
+  # source://sinatra//lib/sinatra/base.rb#1181
   def dispatch!; end
 
-  # source://sinatra//lib/sinatra/base.rb#1274
+  # source://sinatra//lib/sinatra/base.rb#1273
   def dump_errors!(boom); end
 
   # Find an custom error block for the key(s) specified.
   #
-  # source://sinatra//lib/sinatra/base.rb#1255
+  # source://sinatra//lib/sinatra/base.rb#1254
   def error_block!(key, *block_params); end
 
   # Run filters defined on the class and all superclasses.
   # Accepts an optional block to call after each filter is applied.
   #
-  # source://sinatra//lib/sinatra/base.rb#1057
+  # source://sinatra//lib/sinatra/base.rb#1055
   def filter!(type, base = T.unsafe(nil), &block); end
 
   # source://sinatra//lib/sinatra/base.rb#1932
@@ -237,12 +237,12 @@ class Sinatra::Base
 
   # Error handling during requests.
   #
-  # source://sinatra//lib/sinatra/base.rb#1209
+  # source://sinatra//lib/sinatra/base.rb#1208
   def handle_exception!(boom); end
 
   # Run the block with 'throw :halt' support and apply result to the response.
   #
-  # source://sinatra//lib/sinatra/base.rb#1166
+  # source://sinatra//lib/sinatra/base.rb#1165
   def invoke(&block); end
 
   # If the current request matches pattern and conditions, fill params
@@ -251,17 +251,17 @@ class Sinatra::Base
   #
   # Returns pass block.
   #
-  # source://sinatra//lib/sinatra/base.rb#1100
+  # source://sinatra//lib/sinatra/base.rb#1098
   def process_route(pattern, conditions, block = T.unsafe(nil), values = T.unsafe(nil)); end
 
   # Run routes defined on the class and all superclasses.
   #
-  # source://sinatra//lib/sinatra/base.rb#1066
+  # source://sinatra//lib/sinatra/base.rb#1064
   def route!(base = T.unsafe(nil), pass_block = T.unsafe(nil)); end
 
   # Run a route block and throw :halt with the result.
   #
-  # source://sinatra//lib/sinatra/base.rb#1091
+  # source://sinatra//lib/sinatra/base.rb#1089
   def route_eval; end
 
   # No matching route was found or all routes passed. The default
@@ -272,47 +272,47 @@ class Sinatra::Base
   #
   # @raise [NotFound]
   #
-  # source://sinatra//lib/sinatra/base.rb#1137
+  # source://sinatra//lib/sinatra/base.rb#1136
   def route_missing; end
 
   # Attempt to serve static files from public directory. Throws :halt when
   # a matching file is found, returns nil otherwise.
   # If custom static headers are defined, use them.
   #
-  # source://sinatra//lib/sinatra/base.rb#1146
+  # source://sinatra//lib/sinatra/base.rb#1145
   def static!(options = T.unsafe(nil)); end
 
   class << self
     def absolute_redirects; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def absolute_redirects=(val); end
 
     def absolute_redirects?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1368
+    # source://sinatra//lib/sinatra/base.rb#1367
     def add_charset; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def add_charset=(val); end
 
     def add_charset?; end
 
     # add a filter
     #
-    # source://sinatra//lib/sinatra/base.rb#1499
+    # source://sinatra//lib/sinatra/base.rb#1498
     def add_filter(type, path = T.unsafe(nil), **options, &block); end
 
     # Define an after filter; runs after all requests within the same
     # context as route handlers and may access/modify the request and
     # response.
     #
-    # source://sinatra//lib/sinatra/base.rb#1494
+    # source://sinatra//lib/sinatra/base.rb#1493
     def after(path = T.unsafe(nil), **options, &block); end
 
     def app_file; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def app_file=(val); end
 
     def app_file?; end
@@ -321,13 +321,13 @@ class Sinatra::Base
     # context as route handlers and may access/modify the request and
     # response.
     #
-    # source://sinatra//lib/sinatra/base.rb#1487
+    # source://sinatra//lib/sinatra/base.rb#1486
     def before(path = T.unsafe(nil), **options, &block); end
 
     # source://sinatra//lib/sinatra/base.rb#1975
     def bind; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def bind=(val); end
 
     def bind?; end
@@ -335,25 +335,25 @@ class Sinatra::Base
     # Creates a Rack::Builder instance with all the middleware set up and
     # the given +app+ as end point.
     #
-    # source://sinatra//lib/sinatra/base.rb#1671
+    # source://sinatra//lib/sinatra/base.rb#1670
     def build(app); end
 
-    # source://sinatra//lib/sinatra/base.rb#1679
+    # source://sinatra//lib/sinatra/base.rb#1678
     def call(env); end
 
     # Like Kernel#caller but excluding certain magic entries and without
     # line / method information; the resulting array contains filenames only.
     #
-    # source://sinatra//lib/sinatra/base.rb#1685
+    # source://sinatra//lib/sinatra/base.rb#1684
     def caller_files; end
 
-    # source://sinatra//lib/sinatra/base.rb#1306
+    # source://sinatra//lib/sinatra/base.rb#1305
     def callers_to_ignore; end
 
     # Add a route condition. The route is considered non-matching when the
     # block returns false.
     #
-    # source://sinatra//lib/sinatra/base.rb#1513
+    # source://sinatra//lib/sinatra/base.rb#1512
     def condition(name = T.unsafe(nil), &block); end
 
     # Set configuration options for Sinatra and/or the app.
@@ -362,54 +362,60 @@ class Sinatra::Base
     # @yield [_self]
     # @yieldparam _self [Sinatra::Base] the object that the method was called on
     #
-    # source://sinatra//lib/sinatra/base.rb#1580
+    # source://sinatra//lib/sinatra/base.rb#1579
     def configure(*envs); end
 
-    # source://sinatra//lib/sinatra/base.rb#1368
+    # source://sinatra//lib/sinatra/base.rb#1367
     def default_content_type; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def default_content_type=(val); end
 
     def default_content_type?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1368
+    # source://sinatra//lib/sinatra/base.rb#1367
     def default_encoding; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def default_encoding=(val); end
 
     def default_encoding?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1544
+    # source://sinatra//lib/sinatra/base.rb#1543
     def delete(path, opts = T.unsafe(nil), &block); end
 
     # @return [Boolean]
     #
-    # source://sinatra//lib/sinatra/base.rb#1574
+    # source://sinatra//lib/sinatra/base.rb#1573
     def development?; end
 
     # Same as calling `set :option, false` for each of the given options.
     #
-    # source://sinatra//lib/sinatra/base.rb#1394
+    # source://sinatra//lib/sinatra/base.rb#1393
     def disable(*opts); end
 
     # source://sinatra//lib/sinatra/base.rb#1940
     def dump_errors; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def dump_errors=(val); end
 
     def dump_errors?; end
+    def empty_path_info; end
+
+    # source://sinatra//lib/sinatra/base.rb#1366
+    def empty_path_info=(val); end
+
+    def empty_path_info?; end
 
     # Same as calling `set :option, true` for each of the given options.
     #
-    # source://sinatra//lib/sinatra/base.rb#1389
+    # source://sinatra//lib/sinatra/base.rb#1388
     def enable(*opts); end
 
     def environment; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def environment=(val); end
 
     def environment?; end
@@ -418,22 +424,22 @@ class Sinatra::Base
     # class, or an HTTP status code to specify which errors should be
     # handled.
     #
-    # source://sinatra//lib/sinatra/base.rb#1401
+    # source://sinatra//lib/sinatra/base.rb#1400
     def error(*codes, &block); end
 
     # Returns the value of attribute errors.
     #
-    # source://sinatra//lib/sinatra/base.rb#1304
+    # source://sinatra//lib/sinatra/base.rb#1303
     def errors; end
 
     # Extension modules registered on this class and all superclasses.
     #
-    # source://sinatra//lib/sinatra/base.rb#1329
+    # source://sinatra//lib/sinatra/base.rb#1328
     def extensions; end
 
     # Returns the value of attribute filters.
     #
-    # source://sinatra//lib/sinatra/base.rb#1304
+    # source://sinatra//lib/sinatra/base.rb#1303
     def filters; end
 
     # Force data to specified encoding. It defaults to settings.default_encoding
@@ -445,29 +451,29 @@ class Sinatra::Base
     # Defining a `GET` handler also automatically defines
     # a `HEAD` handler.
     #
-    # source://sinatra//lib/sinatra/base.rb#1532
+    # source://sinatra//lib/sinatra/base.rb#1531
     def get(path, opts = T.unsafe(nil), &block); end
 
     def handler_name; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def handler_name=(val); end
 
     def handler_name?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1546
+    # source://sinatra//lib/sinatra/base.rb#1545
     def head(path, opts = T.unsafe(nil), &block); end
 
     # Makes the methods defined in the block and in the Modules given
     # in `extensions` available to the handlers and templates
     #
-    # source://sinatra//lib/sinatra/base.rb#1558
+    # source://sinatra//lib/sinatra/base.rb#1557
     def helpers(*extensions, &block); end
 
     # source://sinatra//lib/sinatra/base.rb#1978
     def host_authorization; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def host_authorization=(val); end
 
     def host_authorization?; end
@@ -475,62 +481,62 @@ class Sinatra::Base
     # Load embedded templates from the file; uses the caller's __FILE__
     # when no file is specified.
     #
-    # source://sinatra//lib/sinatra/base.rb#1427
+    # source://sinatra//lib/sinatra/base.rb#1426
     def inline_templates=(file = T.unsafe(nil)); end
 
     # Define the layout template. The block must return the template source.
     #
-    # source://sinatra//lib/sinatra/base.rb#1421
+    # source://sinatra//lib/sinatra/base.rb#1420
     def layout(name = T.unsafe(nil), &block); end
 
-    # source://sinatra//lib/sinatra/base.rb#1552
+    # source://sinatra//lib/sinatra/base.rb#1551
     def link(path, opts = T.unsafe(nil), &block); end
 
     def lock; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def lock=(val); end
 
     def lock?; end
     def logging; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def logging=(val); end
 
     def logging?; end
     def method_override; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def method_override=(val); end
 
     def method_override?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def methodoverride=(val); end
 
     def methodoverride?; end
 
     # Middleware used in this class and all superclasses.
     #
-    # source://sinatra//lib/sinatra/base.rb#1338
+    # source://sinatra//lib/sinatra/base.rb#1337
     def middleware; end
 
     # Lookup or register a mime type in Rack's mime registry.
     #
-    # source://sinatra//lib/sinatra/base.rb#1460
+    # source://sinatra//lib/sinatra/base.rb#1459
     def mime_type(type, value = T.unsafe(nil)); end
 
     # provides all mime types matching type, including deprecated types:
     #   mime_types :html # => ['text/html']
     #   mime_types :js   # => ['application/javascript', 'text/javascript']
     #
-    # source://sinatra//lib/sinatra/base.rb#1473
+    # source://sinatra//lib/sinatra/base.rb#1472
     def mime_types(type); end
 
-    # source://sinatra//lib/sinatra/base.rb#1368
+    # source://sinatra//lib/sinatra/base.rb#1367
     def mustermann_opts; end
 
-    # source://sinatra//lib/sinatra/base.rb#1376
+    # source://sinatra//lib/sinatra/base.rb#1375
     def mustermann_opts=(val); end
 
     def mustermann_opts?; end
@@ -539,108 +545,108 @@ class Sinatra::Base
     # pipeline. The object is guaranteed to respond to #call but may not be
     # an instance of the class new was called on.
     #
-    # source://sinatra//lib/sinatra/base.rb#1663
+    # source://sinatra//lib/sinatra/base.rb#1662
     def new(*args, **_arg1, &block); end
 
     def new!(*_arg0); end
 
     # Sugar for `error(404) { ... }`
     #
-    # source://sinatra//lib/sinatra/base.rb#1410
+    # source://sinatra//lib/sinatra/base.rb#1409
     def not_found(&block); end
 
-    # source://sinatra//lib/sinatra/base.rb#1503
+    # source://sinatra//lib/sinatra/base.rb#1502
     def on_start(&on_start_callback); end
 
     # Returns the value of attribute on_start_callback.
     #
-    # source://sinatra//lib/sinatra/base.rb#1304
+    # source://sinatra//lib/sinatra/base.rb#1303
     def on_start_callback; end
 
-    # source://sinatra//lib/sinatra/base.rb#1507
+    # source://sinatra//lib/sinatra/base.rb#1506
     def on_stop(&on_stop_callback); end
 
     # Returns the value of attribute on_stop_callback.
     #
-    # source://sinatra//lib/sinatra/base.rb#1304
+    # source://sinatra//lib/sinatra/base.rb#1303
     def on_stop_callback; end
 
-    # source://sinatra//lib/sinatra/base.rb#1548
+    # source://sinatra//lib/sinatra/base.rb#1547
     def options(path, opts = T.unsafe(nil), &block); end
 
-    # source://sinatra//lib/sinatra/base.rb#1550
+    # source://sinatra//lib/sinatra/base.rb#1549
     def patch(path, opts = T.unsafe(nil), &block); end
 
     def port; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def port=(val); end
 
     def port?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1542
+    # source://sinatra//lib/sinatra/base.rb#1541
     def post(path, opts = T.unsafe(nil), &block); end
 
     def prefixed_redirects; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def prefixed_redirects=(val); end
 
     def prefixed_redirects?; end
 
     # @return [Boolean]
     #
-    # source://sinatra//lib/sinatra/base.rb#1575
+    # source://sinatra//lib/sinatra/base.rb#1574
     def production?; end
 
     def protection; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def protection=(val); end
 
     def protection?; end
 
     # The prototype instance used to process requests.
     #
-    # source://sinatra//lib/sinatra/base.rb#1653
+    # source://sinatra//lib/sinatra/base.rb#1652
     def prototype; end
 
-    # source://sinatra//lib/sinatra/base.rb#1517
+    # source://sinatra//lib/sinatra/base.rb#1516
     def public=(value); end
 
-    # source://sinatra//lib/sinatra/base.rb#1526
+    # source://sinatra//lib/sinatra/base.rb#1525
     def public_dir; end
 
-    # source://sinatra//lib/sinatra/base.rb#1522
+    # source://sinatra//lib/sinatra/base.rb#1521
     def public_dir=(value); end
 
-    # source://sinatra//lib/sinatra/base.rb#2012
+    # source://sinatra//lib/sinatra/base.rb#2013
     def public_folder; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def public_folder=(val); end
 
     def public_folder?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1540
+    # source://sinatra//lib/sinatra/base.rb#1539
     def put(path, opts = T.unsafe(nil), &block); end
 
     def quiet; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def quiet=(val); end
 
     def quiet?; end
 
     # Stop the self-hosted server if running.
     #
-    # source://sinatra//lib/sinatra/base.rb#1592
+    # source://sinatra//lib/sinatra/base.rb#1591
     def quit!; end
 
     # source://sinatra//lib/sinatra/base.rb#1939
     def raise_errors; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def raise_errors=(val); end
 
     def raise_errors?; end
@@ -648,13 +654,13 @@ class Sinatra::Base
     # Register an extension. Alternatively take a block from which an
     # extension will be created and registered on the fly.
     #
-    # source://sinatra//lib/sinatra/base.rb#1565
+    # source://sinatra//lib/sinatra/base.rb#1564
     def register(*extensions, &block); end
 
-    # source://sinatra//lib/sinatra/base.rb#2008
+    # source://sinatra//lib/sinatra/base.rb#2009
     def reload_templates; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def reload_templates=(val); end
 
     def reload_templates?; end
@@ -662,20 +668,20 @@ class Sinatra::Base
     # Removes all routes, filters, middleware and extension hooks from the
     # current class (not routes/filters/... defined by its superclass).
     #
-    # source://sinatra//lib/sinatra/base.rb#1312
+    # source://sinatra//lib/sinatra/base.rb#1311
     def reset!; end
 
-    # source://sinatra//lib/sinatra/base.rb#2006
+    # source://sinatra//lib/sinatra/base.rb#2007
     def root; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def root=(val); end
 
     def root?; end
 
     # Returns the value of attribute routes.
     #
-    # source://sinatra//lib/sinatra/base.rb#1304
+    # source://sinatra//lib/sinatra/base.rb#1303
     def routes; end
 
     def run; end
@@ -684,10 +690,10 @@ class Sinatra::Base
     # Puma, Falcon (in that order). If given a block, will call
     # with the constructed handler once we have taken the stage.
     #
-    # source://sinatra//lib/sinatra/base.rb#1609
+    # source://sinatra//lib/sinatra/base.rb#1608
     def run!(options = T.unsafe(nil), &block); end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def run=(val); end
 
     def run?; end
@@ -696,42 +702,42 @@ class Sinatra::Base
     #
     # @return [Boolean]
     #
-    # source://sinatra//lib/sinatra/base.rb#1648
+    # source://sinatra//lib/sinatra/base.rb#1647
     def running?; end
 
     def running_server; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def running_server=(val); end
 
     def running_server?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1368
+    # source://sinatra//lib/sinatra/base.rb#1367
     def server; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def server=(val); end
 
     def server?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1368
+    # source://sinatra//lib/sinatra/base.rb#1367
     def session_secret; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def session_secret=(val); end
 
     def session_secret?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1368
+    # source://sinatra//lib/sinatra/base.rb#1367
     def session_store; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def session_store=(val); end
 
     def session_store?; end
     def sessions; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def sessions=(val); end
 
     def sessions?; end
@@ -741,18 +747,18 @@ class Sinatra::Base
     #
     # @raise [ArgumentError]
     #
-    # source://sinatra//lib/sinatra/base.rb#1348
+    # source://sinatra//lib/sinatra/base.rb#1347
     def set(option, value = T.unsafe(nil), ignore_setter = T.unsafe(nil), &block); end
 
     # Access settings defined with Base.set.
     #
-    # source://sinatra//lib/sinatra/base.rb#1019
+    # source://sinatra//lib/sinatra/base.rb#1017
     def settings; end
 
     # source://sinatra//lib/sinatra/base.rb#1941
     def show_exceptions; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def show_exceptions=(val); end
 
     def show_exceptions?; end
@@ -761,96 +767,96 @@ class Sinatra::Base
     # Puma, Falcon (in that order). If given a block, will call
     # with the constructed handler once we have taken the stage.
     #
-    # source://sinatra//lib/sinatra/base.rb#1609
+    # source://sinatra//lib/sinatra/base.rb#1608
     def start!(options = T.unsafe(nil), &block); end
 
-    # source://sinatra//lib/sinatra/base.rb#2013
+    # source://sinatra//lib/sinatra/base.rb#2014
     def static; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def static=(val); end
 
     def static?; end
     def static_cache_control; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def static_cache_control=(val); end
 
     def static_cache_control?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1368
+    # source://sinatra//lib/sinatra/base.rb#1367
     def static_headers; end
 
-    # source://sinatra//lib/sinatra/base.rb#1376
+    # source://sinatra//lib/sinatra/base.rb#1375
     def static_headers=(val); end
 
     def static_headers?; end
 
     # Stop the self-hosted server if running.
     #
-    # source://sinatra//lib/sinatra/base.rb#1592
+    # source://sinatra//lib/sinatra/base.rb#1591
     def stop!; end
 
     def strict_paths; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def strict_paths=(val); end
 
     def strict_paths?; end
 
     # Define a named template. The block must return the template source.
     #
-    # source://sinatra//lib/sinatra/base.rb#1415
+    # source://sinatra//lib/sinatra/base.rb#1414
     def template(name, &block); end
 
     # Returns the value of attribute templates.
     #
-    # source://sinatra//lib/sinatra/base.rb#1304
+    # source://sinatra//lib/sinatra/base.rb#1303
     def templates; end
 
     # @return [Boolean]
     #
-    # source://sinatra//lib/sinatra/base.rb#1576
+    # source://sinatra//lib/sinatra/base.rb#1575
     def test?; end
 
     def threaded; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def threaded=(val); end
 
     def threaded?; end
     def traps; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def traps=(val); end
 
     def traps?; end
 
-    # source://sinatra//lib/sinatra/base.rb#1554
+    # source://sinatra//lib/sinatra/base.rb#1553
     def unlink(path, opts = T.unsafe(nil), &block); end
 
     # Use the specified Rack middleware
     #
-    # source://sinatra//lib/sinatra/base.rb#1585
+    # source://sinatra//lib/sinatra/base.rb#1584
     def use(middleware, *args, **_arg2, &block); end
 
     def use_code; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def use_code=(val); end
 
     def use_code?; end
 
-    # source://sinatra//lib/sinatra/base.rb#2007
+    # source://sinatra//lib/sinatra/base.rb#2008
     def views; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def views=(val); end
 
     def views?; end
     def x_cascade; end
 
-    # source://sinatra//lib/sinatra/base.rb#1367
+    # source://sinatra//lib/sinatra/base.rb#1366
     def x_cascade=(val); end
 
     def x_cascade?; end
@@ -860,7 +866,7 @@ class Sinatra::Base
     # Condition for matching user agent. Parameter should be Regexp.
     # Will set params[:agent].
     #
-    # source://sinatra//lib/sinatra/base.rb#1745
+    # source://sinatra//lib/sinatra/base.rb#1744
     def agent(pattern); end
 
     # Like Kernel#caller but excluding certain magic entries
@@ -876,7 +882,7 @@ class Sinatra::Base
 
     # Dynamically defines a method on settings.
     #
-    # source://sinatra//lib/sinatra/base.rb#1731
+    # source://sinatra//lib/sinatra/base.rb#1730
     def define_singleton(name, content = T.unsafe(nil)); end
 
     # source://sinatra//lib/sinatra/base.rb#1788
@@ -884,7 +890,7 @@ class Sinatra::Base
 
     # Condition for matching host name. Parameter might be String or Regexp.
     #
-    # source://sinatra//lib/sinatra/base.rb#1739
+    # source://sinatra//lib/sinatra/base.rb#1738
     def host_name(pattern); end
 
     # @private
@@ -897,10 +903,10 @@ class Sinatra::Base
 
     # Condition for matching mimetypes. Accepts file extensions.
     #
-    # source://sinatra//lib/sinatra/base.rb#1758
+    # source://sinatra//lib/sinatra/base.rb#1757
     def provides(*types); end
 
-    # source://sinatra//lib/sinatra/base.rb#1777
+    # source://sinatra//lib/sinatra/base.rb#1776
     def route(verb, path, options = T.unsafe(nil), &block); end
 
     # source://sinatra//lib/sinatra/base.rb#1847
@@ -930,17 +936,17 @@ class Sinatra::Base
     # source://sinatra//lib/sinatra/base.rb#1880
     def setup_sessions(builder); end
 
-    # source://sinatra//lib/sinatra/base.rb#1715
+    # source://sinatra//lib/sinatra/base.rb#1714
     def setup_traps; end
 
     # Starts the server by running the Rack Handler.
     #
-    # source://sinatra//lib/sinatra/base.rb#1692
+    # source://sinatra//lib/sinatra/base.rb#1691
     def start_server(handler, server_settings, handler_name); end
 
     # @return [Boolean]
     #
-    # source://sinatra//lib/sinatra/base.rb#1711
+    # source://sinatra//lib/sinatra/base.rb#1710
     def suppress_messages?; end
 
     # source://sinatra//lib/sinatra/base.rb#1896
@@ -949,7 +955,7 @@ class Sinatra::Base
     # Condition for matching user agent. Parameter should be Regexp.
     # Will set params[:agent].
     #
-    # source://sinatra//lib/sinatra/base.rb#1745
+    # source://sinatra//lib/sinatra/base.rb#1744
     def user_agent(pattern); end
 
     # used for deprecation warnings
@@ -959,7 +965,7 @@ class Sinatra::Base
   end
 end
 
-# source://sinatra//lib/sinatra/base.rb#978
+# source://sinatra//lib/sinatra/base.rb#976
 Sinatra::Base::URI_INSTANCE = T.let(T.unsafe(nil), URI::RFC2396_Parser)
 
 # Behaves exactly like Rack::CommonLogger with the notable exception that it does nothing,
@@ -975,111 +981,111 @@ end
 # methods to be delegated to the Sinatra::Application class. Used primarily
 # at the top-level.
 #
-# source://sinatra//lib/sinatra/base.rb#2100
+# source://sinatra//lib/sinatra/base.rb#2101
 module Sinatra::Delegator
   private
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def after(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def before(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def configure(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def delete(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def development?(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def disable(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def enable(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def error(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def get(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def head(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def helpers(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def layout(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def link(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def mime_type(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def not_found(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def on_start(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def on_stop(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def options(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def patch(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def post(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def production?(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def put(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def register(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def set(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def settings(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def template(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def test?(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def unlink(*args, **_arg1, &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#2103
+  # source://sinatra//lib/sinatra/base.rb#2106
   def use(*args, **_arg1, &block); end
 
   class << self
-    # source://sinatra//lib/sinatra/base.rb#2101
+    # source://sinatra//lib/sinatra/base.rb#2102
     def delegate(*methods); end
 
     # Returns the value of attribute target.
     #
-    # source://sinatra//lib/sinatra/base.rb#2120
+    # source://sinatra//lib/sinatra/base.rb#2123
     def target; end
 
     # Sets the attribute target
     #
     # @param value the value to set the attribute target to.
     #
-    # source://sinatra//lib/sinatra/base.rb#2120
+    # source://sinatra//lib/sinatra/base.rb#2123
     def target=(_arg0); end
   end
 end
@@ -1121,19 +1127,19 @@ module Sinatra::Helpers
   # Set the Content-Disposition to "attachment" with the specified filename,
   # instructing the user agents to prompt to save.
   #
-  # source://sinatra//lib/sinatra/base.rb#417
+  # source://sinatra//lib/sinatra/base.rb#415
   def attachment(filename = T.unsafe(nil), disposition = T.unsafe(nil)); end
 
   # Sugar for redirect (example:  redirect back)
   #
-  # source://sinatra//lib/sinatra/base.rb#653
+  # source://sinatra//lib/sinatra/base.rb#651
   def back; end
 
   # whether or not the status is set to 400
   #
   # @return [Boolean]
   #
-  # source://sinatra//lib/sinatra/base.rb#688
+  # source://sinatra//lib/sinatra/base.rb#686
   def bad_request?; end
 
   # Set or retrieve the response body. When a block is given,
@@ -1153,25 +1159,25 @@ module Sinatra::Helpers
   # See RFC 2616 / 14.9 for more on standard cache control directives:
   # http://tools.ietf.org/html/rfc2616#section-14.9.1
   #
-  # source://sinatra//lib/sinatra/base.rb#540
+  # source://sinatra//lib/sinatra/base.rb#538
   def cache_control(*values); end
 
   # whether or not the status is set to 4xx
   #
   # @return [Boolean]
   #
-  # source://sinatra//lib/sinatra/base.rb#673
+  # source://sinatra//lib/sinatra/base.rb#671
   def client_error?; end
 
   # Set the content-type of the response body given a media type or file
   # extension.
   #
-  # source://sinatra//lib/sinatra/base.rb#386
+  # source://sinatra//lib/sinatra/base.rb#384
   def content_type(type = T.unsafe(nil), params = T.unsafe(nil)); end
 
   # Halt processing and return the error status provided.
   #
-  # source://sinatra//lib/sinatra/base.rb#349
+  # source://sinatra//lib/sinatra/base.rb#347
   def error(code, body = T.unsafe(nil)); end
 
   # Set the response entity tag (HTTP 'ETag' header) and halt if conditional
@@ -1184,7 +1190,7 @@ module Sinatra::Helpers
   # matching etag, execution is immediately halted. If the request method is
   # GET or HEAD, a '304 Not Modified' response is sent.
   #
-  # source://sinatra//lib/sinatra/base.rb#623
+  # source://sinatra//lib/sinatra/base.rb#621
   def etag(value, options = T.unsafe(nil)); end
 
   # Set the Expires header and Cache-Control/max-age directive. Amount
@@ -1196,19 +1202,19 @@ module Sinatra::Helpers
   #   => Cache-Control: public, must-revalidate, max-age=500
   #   => Expires: Mon, 08 Jun 2009 08:50:17 GMT
   #
-  # source://sinatra//lib/sinatra/base.rb#568
+  # source://sinatra//lib/sinatra/base.rb#566
   def expires(amount, *values); end
 
   # Set multiple response headers with Hash.
   #
-  # source://sinatra//lib/sinatra/base.rb#364
+  # source://sinatra//lib/sinatra/base.rb#362
   def headers(hash = T.unsafe(nil)); end
 
   # whether or not the status is set to 1xx
   #
   # @return [Boolean]
   #
-  # source://sinatra//lib/sinatra/base.rb#658
+  # source://sinatra//lib/sinatra/base.rb#656
   def informational?; end
 
   # Set the last modified time of the resource (HTTP 'Last-Modified' header)
@@ -1219,29 +1225,29 @@ module Sinatra::Helpers
   # equal or later than the time specified, execution is immediately halted
   # with a '304 Not Modified' response.
   #
-  # source://sinatra//lib/sinatra/base.rb#592
+  # source://sinatra//lib/sinatra/base.rb#590
   def last_modified(time); end
 
   # Access shared logger object.
   #
-  # source://sinatra//lib/sinatra/base.rb#375
+  # source://sinatra//lib/sinatra/base.rb#373
   def logger; end
 
   # Look up a media type by file extension in Rack's mime registry.
   #
-  # source://sinatra//lib/sinatra/base.rb#380
+  # source://sinatra//lib/sinatra/base.rb#378
   def mime_type(type); end
 
   # Halt processing and return a 404 Not Found.
   #
-  # source://sinatra//lib/sinatra/base.rb#359
+  # source://sinatra//lib/sinatra/base.rb#357
   def not_found(body = T.unsafe(nil)); end
 
   # whether or not the status is set to 404
   #
   # @return [Boolean]
   #
-  # source://sinatra//lib/sinatra/base.rb#683
+  # source://sinatra//lib/sinatra/base.rb#681
   def not_found?; end
 
   # Halt processing and redirect to the URI provided.
@@ -1253,24 +1259,24 @@ module Sinatra::Helpers
   #
   # @return [Boolean]
   #
-  # source://sinatra//lib/sinatra/base.rb#668
+  # source://sinatra//lib/sinatra/base.rb#666
   def redirect?; end
 
   # Use the contents of the file at +path+ as the response body.
   #
-  # source://sinatra//lib/sinatra/base.rb#428
+  # source://sinatra//lib/sinatra/base.rb#426
   def send_file(path, opts = T.unsafe(nil)); end
 
   # whether or not the status is set to 5xx
   #
   # @return [Boolean]
   #
-  # source://sinatra//lib/sinatra/base.rb#678
+  # source://sinatra//lib/sinatra/base.rb#676
   def server_error?; end
 
   # Access the underlying Rack session.
   #
-  # source://sinatra//lib/sinatra/base.rb#370
+  # source://sinatra//lib/sinatra/base.rb#368
   def session; end
 
   # Set or retrieve the response status code.
@@ -1284,38 +1290,38 @@ module Sinatra::Helpers
   # The close parameter specifies whether Stream#close should be called
   # after the block has been executed.
   #
-  # source://sinatra//lib/sinatra/base.rb#515
+  # source://sinatra//lib/sinatra/base.rb#513
   def stream(keep_open = T.unsafe(nil)); end
 
   # whether or not the status is set to 2xx
   #
   # @return [Boolean]
   #
-  # source://sinatra//lib/sinatra/base.rb#663
+  # source://sinatra//lib/sinatra/base.rb#661
   def success?; end
 
   # Generates a Time object from the given value.
   # Used by #expires and #last_modified.
   #
-  # source://sinatra//lib/sinatra/base.rb#694
+  # source://sinatra//lib/sinatra/base.rb#692
   def time_for(value); end
 
   # Generates the absolute URI for a given path in the app.
   # Takes Rack routers and reverse proxies into account.
   #
-  # source://sinatra//lib/sinatra/base.rb#328
+  # source://sinatra//lib/sinatra/base.rb#326
   def to(addr = T.unsafe(nil), absolute = T.unsafe(nil), add_script_name = T.unsafe(nil)); end
 
   # Generates the absolute URI for a given path in the app.
   # Takes Rack routers and reverse proxies into account.
   #
-  # source://sinatra//lib/sinatra/base.rb#328
+  # source://sinatra//lib/sinatra/base.rb#326
   def uri(addr = T.unsafe(nil), absolute = T.unsafe(nil), add_script_name = T.unsafe(nil)); end
 
   # Generates the absolute URI for a given path in the app.
   # Takes Rack routers and reverse proxies into account.
   #
-  # source://sinatra//lib/sinatra/base.rb#328
+  # source://sinatra//lib/sinatra/base.rb#326
   def url(addr = T.unsafe(nil), absolute = T.unsafe(nil), add_script_name = T.unsafe(nil)); end
 
   private
@@ -1324,19 +1330,19 @@ module Sinatra::Helpers
   #
   # @return [Boolean]
   #
-  # source://sinatra//lib/sinatra/base.rb#711
+  # source://sinatra//lib/sinatra/base.rb#709
   def etag_matches?(list, new_resource = T.unsafe(nil)); end
 
-  # source://sinatra//lib/sinatra/base.rb#717
+  # source://sinatra//lib/sinatra/base.rb#715
   def with_params(temp_params); end
 end
 
-# source://sinatra//lib/sinatra/base.rb#613
+# source://sinatra//lib/sinatra/base.rb#611
 Sinatra::Helpers::ETAG_KINDS = T.let(T.unsafe(nil), Array)
 
 # https://html.spec.whatwg.org/#multipart-form-data
 #
-# source://sinatra//lib/sinatra/base.rb#409
+# source://sinatra//lib/sinatra/base.rb#407
 Sinatra::Helpers::MULTIPART_FORM_DATA_REPLACEMENT_TABLE = T.let(T.unsafe(nil), Hash)
 
 # Class of the response body in case you use #stream.
@@ -1348,38 +1354,38 @@ Sinatra::Helpers::MULTIPART_FORM_DATA_REPLACEMENT_TABLE = T.let(T.unsafe(nil), H
 #
 # Scheduler has to respond to defer and schedule.
 #
-# source://sinatra//lib/sinatra/base.rb#460
+# source://sinatra//lib/sinatra/base.rb#458
 class Sinatra::Helpers::Stream
   # @return [Stream] a new instance of Stream
   #
-  # source://sinatra//lib/sinatra/base.rb#464
+  # source://sinatra//lib/sinatra/base.rb#462
   def initialize(scheduler = T.unsafe(nil), keep_open = T.unsafe(nil), &back); end
 
-  # source://sinatra//lib/sinatra/base.rb#492
+  # source://sinatra//lib/sinatra/base.rb#490
   def <<(data); end
 
-  # source://sinatra//lib/sinatra/base.rb#497
+  # source://sinatra//lib/sinatra/base.rb#495
   def callback(&block); end
 
-  # source://sinatra//lib/sinatra/base.rb#472
+  # source://sinatra//lib/sinatra/base.rb#470
   def close; end
 
   # @return [Boolean]
   #
-  # source://sinatra//lib/sinatra/base.rb#505
+  # source://sinatra//lib/sinatra/base.rb#503
   def closed?; end
 
-  # source://sinatra//lib/sinatra/base.rb#479
+  # source://sinatra//lib/sinatra/base.rb#477
   def each(&front); end
 
-  # source://sinatra//lib/sinatra/base.rb#497
+  # source://sinatra//lib/sinatra/base.rb#495
   def errback(&block); end
 
   class << self
-    # source://sinatra//lib/sinatra/base.rb#462
+    # source://sinatra//lib/sinatra/base.rb#460
     def defer(*_arg0); end
 
-    # source://sinatra//lib/sinatra/base.rb#461
+    # source://sinatra//lib/sinatra/base.rb#459
     def schedule(*_arg0); end
   end
 end
@@ -1609,7 +1615,7 @@ class Sinatra::Request < ::Rack::Request
   # source://sinatra//lib/sinatra/base.rb#70
   def safe?; end
 
-  # source://rack/3.2.4/lib/rack/request.rb#415
+  # source://rack/3.2.9/lib/rack/request.rb#417
   def secure?; end
 
   # @return [Boolean]
@@ -1780,16 +1786,16 @@ Sinatra::ShowExceptions::TEMPLATE = T.let(T.unsafe(nil), ERB)
 #
 # Implementation copied from Tilt::Cache.
 #
-# source://sinatra//lib/sinatra/base.rb#951
+# source://sinatra//lib/sinatra/base.rb#949
 class Sinatra::TemplateCache
   # @return [TemplateCache] a new instance of TemplateCache
   #
-  # source://sinatra//lib/sinatra/base.rb#952
+  # source://sinatra//lib/sinatra/base.rb#950
   def initialize; end
 
   # Clears the cache.
   #
-  # source://sinatra//lib/sinatra/base.rb#967
+  # source://sinatra//lib/sinatra/base.rb#965
   def clear; end
 
   # Caches a value for key, or returns the previously cached value.
@@ -1797,7 +1803,7 @@ class Sinatra::TemplateCache
   # returned. Otherwise, block is yielded to and its return value
   # which may be nil, is cached under key and returned.
   #
-  # source://sinatra//lib/sinatra/base.rb#960
+  # source://sinatra//lib/sinatra/base.rb#958
   def fetch(*key); end
 end
 
@@ -1820,18 +1826,18 @@ end
 #                   object rather than the application instance.
 #   :views          Views directory to use.
 #
-# source://sinatra//lib/sinatra/base.rb#744
+# source://sinatra//lib/sinatra/base.rb#742
 module Sinatra::Templates
-  # source://sinatra//lib/sinatra/base.rb#749
+  # source://sinatra//lib/sinatra/base.rb#747
   def initialize; end
 
-  # source://sinatra//lib/sinatra/base.rb#795
+  # source://sinatra//lib/sinatra/base.rb#793
   def asciidoc(template, options = T.unsafe(nil), locals = T.unsafe(nil)); end
 
-  # source://sinatra//lib/sinatra/base.rb#777
+  # source://sinatra//lib/sinatra/base.rb#775
   def builder(template = T.unsafe(nil), options = T.unsafe(nil), locals = T.unsafe(nil), &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#755
+  # source://sinatra//lib/sinatra/base.rb#753
   def erb(template, options = T.unsafe(nil), locals = T.unsafe(nil), &block); end
 
   # Calls the given block for every possible template file in views,
@@ -1839,93 +1845,93 @@ module Sinatra::Templates
   #
   # @yield [::File.join(views, "#{name}.#{@preferred_extension}")]
   #
-  # source://sinatra//lib/sinatra/base.rb#824
+  # source://sinatra//lib/sinatra/base.rb#822
   def find_template(views, name, engine); end
 
-  # source://sinatra//lib/sinatra/base.rb#759
+  # source://sinatra//lib/sinatra/base.rb#757
   def haml(template, options = T.unsafe(nil), locals = T.unsafe(nil), &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#782
+  # source://sinatra//lib/sinatra/base.rb#780
   def liquid(template, options = T.unsafe(nil), locals = T.unsafe(nil), &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#799
+  # source://sinatra//lib/sinatra/base.rb#797
   def markaby(template = T.unsafe(nil), options = T.unsafe(nil), locals = T.unsafe(nil), &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#786
+  # source://sinatra//lib/sinatra/base.rb#784
   def markdown(template, options = T.unsafe(nil), locals = T.unsafe(nil)); end
 
-  # source://sinatra//lib/sinatra/base.rb#803
+  # source://sinatra//lib/sinatra/base.rb#801
   def nokogiri(template = T.unsafe(nil), options = T.unsafe(nil), locals = T.unsafe(nil), &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#817
+  # source://sinatra//lib/sinatra/base.rb#815
   def rabl(template, options = T.unsafe(nil), locals = T.unsafe(nil)); end
 
-  # source://sinatra//lib/sinatra/base.rb#791
+  # source://sinatra//lib/sinatra/base.rb#789
   def rdoc(template, options = T.unsafe(nil), locals = T.unsafe(nil)); end
 
-  # source://sinatra//lib/sinatra/base.rb#763
+  # source://sinatra//lib/sinatra/base.rb#761
   def sass(template, options = T.unsafe(nil), locals = T.unsafe(nil)); end
 
-  # source://sinatra//lib/sinatra/base.rb#770
+  # source://sinatra//lib/sinatra/base.rb#768
   def scss(template, options = T.unsafe(nil), locals = T.unsafe(nil)); end
 
-  # source://sinatra//lib/sinatra/base.rb#808
+  # source://sinatra//lib/sinatra/base.rb#806
   def slim(template, options = T.unsafe(nil), locals = T.unsafe(nil), &block); end
 
-  # source://sinatra//lib/sinatra/base.rb#812
+  # source://sinatra//lib/sinatra/base.rb#810
   def yajl(template, options = T.unsafe(nil), locals = T.unsafe(nil)); end
 
   private
 
-  # source://sinatra//lib/sinatra/base.rb#933
+  # source://sinatra//lib/sinatra/base.rb#931
   def compile_block_template(template, options, &body); end
 
-  # source://sinatra//lib/sinatra/base.rb#895
+  # source://sinatra//lib/sinatra/base.rb#893
   def compile_template(engine, data, options, views); end
 
-  # source://sinatra//lib/sinatra/base.rb#844
+  # source://sinatra//lib/sinatra/base.rb#842
   def render(engine, data, options = T.unsafe(nil), locals = T.unsafe(nil), &block); end
 
   # logic shared between builder and nokogiri
   #
-  # source://sinatra//lib/sinatra/base.rb#835
+  # source://sinatra//lib/sinatra/base.rb#833
   def render_ruby(engine, template, options = T.unsafe(nil), locals = T.unsafe(nil), &block); end
 end
 
-# source://sinatra//lib/sinatra/base.rb#745
+# source://sinatra//lib/sinatra/base.rb#743
 module Sinatra::Templates::ContentTyped
   # Returns the value of attribute content_type.
   #
-  # source://sinatra//lib/sinatra/base.rb#746
+  # source://sinatra//lib/sinatra/base.rb#744
   def content_type; end
 
   # Sets the attribute content_type
   #
   # @param value the value to set the attribute content_type to.
   #
-  # source://sinatra//lib/sinatra/base.rb#746
+  # source://sinatra//lib/sinatra/base.rb#744
   def content_type=(_arg0); end
 end
 
 # source://sinatra//lib/sinatra/version.rb#4
 Sinatra::VERSION = T.let(T.unsafe(nil), String)
 
-# source://sinatra//lib/sinatra/base.rb#2126
+# source://sinatra//lib/sinatra/base.rb#2129
 class Sinatra::Wrapper
   # @return [Wrapper] a new instance of Wrapper
   #
-  # source://sinatra//lib/sinatra/base.rb#2127
+  # source://sinatra//lib/sinatra/base.rb#2130
   def initialize(stack, instance); end
 
-  # source://sinatra//lib/sinatra/base.rb#2140
+  # source://sinatra//lib/sinatra/base.rb#2143
   def call(env); end
 
-  # source://sinatra//lib/sinatra/base.rb#2136
+  # source://sinatra//lib/sinatra/base.rb#2139
   def helpers; end
 
-  # source://sinatra//lib/sinatra/base.rb#2144
+  # source://sinatra//lib/sinatra/base.rb#2147
   def inspect; end
 
-  # source://sinatra//lib/sinatra/base.rb#2132
+  # source://sinatra//lib/sinatra/base.rb#2135
   def settings; end
 end
