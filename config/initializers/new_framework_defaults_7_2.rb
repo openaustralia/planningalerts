@@ -32,6 +32,9 @@
 # backends that use the same database as Active Record as a queue, hence they
 # don't need this feature.
 #++
+# Leave this setting commented out until #2381 is resolved. Using :default
+# would let Sidekiq wait until after the commit, so a failed enqueue could
+# leave an alert marked as sent even though no email was queued.
 # Rails.application.config.active_job.enqueue_after_transaction_commit = :default
 
 ###
