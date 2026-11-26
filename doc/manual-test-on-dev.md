@@ -156,6 +156,12 @@ README for the hostnames and a `curl` example.
 `make up` runs a Sidekiq worker alongside Rails. After you have sent some email above, open the Sidekiq dashboard (Administration panel > Background Jobs) and
 check a worker process is connected and nothing is stuck under Retries or Dead.
 
+Importing applications is not configured for the development environment yet. The "Import applications" button on an
+authority in the admin queues `ImportApplicationsJob`, which needs a `morph_api_key` in the Rails credentials. Development
+has none, so the job fails with `TypeError: Parameter 'morph_api_key': Expected type String, got type NilClass` and
+keeps retrying under Retries. Don't click it for now. If you did, delete the entry from Retries. This is part of getting
+development keys sorted out in openaustralia/oaf-internal#374.
+
 
 ## Maps
 
