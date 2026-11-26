@@ -84,6 +84,19 @@ describe ProcessAlertService do
         end
       end
 
+      # Unlike the stubbed context above, this fails the real enqueue, so it also
+      # catches enqueueing being deferred until after the transaction commits.
+      context "when the queue rejects the email job" do
+        before do
+          allow(ActiveJob::Base.queue_adapter).to receive(:enqueue).and_raise(RuntimeError, "Redis is down")
+        end
+
+        it "does not record the alert as sent" do
+          expect { described_class.call(alert:) }.to raise_error(RuntimeError, "Redis is down")
+          expect(alert.reload.last_sent).to be_nil
+        end
+      end
+
       context "with application that was not properly geocoded" do
         let(:application) do
           create(:geocoded_application, lat: 1.0, lng: 2.0, address: "An address that can't be geocoded")
