@@ -19,6 +19,13 @@ describe ImportApplicationsJob do
       .with(authority:, logger: an_instance_of(AuthorityLogger), scrape_delay: 5, morph_api_key: anything)
   end
 
+  it "refuses to import without a morph.io API key, saying how to set one" do
+    allow(Rails.configuration.x).to receive(:morph_api_key).and_return(nil)
+
+    expect { described_class.new.perform(authority.id) }.to raise_error(/MORPH_API_KEY in \.env/)
+    expect(ImportApplicationsService).not_to have_received(:call)
+  end
+
   it "replaces the authority's import log with this run's" do
     described_class.new.perform(authority.id)
 
