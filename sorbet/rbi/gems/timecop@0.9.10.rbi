@@ -67,7 +67,7 @@ module Process
   extend ::Dalli::PIDCache::CoreExt
   extend ::ConnectionPool::ForkTracker
   extend ::RedisClient::PIDCache::CoreExt
-  extend ::ActiveSupport::ForkTracker::ModernCoreExt
+  extend ::ActiveSupport::ForkTracker::CoreExt
 
   class << self
     # source://timecop//lib/timecop/time_extensions.rb#176

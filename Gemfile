@@ -8,7 +8,7 @@ ruby file: ".ruby-version"
 gem "net-imap"
 
 gem "bootsnap", require: false
-gem "rails", "~> 7.1.0"
+gem "rails", "~> 7.2.4"
 gem "rake"
 
 # TODO: #2167 Remove this pin once tapioca's incompatibility with zeitwerk >= 2.7

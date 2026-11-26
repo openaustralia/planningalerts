@@ -17,9 +17,10 @@ the data live in the `planningalerts-scrapers` organisation and run on
 So when data looks wrong, the cause is often a scraper rather than anything
 here.
 
-Rails 7.1 on Ruby 3.3.14, PostgreSQL with PostGIS, Elasticsearch via Searchkick,
-Redis, and Sidekiq. `config/application.rb` runs `config.load_defaults 7.1`, and
-`config/initializers/message_serializer.rb` keeps reading old Marshal-signed
+Rails 7.2 on Ruby 3.3.14, PostgreSQL with PostGIS, Elasticsearch via Searchkick,
+Redis, and Sidekiq. `config/application.rb` still runs `config.load_defaults 7.1`;
+`config/initializers/new_framework_defaults_7_2.rb` lists the 7.2 defaults not yet
+adopted. `config/initializers/message_serializer.rb` keeps reading old Marshal-signed
 messages for now.
 
 ## Contributing, branches and commits
