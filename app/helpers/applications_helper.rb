@@ -173,10 +173,13 @@ module ApplicationsHelper
   def google_signed_url(domain:, path:, query:, key: :api)
     google_maps_key = lookup_google_maps_key(key)
     cryptographic_key = Rails.configuration.x.google_maps.cryptographic_key
-    if google_maps_key.present?
+    if google_maps_key.present? && cryptographic_key.present?
       signed = "#{path}?#{query.merge(key: google_maps_key).to_query}"
       signature = sign_gmap_bus_api_url(signed, cryptographic_key)
       domain + signed + "&signature=#{signature}"
+    elsif google_maps_key.present?
+      # A key with no signing secret, such as a development key: Google gets the key but no signature
+      "#{domain}#{path}?#{query.merge(key: google_maps_key).to_query}"
     else
       "#{domain}#{path}?#{query.to_query}"
     end

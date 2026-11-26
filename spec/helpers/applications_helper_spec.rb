@@ -148,6 +148,19 @@ describe ApplicationsHelper do
       end
     end
 
+    describe "static map with a key but no signing secret" do
+      before do
+        allow(application).to receive(:address).and_return("Foo Road, NSW")
+        allow(Rails.configuration.x.google_maps).to receive_messages(api_key: "abc", cryptographic_key: nil)
+      end
+
+      it "includes the key and no signature" do
+        expect(helper.google_static_map(application, size: "350x200", zoom: 16)).to eq(
+          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=abc&amp;maptype=roadmap&amp;markers=color%3Ared%7C1.0%2C2.0&amp;size=350x200&amp;zoom=16\" width=\"350\" height=\"200\" />"
+        )
+      end
+    end
+
     describe "static streetview" do
       before do
         allow(application).to receive(:address).and_return("Foo Road, NSW")
