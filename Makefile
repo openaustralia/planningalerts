@@ -78,7 +78,9 @@ typecheck: ## Run Sorbet and the tapioca checks as CI does
 clobber-rbi: ## Delete every generated RBI (sorbet/rbi/gems and dsl), keeping the hand-written shims and todo.rbi, to force regeneration
 	@rm -rf sorbet/rbi/gems sorbet/rbi/dsl
 clean-rbi: ## Delete only the gem RBIs (sorbet/rbi/gems) for versions not in Gemfile.lock (PREVIEW=1 to only list them)
+	@test -r Gemfile.lock || { echo "Gemfile.lock not found" >&2; exit 1; }
 	@for f in sorbet/rbi/gems/*.rbi; do \
+	  [ -e "$$f" ] || continue; \
 	  b=$$(basename "$$f" .rbi); n=$${b%%@*}; v=$${b#*@}; v=$${v%%-*}; \
 	  grep -Eq "^    $$n \($$v[-)]" Gemfile.lock || $(if $(PREVIEW),echo,rm -v) "$$f"; \
 	done
