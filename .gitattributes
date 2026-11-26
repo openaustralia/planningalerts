@@ -1,2 +1,6 @@
 config/credentials/*.yml.enc diff=rails_credentials
 config/credentials.yml.enc diff=rails_credentials
+# Tapioca writes these. GitHub collapses generated files in a pull request's diff, so reviewers see the code
+# first. The hand-written sorbet/rbi/shims and sorbet/rbi/todo.rbi are not listed, so they show as normal.
+sorbet/rbi/gems/** linguist-generated=true
+sorbet/rbi/dsl/** linguist-generated=true
