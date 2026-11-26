@@ -19,7 +19,15 @@ class ImportApplicationsJob
       authority:,
       logger: info_logger,
       scrape_delay: SCRAPE_DELAY,
-      morph_api_key: Rails.application.credentials[:morph_api_key]
+      morph_api_key:
     )
+  end
+
+  private
+
+  sig { returns(String) }
+  def morph_api_key
+    Rails.configuration.x.morph_api_key.presence ||
+      raise("config.x.morph_api_key is not set. In development set MORPH_API_KEY in .env (see .env.example)")
   end
 end

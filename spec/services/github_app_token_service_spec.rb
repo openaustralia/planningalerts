@@ -79,6 +79,18 @@ describe GithubAppTokenService do
       end
     end
 
+    describe ".configured?" do
+      it "is true when all the github_app credentials are set" do
+        expect(described_class.configured?).to be true
+      end
+
+      it "is false when one is missing" do
+        allow(Rails.application.credentials).to receive(:dig).with(:github_app, :private_key).and_return(nil)
+
+        expect(described_class.configured?).to be false
+      end
+    end
+
     context "when a credential is missing" do
       before do
         allow(Rails.application.credentials).to receive(:dig).with(:github_app, :private_key).and_return(nil)

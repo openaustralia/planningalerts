@@ -22,6 +22,10 @@ Rails.application.configure do
   # real postal server
   config.x.postal_jwks_url = "https://postal.example.com/.well-known/jwks.json"
 
+  # The Google Maps keys are left unset in test, so specs that need one stub it. This one is needed
+  # because importing is refused without it
+  config.x.morph_api_key = "test-morph-api-key"
+
   ## User settings (END)
   ## =============================================
 

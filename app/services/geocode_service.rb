@@ -21,6 +21,10 @@ class GeocodeService
   sig { returns(GeocoderResults) }
   def call
     google_result = GoogleGeocodeService.call(address:, key: google_key)
+    # Mappify is only an experimental comparison and it refuses requests without a key (401), which would stop
+    # every application being saved. Development has no Mappify key, so skip it there
+    return google_result if mappify_key.blank?
+
     mappify_result = MappifyGeocodeService.call(address:, key: mappify_key)
 
     record_in_database(google_result, mappify_result) if results_are_different(google_result, mappify_result)

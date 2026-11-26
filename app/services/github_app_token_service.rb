@@ -38,6 +38,12 @@ class GithubAppTokenService
 
   @cached_token = T.let(nil, T.nilable(InstallationToken))
 
+  # Whether the github_app credentials are all set
+  sig { returns(T::Boolean) }
+  def self.configured?
+    %i[id installation_id private_key].all? { |name| Rails.application.credentials.dig(:github_app, name).present? }
+  end
+
   sig { returns(String) }
   def self.call
     cached_token = @cached_token

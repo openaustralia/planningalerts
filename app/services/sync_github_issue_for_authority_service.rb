@@ -127,6 +127,13 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(logger: Logger, authority: Authority).void }
   def call(logger:, authority:)
+    # Development has no GitHub credentials, and must not touch the real GitHub project
+    if Rails.env.development? && !GithubAppTokenService.configured?
+      logger.warn "Skipping the GitHub issue sync for #{authority.full_name}: github_app credentials are not set. " \
+                  "It would have tried to #{intended_action(authority)}"
+      return
+    end
+
     client = Octokit::Client.new(access_token: GithubAppTokenService.call)
 
     issue = authority.github_issue
@@ -146,6 +153,23 @@ class SyncGithubIssueForAuthorityService
     elsif !authority.broken? && issue && !issue.closed?(client)
       logger.info "Authority #{authority.full_name} is fixed but github issue is still open. So labelling."
       issue.add_label!(client, PROBABLY_FIXED_LABEL_NAME)
+    end
+  end
+
+  # What the sync would try to do, worked out without asking GitHub whether the issue is still open
+  sig { params(authority: Authority).returns(String) }
+  def intended_action(authority)
+    issue = authority.github_issue
+    if authority.broken? && authority.date_last_new_application_scraped
+      if issue.nil?
+        "create a GitHub issue for this broken authority and add it to the project"
+      else
+        "create a new GitHub issue for this broken authority if the existing one is closed"
+      end
+    elsif !authority.broken? && issue
+      "label the existing GitHub issue \"#{PROBABLY_FIXED_LABEL_NAME}\" if it is still open, as the authority is working again"
+    else
+      "do nothing, as there is nothing to sync"
     end
   end
 

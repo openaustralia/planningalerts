@@ -42,17 +42,17 @@ logan = Authority.create! full_name: "Logan City Council",
 
 CreateOrUpdateApplicationService.call(
   authority: logan,
-  council_reference: "BW-5279/2009",
+  council_reference: "SP/240/2026",
   attributes: {
-    address: "1 Pitt Court Crestmead QLD 4132",
-    description: "Domestic - Shed",
+    address: "69 Fedrick Street, Boronia Heights QLD 4124",
+    description: "SP354090 Building Format Plan (1 into 2 Lots) + Common Property + 69 Fedrick Street Community Titles Scheme",
     date_scraped: Time.zone.now,
-    info_url: "http://pdonline.logan.qld.gov.au/modules/applicationmaster/default.aspx?page=found&7=5279&8=2009",
+    info_url: "https://devet.loganhub.com.au/#/applications/SP-240-2026",
     # Values that would normally be the result of geocoding
-    suburb: "Crestmead",
+    suburb: "Boronia Heights",
     state: "QLD",
-    postcode: "4132",
-    lat: -27.693237,
-    lng: 153.078117
+    postcode: "4124",
+    lat: -27.686616,
+    lng: 153.0238234
   }
 )

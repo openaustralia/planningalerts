@@ -43,8 +43,7 @@ describe "Extra options on address search" do
 
     before do
       allow(GoogleGeocodeService).to receive(:call).and_call_original
-      allow(Rails.application.credentials).to receive(:dig).and_call_original
-      allow(Rails.application.credentials).to receive(:dig).with(:google_maps, :server_key).and_return("example-key")
+      allow(Rails.configuration.x.google_maps).to receive(:server_key).and_return("example-key")
       allow(Rails).to receive(:cache).and_return(ActiveSupport::Cache::FileStore.new(Dir.mktmpdir))
       stub_request(:get, %r{\Ahttps://maps.googleapis.com/maps/api/geocode/json})
         .to_return(body: google_reply, headers: { "Content-Type" => "application/json" })

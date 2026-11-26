@@ -33,6 +33,19 @@ describe GeocodeService do
   let(:result50) { GeocoderResults.new([point50], nil) }
   let(:empty_result) { GeocoderResults.new([], nil) }
 
+  context "without a mappify key" do
+    before do
+      allow(GoogleGeocodeService).to receive(:call).with(address:, key: google_key).and_return(result0)
+      allow(MappifyGeocodeService).to receive(:call)
+    end
+
+    it "returns the google result without asking mappify or recording anything" do
+      expect(described_class.call(address:, google_key:, mappify_key: nil)).to eq result0
+      expect(MappifyGeocodeService).not_to have_received(:call)
+      expect(GeocodeQuery.count).to eq 0
+    end
+  end
+
   context "with valid google and mappify results" do
     before do
       allow(GoogleGeocodeService).to receive(:call).with(address:, key: google_key).and_return(result0)

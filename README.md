@@ -137,7 +137,7 @@ Initially `db/seeds.rb` (run by `bin/setup` on the first `make up`) will have se
     * Add the admin role using the rails console command `User.find_by(email: "admin@example.com").add_role(:admin)`
 * user `jane@example.com`, a normal person (confirm via the same email inbox)
 * Authority: Logan City Council, with
-    * Application for a shed at 1 Pitt Court, Crestmead QLD 4132
+    * Application for a building format plan (1 into 2 lots) at 69 Fedrick Street, Boronia Heights QLD 4124
 * Authority: Marrickville Council, with
     * Application to demolish a swimming pool at 28 Grey Street, Emu Plains NSW 2750
 
@@ -147,6 +147,45 @@ have changed in the last 5+ years. The Logan scraper still works, so use that au
 #### Using production data locally
 
 If you want to use production data locally, follow the instructions in the [doc/using_production_data_locally.md](doc/using_production_data_locally.md) file.
+
+### API keys in development
+
+Maps, address lookups and importing applications need keys that aren't committed. In production they come from the
+encrypted Rails credentials. In development they come from environment variables, which you put in your gitignored `.env`
+(copy `.env.example`, which lists the names):
+
+* `GOOGLE_MAPS_API_KEY`, `GOOGLE_MAPS_SERVER_KEY`, `GOOGLE_MAPS_EMAIL_KEY` and `GOOGLE_MAPS_CRYPTOGRAPHIC_KEY`: use
+  restricted development keys, not the production ones. Without them maps don't show and an address can't be looked up,
+  so searching by address and adding an alert fail.
+* `MORPH_API_KEY`: your own key from your account on [morph.io](https://morph.io); see the
+  [morph.io API documentation](https://morph.io/documentation/api). Without it the "Import applications" button in the
+  admin is refused with a message saying so.
+
+#### Getting a Google Maps key quickly
+
+Google's free [Maps Demo Key](https://mapsplatform.google.com/maps-demo-key/) needs only a personal Google account (a
+Google Workspace account isn't eligible) and no credit card. Put the same key in `GOOGLE_MAPS_API_KEY` and
+`GOOGLE_MAPS_SERVER_KEY`. Google says it covers the Maps JavaScript API and the Geocoding API, so the map script, address
+search and alert sign-up should work. It is for testing only and has a daily limit, after which it pauses until the next
+day with no charge ([docs](https://developers.google.com/maps/demo-key)).
+
+It is not listed as covering the Static Maps and Street View Static APIs, which draw the map and street view images
+on application pages and in emails (`GOOGLE_MAPS_EMAIL_KEY`). It also has no URL signing secret
+(`GOOGLE_MAPS_CRYPTOGRAPHIC_KEY`). Those images need a standard key from a Google Cloud project with billing enabled.
+Restrict that key to those APIs and set a budget cap on the project. Without them, the images show a Google error
+picture and everything else still works.
+
+If you restrict the browser key (`GOOGLE_MAPS_API_KEY`) by HTTP referrer, allow your local addresses, such as
+`http://localhost:*/*` and `http://*.pa.org.localhost:*/*`. The web port differs between worktrees, hence the `*`. The
+production keys are restricted to our own sites, so they don't work from these addresses: the address field then shows a
+grey "!" icon and the browser console says the referrer isn't allowed. Don't loosen the production key to fix that. Use
+a development key instead.
+
+Restart the stack after changing `.env` (`make down` then `make up`). The app reads these as
+`Rails.configuration.x.google_maps.*` and `Rails.configuration.x.morph_api_key`, set in `config/environments/`.
+
+An import also tries to create or update a GitHub issue for a broken authority. Development has no GitHub credentials,
+so it skips that step and logs a warning saying what it would have done.
 
 ### Emails in development
 

@@ -3,13 +3,13 @@
     {
       "warning_type": "SQL Injection",
       "warning_code": 0,
-      "fingerprint": "79f9eb8002c157639f8398b2c7d44b341a2fe2b7232455ad701334b563b4fdaa",
+      "fingerprint": "7e988c22b4b79479fa27d73a9cf44ae12179e577d10782769b757a7c425dbaaa",
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/controllers/applications_controller.rb",
-      "line": 88,
+      "line": 87,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Application.visible.select(\"*\", \"ST_Distance(lonlat, '#{RGeo::Geographic.spherical_factory.point(GoogleGeocodeService.call(:address => T.let(T.cast(params[:q], T.nilable(String)), T.nilable(String)), :key => Rails.application.credentials.dig(:google_maps, :server_key)).top.lng, GoogleGeocodeService.call(:address => T.let(T.cast(params[:q], T.nilable(String)), T.nilable(String)), :key => Rails.application.credentials.dig(:google_maps, :server_key)).top.lat)}')/1000 AS distance\")",
+      "code": "Application.visible.select(\"*\", \"ST_Distance(lonlat, '#{RGeo::Geographic.spherical_factory.point(GoogleGeocodeService.call(:address => T.let(T.cast(params[:q], T.nilable(String)), T.nilable(String)), :key => Rails.configuration.x.google_maps.server_key).top.lng, GoogleGeocodeService.call(:address => T.let(T.cast(params[:q], T.nilable(String)), T.nilable(String)), :key => Rails.configuration.x.google_maps.server_key).top.lat)}')/1000 AS distance\")",
       "render_path": null,
       "location": {
         "type": "method",

@@ -17,6 +17,15 @@ Rails.application.configure do
   # Where postal publishes the public key it signs delivery webhooks with
   config.x.postal_jwks_url = "https://postal.oaf.org.au/.well-known/jwks.json"
 
+  # Google Maps keys and the morph.io API key. Set them in your gitignored .env (see .env.example);
+  # production reads them from the Rails credentials instead. Without them maps and address lookups
+  # don't work and importing applications is refused
+  config.x.google_maps.api_key = ENV.fetch("GOOGLE_MAPS_API_KEY", nil).presence
+  config.x.google_maps.server_key = ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil).presence
+  config.x.google_maps.email_key = ENV.fetch("GOOGLE_MAPS_EMAIL_KEY", nil).presence
+  config.x.google_maps.cryptographic_key = ENV.fetch("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY", nil).presence
+  config.x.morph_api_key = ENV.fetch("MORPH_API_KEY", nil).presence
+
   # Send mail via Mailcatcher and raise an error if there is a problem
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
