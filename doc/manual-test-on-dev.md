@@ -156,24 +156,20 @@ README for the hostnames and a `curl` example.
 `make up` runs a Sidekiq worker alongside Rails. After you have sent some email above, open the Sidekiq dashboard (Administration panel > Background Jobs) and
 check a worker process is connected and nothing is stuck under Retries or Dead.
 
-Importing applications is not configured for the development environment yet. The "Import applications" button on an
-authority in the admin queues `ImportApplicationsJob`, which needs a `morph_api_key` in the Rails credentials. Development
-has none, so the job fails with `TypeError: Parameter 'morph_api_key': Expected type String, got type NilClass` and
-keeps retrying under Retries. Don't click it for now. If you did, delete the entry from Retries. This is part of getting
-development keys sorted out in openaustralia/oaf-internal#374.
+Importing applications needs your own `MORPH_API_KEY` in `.env` (see API keys in development in the README). The
+"Import applications" button on an authority in the admin queues `ImportApplicationsJob`. Without the key the job is
+refused with a message saying how to set it, and shows under Retries until you delete it. With the key, check the
+authority's import log in the admin afterwards. The import then tries to create or update a GitHub issue for a broken
+authority. Development has no GitHub credentials, so it skips that and logs a warning saying what it would have done.
 
 
 ## Maps
 
-**Google Maps are presently not configured in development** - As the server is unable look up the lat and long location of an address, this following will fail:
-- Search by address
-- Add an alert  
-
-Static maps, street view and address lookups need Google Maps keys in the Rails credentials. Without them the map and
-street view images are requested without a key, so Google returns an error image instead of a map, and an address
-cannot be geocoded. Skip the checks that need an address (signing up for an alert, the address search). The specs use
-recorded responses and do not need the keys. Getting the keys for local
-development is being sorted out in openaustralia/oaf-internal#374.
+Static maps, street view and address lookups need the Google Maps keys in your `.env` (see API keys in development in
+the README). Without them the server can't look up the location of an address, so searching by address and adding an
+alert fail, and the map and street view images are requested without a key, so Google returns an error image instead.
+If you haven't set the keys, skip the checks that need an address. The specs use recorded responses and do not need
+the keys.
 
 With keys, check the application page shows a map and a street view, and that searching for
 `69 Fedrick Street, Boronia Heights QLD 4124` finds the seeded Logan application (or `28 Grey Street, Emu Plains NSW 2750` for
