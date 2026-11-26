@@ -164,6 +164,9 @@ gem "puma"
 
 # Locking sprockets version
 gem "sprockets"
+# Provides config.assets. It used to come in through sassc-rails, which
+# administrate 1.0 no longer depends on.
+gem "sprockets-rails"
 
 # Needed for getting boundary data into maps
 gem "rgeo-geojson"

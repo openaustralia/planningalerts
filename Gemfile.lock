@@ -713,6 +713,10 @@ GEM
       concurrent-ruby (~> 1.1)
       logger
       rack (>= 2.2.4, < 4)
+    sprockets-rails (3.5.2)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      sprockets (>= 3.0.0)
     sshkit (1.23.0)
       base64
       net-scp (>= 1.1.2)
@@ -910,6 +914,7 @@ DEPENDENCIES
   split
   spoom
   sprockets
+  sprockets-rails
   tailwindcss-rails (~> 2.0)
   tapioca (~> 0.15.1)
   terser

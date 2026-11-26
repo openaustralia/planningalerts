@@ -62,6 +62,9 @@ Rails.application.configure do
   config.hosts << "web"
   config.action_mailbox.ingress = :relay
 
+  # Append comments with runtime information tags to SQL queries in logs.
+  config.active_record.query_log_tags_enabled = true
+
   ## User settings (END)
   ## =============================================
 
@@ -130,7 +133,7 @@ Rails.application.configure do
   # config.i18n.raise_on_missing_translations = true
 
   # Annotate rendered view with file names.
-  # config.action_view.annotate_rendered_view_with_filenames = true
+  config.action_view.annotate_rendered_view_with_filenames = true
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
