@@ -138,8 +138,7 @@ describe ApplicationsHelper do
     describe "static maps" do
       before do
         allow(application).to receive(:address).and_return("Foo Road, NSW")
-        allow(Rails.application.credentials).to receive(:dig).with(:google_maps, :api_key).and_return("abc")
-        allow(Rails.application.credentials).to receive(:dig).with(:google_maps, :cryptographic_key).and_return("123456789012345678901234567=")
+        allow(Rails.configuration.x.google_maps).to receive_messages(api_key: "abc", cryptographic_key: "123456789012345678901234567=")
       end
 
       it "generates a static google map api image" do
@@ -152,9 +151,7 @@ describe ApplicationsHelper do
     describe "static streetview" do
       before do
         allow(application).to receive(:address).and_return("Foo Road, NSW")
-        Rails.application.credentials.dig(:google_maps, :api_key)
-        allow(Rails.application.credentials).to receive(:dig).with(:google_maps, :api_key).and_return("abc")
-        allow(Rails.application.credentials).to receive(:dig).with(:google_maps, :cryptographic_key).and_return("123456789012345678901234567=")
+        allow(Rails.configuration.x.google_maps).to receive_messages(api_key: "abc", cryptographic_key: "123456789012345678901234567=")
       end
 
       it "generates a static google streetview image" do

@@ -18,6 +18,13 @@ Rails.application.configure do
   # Where postal publishes the public key it signs delivery webhooks with
   config.x.postal_jwks_url = "https://postal.oaf.org.au/.well-known/jwks.json"
 
+  # Google Maps keys and the morph.io API key (development reads these from ENV instead)
+  config.x.google_maps.api_key = Rails.application.credentials.dig(:google_maps, :api_key)
+  config.x.google_maps.server_key = Rails.application.credentials.dig(:google_maps, :server_key)
+  config.x.google_maps.email_key = Rails.application.credentials.dig(:google_maps, :email_key)
+  config.x.google_maps.cryptographic_key = Rails.application.credentials.dig(:google_maps, :cryptographic_key)
+  config.x.morph_api_key = Rails.application.credentials[:morph_api_key]
+
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :terser
 

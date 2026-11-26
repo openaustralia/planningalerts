@@ -143,7 +143,7 @@ class Alert < ApplicationRecord
 
   sig { void }
   def geocode_from_address
-    geocode_result = GoogleGeocodeService.call(address:, key: Rails.application.credentials.dig(:google_maps, :server_key))
+    geocode_result = GoogleGeocodeService.call(address:, key: Rails.configuration.x.google_maps.server_key)
     @geocode_result = T.let(geocode_result, T.nilable(GeocoderResults))
 
     r = T.must(@geocode_result)

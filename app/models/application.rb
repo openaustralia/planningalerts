@@ -154,7 +154,7 @@ class Application < ApplicationRecord
   def self.geocode_attributes(address)
     r = GeocodeService.call(
       address:,
-      google_key: Rails.application.credentials.dig(:google_maps, :server_key),
+      google_key: Rails.configuration.x.google_maps.server_key,
       mappify_key: Rails.application.credentials[:mappify_api_key]
     )
     top = r.top
