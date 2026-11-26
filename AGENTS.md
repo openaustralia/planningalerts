@@ -92,10 +92,12 @@ On a host with GCC 15 or newer (for example Ubuntu 26.04), `bundle install` fail
 while the tapioca pin (see "The version pins are one interlocking constraint") holds it below 1.0, so this goes away
 with [#2167](https://github.com/openaustralia/planningalerts/issues/2167).
 
-`db/seeds.rb` creates `admin@example.com` (confirm it via the mailcatcher
-inbox at <http://localhost:1080>) and one authority with one application. The
-admin role is not seeded; add it in a console with
-`User.first.add_role(:admin)`.
+`db/seeds.rb` creates `admin@example.com` and `jane@example.com` (a normal
+person), both with the password `password` (confirm each via the mailcatcher
+inbox at <http://localhost:1080>), and two authorities with one application
+each: Logan City Council, whose scraper still works, and Marrickville Council,
+whose scraper no longer does. The admin role is not seeded; add it in a console
+with `User.find_by(email: "admin@example.com").add_role(:admin)`.
 
 **Every service is pinned to `platform: linux/amd64`.** This is not incidental:
 Sorbet has no `linux/arm64` build ([sorbet#4119](https://github.com/sorbet/sorbet/issues/4119)),
