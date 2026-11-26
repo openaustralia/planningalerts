@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
 
   include Pundit::Authorization
 
+  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
+  # Before enabling this filter, add public/406-unsupported-browser.html or provide a custom handler.
+  # allow_browser versions: :modern
+
   helper_method :altcha_required?, :altcha_enforced?
 
   helper :all # include all helpers, all the time

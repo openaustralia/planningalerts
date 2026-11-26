@@ -14,18 +14,16 @@ require "spec_helper"
 describe PlanningalertsApp::Application do
   let(:config) { Rails.application.config }
 
+  # Rails 7.2 deprecates four of the 7.1 settings (to be removed in Rails 8.0), so
+  # load_defaults no longer sets them and they are not checked here:
+  # action_controller.allow_deprecated_parameters_hash_equality,
+  # active_job.use_big_decimal_serializer,
+  # active_record.allow_deprecated_singular_associations_name and
+  # active_record.commit_transaction_on_non_local_return.
   {
-    action_controller: {
-      allow_deprecated_parameters_hash_equality: false
-    },
-    active_job: {
-      use_big_decimal_serializer: true
-    },
     active_record: {
-      allow_deprecated_singular_associations_name: false,
       before_committed_on_all_records: true,
       belongs_to_required_validates_foreign_key: false,
-      commit_transaction_on_non_local_return: true,
       default_column_serializer: nil,
       generate_secure_token_on: :initialize,
       marshalling_format_version: 7.1,
@@ -61,6 +59,12 @@ describe PlanningalertsApp::Application do
 
   it "writes cache entries in the 7.1 format" do
     expect(ActiveSupport::Cache.format_version).to eq 7.1
+  end
+
+  # ProcessAlertService needs a failed deliver_later to roll back its save.
+  # config/application.rb sets this, so load_defaults 7.2 can't change it.
+  it "enqueues jobs inside the current transaction" do
+    expect(ActiveJob::Base.enqueue_after_transaction_commit).to eq :never
   end
 
   it "precompiles filter_parameters" do

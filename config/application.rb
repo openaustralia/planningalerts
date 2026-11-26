@@ -70,6 +70,14 @@ module PlanningalertsApp
 
     config.active_job.queue_adapter = :sidekiq
 
+    # Enqueue inside the current transaction, as before Rails 7.2. ProcessAlertService
+    # relies on a failed enqueue rolling back its save, so the alert is retried rather
+    # than skipped. load_defaults 7.2 sets :default, and the Sidekiq adapter then asks
+    # for enqueueing to wait until after the commit, so a failed enqueue would no
+    # longer roll anything back. This line runs after load_defaults, so it wins.
+    # TODO: #2381 Check the other enqueue sites, then keep or narrow this.
+    config.active_job.enqueue_after_transaction_commit = :never
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
