@@ -1,9 +1,26 @@
 # typed: false
-# Puma can serve each request in a thread from an internal thread pool.
-# The `threads` method setting takes two numbers: a minimum and maximum.
-# Any libraries that use thread pools should be configured to match
-# the maximum value specified for Puma. Default is set to 5 threads for minimum
-# and maximum; this matches the default thread size of Active Record.
+
+# This is used instead of the default config/puma.rb which was not kept
+
+# This configuration file will be evaluated by Puma. The top-level methods that
+# are invoked here are part of Puma's configuration DSL. For more information
+# about methods provided by the DSL, see https://puma.io/puma/Puma/DSL.html.
+
+# Puma starts a configurable number of processes (workers) and each process
+# serves each request in a thread from an internal thread pool.
+#
+# The ideal number of threads per worker depends both on how much time the
+# application spends waiting for IO operations and on how much you wish to
+# to prioritize throughput over latency.
+#
+# As a rule of thumb, increasing the number of threads will increase how much
+# traffic a given process can handle (throughput), but due to CRuby's
+# Global VM Lock (GVL) it has diminishing returns and will degrade the
+# response time (latency) of the application.
+#
+# Each worker uses 5 threads unless RAILS_MAX_THREADS is set.
+# Keep connection pools at least as large as the thread count per worker.
+# config/database.yml sets the Active Record pool to 10 connections.
 #
 threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 threads threads_count, threads_count

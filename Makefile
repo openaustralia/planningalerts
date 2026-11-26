@@ -73,8 +73,8 @@ test: ## Run the specs as CI does, after resetting the test database (ARGS=spec/
 	@$(call in_web,bin/rspec $(ARGS))
 lint: ## Run RuboCop, erb_lint and Brakeman as CI does (ARGS=<paths> for RuboCop on just those)
 	@$(call in_web,$(if $(ARGS),bin/rubocop $(ARGS),bin/rake ci:lint))
-typecheck: ## Run Sorbet and the tapioca checks as CI does
-	@$(call in_web,bin/rake ci:type)
+typecheck: ## Run Sorbet and the tapioca checks as CI does (with CI=true, so Rails eager loads as it does there)
+	@$(call in_web,env CI=true bin/rake ci:type)
 # CI=true makes config/environments/test.rb eager load, so the test run sees classes a normal run does not.
 # `env` carries it through both `docker compose exec` and `run`. Tapioca loads the app and checks its migrations, so
 # the databases are prepared first, as `make test` does for the test one (a fresh worktree has none).

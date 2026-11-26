@@ -142,7 +142,7 @@ nothing less, before taking a pull request out of draft:
 
 ```sh
 make test         # the RSpec suite, after resetting the test database and building Tailwind
-make typecheck    # bin/rake ci:type, Sorbet plus tapioca --verify checks
+make typecheck    # bin/rake ci:type with CI=true, Sorbet plus tapioca --verify checks
 make lint         # bin/rake ci:lint, RuboCop, erb_lint, Brakeman -w2
 ```
 
@@ -220,6 +220,10 @@ docker compose run web bin/tapioca dsl --environment=test    # what CI verifies
 
 `ci:type` runs `--verify` variants of all three plus `check-shims`, so
 out-of-date RBIs fail CI even when the code type checks.
+
+CI sets `CI=true`, and `config/environments/test.rb` then eager loads, so Rails
+loads more classes than a normal local run. `make typecheck` sets `CI=true` for
+the same reason, so use it rather than a bare `bin/rake ci:type`.
 
 Two targets tidy the generated RBIs, and neither touches the hand-written `sorbet/rbi/shims/` or
 `sorbet/rbi/todo.rbi`. `make clean-rbi` deletes only the gem RBIs for versions no longer in `Gemfile.lock`, because

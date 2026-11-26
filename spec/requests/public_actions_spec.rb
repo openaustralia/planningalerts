@@ -165,8 +165,11 @@ describe "Public actions" do
   describe "a locked account" do
     before { user.lock_access!(send_instructions: false) }
 
+    # Rails 7.2 keeps the app's Sidekiq adapter in tests, so ask for the test
+    # adapter that have_enqueued_mail needs
+    def queue_adapter_for_test = ActiveJob::QueueAdapters::TestAdapter.new
+
     it "can ask for the unlock email again" do
-      # On Rails 7.1 request specs put deliver_later on the test queue (see #2313)
       expect { post user_unlock_path, params: { user: { email: "alex@example.com" } } }
         .to have_enqueued_mail(DeviseMailer, :unlock_instructions)
       expect(response).to have_http_status(:redirect)
